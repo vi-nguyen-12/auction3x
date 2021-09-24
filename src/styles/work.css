@@ -9,7 +9,7 @@
     font-weight: 700;
 }
 
-.card{
+.card-work{
     border-radius: 1rem !important;
     margin: 0 auto;
 }
@@ -20,7 +20,7 @@
 }
 
 .card-content{
-    margin: 5rem 15rem;
+    margin: 5rem 5rem;
 }
 
 .card-body{

@@ -16,7 +16,7 @@ const Work = (props) => {
                         [1,2,3].map((key,val)=>
                         {
                            return( <Col>
-                            <Card style={{ width: '22rem' }}>
+                            <Card style={{ width: '22rem' }} className='card-work'>
                                 <div className='card-number'>
                                     <h2>{key}</h2>
                                 </div>

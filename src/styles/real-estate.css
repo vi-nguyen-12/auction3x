@@ -1,7 +1,7 @@
 .real-estate{
    height: 75%;
    margin: 0 auto;
-   width: 72%;
+   width: 85%;
    background-image: url("/src/realstate.png");
    background-size: contain;
    /* margin-left: rem; */
@@ -22,13 +22,13 @@
 }
 
 .btn-group{
-    margin: 6rem 12rem;
+    margin: 6rem 3rem;
 }
 
 .btn{
     height: 3rem;
     width: 10rem;
-    margin-right: 5rem;
+    margin-right: 3rem;
     border-radius: 0.7rem !important;
     /* border: 3px solid #FFFFFF !important; */
      border: 3px solid #EDB48B !important;
