@@ -5,17 +5,17 @@ import '../../styles/work.css'
 const Work = (props) => {
 	return (
         <section className='work-wrapper'>
-            <Row>
+            <Row className='row-custom'>
                 <div className='heading'>How it Works?</div>
                 <div className='content-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br/>
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
             </Row>
             <div className='card-content'>
-                <Row>
+                <Row className='row-custom'>
                 {
                         [1,2,3].map((key,val)=>
                         {
-                           return( <Col>
+                           return( <Col key={key}>
                             <Card style={{ width: '22rem' }} className='card-work'>
                                 <div className='card-number'>
                                     <h2>{key}</h2>

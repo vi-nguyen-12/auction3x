@@ -7,11 +7,11 @@ const RealEstate = (props) => {
         <section className='real-estate-wrap'>
             <div className='real-estate'>
                 <div className='btn-group'>
-                    <Button> Real Estate</Button>
-                    <Button> Cars</Button>
-                    <Button> Yachts</Button>
-                    <Button> Jets</Button>
-                    <Button> Jewels</Button>
+                    <Button className='btn-custom'> Real Estate</Button>
+                    <Button className='btn-custom'> Cars</Button>
+                    <Button className='btn-custom'> Yachts</Button>
+                    <Button className='btn-custom'> Jets</Button>
+                    <Button className='btn-custom'> Jewels</Button>
                 </div>
                 <div className='sell-real-estate'>
                     <div className='content'>

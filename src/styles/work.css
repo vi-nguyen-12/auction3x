@@ -1,4 +1,4 @@
-.row{
+.row-custom{
     text-align: center;
 }
 
@@ -36,7 +36,7 @@
 }
 
 h2{
-    margin-top: 5px !important;
+    /* margin-top: 5px !important; */
 }
 
 .card-number{
