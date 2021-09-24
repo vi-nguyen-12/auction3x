@@ -1,0 +1,49 @@
+.row{
+    text-align: center;
+}
+
+.heading{
+    margin-top: 5rem !important;
+    font-size: 3.5rem;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.card-work{
+    border-radius: 1rem !important;
+    margin: 0 auto;
+}
+
+.content-1{
+    color:  #868686;
+    font-size: 1.5rem;
+}
+
+.card-content{
+    margin: 5rem 5rem;
+}
+
+.card-body{
+    text-align: left;
+}
+
+.card-title{
+    font-weight: bold !important;
+}
+
+.card-text{
+    color: #868686;
+}
+
+h2{
+    margin-top: 5px !important;
+}
+
+.card-number{
+    height: 4rem;
+    width: 4rem;
+    margin-left: 2rem;
+    background: linear-gradient(90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
+    border-radius: 9px;
+    margin-top: 1rem;
+}

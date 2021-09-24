@@ -3,6 +3,9 @@ import { Featured } from "./Featured";
 import { FindInCountries } from "./FindInCountries";
 import Header from "./Header";
 import ImgSlider from "./ImgSlider";
+import Work from "./Home/work";
+import RealEstate from "./Home/realEstate";
+import Footer from "./Home/footer";
 import { Upcoming } from "./Upcoming";
 
 const Home = (props) => {
@@ -16,6 +19,9 @@ const Home = (props) => {
       <Featured />
       <FindInCountries />
       <Upcoming />
+      <Work/>
+      <RealEstate/>
+      <Footer/>
     </>
   );
 };
