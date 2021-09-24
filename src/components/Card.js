@@ -60,7 +60,6 @@ const CardComp = (props) => {
 						</Button>
 					</div>
 				</div>
-				{/* </Card.Text> */}
 			</Card.Body>
 			<Card.Body></Card.Body>
 		</Card>
