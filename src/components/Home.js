@@ -28,8 +28,8 @@ const Home = (props) => {
 
 const Container = styled.main`
   position: relative;
-  overflow-x: hidden;
-  display: block;
+  // overflow-x: hidden;
+  // display: block;
   top: 0;
 
   &:after {

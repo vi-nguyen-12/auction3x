@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        
         <Switch>
           <Route exact path="/">
             <Home />

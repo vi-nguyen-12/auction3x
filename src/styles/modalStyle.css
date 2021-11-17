@@ -1,0 +1,13 @@
+.custom-modal-style {
+    width: 988px;
+    height: 350px;
+    border-radius: 20px;
+    }
+    
+.input, .input-group {
+    color: black!important;
+    }
+
+.modal-header{
+    align-items: normal;
+}

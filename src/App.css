@@ -7,6 +7,28 @@
     padding: 8px;
     font-weight: 800;
 }
+
+.submitBtn{
+    background-image: linear-gradient(#D58F5C, #FFC195, #DD9C6D, #EDB48B);
+    border: none;
+    outline: none;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 8px;
+    font-weight: 800;
+}
+
+.registerBtn{
+    background-image: linear-gradient(#D58F5C, #FFC195, #DD9C6D, #EDB48B);
+    border: none;
+    outline: none;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 8px;
+    font-weight: 800;
+    position: relative;
+    bottom: 15px;
+}
 .customIcon {
     background-image: linear-gradient(#D58F5C, #FFC195, #DD9C6D, #EDB48B);
     border: none;
@@ -30,7 +52,7 @@
     outline: none !important;
     background-color: transparent !important;
     padding: 6px !important;
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
     font-size: 12px !important;
 }
 .form-control::placeholder {

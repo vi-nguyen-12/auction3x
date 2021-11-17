@@ -8,11 +8,12 @@ html {
 
 body {
   background-color: #040714;
-  color: #f9f9f9;
-
+  color: #ffffff;
   font-family: Avenir-Roman, sans-serif;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -34,4 +35,8 @@ a {
   body {
       font-size: 14px;
   }
+}
+
+.form-control{
+  color: #040714 !important;;
 }
