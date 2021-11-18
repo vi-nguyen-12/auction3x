@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 require("react-bootstrap/ModalHeader");
 
-const SellerForm = (props) => {
+const BuyerForm = (props) => {
   const {
     register,
     handleSubmit,
@@ -77,8 +77,8 @@ const SellerForm = (props) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Extra Option"
-              {...register("extraOption", { required: true, maxLength: 20 })}
+              placeholder="Bidder Name"
+              {...register("bidderName", { required: true, maxLength: 20 })}
             />
           </div>
           <div className="form-group mb-2">
@@ -113,7 +113,7 @@ const SellerForm = (props) => {
   );
 };
 
-const BuyerForm = (props) => {
+const SellerForm = (props) => {
   const {
     register,
     handleSubmit,
@@ -185,10 +185,11 @@ const BuyerForm = (props) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Bidder Name"
-              {...register("bidderName", { required: true, maxLength: 20 })}
+              placeholder="Extra Option"
+              {...register("extraOption", { required: true, maxLength: 20 })}
             />
           </div>
+
           <div className="form-group mb-2">
             <input
               type="text"
