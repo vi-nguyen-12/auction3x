@@ -5,14 +5,16 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 require("react-bootstrap/ModalHeader");
 
-export default function BuyerForm(props) {
+const Buyer=({RegistermodalClose, ConfirmmodalOpen})=> {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.onSubmit(data);
+    axios.post("http://localhost:5000/api/user/register",data)
+    RegistermodalClose();
+    ConfirmmodalOpen();
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -150,3 +152,4 @@ export default function BuyerForm(props) {
     </form>
   );
 }
+export default Buyer

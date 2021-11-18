@@ -10,10 +10,11 @@ import { FaCreativeCommonsPd } from "react-icons/fa";
 import "../styles/radioStyle.css";
 require("react-bootstrap/ModalHeader");
 
-export default function Register() {
+const  RegisterForm=({RegistermodalClose, ConfirmmodalOpen})=> {
   const [formType, setFormType] = useState("buyer");
 
   return (
+    <>
     <Form>
       <div className = "mb-2" style = {{display: "flex"}}> Register as:
       <div style = {{paddingLeft: "20px", fontWeight: "bold"}}>
@@ -49,12 +50,15 @@ export default function Register() {
       </div>
       <label style = {{paddingLeft:"5px", fontWeight: "bold"}} htmlFor="broker"> Broker</label>
       </div>
-      {formType === "buyer" && <Buyer />}
-      {formType === "seller" && <Seller />}
-      {formType === "broker" && <Broker/>}
     </Form>
+         {formType === "buyer" && <Buyer RegistermodalClose={RegistermodalClose} ConfirmmodalOpen={ConfirmmodalOpen} />}
+         {formType === "seller" && <Seller  RegistermodalClose={RegistermodalClose} ConfirmmodalOpen={ConfirmmodalOpen} />}
+         {formType === "broker" && <Broker  RegistermodalClose={RegistermodalClose} ConfirmmodalOpen={ConfirmmodalOpen}/>}
+         </>
   );
 }
+
+export default RegisterForm
 
 
 

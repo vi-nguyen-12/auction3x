@@ -6,14 +6,16 @@ import axios from "axios";
 import Buyer from "./Buyer";
 require("react-bootstrap/ModalHeader");
 
-export default function Broker(props) {
+const Broker=({RegistermodalClose, ConfirmmodalOpen})=> {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.onSubmit(data);
+    axios.post("http://localhost:5000/api/user/register",data)
+    RegistermodalClose();
+    ConfirmmodalOpen();
   };
   //const onSubmit = (data) => console.log(data);
   return (
@@ -161,3 +163,5 @@ export default function Broker(props) {
     </form>
   );
 }
+
+export default Broker
