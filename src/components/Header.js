@@ -151,7 +151,7 @@ const Header = () => {
                   id="contained-modal-title-vcenter"
                   style={{ color: "#D58F5C" }}
                 >
-                  Register
+                  REGISTER ON AUCTION10X
                 </Modal.Title>
                 <Modal.Title
                   className="pt-4"

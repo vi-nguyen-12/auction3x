@@ -44,7 +44,7 @@
     border: 2px solid #D58F5C !important;
     outline: none !important;
     font-size: 12px !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
 }
 
 .form-control {
@@ -56,7 +56,7 @@
     font-size: 12px !important;
 }
 .form-control::placeholder {
-    color: white !important;
+    color: rgb(0, 0, 0) !important;
     opacity: 1 !important; /* Firefox */
   }
   
