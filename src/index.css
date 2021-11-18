@@ -40,7 +40,3 @@ a {
 .form-control{
   color: #040714 !important;;
 }
-
-input[type='radio']:checked::after{
-  background-color: #D58F5C;
-}

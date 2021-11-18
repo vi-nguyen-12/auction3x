@@ -7,15 +7,19 @@ import RegisterForm from "./RegisterForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
+import Confirm from "./EmailConfirm";
 
 const Header = () => {
   const HeaderComp = () => {
     const [show, popup] = useState(false);
     const [showRegister, popupRegister] = useState(false);
+    const [showConfirm, popupConfirm] = useState(false);
     const FormmodalOpen = () => popup(true);
     const modalClose = () => popup(false);
     const RegisterFormmodalOpen = () => popupRegister(true);
     const RegistermodalClose = () => popupRegister(false);
+    const ConfirmmodalOpen = () => popupConfirm(true);
+    const ConfirmmodalClose = () => popupConfirm(false);
     return (
       <nav className="customNav navbar navbar-expand-lg p-0">
         <button
@@ -72,6 +76,52 @@ const Header = () => {
             className="form-inline my-2 my-lg-0"
             style={{ display: "flex", paddingTop: 5 }}
           >
+            <Button
+              className="bg-light customButton border-0 mt-2"
+              style={{
+                marginLeft: 15,
+                fontSize: 16,
+                color: "black",
+                fontWeight: "bold",
+              }}
+              variant="success"
+              onClick={ConfirmmodalOpen}
+            >
+              Confirm Email
+            </Button>
+
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showConfirm}
+              onHide={ConfirmmodalClose}
+              centered
+              contentClassName="confirm"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title
+                  id="contained-modal-title-vcenter"
+                  style={{ color: "#D58F5C" }}
+                >
+                  Confirm Email
+                </Modal.Title>
+                <Modal.Title
+                  className="pt-4"
+                  style={{
+                    fontSize: "12px",
+                    color: "#D58F5C",
+                    position: "absolute",
+                    marginright: "10px",
+                    marginTop: "8px",
+                  }}
+                >
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Confirm />
+              </Modal.Body>
+            </Modal>
             <a
               className="nav-link"
               href="#"
@@ -93,12 +143,11 @@ const Header = () => {
               Sign In
             </Button>
             <Modal
-              size=""
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={show}
               onHide={modalClose}
-              contentClassName="custom-modal-style"
+              contentClassName="login"
             >
               <Modal.Header closeButton>
                 <Modal.Title
@@ -154,13 +203,11 @@ const Header = () => {
                   REGISTER ON AUCTION10X
                 </Modal.Title>
                 <Modal.Title
-                  className="pt-4"
                   style={{
                     fontSize: "12px",
                     color: "#D58F5C",
                     position: "absolute",
-                    marginright: "10px",
-                    marginTop: "8px",
+                    top: "50px"
                   }}
                 >
                   already registered? Sign In

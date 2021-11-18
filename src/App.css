@@ -27,7 +27,7 @@
     padding: 8px;
     font-weight: 800;
     position: relative;
-    bottom: 15px;
+    margin-top: 10px;
 }
 .customIcon {
     background-image: linear-gradient(#D58F5C, #FFC195, #DD9C6D, #EDB48B);

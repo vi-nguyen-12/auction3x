@@ -1,6 +1,7 @@
 import React from "react";
 require("react-bootstrap/ModalHeader");
 
+
 const Form = ({ onSubmit }) => {
   return (
     <div className="register">

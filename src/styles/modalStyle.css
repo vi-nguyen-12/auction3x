@@ -1,9 +1,14 @@
 .custom-modal-style {
     display: list-item;
     width: 100%;
-    height: 650px;
+    height: 630px;
     border-radius: 20px;
     }
+
+.custom-modal-title{
+    position:absolute;
+    top:0;
+}
     
 .input, .input-group {
     color: black!important;
@@ -11,4 +16,22 @@
 
 .modal-header{
     align-items: normal;
+}
+
+.confirm{
+    display: list-item;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.login{
+    display: list-item;
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.modal-header{
+    height: 90px;
 }

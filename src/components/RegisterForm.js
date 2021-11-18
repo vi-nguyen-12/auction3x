@@ -7,6 +7,7 @@ import Buyer from "./Buyer";
 import Seller from "./Seller";
 import Broker from "./Broker";
 import { FaCreativeCommonsPd } from "react-icons/fa";
+import "../styles/radioStyle.css";
 require("react-bootstrap/ModalHeader");
 
 export default function Register(props) {
@@ -26,7 +27,7 @@ export default function Register(props) {
         checked={formType === "buyer"}
         type="radio"
       />
-      <label htmlFor="buyer"> Buyer</label>
+      <label style = {{paddingLeft:"5px", fontWeight: "bold"}} htmlFor="buyer"> Buyer</label>
       </div>
       <div style = {{paddingLeft: "20px", fontWeight: "bold"}}>
       <input
@@ -36,24 +37,23 @@ export default function Register(props) {
         checked={formType === "seller"}
         type="radio"
       />
-      <label htmlFor="seller"> Seller</label>
+      <label style = {{paddingLeft:"5px", fontWeight: "bold"}} htmlFor="seller"> Seller</label>
       </div>
-      <div style = {{paddingLeft: "20px", fontWeight: "bold"}}>
+      <div style = {{paddingLeft: "20px"}}>
       <input
-      style = {{color: "#D58F5C"}}
+      style = {{paddingRight: "20px", backgroundColor:"#D58F5C"}}
         onClick={() => {
           setFormType("broker");
         }}
         checked={formType === "broker"}
         type="radio"
       />
-      <label htmlFor="broker"> Broker</label>
       </div>
+      <label style = {{paddingLeft:"5px", fontWeight: "bold"}} htmlFor="broker"> Broker</label>
       </div>
       {formType === "buyer" && <Buyer />}
       {formType === "seller" && <Seller />}
       {formType === "broker" && <Broker/>}
-      <button type="submit" className="btn btn-primary"/>
     </Form>
   );
 }
