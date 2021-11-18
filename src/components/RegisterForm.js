@@ -10,10 +10,8 @@ import { FaCreativeCommonsPd } from "react-icons/fa";
 import "../styles/radioStyle.css";
 require("react-bootstrap/ModalHeader");
 
-export default function Register(props) {
+export default function Register() {
   const [formType, setFormType] = useState("buyer");
-  console.log(Buyer);
-  const onSubmit = (data) => console.log(data);
 
   return (
     <Form>

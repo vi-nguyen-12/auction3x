@@ -214,7 +214,7 @@ const Header = () => {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <RegisterForm />
+                <RegisterForm  FormmodalOpen={FormmodalOpen} ConfirmmodalOpen={ConfirmmodalOpen}/>
               </Modal.Body>
             </Modal>
             <button
