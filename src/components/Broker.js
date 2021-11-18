@@ -3,9 +3,10 @@ import {Form} from 'react-bootstrap';
 import {useState} from 'react';
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Buyer from "./Buyer";
 require("react-bootstrap/ModalHeader");
 
-export default function BuyerForm (props){
+export default function Broker (props) {
     const {
       register,
       handleSubmit,
@@ -14,6 +15,7 @@ export default function BuyerForm (props){
     const onSubmit = (data) => {
       props.onSubmit(data);
     };
+    //const onSubmit = (data) => console.log(data);
     return (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group mb-2">
@@ -76,8 +78,8 @@ export default function BuyerForm (props){
               <input
                 type="text"
                 className="form-control"
-                placeholder="Bidder Name"
-                {...register("bidderName", { required: true, maxLength: 20 })}
+                placeholder="Broker ID"
+                {...register("brokerId", { required: true, maxLength: 20 })}
               />
             </div>
             <div className="form-group mb-2">
@@ -88,12 +90,20 @@ export default function BuyerForm (props){
                 {...register("country", { required: true, maxLength: 20 })}
               />
             </div>
-            <div className="form-group mb-5">
+            <div className="form-group mb-2">
               <input
                 type="text"
                 className="form-control color-black"
                 placeholder="City"
                 {...register("city", { required: true, maxLength: 20 })}
+              />
+            </div>
+            <div className="form-group mb-5">
+              <input
+                type="text"
+                className="form-control color-black"
+                placeholder="Company Name"
+                {...register("companyName", { required: true, maxLength: 20 })}
               />
             </div>
             <button
@@ -111,4 +121,3 @@ export default function BuyerForm (props){
           </form>
     );
   };
-  

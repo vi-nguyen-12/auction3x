@@ -3,9 +3,10 @@ import {Form} from 'react-bootstrap';
 import {useState} from 'react';
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Buyer from "./Buyer";
 require("react-bootstrap/ModalHeader");
 
-export default function BuyerForm (props){
+export default function Seller(props){
     const {
       register,
       handleSubmit,
@@ -14,6 +15,7 @@ export default function BuyerForm (props){
     const onSubmit = (data) => {
       props.onSubmit(data);
     };
+    //const onSubmit = (data) => console.log(data);
     return (
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group mb-2">
@@ -76,10 +78,11 @@ export default function BuyerForm (props){
               <input
                 type="text"
                 className="form-control"
-                placeholder="Bidder Name"
-                {...register("bidderName", { required: true, maxLength: 20 })}
+                placeholder="Extra Option"
+                {...register("extraOption", { required: true, maxLength: 20 })}
               />
             </div>
+  
             <div className="form-group mb-2">
               <input
                 type="text"
@@ -111,4 +114,3 @@ export default function BuyerForm (props){
           </form>
     );
   };
-  
