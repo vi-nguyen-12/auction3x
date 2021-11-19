@@ -1,9 +1,24 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import Toast from "./Toast"
+import axios from "axios"
 require("react-bootstrap/ModalHeader");
 
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
+  const [showWarning, setShowWarning]=useState(false);
+  const onSubmit=(data)=>{
+    const getUser=async()=>{
+      const user=await axios.post("http://localhost:5000/api/user/login",{data})
+      console.log(user)
+      if(!user.isActive){
+        setShowWarning(true)
+      }
+    }
+    getUser();
+  }
   return (
+    <>
+    {showWarning &&<Toast type="warning" message="Warning! Your email verification process has not been done. We have sent the link"/>}
     <div className="register">
       <div className="register__container">
         <div className="block" />
@@ -51,6 +66,7 @@ const Form = ({ onSubmit }) => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 export default Form;

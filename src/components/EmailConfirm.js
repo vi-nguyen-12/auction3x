@@ -1,8 +1,11 @@
 import react from "react";
+import Toast from "./Toast"
 
 function Confirm(props){
     return (
         // Email code confirmation modal
+      <>
+      <Toast type="warning" message="Warning! Your email verification process has not been done. We have sent the link"/>
         <div>
             <div className="form-group mb-2">
                             <h2>Confirm your email</h2>
@@ -27,6 +30,7 @@ function Confirm(props){
                             </form>
                         </div>
             </div>
+    </>
     );
 
 

@@ -7,6 +7,7 @@ import Work from "./Home/work";
 import RealEstate from "./Home/realEstate";
 import Footer from "./Home/footer";
 import { Upcoming } from "./Upcoming";
+import Toast from "./Toast"
 
 const Home = (props) => {
 
