@@ -2,24 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState } from "react";
-import Form from "./Form";
-import RegisterForm from "./RegisterForm";
+import Login from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 import Confirm from "./EmailConfirm";
+import SignUp from "./SignUp";
 
 const Header = () => {
   const HeaderComp = () => {
-    const [show, popup] = useState(false);
-    const [showRegister, popupRegister] = useState(false);
+    const [showSignIn, popSignIn] = useState(false);
+    const [showSignUp, popUpSignUp] = useState(false);
     const [showConfirm, popupConfirm] = useState(false);
-    const FormmodalOpen = () => popup(true);
-    const modalClose = () => popup(false);
-    const RegisterFormmodalOpen = () => popupRegister(true);
-    const RegistermodalClose = () => popupRegister(false);
-    const ConfirmmodalOpen = () => popupConfirm(true);
-    const ConfirmmodalClose = () => popupConfirm(false);
+    const toogleSignIn = () => popSignIn(!showSignIn);
+    const toogleSignUp = () => popUpSignUp(!showSignUp);
+    const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
+
     return (
       <nav className="customNav navbar navbar-expand-lg p-0">
         <button
@@ -85,7 +84,7 @@ const Header = () => {
                 fontWeight: "bold",
               }}
               variant="success"
-              onClick={ConfirmmodalOpen}
+              onClick={toogleConfirmModal}
             >
               Confirm Email
             </Button>
@@ -95,7 +94,7 @@ const Header = () => {
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showConfirm}
-              onHide={ConfirmmodalClose}
+              onHide={toogleConfirmModal}
               centered
               contentClassName="confirm"
             >
@@ -115,11 +114,13 @@ const Header = () => {
                     marginright: "10px",
                     marginTop: "8px",
                   }}
-                >
-                </Modal.Title>
+                ></Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Confirm />
+                <Confirm
+                  toogleConfirmModal={toogleConfirmModal}
+                  toogleSignIn={toogleSignIn}
+                />
               </Modal.Body>
             </Modal>
             <a
@@ -138,39 +139,20 @@ const Header = () => {
                 fontWeight: "bold",
               }}
               variant="success"
-              onClick={FormmodalOpen}
+              onClick={toogleSignIn}
             >
               Sign In
             </Button>
             <Modal
               aria-labelledby="contained-modal-title-vcenter"
               centered
-              show={show}
-              onHide={modalClose}
+              show={showSignIn}
+              onHide={toogleSignIn}
               contentClassName="login"
             >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{ color: "#D58F5C" }}
-                >
-                  LOGIN NOW
-                </Modal.Title>
-                <Modal.Title
-                  className="pt-4"
-                  style={{
-                    fontSize: "12px",
-                    color: "#D58F5C",
-                    position: "absolute",
-                    marginright: "10px",
-                    marginTop: "8px",
-                  }}
-                >
-                  not registered? Sign up
-                </Modal.Title>
-              </Modal.Header>
+
               <Modal.Body>
-                <Form />
+                <Login toogleSignUp = {toogleSignUp} modalClose={toogleSignIn} />
               </Modal.Body>
             </Modal>
 
@@ -183,7 +165,7 @@ const Header = () => {
                 fontWeight: "bold",
               }}
               variant="success"
-              onClick={RegisterFormmodalOpen}
+              onClick={toogleSignUp}
             >
               Sign Up
             </Button>
@@ -191,30 +173,15 @@ const Header = () => {
               size=""
               aria-labelledby="contained-modal-title-vcenter"
               centered
-              show={showRegister}
-              onHide={RegistermodalClose}
+              show={showSignUp}
+              onHide={toogleSignUp}
               contentClassName="custom-modal-style"
             >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{ color: "#D58F5C" }}
-                >
-                  REGISTER ON AUCTION10X
-                </Modal.Title>
-                <Modal.Title
-                  style={{
-                    fontSize: "12px",
-                    color: "#D58F5C",
-                    position: "absolute",
-                    top: "50px"
-                  }}
-                >
-                  already registered? Sign In
-                </Modal.Title>
-              </Modal.Header>
               <Modal.Body>
-                <RegisterForm />
+                <SignUp
+                  toogleSignUp={toogleSignUp}
+                  toogleConfirmModal={toogleConfirmModal}
+                />
               </Modal.Body>
             </Modal>
             <button

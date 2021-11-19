@@ -1,4 +1,13 @@
-div > input[type="radio"]:checked + *::before
- {
-    background: #D58F5C;
-}
+/* pretty radio */
+  label > input[type="radio"]:checked + *::after {
+    color:#D58F5C;
+  }
+  label > input[type="radio"]:checked + *::before {
+    background: radial-gradient(#D58F5C 0%, #D58F5C 40%, transparent 50%, transparent);
+    border-color: #D58F5C;
+  }
+  
+  label > input[type="radio"] + * {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+  }

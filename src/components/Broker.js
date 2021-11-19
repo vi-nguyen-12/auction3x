@@ -3,17 +3,20 @@ import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Buyer from "./Buyer";
+import Buyer from "./User";
+import authServices from "../services/authServices";
 require("react-bootstrap/ModalHeader");
 
-export default function Broker(props) {
+const Broker=({RegistermodalClose, ConfirmmodalOpen})=> {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.onSubmit(data);
+    authServices.register(data)
+    RegistermodalClose();
+    ConfirmmodalOpen();
   };
   //const onSubmit = (data) => console.log(data);
   return (
@@ -161,3 +164,5 @@ export default function Broker(props) {
     </form>
   );
 }
+
+export default Broker

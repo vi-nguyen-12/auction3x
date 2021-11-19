@@ -4,18 +4,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Buyer from "./Buyer";
+import authServices from "../services/authServices";
 require("react-bootstrap/ModalHeader");
 
-export default function Seller(props) {
+const Seller=({RegistermodalClose, ConfirmmodalOpen})=> {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.onSubmit(data);
+    authServices.register(data);
+    RegistermodalClose();
+    ConfirmmodalOpen();
   };
-  //const onSubmit = (data) => console.log(data);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <table style={{ marginBottom: "8px" }}>
@@ -161,3 +163,4 @@ export default function Seller(props) {
     </form>
   );
 }
+export default Seller

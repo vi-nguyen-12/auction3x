@@ -1,21 +1,30 @@
 .custom-modal-style {
     display: list-item;
     width: 100%;
-    height: 630px;
+    height: 570px;
     border-radius: 20px;
     }
 
 .custom-modal-title{
     position:absolute;
     top:0;
+    padding-top: 10px!important;
 }
     
 .input, .input-group {
     color: black!important;
     }
 
-.modal-header{
+.modal-header-login{
     align-items: normal;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.modal-head-signup{
+    align-items: normal;
+    position: relative;
+    padding-top: 10px;
 }
 
 .confirm{
@@ -28,10 +37,41 @@
 .login{
     display: list-item;
     width: 100%;
-    height: 350px;
+    height: 450px;
     border-radius: 20px;
 }
 
 .modal-header{
     height: 90px;
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.nav-link-signup{
+    color: #D58F5C !important;
+    font-size: 12px !important;
+    position: relative!important;
+    display: flex!important;
+    justify-content: center!important;
+    bottom: 2px!important;
+    cursor: pointer!important;
+}
+
+.nav-link-login{
+    color: #D58F5C !important;
+    font-size: 12px !important;
+    position: absolute!important;
+    display: flex!important;
+    justify-content: center!important;
+    top: 2px!important;
+    cursor: pointer!important;
+}
+
+.signup-link{
+    color: #D58F5C !important;
+    font-size: 13px !important;
+}
+
+.signup-div{
+    padding-bottom: 10px!important;
 }

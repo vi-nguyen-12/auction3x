@@ -3,18 +3,37 @@ import { Container, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import authServices from "../services/authServices";
+import { Button, Modal } from "react-bootstrap";
+import "../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
-export default function BuyerForm(props) {
+const User=({RegistermodalClose, ConfirmmodalOpen})=> {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.onSubmit(data);
+    authServices.register(data);
+    RegistermodalClose();
+    ConfirmmodalOpen();
   };
   return (
+    <>
+    <Modal.Header contentClassName = "modal-head-signup" closeButton>
+    <Modal.Title
+      id="contained-modal-title-vcenter"
+      style={{ color: "#D58F5C", fontSize: "25px", fontWeight: "bold" }}
+      contentClassName="custom-modal-title"
+    >
+      REGISTER ON AUCTION10X
+      <div className = "signup-div">
+      <a className = "signup-link">Already Registered? Sign In</a>
+    </div>
+    </Modal.Title>
+
+  </Modal.Header>
     <form onSubmit={handleSubmit(onSubmit)}>
       <table style={{ marginBottom: "13px" }}>
         <tr>
@@ -72,12 +91,12 @@ export default function BuyerForm(props) {
         </tr>
       </table>
       <div className="form-group mb-2">
-        <label>Bidder Name (Optional)</label>
+        <label>Username</label>
         <input
           type="text"
           className="form-control"
-          placeholder="Bidder Name"
-          {...register("bidderName", { required: false, maxLength: 20 })}
+          placeholder="Username"
+          {...register("userName", { required: false, maxLength: 20 })}
         />
       </div>
 
@@ -148,5 +167,7 @@ export default function BuyerForm(props) {
         Register
       </button>
     </form>
+    </>
   );
 }
+export default User
