@@ -181,6 +181,7 @@ const Header = () => {
                 <SignUp
                   toogleSignUp={toogleSignUp}
                   toogleConfirmModal={toogleConfirmModal}
+                  toogleSignIn={toogleSignIn}
                 />
               </Modal.Body>
             </Modal>

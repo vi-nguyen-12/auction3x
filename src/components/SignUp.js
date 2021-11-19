@@ -8,7 +8,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
-const User=({RegistermodalClose, ConfirmmodalOpen})=> {
+const User=({toogleSignUp, toogleSignIn})=> {
   const {
     register,
     handleSubmit,
@@ -16,8 +16,6 @@ const User=({RegistermodalClose, ConfirmmodalOpen})=> {
   } = useForm();
   const onSubmit = (data) => {
     authServices.register(data);
-    RegistermodalClose();
-    ConfirmmodalOpen();
   };
   return (
     <>
@@ -29,7 +27,10 @@ const User=({RegistermodalClose, ConfirmmodalOpen})=> {
     >
       REGISTER ON AUCTION10X
       <div className = "signup-div">
-      <a className = "signup-link">Already Registered? Sign In</a>
+      <a className = "signup-link" onClick={()=>{
+              toogleSignIn();
+              toogleSignUp();
+              }}>Already Registered? Sign In</a>
     </div>
     </Modal.Title>
 
