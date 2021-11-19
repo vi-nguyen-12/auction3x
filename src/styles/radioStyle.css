@@ -1,4 +1,4 @@
 div > input[type="radio"]:checked + *::before
  {
-    color: #D58F5C;
+    background: #D58F5C;
 }
