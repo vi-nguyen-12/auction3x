@@ -52,13 +52,11 @@
 }
 
 .nav-link-signup{
-    color: #D58F5C !important;
-    font-size: 12px !important;
-    position: relative!important;
-    display: flex!important;
-    justify-content: center!important;
-    bottom: 2px!important;
+    color: #D58F5C;
+    font-size: 12px;
     cursor: pointer!important;
+    border: 0;
+    background-color: transparent;
 }
 
 .nav-link-login{
@@ -74,9 +72,29 @@
 .signup-link{
     color: #D58F5C !important;
     font-size: 13px !important;
+    border: none;
+    background-color: transparent;
 }
 
 .signup-div{
     padding-bottom: 10px!important;
     cursor: pointer!important;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.signIn-btn{
+    background-color: transparent;
+    border: 0;
+    cursor:none;
+}
+
+.signUp-btn{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 }

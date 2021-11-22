@@ -3,7 +3,7 @@ import Toast from "./Toast";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 
-function Confirm({ConfirmmodalClose, FormmodalOpen}) {
+function Confirm({toogleConfirmModal, toogleSignIn}) {
   const {
     register,
     handleSubmit,
@@ -12,8 +12,8 @@ function Confirm({ConfirmmodalClose, FormmodalOpen}) {
   const onSubmit = (data) => {
     authServices.verify(data);
     console.log(data)
-    ConfirmmodalClose();
-    FormmodalOpen();
+    toogleConfirmModal();
+    toogleSignIn();
   };
   return (
     // Email code confirmation modal

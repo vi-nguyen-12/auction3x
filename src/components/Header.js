@@ -14,10 +14,11 @@ const Header = () => {
     const [showSignIn, popSignIn] = useState(false);
     const [showSignUp, popUpSignUp] = useState(false);
     const [showConfirm, popupConfirm] = useState(false);
+    const [showButton, popButton] = useState(false);
+    const toogleButton = () => popButton(!showButton);
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
-
 
     return (
       <nav className="customNav navbar navbar-expand-lg p-0">
@@ -130,19 +131,43 @@ const Header = () => {
             >
               <b>Sell</b>
             </a>
-            <Button
-              className="bg-light customButton border-0 mt-2"
-              style={{
-                marginLeft: 15,
-                fontSize: 16,
-                color: "black",
-                fontWeight: "bold",
-              }}
-              variant="success"
-              onClick={toogleSignIn}
-            >
-              Sign In
-            </Button>
+
+            {showButton ? (
+              <button
+                className="bg-light customButton border-0 mt-2"
+                style={{ fontSize: "16px" }}
+              >
+                Hello world
+              </button>
+            ) : (
+              <div className="bg-light customButton border-0 mt-2">
+                <Button
+                  className="signIn-btn"
+                  style={{
+                    fontSize: 16,
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                  variant="success"
+                  onClick={toogleSignIn}
+                >
+                  Sign In
+                </Button>
+                <label>|</label>
+                <Button
+                  className="signUp-btn"
+                  style={{
+                    fontSize: 16,
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                  variant="success"
+                  onClick={toogleSignUp}
+                >
+                  Sign Up
+                </Button>
+              </div>
+            )}
             <Modal
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -150,25 +175,15 @@ const Header = () => {
               onHide={toogleSignIn}
               contentClassName="login"
             >
-
               <Modal.Body>
-                <Login toogleSignUp = {toogleSignUp} modalClose={toogleSignIn} />
+                <Login
+                  toogleSignUp={toogleSignUp}
+                  toogleSignIn={toogleSignIn}
+                  toogleButton={toogleButton}
+                />
               </Modal.Body>
             </Modal>
 
-            <Button
-              className="bg-light customButton border-0 mt-2"
-              style={{
-                marginLeft: 15,
-                fontSize: 16,
-                color: "black",
-                fontWeight: "bold",
-              }}
-              variant="success"
-              onClick={toogleSignUp}
-            >
-              Sign Up
-            </Button>
             <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"

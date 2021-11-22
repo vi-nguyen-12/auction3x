@@ -6,7 +6,7 @@ import authServices from "../services/authServices";
 import { Button, Modal } from "react-bootstrap";
 require("react-bootstrap/ModalHeader");
 
-const Login = ({toogleSignUp,modalClose}) => {
+const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
   const [showWarning, setShowWarning] = useState(false);
   const {
     register,
@@ -15,11 +15,16 @@ const Login = ({toogleSignUp,modalClose}) => {
   } = useForm();
   const onSubmit = (data) => {
     const getUser = async () => {
-      const user = await authServices.login(data);
-      console.log(user);
-      if (!user.isActive) {
+      const response = await authServices.login(data);
+      if (!response.data.isActive) {
         setShowWarning(true);
       }
+      else if(response.status() === 400){
+        console.log("Fail to login!");
+      }
+      console.log(response)
+      toogleButton();
+      toogleSignIn();
     };
     getUser();
   };
@@ -48,7 +53,7 @@ const Login = ({toogleSignUp,modalClose}) => {
               type="email"
               className="form-control"
               placeholder="Email"
-              {...register("email", {
+              {...register("userName", {
                 required: true,
                 pattern: /^\S+@\S+$/i,
               })}
@@ -85,10 +90,10 @@ const Login = ({toogleSignUp,modalClose}) => {
             >
               Submit
             </button>
-            <div className = "pb-2" style = {{position:"relative"}}>Not registered?<a onClick={()=>{
+            <div className = "pb-2" style = {{position:"relative"}}>Not registered?<button onClick={()=>{
               toogleSignUp()
-              modalClose()
-              }} className="nav-link-signup"> Click Here to Sign Up! </a></div>
+              toogleSignIn()
+              }} className="nav-link-signup"> Click Here to Sign Up! </button></div>
           </div>
           
         </Modal.Footer>

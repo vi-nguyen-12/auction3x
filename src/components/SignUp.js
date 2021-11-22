@@ -8,7 +8,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
-const User=({toogleSignUp, toogleSignIn})=> {
+const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
   const {
     register,
     handleSubmit,
@@ -16,6 +16,8 @@ const User=({toogleSignUp, toogleSignIn})=> {
   } = useForm();
   const onSubmit = (data) => {
     authServices.register(data);
+    toogleSignUp();
+    toogleConfirmModal();
   };
   return (
     <>
@@ -27,10 +29,10 @@ const User=({toogleSignUp, toogleSignIn})=> {
     >
       REGISTER ON AUCTION10X
       <div className = "signup-div">
-      <a className = "signup-link" onClick={()=>{
+      <button className = "signup-link" onClick={()=>{
               toogleSignIn();
               toogleSignUp();
-              }}>Already Registered? Sign In</a>
+              }}>Already Registered? Sign In</button>
     </div>
     </Modal.Title>
 
