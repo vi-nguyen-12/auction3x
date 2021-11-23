@@ -98,3 +98,26 @@
     border: 0;
     cursor: pointer;
 }
+
+.signIn-btn:hover{
+    background-color: transparent;
+    border: 0;
+    cursor:pointer;
+}
+
+.signUp-btn:hover{
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.signIn-btn::after{
+    color: #D58F5C;
+    border-color: transparent;
+}
+
+.signUp-btn::after{
+    color: #D58F5C;
+    border-color: #D58F5C!important;
+}
+

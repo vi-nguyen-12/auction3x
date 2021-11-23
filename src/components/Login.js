@@ -4,6 +4,7 @@ import Toast from "./Toast";
 import axios from "axios";
 import authServices from "../services/authServices";
 import { Button, Modal } from "react-bootstrap";
+import Cookies from "js-cookie";
 require("react-bootstrap/ModalHeader");
 
 const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
@@ -16,13 +17,13 @@ const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
   const onSubmit = (data) => {
     const getUser = async () => {
       const response = await authServices.login(data);
+
       if (!response.data.isActive) {
         setShowWarning(true);
       }
       else if(response.status() === 400){
         console.log("Fail to login!");
       }
-      console.log(response)
       toogleButton();
       toogleSignIn();
     };

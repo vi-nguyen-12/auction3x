@@ -117,3 +117,8 @@
     border-radius: 4%;
     width: -webkit-fill-available;
 }
+
+.btn-success{
+    background-color: transparent!important;
+    border-color: transparent!important;
+}

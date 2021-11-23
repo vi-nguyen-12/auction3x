@@ -8,6 +8,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 import Confirm from "./EmailConfirm";
 import SignUp from "./SignUp";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const HeaderComp = () => {
@@ -19,6 +20,9 @@ const Header = () => {
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
+    let userName = Cookies.get("user");
+    userName = JSON.parse(userName);
 
     return (
       <nav className="customNav navbar navbar-expand-lg p-0">
@@ -131,13 +135,12 @@ const Header = () => {
             >
               <b>Sell</b>
             </a>
-
             {showButton ? (
               <button
                 className="bg-light customButton border-0 mt-2"
                 style={{ fontSize: "16px" }}
               >
-                Hello world
+                {userName.firstName} {userName.lastName}
               </button>
             ) : (
               <div className="bg-light customButton border-0 mt-2">

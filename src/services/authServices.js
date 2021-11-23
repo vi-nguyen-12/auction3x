@@ -10,7 +10,7 @@ const authService = {
   },
 
   login(data) {
-    return axios.post(env.API_URL + "/api/user/login", data);
+    return axios.post(env.API_URL + "/api/user/login", data, {withCredentials: true});
   }
 };
 
