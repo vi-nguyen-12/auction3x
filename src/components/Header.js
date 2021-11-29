@@ -9,8 +9,12 @@ import "../styles/modalStyle.css";
 import Confirm from "./EmailConfirm";
 import SignUp from "./SignUp";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import authService from "../services/authServices";
 
 const Header = () => {
+  const user = useSelector((state) => state.user);
+
   const HeaderComp = () => {
     const [showSignIn, popSignIn] = useState(false);
     const [showSignUp, popUpSignUp] = useState(false);
@@ -21,8 +25,9 @@ const Header = () => {
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
 
-    let userName = Cookies.get("user");
-    userName = JSON.parse(userName);
+    const handleLogout = () => {
+      authService.logout();
+    };
 
     return (
       <nav className="customNav navbar navbar-expand-lg p-0">
@@ -80,20 +85,6 @@ const Header = () => {
             className="form-inline my-2 my-lg-0"
             style={{ display: "flex", paddingTop: 5 }}
           >
-            <Button
-              className="bg-light customButton border-0 mt-2"
-              style={{
-                marginLeft: 15,
-                fontSize: 16,
-                color: "black",
-                fontWeight: "bold",
-              }}
-              variant="success"
-              onClick={toogleConfirmModal}
-            >
-              Confirm Email
-            </Button>
-
             <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
@@ -135,13 +126,29 @@ const Header = () => {
             >
               <b>Sell</b>
             </a>
-            {showButton ? (
-              <button
-                className="bg-light customButton border-0 mt-2"
-                style={{ fontSize: "16px" }}
-              >
-                {userName.firstName} {userName.lastName}
-              </button>
+            {user._id ? (
+              <div className="dropdown">
+                <button
+                  className="bg-light customButton border-0 mt-2"
+                  style={{ fontSize: "16px"}}
+                >
+                  {user.firstName} {user.lastName}
+                </button>
+                <div className="dropdown-content">
+                  <a href="#">Profile</a>
+                  <a href="#">My Ads</a>
+                  <button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "0",
+                      width: "100%",
+                    }}
+                    onClick={handleLogout}
+                  >
+                    <a>Log Out</a>
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="bg-light customButton border-0 mt-2">
                 <Button

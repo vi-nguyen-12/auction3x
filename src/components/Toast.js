@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-const ToastMessage = ({ type, message, duration = 5000 }) => {
+const ToastMessage = ({ type, message, duration = 2000 }) => {
 
   const [ showToast, setShowToast ] = useState(false)
   useEffect(() => {
@@ -12,7 +12,7 @@ const ToastMessage = ({ type, message, duration = 5000 }) => {
       <>
       {showToast &&
        <div className="fixed-top d-flex justify-content-center" style={{zIndex: "11"}}>
-       <div className={`toast p-3  bg-${type}`} style={{display:"block"}}>
+       <div className={`toast p-3  bg-${type}`} style={{display:"block", justifyContent:"center"}}>
         {message}
        </div>
      </div>

@@ -1,10 +1,8 @@
 import React from "react";
-import { Container, Form } from "react-bootstrap";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import authServices from "../services/authServices";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
@@ -12,12 +10,17 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    if(data.password!==data.confirmPassword){
+      alert("Passwords do not match");
+    }
+    else{
     authServices.register(data);
     toogleSignUp();
     toogleConfirmModal();
+    }
   };
   return (
     <>
@@ -51,7 +54,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
               className="form-control"
               placeholder="First Name"
               {...register("firstName", { required: true })}
-            />
+            required/>
           </td>
           <td style={{ position: "absolute", right: "15px", width: "220px" }}>
             <input
@@ -60,7 +63,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
               className="form-control"
               placeholder="Last Name"
               {...register("lastName", { required: true })}
-            />
+            required/>
           </td>
         </tr>
       </table>
@@ -77,7 +80,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
               className="form-control"
               placeholder="Email"
               {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-            />
+            required/>
           </td>
           <td style={{ position: "absolute", right: "15px", width: "220px" }}>
             <input
@@ -89,7 +92,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
                 minLength: 6,
                 maxLength: 12,
               })}
-            />
+            required/>
           </td>
         </tr>
       </table>
@@ -100,7 +103,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
           className="form-control"
           placeholder="Username"
           {...register("userName", { required: false, maxLength: 20 })}
-        />
+        required/>
       </div>
 
       <table style={{ marginBottom: "10px" }}>
@@ -119,13 +122,18 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
                 minLength: 6,
                 maxLength: 12,
               })}
-            />
+            required/>
           </td>
           <td style={{ position: "absolute", right: "15px", width: "220px" }}>
             <input
               type="password"
               className="form-control"
               placeholder="Confirm Password"
+              {...register("confirmPassword", {
+                required: true,
+                minLength: 6,
+                maxLength: 12,
+              })}
             />
           </td>
         </tr>
@@ -143,7 +151,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
               className="form-control"
               placeholder="Country"
               {...register("country", { required: true, maxLength: 20 })}
-            />
+            required/>
           </td>
 
           <td style={{ position: "absolute", right: "15px", width: "220px" }}>
@@ -152,7 +160,7 @@ const User=({toogleSignUp, toogleSignIn, toogleConfirmModal})=> {
               className="form-control color-black"
               placeholder="City"
               {...register("city", { required: true, maxLength: 20 })}
-            />
+            required/>
           </td>
         </tr>
       </table>

@@ -1,43 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Toast from "./Toast";
-import axios from "axios";
 import authServices from "../services/authServices";
-import { Button, Modal } from "react-bootstrap";
-import Cookies from "js-cookie";
+import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { login } from "../slice/userSlice";
 require("react-bootstrap/ModalHeader");
 
-const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
+const Login = ({ toogleSignUp, toogleSignIn, toogleButton, getName }) => {
+  const dispatch = useDispatch();
   const [showWarning, setShowWarning] = useState(false);
+  //const [invPass, setInvPass] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     const getUser = async () => {
-      const response = await authServices.login(data);
-
-      if (!response.data.isActive) {
-        setShowWarning(true);
+      try{
+        const response= await authServices.login(data)     
+          if (!response.data.isActive) {
+            setShowWarning(true);
+          }
+          dispatch(login(response.data.data));
+          toogleButton();
+          toogleSignIn();
       }
-      else if(response.status() === 400){
-        console.log("Fail to login!");
-      }
-      toogleButton();
-      toogleSignIn();
+      catch(err){
+        if (err.response.status === 400) {
+          alert("Invalid Password or Email");
+        }   
+      }       
     };
     getUser();
   };
   return (
-<>
+    <>
       {showWarning && (
-        <Toast style={{ marginTop: "10px" }}
+        <Toast
+          style={{ marginTop: "10px" }}
           type="warning"
           message="Warning! Your email verification process has not been done. We have sent the link"
         />
       )}
-      <Modal.Header contentClassName = "modal-head-login" closeButton>
+      <Modal.Header contentClassName="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
@@ -58,6 +66,7 @@ const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
                 required: true,
                 pattern: /^\S+@\S+$/i,
               })}
+              required
             />
           </div>
         </div>
@@ -72,6 +81,7 @@ const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
               minLength: 6,
               maxLength: 12,
             })}
+            required
           />
         </div>
         <div className="form-group mb-4 mt-2 pl-3" style={{ fontSize: "12px" }}>
@@ -91,16 +101,23 @@ const Login = ({toogleSignUp, toogleSignIn, toogleButton}) => {
             >
               Submit
             </button>
-            <div className = "pb-2" style = {{position:"relative"}}>Not registered?<button onClick={()=>{
-              toogleSignUp()
-              toogleSignIn()
-              }} className="nav-link-signup"> Click Here to Sign Up! </button></div>
+            <div className="pb-2" style={{ position: "relative" }}>
+              Not registered?
+              <button
+                onClick={() => {
+                  toogleSignUp();
+                  toogleSignIn();
+                }}
+                className="nav-link-signup"
+              >
+                {" "}
+                Click Here to Sign Up!{" "}
+              </button>
+            </div>
           </div>
-          
         </Modal.Footer>
       </form>
-      </>
-
+    </>
   );
 };
 export default Login;
