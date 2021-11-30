@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState } from "react";
-import Login from "./Login";
+import Login from "../components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
-import Confirm from "./EmailConfirm";
-import SignUp from "./SignUp";
+import Confirm from "../components/EmailConfirm";
+import SignUp from "../components/SignUp";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
@@ -120,6 +120,7 @@ const Header = () => {
                 />
               </Modal.Body>
             </Modal>
+
             <Link to="/MultiSellForm">
               <b
               style={{position:"absolute", top:"25px", right:"280px", color:"white"}}
@@ -127,10 +128,11 @@ const Header = () => {
                 Sell
               </b>
             </Link>
+
             {user._id ? (
               <div className="dropdown">
                 <button
-                  className="bg-light customButton border-0 mt-0"
+                  className="bg-light customButton border-0"
                   style={{ fontSize: "16px"}}
                 >
                   {user.firstName} {user.lastName}

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";import { useEffect } from "react";
 import {useDispatch} from "react-redux";
 import {login} from "./slice/userSlice";
+import MultiSellForm from "./SellRegister/MultiSellForm";
 
 function App() {
  
@@ -33,6 +34,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/MultiSellForm">
+            <MultiSellForm />
           </Route>
         </Switch>
       </Router>
