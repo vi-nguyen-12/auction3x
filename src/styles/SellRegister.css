@@ -1,569 +1,552 @@
 /*Steps bar*/
 .circle {
-    display: flex;
-    width: 85px;
-    height: 85px;
-    background-color: rgb(238, 238, 238);
-    border-radius: 50%;
-  }
-  
-  .text {
-    margin: auto;
-  }
-  /*Sell Welcome*/
-  .box-content {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 600px;
-    width: 1000px;
-    top: 50px;
-  }
-  .pre-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-    width: 150px;
-    background-color: #e5e5e5;
-    color: #707070;
-    border-radius: 2px;
-    border: 0;
-    font-weight: bold;
-  }
-  
-  .nxt-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1px 19px;
-    width: 150px;
-    background-color: #ac744b;
-    color: #ffffff;
-    border-radius: 2px;
-    border: 0;
-    font-weight: bold;
-  }
-  
-  .bottom-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 20px;
-  }
-  
-  .sell-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-top: 150px;
-  }
-  
-  /*Upload Form*/
-  .upload-box {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 600px;
-    width: 1000px;
-    top: 50px;
-  }
-  
-  .verification-box {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 600px;
-    width: 1000px;
-    top: 50px;
-  }
-  
-  .verfied-content {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 600px;
-    width: 1000px;
-    top: 50px;
-  }
-  
-  .agree-content {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 600px;
-    width: 1000px;
-    top: 50px;
-  }
-  .listingfee-content {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 700px;
-    width: 850px;
-    top: 50px;
-  }
-  .listDetail-content {
-    margin: auto;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    height: 1000px;
-    width: 850px;
-    top: 50px;
-  }
-  
-  body {
-    background-color: #ffefe3;
-  }
-  
-  .sell-top {
-    width: 100%;
-    height: 100px;
-    border: 0;
-    border-bottom: 1px solid #efd3bf;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .sell-bottom {
-    display: flex;
-    justify-content: center;
-    border: 0;
-    position: absolute;
-    height: 480px;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .fee-sell-bottom {
-    display: flex;
-    justify-content: center;
-    border: 0;
-    position: absolute;
-    height: 580px;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .list-sell-bottom {
-    display: flex;
-    justify-content: center;
-    border: 0;
-    position: absolute;
-    height: 880px;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .agree-sell-bottom {
-    display: flex;
-    justify-content: center;
-    border: 0;
-    position: absolute;
-    height: 480px;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .pre-btn-listfee {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .nxt-btn-listfee {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1px 19px;
-  }
-  
-  .bottom-btn-listfee {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 30px;
-  }
-  .pay-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 100px;
-    width: 400px;
-    border-radius: 5px;
-    background-color: #ac744b;
-    border: 0;
-    color: #ffffff;
-    font-weight: bold;
-  }
-  .fee-title {
-    display: inline;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 30px;
-  }
-  .fee-table {
-    height: auto;
-    position: absolute;
-    top: 120px;
-  }
-  
-  .listDetails-title {
-    display: inline;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-  }
-  
-  .list-form {
-    width: 700px;
-    height: 700px;
-    box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
-    border-radius: 3px;
-    position: relative;
-    top: 100px;
-  }
-  
-  h6 {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-  }
-  
-  .list-input {
-    position: absolute;
-    right: 50px;
-    width: 370px;
-    height: 40px;
-    border-radius: 1px;
-    border: 1px solid #cecaca;
-    padding-left: 10px;
-  }
-  
-  label {
-    display: inline-block;
-    text-align: left;
-  }
-  
-  .header {
-    display: inline;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    margin-top: 40px;
-    font-size: 20px;
-  }
-  
-  top {
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: bold;
-    color: #6d6d6d;
-  }
-  
-  p {
-    display: flex;
-    justify-content: center;
-  }
-  
-  ul.dashed {
-    list-style-type: none;
-    padding-left: 0 !important;
-  }
-  ul.dashed > li {
-    /* text-indent: -5px; */
-    font-size: 20px;
-    padding: 0 !important;
-  }
-  ul.dashed > li:before {
-    content: "-";
-    /* text-indent: -5px; */
-    color: #fcba7d;
-    padding-right: 20px;
-    font-size: 30px;
-  }
-  
-  .bodi {
-    margin-top: 150px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .agree-bottom-btn {
-    position: absolute;
-    bottom: 50px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* sell top */
-  
-  .circle {
-    display: flex;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(238, 238, 238);
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-1 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-2 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-3 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-4 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-5 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  .circle-6 {
-    background-color: #b77b50;
-    display: flex;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: auto;
-  }
-  
-  .line {
-    width: 8%;
-    height: 2px;
-    background-color: #f1f1f1;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  .line-1 {
-    width: 8%;
-    height: 2px;
-    background-color: #b77b50;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  .line-2 {
-    width: 8%;
-    height: 2px;
-    background-color: #b77b50;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  .line-3 {
-    width: 8%;
-    height: 2px;
-    background-color: #b77b50;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  .line-4 {
-    width: 8%;
-    height: 2px;
-    background-color: #b77b50;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  .line-5 {
-    width: 8%;
-    height: 2px;
-    background-color: #b77b50;
-    margin: center;
-    margin-top: 48px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .spnn {
-    margin-left: 2px;
-    font-size: 10px;
-    display: inline-block;
-    position: absolute;
-    bottom: 5px;
-    align-content: center;
-  }
-  #status p {
-    font-size: 10px;
-  }
-  
-  /* upload and sell welcome */
-  
-  input[type="radio"]:after {
-    width: 15px;
-    height: 15px;
-    border-radius: 15px;
-    top: -4px;
-    left: -2px;
-    position: relative;
-    background-color: #d1d3d1;
-    content: "";
-    display: inline-block;
-    visibility: visible;
-    border: 2px solid #dddfe1;
-    padding: 5x;
-  }
-  
-  input[type="radio"]:checked:after {
-    width: 15px;
-    height: 15px;
-    border-radius: 20px;
-    top: -4px;
-    left: -2px;
-    position: relative;
-    background-color: #ac744b;
-    content: "";
-    display: inline-block;
-    visibility: visible;
-    border: 2px solid #dddfe1;
-    padding: 5px;
-  }
-  
-  /*table 1*/
-  .choice-table-1 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  }
-  .choice-table-2 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  }
-  .choice-table-3 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  }
-  .sell-1 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  
-    display: inline-block;
-    padding: 20px;
-    text-align: left;
-  }
-  .sell-2 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    margin-left: 20px;
-    padding: 20px;
-  }
-  .sell-3 {
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    margin-left: 200px;
-    padding: 20px;
-  }
-  
-  /*title*/
-  h1 {
-    font-size: 1.5em;
-    color: #333;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-    position: relative;
-  }
-  
-  .input-form-1 {
-    display: inline;
-    margin-top: 130px;
-    width: 25%;
-  }
-  
-  .input-form-2 {
-    display: inline;
-    margin-top: 130px;
-    width: 25%;
-  }
+  display: flex;
+  width: 85px;
+  height: 85px;
+  background-color: rgb(238, 238, 238);
+  border-radius: 50%;
+}
+
+.text {
+  margin: auto;
+}
+/*Sell Welcome*/
+.box-content {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 600px;
+  width: 1000px;
+  top: 50px;
+}
+.pre-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 150px;
+  background-color: #e5e5e5;
+  color: #707070;
+  border-radius: 2px;
+  border: 0;
+  font-weight: bold;
+}
+
+.nxt-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 19px;
+  width: 150px;
+  background-color: #ac744b;
+  color: #ffffff;
+  border-radius: 2px;
+  border: 0;
+  font-weight: bold;
+}
+
+.bottom-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+}
+
+.sell-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-top: 150px;
+}
+
+/*Upload Form*/
+.upload-box {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 600px;
+  width: 1000px;
+  top: 50px;
+}
+
+.verification-box {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 600px;
+  width: 1000px;
+  top: 50px;
+}
+
+.verfied-content {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 600px;
+  width: 1000px;
+  top: 50px;
+}
+
+.agree-content {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 600px;
+  width: 1000px;
+  top: 50px;
+}
+.listingfee-content {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 700px;
+  width: 850px;
+  top: 50px;
+}
+.listDetail-content {
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 1000px;
+  width: 850px;
+  top: 50px;
+}
+
+body {
+  background-color: #ffefe3;
+}
+
+.sell-top {
+  width: 100%;
+  height: 100px;
+  border: 0;
+  border-bottom: 1px solid #efd3bf;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+
+.sell-bottom {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  position: absolute;
+  height: 480px;
+  width: 100%;
+  bottom: 0;
+}
+
+.fee-sell-bottom {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  position: absolute;
+  height: 580px;
+  width: 100%;
+  bottom: 0;
+}
+
+.list-sell-bottom {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  position: absolute;
+  height: 880px;
+  width: 100%;
+  bottom: 0;
+}
+
+.agree-sell-bottom {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  position: absolute;
+  height: 480px;
+  width: 100%;
+  bottom: 0;
+}
+
+.pre-btn-listfee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nxt-btn-listfee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 19px;
+}
+
+.bottom-btn-listfee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+}
+.pay-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 100px;
+  width: 400px;
+  border-radius: 5px;
+  background-color: #ac744b;
+  border: 0;
+  color: #ffffff;
+  font-weight: bold;
+}
+.fee-title {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30px;
+}
+.fee-table {
+  height: auto;
+  position: absolute;
+  top: 120px;
+}
+
+.listDetails-title {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+}
+
+.list-form {
+  width: 700px;
+  height: 700px;
+  box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
+  border-radius: 3px;
+  position: relative;
+  top: 100px;
+}
+
+h6 {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.list-input {
+  position: absolute;
+  right: 50px;
+  width: 370px;
+  height: 40px;
+  border-radius: 1px;
+  border: 1px solid #cecaca;
+  padding-left: 10px;
+}
+
+label {
+  display: inline-block;
+  text-align: left;
+}
+
+.header {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+top {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: #6d6d6d;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+}
+
+ul.dashed {
+  list-style-type: none;
+  padding-left: 0 !important;
+}
+ul.dashed > li {
+  /* text-indent: -5px; */
+  font-size: 20px;
+  padding: 0 !important;
+}
+ul.dashed > li:before {
+  content: "-";
+  /* text-indent: -5px; */
+  color: #fcba7d;
+  padding-right: 20px;
+  font-size: 30px;
+}
+
+.bodi {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.agree-bottom-btn {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* sell top */
+
+.circle {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(238, 238, 238);
+  border-radius: 50%;
+  margin: auto;
+}
+.circle-1 {
+  background-color: #b77b50;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+.circle-2 {
+  background-color: #b77b50;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+.circle-3 {
+  background-color: #b77b50;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+.circle-4 {
+  background-color: #b77b50;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+.circle-5 {
+  background-color: #b77b50;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.line {
+  width: 8%;
+  height: 2px;
+  background-color: #f1f1f1;
+  margin: center;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+.line-1 {
+  width: 8%;
+  height: 2px;
+  background-color: #b77b50;
+  margin: center;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+.line-2 {
+  width: 8%;
+  height: 2px;
+  background-color: #b77b50;
+  margin: center;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+.line-3 {
+  width: 8%;
+  height: 2px;
+  background-color: #b77b50;
+  margin: center;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+.line-4 {
+  width: 8%;
+  height: 2px;
+  background-color: #b77b50;
+  margin: center;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.spnn {
+  margin-left: 2px;
+  font-size: 10px;
+  display: inline-block;
+  position: absolute;
+  bottom: 5px;
+  align-content: center;
+}
+#status p {
+  font-size: 10px;
+}
+
+/* upload and sell welcome */
+
+input[type="radio"]:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -4px;
+  left: -2px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #dddfe1;
+  padding: 5x;
+}
+
+input[type="radio"]:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
+  top: -4px;
+  left: -2px;
+  position: relative;
+  background-color: #ac744b;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #dddfe1;
+  padding: 5px;
+}
+
+/*table 1*/
+.choice-table-1 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+.choice-table-2 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+.choice-table-3 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+.sell-1 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+
+  display: inline-block;
+  padding: 20px;
+  text-align: left;
+}
+.sell-2 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  margin-left: 20px;
+  padding: 20px;
+}
+.sell-3 {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  margin-left: 200px;
+  padding: 20px;
+}
+
+/*title*/
+h1 {
+  font-size: 1.5em;
+  color: #333;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  position: relative;
+}
+
+.input-form-1 {
+  display: inline;
+  margin-top: 130px;
+  width: 25%;
+}
+
+.input-form-2 {
+  display: inline;
+  margin-top: 130px;
+  width: 25%;
+}

@@ -6,34 +6,29 @@ import { useState } from "react";
 const ListingFees = ({ toogleStep, step }) => (
   <form className="listingfee-content">
     <div className="sell-top">
-    <div class="circle-1">
+      <div class="circle-1">
         <p class="text">01</p>
-        <span className = "spnn">Select Catagory</span>
+        <span className="spnn">Select Catagory</span>
       </div>{" "}
       <div class="line-1"></div>
       <div class="circle-2">
         <p class="text">02</p>
-        <span className = "spnn">Upload Documents</span>
+        <span className="spnn">Listing Details</span>
       </div>{" "}
       <div class="line-2"></div>
-      <div class="circle-3">
+      <div class="circle-2">
         <p class="text">03</p>
-        <span className = "spnn">Approval</span>
-      </div>{" "}
-      <div class="line-3"></div>
-      <div class="circle-4">
-        <p class="text">04</p>
-        <span className = "spnn">Agreement</span>
+        <span className="spnn">Upload Documents</span>
       </div>{" "}
       <div class="line-4"></div>
       <div class="circle-5">
-        <p class="text">05</p>
-        <span className = "spnn">Listing Fees</span>
+        <p class="text">04</p>
+        <span className="spnn">Listing Fees</span>
       </div>{" "}
       <div class="line"></div>
       <div class="circle">
-        <p class="text">06</p>
-        <span className = "spnn">Listing Details</span>
+        <p class="text">05</p>
+        <span className="spnn">Agreement</span>
       </div>{" "}
     </div>
     <div className="fee-sell-bottom">
@@ -186,7 +181,13 @@ const ListingFees = ({ toogleStep, step }) => (
           <tr>
             <td>
               <input type="checkbox" name="checkbox" />
-              <span style={{ paddingLeft: "10px", color:"#94a5b2", fontSize:"13px" }}>
+              <span
+                style={{
+                  paddingLeft: "10px",
+                  color: "#94a5b2",
+                  fontSize: "13px",
+                }}
+              >
                 I agree to the Terms and Conditions
               </span>
             </td>

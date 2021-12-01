@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import AgreementForm from "./AgreementForm";
 import SellWelcome from "./SellWelcome";
 import UploadForm from "./UploadForm";
-import DocumentVerification from "./DocumentVerification";
-import VerifiedDocs from "./VerifiedDocs";
 import ListingFees from "./ListingFees";
 import "../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
@@ -27,7 +25,7 @@ const MultiSellForm = () => {
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
 
-        <UploadForm toogleStep={(data) => toogleStep(data)} step={step} />
+        <ListingDetails toogleStep={(data) => toogleStep(data)} step={step} />
       </div>
     );
   } else if (step === 2) {
@@ -35,10 +33,7 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <DocumentVerification
-          toogleStep={(data) => toogleStep(data)}
-          step={step}
-        />
+        <UploadForm toogleStep={(data) => toogleStep(data)} step={step} />
       </div>
     );
   } else if (step === 3) {
@@ -46,7 +41,7 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <VerifiedDocs toogleStep={(data) => toogleStep(data)} step={step} />
+        <ListingFees toogleStep={(data) => toogleStep(data)} step={step} />
       </div>
     );
   } else if (step === 4) {
@@ -55,22 +50,6 @@ const MultiSellForm = () => {
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
         <AgreementForm toogleStep={(data) => toogleStep(data)} step={step} />
-      </div>
-    );
-  } else if (step === 5) {
-    return (
-      <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
-        <ListingFees toogleStep={(data) => toogleStep(data)} step={step} />
-      </div>
-    );
-  } else if (step === 6) {
-    return (
-      <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
-        <ListingDetails toogleStep={(data) => toogleStep(data)} step={step} />
       </div>
     );
   }
