@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 require("react-bootstrap/ModalHeader");
 
-const Login = ({ toogleSignUp, toogleSignIn, toogleButton, getName }) => {
+const Login = ({ toogleSignUp, toogleSignIn, toogleButton}) => {
   const dispatch = useDispatch();
   const [showWarning, setShowWarning] = useState(false);
   //const [invPass, setInvPass] = useState(false);

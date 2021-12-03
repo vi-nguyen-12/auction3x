@@ -16,6 +16,15 @@ const authService = {
 
   logout() {
     return axios.get(env.API_URL + "/api/user/logout",  {withCredentials: true});
+  },
+
+  realEstate(data) {
+    return axios.get(env.API_URL + "/api/properties/real-estates/search", {params: data});
+  },
+
+  saveRealEstate(data) {
+    console.log(data)
+    return axios.post(env.API_URL + "/api/properties/real-estates/", data, {withCredentials: true,   headers: { "Content-Type": "multipart/form-data" }});
   }
 };
 

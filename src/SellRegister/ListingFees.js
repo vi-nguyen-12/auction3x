@@ -16,18 +16,23 @@ const ListingFees = ({ toogleStep, step }) => (
         <span className="spnn">Listing Details</span>
       </div>{" "}
       <div class="line-2"></div>
-      <div class="circle-2">
+      <div class="circle-3">
         <p class="text">03</p>
+        <span className="spnn">Property Details</span>
+      </div>{" "}
+      <div class="line-3"></div>
+      <div class="circle-4">
+        <p class="text">04</p>
         <span className="spnn">Upload Documents</span>
       </div>{" "}
       <div class="line-4"></div>
       <div class="circle-5">
-        <p class="text">04</p>
+        <p class="text">05</p>
         <span className="spnn">Listing Fees</span>
       </div>{" "}
       <div class="line"></div>
       <div class="circle">
-        <p class="text">05</p>
+        <p class="text">06</p>
         <span className="spnn">Agreement</span>
       </div>{" "}
     </div>
