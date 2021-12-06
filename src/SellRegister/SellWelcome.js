@@ -1,11 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Button } from "react-bootstrap";
 // create step bar
 
-const Sell = ({ toogleStep, step }) => {
-  console.log(step, "step2");
+const Sell = ({ toogleStep, step}) => {
+  const {
+    handleSubmit,
+    //formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    toogleStep(step + 1);
+  };
+
   return (
-    <form className="box-content">
+    <form onSubmit={handleSubmit(onSubmit)} className="box-content">
       <div className="sell-top">
         <div class="circle-1">
           <p class="text">01</p>
@@ -95,12 +105,7 @@ const Sell = ({ toogleStep, step }) => {
             Previous
           </button>
           <span> </span>
-          <button
-            className="nxt-btn"
-            onClick={() => {
-              toogleStep(step + 1);
-            }}
-          >
+          <button type="submit" className="nxt-btn">
             Next
           </button>
         </div>

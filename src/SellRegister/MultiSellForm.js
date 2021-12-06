@@ -6,17 +6,36 @@ import ListingFees from "./ListingFees";
 import "../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
 import SellRegisterHeader from "./SellRegisterHeader";
+import PropertyDetails from "./PropertyDetails";
 
 const MultiSellForm = () => {
   const [step, setStep] = useState(0);
-  const toogleStep = (stepp) => setStep(stepp);
+  const toogleStep = (step) => {
+    setStep(step);
+  };
+
+  const [propertyData, setPropertyData] = useState({});
+  const tooglePropertyData = (propertyData) => {
+    setPropertyData(propertyData);
+  };
+
+  const [property, setProperty] = useState({});
+
+  const properties = (data) => {
+    setProperty(data);
+  };
+
+  const [file, setFile] = useState(null);
+  const toogleFile = (file) => {
+    setFile(file);
+  };
 
   if (step === 0) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <SellWelcome toogleStep={(data) => toogleStep(data)} step={step} />
+        <SellWelcome toogleStep={toogleStep} step={step} test="test" />
       </div>
     );
   } else if (step === 1) {
@@ -25,7 +44,11 @@ const MultiSellForm = () => {
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
 
-        <ListingDetails toogleStep={(data) => toogleStep(data)} step={step} />
+        <ListingDetails
+          properties={properties}
+          toogleStep={(data) => toogleStep(data)}
+          step={step}
+        />
       </div>
     );
   } else if (step === 2) {
@@ -33,7 +56,12 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <UploadForm toogleStep={(data) => toogleStep(data)} step={step} />
+        <PropertyDetails
+          tooglePropertyData={tooglePropertyData}
+          property={property}
+          toogleStep={(data) => toogleStep(data)}
+          step={step}
+        />
       </div>
     );
   } else if (step === 3) {
@@ -41,7 +69,11 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <ListingFees toogleStep={(data) => toogleStep(data)} step={step} />
+        <UploadForm
+          toogleFile={toogleFile}
+          toogleStep={(data) => toogleStep(data)}
+          step={step}
+        />
       </div>
     );
   } else if (step === 4) {
@@ -49,7 +81,12 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
-        <AgreementForm toogleStep={(data) => toogleStep(data)} step={step} />
+        <AgreementForm
+          file={file}
+          propertyData={propertyData}
+          toogleStep={(data) => toogleStep(data)}
+          step={step}
+        />
       </div>
     );
   }

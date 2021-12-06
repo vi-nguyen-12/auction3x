@@ -13,6 +13,7 @@ import DisplayHeader from "./RealEstate/DisplayHeader";
 import DisplayTab from "./RealEstate/DisplayTab";
 import Footer from "./components/Home/footer";
 import { Featured } from "./components/Featured";
+import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,10 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/MultiSellForm">
-            <MultiSellForm />
+            <div className="sell-register-container">
+              <SellRegisterHeader />
+              <MultiSellForm />
+            </div>
           </Route>
           <Route exact path="/Display">
             <DisplayHeader />
