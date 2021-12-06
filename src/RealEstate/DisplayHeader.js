@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState } from "react";
-import Login from "./Login";
+import Login from "../components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
-import Confirm from "./EmailConfirm";
-import SignUp from "./SignUp";
+import Confirm from "../components/EmailConfirm";
+import SignUp from "../components/SignUp";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
@@ -31,7 +31,10 @@ const Header = () => {
     };
 
     return (
-      <nav className="customNav navbar navbar-expand-lg p-0">
+      <nav
+        className="customNav navbar navbar-expand-lg p-0"
+        style={{ backgroundColor: "black", width: "100%" }}
+      >
         <button
           className="navbar-toggler"
           type="button"
@@ -57,9 +60,9 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul className="navbar-nav m-auto">
             <li className="nav-item navactive mt-2 p-2 mb-auto">
-              <Link to="/Display">
-                <b style={{ color: "white" }}>Real Estate</b>
-              </Link>
+              <a className="nav-link" href="#" style={{ color: "white" }}>
+                <b>Real Estate</b>
+              </a>
             </li>
             <li className="nav-item mt-2 px-4 py-2">
               <a className="nav-link" href="#" style={{ color: "white" }}>
@@ -120,22 +123,24 @@ const Header = () => {
                 />
               </Modal.Body>
             </Modal>
+
             <Link to="/MultiSellForm">
               <b
                 style={{
                   position: "absolute",
                   top: "25px",
-                  right: "15%",
+                  right: "280px",
                   color: "white",
                 }}
               >
                 Sell
               </b>
             </Link>
+
             {user._id ? (
               <div className="dropdown">
                 <button
-                  className="bg-light customButton border-0 mt-0"
+                  className="bg-light customButton border-0"
                   style={{ fontSize: "16px" }}
                 >
                   {user.firstName} {user.lastName}
@@ -232,7 +237,7 @@ const Header = () => {
   };
 
   return (
-    <Nav>
+    <Nav style={{ width: "100.5%" }}>
       <HeaderComp />
     </Nav>
   );

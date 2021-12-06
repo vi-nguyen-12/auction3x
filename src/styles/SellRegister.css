@@ -83,36 +83,7 @@
   top: 50px;
 }
 
-.verification-box {
-  margin: auto;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  height: 600px;
-  width: 1000px;
-  top: 50px;
-}
-
-.verfied-content {
-  margin: auto;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  height: 600px;
-  width: 1000px;
-  top: 50px;
-}
-
+/*Agreement Form*/
 .agree-content {
   margin: auto;
   position: relative;
@@ -127,6 +98,7 @@
   width: 1000px;
   top: 50px;
 }
+/*Fee Form*/
 .listingfee-content {
   margin: auto;
   position: relative;
@@ -141,6 +113,7 @@
   width: 850px;
   top: 50px;
 }
+/*Listing Detail Form*/
 .listDetail-content {
   margin: auto;
   position: relative;
