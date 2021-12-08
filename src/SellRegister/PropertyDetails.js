@@ -113,7 +113,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   type="text"
                   name="state"
                   defaultValue={property.address.state}
-                  {...register("state", { required: true })}
+                  {...register("state", { required: false })}
                 ></input>
               </td>
               <td
@@ -187,8 +187,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   name="ownerName"
                   className="form-control"
                   defaultValue={property.owner.name}
-                  {...register("ownerName", { required: true })}
-                  required
+                  {...register("ownerName", { required: false })}
                 ></input>
               </td>
               <td
@@ -205,8 +204,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   name="propertyType"
                   className="form-control"
                   defaultValue={property.parcel.standardized_land_use_type}
-                  {...register("propertyType", { required: true })}
-                  required
+                  {...register("propertyType", { required: false })}
                 />
               </td>
             </tr>
@@ -240,8 +238,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   name="rooms_count"
                   className="form-control"
                   defaultValue={property.structure.rooms_count}
-                  {...register("rooms_count", { required: true })}
-                  required
+                  {...register("rooms_count", { required: false })}
                 />
               </td>
               <td
@@ -255,11 +252,10 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                 <input
                   style={{ fontSize: "17px", fontWeight: "bold" }}
                   type="number"
-                  name="beds"
+                  name="sqft"
                   className="form-control"
                   defaultValue={property.structure.total_area_sq_ft}
-                  {...register("beds", { required: true })}
-                  required
+                  {...register("sqft", { required: false })}
                 />
               </td>
               <td
@@ -276,8 +272,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   name="beds"
                   className="form-control"
                   defaultValue={property.structure.beds_count}
-                  {...register("beds", { required: true })}
-                  required
+                  {...register("bedrooms", { required: false })}
                 />
               </td>
 
@@ -296,8 +291,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                   name="baths"
                   className="form-control"
                   defaultValue={property.structure.baths}
-                  {...register("baths", { required: true })}
-                  required
+                  {...register("bathrooms", { required: false })}
                 />
               </td>
             </tr>
@@ -309,7 +303,7 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                 bottom: "5px",
               }}
             >
-              <td>Property Value</td>
+              <td>Total Rooms</td>
               <td style={{ paddingLeft: "10px" }}>Property Size(sqft)</td>
               <td style={{paddingLeft:"8px"}}>Bedrooms</td>
               <td style={{paddingRight:"190px", paddingLeft:"39px" }}>Bathrooms</td>

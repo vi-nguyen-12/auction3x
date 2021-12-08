@@ -152,3 +152,9 @@
   .dropdown-content a:hover {background-color:#D58F5C; }
   
   .dropdown:hover .dropdown-content {display: block; }
+
+  .forgotPass{
+      width: 500px;
+        height: 300px;
+        margin-top: 20px;
+  }

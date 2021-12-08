@@ -1,23 +1,64 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import authService from "../services/authServices";
 
-const UploadForm = ({ toogleStep, step, toogleFile }) => {
+const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
+  const { register, handleSubmit } = useForm();
+  const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [documents, setDocuments] = useState([]);
 
-  const { register, handleSubmit} = useForm();
+  const onSelectImages = (e) => {
+    const images = e.target.files;
+    console.log(images);
+    setImages(images);
+  };
 
-  const onSubmit = (data) => {
-    const uploadedFile = {
-      images: data.images,
-      videos: data.videos,
+  const onSelectVideos = (e) => {
+    const videos = e.target.files;
+    console.log(videos);
+    setVideos(videos);
+  };
+
+  const send = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const formData2 = new FormData();
+
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
     }
+    toogleImages(formData);
 
-    toogleFile(uploadedFile);
+    // authService
+    //   .saveImages(formData)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    for (let i = 0; i < videos.length; i++) {
+      formData2.append("videos", videos[i]);
+    }
+    toogleVideos(formData2);
+
+    // authService
+    //   .saveVideos(formData2)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
     toogleStep(step + 1);
   };
 
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
+    <form className="upload-box">
       <div className="sell-top">
         <div class="circle-1">
           <p class="text">01</p>
@@ -29,10 +70,10 @@ const UploadForm = ({ toogleStep, step, toogleFile }) => {
           <span className="spnn">Listing Details</span>
         </div>
         <div class="line-2"></div>
-      <div class="circle-3">
-        <p class="text">03</p>
-        <span className="spnn">Property Details</span>
-      </div>{" "}
+        <div class="circle-3">
+          <p class="text">03</p>
+          <span className="spnn">Property Details</span>
+        </div>{" "}
         <div class="line-3"></div>
         <div class="circle-4">
           <p class="text">04</p>
@@ -60,22 +101,22 @@ const UploadForm = ({ toogleStep, step, toogleFile }) => {
           Choose the Image Files
           <input
             accept="image/*"
-            type="file[]"
-            id="files"
-            name="files"
+            type="file"
+            name="images"
+            onChange={onSelectImages}
             multiple
-            {...register("images", { required: false})}
+            // {...register("images", { required: false })}
           />
         </div>
         <div className="input-form-2">
           Choose the Videos Files
           <input
             accept="video/*"
-            type="file[]"
-            id="files"
-            name="files"
+            type="file"
+            name="videos"
+            onChange={onSelectVideos}
             multiple
-            {...register("videos", { required: false})}
+            // {...register("videos", { required: false })}
           />
         </div>
 
@@ -83,10 +124,7 @@ const UploadForm = ({ toogleStep, step, toogleFile }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button
-            className="nxt-btn"
-            type="submit"
-          >
+          <button className="nxt-btn" type="submit" onClick={send}>
             Next
           </button>
         </div>

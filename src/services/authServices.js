@@ -35,6 +35,36 @@ const authService = {
         ""
     );
   },
+
+  saveRealEstate(data) {
+    console.log(data);
+    return axios.post(env.API_URL + "/api/properties/real-estates/", data, {
+      withCredentials: true,
+      headers: { "content-type": "multipart/form-data" },
+    });
+  },
+
+  saveImages(data) {
+    return axios.post(
+      env.API_URL + "/api/properties/real-estates/images/upload",
+      data,
+      {
+        withCredentials: true,
+        headers: { "content-type": "multipart/form-data" },
+      }
+    );
+  },
+
+  saveVideos(data) {
+    return axios.post(
+      env.API_URL + "/api/properties/real-estates/videos/upload",
+      data,
+      {
+        withCredentials: true,
+        headers: { "content-type": "multipart/form-data" },
+      }
+    );
+  },
 };
 
 export default authService;

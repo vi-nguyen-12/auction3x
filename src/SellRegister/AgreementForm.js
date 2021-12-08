@@ -3,28 +3,46 @@ import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 import authService from "../services/authServices";
+import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
+import {Redirect} from 'react-router-dom'
 
-const Agree = ({ toogleStep, step, propertyData, file }) => {
+const Agree = ({ toogleStep, step, propertyData, images, videos }) => {
+  const [redirect, setRedirect] = React.useState(false);
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const listOfImages=[];
-    for (const i of file.images){
-      listOfImages.push(i)
+  if(redirect === true) {
+    return <Redirect to="/" />
+  }
+
+  const onSubmit = (data) => {
+    if(images){
+    authService
+      .saveImages(images)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
-    console.log(listOfImages);
-    const datas = {
-      ...propertyData,
-      images: listOfImages,
-      // videos: file.videos,
-    };
-    console.log(datas);
-    const response = await authService.saveRealEstate(datas);
-    console.log(response);
+
+    if(videos){
+    authService
+      .saveVideos(videos)
+      .then((res) => {
+        console.log(res);
+        if(res.status === 200){
+          setRedirect(true)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   };
 
   return (
