@@ -1,9 +1,22 @@
 import React from "react";
 import "../styles/realEstate.css";
-import Header from "../components/Header";
-import DisplayTab from "../RealEstate/DisplayTab";
+import { useSelector } from "react-redux";
+import authService from "../services/authServices";
+import { useDispatch } from "react-redux";
+import { addProperty } from "../slice/propertySlice";
+
 
 const Display = () => {
+  const dispatch = useDispatch();
+  const property = useSelector((state) =>state.property);
+
+  //check if property is empty
+  if (property === 0) {
+    authService.getRealEstate().then((res) => {
+      dispatch(addProperty(res.data.data[0]));
+    });
+  }
+
   return (
     <div>
       <tr className="realHeader">
@@ -26,7 +39,7 @@ const Display = () => {
       >
         <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
         <div>
-          <p>64 1st Avenue, High Street, NZ 1002</p>
+          <p>{property.details.address.formatted_street_address}</p>
         </div>
       </div>
       <div className="list-info-2">
