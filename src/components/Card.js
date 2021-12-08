@@ -28,17 +28,65 @@ const CardComp = (props) => {
         />
         <Card.Body style={{ paddingLeft: "13px" }}>
           <Card.Text>
-            <span className="golden-text">64 1st Avenue, High Street, NZ</span>
-            <h4 style={{ marginTop: "5px" }}>Luxury Avenue Los-Angeles</h4>
-
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div>
               <div>
-                <p className="grey-small">Online Auction</p>
-                <p className="black-medium">Feb 09 - 23, 2021</p>
+                <span className="golden-text">
+                  64 1st Avenue, High Street, NZ
+                </span>
+                <h4 style={{ marginTop: "5px" }}>Luxury Avenue Los-Angeles</h4>
               </div>
-              <div style={{ marginLeft: "15px" }}>
-                <p className="grey-small">Additional Info</p>
-                <p className="black-medium">4BD | 2BA | 1,422 sq.ft</p>
+              <div
+                style={{
+                  display: "inline-flex",
+                }}
+              >
+                <div>
+                  <tr>
+                    <td>
+                      <p style={{ fontSize: "15px", width: "100px" }}>
+                        Online Auction
+                      </p>{" "}
+                    </td>
+                    <td
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {" "}
+                      |{" "}
+                    </td>
+                    <td>
+                      <p
+                        style={{
+                          fontSize: "15px",
+                          width: "100px",
+                          marginLeft: "-20px",
+                        }}
+                      >
+                        Additional Info
+                      </p>
+                    </td>
+                  </tr>
+
+                  <td>
+                    <p style={{ fontSize: "12px", width: "100px" }}>
+                      Feb 09 - 23, 2021
+                    </p>
+                  </td>
+
+                  <td>
+                    <p
+                      style={{
+                        fontSize: "12px",
+                        marginLeft: "100px",
+                        width: "100%",
+                      }}
+                    >
+                      4BD | 2BA | 1,422 sq.ft
+                    </p>
+                  </td>
+                </div>
               </div>
             </div>
           </Card.Text>

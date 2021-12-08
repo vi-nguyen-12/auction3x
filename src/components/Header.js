@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState } from "react";
@@ -11,10 +11,9 @@ import SignUp from "./SignUp";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
-
 
 const Header = () => {
   const user = useSelector((state) => state.user);
@@ -32,6 +31,16 @@ const Header = () => {
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
+    const [show, setShow] = useState("0");
+
+    // useEffect(() => {
+    //   if onClick() {
+    //     setShow("1");
+
+    //   } else {
+    //     setShow("0");
+    //   }
+    // }, [show]);
 
     const handleLogout = () => {
       authService.logout();
@@ -65,7 +74,9 @@ const Header = () => {
           <ul className="navbar-nav m-auto">
             <li className="nav-item navactive mt-2 p-2 mb-auto">
               <Link to="/Display">
-                <b style={{ color: "white" }}>Real Estate</b>
+                <b style={{ color: "white" }} onClick={() => setShow(show + 1)}>
+                  Real Estate
+                </b>
               </Link>
             </li>
             <li className="nav-item mt-2 px-4 py-2">
@@ -128,7 +139,6 @@ const Header = () => {
               </Modal.Body>
             </Modal>
 
-
             <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
@@ -141,7 +151,11 @@ const Header = () => {
               <Modal.Header closeButton>
                 <Modal.Title
                   id="contained-modal-title-vcenter"
-                  style={{ color: "#D58F5C", fontSize: "30px", fontWeight: "bold" }}
+                  style={{
+                    color: "#D58F5C",
+                    fontSize: "30px",
+                    fontWeight: "bold",
+                  }}
                 >
                   Forgot Password
                 </Modal.Title>
@@ -154,7 +168,6 @@ const Header = () => {
               </Modal.Body>
             </Modal>
 
-
             <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
@@ -165,9 +178,7 @@ const Header = () => {
               contentClassName="forgotPass"
             >
               <Modal.Body>
-                <ChangePass
-                  toogleChangePass={toogleChangePass}
-                />
+                <ChangePass toogleChangePass={toogleChangePass} />
               </Modal.Body>
             </Modal>
 

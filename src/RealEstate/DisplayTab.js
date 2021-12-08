@@ -5,7 +5,7 @@ const DisplayTab = () => {
   const [realTab, setRealTab] = useState("Investment Opportunity");
   return (
     <form>
-      <div style={{ padding: "25px" }}>
+      <div style={{ padding: "35px", backgroundColor: "white" }}>
         <Tabs
           aciveKey={realTab}
           onselect={() => setRealTab()}
