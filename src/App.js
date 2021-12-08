@@ -8,9 +8,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
-import SellWelcome from "./SellRegister/SellWelcome";
+import Display from "./RealEstate/Display";
+import DisplayHeader from "./RealEstate/DisplayHeader";
+import DisplayTab from "./RealEstate/DisplayTab";
+import Footer from "./components/Home/footer";
+import { Featured } from "./components/Featured";
 import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
-import ListingDetails from "./SellRegister/ListingDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,11 +47,16 @@ function App() {
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
               <SellRegisterHeader />
-              <MultiSellForm
-              />
+              <MultiSellForm />
             </div>
           </Route>
-        
+          <Route exact path="/Display">
+            <DisplayHeader />
+            <Display />
+            <DisplayTab />
+            <Featured />
+            <Footer />
+          </Route>
         </Switch>
       </Router>
     </div>
