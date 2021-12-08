@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 require("react-bootstrap/ModalHeader");
 
-const Login = ({ toogleSignUp, toogleSignIn, toogleButton}) => {
+const Login = ({ toogleSignUp, toogleSignIn, toogleButton, toogleForgotPass }) => {
   const dispatch = useDispatch();
   const [showWarning, setShowWarning] = useState(false);
   //const [invPass, setInvPass] = useState(false);
@@ -19,20 +19,19 @@ const Login = ({ toogleSignUp, toogleSignIn, toogleButton}) => {
   } = useForm();
   const onSubmit = (data) => {
     const getUser = async () => {
-      try{
-        const response= await authServices.login(data)     
-          if (!response.data.isActive) {
-            setShowWarning(true);
-          }
-          dispatch(login(response.data.data));
-          toogleButton();
-          toogleSignIn();
-      }
-      catch(err){
+      try {
+        const response = await authServices.login(data);
+        if (!response.data.isActive) {
+          setShowWarning(true);
+        }
+        dispatch(login(response.data.data));
+        toogleButton();
+        toogleSignIn();
+      } catch (err) {
         if (err.response.status === 400) {
           alert("Invalid Password or Email");
-        }   
-      }       
+        }
+      }
     };
     getUser();
   };
@@ -84,8 +83,17 @@ const Login = ({ toogleSignUp, toogleSignIn, toogleButton}) => {
             required
           />
         </div>
-        <div className="form-group mb-4 mt-2 pl-3" style={{ fontSize: "12px" }}>
-          <label>Forgot Password?</label>
+        <div className="form-group" style={{ fontSize: "12px" }}>
+          <button
+            onClick={() => {
+              toogleForgotPass();
+              toogleSignIn();
+            }}
+            style={{marginTop: "5px", marginBottom: "30px"}}
+            className="nav-link-signup"
+          >
+            Forgot Password?
+          </button>
         </div>
         <Modal.Footer>
           <div className="col text-center mb-2">
@@ -110,8 +118,7 @@ const Login = ({ toogleSignUp, toogleSignIn, toogleButton}) => {
                 }}
                 className="nav-link-signup"
               >
-                {" "}
-                Click Here to Sign Up!{" "}
+                Click Here to Sign Up!
               </button>
             </div>
           </div>

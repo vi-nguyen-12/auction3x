@@ -12,6 +12,8 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
 import {Link} from "react-router-dom";
+import ForgotPass from "./ForgotPass";
+import ChangePass from "./ChangePass";
 
 const Header = () => {
   const user = useSelector((state) => state.user);
@@ -21,6 +23,10 @@ const Header = () => {
     const [showSignUp, popUpSignUp] = useState(false);
     const [showConfirm, popupConfirm] = useState(false);
     const [showButton, popButton] = useState(false);
+    const [forgotPass, popForgotPass] = useState(false);
+    const [changePass, popChangePass] = useState(false);
+    const toogleChangePass = () => popChangePass(!changePass);
+    const toogleForgotPass = () => popForgotPass(!forgotPass);
     const toogleButton = () => popButton(!showButton);
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
@@ -120,6 +126,50 @@ const Header = () => {
                 />
               </Modal.Body>
             </Modal>
+
+
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={forgotPass}
+              onHide={toogleForgotPass}
+              centered
+              contentClassName="forgotPass"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title
+                  id="contained-modal-title-vcenter"
+                  style={{ color: "#D58F5C", fontSize: "30px", fontWeight: "bold" }}
+                >
+                  Forgot Password
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <ForgotPass
+                  toogleForgotPass={toogleForgotPass}
+                  toogleChangePass={toogleChangePass}
+                />
+              </Modal.Body>
+            </Modal>
+
+
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={changePass}
+              onHide={toogleChangePass}
+              centered
+              contentClassName="forgotPass"
+            >
+              <Modal.Body>
+                <ChangePass
+                  toogleChangePass={toogleChangePass}
+                />
+              </Modal.Body>
+            </Modal>
+
             <Link to="/MultiSellForm">
               <b
               style={{position:"absolute", top:"25px", right:"280px", color:"white"}}
@@ -158,6 +208,8 @@ const Header = () => {
                     fontSize: 16,
                     color: "black",
                     fontWeight: "bold",
+                    backgroundColor: "transparent",
+                    border: "0",
                   }}
                   variant="success"
                   onClick={toogleSignIn}
@@ -171,6 +223,8 @@ const Header = () => {
                     fontSize: 16,
                     color: "black",
                     fontWeight: "bold",
+                    backgroundColor: "transparent",
+                    border: "0",
                   }}
                   variant="success"
                   onClick={toogleSignUp}
@@ -191,6 +245,7 @@ const Header = () => {
                   toogleSignUp={toogleSignUp}
                   toogleSignIn={toogleSignIn}
                   toogleButton={toogleButton}
+                  toogleForgotPass={toogleForgotPass}
                 />
               </Modal.Body>
             </Modal>

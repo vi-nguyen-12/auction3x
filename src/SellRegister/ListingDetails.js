@@ -13,31 +13,10 @@ const ListingDetails = ({ toogleStep, step, properties}) => {
   } = useForm();
   //const dispatch = useDispatch();
 
-  // const [property, setProperty] = useState({
-  //   ownerName: "",
-  //   address: "",
-  //   bed: 0,
-  //   bath: 0,
-  //   sqft: 0,
-  //   price: 0,
-  //   year: 0,
-  //   parking: "",
-  // });
-
   const onSubmit = (data) => {
     authService.realEstate(data).then((res) => {
       //dispatch(addProperty(res.data));
-      // setProperty(
-      //   res.data.data.owner.name,
-      //   res.data.data.address.formatted_street_address,
-      //   res.data.data.structure.beds_count,
-      //   res.data.data.structure.baths,
-      //   res.data.data.structure.total_area_sq_ft,
-      //   res.data.data.assessments[0].total_value,
-      //   res.data.data.year,
-      //   res.data.data.structure.parking_type
-      // );
-      properties(res.data.data);
+      properties(res.data);
       toogleStep(step + 1);
     });
   };

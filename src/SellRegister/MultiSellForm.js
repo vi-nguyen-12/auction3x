@@ -20,15 +20,21 @@ const MultiSellForm = () => {
   };
 
   const [property, setProperty] = useState({});
-
   const properties = (data) => {
     setProperty(data);
   };
 
-  const [file, setFile] = useState(null);
-  const toogleFile = (file) => {
-    setFile(file);
+
+  const [images, setImages] = useState([]);
+  const toogleImages = (images) => {
+    setImages(images);
   };
+
+  const [videos, setVideos] = useState([]);
+  const toogleVideos = (videos) => {
+    setVideos(videos);
+  };
+
 
   if (step === 0) {
     return (
@@ -70,7 +76,8 @@ const MultiSellForm = () => {
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
         <UploadForm
-          toogleFile={toogleFile}
+          toogleImages={toogleImages}
+          toogleVideos={toogleVideos}
           toogleStep={(data) => toogleStep(data)}
           step={step}
         />
@@ -82,10 +89,11 @@ const MultiSellForm = () => {
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
         <AgreementForm
-          file={file}
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}
           step={step}
+          images={images}
+          videos={videos}
         />
       </div>
     );
