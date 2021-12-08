@@ -3,6 +3,7 @@ import "../styles/realEstate.css";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
+import authService from "../services/authServices";
 
 const ImagePopup = () => {
   return (
@@ -27,11 +28,6 @@ const ImagePopup = () => {
 }; // end of ImagePopup
 
 const Display = () => {
-  const [view, setView] = useState(0);
-  const PageView = (e) => {
-    setView(e);
-  };
-
   return (
     <div className="styl">
       <tr className="realHeader">
@@ -118,7 +114,7 @@ const Display = () => {
             borderRadius: "10px",
           }}
         >
-          <h4>{PageView}</h4>
+          <h4></h4>
           <p> Views</p>
         </div>
         <div style={{ padding: "35px" }}>
