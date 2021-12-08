@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
+import SearchBar from "../components/SearchBar.js";
+import { BrowserRouter as Router } from "react-router-dom";
+import authService from "../services/authServices";
+import { useForm } from "react-hook-form";
 
 const ImgSlider = (props) => {
   let settings = {
@@ -17,57 +22,53 @@ const ImgSlider = (props) => {
       <Carousel {...settings}>
         <Wrap>
           <a>
-            <img src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png" alt="" />
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
           </a>
           <HomeBottom>
-            <a>
-              $254,562,143
-            </a>
-            <span>
-              HOUSE IN OAKTON, VIRGINIA, UNITED STATES
-            </span>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
           </HomeBottom>
         </Wrap>
 
         <Wrap>
           <a>
-            <img src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png" alt="" />
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
           </a>
           <HomeBottom>
-            <a>
-              $254,562,143
-            </a>
-            <span>
-              HOUSE IN OAKTON, VIRGINIA, UNITED STATES
-            </span>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
           </HomeBottom>
         </Wrap>
 
         <Wrap>
           <a>
-            <img src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png" alt="" />
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
           </a>
           <HomeBottom>
-            <a>
-              $254,562,143
-            </a>
-            <span>
-              HOUSE IN OAKTON, VIRGINIA, UNITED STATES
-            </span>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
           </HomeBottom>
         </Wrap>
 
         <Wrap>
           <a>
-            <img src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png" alt="" />
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
           </a>
           <HomeBottom>
-            <a>
-              $254,562,143
-            </a>
-            <span>
-              HOUSE IN OAKTON, VIRGINIA, UNITED STATES
-            </span>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
           </HomeBottom>
         </Wrap>
       </Carousel>
@@ -75,53 +76,88 @@ const ImgSlider = (props) => {
         <div className="row px-lg-5">
           <div className="col-12 col-sm-6 col-md-2 mt-3">
             <div class="dropdown w-100">
-              <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span className="pr-5">
-                  All Property
-                </span>
+              <button
+                class="btn btn-secondary dropdown-toggle w-100"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="pr-5">All Property</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-2 mt-3">
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span className="pr-5">
-                  All Categories
-                </span>
+              <button
+                class="btn btn-secondary dropdown-toggle w-100"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="pr-5">All Categories</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-2 mt-3">
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span className="pr-5">
-                  All Countries
-                </span>
+              <button
+                class="btn btn-secondary dropdown-toggle w-100"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="pr-5">All Countries</span>
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 mt-3">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="State, City, Zip, Title, Property ID, etc" />
+              <SearchBar />
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-1 mt-3">
-          <button class="bg-light customButton w-100" type="submit">Search</button>
+            <button class="bg-light customButton w-100" type="submit">
+              Search
+            </button>
           </div>
         </div>
       </div>
@@ -198,10 +234,10 @@ const Wrap = styled.div`
 `;
 
 const HomeBottom = styled.div`
-position: absolute;
-bottom: 20vh;
-z-index: 1;
-left: 5vw;
+  position: absolute;
+  bottom: 20vh;
+  z-index: 1;
+  left: 5vw;
   a {
     color: white !important;
     font-size: 24px;
@@ -216,26 +252,26 @@ left: 5vw;
 `;
 
 const FilterMenu = styled.div`
-position: absolute;
-bottom: 10vh;
-z-index: 1;
-left: 5vw;
-width: 90vw;
+  position: absolute;
+  bottom: 10vh;
+  z-index: 1;
+  left: 5vw;
+  width: 90vw;
 `;
 
 const FilterContainer = styled.div`
-display: flex;
-width: 100%;
+  display: flex;
+  width: 100%;
 `;
 
 const Flex1 = styled.div`
-flex:1;
-padding-right: 30px;
+  flex: 1;
+  padding-right: 30px;
 `;
 
 const Flex2 = styled.div`
-flex:5;
-padding-right: 30px;
+  flex: 5;
+  padding-right: 30px;
 `;
 
 export default ImgSlider;

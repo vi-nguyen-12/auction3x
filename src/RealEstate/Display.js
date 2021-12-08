@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/realEstate.css";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
+import { Modal } from "react-bootstrap";
+
+const ImagePopup = () => {
+  return (
+    <Modal>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Text in a modal</h4>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <button
+          className="btn btn-secondary"
+          onClick={() => this.setState({ show: false })}
+        >
+          Close
+        </button>
+      </Modal.Footer>
+    </Modal>
+  );
+}; // end of ImagePopup
 
 const Display = () => {
+  const [view, setView] = useState(0);
+  const PageView = (e) => {
+    setView(e);
+  };
+
   return (
-    <div>
+    <div className="styl">
       <tr className="realHeader">
         <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
       </tr>
@@ -15,98 +43,96 @@ const Display = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          width: "95%",
-          height: "95%",
+          onClick: { ImagePopup },
           margin: "auto",
+          padding: "35px",
+          width: "100%",
         }}
       />
       <div
         className="list-info-1"
-        style={{ display: "inline-block", padding: "25px" }}
+        style={{ display: "inline-block", padding: "35px" }}
       >
-        <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
-        <div>
-          <p>64 1st Avenue, High Street, NZ 1002</p>
-        </div>
+        <tr>
+          <td>
+            <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
+            <div>
+              <p>64 1st Avenue, High Street, NZ 1002</p>
+            </div>
+          </td>
+          <td
+            style={{
+              position: "absolute",
+              right: "100px",
+              width: "240px",
+              fontSize: "17px",
+            }}
+          >
+            {" "}
+            <button className="customButton" style={{ width: "200px" }}>
+              Register to Bid
+            </button>{" "}
+          </td>
+        </tr>
       </div>
       <div className="list-info-2">
-        <tr>
-          <td style={{ width: "240px", position: "relative", left: "105px" }}>
-            {" "}
-            Online Auction
-          </td>
-          <td
-            style={{
-              position: "absolute",
-              right: "100px",
-              width: "240px",
-              fontSize: "17px",
-            }}
-          >
-            {" "}
-            Addition info{" "}
-          </td>
-        </tr>
-        <tr>
-          <td
-            style={{
-              position: "relative",
-              left: "100px",
-              fontSize: "17px",
-              bottom: "5px",
-            }}
-          >
-            {" "}
-            July 19-23, 2021
-          </td>
-          <td
-            style={{
-              position: "absolute",
-              right: "100px",
-              width: "240px",
-              fontSize: "17px",
-            }}
-          >
-            {" "}
-            4bd | 2 ba | 1.422sq.ft
-          </td>
-        </tr>
-        <div className="bidding-session">
-          <tr>
-            <td
-              style={{
-                display: "inline-block",
-                fontSize: "25px",
-                padding: "25px",
-              }}
-            >
-              {" "}
-              Starting Bid: <div> $256,5200,000</div>
-            </td>
-            <td
-              style={{
-                position: "absolute",
-                right: "100px",
-                width: "240px",
-                fontSize: "17px",
-              }}
-            >
-              {" "}
-              <button className="customButton" style={{ width: "200px" }}>
-                Register to Bid
-              </button>{" "}
-            </td>
-          </tr>
+        <div
+          style={{
+            display: "inline-block",
+            justifyContent: "center",
+            textAlign: "center",
+            backgroundColor: "#E8E8E8",
+            width: "15%",
+            marginLeft: "35px",
+            padding: "15px",
+            borderRadius: "10px",
+          }}
+        >
+          <h4> Online Auction</h4>
+          <p> July 19-23, 2021</p>
         </div>
+        <div
+          style={{
+            display: "inline-block",
+            justifyContent: "center",
+            textAlign: "center",
+            backgroundColor: "#E8E8E8",
+            width: "15%",
+            marginLeft: "35px",
+            padding: "15px",
+            borderRadius: "10px",
+          }}
+        >
+          <h4> $256,5200,000</h4>
+          <p> Starting Bid</p>
+        </div>
+        <div
+          style={{
+            display: "inline-block",
+            justifyContent: "center",
+            textAlign: "center",
+            backgroundColor: "#E8E8E8",
+            width: "15%",
+            marginLeft: "35px",
+            padding: "15px",
+            borderRadius: "10px",
+          }}
+        >
+          <h4>{PageView}</h4>
+          <p> Views</p>
+        </div>
+        <div style={{ padding: "35px" }}>
+          <h2>Property Information</h2>
 
-        <div style={{ padding: "25px" }}>
           <tr>
-            {" "}
-            <h2>Property Information</h2>{" "}
-          </tr>
-
-          <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                position: "relative",
+                left: "105px",
+                padding: "15px",
+              }}
+            >
               Sale Type
             </td>
             <td
@@ -115,13 +141,21 @@ const Display = () => {
                 right: "500px",
                 width: "240px",
                 fontSize: "17px",
+                padding: "15px",
               }}
             >
               Tenancy
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                padding: "15px",
+                position: "relative",
+                left: "105px",
+              }}
+            >
               Sale Condition
             </td>
             <td
@@ -130,13 +164,22 @@ const Display = () => {
                 right: "500px",
                 width: "240px",
                 fontSize: "17px",
+                padding: "15px",
+                padding: "15px",
               }}
             >
               Building Height
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                position: "relative",
+                padding: "15px",
+                left: "105px",
+              }}
+            >
               Property Type
             </td>
             <td
@@ -145,13 +188,21 @@ const Display = () => {
                 right: "500px",
                 width: "240px",
                 fontSize: "17px",
+                padding: "15px",
               }}
             >
               Building FAR
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                padding: "15px",
+                position: "relative",
+                left: "105px",
+              }}
+            >
               Building Size
             </td>
             <td
@@ -159,6 +210,7 @@ const Display = () => {
                 position: "absolute",
                 right: "500px",
                 width: "240px",
+                padding: "15px",
                 fontSize: "17px",
               }}
             >
@@ -166,7 +218,14 @@ const Display = () => {
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                padding: "15px",
+                position: "relative",
+                left: "105px",
+              }}
+            >
               Building Class
             </td>
             <td
@@ -174,6 +233,7 @@ const Display = () => {
                 position: "absolute",
                 right: "500px",
                 width: "240px",
+                padding: "15px",
                 fontSize: "17px",
               }}
             >
@@ -181,7 +241,14 @@ const Display = () => {
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                padding: "15px",
+                position: "relative",
+                left: "105px",
+              }}
+            >
               Year Built/ Renovated
             </td>
             <td
@@ -189,6 +256,7 @@ const Display = () => {
                 position: "absolute",
                 right: "500px",
                 width: "240px",
+                padding: "15px",
                 fontSize: "17px",
               }}
             >
@@ -196,13 +264,21 @@ const Display = () => {
             </td>
           </tr>
           <tr>
-            <td style={{ width: "240px", position: "relative", left: "105px" }}>
+            <td
+              style={{
+                width: "240px",
+                padding: "15px",
+                position: "relative",
+                left: "105px",
+              }}
+            >
               Percent Leased
             </td>
             <td
               style={{
                 position: "absolute",
                 right: "500px",
+                padding: "15px",
                 width: "240px",
                 fontSize: "17px",
               }}
@@ -212,7 +288,7 @@ const Display = () => {
           </tr>
         </div>
 
-        <div style={{ padding: "25px" }}>
+        <div style={{ padding: "35px" }}>
           <tr>
             {" "}
             <h2>Executive Summary</h2>
