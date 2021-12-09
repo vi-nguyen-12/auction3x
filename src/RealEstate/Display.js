@@ -7,6 +7,7 @@ import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ImagePopup = () => {
   return (
@@ -73,9 +74,31 @@ const Display = () => {
             }}
           >
             {" "}
-            <button className="customButton" style={{ width: "200px" }}>
-              Register to Bid
-            </button>{" "}
+            <div
+              style={{
+                display: "inline-block",
+                justifyContent: "center",
+                textAlign: "center",
+                width: "100%",
+                marginLeft: "35px",
+                padding: "15px",
+                borderRadius: "10px",
+              }}
+            >
+              <button className="customButton" style={{ width: "200px" }}>
+                Register to Bid
+              </button>{" "}
+              <Link to="/DisplayTab">
+                <b
+                  style={{
+                    borderBottom: "1px solid #6D6D6D",
+                    color: "#6D6D6D",
+                  }}
+                >
+                  View Document
+                </b>
+              </Link>
+            </div>
           </td>
         </tr>
       </div>
@@ -122,11 +145,13 @@ const Display = () => {
             borderRadius: "10px",
           }}
         >
-          <h4></h4>
+          <h4>23,000</h4>
           <p> Views</p>
         </div>
         <div style={{ padding: "35px" }}>
-          <h2>Property Information</h2>
+          <h2>
+            <span style={{ color: "#B77B50" }}>|</span>Property Information
+          </h2>
 
           <tr>
             <td
@@ -295,7 +320,9 @@ const Display = () => {
         <div style={{ padding: "35px" }}>
           <tr>
             {" "}
-            <h2>Executive Summary</h2>
+            <h2>
+              <span style={{ color: "#B77B50" }}>|</span>Executive Summary
+            </h2>
           </tr>
           <tr>
             <td>

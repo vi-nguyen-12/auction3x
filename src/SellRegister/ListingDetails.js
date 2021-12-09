@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import authService from "../services/authServices";
 
 const ListingDetails = ({ toogleStep, step, properties}) => {
