@@ -20,11 +20,10 @@ const MultiSellForm = () => {
   };
 
   const [property, setProperty] = useState({});
-  const properties = (data) => {
-    setProperty(data);
+  const properties = (property) => {
+    setProperty(property);
   };
-
-
+  
   const [images, setImages] = useState([]);
   const toogleImages = (images) => {
     setImages(images);

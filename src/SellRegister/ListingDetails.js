@@ -1,9 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import authService from "../services/authServices";
-import { useDispatch } from "react-redux";
-import { addProperty } from "../slice/propertySlice";
 
 const ListingDetails = ({ toogleStep, step, properties}) => {
   const {
@@ -11,11 +8,9 @@ const ListingDetails = ({ toogleStep, step, properties}) => {
     handleSubmit,
     //formState: { errors },
   } = useForm();
-  //const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     authService.realEstate(data).then((res) => {
-      //dispatch(addProperty(res.data));
       properties(res.data);
       toogleStep(step + 1);
     });
