@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "../styles/realEstate.css";
+import { useSelector } from "react-redux";
+import authService from "../services/authServices";
+import { useDispatch } from "react-redux";
+import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
@@ -29,6 +33,16 @@ const ImagePopup = () => {
 }; // end of ImagePopup
 
 const Display = () => {
+  const dispatch = useDispatch();
+  const property = useSelector((state) =>state.property);
+
+  //check if property is empty
+  if (property === 0) {
+    authService.getRealEstate().then((res) => {
+      dispatch(addProperty(res.data.data[0]));
+    });
+  }
+
   return (
     <div className="styl">
       <tr className="realHeader">

@@ -6,6 +6,17 @@ const authService = {
   register(user) {
     return axios.post(env.API_URL + "/api/user/register", user);
   },
+
+  getUsers(data) {
+    return axios.get(
+      env.API_URL + "/api/user/checkJWT",
+      {
+        data,
+      },
+      { withCredentials: true }
+    );
+  },
+
   verify(data) {
     return axios.post(env.API_URL + "/api/user/verify", data);
   },
