@@ -8,12 +8,12 @@ const authService = {
   },
 
   getUsers(data) {
-    return axios.get(
+    return axios.post(
       env.API_URL + "/api/user/checkJWT",
+      { authToken: data },
       {
-        data,
-      },
-      { withCredentials: true }
+        withCredentials: true,
+      }
     );
   },
 
@@ -73,7 +73,9 @@ const authService = {
   },
 
   verifyKyc(data) {
-    return axios.get(env.API_URL + "/api/kyc/verifyKyc", data);
+    return axios.get(env.API_URL + "/api/kyc/verifyKyc", {
+      withCredentials: true,
+    });
   },
 
   getProperties() {

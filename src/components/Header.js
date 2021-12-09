@@ -61,7 +61,7 @@ const Header = () => {
         setKycUrl(url);
         console.log(url);
       }
-    }, []);
+    }, [user]);
 
     return (
       <>
@@ -199,9 +199,9 @@ const Header = () => {
                 </Modal.Body>
               </Modal>
 
-              <button
+              <Button
                 onClick={handleOnSell}
-                style={{ backgroundColor: "transparent" }}
+                style={{ backgroundColor: "transparent", border: "none" }}
               >
                 <b
                   style={{
@@ -213,7 +213,7 @@ const Header = () => {
                 >
                   Sell
                 </b>
-              </button>
+              </Button>
               {user._id && !user.KYC && (
                 <div className="dropdown">
                   <button style={{ background: "transparent" }}>
