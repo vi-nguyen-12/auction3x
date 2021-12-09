@@ -2,11 +2,12 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import Display from "../RealEstate/Display";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CardComp = (props) => {
+  const property = useSelector((state) => state.property);
   return (
     <Link to="/Display">
-      {" "}
       <Card
         //move to next page
 
@@ -31,7 +32,7 @@ const CardComp = (props) => {
             <div>
               <div>
                 <span className="golden-text">
-                  64 1st Avenue, High Street, NZ
+                  {property.details.address.formatted_street_address}, {property.details.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Luxury Avenue Los-Angeles</h4>
               </div>
@@ -83,7 +84,7 @@ const CardComp = (props) => {
                         width: "100%",
                       }}
                     >
-                      4BD | 2BA | 1,422 sq.ft
+                      {property.details.structure.beds_count}BD | {property.details.structure.baths}BA | {property.details.structure.total_area_sq_ft} sq.ft
                     </p>
                   </td>
                 </div>

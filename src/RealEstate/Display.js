@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/realEstate.css";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
@@ -7,7 +7,6 @@ import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
-import authService from "../services/authServices";
 
 const ImagePopup = () => {
   return (
@@ -32,15 +31,8 @@ const ImagePopup = () => {
 }; // end of ImagePopup
 
 const Display = () => {
-  const dispatch = useDispatch();
   const property = useSelector((state) =>state.property);
-
-  //check if property is empty
-  if (property === 0) {
-    authService.getRealEstate().then((res) => {
-      dispatch(addProperty(res.data.data[0]));
-    });
-  }
+  console.log(property);
 
   return (
     <div className="styl">
@@ -67,7 +59,9 @@ const Display = () => {
           <td>
             <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
             <div>
-              <p>64 1st Avenue, High Street, NZ 1002</p>
+              <p>
+                {property.details.address.formatted_street_address}
+              </p>
             </div>
           </td>
           <td
@@ -178,7 +172,7 @@ const Display = () => {
                 padding: "15px",
               }}
             >
-              Building Height
+              Building Height: <span style={{ fontWeight:"bold" }}>{property.details.structure.stories} Stories</span>
             </td>
           </tr>
           <tr>
@@ -190,7 +184,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Property Type
+              Property Type: <span style={{fontWeight:"bold"}}>{property.details.parcel.county_land_use_description}</span>
             </td>
             <td
               style={{
@@ -213,7 +207,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Building Size
+              Building Size: <span style={{fontWeight:"bold"}}>{property.details.structure.total_area_sq_ft} sq.ft</span>
             </td>
             <td
               style={{
@@ -224,7 +218,7 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Zoning
+              Zoning: <span style={{fontWeight:"bold"}}>{property.details.parcel.zoning}</span>
             </td>
           </tr>
           <tr>
@@ -236,7 +230,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Building Class
+              Building Class: <span style={{fontWeight:"bold"}}>{property.details.structure.quality}</span>
             </td>
             <td
               style={{
@@ -247,7 +241,7 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Parking
+              Parking: <span style={{fontWeight:"bold"}}>{property.details.structure.parking_type}</span>
             </td>
           </tr>
           <tr>
@@ -259,7 +253,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Year Built/ Renovated
+              Year Built/ Renovated: <span style={{fontWeight:"bold"}}>{property.details.structure.year_built}</span>
             </td>
             <td
               style={{
@@ -270,7 +264,7 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Frontage
+              Frontage: <span style={{fontWeight:"bold"}}>{property.details.parcel.frontage_ft}</span>
             </td>
           </tr>
           <tr>
@@ -282,7 +276,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Percent Leased
+              Percent Leased: <span style={{fontWeight:"bold"}}>N/A</span>
             </td>
             <td
               style={{
@@ -293,7 +287,7 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Opportunity Zone
+              Opportunity Zone: <span style={{fontWeight:"bold"}}>N/A</span>
             </td>
           </tr>
         </div>

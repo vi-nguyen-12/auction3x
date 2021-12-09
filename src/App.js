@@ -1,4 +1,3 @@
-import axios from "axios";
 import Home from "./components/Home";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,7 +31,7 @@ function App() {
       getUser();
     }
 
-    authService.getRealEstate().then((res) => {
+    authService.getProperties().then((res) => {
       dispatch(addProperty(res.data.data[0]));
     });
   }, []);
