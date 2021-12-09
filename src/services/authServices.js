@@ -65,6 +65,13 @@ const authService = {
       }
     );
   },
+  fetchKycStatus(data) {
+    return axios.get(env.API_URL + "/api/kyc/fetchKycStatus", data);
+  },
+
+  verifyKyc(data) {
+    return axios.get(env.API_URL + "/api/kyc/verifyKyc", data);
+  },
 };
 
 export default authService;
