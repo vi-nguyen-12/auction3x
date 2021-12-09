@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState } from "react";
@@ -31,16 +31,6 @@ const Header = () => {
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
-    const [show, setShow] = useState("0");
-
-    // useEffect(() => {
-    //   if onClick() {
-    //     setShow("1");
-
-    //   } else {
-    //     setShow("0");
-    //   }
-    // }, [show]);
 
     const handleLogout = () => {
       authService.logout();
@@ -74,9 +64,7 @@ const Header = () => {
           <ul className="navbar-nav m-auto">
             <li className="nav-item navactive mt-2 p-2 mb-auto">
               <Link to="/Display">
-                <b style={{ color: "white" }} onClick={() => setShow(show + 1)}>
-                  Real Estate
-                </b>
+                <b style={{ color: "white" }}>Real Estate</b>
               </Link>
             </li>
             <li className="nav-item mt-2 px-4 py-2">
