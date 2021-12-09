@@ -16,12 +16,12 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const send = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    const formData3 = new FormData();
 
     for (let i = 0; i < documents.length; i++) {
-      formData.append("images", documents[i]);
+      formData3.append("documents", documents[i]);
     }
-    toogleDocuments(formData);
+    toogleDocuments(formData3);
 
     // authService
     //   .saveImages(formData)
@@ -107,4 +107,4 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   );
 };
 
-export default UploadForm;
+export default DocumentsUpload;

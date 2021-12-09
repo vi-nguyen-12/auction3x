@@ -81,6 +81,17 @@ const authService = {
   getProperties() {
     return axios.get(env.API_URL + "/api/properties/real-estates");
   },
+
+  savedDocuments(data) {
+    return axios.post(
+      env.API_URL + "/api/properties/real-estates/documents/upload",
+      data,
+      {
+        withCredentials: true,
+        headers: { "content-type": "multipart/form-data" },
+      }
+    );
+  },
 };
 
 export default authService;

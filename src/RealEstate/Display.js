@@ -7,32 +7,19 @@ import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-const ImagePopup = () => {
-  return (
-    <Modal>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Text in a modal</h4>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      </Modal.Body>
-      <Modal.Footer>
-        <button
-          className="btn btn-secondary"
-          onClick={() => this.setState({ show: false })}
-        >
-          Close
-        </button>
-      </Modal.Footer>
-    </Modal>
-  );
-}; // end of ImagePopup
+import { Route, Link } from "react-router-dom";
 
 const Display = () => {
-  const property = useSelector((state) =>state.property);
+  const dispatch = useDispatch();
+  const property = useSelector((state) => state.property);
+
+  //check if property is empty
+  if (property === 0) {
+    authService.getRealEstate().then((res) => {
+      dispatch(addProperty(res.data.data[0]));
+    });
+  }
+  const property = useSelector((state) => state.property);
   console.log(property);
 
   return (
@@ -46,7 +33,6 @@ const Display = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          onClick: { ImagePopup },
           margin: "auto",
           padding: "35px",
           width: "100%",
@@ -60,9 +46,7 @@ const Display = () => {
           <td>
             <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
             <div>
-              <p>
-                {property.details.address.formatted_street_address}
-              </p>
+              <p>{property.details.address.formatted_street_address}</p>
             </div>
           </td>
           <td
@@ -197,7 +181,10 @@ const Display = () => {
                 padding: "15px",
               }}
             >
-              Building Height: <span style={{ fontWeight:"bold" }}>{property.details.structure.stories} Stories</span>
+              Building Height:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.structure.stories} Stories
+              </span>
             </td>
           </tr>
           <tr>
@@ -209,7 +196,10 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Property Type: <span style={{fontWeight:"bold"}}>{property.details.parcel.county_land_use_description}</span>
+              Property Type:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.parcel.county_land_use_description}
+              </span>
             </td>
             <td
               style={{
@@ -232,7 +222,10 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Building Size: <span style={{fontWeight:"bold"}}>{property.details.structure.total_area_sq_ft} sq.ft</span>
+              Building Size:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.structure.total_area_sq_ft} sq.ft
+              </span>
             </td>
             <td
               style={{
@@ -243,7 +236,10 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Zoning: <span style={{fontWeight:"bold"}}>{property.details.parcel.zoning}</span>
+              Zoning:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.parcel.zoning}
+              </span>
             </td>
           </tr>
           <tr>
@@ -255,7 +251,10 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Building Class: <span style={{fontWeight:"bold"}}>{property.details.structure.quality}</span>
+              Building Class:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.structure.quality}
+              </span>
             </td>
             <td
               style={{
@@ -266,7 +265,10 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Parking: <span style={{fontWeight:"bold"}}>{property.details.structure.parking_type}</span>
+              Parking:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.structure.parking_type}
+              </span>
             </td>
           </tr>
           <tr>
@@ -278,7 +280,10 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Year Built/ Renovated: <span style={{fontWeight:"bold"}}>{property.details.structure.year_built}</span>
+              Year Built/ Renovated:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.structure.year_built}
+              </span>
             </td>
             <td
               style={{
@@ -289,7 +294,10 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Frontage: <span style={{fontWeight:"bold"}}>{property.details.parcel.frontage_ft}</span>
+              Frontage:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {property.details.parcel.frontage_ft}
+              </span>
             </td>
           </tr>
           <tr>
@@ -301,7 +309,7 @@ const Display = () => {
                 left: "105px",
               }}
             >
-              Percent Leased: <span style={{fontWeight:"bold"}}>N/A</span>
+              Percent Leased: <span style={{ fontWeight: "bold" }}>N/A</span>
             </td>
             <td
               style={{
@@ -312,7 +320,7 @@ const Display = () => {
                 fontSize: "17px",
               }}
             >
-              Opportunity Zone: <span style={{fontWeight:"bold"}}>N/A</span>
+              Opportunity Zone: <span style={{ fontWeight: "bold" }}>N/A</span>
             </td>
           </tr>
         </div>

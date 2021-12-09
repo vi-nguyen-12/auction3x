@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import authService from "../services/authServices";
 
-const ListingDetails = ({ toogleStep, step, properties}) => {
+const ListingDetails = ({ toogleStep, step, properties }) => {
   const {
     register,
     handleSubmit,
@@ -74,7 +74,10 @@ const ListingDetails = ({ toogleStep, step, properties}) => {
               className="form-control"
               placeholder="Address"
               style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
-              {...register("street_address", { required: false, maxLength: 100 })}
+              {...register("street_address", {
+                required: false,
+                maxLength: 100,
+              })}
               required
             />
           </div>

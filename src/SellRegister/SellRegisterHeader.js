@@ -11,7 +11,7 @@ import SignUp from "../components/SignUp";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const user = useSelector((state) => state.user);
@@ -123,7 +123,12 @@ const Header = () => {
 
             <Link to="/MultiSellForm">
               <b
-              style={{position:"absolute", top:"25px", right:"280px", color:"white"}}
+                style={{
+                  position: "absolute",
+                  top: "25px",
+                  right: "280px",
+                  color: "white",
+                }}
               >
                 Sell
               </b>
@@ -133,7 +138,7 @@ const Header = () => {
               <div className="dropdown">
                 <button
                   className="bg-light customButton border-0"
-                  style={{ fontSize: "16px"}}
+                  style={{ fontSize: "16px" }}
                 >
                   {user.firstName} {user.lastName}
                 </button>

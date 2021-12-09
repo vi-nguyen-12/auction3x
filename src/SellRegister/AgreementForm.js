@@ -4,9 +4,16 @@ import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 import authService from "../services/authServices";
 import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 
-const Agree = ({ toogleStep, step, propertyData, images, videos }) => {
+const Agree = ({
+  toogleStep,
+  step,
+  propertyData,
+  images,
+  videos,
+  documents,
+}) => {
   const [redirect, setRedirect] = React.useState(false);
   const {
     register,
@@ -14,34 +21,45 @@ const Agree = ({ toogleStep, step, propertyData, images, videos }) => {
     //formState: { errors },
   } = useForm();
 
-  if(redirect === true) {
-    return <Redirect to="/" />
+  if (redirect === true) {
+    return <Redirect to="/" />;
   }
 
   const onSubmit = (data) => {
-    if(images){
-    authService
-      .saveImages(images)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (images) {
+      authService
+        .saveImages(images)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
-    if(videos){
-    authService
-      .saveVideos(videos)
-      .then((res) => {
-        console.log(res);
-        if(res.status === 200){
-          setRedirect(true)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (videos) {
+      authService
+        .saveVideos(videos)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            setRedirect(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    if (documents) {
+      authService
+        .savedDocuments(documents)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
