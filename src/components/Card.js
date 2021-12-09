@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const CardComp = (props) => {
   const property = useSelector((state) => state.property);
+  console.log(property);
   return (
     <Link to="/Display">
       <Card
@@ -23,7 +24,7 @@ const CardComp = (props) => {
       >
         <Card.Img
           variant="top"
-          src="/images/feature.png"
+          src={property.images[1].url}
           className="img-fluid"
           style={{ maxWidth: "350px", maxHeight: "400px" }}
         />
@@ -32,7 +33,8 @@ const CardComp = (props) => {
             <div>
               <div>
                 <span className="golden-text">
-                  {property.details.address.formatted_street_address}, {property.details.address.state}
+                  {property.details.address.formatted_street_address},{" "}
+                  {property.details.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Luxury Avenue Los-Angeles</h4>
               </div>
@@ -84,7 +86,9 @@ const CardComp = (props) => {
                         width: "100%",
                       }}
                     >
-                      {property.details.structure.beds_count}BD | {property.details.structure.baths}BA | {property.details.structure.total_area_sq_ft} sq.ft
+                      {property.details.structure.beds_count}BD |{" "}
+                      {property.details.structure.baths}BA |{" "}
+                      {property.details.structure.total_area_sq_ft} sq.ft
                     </p>
                   </td>
                 </div>

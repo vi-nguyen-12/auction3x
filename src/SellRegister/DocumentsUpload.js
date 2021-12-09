@@ -7,38 +7,19 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
   const [documents, setDocuments] = useState([]);
 
-  const onSelectDocs = (e) => {
+  const onSelectDocs = async (e) => {
     const documents = e.target.files;
-    console.log(documents);
-    setDocuments(documents);
+    const formData = new FormData();
+    for (let i = 0; i < documents.length; i++) {
+      formData.append("documents", documents[i]);
+    }
+    const response = await authService.saveDocuments(formData);
+    setDocuments(response.data);
   };
 
   const send = (e) => {
     e.preventDefault();
-
-    const formData3 = new FormData();
-
-    for (let i = 0; i < documents.length; i++) {
-      formData3.append("documents", documents[i]);
-    }
-    toogleDocuments(formData3);
-
-    // authService
-    //   .saveImages(formData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // authService
-    //   .saveVideos(formData2)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    toogleDocuments(documents);
     toogleStep(step + 1);
   };
 

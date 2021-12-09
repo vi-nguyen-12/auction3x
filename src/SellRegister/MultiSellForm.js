@@ -24,16 +24,11 @@ const MultiSellForm = () => {
   const properties = (property) => {
     setProperty(property);
   };
-<<<<<<< HEAD
-
   const [documents, setDocuments] = useState([]);
   const toogleDocuments = (documents) => {
     setDocuments(documents);
   };
 
-=======
-  
->>>>>>> c34f084e1c4126e85b5354402a369321739a5038
   const [images, setImages] = useState([]);
   const toogleImages = (images) => {
     setImages(images);

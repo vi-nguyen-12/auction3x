@@ -43,7 +43,6 @@ const authService = {
     console.log(data);
     return axios.post(env.API_URL + "/api/properties/real-estates/", data, {
       withCredentials: true,
-      headers: { "content-type": "multipart/form-data" },
     });
   },
 
@@ -82,7 +81,7 @@ const authService = {
     return axios.get(env.API_URL + "/api/properties/real-estates");
   },
 
-  savedDocuments(data) {
+  saveDocuments(data) {
     return axios.post(
       env.API_URL + "/api/properties/real-estates/documents/upload",
       data,

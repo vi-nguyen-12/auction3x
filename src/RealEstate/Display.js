@@ -19,8 +19,6 @@ const Display = () => {
       dispatch(addProperty(res.data.data[0]));
     });
   }
-  const property = useSelector((state) => state.property);
-  console.log(property);
 
   return (
     <div className="styl">
@@ -28,7 +26,7 @@ const Display = () => {
         <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
       </tr>
       <img
-        src="/images/feature.png"
+        src={property.images[2].url}
         alt="Snow"
         style={{
           display: "flex",

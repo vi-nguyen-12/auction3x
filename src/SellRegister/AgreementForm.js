@@ -15,6 +15,7 @@ const Agree = ({
   documents,
 }) => {
   const [redirect, setRedirect] = React.useState(false);
+  console.log(videos, documents);
   const {
     register,
     handleSubmit,
@@ -25,42 +26,17 @@ const Agree = ({
     return <Redirect to="/" />;
   }
 
-  const onSubmit = (data) => {
-    if (images) {
-      authService
-        .saveImages(images)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    if (videos) {
-      authService
-        .saveVideos(videos)
-        .then((res) => {
-          console.log(res);
-          if (res.status === 200) {
-            setRedirect(true);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    if (documents) {
-      authService
-        .savedDocuments(documents)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+  const onSubmit = async (data) => {
+    authService.saveRealEstate({
+      type: propertyData.type,
+      street_address: propertyData.street_address,
+      city: propertyData.city,
+      state: propertyData.state,
+      images,
+      videos,
+      documents,
+    });
+    setRedirect(true);
   };
 
   return (

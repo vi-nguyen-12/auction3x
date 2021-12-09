@@ -9,51 +9,29 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const [videos, setVideos] = useState([]);
   const [documents, setDocuments] = useState([]);
 
-  const onSelectImages = (e) => {
+  const onSelectImages = async (e) => {
     const images = e.target.files;
-    console.log(images);
-    setImages(images);
-  };
-
-  const onSelectVideos = (e) => {
-    const videos = e.target.files;
-    console.log(videos);
-    setVideos(videos);
-  };
-
-  const send = (e) => {
-    e.preventDefault();
-
     const formData = new FormData();
-    const formData2 = new FormData();
-
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
-    toogleImages(formData);
+    const response = await authService.saveImages(formData);
+    setImages(response.data);
+  };
 
-    // authService
-    //   .saveImages(formData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
+  const onSelectVideos = async (e) => {
+    const videos = e.target.files;
+    const formData = new FormData();
     for (let i = 0; i < videos.length; i++) {
-      formData2.append("videos", videos[i]);
+      formData.append("videos", videos[i]);
     }
-    toogleVideos(formData2);
+    const response = await authService.saveVideos(formData);
+    setVideos(response.data);
+  };
 
-    // authService
-    //   .saveVideos(formData2)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  const send = (e) => {
+    toogleImages(images);
+    toogleVideos(videos);
     toogleStep(step + 1);
   };
 
