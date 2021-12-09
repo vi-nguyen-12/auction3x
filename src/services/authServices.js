@@ -34,9 +34,15 @@ const authService = {
   },
 
   realEstate(data) {
+<<<<<<< HEAD
     return axios.get(env.API_URL + "/api/properties/real-estates/search", {
       params: data,
     });
+=======
+    return (
+      axios.get(env.API_URL + "/api/properties/real-estates/search", {params: data})
+    );
+>>>>>>> c34f084e1c4126e85b5354402a369321739a5038
   },
 
   saveRealEstate(data) {

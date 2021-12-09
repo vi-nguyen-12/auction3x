@@ -25,8 +25,6 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
     tooglePropertyData(submitedData);
     toogleStep(step + 1);
   };
-
-  console.log(property);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="listDetail-content">
       <div className="sell-top">
