@@ -32,7 +32,7 @@ function App() {
       getUser();
     }
 
-    authService.getRealEstate().then((res) => {
+    authService.getProperties().then((res) => {
       dispatch(addProperty(res.data.data[0]));
     });
   }, []);

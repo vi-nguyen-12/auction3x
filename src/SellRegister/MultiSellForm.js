@@ -7,6 +7,7 @@ import "../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
 import SellRegisterHeader from "./SellRegisterHeader";
 import PropertyDetails from "./PropertyDetails";
+import DocumentsUpload from "./DocumentsUpload";
 
 const MultiSellForm = () => {
   const [step, setStep] = useState(0);
@@ -24,6 +25,10 @@ const MultiSellForm = () => {
     setProperty(data);
   };
 
+  const [documents, setDocuments] = useState([]);
+  const toogleDocuments = (documents) => {
+    setDocuments(documents);
+  };
 
   const [images, setImages] = useState([]);
   const toogleImages = (images) => {
@@ -34,8 +39,6 @@ const MultiSellForm = () => {
   const toogleVideos = (videos) => {
     setVideos(videos);
   };
-
-
   if (step === 0) {
     return (
       <div className="sell-register-container">
@@ -88,12 +91,34 @@ const MultiSellForm = () => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
         <SellRegisterHeader />
+        <DocumentsUpload
+          propertyData={propertyData}
+          toogleStep={(data) => toogleStep(data)}
+          step={step}
+          toogleDocuments={toogleDocuments}
+        />
+      </div>
+    );
+  } else if (step === 5) {
+    return (
+      <div className="sell-register-container">
+        <h1>Sell On Auction10X</h1>
+        <SellRegisterHeader />
+        <ListingFees toogleStep={toogleStep} step={step} test="test" />
+      </div>
+    );
+  } else if (step === 6) {
+    return (
+      <div className="sell-register-container">
+        <h1>Sell On Auction10X</h1>
+        <SellRegisterHeader />
         <AgreementForm
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}
           step={step}
           images={images}
           videos={videos}
+          documents={documents}
         />
       </div>
     );

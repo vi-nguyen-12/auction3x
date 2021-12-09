@@ -7,34 +7,11 @@ import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
-import authService from "../services/authServices";
 import { Route, Link } from "react-router-dom";
-
-const ImagePopup = () => {
-  return (
-    <Modal>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Text in a modal</h4>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      </Modal.Body>
-      <Modal.Footer>
-        <button
-          className="btn btn-secondary"
-          onClick={() => this.setState({ show: false })}
-        >
-          Close
-        </button>
-      </Modal.Footer>
-    </Modal>
-  );
-}; // end of ImagePopup
 
 const Display = () => {
   const dispatch = useDispatch();
-  const property = useSelector((state) =>state.property);
+  const property = useSelector((state) => state.property);
 
   //check if property is empty
   if (property === 0) {
@@ -54,7 +31,6 @@ const Display = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          onClick: { ImagePopup },
           margin: "auto",
           padding: "35px",
           width: "100%",
