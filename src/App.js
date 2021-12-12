@@ -30,11 +30,11 @@ function App() {
       };
       getUser();
     }
-
-    authService.getProperties().then((res) => {
-      dispatch(addProperty(res.data.data[0]));
-    });
   }, []);
+
+  authService.getProperties().then((res) => {
+    dispatch(addProperty(res.data.data[0]));
+  });
 
   return (
     <div className="App">

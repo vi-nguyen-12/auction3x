@@ -6,12 +6,30 @@ import { useDispatch } from "react-redux";
 import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
-import { Modal } from "react-bootstrap";
+import { Carousel, Modal } from "react-bootstrap";
 import { Route, Link } from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import styled from "styled-components";
 
 const Display = () => {
   const dispatch = useDispatch();
   const property = useSelector((state) => state.property);
+  const [favorite, setFavorite] = useState(false);
+  const [showPics, setShowPics] = useState(false);
+  const [showVideos, setShowVideos] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const toggleMap = () => setShowMap(!showMap);
+  const toggleVids = () => setShowVideos(!showVideos);
+  const togglePics = () => setShowPics(!showPics);
+  const toggleImage = () => setFavorite(!favorite);
+
+  // useEffect(async () => {
+  //   let savedFavorite = "/images/star.png";
+  //   if (savedFavorite) {
+  //     setFavorite(savedFavorite);
+  //   }
+  // }, []);
 
   //check if property is empty
   if (property === 0) {
@@ -33,9 +51,113 @@ const Display = () => {
           justifyContent: "center",
           margin: "auto",
           padding: "35px",
-          width: "100%",
+          width: "1000px",
+          borderRadius: "15px",
+          position: "relative",
         }}
       />
+      <div
+        style={{
+          display: "inline-block",
+          position: "absolute",
+          top: "25%",
+          padding: "35px",
+          marginRight: "100%",
+          left: "90%",
+        }}
+      >
+        <button
+          style={{
+            borderRadius: "15px",
+          }}
+        >
+          <button
+            onClick={toggleImage}
+            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
+            style={{ border: "none" }}
+          >
+            {favorite ? (
+              <img src="/images/star.png" />
+            ) : (
+              <img src="/images/star-before.png" />
+            )}
+          </button>
+
+          <img src="/images/line.png" />
+          <div>
+            <button style={{ border: "none" }} onClick={togglePics}>
+              <img src="/images/picture.png" />
+            </button>
+            <Modal show={showPics} onHide={togglePics} centered>
+              <Modal.Header contentClassName="modal-head-signup" closeButton>
+                <Modal.Title>
+                  <h2>Property Pictures</h2>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Carousel>
+                  <Carousel.Item>
+                    <img src={property.images[0].url} alt="Snow" />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img src={property.images[1].url} alt="Snow" />
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <img src={property.images[2].url} alt="Snow" />
+                  </Carousel.Item>
+                </Carousel>
+              </Modal.Body>
+            </Modal>
+          </div>
+          <img src="/images/line.png" />
+          <div>
+            <button onClick={toggleVids} style={{ border: "none" }}>
+              <img src="/images/video.png" />
+            </button>
+            <Modal show={showVideos} onHide={toggleVids} centered>
+              <Modal.Header contentClassName="modal-head-signup" closeButton>
+                <Modal.Title>
+                  <h2>Property Videos</h2>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Carousel>
+                  <Carousel.Item>
+                    <img src={property.videos[0].url} alt="Snow" />
+                  </Carousel.Item>
+                </Carousel>
+              </Modal.Body>
+            </Modal>
+            <img src="/images/line.png" />
+            <button style={{ border: "none" }}>
+              <Link to="/">
+                <img src="/images/360.png" />
+              </Link>
+            </button>
+            <img src="/images/line.png" />
+            <button onClick={toggleMap} style={{ border: "none" }}>
+              <img src="/images/location.png" />
+            </button>
+            <Modal show={showMap} onHide={toggleMap} centered>
+              <Modal.Header contentClassName="modal-head-signup" closeButton>
+                <Modal.Title>
+                  <h2>Property Location</h2>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <h1
+                  style={{ textAlign: "center" }}
+                  src={
+                    property.details.address.formatted_street_address[0].text
+                  }
+                  alt="Snow"
+                />
+              </Modal.Body>
+            </Modal>
+          </div>
+        </button>
+      </div>
+
       <div
         className="list-info-1"
         style={{ display: "inline-block", padding: "35px" }}
@@ -43,9 +165,7 @@ const Display = () => {
         <tr>
           <td>
             <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
-            <div>
-              <p>{property.details.address.formatted_street_address}</p>
-            </div>
+            <div>function</div>
           </td>
           <td
             style={{
