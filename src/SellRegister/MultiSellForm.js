@@ -24,6 +24,10 @@ const MultiSellForm = () => {
   const properties = (property) => {
     setProperty(property);
   };
+
+  console.log(property);
+
+  console.log(propertyData);
   const [documents, setDocuments] = useState([]);
   const toogleDocuments = (documents) => {
     setDocuments(documents);

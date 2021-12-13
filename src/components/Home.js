@@ -12,12 +12,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const Home = (props) => {
-
   // const property = useSelector(state => state.property);
 
   return (
     <>
-      <Header />
       <Container>
         <ImgSlider/>
       </Container>

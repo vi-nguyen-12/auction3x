@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import authService from "../services/authServices";
-import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 
@@ -47,36 +44,6 @@ const ImgSlider = () => {
               
             </Link>
             ))}
-            {/* <Wrap>
-              <a>
-                <img src={item.images[0].url} alt="" />
-              </a>
-              <HomeBottom>
-                <a>
-                  <NumberFormat
-                  style={{ fontSize: "25px" }}
-                    value={item.details.assessments[0].total_value}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </a>
-                <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
-              </HomeBottom>
-            </Wrap>
-
-          <Wrap>
-          <a>
-            <img
-              src={item.images[1].url}
-              alt=""
-            />
-          </a>
-          <HomeBottom>
-            <a>$254,562,143</a>
-            <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
-          </HomeBottom>
-         </Wrap>  */}
           </Carousel>
       <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
         <div className="row px-lg-5">

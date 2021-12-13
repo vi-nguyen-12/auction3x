@@ -16,6 +16,7 @@ import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
 import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
 import RealEstate from "./components/Home/realEstate";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <Router>
         <Switch>
           <Route exact path="/">
@@ -45,18 +47,16 @@ function App() {
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
-              <SellRegisterHeader />
               <MultiSellForm />
             </div>
           </Route>
           <Route path="/Display/:id">
-            <DisplayHeader />
             <Display />
             <DisplayTab />
-            <Featured />    
+            <Featured />
           </Route>
           <Route exact path="/RealEstates">
-              <RealEstate />
+            <RealEstate />
           </Route>
         </Switch>
       </Router>

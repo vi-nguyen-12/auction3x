@@ -8,7 +8,6 @@ import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 import Confirm from "./EmailConfirm";
 import SignUp from "./SignUp";
-import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
 import { Link } from "react-router-dom";
@@ -21,7 +20,7 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
-  const HeaderComp = () => {
+  const HeaderComp = ({toogleSingInn}) => {
     const [showSignIn, popSignIn] = useState(false);
     const [showSignUp, popUpSignUp] = useState(false);
     const [showConfirm, popupConfirm] = useState(false);
@@ -36,6 +35,7 @@ const Header = () => {
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
 
     const handleLogout = () => {
       authService.logout();

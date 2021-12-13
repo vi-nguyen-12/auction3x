@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => {
+
+  console.log(property);
   const {
     register,
     handleSubmit,
