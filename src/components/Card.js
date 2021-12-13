@@ -2,39 +2,36 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import Display from "../RealEstate/Display";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import authService from "../services/authServices";
 
-const CardComp = (props) => {
-  const property = useSelector((state) => state.property);
-  console.log(property);
+const CardComp = ({ url, data, id }) => {
   return (
-    <Link to="/Display">
-      <Card
-        //move to next page
-
-        className="text-left m-auto"
-        style={{
-          width: "18rem",
-          background: "white",
-          padding: "2.5px",
-          minWidth: "350px",
-          borderRadius: "2px",
-          border: "1px solid lightgrey",
-        }}
-      >
+    <Card
+      // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
+      //move to next page
+      className="text-left m-auto"
+      style={{
+        width: "18rem",
+        background: "white",
+        padding: "2.5px",
+        width: "350px",
+        borderRadius: "2px",
+        border: "1px solid lightgrey",
+      }}
+    >
+      <Link to={`/Display/${id}`}>
         <Card.Img
           variant="top"
-          src={property.images[1].url}
+          src={url}
           className="img-fluid"
-          style={{ maxWidth: "350px", maxHeight: "400px" }}
+          style={{ width: "350px", height: "250px" }}
         />
         <Card.Body style={{ paddingLeft: "13px" }}>
           <Card.Text>
             <div>
               <div>
                 <span className="golden-text">
-                  {property.details.address.formatted_street_address},{" "}
-                  {property.details.address.state}
+                  {data.address.formatted_street_address}, {data.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Luxury Avenue Los-Angeles</h4>
               </div>
@@ -86,9 +83,8 @@ const CardComp = (props) => {
                         width: "100%",
                       }}
                     >
-                      {property.details.structure.beds_count}BD |{" "}
-                      {property.details.structure.baths}BA |{" "}
-                      {property.details.structure.total_area_sq_ft} sq.ft
+                      {data.structure.beds_count}BD | {data.structure.baths}BA |{" "}
+                      {data.structure.total_area_sq_ft} sq.ft
                     </p>
                   </td>
                 </div>
@@ -121,8 +117,8 @@ const CardComp = (props) => {
           </div>
         </Card.Body>
         <Card.Body></Card.Body>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 };
 

@@ -7,26 +7,27 @@ import { addProperty } from "../slice/propertySlice";
 import Header from "../components/Header";
 import DisplayTab from "../RealEstate/DisplayTab";
 import { Modal } from "react-bootstrap";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, useParams } from "react-router-dom";
 
-const Display = () => {
-  const dispatch = useDispatch();
-  const property = useSelector((state) => state.property);
+const Display =  () => {
+  const {id} = useParams();
+const [property, setProperty] = useState();
+  useEffect(async() => {
+    const property = await authService.sendProperty(id);
+    console.log(property);
+    setProperty(property);
+  },[]);
 
-  //check if property is empty
-  if (property === 0) {
-    authService.getRealEstate().then((res) => {
-      dispatch(addProperty(res.data.data[0]));
-    });
-  }
-
+console.log(property);
   return (
-    <div className="styl">
+    <>
+    {!property ?(<div>Loading...</div>):(
+      <div className="styl">
       <tr className="realHeader">
         <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
       </tr>
       <img
-        src={property.images[2].url}
+        src={property.data.images[0].url}
         alt="Snow"
         style={{
           display: "flex",
@@ -44,7 +45,7 @@ const Display = () => {
           <td>
             <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
             <div>
-              <p>{property.details.address.formatted_street_address}</p>
+              <p>{property.data.details.address.formatted_street_address}</p>
             </div>
           </td>
           <td
@@ -181,7 +182,7 @@ const Display = () => {
             >
               Building Height:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.structure.stories} Stories
+                {property.data.details.structure.stories} Stories
               </span>
             </td>
           </tr>
@@ -196,7 +197,7 @@ const Display = () => {
             >
               Property Type:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.parcel.county_land_use_description}
+                {property.data.details.parcel.county_land_use_description}
               </span>
             </td>
             <td
@@ -222,7 +223,7 @@ const Display = () => {
             >
               Building Size:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.structure.total_area_sq_ft} sq.ft
+                {property.data.details.structure.total_area_sq_ft} sq.ft
               </span>
             </td>
             <td
@@ -236,7 +237,7 @@ const Display = () => {
             >
               Zoning:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.parcel.zoning}
+                {property.data.details.parcel.zoning}
               </span>
             </td>
           </tr>
@@ -251,7 +252,7 @@ const Display = () => {
             >
               Building Class:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.structure.quality}
+                {property.data.details.structure.quality}
               </span>
             </td>
             <td
@@ -265,7 +266,7 @@ const Display = () => {
             >
               Parking:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.structure.parking_type}
+                {property.data.details.structure.parking_type}
               </span>
             </td>
           </tr>
@@ -280,7 +281,7 @@ const Display = () => {
             >
               Year Built/ Renovated:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.structure.year_built}
+                {property.data.details.structure.year_built}
               </span>
             </td>
             <td
@@ -294,7 +295,7 @@ const Display = () => {
             >
               Frontage:{" "}
               <span style={{ fontWeight: "bold" }}>
-                {property.details.parcel.frontage_ft}
+                {property.data.details.parcel.frontage_ft}
               </span>
             </td>
           </tr>
@@ -374,6 +375,8 @@ const Display = () => {
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 

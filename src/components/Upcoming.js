@@ -1,8 +1,10 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { CardComp } from './Card'
+import { useSelector } from "react-redux";
 
 const Upcoming = (props) => {
+    const property = useSelector((state) => state.property);
     return (
         <div className="mt-5">
             <Row>
@@ -16,10 +18,10 @@ const Upcoming = (props) => {
             </Row>
             <Col md={10} className="m-auto pt-2">
                 <Row>
-                    {[1, 2, 3, 4, 5, 6].map((card) => (
-                        <Col key={card} md={4} className="mt-5">
-                            <CardComp />
-                        </Col>
+                    {property.map((item) => (
+                        <Col key={item._id} md={6}>
+                        <CardComp url={item.images[0].url} data={item.details} id = {item._id}/>
+                      </Col>
                     ))}
                 </Row>
             </Col>

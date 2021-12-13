@@ -4,13 +4,12 @@ import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar.js";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import authService from "../services/authServices";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import NumberFormat from "react-number-format";
+import propertySlice from "../slice/propertySlice.js";
 
-const ImgSlider = () => {
+const ImgSlider = (props) => {
   let settings = {
     dots: true,
     infinite: true,
@@ -19,65 +18,61 @@ const ImgSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
-
-  const property = useSelector((state) => state.property);
-
   return (
     <>
-           <Carousel {...settings}>
-            {property.map((item) => (
-              <Link  to={`/Display/${item._id}`}  key={item._id}>
-                <Wrap>
-                <a>
-                <img src={item.images[0].url} alt="" />
-              </a>
-              <HomeBottom>
-                <a>
-                  <NumberFormat
-                  style={{ fontSize: "25px" }}
-                    value={item.details.assessments[0].total_value}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </a>
-                <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
-              </HomeBottom>
-                </Wrap>
-              
-            </Link>
-            ))}
-            {/* <Wrap>
-              <a>
-                <img src={item.images[0].url} alt="" />
-              </a>
-              <HomeBottom>
-                <a>
-                  <NumberFormat
-                  style={{ fontSize: "25px" }}
-                    value={item.details.assessments[0].total_value}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </a>
-                <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
-              </HomeBottom>
-            </Wrap>
-
-          <Wrap>
+      <Carousel {...settings}>
+        <Wrap>
           <a>
             <img
-              src={item.images[1].url}
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
               alt=""
             />
           </a>
           <HomeBottom>
             <a>$254,562,143</a>
-            <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
           </HomeBottom>
-         </Wrap>  */}
-          </Carousel>
+        </Wrap>
+
+        <Wrap>
+          <a>
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
+          </a>
+          <HomeBottom>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
+          </HomeBottom>
+        </Wrap>
+
+        <Wrap>
+          <a>
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
+          </a>
+          <HomeBottom>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
+          </HomeBottom>
+        </Wrap>
+
+        <Wrap>
+          <a>
+            <img
+              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
+              alt=""
+            />
+          </a>
+          <HomeBottom>
+            <a>$254,562,143</a>
+            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
+          </HomeBottom>
+        </Wrap>
+      </Carousel>
       <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
         <div className="row px-lg-5">
           <div className="col-12 col-sm-6 col-md-2 mt-3">
