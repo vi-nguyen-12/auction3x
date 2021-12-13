@@ -11,6 +11,7 @@ import { Route, Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 
 const Display = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,26 @@ const Display = () => {
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => setFavorite(!favorite);
+
+  const locations = [
+    {
+      name: "Location 1",
+      location: {
+        lat: 41.3954,
+        lng: 2.162,
+      },
+    },
+  ];
+
+  const mapStyles = {
+    height: "50vh",
+    width: "100%",
+  };
+
+  const defaultCenter = {
+    lat: 41.3851,
+    lng: 2.1734,
+  };
 
   // useEffect(async () => {
   //   let savedFavorite = "/images/star.png";
@@ -97,13 +118,19 @@ const Display = () => {
               <Modal.Body>
                 <Carousel>
                   <Carousel.Item>
-                    <img src={property.images[0].url} alt="Snow" />
+                    <div class="d-flex justify-content-center">
+                      <img src={property.images[0].url} alt="Snow" />
+                    </div>
                   </Carousel.Item>
                   <Carousel.Item>
-                    <img src={property.images[1].url} alt="Snow" />
+                    <div class="d-flex justify-content-center">
+                      <img src={property.images[1].url} alt="Snow" />
+                    </div>
                   </Carousel.Item>
                   <Carousel.Item>
-                    <img src={property.images[2].url} alt="Snow" />
+                    <div class="d-flex justify-content-center">
+                      <img src={property.images[2].url} alt="Snow" />
+                    </div>
                   </Carousel.Item>
                 </Carousel>
               </Modal.Body>
@@ -138,20 +165,27 @@ const Display = () => {
             <button onClick={toggleMap} style={{ border: "none" }}>
               <img src="/images/location.png" />
             </button>
-            <Modal show={showMap} onHide={toggleMap} centered>
-              <Modal.Header contentClassName="modal-head-signup" closeButton>
+            <Modal size="lg" show={showMap} onHide={toggleMap} centered>
+              <Modal.Header closeButton>
                 <Modal.Title>
                   <h2>Property Location</h2>
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <h1
-                  style={{ textAlign: "center" }}
-                  src={
-                    property.details.address.formatted_street_address[0].text
-                  }
-                  alt="Snow"
-                />
+                <LoadScript googleMapsApiKey="AIzaSyAzWmlqg_i74_az_uNpk4A-pDo2LpxNNbE">
+                  <GoogleMap
+                    mapContainerStyle={mapStyles}
+                    zoom={5}
+                    center={defaultCenter}
+                  >
+                    {locations.map((item) => {
+                      return (
+                        <Marker key={item.name} position={item.location} />
+                      );
+                    })}
+                  </GoogleMap>
+                </LoadScript>
+                <p>{property.details.address.formatted_street_address}</p>
               </Modal.Body>
             </Modal>
           </div>
@@ -165,7 +199,9 @@ const Display = () => {
         <tr>
           <td>
             <h2 style={{ color: "#B77B50" }}>Luxury Villa in Los Angeles</h2>
-            <div>function</div>
+            <div>
+              <p>{property.details.address.formatted_street_address}</p>
+            </div>
           </td>
           <td
             style={{

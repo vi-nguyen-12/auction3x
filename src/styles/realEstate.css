@@ -65,3 +65,7 @@
 .styl {
   background-color: white;
 }
+
+.modal-head-map {
+  width: 100% !important;
+}
