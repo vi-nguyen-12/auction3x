@@ -46,7 +46,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <SellWelcome toogleStep={toogleStep} step={step} test="test" />
       </div>
     );
@@ -54,8 +53,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
-
         <ListingDetails
           properties={properties}
           toogleStep={(data) => toogleStep(data)}
@@ -67,7 +64,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <PropertyDetails
           tooglePropertyData={tooglePropertyData}
           property={property}
@@ -80,7 +76,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <UploadForm
           toogleImages={toogleImages}
           toogleVideos={toogleVideos}
@@ -93,7 +88,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <DocumentsUpload
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}
@@ -106,7 +100,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <ListingFees toogleStep={toogleStep} step={step} test="test" />
       </div>
     );
@@ -114,7 +107,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellRegisterHeader />
         <AgreementForm
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}

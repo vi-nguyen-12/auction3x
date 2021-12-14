@@ -38,7 +38,7 @@ const CardComp = ({ url, data, id, singInn }) => {
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push("/MultiBuyForm");
+      history.push(`/Display/${id}`);
     } else {
       setShowKYC(true);
     }
