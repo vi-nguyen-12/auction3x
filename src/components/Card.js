@@ -13,7 +13,6 @@ import Confirm from "./EmailConfirm";
 import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
-import MultiBuyForm from "./BuyRegister/MultiBuyForm";
 
 const CardComp = ({ url, data, id, singInn }) => {
   const user = useSelector((state) => state.user);
@@ -39,7 +38,7 @@ const CardComp = ({ url, data, id, singInn }) => {
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push("/MultiBuyForm");
+      history.push(`/Display/${id}`);
     } else {
       setShowKYC(true);
     }
@@ -149,15 +148,13 @@ const CardComp = ({ url, data, id, singInn }) => {
               marginRight: "6px",
             }}
           >
-            <Link to="/MultiBuyForm">
-              <Button
-                onClick={handleBid}
-                className="black-button text-white"
-                variant="dark"
-              >
-                Place Bid
-              </Button>
-            </Link>
+            <Button
+              onClick={handleBid}
+              className="black-button text-white"
+              variant="dark"
+            >
+              Place Bid
+            </Button>
           </div>
         </div>
       </Card.Body>

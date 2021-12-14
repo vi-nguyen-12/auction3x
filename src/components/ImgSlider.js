@@ -174,10 +174,14 @@ const Carousel = styled(Slider)`
 
   .slick-prev {
     left: -75px;
+    width: 19vw;
+    height: 100%;
   }
 
   .slick-next {
     right: -75px;
+    width: 19vw;
+    height: 100vh;
   }
 `;
 

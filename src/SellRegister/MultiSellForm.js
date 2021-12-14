@@ -46,7 +46,6 @@ const MultiSellForm = () => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-
         <SellWelcome toogleStep={toogleStep} step={step} test="test" />
       </div>
     );

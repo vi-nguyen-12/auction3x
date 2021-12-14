@@ -9,6 +9,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
+import ProcessBar from "../components/BuyRegister/ProcessBar";
 
 const Display = () => {
   const { id } = useParams();
@@ -22,6 +24,8 @@ const Display = () => {
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => setFavorite(!favorite);
+  const [bid, setBid] = useState(false);
+  const toogleBid = () => setBid(!bid);
 
   useEffect(async () => {
     const property = await authService.sendProperty(id);
@@ -49,92 +53,91 @@ const Display = () => {
   };
 
   const Carousel = styled(Slider)`
-  height: 30vh;
-  overflow: hidden;
+    height: 30vh;
+    overflow: hidden;
 
-  & > button {
-    opacity: 0;
-    height: 100%;
-    width: 5vw;
-    z-index: 1;
+    & > button {
+      opacity: 0;
+      height: 100%;
+      width: 5vw;
+      z-index: 1;
 
-    &:hover {
-      opacity: 1;
-      transition: opacity 0.2s ease 0s;
+      &:hover {
+        opacity: 1;
+        transition: opacity 0.2s ease 0s;
+      }
     }
-  }
 
-  ul li button {
-    &:before {
-      top: -5vh;
-      font-size: 20px;
+    ul li button {
+      &:before {
+        top: -5vh;
+        font-size: 20px;
+        color: white;
+        left: -35px;
+      }
+    }
+
+    li.slick-active button:before {
       color: white;
-      left: -35px;
     }
-  }
 
-  li.slick-active button:before {
-    color: white;
-  }
+    .slick-list {
+      overflow: initial;
+    }
 
-  .slick-list {
-    overflow: initial;
-  }
+    .slick-prev {
+      left: -75px;
+    }
 
-  .slick-prev {
-    left: -75px;
-  }
+    .slick-next {
+      right: -75px;
+    }
+  `;
 
-  .slick-next {
-    right: -75px;
-  }
-`;
-
-const Wrap = styled.div`
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-
-  a {
+  const Wrap = styled.div`
     border-radius: 4px;
-    box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-      rgb(0 0 0 / 73%) 0px 16px 10px -10px;
     cursor: pointer;
-    display: block;
     position: relative;
-    padding: 0;
 
-    img {
-      width: 100%;
-      height: 30vh;
+    a {
+      border-radius: 4px;
+      box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+        rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      padding: 0;
+
+      img {
+        width: 100%;
+        height: 30vh;
+      }
+
+      // &:hover {
+      //   padding: 0;
+      //   // border: 4px solid rgba(249, 249, 249, 0.8);
+      //   transition-duration: 300ms;
+      // }
     }
+  `;
 
-    // &:hover {
-    //   padding: 0;
-    //   // border: 4px solid rgba(249, 249, 249, 0.8);
-    //   transition-duration: 300ms;
-    // }
-  }
-`;
-
-const HomeBottom = styled.div`
-  position: absolute;
-  bottom: 20vh;
-  z-index: 1;
-  left: 5vw;
-  a {
-    color: white !important;
-    font-size: 24px;
-    font-weight: bolder;
-    box-shadow: none !important;
-  }
-  span {
-    color: white;
-    font-size: 14px;
-    font-weight: bolder;
-  }
-`;
-
+  const HomeBottom = styled.div`
+    position: absolute;
+    bottom: 20vh;
+    z-index: 1;
+    left: 5vw;
+    a {
+      color: white !important;
+      font-size: 24px;
+      font-weight: bolder;
+      box-shadow: none !important;
+    }
+    span {
+      color: white;
+      font-size: 14px;
+      font-weight: bolder;
+    }
+  `;
 
   return (
     <>
@@ -176,7 +179,7 @@ const HomeBottom = styled.div`
               <button
                 onClick={toggleImage}
                 // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-                style={{ border: "none", position:"relative", top:"10px" }}
+                style={{ border: "none", position: "relative", top: "10px" }}
               >
                 {favorite ? (
                   <img src="/images/star.png" />
@@ -241,7 +244,14 @@ const HomeBottom = styled.div`
                   </Link>
                 </button>
                 <img src="/images/line.png" />
-                <button onClick={toggleMap} style={{ border: "none", position:"relative", bottom:"10px" }}>
+                <button
+                  onClick={toggleMap}
+                  style={{
+                    border: "none",
+                    position: "relative",
+                    bottom: "10px",
+                  }}
+                >
                   <img src="/images/location.png" />
                 </button>
                 <Modal size="lg" show={showMap} onHide={toggleMap} centered>
@@ -266,7 +276,6 @@ const HomeBottom = styled.div`
               </div>
             </button>
           </div>
-
           <div
             className="list-info-1"
             style={{ display: "inline-block", padding: "35px" }}
@@ -300,9 +309,19 @@ const HomeBottom = styled.div`
                     borderRadius: "10px",
                   }}
                 >
-                  <button className="customButton" style={{ width: "200px" }}>
+                  <button
+                    className="customButton"
+                    style={{ width: "200px", fontSize: "20px" }}
+                    onClick={toogleBid}
+                  >
                     Register to Bid
-                  </button>{" "}
+                  </button>
+                  <Modal size="lg" show={bid} onHide={toogleBid} centered>
+                    <Modal.Body>
+                      <MultiBuyForm />
+                    </Modal.Body>
+                  </Modal>
+
                   <Link to="/DisplayTab">
                     <b
                       style={{
@@ -614,8 +633,6 @@ const HomeBottom = styled.div`
       )}
     </>
   );
-
-
 };
 
 export default Display;

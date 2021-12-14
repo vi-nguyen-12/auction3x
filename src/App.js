@@ -34,6 +34,7 @@ function App() {
   }, []);
 
   authService.getProperties().then((res) => {
+    console.log(res.data);
     dispatch(addProperty(res.data.data));
   });
 
