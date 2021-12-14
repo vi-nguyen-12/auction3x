@@ -1,8 +1,11 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { CardComp } from "./Card";
+import { useSelector } from "react-redux";
+import authService from "../services/authServices";
 
 const Featured = (props) => {
+  const property = useSelector((state) => state.property);
   return (
     <div className="background">
       <Row>
@@ -18,11 +21,11 @@ const Featured = (props) => {
           />
         </Col>
       </Row>
-      <Col md={10} className="m-auto pt-2">
+      <Col md={10} className="m-auto">
         <Row>
-          {[1, 2].map((card) => (
-            <Col key={card} md={6}>
-              <CardComp />
+          {property.slice(0,2).map((item) => (
+            <Col key={item._id} md={6}>
+              <CardComp url={item.images[0].url} data={item.details} id = {item._id} />
             </Col>
           ))}
         </Row>

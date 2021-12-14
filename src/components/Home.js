@@ -8,21 +8,22 @@ import RealEstate from "./Home/realEstate";
 import Footer from "./Home/footer";
 import { Upcoming } from "./Upcoming";
 import Toast from "./Toast"
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Home = (props) => {
+  // const property = useSelector(state => state.property);
 
   return (
     <>
-      <Header />
       <Container>
-        <ImgSlider />
+        <ImgSlider/>
       </Container>
       <Featured />
       <FindInCountries />
       <Upcoming />
       <Work/>
       <RealEstate/>
-      <Footer/>
     </>
   );
 };

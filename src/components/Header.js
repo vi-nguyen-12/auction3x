@@ -8,7 +8,6 @@ import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
 import Confirm from "./EmailConfirm";
 import SignUp from "./SignUp";
-import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
 import { Link } from "react-router-dom";
@@ -21,7 +20,7 @@ const Header = () => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
-  const HeaderComp = () => {
+  const HeaderComp = ({toogleSingInn}) => {
     const [showSignIn, popSignIn] = useState(false);
     const [showSignUp, popUpSignUp] = useState(false);
     const [showConfirm, popupConfirm] = useState(false);
@@ -36,6 +35,7 @@ const Header = () => {
     const toogleSignIn = () => popSignIn(!showSignIn);
     const toogleSignUp = () => popUpSignUp(!showSignUp);
     const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
 
     const handleLogout = () => {
       authService.logout();
@@ -92,7 +92,7 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav m-auto">
               <li className="nav-item navactive mt-2 p-2 mb-auto">
-                <Link to="/Display">
+                <Link to="/RealEstates">
                   <b style={{ color: "white" }}>Real Estate</b>
                 </Link>
               </li>
@@ -199,21 +199,20 @@ const Header = () => {
                 </Modal.Body>
               </Modal>
 
-              <Button
+                <button
+                className="bg-transparent border-0"
                 onClick={handleOnSell}
-                style={{ backgroundColor: "transparent", border: "none" }}
-              >
-                <b
                   style={{
                     position: "absolute",
                     top: "25px",
-                    right: "15%",
+                    right: "14%",
                     color: "white",
+                    fontSize: "20px",
+                    fontWeight: "bold",
                   }}
                 >
                   Sell
-                </b>
-              </Button>
+                </button>
               {user._id && !user.KYC && (
                 <div className="dropdown">
                   <button style={{ background: "transparent" }}>
@@ -236,14 +235,10 @@ const Header = () => {
                     <a href="#">Profile</a>
                     <a href="#">My Ads</a>
                     <button
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "0",
-                        width: "100%",
-                      }}
+                    className="logoutbtn"
                       onClick={handleLogout}
                     >
-                      <a>Log Out</a>
+                     <a>Log Out</a>
                     </button>
                   </div>
                 </div>

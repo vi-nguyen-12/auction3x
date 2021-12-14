@@ -91,6 +91,10 @@ const authService = {
       }
     );
   },
+
+  sendProperty(id) {
+    return axios.get(env.API_URL + "/api/properties/real-estates/" + id);
+  }
 };
 
 export default authService;

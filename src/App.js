@@ -15,6 +15,8 @@ import { Featured } from "./components/Featured";
 import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
 import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
+import RealEstate from "./components/Home/realEstate";
+import Header from "./components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +25,6 @@ function App() {
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
-        console.log(response);
         if (response.data.message === "User Logged In") {
           dispatch(login(response.data.user));
         }
@@ -33,11 +34,12 @@ function App() {
   }, []);
 
   authService.getProperties().then((res) => {
-    dispatch(addProperty(res.data.data[0]));
+    dispatch(addProperty(res.data.data));
   });
 
   return (
     <div className="App">
+      <Header />
       <Router>
         <Switch>
           <Route exact path="/">
@@ -45,19 +47,20 @@ function App() {
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
-              <SellRegisterHeader />
               <MultiSellForm />
             </div>
           </Route>
-          <Route exact path="/Display">
-            <DisplayHeader />
+          <Route path="/Display/:id">
             <Display />
             <DisplayTab />
             <Featured />
-            <Footer />
+          </Route>
+          <Route exact path="/RealEstates">
+            <RealEstate />
           </Route>
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }
