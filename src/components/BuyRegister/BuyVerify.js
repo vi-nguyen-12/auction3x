@@ -1,20 +1,24 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-const BuyAuthoried = (toogleStep, step) => {
+const BuyVerify = ({ toogleStep, step }) => {
   return (
     <Modal>
       <Modal.Header>
         <Modal.Title>
-          <h3> Congrat! YOur Docs are Verified</h3>
+          <h3> Document Under Verification </h3>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p> You Docs are Verified</p>
+        <p>
+          {" "}
+          Your document is under verification. Please wait for the verification
+          to complete.{" "}
+        </p>
       </Modal.Body>
       <Modal.Footer></Modal.Footer>
     </Modal>
   );
 };
 
-export default BuyAuthoried;
+export default BuyVerify;

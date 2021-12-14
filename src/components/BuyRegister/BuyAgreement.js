@@ -28,3 +28,5 @@ const BuyAgreement = (toogleStep, step) => {
     </Modal>
   );
 };
+
+export default BuyAgreement;

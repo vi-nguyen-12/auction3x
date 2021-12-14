@@ -1,17 +1,10 @@
-import React from "react";
+import React, { Form } from "react";
+import { Modal } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
-const BuyUpload = ({ ttoogleStep, step, toogleDocumentsoogleStep }) => {
+const BuyUpload = ({ toogleStep, step, toogleDocuments }) => {
   const [documents, setDocuments] = useState([]);
-
-  const onSelectDocs = async (e) => {
-    const documents = e.target.files;
-    const formData = new FormData();
-    for (let i = 0; i < documents.length; i++) {
-      formData.append("documents", documents[i]);
-    }
-    const response = await authService.saveDocuments(formData);
-    setDocuments(response.data);
-  };
 
   const send = (e) => {
     e.preventDefault();
@@ -29,7 +22,6 @@ const BuyUpload = ({ ttoogleStep, step, toogleDocumentsoogleStep }) => {
         <Form onSubmit={send}>
           <Form.Group>
             <Form.Label>Upload Documents</Form.Label>
-            <Form.Control type="file" multiple onChange={onSelectDocs} />
           </Form.Group>
           <div className="bottom-btn">
             <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
@@ -45,3 +37,5 @@ const BuyUpload = ({ ttoogleStep, step, toogleDocumentsoogleStep }) => {
     </Modal>
   );
 };
+
+export default BuyUpload;

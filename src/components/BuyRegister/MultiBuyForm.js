@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import BuyAgreement from "./BuyAgreement";
+import BuyUpload from "./BuyUpload";
+import BuyVerify from "./BuyVerify";
+import BuyAuthorized from "./BuyAuthorized";
+import BuyPayment from "./BuyPayment";
+import BuyConfirm from "./BuyConfirm";
 
 const MultiBuyForm = () => {
   const [step, setStep] = useState(0);
@@ -9,7 +15,7 @@ const MultiBuyForm = () => {
   if (step === 0) {
     return (
       <div className="but-register-container">
-        <BuyAgreement toogleStep={toogleStep} step={step} test="test" />
+        <BuyAgreement toogleStep={toogleStep} step={step} />
       </div>
     );
   } else if (step === 1) {

@@ -21,30 +21,32 @@ const ImgSlider = () => {
 
   return (
     <>
-           <Carousel {...settings}>
-            {property.map((item) => (
-              <Link  to={`/Display/${item._id}`}  key={item._id}>
-                <Wrap>
-                <a>
+      <Carousel {...settings}>
+        {property.map((item) => (
+          <Link to={`/Display/${item._id}`} key={item._id}>
+            <Wrap>
+              <a>
                 <img src={item.images[0].url} alt="" />
               </a>
               <HomeBottom>
                 <a>
                   <NumberFormat
-                  style={{ fontSize: "25px" }}
+                    style={{ fontSize: "25px" }}
                     value={item.details.assessments[0].total_value}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
                   />
                 </a>
-                <span>HOUSE IN {item.details.address.city}, {item.details.address.state}, UNITED STATES</span>
+                <span>
+                  HOUSE IN {item.details.address.city},{" "}
+                  {item.details.address.state}, UNITED STATES
+                </span>
               </HomeBottom>
-                </Wrap>
-              
-            </Link>
-            ))}
-          </Carousel>
+            </Wrap>
+          </Link>
+        ))}
+      </Carousel>
       <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
         <div className="row px-lg-5">
           <div className="col-12 col-sm-6 col-md-2 mt-3">

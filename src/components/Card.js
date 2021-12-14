@@ -13,6 +13,7 @@ import Confirm from "./EmailConfirm";
 import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
+import MultiBuyForm from "./BuyRegister/MultiBuyForm";
 
 const CardComp = ({ url, data, id, singInn }) => {
   const user = useSelector((state) => state.user);
@@ -148,13 +149,15 @@ const CardComp = ({ url, data, id, singInn }) => {
               marginRight: "6px",
             }}
           >
-            <Button
-              onClick={handleBid}
-              className="black-button text-white"
-              variant="dark"
-            >
-              Place Bid
-            </Button>
+            <Link to="/MultiBuyForm">
+              <Button
+                onClick={handleBid}
+                className="black-button text-white"
+                variant="dark"
+              >
+                Place Bid
+              </Button>
+            </Link>
           </div>
         </div>
       </Card.Body>
