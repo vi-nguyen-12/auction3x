@@ -15,8 +15,9 @@ import { Featured } from "./components/Featured";
 import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
 import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
-import RealEstate from "./components/Home/realEstate";
+import RealEstates from "./components/RealEstates";
 import Header from "./components/Header";
+import {useState} from 'react'
 
 function App() {
   const dispatch = useDispatch();
@@ -38,9 +39,15 @@ function App() {
     dispatch(addProperty(res.data.data));
   });
 
+  const [color, setColor] = useState("");
+
+  const colorChange = (color) => {
+    setColor(color);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <Header color = {color}/>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -48,16 +55,16 @@ function App() {
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
-              <MultiSellForm />
+              <MultiSellForm colorChange = {colorChange}/>
             </div>
           </Route>
           <Route path="/Display/:id">
-            <Display />
+            <Display colorChange = {colorChange} />
             <DisplayTab />
             <Featured />
           </Route>
           <Route exact path="/RealEstates">
-            <RealEstate />
+            <RealEstates colorChange = {colorChange} />
           </Route>
         </Switch>
       </Router>

@@ -16,10 +16,10 @@ const Upcoming = (props) => {
                     />
                 </Col>
             </Row>
-            <Col md={10} className="m-auto pt-2">
+            <Col md={12} className="m-auto pt-2">
                 <Row>
                     {property.map((item) => (
-                        <Col key={item._id} md={6}>
+                        <Col key={item._id} md={4} style={{marginBottom:"30px"}}>
                         <CardComp url={item.images[0].url} data={item.details} id = {item._id}/>
                       </Col>
                     ))}

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 // create step bar
 
-const Sell = ({ toogleStep, step}) => {
+const Sell = ({ toogleStep, step }) => {
   const {
     handleSubmit,
     //formState: { errors },
@@ -13,6 +13,15 @@ const Sell = ({ toogleStep, step}) => {
   const onSubmit = (data) => {
     toogleStep(step + 1);
   };
+
+  // const btn = document.getElementById("next");
+
+  // console.log(btn);
+
+  // btn.disabled = true;
+  // setTimeout(() => {
+  //   btn.disabled = false;
+  // }, 8000);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="box-content">
@@ -105,7 +114,7 @@ const Sell = ({ toogleStep, step}) => {
             Previous
           </button>
           <span> </span>
-          <button type="submit" className="nxt-btn">
+          <button type="submit" className="nxt-btn" id="next">
             Next
           </button>
         </div>

@@ -10,7 +10,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const Display = () => {
+const Display = ({ colorChange }) => {
+  colorChange("black");
   const { id } = useParams();
   const [property, setProperty] = useState();
   const [location, setLocation] = useState({});
@@ -83,10 +84,14 @@ const Display = () => {
 
     .slick-prev {
       left: -75px;
+      width: 12vw;
+      height: 100%;
     }
 
     .slick-next {
       right: -75px;
+      width: 12vw;
+      height: 100%;
     }
   `;
 
@@ -170,12 +175,19 @@ const Display = () => {
             <button
               style={{
                 borderRadius: "15px",
+                backgroundColor: "white",
+                border: "none",
               }}
             >
               <button
                 onClick={toggleImage}
                 // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-                style={{ border: "none", position: "relative", top: "10px" }}
+                style={{
+                  border: "none",
+                  position: "relative",
+                  top: "10px",
+                  background: "none",
+                }}
               >
                 {favorite ? (
                   <img src="/images/star.png" />
@@ -186,7 +198,10 @@ const Display = () => {
 
               <img src="/images/line.png" />
               <div>
-                <button style={{ border: "none" }} onClick={togglePics}>
+                <button
+                  style={{ border: "none", background: "none" }}
+                  onClick={togglePics}
+                >
                   <img src="/images/picture.png" />
                 </button>
                 <Modal show={showPics} onHide={togglePics} centered>
@@ -213,9 +228,13 @@ const Display = () => {
               </div>
               <img src="/images/line.png" />
               <div>
-                <button onClick={toggleVids} style={{ border: "none" }}>
+                <button
+                  onClick={toggleVids}
+                  style={{ border: "none", background: "none" }}
+                >
                   <img src="/images/video.png" />
                 </button>
+
                 <Modal show={showVideos} onHide={toggleVids} centered>
                   <Modal.Header
                     contentClassName="modal-head-signup"
@@ -226,15 +245,21 @@ const Display = () => {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel>
-                      <Carousel.Item>
-                        {/* <img src={property.videos[0].url} alt="Snow" /> */}
-                      </Carousel.Item>
+                    <Carousel {...settings}>
+                      {property.videos.map((item) => (
+                        <Wrap>
+                          <a>
+                            <video width="100%" height="100%" controls>
+                              <source src={item.url} type="video/webm" />
+                            </video>
+                          </a>
+                        </Wrap>
+                      ))}
                     </Carousel>
                   </Modal.Body>
                 </Modal>
                 <img src="/images/line.png" />
-                <button style={{ border: "none" }}>
+                <button style={{ border: "none", background: "none" }}>
                   <Link to="/">
                     <img src="/images/360.png" />
                   </Link>
@@ -246,6 +271,7 @@ const Display = () => {
                     border: "none",
                     position: "relative",
                     bottom: "10px",
+                    background: "none",
                   }}
                 >
                   <img src="/images/location.png" />
@@ -305,7 +331,10 @@ const Display = () => {
                     borderRadius: "10px",
                   }}
                 >
-                  <button className="customButton" style={{ width: "200px", fontSize:"20px" }}>
+                  <button
+                    className="customButton"
+                    style={{ width: "200px", fontSize: "20px" }}
+                  >
                     Register to Bid
                   </button>{" "}
                   <Link to="/DisplayTab">

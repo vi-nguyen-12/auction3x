@@ -10,7 +10,7 @@ const Featured = (props) => {
   return (
     <div className="background">
       <Row>
-        <Col md={10} className="m-auto">
+        <Col md={12} className="m-auto">
           <img
             src="/images/f_name.png"
             alt=""

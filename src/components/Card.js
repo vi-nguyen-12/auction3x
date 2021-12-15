@@ -14,7 +14,8 @@ import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 
-const CardComp = ({ url, data, id, singInn }) => {
+const CardComp = ({ url, data, id }) => {
+  console.log(url);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -52,9 +53,9 @@ const CardComp = ({ url, data, id, singInn }) => {
       style={{
         width: "18rem",
         background: "white",
-        padding: "2.5px",
-        width: "350px",
-        borderRadius: "2px",
+        padding: "5px",
+        width: "450px",
+        borderRadius: "10px",
         border: "1px solid lightgrey",
       }}
     >
@@ -64,7 +65,7 @@ const CardComp = ({ url, data, id, singInn }) => {
           variant="top"
           src={url}
           className="img-fluid"
-          style={{ width: "350px", height: "250px" }}
+          style={{ width: "100%", height:"300px", borderRadius: "10px" }}
         />
       </Link>
       <Card.Body style={{ paddingLeft: "13px" }}>
@@ -99,7 +100,7 @@ const CardComp = ({ url, data, id, singInn }) => {
                       style={{
                         fontSize: "15px",
                         width: "100px",
-                        marginLeft: "-20px",
+                        marginRight: "10px",
                       }}
                     >
                       Additional Info
@@ -117,7 +118,7 @@ const CardComp = ({ url, data, id, singInn }) => {
                   <p
                     style={{
                       fontSize: "12px",
-                      marginLeft: "100px",
+                      marginLeft: "150px",
                       width: "100%",
                     }}
                   >

@@ -1,5 +1,4 @@
 import React from "react";
-import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 import authService from "../services/authServices";
@@ -36,6 +35,7 @@ const Agree = ({
       videos,
       documents,
     });
+
     setRedirect(true);
   };
 

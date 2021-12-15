@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar.js";
-import { BrowserRouter as Router } from "react-router-dom";
-import authService from "../services/authServices";
-import { useForm } from "react-hook-form";
-import propertySlice from "../slice/propertySlice.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import NumberFormat from "react-number-format";
+import { Row, Col } from "react-bootstrap";
+import { CardComp } from "./Card";
 
-const ImgSlider = (props) => {
+const RealEstates = ({ colorChange }) => {
+  colorChange("black");
   let settings = {
     dots: true,
     infinite: true,
@@ -18,60 +19,36 @@ const ImgSlider = (props) => {
     slidesToScroll: 1,
     autoplay: true,
   };
+
+  const property = useSelector((state) => state.property);
+
   return (
     <>
       <Carousel {...settings}>
-        <Wrap>
-          <a>
-            <img
-              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
-              alt=""
-            />
-          </a>
-          <HomeBottom>
-            <a>$254,562,143</a>
-            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
-          </HomeBottom>
-        </Wrap>
-
-        <Wrap>
-          <a>
-            <img
-              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
-              alt=""
-            />
-          </a>
-          <HomeBottom>
-            <a>$254,562,143</a>
-            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
-          </HomeBottom>
-        </Wrap>
-
-        <Wrap>
-          <a>
-            <img
-              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
-              alt=""
-            />
-          </a>
-          <HomeBottom>
-            <a>$254,562,143</a>
-            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
-          </HomeBottom>
-        </Wrap>
-
-        <Wrap>
-          <a>
-            <img
-              src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
-              alt=""
-            />
-          </a>
-          <HomeBottom>
-            <a>$254,562,143</a>
-            <span>HOUSE IN OAKTON, VIRGINIA, UNITED STATES</span>
-          </HomeBottom>
-        </Wrap>
+        {property.map((item) => (
+          <Link to={`/Display/${item._id}`} key={item._id}>
+            <Wrap>
+              <a>
+                <img src={item.images[0].url} alt="" />
+              </a>
+              <HomeBottom>
+                <a>
+                  <NumberFormat
+                    style={{ fontSize: "25px" }}
+                    value={item.details.assessments[0].total_value}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </a>
+                <span>
+                  HOUSE IN {item.details.address.city},{" "}
+                  {item.details.address.state}, UNITED STATES
+                </span>
+              </HomeBottom>
+            </Wrap>
+          </Link>
+        ))}
       </Carousel>
       <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
         <div className="row px-lg-5">
@@ -162,6 +139,31 @@ const ImgSlider = (props) => {
           </div>
         </div>
       </div>
+
+      <div className="mt-5">
+        <Row>
+          <Col
+            md={10}
+            className="m-auto pt-2"
+            style={{ fontSize: "30px", fontWeight: "bolder", color: "black" }}
+          >
+            Properties
+          </Col>
+        </Row>
+        <Col md={10} className="m-auto pt-2">
+          <Row>
+            {property.map((item) => (
+              <Col key={item._id} md={4} style={{marginBottom:"30px"}}>
+                <CardComp
+                  url={item.images[0].url}
+                  data={item.details}
+                  id={item._id}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </div>
     </>
   );
 };
@@ -200,10 +202,14 @@ const Carousel = styled(Slider)`
 
   .slick-prev {
     left: -75px;
+    width: 19vw;
+    height: 100%;
   }
 
   .slick-next {
     right: -75px;
+    width: 19vw;
+    height: 100vh;
   }
 `;
 
@@ -275,4 +281,4 @@ const Flex2 = styled.div`
   padding-right: 30px;
 `;
 
-export default ImgSlider;
+export default RealEstates;
