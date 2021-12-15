@@ -60,6 +60,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <ListingDetails
           properties={properties}
           toogleStep={(data) => toogleStep(data)}
@@ -71,6 +72,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <PropertyDetails
           tooglePropertyData={tooglePropertyData}
           property={property}
@@ -83,6 +85,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <UploadForm
           toogleImages={toogleImages}
           toogleVideos={toogleVideos}
@@ -95,6 +98,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <DocumentsUpload
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}
@@ -107,6 +111,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <ListingFees toogleStep={toogleStep} step={step} test="test" />
       </div>
     );
@@ -114,6 +119,7 @@ const MultiSellForm = ({colorChange}) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
+
         <AgreementForm
           propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}

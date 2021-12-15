@@ -9,6 +9,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
+import ProcessBar from "../components/BuyRegister/ProcessBar";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
@@ -23,6 +25,8 @@ const Display = ({ colorChange }) => {
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => setFavorite(!favorite);
+  const [bid, setBid] = useState(false);
+  const toogleBid = () => setBid(!bid);
 
   useEffect(async () => {
     const property = await authService.sendProperty(id);
@@ -334,9 +338,16 @@ const Display = ({ colorChange }) => {
                   <button
                     className="customButton"
                     style={{ width: "200px", fontSize: "20px" }}
+                    onClick={toogleBid}
                   >
                     Register to Bid
-                  </button>{" "}
+                  </button>
+                  <Modal size="lg" show={bid} onHide={toogleBid} centered>
+                    <Modal.Body>
+                      <MultiBuyForm />
+                    </Modal.Body>
+                  </Modal>
+
                   <Link to="/DisplayTab">
                     <b
                       style={{

@@ -110,9 +110,7 @@ const Sell = ({ toogleStep, step }) => {
         </div>
 
         <div className="bottom-btn">
-          <button className="pre-btn" onClick={null}>
-            Previous
-          </button>
+          <button className="pre-btn">Previous</button>
           <span> </span>
           <button type="submit" className="nxt-btn" id="next">
             Next
