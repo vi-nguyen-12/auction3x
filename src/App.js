@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
@@ -19,6 +19,8 @@ import RealEstate from "./components/Home/realEstate";
 import Header from "./components/Header";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const toogleCount = () => setCount(count);
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = Cookies.get("auth-token");
@@ -52,7 +54,7 @@ function App() {
             </div>
           </Route>
           <Route path="/Display/:id">
-            <Display />
+            <Display toogleCount={toogleCount} count={count} />
             <DisplayTab />
             <Featured />
           </Route>

@@ -42,12 +42,12 @@ const MultiBuyForm = () => {
         <BuyPayment toogleStep={toogleStep} step={step} />
       </div>
     );
-  } else if (step === 5) {
-    return (
-      <div className="buy-register-container">
-        <BuyConfirm toogleStep={toogleStep} step={step} />
-      </div>
-    );
+    // } else if (step === 5) {
+    //   return (
+    //     <div className="buy-register-container">
+    //       <BuyConfirm toogleStep={toogleStep} step={step} />
+    //     </div>
+    //   );
   }
 };
 
