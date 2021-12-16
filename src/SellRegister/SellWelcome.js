@@ -14,6 +14,15 @@ const Sell = ({ toogleStep, step }) => {
     toogleStep(step + 1);
   };
 
+  // const btn = document.getElementById("next");
+
+  // console.log(btn);
+
+  // btn.disabled = true;
+  // setTimeout(() => {
+  //   btn.disabled = false;
+  // }, 8000);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="box-content">
       <div className="sell-top">
@@ -103,7 +112,7 @@ const Sell = ({ toogleStep, step }) => {
         <div className="bottom-btn">
           <button className="pre-btn">Previous</button>
           <span> </span>
-          <button type="submit" className="nxt-btn">
+          <button type="submit" className="nxt-btn" id="next">
             Next
           </button>
         </div>

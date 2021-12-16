@@ -15,11 +15,11 @@ import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import Toast from "./Toast";
 import { useHistory } from "react-router-dom";
-import Listing from "../RealEstate/Listing";
 
-const Header = () => {
+const Header = ({ color }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
+  const history2 = useHistory();
 
   const HeaderComp = ({ toogleSingInn }) => {
     const [showSignIn, popSignIn] = useState(false);
@@ -39,6 +39,10 @@ const Header = () => {
 
     const handleLogout = () => {
       authService.logout();
+    };
+
+    const handleRealEstate = () => {
+      history2.push("/RealEstates");
     };
 
     const handleOnSell = () => {
@@ -66,7 +70,10 @@ const Header = () => {
     return (
       <>
         {showKYC && <Toast type="warning" message="Please complete your KYC" />}
-        <nav className="customNav navbar navbar-expand-lg p-0">
+        <nav
+          className="customNav navbar navbar-expand-lg p-0"
+          style={{ backgroundColor: color }}
+        >
           <button
             className="navbar-toggler"
             type="button"
@@ -91,11 +98,6 @@ const Header = () => {
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav m-auto">
-              <li className="nav-item navactive mt-2 p-2 mb-auto">
-                <Link to="/Listing">
-                  <b style={{ color: "white" }}>Real Estate</b>
-                </Link>
-              </li>
               <li className="nav-item mt-2 px-4 py-2">
                 <a className="nav-link" href="#" style={{ color: "white" }}>
                   <b>Cars</b>
@@ -121,6 +123,19 @@ const Header = () => {
               className="form-inline my-2 my-lg-0"
               style={{ display: "flex", paddingTop: 5 }}
             >
+              <button
+                className="bg-transparent border-0"
+                onClick={handleRealEstate}
+                style={{
+                  position: "absolute",
+                  color: "white",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                  left: "30%",
+                }}
+              >
+                Real Estate
+              </button>
               <Modal
                 size=""
                 aria-labelledby="contained-modal-title-vcenter"
@@ -155,7 +170,6 @@ const Header = () => {
                   />
                 </Modal.Body>
               </Modal>
-
               <Modal
                 size=""
                 aria-labelledby="contained-modal-title-vcenter"

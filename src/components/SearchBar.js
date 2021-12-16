@@ -53,6 +53,17 @@ function SearchBar() {
   return (
     <div className="search-location-input">
       <input
+        style={{
+          width: "100%",
+          padding: "5px",
+          display: "flex",
+          margin: "0",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "5px",
+          border: "white 1px solid",
+          height: "50px",
+        }}
         ref={autoCompleteRef}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Enter a City"

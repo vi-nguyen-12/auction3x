@@ -4,7 +4,6 @@ import { useState } from "react";
 import authService from "../services/authServices";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
-  const { register, handleSubmit } = useForm();
   const [documents, setDocuments] = useState([]);
 
   const onSelectDocs = async (e) => {
@@ -13,8 +12,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     for (let i = 0; i < documents.length; i++) {
       formData.append("documents", documents[i]);
     }
-    const response = await authService.saveDocuments(formData);
-    setDocuments(response.data);
+      const response = await authService.saveDocuments(formData);
+      setDocuments(response.data);
   };
 
   const send = (e) => {
@@ -79,7 +78,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" type="submit" onClick={send}>
+          <button className="nxt-btn" onClick={send}>
             Next
           </button>
         </div>

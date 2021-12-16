@@ -2,41 +2,74 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../services/authServices";
+import Toast from "../components/Toast";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
-  const [documents, setDocuments] = useState([]);
 
-  const onSelectImages = async (e) => {
-    const images = e.target.files;
-    const formData = new FormData();
-    for (let i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
-    }
-    const response = await authService.saveImages(formData);
-    setImages(response.data);
-  };
+  // const onSelectImages = async (e) => {
+  //   const images = e.target.files;
+  //   const formData = new FormData();
+  //   for (let i = 0; i < images.length; i++) {
+  //     formData.append("images", images[i]);
+  //   }
+  //   const response = await authService.saveImages(formData);
+  //   setImages(response.data);
+  // };
 
-  const onSelectVideos = async (e) => {
-    const videos = e.target.files;
+  // const onSelectVideos = async (e) => {
+  //   const videos = e.target.files;
+  //   const formData = new FormData();
+  //   for (let i = 0; i < videos.length; i++) {
+  //     formData.append("videos", videos[i]);
+  //   }
+  //     const response = await authService.saveVideos(formData);
+  //     setVideos(response.data);
+  // };
+
+  const onSubmit = async (data) => {
+    const videos = data.videos;
+    const images = data.images;
+
     const formData = new FormData();
+    const formData2 = new FormData();
     for (let i = 0; i < videos.length; i++) {
       formData.append("videos", videos[i]);
     }
-    const response = await authService.saveVideos(formData);
-    setVideos(response.data);
-  };
+    for (let i = 0; i < images.length; i++) {
+      formData2.append("images", images[i]);
+    }
 
-  const send = (e) => {
-    toogleImages(images);
-    toogleVideos(videos);
+    const response2 = await authService
+      .saveVideos(formData)
+      .then((response2) => {
+        console.log(response2);
+        setVideos(response2.data);
+        toogleVideos(videos);
+      });
+
+    const response = await authService
+      .saveImages(formData2)
+      .then((response) => {
+        console.log(response);
+        setImages(response.data);
+        toogleImages(images);
+      });
+
     toogleStep(step + 1);
   };
 
+  // const send = (e) => {
+  //   e.preventDefault();
+  //   toogleImages(images);
+  //   toogleVideos(videos);
+  //   toogleStep(step + 1);
+  // };
+
   return (
-    <form className="upload-box">
+    <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
         <div class="circle-1">
           <p class="text">01</p>
@@ -81,9 +114,8 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             accept="image/*"
             type="file"
             name="images"
-            onChange={onSelectImages}
             multiple
-            // {...register("images", { required: false })}
+            {...register("images", { required: false })}
           />
         </div>
         <div className="input-form-2">
@@ -92,9 +124,8 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             accept="video/*"
             type="file"
             name="videos"
-            onChange={onSelectVideos}
             multiple
-            // {...register("videos", { required: false })}
+            {...register("videos", { required: false })}
           />
         </div>
 
@@ -102,7 +133,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" type="submit" onClick={send}>
+          <button className="nxt-btn" id="next" type="submit">
             Next
           </button>
         </div>

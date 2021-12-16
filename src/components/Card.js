@@ -14,7 +14,8 @@ import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 
-const CardComp = ({ url, data, id, singInn }) => {
+const CardComp = ({ url, data, id }) => {
+  console.log(url);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -23,6 +24,8 @@ const CardComp = ({ url, data, id, singInn }) => {
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const toggleImage = () => setFavorite(!favorite);
   const [kycUrl, setKycUrl] = useState("");
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
@@ -52,9 +55,9 @@ const CardComp = ({ url, data, id, singInn }) => {
       style={{
         width: "18rem",
         background: "white",
-        padding: "2.5px",
-        width: "350px",
-        borderRadius: "2px",
+        padding: "5px",
+        width: "450px",
+        borderRadius: "10px",
         border: "1px solid lightgrey",
       }}
     >
@@ -64,9 +67,27 @@ const CardComp = ({ url, data, id, singInn }) => {
           variant="top"
           src={url}
           className="img-fluid"
-          style={{ width: "350px", height: "250px" }}
+          style={{ width: "100%", height: "300px", borderRadius: "10px" }}
         />
       </Link>
+      <button
+        onClick={toggleImage}
+        // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
+        style={{
+          border: "none",
+          position: "absolute",
+          display: "flex",
+          marginLeft: "90%",
+          top: "10px",
+          background: "none",
+        }}
+      >
+        {favorite ? (
+          <img src="/images/hearted.png" />
+        ) : (
+          <img src="/images/heart.png" />
+        )}
+      </button>
       <Card.Body style={{ paddingLeft: "13px" }}>
         <Card.Text>
           <div>
@@ -99,7 +120,7 @@ const CardComp = ({ url, data, id, singInn }) => {
                       style={{
                         fontSize: "15px",
                         width: "100px",
-                        marginLeft: "-20px",
+                        marginRight: "10px",
                       }}
                     >
                       Additional Info
@@ -117,7 +138,7 @@ const CardComp = ({ url, data, id, singInn }) => {
                   <p
                     style={{
                       fontSize: "12px",
-                      marginLeft: "100px",
+                      marginLeft: "150px",
                       width: "100%",
                     }}
                   >
