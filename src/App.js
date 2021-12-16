@@ -1,4 +1,9 @@
 import Home from "./components/Home";
+import ImgSlider from "./components/ImgSlider";
+import {FindInCountries} from "./components/FindInCountries";
+import {Upcoming} from "./components/Upcoming";
+import Work from "./components/Home/work";
+import RealEstate from "./components/Home/realEstate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,7 +22,7 @@ import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
 import RealEstates from "./components/RealEstates";
 import Header from "./components/Header";
-import {useState} from 'react'
+import { useState } from "react";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,24 +52,29 @@ function App() {
 
   return (
     <div className="App">
-      <Header color = {color}/>
+      <Header color={color} />
       <Router>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <ImgSlider />
+            <Featured />
+            <FindInCountries />
+            <Upcoming />
+            <Work />
+            <RealEstate />
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
-              <MultiSellForm colorChange = {colorChange}/>
+              <MultiSellForm colorChange={colorChange} />
             </div>
           </Route>
           <Route path="/Display/:id">
-            <Display colorChange = {colorChange} />
+            <Display colorChange={colorChange} />
             <DisplayTab />
             <Featured />
           </Route>
           <Route exact path="/RealEstates">
-            <RealEstates colorChange = {colorChange} />
+            <RealEstates colorChange={colorChange} />
           </Route>
         </Switch>
       </Router>

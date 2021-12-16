@@ -74,3 +74,8 @@
   overflow:inherit!important;
   height: 30vh!important;
 }
+
+.custom-modal-size {
+  width: 700px!important;
+  height: 500px!important;
+}

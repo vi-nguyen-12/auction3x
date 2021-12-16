@@ -39,6 +39,7 @@ const Header = ({color}) => {
 
     const handleLogout = () => {
       authService.logout();
+      history.push("/");
     };
 
     const handleRealEstate = () => {
