@@ -9,25 +9,6 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
 
-  // const onSelectImages = async (e) => {
-  //   const images = e.target.files;
-  //   const formData = new FormData();
-  //   for (let i = 0; i < images.length; i++) {
-  //     formData.append("images", images[i]);
-  //   }
-  //   const response = await authService.saveImages(formData);
-  //   setImages(response.data);
-  // };
-
-  // const onSelectVideos = async (e) => {
-  //   const videos = e.target.files;
-  //   const formData = new FormData();
-  //   for (let i = 0; i < videos.length; i++) {
-  //     formData.append("videos", videos[i]);
-  //   }
-  //     const response = await authService.saveVideos(formData);
-  //     setVideos(response.data);
-  // };
 
   const onSubmit = async (data) => {
     const videos = data.videos;
@@ -35,6 +16,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
 
     const formData = new FormData();
     const formData2 = new FormData();
+
     for (let i = 0; i < videos.length; i++) {
       formData.append("videos", videos[i]);
     }
@@ -47,26 +29,15 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       .then((response2) => {
         console.log(response2);
         setVideos(response2.data);
-        toogleVideos(videos);
       });
 
     const response = await authService
       .saveImages(formData2)
       .then((response) => {
-        console.log(response);
         setImages(response.data);
-        toogleImages(images);
       });
-
     toogleStep(step + 1);
   };
-
-  // const send = (e) => {
-  //   e.preventDefault();
-  //   toogleImages(images);
-  //   toogleVideos(videos);
-  //   toogleStep(step + 1);
-  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
@@ -133,7 +104,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" id="next" type="submit">
+          <button className="nxt-btn" onClick={toogleImages(images), toogleVideos(videos)} id="next" type="submit">
             Next
           </button>
         </div>

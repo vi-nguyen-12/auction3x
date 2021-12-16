@@ -4,26 +4,26 @@ import { useState } from "react";
 import authService from "../services/authServices";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
+  const { register, handleSubmit } = useForm();
   const [documents, setDocuments] = useState([]);
 
-  const onSelectDocs = async (e) => {
-    const documents = e.target.files;
-    const formData = new FormData();
-    for (let i = 0; i < documents.length; i++) {
-      formData.append("documents", documents[i]);
-    }
-      const response = await authService.saveDocuments(formData);
-      setDocuments(response.data);
-  };
 
-  const send = (e) => {
-    e.preventDefault();
-    toogleDocuments(documents);
-    toogleStep(step + 1);
-  };
+    const onSubmit = async (data) => {
+      const documents = data.documents;
+      const formData = new FormData();
+
+      for (let i = 0; i < documents.length; i++) {
+        formData.append("documents", documents[i]);
+      }
+      const response = await authService.saveDocuments(formData).then(
+        (response) => {
+          setDocuments(response.data);
+        });
+      toogleStep(step + 1);
+    };
 
   return (
-    <form className="upload-box">
+    <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
         <div class="circle-1">
           <p class="text">01</p>
@@ -68,9 +68,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             accept="documents/*"
             type="file"
             name="documents"
-            onChange={onSelectDocs}
             multiple
-            // {...register("images", { required: false })}
+            {...register("documents", { required: false })}
           />
         </div>
 
@@ -78,7 +77,11 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" onClick={send}>
+          <button
+            className="nxt-btn"
+            type="submit"
+            onClick={toogleDocuments(documents)}
+          >
             Next
           </button>
         </div>

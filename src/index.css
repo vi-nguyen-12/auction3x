@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 * {
@@ -10,8 +11,7 @@ body {
   background-color: #040714;
   color: #ffffff;
   font-family: Avenir-Roman, sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

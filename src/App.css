@@ -125,3 +125,10 @@
   background-color: transparent !important;
   border-color: transparent !important;
 }
+
+.bmsnQQ {
+  padding-right: 0!important;
+}
+.navbar-expand-lg .navbar-collapse {
+  padding-right: 10px!important;
+}

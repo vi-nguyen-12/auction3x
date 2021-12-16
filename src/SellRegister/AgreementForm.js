@@ -4,6 +4,7 @@ import "../styles/SellRegister.css";
 import authService from "../services/authServices";
 import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
 import { Redirect } from "react-router-dom";
+import {useState} from 'react'
 
 const Agree = ({
   toogleStep,
@@ -13,8 +14,7 @@ const Agree = ({
   videos,
   documents,
 }) => {
-  const [redirect, setRedirect] = React.useState(false);
-  console.log(videos, documents);
+  const [redirect, setRedirect] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,6 +24,8 @@ const Agree = ({
   if (redirect === true) {
     return <Redirect to="/" />;
   }
+
+  console.log(images);
 
   const onSubmit = async (data) => {
     authService.saveRealEstate({
@@ -35,7 +37,6 @@ const Agree = ({
       videos,
       documents,
     });
-
     setRedirect(true);
   };
 

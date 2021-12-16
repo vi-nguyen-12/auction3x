@@ -213,9 +213,8 @@ const Display = ({ colorChange }) => {
                 >
                   <img src="/images/picture.png" />
                 </button>
-                <Modal show={showPics} onHide={togglePics} centered>
+                <Modal size="lg" style = {{height:"100%"}} show={showPics} onHide={togglePics} centered>
                   <Modal.Header
-                    contentClassName="modal-head-signup"
                     closeButton
                   >
                     <Modal.Title>
@@ -227,7 +226,7 @@ const Display = ({ colorChange }) => {
                       {property.images.map((item) => (
                         <Wrap>
                           <a>
-                            <img src={item.url} alt="" />
+                            <img style={{height:"100%"}} src={item.url} alt="" />
                           </a>
                         </Wrap>
                       ))}
