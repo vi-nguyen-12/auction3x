@@ -80,7 +80,8 @@ const Display = ({ colorChange }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
+    pauseOnHover: true,
   };
 
   const Carousel = styled(Slider)`
@@ -308,26 +309,26 @@ const Display = ({ colorChange }) => {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel style={{ height: "100%"}} {...settings}>
+                    <Carousel style={{ height: "100%" }} {...settings}>
                       {property.videos.map((item) => (
                         <Wrap>
                           <a>
-                        <video
-                          style={{
-                            display: "relative",
-                            justifyContent: "center",
-                            margin: "auto",
-                            padding: "35px",
-                            width: "100%",
-                            borderRadius: "15px",
-                            position: "relative",
-                            height: "3000px!important",
-                            cursor: "pointer",
-                          }}
-                          controls
-                        >
-                          <source src={item.url} type="video/webm" />
-                        </video>
+                            <video
+                              style={{
+                                display: "relative",
+                                justifyContent: "center",
+                                margin: "auto",
+                                padding: "35px",
+                                width: "100%",
+                                borderRadius: "15px",
+                                position: "relative",
+                                height: "3000px!important",
+                                cursor: "pointer",
+                              }}
+                              controls
+                            >
+                              <source src={item.url} type="video/webm" />
+                            </video>
                           </a>
                         </Wrap>
                       ))}
