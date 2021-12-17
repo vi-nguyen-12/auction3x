@@ -14,6 +14,7 @@ import ProcessBar from "../components/BuyRegister/ProcessBar";
 import userSlice from "../slice/userSlice";
 import { useSelector } from "react-redux";
 import BuyConfirm from "../components/BuyRegister/BuyConfirm";
+import DisplayTab from "./DisplayTab";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
@@ -159,74 +160,92 @@ const Display = ({ colorChange }) => {
           <tr className="realHeader">
             <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
           </tr>
-          <img
-            src={property.images[0].url}
-            alt="Snow"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: "auto",
-              padding: "35px",
-              width: "100%",
-              borderRadius: "15px",
-              position: "relative",
-            }}
-          />
-          <div
-            style={{
-              display: "inline-block",
-              position: "absolute",
-              top: "70%",
-              padding: "35px",
-              marginRight: "100%",
-              left: "90%",
-            }}
-          >
-            <button
-              syle={{
-                backgroundColor: "white",
+          <div style={{ position: "relative", width: "100%" }}>
+            <img
+              src={property.images[0].url}
+              alt="Snow"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "auto",
+                padding: "35px",
+                width: "100%",
+                borderRadius: "15px",
+                position: "relative",
+                height: "auto",
+              }}
+            />
+            <div
+              style={{
+                display: "inline-block",
+                position: "absolute",
+                top: "50%",
+                left: "92%",
+                transform: "translate(-50%, -50%)",
+                height: "405px",
+                marginRight: "100%",
                 border: "none",
+                cursor: "pointer",
+                backgroundColor: "white",
+                borderRadius: "10px",
               }}
             >
-              <button
-                onClick={toggleImage}
-                // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-                style={{
-                  border: "none",
-                  position: "relative",
-                  top: "10px",
-                  background: "none",
-                }}
-              >
-                {favorite ? (
-                  <img src="/images/star.png" />
-                ) : (
-                  <img src="/images/star-before.png" />
-                )}
-              </button>
-
-              <img src="/images/line.png" />
               <div>
                 <button
-                  style={{ border: "none", background: "none" }}
+                  onClick={toggleImage}
+                  // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
+                  style={{
+                    border: "none",
+                    position: "relative",
+                    background: "none",
+                    borderBottom: "1px solid #e6e6e6",
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "15px",
+                    width: "100%",
+                  }}
+                >
+                  {favorite ? (
+                    <img src="/images/star.png" />
+                  ) : (
+                    <img src="/images/star-before.png" />
+                  )}
+                </button>
+              </div>
+
+              <div>
+                <button
+                  style={{
+                    border: "none",
+                    position: "relative",
+                    top: "10px",
+                    background: "none",
+                    borderBottom: "1px solid #e6e6e6",
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "15px",
+                    width: "100%",
+                  }}
                   onClick={togglePics}
                 >
                   <img src="/images/picture.png" />
                 </button>
-                <Modal size="lg" style = {{height:"100%"}} show={showPics} onHide={togglePics} centered>
-                  <Modal.Header
-                    closeButton
-                  >
+                <Modal size="lg" show={showPics} onHide={togglePics} centered>
+                  <Modal.Header closeButton>
                     <Modal.Title>
                       <h2>Property Pictures</h2>
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel {...settings}>
+                    <Carousel style={{ height: "100%" }} {...settings}>
                       {property.images.map((item) => (
                         <Wrap>
                           <a>
-                            <img style={{height:"100%"}} src={item.url} alt="" />
+                            <img
+                              style={{ height: "100%" }}
+                              src={item.url}
+                              alt=""
+                            />
                           </a>
                         </Wrap>
                       ))}
@@ -234,16 +253,61 @@ const Display = ({ colorChange }) => {
                   </Modal.Body>
                 </Modal>
               </div>
-              <img src="/images/line.png" />
+
               <div>
                 <button
                   onClick={toggleVids}
-                  style={{ border: "none", background: "none" }}
+                  style={{
+                    border: "none",
+                    position: "relative",
+                    top: "10px",
+                    background: "none",
+                    borderBottom: "1px solid #e6e6e6",
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "15px",
+                    width: "100%",
+                  }}
                 >
                   <img src="/images/video.png" />
                 </button>
 
-                <Modal show={showVideos} onHide={toggleVids} centered>
+                <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      <h2>Property Videos</h2>
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Carousel style={{ height: "100%" }} {...settings}>
+                      {property.videos.map((item) => (
+                        <video
+                          style={{
+                            display: "relative",
+                            justifyContent: "center",
+                            margin: "auto",
+                            padding: "35px",
+                            width: "100%",
+                            borderRadius: "15px",
+                            position: "relative",
+                            height: "3000px!important",
+                          }}
+                          controls
+                        >
+                          <source src={item.url} type="video/webm" />
+                        </video>
+                      ))}
+                    </Carousel>
+                  </Modal.Body>
+                </Modal>
+              </div>
+              {/* <Modal
+                  size="lg"
+                  style={{ height: "700px", width: "750px" }}
+                  show={showVideos}
+                  onHide={toggleVids}
+                  centered
+                >
                   <Modal.Header
                     contentClassName="modal-head-signup"
                     closeButton
@@ -252,8 +316,8 @@ const Display = ({ colorChange }) => {
                       <h2>Property Videos</h2>
                     </Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>
-                    <Carousel {...settings}>
+                  <Modal.Body style={{ height: "700px" }}>
+                    <Carousel style={{ height: "100%" }} {...settings}>
                       {property.videos.map((item) => (
                         <Wrap>
                           <a>
@@ -265,21 +329,39 @@ const Display = ({ colorChange }) => {
                       ))}
                     </Carousel>
                   </Modal.Body>
-                </Modal>
-                <img src="/images/line.png" />
-                <button style={{ border: "none", background: "none" }}>
+                </Modal> */}
+              <div>
+                <button
+                  style={{
+                    border: "none",
+                    position: "relative",
+                    top: "10px",
+                    background: "none",
+                    borderBottom: "1px solid #e6e6e6",
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "15px",
+                    width: "100%",
+                  }}
+                >
                   <Link to="/">
                     <img src="/images/360.png" />
                   </Link>
                 </button>
-                <img src="/images/line.png" />
+              </div>
+
+              <div>
                 <button
                   onClick={toggleMap}
                   style={{
                     border: "none",
                     position: "relative",
-                    bottom: "10px",
+                    top: "10px",
                     background: "none",
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "15px",
+                    width: "100%",
                   }}
                 >
                   <img src="/images/location.png" />
@@ -304,7 +386,7 @@ const Display = ({ colorChange }) => {
                   </Modal.Body>
                 </Modal>
               </div>
-            </button>
+            </div>
           </div>
           <div
             className="list-info-1"

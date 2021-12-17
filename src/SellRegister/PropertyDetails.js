@@ -1,9 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import "../styles/SellRegister.css";
 
-const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => {
-
+const PropertyDetails = ({
+  toogleStep,
+  step,
+  property,
+  tooglePropertyData,
+}) => {
   console.log(property);
   const {
     register,
@@ -18,12 +23,15 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
       city: data.city,
       state: data.state,
       zipCode: data.zipCode,
-      fields:{
+      discussedAmount: data.discussedAmount,
+      reservedAmount: data.reservedAmount,
+      fields: {
         beds_count: data.bedrooms,
         baths: data.bathrooms,
         rooms_count: data.rooms_count,
-      }
-    }  
+        total_value: data.total_value,
+      },
+    };
     tooglePropertyData(submitedData);
     toogleStep(step + 1);
   };
@@ -81,10 +89,15 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
 
           <div style={{ display: "flex", justifyContent: "center" }}>
             <input
-              style={{ width: "300px", marginBottom: "10px", fontWeight: "bold", fontSize: "15px" }}
+              style={{
+                width: "300px",
+                marginBottom: "10px",
+                fontWeight: "bold",
+                fontSize: "15px",
+              }}
               defaultValue={property.address.formatted_street_address}
               {...register("street_address", { required: false })}
-            ></input>
+            />
           </div>
           <label
             style={{
@@ -276,7 +289,6 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
                 />
               </td>
 
-
               <td
                 style={{
                   position: "absolute",
@@ -305,8 +317,105 @@ const PropertyDetails = ({ toogleStep, step, property, tooglePropertyData }) => 
             >
               <td>Total Rooms</td>
               <td style={{ paddingLeft: "10px" }}>Property Size(sqft)</td>
-              <td style={{paddingLeft:"8px"}}>Bedrooms</td>
-              <td style={{paddingRight:"190px", paddingLeft:"39px" }}>Bathrooms</td>
+              <td style={{ margin: "auto" }}>Bedrooms</td>
+              <td style={{ paddingRight: "170px", paddingLeft: "35px" }}>
+                Bathrooms
+              </td>
+            </tr>
+          </table>
+
+          <table
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "inline" }}>
+              <tr>
+                <td>
+                  <div className="amount-input">
+                    <span className="prefix">$</span>
+                    <input
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "bold",
+                      }}
+                      type="number"
+                      name="total_value"
+                      className="sell-amount"
+                      defaultValue={property.assessments[0].total_value}
+                      // {...register("total_value", { required: false })}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td
+                  style={{
+                    position: "relative",
+                    fontSize: "13px",
+                  }}
+                >
+                  {" "}
+                  House Amount
+                </td>
+              </tr>
+            </div>
+          </table>
+
+          <table style={{ display: "inline" }}>
+            <tr>
+              <td
+                style={{ width: "240px", position: "relative", left: "105px" }}
+              >
+                <div className="amount-input">
+                  <span className="prefix">$</span>
+                  <input
+                    className="sell-amount"
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
+                    type="number"
+                    name="reservedAmount"
+                    {...register("reservedAmount", { required: false })}
+                  />
+                </div>
+              </td>
+              <td
+                style={{
+                  position: "absolute",
+                  right: "100px",
+                  width: "240px",
+                  fontSize: "17px",
+                }}
+              >
+                <div className="amount-input">
+                  <span className="prefix">$</span>
+                  <input
+                    className="sell-amount"
+                    style={{
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
+                    type="number"
+                    name="discussedAmount"
+                    {...register("discussedAmount", { required: false })}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr
+              style={{
+                position: "relative",
+                left: "109px",
+                fontSize: "13px",
+                bottom: "5px",
+              }}
+            >
+              <td>Reserved Amount</td>
+              <td style={{ paddingLeft: "15px" }}>Discuss Amount</td>
             </tr>
           </table>
           <div style={{ display: "flex", justifyContent: "center" }}>
