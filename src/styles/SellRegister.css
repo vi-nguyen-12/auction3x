@@ -523,3 +523,38 @@ h1 {
   margin-top: 130px;
   width: 25%;
 }
+
+.amount-input {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  background: #fff;
+  border: 2px solid #d58f5c;
+  border-radius: 4px;
+  padding-left: 0.5rem;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.amount-input .prefix {
+  font-weight: 300;
+  font-size: 14px;
+  color: #999;
+}
+
+.amount-input input {
+  flex-grow: 1;
+  font-size: 14px;
+  background: #fff;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.sell-amount {
+  outline: none !important;
+  background-color: transparent !important;
+  padding: 6px !important;
+  color: rgb(0, 0, 0) !important;
+  font-size: 12px !important;
+}

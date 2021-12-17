@@ -125,7 +125,6 @@
   margin: 10px;
 }
 
-.custom-modal-size {
-  width: 700px !important;
-  height: 700px !important;
+.slick-slider {
+  height: 100% !important;
 }

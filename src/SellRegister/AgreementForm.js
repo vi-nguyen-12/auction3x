@@ -4,7 +4,7 @@ import "../styles/SellRegister.css";
 import authService from "../services/authServices";
 import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
 import { Redirect } from "react-router-dom";
-import {useState} from 'react'
+import { useState } from "react";
 
 const Agree = ({
   toogleStep,
@@ -33,6 +33,8 @@ const Agree = ({
       street_address: propertyData.street_address,
       city: propertyData.city,
       state: propertyData.state,
+      discussedAmount: propertyData.discussedAmount,
+      reservedAmount: propertyData.reservedAmount,
       images,
       videos,
       documents,
