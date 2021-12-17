@@ -1,9 +1,22 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import "../../styles/Buyer.css";
 
 const BuyAgreement = ({ toogleStep, step }) => {
+  const [agreement, setAgreement] = useState(false);
+  const toogleAgree = () => {
+    setAgreement(!agreement);
+  };
+  const handleNext = () => {
+    if (agreement === true) {
+      toogleStep(step + 1);
+    }
+    else{
+      alert("Please Read the agreement and check the box to continue");
+    }
+  }
   return (
     <>
       <Modal.Header contentClassName="modal-head-login" closeButton>
@@ -18,29 +31,21 @@ const BuyAgreement = ({ toogleStep, step }) => {
       <Modal.Body>
         <form>
           <div>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-          </div>
-          <div style={{ position: "sticky" }} className="bottom-btn">
-            <button className="pre-btn" onClick={"null"}>
-              Previous
-            </button>
-            <button className="nxt-btn" onClick={() => toogleStep(step + 1)}>
-              Next
-            </button>
-          </div>
-          <div className="buy-bottom">
-            <div class="circle-1"></div> <div class="line"></div>
-            <div class="circle"></div> <div class="line"></div>
-            <div class="circle"></div> <div class="line"></div>
-            <div class="circle"></div> <div class="line"></div>
-            <div class="circle"></div>
+            <input type="checkbox" onChange={toogleAgree} />
+            Agree
           </div>
         </form>
       </Modal.Body>
+      <Modal.Footer style={{display:"flex", justifyContent:"center"}}>
+      <div style={{ position: "sticky" }} className="bottom-btn">
+            <button className="pre-btn" onClick={() => toogleStep(step-1)}>
+              Previous
+            </button>
+            <button className="nxt-btn" onClick={() => handleNext()}>
+              Next
+            </button>
+          </div>
+      </Modal.Footer>
     </>
   );
 };

@@ -5,7 +5,6 @@ import UploadForm from "./UploadForm";
 import ListingFees from "./ListingFees";
 import "../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
-import SellRegisterHeader from "./SellRegisterHeader";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
 

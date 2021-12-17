@@ -15,7 +15,6 @@ const BuyAuthoried = ({ toogleStep, step }) => {
       </Modal.Header>
       <form>
         <p>
-          {" "}
           To Proceed with auction you need to pay $100 as deposit and it is
           completely refundable
         </p>
@@ -24,7 +23,10 @@ const BuyAuthoried = ({ toogleStep, step }) => {
           facilisis, erat a euismod aliquam, nisi nunc pretium nunc, eget
           efficitur erat nunc eget nunc.
         </p>
-        <div style={{ position: "sticky" }} className="bottom-btn">
+
+      </form>
+      <Modal.Footer style={{display:"flex", justifyContent:"center"}}>
+      <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
@@ -32,14 +34,7 @@ const BuyAuthoried = ({ toogleStep, step }) => {
             Next
           </button>
         </div>
-        <div className="buy-bottom">
-          <div class="circle-1"></div> <div class="line-1"></div>
-          <div class="circle-2"></div> <div class="line-2"></div>
-          <div class="circle-3"></div> <div class="line-3"></div>
-          <div class="circle-4"></div> <div class="line-4"></div>
-          <div class="circle-5"></div>
-        </div>
-      </form>
+      </Modal.Footer>
     </>
   );
 };

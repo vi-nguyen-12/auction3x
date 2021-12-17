@@ -7,8 +7,8 @@ const DisplayTab = () => {
     <form>
       <div style={{ padding: "35px", backgroundColor: "white" }}>
         <Tabs
-          aciveKey={realTab}
-          onselect={() => setRealTab()}
+          activeKey={realTab}
+          onSelect={() => setRealTab()}
           className="RealEstate-Tab"
         >
           <Tab

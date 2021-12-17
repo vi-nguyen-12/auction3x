@@ -5,15 +5,18 @@ import { Modal, Carousel } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import env from "../env";
+import Confirm from "../components/EmailConfirm";
+import ForgotPass from "../components/ForgotPass";
+import ChangePass from "../components/ChangePass";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
-import ProcessBar from "../components/BuyRegister/ProcessBar";
-import userSlice from "../slice/userSlice";
 import { useSelector } from "react-redux";
-import BuyConfirm from "../components/BuyRegister/BuyConfirm";
+import { useHistory } from "react-router-dom";
+import Login from "../components/Login";
+import SignUp from "../components/SignUp";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
@@ -25,18 +28,39 @@ const Display = ({ colorChange }) => {
   const [showVideos, setShowVideos] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [bid, setBid] = useState(false);
-  const [bid1, setBid1] = useState(false);
-  const toogleBid1 = () => setBid1(!bid1);
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => setFavorite(!favorite);
   const toogleBid = () => setBid(!bid);
+  const [showSignIn, popSignIn] = useState(false);
+  const [showSignUp, popUpSignUp] = useState(false);
+  const [showConfirm, popupConfirm] = useState(false);
+  const [showButton, popButton] = useState(false);
+  const [forgotPass, popForgotPass] = useState(false);
+  const [changePass, popChangePass] = useState(false);
+  const toogleChangePass = () => popChangePass(!changePass);
+  const toogleForgotPass = () => popForgotPass(!forgotPass);
+  const toogleButton = () => popButton(!showButton);
+  const toogleSignIn = () => popSignIn(!showSignIn);
+  const toogleSignUp = () => popUpSignUp(!showSignUp);
+  const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const user = useSelector((state) => state.user);
+
+  const handlePlaceBid = () => {
+    if (!user._id) {
+      return toogleSignIn();
+    }
+  };
+
+  const handleKYC = () => {
+    if (!user.KYC) {
+      return alert("Please Complete your KYC first to bid");
+    }
+  };
 
   useEffect(async () => {
     const property = await authService.sendProperty(id);
-    console.log(property);
     setProperty(property.data);
     setLocation({
       name: "Property Location",
@@ -213,10 +237,14 @@ const Display = ({ colorChange }) => {
                 >
                   <img src="/images/picture.png" />
                 </button>
-                <Modal size="lg" style = {{height:"100%"}} show={showPics} onHide={togglePics} centered>
-                  <Modal.Header
-                    closeButton
-                  >
+                <Modal
+                  size="lg"
+                  style={{ height: "100%" }}
+                  show={showPics}
+                  onHide={togglePics}
+                  centered
+                >
+                  <Modal.Header closeButton>
                     <Modal.Title>
                       <h2>Property Pictures</h2>
                     </Modal.Title>
@@ -226,7 +254,11 @@ const Display = ({ colorChange }) => {
                       {property.images.map((item) => (
                         <Wrap>
                           <a>
-                            <img style={{height:"100%"}} src={item.url} alt="" />
+                            <img
+                              style={{ height: "100%" }}
+                              src={item.url}
+                              alt=""
+                            />
                           </a>
                         </Wrap>
                       ))}
@@ -319,69 +351,251 @@ const Display = ({ colorChange }) => {
                   <p>{property.details.address.formatted_street_address}</p>
                 </div>
               </td>
-              <td
-                style={{
-                  position: "absolute",
-                  right: "100px",
-                  width: "240px",
-                  fontSize: "17px",
-                }}
-              >
-                {" "}
-                <div
+              {!user._id && (
+                <td
                   style={{
-                    display: "inline-block",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    width: "100%",
-                    marginLeft: "35px",
-                    padding: "15px",
-                    borderRadius: "10px",
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
                   }}
                 >
-                  {user ? (
+                  <div
+                    style={{
+                      display: "inline-block",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      width: "100%",
+                      marginLeft: "35px",
+                      padding: "15px",
+                      borderRadius: "10px",
+                    }}
+                  >
                     <div>
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
-                        onclick={toogleBid1}
+                        onClick={handlePlaceBid}
                       >
-                        Place To Bid
+                        Register to Bid
                       </button>
-                      <Modal size="lg" show={bid1} onHide={toogleBid1} centered>
-                        <BuyConfirm />
-                      </Modal>
                     </div>
-                  ) : (
+
+                    <Link to="/DisplayTab">
+                      <b
+                        style={{
+                          borderBottom: "1px solid #6D6D6D",
+                          color: "#6D6D6D",
+                        }}
+                      >
+                        View Document
+                      </b>
+                    </Link>
+                  </div>
+                </td>
+              )}
+
+              {user._id && !user.KYC && (
+                <td
+                  style={{
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "inline-block",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      width: "100%",
+                      marginLeft: "35px",
+                      padding: "15px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div>
+                      <button
+                        className="customButton"
+                        style={{ width: "200px", fontSize: "20px" }}
+                        onClick={handleKYC}
+                      >
+                        Register to Bid
+                      </button>
+                    </div>
+
+                    <Link to="/DisplayTab">
+                      <b
+                        style={{
+                          borderBottom: "1px solid #6D6D6D",
+                          color: "#6D6D6D",
+                        }}
+                      >
+                        View Document
+                      </b>
+                    </Link>
+                  </div>
+                </td>
+              )}
+
+              {user._id && user.KYC && (
+                <td
+                  style={{
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "inline-block",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      width: "100%",
+                      marginLeft: "35px",
+                      padding: "15px",
+                      borderRadius: "10px",
+                    }}
+                  >
                     <div>
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={toogleBid}
                       >
-                        Register to Bid
+                        Place Bid
                       </button>
                     </div>
-                  )}
+                    <Modal size="lg" show={bid} onHide={toogleBid} centered>
+                      <Modal.Body>
+                        <MultiBuyForm />
+                      </Modal.Body>
+                    </Modal>
+                    <Link to="/DisplayTab">
+                      <b
+                        style={{
+                          borderBottom: "1px solid #6D6D6D",
+                          color: "#6D6D6D",
+                        }}
+                      >
+                        View Document
+                      </b>
+                    </Link>
+                  </div>
+                </td>
+              )}
+              <Modal
+                size=""
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={showConfirm}
+                onHide={toogleConfirmModal}
+                centered
+                contentClassName="confirm"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title
+                    id="contained-modal-title-vcenter"
+                    style={{ color: "#D58F5C" }}
+                  >
+                    Confirm Email
+                  </Modal.Title>
+                  <Modal.Title
+                    className="pt-4"
+                    style={{
+                      fontSize: "12px",
+                      color: "#D58F5C",
+                      position: "absolute",
+                      marginright: "10px",
+                      marginTop: "8px",
+                    }}
+                  ></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Confirm
+                    toogleConfirmModal={toogleConfirmModal}
+                    toogleSignIn={toogleSignIn}
+                  />
+                </Modal.Body>
+              </Modal>
 
-                  <Modal size="lg" show={bid} onHide={toogleBid} centered>
-                    <Modal.Body>
-                      <MultiBuyForm />
-                    </Modal.Body>
-                  </Modal>
+              <Modal
+                size=""
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={forgotPass}
+                onHide={toogleForgotPass}
+                centered
+                contentClassName="forgotPass"
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title
+                    id="contained-modal-title-vcenter"
+                    style={{
+                      color: "#D58F5C",
+                      fontSize: "30px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Forgot Password
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <ForgotPass
+                    toogleForgotPass={toogleForgotPass}
+                    toogleChangePass={toogleChangePass}
+                  />
+                </Modal.Body>
+              </Modal>
 
-                  <Link to="/DisplayTab">
-                    <b
-                      style={{
-                        borderBottom: "1px solid #6D6D6D",
-                        color: "#6D6D6D",
-                      }}
-                    >
-                      View Document
-                    </b>
-                  </Link>
-                </div>
-              </td>
+              <Modal
+                size=""
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={changePass}
+                onHide={toogleChangePass}
+                centered
+                contentClassName="forgotPass"
+              >
+                <Modal.Body>
+                  <ChangePass toogleChangePass={toogleChangePass} />
+                </Modal.Body>
+              </Modal>
+              <Modal
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={showSignIn}
+                onHide={toogleSignIn}
+                contentClassName="login"
+              >
+                <Modal.Body>
+                  <Login
+                    toogleSignUp={toogleSignUp}
+                    toogleSignIn={toogleSignIn}
+                    toogleButton={toogleButton}
+                    toogleForgotPass={toogleForgotPass}
+                  />
+                </Modal.Body>
+              </Modal>
+
+              <Modal
+                size=""
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={showSignUp}
+                onHide={toogleSignUp}
+                contentClassName="custom-modal-style"
+              >
+                <Modal.Body>
+                  <SignUp
+                    toogleSignUp={toogleSignUp}
+                    toogleConfirmModal={toogleConfirmModal}
+                    toogleSignIn={toogleSignIn}
+                  />
+                </Modal.Body>
+              </Modal>
             </tr>
           </div>
           <div className="list-info-2">

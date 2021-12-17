@@ -94,6 +94,10 @@ const authService = {
 
   sendProperty(id) {
     return axios.get(env.API_URL + "/api/properties/real-estates/" + id);
+  },
+
+  buyerRegister(data) {
+    return axios.post(env.API_URL + "/api/buyers", data, {withCredentials: true});
   }
 };
 

@@ -15,7 +15,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
       for (let i = 0; i < documents.length; i++) {
         formData.append("documents", documents[i]);
       }
-      const response = await authService.saveDocuments(formData).then(
+      await authService.saveDocuments(formData).then(
         (response) => {
           setDocuments(response.data);
         });

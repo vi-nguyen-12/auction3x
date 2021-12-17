@@ -6,7 +6,6 @@ import authService from "../services/authServices";
 
 const Featured = (props) => {
   const property = useSelector((state) => state.property);
-  console.log(property);
   return (
     <div className="background">
       <Row>

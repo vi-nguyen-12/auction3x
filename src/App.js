@@ -13,11 +13,9 @@ import { useDispatch } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
 import Display from "./RealEstate/Display";
-import DisplayHeader from "./RealEstate/DisplayHeader";
 import DisplayTab from "./RealEstate/DisplayTab";
 import Footer from "./components/Home/footer";
 import { Featured } from "./components/Featured";
-import SellRegisterHeader from "./SellRegister/SellRegisterHeader";
 import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
 import Header from "./components/Header";
@@ -41,7 +39,6 @@ function App() {
   }, []);
 
   authService.getProperties().then((res) => {
-    console.log(res.data);
     dispatch(addProperty(res.data.data));
   });
 

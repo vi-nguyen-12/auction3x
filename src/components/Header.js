@@ -50,10 +50,11 @@ const Header = ({ color }) => {
       if (!user._id) {
         return toogleSignIn();
       }
-      if (user.KYC) {
-        history.push("/MultiSellForm");
-      } else {
-        setShowKYC(true);
+    };
+
+    const handleKYC = () => {
+      if (!user.KYC) {
+        return setShowKYC(true);
       }
     };
     useEffect(async () => {
@@ -64,7 +65,6 @@ const Header = ({ color }) => {
         console.log(response);
         const url = response.data.url;
         setKycUrl(url);
-        console.log(url);
       }
     }, [user]);
 
@@ -214,29 +214,34 @@ const Header = ({ color }) => {
                 </Modal.Body>
               </Modal>
 
-              <button
-                className="bg-transparent border-0"
-                onClick={handleOnSell}
-                style={{
-                  position: "absolute",
-                  top: "25px",
-                  right: "14%",
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
-              >
-                Sell
-              </button>
               {user._id && !user.KYC && (
-                <div className="dropdown">
-                  <button style={{ background: "transparent" }}>
-                    <img src="/images/bell.png" style={{ maxHeight: "30px" }} />
-                  </button>
-                  <div className="dropdown-content">
-                    <a href={kycUrl}>Please complete your KYC</a>
+                <>
+                  <Button
+                    className="bg-transparent border-0"
+                    onClick={handleKYC}
+                    style={{
+                      position: "absolute",
+                      top: "25px",
+                      right: "14%",
+                      color: "white",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Sell
+                  </Button>
+                  <div className="dropdown">
+                    <button style={{ background: "transparent" }}>
+                      <img
+                        src="/images/bell.png"
+                        style={{ maxHeight: "30px" }}
+                      />
+                    </button>
+                    <div className="dropdown-content">
+                      <a href={kycUrl}>Please complete your KYC</a>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
               {user._id ? (
                 <div className="dropdown">
@@ -255,37 +260,72 @@ const Header = ({ color }) => {
                   </div>
                 </div>
               ) : (
-                <div className="bg-light customButton border-0 mt-0">
+                <>
                   <Button
-                    className="signIn-btn"
+                    className="bg-transparent border-0"
+                    onClick={handleOnSell}
                     style={{
-                      fontSize: 16,
-                      color: "black",
+                      position: "absolute",
+                      top: "25px",
+                      right: "14%",
+                      color: "white",
+                      fontSize: "20px",
                       fontWeight: "bold",
-                      backgroundColor: "transparent",
-                      border: "0",
                     }}
-                    variant="success"
-                    onClick={toogleSignIn}
                   >
-                    Sign In
+                    Sell
                   </Button>
-                  <label>|</label>
-                  <Button
-                    className="signUp-btn"
-                    style={{
-                      fontSize: 16,
-                      color: "black",
-                      fontWeight: "bold",
-                      backgroundColor: "transparent",
-                      border: "0",
-                    }}
-                    variant="success"
-                    onClick={toogleSignUp}
-                  >
-                    Sign Up
-                  </Button>
-                </div>
+                  <div className="bg-light customButton border-0 mt-0">
+                    <Button
+                      className="signIn-btn"
+                      style={{
+                        fontSize: 16,
+                        color: "black",
+                        fontWeight: "bold",
+                        backgroundColor: "transparent",
+                        border: "0",
+                      }}
+                      variant="success"
+                      onClick={toogleSignIn}
+                    >
+                      Sign In
+                    </Button>
+                    <label>|</label>
+                    <Button
+                      className="signUp-btn"
+                      style={{
+                        fontSize: 16,
+                        color: "black",
+                        fontWeight: "bold",
+                        backgroundColor: "transparent",
+                        border: "0",
+                      }}
+                      variant="success"
+                      onClick={toogleSignUp}
+                    >
+                      Sign Up
+                    </Button>
+                  </div>
+                </>
+              )}
+
+              {user.KYC && (
+                <button
+                  className="bg-transparent border-0"
+                  onClick={() => {
+                    history.push("/MultiSellForm");
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "25px",
+                    right: "14%",
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Sell
+                </button>
               )}
               <Modal
                 aria-labelledby="contained-modal-title-vcenter"

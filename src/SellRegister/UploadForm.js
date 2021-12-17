@@ -9,7 +9,6 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
 
-
   const onSubmit = async (data) => {
     const videos = data.videos;
     const images = data.images;
@@ -104,7 +103,12 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" onClick={toogleImages(images), toogleVideos(videos)} id="next" type="submit">
+          <button
+            className="nxt-btn"
+            onClick={(toogleImages(images), toogleVideos(videos))}
+            id="next"
+            type="submit"
+          >
             Next
           </button>
         </div>

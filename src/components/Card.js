@@ -15,7 +15,6 @@ import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 
 const CardComp = ({ url, data, id }) => {
-  console.log(url);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
