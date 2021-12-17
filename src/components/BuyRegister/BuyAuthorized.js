@@ -14,7 +14,7 @@ const BuyAuthoried = ({
 }) => {
   const { register, handleSubmit } = useForm();
   const id = useParams().id;
-  console.log(id);
+
   const [agree, setAgree] = useState(false);
   const dateTime = new Date().toISOString();
   const hangleTerms = () => {

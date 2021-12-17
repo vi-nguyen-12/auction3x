@@ -78,10 +78,16 @@ const Display = ({ colorChange }) => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    autoplay: false,
+  };
+
+  let ImgSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
     autoplay: true,
   };
+
 
   const Carousel = styled(Slider)`
     height: 30vh;
@@ -136,8 +142,6 @@ const Display = ({ colorChange }) => {
 
     a {
       border-radius: 4px;
-      box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-        rgb(0 0 0 / 73%) 0px 16px 10px -10px;
       cursor: pointer;
       display: block;
       position: relative;
@@ -266,12 +270,12 @@ const Display = ({ colorChange }) => {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel style={{ height: "100%" }} {...settings}>
+                    <Carousel style={{ height: "100%" }} {...ImgSettings}>
                       {property.images.map((item) => (
                         <Wrap>
                           <a>
                             <img
-                              style={{ height: "100%" }}
+                              style={{ height: "50vh" }}
                               src={item.url}
                               alt=""
                             />
@@ -308,54 +312,24 @@ const Display = ({ colorChange }) => {
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel style={{ height: "100%"}} {...settings}>
-                      {property.videos.map((item) => (
-                        <Wrap>
-                          <a>
-                        <video
-                          style={{
-                            display: "relative",
-                            justifyContent: "center",
-                            margin: "auto",
-                            padding: "35px",
-                            width: "100%",
-                            borderRadius: "15px",
-                            position: "relative",
-                            height: "3000px!important",
-                            cursor: "pointer",
-                          }}
-                          controls
-                        >
-                          <source src={item.url} type="video/webm" />
-                        </video>
-                          </a>
-                        </Wrap>
-                      ))}
-                    </Carousel>
-                  </Modal.Body>
-                </Modal>
-              </div>
-              {/* <Modal
-                  size="lg"
-                  style={{ height: "700px", width: "750px" }}
-                  show={showVideos}
-                  onHide={toggleVids}
-                  centered
-                >
-                  <Modal.Header
-                    contentClassName="modal-head-signup"
-                    closeButton
-                  >
-                    <Modal.Title>
-                      <h2>Property Videos</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body style={{ height: "700px" }}>
                     <Carousel style={{ height: "100%" }} {...settings}>
                       {property.videos.map((item) => (
                         <Wrap>
                           <a>
-                            <video width="100%" height="100%" controls>
+                            <video
+                              style={{
+                                display: "relative",
+                                justifyContent: "center",
+                                margin: "auto",
+                                padding: "35px",
+                                width: "100%",
+                                borderRadius: "15px",
+                                position: "relative",
+                                height: "3000px!important",
+                                cursor: "pointer",
+                              }}
+                              controls
+                            >
                               <source src={item.url} type="video/webm" />
                             </video>
                           </a>
@@ -363,7 +337,8 @@ const Display = ({ colorChange }) => {
                       ))}
                     </Carousel>
                   </Modal.Body>
-                </Modal> */}
+                </Modal>
+              </div>
               <div>
                 <button
                   style={{

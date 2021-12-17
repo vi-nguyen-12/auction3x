@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { Row, Col } from "react-bootstrap";
 import { CardComp } from "../components/Card";

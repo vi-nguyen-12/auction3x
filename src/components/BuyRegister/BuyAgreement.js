@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import "../../styles/Buyer.css";
 

@@ -2,9 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 import authService from "../services/authServices";
-import { createSerializableStateInvariantMiddleware } from "@reduxjs/toolkit";
-import { Redirect } from "react-router-dom";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Agree = ({
   toogleStep,
@@ -21,11 +20,7 @@ const Agree = ({
     //formState: { errors },
   } = useForm();
 
-  if (redirect === true) {
-    return <Redirect to="/" />;
-  }
-
-  console.log(images);
+  const history = useHistory();
 
   const onSubmit = async (data) => {
     authService.saveRealEstate({
@@ -39,7 +34,6 @@ const Agree = ({
       videos,
       documents,
     });
-    setRedirect(true);
   };
 
   return (
@@ -93,7 +87,7 @@ const Agree = ({
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" type="submit">
+          <button className="nxt-btn" type="submit" onClick={() => {history.push("/")}}>
             Submit
           </button>
         </div>
