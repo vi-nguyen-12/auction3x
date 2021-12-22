@@ -11,41 +11,72 @@ const BuyUpload = ({
   toogleDocument1,
   toogleDocument2,
   toogleDocument3,
+  toogleDocument4,
 }) => {
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
   const [document3, setDocument3] = useState([]);
+  const [document4, setDocument4] = useState([]);
 
   const onSubmit = async (data) => {
     const document1 = data.document1;
     const document2 = data.document2;
     const document3 = data.document3;
+    const document4 = data.document4;
 
     const formData1 = new FormData();
     const formData2 = new FormData();
     const formData3 = new FormData();
+    const formData4 = new FormData();
 
     for (let i = 0; i < document1.length; i++) {
       formData1.append("documents", document1[i]);
     }
+    if(document1.length > 0){
     await authService.saveDocuments(formData1).then((res) => {
       console.log(res);
+      res.data[0].name = "BankStatment-" + res.data[0].name;
       setDocument1(res.data);
     });
+    }
 
+
+    if(document2.length > 0){
     for (let i = 0; i < document2.length; i++) {
       formData2.append("documents", document2[i]);
     }
     await authService.saveDocuments(formData2).then((res) => {
+      res.data[0].name = "BrokerageAccountStatement-" + res.data[0].name;
       setDocument2(res.data);
     });
+    }
 
+
+    if(document3.length > 0){
     for (let i = 0; i < document3.length; i++) {
       formData3.append("documents", document3[i]);
     }
     await authService.saveDocuments(formData3).then((res) => {
+      res.data[0].name = "CryptoAccountStatement-"+ res.data[0].name;
+      console.log(res);
       setDocument3(res.data);
+    });
+    }
+
+    if(document4.length > 0){
+    for (let i = 0; i < document4.length; i++) {
+      formData4.append("documents", document4[i]);
+    }
+    await authService.saveDocuments(formData4).then((res) => {
+      res.data[0].name = "LineOfCreditDoc-"+ res.data[0].name;
+      console.log(res);
+      setDocument4(res.data);
+    });
+    }
+
+    await authService.getBuyerQuestions().then((res) => {
+      console.log(res);
     });
 
     toogleStep(step + 1);
@@ -75,7 +106,7 @@ const BuyUpload = ({
               marginBottom: "20px",
             }}
           >
-            Choose the Documents Files
+            Bank Statement
             <input
               accept="documents/*"
               type="file"
@@ -93,7 +124,7 @@ const BuyUpload = ({
               marginBottom: "20px",
             }}
           >
-            Choose the Documents Files
+            Brokerage account statement
             <input
               accept="documents/*"
               type="file"
@@ -111,7 +142,7 @@ const BuyUpload = ({
               marginBottom: "20px",
             }}
           >
-            Choose the Documents Files
+            Crypto account statement
             <input
               accept="documents/*"
               type="file"
@@ -120,6 +151,25 @@ const BuyUpload = ({
               {...register("document3", { required: false })}
             />
           </div>
+
+          <div
+            style={{
+              display: "flex",
+              position: "relative",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            Line of credit doc
+            <input
+              accept="documents/*"
+              type="file"
+              name="document4"
+              multiple
+              {...register("document4", { required: false })}
+            />
+          </div>
+
           <div
             style={{ position: "sticky", padding: "auto" }}
             className="bottom-btn"
@@ -133,7 +183,8 @@ const BuyUpload = ({
               onClick={
                 (toogleDocument1(document1),
                 toogleDocument2(document2),
-                toogleDocument3(document3))
+                toogleDocument3(document3),
+                toogleDocument4(document4))
               }
             >
               Next
