@@ -49,7 +49,7 @@ const BuyAuthoried = ({
     setAgree(dateTime);
   };
 
-  const documents = [document1, document2, document3, document4];
+  const documents = [{document1, document2, document3, document4}];
   const answers = [
     { questionId: question1ID, answer: answer1 },
     { questionId: question2ID, answer: answer2 },
