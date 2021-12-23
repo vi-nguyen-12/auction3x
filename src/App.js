@@ -22,8 +22,6 @@ import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const toogleCount = () => setCount(count);
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = Cookies.get("auth-token");
@@ -68,7 +66,7 @@ function App() {
           </Route>
           <Route path="/Display/:id">
             <Display colorChange={colorChange} />
-            <DisplayTab />
+
             <Featured />
           </Route>
           <Route exact path="/RealEstates">

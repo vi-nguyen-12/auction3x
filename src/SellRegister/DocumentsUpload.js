@@ -7,20 +7,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
   const [documents, setDocuments] = useState([]);
 
+  const onSubmit = async (data) => {
+    const documents = data.documents;
+    const formData = new FormData();
 
-    const onSubmit = async (data) => {
-      const documents = data.documents;
-      const formData = new FormData();
-
-      for (let i = 0; i < documents.length; i++) {
-        formData.append("documents", documents[i]);
-      }
-      await authService.saveDocuments(formData).then(
-        (response) => {
-          setDocuments(response.data);
-        });
-      toogleStep(step + 1);
-    };
+    for (let i = 0; i < documents.length; i++) {
+      formData.append("documents", documents[i]);
+    }
+    await authService.saveDocuments(formData).then((response) => {
+      setDocuments(response.data);
+    });
+    toogleStep(step + 1);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
