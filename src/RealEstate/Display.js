@@ -17,7 +17,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import BuyConfirm from "../components/BuyRegister/BuyConfirm";
+// import BuyConfirm from "../components/BuyRegister/BuyConfirm";
+import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
@@ -577,7 +578,8 @@ const Display = ({ colorChange }) => {
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>
                       <Modal.Body>
-                        <BuyConfirm />
+                        {/* <BuyConfirm /> */}
+                        <MultiBuyForm />
                       </Modal.Body>
                     </Modal>
 
