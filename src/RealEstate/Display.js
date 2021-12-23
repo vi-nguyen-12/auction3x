@@ -572,7 +572,7 @@ const Display = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={toogleBid}
                       >
-                        Place Bid
+                        Register to Bid
                       </button>
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>

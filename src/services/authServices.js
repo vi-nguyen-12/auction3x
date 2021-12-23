@@ -98,6 +98,14 @@ const authService = {
 
   buyerRegister(data) {
     return axios.post(env.API_URL + "/api/buyers", data, {withCredentials: true});
+  },
+
+  getBuyerQuestions() {
+    return axios.get(env.API_URL + "/api/questions", {withCredentials: true});
+  },
+
+  getIPAddress() {
+    return axios.get('https://api.ipdata.co/?api-key='+ env.IP_API_Key);
   }
 };
 
