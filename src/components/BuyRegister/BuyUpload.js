@@ -35,9 +35,8 @@ const BuyUpload = ({
     }
     if(document1.length > 0){
     await authService.saveDocuments(formData1).then((res) => {
-      console.log(res);
       res.data[0].name = "BankStatment-" + res.data[0].name;
-      setDocument1(res.data);
+      setDocument1(res.data[0]);
     });
     }
 
@@ -48,7 +47,7 @@ const BuyUpload = ({
     }
     await authService.saveDocuments(formData2).then((res) => {
       res.data[0].name = "BrokerageAccountStatement-" + res.data[0].name;
-      setDocument2(res.data);
+      setDocument2(res.data[0]);
     });
     }
 
@@ -59,8 +58,7 @@ const BuyUpload = ({
     }
     await authService.saveDocuments(formData3).then((res) => {
       res.data[0].name = "CryptoAccountStatement-"+ res.data[0].name;
-      console.log(res);
-      setDocument3(res.data);
+      setDocument3(res.data[0]);
     });
     }
 
@@ -70,8 +68,7 @@ const BuyUpload = ({
     }
     await authService.saveDocuments(formData4).then((res) => {
       res.data[0].name = "LineOfCreditDoc-"+ res.data[0].name;
-      console.log(res);
-      setDocument4(res.data);
+      setDocument4(res.data[0]);
     });
     }
 

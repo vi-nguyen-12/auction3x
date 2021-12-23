@@ -48,8 +48,11 @@ const BuyAuthoried = ({
   const hangleTerms = () => {
     setAgree(dateTime);
   };
+  const Documents = [document1, document2, document3, document4];
 
-  const documents = [{document1, document2, document3, document4}];
+
+  // const documents = [{document1}, {document2}, {document3}, {document4}];
+  console.log(Documents);
   const answers = [
     { questionId: question1ID, answer: answer1 },
     { questionId: question2ID, answer: answer2 },
@@ -58,16 +61,21 @@ const BuyAuthoried = ({
     { questionId: question5ID, answer: answer5 },
   ];
 
-  console.log(documents);
   const onSubmit = async (data) => {
-    const response = await authService.buyerRegister({
+    await authService.buyerRegister({
       propertyId: id,
-      documents: documents,
+      documents: Documents,
       TC: {time: agree, IPAddress: ip},
       answers: answers,
+    }).catch((err) => {
+      alert("User Already Registered for this property!");
+    }).then((res) => {
+      if (res) {
+        console.log(res);
+        history.push("/");
+      }
     });
   };
-console.log(question1ID);
   return (
     <>
       <Modal.Header>
