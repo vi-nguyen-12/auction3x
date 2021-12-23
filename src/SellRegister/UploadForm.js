@@ -8,19 +8,25 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
+  const [lives, setLives] = useState([]);
 
   const onSubmit = async (data) => {
     const videos = data.videos;
     const images = data.images;
+    const lives = data.lives;
 
     const formData = new FormData();
     const formData2 = new FormData();
+    const formData3 = new FormData();
 
     for (let i = 0; i < videos.length; i++) {
       formData.append("videos", videos[i]);
     }
     for (let i = 0; i < images.length; i++) {
       formData2.append("images", images[i]);
+    }
+    for (let i = 0; i < lives.length; i++) {
+      formData3.append("lives", lives[i]);
     }
 
     const response2 = await authService
@@ -30,6 +36,12 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         setVideos(response2.data);
       });
 
+    const respone3 = await authService
+      .saveLives(formData3)
+      .then((response3) => {
+        console.log(response3);
+        setLives(response3.data);
+      });
     const response = await authService
       .saveImages(formData2)
       .then((response) => {
@@ -37,7 +49,6 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       });
     toogleStep(step + 1);
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
@@ -96,6 +107,17 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             name="videos"
             multiple
             {...register("videos", { required: false })}
+          />
+        </div>
+
+        <div className="input-form-2">
+          Choose the Live360 Files
+          <input
+            accept="video/*"
+            type="file"
+            name="live360"
+            multiple
+            {...register("lives", { required: false })}
           />
         </div>
 

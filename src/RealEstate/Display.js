@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
 import authService from "../services/authServices";
 import { Modal, Carousel } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  streetViewPanoramaOptions,
+} from "@react-google-maps/api";
 import env from "../env";
 import Confirm from "../components/EmailConfirm";
 import ForgotPass from "../components/ForgotPass";
@@ -12,11 +17,13 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
+import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import { Tab, Tabs } from "react-bootstrap";
+import { set } from "react-hook-form";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
@@ -27,7 +34,9 @@ const Display = ({ colorChange }) => {
   const [showPics, setShowPics] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [showLives, setShowLives] = useState(false);
   const [bid, setBid] = useState(false);
+  const toggleLive = () => setShowLives(!showLives);
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
@@ -46,6 +55,10 @@ const Display = ({ colorChange }) => {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const user = useSelector((state) => state.user);
+  const [realTab, setRealTab] = useState("Investment Opportunity");
+
+  const myRef = useRef(null);
+  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
   const handlePlaceBid = () => {
     if (!user._id) {
@@ -73,15 +86,23 @@ const Display = ({ colorChange }) => {
     height: "50vh",
     width: "100%",
   };
+  const streetviewStyles = {
+    height: "50vh",
+    width: "100%",
+  };
 
   let settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
     autoplay: false,
-    pauseOnHover: true,
+  };
+
+  let ImgSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
   };
 
   const Carousel = styled(Slider)`
@@ -102,15 +123,15 @@ const Display = ({ colorChange }) => {
 
     ul li button {
       &:before {
-        top: -5vh;
+        top: -3vh;
         font-size: 20px;
-        color: white;
+        color: gray;
         left: -35px;
       }
     }
 
     li.slick-active button:before {
-      color: white;
+      color: #e9af84;
     }
 
     .slick-list {
@@ -137,8 +158,6 @@ const Display = ({ colorChange }) => {
 
     a {
       border-radius: 4px;
-      box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
-        rgb(0 0 0 / 73%) 0px 16px 10px -10px;
       cursor: pointer;
       display: block;
       position: relative;
@@ -252,7 +271,10 @@ const Display = ({ colorChange }) => {
                   }}
                   onClick={togglePics}
                 >
-                  <img src="/images/picture.png" />
+                  <img
+                    style={{ borderRadius: "15px" }}
+                    src="/images/picture.png"
+                  />
                 </button>
                 <Modal
                   size="lg"
@@ -263,16 +285,19 @@ const Display = ({ colorChange }) => {
                 >
                   <Modal.Header closeButton>
                     <Modal.Title>
-                      <h2>Property Pictures</h2>
+                      <h2 style={{ color: " #e9af84" }}>Property Pictures</h2>
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Carousel style={{ height: "100%" }} {...settings}>
+                    <Carousel
+                      style={{ height: "100%", borderRadius: "15px" }}
+                      {...ImgSettings}
+                    >
                       {property.images.map((item) => (
                         <Wrap>
                           <a>
                             <img
-                              style={{ height: "100%" }}
+                              style={{ height: "50vh" }}
                               src={item.url}
                               alt=""
                             />
@@ -305,11 +330,14 @@ const Display = ({ colorChange }) => {
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
                   <Modal.Header closeButton>
                     <Modal.Title>
-                      <h2>Property Videos</h2>
+                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>
                     </Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>
-                    <Carousel style={{ height: "100%" }} {...settings}>
+                  <Modal.Body style={{ height: "500px" }}>
+                    <Carousel
+                      style={{ height: "100%", borderRadius: "15px" }}
+                      {...settings}
+                    >
                       {property.videos.map((item) => (
                         <Wrap>
                           <a>
@@ -318,7 +346,7 @@ const Display = ({ colorChange }) => {
                                 display: "relative",
                                 justifyContent: "center",
                                 margin: "auto",
-                                padding: "35px",
+
                                 width: "100%",
                                 borderRadius: "15px",
                                 position: "relative",
@@ -336,35 +364,6 @@ const Display = ({ colorChange }) => {
                   </Modal.Body>
                 </Modal>
               </div>
-              {/* <Modal
-                  size="lg"
-                  style={{ height: "700px", width: "750px" }}
-                  show={showVideos}
-                  onHide={toggleVids}
-                  centered
-                >
-                  <Modal.Header
-                    contentClassName="modal-head-signup"
-                    closeButton
-                  >
-                    <Modal.Title>
-                      <h2>Property Videos</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body style={{ height: "700px" }}>
-                    <Carousel style={{ height: "100%" }} {...settings}>
-                      {property.videos.map((item) => (
-                        <Wrap>
-                          <a>
-                            <video width="100%" height="100%" controls>
-                              <source src={item.url} type="video/webm" />
-                            </video>
-                          </a>
-                        </Wrap>
-                      ))}
-                    </Carousel>
-                  </Modal.Body>
-                </Modal> */}
               <div>
                 <button
                   style={{
@@ -378,11 +377,32 @@ const Display = ({ colorChange }) => {
                     padding: "15px",
                     width: "100%",
                   }}
+                  onClick={toggleLive}
                 >
-                  <Link to="/">
-                    <img src="/images/360.png" />
-                  </Link>
+                  <img src="/images/360.png" />
                 </button>
+                <Modal size="lg" show={showLives} onHide={toggleLive} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      <h2 style={{ color: " #e9af84" }}>Live 360</h2>
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <LoadScript {...env.API_Key}>
+                      <GoogleMap
+                        mapContainerStyle={mapStyles}
+                        zoom={18}
+                        center={location}
+                        defaultStreetView={true}
+                        streetView={true}
+                        options={{ streetViewControl: true }}
+                      >
+                        <Marker key={location.name} position={location} />
+                      </GoogleMap>
+                    </LoadScript>
+                    <p>{property.details.address.formatted_street_address}</p>
+                  </Modal.Body>
+                </Modal>
               </div>
 
               <div>
@@ -404,7 +424,7 @@ const Display = ({ colorChange }) => {
                 <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                   <Modal.Header closeButton>
                     <Modal.Title>
-                      <h2>Property Location</h2>
+                      <h2 style={{ color: " #e9af84" }}>Property Location</h2>
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
@@ -414,7 +434,10 @@ const Display = ({ colorChange }) => {
                         zoom={18}
                         center={location}
                       >
-                        <Marker key={location.name} position={location} />
+                        <streetViewPanoramaOptions
+                          key={location.name}
+                          position={location}
+                        />
                       </GoogleMap>
                     </LoadScript>
                     <p>{property.details.address.formatted_street_address}</p>
@@ -466,16 +489,16 @@ const Display = ({ colorChange }) => {
                       </button>
                     </div>
 
-                    <Link to="/DisplayTab">
-                      <b
-                        style={{
-                          borderBottom: "1px solid #6D6D6D",
-                          color: "#6D6D6D",
-                        }}
-                      >
-                        View Document
-                      </b>
-                    </Link>
+                    <b
+                      style={{
+                        borderBottom: "1px solid #6D6D6D",
+                        cursor: "pointer",
+                        color: "#6D6D6D",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Document
+                    </b>
                   </div>
                 </td>
               )}
@@ -510,16 +533,15 @@ const Display = ({ colorChange }) => {
                       </button>
                     </div>
 
-                    <Link to="/DisplayTab">
-                      <b
-                        style={{
-                          borderBottom: "1px solid #6D6D6D",
-                          color: "#6D6D6D",
-                        }}
-                      >
-                        View Document
-                      </b>
-                    </Link>
+                    <b
+                      style={{
+                        borderBottom: "1px solid #6D6D6D",
+                        cursor: "pointer",
+                        color: "#6D6D6D",
+                      }}
+                    >
+                      View Document
+                    </b>
                   </div>
                 </td>
               )}
@@ -555,19 +577,20 @@ const Display = ({ colorChange }) => {
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>
                       <Modal.Body>
-                        <MultiBuyForm />
+                        <BuyConfirm />
                       </Modal.Body>
                     </Modal>
-                    <Link to="/DisplayTab">
-                      <b
-                        style={{
-                          borderBottom: "1px solid #6D6D6D",
-                          color: "#6D6D6D",
-                        }}
-                      >
-                        View Document
-                      </b>
-                    </Link>
+
+                    <b
+                      style={{
+                        borderBottom: "1px solid #6D6D6D",
+                        cursor: "pointer",
+                        color: "#6D6D6D",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Document
+                    </b>
                   </div>
                 </td>
               )}
@@ -891,7 +914,7 @@ const Display = ({ colorChange }) => {
                     fontSize: "17px",
                   }}
                 >
-                  Frontage:{" "}
+                  Frontage:
                   <span style={{ fontWeight: "bold" }}>
                     {property.details.parcel.frontage_ft}
                   </span>
@@ -976,6 +999,191 @@ const Display = ({ colorChange }) => {
               </tr>
             </div>
           </div>
+          <form>
+            <div
+              ref={myRef}
+              style={{ padding: "35px", backgroundColor: "white" }}
+            >
+              <Tabs
+                activeKey={realTab}
+                onSelect={() => setRealTab()}
+                className="RealEstate-Tab"
+              >
+                <Tab
+                  eventKey="Investment Opportunity"
+                  title="Investment Opportunity"
+                  className="RealEstate-Tab-1"
+                  style={{
+                    backgroundColor: "#B77B50",
+                    border: "none",
+                    outline: "none",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    padding: "20px",
+                  }}
+                >
+                  <div style={{ color: "white" }}>
+                    <h3>Detailed Despcription</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Pellentesque euismod, urna eu tempor congue, ipsum nunc
+                      consectetur nisi, eget congue nisl nisl eget nunc.
+                      Vestibulum ante ipsum primis in faucibus orci luctus et
+                      ultrices posuere cubilia Curae; Donec euismod, nisi eget
+                      tincidunt congue, nisl nisl euismod nisi, eget congue nisl
+                      nisl eget nunc. Vestibulum ante ipsum primis in faucibus
+                      orci luctus et ultrices posuere cubilia Curae; Donec
+                      euismod, nisi eget tincidunt congue, nisl nisl euismod
+                      nisi, eget congue nisl nisl eget nunc. Vestibulum ante
+                      ipsum primis in faucibus orci luctus et ultrices posuere
+                      cubilia Curae; Donec euismod, nisi eget tincidunt congue,
+                      nisl nisl euismod nisi,
+                    </p>
+                  </div>
+                </Tab>
+                <Tab
+                  eventKey="Location Information"
+                  title="Location Information"
+                  style={{
+                    backgroundColor: "#B77B50",
+                    border: "none",
+                    outline: "none",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    padding: "20px",
+                  }}
+                >
+                  {" "}
+                  <div style={{ color: "white" }}>
+                    <h3>Location Highlight</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Pellentesque euismod, urna eu tempor congue, ipsum nunc
+                      consectetur nisi, eget congue nisl nisl eget nunc.
+                      Vestibulum ante ipsum primis in faucibus orci luctus et
+                    </p>
+                  </div>
+                </Tab>
+                <Tab
+                  eventKey="Market Information"
+                  title="ConMarket Informationtact"
+                  style={{
+                    backgroundColor: "#B77B50",
+                    border: "none",
+                    outline: "none",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    padding: "20px",
+                  }}
+                >
+                  {" "}
+                  <div style={{ color: "white" }}>
+                    <h3> Market Overview</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Pellentesque euismod, urna eu tempor congue, ipsum nunc
+                      consectetur nisi, eget congue nisl nisl eget nunc.
+                      Vestibulum ante ipsum primis in faucibus orci luctus et
+                    </p>
+                  </div>
+                </Tab>
+
+                <Tab
+                  eventKey="Document Vault"
+                  title="Document Vault"
+                  style={{
+                    backgroundColor: "#B77B50",
+                    border: "none",
+                    outline: "none",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    padding: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "white",
+                      display: "inline-block",
+                      alignItems: "center",
+                      position: "relative",
+                      marginLeft: "35%",
+                    }}
+                  >
+                    <div>
+                      <tr>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Broker
+                          Offering Memorandum (1)
+                        </td>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Purchase
+                          Agreement (3)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Market and
+                          Valuations (4)
+                        </td>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Third Party
+                          Reports (2)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Operating
+                          and Financial (10)
+                        </td>
+                        <td className="DocVault">
+                          <input type="checkbox" name="checkbox" /> Title and
+                          Insurance (1)
+                        </td>
+                      </tr>
+                    </div>
+                    <div className="DocVault-1">
+                      <input type="checkbox" name="checkbox" />
+                      <span
+                        style={{
+                          paddingLeft: "10px",
+                          color: "#94a5b2",
+                          fontSize: "13px",
+                        }}
+                      >
+                        I agree to the Terms and Conditions
+                      </span>
+                    </div>
+                    <div className="DocVault-1">
+                      <button
+                        style={{
+                          backgroundColor: "white",
+                          color: "#B77B50",
+                          padding: "10px",
+                          borderRadius: "10px",
+                          margin: "auto",
+                        }}
+                        onClick={null}
+                      >
+                        Download Selected
+                      </button>
+                      <button
+                        style={{
+                          backgroundColor: "white",
+                          color: "#B77B50",
+                          padding: "10px",
+                          borderRadius: "10px",
+                          margin: "auto",
+                        }}
+                        onClick={null}
+                      >
+                        Download All
+                      </button>
+                    </div>
+                  </div>
+                </Tab>
+              </Tabs>
+            </div>
+          </form>
         </div>
       )}
     </>

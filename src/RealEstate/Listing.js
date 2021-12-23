@@ -1,6 +1,6 @@
 import React from "react";
 
-const Listing = ({ toogleCount, count }) => {
+const Listing = () => {
   return (
     <div>
       <tr className="realHeader">
