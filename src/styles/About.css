@@ -1,0 +1,63 @@
+.about{
+    padding: 100px;
+}
+.about h2 {
+    font-size: 2.5em;
+    color: #EDB48B;
+    text-align: center;
+
+}
+.about p {
+    font-size: 1.5em;
+    color: black;
+    text-align: left;
+ 
+}
+.side-button{
+    display: inline;
+    padding-left: 20px;
+}
+.button-container button {
+    background: linear-gradient(
+90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
+    width: 25%;
+    border: none;
+    border-radius:3px;
+    width: 150px;
+    }
+
+.content-left{
+    padding: 100px;
+}
+.content-left h2 {
+    font-size: 2.5em;
+    color: #EDB48B;
+    text-align: center;
+
+}
+.content-left p {
+    font-size: 1.5em;
+    color: black;
+    text-align: left;
+}
+.content-right{
+    padding: 150px;
+}
+.content-right button{ 
+display: block;
+width: 90%;
+background: linear-gradient(
+90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
+border: none;
+border-radius:3px;
+font-weight: bold;
+}
+.content-right input{
+   width: 90%;
+   background-color: transparent;
+   border: 2px solid #D58F5C;
+   border-radius: 3px;
+}
+.banner-container{
+    background-color: white;
+}

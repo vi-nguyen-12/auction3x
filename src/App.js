@@ -20,6 +20,7 @@ import { addProperty } from "./slice/propertySlice";
 import authService from "./services/authServices";
 import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
+import About from "./components/Home/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
             <Upcoming />
             <Work />
             <RealEstate />
+            <About />
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
