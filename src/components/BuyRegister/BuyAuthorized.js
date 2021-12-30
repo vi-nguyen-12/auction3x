@@ -6,24 +6,14 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
 import { useHistory } from "react-router-dom";
+import { FaCreativeCommonsPd } from "react-icons/fa";
 
 const BuyAuthoried = ({
   toogleStep,
   step,
-  document1,
-  document2,
-  document3,
-  document4,
-  answer1,
-  answer2,
-  answer3,
-  answer4,
-  answer5,
-  question1ID,
-  question2ID,
-  question3ID,
-  question4ID,
-  question5ID,
+  document,
+  answer,
+  questionID,
 }) => {
   const { register, handleSubmit } = useForm();
   const id = useParams().id;
@@ -48,23 +38,22 @@ const BuyAuthoried = ({
   const hangleTerms = () => {
     setAgree(dateTime);
   };
-  const Documents = [document1, document2, document3, document4];
 
-
-  // const documents = [{document1}, {document2}, {document3}, {document4}];
-  console.log(Documents);
+  const documents = [document[0], document[1], document[2], document[3]];
+  console.log(documents);
+  
   const answers = [
-    { questionId: question1ID, answer: answer1 },
-    { questionId: question2ID, answer: answer2 },
-    { questionId: question3ID, answer: answer3 },
-    { questionId: question4ID, answer: answer4 },
-    { questionId: question5ID, answer: answer5 },
+    { questionId: questionID[0], answer: answer[0] },
+    { questionId: questionID[1], answer: answer[1] },
+    { questionId: questionID[2], answer: answer[2] },
+    { questionId: questionID[3], answer: answer[3] },
+    { questionId: questionID[4], answer: answer[4] },
   ];
 
   const onSubmit = async (data) => {
     await authService.buyerRegister({
       propertyId: id,
-      documents: Documents,
+      documents: documents,
       TC: {time: agree, IPAddress: ip},
       answers: answers,
     }).catch((err) => {

@@ -24,13 +24,12 @@ import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
-import { set } from "react-hook-form";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
   const { id } = useParams();
   const [property, setProperty] = useState();
-  const [location, setLocation] = useState({});
+  const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
@@ -81,6 +80,9 @@ const Display = ({ colorChange }) => {
       lat: property.data.details.address.latitude,
       lng: property.data.details.address.longitude,
     });
+    window.setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
   }, []);
 
   const mapStyles = {
@@ -197,9 +199,7 @@ const Display = ({ colorChange }) => {
 
   return (
     <>
-      {!property ? (
-        <div>Loading...</div>
-      ) : (
+      {property && location && (
         <div className="styl">
           <tr className="realHeader">
             <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
@@ -382,7 +382,7 @@ const Display = ({ colorChange }) => {
                 >
                   <img src="/images/360.png" />
                 </button>
-                <Modal size="lg" show={showLives} onHide={toggleLive} centered>
+                {/* <Modal size="lg" show={showLives} onHide={toggleLive} centered>
                   <Modal.Header closeButton>
                     <Modal.Title>
                       <h2 style={{ color: " #e9af84" }}>Live 360</h2>
@@ -403,9 +403,8 @@ const Display = ({ colorChange }) => {
                     </LoadScript>
                     <p>{property.details.address.formatted_street_address}</p>
                   </Modal.Body>
-                </Modal>
+                </Modal> */}
               </div>
-
               <div>
                 <button
                   onClick={toggleMap}

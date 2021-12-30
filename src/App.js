@@ -13,13 +13,16 @@ import { useDispatch } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
 import Display from "./RealEstate/Display";
+import DisplayAuction from "./components/Auction/displayAuction";
 import DisplayTab from "./RealEstate/DisplayTab";
 import Footer from "./components/Home/footer";
 import { Featured } from "./components/Featured";
 import { addProperty } from "./slice/propertySlice";
+import { addAuction } from "./slice/auctionSlice";
 import authService from "./services/authServices";
 import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
+import AuctionCard from "./components/Auction/auctionCard";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +43,10 @@ function App() {
     dispatch(addProperty(res.data.data));
   });
 
+  authService.getAuction().then((res) => {
+    dispatch(addAuction(res.data));
+  });
+
   const [color, setColor] = useState("");
 
   const colorChange = (color) => {
@@ -55,6 +62,7 @@ function App() {
             <ImgSlider />
             <Featured />
             <FindInCountries />
+            <AuctionCard />
             <Upcoming />
             <Work />
             <RealEstate />
@@ -66,7 +74,10 @@ function App() {
           </Route>
           <Route path="/Display/:id">
             <Display colorChange={colorChange} />
-
+            <Featured />
+          </Route>
+          <Route path="/DisplayAuction/:id">
+            <DisplayAuction colorChange={colorChange} />
             <Featured />
           </Route>
           <Route exact path="/RealEstates">
