@@ -29,9 +29,42 @@ const BuyAgreement = ({ toogleStep, step }) => {
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div>
-            <input type="checkbox" onChange={toogleAgree} />
-            Agree
+          <div className="term">
+            <ul>
+            <h3>1. Terms and Conditions</h3> 
+             <li>   1.1. The following terms and conditions apply to the use of the Auction 10X platform and the services provided by the Auction 10X team.
+                </li>
+                <li>
+                  1.2. The Auction 10X platform is a platform for the sale of
+                  properties.
+                </li>
+                <li>
+                  1.3. The Auction 10X team is a team of professional real estate
+                  investors and brokers.
+                </li>
+                <li>
+                  1.4. The Auction 10X team is not a real estate broker.
+                </li>
+                <li>
+                  1.5. The Auction 10X team is not a real estate investor.
+                </li>
+                <li>
+                  1.6. The Auction 10X team is not a real estate agent.
+                </li>
+                <li>
+                  1.7. The Auction 10X team is not a real estate developer.
+                </li>
+                <li>
+                  1.8. The Auction 10X team is not a real estate developer.
+                </li>
+                <li>
+                  1.9. The Auction 10X team is not a real estate developer.
+                </li>
+      
+
+            </ul>
+            <input   style={{ marginRight: "10px" }} type="checkbox" onChange={toogleAgree} />
+            <label>I agree to the terms and conditions</label>
           </div>
         </form>
       </Modal.Body>

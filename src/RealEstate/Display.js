@@ -17,7 +17,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-// import BuyConfirm from "../components/BuyRegister/BuyConfirm";
+import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -37,6 +37,7 @@ const Display = ({ colorChange }) => {
   const [showMap, setShowMap] = useState(false);
   const [showLives, setShowLives] = useState(false);
   const [bid, setBid] = useState(false);
+  const [placeBid, setPlaceBid] = useState(false);
   const toggleLive = () => setShowLives(!showLives);
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
@@ -49,6 +50,7 @@ const Display = ({ colorChange }) => {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
+  const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -331,7 +333,7 @@ const Display = ({ colorChange }) => {
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
                   <Modal.Header closeButton>
                     <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>
+                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>                                                                                                                                                                                                                
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={{ height: "500px" }}>
@@ -540,6 +542,7 @@ const Display = ({ colorChange }) => {
                         cursor: "pointer",
                         color: "#6D6D6D",
                       }}
+                      onClick={executeScroll}
                     >
                       View Document
                     </b>
@@ -596,6 +599,16 @@ const Display = ({ colorChange }) => {
                   </div>
                 </td>
               )}
+              <td>
+                <div>
+                  <button onClick={tooglePlaceBid}>place to bid</button>
+                </div>
+              </td>
+              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+                <Modal.Body>
+                  <BuyConfirm />
+                </Modal.Body>
+              </Modal>
               <Modal
                 size=""
                 aria-labelledby="contained-modal-title-vcenter"

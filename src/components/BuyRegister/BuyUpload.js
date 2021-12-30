@@ -99,12 +99,13 @@ const BuyUpload = ({
             style={{
               display: "flex",
               position: "relative",
-              justifyContent: "center",
+              justifyContent: "left",
               marginBottom: "20px",
             }}
           >
             Bank Statement
-            <input
+            <input style={{display:"flex" , position: "absolute", right: "0px"}}
+
               accept="documents/*"
               type="file"
               name="document1"
@@ -117,12 +118,13 @@ const BuyUpload = ({
             style={{
               display: "flex",
               position: "relative",
-              justifyContent: "center",
+              justifyContent: "left",
               marginBottom: "20px",
             }}
           >
             Brokerage account statement
             <input
+            style={{display:"flex" , position: "absolute", right: "0px"}}
               accept="documents/*"
               type="file"
               name="document2"
@@ -135,12 +137,13 @@ const BuyUpload = ({
             style={{
               display: "flex",
               position: "relative",
-              justifyContent: "center",
+              justifyContent: "left",
               marginBottom: "20px",
             }}
           >
             Crypto account statement
             <input
+            style={{display:"flex" , position: "absolute", right: "0px"}}
               accept="documents/*"
               type="file"
               name="document3"
@@ -153,18 +156,27 @@ const BuyUpload = ({
             style={{
               display: "flex",
               position: "relative",
-              justifyContent: "center",
+              justifyContent: "left",
               marginBottom: "20px",
             }}
           >
             Line of credit doc
             <input
+            style={{display:"flex" , position: "absolute", right: "0px"}}
               accept="documents/*"
               type="file"
               name="document4"
               multiple
               {...register("document4", { required: false })}
             />
+          </div>
+          <div>
+            <p>
+              lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            </p>
           </div>
 
           <div

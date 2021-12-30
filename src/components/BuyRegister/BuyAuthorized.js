@@ -69,6 +69,7 @@ const BuyAuthoried = ({
       answers: answers,
     }).catch((err) => {
       alert("User Already Registered for this property!");
+      history.push("/");
     }).then((res) => {
       if (res) {
         console.log(res);
@@ -93,6 +94,10 @@ const BuyAuthoried = ({
             <p>
               lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             </p>
+            <p>
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            </p>
+            
           </div>
 
           <div

@@ -84,7 +84,7 @@ const BuyAuthoried = ({
       <Modal.Body>
         <form>
           <div style={{ marginBottom: "10px" }}>
-            <p>{question1}</p>
+            <p>Q.1: {question1}</p>
             <select onChange={(e) => setAnswer1(e.target.value)}>
               <option value="">Select</option>
               <option value="yes">yes</option>
@@ -93,7 +93,7 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>{question2}</p>
+            <p>Q.2: {question2}</p>
             <select onChange={(e) => setAnswer2(e.target.value)}>
               <option value="">Select</option>
               <option value="yes">yes</option>
@@ -102,7 +102,7 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>{question3}</p>
+            <p>Q3: {question3}</p>
             <select onChange={(e) => setAnswer3(e.target.value)}>
               <option value="">Select</option>
               <option value="yes">yes</option>
@@ -111,7 +111,7 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>{question4}</p>
+            <p>Q4: {question4}</p>
             <select onChange={(e) => setAnswer4(e.target.value)}>
               <option value="">Select</option>
               <option value="yes">yes</option>
@@ -120,7 +120,7 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>{question5}</p>
+            <p>Q5: {question5}</p>
             <select onChange={(e) => setAnswer5(e.target.value)}>
               <option value="">Select</option>
               <option value="yes">yes</option>
