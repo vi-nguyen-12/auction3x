@@ -67,6 +67,18 @@ const authService = {
       }
     );
   },
+
+  saveLives(data) {
+    return axios.post(
+      env.API_URL + "/api/properties/real-estates/videos/upload",
+      data,
+      {
+        withCredentials: true,
+        headers: { "content-type": "multipart/form-data" },
+      }
+    )
+  },
+
   fetchKycStatus(data) {
     return axios.get(env.API_URL + "/api/kyc/fetchKycStatus", data);
   },
@@ -106,6 +118,10 @@ const authService = {
 
   getIPAddress() {
     return axios.get('https://api.ipdata.co/?api-key='+ env.IP_API_Key);
+  },
+
+  getAuction() {
+    return axios.get(env.API_URL + "/api/auctions/61cc872b2c50167a30cfab1b");
   }
 };
 

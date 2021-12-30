@@ -18,7 +18,7 @@ const Upcoming = (props) => {
             </Row>
             <Col md={12} className="m-auto pt-2">
                 <Row>
-                    {property.map((item) => (
+                    {property.slice(0, 9).map((item) => (
                         <Col key={item._id} md={4} style={{marginBottom:"30px"}}>
                         <CardComp url={item.images[0].url} data={item.details} id = {item._id}/>
                       </Col>

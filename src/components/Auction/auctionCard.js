@@ -1,25 +1,26 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import Display from "../RealEstate/Display";
 import { Link } from "react-router-dom";
-import authService from "../services/authServices";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import Toast from "./Toast";
-import Login from "./Login";
+import Toast from "../Toast";
+import Login from "../Login";
 import Modal from "react-bootstrap/Modal";
-import Confirm from "./EmailConfirm";
-import ForgotPass from "./ForgotPass";
-import ChangePass from "./ChangePass";
-import SignUp from "./SignUp";
+import Confirm from "../EmailConfirm";
+import ForgotPass from "../ForgotPass";
+import ChangePass from "../ChangePass";
+import SignUp from "../SignUp";
 import NumberFormat from "react-number-format";
+const AuctionCard = () => {
 
-const CardComp = ({
-  url,
-  data,
-  id,
-}) => {
+    const auction = useSelector((state) => state.auction);
+    const id = auction._id;
+
+    const auctionProperty = auction.property;
+    console.log(auctionProperty);
+
+
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -45,15 +46,10 @@ const CardComp = ({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/Display/${id}`);
+      history.push(`/DisplayAuction/${id}`);
     } else {
       setShowKYC(true);
     }
-  };
-
-  const handleDisplay = () => {
-    history.push(`/Display/${id}`);
-    window.location.reload();
   };
 
   return (
@@ -72,15 +68,14 @@ const CardComp = ({
         }}
       >
         {showKYC && <Toast type="warning" message="Please complete your KYC" />}
-        {/* <Link to={`/Display/${id}`}> */}
+        <Link to={`/DisplayAuction/${id}`}>
           <Card.Img
-          onClick={handleDisplay}
             variant="top"
-            src={url}
+            src={auctionProperty.images[0].url}
             className="img-fluid"
-            style={{ width: "100%", height: "300px", borderRadius: "10px", cursor: "pointer" }}
+            style={{ width: "100%", height: "300px", borderRadius: "10px" }}
           />
-        {/* </Link> */}
+        </Link>
         <button
           onClick={toggleImage}
           // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
@@ -104,7 +99,7 @@ const CardComp = ({
             <div>
               <div>
                 <span className="golden-text">
-                  {data.address.formatted_street_address}, {data.address.state}
+                  {auctionProperty.details.address.formatted_street_address}, {auctionProperty.details.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Property Address</h4>
               </div>
@@ -153,8 +148,8 @@ const CardComp = ({
                         width: "100%",
                       }}
                     >
-                      {data.structure.beds_count}BD | {data.structure.baths}BA |{" "}
-                      {data.structure.total_area_sq_ft} sq.ft
+                      {auctionProperty.details.structure.beds_count}BD | {auctionProperty.details.structure.baths}BA |{" "}
+                      {auctionProperty.details.structure.total_area_sq_ft} sq.ft
                     </p>
                   </td>
                 </div>
@@ -171,7 +166,14 @@ const CardComp = ({
           >
             <div>
               <p className="grey-small">Starting Bid</p>
-              <p className="black-bold">$256, 000, 000</p>
+              <NumberFormat
+                className="black-bold"
+                value={auction.startingBid}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+              {/* <p className="black-bold">$256, 000, 000</p> */}
             </div>
             <div
               style={{
@@ -305,4 +307,4 @@ const CardComp = ({
   );
 };
 
-export { CardComp };
+export default AuctionCard;

@@ -7,16 +7,16 @@ import { useForm } from "react-hook-form";
 const BuyAuthoried = ({
   toogleStep,
   step,
-  toogleAnswer1,
-  toogleAnswer2,
-  toogleAnswer3,
-  toogleAnswer4,
-  toogleAnswer5,
-  toogleQuestion1ID,
-  toogleQuestion2ID,
-  toogleQuestion3ID,
-  toogleQuestion4ID,
-  toogleQuestion5ID,
+  toogleAnswer,
+  // toogleAnswer2,
+  // toogleAnswer3,
+  // toogleAnswer4,
+  // toogleAnswer5,
+  toogleQuestionID,
+  // toogleQuestion2ID,
+  // toogleQuestion3ID,
+  // toogleQuestion4ID,
+  // toogleQuestion5ID,
 }) => {
   const { register, handleSubmit } = useForm();
   const [question1, setQuestion1] = useState();
@@ -35,6 +35,9 @@ const BuyAuthoried = ({
   const [answer3, setAnswer3] = useState();
   const [answer4, setAnswer4] = useState();
   const [answer5, setAnswer5] = useState();
+
+  const answer = [answer1, answer2, answer3, answer4, answer5];
+  const questionID = [question1ID, question2ID, question3ID, question4ID, question5ID];
 
   useEffect(async () => {
     await authService.getBuyerQuestions().then((res) => {
@@ -140,16 +143,16 @@ const BuyAuthoried = ({
             className="nxt-btn"
             type="submit"
             onClick={() => {
-              toogleAnswer1(answer1);
-              toogleAnswer2(answer2);
-              toogleAnswer3(answer3);
-              toogleAnswer4(answer4);
-              toogleAnswer5(answer5);
-              toogleQuestion1ID(question1ID);
-              toogleQuestion2ID(question2ID);
-              toogleQuestion3ID(question3ID);
-              toogleQuestion4ID(question4ID);
-              toogleQuestion5ID(question5ID);
+              toogleAnswer(answer);
+              // toogleAnswer2(answer2);
+              // toogleAnswer3(answer3);
+              // toogleAnswer4(answer4);
+              // toogleAnswer5(answer5);
+              toogleQuestionID(questionID);
+              // toogleQuestion2ID(question2ID);
+              // toogleQuestion3ID(question3ID);
+              // toogleQuestion4ID(question4ID);
+              // toogleQuestion5ID(question5ID);
               toogleStep(step + 1);
             }}
           >

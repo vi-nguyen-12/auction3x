@@ -1,23 +1,30 @@
 import React, { Form } from "react";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import "../../styles/Buyer.css";
 
 const BuyUpload = ({
   toogleStep,
   step,
-  toogleDocument1,
-  toogleDocument2,
-  toogleDocument3,
-  toogleDocument4,
+  toogleDocument,
+  // toogleDocument2,
+  // toogleDocument3,
+  // toogleDocument4,
 }) => {
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
   const [document3, setDocument3] = useState([]);
   const [document4, setDocument4] = useState([]);
+
+  const document = [document1, document2, document3, document4];
+  console.log(document);
+
+  useEffect(() => {
+    toogleDocument(document);
+  }, [document[0, 3]]);
 
   const onSubmit = async (data) => {
     const document1 = data.document1;
@@ -33,49 +40,42 @@ const BuyUpload = ({
     for (let i = 0; i < document1.length; i++) {
       formData1.append("documents", document1[i]);
     }
-    if(document1.length > 0){
-    await authService.saveDocuments(formData1).then((res) => {
-      res.data[0].name = "BankStatment-" + res.data[0].name;
-      setDocument1(res.data[0]);
-    });
+    if (document1.length > 0) {
+      await authService.saveDocuments(formData1).then((res) => {
+        res.data[0].name = "BankStatment-" + res.data[0].name;
+        setDocument1(res.data[0]);
+      });
     }
 
-
-    if(document2.length > 0){
-    for (let i = 0; i < document2.length; i++) {
-      formData2.append("documents", document2[i]);
-    }
-    await authService.saveDocuments(formData2).then((res) => {
-      res.data[0].name = "BrokerageAccountStatement-" + res.data[0].name;
-      setDocument2(res.data[0]);
-    });
-    }
-
-
-    if(document3.length > 0){
-    for (let i = 0; i < document3.length; i++) {
-      formData3.append("documents", document3[i]);
-    }
-    await authService.saveDocuments(formData3).then((res) => {
-      res.data[0].name = "CryptoAccountStatement-"+ res.data[0].name;
-      setDocument3(res.data[0]);
-    });
+    if (document2.length > 0) {
+      for (let i = 0; i < document2.length; i++) {
+        formData2.append("documents", document2[i]);
+      }
+      await authService.saveDocuments(formData2).then((res) => {
+        res.data[0].name = "BrokerageAccountStatement-" + res.data[0].name;
+        setDocument2(res.data[0]);
+      });
     }
 
-    if(document4.length > 0){
-    for (let i = 0; i < document4.length; i++) {
-      formData4.append("documents", document4[i]);
-    }
-    await authService.saveDocuments(formData4).then((res) => {
-      res.data[0].name = "LineOfCreditDoc-"+ res.data[0].name;
-      setDocument4(res.data[0]);
-    });
+    if (document3.length > 0) {
+      for (let i = 0; i < document3.length; i++) {
+        formData3.append("documents", document3[i]);
+      }
+      await authService.saveDocuments(formData3).then((res) => {
+        res.data[0].name = "CryptoAccountStatement-" + res.data[0].name;
+        setDocument3(res.data[0]);
+      });
     }
 
-    await authService.getBuyerQuestions().then((res) => {
-      console.log(res);
-    });
-
+    if (document4.length > 0) {
+      for (let i = 0; i < document4.length; i++) {
+        formData4.append("documents", document4[i]);
+      }
+      await authService.saveDocuments(formData4).then((res) => {
+        res.data[0].name = "LineOfCreditDoc-" + res.data[0].name;
+        setDocument4(res.data[0]);
+      });
+    }
     toogleStep(step + 1);
   };
 
@@ -186,16 +186,7 @@ const BuyUpload = ({
             <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
               Previous
             </button>
-            <button
-              className="nxt-btn"
-              type="submit"
-              onClick={
-                (toogleDocument1(document1),
-                toogleDocument2(document2),
-                toogleDocument3(document3),
-                toogleDocument4(document4))
-              }
-            >
+            <button className="nxt-btn" type="submit">
               Next
             </button>
           </div>
