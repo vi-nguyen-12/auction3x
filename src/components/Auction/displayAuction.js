@@ -25,6 +25,7 @@ import Login from "../Login";
 import SignUp from "../SignUp";
 import NumberFormat from "react-number-format";
 import { Tab, Tabs } from "react-bootstrap";
+import BuyConfirm from "../BuyRegister/BuyConfirm";
 
 const DisplayAuction = ({ colorChange }) => {
   colorChange("black");
@@ -49,6 +50,8 @@ const DisplayAuction = ({ colorChange }) => {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
+  const [placeBid, setPlaceBid] = useState(false);
+  const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -67,6 +70,9 @@ const DisplayAuction = ({ colorChange }) => {
       lat: auctionProperty.details.address.latitude,
       lng: auctionProperty.details.address.longitude,
     });
+    window.setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1);
   }, [auctionProperty]);
 
   console.log(auctionProperty);
@@ -609,8 +615,17 @@ const DisplayAuction = ({ colorChange }) => {
                 />
               </Modal.Body>
             </Modal>
-
-            <Modal
+            <td>
+                <div>
+                  <button onClick={tooglePlaceBid}>place to bid</button>
+                </div>
+              </td>
+              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+                <Modal.Body>
+                  <BuyConfirm />
+                </Modal.Body>
+              </Modal>
+              <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
               centered

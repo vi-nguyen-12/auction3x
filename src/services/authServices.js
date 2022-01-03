@@ -122,6 +122,10 @@ const authService = {
 
   getAuction() {
     return axios.get(env.API_URL + "/api/auctions/61cc872b2c50167a30cfab1b");
+  },
+
+  auctionBid(data) {
+    return axios.put(env.API_URL + "/api/auctions/bidding/61cc872b2c50167a30cfab1b", data, {withCredentials: true});
   }
 };
 

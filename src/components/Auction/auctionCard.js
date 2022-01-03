@@ -13,13 +13,11 @@ import ChangePass from "../ChangePass";
 import SignUp from "../SignUp";
 import NumberFormat from "react-number-format";
 const AuctionCard = () => {
+  const auction = useSelector((state) => state.auction);
+  const id = auction._id;
 
-    const auction = useSelector((state) => state.auction);
-    const id = auction._id;
-
-    const auctionProperty = auction.property;
-    console.log(auctionProperty);
-
+  const auctionProperty = auction.property;
+  console.log(auctionProperty);
 
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
@@ -52,6 +50,11 @@ const AuctionCard = () => {
     }
   };
 
+  const handleDisplay = () => {
+    history.push(`/DisplayAuction/${id}`);
+    window.location.reload();
+  };
+
   return (
     <div>
       <Card
@@ -68,14 +71,13 @@ const AuctionCard = () => {
         }}
       >
         {showKYC && <Toast type="warning" message="Please complete your KYC" />}
-        <Link to={`/DisplayAuction/${id}`}>
-          <Card.Img
-            variant="top"
-            src={auctionProperty.images[0].url}
-            className="img-fluid"
-            style={{ width: "100%", height: "300px", borderRadius: "10px" }}
-          />
-        </Link>
+        <Card.Img
+          onClick={handleDisplay}
+          variant="top"
+          src={auctionProperty.images[0].url}
+          className="img-fluid"
+          style={{ width: "100%", height: "300px", borderRadius: "10px", cursor: "pointer" }}
+        />
         <button
           onClick={toggleImage}
           // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
@@ -99,7 +101,8 @@ const AuctionCard = () => {
             <div>
               <div>
                 <span className="golden-text">
-                  {auctionProperty.details.address.formatted_street_address}, {auctionProperty.details.address.state}
+                  {auctionProperty.details.address.formatted_street_address},{" "}
+                  {auctionProperty.details.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Property Address</h4>
               </div>
@@ -148,7 +151,8 @@ const AuctionCard = () => {
                         width: "100%",
                       }}
                     >
-                      {auctionProperty.details.structure.beds_count}BD | {auctionProperty.details.structure.baths}BA |{" "}
+                      {auctionProperty.details.structure.beds_count}BD |{" "}
+                      {auctionProperty.details.structure.baths}BA |{" "}
                       {auctionProperty.details.structure.total_area_sq_ft} sq.ft
                     </p>
                   </td>

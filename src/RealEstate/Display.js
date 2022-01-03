@@ -37,6 +37,7 @@ const Display = ({ colorChange }) => {
   const [showLives, setShowLives] = useState(false);
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
+  const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const toggleLive = () => setShowLives(!showLives);
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
@@ -49,7 +50,6 @@ const Display = ({ colorChange }) => {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
