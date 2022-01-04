@@ -55,8 +55,10 @@ const CardComp = ({ url, data, id, auctionStartDate, auctionEndDate, startingBid
   };
 
   useEffect(() => {
-    setAuctionStartDate((auctionStartDate.split("T")[0]).split("-").reverse().join("/"));
-    setAuctionEndDate((auctionEndDate.split("T")[0]).split("-").reverse().join("/"));
+    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
+    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
+    setAuctionStartDate(startDate);
+    setAuctionEndDate(endDate);
   }, []);
 
   return (

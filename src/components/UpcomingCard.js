@@ -55,8 +55,10 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
   };
 
   useEffect(() => {
-    setStartRegisterDate((startRegister.split("T")[0]).split("-").reverse(0, 3).join("/"));
-    setEndRegisterDate((endRegister.split("T")[0]).split("-").reverse().join("/"));
+    const startDate = new Date(startRegister).toLocaleString().split(",")[0];
+    const endDate = new Date(endRegister).toLocaleString().split(",")[0];
+    setStartRegisterDate(startDate);
+    setEndRegisterDate(endDate);
   }, []);
 
   return (

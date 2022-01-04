@@ -41,6 +41,8 @@ const Display = ({ colorChange }) => {
   const [propertyData, setPropertyData] = useState();
   const [startAuction, setStartAuction] = useState();
   const [endAuction, setEndAuction] = useState();
+  const [startAuctionTime, setStartAuctionTime] = useState();
+  const [endAuctionTime, setEndAuctionTime] = useState();
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -96,18 +98,17 @@ const Display = ({ colorChange }) => {
 
   useEffect(async () => {
     const property = await authService.getAuctionProperty(id);
+    console.log(property);
     setProperty(property.data.property);
     setPropertyData(property.data);
     setStartAuction(
-      property.data.auctionStartDate
-        .split("T")[0]
-        .split("-")
-        .reverse()
-        .join("/")
+      new Date(property.data.auctionStartDate).toLocaleString().split(",")[0]
     );
-    setEndAuction(
-      property.data.auctionEndDate.split("T")[0].split("-").reverse().join("/")
-    );
+    setEndAuction(new Date(property.data.auctionEndDate).toLocaleDateString().split(",")[0]);
+    setStartAuctionTime(
+      new Date(property.data.auctionStartDate).toLocaleTimeString().split(",")[0]);
+    setEndAuctionTime(
+      new Date(property.data.auctionEndDate).toLocaleTimeString().split(",")[0]);
     setLocation({
       name: "Property Location",
       lat: property.data.property.details.address.latitude,
@@ -808,7 +809,7 @@ const Display = ({ colorChange }) => {
                 justifyContent: "center",
                 textAlign: "center",
                 backgroundColor: "#E8E8E8",
-                width: "15%",
+                width: "20%",
                 marginLeft: "35px",
                 padding: "15px",
                 borderRadius: "10px",
@@ -816,8 +817,10 @@ const Display = ({ colorChange }) => {
             >
               <h4> Online Auction</h4>
               <p>
-                {" "}
                 {startAuction} - {endAuction}
+              </p>
+              <p>
+                {startAuctionTime} - {endAuctionTime}
               </p>
             </div>
             <div
