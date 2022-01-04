@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import axious from "axios";
 import { useHistory } from "react-router-dom";
 import { FaCreativeCommonsPd } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const BuyAuthoried = ({
   toogleStep,
@@ -17,6 +18,8 @@ const BuyAuthoried = ({
 }) => {
   const { register, handleSubmit } = useForm();
   const id = useParams().id;
+  const properties = useSelector((state) => state.property);
+  const auctionId=properties.find(item=>item._id===id)
 
   const [ip, setIp] = useState();
 
@@ -52,7 +55,7 @@ const BuyAuthoried = ({
 
   const onSubmit = async (data) => {
     await authService.buyerRegister({
-      propertyId: id,
+      auctionId: auctionId.auctionDetails._id,
       documents: documents,
       TC: {time: agree, IPAddress: ip},
       answers: answers,

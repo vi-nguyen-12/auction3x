@@ -67,7 +67,7 @@ const DisplayTab = () => {
           </Tab>
           <Tab
             eventKey="Market Information"
-            title="ConMarket Informationtact"
+            title="Market Information"
             style={{
               backgroundColor: "#B77B50",
               border: "none",

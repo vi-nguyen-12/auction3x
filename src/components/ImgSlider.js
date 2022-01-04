@@ -50,9 +50,9 @@ const ImgSlider = () => {
       <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
         <div className="row px-lg-5">
           <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div class="dropdown w-100">
+            <div className="dropdown w-100">
               <button
-                class="btn btn-secondary dropdown-toggle w-100"
+                className="btn btn-secondary dropdown-toggle w-100"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -61,23 +61,23 @@ const ImgSlider = () => {
               >
                 <span className="pr-5">All Property</span>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">
                   Action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Another action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Something else here
                 </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-secondary dropdown-toggle w-100"
+                className="btn btn-secondary dropdown-toggle w-100"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -86,23 +86,23 @@ const ImgSlider = () => {
               >
                 <span className="pr-5">All Categories</span>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">
                   Action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Another action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Something else here
                 </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div class="dropdown">
+            <div className="dropdown">
               <button
-                class="btn btn-secondary dropdown-toggle w-100"
+                className="btn btn-secondary dropdown-toggle w-100"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -111,26 +111,26 @@ const ImgSlider = () => {
               >
                 <span className="pr-5">All Countries</span>
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">
                   Action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Another action
                 </a>
-                <a class="dropdown-item" href="#">
+                <a className="dropdown-item" href="#">
                   Something else here
                 </a>
               </div>
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-4 mt-3">
-            <div class="form-group">
+            <div className="form-group">
               <SearchBar />
             </div>
           </div>
           <div className="col-12 col-sm-6 col-md-1 mt-3">
-            <button class="bg-light customButton w-100" type="submit">
+            <button className="bg-light customButton w-100" type="submit">
               Search
             </button>
           </div>

@@ -7,7 +7,7 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
-  streetViewPanoramaOptions,
+  StreetViewPanoramaOptions,
 } from "@react-google-maps/api";
 import env from "../../env";
 import Confirm from "../EmailConfirm";
@@ -1065,7 +1065,7 @@ const DisplayAuction = ({ colorChange }) => {
               </Tab>
               <Tab
                 eventKey="Market Information"
-                title="ConMarket Informationtact"
+                title="Market Information"
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",

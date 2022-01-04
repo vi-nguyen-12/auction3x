@@ -2,15 +2,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import userReducer from './slice/userSlice'
 import propertyReducer from './slice/propertySlice'
 import auctionReducer from './slice/auctionSlice'
+import registPropertyReducer from './slice/registPropertySlice'
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
+import registPropertySlice from './slice/registPropertySlice'
 
 const reducers = combineReducers({
     property: propertyReducer,
     user: userReducer,
-    auction: auctionReducer
+    auction: auctionReducer,
+    registProperty: registPropertySlice
 });
 
 const persistConfig = {

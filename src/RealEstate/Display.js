@@ -7,7 +7,7 @@ import {
   GoogleMap,
   LoadScript,
   Marker,
-  streetViewPanoramaOptions,
+  StreetViewPanoramaOptions,
 } from "@react-google-maps/api";
 import env from "../env";
 import Confirm from "../components/EmailConfirm";
@@ -24,11 +24,23 @@ import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
+import NumberFormat from "react-number-format";
 
 const Display = ({ colorChange }) => {
   colorChange("black");
   const { id } = useParams();
+  const registProperty = useSelector((state) => state.registProperty);
+
+  const properties = useSelector((state) => state.property);
+  const registeredProperty = properties.find((item) => item._id === id);
+  // console.log(registeredProperty.auctionDetails._id);
+  let auctId = registeredProperty.auctionDetails._id;
+
+  const [setRegistered, setRegisteredProperty] = useState(false);
   const [property, setProperty] = useState();
+  const [propertyData, setPropertyData] = useState();
+  const [startAuction, setStartAuction] = useState();
+  const [endAuction, setEndAuction] = useState();
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -59,6 +71,7 @@ const Display = ({ colorChange }) => {
   const user = useSelector((state) => state.user);
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
+  //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
@@ -74,24 +87,47 @@ const Display = ({ colorChange }) => {
     }
   };
 
+  const findAuction = () => {
+    let regist = registProperty.find((item) => item._id === auctId);
+    if (regist !== undefined) {
+      setRegisteredProperty(true);
+    }
+  };
+
   useEffect(async () => {
-    const property = await authService.sendProperty(id);
-    setProperty(property.data);
+    const property = await authService.getAuctionProperty(id);
+    setProperty(property.data.property);
+    setPropertyData(property.data);
+    setStartAuction(
+      property.data.auctionStartDate
+        .split("T")[0]
+        .split("-")
+        .reverse()
+        .join("/")
+    );
+    setEndAuction(
+      property.data.auctionEndDate.split("T")[0].split("-").reverse().join("/")
+    );
     setLocation({
       name: "Property Location",
-      lat: property.data.details.address.latitude,
-      lng: property.data.details.address.longitude,
+      lat: property.data.property.details.address.latitude,
+      lng: property.data.property.details.address.longitude,
     });
-    window.setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
+
+    if (window.scrollbars !== 0) {
+      window.setTimeout(() => {
+        window.scrollTo(0, 0);
+        findAuction();
+      }, 0);
+    }
   }, []);
 
+  console.log(setRegistered);
   const mapStyles = {
     height: "50vh",
     width: "100%",
   };
-  const streetviewStyles = {
+  const StreetviewStyles = {
     height: "50vh",
     width: "100%",
   };
@@ -201,7 +237,7 @@ const Display = ({ colorChange }) => {
 
   return (
     <>
-      {property && location && (
+      {property && location && startAuction && endAuction && (
         <div className="styl">
           <tr className="realHeader">
             <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
@@ -333,7 +369,7 @@ const Display = ({ colorChange }) => {
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
                   <Modal.Header closeButton>
                     <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>                                                                                                                                                                                                                
+                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body style={{ height: "500px" }}>
@@ -598,11 +634,56 @@ const Display = ({ colorChange }) => {
                   </div>
                 </td>
               )}
-              <td>
+
+              {user._id && user.KYC && setRegistered && (
+                <td
+                  style={{
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "inline-block",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      width: "100%",
+                      marginLeft: "35px",
+                      padding: "15px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div>
+                      <button
+                        className="customButton"
+                        style={{ width: "200px", fontSize: "20px" }}
+                        onClick={tooglePlaceBid}
+                      >
+                        Place Bid
+                      </button>
+                    </div>
+
+                    <b
+                      style={{
+                        borderBottom: "1px solid #6D6D6D",
+                        cursor: "pointer",
+                        color: "#6D6D6D",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Document
+                    </b>
+                  </div>
+                </td>
+              )}
+
+              {/* <td>
                 <div>
                   <button onClick={tooglePlaceBid}>place to bid</button>
                 </div>
-              </td>
+              </td> */}
               <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
                 <Modal.Body>
                   <BuyConfirm />
@@ -734,7 +815,10 @@ const Display = ({ colorChange }) => {
               }}
             >
               <h4> Online Auction</h4>
-              <p> July 19-23, 2021</p>
+              <p>
+                {" "}
+                {startAuction} - {endAuction}
+              </p>
             </div>
             <div
               style={{
@@ -748,7 +832,14 @@ const Display = ({ colorChange }) => {
                 borderRadius: "10px",
               }}
             >
-              <h4> $256,5200,000</h4>
+              <h4>
+                <NumberFormat
+                  value={propertyData.startingBid}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              </h4>
               <p> Starting Bid</p>
             </div>
             <div
@@ -1080,7 +1171,7 @@ const Display = ({ colorChange }) => {
                 </Tab>
                 <Tab
                   eventKey="Market Information"
-                  title="ConMarket Informationtact"
+                  title="Market Information"
                   style={{
                     backgroundColor: "#B77B50",
                     border: "none",

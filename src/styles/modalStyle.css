@@ -148,6 +148,15 @@
     border-radius: 3px;
     font-weight: bold;
   }
+  .dropdown-content span {
+    color: black!important;
+    padding: 12px 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
 
   .dropdown-content button{
       border : none;

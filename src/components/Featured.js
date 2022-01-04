@@ -29,6 +29,10 @@ const Featured = (props) => {
                 url={item.images[0].url}
                 data={item.details}
                 id={item._id}
+                auctionStartDate = {item.auctionDetails.auctionStartDate}
+                auctionEndDate = {item.auctionDetails.auctionEndDate}
+                startingBid = {item.auctionDetails.startingBid}
+                auctionId = {item.auctionDetails._id}
               />
             </Col>
           ))}

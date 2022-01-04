@@ -120,12 +120,24 @@ const authService = {
     return axios.get('https://api.ipdata.co/?api-key='+ env.IP_API_Key);
   },
 
-  getAuction() {
-    return axios.get(env.API_URL + "/api/auctions/61cc872b2c50167a30cfab1b");
+  // getAuction(id) {
+  //   return axios.get(env.API_URL + "/api/auctions/");
+  // },
+
+  auctionBid(id) {
+    return axios.put(env.API_URL + "/api/auctions/bidding/" + id, {withCredentials: true});
   },
 
-  auctionBid(data) {
-    return axios.put(env.API_URL + "/api/auctions/bidding/61cc872b2c50167a30cfab1b", data, {withCredentials: true});
+  getAuctionProperty(id) {
+    return axios.get(env.API_URL + "/api/auctions/propertyId/" + id);
+  },
+
+  getUpcomingAuctions() {
+    return axios.get(env.API_URL + "/api/properties/real-estates/upcomingAuctions");
+  },
+
+  getRegistStatus() {
+    return axios.get(env.API_URL + "/api/auctions/real-estates/status?buyer=true", {withCredentials: true});
   }
 };
 

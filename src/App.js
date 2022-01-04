@@ -24,6 +24,7 @@ import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
 import AuctionCard from "./components/Auction/auctionCard";
 import About from "./components/Home/About";
+import { addRegistProp } from "./slice/registPropertySlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,12 +41,23 @@ function App() {
     }
   }, []);
 
-  authService.getProperties().then((res) => {
-    dispatch(addProperty(res.data.data));
+  // authService.getProperties().then((res) => {
+  //   dispatch(addProperty(res.data.data));
+  // });
+
+  // authService.getAuction().then((res) => {
+  //   dispatch(addAuction(res.data));
+  // });
+
+  authService.getUpcomingAuctions().then((res) => {
+    console.log(res.data);
+    dispatch(addProperty(res.data));
+    dispatch(addAuction(res.data));
   });
 
-  authService.getAuction().then((res) => {
-    dispatch(addAuction(res.data));
+  authService.getRegistStatus().then((res) => {
+    console.log(res.data);
+    dispatch(addRegistProp(res.data));
   });
 
   const [color, setColor] = useState("");
@@ -63,7 +75,6 @@ function App() {
             <ImgSlider />
             <Featured />
             <FindInCountries />
-            <AuctionCard />
             <Upcoming />
             <Work />
             <RealEstate />
@@ -78,10 +89,10 @@ function App() {
             <Display colorChange={colorChange} />
             <Featured />
           </Route>
-          <Route path="/DisplayAuction/:id">
+          {/* <Route path="/DisplayAuction/:id">
             <DisplayAuction colorChange={colorChange} />
             <Featured />
-          </Route>
+          </Route> */}
           <Route exact path="/RealEstates">
             <RealEstates colorChange={colorChange} />
           </Route>

@@ -86,7 +86,7 @@ const Header = ({ color }) => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <a className="navbar-brand mt-2" href="#">
+          <div className="navbar-brand mt-2">
             <Logo href="/">
               <div>
                 <img src="/images/logo.png" />
@@ -95,7 +95,7 @@ const Header = ({ color }) => {
                 <img src="/images/name.png" />
               </div>
             </Logo>
-          </a>
+          </div>
 
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav m-auto">
@@ -255,7 +255,7 @@ const Header = ({ color }) => {
                     <a href="#">Profile</a>
                     <a href="#">My Ads</a>
                     <button className="logoutbtn" onClick={handleLogout}>
-                      <a>Log Out</a>
+                      <span>Log Out</span>
                     </button>
                   </div>
                 </div>
