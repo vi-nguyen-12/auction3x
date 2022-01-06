@@ -17,7 +17,6 @@ const RegisterForm = ({ RegistermodalClose, ConfirmmodalOpen }) => {
     <>
       <Form>
         <div className="circle mb-2" style={{ display: "flex" }}>
-          {" "}
           Register as:
           <div style={{ paddingLeft: "20px", fontWeight: "bold" }}>
             <input

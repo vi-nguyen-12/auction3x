@@ -17,7 +17,7 @@ const BuyAuthoried = ({
   questionID,
 }) => {
   const { register, handleSubmit } = useForm();
-  const id = useParams().id;
+  const {id} = useParams();
   const properties = useSelector((state) => state.property);
   const auctionId=properties.find(item=>item._id===id)
 
@@ -55,7 +55,7 @@ const BuyAuthoried = ({
 
   const onSubmit = async (data) => {
     await authService.buyerRegister({
-      auctionId: auctionId.auctionDetails._id,
+      auctionId: auctionId._id,
       documents: documents,
       TC: {time: agree, IPAddress: ip},
       answers: answers,

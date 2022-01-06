@@ -13,8 +13,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
 import Display from "./RealEstate/Display";
-import DisplayAuction from "./components/Auction/displayAuction";
-import DisplayTab from "./RealEstate/DisplayTab";
+import AuctionDisplay from "./RealEstate/AuctionDisplay";
 import Footer from "./components/Home/footer";
 import { Featured } from "./components/Featured";
 import { addProperty } from "./slice/propertySlice";
@@ -50,13 +49,14 @@ function App() {
   // });
 
   authService.getUpcomingAuctions().then((res) => {
-    console.log(res.data);
     dispatch(addProperty(res.data));
+  });
+
+  authService.getOngoingAuctions().then((res) => {
     dispatch(addAuction(res.data));
   });
 
   authService.getRegistStatus().then((res) => {
-    console.log(res.data);
     dispatch(addRegistProp(res.data));
   });
 
@@ -89,10 +89,10 @@ function App() {
             <Display colorChange={colorChange} />
             <Featured />
           </Route>
-          {/* <Route path="/DisplayAuction/:id">
-            <DisplayAuction colorChange={colorChange} />
+          <Route path="/AuctionDisplay/:id">
+            <AuctionDisplay colorChange={colorChange} />
             <Featured />
-          </Route> */}
+          </Route>
           <Route exact path="/RealEstates">
             <RealEstates colorChange={colorChange} />
           </Route>

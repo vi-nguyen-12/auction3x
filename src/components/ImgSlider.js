@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
+import { useState, useEffect } from "react";
 
 const ImgSlider = () => {
   let settings = {
@@ -17,126 +18,274 @@ const ImgSlider = () => {
     autoplay: true,
   };
 
+  const [properties, setProperties] = useState([]);
+
   const property = useSelector((state) => state.property);
 
+  useEffect(() => {
+    for (let i = 0; i < property.length; i++) {
+      setProperties((properties) => [...properties, property[i].property]);
+    }
+  }, []);
+
   return (
-    <>
-      <Carousel {...settings}>
-        {property.slice(0, 5).map((item) => (
-          <Link to={`/Display/${item._id}`} key={item._id}>
-            <Wrap>
-              <a>
-                <img src={item.images[0].url} alt="" />
-              </a>
-              <HomeBottom>
-                <a>
-                  <NumberFormat
-                    style={{ fontSize: "25px" }}
-                    value={item.details.assessments[0].total_value}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </a>
-                <span>
-                  HOUSE IN {item.details.address.city},
-                  {item.details.address.state}, UNITED STATES
-                </span>
-              </HomeBottom>
-            </Wrap>
-          </Link>
-        ))}
-      </Carousel>
-      <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
-        <div className="row px-lg-5">
-          <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div className="dropdown w-100">
-              <button
-                className="btn btn-secondary dropdown-toggle w-100"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span className="pr-5">All Property</span>
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
+    <div>
+      {properties.length > 0 ? (
+        <>
+          <Carousel {...settings}>
+            {properties.slice(0, 5).map((item) => (
+              <Link to={`/Display/${item._id}`} key={item._id}>
+                <Wrap>
+                  <a>
+                    <img src={item.images[0].url} alt="" />
+                  </a>
+                  <HomeBottom>
+                    <a>
+                      <NumberFormat
+                        style={{ fontSize: "25px" }}
+                        value={item.details.assessments[0].total_value}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </a>
+                    <span>
+                      HOUSE IN {item.details.address.city},
+                      {item.details.address.state}, UNITED STATES
+                    </span>
+                  </HomeBottom>
+                </Wrap>
+              </Link>
+            ))}
+          </Carousel>
+          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+            <div className="row px-lg-5">
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown w-100">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Property</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Categories</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Countries</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 mt-3">
+                <div className="form-group">
+                  <SearchBar />
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-1 mt-3">
+                <button className="bg-light customButton w-100" type="submit">
+                  Search
+                </button>
               </div>
             </div>
           </div>
-          <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle w-100"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span className="pr-5">All Categories</span>
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
+        </>
+      ) : (
+        <>
+          <Carousel {...settings}>
+            {properties.slice(0, 5).map((item) => (
+              <Link to={`/Display/${item._id}`} key={item._id}>
+                <Wrap>
+                  <a>
+                    <img src={item.images[0].url} alt="" />
+                  </a>
+                  <HomeBottom>
+                    <a>
+                      <NumberFormat
+                        style={{ fontSize: "25px" }}
+                        value={item.details.assessments[0].total_value}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </a>
+                    <span>
+                      HOUSE IN {item.details.address.city},
+                      {item.details.address.state}, UNITED STATES
+                    </span>
+                  </HomeBottom>
+                </Wrap>
+              </Link>
+            ))}
+          </Carousel>
+          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+            <div className="row px-lg-5">
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown w-100">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Property</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Categories</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-2 mt-3">
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle w-100"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <span className="pr-5">All Countries</span>
+                  </button>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <a className="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <a className="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-4 mt-3">
+                <div className="form-group">
+                  <SearchBar />
+                </div>
+              </div>
+              <div className="col-12 col-sm-6 col-md-1 mt-3">
+                <button className="bg-light customButton w-100" type="submit">
+                  Search
+                </button>
               </div>
             </div>
           </div>
-          <div className="col-12 col-sm-6 col-md-2 mt-3">
-            <div className="dropdown">
-              <button
-                className="btn btn-secondary dropdown-toggle w-100"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span className="pr-5">All Countries</span>
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-sm-6 col-md-4 mt-3">
-            <div className="form-group">
-              <SearchBar />
-            </div>
-          </div>
-          <div className="col-12 col-sm-6 col-md-1 mt-3">
-            <button className="bg-light customButton w-100" type="submit">
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
+        </>
+      )}
+    </div>
   );
 };
 

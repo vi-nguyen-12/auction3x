@@ -44,6 +44,7 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
     }
     if (user.KYC) {
       history.push(`/Display/${id}`);
+      window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -51,7 +52,7 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
 
   const handleDisplay = () => {
     history.push(`/Display/${id}`);
-    // window.location.reload();
+    window.location.reload();
   };
 
   useEffect(() => {

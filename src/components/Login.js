@@ -5,10 +5,17 @@ import authServices from "../services/authServices";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
+import { useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
-const Login = ({ toogleSignUp, toogleSignIn, toogleButton, toogleForgotPass }) => {
+const Login = ({
+  toogleSignUp,
+  toogleSignIn,
+  toogleButton,
+  toogleForgotPass,
+}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showWarning, setShowWarning] = useState(false);
   //const [invPass, setInvPass] = useState(false);
 
@@ -32,6 +39,12 @@ const Login = ({ toogleSignUp, toogleSignIn, toogleButton, toogleForgotPass }) =
           alert("Invalid Password or Email");
         }
       }
+      history.push("/");
+      window.location.reload();
+      window.setTimeout(() => {
+        window.scrollTo(0);
+      }, 0);
+
     };
     getUser();
   };
@@ -89,7 +102,7 @@ const Login = ({ toogleSignUp, toogleSignIn, toogleButton, toogleForgotPass }) =
               toogleForgotPass();
               toogleSignIn();
             }}
-            style={{marginTop: "5px", marginBottom: "30px"}}
+            style={{ marginTop: "5px", marginBottom: "30px" }}
             className="nav-link-signup"
           >
             Forgot Password?

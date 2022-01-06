@@ -29,20 +29,20 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       formData3.append("lives", lives[i]);
     }
 
-    const response2 = await authService
+    await authService
       .saveVideos(formData)
       .then((response2) => {
         console.log(response2);
         setVideos(response2.data);
       });
 
-    const respone3 = await authService
+    await authService
       .saveLives(formData3)
       .then((response3) => {
         console.log(response3);
         setLives(response3.data);
       });
-    const response = await authService
+    await authService
       .saveImages(formData2)
       .then((response) => {
         setImages(response.data);

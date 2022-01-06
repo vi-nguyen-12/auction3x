@@ -25,30 +25,28 @@ import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import Timer from "./Timer";
+import DateCountdown from "react-date-countdown-timer";
+import AuctionTimer from "./AuctionTimer";
 
-const Display = ({ colorChange }) => {
+const AuctionDisplay = ({ colorChange }) => {
   colorChange("black");
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
   const registProperty = useSelector((state) => state.registProperty);
-
-  const properties = useSelector((state) => state.property);
-
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
     checkProperty = [...checkProperty, registProperty[i]];
   }
   const registeredProperty = checkProperty.find((item) => item._id === id);
-
   const [setRegistered, setRegisteredProperty] = useState(false);
 
-  const [property, setProperty] = useState();
-  const [propertyData, setPropertyData] = useState();
+  const auctions = useSelector((state) => state.auction);
 
-  const [startAuction, setStartAuction] = useState();
-  const [endAuction, setEndAuction] = useState();
+  const [auction, setAuction] = useState([]);
+  const [auctionProp, setAuctionProp] = useState();
+
+  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -85,54 +83,45 @@ const Display = ({ colorChange }) => {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
-  let today = new Date().toISOString();
-  const handlePlaceBid = () => {
-    if (!user._id) {
-      return toogleSignIn();
-    } else if (today < startAuction) {
-      return alert("Auction has not started yet!");
-    }
-  };
-
   const handleKYC = () => {
     if (!user.KYC) {
       return alert("Please Complete your KYC first to bid");
     }
   };
 
-
+  const handleRegister = () => {
+    if (!setRegistered) {
+      return alert("You have not registered to bid for this property!");
+    }
+  };
 
   useEffect(() => {
-    window.setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
+    //for ongoing auction
+    const auctionData = auctions.find((item) => item._id === id);
+    setAuction(auctionData);
+    setAuctionProp(auctionData.property);
 
-    //for upcoming auction property data
-    const propertyData = properties.find((item) => item._id === id);
-    setProperty(propertyData.property);
-
-    //for auction details for upcoming auction
-    setPropertyData(propertyData);
-
-    //set dates and times for upcoming auction
-    setStartAuction(propertyData.auctionStartDate);
-    setEndAuction(propertyData.auctionEndDate);
+    //set dates for ongoing auction end date
+    setOnGoingAuctionEnd(auctionData.auctionEndDate);
 
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: propertyData.property.details.address.latitude,
-      lng: propertyData.property.details.address.longitude,
+      lat: auctionData.property.details.address.latitude,
+      lng: auctionData.property.details.address.longitude,
     });
+    window.setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
 
-    if(user._id && user.KYC){
-      if(registeredProperty !== undefined){
+    if (user._id && user.KYC) {
+      if (registeredProperty !== undefined) {
         setRegisteredProperty(true);
       }
     }
   }, [registProperty]);
 
-  console.log(setRegistered);
+  //   console.log(onGoingAuctionEnd);
   const mapStyles = {
     height: "50vh",
     width: "100%",
@@ -247,14 +236,14 @@ const Display = ({ colorChange }) => {
 
   return (
     <>
-      {property && location && startAuction && endAuction && (
+      {auctionProp && location && (
         <div className="styl">
           <tr className="realHeader">
             <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
           </tr>
           <div style={{ position: "relative", width: "100%" }}>
             <img
-              src={property.images[0].url}
+              src={auctionProp.images[0].url}
               alt="Snow"
               style={{
                 display: "flex",
@@ -342,7 +331,7 @@ const Display = ({ colorChange }) => {
                       style={{ height: "100%", borderRadius: "15px" }}
                       {...ImgSettings}
                     >
-                      {property.images.map((item) => (
+                      {auctionProp.images.map((item) => (
                         <Wrap>
                           <a>
                             <img
@@ -387,7 +376,7 @@ const Display = ({ colorChange }) => {
                       style={{ height: "100%", borderRadius: "15px" }}
                       {...settings}
                     >
-                      {property.videos.map((item) => (
+                      {auctionProp.videos.map((item) => (
                         <Wrap>
                           <a>
                             <video
@@ -430,68 +419,46 @@ const Display = ({ colorChange }) => {
                 >
                   <img src="/images/360.png" />
                 </button>
-                {/* <Modal size="lg" show={showLives} onHide={toggleLive} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Live 360</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <LoadScript {...env.API_Key}>
-                      <GoogleMap
-                        mapContainerStyle={mapStyles}
-                        zoom={18}
-                        center={location}
-                        defaultStreetView={true}
-                        streetView={true}
-                        options={{ streetViewControl: true }}
-                      >
-                        <Marker key={location.name} position={location} />
-                      </GoogleMap>
-                    </LoadScript>
-                    <p>{property.details.address.formatted_street_address}</p>
-                  </Modal.Body>
-                </Modal> */}
               </div>
-              <div>
-                <button
-                  onClick={toggleMap}
-                  style={{
-                    border: "none",
-                    position: "relative",
-                    top: "10px",
-                    background: "none",
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "15px",
-                    width: "100%",
-                  }}
-                >
-                  <img src="/images/location.png" />
-                </button>
-                <Modal size="lg" show={showMap} onHide={toggleMap} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Location</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <LoadScript {...env.API_Key}>
-                      <GoogleMap
-                        mapContainerStyle={mapStyles}
-                        zoom={18}
-                        center={location}
-                      >
-                        <streetViewPanoramaOptions
-                          key={location.name}
-                          position={location}
-                        />
-                      </GoogleMap>
-                    </LoadScript>
-                    <p>{property.details.address.formatted_street_address}</p>
-                  </Modal.Body>
-                </Modal>
-              </div>
+
+              {auctionProp && (
+                <div>
+                  <button
+                    onClick={toggleMap}
+                    style={{
+                      border: "none",
+                      position: "relative",
+                      top: "10px",
+                      background: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                      padding: "15px",
+                      width: "100%",
+                    }}
+                  >
+                    <img src="/images/location.png" />
+                  </button>
+                  <Modal size="lg" show={showMap} onHide={toggleMap} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>
+                        <h2 style={{ color: " #e9af84" }}>Property Location</h2>
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <LoadScript {...env.API_Key}>
+                        <GoogleMap
+                          mapContainerStyle={mapStyles}
+                          zoom={18}
+                          center={location}
+                        ></GoogleMap>
+                      </LoadScript>
+                      <p>
+                        {auctionProp.details.address.formatted_street_address}
+                      </p>
+                    </Modal.Body>
+                  </Modal>
+                </div>
+              )}
             </div>
           </div>
           <div
@@ -504,7 +471,7 @@ const Display = ({ colorChange }) => {
                   Luxury Villa in Los Angeles
                 </h2>
                 <div>
-                  <p>{property.details.address.formatted_street_address}</p>
+                  <p>{auctionProp.details.address.formatted_street_address}</p>
                 </div>
               </td>
               {!user._id && (
@@ -531,9 +498,9 @@ const Display = ({ colorChange }) => {
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
-                        onClick={handlePlaceBid}
+                        onClick={toogleSignIn}
                       >
-                        Register to Bid
+                        Place Bid
                       </button>
                     </div>
 
@@ -577,7 +544,7 @@ const Display = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={handleKYC}
                       >
-                        Register to Bid
+                        Place Bid
                       </button>
                     </div>
 
@@ -595,7 +562,7 @@ const Display = ({ colorChange }) => {
                 </td>
               )}
 
-              {user._id && user.KYC && (
+              {user._id && user.KYC && !setRegistered && (
                 <td
                   style={{
                     position: "absolute",
@@ -619,9 +586,9 @@ const Display = ({ colorChange }) => {
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
-                        onClick={toogleBid}
+                        onClick={handleRegister}
                       >
-                        Register to Bid
+                        Place Bid
                       </button>
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>
@@ -669,7 +636,7 @@ const Display = ({ colorChange }) => {
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
-                        onClick={handlePlaceBid}
+                        onClick={tooglePlaceBid}
                       >
                         Place Bid
                       </button>
@@ -690,10 +657,10 @@ const Display = ({ colorChange }) => {
               )}
 
               {/* <td>
-                <div>
-                  <button onClick={tooglePlaceBid}>place to bid</button>
-                </div>
-              </td> */}
+            <div>
+              <button onClick={tooglePlaceBid}>place to bid</button>
+            </div>
+          </td> */}
               <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
                 <Modal.Body>
                   <BuyConfirm />
@@ -819,54 +786,62 @@ const Display = ({ colorChange }) => {
                 textAlign: "center",
                 backgroundColor: "#E8E8E8",
                 width: "20%",
-                marginLeft: "25px",
+                marginLeft: "35px",
                 padding: "15px",
                 borderRadius: "10px",
               }}
             >
               <h4> Online Auction</h4>
-              <p>
-                {new Date(startAuction).toLocaleDateString().split(",")[0]} -
-                {new Date(endAuction).toLocaleDateString().split(",")[0]}
-              </p>
+              <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
             </div>
-            <div
-              style={{
-                display: "inline-block",
-                justifyContent: "center",
-                textAlign: "center",
-                backgroundColor: "#E8E8E8",
-                width: "20%",
-                marginLeft: "35px",
-                padding: "15px",
-                borderRadius: "10px",
-              }}
-            >
-              <h4> Bidding Starts In</h4>
-                <Timer auctionStartDate = {startAuction}/>
-            </div>
-            <div
-              style={{
-                display: "inline-block",
-                justifyContent: "center",
-                textAlign: "center",
-                backgroundColor: "#E8E8E8",
-                width: "15%",
-                marginLeft: "35px",
-                padding: "15px",
-                borderRadius: "10px",
-              }}
-            >
-              <h4>
-                <NumberFormat
-                  value={propertyData.startingBid}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
-              </h4>
-              <p> Starting Bid</p>
-            </div>
+            {auction.highestBid ? (
+              <div
+                style={{
+                  display: "inline-block",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  backgroundColor: "#E8E8E8",
+                  width: "15%",
+                  marginLeft: "35px",
+                  padding: "15px",
+                  borderRadius: "10px",
+                }}
+              >
+                <h4>
+                  <NumberFormat
+                    value={auction.highestBid}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </h4>
+                <p> Starting Bid</p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: "inline-block",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  backgroundColor: "#E8E8E8",
+                  width: "15%",
+                  marginLeft: "35px",
+                  padding: "15px",
+                  borderRadius: "10px",
+                }}
+              >
+                <h4>
+                  <NumberFormat
+                    value={auction.startingBid}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </h4>
+                <p> Starting Bid</p>
+              </div>
+            )}
+
             <div
               style={{
                 display: "inline-block",
@@ -933,7 +908,7 @@ const Display = ({ colorChange }) => {
                 >
                   Building Height:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.structure.stories} Stories
+                    {auctionProp.details.structure.stories} Stories
                   </span>
                 </td>
               </tr>
@@ -948,7 +923,7 @@ const Display = ({ colorChange }) => {
                 >
                   Property Type:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.parcel.county_land_use_description}
+                    {auctionProp.details.parcel.county_land_use_description}
                   </span>
                 </td>
                 <td
@@ -974,7 +949,7 @@ const Display = ({ colorChange }) => {
                 >
                   Building Size:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.structure.total_area_sq_ft} sq.ft
+                    {auctionProp.details.structure.total_area_sq_ft} sq.ft
                   </span>
                 </td>
                 <td
@@ -988,7 +963,7 @@ const Display = ({ colorChange }) => {
                 >
                   Zoning:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.parcel.zoning}
+                    {auctionProp.details.parcel.zoning}
                   </span>
                 </td>
               </tr>
@@ -1003,7 +978,7 @@ const Display = ({ colorChange }) => {
                 >
                   Building Class:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.structure.quality}
+                    {auctionProp.details.structure.quality}
                   </span>
                 </td>
                 <td
@@ -1017,7 +992,7 @@ const Display = ({ colorChange }) => {
                 >
                   Parking:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.structure.parking_type}
+                    {auctionProp.details.structure.parking_type}
                   </span>
                 </td>
               </tr>
@@ -1032,7 +1007,7 @@ const Display = ({ colorChange }) => {
                 >
                   Year Built/ Renovated:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.structure.year_built}
+                    {auctionProp.details.structure.year_built}
                   </span>
                 </td>
                 <td
@@ -1046,7 +1021,7 @@ const Display = ({ colorChange }) => {
                 >
                   Frontage:
                   <span style={{ fontWeight: "bold" }}>
-                    {property.details.parcel.frontage_ft}
+                    {auctionProp.details.parcel.frontage_ft}
                   </span>
                 </td>
               </tr>
@@ -1319,5 +1294,4 @@ const Display = ({ colorChange }) => {
     </>
   );
 };
-
-export default Display;
+export default AuctionDisplay;

@@ -76,7 +76,7 @@ const authService = {
         withCredentials: true,
         headers: { "content-type": "multipart/form-data" },
       }
-    )
+    );
   },
 
   fetchKycStatus(data) {
@@ -109,36 +109,57 @@ const authService = {
   },
 
   buyerRegister(data) {
-    return axios.post(env.API_URL + "/api/buyers", data, {withCredentials: true});
+    return axios.post(env.API_URL + "/api/buyers", data, {
+      withCredentials: true,
+    });
   },
 
   getBuyerQuestions() {
-    return axios.get(env.API_URL + "/api/questions", {withCredentials: true});
+    return axios.get(env.API_URL + "/api/questions", { withCredentials: true });
   },
 
   getIPAddress() {
-    return axios.get('https://api.ipdata.co/?api-key='+ env.IP_API_Key);
+    return axios.get("https://api.ipdata.co/?api-key=" + env.IP_API_Key);
   },
 
   // getAuction(id) {
   //   return axios.get(env.API_URL + "/api/auctions/");
   // },
 
-  auctionBid(id) {
-    return axios.put(env.API_URL + "/api/auctions/bidding/" + id, {withCredentials: true});
+  auctionBid(data) {
+    return axios.put(
+      env.API_URL + "/api/auctions/bidding/" + data.id,
+      {
+        biddingTime: data.biddingTimes,
+        biddingPrice: data.bidding,
+      },
+      { withCredentials: true }
+    );
   },
 
-  getAuctionProperty(id) {
-    return axios.get(env.API_URL + "/api/auctions/propertyId/" + id);
-  },
+  // getAuctionProperty(id) {
+  //   return axios.get(env.API_URL + "/api/auctions/propertyId/" + id);
+  // },
 
   getUpcomingAuctions() {
-    return axios.get(env.API_URL + "/api/properties/real-estates/upcomingAuctions");
+    return axios.get(
+      env.API_URL + "/api/auctions/real-estates/upcoming",
+      { withCredentials: true }
+    );
   },
 
   getRegistStatus() {
-    return axios.get(env.API_URL + "/api/auctions/real-estates/status?buyer=true", {withCredentials: true});
-  }
+    return axios.get(
+      env.API_URL + "/api/auctions/real-estates/status?buyer=true",
+      { withCredentials: true }
+    );
+  },
+
+  getOngoingAuctions() {
+    return axios.get(
+      env.API_URL + "/api/auctions/real-estates/ongoing"
+    );
+  },
 };
 
 export default authService;

@@ -1,9 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import Display from "../RealEstate/Display";
-import { Link } from "react-router-dom";
-import authService from "../services/authServices";
-import { connectAdvanced, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Toast from "./Toast";
@@ -43,15 +40,16 @@ const CardComp = ({ url, data, id, auctionStartDate, auctionEndDate, startingBid
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/Display/${id}`);
+      history.push(`/AuctionDisplay/${id}`);
+      window.location.reload();
     } else {
       setShowKYC(true);
     }
   };
 
   const handleDisplay = () => {
-    history.push(`/Display/${id}`);
-    // window.location.reload();
+    history.push(`/AuctionDisplay/${id}`);
+    window.location.reload();
   };
 
   useEffect(() => {
