@@ -103,9 +103,6 @@ const Display = ({ colorChange }) => {
 
 
   useEffect(() => {
-    window.setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
 
     //for upcoming auction property data
     const propertyData = properties.find((item) => item._id === id);
@@ -124,6 +121,10 @@ const Display = ({ colorChange }) => {
       lat: propertyData.property.details.address.latitude,
       lng: propertyData.property.details.address.longitude,
     });
+
+    window.setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 0);
 
     if(user._id && user.KYC){
       if(registeredProperty !== undefined){
@@ -671,7 +672,7 @@ const Display = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={handlePlaceBid}
                       >
-                        Place Bid
+                        Bid Now!
                       </button>
                     </div>
 

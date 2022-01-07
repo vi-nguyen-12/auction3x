@@ -12,7 +12,15 @@ import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 
-const CardComp = ({ url, data, id, auctionStartDate, auctionEndDate, startingBid, auctionId }) => {
+const CardComp = ({
+  url,
+  data,
+  id,
+  auctionStartDate,
+  auctionEndDate,
+  startingBid,
+  auctionId,
+}) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -41,7 +49,7 @@ const CardComp = ({ url, data, id, auctionStartDate, auctionEndDate, startingBid
     }
     if (user.KYC) {
       history.push(`/AuctionDisplay/${id}`);
-      window.location.reload();
+      // window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -49,7 +57,9 @@ const CardComp = ({ url, data, id, auctionStartDate, auctionEndDate, startingBid
 
   const handleDisplay = () => {
     history.push(`/AuctionDisplay/${id}`);
-    window.location.reload();
+    // window.setTimeout(() => {
+    //   window.location.reload();
+    // }, 800);
   };
 
   useEffect(() => {

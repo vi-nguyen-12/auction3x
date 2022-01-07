@@ -15,7 +15,14 @@ import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 
-const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }) => {
+const UpcomingCard = ({
+  url,
+  data,
+  id,
+  startRegister,
+  endRegister,
+  startingBid,
+}) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -44,7 +51,7 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
     }
     if (user.KYC) {
       history.push(`/Display/${id}`);
-      window.location.reload();
+      // window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -52,7 +59,9 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
 
   const handleDisplay = () => {
     history.push(`/Display/${id}`);
-    window.location.reload();
+    window.setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   useEffect(() => {
@@ -189,10 +198,10 @@ const UpcomingCard = ({ url, data, id, startRegister, endRegister, startingBid }
                   <p className="grey-small">Starting Bid</p>
                   <p className="black-bold">
                     <NumberFormat
-                        value={startingBid}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
+                      value={startingBid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
                     />
                   </p>
                 </div>

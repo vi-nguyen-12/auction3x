@@ -500,7 +500,7 @@ const AuctionDisplay = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={toogleSignIn}
                       >
-                        Place Bid
+                        Bid Now!
                       </button>
                     </div>
 
@@ -544,7 +544,7 @@ const AuctionDisplay = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={handleKYC}
                       >
-                        Place Bid
+                        Bid Now!
                       </button>
                     </div>
 
@@ -588,7 +588,7 @@ const AuctionDisplay = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={handleRegister}
                       >
-                        Place Bid
+                        Bid Now!
                       </button>
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>
@@ -638,7 +638,7 @@ const AuctionDisplay = ({ colorChange }) => {
                         style={{ width: "200px", fontSize: "20px" }}
                         onClick={tooglePlaceBid}
                       >
-                        Place Bid
+                        Bid Now!
                       </button>
                     </div>
 

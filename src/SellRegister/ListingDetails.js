@@ -1,8 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import authService from "../services/authServices";
+import PlacesAutocomplete, { geocodeByAddress } from "react-places-autocomplete";
 
 const ListingDetails = ({ toogleStep, step, properties }) => {
+  const [address, setAddress] = useState("");
+
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = async (address) => {
+    setAddress(address);
+    const results = await geocodeByAddress(address);
+    console.log(results);
+  };
   const {
     register,
     handleSubmit,
@@ -22,32 +35,32 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
         <div class="circle-1">
           <p class="text">01</p>
           <span className="spnn">Select Catagory</span>
-        </div>{" "}
+        </div>
         <div class="line-1"></div>
         <div class="circle-2">
           <p class="text">02</p>
           <span className="spnn">Listing Details</span>
-        </div>{" "}
+        </div>
         <div class="line"></div>
         <div class="circle">
           <p class="text">03</p>
           <span className="spnn">Property Details</span>
-        </div>{" "}
+        </div>
         <div class="line"></div>
         <div class="circle">
           <p class="text">04</p>
           <span className="spnn">Upload Documents</span>
-        </div>{" "}
+        </div>
         <div class="line"></div>
         <div class="circle">
           <p class="text">05</p>
           <span className="spnn">Listing Fees</span>
-        </div>{" "}
+        </div>
         <div class="line"></div>
         <div class="circle">
           <p class="text">06</p>
           <span className="spnn">Agreement</span>
-        </div>{" "}
+        </div>
       </div>
       <div className="list-sell-bottom">
         <div className="listDetails-title">
@@ -69,17 +82,57 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               paddingLeft: "10px",
             }}
           >
-            <input
+            <PlacesAutocomplete 
+              value={address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div>
+                  <input
+                  style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
+                    {...getInputProps({
+                      placeholder: "Search Address",
+                      className: "form-control",
+                    })}
+                  />
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active
+                          ? "#41b6e6"
+                          : "#fff",
+                      };
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className: "suggestion-item", 
+                            style,
+                          })}
+                        >
+                          <span>{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
+            {/* <input
               type="text"
               className="form-control"
               placeholder="Address"
               style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
+              // value={address}
+              onChange={(e) => handleChange(e.target.value)}
+              onSelect={(e) => handleSelect(e.target.value)}
               {...register("street_address", {
                 required: false,
                 maxLength: 100,
               })}
               required
-            />
+            /> */}
           </div>
           <label
             style={{
