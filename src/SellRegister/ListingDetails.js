@@ -1,29 +1,64 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import authService from "../services/authServices";
-import PlacesAutocomplete, { geocodeByAddress } from "react-places-autocomplete";
+import { useState, useEffect } from "react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
 
 const ListingDetails = ({ toogleStep, step, properties }) => {
-  const [address, setAddress] = useState("");
-
-  const handleChange = (address) => {
-    setAddress(address);
-  };
-
-  const handleSelect = async (address) => {
-    setAddress(address);
-    const results = await geocodeByAddress(address);
-    console.log(results);
-  };
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm();
 
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
+
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      console.log(results);
+      setAddress(results[0].formatted_address.split(",")[0]);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types[0] === "locality";
+      });
+      setCity(cities[0].long_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(states[0].long_name);
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(countries[0].long_name);
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(zipcodes[0].long_name);
+    });
+  };
+
   const onSubmit = (data) => {
-    authService.realEstate(data).then((res) => {
+    const datas = {
+      street_address: address,
+      city: city,
+      state: state,
+      country: country,
+      zipCode: zip,
+    };
+    authService.realEstate(datas).then((res) => {
       properties(res.data);
       toogleStep(step + 1);
     });
@@ -82,32 +117,39 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               paddingLeft: "10px",
             }}
           >
-            <PlacesAutocomplete 
+            <PlacesAutocomplete
               value={address}
               onChange={handleChange}
               onSelect={handleSelect}
             >
-              {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
                 <div>
                   <input
                   style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
                     {...getInputProps({
-                      placeholder: "Search Address",
+                      placeholder: "Search address",
                       className: "form-control",
                     })}
                   />
                   <div className="autocomplete-dropdown-container">
                     {loading && <div>Loading...</div>}
                     {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: suggestion.active
-                          ? "#41b6e6"
-                          : "#fff",
-                      };
+                      const className = suggestion.active
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                        : { backgroundColor: "#ffffff", cursor: "pointer" };
                       return (
                         <div
                           {...getSuggestionItemProps(suggestion, {
-                            className: "suggestion-item", 
+                            className,
                             style,
                           })}
                         >
@@ -124,9 +166,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               className="form-control"
               placeholder="Address"
               style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
-              // value={address}
-              onChange={(e) => handleChange(e.target.value)}
-              onSelect={(e) => handleSelect(e.target.value)}
               {...register("street_address", {
                 required: false,
                 maxLength: 100,
@@ -192,8 +231,8 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   name="firstName"
                   className="form-control"
                   placeholder="State"
-                  {...register("state", { required: true })}
-                  required
+                  value={state}
+                  {...register("state", { required: false })}
                 />
               </td>
               <td
@@ -210,8 +249,8 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   name="lastName"
                   className="form-control"
                   placeholder="City"
-                  {...register("city", { required: true })}
-                  required
+                  value={city}
+                  {...register("city", { required: false})}
                 />
               </td>
             </tr>
@@ -238,6 +277,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   type="number"
                   className="form-control"
                   placeholder="Zip Code"
+                  value={zip}
                   {...register("zipCode", { required: false })}
                 />
               </td>
@@ -254,6 +294,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   type="text"
                   className="form-control"
                   placeholder="Country"
+                  value={country}
                   {...register("country", {
                     required: false,
                     maxLength: 100,

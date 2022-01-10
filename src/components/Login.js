@@ -42,7 +42,7 @@ const Login = ({
       history.push("/");
       window.location.reload();
       window.setTimeout(() => {
-        window.scrollTo(0);
+        window.scrollTo(0, 0);
       }, 0);
 
     };

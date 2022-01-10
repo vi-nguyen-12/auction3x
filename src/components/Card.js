@@ -19,7 +19,6 @@ const CardComp = ({
   auctionStartDate,
   auctionEndDate,
   startingBid,
-  auctionId,
 }) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);

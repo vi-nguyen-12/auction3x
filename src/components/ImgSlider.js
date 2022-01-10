@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const ImgSlider = () => {
   let settings = {
@@ -18,40 +19,32 @@ const ImgSlider = () => {
     autoplay: true,
   };
 
-  const [properties, setProperties] = useState([]);
-
   const property = useSelector((state) => state.property);
-
-  useEffect(() => {
-    for (let i = 0; i < property.length; i++) {
-      setProperties((properties) => [...properties, property[i].property]);
-    }
-  }, []);
 
   return (
     <div>
-      {properties.length > 0 ? (
+      {property.length > 0 ? (
         <>
           <Carousel {...settings}>
-            {properties.slice(0, 5).map((item) => (
+            {property.slice(0, 5).map((item) => (
               <Link to={`/Display/${item._id}`} key={item._id}>
                 <Wrap>
                   <a>
-                    <img src={item.images[0].url} alt="" />
+                    <img src={item.property.images[0].url} alt="" />
                   </a>
                   <HomeBottom>
                     <a>
                       <NumberFormat
                         style={{ fontSize: "25px" }}
-                        value={item.details.assessments[0].total_value}
+                        value={item.property.details.assessments[0].total_value}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
                       />
                     </a>
                     <span>
-                      HOUSE IN {item.details.address.city},
-                      {item.details.address.state}, UNITED STATES
+                      HOUSE IN {item.property.details.address.city},
+                      {item.property.details.address.state}, UNITED STATES
                     </span>
                   </HomeBottom>
                 </Wrap>
@@ -160,25 +153,25 @@ const ImgSlider = () => {
       ) : (
         <>
           <Carousel {...settings}>
-            {properties.slice(0, 5).map((item) => (
+            {property.slice(0, 5).map((item) => (
               <Link to={`/Display/${item._id}`} key={item._id}>
                 <Wrap>
                   <a>
-                    <img src={item.images[0].url} alt="" />
+                    <img src={item.property.images[0].url} alt="" />
                   </a>
                   <HomeBottom>
                     <a>
                       <NumberFormat
                         style={{ fontSize: "25px" }}
-                        value={item.details.assessments[0].total_value}
+                        value={item.property.details.assessments[0].total_value}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}
                       />
                     </a>
                     <span>
-                      HOUSE IN {item.details.address.city},
-                      {item.details.address.state}, UNITED STATES
+                      HOUSE IN {item.property.details.address.city},
+                      {item.property.details.address.state}, UNITED STATES
                     </span>
                   </HomeBottom>
                 </Wrap>

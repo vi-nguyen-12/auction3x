@@ -147,7 +147,7 @@ const Featured = (props) => {
                     id={item._id}
                     auctionStartDate={item.auctionStartDate}
                     auctionEndDate={item.auctionEndDate}
-                    startingBid={item.startingBid}
+                    startingBid={item.highestBid}
                     auctionId={item._id}
                   />
                 </Col>
