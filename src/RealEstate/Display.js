@@ -80,6 +80,7 @@ const Display = ({ colorChange }) => {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
+  const [count, setCount] = useState(0);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -129,6 +130,8 @@ const Display = ({ colorChange }) => {
     if(user._id && user.KYC){
       if(registeredProperty !== undefined){
         setRegisteredProperty(true);
+        count = registeredProperty.count + 1;
+        setCount(count);
       }
     }
   }, [registProperty]);
@@ -880,7 +883,7 @@ const Display = ({ colorChange }) => {
                 borderRadius: "10px",
               }}
             >
-              <h4>12,3456</h4>
+              <h4>{count}</h4>
               <p> Views</p>
             </div>
             <div style={{ padding: "35px" }}>

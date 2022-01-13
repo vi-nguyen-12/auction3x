@@ -11,6 +11,7 @@ import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
+import AuctionTimer from "../RealEstate/AuctionTimer";
 
 const CardComp = ({
   url,
@@ -39,6 +40,10 @@ const CardComp = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
+  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
+  const auctions = useSelector((state) => state.auction);
+  const [auction, setAuction] = useState([]);
+  const [auctionProp, setAuctionProp] = useState();
 
   const history = useHistory();
 
@@ -64,8 +69,12 @@ const CardComp = ({
   useEffect(() => {
     const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
     const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
+    const auctionData = auctions.find((item) => item._id === id);
+    setAuction(auctionData);
+    setAuctionProp(auctionData.property);
     setAuctionStartDate(startDate);
     setAuctionEndDate(endDate);
+    setOnGoingAuctionEnd(auctionData.auctionEndDate);
   }, []);
 
   return (
@@ -120,7 +129,7 @@ const CardComp = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            <Card.Text>
+           
               <div>
                 <div>
                   <span className="golden-text">
@@ -161,27 +170,47 @@ const CardComp = ({
                     </tr>
 
                     <td>
-                      <p style={{ fontSize: "12px", width: "100px" }}>
+                      <p style={{ fontSize: "12px", width: "110px" }}>
                         {auctionDate} - {auctionEnd}
                       </p>
                     </td>
-
+                    <tr>
                     <td>
                       <p
                         style={{
                           fontSize: "12px",
-                          marginLeft: "150px",
+                          display: "inline-flex",
                           width: "100%",
                         }}
                       >
-                        {data.structure.beds_count}BD | {data.structure.baths}BA
-                        | {data.structure.total_area_sq_ft} sq.ft
-                      </p>
+                     
+                        {data.structure.beds_count} BD |</p>
+                        </td>
+                      <td>
+                        <p  style={{
+                          fontSize: "12px",
+                          display: "inline-flex",
+                          width: "100%",
+                        }}> {data.structure.baths} BA |</p>
+                         </td>
+                      <td>
+                        <p  style={{
+                          fontSize: "12px",
+                          display: "inline-flex",
+                          width: "100%",
+                        }}>{data.structure.total_area_sq_ft} sq.ft</p>
+                   
                     </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                    </td>
+                    </tr>
                   </div>
                 </div>
               </div>
-            </Card.Text>
+
             <hr />
             <div
               style={{
