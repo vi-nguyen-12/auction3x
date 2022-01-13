@@ -129,7 +129,7 @@ const CardComp = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-           
+            <Card.Text>
               <div>
                 <div>
                   <span className="golden-text">
@@ -170,47 +170,27 @@ const CardComp = ({
                     </tr>
 
                     <td>
-                      <p style={{ fontSize: "12px", width: "110px" }}>
+                      <p style={{ fontSize: "12px", width: "100px" }}>
                         {auctionDate} - {auctionEnd}
                       </p>
                     </td>
-                    <tr>
+
                     <td>
                       <p
                         style={{
                           fontSize: "12px",
-                          display: "inline-flex",
+                          marginLeft: "150px",
                           width: "100%",
                         }}
                       >
-                     
-                        {data.structure.beds_count} BD |</p>
-                        </td>
-                      <td>
-                        <p  style={{
-                          fontSize: "12px",
-                          display: "inline-flex",
-                          width: "100%",
-                        }}> {data.structure.baths} BA |</p>
-                         </td>
-                      <td>
-                        <p  style={{
-                          fontSize: "12px",
-                          display: "inline-flex",
-                          width: "100%",
-                        }}>{data.structure.total_area_sq_ft} sq.ft</p>
-                   
+                        {data.structure.beds_count}BD | {data.structure.baths}BA
+                        | {data.structure.total_area_sq_ft} sq.ft
+                      </p>
                     </td>
-                    </tr>
-                    <tr>
-                    <td>
-                    <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
-                    </td>
-                    </tr>
                   </div>
                 </div>
               </div>
-
+            </Card.Text>
             <hr />
             <div
               style={{
@@ -230,7 +210,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",
