@@ -127,11 +127,9 @@ const Display = ({ colorChange }) => {
       window.scrollTo(0, 0);
     }, 0);
 
-    if(user._id && user.KYC){
-      if(registeredProperty !== undefined){
+    if (user._id && user.KYC) {
+      if (registeredProperty !== undefined) {
         setRegisteredProperty(true);
-        count = registeredProperty.count + 1;
-        setCount(count);
       }
     }
   }, [registProperty]);
@@ -847,7 +845,7 @@ const Display = ({ colorChange }) => {
               }}
             >
               <h4> Bidding Starts In</h4>
-                <Timer auctionStartDate = {startAuction}/>
+              <Timer auctionStartDate={startAuction} />
             </div>
             <div
               style={{
