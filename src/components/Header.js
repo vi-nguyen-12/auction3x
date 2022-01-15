@@ -340,6 +340,7 @@ const Header = ({ color }) => {
                     toogleSignIn={toogleSignIn}
                     toogleButton={toogleButton}
                     toogleForgotPass={toogleForgotPass}
+                    toogleConfirmModal={toogleConfirmModal}
                   />
                 </Modal.Body>
               </Modal>

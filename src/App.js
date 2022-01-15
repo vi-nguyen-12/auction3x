@@ -23,7 +23,6 @@ import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
 import AuctionCard from "./components/Auction/auctionCard";
 import About from "./components/Home/About";
-import { addRegistProp } from "./slice/registPropertySlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,9 +55,6 @@ function App() {
     dispatch(addAuction(res.data));
   });
 
-  authService.getRegistStatus().then((res) => {
-    dispatch(addRegistProp(res.data));
-  });
 
   const [color, setColor] = useState("");
 

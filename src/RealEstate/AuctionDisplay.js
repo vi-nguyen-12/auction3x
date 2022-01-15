@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
 import authService from "../services/authServices";
-import { Modal, Carousel } from "react-bootstrap";
+import { Modal, Carousel, Table } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import {
   GoogleMap,
@@ -1049,6 +1049,9 @@ const AuctionDisplay = ({ colorChange }) => {
                   Opportunity Zone:{" "}
                   <span style={{ fontWeight: "bold" }}>N/A</span>
                 </td>
+              </tr>
+              <tr>
+                <td>{auction.highestBidders}</td>
               </tr>
             </div>
 
