@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import "../styles/SellRegister.css";
 // create step bar
 
 const Sell = ({ toogleStep, step }) => {
@@ -52,62 +53,66 @@ const Sell = ({ toogleStep, step }) => {
         </div>{" "}
       </div>
       <div className="sell-bottom">
-        <div className="title mt-3">
-          <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
-            SELECT WHAT YOU WANT TO SELL
-          </h3>
-          <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p>
-        </div>
-        <div className="sell-form">
-          <tr>
-            <td className="choice-table-1">
-              <div className="sell-1">
-                <input type="radio" name="sell" />
-                <label>Real Estate</label>
-              </div>
+        <Table borderless responsive>
+          <thead>
+            <th colSpan={3} >
+              <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
+                SELECT WHAT YOU WANT TO SELL
+              </h3>
+              <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p>
+            </th>
+          </thead>
 
-              <div className="sell-1">
-                <input type="radio" name="sell" value=" 1" />
-                <label>Yachts</label>
-              </div>
+          <tbody>
+            <tr className="sell-1">
+              <td>
+                <input type="radio" name="sell" value="1" />
+                <label className="choice">Real Estate</label>
+              </td>
 
-              <div className="sell-1">
+              <td>
                 <input type="radio" name="sell" value="1" />
-                <label>Jewels</label>
-              </div>
-            </td>
+                <label className="choice">Cars</label>
+              </td>
 
-            <td className="choice-table-2">
-              <div className="sell-2">
+              <td>
                 <input type="radio" name="sell" value="1" />
-                <label>Cars</label>
-              </div>
-              <div className="sell-2">
-                <input type="radio" name="sell" value="1" />
-                <label>Jets</label>
-              </div>
-              <div className="sell-2">
-                <input type="radio" name="sell" value="1" />
-                <label>Motorcycles</label>
-              </div>
-            </td>
+                <label className="choice">Collectible</label>
+              </td>
+            </tr>
 
-            <td className="choice-table-3">
-              <div className="sell-3">
+            <tr className="sell-2">
+              <td>
                 <input type="radio" name="sell" value="1" />
-                <label>Collectible</label>
-              </div>
-              <div className="sell-3">
+                <label className="choice">Yachts</label>
+              </td>
+              <td>
                 <input type="radio" name="sell" value="1" />
-                <label>Helicopters</label>
-              </div>
-              <div className="sell-3">
+                <label className="choice">Jets</label>
+              </td>
+              <td>
                 <input type="radio" name="sell" value="1" />
-                <label>Watches</label>
-              </div>
-            </td>
-          </tr>
-        </div>
+                <label className="choice">Helicopters</label>
+              </td>
+            </tr>
+
+            <tr className="sell-3">
+              <td>
+                <input type="radio" name="sell" value="1" />
+                <label className="choice">Jewels</label>
+              </td>
+              <td>
+
+                <input type="radio" name="sell" value="1" />
+                <label className="choice">Motorcycle</label>
+              </td>
+              <td>
+                <input type="radio" name="sell" value="1" />
+                <label className="choice">Watches</label>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
 
         <div className="bottom-btn">
           <button className="pre-btn">Previous</button>

@@ -36,6 +36,7 @@
   border-radius: 2px;
   border: 0;
   font-weight: bold;
+  height: 40px;
 }
 
 .nxt-btn {
@@ -49,6 +50,7 @@
   border-radius: 2px;
   border: 0;
   font-weight: bold;
+  height: 40px;
 }
 
 .bottom-btn {
@@ -148,7 +150,7 @@ body {
   justify-content: center;
   border: 0;
   position: absolute;
-  height: 480px;
+  height: 75%;
   width: 100%;
   bottom: 0;
 }
@@ -430,76 +432,32 @@ ul.dashed > li:before {
 
 /* upload and sell welcome */
 
-input[type="radio"]:after {
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  top: -4px;
-  left: -2px;
-  position: relative;
-  background-color: #d1d3d1;
-  content: "";
-  display: inline-block;
-  visibility: visible;
-  border: 2px solid #dddfe1;
-  padding: 5x;
-}
-
 input[type="radio"]:checked:after {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   border-radius: 20px;
-  top: -4px;
-  left: -2px;
-  position: relative;
+  top: auto;
+  left: auto;
+  position: absolute;
   background-color: #ac744b;
   content: "";
   display: inline-block;
-  visibility: visible;
-  border: 2px solid #dddfe1;
-  padding: 5px;
+  margin-right: 20px;
 }
 
-/*table 1*/
-.choice-table-1 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
-.choice-table-2 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
-.choice-table-3 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
+/*sell-welcome*/
 .sell-1 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-
-  display: inline-block;
-  padding: 20px;
-  text-align: left;
+  font-size: 25px;
 }
 .sell-2 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  margin-left: 20px;
-  padding: 20px;
+  font-size: 25px;
 }
 .sell-3 {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  margin-left: 200px;
-  padding: 20px;
+  font-size: 25px;
 }
-
+.choice {
+  margin-left: 20px;
+}
 /*title*/
 h1 {
   font-size: 1.5em;

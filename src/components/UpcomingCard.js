@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import Display from "../RealEstate/Display";
 import { Link } from "react-router-dom";
 import authService from "../services/authServices";
@@ -14,6 +14,7 @@ import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
+import RegistrationTimer from "../RealEstate/RegistrationTimer";
 
 const UpcomingCard = ({
   url,
@@ -23,7 +24,9 @@ const UpcomingCard = ({
   endRegister,
   startingBid,
 }) => {
+  console.log(id);
   const user = useSelector((state) => state.user);
+  const property = useSelector((state) => state.property);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -42,6 +45,7 @@ const UpcomingCard = ({
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [startRegisterDate, setStartRegisterDate] = useState();
   const [endRegisterDate, setEndRegisterDate] = useState();
+  const [RegistrationEndDate, setRegistrationEndDate] = useState();
 
   const history = useHistory();
 
@@ -67,6 +71,9 @@ const UpcomingCard = ({
   useEffect(() => {
     const startDate = new Date(startRegister).toLocaleString().split(",")[0];
     const endDate = new Date(endRegister).toLocaleString().split(",")[0];
+    const auctionData = property.find((item) => item._id === id);
+    console.log(auctionData);
+    setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);
   }, []);
@@ -124,68 +131,64 @@ const UpcomingCard = ({
               )}
             </button>
             <Card.Body style={{ paddingLeft: "13px" }}>
-              <Card.Text>
+
+              <div>
                 <div>
+                  <span className="golden-text">
+                    {data.address.formatted_street_address},{" "}
+                    {data.address.state}
+                  </span>
+                  <h4 style={{ marginTop: "5px" }}>Property Address</h4>
+                </div>
+                <div
+                  style={{
+                    display: "inline-flex",
+                  }}
+                >
                   <div>
-                    <span className="golden-text">
-                      {data.address.formatted_street_address},{" "}
-                      {data.address.state}
-                    </span>
-                    <h4 style={{ marginTop: "5px" }}>Property Address</h4>
-                  </div>
-                  <div
-                    style={{
-                      display: "inline-flex",
-                    }}
-                  >
-                    <div>
-                      <tr>
-                        <td>
-                          <p style={{ fontSize: "15px", width: "100px" }}>
-                            Registration:
-                          </p>
-                        </td>
-                        <td
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                          }}
-                        ></td>
-                        <td>
-                          <p
-                            style={{
-                              fontSize: "15px",
-                              width: "100px",
-                              marginRight: "10px",
-                            }}
-                          >
-                            Additional Info
-                          </p>
-                        </td>
-                      </tr>
-
-                      <td>
-                        <p style={{ fontSize: "12px", width: "100px" }}>
-                          {startRegisterDate} - {endRegisterDate}
+                    <Row>
+                      <Col md={5} style={{ width: "50%" }}>
+                        <p style={{ fontSize: "15px", width: "100px" }}>
+                          Registration
                         </p>
-                      </td>
+                      </Col>
 
-                      <td>
+                      <Col md={6} style={{ width: "50%" }}>
                         <p
                           style={{
                             fontSize: "12px",
-                            marginLeft: "150px",
-                            width: "100%",
+
+                            width: "250px",
                           }}
                         >
-                          {data.structure.beds_count}BD | {data.structure.baths}
-                          BA | {data.structure.total_area_sq_ft} sq.ft
+                          Additional Info
                         </p>
-                      </td>
-                    </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={1} style={{ width: "50%" }}>
+                        <p style={{ fontSize: "12px", width: "200px" }}>
+                          <RegistrationTimer RegistrationEndDate={RegistrationEndDate} />
+                        </p>
+                      </Col>
+
+                      <Col md={6} style={{ width: "50%" }}>
+                        <p
+                          style={{
+                            fontSize: "12px",
+
+                            width: "250px",
+                          }}
+                        >
+                          {data.structure.beds_count}BD | {data.structure.baths}BA
+                          | {data.structure.total_area_sq_ft} sq.ft
+                        </p>
+                      </Col>
+                    </Row>
                   </div>
                 </div>
-              </Card.Text>
+              </div>
+
               <hr />
               <div
                 style={{
@@ -205,6 +208,7 @@ const UpcomingCard = ({
                     />
                   </p>
                 </div>
+                { }
                 <div
                   style={{
                     alignItems: "flex-end",
