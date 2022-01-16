@@ -20,7 +20,7 @@ const RealEstates = ({ colorChange }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     slidesToShow: 3,
     responsive: [
       {

@@ -34,7 +34,7 @@ const Agree = ({
       videos,
       documents,
     }).then((res) => {
-      if(res.status === 200) {
+      if (res.status === 200) {
         history.push("/");
         window.scrollTo(0, 0);
       }
@@ -92,10 +92,7 @@ const Agree = ({
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button
-            className="nxt-btn"
-            type="submit"
-          >
+          <button className="nxt-btn" type="submit">
             Submit
           </button>
         </div>
