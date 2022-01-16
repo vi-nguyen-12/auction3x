@@ -66,13 +66,13 @@ const Agree = ({
         <div class="line-3"></div>
         <div class="circle-4">
           <p class="text">05</p>
-          <span className="spnn">Listing Fees</span>
+          <span className="spnn">LAgreement</span>
         </div>
-        <div class="line-4"></div>
+        {/* <div class="line-4"></div>
         <div class="circle-5">
           <p class="text">06</p>
           <span className="spnn">Agreement</span>
-        </div>
+        </div> */}
       </div>
       <div className="agree-sell-bottom">
         <div className="header">
@@ -81,11 +81,19 @@ const Agree = ({
         </div>
         <div className="bodi">
           <ul className="dashed">
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
-            <li>sdhfsdufh sdufhasufha isudhfasdufh asdufh</li>
+            {/* create the agreement form*/}
+            <li>
+              I, the Seller, hereby agree to sell the property described in this
+              Agreement to the Buyer, as set forth below.
+            </li>
+            <li>
+              I, the Seller, hereby agree to sell the property described in
+              this Agreement to the Buyer, as set forth below.
+            </li>
+            <li>
+              I, the Seller, hereby agree to sell the property described in
+              this Agreement to the Buyer, as set forth below.
+            </li>
           </ul>
         </div>
         <div className="agree-bottom-btn">

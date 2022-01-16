@@ -89,18 +89,17 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
         <div class="line"></div>
         <div class="circle">
           <p class="text">05</p>
-          <span className="spnn">Listing Fees</span>
+          <span className="spnn">Agreement</span>
         </div>
-        <div class="line"></div>
+        {/* <div class="line"></div>
         <div class="circle">
           <p class="text">06</p>
           <span className="spnn">Agreement</span>
-        </div>
+        </div> */}
       </div>
       <div className="list-sell-bottom">
         <div className="listDetails-title">
           <h2>Listing Deatails</h2>
-          <p>shdcb sdhb sdhc sdbchsdbch </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="list-form">
           <h6 style={{ fontWeight: "bolder", fontSize: "20px" }}>
@@ -130,7 +129,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               }) => (
                 <div>
                   <input
-                  style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
+                    style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
                     {...getInputProps({
                       placeholder: "Search address",
                       className: "form-control",
@@ -250,7 +249,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   className="form-control"
                   placeholder="City"
                   value={city}
-                  {...register("city", { required: false})}
+                  {...register("city", { required: false })}
                 />
               </td>
             </tr>

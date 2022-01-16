@@ -8,7 +8,7 @@ import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
 
-const MultiSellForm = ({colorChange}) => {
+const MultiSellForm = ({ colorChange }) => {
 
   colorChange("black");
 
@@ -106,15 +106,15 @@ const MultiSellForm = ({colorChange}) => {
         />
       </div>
     );
-  } else if (step === 5) {
-    return (
-      <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+    // } else if (step === 5) {
+    //   return (
+    //     <div className="sell-register-container">
+    //       <h1>Sell On Auction10X</h1>
 
-        <ListingFees toogleStep={toogleStep} step={step} test="test" />
-      </div>
-    );
-  } else if (step === 6) {
+    //       <ListingFees toogleStep={toogleStep} step={step} test="test" />
+    //     </div>
+    //   );
+  } else if (step === 5) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
