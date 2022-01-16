@@ -16,14 +16,14 @@ const Featured = (props) => {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: false,
-    slidesToShow: 3,
+    autoplay: true,
+    slidesToShow: 2,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 0,
           infinite: true,
           dots: false,
         },
@@ -55,11 +55,10 @@ const Featured = (props) => {
       height: 100%;
       width: 15vw;
       z-index: 1;
-    
+
       &:hover {
         opacity: 1;
         transition: opacity 0.2s ease 0s;
-       
       }
     }
 
@@ -84,7 +83,6 @@ const Featured = (props) => {
       left: -75px;
       width: 12vw;
       height: 100%;
-
     }
 
     .slick-prev:before {
@@ -96,7 +94,6 @@ const Featured = (props) => {
       right: -75px;
       width: 12vw;
       height: 100%;
-
     }
 
     .slick-next:before {
@@ -119,27 +116,26 @@ const Featured = (props) => {
     }
   `;
   return (
-        <div className="background">
-          <Row>
-            <Col md={12} className="m-auto">
-              <img
-                src="/images/f_name.png"
-                alt=""
-                style={{
-                  marginBottom: "0px",
-                  maxWidth: "250px",
-                  maxHeight: "150px",
-                }}
-              />
-            </Col>
-          </Row>
-          
-          <Col md={12} className="m-auto">
-            <Row>
-            <Carousel {...settings}>
-           
-              {auction.map((item) => (
-                 <Wrap>
+    <div className="background">
+      <Row>
+        <Col md={12} className="m-auto">
+          <img
+            src="/images/f_name.png"
+            alt=""
+            style={{
+              marginBottom: "0px",
+              maxWidth: "250px",
+              maxHeight: "150px",
+            }}
+          />
+        </Col>
+      </Row>
+
+      <Col md={12} className="m-auto">
+        <Row>
+          <Carousel {...settings}>
+            {auction.map((item) => (
+              <Wrap>
                 <Col key={item._id} md={12}>
                   <CardComp
                     url={item.property.images[0].url}
@@ -151,14 +147,12 @@ const Featured = (props) => {
                     auctionId={item._id}
                   />
                 </Col>
-                </Wrap>
-              ))}
-         
+              </Wrap>
+            ))}
           </Carousel>
-            </Row>
-          </Col>
-        
-        </div>
+        </Row>
+      </Col>
+    </div>
   );
 };
 

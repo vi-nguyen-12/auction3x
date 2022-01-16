@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
 import authService from "../services/authServices";
-import { Modal, Carousel } from "react-bootstrap";
+import { Modal, Carousel, Table } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import {
   GoogleMap,
@@ -908,7 +908,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     padding: "15px",
                   }}
                 >
-                  Building Height:{" "}
+                  Building Height:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.structure.stories} Stories
                   </span>
@@ -923,7 +923,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     left: "105px",
                   }}
                 >
-                  Property Type:{" "}
+                  Property Type:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.parcel.county_land_use_description}
                   </span>
@@ -949,7 +949,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     left: "105px",
                   }}
                 >
-                  Building Size:{" "}
+                  Building Size:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.structure.total_area_sq_ft} sq.ft
                   </span>
@@ -963,7 +963,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     fontSize: "17px",
                   }}
                 >
-                  Zoning:{" "}
+                  Zoning:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.parcel.zoning}
                   </span>
@@ -978,7 +978,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     left: "105px",
                   }}
                 >
-                  Building Class:{" "}
+                  Building Class:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.structure.quality}
                   </span>
@@ -992,7 +992,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     fontSize: "17px",
                   }}
                 >
-                  Parking:{" "}
+                  Parking:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.structure.parking_type}
                   </span>
@@ -1007,7 +1007,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     left: "105px",
                   }}
                 >
-                  Year Built/ Renovated:{" "}
+                  Year Built/ Renovated:
                   <span style={{ fontWeight: "bold" }}>
                     {auctionProp.details.structure.year_built}
                   </span>
@@ -1036,7 +1036,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     left: "105px",
                   }}
                 >
-                  Percent Leased:{" "}
+                  Percent Leased:
                   <span style={{ fontWeight: "bold" }}>N/A</span>
                 </td>
                 <td
@@ -1048,15 +1048,18 @@ const AuctionDisplay = ({ colorChange }) => {
                     fontSize: "17px",
                   }}
                 >
-                  Opportunity Zone:{" "}
+                  Opportunity Zone:
                   <span style={{ fontWeight: "bold" }}>N/A</span>
                 </td>
               </tr>
+              {/* <tr>
+                <td>{auction.highestBidders}</td>
+              </tr> */}
             </div>
 
             <div style={{ padding: "35px" }}>
               <tr>
-                {" "}
+                
                 <h2>
                   <span style={{ color: "#B77B50" }}>|</span>Executive Summary
                 </h2>
@@ -1160,7 +1163,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     padding: "20px",
                   }}
                 >
-                  {" "}
+                  
                   <div style={{ color: "white" }}>
                     <h3>Location Highlight</h3>
                     <p>
@@ -1183,7 +1186,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     padding: "20px",
                   }}
                 >
-                  {" "}
+                  
                   <div style={{ color: "white" }}>
                     <h3> Market Overview</h3>
                     <p>

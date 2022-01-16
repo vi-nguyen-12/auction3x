@@ -27,27 +27,22 @@ const MultiSellForm = ({ colorChange }) => {
     setProperty(property);
   };
 
-  console.log(propertyData);
   const [documents, setDocuments] = useState([]);
   const toogleDocuments = (documents) => {
     setDocuments(documents);
   };
-
-  console.log(documents);
 
   const [images, setImages] = useState([]);
   const toogleImages = (images) => {
     setImages(images);
   };
 
-  console.log(images);
-
   const [videos, setVideos] = useState([]);
   const toogleVideos = (videos) => {
     setVideos(videos);
   };
 
-  console.log(videos);
+  
   if (step === 0) {
     return (
       <div className="sell-register-container">

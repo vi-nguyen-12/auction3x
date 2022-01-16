@@ -6,6 +6,8 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useHistory } from "react-router-dom";
+import { addRegistProp } from "../slice/registPropertySlice";
+
 require("react-bootstrap/ModalHeader");
 
 const Login = ({
@@ -13,6 +15,7 @@ const Login = ({
   toogleSignIn,
   toogleButton,
   toogleForgotPass,
+  toogleConfirmModal,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,23 +31,31 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        if (!response.data.isActive) {
-          setShowWarning(true);
+        if (response.data.message === "User has not been verified") {
+          toogleSignIn();
+          toogleConfirmModal();
+        } else {
+          console.log(response);
+          if (!response.data.isActive) {
+            setShowWarning(true);
+          }
+          dispatch(login(response.data.data));
+          toogleButton();
+          toogleSignIn();
+          authServices.getRegistStatus().then((res) => {
+            dispatch(addRegistProp(res.data));
+          });
         }
-        dispatch(login(response.data.data));
-        toogleButton();
-        toogleSignIn();
       } catch (err) {
         if (err.response.status === 400) {
           alert("Invalid Password or Email");
         }
       }
       history.push("/");
-      window.location.reload();
+      // window.location.reload();
       window.setTimeout(() => {
         window.scrollTo(0, 0);
       }, 0);
-
     };
     getUser();
   };
@@ -71,12 +82,11 @@ const Login = ({
           <label htmlFor="exampleInputEmail1">Username or Email</label>
           <div className="input-group">
             <input
-              type="email"
+              type="text"
               className="form-control"
               placeholder="Email"
               {...register("userName", {
                 required: true,
-                pattern: /^\S+@\S+$/i,
               })}
               required
             />

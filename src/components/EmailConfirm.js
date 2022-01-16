@@ -38,12 +38,12 @@ function Confirm({toogleConfirmModal, toogleSignIn}) {
                 })}
               />
             </div>
-            <div className="form-group">
-              <label>Code</label>
+            <div className="form-group" style={{marginTop:"10px"}}>
               <input
                 type="text"
                 className="form-control"
                 name="code"
+                placeholder="Code"
                 {...register("token", {required: true})}
               />
             </div>
