@@ -186,7 +186,7 @@ const BuyUpload = ({
             <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
               Previous
             </button>
-            <button className="nxt-btn" type="submit">
+            <button className="nxt-btn" type="submit" onClick={toogleDocument(document)}>
               Next
             </button>
           </div>

@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./SellRegister/MultiSellForm";
 import Display from "./RealEstate/Display";
@@ -23,8 +23,10 @@ import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
 import AuctionCard from "./components/Auction/auctionCard";
 import About from "./components/Home/About";
+import { addRegistProp } from "./slice/registPropertySlice";
 
 function App() {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = Cookies.get("auth-token");
@@ -55,6 +57,11 @@ function App() {
     dispatch(addAuction(res.data));
   });
 
+  if (user._id) {
+    authService.getRegistStatus().then((res) => {
+      dispatch(addRegistProp(res.data));
+    });
+  }
 
   const [color, setColor] = useState("");
 

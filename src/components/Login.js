@@ -6,7 +6,6 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
 import { useHistory } from "react-router-dom";
-import { addRegistProp } from "../slice/registPropertySlice";
 
 require("react-bootstrap/ModalHeader");
 
@@ -42,9 +41,6 @@ const Login = ({
           dispatch(login(response.data.data));
           toogleButton();
           toogleSignIn();
-          authServices.getRegistStatus().then((res) => {
-            dispatch(addRegistProp(res.data));
-          });
         }
       } catch (err) {
         if (err.response.status === 400) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BuyAgreement from "./BuyAgreement";
 import BuyUpload from "./BuyUpload";
 import BuyVerify from "./BuyVerify";
@@ -14,6 +14,7 @@ const MultiBuyForm = () => {
     setDocument(document);
   };
 
+  console.log(document);
 
   const toogleStep = (step) => {
     setStep(step);
@@ -29,6 +30,10 @@ const MultiBuyForm = () => {
   const toogleAnswer = (answer) => {
     setAnswer(answer);
   };
+
+  useEffect(() => {
+    toogleDocument(document);
+  }, [document]);
 
 
   if (step === 0) {

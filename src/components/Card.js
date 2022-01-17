@@ -70,7 +70,6 @@ const CardComp = ({
     const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
     const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
     const auctionData = auctions.find((item) => item._id === id);
-    console.log(auctionData);
     setAuction(auctionData);
     setAuctionProp(auctionData.property);
     setAuctionStartDate(startDate);

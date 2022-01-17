@@ -9,17 +9,11 @@ import { useHistory } from "react-router-dom";
 import { FaCreativeCommonsPd } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const BuyAuthoried = ({
-  toogleStep,
-  step,
-  document,
-  answer,
-  questionID,
-}) => {
+const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   const { register, handleSubmit } = useForm();
-  const {id} = useParams();
+  const { id } = useParams();
   const properties = useSelector((state) => state.property);
-  const auctionId=properties.find(item=>item._id===id)
+  const auctionId = properties.find((item) => item._id === id);
 
   const [ip, setIp] = useState();
 
@@ -42,9 +36,26 @@ const BuyAuthoried = ({
     setAgree(dateTime);
   };
 
-  const documents = [document[0], document[1], document[2], document[3]];
+  const documents = [
+    {
+      name: document[0].name,
+      url: document[0].url,
+    },
+    {
+      name: document[1].name,
+      url: document[1].url,
+    },
+    {
+      name: document[2].name,
+      url: document[2].url,
+    },
+    {
+      name: document[3].name,
+      url: document[3].url,
+    },
+  ];
+
   console.log(documents);
-  
   const answers = [
     { questionId: questionID[0], answer: answer[0] },
     { questionId: questionID[1], answer: answer[1] },
@@ -54,20 +65,23 @@ const BuyAuthoried = ({
   ];
 
   const onSubmit = async (data) => {
-    await authService.buyerRegister({
-      auctionId: auctionId._id,
-      documents: documents,
-      TC: {time: agree, IPAddress: ip},
-      answers: answers,
-    }).catch((err) => {
-      alert("User Already Registered for this property!");
-      history.push("/");
-    }).then((res) => {
-      if (res) {
-        console.log(res);
+    await authService
+      .buyerRegister({
+        auctionId: auctionId._id,
+        documents: documents,
+        TC: { time: agree, IPAddress: ip },
+        answers: answers,
+      })
+      .catch((err) => {
+        alert("User Already Registered for this property!");
         history.push("/");
-      }
-    });
+      })
+      .then((res) => {
+        if (res) {
+          console.log(res);
+          history.push("/");
+        }
+      });
   };
   return (
     <>
@@ -89,7 +103,6 @@ const BuyAuthoried = ({
             <p>
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
             </p>
-            
           </div>
 
           <div

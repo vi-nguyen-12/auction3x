@@ -24,7 +24,6 @@ const UpcomingCard = ({
   endRegister,
   startingBid,
 }) => {
-  console.log(id);
   const user = useSelector((state) => state.user);
   const property = useSelector((state) => state.property);
   const [showSignIn, popSignIn] = useState(false);
@@ -72,7 +71,6 @@ const UpcomingCard = ({
     const startDate = new Date(startRegister).toLocaleString().split(",")[0];
     const endDate = new Date(endRegister).toLocaleString().split(",")[0];
     const auctionData = property.find((item) => item._id === id);
-    console.log(auctionData);
     setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);
