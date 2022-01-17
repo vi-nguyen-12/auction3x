@@ -60,18 +60,18 @@ const PropertyDetails = ({
         <div class="line"></div>
         <div class="circle">
           <p class="text">05</p>
-          <span className="spnn">Listing Fees</span>
+          <span className="spnn">Agreement</span>
         </div>
-        <div class="line"></div>
+        {/* <div class="line"></div>
         <div class="circle">
           <p class="text">06</p>
           <span className="spnn">Agreement</span>
-        </div>
+        </div> */}
       </div>
       <div className="list-sell-bottom">
         <div className="listDetails-title">
           <h2>Listing Deatails</h2>
-          <p>shdcb sdhb sdhc sdbchsdbch </p>
+
         </div>
         <form className="list-form">
           <label
@@ -345,7 +345,7 @@ const PropertyDetails = ({
                       name="total_value"
                       className="sell-amount"
                       defaultValue={property.assessments[0].total_value}
-                      // {...register("total_value", { required: false })}
+                    // {...register("total_value", { required: false })}
                     />
                   </div>
                 </td>

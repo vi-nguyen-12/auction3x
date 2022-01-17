@@ -74,20 +74,19 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         <div class="line"></div>
         <div class="circle">
           <p class="text">05</p>
-          <span className="spnn">Listing Fees</span>
+          <span className="spnn">Agreement</span>
         </div>
-        <div class="line"></div>
+        {/* <div class="line"></div>
         <div class="circle">
           <p class="text">06</p>
           <span className="spnn">Agreement</span>
-        </div>
+        </div> */}
       </div>
       <div className="sell-bottom">
         <div className="listDetails-title">
           <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD DOCUMENTS
           </h2>
-          <p>shdcb sdhb sdhc sdbchsdbch </p>
         </div>
         <div className="input-form-1">
           Choose the Image Files

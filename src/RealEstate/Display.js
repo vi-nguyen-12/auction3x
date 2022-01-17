@@ -822,7 +822,8 @@ const Display = ({ colorChange }) => {
                 backgroundColor: "#E8E8E8",
                 width: "20%",
                 marginLeft: "25px",
-                padding: "15px",
+                padding: "35px",
+                paddingTop: "15px",
                 borderRadius: "10px",
               }}
             >
@@ -1317,7 +1318,8 @@ const Display = ({ colorChange }) => {
             </div>
           </form>
         </div>
-      )}
+      )
+      }
     </>
   );
 };
