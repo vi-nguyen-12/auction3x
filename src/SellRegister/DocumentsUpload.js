@@ -63,7 +63,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
         <div className="input-form-1">
           Choose the Documents Files (.pdf)
           <input
-            accept="documents/*"
+            accept="application/pdf"
             type="file"
             name="documents"
             multiple

@@ -59,7 +59,7 @@ const Sell = ({ toogleStep, step }) => {
               <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
                 SELECT WHAT YOU WANT TO SELL
               </h3>
-              <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p>
+              {/* <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p> */}
             </th>
           </thead>
 
