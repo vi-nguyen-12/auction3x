@@ -21,7 +21,7 @@ const RealEstates = ({ colorChange }) => {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: 3,
+    slidesToShow: auction.length > 3 ? 3 : auction.length,
     responsive: [
       {
         breakpoint: 1024,

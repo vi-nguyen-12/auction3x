@@ -36,26 +36,22 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     setAgree(dateTime);
   };
 
-  const documents = [
-    {
-      name: document[0].name,
-      url: document[0].url,
-    },
-    {
-      name: document[1].name,
-      url: document[1].url,
-    },
-    {
-      name: document[2].name,
-      url: document[2].url,
-    },
-    {
-      name: document[3].name,
-      url: document[3].url,
-    },
-  ];
+  const documents = [];
 
-  console.log(documents);
+  //push document to array if it is not empty
+  document.map((item) => {
+    if (item.name) {
+      documents.push(item);
+    }
+  });
+
+  const realDocuments = documents.map((item) => {
+    return {
+      name: item.name,
+      url: item.url,
+    };
+  });
+  
   const answers = [
     { questionId: questionID[0], answer: answer[0] },
     { questionId: questionID[1], answer: answer[1] },
@@ -68,7 +64,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     await authService
       .buyerRegister({
         auctionId: auctionId._id,
-        documents: documents,
+        documents: realDocuments,
         TC: { time: agree, IPAddress: ip },
         answers: answers,
       })

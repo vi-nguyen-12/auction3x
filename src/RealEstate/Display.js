@@ -670,8 +670,9 @@ const Display = ({ colorChange }) => {
                     <div>
                       <button
                         className="customButton"
-                        style={{ width: "200px", fontSize: "20px" }}
+                        style={{ width: "200px", fontSize: "20px", color:"gray" }}
                         onClick={handlePlaceBid}
+                        disabled
                       >
                         Bid Now!
                       </button>

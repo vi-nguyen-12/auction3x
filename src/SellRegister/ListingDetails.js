@@ -29,7 +29,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {
-        return item.types[0] === "locality";
+        return item.types.includes("locality" || "political" || "sublocality");
       });
       setCity(cities[0].long_name);
 
@@ -51,8 +51,9 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
   };
 
   const onSubmit = (data) => {
+    const addres = address + " #" + data.address1;
     const datas = {
-      street_address: address,
+      street_address: addres,
       city: city,
       state: state,
       country: country,
@@ -273,7 +274,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               >
                 <input
                   style={{ fontSize: "17px", fontWeight: "bold" }}
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Zip Code"
                   value={zip}

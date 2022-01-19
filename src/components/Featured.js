@@ -17,7 +17,7 @@ const Featured = (props) => {
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: 2,
+    slidesToShow: auction.length > 3 ? 2 : auction.length,
     responsive: [
       {
         breakpoint: 1024,
