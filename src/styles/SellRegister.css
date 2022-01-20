@@ -241,11 +241,11 @@ body {
 
 .list-form {
   width: 700px;
-  height: 700px;
+  height: 830px;
   box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
   border-radius: 3px;
   position: relative;
-  top: 100px;
+  top: 20px;
 }
 
 h6 {
