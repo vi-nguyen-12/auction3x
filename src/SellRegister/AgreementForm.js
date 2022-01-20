@@ -44,28 +44,28 @@ const Agree = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="agree-content">
       <div className="sell-top">
-        <div class="circle-1">
-          <p class="text">01</p>
+        <div className="circle-1">
+          <p className="text">01</p>
           <span className="spnn">Select Catagory</span>
         </div>
-        <div class="line-1"></div>
-        <div class="circle-2">
-          <p class="text">02</p>
+        <div className="line-1"></div>
+        <div className="circle-2">
+          <p className="text">02</p>
           <span className="spnn">Listing Details</span>
         </div>
-        <div class="line-2"></div>
-        <div class="circle-3">
-          <p class="text">03</p>
+        <div className="line-2"></div>
+        <div className="circle-3">
+          <p className="text">03</p>
           <span className="spnn">Property Details</span>
         </div>
-        <div class="line-2"></div>
-        <div class="circle-3">
-          <p class="text">04</p>
+        <div className="line-2"></div>
+        <div className="circle-3">
+          <p className="text">04</p>
           <span className="spnn">Upload Documents</span>
         </div>
-        <div class="line-3"></div>
-        <div class="circle-4">
-          <p class="text">05</p>
+        <div className="line-3"></div>
+        <div className="circle-4">
+          <p className="text">05</p>
           <span className="spnn">LAgreement</span>
         </div>
         {/* <div class="line-4"></div>

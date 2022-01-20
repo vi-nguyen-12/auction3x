@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import authService from "../services/authServices";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
   const [documents, setDocuments] = useState([]);
+
+  const handleDocument = (data) => {
+    setDocuments(data);
+  };
+
+  useEffect(() => {
+    handleDocument();
+  }, []);
 
   const onSubmit = async (data) => {
     const documents = data.documents;
@@ -15,7 +23,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
       formData.append("documents", documents[i]);
     }
     await authService.saveDocuments(formData).then((response) => {
-      setDocuments(response.data);
+      handleDocument(response.data);
     });
     toogleStep(step + 1);
   };
@@ -23,28 +31,28 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
-        <div class="circle-1">
-          <p class="text">01</p>
+        <div className="circle-1">
+          <p className="text">01</p>
           <span className="spnn">Select Catagory</span>
         </div>
-        <div class="line-1"></div>
-        <div class="circle-2">
-          <p class="text">02</p>
+        <div className="line-1"></div>
+        <div className="circle-2">
+          <p className="text">02</p>
           <span className="spnn">Listing Details</span>
         </div>
-        <div class="line-2"></div>
-        <div class="circle-3">
-          <p class="text">03</p>
+        <div className="line-2"></div>
+        <div className="circle-3">
+          <p className="text">03</p>
           <span className="spnn">Property Details</span>
-        </div>{" "}
-        <div class="line-3"></div>
-        <div class="circle-4">
-          <p class="text">04</p>
+        </div>
+        <div className="line-3"></div>
+        <div className="circle-4">
+          <p className="text">04</p>
           <span className="spnn">Upload Documents</span>
         </div>
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">05</p>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">05</p>
           <span className="spnn">Agreement</span>
         </div>
         {/* <div class="line"></div>

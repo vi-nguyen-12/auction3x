@@ -139,6 +139,8 @@ const Header = ({ color }) => {
               </button>
               <Modal
                 size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showConfirm}
@@ -172,6 +174,8 @@ const Header = ({ color }) => {
                 </Modal.Body>
               </Modal>
               <Modal
+                backdrop="static"
+                keyboard={false}
                 size=""
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -328,6 +332,8 @@ const Header = ({ color }) => {
                 </button>
               )}
               <Modal
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showSignIn}
@@ -347,6 +353,8 @@ const Header = ({ color }) => {
 
               <Modal
                 size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showSignUp}

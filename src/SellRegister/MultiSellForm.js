@@ -10,8 +10,10 @@ import DocumentsUpload from "./DocumentsUpload";
 
 const MultiSellForm = ({ colorChange }) => {
 
+  useEffect(() => {
   colorChange("black");
-
+  }, []);
+  
   const [step, setStep] = useState(0);
   const toogleStep = (step) => {
     setStep(step);
@@ -21,6 +23,8 @@ const MultiSellForm = ({ colorChange }) => {
   const tooglePropertyData = (propertyData) => {
     setPropertyData(propertyData);
   };
+
+  console.log(propertyData);
 
   const [property, setProperty] = useState({});
   const properties = (property) => {

@@ -3,12 +3,47 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../services/authServices";
 import Toast from "../components/Toast";
+import "../styles/SellRegister.css";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
   const [lives, setLives] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [videoLoader, setVideoLoader] = useState(false);
+
+  const onChange = async (e) => {
+    setLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("images", e.target.files[i]);
+    }
+    await authService.saveImages(formData).then((response) => {
+      if (response.status === 200) {
+        setImages([...images, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChangeVideos = async (e) => {
+    setVideoLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("videos", e.target.files[i]);
+    }
+    await authService
+      .saveVideos(formData)
+      .then((response2) => {
+        if (response2.status === 200) {
+          setVideos([...videos, ...response2.data]);
+          setVideoLoader(false);
+        }
+      });
+  }
 
   const onSubmit = async (data) => {
     const videos = data.videos;
@@ -29,51 +64,45 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       formData3.append("lives", lives[i]);
     }
 
-    await authService
-      .saveVideos(formData)
-      .then((response2) => {
-        console.log(response2);
-        setVideos(response2.data);
-      });
+    await authService.saveVideos(formData).then((response2) => {
+      console.log(response2);
+      setVideos(response2.data);
+    });
 
-    await authService
-      .saveLives(formData3)
-      .then((response3) => {
-        console.log(response3);
-        setLives(response3.data);
-      });
-    await authService
-      .saveImages(formData2)
-      .then((response) => {
-        setImages(response.data);
-      });
+    await authService.saveLives(formData3).then((response3) => {
+      console.log(response3);
+      setLives(response3.data);
+    });
+    await authService.saveImages(formData2).then((response) => {
+      setImages(response.data);
+    });
     toogleStep(step + 1);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
-        <div class="circle-1">
-          <p class="text">01</p>
+        <div className="circle-1">
+          <p className="text">01</p>
           <span className="spnn">Select Catagory</span>
         </div>
-        <div class="line-1"></div>
-        <div class="circle-2">
-          <p class="text">02</p>
+        <div className="line-1"></div>
+        <div className="circle-2">
+          <p className="text">02</p>
           <span className="spnn">Listing Details</span>
         </div>
-        <div class="line-2"></div>
-        <div class="circle-3">
-          <p class="text">03</p>
+        <div className="line-2"></div>
+        <div className="circle-3">
+          <p className="text">03</p>
           <span className="spnn">Property Details</span>
-        </div>{" "}
-        <div class="line-3"></div>
-        <div class="circle-4">
-          <p class="text">04</p>
+        </div>
+        <div className="line-3"></div>
+        <div className="circle-4">
+          <p className="text">04</p>
           <span className="spnn">Upload Documents</span>
         </div>
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">05</p>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">05</p>
           <span className="spnn">Agreement</span>
         </div>
         {/* <div class="line"></div>
@@ -88,6 +117,8 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             UPLOAD DOCUMENTS
           </h2>
         </div>
+        {loader ? <div className="loader" /> : null}
+        {videoLoader ? <div className="loader" /> : null}
         <div className="input-form-1">
           Choose the Image Files
           <input
@@ -95,9 +126,18 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             type="file"
             name="images"
             multiple
-            {...register("images", { required: false })}
+            {...register("images", { onChange: onChange })}
           />
         </div>
+
+        <div className="upload-list">
+          {images.map((image) => (
+            <div className="upload-list-item">
+            <span>{image.name}</span>
+            </div>
+          ))}
+        </div>
+
         <div className="input-form-2">
           Choose the Videos Files
           <input
@@ -105,8 +145,16 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             type="file"
             name="videos"
             multiple
-            {...register("videos", { required: false })}
+            {...register("videos", { onChange: onChangeVideos })}
           />
+        </div>
+
+        <div className="upload-list">
+          {videos.map((video) => (
+            <div className="upload-list-item">
+            <span>{video.name}</span>
+            </div>
+          ))}
         </div>
 
         <div className="input-form-2">

@@ -28,7 +28,6 @@ import NumberFormat from "react-number-format";
 import Timer from "./Timer";
 
 const Display = ({ colorChange }) => {
-  colorChange("black");
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
@@ -104,7 +103,7 @@ const Display = ({ colorChange }) => {
 
 
   useEffect(() => {
-
+    colorChange("black");
     //for upcoming auction property data
     const propertyData = properties.find((item) => item._id === id);
     setProperty(propertyData.property);

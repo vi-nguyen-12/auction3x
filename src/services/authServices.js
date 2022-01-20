@@ -4,12 +4,12 @@ import env from "../env";
 
 const authService = {
   register(user) {
-    return axios.post(env.API_URL + "/api/user/register", user);
+    return axios.post(env.API_URL + "/api/users/register", user);
   },
 
   getUsers(data) {
     return axios.post(
-      env.API_URL + "/api/user/checkJWT",
+      env.API_URL + "/api/users/checkJWT",
       { authToken: data },
       {
         withCredentials: true,
@@ -18,17 +18,17 @@ const authService = {
   },
 
   verify(data) {
-    return axios.post(env.API_URL + "/api/user/verify", data);
+    return axios.post(env.API_URL + "/api/users/verify", data);
   },
 
   login(data) {
-    return axios.post(env.API_URL + "/api/user/login", data, {
+    return axios.post(env.API_URL + "/api/users/login", data, {
       withCredentials: true,
     });
   },
 
   logout() {
-    return axios.get(env.API_URL + "/api/user/logout", {
+    return axios.get(env.API_URL + "/api/users/logout", {
       withCredentials: true,
     });
   },
@@ -117,14 +117,6 @@ const authService = {
   getBuyerQuestions() {
     return axios.get(env.API_URL + "/api/questions", { withCredentials: true });
   },
-
-  getIPAddress() {
-    return axios.get("https://api.ipdata.co/?api-key=" + env.IP_API_Key);
-  },
-
-  // getAuction(id) {
-  //   return axios.get(env.API_URL + "/api/auctions/");
-  // },
 
   auctionBid(data) {
     return axios.put(

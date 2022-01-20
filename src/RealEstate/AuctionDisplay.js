@@ -29,7 +29,6 @@ import DateCountdown from "react-date-countdown-timer";
 import AuctionTimer from "./AuctionTimer";
 
 const AuctionDisplay = ({ colorChange }) => {
-  colorChange("black");
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
@@ -98,6 +97,7 @@ const AuctionDisplay = ({ colorChange }) => {
   };
 
   useEffect(() => {
+    colorChange("black");
     //for ongoing auction
     const auctionData = auctions.find((item) => item._id === id);
     setAuction(auctionData);

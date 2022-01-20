@@ -18,7 +18,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   const [ip, setIp] = useState();
 
   const getIp = async () => {
-    await authService.getIPAddress().then((res) => {
+    await axious.get("https://api.ipify.org?format=json").then((res) => {
       setIp(res.data.ip);
     });
   };

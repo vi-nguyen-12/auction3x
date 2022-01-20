@@ -69,6 +69,10 @@ function App() {
     setColor(color);
   };
 
+  // useEffect(() => {
+  //   colorChange();
+  // }, []);
+
   return (
     <div className="App">
       <Header color={color} />

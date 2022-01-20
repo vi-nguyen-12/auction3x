@@ -27,43 +27,44 @@ const Sell = ({ toogleStep, step }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="box-content">
       <div className="sell-top">
-        <div class="circle-1">
-          <p class="text">01</p>
+        <div className="circle-1">
+          <p className="text">01</p>
           <span className="spnn">Select Catagory</span>
-        </div>{" "}
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">02</p>
+        </div>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">02</p>
           <span className="spnn">Listing Details</span>
-        </div>{" "}
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">03</p>
+        </div>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">03</p>
           <span className="spnn">Upload Documents</span>
-        </div>{" "}
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">04</p>
+        </div>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">04</p>
           <span className="spnn">Listing Fees</span>
-        </div>{" "}
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">05</p>
+        </div>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">05</p>
           <span className="spnn">Agreement</span>
-        </div>{" "}
+        </div>
       </div>
       <div className="sell-bottom">
-        <Table borderless responsive>
+        <Table borderless responsive="lg" style={{display:"grid"}}>
           <thead>
-            <th colSpan={3} >
-              <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
-                SELECT WHAT YOU WANT TO SELL
-              </h3>
-              {/* <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p> */}
-            </th>
+            <tr>
+              <th>
+                <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
+                  SELECT WHAT YOU WANT TO SELL
+                </h3>
+              </th>
+            </tr>
+            {/* <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p> */}
           </thead>
-
-          <tbody>
+          <tbody style={{marginTop:"30px"}}>
             <tr className="sell-1">
               <td>
                 <input type="radio" name="sell" value="1" />
@@ -102,7 +103,6 @@ const Sell = ({ toogleStep, step }) => {
                 <label className="choice">Jewels</label>
               </td>
               <td>
-
                 <input type="radio" name="sell" value="1" />
                 <label className="choice">Motorcycle</label>
               </td>

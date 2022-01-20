@@ -29,7 +29,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {
-        return item.types.includes("locality" || "political" || "sublocality");
+        return item.types.includes("locality" || "sublocality");
       });
       setCity(cities[0].long_name);
 
@@ -51,7 +51,9 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
   };
 
   const onSubmit = (data) => {
-    const addres = address + " #" + data.address1;
+
+    console.log(data);
+    const addres = address + " " + data.address1;
     const datas = {
       street_address: addres,
       city: city,
@@ -59,37 +61,46 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
       country: country,
       zipCode: zip,
     };
+
     authService.realEstate(datas).then((res) => {
-      properties(res.data);
-      toogleStep(step + 1);
+      if (res.data.length !== 0) {
+        console.log(res.data);
+        properties(res.data);
+        toogleStep(step + 1);
+      } 
+      else if (res.data.length === 0) {
+        alert("Could not find property information! Please fill out the property details.");
+        properties(datas);
+        toogleStep(step + 1);
+      }
     });
   };
 
   return (
     <div className="listDetail-content">
       <div className="sell-top">
-        <div class="circle-1">
-          <p class="text">01</p>
+        <div className="circle-1">
+          <p className="text">01</p>
           <span className="spnn">Select Catagory</span>
         </div>
-        <div class="line-1"></div>
-        <div class="circle-2">
-          <p class="text">02</p>
+        <div className="line-1"></div>
+        <div className="circle-2">
+          <p className="text">02</p>
           <span className="spnn">Listing Details</span>
         </div>
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">03</p>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">03</p>
           <span className="spnn">Property Details</span>
         </div>
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">04</p>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">04</p>
           <span className="spnn">Upload Documents</span>
         </div>
-        <div class="line"></div>
-        <div class="circle">
-          <p class="text">05</p>
+        <div className="line"></div>
+        <div className="circle">
+          <p className="text">05</p>
           <span className="spnn">Agreement</span>
         </div>
         {/* <div class="line"></div>
@@ -130,11 +141,16 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               }) => (
                 <div>
                   <input
-                    style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
+                    style={{
+                      width: "500px",
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
                     {...getInputProps({
                       placeholder: "Search address",
                       className: "form-control",
                     })}
+                    required
                   />
                   <div className="autocomplete-dropdown-container">
                     {loading && <div>Loading...</div>}
@@ -182,7 +198,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               marginBottom: "10px",
             }}
           >
-            Address Line 1
+            Address Line 1*
           </label>
 
           <div
@@ -221,98 +237,110 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               marginBottom: "10px",
             }}
           >
-            <tr>
-              <td
-                style={{ width: "240px", position: "relative", left: "105px" }}
-              >
-                <input
-                  style={{ fontSize: "17px", fontWeight: "bold" }}
-                  type="text"
-                  name="firstName"
-                  className="form-control"
-                  placeholder="State"
-                  value={state}
-                  {...register("state", { required: false })}
-                />
-              </td>
-              <td
+            <tbody>
+              <tr>
+                <td
+                  style={{
+                    width: "240px",
+                    position: "relative",
+                    left: "105px",
+                  }}
+                >
+                  <input
+                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    type="text"
+                    name="firstName"
+                    className="form-control"
+                    placeholder="State"
+                    defaultValue={state}
+                    {...register("state", { required: false })}
+                  />
+                </td>
+                <td
+                  style={{
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
+                  }}
+                >
+                  <input
+                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    type="text"
+                    name="lastName"
+                    className="form-control"
+                    placeholder="City"
+                    defaultValue={city}
+                    {...register("city", { required: false })}
+                  />
+                </td>
+              </tr>
+              <tr
                 style={{
-                  position: "absolute",
-                  right: "100px",
-                  width: "240px",
-                  fontSize: "17px",
+                  position: "relative",
+                  left: "109px",
+                  fontSize: "13px",
+                  bottom: "5px",
                 }}
               >
-                <input
-                  style={{ fontSize: "17px", fontWeight: "bold" }}
-                  type="text"
-                  name="lastName"
-                  className="form-control"
-                  placeholder="City"
-                  value={city}
-                  {...register("city", { required: false })}
-                />
-              </td>
-            </tr>
-            <tr
-              style={{
-                position: "relative",
-                left: "109px",
-                fontSize: "13px",
-                bottom: "5px",
-              }}
-            >
-              <td>State / Province</td>
-              <td style={{ paddingLeft: "15px" }}>City / District</td>
-            </tr>
+                <td>State / Province</td>
+                <td style={{ paddingLeft: "15px" }}>City / District</td>
+              </tr>
+            </tbody>
           </table>
 
           <table style={{ marginBottom: "30px" }}>
-            <tr>
-              <td
-                style={{ width: "240px", position: "relative", left: "105px" }}
-              >
-                <input
-                  style={{ fontSize: "17px", fontWeight: "bold" }}
-                  type="text"
-                  className="form-control"
-                  placeholder="Zip Code"
-                  value={zip}
-                  {...register("zipCode", { required: false })}
-                />
-              </td>
-              <td
+            <tbody>
+              <tr>
+                <td
+                  style={{
+                    width: "240px",
+                    position: "relative",
+                    left: "105px",
+                  }}
+                >
+                  <input
+                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    type="text"
+                    className="form-control"
+                    placeholder="Zip Code"
+                    defaultValue={zip}
+                    {...register("zipCode", { required: false })}
+                  />
+                </td>
+                <td
+                  style={{
+                    position: "absolute",
+                    right: "100px",
+                    width: "240px",
+                    fontSize: "17px",
+                  }}
+                >
+                  <input
+                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    type="text"
+                    className="form-control"
+                    placeholder="Country"
+                    defaultValue={country}
+                    {...register("country", {
+                      required: false,
+                      maxLength: 100,
+                    })}
+                  />
+                </td>
+              </tr>
+              <tr
                 style={{
-                  position: "absolute",
-                  right: "100px",
-                  width: "240px",
-                  fontSize: "17px",
+                  position: "relative",
+                  left: "109px",
+                  fontSize: "13px",
+                  bottom: "5px",
                 }}
               >
-                <input
-                  style={{ fontSize: "17px", fontWeight: "bold" }}
-                  type="text"
-                  className="form-control"
-                  placeholder="Country"
-                  value={country}
-                  {...register("country", {
-                    required: false,
-                    maxLength: 100,
-                  })}
-                />
-              </td>
-            </tr>
-            <tr
-              style={{
-                position: "relative",
-                left: "109px",
-                fontSize: "13px",
-                bottom: "5px",
-              }}
-            >
-              <td>Postal Code</td>
-              <td style={{ paddingLeft: "15px" }}>Country</td>
-            </tr>
+                <td>Postal Code</td>
+                <td style={{ paddingLeft: "15px" }}>Country</td>
+              </tr>
+            </tbody>
           </table>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <textarea
@@ -323,7 +351,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                 borderRadius: "3px",
                 paddingLeft: "10px",
               }}
-              placeholder="Property Description"
+              placeholder="Property Description(Optional)"
             ></textarea>
           </div>
           <div
