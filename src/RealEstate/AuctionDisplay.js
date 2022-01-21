@@ -61,6 +61,8 @@ const AuctionDisplay = ({ colorChange }) => {
 
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
 
   const toogleBid = () => setBid(!bid);
@@ -90,11 +92,11 @@ const AuctionDisplay = ({ colorChange }) => {
     }
   };
 
-  const handleRegister = () => {
-    if (!setRegistered) {
-      return alert("You have not registered to bid for this property!");
-    }
-  };
+  // const handleRegister = () => {
+  //   if (!setRegistered) {
+  //     return alert("You have not registered to bid for this property!");
+  //   }
+  // };
 
   useEffect(() => {
     colorChange("black");
@@ -588,9 +590,12 @@ const AuctionDisplay = ({ colorChange }) => {
                       <button
                         className="customButton"
                         style={{ width: "200px", fontSize: "20px" }}
-                        onClick={handleRegister}
+                        onClick={() => {
+                          // handleRegister();
+                          toogleRegister();
+                        }}
                       >
-                        Bid Now!
+                        Register to Bid!
                       </button>
                     </div>
                     <Modal size="lg" show={bid} onHide={toogleBid} centered>
@@ -663,6 +668,14 @@ const AuctionDisplay = ({ colorChange }) => {
               <button onClick={tooglePlaceBid}>place to bid</button>
             </div>
           </td> */}
+
+              <Modal size="lg" show={showRegister} onHide={toogleRegister} centered>
+                <Modal.Body>
+                  {/* <BuyConfirm /> */}
+                  <MultiBuyForm />
+                </Modal.Body>
+              </Modal>
+
               <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
                 <Modal.Body>
                   <BuyConfirm />
@@ -1059,7 +1072,6 @@ const AuctionDisplay = ({ colorChange }) => {
 
             <div style={{ padding: "35px" }}>
               <tr>
-                
                 <h2>
                   <span style={{ color: "#B77B50" }}>|</span>Executive Summary
                 </h2>
@@ -1163,7 +1175,6 @@ const AuctionDisplay = ({ colorChange }) => {
                     padding: "20px",
                   }}
                 >
-                  
                   <div style={{ color: "white" }}>
                     <h3>Location Highlight</h3>
                     <p>
@@ -1186,7 +1197,6 @@ const AuctionDisplay = ({ colorChange }) => {
                     padding: "20px",
                   }}
                 >
-                  
                   <div style={{ color: "white" }}>
                     <h3> Market Overview</h3>
                     <p>
