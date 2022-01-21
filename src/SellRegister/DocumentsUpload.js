@@ -18,16 +18,17 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
       formData.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData).then((response) => {
+      console.log(response);
       if (response.status === 200) {
-        setDocuments([...documents, ...response.data]);
+        setDocuments(response.data);
         setLoader(false);
       }
     });
   };
 
   const handleDelete = (url) => () => {
-    setDocuments(document.filter(document => document.url !== url))
-  }
+    setDocuments(documents.filter((document) => document.url !== url));
+  };
 
   const handleDocument = (data) => {
     setDocuments(data);
@@ -38,18 +39,19 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   }, []);
 
   const onSubmit = async (data) => {
-    const documents = data.documents;
-    const formData = new FormData();
+    // const documents = data.documents;
+    // const formData = new FormData();
 
-    for (let i = 0; i < documents.length; i++) {
-      formData.append("documents", documents[i]);
-    }
-    await authService.saveDocuments(formData).then((response) => {
-      setDocuments(response.data);
-    });
+    // for (let i = 0; i < documents.length; i++) {
+    //   formData.append("documents", documents[i]);
+    // }
+    // await authService.saveDocuments(formData).then((response) => {
+    //   setDocuments(response.data);
+    // });
     toogleStep(step + 1);
   };
 
+  console.log(documents);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
@@ -90,7 +92,11 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           </h2>
           <p>We only accept PDF Files</p>
         </div>
-        {loader ? <div className="loader" /> : null}
+        {loader ? (
+          <div className="loader">
+            <div className="spinning" />
+          </div>
+        ) : null}
         <div className="input-form-3">
           Choose the Documents Files (.pdf)
           <input
@@ -103,7 +109,26 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             {...register("documents", { onChange: onChange })}
             required
           />
-          <label for="documents-btn" >+ Documents</label>
+          <div>
+            <label for="documents-btn">+ Documents</label>
+          </div>
+          <div className="upload-list">
+            {documents
+              ? documents.map((document) => (
+                  <div className="upload-list-item">
+                    <span>
+                      {document.name}
+                      <Button
+                        className="delete-btn"
+                        onClick={handleDelete(document.url)}
+                      >
+                        X
+                      </Button>
+                    </span>
+                  </div>
+                ))
+              : null}
+          </div>
         </div>
 
         {/* <div className="upload-list">
@@ -114,7 +139,6 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             </div>
           ))}
         </div> */}
-
 
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>

@@ -34,54 +34,47 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
     for (let i = 0; i < e.target.files.length; i++) {
       formData.append("videos", e.target.files[i]);
     }
-    await authService
-      .saveVideos(formData)
-      .then((response2) => {
-        if (response2.status === 200) {
-          setVideos([...videos, ...response2.data]);
-          setVideoLoader(false);
-        }
-      });
-  }
+    await authService.saveVideos(formData).then((response2) => {
+      if (response2.status === 200) {
+        setVideos([...videos, ...response2.data]);
+        setVideoLoader(false);
+      }
+    });
+  };
 
   const handleDelete = (url) => () => {
-    console.log(url)
-    setImages(images.filter(image => image.url !== url))
+    console.log(url);
+    setImages(images.filter((image) => image.url !== url));
     // make button not hit submit
-
-  }
+  };
 
   const handleDeleteVideo = (url) => () => {
-    console.log(url)
-    setVideos(videos.filter(video => video.url !== url))
-
-  }
+    console.log(url);
+    setVideos(videos.filter((video) => video.url !== url));
+  };
 
   const onSubmit = async (data) => {
-    const videos = data.videos;
-    const images = data.images;
+    // const videos = data.videos;
+    // const images = data.images;
 
+    // const formData = new FormData();
+    // const formData2 = new FormData();
 
-    const formData = new FormData();
-    const formData2 = new FormData();
+    // for (let i = 0; i < videos.length; i++) {
+    //   formData2.append("videos", videos[i]);
+    // }
+    // for (let i = 0; i < images.length; i++) {
+    //   formData.append("images", images[i]);
+    // }
 
+    // await authService.saveVideos(formData2).then((response2) => {
+    //   console.log(response2);
+    //   setVideos(response2.data);
+    // });
 
-    for (let i = 0; i < videos.length; i++) {
-      formData2.append("videos", videos[i]);
-    }
-    for (let i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
-    }
-
-    await authService.saveVideos(formData2).then((response2) => {
-      console.log(response2);
-      setVideos(response2.data);
-    });
-
-
-    await authService.saveImages(formData).then((response) => {
-      setImages(response.data);
-    });
+    // await authService.saveImages(formData).then((response) => {
+    //   setImages(response.data);
+    // });
     toogleStep(step + 1);
   };
   return (
@@ -123,8 +116,16 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             UPLOAD DOCUMENTS
           </h2>
         </div>
-        {loader ? <div className="loader" /> : null}
-        {videoLoader ? <div className="loader" /> : null}
+        {loader ? (
+          <div className="loader">
+            <div className="spinning" />
+          </div>
+        ) : null}
+        {videoLoader ? (
+          <div className="loader">
+            <div className="spinning" />
+          </div>
+        ) : null}
         <div className="input-form-1">
           Choose the Image Files
           <input
@@ -134,21 +135,24 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             name="images"
             multiple
             hidden
-            {...register("images", { onChange: onChange })} required
+            {...register("images", { onChange: onChange })}
+            required
           />
           <div>
-            <label for="images-btn" >+ Images</label>
+            <label for="images-btn">+ Images</label>
           </div>
-
-
           <div className="upload-list">
             {images.map((image) => (
               <div className="upload-list-item">
-                <span>{image.name}<Button className="delete-btn"
-                  onClick={handleDelete(image.url)}
-                >
-                  X
-                </Button></span>
+                <span>
+                  {image.name}
+                  <Button
+                    className="delete-btn"
+                    onClick={handleDelete(image.url)}
+                  >
+                    X
+                  </Button>
+                </span>
               </div>
             ))}
           </div>
@@ -164,27 +168,27 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             multiple
             hidden
             {...register("videos", { onChange: onChangeVideos })}
+            // required
           />
           <div>
             <label for="videos-btn">+ Videos</label>
           </div>
-
-
-
           <div className="upload-list">
             {videos.map((video) => (
               <div className="upload-list-item">
-                <span>{video.name}
-                  <Button className="delete-btn"
+                <span>
+                  {video.name}
+                  <Button
+                    className="delete-btn"
                     onClick={handleDeleteVideo(video.url)}
                   >
                     X
-                  </Button></span>
+                  </Button>
+                </span>
               </div>
             ))}
           </div>
         </div>
-
 
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
