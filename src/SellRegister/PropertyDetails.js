@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
@@ -16,6 +16,7 @@ const PropertyDetails = ({
   } = useForm();
 
   const onSubmit = (data) => {
+    console.log(data);
     const submitedData = {
       type: "real-estate",
       street_address: data.street_address,
@@ -70,9 +71,6 @@ const PropertyDetails = ({
             </div> */}
           </div>
           <div className="list-sell-bottom">
-            <div className="listDetails-title">
-              <h2>Listing Deatails</h2>
-            </div>
             <form onSubmit={handleSubmit(onSubmit)} className="list-form">
               <label
                 style={{
@@ -361,7 +359,9 @@ const PropertyDetails = ({
                             type="number"
                             name="total_value"
                             className="sell-amount"
-                            defaultValue={property.market_assessments[0].total_value}
+                            defaultValue={
+                              property.market_assessments[0].total_value
+                            }
                             // {...register("total_value", { required: false })}
                           />
                         </div>
@@ -450,20 +450,23 @@ const PropertyDetails = ({
                     borderRadius: "3px",
                     paddingLeft: "10px",
                     position: "absolute",
-                    bottom: "10px",
+                    bottom: "15%",
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
+              <div className="bottom-btn" style={{width:"100%"}}>
+                <button
+                  className="pre-btn"
+                  onClick={() => toogleStep(step - 1)}
+                >
+                  Previous
+                </button>
+                <button className="nxt-btn" type="submit">
+                  Next
+                </button>
+              </div>
             </form>
-          </div>
-          <div className="bottom-btn">
-            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
-              Previous
-            </button>
-            <button className="nxt-btn" onClick={() => toogleStep(step + 1)} type="submit">
-              Next
-            </button>
           </div>
         </div>
       ) : (
@@ -525,7 +528,7 @@ const PropertyDetails = ({
                     fontWeight: "bold",
                     fontSize: "15px",
                   }}
-                  defaultValue={property.street_address}
+                  // defaultValue={property.street_address}
                   {...register("street_address", { required: false })}
                 />
               </div>
@@ -554,7 +557,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "100px",
                         }}
-                        defaultValue={property.state}
+                        // defaultValue={property.state}
                         type="text"
                         name="state"
                         {...register("state", { required: false })}
@@ -573,7 +576,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "100px",
                         }}
-                        defaultValue={property.city}
+                        // defaultValue={property.city}
                         type="text"
                         name="city"
                         {...register("city", { required: false })}
@@ -592,7 +595,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "80px",
                         }}
-                        defaultValue={property.zipCode}
+                        // defaultValue={property.zipCode}
                         type="number"
                         name="zipCode"
                         {...register("zipCode", { required: false })}
@@ -873,18 +876,21 @@ const PropertyDetails = ({
                     position: "absolute",
                     bottom: "10px",
                   }}
-                  placeholder="Property Description"
+                  placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
+              <div className="bottom-btn">
+                <button
+                  className="pre-btn"
+                  onClick={() => toogleStep(step - 1)}
+                >
+                  Previous
+                </button>
+                <button className="nxt-btn" type="submit">
+                  Next
+                </button>
+              </div>
             </form>
-          </div>
-          <div className="bottom-btn">
-            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
-              Previous
-            </button>
-            <button className="nxt-btn" type="submit">
-              Next
-            </button>
           </div>
         </div>
       )}
