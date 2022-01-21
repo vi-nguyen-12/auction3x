@@ -2,14 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../services/authServices";
-import Toast from "../components/Toast";
+import { Button } from "react-bootstrap";
 import "../styles/SellRegister.css";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
-  const [lives, setLives] = useState([]);
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
 
@@ -45,35 +44,42 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       });
   }
 
+  const handleDelete = (url) => () => {
+    console.log(url)
+    setImages(images.filter(image => image.url !== url))
+    // make button not hit submit
+
+  }
+
+  const handleDeleteVideo = (url) => () => {
+    console.log(url)
+    setVideos(videos.filter(video => video.url !== url))
+
+  }
+
   const onSubmit = async (data) => {
     const videos = data.videos;
     const images = data.images;
-    const lives = data.lives;
+
 
     const formData = new FormData();
     const formData2 = new FormData();
-    const formData3 = new FormData();
+
 
     for (let i = 0; i < videos.length; i++) {
-      formData.append("videos", videos[i]);
+      formData2.append("videos", videos[i]);
     }
     for (let i = 0; i < images.length; i++) {
-      formData2.append("images", images[i]);
-    }
-    for (let i = 0; i < lives.length; i++) {
-      formData3.append("lives", lives[i]);
+      formData.append("images", images[i]);
     }
 
-    await authService.saveVideos(formData).then((response2) => {
+    await authService.saveVideos(formData2).then((response2) => {
       console.log(response2);
       setVideos(response2.data);
     });
 
-    await authService.saveLives(formData3).then((response3) => {
-      console.log(response3);
-      setLives(response3.data);
-    });
-    await authService.saveImages(formData2).then((response) => {
+
+    await authService.saveImages(formData).then((response) => {
       setImages(response.data);
     });
     toogleStep(step + 1);
@@ -122,51 +128,63 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         <div className="input-form-1">
           Choose the Image Files
           <input
+            id="images-btn"
             accept="image/*"
             type="file"
             name="images"
             multiple
-            {...register("images", { onChange: onChange })}
+            hidden
+            {...register("images", { onChange: onChange })} required
           />
-        </div>
+          <div>
+            <label for="images-btn" >+ Images</label>
+          </div>
 
-        <div className="upload-list">
-          {images.map((image) => (
-            <div className="upload-list-item">
-            <span>{image.name}</span>
-            </div>
-          ))}
+
+          <div className="upload-list">
+            {images.map((image) => (
+              <div className="upload-list-item">
+                <span>{image.name}<Button className="delete-btn"
+                  onClick={handleDelete(image.url)}
+                >
+                  X
+                </Button></span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="input-form-2">
-          Choose the Videos Files
+          Choose the Videos/ Live360 Files
           <input
+            id="videos-btn"
             accept="video/*"
             type="file"
             name="videos"
             multiple
+            hidden
             {...register("videos", { onChange: onChangeVideos })}
           />
+          <div>
+            <label for="videos-btn">+ Videos</label>
+          </div>
+
+
+
+          <div className="upload-list">
+            {videos.map((video) => (
+              <div className="upload-list-item">
+                <span>{video.name}
+                  <Button className="delete-btn"
+                    onClick={handleDeleteVideo(video.url)}
+                  >
+                    X
+                  </Button></span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="upload-list">
-          {videos.map((video) => (
-            <div className="upload-list-item">
-            <span>{video.name}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="input-form-2">
-          Choose the Live360 Files
-          <input
-            accept="video/*"
-            type="file"
-            name="live360"
-            multiple
-            {...register("lives", { required: false })}
-          />
-        </div>
 
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
