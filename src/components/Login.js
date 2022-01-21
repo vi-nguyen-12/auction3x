@@ -30,25 +30,22 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        if (response.data.message === "User has not been verified") {
+        if (response.data.error === "Invalid password") {
+          alert(response.data.error);
+        } else if (response.data.error === "User has not been verified") {
+          alert(response.data.error);
           toogleSignIn();
           toogleConfirmModal();
         } else {
-          console.log(response);
-          if (!response.data.isActive) {
-            setShowWarning(true);
-          }
           dispatch(login(response.data.data));
           toogleButton();
           toogleSignIn();
         }
-      } catch (err) {
-        if (err.response.status === 400) {
-          alert("Invalid Password or Email");
-        }
+      } catch (error) {
+        console.log(error);
       }
       history.push("/");
-      // window.location.reload();
+      window.location.reload();
       window.setTimeout(() => {
         window.scrollTo(0, 0);
       }, 0);

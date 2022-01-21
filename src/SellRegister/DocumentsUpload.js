@@ -20,7 +20,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     await authService.saveDocuments(formData).then((response) => {
       console.log(response);
       if (response.status === 200) {
-        setDocuments(response.data);
+        setDocuments([...documents, ...response.data]);
         setLoader(false);
       }
     });
@@ -29,14 +29,6 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const handleDelete = (url) => () => {
     setDocuments(documents.filter((document) => document.url !== url));
   };
-
-  const handleDocument = (data) => {
-    setDocuments(data);
-  };
-
-  useEffect(() => {
-    handleDocument();
-  }, []);
 
   const onSubmit = async (data) => {
     // const documents = data.documents;
