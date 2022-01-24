@@ -43,7 +43,7 @@ const PropertyDetails = ({
 
   return (
     <>
-      {property.address && property.structure ? (
+      {property.address && property.structure && property.market_assessments ? (
         <div className="listDetail-content">
           <div className="sell-top">
             <div className="circle-1">
@@ -409,6 +409,7 @@ const PropertyDetails = ({
                           name="reservedAmount"
                           required
                           {...register("reservedAmount", { required: false })}
+                          required
                         />
                       </div>
                     </td>
@@ -432,6 +433,7 @@ const PropertyDetails = ({
                           name="discussedAmount"
                           required
                           {...register("discussedAmount", { required: false })}
+                          required
                         />
                       </div>
                     </td>
@@ -887,7 +889,7 @@ const PropertyDetails = ({
                   placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
-              <div className="bottom-btn">
+              <div className="bottom-btn" style={{width:"100%"}}>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}

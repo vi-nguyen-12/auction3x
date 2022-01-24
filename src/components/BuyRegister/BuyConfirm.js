@@ -7,7 +7,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 
-const BuyConfirm = ({ toogleStep, step }) => {
+const BuyConfirm = () => {
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState();
   const { id } = useParams();
@@ -20,29 +20,30 @@ const BuyConfirm = ({ toogleStep, step }) => {
 
   const onSubmit = async (data) => {
     const Bid = { id: propId._id, biddingTimes, bidding: bid };
-    await authService
-      .auctionBid(Bid)
-      .then((res) => {
-        if (res.status === 200) {
+    await authService.auctionBid(Bid).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
           window.setTimeout(() => {
             window.location.reload();
           }, 1000);
         }
-      })
-      .catch((err) => {
-        if (err.response.status === 400) {
-          alert(
-            "Your bid is less than or equal to the current highest bid! Please bid higher!"
-          );
-        }
-      });
+      }
+    });
   };
   return (
     <>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
+          style={{
+            color: "#D58F5C",
+            fontSize: "40px",
+            fontWeight: "bold",
+            marginBottom: "20px",
+          }}
           contentClassName="custom-modal-title"
         >
           Enter your Bid

@@ -3,17 +3,23 @@ import Toast from "./Toast";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 
-function Confirm({toogleConfirmModal, toogleSignIn}) {
+function Confirm({ toogleConfirmModal, toogleSignIn }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    authServices.verify(data);
-    console.log(data)
-    toogleConfirmModal();
-    toogleSignIn();
+    authServices.verify(data).then((response) => {
+      console.log(response);
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        alert(response.data.message);
+        toogleConfirmModal();
+        toogleSignIn();
+      }
+    });
   };
   return (
     // Email code confirmation modal
@@ -38,13 +44,13 @@ function Confirm({toogleConfirmModal, toogleSignIn}) {
                 })}
               />
             </div>
-            <div className="form-group" style={{marginTop:"10px"}}>
+            <div className="form-group" style={{ marginTop: "10px" }}>
               <input
                 type="text"
                 className="form-control"
                 name="code"
                 placeholder="Code"
-                {...register("token", {required: true})}
+                {...register("token", { required: true })}
               />
             </div>
             <div
