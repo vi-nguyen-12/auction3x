@@ -85,301 +85,321 @@ const PropertyDetails = ({
                 Property Details
               </label>
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <input
-                  style={{
-                    width: "300px",
-                    marginBottom: "10px",
-                    fontWeight: "bold",
-                    fontSize: "15px",
-                  }}
-                  defaultValue={property.address.formatted_street_address}
-                  {...register("street_address", { required: false })}
-                />
-              </div>
-              <label
-                style={{
-                  position: "relative",
-                  fontSize: "13px",
-                  bottom: "15px",
-                  left: "200px",
-                }}
-              >
-                Street Address
-              </label>
-
-              <table
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                <tbody>
-                  <tr style={{ marginBottom: "30px" }}>
-                    <td style={{ position: "relative", left: "199px" }}>
-                      <input
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: "bold",
-                          width: "100px",
-                        }}
-                        type="text"
-                        name="state"
-                        defaultValue={property.address.state}
-                        {...register("state", { required: false })}
-                      ></input>
-                    </td>
-                    <td
+              {property.address ? (
+                <>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <input
                       style={{
-                        position: "absolute",
-                        right: "290px",
-                        fontSize: "17px",
+                        width: "300px",
+                        marginBottom: "10px",
+                        fontWeight: "bold",
+                        fontSize: "15px",
                       }}
-                    >
-                      <input
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: "bold",
-                          width: "100px",
-                        }}
-                        type="text"
-                        name="city"
-                        defaultValue={property.address.city}
-                        {...register("city", { required: false })}
-                      />
-                    </td>
-                    <td
-                      style={{
-                        position: "absolute",
-                        right: "199px",
-                        fontSize: "17px",
-                      }}
-                    >
-                      <input
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: "bold",
-                          width: "80px",
-                        }}
-                        type="number"
-                        name="zipCode"
-                        defaultValue={property.address.zip_code}
-                        {...register("zipCode", { required: false })}
-                      />
-                    </td>
-                  </tr>
-                  <tr
+                      defaultValue={property.address.formatted_street_address}
+                      {...register("street_address", { required: false })}
+                    />
+                  </div>
+                  <label
                     style={{
                       position: "relative",
+                      fontSize: "13px",
+                      bottom: "15px",
                       left: "200px",
-                      fontSize: "13px",
-                      bottom: "5px",
                     }}
                   >
-                    <td>State</td>
-                    <td style={{ paddingLeft: "10px" }}>City</td>
-                    <td style={{ paddingLeft: "87px" }}>Zip Code</td>
-                  </tr>
-                </tbody>
-              </table>
+                    Street Address
+                  </label>
 
-              <table
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  marginBottom: "20px",
-                  marginTop: "40px",
-                }}
-              >
-                <tbody>
-                  <tr>
-                    <td
-                      style={{
-                        width: "270px",
-                        position: "relative",
-                        left: "105px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="text"
-                        name="ownerName"
-                        className="form-control"
-                        defaultValue={property.owner.name}
-                        {...register("ownerName", { required: false })}
-                      ></input>
-                    </td>
-                    <td
-                      style={{
-                        position: "absolute",
-                        right: "103px",
-                        width: "190px",
-                        fontSize: "17px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="text"
-                        name="propertyType"
-                        className="form-control"
-                        defaultValue={
-                          property.parcel.standardized_land_use_type
-                        }
-                        {...register("propertyType", { required: false })}
-                      />
-                    </td>
-                  </tr>
-                  <tr
+                  <table
                     style={{
-                      position: "relative",
-                      left: "109px",
-                      fontSize: "13px",
-                      bottom: "5px",
+                      marginBottom: "10px",
                     }}
                   >
-                    <td>Property Owner</td>
-                    <td style={{ paddingLeft: "30px" }}>Property Type</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <table
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  marginBottom: "10px",
-                }}
-              >
-                <tbody>
-                  <tr>
-                    <td
-                      style={{
-                        width: "130px",
-                        position: "relative",
-                        left: "105px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="number"
-                        name="rooms_count"
-                        className="form-control"
-                        defaultValue={property.structure.rooms_count}
-                        {...register("rooms_count", { required: false })}
-                      />
-                    </td>
-                    <td
-                      style={{
-                        position: "absolute",
-                        left: "245px",
-                        width: "130px",
-                        fontSize: "17px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="number"
-                        name="sqft"
-                        className="form-control"
-                        defaultValue={property.structure.total_area_sq_ft}
-                        {...register("sqft", { required: false })}
-                      />
-                    </td>
-                    <td
-                      style={{
-                        position: "absolute",
-                        right: "215px",
-                        width: "100px",
-                        fontSize: "17px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="number"
-                        name="beds"
-                        className="form-control"
-                        defaultValue={property.structure.beds_count}
-                        {...register("bedrooms", { required: false })}
-                      />
-                    </td>
-
-                    <td
-                      style={{
-                        position: "absolute",
-                        right: "105px",
-                        width: "100px",
-                        fontSize: "17px",
-                      }}
-                    >
-                      <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
-                        type="number"
-                        name="baths"
-                        className="form-control"
-                        defaultValue={property.structure.baths}
-                        {...register("bathrooms", { required: false })}
-                      />
-                    </td>
-                  </tr>
-                  <tr
-                    style={{
-                      position: "relative",
-                      left: "109px",
-                      fontSize: "13px",
-                      bottom: "5px",
-                    }}
-                  >
-                    <td>Total Rooms</td>
-                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)</td>
-                    <td style={{ margin: "auto" }}>Bedrooms</td>
-                    <td style={{ paddingRight: "170px", paddingLeft: "35px" }}>
-                      Bathrooms
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <table
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <tbody>
-                  <div style={{ display: "inline" }}>
-                    <tr>
-                      <td>
-                        <div className="amount-input">
-                          <span className="prefix">$</span>
+                    <tbody>
+                      <tr style={{ marginBottom: "30px" }}>
+                        <td style={{ position: "relative", left: "199px" }}>
                           <input
                             style={{
-                              fontSize: "17px",
+                              fontSize: "15px",
                               fontWeight: "bold",
+                              width: "100px",
+                            }}
+                            type="text"
+                            name="state"
+                            defaultValue={property.address.state}
+                            {...register("state", { required: false })}
+                          ></input>
+                        </td>
+                        <td
+                          style={{
+                            position: "absolute",
+                            right: "290px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: "bold",
+                              width: "100px",
+                            }}
+                            type="text"
+                            name="city"
+                            defaultValue={property.address.city}
+                            {...register("city", { required: false })}
+                          />
+                        </td>
+                        <td
+                          style={{
+                            position: "absolute",
+                            right: "199px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: "bold",
+                              width: "80px",
                             }}
                             type="number"
-                            name="total_value"
-                            className="sell-amount"
-                            defaultValue={
-                              property.market_assessments[0].total_value
-                            }
-                            // {...register("total_value", { required: false })}
+                            name="zipCode"
+                            defaultValue={property.address.zip_code}
+                            {...register("zipCode", { required: false })}
                           />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
+                        </td>
+                      </tr>
+                      <tr
                         style={{
                           position: "relative",
+                          left: "200px",
                           fontSize: "13px",
+                          bottom: "5px",
                         }}
                       >
-                        Market Value
-                      </td>
-                    </tr>
-                  </div>
-                </tbody>
-              </table>
+                        <td>State</td>
+                        <td style={{ paddingLeft: "10px" }}>City</td>
+                        <td style={{ paddingLeft: "87px" }}>Zip Code</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+              ) : null}
+
+              {property.owner && property.parcel ? (
+                <>
+                  <table
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      marginBottom: "20px",
+                      marginTop: "40px",
+                    }}
+                  >
+                    <tbody>
+                      <tr>
+                        <td
+                          style={{
+                            width: "270px",
+                            position: "relative",
+                            left: "105px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="text"
+                            name="ownerName"
+                            className="form-control"
+                            defaultValue={property.owner.name}
+                            {...register("ownerName", { required: false })}
+                          ></input>
+                        </td>
+                        <td
+                          style={{
+                            position: "absolute",
+                            right: "103px",
+                            width: "190px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="text"
+                            name="propertyType"
+                            className="form-control"
+                            defaultValue={
+                              property.parcel.standardized_land_use_type
+                            }
+                            {...register("propertyType", { required: false })}
+                          />
+                        </td>
+                      </tr>
+                      <tr
+                        style={{
+                          position: "relative",
+                          left: "109px",
+                          fontSize: "13px",
+                          bottom: "5px",
+                        }}
+                      >
+                        <td>Property Owner</td>
+                        <td style={{ paddingLeft: "30px" }}>Property Type</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+              ) : null}
+
+              {property.structure ? (
+                <>
+                  <table
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <tbody>
+                      <tr>
+                        <td
+                          style={{
+                            width: "130px",
+                            position: "relative",
+                            left: "105px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="number"
+                            name="rooms_count"
+                            className="form-control"
+                            defaultValue={property.structure.rooms_count}
+                            {...register("rooms_count", { required: false })}
+                          />
+                        </td>
+                        <td
+                          style={{
+                            position: "absolute",
+                            left: "245px",
+                            width: "130px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="number"
+                            name="sqft"
+                            className="form-control"
+                            defaultValue={property.structure.total_area_sq_ft}
+                            {...register("sqft", { required: false })}
+                          />
+                        </td>
+                        <td
+                          style={{
+                            position: "absolute",
+                            right: "215px",
+                            width: "100px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="number"
+                            name="beds"
+                            className="form-control"
+                            defaultValue={property.structure.beds_count}
+                            {...register("bedrooms", { required: false })}
+                          />
+                        </td>
+
+                        <td
+                          style={{
+                            position: "absolute",
+                            right: "105px",
+                            width: "100px",
+                            fontSize: "17px",
+                          }}
+                        >
+                          <input
+                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            type="number"
+                            name="baths"
+                            className="form-control"
+                            defaultValue={property.structure.baths}
+                            {...register("bathrooms", { required: false })}
+                          />
+                        </td>
+                      </tr>
+                      <tr
+                        style={{
+                          position: "relative",
+                          left: "109px",
+                          fontSize: "13px",
+                          bottom: "5px",
+                        }}
+                      >
+                        <td>Total Rooms</td>
+                        <td style={{ paddingLeft: "10px" }}>
+                          Property Size(sqft)
+                        </td>
+                        <td style={{ margin: "auto" }}>Bedrooms</td>
+                        <td
+                          style={{ paddingRight: "170px", paddingLeft: "35px" }}
+                        >
+                          Bathrooms
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </>
+              ) : null}
+
+              {property.market_assessments ? (
+                <>
+                  <table
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <tbody>
+                      <div style={{ display: "inline" }}>
+                        <tr>
+                          <td>
+                            <div className="amount-input">
+                              <span className="prefix">$</span>
+                              <input
+                                style={{
+                                  fontSize: "17px",
+                                  fontWeight: "bold",
+                                }}
+                                type="number"
+                                name="total_value"
+                                className="sell-amount"
+                                defaultValue={
+                                  property.market_assessments[0].total_value
+                                }
+                                // {...register("total_value", { required: false })}
+                              />
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              position: "relative",
+                              fontSize: "13px",
+                            }}
+                          >
+                            Market Value
+                          </td>
+                        </tr>
+                      </div>
+                    </tbody>
+                  </table>
+                </>
+              ) : null}
 
               <table style={{ display: "inline" }}>
                 <tbody>
@@ -457,7 +477,7 @@ const PropertyDetails = ({
                   placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
-              <div className="bottom-btn" style={{width:"100%"}}>
+              <div className="bottom-btn" style={{ width: "100%" }}>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}
@@ -530,7 +550,7 @@ const PropertyDetails = ({
                     fontWeight: "bold",
                     fontSize: "15px",
                   }}
-                  // defaultValue={property.street_address}
+                  defaultValue={property.street_address}
                   {...register("street_address", { required: false })}
                 />
               </div>
@@ -559,7 +579,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "100px",
                         }}
-                        // defaultValue={property.state}
+                        defaultValue={property.state}
                         type="text"
                         name="state"
                         {...register("state", { required: false })}
@@ -578,7 +598,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "100px",
                         }}
-                        // defaultValue={property.city}
+                        defaultValue={property.city}
                         type="text"
                         name="city"
                         {...register("city", { required: false })}
@@ -597,7 +617,7 @@ const PropertyDetails = ({
                           fontWeight: "bold",
                           width: "80px",
                         }}
-                        // defaultValue={property.zipCode}
+                        defaultValue={property.zipCode}
                         type="number"
                         name="zipCode"
                         {...register("zipCode", { required: false })}
@@ -876,12 +896,12 @@ const PropertyDetails = ({
                     borderRadius: "3px",
                     paddingLeft: "10px",
                     position: "absolute",
-                    bottom: "10px",
+                    bottom: "100px",
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
-              <div className="bottom-btn" style={{width:"100%"}}>
+              <div className="bottom-btn" style={{ width: "100%" }}>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}

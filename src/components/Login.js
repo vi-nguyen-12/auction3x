@@ -30,9 +30,10 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        if (response.data.error === "Invalid password") {
+        if (response.data.error === "Invalid email or password" || response.data.error === "Email is not found") {
           alert(response.data.error);
-        } else if (response.data.error === "User has not been verified") {
+        }
+         else if (response.data.error === "User has not been verified") {
           alert(response.data.error);
           toogleSignIn();
           toogleConfirmModal();
