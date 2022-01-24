@@ -17,24 +17,30 @@ const PropertyDetails = ({
 
   const onSubmit = (data) => {
     console.log(data);
-    const submitedData = {
-      type: "real-estate",
-      street_address: data.street_address,
-      city: data.city,
-      state: data.state,
-      zipCode: data.zipCode,
-      discussedAmount: data.discussedAmount,
-      reservedAmount: data.reservedAmount,
-      fields: {
-        beds_count: data.bedrooms,
-        baths: data.bathrooms,
-        rooms_count: data.rooms_count,
-        total_value: data.total_value,
-      },
-    };
-    tooglePropertyData(submitedData);
-    toogleStep(step + 1);
+    if (data.reservedAmount <= data.discussedAmount) {
+      alert("Reserved amount should be greater than discussed amount");
+    } else {
+      const submitedData = {
+        type: "real-estate",
+        street_address: data.street_address,
+        city: data.city,
+        state: data.state,
+        zipCode: data.zipCode,
+        discussedAmount: data.discussedAmount,
+        reservedAmount: data.reservedAmount,
+        fields: {
+          beds_count: data.bedrooms,
+          baths: data.bathrooms,
+          rooms_count: data.rooms_count,
+          total_value: data.total_value,
+        },
+      };
+
+      tooglePropertyData(submitedData);
+      toogleStep(step + 1);
+    }
   };
+
   return (
     <>
       {property.address && property.structure ? (
@@ -362,7 +368,7 @@ const PropertyDetails = ({
                             defaultValue={
                               property.market_assessments[0].total_value
                             }
-                            // {...register("total_value", { required: false })}
+                          // {...register("total_value", { required: false })}
                           />
                         </div>
                       </td>
@@ -401,6 +407,7 @@ const PropertyDetails = ({
                           }}
                           type="number"
                           name="reservedAmount"
+                          required
                           {...register("reservedAmount", { required: false })}
                         />
                       </div>
@@ -423,6 +430,7 @@ const PropertyDetails = ({
                           }}
                           type="number"
                           name="discussedAmount"
+                          required
                           {...register("discussedAmount", { required: false })}
                         />
                       </div>
@@ -455,7 +463,7 @@ const PropertyDetails = ({
                   placeholder="Property Description(Optional)"
                 ></textarea>
               </div>
-              <div className="bottom-btn" style={{width:"100%"}}>
+              <div className="bottom-btn" style={{ width: "100%" }}>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}
@@ -786,7 +794,7 @@ const PropertyDetails = ({
                             type="number"
                             name="total_value"
                             className="sell-amount"
-                            // {...register("total_value", { required: false })}
+                          // {...register("total_value", { required: false })}
                           />
                         </div>
                       </td>
@@ -886,7 +894,8 @@ const PropertyDetails = ({
                 >
                   Previous
                 </button>
-                <button className="nxt-btn" type="submit">
+                <button
+                  className="nxt-btn" type="submit">
                   Next
                 </button>
               </div>

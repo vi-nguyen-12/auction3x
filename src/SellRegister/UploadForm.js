@@ -27,6 +27,12 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
     });
   };
 
+  const handleError = () => {
+    if (images.length === 0) {
+      alert("Please upload atleast one image");
+    }
+  };
+
   const onChangeVideos = async (e) => {
     setVideoLoader(true);
     const formData = new FormData();
@@ -127,7 +133,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           </div>
         ) : null}
         <div className="input-form-1">
-          Choose the Image Files
+          Choose the Image Files (*)
           <input
             id="images-btn"
             accept="image/*"
@@ -159,7 +165,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         </div>
 
         <div className="input-form-2">
-          Choose the Videos/ Live360 Files
+          Choose the Videos/ Live360 Files (optional)
           <input
             id="videos-btn"
             accept="video/*"
@@ -168,7 +174,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             multiple
             hidden
             {...register("videos", { onChange: onChangeVideos })}
-            // required
+          // required
           />
           <div>
             <label for="videos-btn">+ Videos</label>
@@ -196,9 +202,14 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           </button>
           <button
             className="nxt-btn"
-            onClick={(toogleImages(images), toogleVideos(videos))}
+            onClick={() => {
+              handleError();
+              toogleImages(images);
+              toogleVideos(videos);
+            }}
             id="next"
             type="submit"
+
           >
             Next
           </button>

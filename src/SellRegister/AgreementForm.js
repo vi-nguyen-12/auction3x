@@ -66,7 +66,7 @@ const Agree = ({
         <div className="line-3"></div>
         <div className="circle-4">
           <p className="text">05</p>
-          <span className="spnn">LAgreement</span>
+          <span className="spnn">Agreement</span>
         </div>
         {/* <div class="line-4"></div>
         <div class="circle-5">

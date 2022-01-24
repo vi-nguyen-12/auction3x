@@ -7,7 +7,7 @@ import "../styles/SellRegister.css";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
-  const [documents, setDocuments] = useState([]);
+  const [docs, setDocuments] = useState([]);
   const [loader, setLoader] = useState(false);
 
   const onChange = async (e) => {
@@ -20,23 +20,25 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     await authService.saveDocuments(formData).then((response) => {
       console.log(response);
       if (response.status === 200) {
-        setDocuments(response.data);
+        console.log(docs)
+        console.log(response.data)
+        setDocuments([...docs, ...response.data]);
         setLoader(false);
       }
     });
   };
 
+
+  const handleError = () => {
+    if (docs.length === 0) {
+      alert("Please upload atleast one image");
+    }
+  };
+
+
   const handleDelete = (url) => () => {
-    setDocuments(documents.filter((document) => document.url !== url));
+    setDocuments(docs.filter((document) => document.url !== url));
   };
-
-  const handleDocument = (data) => {
-    setDocuments(data);
-  };
-
-  useEffect(() => {
-    handleDocument();
-  }, []);
 
   const onSubmit = async (data) => {
     // const documents = data.documents;
@@ -51,7 +53,6 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     toogleStep(step + 1);
   };
 
-  console.log(documents);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
       <div className="sell-top">
@@ -113,20 +114,20 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             <label for="documents-btn">+ Documents</label>
           </div>
           <div className="upload-list">
-            {documents
-              ? documents.map((document) => (
-                  <div className="upload-list-item">
-                    <span>
-                      {document.name}
-                      <Button
-                        className="delete-btn"
-                        onClick={handleDelete(document.url)}
-                      >
-                        X
-                      </Button>
-                    </span>
-                  </div>
-                ))
+            {docs
+              ? docs.map((document) => (
+                <div className="upload-list-item">
+                  <span>
+                    {document.name}
+                    <Button
+                      className="delete-btn"
+                      onClick={handleDelete(document.url)}
+                    >
+                      X
+                    </Button>
+                  </span>
+                </div>
+              ))
               : null}
           </div>
         </div>
@@ -147,7 +148,11 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           <button
             className="nxt-btn"
             type="submit"
-            onClick={toogleDocuments(documents)}
+            onClick={() => {
+              handleError();
+              toogleDocuments(docs);
+            }}
+
           >
             Next
           </button>
