@@ -17,10 +17,6 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const [doc8, setDocument8] = useState([]);
 
   const [loader, setLoader] = useState(false);
- 
-
-
-
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -153,39 +149,39 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     setDocument8(doc8.filter((document) => document.url !== url));
   };
 
+  const titleReport = doc1.map((document) => {
+    return { ...document, officialName: "Title Report" };
+  });
+  const insuranceCopy = doc2.map((document) => {
+    return { ...document, officialName: "Insurance Copy" };
+  });
+  const financialDocuments = doc3.map((document) => {
+    return { ...document, officialName: "Financial Documents" };
+  });
+  const purchaseAgreement = doc4.map((document) => {
+    return { ...document, officialName: "Purchase Agreement" };
+  });
+  const thirdpartyReport = doc5.map((document) => {
+    return { ...document, officialName: "Third-party Report" };
+  });
+  const demographics = doc6.map((document) => {
+    return { ...document, officialName: "Demographics" };
+  });
+  const marketandValuations = doc7.map((document) => {
+    return { ...document, officialName: "Market and Valuations" };
+  });
+  const otherDocuments = doc8.map((document) => {
+    return { ...document, officialName: "Other Documents" };
+  });
   const documents = [
-    {
-      name: "Title Report",
-      value: doc1,
-    },
-    {
-      name: "Insurance Copy",
-      value: doc2,
-    },
-    {
-      name: "Financial Documents",
-      value: doc3,
-    },
-    {
-      name: "Purchase Agreement",
-      value: doc4,
-    },
-    {
-      name: "Third-Party Report",
-      value: doc5,
-    },
-    {
-      name: "Demographics",
-      value: doc6,
-    },
-    {
-      name: "Market and Valuation",
-      value: doc7,
-    },
-    {
-      name: "Other Documents",
-      value: doc8,
-    },
+    ...titleReport,
+    ...insuranceCopy,
+    ...financialDocuments,
+    ...purchaseAgreement,
+    ...thirdpartyReport,
+    ...demographics,
+    ...marketandValuations,
+    ...otherDocuments,
   ];
   console.log(documents);
   const onSubmit = async (data) => {
