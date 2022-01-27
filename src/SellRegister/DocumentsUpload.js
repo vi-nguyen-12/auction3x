@@ -17,7 +17,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const [doc8, setDocument8] = useState([]);
 
   const [loader, setLoader] = useState(false);
- 
+
 
 
 
@@ -258,7 +258,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Title Report (.pdf)
                 <input
                   id="documents-btn1"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -272,18 +272,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc1
                     ? doc1.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -293,7 +293,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Insurance Copy (.pdf)
                 <input
                   id="documents-btn2"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -307,18 +307,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc2
                     ? doc2.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -328,7 +328,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Financial Documents (.pdf)
                 <input
                   id="documents-btn3"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -342,18 +342,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc3
                     ? doc3.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -366,7 +366,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Purchase Agreement (.pdf)
                 <input
                   id="documents-btn4"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -380,18 +380,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc4
                     ? doc4.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -401,7 +401,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Third-Party Report (.pdf)
                 <input
                   id="documents-btn5"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -415,18 +415,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc5
                     ? doc5.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -436,7 +436,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Demographics (.pdf)
                 <input
                   id="documents-btn6"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -450,18 +450,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc6
                     ? doc6.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -474,7 +474,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Market and Valuations (.pdf)
                 <input
                   id="documents-btn7"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -488,18 +488,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc7
                     ? doc7.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>
@@ -509,7 +509,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 Other Documents (.pdf)
                 <input
                   id="documents-btn8"
-                  accept="pdf/*"
+                  accept=".pdf"
                   type="file"
                   name="documents"
                   multiple
@@ -523,18 +523,18 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div className="upload-list">
                   {doc8
                     ? doc8.map((document) => (
-                        <div className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <Button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              X
-                            </Button>
-                          </span>
-                        </div>
-                      ))
+                      <div className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            X
+                          </Button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </div>

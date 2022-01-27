@@ -9,6 +9,7 @@ const PropertyDetails = ({
   property,
   tooglePropertyData,
 }) => {
+  console.log(property);
   const {
     register,
     handleSubmit,
@@ -385,7 +386,7 @@ const PropertyDetails = ({
                                 defaultValue={
                                   property.market_assessments[0].total_value
                                 }
-                                // {...register("total_value", { required: false })}
+                              // {...register("total_value", { required: false })}
                               />
                             </div>
                           </td>
