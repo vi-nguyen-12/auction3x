@@ -396,7 +396,6 @@ const Display = ({ colorChange }) => {
                                 display: "relative",
                                 justifyContent: "center",
                                 margin: "auto",
-
                                 width: "100%",
                                 borderRadius: "15px",
                                 position: "relative",
@@ -669,7 +668,7 @@ const Display = ({ colorChange }) => {
                     <div>
                       <button
                         className="customButton"
-                        style={{ width: "200px", fontSize: "20px", color:"gray" }}
+                        style={{ width: "200px", fontSize: "20px", color: "gray" }}
                         onClick={handlePlaceBid}
                         disabled
                       >
