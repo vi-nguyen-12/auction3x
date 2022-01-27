@@ -18,11 +18,11 @@ const BuyAgreement = ({ toogleStep, step }) => {
   }
   return (
     <>
-      <Modal.Header contentClassName="modal-head-login" closeButton>
+      <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           Auction Register Agreement
         </Modal.Title>

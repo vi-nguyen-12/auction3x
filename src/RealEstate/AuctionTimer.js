@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 
-const AuctionTimer = ({ auctionEndDate }) => {
+const AuctionTimer = ({ auctionEndDate, toogleAuction }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -22,6 +22,7 @@ const AuctionTimer = ({ auctionEndDate }) => {
 
       if (distance < 0) {
         clearInterval(interval.current);
+        toogleAuction();
       } else {
         setDays(days);
         setHours(hours);

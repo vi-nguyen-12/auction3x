@@ -7,7 +7,6 @@ import RealEstate from "./components/Home/realEstate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
@@ -24,12 +23,14 @@ import RealEstates from "./RealEstate/RealEstates";
 import AuctionCard from "./components/Auction/auctionCard";
 import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
+import ChangePass from "./components/ChangePass";
+import EmailConfirm from "./components/EmailConfirm";
 
 function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    const authToken = Cookies.get("auth-token");
+    const authToken = document.cookie.split("=")[1];
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
@@ -102,6 +103,12 @@ function App() {
           </Route>
           <Route exact path="/RealEstates">
             <RealEstates colorChange={colorChange} />
+          </Route>
+          <Route path="/reset_password">
+            <ChangePass colorChange={colorChange} />
+          </Route>
+          <Route path="/confirm_email">
+            <EmailConfirm colorChange={colorChange} />
           </Route>
         </Switch>
       </Router>

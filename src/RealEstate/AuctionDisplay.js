@@ -95,7 +95,6 @@ const AuctionDisplay = ({ colorChange }) => {
     }
   };
 
-
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
@@ -137,6 +136,12 @@ const AuctionDisplay = ({ colorChange }) => {
         setRegisteredProperty(true);
       }
     }
+
+    let topBidders = [];
+    for (let i = 0; i < auctionData.highestBidders.length; i++) {
+      topBidders = [...topBidders, auctionData.highestBidders[i]];
+    }
+    setTopBid(topBidders.reverse());
   }, [registProperty]);
 
   //   console.log(onGoingAuctionEnd);
@@ -256,10 +261,9 @@ const AuctionDisplay = ({ colorChange }) => {
     <>
       {auctionProp && location && auction && (
         <div className="styl">
-          <tr className="realHeader">
-            <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
-          </tr>
-          <div style={{ position: "relative", width: "100%" }}>
+          <div
+            style={{ position: "relative", width: "100%", marginTop: "70px" }}
+          >
             <img
               src={auctionProp.images[0].url}
               alt="Snow"
@@ -683,16 +687,28 @@ const AuctionDisplay = ({ colorChange }) => {
             </div>
           </td> */}
 
-              <Modal size="lg" show={showRegister} onHide={toogleRegister} centered>
+              <Modal
+                size="lg"
+                show={showRegister}
+                onHide={toogleRegister}
+                centered
+              >
                 <Modal.Body>
                   {/* <BuyConfirm /> */}
                   <MultiBuyForm />
                 </Modal.Body>
               </Modal>
 
-              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+              <Modal
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                show={placeBid}
+                onHide={tooglePlaceBid}
+                centered
+              >
                 <Modal.Body>
-                  <BuyConfirm />
+                  <BuyConfirm tooglePlaceBid = {tooglePlaceBid} />
                 </Modal.Body>
               </Modal>
               <Modal
@@ -702,7 +718,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={showConfirm}
                 onHide={toogleConfirmModal}
                 centered
-                contentClassName="confirm"
+                contentclassname="confirm"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -737,7 +753,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={forgotPass}
                 onHide={toogleForgotPass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -766,7 +782,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={changePass}
                 onHide={toogleChangePass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Body>
                   <ChangePass toogleChangePass={toogleChangePass} />
@@ -777,7 +793,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={showSignIn}
                 onHide={toogleSignIn}
-                contentClassName="login"
+                contentclassname="login"
               >
                 <Modal.Body>
                   <Login
@@ -795,7 +811,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={showSignUp}
                 onHide={toogleSignUp}
-                contentClassName="custom-modal-style"
+                contentclassname="custom-modal-style"
               >
                 <Modal.Body>
                   <SignUp
@@ -890,9 +906,9 @@ const AuctionDisplay = ({ colorChange }) => {
               <Col>
                 <div style={{ padding: "35px" }}>
                   <h2>
-                    <span style={{ color: "#B77B50" }}>|</span>Property Information
+                    <span style={{ color: "#B77B50" }}>|</span>Property
+                    Information
                   </h2>
-
 
                   <Table borderless>
                     <tbody>
@@ -957,7 +973,10 @@ const AuctionDisplay = ({ colorChange }) => {
                         >
                           Property Type:
                           <span style={{ fontWeight: "bold" }}>
-                            {auctionProp.details.parcel.county_land_use_description}
+                            {
+                              auctionProp.details.parcel
+                                .county_land_use_description
+                            }
                           </span>
                         </td>
                         <td
@@ -983,7 +1002,8 @@ const AuctionDisplay = ({ colorChange }) => {
                         >
                           Building Size:
                           <span style={{ fontWeight: "bold" }}>
-                            {auctionProp.details.structure.total_area_sq_ft} sq.ft
+                            {auctionProp.details.structure.total_area_sq_ft}{" "}
+                            sq.ft
                           </span>
                         </td>
                         <td
@@ -1087,19 +1107,29 @@ const AuctionDisplay = ({ colorChange }) => {
                       {/* <tr>
                 <td>{auction.highestBidders}</td>
               </tr> */}
-
                     </tbody>
                   </Table>
 
                   {/* create the table of 5 bidder */}
-
                 </div>
               </Col>
 
               <Col style={{ margin: "auto" }}>
-                <Table bordered style={{ margin: "auto", justifyContent: "center", textAlign: "center", width: "auto", height: "auto" }} size="lg">
-                  <thead style={{ backgroundColor: "#d58f5c" }} >
-                    <tr ><th colSpan={3}>Top Bidder</th></tr>
+                <Table
+                  bordered
+                  style={{
+                    margin: "auto",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    width: "auto",
+                    height: "auto",
+                  }}
+                  size="lg"
+                >
+                  <thead style={{ backgroundColor: "#d58f5c" }}>
+                    <tr>
+                      <th colSpan={3}>Top Bidder</th>
+                    </tr>
                     <tr>
                       <th>Bidder ID</th>
                       <th>Bid Amount</th>
@@ -1108,46 +1138,52 @@ const AuctionDisplay = ({ colorChange }) => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td >
-                        {auction.highestBidders ? (
-                          auction.highestBidders.map((bidder, index) => {
-                            return (
-                              <tr key={index} >
-                                <td style={{ padding: "25px" }}>{bidder.userName}</td>
-                              </tr>
-                            );
-                          }
-
-                          )
-                        ) : (
-                          <h2>No Bidders</h2>
-                        )}
-                      </td>
                       <td>
-                        {auction.highestBidders ? (
-                          auction.highestBidders.map((bidder, index) => {
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
                             return (
                               <tr key={index}>
-                                <td style={{ padding: "25px" }}><NumberFormat value={bidder.amount} displayType={"text"} thousandSeparator={true} prefix={"$"} />
+                                <td style={{ padding: "25px" }}>
+                                  {bidder.userName}
                                 </td>
                               </tr>
                             );
-                          }
-                          )
+                          })
                         ) : (
                           <h2>No Bidders</h2>
                         )}
                       </td>
                       <td>
-                        {auction.highestBidders ? (
-                          auction.highestBidders.map((bidder, index) => {
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
                             return (
                               <tr key={index}>
-                                <td style={{ padding: "25px" }}>{new Date(bidder.time).toLocaleString()}</td>
+                                <td style={{ padding: "25px" }}>
+                                  <NumberFormat
+                                    value={bidder.amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"$"}
+                                  />
+                                </td>
                               </tr>
                             );
-                          }
-                          )
+                          })
+                        ) : (
+                          <h2>No Bidders</h2>
+                        )}
+                      </td>
+                      <td>
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ padding: "25px" }}>
+                                  {new Date(bidder.time).toLocaleString()}
+                                </td>
+                              </tr>
+                            );
+                          })
                         ) : (
                           <h2>No Bidders</h2>
                         )}
@@ -1393,8 +1429,7 @@ const AuctionDisplay = ({ colorChange }) => {
             </div>
           </form>
         </div>
-      )
-      }
+      )}
     </>
   );
 };

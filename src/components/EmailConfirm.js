@@ -1,70 +1,49 @@
-import react from "react";
+import react, { useEffect } from "react";
 import Toast from "./Toast";
 import { useForm } from "react-hook-form";
+import { useLocation, useHistory } from "react-router-dom";
 import authServices from "../services/authServices";
 
-function Confirm({ toogleConfirmModal, toogleSignIn }) {
+function Confirm({ colorChange }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    authServices.verify(data).then((response) => {
-      console.log(response);
-      if (response.data.error) {
-        alert(response.data.error);
+
+  const token = useLocation().search.split("=")[1];
+  const history = useHistory();
+
+  useEffect(async () => {
+    colorChange("black");
+    authServices.confirmEmail(token).then((res) => {
+      console.log(res);
+      if (res.data.error) {
+        alert(res.data.error);
       } else {
-        alert(response.data.message);
-        toogleConfirmModal();
-        toogleSignIn();
+        alert(res.data.message);
+        history.push("/");
       }
     });
-  };
+  }, []);
+
   return (
-    // Email code confirmation modal
-    <>
-      <Toast
-        type="warning"
-        message="Warning! Your email verification process has not been done. We have sent the link"
-      />
-      <div>
+    <div>
+      <div
+        className="listDetail-content"
+        style={{
+          display: "grid",
+          justifyContent: "center",
+          height: "50vh",
+          alignItems: "center",
+          marginTop: "200px",
+        }}
+      >
         <div className="form-group mb-2">
-          <h2>Confirm your email</h2>
-          <p>Please enter the code sent to your email</p>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-              />
-            </div>
-            <div className="form-group" style={{ marginTop: "10px" }}>
-              <input
-                type="text"
-                className="form-control"
-                name="code"
-                placeholder="Code"
-                {...register("token", { required: true })}
-              />
-            </div>
-            <div
-              className="form-group"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <button type="submit" className="btn btn-primary mt-3">
-                Confirm
-              </button>
-            </div>
-          </form>
+          <>Email Confirm!</>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

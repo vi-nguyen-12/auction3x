@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { ImSearch } from "react-icons/im";
 
 const ImgSlider = () => {
   let settings = {
@@ -53,7 +53,7 @@ const ImgSlider = () => {
           </Carousel>
           <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
-              <div className="col-12 col-sm-6 col-md-2 mt-3">
+              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
                 <div className="dropdown w-100">
                   <button
                     className="btn btn-secondary dropdown-toggle w-100"
@@ -80,8 +80,8 @@ const ImgSlider = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-2 mt-3">
+              </div> */}
+              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
                 <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle w-100"
@@ -108,8 +108,8 @@ const ImgSlider = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-2 mt-3">
+              </div> */}
+              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
                 <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle w-100"
@@ -136,17 +136,28 @@ const ImgSlider = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-4 mt-3">
-                <div className="form-group">
+              </div> */}
+              <div
+                className="col-12 col-sm-6 col-md-4 mt-3"
+                style={{
+                  width: "375px",
+                  backgroundColor: "white",
+                  display: "flex",
+                }}
+              >
+                <div className="form-group" style={{ width: "300px" }}>
                   <SearchBar />
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-1 mt-3">
-                <button className="bg-light customButton w-100" type="submit">
-                  Search
+                <button
+                  style={{ border: "0", width: "100%", backgroundColor: "", marginRight:"-12px" }}
+                  type="submit"
+                >
+                  <ImSearch />
                 </button>
               </div>
+              {/* <div className="col-12 col-sm-6 col-md-1 mt-3">
+
+              </div> */}
             </div>
           </div>
         </>

@@ -2,59 +2,211 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import authService from "../services/authServices";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col, Container } from "react-bootstrap";
 import "../styles/SellRegister.css";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
-  const [docs, setDocuments] = useState([]);
-  const [loader, setLoader] = useState(false);
+  const [doc1, setDocument1] = useState([]);
+  const [doc2, setDocument2] = useState([]);
+  const [doc3, setDocument3] = useState([]);
+  const [doc4, setDocument4] = useState([]);
+  const [doc5, setDocument5] = useState([]);
+  const [doc6, setDocument6] = useState([]);
+  const [doc7, setDocument7] = useState([]);
+  const [doc8, setDocument8] = useState([]);
 
-  const onChange = async (e) => {
+  const [loader, setLoader] = useState(false);
+ 
+
+
+
+
+  const onChange1 = async (e) => {
     setLoader(true);
-    const formData = new FormData();
+    const formData1 = new FormData();
 
     for (let i = 0; i < e.target.files.length; i++) {
-      formData.append("documents", e.target.files[i]);
+      formData1.append("documents", e.target.files[i]);
     }
-    await authService.saveDocuments(formData).then((response) => {
-      console.log(response);
+    await authService.saveDocuments(formData1).then((response) => {
       if (response.status === 200) {
-        console.log(docs)
-        console.log(response.data)
-        setDocuments([...docs, ...response.data]);
+        setDocument1([...doc1, ...response.data]);
         setLoader(false);
       }
     });
   };
 
+  const onChange2 = async (e) => {
+    setLoader(true);
 
-  const handleError = () => {
-    if (docs.length === 0) {
+    const formData2 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData2.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData2).then((response) => {
+      if (response.status === 200) {
+        setDocument2([...doc2, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange3 = async (e) => {
+    setLoader(true);
+
+    const formData3 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData3.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData3).then((response) => {
+      if (response.status === 200) {
+        setDocument3([...doc3, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange4 = async (e) => {
+    setLoader(true);
+
+    const formData4 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData4.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData4).then((response) => {
+      if (response.status === 200) {
+        setDocument4([...doc4, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange5 = async (e) => {
+    setLoader(true);
+
+    const formData5 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData5.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData5).then((response) => {
+      if (response.status === 200) {
+        setDocument5([...doc5, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange6 = async (e) => {
+    setLoader(true);
+
+    const formData6 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData6.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData6).then((response) => {
+      if (response.status === 200) {
+        setDocument6([...doc6, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange7 = async (e) => {
+    setLoader(true);
+
+    const formData7 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData7.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData7).then((response) => {
+      if (response.status === 200) {
+        setDocument7([...doc7, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const onChange8 = async (e) => {
+    setLoader(true);
+
+    const formData8 = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData8.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData8).then((response) => {
+      if (response.status === 200) {
+        setDocument8([...doc8, ...response.data]);
+        setLoader(false);
+      }
+    });
+  };
+
+  const handleDelete = (url) => () => {
+    setDocument1(doc1.filter((document) => document.url !== url));
+    setDocument2(doc2.filter((document) => document.url !== url));
+    setDocument3(doc3.filter((document) => document.url !== url));
+    setDocument4(doc4.filter((document) => document.url !== url));
+    setDocument5(doc5.filter((document) => document.url !== url));
+    setDocument6(doc6.filter((document) => document.url !== url));
+    setDocument7(doc7.filter((document) => document.url !== url));
+    setDocument8(doc8.filter((document) => document.url !== url));
+  };
+
+  const documents = [
+    {
+      name: "Title Report",
+      value: doc1,
+    },
+    {
+      name: "Insurance Copy",
+      value: doc2,
+    },
+    {
+      name: "Financial Documents",
+      value: doc3,
+    },
+    {
+      name: "Purchase Agreement",
+      value: doc4,
+    },
+    {
+      name: "Third-Party Report",
+      value: doc5,
+    },
+    {
+      name: "Demographics",
+      value: doc6,
+    },
+    {
+      name: "Market and Valuation",
+      value: doc7,
+    },
+    {
+      name: "Other Documents",
+      value: doc8,
+    },
+  ];
+  console.log(documents);
+  const onSubmit = async (data) => {
+    if (
+      doc1.length === 0 ||
+      doc2.length === 0 ||
+      doc3.length === 0 ||
+      doc4.length === 0 ||
+      doc5.length === 0 ||
+      doc6.length === 0 ||
+      doc7.length === 0 ||
+      doc8.length === 0
+    ) {
       alert("Please upload atleast one image");
+    } else {
+      toogleStep(step + 1);
     }
   };
 
-
-  const handleDelete = (url) => () => {
-    setDocuments(docs.filter((document) => document.url !== url));
-  };
-
-  const onSubmit = async (data) => {
-    // const documents = data.documents;
-    // const formData = new FormData();
-
-    // for (let i = 0; i < documents.length; i++) {
-    //   formData.append("documents", documents[i]);
-    // }
-    // await authService.saveDocuments(formData).then((response) => {
-    //   setDocuments(response.data);
-    // });
-    toogleStep(step + 1);
-  };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
+    <form onSubmit={handleSubmit(onSubmit)} className="upload-box-docu">
       <div className="sell-top">
         <div className="circle-1">
           <p className="text">01</p>
@@ -86,7 +238,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           <span className="spnn">Agreement</span>
         </div> */}
       </div>
-      <div className="sell-bottom">
+      <div className="sell-bottom-docu">
         <div className="listDetails-title">
           <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD DOCUMENTS
@@ -98,48 +250,297 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             <div className="spinning" />
           </div>
         ) : null}
-        <div className="input-form-3">
-          Choose the Documents Files (.pdf)
-          <input
-            id="documents-btn"
-            accept="pdf/*"
-            type="file"
-            name="documents"
-            multiple
-            hidden
-            {...register("documents", { onChange: onChange })}
-            required
-          />
-          <div>
-            <label for="documents-btn">+ Documents</label>
-          </div>
-          <div className="upload-list">
-            {docs
-              ? docs.map((document) => (
-                <div className="upload-list-item">
-                  <span>
-                    {document.name}
-                    <Button
-                      className="delete-btn"
-                      onClick={handleDelete(document.url)}
-                    >
-                      X
-                    </Button>
-                  </span>
-                </div>
-              ))
-              : null}
-          </div>
-        </div>
 
-        {/* <div className="upload-list">
-          {documents.map((document) => (
-            <div className="upload-list-item">
-              <span>{document.name}
-                <Button className="delete-btn" onClick={handleDelete(document.url)}>X</Button></span>
-            </div>
-          ))}
-        </div> */}
+        <Container style={{ marginTop: "10%" }}>
+          <Row>
+            <Col className="colum">
+              <div className="input-form-3">
+                Title Report (.pdf)
+                <input
+                  id="documents-btn1"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("titleReport", { onChange: onChange1 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn1">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc1
+                    ? doc1.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+            <Col className="colum">
+              <div className="input-form-3">
+                Insurance Copy (.pdf)
+                <input
+                  id="documents-btn2"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("insuranceCopy", { onChange: onChange2 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn2">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc2
+                    ? doc2.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+            <Col className="colum">
+              <div className="input-form-3">
+                Financial Documents (.pdf)
+                <input
+                  id="documents-btn3"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("financialDocuments", { onChange: onChange3 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn3">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc3
+                    ? doc3.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col className="colum">
+              <div className="input-form-3">
+                Purchase Agreement (.pdf)
+                <input
+                  id="documents-btn4"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("purchaseAgreement", { onChange: onChange4 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn4">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc4
+                    ? doc4.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+            <Col className="colum">
+              <div className="input-form-3">
+                Third-Party Report (.pdf)
+                <input
+                  id="documents-btn5"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("thirdpartyReport", { onChange: onChange5 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn5">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc5
+                    ? doc5.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+            <Col className="colum">
+              <div className="input-form-3">
+                Demographics (.pdf)
+                <input
+                  id="documents-btn6"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("demographics", { onChange: onChange6 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn6">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc6
+                    ? doc6.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col className="colum">
+              <div className="input-form-3">
+                Market and Valuations (.pdf)
+                <input
+                  id="documents-btn7"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("marketandValuations", { onChange: onChange7 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn7">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc7
+                    ? doc7.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+            <Col className="colum">
+              <div className="input-form-3">
+                Other Documents (.pdf)
+                <input
+                  id="documents-btn8"
+                  accept="pdf/*"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("otherDocuments", { onChange: onChange8 })}
+                  required
+                />
+                <div>
+                  <label for="documents-btn8">+ Documents</label>
+                </div>
+                <div className="upload-list">
+                  {doc8
+                    ? doc8.map((document) => (
+                        <div className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <Button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                            >
+                              X
+                            </Button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
 
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
@@ -149,10 +550,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             className="nxt-btn"
             type="submit"
             onClick={() => {
-              handleError();
-              toogleDocuments(docs);
+              toogleDocuments(documents);
             }}
-
           >
             Next
           </button>

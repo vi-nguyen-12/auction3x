@@ -588,7 +588,7 @@ const DisplayAuction = ({ colorChange }) => {
               show={showConfirm}
               onHide={toogleConfirmModal}
               centered
-              contentClassName="confirm"
+              contentclassname="confirm"
             >
               <Modal.Header closeButton>
                 <Modal.Title
@@ -632,7 +632,7 @@ const DisplayAuction = ({ colorChange }) => {
               show={forgotPass}
               onHide={toogleForgotPass}
               centered
-              contentClassName="forgotPass"
+              contentclassname="forgotPass"
             >
               <Modal.Header closeButton>
                 <Modal.Title
@@ -661,7 +661,7 @@ const DisplayAuction = ({ colorChange }) => {
               show={changePass}
               onHide={toogleChangePass}
               centered
-              contentClassName="forgotPass"
+              contentclassname="forgotPass"
             >
               <Modal.Body>
                 <ChangePass toogleChangePass={toogleChangePass} />
@@ -672,7 +672,7 @@ const DisplayAuction = ({ colorChange }) => {
               centered
               show={showSignIn}
               onHide={toogleSignIn}
-              contentClassName="login"
+              contentclassname="login"
             >
               <Modal.Body>
                 <Login
@@ -690,7 +690,7 @@ const DisplayAuction = ({ colorChange }) => {
               centered
               show={showSignUp}
               onHide={toogleSignUp}
-              contentClassName="custom-modal-style"
+              contentclassname="custom-modal-style"
             >
               <Modal.Body>
                 <SignUp

@@ -76,7 +76,7 @@ const Agree = ({
       </div>
       <div className="agree-sell-bottom">
         <div className="header">
-          <top>SELLER AGREEMENT</top>
+          <h2>SELLER AGREEMENT</h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
         </div>
         <div className="bodi">

@@ -5,79 +5,103 @@ import authServices from "../services/authServices";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
+import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
-const ChangePass = ({ toogleChangePass }) => {
+const ChangePass = ({ toogleChangePass, colorChange }) => {
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm();
+  const token = useLocation().search.split("=")[1];
+  const history = useHistory();
+
+  useEffect(() => {
+    colorChange("black");
+  }, []);
+
   const onSubmit = (data) => {
+    const datas = {
+      password: data.newPassword,
+      token: token,
+    };
     if (data.newPassword !== data.confirmPassword) {
-      alert("Password not match");
-    } 
-    else {
-      toogleChangePass();
+      alert("Passwords do not match");
+    } else {
+      authServices.resetPassword(datas).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          history.push("/");
+        }
+      });
     }
   };
   return (
-    <>
-      <Modal.Header contentClassName="modal-head-login" closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
-        >
-          Change Password
-        </Modal.Title>
-      </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group mb-4 mt-3">
-          <label htmlFor="exampleInputEmail1">New Password</label>
-          <div className="input-group">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="New Password"
-              {...register("newPassword", {
-                required: true,
-              })}
-              required
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Confirm Password"
-            {...register("confirmPassword", {
-              required: true,
-            })}
-            required
-          />
-        </div>
-        <div className="form-group" style={{ fontSize: "12px" }}></div>
-        <Modal.Footer>
-          <div className="col text-center mb-2">
-            <button
-              type="submit"
-              className="submitBtn mb-3"
-              style={{
-                width: "100%",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: "15px",
-              }}
+    <div>
+      <div
+        className="listDetail-content"
+        style={{
+          display: "grid",
+          justifyContent: "center",
+          height: "50vh",
+          alignItems: "center",
+          marginTop: "200px",
+        }}
+      >
+        <div className="form-group mb-2">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <p style={{ justifyContent: "left", margin: "0" }}>
+                Please enter the new password
+              </p>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="New Password"
+                style={{ height: "40px", width: "300px" }}
+                {...register("newPassword", {
+                  required: true,
+                })}
+              />
+            </div>
+            <div className="form-group">
+              <p
+                style={{
+                  justifyContent: "left",
+                  margin: "0",
+                  marginTop: "20px",
+                }}
+              >
+                Please confirm the password
+              </p>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Confirm Password"
+                style={{ height: "40px" }}
+                {...register("confirmPassword", {
+                  required: true,
+                })}
+              />
+            </div>
+            <div
+              className="form-group"
+              style={{ display: "flex", justifyContent: "center" }}
             >
-              Submit
-            </button>
-          </div>
-        </Modal.Footer>
-      </form>
-    </>
+              <button
+                type="submit"
+                className="customButton mt-4"
+                style={{ width: "80px", fontSize: "15px" }}
+              >
+                Change
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 export default ChangePass;

@@ -60,27 +60,6 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   };
 
   const onSubmit = async (data) => {
-    // const videos = data.videos;
-    // const images = data.images;
-
-    // const formData = new FormData();
-    // const formData2 = new FormData();
-
-    // for (let i = 0; i < videos.length; i++) {
-    //   formData2.append("videos", videos[i]);
-    // }
-    // for (let i = 0; i < images.length; i++) {
-    //   formData.append("images", images[i]);
-    // }
-
-    // await authService.saveVideos(formData2).then((response2) => {
-    //   console.log(response2);
-    //   setVideos(response2.data);
-    // });
-
-    // await authService.saveImages(formData).then((response) => {
-    //   setImages(response.data);
-    // });
     toogleStep(step + 1);
   };
   return (

@@ -51,7 +51,7 @@ function SearchBar() {
   }, []);
 
   return (
-    <div className="search-location-input">
+    <div className="search-location-input" style={{width:"300px"}}>
       <input
         style={{
           width: "100%",
@@ -61,8 +61,8 @@ function SearchBar() {
           justifyContent: "center",
           alignItems: "center",
           borderRadius: "5px",
-          border: "white 1px solid",
-          height: "50px",
+          border: "0",
+          height: "40px",
         }}
         ref={autoCompleteRef}
         onChange={(event) => setQuery(event.target.value)}

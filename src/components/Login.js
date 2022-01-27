@@ -30,7 +30,11 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        if (response.data.error === "Invalid password") {
+        console.log(response);
+        if (
+          response.data.error === "Invalid email or password" ||
+          response.data.error === "Email is not found"
+        ) {
           alert(response.data.error);
         } else if (response.data.error === "User has not been verified") {
           alert(response.data.error);
@@ -40,15 +44,15 @@ const Login = ({
           dispatch(login(response.data.data));
           toogleButton();
           toogleSignIn();
+          history.push("/");
+          window.location.reload();
+          window.setTimeout(() => {
+            window.scrollTo(0, 0);
+          }, 0);
         }
       } catch (error) {
         console.log(error);
       }
-      history.push("/");
-      window.location.reload();
-      window.setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 0);
     };
     getUser();
   };
@@ -61,11 +65,11 @@ const Login = ({
           message="Warning! Your email verification process has not been done. We have sent the link"
         />
       )}
-      <Modal.Header contentClassName="modal-head-login" closeButton>
+      <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           LOGIN NOW
         </Modal.Title>
@@ -77,7 +81,7 @@ const Login = ({
             <input
               type="text"
               className="form-control"
-              placeholder="Email"
+              placeholder="Username or Email"
               {...register("userName", {
                 required: true,
               })}

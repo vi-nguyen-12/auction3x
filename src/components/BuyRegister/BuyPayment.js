@@ -79,7 +79,7 @@ const BuyAuthoried = ({
             fontWeight: "bold",
             marginTop: "-20px",
           }}
-          contentClassName="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           Questionaire
         </Modal.Title>

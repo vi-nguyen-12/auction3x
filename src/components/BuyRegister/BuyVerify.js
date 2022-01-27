@@ -8,7 +8,7 @@ const BuyVerify = ({ toogleStep, step }) => {
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           Document Under Verification
         </Modal.Title>

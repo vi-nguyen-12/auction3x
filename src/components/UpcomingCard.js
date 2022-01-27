@@ -15,6 +15,7 @@ import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 import RegistrationTimer from "../RealEstate/RegistrationTimer";
+import Timer from "../RealEstate/Timer";
 
 const UpcomingCard = ({
   url,
@@ -45,6 +46,9 @@ const UpcomingCard = ({
   const [startRegisterDate, setStartRegisterDate] = useState();
   const [endRegisterDate, setEndRegisterDate] = useState();
   const [RegistrationEndDate, setRegistrationEndDate] = useState();
+  const [registEnded, setRegistEnded] = useState(false);
+  const [startAuction, setStartAuction] = useState();
+  const toogleRegistEnded = () => setRegistEnded(!registEnded);
 
   const history = useHistory();
 
@@ -74,11 +78,13 @@ const UpcomingCard = ({
     setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);
+    setStartAuction(auctionData.auctionStartDate);
   }, []);
 
+  console.log(registEnded);
   return (
     <>
-      {startRegisterDate && endRegisterDate && (
+      {startRegisterDate && endRegisterDate && startAuction && (
         <div>
           <Card
             // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
@@ -129,7 +135,6 @@ const UpcomingCard = ({
               )}
             </button>
             <Card.Body style={{ paddingLeft: "13px" }}>
-
               <div>
                 <div>
                   <span className="golden-text">
@@ -145,17 +150,24 @@ const UpcomingCard = ({
                 >
                   <div>
                     <Row>
-                      <Col md={5} style={{ width: "50%" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
-                          Registration
-                        </p>
-                      </Col>
+                      {registEnded && startAuction ? (
+                        <Col md={5} style={{ width: "50%" }}>
+                          <p style={{ fontSize: "15px", width: "100px" }}>
+                            Auction Start:
+                          </p>
+                        </Col>
+                      ) : (
+                        <Col md={5} style={{ width: "50%" }}>
+                          <p style={{ fontSize: "15px", width: "100px" }}>
+                            Registration:
+                          </p>
+                        </Col>
+                      )}
 
                       <Col md={6} style={{ width: "50%" }}>
                         <p
                           style={{
                             fontSize: "12px",
-
                             width: "250px",
                           }}
                         >
@@ -164,11 +176,27 @@ const UpcomingCard = ({
                       </Col>
                     </Row>
                     <Row>
-                      <Col md={1} style={{ width: "50%" }}>
-                        <p style={{ fontSize: "12px", width: "200px" }}>
-                          <RegistrationTimer RegistrationEndDate={RegistrationEndDate} />
-                        </p>
-                      </Col>
+                      {registEnded && startAuction ? (
+                        <Col md={1} style={{ width: "50%" }}>
+                          <p
+                            style={{
+                              fontSize: "12px",
+                              width: "200px",
+                            }}
+                          >
+                            <Timer auctionStartDate={startAuction} />
+                          </p>
+                        </Col>
+                      ) : (
+                        <Col md={1} style={{ width: "50%" }}>
+                          <p style={{ fontSize: "12px", width: "200px" }}>
+                            <RegistrationTimer
+                              RegistrationEndDate={RegistrationEndDate}
+                              toogleRegistEnded={toogleRegistEnded}
+                            />
+                          </p>
+                        </Col>
+                      )}
 
                       <Col md={6} style={{ width: "50%" }}>
                         <p
@@ -178,8 +206,8 @@ const UpcomingCard = ({
                             width: "250px",
                           }}
                         >
-                          {data.structure.beds_count}BD | {data.structure.baths}BA
-                          | {data.structure.total_area_sq_ft} sq.ft
+                          {data.structure.beds_count}BD | {data.structure.baths}
+                          BA | {data.structure.total_area_sq_ft} sq.ft
                         </p>
                       </Col>
                     </Row>
@@ -206,22 +234,40 @@ const UpcomingCard = ({
                     />
                   </p>
                 </div>
-                { }
-                <div
-                  style={{
-                    alignItems: "flex-end",
-                    display: "flex",
-                    marginRight: "6px",
-                  }}
-                >
-                  <Button
-                    onClick={handleBid}
-                    className="black-button text-white"
-                    variant="dark"
+                {registEnded ? (
+                  <div
+                    style={{
+                      alignItems: "flex-end",
+                      display: "flex",
+                      marginRight: "6px",
+                    }}
                   >
-                    Register to Bid
-                  </Button>
-                </div>
+                    <Button
+                      onClick={handleBid}
+                      className="black-button text-white"
+                      variant="dark"
+                      disabled
+                    >
+                      Registeration Ended
+                    </Button>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      alignItems: "flex-end",
+                      display: "flex",
+                      marginRight: "6px",
+                    }}
+                  >
+                    <Button
+                      onClick={handleBid}
+                      className="black-button text-white"
+                      variant="dark"
+                    >
+                      Register to Bid
+                    </Button>
+                  </div>
+                )}
               </div>
             </Card.Body>
             <Modal
@@ -231,7 +277,7 @@ const UpcomingCard = ({
               show={showConfirm}
               onHide={toogleConfirmModal}
               centered
-              contentClassName="confirm"
+              contentclassname="confirm"
             >
               <Modal.Header closeButton>
                 <Modal.Title
@@ -266,7 +312,7 @@ const UpcomingCard = ({
               show={forgotPass}
               onHide={toogleForgotPass}
               centered
-              contentClassName="forgotPass"
+              contentclassname="forgotPass"
             >
               <Modal.Header closeButton>
                 <Modal.Title
@@ -295,7 +341,7 @@ const UpcomingCard = ({
               show={changePass}
               onHide={toogleChangePass}
               centered
-              contentClassName="forgotPass"
+              contentclassname="forgotPass"
             >
               <Modal.Body>
                 <ChangePass toogleChangePass={toogleChangePass} />
@@ -306,7 +352,7 @@ const UpcomingCard = ({
               centered
               show={showSignIn}
               onHide={toogleSignIn}
-              contentClassName="login"
+              contentclassname="login"
             >
               <Modal.Body>
                 <Login
@@ -324,7 +370,7 @@ const UpcomingCard = ({
               centered
               show={showSignUp}
               onHide={toogleSignUp}
-              contentClassName="custom-modal-style"
+              contentclassname="custom-modal-style"
             >
               <Modal.Body>
                 <SignUp

@@ -6,7 +6,7 @@ import Login from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal } from "react-bootstrap";
 import "../styles/modalStyle.css";
-import Confirm from "./EmailConfirm";
+import ReconfirmEmail from "./ReconfirmEmail";
 import SignUp from "./SignUp";
 import { useSelector } from "react-redux";
 import authService from "../services/authServices";
@@ -130,9 +130,10 @@ const Header = ({ color }) => {
                 style={{
                   position: "absolute",
                   color: "white",
-                  fontSize: "30px",
+                  fontSize: "1.5rem",
                   fontWeight: "bold",
                   left: "30%",
+                  marginTop: "7px",
                 }}
               >
                 Real Estate
@@ -146,7 +147,7 @@ const Header = ({ color }) => {
                 show={showConfirm}
                 onHide={toogleConfirmModal}
                 centered
-                contentClassName="confirm"
+                contentclassname="confirm"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -167,7 +168,7 @@ const Header = ({ color }) => {
                   ></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Confirm
+                  <ReconfirmEmail
                     toogleConfirmModal={toogleConfirmModal}
                     toogleSignIn={toogleSignIn}
                   />
@@ -182,7 +183,7 @@ const Header = ({ color }) => {
                 show={forgotPass}
                 onHide={toogleForgotPass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -211,7 +212,7 @@ const Header = ({ color }) => {
                 show={changePass}
                 onHide={toogleChangePass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Body>
                   <ChangePass toogleChangePass={toogleChangePass} />
@@ -338,7 +339,7 @@ const Header = ({ color }) => {
                 centered
                 show={showSignIn}
                 onHide={toogleSignIn}
-                contentClassName="login"
+                contentclassname="login"
               >
                 <Modal.Body>
                   <Login
@@ -359,7 +360,7 @@ const Header = ({ color }) => {
                 centered
                 show={showSignUp}
                 onHide={toogleSignUp}
-                contentClassName="custom-modal-style"
+                contentclassname="custom-modal-style"
               >
                 <Modal.Body>
                   <SignUp
