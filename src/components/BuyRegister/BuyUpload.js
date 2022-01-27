@@ -85,7 +85,7 @@ const BuyUpload = ({
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
+          contentClassname="custom-modal-title"
         >
           Documents Upload
         </Modal.Title>

@@ -4,7 +4,7 @@ import "../../styles/Buyer.css";
 
 const BuyAgreement = () => {
   return (
-    <Modal.Header contentClassName="ProcessBar">
+    <Modal.Header contentclassname="ProcessBar">
       <Modal.Title>Auction Register Agreement</Modal.Title>
     </Modal.Header>
   );

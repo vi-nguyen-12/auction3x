@@ -117,41 +117,59 @@ const Featured = (props) => {
   `;
   return (
     <div className="background">
-      <Row>
-        <Col md={12} className="m-auto">
-          <img
-            src="/images/f_name.png"
-            alt=""
-            style={{
-              marginBottom: "0px",
-              maxWidth: "250px",
-              maxHeight: "150px",
-            }}
-          />
-        </Col>
-      </Row>
+      {auction.length > 0 ? (
+        <>
+          <Row>
+            <Col md={12} className="m-auto">
+              <img
+                src="/images/f_name.png"
+                alt=""
+                style={{
+                  marginBottom: "0px",
+                  maxWidth: "250px",
+                  maxHeight: "150px",
+                }}
+              />
+            </Col>
+          </Row>
 
-      <Col md={12} className="m-auto">
+          <Col md={12} className="m-auto">
+            <Row>
+              <Carousel {...settings}>
+                {auction.map((item) => (
+                  <Wrap>
+                    <Col key={item._id} md={12}>
+                      <CardComp
+                        url={item.property.images[0].url}
+                        data={item.property.details}
+                        id={item._id}
+                        auctionStartDate={item.auctionStartDate}
+                        auctionEndDate={item.auctionEndDate}
+                        startingBid={item.highestBid}
+                        auctionId={item._id}
+                      />
+                    </Col>
+                  </Wrap>
+                ))}
+              </Carousel>
+            </Row>
+          </Col>
+        </>
+      ) : (
         <Row>
-          <Carousel {...settings}>
-            {auction.map((item) => (
-              <Wrap>
-                <Col key={item._id} md={12}>
-                  <CardComp
-                    url={item.property.images[0].url}
-                    data={item.property.details}
-                    id={item._id}
-                    auctionStartDate={item.auctionStartDate}
-                    auctionEndDate={item.auctionEndDate}
-                    startingBid={item.highestBid}
-                    auctionId={item._id}
-                  />
-                </Col>
-              </Wrap>
-            ))}
-          </Carousel>
+          <Col md={12} className="m-auto">
+            <img
+              src="/images/f_name.png"
+              alt=""
+              style={{
+                marginBottom: "0px",
+                maxWidth: "250px",
+                maxHeight: "150px",
+              }}
+            />
+          </Col>
         </Row>
-      </Col>
+      )}
     </div>
   );
 };

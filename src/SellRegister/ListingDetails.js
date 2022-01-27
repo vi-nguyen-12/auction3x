@@ -227,7 +227,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               marginBottom: "10px",
             }}
           >
-            Address Line 2
+            Address Line 2*
           </label>
 
           <table
@@ -283,8 +283,8 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   bottom: "5px",
                 }}
               >
-                <td>State / Province</td>
-                <td style={{ paddingLeft: "15px" }}>City / District</td>
+                <td>State / Province*</td>
+                <td style={{ paddingLeft: "15px" }}>City / District*</td>
               </tr>
             </tbody>
           </table>
@@ -337,8 +337,8 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   bottom: "5px",
                 }}
               >
-                <td>Postal Code</td>
-                <td style={{ paddingLeft: "15px" }}>Country</td>
+                <td>Postal Code*</td>
+                <td style={{ paddingLeft: "15px" }}>Country*</td>
               </tr>
             </tbody>
           </table>

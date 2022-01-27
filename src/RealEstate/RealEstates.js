@@ -125,7 +125,7 @@ const RealEstates = ({ colorChange }) => {
   return (
     <>
       <tr className="realHeader">
-        <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
+        <h2 style={{fontSize:"4rem", color: "#fcbe91" }}>REAL ESTATE</h2>
       </tr>
 
       <div className="realEstateFilter">

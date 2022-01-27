@@ -16,25 +16,30 @@ const PropertyDetails = ({
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const submitedData = {
-      type: "real-estate",
-      street_address: data.street_address,
-      city: data.city,
-      state: data.state,
-      zipCode: data.zipCode,
-      discussedAmount: data.discussedAmount,
-      reservedAmount: data.reservedAmount,
-      fields: {
-        beds_count: data.bedrooms,
-        baths: data.bathrooms,
-        rooms_count: data.rooms_count,
-        total_value: data.total_value,
-      },
-    };
-    tooglePropertyData(submitedData);
-    toogleStep(step + 1);
+    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than discussed amount");
+    } else {
+      const submitedData = {
+        type: "real-estate",
+        street_address: data.street_address,
+        city: data.city,
+        state: data.state,
+        zipCode: data.zipCode,
+        discussedAmount: data.discussedAmount,
+        reservedAmount: data.reservedAmount,
+        fields: {
+          beds_count: data.bedrooms,
+          baths: data.bathrooms,
+          rooms_count: data.rooms_count,
+          total_value: data.total_value,
+        },
+      };
+
+      tooglePropertyData(submitedData);
+      toogleStep(step + 1);
+    }
   };
+
   return (
     <>
       {property.address && property.structure && property.market_assessments ? (
@@ -242,8 +247,8 @@ const PropertyDetails = ({
                           bottom: "5px",
                         }}
                       >
-                        <td>Property Owner</td>
-                        <td style={{ paddingLeft: "30px" }}>Property Type</td>
+                        <td>Property Owner*</td>
+                        <td style={{ paddingLeft: "30px" }}>Property Type*</td>
                       </tr>
                     </tbody>
                   </table>
@@ -338,15 +343,15 @@ const PropertyDetails = ({
                           bottom: "5px",
                         }}
                       >
-                        <td>Total Rooms</td>
+                        <td>Total Rooms*</td>
                         <td style={{ paddingLeft: "10px" }}>
-                          Property Size(sqft)
+                          Property Size(sqft)*
                         </td>
-                        <td style={{ margin: "auto" }}>Bedrooms</td>
+                        <td style={{ margin: "auto" }}>Bedrooms*</td>
                         <td
                           style={{ paddingRight: "170px", paddingLeft: "35px" }}
                         >
-                          Bathrooms
+                          Bathrooms*
                         </td>
                       </tr>
                     </tbody>
@@ -392,7 +397,7 @@ const PropertyDetails = ({
                               fontSize: "13px",
                             }}
                           >
-                            Market Value
+                            Market Value*
                           </td>
                         </tr>
                       </div>
@@ -421,6 +426,7 @@ const PropertyDetails = ({
                           }}
                           type="number"
                           name="reservedAmount"
+                          required
                           {...register("reservedAmount", { required: false })}
                           required
                         />
@@ -444,6 +450,7 @@ const PropertyDetails = ({
                           }}
                           type="number"
                           name="discussedAmount"
+                          required
                           {...register("discussedAmount", { required: false })}
                           required
                         />
@@ -458,8 +465,8 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Reserved Amount</td>
-                    <td style={{ paddingLeft: "15px" }}>Discuss Amount</td>
+                    <td>Reserved Amount*</td>
+                    <td style={{ paddingLeft: "15px" }}>Discuss Amount*</td>
                   </tr>
                 </tbody>
               </table>
@@ -689,8 +696,8 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Property Owner</td>
-                    <td style={{ paddingLeft: "30px" }}>Property Type</td>
+                    <td>Property Owner*</td>
+                    <td style={{ paddingLeft: "30px" }}>Property Type*</td>
                   </tr>
                 </tbody>
               </table>
@@ -777,11 +784,11 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Total Rooms</td>
-                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)</td>
-                    <td style={{ margin: "auto" }}>Bedrooms</td>
+                    <td>Total Rooms*</td>
+                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)*</td>
+                    <td style={{ margin: "auto" }}>Bedrooms*</td>
                     <td style={{ paddingRight: "170px", paddingLeft: "35px" }}>
-                      Bathrooms
+                      Bathrooms*
                     </td>
                   </tr>
                 </tbody>
@@ -808,7 +815,7 @@ const PropertyDetails = ({
                             type="number"
                             name="total_value"
                             className="sell-amount"
-                            // {...register("total_value", { required: false })}
+                          // {...register("total_value", { required: false })}
                           />
                         </div>
                       </td>
@@ -820,7 +827,7 @@ const PropertyDetails = ({
                           fontSize: "13px",
                         }}
                       >
-                        Market Value
+                        Market Value*
                       </td>
                     </tr>
                   </div>
@@ -882,8 +889,8 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Reserved Amount</td>
-                    <td style={{ paddingLeft: "15px" }}>Discuss Amount</td>
+                    <td>Reserved Amount*</td>
+                    <td style={{ paddingLeft: "15px" }}>Discuss Amount*</td>
                   </tr>
                 </tbody>
               </table>
@@ -908,7 +915,8 @@ const PropertyDetails = ({
                 >
                   Previous
                 </button>
-                <button className="nxt-btn" type="submit">
+                <button
+                  className="nxt-btn" type="submit">
                   Next
                 </button>
               </div>

@@ -43,6 +43,8 @@ const CardComp = ({
   const auctions = useSelector((state) => state.auction);
   const [auction, setAuction] = useState([]);
   const [auctionProp, setAuctionProp] = useState();
+  const [auctionEnded, setAuctionEnded] = useState(false);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const history = useHistory();
@@ -75,7 +77,6 @@ const CardComp = ({
     setAuctionStartDate(startDate);
     setAuctionEndDate(endDate);
     setOnGoingAuctionEnd(auctionData.auctionEndDate);
-
   }, []);
 
   return (
@@ -130,12 +131,10 @@ const CardComp = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-
             <div>
               <div>
                 <span className="golden-text">
-                  {data.address.formatted_street_address},{" "}
-                  {data.address.state}
+                  {data.address.formatted_street_address}, {data.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px" }}>Property Address</h4>
               </div>
@@ -165,11 +164,22 @@ const CardComp = ({
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={1} style={{ width: "50%" }}>
-                      <p style={{ fontSize: "12px", width: "200px" }}>
-                        <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
-                      </p>
-                    </Col>
+                    {auctionEnded ? (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <p style={{ fontSize: "15px", width: "200px", fontWeight:"bold" }}>
+                          Auction Ended
+                        </p>
+                      </Col>
+                    ) : (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <p style={{ fontSize: "12px", width: "200px" }}>
+                          <AuctionTimer
+                            auctionEndDate={onGoingAuctionEnd}
+                            toogleAuction={toogleAuction}
+                          />
+                        </p>
+                      </Col>
+                    )}
 
                     <Col md={6} style={{ width: "50%" }}>
                       <p
@@ -207,7 +217,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",
@@ -232,7 +242,7 @@ const CardComp = ({
             show={showConfirm}
             onHide={toogleConfirmModal}
             centered
-            contentClassName="confirm"
+            contentclassname="confirm"
           >
             <Modal.Header closeButton>
               <Modal.Title
@@ -267,7 +277,7 @@ const CardComp = ({
             show={forgotPass}
             onHide={toogleForgotPass}
             centered
-            contentClassName="forgotPass"
+            contentclassname="forgotPass"
           >
             <Modal.Header closeButton>
               <Modal.Title
@@ -296,7 +306,7 @@ const CardComp = ({
             show={changePass}
             onHide={toogleChangePass}
             centered
-            contentClassName="forgotPass"
+            contentclassname="forgotPass"
           >
             <Modal.Body>
               <ChangePass toogleChangePass={toogleChangePass} />
@@ -307,7 +317,7 @@ const CardComp = ({
             centered
             show={showSignIn}
             onHide={toogleSignIn}
-            contentClassName="login"
+            contentclassname="login"
           >
             <Modal.Body>
               <Login
@@ -325,7 +335,7 @@ const CardComp = ({
             centered
             show={showSignUp}
             onHide={toogleSignUp}
-            contentClassName="custom-modal-style"
+            contentclassname="custom-modal-style"
           >
             <Modal.Body>
               <SignUp

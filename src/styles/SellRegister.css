@@ -85,6 +85,21 @@
   top: 50px;
 }
 
+.upload-box-docu{
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 800px;
+  width: 1000px;
+  top: 50px;
+}
+
 /*Agreement Form*/
 .agree-content {
   margin: auto;
@@ -151,6 +166,17 @@ body {
   border: 0;
   position: absolute;
   height: 75%;
+  width: 100%;
+  bottom: 0;
+}
+
+.sell-bottom-docu {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  position: absolute;
+  flex-wrap: wrap;
+  height: 85%;
   width: 100%;
   bottom: 0;
 }
@@ -479,11 +505,6 @@ h1 {
   margin-right: -86px;
 }
 
-.input-form-3 {
-  padding: 75px;
-  margin-top: 20px;
-}
-
 .amount-input {
   display: flex;
   align-items: center;
@@ -542,13 +563,15 @@ h1 {
 }
 
 .input-form-3 label {
+  display: grid;
+  justify-content: center;
   background-color: #d58f5c;
   color: white;
-  padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin-top: 1rem;
+  margin:0;
+  padding:3px;
 }
 
 .delete-btn {
@@ -564,6 +587,10 @@ h1 {
 
 .upload-list {
   display: grid;
+  justify-content: center;
+  height: 100px;
+  width: 200px;
+  overflow-x: hidden;
 }
 /* loader full screen */
 .loader {
@@ -600,4 +627,9 @@ h1 {
 }
 .upload-list-item {
   display: inline-grid;
+}
+
+.colum{
+  display: grid;
+  justify-content: center;
 }

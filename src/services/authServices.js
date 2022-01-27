@@ -152,6 +152,22 @@ const authService = {
       env.API_URL + "/api/auctions/real-estates/ongoing"
     );
   },
+
+  forgotPassword(data) {
+    return axios.post(env.API_URL + "/api/users/password", data);
+  },
+
+  resetPassword(data) {
+    return axios.post(env.API_URL + "/api/users/password", {token: data.token, password: data.password});
+  },
+
+  resendConfirmEmail(data) {
+    return axios.post(env.API_URL + "/api/users/confirmation/email", {email: data.email});
+  },
+
+  confirmEmail(data) {
+    return axios.post(env.API_URL + "/api/users/confirmation/verify", {token:data});
+  }
 };
 
 export default authService;

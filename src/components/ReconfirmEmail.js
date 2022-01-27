@@ -1,27 +1,23 @@
-import react from "react";
-import Toast from "./Toast";
-import { useForm } from "react-hook-form";
-import authServices from "../services/authServices";
+import React from "react";
+import {useForm} from "react-hook-form";
+import authService from "../services/authServices";
+import {useHistory} from "react-router-dom";
 
-function ForgotPass({ toogleForgotPass, toogleChangePass }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    //authServices.verify(data);
-    authServices.forgotPassword(data).then((response) => {
-      if (response.data.error) {
-        alert(response.data.error);
-      } else {
-        alert("Password reset link has been sent to your email");
-        toogleForgotPass();
-      }
-    });
-  };
+function ReconfirmEmail({toogleConfirmModal, toogleSignIn}) {
+    const {register, handleSubmit} = useForm();
+    const history = useHistory();
+
+    const onSubmit = (data) => {
+      authService.resendConfirmEmail(data).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert(res.data.message);
+          history.push("/");
+        }
+      });
+    };
   return (
-    // reset password
     <>
       <div>
         <div className="form-group mb-2">
@@ -60,4 +56,4 @@ function ForgotPass({ toogleForgotPass, toogleChangePass }) {
   );
 }
 
-export default ForgotPass;
+export default ReconfirmEmail;

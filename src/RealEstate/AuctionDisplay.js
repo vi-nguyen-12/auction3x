@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
 import authService from "../services/authServices";
-import { Modal, Carousel, Table } from "react-bootstrap";
+import { Modal, Carousel, Table, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import {
   GoogleMap,
@@ -44,6 +44,7 @@ const AuctionDisplay = ({ colorChange }) => {
 
   const [auction, setAuction] = useState([]);
   const [auctionProp, setAuctionProp] = useState();
+  const [topBid, setTopBid] = useState();
 
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
@@ -81,6 +82,18 @@ const AuctionDisplay = ({ colorChange }) => {
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
   const [count, setCount] = useState(0);
+  const [sorted, setSorted] = useState(false);
+
+  //sort by price
+  const sortByPrice = () => {
+    if (sorted === false) {
+      setSorted(true);
+      setAuction(auctions.sort((a, b) => a.bidder.amount - b.bidder.amount));
+    } else {
+      setSorted(false);
+      setAuction(auctions.sort((a, b) => b.bidder.amount - a.bidder.amount));
+    }
+  };
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -123,6 +136,12 @@ const AuctionDisplay = ({ colorChange }) => {
         setRegisteredProperty(true);
       }
     }
+
+    let topBidders = [];
+    for (let i = 0; i < auctionData.highestBidders.length; i++) {
+      topBidders = [...topBidders, auctionData.highestBidders[i]];
+    }
+    setTopBid(topBidders.reverse());
   }, [registProperty]);
 
   //   console.log(onGoingAuctionEnd);
@@ -240,12 +259,11 @@ const AuctionDisplay = ({ colorChange }) => {
 
   return (
     <>
-      {auctionProp && location && (
+      {auctionProp && location && auction && (
         <div className="styl">
-          <tr className="realHeader">
-            <h2 style={{ color: "rgb(233,175,132)" }}>REAL ESTATE</h2>
-          </tr>
-          <div style={{ position: "relative", width: "100%" }}>
+          <div
+            style={{ position: "relative", width: "100%", marginTop: "70px" }}
+          >
             <img
               src={auctionProp.images[0].url}
               alt="Snow"
@@ -669,16 +687,28 @@ const AuctionDisplay = ({ colorChange }) => {
             </div>
           </td> */}
 
-              <Modal size="lg" show={showRegister} onHide={toogleRegister} centered>
+              <Modal
+                size="lg"
+                show={showRegister}
+                onHide={toogleRegister}
+                centered
+              >
                 <Modal.Body>
                   {/* <BuyConfirm /> */}
                   <MultiBuyForm />
                 </Modal.Body>
               </Modal>
 
-              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+              <Modal
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                show={placeBid}
+                onHide={tooglePlaceBid}
+                centered
+              >
                 <Modal.Body>
-                  <BuyConfirm />
+                  <BuyConfirm tooglePlaceBid = {tooglePlaceBid} />
                 </Modal.Body>
               </Modal>
               <Modal
@@ -688,7 +718,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={showConfirm}
                 onHide={toogleConfirmModal}
                 centered
-                contentClassName="confirm"
+                contentclassname="confirm"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -723,7 +753,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={forgotPass}
                 onHide={toogleForgotPass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Header closeButton>
                   <Modal.Title
@@ -752,7 +782,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 show={changePass}
                 onHide={toogleChangePass}
                 centered
-                contentClassName="forgotPass"
+                contentclassname="forgotPass"
               >
                 <Modal.Body>
                   <ChangePass toogleChangePass={toogleChangePass} />
@@ -763,7 +793,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={showSignIn}
                 onHide={toogleSignIn}
-                contentClassName="login"
+                contentclassname="login"
               >
                 <Modal.Body>
                   <Login
@@ -781,7 +811,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={showSignUp}
                 onHide={toogleSignUp}
-                contentClassName="custom-modal-style"
+                contentclassname="custom-modal-style"
               >
                 <Modal.Body>
                   <SignUp
@@ -872,203 +902,297 @@ const AuctionDisplay = ({ colorChange }) => {
               <h4>{count}</h4>
               <p> Views</p>
             </div>
-            <div style={{ padding: "35px" }}>
-              <h2>
-                <span style={{ color: "#B77B50" }}>|</span>Property Information
-              </h2>
+            <Row>
+              <Col>
+                <div style={{ padding: "35px" }}>
+                  <h2>
+                    <span style={{ color: "#B77B50" }}>|</span>Property
+                    Information
+                  </h2>
 
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    position: "relative",
-                    left: "105px",
-                    padding: "15px",
-                  }}
-                >
-                  Sale Type
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    fontSize: "17px",
-                    padding: "15px",
-                  }}
-                >
-                  Tenancy
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    padding: "15px",
-                    position: "relative",
-                    left: "105px",
-                  }}
-                >
-                  Sale Condition
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    fontSize: "17px",
-                    padding: "15px",
-                    padding: "15px",
-                  }}
-                >
-                  Building Height:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.structure.stories} Stories
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    position: "relative",
-                    padding: "15px",
-                    left: "105px",
-                  }}
-                >
-                  Property Type:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.parcel.county_land_use_description}
-                  </span>
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    fontSize: "17px",
-                    padding: "15px",
-                  }}
-                >
-                  Building FAR
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    padding: "15px",
-                    position: "relative",
-                    left: "105px",
-                  }}
-                >
-                  Building Size:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.structure.total_area_sq_ft} sq.ft
-                  </span>
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    padding: "15px",
-                    fontSize: "17px",
-                  }}
-                >
-                  Zoning:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.parcel.zoning}
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    padding: "15px",
-                    position: "relative",
-                    left: "105px",
-                  }}
-                >
-                  Building Class:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.structure.quality}
-                  </span>
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    padding: "15px",
-                    fontSize: "17px",
-                  }}
-                >
-                  Parking:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.structure.parking_type}
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    padding: "15px",
-                    position: "relative",
-                    left: "105px",
-                  }}
-                >
-                  Year Built/ Renovated:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.structure.year_built}
-                  </span>
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    width: "240px",
-                    padding: "15px",
-                    fontSize: "17px",
-                  }}
-                >
-                  Frontage:
-                  <span style={{ fontWeight: "bold" }}>
-                    {auctionProp.details.parcel.frontage_ft}
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    width: "240px",
-                    padding: "15px",
-                    position: "relative",
-                    left: "105px",
-                  }}
-                >
-                  Percent Leased:
-                  <span style={{ fontWeight: "bold" }}>N/A</span>
-                </td>
-                <td
-                  style={{
-                    position: "absolute",
-                    right: "500px",
-                    padding: "15px",
-                    width: "240px",
-                    fontSize: "17px",
-                  }}
-                >
-                  Opportunity Zone:
-                  <span style={{ fontWeight: "bold" }}>N/A</span>
-                </td>
-              </tr>
-              {/* <tr>
+                  <Table borderless>
+                    <tbody>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        //   padding: "15px",
+                        // }}
+                        >
+                          Sale Type
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   fontSize: "17px",
+                        //   padding: "15px",
+                        // }}
+                        >
+                          Tenancy
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Sale Condition
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   fontSize: "17px",
+                        //   padding: "15px",
+                        //   padding: "15px",
+                        // }}
+                        >
+                          Building Height:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.structure.stories} Stories
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   position: "relative",
+                        //   padding: "15px",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Property Type:
+                          <span style={{ fontWeight: "bold" }}>
+                            {
+                              auctionProp.details.parcel
+                                .county_land_use_description
+                            }
+                          </span>
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   fontSize: "17px",
+                        //   padding: "15px",
+                        // }}
+                        >
+                          Building FAR
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Building Size:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.structure.total_area_sq_ft}{" "}
+                            sq.ft
+                          </span>
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   fontSize: "17px",
+                        // }}
+                        >
+                          Zoning:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.parcel.zoning}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Building Class:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.structure.quality}
+                          </span>
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   fontSize: "17px",
+                        // }}
+                        >
+                          Parking:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.structure.parking_type}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Year Built/ Renovated:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.structure.year_built}
+                          </span>
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   fontSize: "17px",
+                        // }}
+                        >
+                          Frontage:
+                          <span style={{ fontWeight: "bold" }}>
+                            {auctionProp.details.parcel.frontage_ft}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                        // style={{
+                        //   width: "240px",
+                        //   padding: "15px",
+                        //   position: "relative",
+                        //   left: "105px",
+                        // }}
+                        >
+                          Percent Leased:
+                          <span style={{ fontWeight: "bold" }}>N/A</span>
+                        </td>
+                        <td
+                        // style={{
+                        //   position: "absolute",
+                        //   right: "500px",
+                        //   padding: "15px",
+                        //   width: "240px",
+                        //   fontSize: "17px",
+                        // }}
+                        >
+                          Opportunity Zone:
+                          <span style={{ fontWeight: "bold" }}>N/A</span>
+                        </td>
+                      </tr>
+                      {/* <tr>
                 <td>{auction.highestBidders}</td>
               </tr> */}
-            </div>
+                    </tbody>
+                  </Table>
+
+                  {/* create the table of 5 bidder */}
+                </div>
+              </Col>
+
+              <Col style={{ margin: "auto" }}>
+                <Table
+                  bordered
+                  style={{
+                    margin: "auto",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    width: "auto",
+                    height: "auto",
+                  }}
+                  size="lg"
+                >
+                  <thead style={{ backgroundColor: "#d58f5c" }}>
+                    <tr>
+                      <th colSpan={3}>Top Bidder</th>
+                    </tr>
+                    <tr>
+                      <th>Bidder ID</th>
+                      <th>Bid Amount</th>
+                      <th>Date/Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ padding: "25px" }}>
+                                  {bidder.userName}
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <h2>No Bidders</h2>
+                        )}
+                      </td>
+                      <td>
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ padding: "25px" }}>
+                                  <NumberFormat
+                                    value={bidder.amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"$"}
+                                  />
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <h2>No Bidders</h2>
+                        )}
+                      </td>
+                      <td>
+                        {topBid ? (
+                          topBid.map((bidder, index) => {
+                            return (
+                              <tr key={index}>
+                                <td style={{ padding: "25px" }}>
+                                  {new Date(bidder.time).toLocaleString()}
+                                </td>
+                              </tr>
+                            );
+                          })
+                        ) : (
+                          <h2>No Bidders</h2>
+                        )}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
 
             <div style={{ padding: "35px" }}>
               <tr>

@@ -21,18 +21,19 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           alert(response.data.error);
         } else {
           toogleSignUp();
-          toogleConfirmModal();
+          alert("Please check your email to verify your account");
+          // toogleConfirmModal();
         }
       });
     }
   };
   return (
     <>
-      <Modal.Header contentClassName="modal-head-signup" closeButton>
+      <Modal.Header contentclassname="modal-head-signup" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "25px", fontWeight: "bold" }}
-          contentClassName="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           REGISTER ON AUCTION10X
           <div className="signup-div">
@@ -51,8 +52,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <table style={{ marginBottom: "13px" }}>
           <tr>
-            <td>First Name</td>
-            <td style={{ paddingLeft: "50px" }}>Last Name</td>
+            <td>First Name*</td>
+            <td style={{ paddingLeft: "50px" }}>Last Name*</td>
           </tr>
           <tr>
             <td style={{ width: "200px" }}>
@@ -80,8 +81,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
 
         <table style={{ marginBottom: "13px" }}>
           <tr>
-            <td>Email</td>
-            <td style={{ paddingLeft: "50px" }}>Mobile No.</td>
+            <td>Email*</td>
+            <td style={{ paddingLeft: "50px" }}>Mobile No.*</td>
           </tr>
           <tr>
             <td style={{ width: "200px" }}>
@@ -124,8 +125,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
 
         <table style={{ marginBottom: "10px" }}>
           <tr>
-            <td>Password</td>
-            <td style={{ paddingLeft: "50px" }}>Confirm Password</td>
+            <td>Password*</td>
+            <td style={{ paddingLeft: "50px" }}>Confirm Password*</td>
           </tr>
           <tr>
             <td style={{ width: "200px" }}>
@@ -158,8 +159,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
 
         <table>
           <tr>
-            <td>Country</td>
-            <td style={{ paddingLeft: "50px" }}>City</td>
+            <td>Country*</td>
+            <td style={{ paddingLeft: "50px" }}>City*</td>
           </tr>
           <tr>
             <td style={{ width: "200px" }}>
