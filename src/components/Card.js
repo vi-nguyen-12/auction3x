@@ -166,7 +166,13 @@ const CardComp = ({
                   <Row>
                     {auctionEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
-                        <p style={{ fontSize: "15px", width: "200px", fontWeight:"bold" }}>
+                        <p
+                          style={{
+                            fontSize: "15px",
+                            width: "200px",
+                            fontWeight: "bold",
+                          }}
+                        >
                           Auction Ended
                         </p>
                       </Col>
@@ -236,7 +242,8 @@ const CardComp = ({
             </div>
           </Card.Body>
           <Modal
-            size=""
+            backdrop="static"
+            keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showConfirm}
@@ -271,7 +278,8 @@ const CardComp = ({
           </Modal>
 
           <Modal
-            size=""
+            backdrop="static"
+            keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={forgotPass}
@@ -300,7 +308,8 @@ const CardComp = ({
           </Modal>
 
           <Modal
-            size=""
+            backdrop="static"
+            keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={changePass}
@@ -318,6 +327,8 @@ const CardComp = ({
             show={showSignIn}
             onHide={toogleSignIn}
             contentclassname="login"
+            backdrop="static"
+            keyboard={false}
           >
             <Modal.Body>
               <Login
@@ -330,7 +341,8 @@ const CardComp = ({
           </Modal>
 
           <Modal
-            size=""
+            backdrop="static"
+            keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignUp}

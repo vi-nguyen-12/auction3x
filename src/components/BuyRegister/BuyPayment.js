@@ -37,7 +37,13 @@ const BuyAuthoried = ({
   const [answer5, setAnswer5] = useState();
 
   const answer = [answer1, answer2, answer3, answer4, answer5];
-  const questionID = [question1ID, question2ID, question3ID, question4ID, question5ID];
+  const questionID = [
+    question1ID,
+    question2ID,
+    question3ID,
+    question4ID,
+    question5ID,
+  ];
 
   useEffect(async () => {
     await authService.getBuyerQuestions().then((res) => {
@@ -70,7 +76,7 @@ const BuyAuthoried = ({
 
   return (
     <>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{
@@ -86,49 +92,204 @@ const BuyAuthoried = ({
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div style={{ marginBottom: "10px" }}>
-            <p>Q.1: {question1}</p>
-            <select onChange={(e) => setAnswer1(e.target.value)}>
-              <option value="">Select</option>
-              <option value="yes">yes</option>
-              <option value="no">no</option>
-            </select>
+          <div style={{ marginBottom: "15px" }}>
+            <p style={{ fontWeight: "bold" }}>Q.1: {question1}</p>
+            <input
+              type="radio"
+              name="answer1"
+              value="yes"
+              onChange={(e) => setAnswer1(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <input
+              style={{ marginLeft: "30px" }}
+              type="radio"
+              name="answer1"
+              value="no"
+              onChange={(e) => setAnswer1(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>No</label>
+            {answer1 === "yes" && (
+              <div style={{ display: "grid" }}>
+                <textarea
+                  style={{ width: "40%" }}
+                  placeholder="Please Explain"
+                />
+                <span style={{ marginTop: "10px" }}>
+                  <input type="file" />
+                </span>
+                <div
+                  style={{
+                    width: "40%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <button>Upload</button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>Q.2: {question2}</p>
-            <select onChange={(e) => setAnswer2(e.target.value)}>
-              <option value="">Select</option>
-              <option value="yes">yes</option>
-              <option value="no">no</option>
-            </select>
+            <p style={{ fontWeight: "bold" }}>Q.2: {question2}</p>
+            <input
+              type="radio"
+              name="answer2"
+              value="yes"
+              onChange={(e) => setAnswer2(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <input
+              style={{ marginLeft: "30px" }}
+              type="radio"
+              name="answer2"
+              value="no"
+              onChange={(e) => setAnswer2(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>No</label>
+            {answer2 === "yes" && (
+              <div style={{ display: "grid" }}>
+                <textarea
+                  style={{ width: "40%" }}
+                  placeholder="Please Explain"
+                />
+                <span style={{ marginTop: "10px" }}>
+                  <input type="file" />
+                </span>
+                <div
+                  style={{
+                    width: "40%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <button>Upload</button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>Q3: {question3}</p>
-            <select onChange={(e) => setAnswer3(e.target.value)}>
-              <option value="">Select</option>
-              <option value="yes">yes</option>
-              <option value="no">no</option>
-            </select>
+            <p style={{ fontWeight: "bold" }}>Q3: {question3}</p>
+            <input
+              type="radio"
+              name="answer3"
+              value="yes"
+              onChange={(e) => setAnswer3(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <input
+              style={{ marginLeft: "30px" }}
+              type="radio"
+              name="answer3"
+              value="no"
+              onChange={(e) => setAnswer3(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>No</label>
+            {answer3 === "yes" && (
+              <div style={{ display: "grid" }}>
+                <textarea
+                  style={{ width: "40%" }}
+                  placeholder="Please Explain"
+                />
+                <span style={{ marginTop: "10px" }}>
+                  <input type="file" />
+                </span>
+                <div
+                  style={{
+                    width: "40%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <button>Upload</button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>Q4: {question4}</p>
-            <select onChange={(e) => setAnswer4(e.target.value)}>
-              <option value="">Select</option>
-              <option value="yes">yes</option>
-              <option value="no">no</option>
-            </select>
+            <p style={{ fontWeight: "bold" }}>Q4: {question4}</p>
+            <input
+              type="radio"
+              name="answer4"
+              value="yes"
+              onChange={(e) => setAnswer4(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <input
+              style={{ marginLeft: "30px" }}
+              type="radio"
+              name="answer4"
+              value="no"
+              onChange={(e) => setAnswer4(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>No</label>
+            {answer4 === "yes" && (
+              <div style={{ display: "grid" }}>
+                <textarea
+                  style={{ width: "40%" }}
+                  placeholder="Please Explain"
+                />
+                <span style={{ marginTop: "10px" }}>
+                  <input type="file" />
+                </span>
+                <div
+                  style={{
+                    width: "40%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <button>Upload</button>
+                </div>
+              </div>
+            )}
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p>Q5: {question5}</p>
-            <select onChange={(e) => setAnswer5(e.target.value)}>
-              <option value="">Select</option>
-              <option value="yes">yes</option>
-              <option value="no">no</option>
-            </select>
+            <p style={{ fontWeight: "bold" }}>Q5: {question5}</p>
+            <input
+              type="radio"
+              name="answer5"
+              value="yes"
+              onChange={(e) => setAnswer5(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <input
+              style={{ marginLeft: "30px" }}
+              type="radio"
+              name="answer5"
+              value="no"
+              onChange={(e) => setAnswer5(e.target.value)}
+            />
+            <label style={{ marginLeft: "5px" }}>No</label>
+            {answer5 === "yes" && (
+              <div style={{ display: "grid" }}>
+                <textarea
+                  style={{ width: "40%" }}
+                  placeholder="Please Explain"
+                />
+                <span style={{ marginTop: "10px" }}>
+                  <input type="file" />
+                </span>
+                <div
+                  style={{
+                    width: "40%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  <button>Upload</button>
+                </div>
+              </div>
+            )}
           </div>
         </form>
       </Modal.Body>

@@ -689,6 +689,8 @@ const AuctionDisplay = ({ colorChange }) => {
 
               <Modal
                 size="lg"
+                backdrop="static"
+                keyboard={false}
                 show={showRegister}
                 onHide={toogleRegister}
                 centered
@@ -708,11 +710,12 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
               >
                 <Modal.Body>
-                  <BuyConfirm tooglePlaceBid = {tooglePlaceBid} />
+                  <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
                 </Modal.Body>
               </Modal>
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showConfirm}
@@ -747,7 +750,8 @@ const AuctionDisplay = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={forgotPass}
@@ -776,7 +780,8 @@ const AuctionDisplay = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={changePass}
@@ -789,6 +794,8 @@ const AuctionDisplay = ({ colorChange }) => {
                 </Modal.Body>
               </Modal>
               <Modal
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showSignIn}
@@ -806,7 +813,8 @@ const AuctionDisplay = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showSignUp}

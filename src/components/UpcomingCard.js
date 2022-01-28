@@ -271,7 +271,8 @@ const UpcomingCard = ({
               </div>
             </Card.Body>
             <Modal
-              size=""
+              backdrop="static"
+              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showConfirm}
@@ -306,7 +307,8 @@ const UpcomingCard = ({
             </Modal>
 
             <Modal
-              size=""
+              backdrop="static"
+              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={forgotPass}
@@ -335,7 +337,8 @@ const UpcomingCard = ({
             </Modal>
 
             <Modal
-              size=""
+              backdrop="static"
+              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={changePass}
@@ -365,7 +368,8 @@ const UpcomingCard = ({
             </Modal>
 
             <Modal
-              size=""
+              backdrop="static"
+              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showSignUp}

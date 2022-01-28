@@ -81,7 +81,7 @@ const BuyUpload = ({
 
   return (
     <>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
