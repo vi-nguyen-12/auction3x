@@ -100,8 +100,6 @@ const Display = ({ colorChange }) => {
     }
   };
 
-
-
   useEffect(() => {
     colorChange("black");
     //for upcoming auction property data
@@ -624,7 +622,14 @@ const Display = ({ colorChange }) => {
                         Register to Bid
                       </button>
                     </div>
-                    <Modal size="lg" show={bid} onHide={toogleBid} centered>
+                    <Modal
+                      backdrop="static"
+                      keyboard={false}
+                      size="lg"
+                      show={bid}
+                      onHide={toogleBid}
+                      centered
+                    >
                       <Modal.Body>
                         {/* <BuyConfirm /> */}
                         <MultiBuyForm />
@@ -668,7 +673,15 @@ const Display = ({ colorChange }) => {
                     <div>
                       <button
                         className="customButton"
+<<<<<<< HEAD
                         style={{ width: "200px", fontSize: "20px", color: "gray" }}
+=======
+                        style={{
+                          width: "200px",
+                          fontSize: "20px",
+                          color: "gray",
+                        }}
+>>>>>>> a9f4f185110e1ba9a45dea7b50f9f61aece718f7
                         onClick={handlePlaceBid}
                         disabled
                       >
@@ -695,13 +708,21 @@ const Display = ({ colorChange }) => {
                   <button onClick={tooglePlaceBid}>place to bid</button>
                 </div>
               </td> */}
-              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+              <Modal
+                backdrop="static"
+                keyboard={false}
+                size="lg"
+                show={placeBid}
+                onHide={tooglePlaceBid}
+                centered
+              >
                 <Modal.Body>
                   <BuyConfirm />
                 </Modal.Body>
               </Modal>
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showConfirm}
@@ -736,7 +757,8 @@ const Display = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={forgotPass}
@@ -765,7 +787,8 @@ const Display = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={changePass}
@@ -795,7 +818,8 @@ const Display = ({ colorChange }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={showSignUp}
@@ -1317,8 +1341,7 @@ const Display = ({ colorChange }) => {
             </div>
           </form>
         </div>
-      )
-      }
+      )}
     </>
   );
 };

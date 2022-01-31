@@ -62,6 +62,8 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     { questionId: questionID[4], answer: answer[4] },
   ];
 
+  console.log(answers);
+
   const onSubmit = async (data) => {
     await authService
       .buyerRegister({
@@ -83,7 +85,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   };
   return (
     <>
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}

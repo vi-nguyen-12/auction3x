@@ -139,7 +139,6 @@ const Header = ({ color }) => {
                 Real Estate
               </button>
               <Modal
-                size=""
                 backdrop="static"
                 keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -177,7 +176,6 @@ const Header = ({ color }) => {
               <Modal
                 backdrop="static"
                 keyboard={false}
-                size=""
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={forgotPass}
@@ -206,7 +204,8 @@ const Header = ({ color }) => {
               </Modal>
 
               <Modal
-                size=""
+                backdrop="static"
+                keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={changePass}
@@ -353,7 +352,6 @@ const Header = ({ color }) => {
               </Modal>
 
               <Modal
-                size=""
                 backdrop="static"
                 keyboard={false}
                 aria-labelledby="contained-modal-title-vcenter"
