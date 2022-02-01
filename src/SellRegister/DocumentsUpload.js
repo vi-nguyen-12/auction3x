@@ -150,28 +150,28 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   };
 
   const titleReport = doc1.map((document) => {
-    return { ...document, officialName: "Title Report" };
+    return { ...document, officialName: "title_report" };
   });
   const insuranceCopy = doc2.map((document) => {
-    return { ...document, officialName: "Insurance Copy" };
+    return { ...document, officialName: "insurance_copy" };
   });
   const financialDocuments = doc3.map((document) => {
-    return { ...document, officialName: "Financial Documents" };
+    return { ...document, officialName: "financial_document" };
   });
   const purchaseAgreement = doc4.map((document) => {
-    return { ...document, officialName: "Purchase Agreement" };
+    return { ...document, officialName: "purchase_agreement" };
   });
   const thirdpartyReport = doc5.map((document) => {
-    return { ...document, officialName: "Third-party Report" };
+    return { ...document, officialName: "third-party_report" };
   });
   const demographics = doc6.map((document) => {
-    return { ...document, officialName: "Demographics" };
+    return { ...document, officialName: "demographics" };
   });
   const marketandValuations = doc7.map((document) => {
-    return { ...document, officialName: "Market and Valuations" };
+    return { ...document, officialName: "market_and_valuations" };
   });
   const otherDocuments = doc8.map((document) => {
-    return { ...document, officialName: "Other Documents" };
+    return { ...document, officialName: "other_documents" };
   });
   const documents = [
     ...titleReport,
@@ -185,20 +185,20 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   ];
   console.log(documents);
   const onSubmit = async (data) => {
-    if (
-      doc1.length === 0 ||
-      doc2.length === 0 ||
-      doc3.length === 0 ||
-      doc4.length === 0 ||
-      doc5.length === 0 ||
-      doc6.length === 0 ||
-      doc7.length === 0 ||
-      doc8.length === 0
-    ) {
-      alert("Please upload atleast one image");
-    } else {
+    // if (
+    //   doc1.length === 0 ||
+    //   doc2.length === 0 ||
+    //   doc3.length === 0 ||
+    //   doc4.length === 0 ||
+    //   doc5.length === 0 ||
+    //   doc6.length === 0 ||
+    //   doc7.length === 0 ||
+    //   doc8.length === 0
+    // ) {
+    //   alert("Please upload atleast one image");
+    // } else {
       toogleStep(step + 1);
-    }
+    // }
   };
 
   return (
@@ -260,7 +260,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("titleReport", { onChange: onChange1 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn1">+ Documents</label>
@@ -295,7 +295,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("insuranceCopy", { onChange: onChange2 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn2">+ Documents</label>
@@ -330,7 +330,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("financialDocuments", { onChange: onChange3 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn3">+ Documents</label>
@@ -368,7 +368,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("purchaseAgreement", { onChange: onChange4 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn4">+ Documents</label>
@@ -403,7 +403,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("thirdpartyReport", { onChange: onChange5 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn5">+ Documents</label>
@@ -438,7 +438,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("demographics", { onChange: onChange6 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn6">+ Documents</label>
@@ -476,7 +476,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("marketandValuations", { onChange: onChange7 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn7">+ Documents</label>
@@ -511,7 +511,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                   multiple
                   hidden
                   {...register("otherDocuments", { onChange: onChange8 })}
-                  required
+                  
                 />
                 <div>
                   <label for="documents-btn8">+ Documents</label>
