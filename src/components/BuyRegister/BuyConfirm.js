@@ -31,6 +31,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
   //   setMinimumBid(value);
   // };
 
+
   const onSubmit = async (data) => {
     if (bid === undefined) {
       alert("Please enter a bid amount");

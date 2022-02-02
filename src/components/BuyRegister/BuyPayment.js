@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -35,6 +35,12 @@ const BuyAuthoried = ({
   const [answer3, setAnswer3] = useState();
   const [answer4, setAnswer4] = useState();
   const [answer5, setAnswer5] = useState();
+
+  const [explain1, setExplain1] = useState();
+  const [explain2, setExplain2] = useState();
+  const [explain3, setExplain3] = useState();
+  const [explain4, setExplain4] = useState();
+  const [explain5, setExplain5] = useState();
 
   const answer = [answer1, answer2, answer3, answer4, answer5];
   const questionID = [
@@ -73,7 +79,7 @@ const BuyAuthoried = ({
   //   toogleQuestion5ID(question5ID);
   //   toogleStep(step + 1);
   // };
-
+  console.log(explain1);
   return (
     <>
       <Modal.Header closeButton>
@@ -114,6 +120,7 @@ const BuyAuthoried = ({
                 <textarea
                   style={{ width: "40%" }}
                   placeholder="Please Explain"
+                  onChange={(e) => setExplain1(e.target.value)}
                 />
                 <span style={{ marginTop: "10px" }}>
                   <input type="file" />
@@ -126,7 +133,7 @@ const BuyAuthoried = ({
                     marginTop: "10px",
                   }}
                 >
-                  <button>Upload</button>
+                  <Button>Upload</Button>
                 </div>
               </div>
             )}

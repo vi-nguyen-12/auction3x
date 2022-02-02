@@ -111,7 +111,7 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  height: 600px;
+  height: 900px;
   width: 1000px;
   top: 50px;
 }
@@ -206,7 +206,7 @@ body {
   justify-content: center;
   border: 0;
   position: absolute;
-  height: 480px;
+  height: 800px;
   width: 100%;
   bottom: 0;
 }
@@ -335,9 +335,7 @@ ul.dashed > li:before {
 }
 
 .bodi {
-  margin-top: 150px;
-  display: flex;
-  justify-content: center;
+  /* margin-top: 50px; */
 }
 
 .agree-bottom-btn {

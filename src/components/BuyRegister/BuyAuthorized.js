@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
+  const [url, setUrl] = useState();
   const properties = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   const onGoingAuction = auction.find((item) => item._id === id);
@@ -27,6 +28,9 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
 
   useEffect(() => {
     getIp();
+    authService.getDocuSign().then((res) => {
+      setUrl(res.data.redirectUrl);
+    });
   }, []);
 
   const history = useHistory();
@@ -49,11 +53,13 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
 
   const realDocuments = documents.map((item) => {
     return {
+      officialName: item.officialName,
       name: item.name,
       url: item.url,
     };
   });
-  
+  console.log(realDocuments);
+
   const answers = [
     { questionId: questionID[0], answer: answer[0] },
     { questionId: questionID[1], answer: answer[1] },
@@ -71,6 +77,8 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
         documents: realDocuments,
         TC: { time: agree, IPAddress: ip },
         answers: answers,
+        // explanation: explanations,
+        // files: files,
       })
       .catch((err) => {
         alert("User Already Registered for this property!");
@@ -97,24 +105,19 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
       <Modal.Body>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <p>
-              lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            </p>
-            <p>
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            </p>
+            <iframe src={url} width="100%" height="600px" />
           </div>
 
           <div
-            style={{ fontSize: "14px", marginLeft: "30px" }}
-            className="input-form-1"
+            style={{ fontSize: "14px"}}
+            // className="input-form-1"
           >
             <input
               type="checkbox"
               name="terms"
               multiple
               // {...register("images", { required: false })}
-              style={{ marginRight: "10px" }}
+              style={{ marginRight: "10px", marginBottom: "30px" }}
               onChange={hangleTerms}
             />
             Terms & Conditions
@@ -127,7 +130,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
               Previous
             </button>
             <button className="nxt-btn" type="submit">
-              Next
+              Submit
             </button>
           </div>
         </form>

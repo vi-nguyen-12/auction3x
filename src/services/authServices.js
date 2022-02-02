@@ -134,10 +134,9 @@ const authService = {
   // },
 
   getUpcomingAuctions() {
-    return axios.get(
-      env.API_URL + "/api/auctions/real-estates/upcoming",
-      { withCredentials: true }
-    );
+    return axios.get(env.API_URL + "/api/auctions/real-estates/upcoming", {
+      withCredentials: true,
+    });
   },
 
   getRegistStatus() {
@@ -148,9 +147,7 @@ const authService = {
   },
 
   getOngoingAuctions() {
-    return axios.get(
-      env.API_URL + "/api/auctions/real-estates/ongoing"
-    );
+    return axios.get(env.API_URL + "/api/auctions/real-estates/ongoing");
   },
 
   forgotPassword(data) {
@@ -158,16 +155,29 @@ const authService = {
   },
 
   resetPassword(data) {
-    return axios.post(env.API_URL + "/api/users/password", {token: data.token, password: data.password});
+    return axios.post(env.API_URL + "/api/users/password", {
+      token: data.token,
+      password: data.password,
+    });
   },
 
   resendConfirmEmail(data) {
-    return axios.post(env.API_URL + "/api/users/confirmation/email", {email: data.email});
+    return axios.post(env.API_URL + "/api/users/confirmation/email", {
+      email: data.email,
+    });
   },
 
   confirmEmail(data) {
-    return axios.post(env.API_URL + "/api/users/confirmation/verify", {token:data});
-  }
+    return axios.post(env.API_URL + "/api/users/confirmation/verify", {
+      token: data,
+    });
+  },
+
+  getDocuSign() {
+    return axios.get(
+      env.API_URL + "/api/docusign/signature/sellerAgreement/uiviews", {withCredentials: true}
+    );
+  },
 };
 
 export default authService;

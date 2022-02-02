@@ -154,6 +154,30 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
     setDocument8(doc8.filter((document) => document.url !== url));
   };
 
+  const titleReport = doc1.map((document) => {
+    return { ...document, officialName: "title_report" };
+  });
+  const insuranceCopy = doc2.map((document) => {
+    return { ...document, officialName: "insurance_copy" };
+  });
+  const financialDocuments = doc3.map((document) => {
+    return { ...document, officialName: "financial_document" };
+  });
+  const purchaseAgreement = doc4.map((document) => {
+    return { ...document, officialName: "purchase_agreement" };
+  });
+  const thirdpartyReport = doc5.map((document) => {
+    return { ...document, officialName: "third-party_report" };
+  });
+  const demographics = doc6.map((document) => {
+    return { ...document, officialName: "demographics" };
+  });
+  const marketandValuations = doc7.map((document) => {
+    return { ...document, officialName: "market_and_valuations" };
+  });
+  const otherDocuments = doc8.map((document) => {
+    return { ...document, officialName: "other_documents" };
+  });
   const documents = [
     {
       name: "Title Report",
@@ -190,20 +214,20 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   ];
 
   const onSubmit = async (data) => {
-    if (
-      doc1.length === 0 ||
-      doc2.length === 0 ||
-      doc3.length === 0 ||
-      doc4.length === 0 ||
-      doc5.length === 0 ||
-      doc6.length === 0 ||
-      doc7.length === 0 ||
-      doc8.length === 0
-    ) {
-      alert("Please upload atleast one image");
-    } else {
-      toogleStep(step + 1);
-    }
+    // if (
+    //   doc1.length === 0 ||
+    //   doc2.length === 0 ||
+    //   doc3.length === 0 ||
+    //   doc4.length === 0 ||
+    //   doc5.length === 0 ||
+    //   doc6.length === 0 ||
+    //   doc7.length === 0 ||
+    //   doc8.length === 0
+    // ) {
+    //   alert("Please upload atleast one image");
+    // } else {
+    toogleStep(step + 1);
+    // }
   };
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 import authService from "../services/authServices";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 const Agree = ({
@@ -14,6 +14,7 @@ const Agree = ({
   documents,
 }) => {
   const [redirect, setRedirect] = useState(false);
+  const [url, setUrl] = useState();
   const {
     register,
     handleSubmit,
@@ -22,23 +23,32 @@ const Agree = ({
 
   const history = useHistory();
 
-  const onSubmit = async (data) => {
-    authService.saveRealEstate({
-      type: propertyData.type,
-      street_address: propertyData.street_address,
-      city: propertyData.city,
-      state: propertyData.state,
-      discussedAmount: propertyData.discussedAmount,
-      reservedAmount: propertyData.reservedAmount,
-      images,
-      videos,
-      documents,
-    }).then((res) => {
-      if (res.status === 200) {
-        history.push("/");
-        window.scrollTo(0, 0);
-      }
+  useEffect(async () => {
+    await authService.getDocuSign().then((res) => {
+      setUrl(res.data.redirectUrl);
+      console.log(res.data.redirectUrl);
     });
+  }, []);
+
+  const onSubmit = async (data) => {
+    authService
+      .saveRealEstate({
+        type: propertyData.type,
+        street_address: propertyData.street_address,
+        city: propertyData.city,
+        state: propertyData.state,
+        discussedAmount: propertyData.discussedAmount,
+        reservedAmount: propertyData.reservedAmount,
+        images,
+        videos,
+        documents,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          history.push("/");
+          window.scrollTo(0, 0);
+        }
+      });
   };
 
   return (
@@ -79,23 +89,9 @@ const Agree = ({
           <h2>SELLER AGREEMENT</h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
         </div>
-        <div className="bodi">
-          <ul className="dashed">
-            {/* create the agreement form*/}
-            <li>
-              I, the Seller, hereby agree to sell the property described in this
-              Agreement to the Buyer, as set forth below.
-            </li>
-            <li>
-              I, the Seller, hereby agree to sell the property described in
-              this Agreement to the Buyer, as set forth below.
-            </li>
-            <li>
-              I, the Seller, hereby agree to sell the property described in
-              this Agreement to the Buyer, as set forth below.
-            </li>
-          </ul>
-        </div>
+        {/* <div style={{marginTop:"100px"}}>
+          <iframe src={url} width="800px" height="580px"></iframe>
+        </div> */}
         <div className="agree-bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
