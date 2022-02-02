@@ -394,7 +394,6 @@ const Display = ({ colorChange }) => {
                                 display: "relative",
                                 justifyContent: "center",
                                 margin: "auto",
-
                                 width: "100%",
                                 borderRadius: "15px",
                                 position: "relative",

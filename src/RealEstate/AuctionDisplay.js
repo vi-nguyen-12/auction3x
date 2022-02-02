@@ -84,7 +84,7 @@ const AuctionDisplay = ({ colorChange }) => {
   const [count, setCount] = useState(0);
   const [sorted, setSorted] = useState(false);
 
-  //sort by price
+
   const sortByPrice = () => {
     if (sorted === false) {
       setSorted(true);
