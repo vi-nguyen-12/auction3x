@@ -451,7 +451,6 @@ const PropertyDetails = ({
                           }}
                           type="number"
                           name="discussedAmount"
-                          required
                           {...register("discussedAmount", { required: false })}
                           required
                         />

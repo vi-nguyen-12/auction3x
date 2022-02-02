@@ -673,15 +673,11 @@ const Display = ({ colorChange }) => {
                     <div>
                       <button
                         className="customButton"
-<<<<<<< HEAD
-                        style={{ width: "200px", fontSize: "20px", color: "gray" }}
-=======
                         style={{
                           width: "200px",
                           fontSize: "20px",
                           color: "gray",
                         }}
->>>>>>> a9f4f185110e1ba9a45dea7b50f9f61aece718f7
                         onClick={handlePlaceBid}
                         disabled
                       >

@@ -85,7 +85,7 @@
   top: 50px;
 }
 
-.upload-box-docu{
+.upload-box-docu {
   margin: auto;
   position: relative;
   display: flex;
@@ -95,7 +95,7 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  height: 800px;
+  height: 1800px;
   width: 1000px;
   top: 50px;
 }
@@ -540,7 +540,6 @@ h1 {
   font-size: 12px !important;
 }
 
-
 /* loader */
 .input-form-1 label {
   background-color: #d58f5c;
@@ -563,15 +562,16 @@ h1 {
 }
 
 .input-form-3 label {
-  display: grid;
-  justify-content: center;
   background-color: #d58f5c;
   color: white;
+  padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin:0;
-  padding:3px;
+  margin-top: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  width: 120px;
 }
 
 .delete-btn {
@@ -587,11 +587,13 @@ h1 {
 
 .upload-list {
   display: grid;
-  justify-content: center;
-  height: 100px;
-  width: 200px;
+  justify-content: left;
+  height: 150px;
+  width: 300px;
   overflow-x: hidden;
+  margin: auto;
 }
+
 /* loader full screen */
 .loader {
   position: fixed;
@@ -627,9 +629,35 @@ h1 {
 }
 .upload-list-item {
   display: inline-grid;
+  height: fit-content;
+  border-bottom: #333 solid 1px;
+  justify-content: left;
+  text-align: left;
 }
 
-.colum{
-  display: grid;
+col {
+  width: 50%;
+}
+
+.upload-list-item span {
+  display: inline-block;
+  width: 100%;
   justify-content: center;
+  font-size: 16px;
+}
+
+summary {
+  display: block;
+}
+
+summary::after {
+  margin-left: 1ch;
+  display: inline-block;
+  transition: 0.2s;
+  content: "\002B";
+  font-size: 28px;
+}
+
+details[open] summary::after {
+  transform: rotate(90deg);
 }
