@@ -42,7 +42,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
           alert(res.data.error);
         } else {
           alert("Bid Successful!");
-          tooglePlaceBid();
+          // tooglePlaceBid();
           window.location.reload();
         }
       });

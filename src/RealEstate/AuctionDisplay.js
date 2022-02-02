@@ -127,6 +127,7 @@ const AuctionDisplay = ({ colorChange }) => {
       lat: auctionData.property.details.address.latitude,
       lng: auctionData.property.details.address.longitude,
     });
+    
     window.setTimeout(() => {
       window.scrollTo(0, 0);
     }, 0);
@@ -142,7 +143,7 @@ const AuctionDisplay = ({ colorChange }) => {
       topBidders = [...topBidders, auctionData.highestBidders[i]];
     }
     setTopBid(topBidders.reverse());
-  }, [registProperty]);
+  }, [auctions, registProperty]);
 
   //   console.log(onGoingAuctionEnd);
   const mapStyles = {

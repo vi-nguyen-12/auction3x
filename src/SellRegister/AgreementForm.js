@@ -4,6 +4,7 @@ import "../styles/SellRegister.css";
 import authService from "../services/authServices";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { SiDocusign } from "react-icons/si";
 
 const Agree = ({
   toogleStep,
@@ -13,7 +14,13 @@ const Agree = ({
   videos,
   documents,
 }) => {
-  const [redirect, setRedirect] = useState(false);
+  const [agree, setAgree] = useState(false);
+  const [envelopeId, setEnvelopeId] = useState();
+  const [docId, setDocId] = useState();
+  const toogleAgree = () => {
+    setAgree(!agree);
+  };
+
   const [url, setUrl] = useState();
   const {
     register,
@@ -26,29 +33,39 @@ const Agree = ({
   useEffect(async () => {
     await authService.getDocuSign().then((res) => {
       setUrl(res.data.redirectUrl);
-      console.log(res.data.redirectUrl);
+      setEnvelopeId(res.data.envelopeId);
+      console.log(res.data);
+    });
+
+    await authService.getDocuSignStatus(envelopeId).then((res) => {
+      setDocId(res.data._id);
     });
   }, []);
 
   const onSubmit = async (data) => {
-    authService
-      .saveRealEstate({
-        type: propertyData.type,
-        street_address: propertyData.street_address,
-        city: propertyData.city,
-        state: propertyData.state,
-        discussedAmount: propertyData.discussedAmount,
-        reservedAmount: propertyData.reservedAmount,
-        images,
-        videos,
-        documents,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          history.push("/");
-          window.scrollTo(0, 0);
-        }
-      });
+    if (agree === true) {
+      authService
+        .saveRealEstate({
+          type: propertyData.type,
+          street_address: propertyData.street_address,
+          city: propertyData.city,
+          state: propertyData.state,
+          discussedAmount: propertyData.discussedAmount,
+          reservedAmount: propertyData.reservedAmount,
+          docusign: { envelopeId: docId, type: "seller_agreement" },
+          images,
+          videos,
+          documents,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            history.push("/");
+            window.scrollTo(0, 0);
+          }
+        });
+    } else {
+      alert("You must agree to the terms and conditions");
+    }
   };
 
   return (
@@ -89,9 +106,29 @@ const Agree = ({
           <h2>SELLER AGREEMENT</h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
         </div>
-        {/* <div style={{marginTop:"100px"}}>
-          <iframe src={url} width="800px" height="580px"></iframe>
-        </div> */}
+        <div style={{ marginTop: "200px" }}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => window.open(url)}
+          >
+            Sign DocuSign <SiDocusign />
+          </button>
+        </div>
+        <div
+          style={{
+            height: "fit-content",
+            position: "absolute",
+            bottom: "200px",
+          }}
+        >
+          <input
+            style={{ marginRight: "10px" }}
+            type="checkbox"
+            onChange={toogleAgree}
+          />
+          <label>I agree to the terms and conditions</label>
+        </div>
         <div className="agree-bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous

@@ -66,9 +66,9 @@ const UpcomingCard = ({
 
   const handleDisplay = () => {
     history.push(`/Display/${id}`);
-    window.setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // window.setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   };
 
   useEffect(() => {

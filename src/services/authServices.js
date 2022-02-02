@@ -178,6 +178,11 @@ const authService = {
       env.API_URL + "/api/docusign/signature/sellerAgreement/uiviews", {withCredentials: true}
     );
   },
+
+  getDocuSignStatus(data) {
+    console.log(data);
+    return axios.get(env.API_URL + `/api/docusign/envelopes/${data}/status`, {withCredentials: true});
+  },
 };
 
 export default authService;

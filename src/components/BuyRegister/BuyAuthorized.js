@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ import axious from "axios";
 import { useHistory } from "react-router-dom";
 import { FaCreativeCommonsPd } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { SiDocusign } from "react-icons/si";
 
 const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   const { register, handleSubmit } = useForm();
@@ -102,15 +103,41 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
           Documents Upload
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{ height: "300px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <iframe src={url} width="100%" height="600px" />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "70px",
+            }}
+          >
+            <Button
+              className="btn btn-primary"
+              onClick={() => {
+                window.open(url);
+              }}
+            >
+              <SiDocusign />
+              <span style={{ marginLeft: "10px" }}>
+                <span style={{ fontSize: "20px" }}>
+                  <strong>Sign</strong>
+                </span>
+                <span style={{ fontSize: "15px", marginLeft: "10px" }}>
+                  <strong>Document</strong>
+                </span>
+              </span>
+            </Button>
           </div>
 
           <div
-            style={{ fontSize: "14px"}}
-            // className="input-form-1"
+            style={{
+              fontSize: "14px",
+              width: "100%",
+              marginTop: "70px",
+              textAlign: "center",
+            }}
           >
             <input
               type="checkbox"
@@ -122,19 +149,21 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
             />
             Terms & Conditions
           </div>
-          <div
-            style={{ position: "sticky", padding: "auto" }}
-            className="bottom-btn"
-          >
-            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
-              Previous
-            </button>
-            <button className="nxt-btn" type="submit">
-              Submit
-            </button>
-          </div>
         </form>
       </Modal.Body>
+      <Modal.Footer style={{ justifyContent: "center" }}>
+        <div
+          style={{ position: "sticky", padding: "auto" }}
+          className="bottom-btn"
+        >
+          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+            Previous
+          </button>
+          <button className="nxt-btn" type="submit">
+            Submit
+          </button>
+        </div>
+      </Modal.Footer>
     </>
   );
 };
