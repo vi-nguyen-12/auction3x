@@ -5,11 +5,9 @@ import authService from "../services/authServices";
 import { Button, Row, Col, Container, Table } from "react-bootstrap";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
-import { GrFormClose } from "react-icons/gr";
 import { MdClose } from "react-icons/md";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
-  const [hover, setHover] = useState(true);
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -255,10 +253,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn1">+ Documents</label>
+                  <label htmlFor="documents-btn1">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn1">
+                  <label htmlFor="documents-btn1">
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
                   </label>
                 </div>
@@ -268,35 +266,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc1
                   ? doc1.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = true;
-                              setDocument1([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument1([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover1 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover1 = true;
+                            setDocument1([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover1 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument1([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover1 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -316,10 +314,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn2">+ Documents</label>
+                  <label htmlFor="documents-btn2">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn2">
+                  <label htmlFor="documents-btn2">
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
                 </div>
@@ -329,35 +327,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc2
                   ? doc2.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = true;
-                              setDocument2([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument2([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover2 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover2 = true;
+                            setDocument2([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover2 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument2([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover2 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -378,10 +376,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn3">+ Documents</label>
+                  <label htmlFor="documents-btn3">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn3">
+                  <label htmlFor="documents-btn3">
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
                 </div>
@@ -391,35 +389,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc3
                   ? doc3.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = true;
-                              setDocument3([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument3([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover3 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover3 = true;
+                            setDocument3([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover3 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument3([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover3 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -440,10 +438,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn4">+ Documents</label>
+                  <label htmlFor="documents-btn4">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn4">
+                  <label htmlFor="documents-btn4">
                     {" "}
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
                   </label>
@@ -454,35 +452,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc4
                   ? doc4.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = true;
-                              setDocument4([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument4([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover4 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover4 = true;
+                            setDocument4([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover4 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument4([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover4 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -503,10 +501,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn5">+ Documents</label>
+                  <label htmlFor="documents-btn5">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn5">
+                  <label htmlFor="documents-btn5">
                     {" "}
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
@@ -517,35 +515,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc5
                   ? doc5.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = true;
-                              setDocument5([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument5([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover5 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover5 = true;
+                            setDocument5([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover5 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument5([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover5 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -565,10 +563,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn6">+ Documents</label>
+                  <label htmlFor="documents-btn6">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn6">
+                  <label htmlFor="documents-btn6">
                     {" "}
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
@@ -579,35 +577,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc6
                   ? doc6.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = true;
-                              setDocument6([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument6([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover6 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover6 = true;
+                            setDocument6([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover6 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument6([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover6 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -628,10 +626,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn7">+ Documents</label>
+                  <label htmlFor="documents-btn7">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn7">
+                  <label htmlFor="documents-btn7">
                     {" "}
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
@@ -642,35 +640,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc7
                   ? doc7.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = true;
-                              setDocument7([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument7([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover7 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover7 = true;
+                            setDocument7([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover7 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument7([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover7 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -690,10 +688,10 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               />
               <details>
                 <summary>
-                  <label for="documents-btn8">+ Documents</label>
+                  <label htmlFor="documents-btn8">+ Documents</label>
                 </summary>
                 <div>
-                  <label for="documents-btn8">
+                  <label htmlFor="documents-btn8">
                     {" "}
                     <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
                   </label>
@@ -704,35 +702,35 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
               <div className="upload-list">
                 {doc8
                   ? doc8.map((document, index, arr) => (
-                      <div className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = true;
-                              setDocument8([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument8([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover8 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                          onMouseEnter={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover8 = true;
+                            setDocument8([...tempArr]);
+                          }}
+                          onMouseLeave={() => {
+                            var tempArr = arr;
+                            var temp = document;
+                            temp.onHover8 = false;
+                            let newArr = tempArr.splice(index, 0);
+                            setDocument8([...tempArr, ...newArr]);
+                          }}
+                        >
+                          {!document.onHover8 ? (
+                            <FaCheck fontSize="1.5em" color="blue" />
+                          ) : (
+                            <MdClose fontSize="1.5em" color="red" />
+                          )}
+                        </button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>

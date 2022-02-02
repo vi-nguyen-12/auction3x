@@ -1,13 +1,10 @@
-import React, { Component, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
-import authService from "../services/authServices";
-import { Modal, Carousel, Table, Row, Col } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Modal, Table, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import {
   GoogleMap,
   LoadScript,
-  Marker,
-  StreetViewPanoramaOptions,
 } from "@react-google-maps/api";
 import env from "../env";
 import Confirm from "../components/EmailConfirm";
@@ -20,12 +17,10 @@ import Slider from "react-slick";
 import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import DateCountdown from "react-date-countdown-timer";
 import AuctionTimer from "./AuctionTimer";
 
 const AuctionDisplay = ({ colorChange }) => {
@@ -81,19 +76,6 @@ const AuctionDisplay = ({ colorChange }) => {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
-  const [count, setCount] = useState(0);
-  const [sorted, setSorted] = useState(false);
-
-
-  const sortByPrice = () => {
-    if (sorted === false) {
-      setSorted(true);
-      setAuction(auctions.sort((a, b) => a.bidder.amount - b.bidder.amount));
-    } else {
-      setSorted(false);
-      setAuction(auctions.sort((a, b) => b.bidder.amount - a.bidder.amount));
-    }
-  };
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -127,7 +109,7 @@ const AuctionDisplay = ({ colorChange }) => {
       lat: auctionData.property.details.address.latitude,
       lng: auctionData.property.details.address.longitude,
     });
-    
+
     window.setTimeout(() => {
       window.scrollTo(0, 0);
     }, 0);
@@ -147,10 +129,6 @@ const AuctionDisplay = ({ colorChange }) => {
 
   //   console.log(onGoingAuctionEnd);
   const mapStyles = {
-    height: "50vh",
-    width: "100%",
-  };
-  const StreetviewStyles = {
     height: "50vh",
     width: "100%",
   };
@@ -240,23 +218,8 @@ const AuctionDisplay = ({ colorChange }) => {
     }
   `;
 
-  const HomeBottom = styled.div`
-    position: absolute;
-    bottom: 20vh;
-    z-index: 1;
-    left: 5vw;
-    a {
-      color: white !important;
-      font-size: 24px;
-      font-weight: bolder;
-      box-shadow: none !important;
-    }
-    span {
-      color: white;
-      font-size: 14px;
-      font-weight: bolder;
-    }
-  `;
+
+  ;
 
   return (
     <>
@@ -310,9 +273,9 @@ const AuctionDisplay = ({ colorChange }) => {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" />
+                    <img src="/images/star.png" alt="" />
                   ) : (
-                    <img src="/images/star-before.png" />
+                    <img src="/images/star-before.png" alt="" />
                   )}
                 </button>
               </div>
@@ -335,6 +298,7 @@ const AuctionDisplay = ({ colorChange }) => {
                   <img
                     style={{ borderRadius: "15px" }}
                     src="/images/picture.png"
+                    alt=""
                   />
                 </button>
                 <Modal
@@ -356,13 +320,11 @@ const AuctionDisplay = ({ colorChange }) => {
                     >
                       {auctionProp.images.map((item) => (
                         <Wrap>
-                          <a>
-                            <img
-                              style={{ height: "50vh" }}
-                              src={item.url}
-                              alt=""
-                            />
-                          </a>
+                          <img
+                            style={{ height: "50vh" }}
+                            src={item.url}
+                            alt=""
+                          />
                         </Wrap>
                       ))}
                     </Carousel>
@@ -385,7 +347,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" />
+                  <img src="/images/video.png" alt="" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -401,24 +363,22 @@ const AuctionDisplay = ({ colorChange }) => {
                     >
                       {auctionProp.videos.map((item) => (
                         <Wrap>
-                          <a>
-                            <video
-                              style={{
-                                display: "relative",
-                                justifyContent: "center",
-                                margin: "auto",
+                          <video
+                            style={{
+                              display: "relative",
+                              justifyContent: "center",
+                              margin: "auto",
 
-                                width: "100%",
-                                borderRadius: "15px",
-                                position: "relative",
-                                height: "3000px!important",
-                                cursor: "pointer",
-                              }}
-                              controls
-                            >
-                              <source src={item.url} type="video/webm" />
-                            </video>
-                          </a>
+                              width: "100%",
+                              borderRadius: "15px",
+                              position: "relative",
+                              height: "3000px!important",
+                              cursor: "pointer",
+                            }}
+                            controls
+                          >
+                            <source src={item.url} type="video/webm" />
+                          </video>
                         </Wrap>
                       ))}
                     </Carousel>
@@ -440,7 +400,7 @@ const AuctionDisplay = ({ colorChange }) => {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" />
+                  <img src="/images/360.png" alt="" />
                 </button>
               </div>
 
@@ -459,7 +419,7 @@ const AuctionDisplay = ({ colorChange }) => {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" />
+                    <img src="/images/location.png" alt="" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>
@@ -721,7 +681,6 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={showConfirm}
                 onHide={toogleConfirmModal}
-                centered
                 contentclassname="confirm"
               >
                 <Modal.Header closeButton>
@@ -757,7 +716,6 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={forgotPass}
                 onHide={toogleForgotPass}
-                centered
                 contentclassname="forgotPass"
               >
                 <Modal.Header closeButton>
@@ -787,7 +745,6 @@ const AuctionDisplay = ({ colorChange }) => {
                 centered
                 show={changePass}
                 onHide={toogleChangePass}
-                centered
                 contentclassname="forgotPass"
               >
                 <Modal.Body>
@@ -908,7 +865,7 @@ const AuctionDisplay = ({ colorChange }) => {
                 borderRadius: "10px",
               }}
             >
-              <h4>{count}</h4>
+              <h4>115512</h4>
               <p> Views</p>
             </div>
             <Row>

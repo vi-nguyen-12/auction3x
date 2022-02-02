@@ -369,39 +369,39 @@ const PropertyDetails = ({
                       alignItems: "center",
                     }}
                   >
-                    <tbody>
-                      <div style={{ display: "inline" }}>
-                        <tr>
-                          <td>
-                            <div className="amount-input">
-                              <span className="prefix">$</span>
-                              <input
-                                style={{
-                                  fontSize: "17px",
-                                  fontWeight: "bold",
-                                }}
-                                type="number"
-                                name="total_value"
-                                className="sell-amount"
-                                defaultValue={
-                                  property.market_assessments[0].total_value
-                                }
-                              // {...register("total_value", { required: false })}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            style={{
-                              position: "relative",
-                              fontSize: "13px",
-                            }}
-                          >
-                            Market Value*
-                          </td>
-                        </tr>
-                      </div>
+                    <tbody style={{ display: "inline" }}>
+
+                      <tr>
+                        <td>
+                          <div className="amount-input">
+                            <span className="prefix">$</span>
+                            <input
+                              style={{
+                                fontSize: "17px",
+                                fontWeight: "bold",
+                              }}
+                              type="number"
+                              name="total_value"
+                              className="sell-amount"
+                              defaultValue={
+                                property.market_assessments[0].total_value
+                              }
+                            // {...register("total_value", { required: false })}
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          style={{
+                            position: "relative",
+                            fontSize: "13px",
+                          }}
+                        >
+                          Market Value*
+                        </td>
+                      </tr>
+
                     </tbody>
                   </table>
                 </>

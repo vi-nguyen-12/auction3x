@@ -1,4 +1,3 @@
-import Home from "./components/Home";
 import ImgSlider from "./components/ImgSlider";
 import { FindInCountries } from "./components/FindInCountries";
 import { Upcoming } from "./components/Upcoming";
@@ -20,7 +19,6 @@ import { addAuction } from "./slice/auctionSlice";
 import authService from "./services/authServices";
 import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
-import AuctionCard from "./components/Auction/auctionCard";
 import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/ChangePass";

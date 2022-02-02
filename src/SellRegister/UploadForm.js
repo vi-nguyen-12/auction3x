@@ -4,6 +4,8 @@ import { useState } from "react";
 import authService from "../services/authServices";
 import { Button } from "react-bootstrap";
 import "../styles/SellRegister.css";
+import { FaCheck } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
@@ -123,23 +125,49 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             {...register("images", { onChange: onChange })}
             required
           />
-          <div>
-            <label for="images-btn">+ Images</label>
-          </div>
+          <details>
+            <summary>
+              <label htmlFor="images-btn">+ Images</label>
+            </summary>
+            <div>
+              <label htmlFor="images-btn">
+                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
+              </label>
+            </div>
+          </details>
           <div className="upload-list">
-            {images.map((image) => (
-              <div className="upload-list-item">
-                <span>
-                  {image.name}
-                  <Button
-                    className="delete-btn"
-                    onClick={handleDelete(image.url)}
-                  >
-                    X
-                  </Button>
-                </span>
-              </div>
-            ))}
+            {images ?
+              images.map((image, index, arr) => (
+                <div key={index} className="upload-list-item">
+                  <span>
+                    {image.name}
+                    <button
+                      className="delete-btn"
+                      onClick={handleDelete(image.url)}
+                      onMouseEnter={() => {
+                        var tempArr = arr;
+                        var temp = image;
+                        temp.onHover = true;
+                        setImages([...tempArr]);
+                      }}
+                      onMouseLeave={() => {
+                        var tempArr = arr;
+                        var temp = image;
+                        temp.onHover = false;
+                        let newArr = tempArr.splice(index, 0);
+                        setImages([...tempArr, ...newArr]);
+                      }}
+                    >
+                      {!image.onHover ? (
+                        <FaCheck fontSize="1.5em" color="blue" />
+                      ) : (
+                        <MdClose fontSize="1.5em" color="red" />
+                      )}
+                    </button>
+                  </span>
+                </div>
+              ))
+              : null}
           </div>
         </div>
 
@@ -155,23 +183,49 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             {...register("videos", { onChange: onChangeVideos })}
           // required
           />
-          <div>
-            <label for="videos-btn">+ Videos</label>
-          </div>
+          <details>
+            <summary>
+              <label htmlFor="videos-btn">+ Videos</label>
+            </summary>
+            <div>
+              <label htmlFor="videos-btn">
+                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+              </label>
+            </div>
+          </details>
           <div className="upload-list">
-            {videos.map((video) => (
-              <div className="upload-list-item">
-                <span>
-                  {video.name}
-                  <Button
-                    className="delete-btn"
-                    onClick={handleDeleteVideo(video.url)}
-                  >
-                    X
-                  </Button>
-                </span>
-              </div>
-            ))}
+            {videos ?
+              videos.map((video, index, arr) => (
+                <div key={index} className="upload-list-item">
+                  <span>
+                    {video.name}
+                    <button
+                      className="delete-btn"
+                      onClick={handleDeleteVideo(video.url)}
+                      onMouseEnter={() => {
+                        var tempArr = arr;
+                        var temp = video;
+                        temp.onHover0 = true;
+                        setVideos([...tempArr]);
+                      }}
+                      onMouseLeave={() => {
+                        var tempArr = arr;
+                        var temp = video;
+                        temp.onHover0 = false;
+                        let newArr = tempArr.splice(index, 0);
+                        setVideos([...tempArr, ...newArr]);
+                      }}
+                    >
+                      {!video.onHover0 ? (
+                        <FaCheck fontSize="1.5em" color="blue" />
+                      ) : (
+                        <MdClose fontSize="1.5em" color="red" />
+                      )}
+                    </button>
+                  </span>
+                </div>
+              ))
+              : null}
           </div>
         </div>
 

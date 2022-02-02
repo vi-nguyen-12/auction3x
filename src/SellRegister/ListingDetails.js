@@ -67,7 +67,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
         console.log(res.data);
         properties(res.data);
         toogleStep(step + 1);
-      } 
+      }
       else if (res.data.length === 0) {
         alert("Could not find property information! Please fill out the property details.");
         properties(datas);
@@ -154,7 +154,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   />
                   <div className="autocomplete-dropdown-container">
                     {loading && <div>Loading...</div>}
-                    {suggestions.map((suggestion) => {
+                    {suggestions.map((suggestion, index) => {
                       const className = suggestion.active
                         ? "suggestion-item--active"
                         : "suggestion-item";
@@ -164,6 +164,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                         : { backgroundColor: "#ffffff", cursor: "pointer" };
                       return (
                         <div
+                          key={index}
                           {...getSuggestionItemProps(suggestion, {
                             className,
                             style,
