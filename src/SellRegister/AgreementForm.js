@@ -17,6 +17,7 @@ const Agree = ({
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [docId, setDocId] = useState();
+  const [loader, setLoader] = useState(false);
   const toogleAgree = () => {
     setAgree(!agree);
   };
@@ -31,16 +32,26 @@ const Agree = ({
   const history = useHistory();
 
   useEffect(async () => {
+    setLoader(true);
     await authService.getDocuSign().then((res) => {
+      console.log(res.data);
       setUrl(res.data.redirectUrl);
       setEnvelopeId(res.data.envelopeId);
-      console.log(res.data);
     });
 
+    // await authService.getDocuSignStatus(envelopeId).then((res) => {
+    //   setDocId(res.data._id);
+    // });
+  }, []);
+
+  useEffect(async () => {
     await authService.getDocuSignStatus(envelopeId).then((res) => {
       setDocId(res.data._id);
+      if (envelopeId) {
+        setLoader(false);
+      }
     });
-  }, []);
+  }, [envelopeId]);
 
   const onSubmit = async (data) => {
     if (agree === true) {
@@ -52,7 +63,7 @@ const Agree = ({
           state: propertyData.state,
           discussedAmount: propertyData.discussedAmount,
           reservedAmount: propertyData.reservedAmount,
-          docusign: { envelopeId: docId, type: "seller_agreement" },
+          docusignId: docId,
           images,
           videos,
           documents,
@@ -106,6 +117,11 @@ const Agree = ({
           <h2>SELLER AGREEMENT</h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
         </div>
+        {loader ? (
+          <div className="loader">
+            <div className="spinning" />
+          </div>
+        ) : null}
         <div style={{ marginTop: "200px" }}>
           <button
             type="button"
