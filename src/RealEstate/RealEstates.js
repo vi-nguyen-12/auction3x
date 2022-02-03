@@ -1,10 +1,10 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar";
 import { useSelector } from "react-redux";
-import NumberFormat from "react-number-format";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../components/UpcomingCard";
 import "../styles/realEstate.css";
@@ -83,7 +83,9 @@ position: relative;
 `;
 
 const RealEstates = ({ colorChange }) => {
-  colorChange("black");
+  useEffect(() => {
+    colorChange("black");
+  }, []);
 
   const property = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
@@ -123,9 +125,9 @@ const RealEstates = ({ colorChange }) => {
 
   return (
     <>
-      <tr className="realHeader">
-        <h2 style={{ fontSize: "4rem", color: "#fcbe91" }}>REAL ESTATE</h2>
-      </tr>
+      <h5 className="realHeader">
+        <p style={{ fontSize: "4rem", color: "#fcbe91" }}>REAL ESTATE</p>
+      </h5>
 
       <div className="realEstateFilter">
         <div className="searchBar">

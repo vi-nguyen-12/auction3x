@@ -215,10 +215,6 @@ function DisplayAuctions({ colorChange }) {
       lng: auctionData.property.details.address.longitude,
     });
 
-    window.setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
-
     if (user._id && user.KYC) {
       if (registeredProperty !== undefined) {
         setRegisteredProperty(true);

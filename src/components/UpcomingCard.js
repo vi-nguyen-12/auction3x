@@ -1,8 +1,5 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import Display from "../RealEstate/Display";
-import { Link } from "react-router-dom";
-import authService from "../services/authServices";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -58,7 +55,6 @@ const UpcomingCard = ({
     }
     if (user.KYC) {
       history.push(`/DisplayUpcomings/${id}`);
-      // window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -66,9 +62,6 @@ const UpcomingCard = ({
 
   const handleDisplay = () => {
     history.push(`/DisplayUpcomings/${id}`);
-    // window.setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
   };
 
   useEffect(() => {

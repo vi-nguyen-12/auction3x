@@ -1,15 +1,8 @@
-import React, { Component, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
-import authService from "../services/authServices";
 import { Modal, Col, Row, Table } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  StreetViewPanoramaOptions,
-} from "@react-google-maps/api";
-import env from "../env";
+import { useParams } from "react-router-dom";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import Confirm from "../components/EmailConfirm";
 import ForgotPass from "../components/ForgotPass";
 import ChangePass from "../components/ChangePass";
@@ -20,7 +13,6 @@ import Slider from "react-slick";
 import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
@@ -168,20 +160,19 @@ function DisplayUpcomings({ colorChange }) {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
-  const [count, setCount] = useState(0);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
   let today = new Date().toISOString();
-  const handlePlaceBid = () => {
-    if (!user._id) {
-      return toogleSignIn();
-    } else if (today < startAuction) {
-      return alert("Auction has not started yet!");
-    }
-  };
+  // const handlePlaceBid = () => {
+  //   if (!user._id) {
+  //     return toogleSignIn();
+  //   } else if (today < startAuction) {
+  //     return alert("Auction has not started yet!");
+  //   }
+  // };
 
   const handleKYC = () => {
     if (!user.KYC) {
@@ -209,9 +200,7 @@ function DisplayUpcomings({ colorChange }) {
       lng: propertyData.property.details.address.longitude,
     });
 
-    window.setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 0);
+    // window.scrollTo(0, 0);
 
     if (user._id && user.KYC) {
       if (registeredProperty !== undefined) {
