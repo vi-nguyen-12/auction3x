@@ -40,6 +40,7 @@ const Display = ({ colorChange }) => {
   const [setRegistered, setRegisteredProperty] = useState(false);
 
   const [property, setProperty] = useState();
+
   const [propertyData, setPropertyData] = useState();
 
   const [startAuction, setStartAuction] = useState();
@@ -109,17 +110,9 @@ const Display = ({ colorChange }) => {
     setStartAuction(propertyData.auctionStartDate);
     setEndAuction(propertyData.auctionEndDate);
 
-    //set location for map
-    setLocation({
-      name: "Property Location",
-      lat: propertyData.property.details.address.latitude,
-      lng: propertyData.property.details.address.longitude,
-    });
-
     window.setTimeout(() => {
       window.scrollTo(0, 0);
     }, 0);
-
     if (user._id && user.KYC) {
       if (registeredProperty !== undefined) {
         setRegisteredProperty(true);
@@ -127,7 +120,8 @@ const Display = ({ colorChange }) => {
     }
   }, [registProperty]);
 
-  console.log(setRegistered);
+
+
   const mapStyles = {
     height: "50vh",
     width: "100%",
@@ -447,6 +441,7 @@ const Display = ({ colorChange }) => {
                   <Modal.Body>
                     <LoadScript {...env.API_Key}>
                       <GoogleMap
+                        key={location}
                         mapContainerStyle={mapStyles}
                         zoom={18}
                         center={location}

@@ -127,6 +127,13 @@ const AuctionDisplay = ({ colorChange }) => {
     setTopBid(topBidders.reverse());
   }, [auctions, registProperty]);
 
+  //useEffect for property display
+  useEffect(() => {
+    if (registeredProperty !== undefined) {
+      setRegisteredProperty(true);
+    }
+  }, [registeredProperty]);
+
   //   console.log(onGoingAuctionEnd);
   const mapStyles = {
     height: "50vh",
@@ -430,6 +437,7 @@ const AuctionDisplay = ({ colorChange }) => {
                     <Modal.Body>
                       <LoadScript {...env.API_Key}>
                         <GoogleMap
+                          key={auctionProp}
                           mapContainerStyle={mapStyles}
                           zoom={18}
                           center={location}

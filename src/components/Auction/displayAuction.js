@@ -6,8 +6,6 @@ import { Link, useParams } from "react-router-dom";
 import {
   GoogleMap,
   LoadScript,
-  Marker,
-  StreetViewPanoramaOptions,
 } from "@react-google-maps/api";
 import env from "../../env";
 import Confirm from "../EmailConfirm";
@@ -414,6 +412,7 @@ const DisplayAuction = ({ colorChange }) => {
                 <Modal.Body>
                   <LoadScript {...env.API_Key}>
                     <GoogleMap
+                      key={location}
                       mapContainerStyle={mapStyles}
                       zoom={18}
                       center={location}
@@ -616,16 +615,16 @@ const DisplayAuction = ({ colorChange }) => {
               </Modal.Body>
             </Modal>
             <td>
-                <div>
-                  <button onClick={tooglePlaceBid}>place to bid</button>
-                </div>
-              </td>
-              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
-                <Modal.Body>
-                  <BuyConfirm />
-                </Modal.Body>
-              </Modal>
-              <Modal
+              <div>
+                <button onClick={tooglePlaceBid}>place to bid</button>
+              </div>
+            </td>
+            <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+              <Modal.Body>
+                <BuyConfirm />
+              </Modal.Body>
+            </Modal>
+            <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
               centered

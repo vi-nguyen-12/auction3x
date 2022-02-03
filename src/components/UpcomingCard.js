@@ -1,8 +1,5 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import Display from "../RealEstate/Display";
-import { Link } from "react-router-dom";
-import authService from "../services/authServices";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
