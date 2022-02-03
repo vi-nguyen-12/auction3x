@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
 import authService from "../services/authServices";
-import { Modal, Carousel, Table, Row, Col } from "react-bootstrap";
+import { Modal, Table, Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import {
   GoogleMap,
@@ -27,6 +27,119 @@ import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import DateCountdown from "react-date-countdown-timer";
 import AuctionTimer from "./AuctionTimer";
+
+const mapStyles = {
+  height: "50vh",
+  width: "100%",
+};
+const StreetviewStyles = {
+  height: "50vh",
+  width: "100%",
+};
+
+let settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  autoplay: false,
+};
+
+let ImgSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  autoplay: true,
+};
+
+const Carousel = styled(Slider)`
+  height: 30vh;
+  overflow: hidden;
+
+  & > button {
+    opacity: 0;
+    height: 100%;
+    width: 5vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+
+  ul li button {
+    &:before {
+      top: -3vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
+  }
+
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    left: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-next {
+    right: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+`;
+
+const Wrap = styled.div`
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+
+  a {
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 30vh;
+    }
+
+    // &:hover {
+    //   padding: 0;
+    //   // border: 4px solid rgba(249, 249, 249, 0.8);
+    //   transition-duration: 300ms;
+    // }
+  }
+`;
+
+const HomeBottom = styled.div`
+  position: absolute;
+  bottom: 20vh;
+  z-index: 1;
+  left: 5vw;
+  a {
+    color: white !important;
+    font-size: 24px;
+    font-weight: bolder;
+    box-shadow: none !important;
+  }
+  span {
+    color: white;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+`;
+
 
 const AuctionDisplay = ({ colorChange }) => {
   const user = useSelector((state) => state.user);
@@ -146,118 +259,6 @@ const AuctionDisplay = ({ colorChange }) => {
   }, [auctions, registProperty]);
 
   //   console.log(onGoingAuctionEnd);
-  const mapStyles = {
-    height: "50vh",
-    width: "100%",
-  };
-  const StreetviewStyles = {
-    height: "50vh",
-    width: "100%",
-  };
-
-  let settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: false,
-  };
-
-  let ImgSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-  };
-
-  const Carousel = styled(Slider)`
-    height: 30vh;
-    overflow: hidden;
-
-    & > button {
-      opacity: 0;
-      height: 100%;
-      width: 5vw;
-      z-index: 1;
-
-      &:hover {
-        opacity: 1;
-        transition: opacity 0.2s ease 0s;
-      }
-    }
-
-    ul li button {
-      &:before {
-        top: -3vh;
-        font-size: 20px;
-        color: gray;
-        left: -35px;
-      }
-    }
-
-    li.slick-active button:before {
-      color: #e9af84;
-    }
-
-    .slick-list {
-      overflow: initial;
-    }
-
-    .slick-prev {
-      left: -75px;
-      width: 12vw;
-      height: 100%;
-    }
-
-    .slick-next {
-      right: -75px;
-      width: 12vw;
-      height: 100%;
-    }
-  `;
-
-  const Wrap = styled.div`
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-
-    a {
-      border-radius: 4px;
-      cursor: pointer;
-      display: block;
-      position: relative;
-      padding: 0;
-
-      img {
-        width: 100%;
-        height: 30vh;
-      }
-
-      // &:hover {
-      //   padding: 0;
-      //   // border: 4px solid rgba(249, 249, 249, 0.8);
-      //   transition-duration: 300ms;
-      // }
-    }
-  `;
-
-  const HomeBottom = styled.div`
-    position: absolute;
-    bottom: 20vh;
-    z-index: 1;
-    left: 5vw;
-    a {
-      color: white !important;
-      font-size: 24px;
-      font-weight: bolder;
-      box-shadow: none !important;
-    }
-    span {
-      color: white;
-      font-size: 14px;
-      font-weight: bolder;
-    }
-  `;
-
   return (
     <>
       {auctionProp && location && auction && (

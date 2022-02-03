@@ -37,46 +37,34 @@ const Timer = ({ auctionStartDate }) => {
   }, []);
 
   return (
-    <section
+    <div
+      className="auction-timer"
       style={{
         display: "flex",
-        flex: "column",
-        alignItems: "center",
         justifyContent: "center",
-        margin: "0 auto",
-        padding: "0",
+        alignItems: "center",
+        padding: "10px",
+        fontWeight: "700",
+        fontSize: "20px",
       }}
     >
-      <div style={{display:"grid", gridTemplateColumns:"repeat(7, 1fr)", textAlign:"center", fontSize:"18px"}}>
-        <section>
-          <p>{days}</p>
-          <p style={{marginTop:"-18px"}}>
-            <small>Days</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{hours}</p>
-          <p style={{marginTop:"-18px"}}>
-            <small>Hours</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{minutes}</p>
-          <p style={{marginTop:"-18px"}}>
-            <small>Minutes</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{seconds}</p>
-          <p style={{marginTop:"-18px"}}>
-            <small>Seconds</small>
-          </p>
-        </section>
+      <div className="auction-timer__days">
+        <span> {days} </span>
+        <span>days</span>
       </div>
-    </section>
+      <div className="auction-timer__hours">
+        <span style={{ marginLeft: "10px" }}> {hours} </span>
+        <span>hrs</span>
+      </div>
+      <div className="auction-timer__minutes">
+        <span style={{ marginLeft: "10px" }}> {minutes} </span>
+        <span>min</span>
+      </div>
+      <div className="auction-timer__seconds">
+        <span style={{ marginLeft: "10px" }}> {seconds} </span>
+        <span>sec</span>
+      </div>
+    </div>
   );
 };
 

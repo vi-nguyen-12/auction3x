@@ -1,4 +1,5 @@
 /*Display Form*/
+
 .display-content {
   margin: auto;
   position: relative;
@@ -128,3 +129,14 @@
 .slick-slider {
   height: 100% !important;
 }
+
+.propInfo tr:nth-child(n+1) td:first-child {
+  color:#6d6d6d;
+}
+
+.tabDocs tr:nth-child(n+1) td:nth-child(n+1) {
+  color:white;
+  padding: 30px 60px;
+  font-size: 20px;
+}
+

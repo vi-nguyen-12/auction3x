@@ -43,12 +43,12 @@ function SearchBar() {
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
 
-  useEffect(() => {
-    loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWmlqg_i74_az_uNpk4A-pDo2LpxNNbE&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef)
-    );
-  }, []);
+  // useEffect(() => {
+  //   loadScript(
+  //     `https://maps.googleapis.com/maps/api/js?key=AIzaSyAzWmlqg_i74_az_uNpk4A-pDo2LpxNNbE&libraries=places`,
+  //     () => handleScriptLoad(setQuery, autoCompleteRef)
+  //   );
+  // }, []);
 
   return (
     <div className="search-location-input" style={{width:"300px"}}>

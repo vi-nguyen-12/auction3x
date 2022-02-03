@@ -57,7 +57,7 @@ const UpcomingCard = ({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/Display/${id}`);
+      history.push(`/DisplayUpcomings/${id}`);
       // window.location.reload();
     } else {
       setShowKYC(true);
@@ -65,7 +65,7 @@ const UpcomingCard = ({
   };
 
   const handleDisplay = () => {
-    history.push(`/Display/${id}`);
+    history.push(`/DisplayUpcomings/${id}`);
     // window.setTimeout(() => {
     //   window.location.reload();
     // }, 1000);
@@ -81,7 +81,6 @@ const UpcomingCard = ({
     setStartAuction(auctionData.auctionStartDate);
   }, []);
 
-  console.log(registEnded);
   return (
     <>
       {startRegisterDate && endRegisterDate && startAuction && (
@@ -189,12 +188,12 @@ const UpcomingCard = ({
                         </Col>
                       ) : (
                         <Col md={1} style={{ width: "50%" }}>
-                          <p style={{ fontSize: "12px", width: "200px" }}>
+                          <div style={{ fontSize: "12px", width: "200px" }}>
                             <RegistrationTimer
                               RegistrationEndDate={RegistrationEndDate}
                               toogleRegistEnded={toogleRegistEnded}
                             />
-                          </p>
+                          </div>
                         </Col>
                       )}
 

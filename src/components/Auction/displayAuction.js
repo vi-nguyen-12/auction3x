@@ -20,12 +20,100 @@ import Slider from "react-slick";
 // import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import MultiBuyForm from "../BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Login from "../Login";
 import SignUp from "../SignUp";
 import NumberFormat from "react-number-format";
 import { Tab, Tabs } from "react-bootstrap";
 import BuyConfirm from "../BuyRegister/BuyConfirm";
+
+const Carousel = styled(Slider)`
+  height: 30vh;
+  overflow: hidden;
+
+  & > button {
+    opacity: 0;
+    height: 100%;
+    width: 5vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+
+  ul li button {
+    &:before {
+      top: -3vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
+  }
+
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    left: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-next {
+    right: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+`;
+
+const Wrap = styled.div`
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+
+  a {
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 30vh;
+    }
+
+    // &:hover {
+    //   padding: 0;
+    //   // border: 4px solid rgba(249, 249, 249, 0.8);
+    //   transition-duration: 300ms;
+    // }
+  }
+`;
+
+const HomeBottom = styled.div`
+  position: absolute;
+  bottom: 20vh;
+  z-index: 1;
+  left: 5vw;
+  a {
+    color: white !important;
+    font-size: 24px;
+    font-weight: bolder;
+    box-shadow: none !important;
+  }
+  span {
+    color: white;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+`;
 
 const DisplayAuction = ({ colorChange }) => {
   colorChange("black");
@@ -114,95 +202,6 @@ const DisplayAuction = ({ colorChange }) => {
     speed: 500,
     autoplay: true,
   };
-
-  const Carousel = styled(Slider)`
-    height: 30vh;
-    overflow: hidden;
-
-    & > button {
-      opacity: 0;
-      height: 100%;
-      width: 5vw;
-      z-index: 1;
-
-      &:hover {
-        opacity: 1;
-        transition: opacity 0.2s ease 0s;
-      }
-    }
-
-    ul li button {
-      &:before {
-        top: -3vh;
-        font-size: 20px;
-        color: gray;
-        left: -35px;
-      }
-    }
-
-    li.slick-active button:before {
-      color: #e9af84;
-    }
-
-    .slick-list {
-      overflow: initial;
-    }
-
-    .slick-prev {
-      left: -75px;
-      width: 12vw;
-      height: 100%;
-    }
-
-    .slick-next {
-      right: -75px;
-      width: 12vw;
-      height: 100%;
-    }
-  `;
-
-  const Wrap = styled.div`
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-
-    a {
-      border-radius: 4px;
-      cursor: pointer;
-      display: block;
-      position: relative;
-      padding: 0;
-
-      img {
-        width: 100%;
-        height: 30vh;
-      }
-
-      // &:hover {
-      //   padding: 0;
-      //   // border: 4px solid rgba(249, 249, 249, 0.8);
-      //   transition-duration: 300ms;
-      // }
-    }
-  `;
-
-  const HomeBottom = styled.div`
-    position: absolute;
-    bottom: 20vh;
-    z-index: 1;
-    left: 5vw;
-    a {
-      color: white !important;
-      font-size: 24px;
-      font-weight: bolder;
-      box-shadow: none !important;
-    }
-    span {
-      color: white;
-      font-size: 14px;
-      font-weight: bolder;
-    }
-  `;
 
   return (
     <>
@@ -616,16 +615,16 @@ const DisplayAuction = ({ colorChange }) => {
               </Modal.Body>
             </Modal>
             <td>
-                <div>
-                  <button onClick={tooglePlaceBid}>place to bid</button>
-                </div>
-              </td>
-              <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
-                <Modal.Body>
-                  <BuyConfirm />
-                </Modal.Body>
-              </Modal>
-              <Modal
+              <div>
+                <button onClick={tooglePlaceBid}>place to bid</button>
+              </div>
+            </td>
+            <Modal size="lg" show={placeBid} onHide={tooglePlaceBid} centered>
+              <Modal.Body>
+                <BuyConfirm />
+              </Modal.Body>
+            </Modal>
+            <Modal
               size=""
               aria-labelledby="contained-modal-title-vcenter"
               centered

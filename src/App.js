@@ -25,6 +25,8 @@ import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/ChangePass";
 import EmailConfirm from "./components/EmailConfirm";
+import DisplayAuctions from "./RealEstate/DisplayAuctions";
+import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -109,6 +111,14 @@ function App() {
           </Route>
           <Route path="/confirm_email">
             <EmailConfirm colorChange={colorChange} />
+          </Route>
+          <Route path="/DisplayAuctions/:id">
+            <DisplayAuctions colorChange={colorChange} />
+            <Featured />
+          </Route>
+          <Route path="/DisplayUpcomings/:id">
+            <DisplayUpcomings colorChange={colorChange} />
+            <Featured />
           </Route>
         </Switch>
       </Router>

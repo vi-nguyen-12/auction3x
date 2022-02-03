@@ -54,7 +54,7 @@ const CardComp = ({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/AuctionDisplay/${id}`);
+      history.push(`/DisplayAuctions/${id}`);
       // window.location.reload();
     } else {
       setShowKYC(true);
@@ -62,7 +62,7 @@ const CardComp = ({
   };
 
   const handleDisplay = () => {
-    history.push(`/AuctionDisplay/${id}`);
+    history.push(`/DisplayAuctions/${id}`);
     // window.setTimeout(() => {
     //   window.location.reload();
     // }, 800);
@@ -178,12 +178,12 @@ const CardComp = ({
                       </Col>
                     ) : (
                       <Col md={1} style={{ width: "50%" }}>
-                        <p style={{ fontSize: "12px", width: "200px" }}>
+                        <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
                             auctionEndDate={onGoingAuctionEnd}
                             toogleAuction={toogleAuction}
                           />
-                        </p>
+                        </div>
                       </Col>
                     )}
 
