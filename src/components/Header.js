@@ -17,35 +17,6 @@ import Toast from "./Toast";
 import { useHistory } from "react-router-dom";
 import { logout } from "../slice/userSlice";
 
-const Nav = styled.nav`
-  position: absolute;
-  z-index: 10;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background-color: rgba(0, 0, 0, 0.5);
-  //display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-  padding-right: 10px;
-  z-index: 3;
-  // flex-wrap: wrap;
-`;
-
-const Logo = styled.a`
-  cursor: pointer;
-  flex: 1;
-  display: flex;
-  position: relative;
-  left: 30%;
-
-  @media (max-width: 768px) {
-    text-align: center;
-  }
-`;
-
 const Header = ({ color }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();

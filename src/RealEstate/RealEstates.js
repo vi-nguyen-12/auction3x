@@ -87,13 +87,14 @@ const RealEstates = ({ colorChange }) => {
   useEffect(() => {
     colorChange("black");
   }, []);
+  const property = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: ongoingAuctions.length > 3 ? 3 : ongoingAuctions.length,
+    slidesToShow: auction.length > 3 ? 3 : auction.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -202,7 +203,7 @@ const RealEstates = ({ colorChange }) => {
             </Carousel>
           </Row>
           <Row>
-            {upcomingAuctions.map((item) => (
+            {property.map((item) => (
               <Col key={item._id} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard
                   url={item.property.images[0].url}
