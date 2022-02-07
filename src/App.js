@@ -1,3 +1,4 @@
+import Home from "./components/Home";
 import ImgSlider from "./components/ImgSlider";
 import { FindInCountries } from "./components/FindInCountries";
 import { Upcoming } from "./components/Upcoming";
@@ -21,8 +22,6 @@ import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/ChangePass";
 import EmailConfirm from "./components/EmailConfirm";
-import DisplayAuctions from "./RealEstate/DisplayAuctions";
-import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
 import ScrollTop from "./components/ScrollTop";
 
 function App() {
@@ -33,6 +32,7 @@ function App() {
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
+        console.log(response);
         if (response.data.message === "User Logged In") {
           dispatch(login(response.data.user));
         }
@@ -40,14 +40,6 @@ function App() {
       getUser();
     }
   }, []);
-
-  // authService.getProperties().then((res) => {
-  //   dispatch(addProperty(res.data.data));
-  // });
-
-  // authService.getAuction().then((res) => {
-  //   dispatch(addAuction(res.data));
-  // });
 
   authService.getUpcomingAuctions().then((res) => {
     dispatch(addProperty(res.data));
@@ -75,25 +67,16 @@ function App() {
 
   return (
     <div className="App">
-      <Header color={color} />
       <Router>
-        <ScrollTop />
+        <Header color={color} />
         <Switch>
-          <Route exact path="/">
-            <ImgSlider />
-            <Featured />
-            <FindInCountries />
-            <Upcoming />
-            <Work />
-            <RealEstate />
-            <About />
-          </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
               <MultiSellForm colorChange={colorChange} />
             </div>
           </Route>
-          <Route exact path="/RealEstates">
+
+          <Route exact path="/realEstates">
             <RealEstates colorChange={colorChange} />
           </Route>
           <Route path="/reset_password">
@@ -102,13 +85,14 @@ function App() {
           <Route path="/confirm_email">
             <EmailConfirm colorChange={colorChange} />
           </Route>
-          <Route path="/DisplayAuctions/:id">
-            <DisplayAuctions colorChange={colorChange} />
+          <Route exact path="/">
+            <ImgSlider />
             <Featured />
-          </Route>
-          <Route path="/DisplayUpcomings/:id">
-            <DisplayUpcomings colorChange={colorChange} />
-            <Featured />
+            <FindInCountries />
+            <Upcoming />
+            <Work />
+            <RealEstate />
+            <About />
           </Route>
         </Switch>
       </Router>
