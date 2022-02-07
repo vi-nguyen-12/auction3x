@@ -23,6 +23,8 @@ import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/ChangePass";
 import EmailConfirm from "./components/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
+import DisplayAuctions from "./RealEstate/DisplayAuctions";
+import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -69,11 +71,20 @@ function App() {
     <div className="App">
       <Router>
         <Header color={color} />
+        <ScrollTop />
         <Switch>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
               <MultiSellForm colorChange={colorChange} />
             </div>
+          </Route>
+
+          <Route exact path="/DisplayAuctions/:id">
+            <DisplayAuctions colorChange={colorChange} />
+          </Route>
+
+          <Route exact path="/DisplayUpcomings/:id">
+            <DisplayUpcomings colorChange={colorChange} />
           </Route>
 
           <Route exact path="/realEstates">
