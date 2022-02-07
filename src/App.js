@@ -61,10 +61,6 @@ function App() {
     setColor(color);
   };
 
-  // useEffect(() => {
-  //   colorChange();
-  // }, []);
-
   return (
     <div className="App">
       <Router>

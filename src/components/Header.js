@@ -84,7 +84,7 @@ const Header = ({ color }) => {
   return (
     <Nav>
       <nav
-        className="customNav navbar navbar-expand-lg p-0"
+        className="navbar navbar-expand-lg p-0 pe-4"
         style={{ backgroundColor: color }}
       >
         <div className="navbar-brand mt-2">
@@ -372,15 +372,8 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  height: 70px;
   background-color: rgba(0, 0, 0, 0.5);
-  //display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-  padding-right: 10px;
   z-index: 3;
-  // flex-wrap: wrap;
 `;
 
 const Menu = styled.div`
