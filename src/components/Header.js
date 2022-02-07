@@ -17,7 +17,7 @@ import Toast from "./Toast";
 import { useHistory } from "react-router-dom";
 import { logout } from "../slice/userSlice";
 
-const Header = ({ color }) => {
+const Header = ({ color, change }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -40,7 +40,7 @@ const Header = ({ color }) => {
     await authService.logout().then((res) => {
       if (res.data.message === "User logged out") {
         dispatch(logout());
-        history.push("/");
+        window.location.reload();
       }
     });
   };
@@ -327,37 +327,74 @@ const Header = ({ color }) => {
             </div>
           ) : (
             <>
-              <div className="bg-light customButton border-0 mt-0">
-                <Button
-                  className="signIn-btn"
-                  style={{
-                    fontSize: 16,
-                    color: "black",
-                    fontWeight: "bold",
-                    backgroundColor: "transparent",
-                    border: "0",
-                  }}
-                  variant="success"
-                  onClick={toogleSignIn}
+              {change === false ? (
+                <div className="bg-light customButton border-0 mt-0">
+                  <Button
+                    className="signIn-btn"
+                    style={{
+                      fontSize: 16,
+                      color: "black",
+                      fontWeight: "bold",
+                      backgroundColor: "transparent",
+                      border: "0",
+                    }}
+                    variant="success"
+                    onClick={toogleSignIn}
+                  >
+                    Sign In
+                  </Button>
+                  <label>|</label>
+                  <Button
+                    className="signUp-btn"
+                    style={{
+                      fontSize: 16,
+                      color: "black",
+                      fontWeight: "bold",
+                      backgroundColor: "transparent",
+                      border: "0",
+                    }}
+                    variant="success"
+                    onClick={toogleSignUp}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              ) : (
+                <div
+                  className="border-0 mt-0"
+                  style={{ backgroundColor: "transparent" }}
                 >
-                  Sign In
-                </Button>
-                <label>|</label>
-                <Button
-                  className="signUp-btn"
-                  style={{
-                    fontSize: 16,
-                    color: "black",
-                    fontWeight: "bold",
-                    backgroundColor: "transparent",
-                    border: "0",
-                  }}
-                  variant="success"
-                  onClick={toogleSignUp}
-                >
-                  Sign Up
-                </Button>
-              </div>
+                  <Button
+                    className="signIn-btn"
+                    style={{
+                      fontSize: 16,
+                      color: "white",
+                      fontWeight: "bold",
+                      backgroundColor: "transparent",
+                      border: "0",
+                    }}
+                    variant="success"
+                    onClick={toogleSignIn}
+                  >
+                    Sign In
+                  </Button>
+                  <label style={{color:"white"}}>|</label>
+                  <Button
+                    className="signUp-btn"
+                    style={{
+                      fontSize: 16,
+                      color: "white",
+                      fontWeight: "bold",
+                      backgroundColor: "transparent",
+                      border: "0",
+                    }}
+                    variant="success"
+                    onClick={toogleSignUp}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -373,12 +410,10 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
   background-color: rgba(0, 0, 0, 0.5);
   //display: flex;
   // justify-content: space-between;
   // align-items: center;
-  padding-right: 10px;
   z-index: 3;
   // flex-wrap: wrap;
 `;

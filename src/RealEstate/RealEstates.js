@@ -83,9 +83,10 @@ position: relative;
 }
 `;
 
-const RealEstates = ({ colorChange }) => {
+const RealEstates = ({ colorChange, toogleChange }) => {
   useEffect(() => {
     colorChange("black");
+    toogleChange();
   }, []);
   const property = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);

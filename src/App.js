@@ -63,6 +63,11 @@ function App() {
     setColor(color);
   };
 
+  const [change, setChange] = useState(false);
+  const toogleChange = (change) => {
+    setChange(change);
+  };
+
   // useEffect(() => {
   //   colorChange();
   // }, []);
@@ -70,7 +75,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header color={color} />
+        <Header color={color} change = {change}/>
         <ScrollTop />
         <Switch>
           <Route exact path="/MultiSellForm">
@@ -80,15 +85,24 @@ function App() {
           </Route>
 
           <Route exact path="/DisplayAuctions/:id">
-            <DisplayAuctions colorChange={colorChange} />
+            <DisplayAuctions
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
           </Route>
 
           <Route exact path="/DisplayUpcomings/:id">
-            <DisplayUpcomings colorChange={colorChange} />
+            <DisplayUpcomings
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
           </Route>
 
           <Route exact path="/realEstates">
-            <RealEstates colorChange={colorChange} />
+            <RealEstates
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
           </Route>
           <Route path="/reset_password">
             <ChangePass colorChange={colorChange} />
