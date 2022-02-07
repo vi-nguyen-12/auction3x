@@ -180,7 +180,6 @@ const authService = {
   },
 
   getDocuSignStatus(data) {
-    console.log(data);
     return axios.get(env.API_URL + `/api/docusign/envelopes/${data}/status`, { withCredentials: true });
   },
 };

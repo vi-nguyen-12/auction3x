@@ -9,7 +9,6 @@ const PropertyDetails = ({
   property,
   tooglePropertyData,
 }) => {
-  console.log(property);
   const {
     register,
     handleSubmit,

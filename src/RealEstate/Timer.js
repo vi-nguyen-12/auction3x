@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { Table } from "react-bootstrap";
 
 const Timer = ({ auctionStartDate }) => {
   const [days, setDays] = useState();
@@ -37,34 +38,24 @@ const Timer = ({ auctionStartDate }) => {
   }, []);
 
   return (
-    <div
-      className="auction-timer"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "10px",
-        fontWeight: "700",
-        fontSize: "20px",
-      }}
-    >
-      <div className="auction-timer__days">
-        <span> {days} </span>
-        <span>days</span>
-      </div>
-      <div className="auction-timer__hours">
-        <span style={{ marginLeft: "10px" }}> {hours} </span>
-        <span>hrs</span>
-      </div>
-      <div className="auction-timer__minutes">
-        <span style={{ marginLeft: "10px" }}> {minutes} </span>
-        <span>min</span>
-      </div>
-      <div className="auction-timer__seconds">
-        <span style={{ marginLeft: "10px" }}> {seconds} </span>
-        <span>sec</span>
-      </div>
-    </div>
+    <Table borderless hover>
+      <thead>
+        <tr className="timerHead">
+          <th>{days}</th>
+          <th>{hours}</th>
+          <th>{minutes}</th>
+          <th>{seconds}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Days</td>
+          <td>Hours</td>
+          <td>Minutes</td>
+          <td>Seconds</td>
+        </tr>
+      </tbody>
+    </Table>
   );
 };
 
