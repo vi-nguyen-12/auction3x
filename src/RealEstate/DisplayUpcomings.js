@@ -644,7 +644,7 @@ function DisplayUpcomings({ colorChange }) {
                       backgroundColor: "#e8e8e8",
                       width: "100%",
                       borderRadius: "10px",
-                      padding: "10px",
+                      padding: "20px",
                     }}
                   >
                     <Timer auctionStartDate={startAuction} />
@@ -671,7 +671,7 @@ function DisplayUpcomings({ colorChange }) {
                       width: "100%",
                       marginLeft: "20px",
                       borderRadius: "10px",
-                      padding: "10px",
+                      padding: "35px",
                     }}
                   >
                     <h4 style={{ padding: "8px" }}>
@@ -706,7 +706,7 @@ function DisplayUpcomings({ colorChange }) {
                       width: "100%",
                       marginLeft: "35px",
                       borderRadius: "10px",
-                      padding: "10px",
+                      padding: "35px",
                     }}
                   >
                     <h4 style={{ padding: "8px" }}>199,530</h4>

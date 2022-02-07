@@ -9,7 +9,6 @@ const PropertyDetails = ({
   property,
   tooglePropertyData,
 }) => {
-  console.log(property);
   const {
     register,
     handleSubmit,
@@ -407,15 +406,15 @@ const PropertyDetails = ({
                 </>
               ) : null}
 
-              <table style={{ display: "inline" }}>
+              <table>
                 <tbody>
                   <tr>
-                    <td className="amount-input"
-                      style={{
-                        width: "240px",
-                        position: "relative",
-                        left: "105px",
-                      }}
+                    <td className="amount-input-2"
+                    // style={{
+                    //   width: "240px",
+                    //   // position: "relative",
+                    //   // left: "105px",
+                    // }}
                     >
                       <span className="prefix">$</span>
                       <input
@@ -431,40 +430,27 @@ const PropertyDetails = ({
                         required
                       />
                     </td>
+
                     <td
-                      style={{
-                        position: "absolute",
-                        right: "100px",
-                        width: "240px",
-                        fontSize: "17px",
-                      }}
+                      className="amount-input-3"
                     >
-                      <div className="amount-input">
-                        <span className="prefix">$</span>
-                        <input
-                          className="sell-amount"
-                          style={{
-                            fontSize: "17px",
-                            fontWeight: "bold",
-                          }}
-                          type="number"
-                          name="discussedAmount"
-                          {...register("discussedAmount", { required: false })}
-                          required
-                        />
-                      </div>
+                      <span className="prefix">$</span>
+                      <input
+                        className="sell-amount"
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                        }}
+                        type="number"
+                        name="discussedAmount"
+                        {...register("discussedAmount", { required: false })}
+                        required
+                      />
                     </td>
                   </tr>
-                  <tr
-                    style={{
-                      position: "relative",
-                      left: "109px",
-                      fontSize: "13px",
-                      bottom: "5px",
-                    }}
-                  >
-                    <td>Reserved Amount*</td>
-                    <td style={{ paddingLeft: "15px" }}>Discuss Amount*</td>
+                  <tr style={{ display: "flex" }}>
+                    <td style={{ display: "flex", marginLeft: "140px" }}>Reserved Amount*</td>
+                    <td style={{ display: "block", marginLeft: "85px" }}>Discuss Amount*</td>
                   </tr>
                 </tbody>
               </table>

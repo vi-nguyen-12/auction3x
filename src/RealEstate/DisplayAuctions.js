@@ -642,7 +642,7 @@ function DisplayAuctions({ colorChange }) {
                       backgroundColor: "#e8e8e8",
                       width: "100%",
                       borderRadius: "10px",
-                      padding: "10px",
+                      padding: "20px",
                     }}
                   >
                     <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
@@ -651,7 +651,6 @@ function DisplayAuctions({ colorChange }) {
                         display: "flex",
                         justifyContent: "left",
                         marginLeft: "10px",
-                        marginTop: "-10px",
                         color: "#7c7c7c",
                       }}
                     >
@@ -668,9 +667,9 @@ function DisplayAuctions({ colorChange }) {
                         justifyContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
-                        marginLeft: "35px",
+                        marginLeft: "18px",
                         borderRadius: "10px",
-                        padding: "10px",
+                        padding: "33px",
                       }}
                     >
                       <h4 style={{ padding: "8px" }}>
@@ -701,9 +700,9 @@ function DisplayAuctions({ colorChange }) {
                         justifyContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
-                        marginLeft: "20px",
+                        marginLeft: "18px",
                         borderRadius: "10px",
-                        padding: "10px",
+                        padding: "33px",
                       }}
                     >
                       <h4 style={{ padding: "8px" }}>
@@ -739,7 +738,7 @@ function DisplayAuctions({ colorChange }) {
                       width: "100%",
                       marginLeft: "35px",
                       borderRadius: "10px",
-                      padding: "10px",
+                      padding: "33px",
                     }}
                   >
                     <h4 style={{ padding: "8px" }}>199,530</h4>

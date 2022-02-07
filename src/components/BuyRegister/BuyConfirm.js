@@ -6,31 +6,23 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
+import AuctionTimer from "../../RealEstate/AuctionTimer";
 
 const BuyConfirm = ({ tooglePlaceBid }) => {
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState();
-  const [minimumBid, setMinimumBid] = useState();
   const { id } = useParams();
   const history = useHistory();
+  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
   const properties = useSelector((state) => state.auction);
   const propId = properties.find((item) => item._id === id);
 
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
 
-  // const firstMinimumBid = () => {
-  //   const value = propId.startingBid + propId.increment;
-  //   console.log(value);
-  //   setMinimumBid(value);
-  // };
-
-  // const highest = () => {
-  //   const value = propId.highestBid + propId.increment;
-  //   console.log(value);
-  //   setMinimumBid(value);
-  // };
-
+  useEffect(() => {
+    setOnGoingAuctionEnd(propId.auctionEndDate);
+  }, [propId]);
 
   const onSubmit = async (data) => {
     if (bid === undefined) {
@@ -67,22 +59,12 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
       </Modal.Header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            facilisis, erat a euismod aliquam, nisi nunc pretium nunc, eget
-          </p>
+          {onGoingAuctionEnd && (
+            <div style={{marginLeft:"15%", marginTop:"20px"}}>
+              <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+            </div>
+          )}
           <div className="auction-info">
-            <tr>
-              <td
-                style={{
-                  position: "relative",
-
-                  padding: "15px",
-                }}
-              >
-                Auction Ends import
-              </td>
-            </tr>
             <tr>
               {propId.highestBid ? (
                 <td

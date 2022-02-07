@@ -14,6 +14,7 @@ const Agree = ({
   videos,
   documents,
 }) => {
+  window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [docId, setDocId] = useState();
@@ -34,14 +35,9 @@ const Agree = ({
   useEffect(async () => {
     setLoader(true);
     await authService.getDocuSign().then((res) => {
-      console.log(res.data);
       setUrl(res.data.redirectUrl);
       setEnvelopeId(res.data.envelopeId);
     });
-
-    // await authService.getDocuSignStatus(envelopeId).then((res) => {
-    //   setDocId(res.data._id);
-    // });
   }, []);
 
   useEffect(async () => {

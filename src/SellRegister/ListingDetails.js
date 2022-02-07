@@ -25,7 +25,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      console.log(results);
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {
@@ -51,8 +50,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
   };
 
   const onSubmit = (data) => {
-
-    console.log(data);
     const addres = address + " " + data.address1;
     const datas = {
       street_address: addres,
@@ -64,7 +61,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
 
     authService.realEstate(datas).then((res) => {
       if (res.data.length !== 0) {
-        console.log(res.data);
         properties(res.data);
         toogleStep(step + 1);
       }
