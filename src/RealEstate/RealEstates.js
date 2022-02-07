@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../components/UpcomingCard";
 import "../styles/realEstate.css";
 import { CardComp } from "../components/Card";
+import authService from "../services/authServices";
 
 const Carousel = styled(Slider)`
   height: 30vh;
@@ -86,15 +87,13 @@ const RealEstates = ({ colorChange }) => {
   useEffect(() => {
     colorChange("black");
   }, []);
-
-  const property = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auction.length > 3 ? 3 : auction.length,
+    slidesToShow: ongoingAuctions.length > 3 ? 3 : ongoingAuctions.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -203,7 +202,7 @@ const RealEstates = ({ colorChange }) => {
             </Carousel>
           </Row>
           <Row>
-            {property.map((item) => (
+            {upcomingAuctions.map((item) => (
               <Col key={item._id} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard
                   url={item.property.images[0].url}
