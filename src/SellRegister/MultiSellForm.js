@@ -24,8 +24,6 @@ const MultiSellForm = ({ colorChange }) => {
     setPropertyData(propertyData);
   };
 
-  console.log(propertyData);
-
   const [property, setProperty] = useState({});
   const properties = (property) => {
     setProperty(property);

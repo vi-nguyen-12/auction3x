@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { Table } from "react-bootstrap";
 
 const RegistrationTimer = ({ RegistrationEndDate, toogleRegistEnded }) => {
   const [days, setDays] = useState();
@@ -38,53 +39,24 @@ const RegistrationTimer = ({ RegistrationEndDate, toogleRegistEnded }) => {
   }, []);
 
   return (
-    <section
-      style={{
-        display: "flex",
-        flex: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "0 auto",
-        padding: "0",
-      }}
-    >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(7, 1fr)",
-          textAlign: "center",
-          fontSize: "18px",
-        }}
-      >
-        <section>
-          <p>{days}</p>
-          <p style={{ marginTop: "-18px" }}>
-            <small>Days</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{hours}</p>
-          <p style={{ marginTop: "-18px" }}>
-            <small>Hours</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{minutes}</p>
-          <p style={{ marginTop: "-18px" }}>
-            <small>Minutes</small>
-          </p>
-        </section>
-        <span> : </span>
-        <section>
-          <p>{seconds}</p>
-          <p style={{ marginTop: "-18px" }}>
-            <small>Seconds</small>
-          </p>
-        </section>
-      </div>
-    </section>
+    <Table borderless hover>
+      <thead>
+        <tr className="timerHead">
+          <th>{days}</th>
+          <th>{hours}</th>
+          <th>{minutes}</th>
+          <th>{seconds}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Days</td>
+          <td>Hours</td>
+          <td>Minutes</td>
+          <td>Seconds</td>
+        </tr>
+      </tbody>
+    </Table>
   );
 };
 

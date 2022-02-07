@@ -185,9 +185,9 @@ const RealEstates = ({ colorChange }) => {
         <Col md={12} className="m-auto pt-2">
           <Row>
             <Carousel {...settings}>
-              {auction.map((item) => (
-                <Wrap>
-                  <Col key={item._id} md={12} style={{ marginBottom: "30px" }}>
+              {auction.map((item, index) => (
+                <Wrap key={index}>
+                  <Col md={12} style={{ marginBottom: "30px" }}>
                     <CardComp
                       url={item.property.images[0].url}
                       data={item.property.details}
@@ -203,8 +203,8 @@ const RealEstates = ({ colorChange }) => {
             </Carousel>
           </Row>
           <Row>
-            {property.map((item) => (
-              <Col key={item._id} md={4} style={{ marginBottom: "30px" }}>
+            {property.map((item, index) => (
+              <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard
                   url={item.property.images[0].url}
                   data={item.property.details}

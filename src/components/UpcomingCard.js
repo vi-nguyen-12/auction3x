@@ -170,14 +170,14 @@ const UpcomingCard = ({
                     <Row>
                       {registEnded && startAuction ? (
                         <Col md={1} style={{ width: "50%" }}>
-                          <p
+                          <div
                             style={{
                               fontSize: "12px",
                               width: "200px",
                             }}
                           >
                             <Timer auctionStartDate={startAuction} />
-                          </p>
+                          </div>
                         </Col>
                       ) : (
                         <Col md={1} style={{ width: "50%" }}>
