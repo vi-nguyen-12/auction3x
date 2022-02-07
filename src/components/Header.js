@@ -46,7 +46,7 @@ const Header = ({ color }) => {
   };
 
   const handleOnClick = (page) => () => {
-    history.push(`${page}`);
+    history.push(`/${page}`);
   };
 
   const handleSell = () => {
