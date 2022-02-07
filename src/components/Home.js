@@ -8,10 +8,7 @@ import RealEstate from "./Home/realEstate";
 import Footer from "./Home/footer";
 import { Upcoming } from "./Upcoming";
 import MultiSellForm from "../SellRegister/MultiSellForm";
-import Display from "../RealEstate/Display";
-import AuctionDisplay from "../RealEstate/AuctionDisplay";
 import RealEstates from "../RealEstate/RealEstates";
-import AuctionCard from "../components/Auction/auctionCard";
 import About from "../components/Home/About";
 import ChangePass from "../components/ChangePass";
 import EmailConfirm from "../components/EmailConfirm";
@@ -28,9 +25,9 @@ const Home = (props) => {
 
   return (
     <>
-      <Header color={color} />
       <Router>
         <Switch>
+          <Header color={color} />
           <Route exact path="/">
             <ImgSlider />
             <Featured />
@@ -45,14 +42,7 @@ const Home = (props) => {
               <MultiSellForm colorChange={colorChange} />
             </div>
           </Route>
-          <Route path="/Display/:id">
-            <Display colorChange={colorChange} />
-            <Featured />
-          </Route>
-          <Route path="/AuctionDisplay/:id">
-            <AuctionDisplay colorChange={colorChange} />
-            <Featured />
-          </Route>
+
           <Route exact path="/RealEstates">
             <RealEstates colorChange={colorChange} />
           </Route>

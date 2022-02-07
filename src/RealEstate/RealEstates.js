@@ -9,6 +9,7 @@ import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../components/UpcomingCard";
 import "../styles/realEstate.css";
 import { CardComp } from "../components/Card";
+import authService from "../services/authServices";
 
 const Carousel = styled(Slider)`
   height: 30vh;
@@ -86,7 +87,6 @@ const RealEstates = ({ colorChange }) => {
   useEffect(() => {
     colorChange("black");
   }, []);
-
   const property = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   let settings = {
