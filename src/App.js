@@ -34,6 +34,7 @@ function App() {
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
+        console.log(response);
         if (response.data.message === "User Logged In") {
           dispatch(login(response.data.user));
         }
@@ -41,14 +42,6 @@ function App() {
       getUser();
     }
   }, []);
-
-  // authService.getProperties().then((res) => {
-  //   dispatch(addProperty(res.data.data));
-  // });
-
-  // authService.getAuction().then((res) => {
-  //   dispatch(addAuction(res.data));
-  // });
 
   authService.getUpcomingAuctions().then((res) => {
     dispatch(addProperty(res.data));
@@ -76,18 +69,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header color={color} />
       <Router>
+        <Header color={color} />
         <Switch>
-          <Route exact path="/">
-            <ImgSlider />
-            <Featured />
-            <FindInCountries />
-            <Upcoming />
-            <Work />
-            <RealEstate />
-            <About />
-          </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
               <MultiSellForm colorChange={colorChange} />
@@ -101,7 +85,7 @@ function App() {
             <AuctionDisplay colorChange={colorChange} />
             <Featured />
           </Route>
-          <Route exact path="/RealEstates">
+          <Route exact path="/realEstates">
             <RealEstates colorChange={colorChange} />
           </Route>
           <Route path="/reset_password">
@@ -109,6 +93,15 @@ function App() {
           </Route>
           <Route path="/confirm_email">
             <EmailConfirm colorChange={colorChange} />
+          </Route>
+          <Route exact path="/">
+            <ImgSlider />
+            <Featured />
+            <FindInCountries />
+            <Upcoming />
+            <Work />
+            <RealEstate />
+            <About />
           </Route>
         </Switch>
       </Router>

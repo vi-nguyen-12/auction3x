@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-
-const userState={firstName:"",lastName:"",isKYC:false}
-const propertyState = {}
+const userState = { firstName: "", lastName: "", isKYC: false };
 
 export const userSlice = createSlice({
-    name: 'user',
-    initialState: userState,
-    reducers: {
-        login: (state, action)=>{
-            if(login){
-            return state={...action.payload}
-            }
-        },
+  name: "user",
+  initialState: userState,
+  reducers: {
+    login: (state, action) => {
+      if (login) {
+        return (state = { ...action.payload });
+      }
     },
-  })
-  
-  // Action creators are generated for each case reducer function
-  export const {login, addProperties } = userSlice.actions
-  export default userSlice.reducer
+    logout: (state, action) => {
+      console.log("test");
+      return (state = { firstName: "", lastName: "", isKYC: false });
+    },
+  },
+});
+
+// Action creators are generated for each case reducer function
+export const { login, logout } = userSlice.actions;
+export default userSlice.reducer;
