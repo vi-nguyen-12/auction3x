@@ -1,9 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import Buyer from "./User";
 import authServices from "../services/authServices";
 require("react-bootstrap/ModalHeader");
 

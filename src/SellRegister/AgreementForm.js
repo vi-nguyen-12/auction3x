@@ -57,8 +57,8 @@ const Agree = ({
           street_address: propertyData.street_address,
           city: propertyData.city,
           state: propertyData.state,
-          discussedAmount: propertyData.discussedAmount,
-          reservedAmount: propertyData.reservedAmount,
+          discussedAmount: parseFloat(propertyData.discussedAmount),
+          reservedAmount: parseFloat(propertyData.reservedAmount),
           docusignId: docId,
           images,
           videos,
@@ -76,7 +76,15 @@ const Agree = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="agree-content">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+        }
+      }}
+      className="agree-content"
+    >
       <div className="sell-top">
         <div className="circle-1">
           <p className="text">01</p>

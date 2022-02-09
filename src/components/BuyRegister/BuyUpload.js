@@ -1,18 +1,11 @@
-import React, { Form } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import "../../styles/Buyer.css";
 
-const BuyUpload = ({
-  toogleStep,
-  step,
-  toogleDocument,
-  // toogleDocument2,
-  // toogleDocument3,
-  // toogleDocument4,
-}) => {
+const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
@@ -88,62 +81,12 @@ const BuyUpload = ({
   });
 
   const document = [...bankStatment, ...broker, ...crypto, ...lineCredit];
-  console.log(document);
 
   useEffect(() => {
     toogleDocument(document);
-  }, [document[(0, 3)]]);
+  }, [document]);
 
   const onSubmit = async (data) => {
-    // const document1 = data.document1;
-    // const document2 = data.document2;
-    // const document3 = data.document3;
-    // const document4 = data.document4;
-
-    // const formData1 = new FormData();
-    // const formData2 = new FormData();
-    // const formData3 = new FormData();
-    // const formData4 = new FormData();
-
-    // for (let i = 0; i < document1.length; i++) {
-    //   formData1.append("documents", document1[i]);
-    // }
-    // if (document1.length > 0) {
-    //   await authService.saveDocuments(formData1).then((res) => {
-    //     res.data[0].name = "BankStatment-" + res.data[0].name;
-    //     setDocument1([...document1, ...res.data]);
-    //   });
-    // }
-
-    // if (document2.length > 0) {
-    //   for (let i = 0; i < document2.length; i++) {
-    //     formData2.append("documents", document2[i]);
-    //   }
-    //   await authService.saveDocuments(formData2).then((res) => {
-    //     res.data[0].name = "BrokerageAccountStatement-" + res.data[0].name;
-    //     setDocument2([...document2, ...res.data]);
-    //   });
-    // }
-
-    // if (document3.length > 0) {
-    //   for (let i = 0; i < document3.length; i++) {
-    //     formData3.append("documents", document3[i]);
-    //   }
-    //   await authService.saveDocuments(formData3).then((res) => {
-    //     res.data[0].name = "CryptoAccountStatement-" + res.data[0].name;
-    //     setDocument3([...document3, ...res.data]);
-    //   });
-    // }
-
-    // if (document4.length > 0) {
-    //   for (let i = 0; i < document4.length; i++) {
-    //     formData4.append("documents", document4[i]);
-    //   }
-    //   await authService.saveDocuments(formData4).then((res) => {
-    //     res.data[0].name = "LineOfCreditDoc-" + res.data[0].name;
-    //     setDocument4([...document4, ...res.data]);
-    //   });
-    // }
     toogleStep(step + 1);
   };
 
@@ -153,7 +96,7 @@ const BuyUpload = ({
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentClassname="custom-modal-title"
+          contentclassname="custom-modal-title"
         >
           Documents Upload
         </Modal.Title>
@@ -161,6 +104,11 @@ const BuyUpload = ({
       <Modal.Body>
         <form
           onSubmit={handleSubmit(onSubmit)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
           style={{ display: "inline", justifyContent: "center" }}
         >
           <div

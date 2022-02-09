@@ -1,4 +1,3 @@
-import Home from "./components/Home";
 import ImgSlider from "./components/ImgSlider";
 import { FindInCountries } from "./components/FindInCountries";
 import { Upcoming } from "./components/Upcoming";
@@ -34,7 +33,6 @@ function App() {
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
-        console.log(response);
         if (response.data.message === "User Logged In") {
           dispatch(login(response.data.user));
         }

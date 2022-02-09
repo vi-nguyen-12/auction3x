@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Toast from "./Toast";
 import authServices from "../services/authServices";
-import { Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { login } from "../slice/userSlice";
 import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
@@ -51,7 +47,14 @@ const ChangePass = ({ toogleChangePass, colorChange }) => {
         }}
       >
         <div className="form-group mb-2">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
+          >
             <div className="form-group">
               <p style={{ justifyContent: "left", margin: "0" }}>
                 Please enter the new password

@@ -9,11 +9,10 @@ import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../components/UpcomingCard";
 import "../styles/realEstate.css";
 import { CardComp } from "../components/Card";
-import authService from "../services/authServices";
 
 const Carousel = styled(Slider)`
   height: 30vh;
-  overflow: hidden;
+  // overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -203,7 +202,7 @@ const RealEstates = ({ colorChange, toogleChange }) => {
               ))}
             </Carousel>
           </Row>
-          <Row>
+          <Row style={{marginTop:"25%"}}>
             {property.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard

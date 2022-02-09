@@ -5,7 +5,7 @@ import authServices from "../services/authServices";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../slice/userSlice";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 require("react-bootstrap/ModalHeader");
 
@@ -18,6 +18,7 @@ const Login = ({
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const [showWarning, setShowWarning] = useState(false);
   //const [invPass, setInvPass] = useState(false);
 
@@ -44,7 +45,7 @@ const Login = ({
           dispatch(login(response.data.data));
           toogleButton();
           toogleSignIn();
-          history.push("/");
+          history.push(location.pathname);
           window.location.reload();
           window.setTimeout(() => {
             window.scrollTo(0, 0);
@@ -74,7 +75,14 @@ const Login = ({
           LOGIN NOW
         </Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+      >
         <div className="form-group mb-4 mt-3">
           <label htmlFor="exampleInputEmail1">Username or Email</label>
           <div className="input-group">

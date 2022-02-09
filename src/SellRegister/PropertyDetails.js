@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useForm } from "react-hook-form";
 import "../styles/SellRegister.css";
 
@@ -76,7 +75,15 @@ const PropertyDetails = ({
             </div> */}
           </div>
           <div className="list-sell-bottom">
-            <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                }
+              }}
+              className="list-form"
+            >
               <label
                 style={{
                   fontWeight: "bold",
@@ -369,10 +376,8 @@ const PropertyDetails = ({
                     }}
                   >
                     <tbody style={{ display: "inline" }}>
-
                       <tr>
                         <td className="amount-input">
-
                           <span className="prefix">$</span>
                           <input
                             style={{
@@ -385,9 +390,8 @@ const PropertyDetails = ({
                             defaultValue={
                               property.market_assessments[0].total_value
                             }
-                          // {...register("total_value", { required: false })}
+                            // {...register("total_value", { required: false })}
                           />
-
                         </td>
                       </tr>
                       <tr>
@@ -400,7 +404,6 @@ const PropertyDetails = ({
                           Market Value*
                         </td>
                       </tr>
-
                     </tbody>
                   </table>
                 </>
@@ -409,12 +412,13 @@ const PropertyDetails = ({
               <table>
                 <tbody>
                   <tr>
-                    <td className="amount-input-2"
-                    // style={{
-                    //   width: "240px",
-                    //   // position: "relative",
-                    //   // left: "105px",
-                    // }}
+                    <td
+                      className="amount-input-2"
+                      // style={{
+                      //   width: "240px",
+                      //   // position: "relative",
+                      //   // left: "105px",
+                      // }}
                     >
                       <span className="prefix">$</span>
                       <input
@@ -431,9 +435,7 @@ const PropertyDetails = ({
                       />
                     </td>
 
-                    <td
-                      className="amount-input-3"
-                    >
+                    <td className="amount-input-3">
                       <span className="prefix">$</span>
                       <input
                         className="sell-amount"
@@ -449,8 +451,12 @@ const PropertyDetails = ({
                     </td>
                   </tr>
                   <tr style={{ display: "flex" }}>
-                    <td style={{ display: "flex", marginLeft: "140px" }}>Reserved Amount*</td>
-                    <td style={{ display: "block", marginLeft: "85px" }}>Discuss Amount*</td>
+                    <td style={{ display: "flex", marginLeft: "140px" }}>
+                      Reserved Amount*
+                    </td>
+                    <td style={{ display: "block", marginLeft: "85px" }}>
+                      Discuss Amount*
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -516,10 +522,15 @@ const PropertyDetails = ({
         </div> */}
           </div>
           <div className="list-sell-bottom">
-            <div className="listDetails-title">
-              <h2>Listing Deatails</h2>
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                }
+              }}
+              className="list-form"
+            >
               <label
                 style={{
                   fontWeight: "bold",
@@ -769,7 +780,9 @@ const PropertyDetails = ({
                     }}
                   >
                     <td>Total Rooms*</td>
-                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)*</td>
+                    <td style={{ paddingLeft: "10px" }}>
+                      Property Size(sqft)*
+                    </td>
                     <td style={{ margin: "auto" }}>Bedrooms*</td>
                     <td style={{ paddingRight: "170px", paddingLeft: "35px" }}>
                       Bathrooms*
@@ -786,35 +799,33 @@ const PropertyDetails = ({
                 }}
               >
                 <tbody>
-                  <div style={{ display: "inline" }}>
-                    <tr>
-                      <td>
-                        <div className="amount-input">
-                          <span className="prefix">$</span>
-                          <input
-                            style={{
-                              fontSize: "17px",
-                              fontWeight: "bold",
-                            }}
-                            type="number"
-                            name="total_value"
-                            className="sell-amount"
+                  <tr>
+                    <td>
+                      <div className="amount-input">
+                        <span className="prefix">$</span>
+                        <input
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: "bold",
+                          }}
+                          type="number"
+                          name="total_value"
+                          className="sell-amount"
                           // {...register("total_value", { required: false })}
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{
-                          position: "relative",
-                          fontSize: "13px",
-                        }}
-                      >
-                        Market Value*
-                      </td>
-                    </tr>
-                  </div>
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style={{
+                        position: "relative",
+                        fontSize: "13px",
+                      }}
+                    >
+                      Market Value*
+                    </td>
+                  </tr>
                 </tbody>
               </table>
 
@@ -898,8 +909,7 @@ const PropertyDetails = ({
                 >
                   Previous
                 </button>
-                <button
-                  className="nxt-btn" type="submit">
+                <button className="nxt-btn" type="submit">
                   Next
                 </button>
               </div>

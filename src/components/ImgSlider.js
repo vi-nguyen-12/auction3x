@@ -6,7 +6,6 @@ import SearchBar from "../components/SearchBar.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
-import { useState, useEffect } from "react";
 import { ImSearch } from "react-icons/im";
 
 const Carousel = styled(Slider)`
@@ -140,7 +139,7 @@ const ImgSlider = () => {
             {property.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
-                <a href={`/Display/${item._id}`}>
+                <a href={`/DisplayUpcomings/${item._id}`}>
                   <img src={item.property.images[0].url} alt="" />
                 </a>
                 <HomeBottom>

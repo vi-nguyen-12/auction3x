@@ -1,5 +1,4 @@
 import react from "react";
-import Toast from "./Toast";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 
@@ -25,7 +24,14 @@ function ForgotPass({ toogleForgotPass, toogleChangePass }) {
     <>
       <div>
         <div className="form-group mb-2">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
+          >
             <div className="form-group">
               <p style={{ justifyContent: "left" }}>
                 Please enter the account email

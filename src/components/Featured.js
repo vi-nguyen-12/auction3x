@@ -2,9 +2,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { CardComp } from "./Card";
 import { useSelector } from "react-redux";
-import authService from "../services/authServices";
-import { useState, useEffect } from "react";
-import { propertySlice } from "../slice/propertySlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -12,7 +9,7 @@ import styled from "styled-components";
 
 const Carousel = styled(Slider)`
   height: 30vh;
-  overflow: hidden;
+  // overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -80,7 +77,7 @@ position: relative;
 }
 `;
 
-const Featured = (props) => {
+const Featured = () => {
   const auction = useSelector((state) => state.auction);
   let settings = {
     dots: false,
@@ -92,7 +89,7 @@ const Featured = (props) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: auction.length,
           slidesToScroll: 0,
           infinite: true,
           dots: false,
@@ -101,7 +98,7 @@ const Featured = (props) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: auction.length,
           slidesToScroll: 1,
           initialSlide: 1,
         },

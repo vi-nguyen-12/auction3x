@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
+import { FaBars, FaGlobeAmericas } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Login from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import "../styles/modalStyle.css";
+import "../styles/Header.css";
 import ReconfirmEmail from "./ReconfirmEmail";
 import SignUp from "./SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import authService from "../services/authServices";
-import { Link } from "react-router-dom";
 import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
-import Toast from "./Toast";
 import { useHistory } from "react-router-dom";
 import { logout } from "../slice/userSlice";
 
@@ -29,6 +28,8 @@ const Header = ({ color, change }) => {
   const [changePass, popChangePass] = useState(false);
   const [kycUrl, setKycUrl] = useState("");
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+  const toogleOpen = () => setOpen(!open);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -46,7 +47,7 @@ const Header = ({ color, change }) => {
   };
 
   const handleOnClick = (page) => () => {
-    history.push(`${page}`);
+    history.push(`/${page}`);
   };
 
   const handleSell = () => {
@@ -84,16 +85,16 @@ const Header = ({ color, change }) => {
   return (
     <Nav>
       <nav
-        className="customNav navbar navbar-expand-lg p-0"
+        className="navbar navbar-expand-lg p-0 pe-4"
         style={{ backgroundColor: color }}
       >
         <div className="navbar-brand mt-2">
           <Logo href="/">
             <div>
-              <img src="/images/logo.png" />
+              <img src="/images/logo.png" alt="" />
             </div>
             <div style={{ marginTop: 5, marginLeft: 15 }}>
-              <img src="/images/name.png" />
+              <img src="/images/name.png" alt="" />
             </div>
           </Logo>
         </div>
@@ -101,21 +102,21 @@ const Header = ({ color, change }) => {
         <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <div className="navbar-nav m-auto">
             <div className="nav-item mt-2 px-4 py-2">
-              <button onClick={handleOnClick("realEstates")}>
+              <button className="headerNav" onClick={handleOnClick("realEstates")}>
                 Real Estates
               </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button onClick={handleOnClick("cars")}>Cars</button>
+              <button className="headerNav" onClick={handleOnClick("cars")}>Cars</button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button onClick={handleOnClick("jets")}>Jets</button>
+              <button className="headerNav" onClick={handleOnClick("jets")}>Jets</button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button onClick={handleOnClick("yachts")}>Yachts</button>
+              <button className="headerNav" onClick={handleOnClick("yachts")}>Yachts</button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button onClick={handleOnClick("others")}>Others</button>
+              <button className="headerNav" onClick={handleOnClick("others")}>Others</button>
             </div>
           </div>
           <form
@@ -239,6 +240,256 @@ const Header = ({ color, change }) => {
                 />
               </Modal.Body>
             </Modal>
+
+            <Modal show={open} onHide={toogleOpen} fullscreen>
+              <Button
+                className="close-button"
+                onClick={() => {
+                  toogleOpen();
+                }}
+              >
+                X
+              </Button>
+              <Modal.Body
+                style={{ backgroundColor: "#282828", padding: "150px" }}
+              >
+                <Table
+                  style={{ color: "white", fontSize: "30px" }}
+                  responsive
+                  borderless
+                >
+                  <tbody>
+                    <tr>
+                      <td>
+                        {" "}
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          REAL ESTATE
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          MANAGED BID
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          BROKERS
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          CARS
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                            handleSell();
+                          }}
+                        >
+                          SELLER
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          BUYERS
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          YACHTS
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          DASHBOARD
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          SELLERS
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          JETS
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          CAREERS
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          JEWELS
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          ABOUT US
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          JOURNOULS
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {" "}
+                        <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          OTHERS
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Modal.Body>
+            </Modal>
             {/* <button
                 className="bg-light customIcon mt-0 ml-2 iconsCubstom"
                 type="submit"
@@ -250,85 +501,123 @@ const Header = ({ color, change }) => {
               </button> */}
           </form>
         </Menu>
-        <div className="d-flex flex-row ">
-          <Button
-            className="bg-transparent border-0"
-            onClick={handleSell}
-            style={{
-              color: "white",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            Sell
-          </Button>
-          {user._id && !user.KYC && (
-            <>
-              <div className="dropdown">
-                <button style={{ background: "transparent" }}>
-                  <img src="/images/bell.png" style={{ maxHeight: "30px" }} />
-                </button>
-                <div className="dropdown-content">
-                  <a href={kycUrl}>Please complete your KYC</a>
+        {change === false ? (
+          <div className="d-flex flex-row ">
+            <Button
+              className="bg-transparent border-0"
+              onClick={handleSell}
+              style={{
+                color: "white",
+                fontSize: "20px",
+                fontWeight: "bold",
+              }}
+            >
+              Sell
+            </Button>
+            {user._id && !user.KYC && (
+              <>
+                <div className="dropdown">
+                  <button style={{ background: "transparent" }}>
+                    <img src="/images/bell.png" style={{ maxHeight: "30px" }} alt="" />
+                  </button>
+                  <div className="dropdown-content">
+                    <a href={kycUrl}>Please complete your KYC</a>
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
-          {user._id ? (
-            <div className="dropdown">
-              <button
-                className="bg-light customButton border-0 mt-0"
-                style={{ fontSize: "16px" }}
-              >
-                {user.firstName} {user.lastName}
-              </button>
-              <div className="dropdown-content ">
-                {windowSize < 992 && (
-                  <>
+              </>
+            )}
+            {user._id ? (
+              <>
+                <div className="dropdown">
+                  <button
+                    className="customButton border-0 mt-0"
+                    style={{
+                      fontSize: "16px",
+                      backgroundImage: "none",
+                      backgroundColor: "#fcba7d",
+                      marginRight: "50px",
+                    }}
+                  >
+                    Hello, {user.firstName}
+                  </button>
+                  <div className="dropdown-content ">
+                    {windowSize < 992 && (
+                      <>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("realEstates")}
+                        >
+                          Real Estates
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("cars")}
+                        >
+                          Cars
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("jets")}
+                        >
+                          Jets
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("yachts")}
+                        >
+                          Yatches
+                        </button>
+                      </>
+                    )}
                     <button
                       className="fw-bold p-3"
-                      onClick={handleOnClick("realEstates")}
+                      onClick={handleOnClick("profile")}
                     >
-                      Real Estates
+                      Profile
                     </button>
                     <button
                       className="fw-bold p-3"
-                      onClick={handleOnClick("cars")}
+                      onClick={handleOnClick("ads")}
                     >
-                      Cars
+                      My Ads
                     </button>
-                    <button
-                      className="fw-bold p-3"
-                      onClick={handleOnClick("jets")}
-                    >
-                      Jets
+                    <button className="fw-bold p-3" onClick={handleLogout}>
+                      Log Out
                     </button>
-                    <button
-                      className="fw-bold p-3"
-                      onClick={handleOnClick("yachts")}
-                    >
-                      Yatches
-                    </button>
-                  </>
-                )}
-                <button
-                  className="fw-bold p-3"
-                  onClick={handleOnClick("profile")}
+                  </div>
+                </div>
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => {
+                    toogleOpen();
+                  }}
                 >
-                  Profile
-                </button>
-                <button className="fw-bold p-3" onClick={handleOnClick("ads")}>
-                  My Ads
-                </button>
-                <button className="fw-bold p-3" onClick={handleLogout}>
-                  Log Out
-                </button>
-              </div>
-            </div>
-          ) : (
-            <>
-              {change === false ? (
-                <div className="bg-light customButton border-0 mt-0">
+                  <FaBars size={20} />
+                </Button>
+
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                  }}
+                >
+                  <FaGlobeAmericas size={25} />
+                </Button>
+              </>
+            ) : (
+              <>
+                <div
+                  className="bg-light customButton border-0 mt-0"
+                  style={{
+                    marginRight: "50px",
+                  }}
+                >
                   <Button
                     className="signIn-btn"
                     style={{
@@ -359,15 +648,145 @@ const Header = ({ color, change }) => {
                     Sign Up
                   </Button>
                 </div>
-              ) : (
+                <Button
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b)",
+                    color: "black",
+                    borderColor: "transparent",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => {
+                    toogleOpen();
+                  }}
+                >
+                  <FaBars size={20} />
+                </Button>
+
+                <Button
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b)",
+                    color: "black",
+                    borderColor: "transparent",
+                  }}
+                >
+                  <FaGlobeAmericas size={25} />
+                </Button>
+              </>
+            )}
+          </div>
+        ) : (
+          <div className="d-flex flex-row ">
+            {user._id && !user.KYC && (
+              <>
+                <div className="dropdown">
+                  <button style={{ background: "transparent" }}>
+                    <img src="/images/bell.png" style={{ maxHeight: "30px" }} alt="" />
+                  </button>
+                  <div className="dropdown-content">
+                    <a href={kycUrl}>Please complete your KYC</a>
+                  </div>
+                </div>
+              </>
+            )}
+            {user._id ? (
+              <>
+                <div className="dropdown">
+                  <button
+                    className="customButton border-0 mt-0"
+                    style={{
+                      fontSize: "16px",
+                      backgroundImage: "none",
+                      backgroundColor: "#fcba7d",
+                      marginRight: "50px",
+                    }}
+                  >
+                    Hello, {user.firstName}
+                  </button>
+                  <div className="dropdown-content ">
+                    {windowSize < 992 && (
+                      <>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("realEstates")}
+                        >
+                          Real Estates
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("cars")}
+                        >
+                          Cars
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("jets")}
+                        >
+                          Jets
+                        </button>
+                        <button
+                          className="headerNav fw-bold p-3"
+                          onClick={handleOnClick("yachts")}
+                        >
+                          Yatches
+                        </button>
+                      </>
+                    )}
+                    <button
+                      className="fw-bold p-3"
+                      onClick={handleOnClick("profile")}
+                    >
+                      Profile
+                    </button>
+                    <button
+                      className="fw-bold p-3"
+                      onClick={handleOnClick("ads")}
+                    >
+                      My Ads
+                    </button>
+                    <button className="fw-bold p-3" onClick={handleLogout}>
+                      Log Out
+                    </button>
+                  </div>
+                </div>
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => {
+                    toogleOpen();
+                  }}
+                >
+                  <FaBars size={20} />
+                </Button>
+
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                  }}
+                >
+                  <FaGlobeAmericas size={25} />
+                </Button>
+              </>
+            ) : (
+              <>
                 <div
                   className="border-0 mt-0"
-                  style={{ backgroundColor: "transparent" }}
+                  style={{
+                    backgroundColor: "transparent",
+                    marginRight: "50px",
+                  }}
                 >
                   <Button
                     className="signIn-btn"
                     style={{
-                      fontSize: 16,
+                      fontSize: 18,
                       color: "white",
                       fontWeight: "bold",
                       backgroundColor: "transparent",
@@ -376,13 +795,13 @@ const Header = ({ color, change }) => {
                     variant="success"
                     onClick={toogleSignIn}
                   >
-                    Sign In
+                    Login
                   </Button>
-                  <label style={{color:"white"}}>|</label>
+                  <label style={{ color: "white" }}>|</label>
                   <Button
                     className="signUp-btn"
                     style={{
-                      fontSize: 16,
+                      fontSize: 18,
                       color: "white",
                       fontWeight: "bold",
                       backgroundColor: "transparent",
@@ -391,13 +810,47 @@ const Header = ({ color, change }) => {
                     variant="success"
                     onClick={toogleSignUp}
                   >
-                    Sign Up
+                    Signup
                   </Button>
                 </div>
-              )}
-            </>
-          )}
-        </div>
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                    marginRight: "10px",
+                  }}
+                  onClick={() => {
+                    toogleOpen();
+                  }}
+                >
+                  <FaBars size={20} />
+                </Button>
+
+                <Button
+                  style={{
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                  }}
+                >
+                  <FaGlobeAmericas size={25} />
+                </Button>
+                {/* <Button
+                  className="bg-transparent border-0"
+                  onClick={handleSell}
+                  style={{
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Sell
+                </Button> */}
+              </>
+            )}
+          </div>
+        )}
       </nav>
     </Nav>
   );
@@ -409,13 +862,8 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  //display: flex;
-  // justify-content: space-between;
-  // align-items: center;
   z-index: 3;
-  // flex-wrap: wrap;
 `;
 
 const Menu = styled.div`

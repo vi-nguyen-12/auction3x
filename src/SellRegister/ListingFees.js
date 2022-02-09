@@ -1,7 +1,4 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
 
 const ListingFees = ({ toogleStep, step }) => (
   <form className="listingfee-content">

@@ -81,7 +81,7 @@ const UpcomingCard = ({
           <Card
             // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
             //move to next page
-            className="text-left m-auto"
+            className="cards text-left m-auto"
             style={{
               width: "18rem",
               background: "white",
@@ -89,6 +89,9 @@ const UpcomingCard = ({
               width: "450px",
               borderRadius: "10px",
               border: "1px solid lightgrey",
+              boxShadow:
+                "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
+              transition: "all ease 200ms",
             }}
           >
             {showKYC && (
@@ -121,9 +124,9 @@ const UpcomingCard = ({
               }}
             >
               {favorite ? (
-                <img src="/images/hearted.png" />
+                <img src="/images/hearted.png" alt="" />
               ) : (
-                <img src="/images/heart.png" />
+                <img src="/images/heart.png" alt="" />
               )}
             </button>
             <Card.Body style={{ paddingLeft: "13px" }}>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BuyAgreement from "./BuyAgreement";
 import BuyUpload from "./BuyUpload";
-import BuyVerify from "./BuyVerify";
 import BuyAuthorized from "./BuyAuthorized";
 import BuyPayment from "./BuyPayment";
-import BuyConfirm from "./BuyConfirm";
-import { Modal } from "react-bootstrap";
 
 const MultiBuyForm = () => {
   const [step, setStep] = useState(0);
@@ -13,8 +10,6 @@ const MultiBuyForm = () => {
   const toogleDocument = (document) => {
     setDocument(document);
   };
-
-  console.log(document);
 
   const toogleStep = (step) => {
     setStep(step);
@@ -34,7 +29,6 @@ const MultiBuyForm = () => {
   useEffect(() => {
     toogleDocument(document);
   }, [document]);
-
 
   if (step === 0) {
     return (
@@ -69,7 +63,7 @@ const MultiBuyForm = () => {
         <BuyAuthorized
           toogleStep={toogleStep}
           step={step}
-          document ={document}
+          document={document}
           answer={answer}
           questionID={questionID}
         />

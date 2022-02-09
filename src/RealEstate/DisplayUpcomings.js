@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "../styles/realEstate.css";
+// import "../styles/realEstate.css";
 import { Modal, Col, Row, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -20,7 +20,7 @@ import NumberFormat from "react-number-format";
 import Timer from "./Timer";
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  height: 50vh;
   overflow: hidden;
 
   & > button {
@@ -37,7 +37,7 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
+      top: -5vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -70,16 +70,21 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  a {
-    border-radius: 4px;
-    cursor: pointer;
-    display: block;
-    position: relative;
-    padding: 0;
+  // a {
+  //   border-radius: 4px;
+  //   cursor: pointer;
+  //   display: block;
+  //   position: relative;
+  //   padding: 0;
 
     img {
       width: 100%;
       height: 30vh;
+      border-radius: 4px;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      padding: 0;
     }
 
     // &:hover {
@@ -87,28 +92,28 @@ const Wrap = styled.div`
     //   // border: 4px solid rgba(249, 249, 249, 0.8);
     //   transition-duration: 300ms;
     // }
-  }
+  // }
 `;
 
-const HomeBottom = styled.div`
-  position: absolute;
-  bottom: 20vh;
-  z-index: 1;
-  left: 5vw;
-  a {
-    color: white !important;
-    font-size: 24px;
-    font-weight: bolder;
-    box-shadow: none !important;
-  }
-  span {
-    color: white;
-    font-size: 14px;
-    font-weight: bolder;
-  }
-`;
+// const HomeBottom = styled.div`
+//   position: absolute;
+//   bottom: 20vh;
+//   z-index: 1;
+//   left: 5vw;
+//   a {
+//     color: white !important;
+//     font-size: 24px;
+//     font-weight: bolder;
+//     box-shadow: none !important;
+//   }
+//   span {
+//     color: white;
+//     font-size: 14px;
+//     font-weight: bolder;
+//   }
+// `;
 
-function DisplayUpcomings({ colorChange }) {
+function DisplayUpcomings({ colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
@@ -165,7 +170,7 @@ function DisplayUpcomings({ colorChange }) {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
-  let today = new Date().toISOString();
+  // let today = new Date().toISOString();
   // const handlePlaceBid = () => {
   //   if (!user._id) {
   //     return toogleSignIn();
@@ -182,6 +187,7 @@ function DisplayUpcomings({ colorChange }) {
 
   useEffect(() => {
     colorChange("black");
+    toogleChange();
     //for upcoming auction property data
     const propertyData = properties.find((item) => item._id === id);
     setProperty(propertyData.property);
@@ -284,9 +290,9 @@ function DisplayUpcomings({ colorChange }) {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" />
+                    <img src="/images/star.png" alt="" />
                   ) : (
-                    <img src="/images/star-before.png" />
+                    <img src="/images/star-before.png" alt="" />
                   )}
                 </button>
               </div>
@@ -309,6 +315,7 @@ function DisplayUpcomings({ colorChange }) {
                   <img
                     style={{ borderRadius: "15px" }}
                     src="/images/picture.png"
+                    alt=""
                   />
                 </button>
                 <Modal
@@ -325,18 +332,18 @@ function DisplayUpcomings({ colorChange }) {
                   </Modal.Header>
                   <Modal.Body>
                     <Carousel
-                      style={{ height: "100%", borderRadius: "15px" }}
+                      style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
                     >
                       {property.images.map((item, index) => (
                         <Wrap key={index}>
-                          <a>
+                          {/* <a> */}
                             <img
                               style={{ height: "50vh" }}
                               src={item.url}
                               alt=""
                             />
-                          </a>
+                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -359,7 +366,7 @@ function DisplayUpcomings({ colorChange }) {
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" />
+                  <img src="/images/video.png" alt="" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -375,7 +382,7 @@ function DisplayUpcomings({ colorChange }) {
                     >
                       {property.videos.map((item, index) => (
                         <Wrap key={index}>
-                          <a>
+                          {/* <a> */}
                             <video
                               style={{
                                 display: "relative",
@@ -392,7 +399,7 @@ function DisplayUpcomings({ colorChange }) {
                             >
                               <source src={item.url} type="video/webm" />
                             </video>
-                          </a>
+                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -414,7 +421,7 @@ function DisplayUpcomings({ colorChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" />
+                  <img src="/images/360.png" alt="" />
                 </button>
               </div>
 
@@ -433,7 +440,7 @@ function DisplayUpcomings({ colorChange }) {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" />
+                    <img src="/images/location.png" alt="" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>
@@ -1177,12 +1184,6 @@ function DisplayUpcomings({ colorChange }) {
             </span>
           </div>
         </Row> */}
-          <Modal size="lg" show={bid} onHide={toogleBid} centered>
-            <Modal.Body>
-              {/* <BuyConfirm /> */}
-              <MultiBuyForm />
-            </Modal.Body>
-          </Modal>
 
           <Modal
             size="lg"
@@ -1217,7 +1218,6 @@ function DisplayUpcomings({ colorChange }) {
             centered
             show={showConfirm}
             onHide={toogleConfirmModal}
-            centered
             contentclassname="confirm"
           >
             <Modal.Header closeButton>
@@ -1253,7 +1253,6 @@ function DisplayUpcomings({ colorChange }) {
             centered
             show={forgotPass}
             onHide={toogleForgotPass}
-            centered
             contentclassname="forgotPass"
           >
             <Modal.Header closeButton>
@@ -1283,7 +1282,6 @@ function DisplayUpcomings({ colorChange }) {
             centered
             show={changePass}
             onHide={toogleChangePass}
-            centered
             contentclassname="forgotPass"
           >
             <Modal.Body>

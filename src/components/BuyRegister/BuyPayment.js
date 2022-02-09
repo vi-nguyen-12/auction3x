@@ -79,7 +79,6 @@ const BuyAuthoried = ({
   //   toogleQuestion5ID(question5ID);
   //   toogleStep(step + 1);
   // };
-  console.log(explain1);
   return (
     <>
       <Modal.Header closeButton>

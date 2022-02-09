@@ -1,5 +1,4 @@
 import axios from "axios";
-import { FaLongArrowAltUp } from "react-icons/fa";
 import env from "../env";
 
 const authService = {
@@ -40,7 +39,6 @@ const authService = {
   },
 
   saveRealEstate(data) {
-    console.log(data);
     return axios.post(env.API_URL + "/api/properties/real-estates/", data, {
       withCredentials: true,
     });

@@ -12,7 +12,6 @@ export const userSlice = createSlice({
       }
     },
     logout: (state, action) => {
-      console.log("test");
       return (state = { firstName: "", lastName: "", isKYC: false });
     },
   },

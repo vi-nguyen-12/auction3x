@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import "../styles/SellRegister.css";
 // create step bar
 
@@ -25,7 +24,15 @@ const Sell = ({ toogleStep, step }) => {
   // }, 8000);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="box-content">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+        }
+      }}
+      className="box-content"
+    >
       <div className="sell-top">
         <div className="circle-1">
           <p className="text">01</p>
@@ -53,7 +60,7 @@ const Sell = ({ toogleStep, step }) => {
         </div>
       </div>
       <div className="sell-bottom">
-        <Table borderless responsive="lg" style={{display:"grid"}}>
+        <Table borderless responsive="lg" style={{ display: "grid" }}>
           <thead>
             <tr>
               <th>
@@ -64,7 +71,7 @@ const Sell = ({ toogleStep, step }) => {
             </tr>
             {/* <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p> */}
           </thead>
-          <tbody style={{marginTop:"30px"}}>
+          <tbody style={{ marginTop: "30px" }}>
             <tr className="sell-1">
               <td>
                 <input type="radio" name="sell" value="1" />

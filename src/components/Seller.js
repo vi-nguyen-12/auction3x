@@ -1,13 +1,9 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import Buyer from "./Buyer";
 import authServices from "../services/authServices";
 require("react-bootstrap/ModalHeader");
 
-const Seller=({RegistermodalClose, ConfirmmodalOpen})=> {
+const Seller = ({ RegistermodalClose, ConfirmmodalOpen }) => {
   const {
     register,
     handleSubmit,
@@ -147,7 +143,10 @@ const Seller=({RegistermodalClose, ConfirmmodalOpen})=> {
           {...register("extraOption", { required: false, maxLength: 20 })}
         />
       </div>
-      <label style = {{fontSize: "12px"}}>By signing up you will agree to our Privacy Policy and Terms & Conditions</label>
+      <label style={{ fontSize: "12px" }}>
+        By signing up you will agree to our Privacy Policy and Terms &
+        Conditions
+      </label>
       <button
         type="submit"
         className="registerBtn"
@@ -162,5 +161,5 @@ const Seller=({RegistermodalClose, ConfirmmodalOpen})=> {
       </button>
     </form>
   );
-}
-export default Seller
+};
+export default Seller;

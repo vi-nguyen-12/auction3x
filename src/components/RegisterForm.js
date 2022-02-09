@@ -1,12 +1,9 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 import Buyer from "./User";
 import Seller from "./Seller";
 import Broker from "./Broker";
-import { FaCreativeCommonsPd } from "react-icons/fa";
 import "../styles/radioStyle.css";
 require("react-bootstrap/ModalHeader");
 

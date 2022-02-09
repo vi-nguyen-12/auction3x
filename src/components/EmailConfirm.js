@@ -1,23 +1,14 @@
 import react, { useEffect } from "react";
-import Toast from "./Toast";
-import { useForm } from "react-hook-form";
 import { useLocation, useHistory } from "react-router-dom";
 import authServices from "../services/authServices";
 
 function Confirm({ colorChange }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
 
   useEffect(async () => {
     colorChange("black");
     authServices.confirmEmail(token).then((res) => {
-      console.log(res);
       if (res.data.error) {
         alert(res.data.error);
       } else {

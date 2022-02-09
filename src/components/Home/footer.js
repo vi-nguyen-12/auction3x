@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Card, Button } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 import '../../styles/footer.css'
 
 const Footer = (props) => {
@@ -10,8 +10,8 @@ const Footer = (props) => {
             <Row className='row-1'>
                 <Col>
                     <div className='img-flex'>
-                        <img src='/Vector.png'/>
-                        <img src='/Auction10X.png' className='auction-img'/>
+                        <img src='/Vector.png' alt='' />
+                        <img src='/Auction10X.png' className='auction-img' alt='' />
                     </div>
                     <p className='auction-content'>AUCTION 10X is an innovative online bidding platform that specialized in the expediting sale of
                     real estate through auction  and  brings  the exciting real estate opportunities to both buyers

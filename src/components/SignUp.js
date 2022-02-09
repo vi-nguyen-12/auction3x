@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 import { Modal } from "react-bootstrap";
@@ -49,7 +48,14 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           </div>
         </Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+      >
         <table style={{ marginBottom: "13px" }}>
           <tr>
             <td>First Name*</td>

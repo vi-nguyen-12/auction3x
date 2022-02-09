@@ -1,15 +1,8 @@
-import React, { Component, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/realEstate.css";
-import authService from "../services/authServices";
-import { Modal, Table, Row, Col, Container } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  StreetViewPanoramaOptions,
-} from "@react-google-maps/api";
-import env from "../env";
+import { Modal, Table, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import Confirm from "../components/EmailConfirm";
 import ForgotPass from "../components/ForgotPass";
 import ChangePass from "../components/ChangePass";
@@ -20,22 +13,20 @@ import Slider from "react-slick";
 import BuyConfirm from "../components/BuyRegister/BuyConfirm";
 import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import DateCountdown from "react-date-countdown-timer";
 import AuctionTimer from "./AuctionTimer";
 
 const mapStyles = {
   height: "50vh",
   width: "100%",
 };
-const StreetviewStyles = {
-  height: "50vh",
-  width: "100%",
-};
+// const StreetviewStyles = {
+//   height: "50vh",
+//   width: "100%",
+// };
 
 let settings = {
   dots: true,
@@ -52,7 +43,7 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  height: 50vh;
   overflow: hidden;
 
   & > button {
@@ -69,7 +60,7 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
+      top: -5vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -102,27 +93,32 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  a {
+  // a {
+  //   border-radius: 4px;
+  //   cursor: pointer;
+  //   display: block;
+  //   position: relative;
+  //   padding: 0;
+
+  img {
+    width: 100%;
+    height: 30vh;
     border-radius: 4px;
     cursor: pointer;
     display: block;
     position: relative;
     padding: 0;
-
-    img {
-      width: 100%;
-      height: 30vh;
-    }
-
-    // &:hover {
-    //   padding: 0;
-    //   // border: 4px solid rgba(249, 249, 249, 0.8);
-    //   transition-duration: 300ms;
-    // }
   }
+
+  // &:hover {
+  //   padding: 0;
+  //   // border: 4px solid rgba(249, 249, 249, 0.8);
+  //   transition-duration: 300ms;
+  // }
+  // }
 `;
 
-function DisplayAuctions({ colorChange }) {
+function DisplayAuctions({ colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
@@ -200,6 +196,7 @@ function DisplayAuctions({ colorChange }) {
 
   useEffect(() => {
     colorChange("black");
+    toogleChange();
     //for ongoing auction
     const auctionData = auctions.find((item) => item._id === id);
     setAuction(auctionData);
@@ -280,9 +277,9 @@ function DisplayAuctions({ colorChange }) {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" />
+                    <img src="/images/star.png" alt="" />
                   ) : (
-                    <img src="/images/star-before.png" />
+                    <img src="/images/star-before.png" alt="" />
                   )}
                 </button>
               </div>
@@ -305,6 +302,7 @@ function DisplayAuctions({ colorChange }) {
                   <img
                     style={{ borderRadius: "15px" }}
                     src="/images/picture.png"
+                    alt=""
                   />
                 </button>
                 <Modal
@@ -321,18 +319,18 @@ function DisplayAuctions({ colorChange }) {
                   </Modal.Header>
                   <Modal.Body>
                     <Carousel
-                      style={{ height: "100%", borderRadius: "15px" }}
+                      style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
                     >
                       {auctionProp.images.map((item, index) => (
                         <Wrap key={index}>
-                          <a>
-                            <img
-                              style={{ height: "50vh" }}
-                              src={item.url}
-                              alt=""
-                            />
-                          </a>
+                          {/* <a> */}
+                          <img
+                            style={{ height: "50vh" }}
+                            src={item.url}
+                            alt=""
+                          />
+                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -355,7 +353,7 @@ function DisplayAuctions({ colorChange }) {
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" />
+                  <img src="/images/video.png" alt="" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -366,29 +364,29 @@ function DisplayAuctions({ colorChange }) {
                   </Modal.Header>
                   <Modal.Body style={{ height: "500px" }}>
                     <Carousel
-                      style={{ height: "100%", borderRadius: "15px" }}
+                      style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
                     >
                       {auctionProp.videos.map((item, index) => (
                         <Wrap key={index}>
-                          <a>
-                            <video
-                              style={{
-                                display: "relative",
-                                justifyContent: "center",
-                                margin: "auto",
+                          {/* <a> */}
+                          <video
+                            style={{
+                              display: "relative",
+                              justifyContent: "center",
+                              margin: "auto",
 
-                                width: "100%",
-                                borderRadius: "15px",
-                                position: "relative",
-                                height: "3000px!important",
-                                cursor: "pointer",
-                              }}
-                              controls
-                            >
-                              <source src={item.url} type="video/webm" />
-                            </video>
-                          </a>
+                              width: "100%",
+                              borderRadius: "0",
+                              position: "relative",
+                              // height: "3000px!important",
+                              cursor: "pointer",
+                            }}
+                            controls
+                          >
+                            <source src={item.url} type="video/webm" />
+                          </video>
+                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -410,7 +408,7 @@ function DisplayAuctions({ colorChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" />
+                  <img src="/images/360.png" alt="" />
                 </button>
               </div>
 
@@ -429,7 +427,7 @@ function DisplayAuctions({ colorChange }) {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" />
+                    <img src="/images/location.png" alt="" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>
@@ -1218,7 +1216,6 @@ function DisplayAuctions({ colorChange }) {
           </Row> */}
           <Modal size="lg" show={bid} onHide={toogleBid} centered>
             <Modal.Body>
-              {/* <BuyConfirm /> */}
               <MultiBuyForm />
             </Modal.Body>
           </Modal>
@@ -1232,7 +1229,6 @@ function DisplayAuctions({ colorChange }) {
             centered
           >
             <Modal.Body>
-              {/* <BuyConfirm /> */}
               <MultiBuyForm />
             </Modal.Body>
           </Modal>
@@ -1240,7 +1236,7 @@ function DisplayAuctions({ colorChange }) {
           <Modal
             backdrop="static"
             keyboard={false}
-            size="lg"
+            size="md"
             show={placeBid}
             onHide={tooglePlaceBid}
             centered
@@ -1256,7 +1252,6 @@ function DisplayAuctions({ colorChange }) {
             centered
             show={showConfirm}
             onHide={toogleConfirmModal}
-            centered
             contentclassname="confirm"
           >
             <Modal.Header closeButton>
@@ -1292,7 +1287,6 @@ function DisplayAuctions({ colorChange }) {
             centered
             show={forgotPass}
             onHide={toogleForgotPass}
-            centered
             contentclassname="forgotPass"
           >
             <Modal.Header closeButton>
@@ -1322,7 +1316,6 @@ function DisplayAuctions({ colorChange }) {
             centered
             show={changePass}
             onHide={toogleChangePass}
-            centered
             contentclassname="forgotPass"
           >
             <Modal.Body>

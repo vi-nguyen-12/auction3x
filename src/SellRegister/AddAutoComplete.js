@@ -4,7 +4,6 @@ import { geocodeByAddress, geocodeByPlaceId } from "react-places-autocomplete";
 
 const AddAutoComplete = ({ updateQuery }) => {
   const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({});
   const [query, setQuery] = useState("");
   const [error, setError] = useState(false);
 

@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import authService from "../services/authServices";
-import { Button, Row, Col, Container, Table } from "react-bootstrap";
+import { Row, Col, Container, } from "react-bootstrap";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -268,7 +268,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 </summary>
                 <div>
                   <label htmlFor="documents-btn1">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
                   </label>
                 </div>
               </details>
@@ -329,7 +329,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 </summary>
                 <div>
                   <label htmlFor="documents-btn2">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -391,7 +391,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 </summary>
                 <div>
                   <label htmlFor="documents-btn3">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -454,7 +454,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div>
                   <label htmlFor="documents-btn4">
                     {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
                   </label>
                 </div>
               </details>
@@ -517,7 +517,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div>
                   <label htmlFor="documents-btn5">
                     {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -579,7 +579,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div>
                   <label htmlFor="documents-btn6">
                     {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -642,7 +642,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div>
                   <label htmlFor="documents-btn7">
                     {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -703,7 +703,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 <div>
                   <label htmlFor="documents-btn8">
                     {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
                   </label>
                 </div>
               </details>
@@ -747,7 +747,15 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           </Row>
         </Row>
       </Container>
-      <form onSubmit={handleSubmit(onSubmit)} className="bottom-btn">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+        className="bottom-btn"
+      >
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous

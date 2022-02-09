@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Card, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import '../../styles/real-estate.css'
 
 const RealEstate = (props) => {

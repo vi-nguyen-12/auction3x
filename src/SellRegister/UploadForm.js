@@ -2,7 +2,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../services/authServices";
-import { Button } from "react-bootstrap";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -51,13 +50,11 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   };
 
   const handleDelete = (url) => () => {
-    console.log(url);
     setImages(images.filter((image) => image.url !== url));
     // make button not hit submit
   };
 
   const handleDeleteVideo = (url) => () => {
-    console.log(url);
     setVideos(videos.filter((video) => video.url !== url));
   };
 
@@ -65,7 +62,15 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
     toogleStep(step + 1);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="upload-box">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+        }
+      }}
+      className="upload-box"
+    >
       <div className="sell-top">
         <div className="circle-1">
           <p className="text">01</p>
@@ -131,42 +136,42 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             </summary>
             <div>
               <label htmlFor="images-btn">
-                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />
+                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
               </label>
             </div>
           </details>
           <div className="upload-list">
-            {images ?
-              images.map((image, index, arr) => (
-                <div key={index} className="upload-list-item">
-                  <span>
-                    {image.name}
-                    <button
-                      className="delete-btn"
-                      onClick={handleDelete(image.url)}
-                      onMouseEnter={() => {
-                        var tempArr = arr;
-                        var temp = image;
-                        temp.onHover = true;
-                        setImages([...tempArr]);
-                      }}
-                      onMouseLeave={() => {
-                        var tempArr = arr;
-                        var temp = image;
-                        temp.onHover = false;
-                        let newArr = tempArr.splice(index, 0);
-                        setImages([...tempArr, ...newArr]);
-                      }}
-                    >
-                      {!image.onHover ? (
-                        <FaCheck fontSize="1.5em" color="blue" />
-                      ) : (
-                        <MdClose fontSize="1.5em" color="red" />
-                      )}
-                    </button>
-                  </span>
-                </div>
-              ))
+            {images
+              ? images.map((image, index, arr) => (
+                  <div key={index} className="upload-list-item">
+                    <span>
+                      {image.name}
+                      <button
+                        className="delete-btn"
+                        onClick={handleDelete(image.url)}
+                        onMouseEnter={() => {
+                          var tempArr = arr;
+                          var temp = image;
+                          temp.onHover = true;
+                          setImages([...tempArr]);
+                        }}
+                        onMouseLeave={() => {
+                          var tempArr = arr;
+                          var temp = image;
+                          temp.onHover = false;
+                          let newArr = tempArr.splice(index, 0);
+                          setImages([...tempArr, ...newArr]);
+                        }}
+                      >
+                        {!image.onHover ? (
+                          <FaCheck fontSize="1.5em" color="blue" />
+                        ) : (
+                          <MdClose fontSize="1.5em" color="red" />
+                        )}
+                      </button>
+                    </span>
+                  </div>
+                ))
               : null}
           </div>
         </div>
@@ -181,7 +186,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             multiple
             hidden
             {...register("videos", { onChange: onChangeVideos })}
-          // required
+            // required
           />
           <details>
             <summary>
@@ -189,42 +194,42 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             </summary>
             <div>
               <label htmlFor="videos-btn">
-                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
               </label>
             </div>
           </details>
           <div className="upload-list">
-            {videos ?
-              videos.map((video, index, arr) => (
-                <div key={index} className="upload-list-item">
-                  <span>
-                    {video.name}
-                    <button
-                      className="delete-btn"
-                      onClick={handleDeleteVideo(video.url)}
-                      onMouseEnter={() => {
-                        var tempArr = arr;
-                        var temp = video;
-                        temp.onHover0 = true;
-                        setVideos([...tempArr]);
-                      }}
-                      onMouseLeave={() => {
-                        var tempArr = arr;
-                        var temp = video;
-                        temp.onHover0 = false;
-                        let newArr = tempArr.splice(index, 0);
-                        setVideos([...tempArr, ...newArr]);
-                      }}
-                    >
-                      {!video.onHover0 ? (
-                        <FaCheck fontSize="1.5em" color="blue" />
-                      ) : (
-                        <MdClose fontSize="1.5em" color="red" />
-                      )}
-                    </button>
-                  </span>
-                </div>
-              ))
+            {videos
+              ? videos.map((video, index, arr) => (
+                  <div key={index} className="upload-list-item">
+                    <span>
+                      {video.name}
+                      <button
+                        className="delete-btn"
+                        onClick={handleDeleteVideo(video.url)}
+                        onMouseEnter={() => {
+                          var tempArr = arr;
+                          var temp = video;
+                          temp.onHover0 = true;
+                          setVideos([...tempArr]);
+                        }}
+                        onMouseLeave={() => {
+                          var tempArr = arr;
+                          var temp = video;
+                          temp.onHover0 = false;
+                          let newArr = tempArr.splice(index, 0);
+                          setVideos([...tempArr, ...newArr]);
+                        }}
+                      >
+                        {!video.onHover0 ? (
+                          <FaCheck fontSize="1.5em" color="blue" />
+                        ) : (
+                          <MdClose fontSize="1.5em" color="red" />
+                        )}
+                      </button>
+                    </span>
+                  </div>
+                ))
               : null}
           </div>
         </div>
@@ -242,7 +247,6 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             }}
             id="next"
             type="submit"
-
           >
             Next
           </button>

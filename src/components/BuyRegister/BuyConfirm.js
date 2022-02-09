@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useSelector } from "react-redux";
@@ -57,16 +57,139 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
           Enter your Bid
         </Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+      {/* <div style={{display:"flex", margin:"0", padding:"0"}}>
+        <Button style={{position:"absolute", right:"10px"}} onClick={tooglePlaceBid}>
+          x
+        </Button>
+        <h1
+          style={{
+            color: "#D58F5C",
+            fontSize: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Enter your Bid
+        </h1>
+      </div> */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+      >
+        <>
           {onGoingAuctionEnd && (
-            <div style={{marginLeft:"15%", marginTop:"20px"}}>
+            <div style={{ marginLeft: "15%", marginTop: "20px" }}>
               <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
             </div>
           )}
-          <div className="auction-info">
-            <tr>
-              {propId.highestBid ? (
+          <Table borderless>
+            <tbody className="auction-info">
+              <tr>
+                {propId.highestBid ? (
+                  <td
+                    style={{
+                      position: "relative",
+                      fontWeight: "bold",
+                      padding: "15px",
+                    }}
+                  >
+                    Leading Bid:
+                    <NumberFormat
+                      style={{ marginLeft: "10px", fontWeight: "normal" }}
+                      value={propId.highestBid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </td>
+                ) : (
+                  <td
+                    style={{
+                      position: "relative",
+                      fontWeight: "bold",
+                      padding: "15px",
+                    }}
+                  >
+                    Leading Bid:
+                    <NumberFormat
+                      style={{ marginLeft: "10px", fontWeight: "normal" }}
+                      value={propId.startingBid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </td>
+                )}
+              </tr>
+              <tr>
+                {propId.highestBid ? (
+                  <td
+                    style={{
+                      position: "relative",
+                      fontWeight: "bold",
+                      padding: "15px",
+                    }}
+                  >
+                    Minimal Bid(highest bid + increment):
+                    <NumberFormat
+                      style={{ marginLeft: "10px", fontWeight: "normal" }}
+                      value={propId.highestBid + propId.incrementAmount}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                    <button
+                      style={{
+                        marginLeft: "10px",
+                        backgroundColor: "#D58F5C",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "5px",
+                      }}
+                      onClick={() => {
+                        setBid(propId.highestBid + propId.incrementAmount);
+                      }}
+                    >
+                      Bid
+                    </button>
+                  </td>
+                ) : (
+                  <td
+                    style={{
+                      position: "relative",
+                      fontWeight: "bold",
+                      padding: "15px",
+                    }}
+                  >
+                    Minimal Bid(starting bid + increment):
+                    <NumberFormat
+                      style={{ marginLeft: "10px", fontWeight: "normal" }}
+                      value={propId.startingBid + propId.incrementAmount}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                    <button
+                      style={{
+                        fontWeight: "normal",
+                        backgroundColor: "transparent",
+                        color: "black",
+                        padding: "0",
+                        margin: "10px",
+                      }}
+                      onClick={() => {
+                        setBid(propId.highestBid + propId.incrementAmount);
+                      }}
+                    >
+                      Bid
+                    </button>
+                  </td>
+                )}
+              </tr>
+              <tr>
                 <td
                   style={{
                     position: "relative",
@@ -74,122 +197,27 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                     padding: "15px",
                   }}
                 >
-                  Leading Bid:
+                  Your Bid:
                   <NumberFormat
-                    style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={propId.highestBid}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </td>
-              ) : (
-                <td
-                  style={{
-                    position: "relative",
-                    fontWeight: "bold",
-                    padding: "15px",
-                  }}
-                >
-                  Leading Bid:
-                  <NumberFormat
-                    style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={propId.startingBid}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </td>
-              )}
-            </tr>
-            <tr>
-              {propId.highestBid ? (
-                <td
-                  style={{
-                    position: "relative",
-                    fontWeight: "bold",
-                    padding: "15px",
-                  }}
-                >
-                  Minimal Bid(highest bid + increment):
-                  <NumberFormat
-                    style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={propId.highestBid + propId.incrementAmount}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                  <button
                     style={{
                       marginLeft: "10px",
-                      backgroundColor: "#D58F5C",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "5px",
+                      fontWeight: "normal",
+                      color: "#b77b50",
+                      fontWeight: "bold",
                     }}
-                    onClick={() => {
-                      setBid(propId.highestBid + propId.incrementAmount);
-                    }}
-                  >
-                    Bid
-                  </button>
-                </td>
-              ) : (
-                <td
-                  style={{
-                    position: "relative",
-                    fontWeight: "bold",
-                    padding: "15px",
-                  }}
-                >
-                  Minimal Bid(starting bid + increment):
-                  <NumberFormat
-                    style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={propId.startingBid + propId.incrementAmount}
+                    value={bid}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
+                    onValueChange={(values) => {
+                      const { value } = values;
+                      setBid(value);
+                    }}
                   />
-                  <button
-                    style={{
-                      fontWeight: "normal",
-                      backgroundColor: "transparent",
-                      color: "black",
-                      padding: "0",
-                      margin: "10px",
-                    }}
-                    onClick={() => {
-                      setBid(propId.highestBid + propId.incrementAmount);
-                    }}
-                  >
-                    Bid
-                  </button>
                 </td>
-              )}
-            </tr>
-            <tr>
-              <td
-                style={{
-                  position: "relative",
-                  fontWeight: "bold",
-                  padding: "15px",
-                }}
-              >
-                Your Bid:
-                <NumberFormat
-                  style={{ marginLeft: "10px", fontWeight: "normal" }}
-                  value={bid}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                  onValueChange={(values) => {
-                    const { value } = values;
-                    setBid(value);
-                  }}
-                />
-              </td>
-            </tr>
-          </div>
+              </tr>
+            </tbody>
+          </Table>
 
           <div
             style={{
@@ -197,25 +225,49 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
               display: "inline-block",
               width: "100%",
               margin: "auto",
+              padding: "15px",
             }}
           >
             <input
-              style={{ padding: "10px", width: "100%" }}
+              style={{
+                padding: "10px",
+                paddingLeft: "20px",
+                width: "100%",
+                borderRadius: "8px",
+                border: "none",
+                backgroundColor: "#f2f6fc",
+              }}
               type="text"
-              placeholder="Your Bid"
+              placeholder="Enter Amount"
               name="bid"
               defaultValue={bid}
               onChange={(e) => setBid(e.target.value)}
             />
             <button
-              style={{ padding: "10px", width: "100%" }}
+              style={{
+                padding: "10px",
+                width: "100%",
+                marginTop: "10px",
+                borderRadius: "8px",
+              }}
               className="nxt-btn"
               type="submit"
             >
               Submit
             </button>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "10px",
+                fontSize: "13px",
+              }}
+            >
+              <span>View Bid History</span>
+            </div>
           </div>
-        </div>
+        </>
       </form>
     </>
   );

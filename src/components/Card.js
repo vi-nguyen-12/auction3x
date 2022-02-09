@@ -12,6 +12,7 @@ import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../RealEstate/AuctionTimer";
+import "../styles/Card.css";
 
 const CardComp = ({
   url,
@@ -33,7 +34,6 @@ const CardComp = ({
   const [auctionDate, setAuctionStartDate] = useState();
   const [auctionEnd, setAuctionEndDate] = useState();
   const toggleImage = () => setFavorite(!favorite);
-  const [kycUrl, setKycUrl] = useState("");
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -41,8 +41,6 @@ const CardComp = ({
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const auctions = useSelector((state) => state.auction);
-  const [auction, setAuction] = useState([]);
-  const [auctionProp, setAuctionProp] = useState();
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
@@ -72,8 +70,6 @@ const CardComp = ({
     const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
     const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
     const auctionData = auctions.find((item) => item._id === id);
-    setAuction(auctionData);
-    setAuctionProp(auctionData.property);
     setAuctionStartDate(startDate);
     setAuctionEndDate(endDate);
     setOnGoingAuctionEnd(auctionData.auctionEndDate);
@@ -83,9 +79,7 @@ const CardComp = ({
     <div>
       {auctionDate && auctionEnd && (
         <Card
-          // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
-          //move to next page
-          className="text-left m-auto"
+          className="cards text-left m-auto"
           style={{
             width: "18rem",
             background: "white",
@@ -93,6 +87,9 @@ const CardComp = ({
             width: "450px",
             borderRadius: "10px",
             border: "1px solid lightgrey",
+            boxShadow:
+              "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
+            transition: "all ease 200ms",
           }}
         >
           {showKYC && (
@@ -125,9 +122,9 @@ const CardComp = ({
             }}
           >
             {favorite ? (
-              <img src="/images/hearted.png" />
+              <img src="/images/hearted.png" alt="" />
             ) : (
-              <img src="/images/heart.png" />
+              <img src="/images/heart.png" alt="" />
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>

@@ -7,7 +7,7 @@ const About = () => {
     <div className="banner-section">
       <Row className="banner-container">
         <Col>
-          <img src="./images/investors.PNG" className="investor" />
+          <img src="./images/investors.PNG" className="investor" alt="" />
         </Col>
         <Col className="about">
               <h2>INVESTORS / BUYERS</h2>
@@ -45,7 +45,7 @@ const About = () => {
           </div>
         </Col>
         <Col  className="banner-right">
-          <img src="./images/broker.PNG" className="investor" />
+          <img src="./images/broker.PNG" className="investor" alt="" />
         </Col>
       </Row>
       <Row className="bottom-container">

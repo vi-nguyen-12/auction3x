@@ -1,19 +1,23 @@
 import React from "react";
+import "../../styles/SellRegister.css";
 import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
-import { useHistory } from "react-router-dom";
-import { FaCreativeCommonsPd } from "react-icons/fa";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
 const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
+  const location = useLocation();
   const [url, setUrl] = useState();
+  const [loader, setLoader] = useState(false);
+  const [envelopeId, setEnvelopeId] = useState();
+  const [docId, setDocId] = useState();
   const properties = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   const onGoingAuction = auction.find((item) => item._id === id);
@@ -31,8 +35,19 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     getIp();
     authService.getDocuSign().then((res) => {
       setUrl(res.data.redirectUrl);
+      setEnvelopeId(res.data.envelopeId);
     });
   }, []);
+
+  useEffect(() => {
+    setLoader(true);
+    authService.getDocuSignStatus(envelopeId).then((res) => {
+      setDocId(res.data._id);
+      if (envelopeId) {
+        setLoader(false);
+      }
+    });
+  }, [envelopeId]);
 
   const history = useHistory();
   // console.log(ip);
@@ -59,7 +74,6 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
       url: item.url,
     };
   });
-  console.log(realDocuments);
 
   const answers = [
     { questionId: questionID[0], answer: answer[0] },
@@ -69,8 +83,6 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     { questionId: questionID[4], answer: answer[4] },
   ];
 
-  console.log(answers);
-
   const onSubmit = async (data) => {
     await authService
       .buyerRegister({
@@ -78,17 +90,16 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
         documents: realDocuments,
         TC: { time: agree, IPAddress: ip },
         answers: answers,
+        docusign: docId,
         // explanation: explanations,
         // files: files,
-      })
-      .catch((err) => {
-        alert("User Already Registered for this property!");
-        history.push("/");
-      })
-      .then((res) => {
-        if (res) {
-          console.log(res);
-          history.push("/");
+      }).then((res) => {
+        if(res.data.error){
+          alert(res.data.error);
+        }
+        else{
+          // history.push(location.pathname);
+          window.location.reload();
         }
       });
   };
@@ -104,7 +115,19 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {loader ? (
+          <div className="loader">
+            <div className="spinning" />
+          </div>
+        ) : null}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -149,9 +172,20 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
             />
             Terms & Conditions
           </div>
+          <div
+            style={{ position: "sticky", padding: "auto" }}
+            className="bottom-btn"
+          >
+            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+              Previous
+            </button>
+            <button className="nxt-btn" type="submit">
+              Submit
+            </button>
+          </div>
         </form>
       </Modal.Body>
-      <Modal.Footer style={{ justifyContent: "center" }}>
+      {/* <Modal.Footer style={{ justifyContent: "center" }}>
         <div
           style={{ position: "sticky", padding: "auto" }}
           className="bottom-btn"
@@ -163,7 +197,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
             Submit
           </button>
         </div>
-      </Modal.Footer>
+      </Modal.Footer> */}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import authService from "../services/authServices";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
@@ -63,9 +63,10 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
       if (res.data.length !== 0) {
         properties(res.data);
         toogleStep(step + 1);
-      }
-      else if (res.data.length === 0) {
-        alert("Could not find property information! Please fill out the property details.");
+      } else if (res.data.length === 0) {
+        alert(
+          "Could not find property information! Please fill out the property details."
+        );
         properties(datas);
         toogleStep(step + 1);
       }
@@ -109,7 +110,15 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
         <div className="listDetails-title">
           <h2>Listing Deatails</h2>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
+          className="list-form"
+        >
           <h6 style={{ fontWeight: "bolder", fontSize: "20px" }}>
             Property Information
           </h6>

@@ -1,0 +1,21 @@
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  padding: 0 10px;
+  font-size: 30px;
+  color: black;
+  background-color: #fcba7d;
+  cursor: pointer;
+  border: none;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: black;
+  background-color: #fcba7d;
+}
+
+.headerNav:hover {
+  color: #fcba7d;
+}
