@@ -140,7 +140,7 @@ const ImgSlider = () => {
             {property.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
-                <a href={`/Display/${item._id}`}>
+                <a href={`/DisplayUpcomings/${item._id}`}>
                   <img src={item.property.images[0].url} alt="" />
                 </a>
                 <HomeBottom>

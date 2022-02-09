@@ -247,8 +247,8 @@ const PropertyDetails = ({
                           bottom: "5px",
                         }}
                       >
-                        <td>Property Owner*</td>
-                        <td style={{ paddingLeft: "30px" }}>Property Type*</td>
+                        <td>Property Owner<span style={{ color: "#ff0000" }}>*</span></td>
+                        <td style={{ paddingLeft: "30px" }}>Property Type<span style={{ color: "#ff0000" }}>*</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -343,15 +343,15 @@ const PropertyDetails = ({
                           bottom: "5px",
                         }}
                       >
-                        <td>Total Rooms*</td>
+                        <td>Total Rooms<span style={{ color: "#ff0000" }}>*</span></td>
                         <td style={{ paddingLeft: "10px" }}>
-                          Property Size(sqft)*
+                          Property Size(sqft)<span style={{ color: "#ff0000" }}>*</span>
                         </td>
-                        <td style={{ margin: "auto" }}>Bedrooms*</td>
+                        <td style={{ margin: "auto" }}>Bedrooms<span style={{ color: "#ff0000" }}>*</span></td>
                         <td
                           style={{ paddingRight: "170px", paddingLeft: "35px" }}
                         >
-                          Bathrooms*
+                          Bathrooms<span style={{ color: "#ff0000" }}>*</span>
                         </td>
                       </tr>
                     </tbody>
@@ -397,7 +397,7 @@ const PropertyDetails = ({
                             fontSize: "13px",
                           }}
                         >
-                          Market Value*
+                          Market Value<span style={{ color: "#ff0000" }}>*</span>
                         </td>
                       </tr>
 
@@ -449,8 +449,8 @@ const PropertyDetails = ({
                     </td>
                   </tr>
                   <tr style={{ display: "flex" }}>
-                    <td style={{ display: "flex", marginLeft: "140px" }}>Reserved Amount*</td>
-                    <td style={{ display: "block", marginLeft: "85px" }}>Discuss Amount*</td>
+                    <td style={{ display: "flex", marginLeft: "140px" }}>Reserved Amount<span style={{ color: "#ff0000" }}>*</span></td>
+                    <td style={{ display: "block", marginLeft: "85px" }}>Discuss Amount<span style={{ color: "#ff0000" }}>*</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -680,8 +680,8 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Property Owner*</td>
-                    <td style={{ paddingLeft: "30px" }}>Property Type*</td>
+                    <td>Property Owner<span style={{ color: "#ff0000" }}>*</span></td>
+                    <td style={{ paddingLeft: "30px" }}>Property Type<span style={{ color: "#ff0000" }}>*</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -768,11 +768,11 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Total Rooms*</td>
-                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)*</td>
-                    <td style={{ margin: "auto" }}>Bedrooms*</td>
+                    <td>Total Rooms<span style={{ color: "#ff0000" }}>*</span></td>
+                    <td style={{ paddingLeft: "10px" }}>Property Size(sqft)<span style={{ color: "#ff0000" }}>*</span></td>
+                    <td style={{ margin: "auto" }}>Bedrooms<span style={{ color: "#ff0000" }}>*</span></td>
                     <td style={{ paddingRight: "170px", paddingLeft: "35px" }}>
-                      Bathrooms*
+                      Bathrooms<span style={{ color: "#ff0000" }}>*</span>
                     </td>
                   </tr>
                 </tbody>
@@ -811,7 +811,7 @@ const PropertyDetails = ({
                           fontSize: "13px",
                         }}
                       >
-                        Market Value*
+                        Market Value<span style={{ color: "#ff0000" }}>*</span>
                       </td>
                     </tr>
                   </div>
@@ -872,8 +872,8 @@ const PropertyDetails = ({
                       bottom: "5px",
                     }}
                   >
-                    <td>Reserved Amount*</td>
-                    <td style={{ paddingLeft: "15px" }}>Discuss Amount*</td>
+                    <td>Reserved Amount<span style={{ color: "#ff0000" }}>*</span></td>
+                    <td style={{ paddingLeft: "15px" }}>Discuss Amount<span style={{ color: "#ff0000" }}>*</span></td>
                   </tr>
                 </tbody>
               </table>

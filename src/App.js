@@ -1,4 +1,3 @@
-import Home from "./components/Home";
 import ImgSlider from "./components/ImgSlider";
 import { FindInCountries } from "./components/FindInCountries";
 import { Upcoming } from "./components/Upcoming";

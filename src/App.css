@@ -54,7 +54,7 @@
   background-color: transparent !important;
   padding: 6px !important;
   color: rgb(0, 0, 0) !important;
-  font-size: 12px !important;
+  font-size: 12px;
 }
 .form-control::placeholder {
   color: rgb(0, 0, 0) !important;
@@ -127,8 +127,12 @@
 }
 
 .bmsnQQ {
-  padding-right: 0!important;
+  padding-right: 0 !important;
 }
 .navbar-expand-lg .navbar-collapse {
-  padding-right: 10px!important;
+  padding-right: 10px !important;
+}
+
+.modal-content {
+  border-radius: 10px !important;
 }

@@ -18,6 +18,12 @@ import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Timer from "./Timer";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { IoImageOutline } from "react-icons/io5";
+import { RiVideoLine } from "react-icons/ri";
+import { Md360 } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
+import "../styles/modalStyle.css";
 
 const Carousel = styled(Slider)`
   height: 30vh;
@@ -90,24 +96,6 @@ const Wrap = styled.div`
   }
 `;
 
-const HomeBottom = styled.div`
-  position: absolute;
-  bottom: 20vh;
-  z-index: 1;
-  left: 5vw;
-  a {
-    color: white !important;
-    font-size: 24px;
-    font-weight: bolder;
-    box-shadow: none !important;
-  }
-  span {
-    color: white;
-    font-size: 14px;
-    font-weight: bolder;
-  }
-`;
-
 function DisplayUpcomings({ colorChange }) {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
@@ -165,7 +153,7 @@ function DisplayUpcomings({ colorChange }) {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
-  let today = new Date().toISOString();
+  // let today = new Date().toISOString();
   // const handlePlaceBid = () => {
   //   if (!user._id) {
   //     return toogleSignIn();
@@ -213,10 +201,6 @@ function DisplayUpcomings({ colorChange }) {
     height: "50vh",
     width: "100%",
   };
-  const StreetviewStyles = {
-    height: "50vh",
-    width: "100%",
-  };
 
   let settings = {
     dots: true,
@@ -260,7 +244,7 @@ function DisplayUpcomings({ colorChange }) {
                 top: "50%",
                 left: "92%",
                 transform: "translate(-50%, -50%)",
-                height: "405px",
+                height: "420px",
                 marginRight: "100%",
                 border: "none",
                 cursor: "pointer",
@@ -284,9 +268,9 @@ function DisplayUpcomings({ colorChange }) {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" />
+                    <BsStarFill size="100%" color="C58753" />
                   ) : (
-                    <img src="/images/star-before.png" />
+                    <BsStar size="100%" color="C58753" />
                   )}
                 </button>
               </div>
@@ -306,10 +290,7 @@ function DisplayUpcomings({ colorChange }) {
                   }}
                   onClick={togglePics}
                 >
-                  <img
-                    style={{ borderRadius: "15px" }}
-                    src="/images/picture.png"
-                  />
+                  <IoImageOutline size="100%" color="C58753" />
                 </button>
                 <Modal
                   size="lg"
@@ -359,7 +340,7 @@ function DisplayUpcomings({ colorChange }) {
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" />
+                  <RiVideoLine size="100%" color="C58753" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -414,7 +395,7 @@ function DisplayUpcomings({ colorChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" />
+                  <Md360 size="100%" color="C58753" />
                 </button>
               </div>
 
@@ -433,7 +414,7 @@ function DisplayUpcomings({ colorChange }) {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" />
+                    < IoLocationOutline size="50px" color="C58753" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>
@@ -1177,12 +1158,12 @@ function DisplayUpcomings({ colorChange }) {
             </span>
           </div>
         </Row> */}
-          <Modal size="lg" show={bid} onHide={toogleBid} centered>
-            <Modal.Body>
-              {/* <BuyConfirm /> */}
-              <MultiBuyForm />
+          {/* <Modal size="lg" show={bid} onHide={toogleBid} centered>
+            <Modal.Body> */}
+          {/* <BuyConfirm /> */}
+          {/* <MultiBuyForm />
             </Modal.Body>
-          </Modal>
+          </Modal> */}
 
           <Modal
             size="lg"
@@ -1217,7 +1198,6 @@ function DisplayUpcomings({ colorChange }) {
             centered
             show={showConfirm}
             onHide={toogleConfirmModal}
-            centered
             contentclassname="confirm"
           >
             <Modal.Header closeButton>
@@ -1291,6 +1271,28 @@ function DisplayUpcomings({ colorChange }) {
             </Modal.Body>
           </Modal>
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toogleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              className="sign-In"
+            >
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
@@ -1308,6 +1310,7 @@ function DisplayUpcomings({ colorChange }) {
               />
             </Modal.Body>
           </Modal>
+
 
           <Modal
             backdrop="static"

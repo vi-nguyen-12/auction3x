@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
-import { Modal } from "react-bootstrap";
+import { Modal, Table } from "react-bootstrap";
 import "../styles/modalStyle.css";
+
 require("react-bootstrap/ModalHeader");
 
 const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
@@ -32,31 +33,28 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
       <Modal.Header contentclassname="modal-head-signup" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "25px", fontWeight: "bold" }}
+          style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
           contentclassname="custom-modal-title"
         >
           REGISTER ON AUCTION10X
-          <div className="signup-div">
+          <div style={{ display: "flex" }}>
             <button
+              style={{ fontSize: "20px" }}
               className="signup-link"
               onClick={() => {
                 toogleSignIn();
                 toogleSignUp();
-              }}
-            >
+              }}>
               Already Registered? Sign In
             </button>
           </div>
         </Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <table style={{ marginBottom: "13px" }}>
+      <form style={{ width: "100%", padding: "20px" }} onSubmit={handleSubmit(onSubmit)}>
+        <Table style={{}}>
           <tr>
-            <td>First Name*</td>
-            <td style={{ paddingLeft: "50px" }}>Last Name*</td>
-          </tr>
-          <tr>
-            <td style={{ width: "200px" }}>
+            <td style={{ width: "50%", paddingRight: "20px" }}>
+              <label style={{ fontSize: "20px" }}>First Name*</label>
               <input
                 type="text"
                 name="firstName"
@@ -64,9 +62,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="First Name"
                 {...register("firstName", { required: true })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
-            <td style={{ position: "absolute", right: "15px", width: "220px" }}>
+            <td style={{ width: "50%" }}>
+              <label style={{ fontSize: "20px" }}>Last Name*</label>
               <input
                 type="text"
                 name="lastName"
@@ -74,18 +74,13 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Last Name"
                 {...register("lastName", { required: true })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
           </tr>
-        </table>
-
-        <table style={{ marginBottom: "13px" }}>
           <tr>
-            <td>Email*</td>
-            <td style={{ paddingLeft: "50px" }}>Mobile No.*</td>
-          </tr>
-          <tr>
-            <td style={{ width: "200px" }}>
+            <td style={{ width: "50%", paddingRight: "20px" }}>
+              <label style={{ fontSize: "20px" }}>Email*</label>
               <input
                 type="email"
                 className="form-control"
@@ -95,9 +90,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                   pattern: /^\S+@\S+$/i,
                 })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
-            <td style={{ position: "absolute", right: "15px", width: "220px" }}>
+            <td style={{}}>
+              <label style={{ fontSize: "20px" }}>Mobile No.*</label>
               <input
                 type="number"
                 className="form-control"
@@ -108,28 +105,28 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                   maxLength: 12,
                 })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
           </tr>
-        </table>
-        <div className="form-group mb-2">
-          <label>Username</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Username"
-            {...register("userName", { required: false, maxLength: 20 })}
-            required
-          />
-        </div>
 
-        <table style={{ marginBottom: "10px" }}>
-          <tr>
-            <td>Password*</td>
-            <td style={{ paddingLeft: "50px" }}>Confirm Password*</td>
+          <tr className="form-group mb-2 ">
+            <td colSpan={2}>
+              <label style={{ fontSize: "20px" }}>Username</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Username"
+                {...register("userName", { required: false, maxLength: 20 })}
+                required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
+              />
+            </td>
           </tr>
           <tr>
-            <td style={{ width: "200px" }}>
+
+            <td style={{ width: "50%", paddingRight: "20px" }} >
+              <label style={{ fontSize: "20px" }}>Password*</label>
               <input
                 type="password"
                 className="form-control"
@@ -140,9 +137,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                   maxLength: 12,
                 })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
-            <td style={{ position: "absolute", right: "15px", width: "220px" }}>
+            <td style={{}}>
+              <label style={{ fontSize: "20px" }}>Confirm Password*</label>
               <input
                 type="password"
                 className="form-control"
@@ -152,39 +151,38 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                   minLength: 6,
                   maxLength: 12,
                 })}
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
           </tr>
-        </table>
 
-        <table>
           <tr>
-            <td>Country*</td>
-            <td style={{ paddingLeft: "50px" }}>City*</td>
-          </tr>
-          <tr>
-            <td style={{ width: "200px" }}>
+            <td style={{ width: "50%", paddingRight: "20px" }}>
+              <label style={{ fontSize: "20px" }}>Country*</label>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Country"
                 {...register("country", { required: true, maxLength: 20 })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
 
-            <td style={{ position: "absolute", right: "15px", width: "220px" }}>
+            <td style={{}}>
+              <label style={{ fontSize: "20px" }}>City*</label>
               <input
                 type="text"
                 className="form-control color-black"
                 placeholder="City"
                 {...register("city", { required: true, maxLength: 20 })}
                 required
+                style={{ height: "50px", fontSize: "15px", borderRadius: "8px" }}
               />
             </td>
           </tr>
-        </table>
-        <label style={{ fontSize: "12px", marginBottom: "20px" }}>
+        </Table>
+        <label style={{ fontSize: "15px", marginBottom: "20px" }}>
           By signing up you will agree to our Privacy Policy and Terms &
           Conditions
         </label>
@@ -195,10 +193,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
             width: "100%",
             color: "white",
             fontWeight: "bold",
-            fontSize: "15px",
+            fontSize: "35px",
+            borderRadius: "10px"
           }}
         >
-          Register
+          REGISTER
         </button>
       </form>
     </>

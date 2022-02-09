@@ -582,36 +582,46 @@ h1 {
 
 /* loader */
 .input-form-1 label {
-  background-color: #d58f5c;
-  color: white;
+  background-color: #ffffff;
+  color: black;
   padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin-top: 1rem;
+  width: 150%;
+  text-align: center;
 }
 
 .input-form-2 label {
-  background-color: #d58f5c;
-  color: white;
+  background-color: #ffffff;
+  color: black;
   padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin-top: 1rem;
+  width: 150%;
+  text-align: center;
 }
 
 .input-form-3 label {
-  background-color: #d58f5c;
-  color: white;
+  background-color: #ffffff;
+  color: black;
   padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
   cursor: pointer;
-  margin-top: 1rem;
   display: inline-flex;
   justify-content: center;
-  width: 120px;
+  width: 150%;
+}
+
+.upload-cover {
+  background-color: #f2f6fc;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .delete-btn {
@@ -633,6 +643,11 @@ h1 {
   overflow-x: hidden;
   margin: auto;
 }
+.upload-btn {
+  background-color: transparent;
+  border: none;
+  display: flex;
+}
 
 /* loader full screen */
 .loader {
@@ -647,6 +662,15 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    visibility: hidden;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .spinning {
   border: 16px solid #f3f3f3;
@@ -658,15 +682,6 @@ h1 {
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-    visibility: hidden;
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .upload-list-item {
   display: inline-grid;
   height: fit-content;
@@ -687,17 +702,18 @@ col {
 }
 
 summary {
-  display: block;
+  display: flex;
 }
 
 summary::after {
   margin-left: 1ch;
-  display: inline-block;
+  display: inline-flex;
   transition: 0.2s;
   content: "\002B";
   font-size: 28px;
 }
 
 details[open] summary::after {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
+  content: "\002D";
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { FaAlignJustify, FaGlobeAmericas } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Login from "./Login";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,10 +9,8 @@ import ReconfirmEmail from "./ReconfirmEmail";
 import SignUp from "./SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import authService from "../services/authServices";
-import { Link } from "react-router-dom";
 import ForgotPass from "./ForgotPass";
 import ChangePass from "./ChangePass";
-import Toast from "./Toast";
 import { useHistory } from "react-router-dom";
 import { logout } from "../slice/userSlice";
 
@@ -158,6 +155,32 @@ const Header = ({ color }) => {
               </Modal.Body>
             </Modal>
             <Modal
+              size="md"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={forgotPass}
+              onHide={toogleForgotPass}
+              contentclassname="forgotPass"
+            >
+              <Modal.Body size="md"
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={forgotPass}
+                onHide={toogleForgotPass}
+                contentclassname="forgotPass"
+                className="forgot-modal">
+                <ForgotPass
+                  toogleForgotPass={toogleForgotPass}
+                  toogleChangePass={toogleChangePass}
+                />
+              </Modal.Body>
+            </Modal>
+            <Modal
+              size="md"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -201,8 +224,8 @@ const Header = ({ color }) => {
                 <ChangePass toogleChangePass={toogleChangePass} />
               </Modal.Body>
             </Modal>
-
             <Modal
+              size="lg"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -211,6 +234,29 @@ const Header = ({ color }) => {
               onHide={toogleSignIn}
               contentclassname="login"
             >
+              <Modal.Body
+                centered
+                show={showSignIn}
+                onHide={toogleSignIn}
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                className="sign-In"
+              >
+              </Modal.Body>
+            </Modal>
+
+            <Modal
+              size="lg"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              contentclassname="login"
+            >
+
               <Modal.Body>
                 <Login
                   toogleSignUp={toogleSignUp}
@@ -223,6 +269,29 @@ const Header = ({ color }) => {
             </Modal>
 
             <Modal
+              size="lg"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignUp}
+              onHide={toogleSignUp}
+              contentclassname="custom-modal-style"
+            >
+              <Modal.Body
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={showSignUp}
+                onHide={toogleSignUp}
+                className="sign-Up"
+              >
+              </Modal.Body>
+            </Modal>
+
+            <Modal
+              size="lg"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -362,7 +431,7 @@ const Header = ({ color }) => {
           )}
         </div>
       </nav>
-    </Nav>
+    </Nav >
   );
 };
 
