@@ -220,7 +220,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",
@@ -303,22 +303,70 @@ const CardComp = ({
               />
             </Modal.Body>
           </Modal>
-
+          <Modal
+            size="md"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toogleForgotPass}
+          >
+            <Modal.Body
+              className="forgot-modal"
+            >
+            </Modal.Body>
+          </Modal>
           <Modal
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            show={changePass}
-            onHide={toogleChangePass}
-            centered
+            show={forgotPass}
+            onHide={toogleForgotPass}
             contentclassname="forgotPass"
           >
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            </Modal.Header>
             <Modal.Body>
-              <ChangePass toogleChangePass={toogleChangePass} />
+              <ForgotPass
+                toogleForgotPass={toogleForgotPass}
+                toogleChangePass={toogleChangePass}
+              />
             </Modal.Body>
           </Modal>
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toogleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              className="sign-In"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignIn}
@@ -336,8 +384,28 @@ const CardComp = ({
               />
             </Modal.Body>
           </Modal>
-
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            onHide={toogleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignUp}
+              onHide={toogleSignUp}
+              className="sign-Up"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
