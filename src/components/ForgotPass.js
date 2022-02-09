@@ -21,48 +21,43 @@ function ForgotPass({ toogleForgotPass, toogleChangePass }) {
   };
   return (
     // reset password
-    <>
-      <div>
-        <div className="form-group mb-2">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
-          >
-            <div className="form-group">
-              <p style={{ justifyContent: "left" }}>
-                Please enter the account email
-              </p>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                style={{ height: "45px" }}
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-              />
-            </div>
-            <div
-              className="form-group"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <button
-                type="submit"
-                className="customButton mt-4"
-                style={{ width: "80px", fontSize: "15px" }}
-              >
-                Send
-              </button>
-            </div>
-          </form>
-        </div>
+    <form
+      style={{ height: "300px", padding: "50px 20px" }}
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="form-group">
+        <label style={{ fontSize: "25px" }}>
+          Please enter the account email
+        </label>
+        <input
+          type="email"
+          className="form-control"
+          placeholder="Email"
+          style={{ height: "50px", fontSize: "20px" }}
+          {...register("email", {
+            required: true,
+            pattern: /^\S+@\S+$/i,
+          })}
+        />
       </div>
-    </>
+      <div
+        className="form-group"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <button
+          type="submit"
+          className="customButton mt-4"
+          style={{
+            width: "100px",
+            color: "white",
+            fontWeight: "bold",
+            fontSize: "15px",
+          }}
+        >
+          SEND
+        </button>
+      </div>
+    </form>
   );
 }
 

@@ -1,180 +1,227 @@
 .custom-modal-style {
-    display: list-item;
-    width: 100%;
-    height: 570px;
-    border-radius: 20px;
-    }
-
-.custom-modal-title{
-    position:absolute;
-    top:0;
-    padding-top: 10px!important;
+  display: list-item;
+  width: 100%;
+  height: 570px;
+  border-radius: 20px;
 }
 
-.modal-title{
-    padding-top: 20px!important;
-}
-    
-.input, .input-group {
-    color: black!important;
-    }
-
-.modal-header-login{
-    align-items: normal;
-    position: relative;
-    margin-bottom: 20px;
+.custom-modal-title {
+  position: absolute;
+  top: 0;
+  padding-top: 10px !important;
 }
 
-.modal-head-signup{
-    align-items: normal;
-    position: relative;
-    padding-top: 10px;
+.modal-title {
+  padding-top: 20px !important;
 }
 
-.confirm{
-    display: list-item;
-    width: 100%;
-    height: 350px;
-    border-radius: 20px;
+.input,
+.input-group {
+  color: black !important;
 }
 
-.login{
-    display: list-item;
-    width: 100%;
-    height: 450px;
-    border-radius: 20px;
+.modal-header-login {
+  align-items: normal;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.modal-header{
-    height: 90px;
-    display: flex;
-    padding-bottom: 40px;
+.modal-head-signup {
+  align-items: normal;
+  position: relative;
+  padding-top: 10px;
 }
 
-.nav-link-signup{
-    color: #D58F5C;
-    font-size: 12px;
-    cursor: pointer!important;
-    border: 0;
-    background-color: transparent;
+.confirm {
+  display: list-item;
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
 }
 
-.nav-link-login{
-    color: #D58F5C !important;
-    font-size: 12px !important;
-    position: absolute!important;
-    display: flex!important;
-    justify-content: center!important;
-    top: 2px!important;
-    cursor: pointer!important;
+.login {
+  display: list-item;
+  width: 100%;
+  height: 450px;
+  border-radius: 20px;
 }
 
-.signup-link{
-    color: #D58F5C !important;
-    font-size: 13px !important;
-    border: none;
-    background-color: transparent;
+.modal-header {
+  height: 90px;
+  display: flex;
+  padding-bottom: 40px;
 }
 
-.signup-div{
-    padding-bottom: 10px!important;
-    cursor: pointer!important;
+.nav-link-signup {
+  color: #d58f5c;
+  font-size: 12px;
+  cursor: pointer !important;
+  border: 0;
+  background-color: transparent;
 }
 
-.modal-footer{
-    display: flex;
-    justify-content: center;
-    padding-top: 10px;
+.nav-link-login {
+  color: #d58f5c !important;
+  font-size: 12px !important;
+  position: absolute !important;
+  display: flex !important;
+  justify-content: center !important;
+  top: 2px !important;
+  cursor: pointer !important;
 }
 
-.signIn-btn{
-    background-color: transparent;
-    border: 0;
-    cursor:none;
+.signup-link {
+  color: #d58f5c !important;
+  font-size: 13px !important;
+  border: none;
+  background-color: transparent;
 }
 
-.signUp-btn{
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+.signup-div {
+  padding-bottom: 10px;
+  cursor: pointer !important;
 }
 
-.signIn-btn:hover{
-    background-color: transparent;
-    border: 0;
-    cursor:pointer;
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
 }
 
-.signUp-btn:hover{
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
+.signIn-btn {
+  background-color: transparent;
+  border: 0;
+  cursor: none;
 }
 
-.signIn-btn::after{
-    color: #D58F5C;
-    border-color: transparent;
+.signUp-btn {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
-.signUp-btn::after{
-    color: #D58F5C;
-    border-color: #D58F5C!important;
+.signIn-btn:hover {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.signUp-btn:hover {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.signIn-btn::after {
+  color: #d58f5c;
+  border-color: transparent;
+}
+
+.signUp-btn::after {
+  color: #d58f5c;
+  border-color: #d58f5c !important;
 }
 
 /* Dropdown menu */
 
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    text-align: center;
-    background-color: rgb(247, 242, 234);
-    min-width: 110px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: black!important;
-    padding: 12px 12px;
-    text-decoration: none;
-    display: block;
-    font-size: 15px;
-    border-radius: 3px;
-    font-weight: bold;
-  }
-  .dropdown-content span {
-    color: black!important;
-    padding: 12px 12px;
-    text-decoration: none;
-    display: block;
-    font-size: 15px;
-    border-radius: 3px;
-    font-weight: bold;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .dropdown-content button{
-      border : none;
-    }
-    .dropdown-content button:hover{
-        background-color: #D58F5C;
-        width: 100%;
-        color: white;
-    }
-  
-  .dropdown-content a:hover {background-color:#D58F5C; border-radius: 0; }
-  
-  .dropdown:hover .dropdown-content {display: block; }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  text-align: center;
+  background-color: rgb(247, 242, 234);
+  min-width: 110px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
+.dropdown-content a {
+  color: black !important;
+  padding: 12px 12px;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.dropdown-content span {
+  color: black !important;
+  padding: 12px 12px;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  border-radius: 3px;
+  font-weight: bold;
+}
 
-  .forgotPass{
-      width: 500px;
-        height: 300px;
-        margin-top: 20px;
-  }
+.dropdown-content button {
+  border: none;
+}
+.dropdown-content button:hover {
+  background-color: #d58f5c;
+  width: 100%;
+  color: white;
+}
 
+.dropdown-content a:hover {
+  background-color: #d58f5c;
+  border-radius: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.forgotPass {
+  width: 500px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+.sign-In {
+  height: 400px;
+  width: 950px;
+  background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
+  position: fixed;
+  display: flex;
+  margin-left: -75px;
+  margin-top: -10px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-Up {
+  height: 600px;
+  width: 950px;
+  background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
+  position: fixed;
+  display: flex;
+  margin-left: -75px;
+  margin-top: -10px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-modal {
+  height: 300px;
+  width: 650px;
+  background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
+  position: fixed;
+  display: flex;
+  margin-left: -75px;
+  margin-top: -10px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .form-control::placeholder {
+  color: red !important;
+  opacity: 1 !important;
+} */

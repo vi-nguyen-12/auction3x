@@ -18,6 +18,11 @@ import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "./AuctionTimer";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { IoImageOutline } from "react-icons/io5";
+import { RiVideoLine } from "react-icons/ri";
+import { MdOutline360 } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
 
 const mapStyles = {
   height: "50vh",
@@ -171,19 +176,6 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
-  const [count, setCount] = useState(0);
-  const [sorted, setSorted] = useState(false);
-
-  const sortByPrice = () => {
-    if (sorted === false) {
-      setSorted(true);
-      setAuction(auctions.sort((a, b) => a.bidder.amount - b.bidder.amount));
-    } else {
-      setSorted(false);
-      setAuction(auctions.sort((a, b) => b.bidder.amount - a.bidder.amount));
-    }
-  };
-
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
@@ -253,7 +245,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                 top: "50%",
                 left: "92%",
                 transform: "translate(-50%, -50%)",
-                height: "405px",
+                height: "420px",
                 marginRight: "100%",
                 border: "none",
                 cursor: "pointer",
@@ -269,7 +261,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                     border: "none",
                     position: "relative",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -277,9 +269,9 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" alt="" />
+                    <BsStarFill size="100%" color="C58753" />
                   ) : (
-                    <img src="/images/star-before.png" alt="" />
+                    <BsStar size="100%" color="C58753" />
                   )}
                 </button>
               </div>
@@ -291,7 +283,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -299,11 +291,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   }}
                   onClick={togglePics}
                 >
-                  <img
-                    style={{ borderRadius: "15px" }}
-                    src="/images/picture.png"
-                    alt=""
-                  />
+                  <IoImageOutline size="100%" color="C58753" />
                 </button>
                 <Modal
                   size="lg"
@@ -346,14 +334,14 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" alt="" />
+                  <RiVideoLine size="100%" color="C58753" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -400,7 +388,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px  solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -408,7 +396,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" alt="" />
+                  <MdOutline360 size="100%" color="C58753" />
                 </button>
               </div>
 
@@ -427,7 +415,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" alt="" />
+                    <IoLocationOutline size="50px" color="C58753" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>

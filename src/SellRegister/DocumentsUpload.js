@@ -2,10 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../services/authServices";
-import { Row, Col, Container, } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
   const { register, handleSubmit } = useForm();
@@ -251,7 +252,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
         <Row style={{ height: "1300px", overflowX: "hidden", margin: "125px" }}>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Title Report (.pdf) *
+              Title Report (.pdf) <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn1"
                 accept=".pdf"
@@ -262,16 +263,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("titleReport", { onChange: onChange1 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn1">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn1">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn1">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="images-btn"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -312,7 +318,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Insurance Copy (.pdf) *
+              Insurance Copy (.pdf) <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn2"
                 accept=".pdf"
@@ -323,16 +329,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("insuranceCopy", { onChange: onChange2 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn2">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn2">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn2">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn2"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -374,7 +385,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Financial Documents (.pdf) *
+              Financial Documents (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn3"
                 accept=".pdf"
@@ -385,16 +397,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("financialDocuments", { onChange: onChange3 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn3">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn3">
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn3">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn3"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -436,7 +453,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Purchase Agreement (.pdf) *
+              Purchase Agreement (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn4"
                 accept=".pdf"
@@ -447,17 +465,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("purchaseAgreement", { onChange: onChange4 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn4">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn4">
-                    {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn4">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn4"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -499,7 +521,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Third-Party Report (.pdf) *
+              Third-Party Report (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn5"
                 accept=".pdf"
@@ -510,17 +533,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("thirdpartyReport", { onChange: onChange5 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn5">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn5">
-                    {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn5">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn5"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -561,7 +588,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Demographics (.pdf) *
+              Demographics (.pdf) <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn6"
                 accept=".pdf"
@@ -572,17 +599,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("demographics", { onChange: onChange6 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn6">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn6">
-                    {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn6">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn6"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -624,7 +655,8 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Market and Valuations (.pdf) *
+              Market and Valuations (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn7"
                 accept=".pdf"
@@ -635,17 +667,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 {...register("marketandValuations", { onChange: onChange7 })}
                 required
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn7">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn7">
-                    {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn7">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn7"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">
@@ -696,17 +732,21 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
                 hidden
                 {...register("otherDocuments", { onChange: onChange8 })}
               />
-              <details>
-                <summary>
-                  <label htmlFor="documents-btn8">+ Documents</label>
-                </summary>
-                <div>
-                  <label htmlFor="documents-btn8">
-                    {" "}
-                    <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-                  </label>
-                </div>
-              </details>
+              <div className="upload-cover">
+                <details>
+                  <summary>
+                    <label htmlFor="documents-btn8">+ Documents</label>
+                  </summary>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="documents-btn8"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
             </Col>
             <Col>
               <div className="upload-list">

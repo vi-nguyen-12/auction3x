@@ -18,6 +18,12 @@ import SignUp from "../components/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Timer from "./Timer";
+import { BsStar, BsStarFill } from "react-icons/bs";
+import { IoImageOutline } from "react-icons/io5";
+import { RiVideoLine } from "react-icons/ri";
+import { MdOutline360 } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
+import "../styles/modalStyle.css";
 
 const Carousel = styled(Slider)`
   height: 50vh;
@@ -77,21 +83,21 @@ const Wrap = styled.div`
   //   position: relative;
   //   padding: 0;
 
-    img {
-      width: 100%;
-      height: 30vh;
-      border-radius: 4px;
-      cursor: pointer;
-      display: block;
-      position: relative;
-      padding: 0;
-    }
+  img {
+    width: 100%;
+    height: 30vh;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding: 0;
+  }
 
-    // &:hover {
-    //   padding: 0;
-    //   // border: 4px solid rgba(249, 249, 249, 0.8);
-    //   transition-duration: 300ms;
-    // }
+  // &:hover {
+  //   padding: 0;
+  //   // border: 4px solid rgba(249, 249, 249, 0.8);
+  //   transition-duration: 300ms;
+  // }
   // }
 `;
 
@@ -219,10 +225,6 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
     height: "50vh",
     width: "100%",
   };
-  const StreetviewStyles = {
-    height: "50vh",
-    width: "100%",
-  };
 
   let settings = {
     dots: true,
@@ -266,7 +268,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                 top: "50%",
                 left: "92%",
                 transform: "translate(-50%, -50%)",
-                height: "405px",
+                height: "420px",
                 marginRight: "100%",
                 border: "none",
                 cursor: "pointer",
@@ -290,9 +292,9 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   }}
                 >
                   {favorite ? (
-                    <img src="/images/star.png" alt="" />
+                    <BsStarFill size="100%" color="C58753" />
                   ) : (
-                    <img src="/images/star-before.png" alt="" />
+                    <BsStar size="100%" color="C58753" />
                   )}
                 </button>
               </div>
@@ -312,11 +314,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   }}
                   onClick={togglePics}
                 >
-                  <img
-                    style={{ borderRadius: "15px" }}
-                    src="/images/picture.png"
-                    alt=""
-                  />
+                  <IoImageOutline size="100%" color="C58753" />
                 </button>
                 <Modal
                   size="lg"
@@ -338,11 +336,11 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       {property.images.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
-                            <img
-                              style={{ height: "50vh" }}
-                              src={item.url}
-                              alt=""
-                            />
+                          <img
+                            style={{ height: "50vh" }}
+                            src={item.url}
+                            alt=""
+                          />
                           {/* </a> */}
                         </Wrap>
                       ))}
@@ -366,7 +364,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     width: "100%",
                   }}
                 >
-                  <img src="/images/video.png" alt="" />
+                  <RiVideoLine size="100%" color="C58753" />
                 </button>
 
                 <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
@@ -383,22 +381,22 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       {property.videos.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
-                            <video
-                              style={{
-                                display: "relative",
-                                justifyContent: "center",
-                                margin: "auto",
+                          <video
+                            style={{
+                              display: "relative",
+                              justifyContent: "center",
+                              margin: "auto",
 
-                                width: "100%",
-                                borderRadius: "15px",
-                                position: "relative",
-                                height: "3000px!important",
-                                cursor: "pointer",
-                              }}
-                              controls
-                            >
-                              <source src={item.url} type="video/webm" />
-                            </video>
+                              width: "100%",
+                              borderRadius: "15px",
+                              position: "relative",
+                              height: "3000px!important",
+                              cursor: "pointer",
+                            }}
+                            controls
+                          >
+                            <source src={item.url} type="video/webm" />
+                          </video>
                           {/* </a> */}
                         </Wrap>
                       ))}
@@ -421,7 +419,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <img src="/images/360.png" alt="" />
+                  <MdOutline360 size="100%" color="C58753" />
                 </button>
               </div>
 
@@ -440,7 +438,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       width: "100%",
                     }}
                   >
-                    <img src="/images/location.png" alt="" />
+                    <IoLocationOutline size="50px" color="C58753" />
                   </button>
                   <Modal size="lg" show={showMap} onHide={toggleMap} centered>
                     <Modal.Header closeButton>
@@ -1289,6 +1287,27 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
             </Modal.Body>
           </Modal>
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toogleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              className="sign-In"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"

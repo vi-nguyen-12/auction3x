@@ -25,7 +25,6 @@ const Agree = ({
 
   const [url, setUrl] = useState();
   const {
-    register,
     handleSubmit,
     //formState: { errors },
   } = useForm();

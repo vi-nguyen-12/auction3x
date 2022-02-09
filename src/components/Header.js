@@ -102,21 +102,32 @@ const Header = ({ color, change }) => {
         <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <div className="navbar-nav m-auto">
             <div className="nav-item mt-2 px-4 py-2">
-              <button className="headerNav" onClick={handleOnClick("realEstates")}>
+              <button
+                className="headerNav"
+                onClick={handleOnClick("realEstates")}
+              >
                 Real Estates
               </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button className="headerNav" onClick={handleOnClick("cars")}>Cars</button>
+              <button className="headerNav" onClick={handleOnClick("cars")}>
+                Cars
+              </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button className="headerNav" onClick={handleOnClick("jets")}>Jets</button>
+              <button className="headerNav" onClick={handleOnClick("jets")}>
+                Jets
+              </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button className="headerNav" onClick={handleOnClick("yachts")}>Yachts</button>
+              <button className="headerNav" onClick={handleOnClick("yachts")}>
+                Yachts
+              </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
-              <button className="headerNav" onClick={handleOnClick("others")}>Others</button>
+              <button className="headerNav" onClick={handleOnClick("others")}>
+                Others
+              </button>
             </div>
           </div>
           <form
@@ -159,6 +170,34 @@ const Header = ({ color, change }) => {
               </Modal.Body>
             </Modal>
             <Modal
+              size="md"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={forgotPass}
+              onHide={toogleForgotPass}
+              contentclassname="forgotPass"
+            >
+              <Modal.Body
+                size="md"
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={forgotPass}
+                onHide={toogleForgotPass}
+                contentclassname="forgotPass"
+                className="forgot-modal"
+              >
+                <ForgotPass
+                  toogleForgotPass={toogleForgotPass}
+                  toogleChangePass={toogleChangePass}
+                />
+              </Modal.Body>
+            </Modal>
+            <Modal
+              size="md"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -202,8 +241,29 @@ const Header = ({ color, change }) => {
                 <ChangePass toogleChangePass={toogleChangePass} />
               </Modal.Body>
             </Modal>
+            <Modal
+              size="lg"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              contentclassname="login"
+            >
+              <Modal.Body
+                centered
+                show={showSignIn}
+                onHide={toogleSignIn}
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                className="sign-In"
+              ></Modal.Body>
+            </Modal>
 
             <Modal
+              size="lg"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -224,6 +284,28 @@ const Header = ({ color, change }) => {
             </Modal>
 
             <Modal
+              size="lg"
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignUp}
+              onHide={toogleSignUp}
+              contentclassname="custom-modal-style"
+            >
+              <Modal.Body
+                backdrop="static"
+                keyboard={false}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={showSignUp}
+                onHide={toogleSignUp}
+                className="sign-Up"
+              ></Modal.Body>
+            </Modal>
+
+            <Modal
+              size="lg"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -518,7 +600,11 @@ const Header = ({ color, change }) => {
               <>
                 <div className="dropdown">
                   <button style={{ background: "transparent" }}>
-                    <img src="/images/bell.png" style={{ maxHeight: "30px" }} alt="" />
+                    <img
+                      src="/images/bell.png"
+                      style={{ maxHeight: "30px" }}
+                      alt=""
+                    />
                   </button>
                   <div className="dropdown-content">
                     <a href={kycUrl}>Please complete your KYC</a>
@@ -682,7 +768,11 @@ const Header = ({ color, change }) => {
               <>
                 <div className="dropdown">
                   <button style={{ background: "transparent" }}>
-                    <img src="/images/bell.png" style={{ maxHeight: "30px" }} alt="" />
+                    <img
+                      src="/images/bell.png"
+                      style={{ maxHeight: "30px" }}
+                      alt=""
+                    />
                   </button>
                   <div className="dropdown-content">
                     <a href={kycUrl}>Please complete your KYC</a>

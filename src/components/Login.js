@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Form } from "react-hook-form";
 import Toast from "./Toast";
 import authServices from "../services/authServices";
 import { Modal } from "react-bootstrap";
@@ -69,7 +69,7 @@ const Login = ({
       <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
+          style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
           contentclassname="custom-modal-title"
         >
           LOGIN NOW
@@ -84,23 +84,27 @@ const Login = ({
         }}
       >
         <div className="form-group mb-4 mt-3">
-          <label htmlFor="exampleInputEmail1">Username or Email</label>
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Username or Email"
-              {...register("userName", {
-                required: true,
-              })}
-              required
-            />
-          </div>
+          <label style={{ fontSize: "35px" }} htmlFor="exampleInputEmail1">
+            Username or Email
+          </label>
+          <input
+            type="text"
+            style={{ height: "50px", fontSize: "20px" }}
+            className="form-control"
+            placeholder="Username or Email"
+            {...register("userName", {
+              required: true,
+            })}
+            required
+          />
         </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
+        <div className="form-group mt-3">
+          <label style={{ fontSize: "35px" }} htmlFor="exampleInputPassword1">
+            Password
+          </label>
           <input
             type="password"
+            style={{ height: "50px", fontSize: "20px" }}
             className="form-control"
             placeholder="Password"
             {...register("password", {
@@ -111,13 +115,13 @@ const Login = ({
             required
           />
         </div>
-        <div className="form-group" style={{ fontSize: "12px" }}>
+        <div className="form-group">
           <button
             onClick={() => {
               toogleForgotPass();
               toogleSignIn();
             }}
-            style={{ marginTop: "5px", marginBottom: "30px" }}
+            style={{ marginTop: "5px", marginBottom: "30px", fontSize: "20px" }}
             className="nav-link-signup"
           >
             Forgot Password?
@@ -132,12 +136,15 @@ const Login = ({
                 width: "100%",
                 color: "white",
                 fontWeight: "bold",
-                fontSize: "15px",
+                fontSize: "35px",
               }}
             >
-              Submit
+              LOGIN
             </button>
-            <div className="pb-2" style={{ position: "relative" }}>
+            <div
+              className="pb-2"
+              style={{ position: "relative", fontSize: "15px" }}
+            >
               Not registered?
               <button
                 onClick={() => {
@@ -145,6 +152,7 @@ const Login = ({
                   toogleSignIn();
                 }}
                 className="nav-link-signup"
+                style={{ fontSize: "15px" }}
               >
                 Click Here to Sign Up!
               </button>
@@ -152,6 +160,7 @@ const Login = ({
           </div>
         </Modal.Footer>
       </form>
+      {/* </div> */}
     </>
   );
 };

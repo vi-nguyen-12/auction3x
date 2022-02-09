@@ -5,6 +5,9 @@ import authService from "../services/authServices";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { AiOutlineMinus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const { register, handleSubmit } = useForm();
@@ -12,6 +15,8 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
   const [videos, setVideos] = useState([]);
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
+  const [extra, setExtra] = useState(false);
+  const toogleExtra = () => setExtra(!extra);
 
   const onChange = async (e) => {
     setLoader(true);
@@ -119,7 +124,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           </div>
         ) : null}
         <div className="input-form-1">
-          Choose the Image Files (*)
+          Choose the Image Files<span style={{ color: "#ff0000" }}>*</span>
           <input
             id="images-btn"
             accept="image/*"
@@ -130,16 +135,49 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             {...register("images", { onChange: onChange })}
             required
           />
-          <details>
-            <summary>
-              <label htmlFor="images-btn">+ Images</label>
-            </summary>
-            <div>
-              <label htmlFor="images-btn">
-                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />
-              </label>
-            </div>
-          </details>
+          <div className="upload-cover">
+            <details>
+              <summary>
+                <label onClick={toogleExtra} htmlFor="images-btn">
+                  + Images
+                </label>
+              </summary>
+              {/* {extra ? (
+              <AiOutlinePlusCircle />
+            ) : (
+              null
+            )} */}
+              {/* {extra === true ? (
+              <AiOutlinePlus size="5%" />
+            ) : (
+              null
+            )} */}
+
+              {/* {extra ? (
+              <button className="upload-btn" onClick={toogleExtra}>
+                <AiOutlinePlus size="5%" />
+              </button>
+            ) : (
+              <>
+                <button className="upload-btn" onClick={toogleExtra}>
+                  <AiOutlineMinus size="5%" />
+                </button>
+                <label htmlFor="images-btn">
+                  
+                </label>
+              </>
+            )} */}
+
+              <div>
+                <label
+                  style={{ width: "50%", marginTop: "10px" }}
+                  htmlFor="images-btn"
+                >
+                  <AiOutlinePlusCircle />
+                </label>
+              </div>
+            </details>
+          </div>
           <div className="upload-list">
             {images
               ? images.map((image, index, arr) => (
@@ -188,16 +226,29 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             {...register("videos", { onChange: onChangeVideos })}
             // required
           />
-          <details>
-            <summary>
-              <label htmlFor="videos-btn">+ Videos</label>
-            </summary>
-            <div>
-              <label htmlFor="videos-btn">
-                <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" alt="" />{" "}
-              </label>
-            </div>
-          </details>
+          <div className="upload-cover">
+            <details>
+              <summary>
+                <label onClick={toogleExtra} htmlFor="videos-btn">
+                  + Videos
+                </label>
+              </summary>
+
+              <div>
+                <label
+                  style={{ width: "50%", marginTop: "10px" }}
+                  htmlFor="images-btn"
+                >
+                  <AiOutlinePlusCircle />
+                </label>
+              </div>
+            </details>
+          </div>
+          {/* <div>
+                <label htmlFor="videos-btn">
+                  <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
+                </label>
+              </div> */}
           <div className="upload-list">
             {videos
               ? videos.map((video, index, arr) => (
