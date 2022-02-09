@@ -1243,7 +1243,20 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
-
+          <Modal
+            size="md"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toogleForgotPass}
+          >
+            <Modal.Body
+              className="forgot-modal"
+            >
+            </Modal.Body>
+          </Modal>
           <Modal
             backdrop="static"
             keyboard={false}
@@ -1272,7 +1285,6 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
-
           <Modal
             backdrop="static"
             keyboard={false}
@@ -1325,8 +1337,28 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
-
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            onHide={toogleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignUp}
+              onHide={toogleSignUp}
+              className="sign-Up"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
