@@ -21,7 +21,7 @@ import Timer from "./Timer";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
-import { MdOutline360 } from "react-icons/md";
+import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import "../styles/modalStyle.css";
 
@@ -419,7 +419,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   }}
                   onClick={toggleLive}
                 >
-                  <MdOutline360 size="100%" color="C58753" />
+                  <Md360 size="100%" color="C58753" />
                 </button>
               </div>
 
