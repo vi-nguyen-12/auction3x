@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "../components/SearchBar.js";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
@@ -96,29 +96,6 @@ const HomeBottom = styled.div`
   }
 `;
 
-const FilterMenu = styled.div`
-  position: absolute;
-  bottom: 10vh;
-  z-index: 1;
-  left: 5vw;
-  width: 90vw;
-`;
-
-const FilterContainer = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const Flex1 = styled.div`
-  flex: 1;
-  padding-right: 30px;
-`;
-
-const Flex2 = styled.div`
-  flex: 5;
-  padding-right: 30px;
-`;
-
 const ImgSlider = () => {
   let settings = {
     dots: true,
@@ -143,7 +120,7 @@ const ImgSlider = () => {
                   <img src={item.property.images[0].url} alt="" />
                 </a>
                 <HomeBottom>
-                  <a>
+                  <h2>
                     <NumberFormat
                       style={{ fontSize: "25px" }}
                       value={item.property.details.assessments[0].total_value}
@@ -151,7 +128,7 @@ const ImgSlider = () => {
                       thousandSeparator={true}
                       prefix={"$"}
                     />
-                  </a>
+                  </h2>
                   <span>
                     HOUSE IN {item.property.details.address.city},
                     {item.property.details.address.state}, UNITED STATES
@@ -282,31 +259,31 @@ const ImgSlider = () => {
             {property.slice(0, 5).map((item) => (
               <Link to={`/Display/${item._id}`} key={item._id}>
                 <Wrap>
-                  <a>
+                  <h2>
                     <img src={item.property.images[0].url} alt="" />
-                  </a>
-                  <HomeBottom>
-                    <a>
-                      <NumberFormat
-                        style={{ fontSize: "25px" }}
-                        value={item.property.details.assessments[0].total_value}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </a>
-                    <span>
-                      HOUSE IN {item.property.details.address.city},
-                      {item.property.details.address.state}, UNITED STATES
-                    </span>
-                  </HomeBottom>
+                  </h2>
+                  {/* <HomeBottom> */}
+                  <h2>
+                    <NumberFormat
+                      style={{ fontSize: "25px" }}
+                      value={item.property.details.assessments[0].total_value}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </h2>
+                  <span>
+                    HOUSE IN {item.property.details.address.city},
+                    {item.property.details.address.state}, UNITED STATES
+                  </span>
+                  {/* </HomeBottom> */}
                 </Wrap>
               </Link>
             ))}
           </Carousel>
           <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
-              <div className="col-12 col-sm-6 col-md-2 mt-3">
+              {/*<div className="col-12 col-sm-6 col-md-2 mt-3">
                 <div className="dropdown w-100">
                   <button
                     className="btn btn-secondary dropdown-toggle w-100"
@@ -333,8 +310,8 @@ const ImgSlider = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-              <div className="col-12 col-sm-6 col-md-2 mt-3">
+              </div> */}
+              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
                 <div className="dropdown">
                   <button
                     className="btn btn-secondary dropdown-toggle w-100"
@@ -389,7 +366,7 @@ const ImgSlider = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-12 col-sm-6 col-md-4 mt-3">
                 <div className="form-group">
                   <SearchBar />

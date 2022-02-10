@@ -36,7 +36,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           contentclassname="custom-modal-title"
         >
           REGISTER ON AUCTION10X
-          <div style={{ display: "flex", marginBottom:"30px" }}>
+          <div style={{ display: "flex", marginBottom: "30px" }}>
             <button
               style={{ fontSize: "20px" }}
               className="signup-link"
@@ -59,170 +59,172 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         }}
       >
         <Table style={{ marginBottom: "13px" }}>
-          <tr>
-            <td style={{ width: "50%", paddingRight: "20px" }}>
-              <label style={{ fontSize: "20px" }}>First Name*</label>
-              <input
-                type="text"
-                name="firstName"
-                className="form-control"
-                placeholder="First Name"
-                {...register("firstName", { required: true })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-            <td style={{ width: "50%" }}>
-              <label style={{ fontSize: "20px" }}>Last Name*</label>
-              <input
-                type="text"
-                name="lastName"
-                className="form-control"
-                placeholder="Last Name"
-                {...register("lastName", { required: true })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ width: "50%", paddingRight: "20px" }}>
-              <label style={{ fontSize: "20px" }}>Email*</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-            <td style={{}}>
-              <label style={{ fontSize: "20px" }}>Mobile No.*</label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Phone Number"
-                {...register("phone", {
-                  required: true,
-                  minLength: 6,
-                  maxLength: 12,
-                })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td style={{ width: "50%", paddingRight: "20px" }}>
+                <label style={{ fontSize: "20px" }}>First Name*</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  className="form-control"
+                  placeholder="First Name"
+                  {...register("firstName", { required: true })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+              <td style={{ width: "50%" }}>
+                <label style={{ fontSize: "20px" }}>Last Name*</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  className="form-control"
+                  placeholder="Last Name"
+                  {...register("lastName", { required: true })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td style={{ width: "50%", paddingRight: "20px" }}>
+                <label style={{ fontSize: "20px" }}>Email*</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^\S+@\S+$/i,
+                  })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+              <td style={{}}>
+                <label style={{ fontSize: "20px" }}>Mobile No.*</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Phone Number"
+                  {...register("phone", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12,
+                  })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+            </tr>
 
-          <tr className="form-group mb-2 ">
-            <td colSpan={2}>
-              <label style={{ fontSize: "20px" }}>Username</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Username"
-                {...register("userName", { required: false, maxLength: 20 })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ width: "50%", paddingRight: "20px" }}>
-              <label style={{ fontSize: "20px" }}>Password*</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                  minLength: 6,
-                  maxLength: 12,
-                })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-            <td style={{}}>
-              <label style={{ fontSize: "20px" }}>Confirm Password*</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Confirm Password"
-                {...register("confirmPassword", {
-                  required: true,
-                  minLength: 6,
-                  maxLength: 12,
-                })}
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-          </tr>
+            <tr className="form-group mb-2 ">
+              <td colSpan={2}>
+                <label style={{ fontSize: "20px" }}>Username</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                  {...register("userName", { required: false, maxLength: 20 })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td style={{ width: "50%", paddingRight: "20px" }}>
+                <label style={{ fontSize: "20px" }}>Password*</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12,
+                  })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+              <td style={{}}>
+                <label style={{ fontSize: "20px" }}>Confirm Password*</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Confirm Password"
+                  {...register("confirmPassword", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12,
+                  })}
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+            </tr>
 
-          <tr>
-            <td style={{ width: "50%", paddingRight: "20px" }}>
-              <label style={{ fontSize: "20px" }}>Country*</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Country"
-                {...register("country", { required: true, maxLength: 20 })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
+            <tr>
+              <td style={{ width: "50%", paddingRight: "20px" }}>
+                <label style={{ fontSize: "20px" }}>Country*</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Country"
+                  {...register("country", { required: true, maxLength: 20 })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
 
-            <td style={{}}>
-              <label style={{ fontSize: "20px" }}>City*</label>
-              <input
-                type="text"
-                className="form-control color-black"
-                placeholder="City"
-                {...register("city", { required: true, maxLength: 20 })}
-                required
-                style={{
-                  height: "50px",
-                  fontSize: "15px",
-                  borderRadius: "8px",
-                }}
-              />
-            </td>
-          </tr>
+              <td style={{}}>
+                <label style={{ fontSize: "20px" }}>City*</label>
+                <input
+                  type="text"
+                  className="form-control color-black"
+                  placeholder="City"
+                  {...register("city", { required: true, maxLength: 20 })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+            </tr>
+          </tbody>
         </Table>
         <label style={{ fontSize: "15px", marginBottom: "20px" }}>
           By signing up you will agree to our Privacy Policy and Terms &

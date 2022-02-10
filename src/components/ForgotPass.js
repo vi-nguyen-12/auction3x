@@ -1,4 +1,3 @@
-import react from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 
@@ -6,7 +5,7 @@ function ForgotPass({ toogleForgotPass, toogleChangePass }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     //authServices.verify(data);

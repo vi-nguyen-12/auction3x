@@ -33,7 +33,6 @@ const UpcomingCard = ({
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const toggleImage = () => setFavorite(!favorite);
-  const [kycUrl, setKycUrl] = useState("");
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -83,7 +82,7 @@ const UpcomingCard = ({
             //move to next page
             className="cards text-left m-auto"
             style={{
-              width: "18rem",
+              // width: "18rem",
               background: "white",
               padding: "5px",
               width: "450px",
@@ -272,7 +271,6 @@ const UpcomingCard = ({
               centered
               show={showConfirm}
               onHide={toogleConfirmModal}
-              centered
               contentclassname="confirm"
             >
               <Modal.Header closeButton>
@@ -308,7 +306,6 @@ const UpcomingCard = ({
               centered
               show={forgotPass}
               onHide={toogleForgotPass}
-              centered
               contentclassname="forgotPass"
             >
               <Modal.Header closeButton>
@@ -338,7 +335,6 @@ const UpcomingCard = ({
               centered
               show={changePass}
               onHide={toogleChangePass}
-              centered
               contentclassname="forgotPass"
             >
               <Modal.Body>

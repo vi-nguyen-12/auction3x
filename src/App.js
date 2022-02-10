@@ -39,7 +39,7 @@ function App() {
       };
       getUser();
     }
-  }, []);
+  }, [dispatch]);
 
   authService.getUpcomingAuctions().then((res) => {
     dispatch(addProperty(res.data));
@@ -73,7 +73,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header color={color} change = {change}/>
+        <Header color={color} change={change} />
         <ScrollTop />
         <Switch>
           <Route exact path="/MultiSellForm">
