@@ -631,6 +631,7 @@ h1 {
   cursor: pointer;
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 .delete-btn {

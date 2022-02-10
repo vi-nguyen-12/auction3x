@@ -8,7 +8,6 @@ import Login from "./Login";
 import Modal from "react-bootstrap/Modal";
 import Confirm from "./EmailConfirm";
 import ForgotPass from "./ForgotPass";
-import ChangePass from "./ChangePass";
 import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../RealEstate/AuctionTimer";

@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "./UpcomingCard";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 
 const Upcoming = (props) => {
   const property = useSelector((state) => state.property);

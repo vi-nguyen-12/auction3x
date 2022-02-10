@@ -5,8 +5,6 @@ import authService from "../services/authServices";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { AiOutlineMinus } from "react-icons/ai";
-import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
@@ -181,35 +179,35 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <div className="upload-list">
             {images
               ? images.map((image, index, arr) => (
-                  <div key={index} className="upload-list-item">
-                    <span>
-                      {image.name}
-                      <button
-                        className="delete-btn"
-                        onClick={handleDelete(image.url)}
-                        onMouseEnter={() => {
-                          var tempArr = arr;
-                          var temp = image;
-                          temp.onHover = true;
-                          setImages([...tempArr]);
-                        }}
-                        onMouseLeave={() => {
-                          var tempArr = arr;
-                          var temp = image;
-                          temp.onHover = false;
-                          let newArr = tempArr.splice(index, 0);
-                          setImages([...tempArr, ...newArr]);
-                        }}
-                      >
-                        {!image.onHover ? (
-                          <FaCheck fontSize="1.5em" color="blue" />
-                        ) : (
-                          <MdClose fontSize="1.5em" color="red" />
-                        )}
-                      </button>
-                    </span>
-                  </div>
-                ))
+                <div key={index} className="upload-list-item">
+                  <span>
+                    {image.name}
+                    <button
+                      className="delete-btn"
+                      onClick={handleDelete(image.url)}
+                      onMouseEnter={() => {
+                        var tempArr = arr;
+                        var temp = image;
+                        temp.onHover = true;
+                        setImages([...tempArr]);
+                      }}
+                      onMouseLeave={() => {
+                        var tempArr = arr;
+                        var temp = image;
+                        temp.onHover = false;
+                        let newArr = tempArr.splice(index, 0);
+                        setImages([...tempArr, ...newArr]);
+                      }}
+                    >
+                      {!image.onHover ? (
+                        <FaCheck fontSize="1.5em" color="blue" />
+                      ) : (
+                        <MdClose fontSize="1.5em" color="red" />
+                      )}
+                    </button>
+                  </span>
+                </div>
+              ))
               : null}
           </div>
         </div>
@@ -224,7 +222,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             multiple
             hidden
             {...register("videos", { onChange: onChangeVideos })}
-            // required
+          // required
           />
           <div className="upload-cover">
             <details>
@@ -252,35 +250,35 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <div className="upload-list">
             {videos
               ? videos.map((video, index, arr) => (
-                  <div key={index} className="upload-list-item">
-                    <span>
-                      {video.name}
-                      <button
-                        className="delete-btn"
-                        onClick={handleDeleteVideo(video.url)}
-                        onMouseEnter={() => {
-                          var tempArr = arr;
-                          var temp = video;
-                          temp.onHover0 = true;
-                          setVideos([...tempArr]);
-                        }}
-                        onMouseLeave={() => {
-                          var tempArr = arr;
-                          var temp = video;
-                          temp.onHover0 = false;
-                          let newArr = tempArr.splice(index, 0);
-                          setVideos([...tempArr, ...newArr]);
-                        }}
-                      >
-                        {!video.onHover0 ? (
-                          <FaCheck fontSize="1.5em" color="blue" />
-                        ) : (
-                          <MdClose fontSize="1.5em" color="red" />
-                        )}
-                      </button>
-                    </span>
-                  </div>
-                ))
+                <div key={index} className="upload-list-item">
+                  <span>
+                    {video.name}
+                    <button
+                      className="delete-btn"
+                      onClick={handleDeleteVideo(video.url)}
+                      onMouseEnter={() => {
+                        var tempArr = arr;
+                        var temp = video;
+                        temp.onHover0 = true;
+                        setVideos([...tempArr]);
+                      }}
+                      onMouseLeave={() => {
+                        var tempArr = arr;
+                        var temp = video;
+                        temp.onHover0 = false;
+                        let newArr = tempArr.splice(index, 0);
+                        setVideos([...tempArr, ...newArr]);
+                      }}
+                    >
+                      {!video.onHover0 ? (
+                        <FaCheck fontSize="1.5em" color="blue" />
+                      ) : (
+                        <MdClose fontSize="1.5em" color="red" />
+                      )}
+                    </button>
+                  </span>
+                </div>
+              ))
               : null}
           </div>
         </div>

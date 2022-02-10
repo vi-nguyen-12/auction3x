@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 const BuyAuthoried = ({
   toogleStep,
@@ -18,7 +17,6 @@ const BuyAuthoried = ({
   // toogleQuestion4ID,
   // toogleQuestion5ID,
 }) => {
-  const { register, handleSubmit } = useForm();
   const [question1, setQuestion1] = useState();
   const [question2, setQuestion2] = useState();
   const [question3, setQuestion3] = useState();
@@ -37,10 +35,6 @@ const BuyAuthoried = ({
   const [answer5, setAnswer5] = useState();
 
   const [explain1, setExplain1] = useState();
-  const [explain2, setExplain2] = useState();
-  const [explain3, setExplain3] = useState();
-  const [explain4, setExplain4] = useState();
-  const [explain5, setExplain5] = useState();
 
   const answer = [answer1, answer2, answer3, answer4, answer5];
   const questionID = [

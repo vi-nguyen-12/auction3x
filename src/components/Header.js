@@ -141,7 +141,6 @@ const Header = ({ color, change }) => {
               centered
               show={showConfirm}
               onHide={toogleConfirmModal}
-              centered
               contentclassname="confirm"
             >
               <Modal.Header closeButton>
@@ -183,8 +182,6 @@ const Header = ({ color, change }) => {
                 size="md"
                 backdrop="static"
                 keyboard={false}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
                 show={forgotPass}
                 onHide={toogleForgotPass}
                 contentclassname="forgotPass"
@@ -204,7 +201,6 @@ const Header = ({ color, change }) => {
               centered
               show={forgotPass}
               onHide={toogleForgotPass}
-              centered
               contentclassname="forgotPass"
             >
               <Modal.Header closeButton>
@@ -234,7 +230,6 @@ const Header = ({ color, change }) => {
               centered
               show={changePass}
               onHide={toogleChangePass}
-              centered
               contentclassname="forgotPass"
             >
               <Modal.Body>
@@ -252,12 +247,10 @@ const Header = ({ color, change }) => {
               contentclassname="login"
             >
               <Modal.Body
-                centered
                 show={showSignIn}
                 onHide={toogleSignIn}
                 backdrop="static"
                 keyboard={false}
-                aria-labelledby="contained-modal-title-vcenter"
                 className="sign-In"
               ></Modal.Body>
             </Modal>
@@ -296,8 +289,6 @@ const Header = ({ color, change }) => {
               <Modal.Body
                 backdrop="static"
                 keyboard={false}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
                 show={showSignUp}
                 onHide={toogleSignUp}
                 className="sign-Up"
