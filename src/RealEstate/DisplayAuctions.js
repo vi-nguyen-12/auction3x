@@ -919,8 +919,15 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   {topBid ? (
                     topBid.map((bid, index) => (
                       <tr key={index}>
-                        <td>{bid.userName}</td>
-                        <td>{bid.amount}</td>
+                        <td>{bid._id}</td>
+                        <td>
+                          <NumberFormat
+                            value={bid.amount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </td>
                         <td>{new Date(bid.time).toLocaleString()}</td>
                       </tr>
                     ))
@@ -1276,10 +1283,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
             show={forgotPass}
             onHide={toogleForgotPass}
           >
-            <Modal.Body
-              className="forgot-modal"
-            >
-            </Modal.Body>
+            <Modal.Body className="forgot-modal"></Modal.Body>
           </Modal>
           <Modal
             backdrop="static"

@@ -7,8 +7,13 @@ import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../../RealEstate/AuctionTimer";
+import socket from "socket.io-client";
 
 const BuyConfirm = ({ tooglePlaceBid }) => {
+  // socket.on("connect", () => {
+  //   const transport = socket.io.engine.transport.name;
+  //   console.log(transport);
+  // });
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState();
   const { id } = useParams();
@@ -28,7 +33,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
     if (bid === undefined) {
       alert("Please enter a bid amount");
     } else {
-      const Bid = { id: propId._id, biddingTimes, bidding: bid };
+      const Bid = { id: propId._id, biddingTimes, bidding: parseInt(bid) };
       await authService.auctionBid(Bid).then((res) => {
         if (res.data.error) {
           alert(res.data.error);

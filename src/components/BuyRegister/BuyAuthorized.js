@@ -84,24 +84,28 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
   ];
 
   const onSubmit = async (data) => {
-    await authService
-      .buyerRegister({
-        auctionId: auctionId ? auctionId._id : onGoingAuction._id,
-        documents: realDocuments,
-        TC: { time: agree, IPAddress: ip },
-        answers: answers,
-        docusign: docId,
-        // explanation: explanations,
-        // files: files,
-      }).then((res) => {
-        if(res.data.error){
-          alert(res.data.error);
-        }
-        else{
-          // history.push(location.pathname);
-          window.location.reload();
-        }
-      });
+    if (agree) {
+      await authService
+        .buyerRegister({
+          auctionId: auctionId ? auctionId._id : onGoingAuction._id,
+          documents: realDocuments,
+          TC: { time: agree, IPAddress: ip },
+          answers: answers,
+          docusign: docId,
+          // explanation: explanations,
+          // files: files,
+        })
+        .then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            // history.push(location.pathname);
+            window.location.reload();
+          }
+        });
+    } else {
+      alert("Please agree to the terms and conditions");
+    }
   };
   return (
     <>

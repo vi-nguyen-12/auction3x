@@ -5,8 +5,6 @@ import authService from "../services/authServices";
 import "../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { AiOutlineMinus } from "react-icons/ai";
-import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
