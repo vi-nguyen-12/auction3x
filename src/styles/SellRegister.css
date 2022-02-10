@@ -267,11 +267,20 @@ body {
 
 .list-form {
   width: 700px;
+  height: 730px;
+  box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
+  border-radius: 3px;
+  position: relative;
+  top: 80px;
+}
+
+.list-form1 {
+  width: 700px;
   height: 830px;
   box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
   border-radius: 3px;
   position: relative;
-  top: 20px;
+  top: 30px;
 }
 
 h6 {

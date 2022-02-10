@@ -82,7 +82,7 @@ const PropertyDetails = ({
                   e.preventDefault();
                 }
               }}
-              className="list-form"
+              className="list-form1"
             >
               <label
                 style={{

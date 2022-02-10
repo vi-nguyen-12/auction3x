@@ -1267,7 +1267,20 @@ function DisplayAuctions({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
-
+          <Modal
+            size="md"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toogleForgotPass}
+          >
+            <Modal.Body
+              className="forgot-modal"
+            >
+            </Modal.Body>
+          </Modal>
           <Modal
             backdrop="static"
             keyboard={false}
@@ -1296,7 +1309,6 @@ function DisplayAuctions({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
-
           <Modal
             backdrop="static"
             keyboard={false}
@@ -1311,6 +1323,27 @@ function DisplayAuctions({ colorChange, toogleChange }) {
             </Modal.Body>
           </Modal>
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toogleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body
+              centered
+              show={showSignIn}
+              onHide={toogleSignIn}
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              className="sign-In"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
@@ -1330,6 +1363,27 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           </Modal>
 
           <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            onHide={toogleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body
+              backdrop="static"
+              keyboard={false}
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={showSignUp}
+              onHide={toogleSignUp}
+              className="sign-Up"
+            ></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"

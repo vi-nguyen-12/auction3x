@@ -107,9 +107,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
         </div> */}
       </div>
       <div className="list-sell-bottom">
-        <div className="listDetails-title">
-          <h2>Listing Deatails</h2>
-        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
           onKeyDown={(e) => {
@@ -120,7 +117,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
           className="list-form"
         >
           <h6 style={{ fontWeight: "bolder", fontSize: "20px" }}>
-            Property Information
+            Search Property
           </h6>
 
           <div
@@ -149,7 +146,6 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                     style={{
                       width: "500px",
                       fontSize: "17px",
-                      fontWeight: "bold",
                     }}
                     {...getInputProps({
                       placeholder: "Search address",
@@ -220,7 +216,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               type="text"
               className="form-control"
               placeholder="Address"
-              style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
+              style={{ width: "500px", fontSize: "17px" }}
               {...register("address1", { required: false, maxLength: 100 })}
             />
           </div>
@@ -253,7 +249,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   }}
                 >
                   <input
-                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    style={{ fontSize: "17px" }}
                     type="text"
                     name="firstName"
                     className="form-control"
@@ -271,7 +267,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   }}
                 >
                   <input
-                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    style={{ fontSize: "17px" }}
                     type="text"
                     name="lastName"
                     className="form-control"
@@ -289,8 +285,12 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   bottom: "5px",
                 }}
               >
-                <td>State / Province<span style={{ color: "#ff0000" }}>*</span></td>
-                <td style={{ paddingLeft: "15px" }}>City / District<span style={{ color: "#ff0000" }}>*</span></td>
+                <td>
+                  State / Province<span style={{ color: "#ff0000" }}>*</span>
+                </td>
+                <td style={{ paddingLeft: "15px" }}>
+                  City / District<span style={{ color: "#ff0000" }}>*</span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -306,7 +306,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   }}
                 >
                   <input
-                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    style={{ fontSize: "17px" }}
                     type="text"
                     className="form-control"
                     placeholder="Zip Code"
@@ -323,7 +323,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   }}
                 >
                   <input
-                    style={{ fontSize: "17px", fontWeight: "bold" }}
+                    style={{ fontSize: "17px" }}
                     type="text"
                     className="form-control"
                     placeholder="Country"
@@ -343,8 +343,12 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   bottom: "5px",
                 }}
               >
-                <td>Postal Code<span style={{ color: "#ff0000" }}>*</span></td>
-                <td style={{ paddingLeft: "15px" }}>Country<span style={{ color: "#ff0000" }}>*</span></td>
+                <td>
+                  Postal Code<span style={{ color: "#ff0000" }}>*</span>
+                </td>
+                <td style={{ paddingLeft: "15px" }}>
+                  Country<span style={{ color: "#ff0000" }}>*</span>
+                </td>
               </tr>
             </tbody>
           </table>

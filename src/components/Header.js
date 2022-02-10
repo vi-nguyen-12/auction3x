@@ -413,7 +413,7 @@ const Header = ({ color, change }) => {
                             handleSell();
                           }}
                         >
-                          SELLER
+                          SELL
                         </button>
                       </td>
                       <td>
