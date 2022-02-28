@@ -648,7 +648,7 @@ const Header = ({ color, change }) => {
                     )}
                     <button
                       className="fw-bold p-3"
-                      onClick={handleOnClick("dashBoard")}
+                      onClick={handleOnClick("Dashboard")}
                     >
                       My DashBoard
                     </button>

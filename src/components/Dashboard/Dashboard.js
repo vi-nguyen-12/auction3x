@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Profile from "./Pages/Profile";
 import Setting from "./Pages/Setting";
@@ -12,13 +12,16 @@ import PendingListings from "./Pages/Listings/PendingListings";
 import SoldListings from "./Pages/Listings/SoldListings";
 import Dash from "./Pages/Dash";
 import Messaging from "./Pages/Messaging";
+import DashHeader from "./DashHeader";
 
 function Dashboard() {
+    const location = useLocation();
   return (
     <Router>
       <Sidebar />
+      <DashHeader location = {location.pathname.split("/")[1]} />
       <Switch>
-        <Route exact path="/Dash" component={Dash} />
+        <Route exact path="/Dashboard" component={Dash} />
         <Route exact path="/Messaging" component={Messaging} />
         <Route exact path="/BidAuctions" exact component={BidAuctions} />
         <Route exact path="/PendingAuctions" component={PendingAuctions} />
