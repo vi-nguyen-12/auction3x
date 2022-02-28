@@ -24,6 +24,7 @@ import EmailConfirm from "./components/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
 import DisplayAuctions from "./RealEstate/DisplayAuctions";
 import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -101,6 +102,9 @@ function App() {
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
+          </Route>
+          <Route exact path="/dashBoard">
+            <Dashboard />
           </Route>
           <Route path="/reset_password">
             <ChangePass colorChange={colorChange} />
