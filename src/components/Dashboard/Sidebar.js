@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { sideBarMenu } from '../Dashboard/SidebarMenu';
+import React from 'react'
 
 function Sidebar() {
     return (
