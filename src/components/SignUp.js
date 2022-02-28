@@ -58,7 +58,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           }
         }}
       >
-        <Table style={{ marginBottom: "13px" }}>
+        <Table borderless style={{ marginBottom: "13px" }}>
           <tbody>
             <tr>
               <td style={{ width: "50%", paddingRight: "20px" }}>
