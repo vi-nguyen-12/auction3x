@@ -104,7 +104,10 @@ function App() {
             />
           </Route>
           <Route exact path="/dashBoard">
-            <Dashboard />
+            <Dashboard
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
           </Route>
           <Route path="/reset_password">
             <ChangePass colorChange={colorChange} />
