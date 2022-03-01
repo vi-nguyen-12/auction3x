@@ -1,14 +1,13 @@
 /* Dashboard Header*/
-.row {
+.row{
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0!important;
+  padding-right: 200px;
 }
 
 .DashHeader {
   display: flex;
-  width: 100vw;
-  padding-left: 400px;
-  margin-top: 5%;
+  width: 100%;
   /* align-items: center; */
 }
 
@@ -67,12 +66,12 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  justify-content: right;
-  padding: 20px 0;
+  /* justify-content: right; */
+  /* padding: 20px 0; */
 }
 
 .DashBody {
-  width: 80vw;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -165,8 +164,10 @@
 }
 
 @media screen and (max-width: 1550px) {
+
   .liveAuc {
     width: 280px;
     height: 130px;
   }
+  
 }

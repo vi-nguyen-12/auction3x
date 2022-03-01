@@ -1,60 +1,59 @@
-.card-footer{
-    background-color:  #282828 !important;
-    margin-top: 10rem;
+.card-footer {
+  background-color: #282828 !important;
+  /* margin-top: 10rem; */
 }
 
-.row-1{
-    /* margin-left: 10rem !important;
+.row-1 {
+  /* margin-left: 10rem !important;
     margin-right: 10rem !important; */
-    padding: 5rem 3rem !important;
+  padding: 5rem 3rem !important;
 }
 
-.img-flex{
-    display: inline-flex;
+.img-flex {
+  display: inline-flex;
 }
 
-.auction-img{
-    height: 6rem;
-    padding: 2rem
+.auction-img {
+  height: 6rem;
+  padding: 2rem;
 }
 
-.auction-content{
-    color: #fff;
-    margin-top: 4rem;
-    font-size: 1rem;
-    text-align: left;
+.auction-content {
+  color: #fff;
+  margin-top: 4rem;
+  font-size: 1rem;
+  text-align: left;
 }
 
-.footer-title{
-    color: #fff;
-    font-family: Josefin Slab;
-    font-size: 2rem;
-    margin-top: 2rem;
-    text-align: left;
-    padding-left: 6rem;
+.footer-title {
+  color: #fff;
+  font-family: Josefin Slab;
+  font-size: 2rem;
+  margin-top: 2rem;
+  text-align: left;
+  padding-left: 6rem;
 }
 
-li{
-    padding: 0.2rem;
-    font-size: 2rem;
-    font-size: 1.8rem;
-    text-align: left;
-   
+li {
+  padding: 0.2rem;
+  font-size: 2rem;
+  font-size: 1.8rem;
+  text-align: left;
 }
 
-ul{
-    padding-left: 6rem !important;
+ul {
+  padding-left: 6rem !important;
 }
 
-a{
-    font-size: 1.5rem;
-    color : #fff !important;
-    text-decoration: none !important;
+a {
+  font-size: 1.5rem;
+  color: #fff !important;
+  text-decoration: none !important;
 }
 
-.auction-reserved{
-    border-top: 2px solid #B77B50;;
-    color: #fff;
-    text-align: center;
-    padding: 2rem;
+.auction-reserved {
+  border-top: 2px solid #b77b50;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
 }

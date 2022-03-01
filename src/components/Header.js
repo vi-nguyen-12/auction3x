@@ -939,7 +939,7 @@ const Header = ({ color, change }) => {
 
 const Nav = styled.nav`
   position: absolute;
-  z-index: 10;
+  z-index: 999;
   width: 100%;
   top: 0;
   left: 0;
