@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Profile from "./Pages/Profile";
 import Setting from "./Pages/Setting";
@@ -12,15 +12,14 @@ import PendingListings from "./Pages/Listings/PendingListings";
 import SoldListings from "./Pages/Listings/SoldListings";
 import Dash from "./Pages/Dash";
 import Messaging from "./Pages/Messaging";
+import DashHeader from "./DashHeader";
 
-function Dashboard({ colorChange, toogleChange }) {
-    useEffect(() => {
-        colorChange("black");
-        toogleChange();
-    }, []);
+function Dashboard() {
+    const location = useLocation();
     return (
         <Router>
             <Sidebar />
+            <DashHeader location={location.pathname.split("/")[1]} />
             <Switch>
                 <Route exact path="/Dashboard" component={Dash} />
                 <Route exact path="/Messaging" component={Messaging} />
@@ -32,7 +31,7 @@ function Dashboard({ colorChange, toogleChange }) {
                 <Route exact path="/PendingListings" component={PendingListings} />
                 <Route exact path="/SoldListings" component={SoldListings} />
                 <Route exact path="/Profile" component={Profile} />
-                <Route exact path="/Settings" component={Setting} />
+                <Route exact path="/Setting" component={Setting} />
             </Switch>
         </Router>
     );
