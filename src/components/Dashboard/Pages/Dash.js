@@ -1,14 +1,16 @@
 import React from "react";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import { CircularProgressbar } from "react-circular-progressbar";
+import { RiFilter2Fill } from "react-icons/ri";
+import {MdOutlineRefresh} from 'react-icons/md'
 import "react-circular-progressbar/dist/styles.css";
 
 function Dash() {
   return (
     // <div className="DashContainer">
     //   <div className="DashBody">
-    <Container>
-      <Row sm={4}>
+    <Container className="container2">
+      <Row lg={3}>
         <Col>
           <div className="liveAuc">
             <div className="names">
@@ -31,7 +33,7 @@ function Dash() {
             </div>
           </div>
         </Col>
-        <Col>
+        {/* <Col>
           <div className="liveAuc">
             <div className="names">
               <span>Your Wishlist</span>
@@ -41,7 +43,7 @@ function Dash() {
               <CircularProgressbar value={60} strokeWidth={20} stroke="red" />
             </div>
           </div>
-        </Col>
+        </Col> */}
         <Col>
           <div className="liveAuc">
             <div className="names">
@@ -72,12 +74,18 @@ function Dash() {
 
         <Col>
           <div className="filter">
-            <Button className="filterBtn">
-              <span>Filter</span>
-            </Button>
-            <Button className="resetBtn">
-              <span>Refresh</span>
-            </Button>
+            <div className="filterIcon">
+              <RiFilter2Fill color="white" size={25} />
+              <button className="filterBtn">
+                <span>Filter</span>
+              </button>
+            </div>
+            <div className="refresh">
+              <MdOutlineRefresh color="white" size={28} />
+              <button className="resetBtn">
+                <span>Refresh</span>
+              </button>
+            </div>
           </div>
         </Col>
       </Row>

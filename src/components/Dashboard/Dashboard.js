@@ -25,11 +25,11 @@ function Dashboard() {
     <div style={{ display: "flex" }}>
       <Router>
         <Sidebar />
-        <div style={{display:"-moz-initial", padding:"130px 30px"}}>
+        <div style={{display:"-moz-initial", margin:"105px auto"}}>
         <DashHeader location={location.pathname.split("/")[1]} />
         <Switch>
           <Route exact path="/Dashboard" component={Dash} />
-          <Route exact path="/Messaging" component={Messaging} />
+          <Route exact path="/DashBoard/Messaging" component={Messaging} />
           <Route exact path="/BidAuctions" exact component={BidAuctions} />
           <Route exact path="/PendingAuctions" component={PendingAuctions} />
           <Route exact path="/SavedAuctions" component={SavedAuctions} />
@@ -37,8 +37,8 @@ function Dashboard() {
           <Route exact path="/LiveListings" component={LiveListings} />
           <Route exact path="/PendingListings" component={PendingListings} />
           <Route exact path="/SoldListings" component={SoldListings} />
-          <Route exact path="/Profile" component={Profile} />
-          <Route exact path="/Setting" component={Setting} />
+          <Route exact path="/DashBoard/Profile" component={Profile} />
+          <Route exact path="/DashBoard/Setting" component={Setting} />
         </Switch>
         </div>
       </Router>
