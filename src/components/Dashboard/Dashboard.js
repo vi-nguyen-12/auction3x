@@ -15,11 +15,10 @@ import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 
 function Dashboard() {
-    const location = useLocation();
+    // const location = useLocation();
   return (
     <Router>
       <Sidebar />
-      <DashHeader location = {location.pathname.split("/")[1]} />
       <Switch>
         <Route exact path="/Dashboard" component={Dash} />
         <Route exact path="/Messaging" component={Messaging} />

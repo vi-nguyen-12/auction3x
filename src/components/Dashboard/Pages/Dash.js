@@ -7,7 +7,7 @@ function Dash() {
   return (
     <div className="DashContainer">
       <div className="DashBody">
-        <Row>
+        <Row sm={4}>
           <Col>
             <div className="liveAuc">
               <div className="names">
