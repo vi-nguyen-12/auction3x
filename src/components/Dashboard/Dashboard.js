@@ -19,6 +19,7 @@ import Dash from "./Pages/Dash";
 import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 
+<<<<<<< HEAD
 function Dashboard({ colorChange, toogleChange }) {
     useEffect(() => {
         colorChange("black");
@@ -46,6 +47,29 @@ function Dashboard({ colorChange, toogleChange }) {
                     </Switch>
                 </div>
             </Router>
+=======
+function Dashboard() {
+  const location = useLocation();
+  return (
+    <div style={{ display: "flex" }}>
+      <Router>
+        <Sidebar />
+        <div style={{display:"-moz-initial", margin:"105px auto"}}>
+        <DashHeader location={location.pathname.split("/")[1]} />
+        <Switch>
+          <Route exact path="/Dashboard" component={Dash} />
+          <Route exact path="/DashBoard/Messaging" component={Messaging} />
+          <Route exact path="/BidAuctions" exact component={BidAuctions} />
+          <Route exact path="/PendingAuctions" component={PendingAuctions} />
+          <Route exact path="/SavedAuctions" component={SavedAuctions} />
+          <Route exact path="/WinAuctions" component={WinAuctions} />
+          <Route exact path="/LiveListings" component={LiveListings} />
+          <Route exact path="/PendingListings" component={PendingListings} />
+          <Route exact path="/SoldListings" component={SoldListings} />
+          <Route exact path="/DashBoard/Profile" component={Profile} />
+          <Route exact path="/DashBoard/Setting" component={Setting} />
+        </Switch>
+>>>>>>> 69eb2cc7f1f87935fef2fa1c66d76b781fafef90
         </div>
     );
 }
