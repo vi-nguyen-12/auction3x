@@ -14,6 +14,7 @@ import Footer from "./components/Home/footer";
 import { Featured } from "./components/Featured";
 import { addProperty } from "./slice/propertySlice";
 import { addAuction } from "./slice/auctionSlice";
+import { addSavedProperty } from "./slice/savedPropertySlice";
 import authService from "./services/authServices";
 import Header from "./components/Header";
 import RealEstates from "./RealEstate/RealEstates";
@@ -53,6 +54,9 @@ function App() {
   if (user._id) {
     authService.getRegistStatus().then((res) => {
       dispatch(addRegistProp(res.data));
+    });
+    authService.getSavedProperties(user._id).then((res) => {
+      dispatch(addSavedProperty(res.data));
     });
   }
 
@@ -104,10 +108,7 @@ function App() {
             />
           </Route>
           <Route exact path="/dashBoard">
-            <Dashboard
-              colorChange={colorChange}
-              toogleChange={toogleChange}
-            />
+            <Dashboard colorChange={colorChange} toogleChange={toogleChange} />
           </Route>
           <Route path="/reset_password">
             <ChangePass colorChange={colorChange} />

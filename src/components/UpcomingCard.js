@@ -13,6 +13,7 @@ import SignUp from "./SignUp";
 import NumberFormat from "react-number-format";
 import RegistrationTimer from "../RealEstate/RegistrationTimer";
 import Timer from "../RealEstate/Timer";
+import authService from "../services/authServices";
 
 const UpcomingCard = ({
   url,
@@ -32,7 +33,19 @@ const UpcomingCard = ({
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const toggleImage = () => setFavorite(!favorite);
+  const toggleImage = () => {
+    const data = {
+      userId: user._id,
+      auctionId: id,
+    };
+    if (favorite === false) {
+      authService.saveProperty(data);
+      setFavorite(!favorite);
+    } else if (favorite === true) {
+      authService.removeProperty(data);
+      setFavorite(!favorite);
+    }
+  };
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);

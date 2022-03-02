@@ -183,6 +183,46 @@ const authService = {
       withCredentials: true,
     });
   },
+
+  saveProperty(data) {
+    return axios.put(
+      env.API_URL + `/api/users/${data.userId}/likes/${data.auctionId}`
+    );
+  },
+
+  removeProperty(data) {
+    return axios.delete(
+      env.API_URL + `/api/users/${data.userId}/likes/${data.auctionId}`
+    );
+  },
+
+  getSavedProperties(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/likes`);
+  },
+
+  getUserBidAuctions(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/bidAuctions`);
+  },
+
+  buyerApprovedAuctions(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/buyer/approvedAuctions`);
+  },
+
+  buyerWonAuctions(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/buyer/winAuctions`);
+  },
+
+  sellerApprovedAuctions(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/seller/approvedAuctions`);
+  },
+
+  sellerPendingAuctions(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/seller/pendingListings`);
+  },
+
+  sellerApprovedListings(id) {
+    return axios.get(env.API_URL + `/api/users/${id}/seller/approvedListings`);
+  },
 };
 
 export default authService;

@@ -19,3 +19,8 @@
 .headerNav:hover {
   color: #fcba7d;
 }
+
+.sell_btn:focus {
+  outline: none;
+  box-shadow: none;
+}
