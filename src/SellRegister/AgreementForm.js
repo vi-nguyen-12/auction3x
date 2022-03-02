@@ -17,60 +17,56 @@ const Agree = ({
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
-  const [docId, setDocId] = useState();
   const [loader, setLoader] = useState(false);
-  const toogleAgree = () => {
+  const toggle = () => {
     setAgree(!agree);
   };
-
-  const [url, setUrl] = useState();
-  const {
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const { handleSubmit } = useForm();
 
   const history = useHistory();
 
-  useEffect(async () => {
+  const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getDocuSign().then((res) => {
-      setUrl(res.data.redirectUrl);
+    await authService.getDocuSign(envelopeId).then((res) => {
+      setLoader(false);
       setEnvelopeId(res.data.envelopeId);
-    });
-  }, []);
-
-  useEffect(async () => {
-    await authService.getDocuSignStatus(envelopeId).then((res) => {
-      setDocId(res.data._id);
-      if (envelopeId) {
-        setLoader(false);
+      if (res.data.status !== "signing_complete") {
+        window.open(res.data.redirectUrl);
       }
     });
-  }, [envelopeId]);
+  };
 
   const onSubmit = async (data) => {
-    if (agree === true) {
-      authService
-        .saveRealEstate({
-          type: propertyData.type,
-          street_address: propertyData.street_address,
-          city: propertyData.city,
-          state: propertyData.state,
-          discussedAmount: parseFloat(propertyData.discussedAmount),
-          reservedAmount: parseFloat(propertyData.reservedAmount),
-          docusignId: docId,
-          images,
-          videos,
-          documents,
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            history.push("/");
-            window.scrollTo(0, 0);
-          }
-        });
-    } else {
+    if (!agree) {
       alert("You must agree to the terms and conditions");
+    } else {
+      setLoader(true);
+      await authService.getDocuSignStatus(envelopeId).then((res) => {
+        setLoader(false);
+        if (res.data.status !== "signing_complete") {
+          alert("Please sign the docusign before proceeding ");
+        } else {
+          authService
+            .saveRealEstate({
+              type: propertyData.type,
+              street_address: propertyData.street_address,
+              city: propertyData.city,
+              state: propertyData.state,
+              discussedAmount: parseFloat(propertyData.discussedAmount),
+              reservedAmount: parseFloat(propertyData.reservedAmount),
+              docusignId: res.data._id,
+              images,
+              videos,
+              documents,
+            })
+            .then((res) => {
+              if (res.status === 200) {
+                history.push("/");
+                window.scrollTo(0, 0);
+              }
+            });
+        }
+      });
     }
   };
 
@@ -129,7 +125,7 @@ const Agree = ({
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => window.open(url)}
+            onClick={handleSignDocusign}
           >
             Sign DocuSign <SiDocusign />
           </button>
@@ -144,7 +140,7 @@ const Agree = ({
           <input
             style={{ marginRight: "10px" }}
             type="checkbox"
-            onChange={toogleAgree}
+            onChange={toggle}
           />
           <label>I agree to the terms and conditions</label>
         </div>
