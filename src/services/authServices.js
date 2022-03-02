@@ -171,9 +171,10 @@ const authService = {
     });
   },
 
-  getDocuSign() {
+  getDocuSign(data) {
     return axios.get(
-      env.API_URL + "/api/docusign/signature/sellerAgreement/uiviews",
+      env.API_URL +
+        `/api/docusign/signature/sellerAgreement/uiviews?envelopeId=${data}`,
       { withCredentials: true }
     );
   },
