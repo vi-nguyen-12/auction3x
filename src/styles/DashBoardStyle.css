@@ -7,6 +7,7 @@
 .profileContainer {
   background-color: white;
   border-radius: 20px;
+  padding: 50px;
 }
 
 .container2 {
@@ -148,6 +149,11 @@
   border-radius: 0 0 3px 3px;
 }
 
+.tab .tabs:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .filter {
   width: auto;
   height: 50px;
@@ -189,6 +195,11 @@
 
 /* Dashboard Profile */
 
+.profilePicCol {
+  display: flex;
+  justify-content: center;
+}
+
 .profileOutline {
   height: 320px;
   width: 280px;
@@ -198,8 +209,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 50px;
-  margin-top: 50px;
+  /* margin-left: 50px;
+  margin-top: 50px; */
 }
 
 .profileInline {
@@ -243,4 +254,51 @@
   margin: 5px;
   font-size: 15px;
   padding: 10px;
+}
+
+.descript {
+  padding-left: 60px;
+}
+
+.descript h3 {
+  margin-top: 15px;
+  color: black;
+  font-weight: bold;
+}
+
+.descript p {
+  margin-top: 20px;
+  color: #808080;
+  font-weight: 500;
+}
+
+.name h3 {
+  color: black;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.name p {
+  color: #4bd67f;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.address p {
+  color: #7c8392;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.address Button {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #d3e2fb;
+  border: none;
+  margin: auto 10px;
+}
+
+.address Button:hover {
+  background-color: transparent;
 }

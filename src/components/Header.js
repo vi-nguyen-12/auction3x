@@ -577,7 +577,7 @@ const Header = ({ color, change }) => {
         {change === false ? (
           <div className="d-flex flex-row ">
             <Button
-              className="bg-transparent border-0"
+              className="sell_btn bg-transparent border-0"
               onClick={handleSell}
               style={{
                 color: "white",

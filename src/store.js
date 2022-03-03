@@ -3,6 +3,7 @@ import userReducer from "./slice/userSlice";
 import propertyReducer from "./slice/propertySlice";
 import auctionReducer from "./slice/auctionSlice";
 import registPropertyReducer from "./slice/registPropertySlice";
+import savedPropertyReducer from "./slice/savedPropertySlice";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
@@ -13,12 +14,13 @@ const reducers = combineReducers({
   user: userReducer,
   auction: auctionReducer,
   registProperty: registPropertyReducer,
+  savedProperty: savedPropertyReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["property", "auction", "registProperty"],
+  whitelist: ["property", "auction", "registProperty", "savedProperty"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

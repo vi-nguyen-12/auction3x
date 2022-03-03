@@ -1,20 +1,18 @@
 import React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
 
 function Profile() {
   return (
     <Container className="profileContainer">
       <Row>
-        <Col sm ={4} className="profilePicCol">
+        <Col sm={3} className="profilePicCol">
           <div className="profileOutline">
-            <div className="profileInline">
-
-            </div>
+            <div className="profileInline"></div>
           </div>
         </Col>
-        <Col sm = {8}>
-          <div>
+        <Col sm={9}>
+          <div className="descript">
             <h3>Description</h3>
             <p>
               Well, from my learning experience, I would state that the most
@@ -38,22 +36,34 @@ function Profile() {
         </Col>
       </Row>
       <Row>
-        <Col sm = {4} style={{display:"inline-grid", justifyContent:"center", textAlign:"center"}}>
+        <Col
+          sm={3}
+          style={{
+            display: "inline-grid",
+            justifyContent: "center",
+            textAlign: "center",
+            marginTop: "30px",
+          }}
+        >
           <div className="name">
             <h3>Samuel Rodriguez</h3>
             <p>Owner</p>
           </div>
-          <div>
+          <div className="address">
             <p>Midnight Corner St. Suite 600 San Francisco, CADGE 94107</p>
-            <p>
-              <BsInstagram />
-              <BsFacebook />
-              <BsTwitter />
-            </p>
+            <Button>
+              <BsInstagram size={25} color="#216fed" />
+            </Button>
+            <Button>
+              <BsFacebook size={29} color="#216fed" />
+            </Button>
+            <Button>
+              <BsTwitter size={27} color="#216fed" />
+            </Button>
           </div>
         </Col>
-        <Col sm = {8}>
-          <div>
+        <Col style={{paddingLeft:"70px"}} sm={9}>
+          <div className="list">
             <h3>Listed Property</h3>
           </div>
         </Col>
