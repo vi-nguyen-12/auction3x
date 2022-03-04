@@ -14,7 +14,7 @@ export const SidebarMenu = [
   },
   {
     name: "Messaging",
-    path: "/DashBoard/Messaging",
+    path: "/Dashboard/Messaging",
     icon: <AI.AiFillMessage color="#96a0af" size={30} />,
   },
   {
@@ -65,12 +65,12 @@ export const SidebarMenu = [
   },
   {
     name: "Profile",
-    path: "/DashBoard/Profile",
+    path: "/Dashboard/Profile",
     icon: <CgProfile color="#96a0af" size={30} />,
   },
   {
     name: "Settings",
-    path: "/DashBoard/Setting",
+    path: "/Dashboard/Setting",
     icon: <AI.AiFillSetting color="#96a0af" size={30} />,
   },
 ];
