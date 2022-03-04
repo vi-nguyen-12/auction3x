@@ -217,7 +217,11 @@ function Dash() {
                     id={property._id}
                     auctionStartDate={property.auctionStartDate}
                     auctionEndDate={property.auctionEndDate}
-                    startingBid={property.highestBid}
+                    startingBid={
+                      property.highestBid
+                        ? property.highestBid
+                        : property.startingBid
+                    }
                     auctionId={property._id}
                   />
                 </Col>
