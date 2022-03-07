@@ -5,7 +5,12 @@ import Work from "./components/Home/work";
 import RealEstate from "./components/Home/realEstate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
@@ -29,6 +34,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
+  const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = document.cookie.split("=")[1];
@@ -61,6 +67,10 @@ function App() {
   }
 
   const [color, setColor] = useState("");
+  const [show, setShow] = useState(true);
+  const toogleShow = () => {
+    setShow(!show);
+  };
 
   const colorChange = (color) => {
     setColor(color);
@@ -110,6 +120,7 @@ function App() {
           {user._id && (
             <Route exact path="/dashBoard">
               <Dashboard
+                toogleShow={toogleShow}
                 colorChange={colorChange}
                 toogleChange={toogleChange}
               />
@@ -132,7 +143,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <Footer />
+      {show ? <Footer /> : null}
     </div>
   );
 }
