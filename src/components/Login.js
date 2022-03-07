@@ -143,7 +143,7 @@ const Login = ({
             </button>
             <div
               className="pb-2"
-              style={{ position: "relative", fontSize: "15px" }}
+              style={{ position: "relative", fontSize: "15px", color: "black" }}
             >
               Not registered?
               <button
