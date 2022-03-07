@@ -258,7 +258,6 @@ const CardComp = ({
             centered
             show={showConfirm}
             onHide={toogleConfirmModal}
-            centered
             contentclassname="confirm"
           >
             <Modal.Header closeButton>
@@ -294,7 +293,6 @@ const CardComp = ({
             centered
             show={forgotPass}
             onHide={toogleForgotPass}
-            centered
             contentclassname="forgotPass"
           >
             <Modal.Header closeButton>

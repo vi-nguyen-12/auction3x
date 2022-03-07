@@ -13,7 +13,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  // height: 30vh;
   // overflow: hidden;
 
   & > button {
@@ -217,7 +217,11 @@ function Dash() {
                     id={property._id}
                     auctionStartDate={property.auctionStartDate}
                     auctionEndDate={property.auctionEndDate}
-                    startingBid={property.highestBid}
+                    startingBid={
+                      property.highestBid
+                        ? property.highestBid
+                        : property.startingBid
+                    }
                     auctionId={property._id}
                   />
                 </Col>

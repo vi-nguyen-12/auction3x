@@ -136,6 +136,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   const [setRegistered, setRegisteredProperty] = useState(false);
 
   const auctions = useSelector((state) => state.auction);
+  const properties = useSelector((state) => state.property);
 
   const [auction, setAuction] = useState([]);
   const [auctionProp, setAuctionProp] = useState();
@@ -191,17 +192,24 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     toogleChange();
     //for ongoing auction
     const auctionData = auctions.find((item) => item._id === id);
+    const propertyData = properties.find((item) => item._id === id);
     setAuction(auctionData);
-    setAuctionProp(auctionData.property);
+    setAuctionProp(auctionData ? auctionData.property : propertyData.property);
 
     //set dates for ongoing auction end date
-    setOnGoingAuctionEnd(auctionData.auctionEndDate);
+    setOnGoingAuctionEnd(
+      auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
+    );
 
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: auctionData.property.details.address.latitude,
-      lng: auctionData.property.details.address.longitude,
+      lat: auctionData
+        ? auctionData.property.details.address.latitude
+        : propertyData.property.details.address.latitude,
+      lng: auctionData
+        ? auctionData.property.details.address.longitude
+        : propertyData.property.details.address.longitude,
     });
 
     if (user._id && user.KYC) {
@@ -211,10 +219,21 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     }
 
     let topBidders = [];
-    for (let i = 0; i < auctionData.highestBidders.length; i++) {
-      topBidders = [...topBidders, auctionData.highestBidders[i]];
+    if (auctionData) {
+      for (let i = 0; i < auctionData.highestBidders.length; i++) {
+        topBidders = [...topBidders, auctionData.highestBidders[i]];
+      }
+      setTopBid(topBidders.reverse());
+    } else if (propertyData) {
+      if (propertyData.highestBidders) {
+        for (let i = 0; i < propertyData.highestBidders.length; i++) {
+          topBidders = [...topBidders, propertyData.highestBidders[i]];
+        }
+        setTopBid(topBidders.reverse());
+      } else {
+        setTopBid([]);
+      }
     }
-    setTopBid(topBidders.reverse());
   }, [auctions, registProperty]);
 
   return (
