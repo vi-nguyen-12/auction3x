@@ -22,7 +22,6 @@ function SavedAuctionsCard({
   auctionEndDate,
   startingBid,
 }) {
-  console.log(data);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);

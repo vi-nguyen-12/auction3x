@@ -10,17 +10,17 @@ export const SidebarMenu = [
   {
     name: "Dashboard",
     path: "/Dashboard",
-    icon: <AI.AiFillHome color="#96a0af" size={30} />,
+    icon: <AI.AiFillHome size={30} />,
   },
   {
     name: "Messaging",
     path: "/Dashboard/Messaging",
-    icon: <AI.AiFillMessage color="#96a0af" size={30} />,
+    icon: <AI.AiFillMessage size={30} />,
   },
   {
     name: "Auctions",
     path: { path },
-    icon: <RiAuctionFill color="#96a0af" size={30} />,
+    icon: <RiAuctionFill size={30} />,
     iconClosed: <RI.RiArrowDropDownLine color="#c4c4c4" className="arrow" />,
     iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow" />,
     subNav: [
@@ -45,7 +45,7 @@ export const SidebarMenu = [
   {
     name: "Your Listings",
     path: { path },
-    icon: <RiAuctionFill color="#96a0af" size={30} />,
+    icon: <RiAuctionFill size={30} />,
     iconClosed: <RI.RiArrowDropDownLine color="#c4c4c4" className="arrow" />,
     iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow " />,
     subNav: [
@@ -66,12 +66,12 @@ export const SidebarMenu = [
   {
     name: "Profile",
     path: "/Dashboard/Profile",
-    icon: <CgProfile color="#96a0af" size={30} />,
+    icon: <CgProfile size={30} />,
   },
   {
     name: "Settings",
     path: "/Dashboard/Setting",
-    icon: <AI.AiFillSetting color="#96a0af" size={30} />,
+    icon: <AI.AiFillSetting size={30} />,
   },
 ];
 

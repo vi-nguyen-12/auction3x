@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { RiFilter2Fill } from "react-icons/ri";
@@ -84,9 +84,19 @@ position: relative;
 
 function Dash() {
   const [savedProp, setSavedProp] = useState([]);
+  const [bidAuctions, setBidAuctions] = useState([]);
+  const [approvedAuctions, setApprovedAuctions] = useState([]);
   const [showSavedProp, setShowSavedProp] = useState(false);
-  const toogleShowSavedProp = () => setShowSavedProp(!showSavedProp);
+  const [showBidAuctions, setShowBidAuctions] = useState(false);
+  const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
+  const [liveAuctions, setLiveAuctions] = useState();
+  const [upcomingAuctions, setUpcomingAuctions] = useState();
+  const toogleShowSavedProp = (state) => setShowSavedProp(state);
+  const toogleShowBidAuctions = (state) => setShowBidAuctions(state);
+  const toogleShowApprovedAuctions = (state) => setShowApprovedAuctions(state);
   const user = useSelector((state) => state.user);
+  const auctions = useSelector((state) => state.auction);
+  const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
 
   let settings = {
@@ -97,6 +107,11 @@ function Dash() {
     slidesToShow: savedProperties.length > 3 ? 3 : savedProperties.length,
   };
 
+  useEffect(() => {
+    setUpcomingAuctions(property.length);
+    setLiveAuctions(auctions.length);
+  }, [property, auctions]);
+
   const getSavedProperty = () => {
     if (user._id) {
       setSavedProp(savedProperties);
@@ -106,16 +121,15 @@ function Dash() {
   const getBidAuctions = async () => {
     const id = user._id;
     const data = await authServices.getUserBidAuctions(id);
-    console.log(data);
+    setBidAuctions(data);
   };
 
   const getApprovedAuctions = async () => {
     const id = user._id;
     const data = await authServices.buyerApprovedAuctions(id);
-    console.log(data);
+    setApprovedAuctions(data);
   };
 
-  console.log(savedProp);
   return (
     // <div className="DashContainer">
     //   <div className="DashBody">
@@ -125,7 +139,7 @@ function Dash() {
           <div className="liveAuc">
             <div className="names">
               <span>Live Auctions</span>
-              <h3>684</h3>
+              <h3>{liveAuctions}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={70} strokeWidth={20} stroke="red" />
@@ -136,7 +150,7 @@ function Dash() {
           <div className="liveAuc">
             <div className="names">
               <span>Upcoming Auctions</span>
-              <h3>546</h3>
+              <h3>{upcomingAuctions}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={20} strokeWidth={20} stroke="red" />
@@ -172,17 +186,35 @@ function Dash() {
           <div className="tab">
             <Button
               onClick={() => {
+                toogleShowApprovedAuctions(false);
+                toogleShowBidAuctions(false);
                 getSavedProperty();
-                toogleShowSavedProp();
+                toogleShowSavedProp(true);
               }}
               className="tabs"
             >
               <span>Saved Auction</span>
             </Button>
-            <Button className="tabs">
+            <Button
+              onClick={() => {
+                toogleShowApprovedAuctions(false);
+                toogleShowSavedProp(false);
+                getBidAuctions();
+                toogleShowBidAuctions(true);
+              }}
+              className="tabs"
+            >
               <span>Bid Auction</span>
             </Button>
-            <Button className="tabs">
+            <Button
+              onClick={() => {
+                toogleShowBidAuctions(false);
+                toogleShowSavedProp(false);
+                getApprovedAuctions();
+                toogleShowApprovedAuctions(true);
+              }}
+              className="tabs"
+            >
               <span>Approved</span>
             </Button>
           </div>
@@ -205,7 +237,7 @@ function Dash() {
           </div>
         </Col>
       </Row>
-      {showSavedProp ? (
+      {showSavedProp && savedProp.length > 0 ? (
         <Row>
           <Carousel {...settings}>
             {savedProp.map((property, index) => (
@@ -229,7 +261,80 @@ function Dash() {
             ))}
           </Carousel>
         </Row>
-      ) : null}
+      ) : (
+        savedProp.length === 0 &&
+        showSavedProp && (
+          <div>
+            <h1>No Saved Auction</h1>
+          </div>
+        )
+      )}
+
+      {showBidAuctions && bidAuctions.length > 0 ? (
+        <Row>
+          <Carousel {...settings}>
+            {bidAuctions.map((property, index) => (
+              <Wrap key={index}>
+                <Col md={12}>
+                  <SavedAuctionsCard
+                    url={property.property.images[0].url}
+                    data={property.property.details}
+                    id={property._id}
+                    auctionStartDate={property.auctionStartDate}
+                    auctionEndDate={property.auctionEndDate}
+                    startingBid={
+                      property.highestBid
+                        ? property.highestBid
+                        : property.startingBid
+                    }
+                    auctionId={property._id}
+                  />
+                </Col>
+              </Wrap>
+            ))}
+          </Carousel>
+        </Row>
+      ) : (
+        bidAuctions.length === 0 &&
+        showBidAuctions && (
+          <div>
+            <h1>No Bid Auction</h1>
+          </div>
+        )
+      )}
+
+      {showApprovedAuctions && approvedAuctions.length > 0 ? (
+        <Row>
+          <Carousel {...settings}>
+            {approvedAuctions.map((property, index) => (
+              <Wrap key={index}>
+                <Col md={12}>
+                  <SavedAuctionsCard
+                    url={property.property.images[0].url}
+                    data={property.property.details}
+                    id={property._id}
+                    auctionStartDate={property.auctionStartDate}
+                    auctionEndDate={property.auctionEndDate}
+                    startingBid={
+                      property.highestBid
+                        ? property.highestBid
+                        : property.startingBid
+                    }
+                    auctionId={property._id}
+                  />
+                </Col>
+              </Wrap>
+            ))}
+          </Carousel>
+        </Row>
+      ) : (
+        // approvedAuctions.length === 0 &&
+        showApprovedAuctions && (
+          <div>
+            <h1>No Approved Auction</h1>
+          </div>
+        )
+      )}
     </Container>
   );
 }
