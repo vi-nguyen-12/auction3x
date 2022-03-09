@@ -26,19 +26,19 @@ export const SidebarMenu = [
     subNav: [
       {
         name: "Saved Auctions",
-        path: "/Auctions/SavedAuctions",
+        path: "/Dashboard/Auctions/SavedAuctions",
       },
       {
         name: "Pending Auctions",
-        path: "/Auctions/PendingAuctions",
+        path: "/Dashboard/Auctions/PendingAuctions",
       },
       {
         name: "Bid Auctions",
-        path: "/Auctions/BidAuctions",
+        path: "/Dashboard/Auctions/BidAuctions",
       },
       {
         name: "Win Auctions",
-        path: "/Auctions/WinAuctions",
+        path: "/Dashboard/Auctions/WinAuctions",
       },
     ],
   },
@@ -51,15 +51,15 @@ export const SidebarMenu = [
     subNav: [
       {
         name: "Pending Listings",
-        path: "/Listings/PendingListings",
+        path: "/Dashboard/Listings/PendingListings",
       },
       {
-        name: "Live Listings",
-        path: "/Listings/LiveListings",
+        name: "Auction Listings",
+        path: "/Dashboard/Listings/LiveListings",
       },
       {
         name: "Sold Listings",
-        path: "/Listings/SoldListings",
+        path: "/Dashboard/Listings/SoldListings",
       },
     ],
   },

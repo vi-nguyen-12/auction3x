@@ -1,7 +1,7 @@
 /* Dashboard Header*/
 .row {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 .profileContainer {
@@ -216,8 +216,8 @@
 }
 
 .profileInline {
-  height: 300px;
-  width: 260px;
+  height: 94%;
+  width: 92%;
   background-color: #c4c4c4;
   border-radius: 20px;
 }

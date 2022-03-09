@@ -43,13 +43,13 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
           <Switch>
             <Route exact path="/Dashboard" component={Dash} />
             <Route exact path="/Dashboard/Messaging" component={Messaging} />
-            <Route exact path="/BidAuctions" component={BidAuctions} />
-            <Route exact path="/PendingAuctions" component={PendingAuctions} />
-            <Route exact path="/SavedAuctions" component={SavedAuctions} />
-            <Route exact path="/WinAuctions" component={WinAuctions} />
-            <Route exact path="/LiveListings" component={LiveListings} />
-            <Route exact path="/PendingListings" component={PendingListings} />
-            <Route exact path="/SoldListings" component={SoldListings} />
+            <Route exact path="/Dashboard/Auctions/BidAuctions" component={BidAuctions} />
+            <Route exact path="/Dashboard/Auctions/PendingAuctions" component={PendingAuctions} />
+            <Route exact path="/Dashboard/Auctions/SavedAuctions" component={SavedAuctions} />
+            <Route exact path="/Dashboard/Auctions/WinAuctions" component={WinAuctions} />
+            <Route exact path="/Dashboard/Listings/AuctionListings" component={LiveListings} />
+            <Route exact path="/Dashboard/Listings/PendingListings" component={PendingListings} />
+            <Route exact path="/Dashboard/Listings/SoldListings" component={SoldListings} />
             <Route exact path="/Dashboard/Profile" component={Profile} />
             <Route exact path="/Dashboard/Setting" component={Setting} />
           </Switch>

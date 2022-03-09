@@ -169,6 +169,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
+  const [startAuction, setStartAuction] = useState();
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -193,12 +194,17 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     //for ongoing auction
     const auctionData = auctions.find((item) => item._id === id);
     const propertyData = properties.find((item) => item._id === id);
-    setAuction(auctionData);
+    setAuction(auctionData ? auctionData : propertyData);
     setAuctionProp(auctionData ? auctionData.property : propertyData.property);
+
+    console.log(auction, auctionProp);
 
     //set dates for ongoing auction end date
     setOnGoingAuctionEnd(
       auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
+    );
+    setStartAuction(
+      auctionData ? auctionData.auctionStartDate : propertyData.auctionStartDate
     );
 
     //set location for map
@@ -238,7 +244,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
 
   return (
     <>
-      {auction && location && auctionProp && (
+      {auction && location && auctionProp && startAuction && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
@@ -461,7 +467,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0 35px" }}>
+          <Row style={{ padding: "0 25px" }}>
             <Col>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
@@ -639,30 +645,57 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                <Col>
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "center",
-                      backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      borderRadius: "10px",
-                      padding: "20px",
-                    }}
-                  >
-                    <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                {onGoingAuctionEnd >= new Date() ? (
+                  <Col>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "left",
-                        marginLeft: "10px",
-                        color: "#7c7c7c",
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "20px",
                       }}
                     >
-                      <p>Auction Ends</p>
+                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        <p>Auction Ends</p>
+                      </div>
                     </div>
-                  </div>
-                </Col>
+                  </Col>
+                ) : (
+                  <Col>
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "20px",
+                      }}
+                    >
+                      <AuctionTimer auctionEndDate={startAuction} />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        <p>Auction Starts In</p>
+                      </div>
+                    </div>
+                  </Col>
+                )}
 
                 <Col>
                   {auction.highestBid ? (
