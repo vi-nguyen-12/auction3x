@@ -66,14 +66,14 @@ const UpcomingCard = ({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/DisplayUpcomings/${id}`);
+      history.push(`/DisplayAuctions/${id}`);
     } else {
       setShowKYC(true);
     }
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayUpcomings/${id}`);
+    history.push(`/DisplayAuctions/${id}`);
   };
 
   useEffect(() => {

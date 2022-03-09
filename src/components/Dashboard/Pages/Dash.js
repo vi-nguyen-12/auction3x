@@ -6,81 +6,9 @@ import { MdOutlineRefresh } from "react-icons/md";
 import "react-circular-progressbar/dist/styles.css";
 import authServices from "../../../services/authServices";
 import { useSelector } from "react-redux";
-import SavedAuctionsCard from "./Auctions/SavedAuctionsCard";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import styled from "styled-components";
-
-const Carousel = styled(Slider)`
-  // height: 30vh;
-  // overflow: hidden;
-
-  & > button {
-    opacity: 1;
-    height: 100%;
-    width: 15vw;
-    z-index: 1;
-
-    &:hover {
-      opacity: 1;
-      transition: opacity 0.2s ease 0s;
-    }
-  }
-
-  ul li button {
-    &:before {
-      top: -3vh;
-      font-size: 20px;
-      color: gray;
-      left: -35px;
-    }
-  }
-
-  li.slick-active button:before {
-    color: #e9af84;
-  }
-
-  .slick-list {
-    overflow: initial;
-  }
-
-  .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100%;
-  }
-
-  .slick-prev:before {
-    color: #e9af84;
-    font-size: 50px;
-  }
-
-  .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100%;
-  }
-
-  .slick-next:before {
-    color: #e9af84;
-    font-size: 50px;
-  }
-`;
-
-const Wrap = styled.div`
-border-radius: 4px;
-cursor: pointer;
-position: relative;
-
-
-  &:hover {
-    padding: 0;
-    // border: 4px solid rgba(249, 249, 249, 0.8);
-    transition-duration: 300ms;
-  }
-}
-`;
+import SavedAuctionsComp from "./Auctions/TabsComponents/SavedAuctionsComp";
+import BidAuctionsComp from "./Auctions/TabsComponents/BidAuctionsComp";
+import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp";
 
 function Dash() {
   const [savedProp, setSavedProp] = useState([]);
@@ -98,14 +26,6 @@ function Dash() {
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
-
-  let settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    slidesToShow: savedProperties.length > 3 ? 3 : savedProperties.length,
-  };
 
   useEffect(() => {
     setUpcomingAuctions(property.length);
@@ -239,30 +159,10 @@ function Dash() {
       </Row>
       {showSavedProp && savedProp.length > 0 ? (
         <Row>
-          <Carousel {...settings}>
-            {savedProp.map((property, index) => (
-              <Wrap key={index}>
-                <Col md={12}>
-                  <SavedAuctionsCard
-                    url={property.property.images[0].url}
-                    data={property.property.details}
-                    id={property._id}
-                    auctionStartDate={property.auctionStartDate}
-                    auctionEndDate={property.auctionEndDate}
-                    startingBid={
-                      property.highestBid
-                        ? property.highestBid
-                        : property.startingBid
-                    }
-                    auctionId={property._id}
-                  />
-                </Col>
-              </Wrap>
-            ))}
-          </Carousel>
+          <SavedAuctionsComp savedProp = {savedProp} />
         </Row>
       ) : (
-        savedProp.length === 0 &&
+        // savedProp.length === 0 &&
         showSavedProp && (
           <div>
             <h1>No Saved Auction</h1>
@@ -272,30 +172,10 @@ function Dash() {
 
       {showBidAuctions && bidAuctions.length > 0 ? (
         <Row>
-          <Carousel {...settings}>
-            {bidAuctions.map((property, index) => (
-              <Wrap key={index}>
-                <Col md={12}>
-                  <SavedAuctionsCard
-                    url={property.property.images[0].url}
-                    data={property.property.details}
-                    id={property._id}
-                    auctionStartDate={property.auctionStartDate}
-                    auctionEndDate={property.auctionEndDate}
-                    startingBid={
-                      property.highestBid
-                        ? property.highestBid
-                        : property.startingBid
-                    }
-                    auctionId={property._id}
-                  />
-                </Col>
-              </Wrap>
-            ))}
-          </Carousel>
+          <BidAuctionsComp bidAuctions = {bidAuctions} />
         </Row>
       ) : (
-        bidAuctions.length === 0 &&
+        // bidAuctions.length === 0 &&
         showBidAuctions && (
           <div>
             <h1>No Bid Auction</h1>
@@ -305,27 +185,7 @@ function Dash() {
 
       {showApprovedAuctions && approvedAuctions.length > 0 ? (
         <Row>
-          <Carousel {...settings}>
-            {approvedAuctions.map((property, index) => (
-              <Wrap key={index}>
-                <Col md={12}>
-                  <SavedAuctionsCard
-                    url={property.property.images[0].url}
-                    data={property.property.details}
-                    id={property._id}
-                    auctionStartDate={property.auctionStartDate}
-                    auctionEndDate={property.auctionEndDate}
-                    startingBid={
-                      property.highestBid
-                        ? property.highestBid
-                        : property.startingBid
-                    }
-                    auctionId={property._id}
-                  />
-                </Col>
-              </Wrap>
-            ))}
-          </Carousel>
+          <ApprovedAuctionsComp approvedAuctions = {approvedAuctions} />
         </Row>
       ) : (
         // approvedAuctions.length === 0 &&
