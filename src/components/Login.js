@@ -31,7 +31,6 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        console.log(response);
         if (
           response.data.error === "Invalid email or password" ||
           response.data.error === "Email is not found"
@@ -143,7 +142,7 @@ const Login = ({
             </button>
             <div
               className="pb-2"
-              style={{ position: "relative", fontSize: "15px" }}
+              style={{ position: "relative", fontSize: "15px", color: "black" }}
             >
               Not registered?
               <button

@@ -10,30 +10,30 @@ const SidebarLink = styled(Link)`
   align-items: center;
   padding: 20px;
   list-style: none;
-  height: 60px;
+  height: 70px;
   text-decoration: none;
   font-size: 18px;
-  &:hover {
-    border-left: 4px solid #b77b50;
-    color: #b77b50;
-    cursor: pointer;
-  }
-  &:focus {
-    border-left: 4px solid #b77b50;
-    cursor: pointer;
-  }
 `;
 
-const SidebarLabel = styled.span`
-  margin-left: 16px;
+const SidebarLabel = styled.button`
+  padding: 10px;
+  padding-left: 15%;
+  width: -webkit-fill-available;
+  display: flex;
+  background: none;
+  border: none;
   color: #96a0af;
+  font-weight: bold;
+  font-size: 16px;
   &:hover {
+    border-left: 4px solid #b77b50;
     color: #b77b50;
     cursor: pointer;
-    };
+    }
   &:focus {
-    color: #b77b50;
-    cursor: pointer;
+      border-left: 4px solid #b77b50;
+      color: #b77b50;
+      cursor: pointer;
     }
 `;
 
@@ -46,11 +46,6 @@ const DropdownLink = styled(Link)`
   text-decoration: none;
   color: #96a0af;
   font-size: 18px;
-  &:hover {
-    background: white;
-    border-left: 4px solid #b77b50;
-    cursor: pointer;
-  }
 `;
 
 const SubMenu = ({ item }) => {
@@ -59,10 +54,7 @@ const SubMenu = ({ item }) => {
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        <div>
-          {item.icon}
-          <SidebarLabel>{item.name}</SidebarLabel>
-        </div>
+        <SidebarLabel > {item.icon} <span style={{ padding: "15px" }} /> {item.name}</SidebarLabel>
         <div>
           {item.subNav && subnav
             ? item.iconOpened
@@ -76,8 +68,7 @@ const SubMenu = ({ item }) => {
         item.subNav.map((item, index) => {
           return (
             <DropdownLink to={item.path} key={index}>
-              {item.icon}
-              <SidebarLabel>{item.name}</SidebarLabel>
+              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px" }}>{item.name}</SidebarLabel>
             </DropdownLink>
           );
         })
