@@ -1,5 +1,5 @@
 const env = {
-  API_URL: "https://auction10xbe.herokuapp.com",
+  API_URL: "http://localhost:5000",
   API_Key: "AIzaSyAcHd3S5vDRGMkLFIlwKcvCVcA3EetsxMU",
 };
 

@@ -37,6 +37,27 @@ const SidebarLabel = styled.button`
     }
 `;
 
+// const FirstLabel = styled.button`
+// padding: 10px;
+// padding-left: 15%;
+// width: -webkit-fill-available;
+// display: flex;
+// background: none;
+// border: none;
+// font-weight: bold;
+// font-size: 16px;
+// &:hover {
+//   border-left: 4px solid #b77b50;
+//   color: #b77b50;
+//   cursor: pointer;
+//   }
+// &:focus {
+//     border-left: 4px solid #b77b50;
+//     color: #b77b50;
+//     cursor: pointer;
+//   }
+// `;
+
 const DropdownLink = styled(Link)`
   background: white;
   height: 60px;
@@ -48,13 +69,20 @@ const DropdownLink = styled(Link)`
   font-size: 18px;
 `;
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, path }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
+  console.log(path);
+  console.log(item.path);
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        <SidebarLabel > {item.icon} <span style={{ padding: "15px" }} /> {item.name}</SidebarLabel>
+        {/* {path === '/Dashboard' && item.path === ("Dashboard") ? (
+          <FirstLabel> {item.icon} <span style={{ padding: "15px" }} /> {item.name}</FirstLabel>
+        ) : (
+          null
+        )} */}
+        < SidebarLabel className='firstLabel' id={window.location.pathname == path ? "active" : ""} > {item.icon} < span style={{ padding: "15px" }} /> {item.name}</SidebarLabel>
         <div>
           {item.subNav && subnav
             ? item.iconOpened

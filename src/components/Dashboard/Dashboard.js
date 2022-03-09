@@ -26,10 +26,12 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
     toogleShow();
   }, []);
   const location = useLocation();
+  const path = window.location.pathname;
+  console.log(path);
   return (
     <div style={{ display: "flex" }}>
       <Router>
-        <Sidebar />
+        <Sidebar path={path} />
         <div
           style={{
             display: "-moz-initial",
