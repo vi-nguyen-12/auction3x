@@ -50,8 +50,8 @@ export const SidebarMenu = [
     iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow " />,
     subNav: [
       {
-        name: "Pending Listings",
-        path: "/Dashboard/Listings/PendingListings",
+        name: "Pending Approval",
+        path: "/Dashboard/Listings/PendingApproval",
       },
       {
         name: "Auction Listings",

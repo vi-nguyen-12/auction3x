@@ -48,7 +48,7 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
             <Route exact path="/Dashboard/Auctions/SavedAuctions" component={SavedAuctions} />
             <Route exact path="/Dashboard/Auctions/WinAuctions" component={WinAuctions} />
             <Route exact path="/Dashboard/Listings/AuctionListings" component={LiveListings} />
-            <Route exact path="/Dashboard/Listings/PendingListings" component={PendingListings} />
+            <Route exact path="/Dashboard/Listings/PendingApproval" component={PendingListings} />
             <Route exact path="/Dashboard/Listings/SoldListings" component={SoldListings} />
             <Route exact path="/Dashboard/Profile" component={Profile} />
             <Route exact path="/Dashboard/Setting" component={Setting} />
