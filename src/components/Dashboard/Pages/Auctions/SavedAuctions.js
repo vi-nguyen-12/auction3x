@@ -8,7 +8,7 @@ function SavedAuctions() {
   return (
     <Container>
       <Row>
-        {savedProperty.map((property) => (
+        {savedProperty.slice(0, 4).map((property) => (
           <Col key={property._id}>
             <SavedAuctionsCard
               data={property.property.details}

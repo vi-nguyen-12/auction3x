@@ -60,6 +60,7 @@ function App() {
 
   if (user._id) {
     authService.getRegistStatus().then((res) => {
+      console.log(res.data);
       dispatch(addRegistProp(res.data));
     });
     authService.getSavedProperties(user._id).then((res) => {

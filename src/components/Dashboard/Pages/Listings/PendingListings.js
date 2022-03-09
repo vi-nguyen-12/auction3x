@@ -36,7 +36,7 @@ function PendingListings() {
           ))}
         </Row>
       ) : (
-        <h1>No Pending Listings</h1>
+        <h1>No Pending Approval</h1>
       )}
     </Container>
   );

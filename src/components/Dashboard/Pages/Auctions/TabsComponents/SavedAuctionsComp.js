@@ -8,8 +8,8 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
-  // height: 30vh;
-  // overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -82,8 +82,8 @@ function SavedAuctionsComp({ savedProp }) {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: true,
-    slidesToShow: savedProp.length > 3 ? 3 : savedProp.length,
+    autoplay: false,
+    slidesToShow: savedProp.length > 3 ? 2 : savedProp.length,
   };
 
   return (
@@ -92,7 +92,7 @@ function SavedAuctionsComp({ savedProp }) {
         <Carousel {...settings}>
           {savedProp.map((property, index) => (
             <Wrap key={index}>
-              <Col md={12}>
+              <Col>
                 <SavedAuctionsCard
                   url={property.property.images[0].url}
                   data={property.property.details}
