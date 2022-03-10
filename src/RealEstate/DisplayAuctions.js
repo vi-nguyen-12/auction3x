@@ -680,6 +680,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "20px",
+                        color:"black",
                       }}
                     >
                       <AuctionTimer auctionEndDate={startAuction} />
@@ -716,7 +717,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "20px" }}
+                          style={{ fontWeight: "700", fontSize: "22px" }}
                         />
                       </h4>
                       <p
@@ -749,7 +750,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "20px" }}
+                          style={{ fontWeight: "700", fontSize: "22px" }}
                         />
                       </h4>
                       <p
@@ -779,7 +780,15 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       padding: "33px",
                     }}
                   >
-                    <h4 style={{ padding: "8px" }}>199,530</h4>
+                    <h4
+                      style={{
+                        padding: "8px",
+                        fontWeight: "700",
+                        fontSize: "22px",
+                      }}
+                    >
+                      199,530
+                    </h4>
                     <p
                       style={{
                         display: "flex",
@@ -1012,7 +1021,9 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                 Executive Summary
               </span>
             </div>
-            <Col style={{ fontSize: "20px", paddingRight: "40px" }}>
+            <Col
+              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+            >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
               Office. The property is being offered in a Fee Simple interest,
@@ -1032,7 +1043,9 @@ function DisplayAuctions({ colorChange, toogleChange }) {
               19th century, and it became well known for its brewing industry.
             </Col>
 
-            <Col style={{ fontSize: "20px", paddingRight: "40px" }}>
+            <Col
+              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+            >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city
               in the past two decades include the Milwaukee Riverwalk, the

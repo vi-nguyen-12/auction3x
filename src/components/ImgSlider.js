@@ -123,14 +123,14 @@ const ImgSlider = () => {
                 <HomeBottom>
                   <h2>
                     <NumberFormat
-                      style={{ fontSize: "25px" }}
+                      style={{ fontSize: "50px", color: "white" }}
                       value={item.property.details.assessments[0].total_value}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
                     />
                   </h2>
-                  <span>
+                  <span style={{ color: "white", fontSize:"20px" }}>
                     HOUSE IN {item.property.details.address.city},
                     {item.property.details.address.state}, UNITED STATES
                   </span>

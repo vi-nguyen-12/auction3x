@@ -75,7 +75,7 @@ const Header = ({ color, change }) => {
     };
     getKYCstatus();
   }, [user]);
-  
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {
@@ -698,28 +698,14 @@ const Header = ({ color, change }) => {
                 >
                   <Button
                     className="signIn-btn"
-                    style={{
-                      fontSize: 16,
-                      color: "black",
-                      fontWeight: "bold",
-                      backgroundColor: "transparent",
-                      border: "0",
-                    }}
                     variant="success"
                     onClick={toogleSignIn}
                   >
                     Sign In
                   </Button>
-                  <label>|</label>
+                  <label style={{ color: "black" }}>|</label>
                   <Button
                     className="signUp-btn"
-                    style={{
-                      fontSize: 16,
-                      color: "black",
-                      fontWeight: "bold",
-                      backgroundColor: "transparent",
-                      border: "0",
-                    }}
                     variant="success"
                     onClick={toogleSignUp}
                   >
