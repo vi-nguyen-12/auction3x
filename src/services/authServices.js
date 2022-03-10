@@ -241,7 +241,7 @@ const authService = {
   },
 
   getUserBidAuctions(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/buyer/bidAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/bidAuctions`);
   },
 
   buyerApprovedAuctions(id) {
