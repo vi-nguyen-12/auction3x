@@ -812,6 +812,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       fontWeight: "400",
                       fontSize: "30px",
                       marginLeft: "20px",
+                      color: "black",
                     }}
                   >
                     Property Info
@@ -1016,6 +1017,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   fontWeight: "400",
                   fontSize: "25px",
                   marginLeft: "20px",
+                  color: "black",
                 }}
               >
                 Executive Summary
