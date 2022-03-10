@@ -26,10 +26,8 @@ function Dash() {
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
-  const [toggle, setToggle] = React.useState(true);
-  const toggleIt = () => {
-    setToggle(!toggle)
-  }
+  const [color, setColor] = useState('#b77b50');
+  const toogleColor = (color) => setColor(color);
 
 
   useEffect(() => {
@@ -37,6 +35,7 @@ function Dash() {
     setLiveAuctions(auctions.length);
     if (user._id) {
       setSavedProp(savedProperties);
+      setColor('#b77b50');
     }
   }, [property, auctions, savedProperties, user]);
 
@@ -112,19 +111,33 @@ function Dash() {
       <Row>
         <Col>
           <div className="tab" >
-            <Button
-              onClick={() => {
-                toogleShowApprovedAuctions(false);
-                toogleShowBidAuctions(false);
-                getSavedProperty();
-                toogleShowSavedProp(true);
-                toggleIt(toggle ? false : true)
-              }}
-              // style={{ borderBottom: color, color: textColor }}
-              className={toggle && 'body-color'}
-            >
-              <span>Saved Auction</span>
-            </Button>
+            {window.location.pathname === "/Dashboard" ?
+              <Button
+                onClick={() => {
+                  toogleShowApprovedAuctions(false);
+                  toogleShowBidAuctions(false);
+                  getSavedProperty();
+                  toogleShowSavedProp(true);
+                }}
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
+                className="tabs"
+              >
+                <span>Saved Auction</span>
+              </Button>
+              : <Button
+                onClick={() => {
+                  toogleShowApprovedAuctions(false);
+                  toogleShowBidAuctions(false);
+                  getSavedProperty();
+                  toogleShowSavedProp(true);
+                }}
+                // style={{ borderBottom: color, color: textColor }}
+                className="tabs"
+              >
+                <span>Saved Auction</span>
+              </Button>}
+
             <Button
               onClick={() => {
                 toogleShowApprovedAuctions(false);
