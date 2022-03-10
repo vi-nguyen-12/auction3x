@@ -1,74 +1,81 @@
 import axios from "axios";
-import env from "../env";
+
+const apiUrl =
+  process.env.REACT_APP_NODE_ENV === "production"
+    ? process.env.REACT_APP_API_URL
+    : "http://localhost:5000";
+const auth_token = document.cookie.split("=")[1];
+
+console.log(apiUrl);
 
 const authService = {
   register(user) {
-    return axios.post(env.API_URL + "/api/users/register", user);
+    return axios.post(apiUrl + "/api/users/register", user);
   },
 
   getUsers(data) {
-    return axios.post(
-      env.API_URL + "/api/users/checkJWT",
-      { authToken: data },
-      {
-        withCredentials: true,
-      }
-    );
+    return axios.post(apiUrl + "/api/users/checkJWT", { authToken: data });
   },
 
   verify(data) {
-    return axios.post(env.API_URL + "/api/users/verify", data);
+    return axios.post(apiUrl + "/api/users/verify", data);
   },
 
   login(data) {
-    return axios.post(env.API_URL + "/api/users/login", data, {
-      withCredentials: true,
-    });
-  },
-
-  logout() {
-    return axios.get(env.API_URL + "/api/users/logout", {
-      withCredentials: true,
-    });
+    // return axios.post(apiUrl + "/api/users/login", data, {
+    //   withCredentials: true,
+    // });
+    return axios.post(apiUrl + "/api/users/login", data);
   },
 
   realEstate(data) {
-    return axios.get(env.API_URL + "/api/properties/real-estates/search", {
+    return axios.get(apiUrl + "/api/properties/real-estates/search", {
       params: data,
     });
   },
 
   saveRealEstate(data) {
-    return axios.post(env.API_URL + "/api/properties/real-estates/", data, {
-      withCredentials: true,
+    return axios.post(apiUrl + "/api/properties/real-estates/", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
     });
   },
 
   saveImages(data) {
     return axios.post(
-      env.API_URL + "/api/properties/real-estates/images/upload",
+      apiUrl + "/api/properties/real-estates/images/upload",
       data,
       {
-        withCredentials: true,
-        headers: { "content-type": "multipart/form-data" },
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "content-type": "multipart/form-data",
+        },
       }
     );
   },
 
   saveVideos(data) {
     return axios.post(
-      env.API_URL + "/api/properties/real-estates/videos/upload",
+      apiUrl + "/api/properties/real-estates/videos/upload",
       data,
       {
-        withCredentials: true,
-        headers: { "content-type": "multipart/form-data" },
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "content-type": "multipart/form-data",
+        },
       }
     );
   },
 
   saveLives(data) {
     return axios.post(
-      env.API_URL + "/api/properties/real-estates/videos/upload",
+      apiUrl + "/api/properties/real-estates/videos/upload",
       data,
       {
         withCredentials: true,
@@ -78,127 +85,159 @@ const authService = {
   },
 
   fetchKycStatus(data) {
-    return axios.get(env.API_URL + "/api/kyc/fetchKycStatus", data);
+    return axios.get(apiUrl + "/api/kyc/fetchKycStatus", data);
   },
 
   verifyKyc(data) {
-    return axios.get(env.API_URL + "/api/kyc/verifyKyc", {
-      withCredentials: true,
+    return axios.get(apiUrl + "/api/kyc/verifyKyc", {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
     });
   },
 
   getProperties() {
-    return axios.get(env.API_URL + "/api/properties/real-estates");
+    return axios.get(apiUrl + "/api/properties/real-estates");
   },
 
   saveDocuments(data) {
     return axios.post(
-      env.API_URL + "/api/properties/real-estates/documents/upload",
+      apiUrl + "/api/properties/real-estates/documents/upload",
       data,
       {
-        withCredentials: true,
-        headers: { "content-type": "multipart/form-data" },
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "content-type": "multipart/form-data",
+        },
       }
     );
   },
 
   sendProperty(id) {
-    return axios.get(env.API_URL + "/api/properties/real-estates/" + id);
+    return axios.get(apiUrl + "/api/properties/real-estates/" + id);
   },
 
   buyerRegister(data) {
-    return axios.post(env.API_URL + "/api/buyers", data, {
-      withCredentials: true,
+    return axios.post(apiUrl + "/api/buyers", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
     });
   },
 
   getBuyerQuestions() {
-    return axios.get(env.API_URL + "/api/questions", { withCredentials: true });
+    return axios.get(apiUrl + "/api/questions", {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   auctionBid(data) {
     return axios.put(
-      env.API_URL + "/api/auctions/bidding/" + data.id,
+      apiUrl + "/api/auctions/bidding/" + data.id,
       {
         biddingTime: data.biddingTimes,
         biddingPrice: data.bidding,
       },
-      { withCredentials: true }
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
     );
   },
 
   // getAuctionProperty(id) {
-  //   return axios.get(env.API_URL + "/api/auctions/propertyId/" + id);
+  //   return axios.get(apiUrl + "/api/auctions/propertyId/" + id);
   // },
 
   getUpcomingAuctions() {
-    return axios.get(env.API_URL + "/api/auctions/real-estates/upcoming", {
-      withCredentials: true,
+    return axios.get(apiUrl + "/api/auctions/real-estates/upcoming", {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
     });
   },
 
   getRegistStatus() {
-    return axios.get(
-      env.API_URL + "/api/auctions/real-estates/status?buyer=true",
-      { withCredentials: true }
-    );
+    return axios.get(apiUrl + "/api/auctions/real-estates/status?buyer=true", {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   getOngoingAuctions() {
-    return axios.get(env.API_URL + "/api/auctions/real-estates/ongoing");
+    return axios.get(apiUrl + "/api/auctions/real-estates/ongoing");
   },
 
   forgotPassword(data) {
-    return axios.post(env.API_URL + "/api/users/password", data);
+    return axios.post(apiUrl + "/api/users/password", data);
   },
 
   resetPassword(data) {
-    return axios.post(env.API_URL + "/api/users/password", {
+    return axios.post(apiUrl + "/api/users/password", {
       token: data.token,
       password: data.password,
     });
   },
 
   resendConfirmEmail(data) {
-    return axios.post(env.API_URL + "/api/users/confirmation/email", {
+    return axios.post(apiUrl + "/api/users/confirmation/email", {
       email: data.email,
     });
   },
 
   confirmEmail(data) {
-    return axios.post(env.API_URL + "/api/users/confirmation/verify", {
+    return axios.post(apiUrl + "/api/users/confirmation/verify", {
       token: data,
     });
   },
 
   getDocuSign(data) {
     return axios.get(
-      env.API_URL +
+      apiUrl +
         `/api/docusign/signature/sellerAgreement/uiviews?envelopeId=${data}`,
-      { withCredentials: true }
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
     );
   },
 
   getDocuSignStatus(data) {
-    return axios.get(env.API_URL + `/api/docusign/envelopes/${data}/status`, {
+    return axios.get(apiUrl + `/api/docusign/envelopes/${data}/status`, {
       withCredentials: true,
     });
   },
 
   saveProperty(data) {
     return axios.put(
-      env.API_URL + `/api/users/${data.userId}/likes/${data.auctionId}`
+      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`
     );
   },
 
   removeProperty(data) {
     return axios.delete(
-      env.API_URL + `/api/users/${data.userId}/likes/${data.auctionId}`
+      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`
     );
   },
 
   getSavedProperties(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/likes`);
+    return axios.get(apiUrl + `/api/users/${id}/likes`);
   },
 
   getUserBidAuctions(id) {
@@ -206,23 +245,23 @@ const authService = {
   },
 
   buyerApprovedAuctions(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/buyer/approvedAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/approvedAuctions`);
   },
 
   buyerWonAuctions(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/buyer/winAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/winAuctions`);
   },
 
   sellerApprovedAuctions(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/seller/approvedAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/approvedAuctions`);
   },
 
   sellerPendingAuctions(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/seller/pendingListings`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/pendingListings`);
   },
 
   sellerApprovedListings(id) {
-    return axios.get(env.API_URL + `/api/users/${id}/seller/approvedListings`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/approvedListings`);
   },
 };
 
