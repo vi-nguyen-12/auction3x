@@ -16,8 +16,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* span{
+  color: black!important;
+} */
+
+/* h1, h2, h3, h4, h6 {
+  color: black!important;
+} */
+h4{
+  color: black!important;
+}
+
 a {
-  color: #f9f9f9;
+  color: #000000;
   text-decoration: none;
 }
 

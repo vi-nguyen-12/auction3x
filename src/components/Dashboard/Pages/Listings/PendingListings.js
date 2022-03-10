@@ -8,11 +8,14 @@ function PendingListings() {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
 
-  useEffect(async () => {
-    const id = user._id;
-    await authService.sellerPendingAuctions(id).then((data) => {
-      setPendingListings(data);
-    });
+  useEffect(() => {
+    const fetchPendingListings = async () => {
+      const id = user._id;
+      await authService.sellerPendingAuctions(id).then((data) => {
+        setPendingListings(data);
+      });
+    };
+    fetchPendingListings();
   }, []);
 
   return (

@@ -38,12 +38,9 @@ const Header = ({ color, change }) => {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
 
   const handleLogout = async () => {
-    await authService.logout().then((res) => {
-      if (res.data.message === "User logged out") {
-        dispatch(logout());
-        window.location.reload();
-      }
-    });
+    document.cookie = "auth_token=; path=/";
+    dispatch(logout());
+    window.location.reload();
   };
 
   const handleOnClick = (page) => () => {
@@ -66,15 +63,19 @@ const Header = ({ color, change }) => {
     setWindowSize(window.innerWidth);
   };
 
-  useEffect(async () => {
-    if (user._id && !user.KYC) {
-      const response = await authService.verifyKyc({
-        params: { userId: user._id },
-      });
-      const url = response.data.url;
-      setKycUrl(url);
-    }
+  useEffect(() => {
+    const getKYCstatus = async () => {
+      if (user._id && !user.KYC) {
+        const response = await authService.verifyKyc({
+          params: { userId: user._id },
+        });
+        const url = response.data.url;
+        setKycUrl(url);
+      }
+    };
+    getKYCstatus();
   }, [user]);
+  
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {

@@ -8,11 +8,14 @@ function BidAuctions() {
   const user = useSelector((state) => state.user);
   const [bidAuctions, setBidAuctions] = useState([]);
 
-  useEffect(async () => {
-    const id = user._id;
-    await authService.getUserBidAuctions(id).then((data) => {
-      setBidAuctions(data);
-    });
+  useEffect(() => {
+    const fetchBidAuctions = async () => {
+      const id = user._id;
+      await authService.getUserBidAuctions(id).then((data) => {
+        setBidAuctions(data);
+      });
+    };
+    fetchBidAuctions();
   }, []);
   return (
     <Container>

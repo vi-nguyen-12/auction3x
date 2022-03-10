@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import "../styles/Search.css";
 
 // let autoComplete;
 
@@ -50,19 +51,8 @@ function SearchBar() {
   // }, []);
 
   return (
-    <div className="search-location-input" style={{ width: "300px" }}>
+    <div className="search-location-input">
       <input
-        style={{
-          width: "100%",
-          padding: "5px",
-          display: "flex",
-          margin: "0",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: "5px",
-          border: "0",
-          height: "40px",
-        }}
         ref={autoCompleteRef}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Enter a City"

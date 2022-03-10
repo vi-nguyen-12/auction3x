@@ -1,8 +1,94 @@
 import React from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
+import "../../../styles/DashBoardStyle.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import styled from "styled-components";
+
+const Carousel = styled(Slider)`
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  & > button {
+    opacity: 1;
+    height: 100%;
+    width: 15vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+
+  ul li button {
+    &:before {
+      top: -3vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
+  }
+
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    left: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-prev:before {
+    color: #e9af84;
+    font-size: 50px;
+  }
+
+  .slick-next {
+    right: -75px;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-next:before {
+    color: #e9af84;
+    font-size: 50px;
+  }
+`;
+
+const Wrap = styled.div`
+border-radius: 15px;
+// cursor: pointer;
+// position: relative;
+width: 250px;
+height: 150px;
+
+  // &:hover {
+  //   padding: 0;
+  //   transform: scale(1.03);
+  //   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  // }
+}
+`;
 
 function Profile() {
+  const savedProperty = useSelector((state) => state.savedProperty);
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: savedProperty.length > 3 ? 3 : savedProperty.length,
+  };
   return (
     <Container className="profileContainer">
       <Row>
@@ -62,10 +148,30 @@ function Profile() {
             </Button>
           </div>
         </Col>
-        <Col style={{paddingLeft:"70px"}} sm={9}>
-          <div className="list">
-            <h3>Listed Property</h3>
-          </div>
+        <Col style={{ paddingLeft: "70px" }} sm={9}>
+          <h3>Listed Property</h3>
+          <Row>
+            <Carousel {...settings}>
+              {savedProperty.map((property, index) => (
+                <Wrap key={index}>
+                  <div className="listItem">
+                    <img
+                      src={property.property.images[0].url}
+                      alt="property"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "15px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </div>
+                </Wrap>
+              ))}
+            </Carousel>
+          </Row>
         </Col>
       </Row>
     </Container>

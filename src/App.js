@@ -35,7 +35,6 @@ import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
 
 function App() {
   const user = useSelector((state) => state.user);
-  const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = document.cookie.split("=")[1];
