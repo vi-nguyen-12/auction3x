@@ -8,11 +8,14 @@ function WinAuctions() {
   const user = useSelector((state) => state.user);
   const [winAuctions, setWinAuctions] = useState([]);
 
-  useEffect(async () => {
-    const id = user._id;
-    await authService.buyerWonAuctions(id).then((data) => {
-      setWinAuctions(data);
-    });
+  useEffect(() => {
+    const fetchWinAuctions = async () => {
+      const id = user._id;
+      await authService.buyerWonAuctions(id).then((data) => {
+        setWinAuctions(data);
+      });
+    };
+    fetchWinAuctions();
   }, []);
 
   return (

@@ -66,15 +66,19 @@ const Header = ({ color, change }) => {
     setWindowSize(window.innerWidth);
   };
 
-  useEffect(async () => {
-    if (user._id && !user.KYC) {
-      const response = await authService.verifyKyc({
-        params: { userId: user._id },
-      });
-      const url = response.data.url;
-      setKycUrl(url);
-    }
+  useEffect(() => {
+    const getKYCstatus = async () => {
+      if (user._id && !user.KYC) {
+        const response = await authService.verifyKyc({
+          params: { userId: user._id },
+        });
+        const url = response.data.url;
+        setKycUrl(url);
+      }
+    };
+    getKYCstatus();
   }, [user]);
+  
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {

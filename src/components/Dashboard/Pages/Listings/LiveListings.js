@@ -9,12 +9,15 @@ function LiveListings() {
   const [approvedProperty, setApprovedProperty] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
-  useEffect(async () => {
-    const id = user._id;
-    await authService.sellerApprovedAuctions(id).then((data) => {
-      console.log(data);
-      setUpcomingAuctions(data);
-    });
+  useEffect(() => {
+    const fetchApprovedProperty = async () => {
+      const id = user._id;
+      await authService.sellerApprovedAuctions(id).then((data) => {
+        console.log(data);
+        setUpcomingAuctions(data);
+      });
+    };
+    fetchApprovedProperty();
   }, []);
   return (
     <Container>
