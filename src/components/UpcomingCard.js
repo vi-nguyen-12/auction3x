@@ -25,6 +25,7 @@ const UpcomingCard = ({
 }) => {
   const user = useSelector((state) => state.user);
   const property = useSelector((state) => state.property);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -66,20 +67,23 @@ const UpcomingCard = ({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/DisplayUpcomings/${id}`);
+      history.push(`/DisplayAuctions/${id}`);
     } else {
       setShowKYC(true);
     }
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayUpcomings/${id}`);
+    history.push(`/DisplayAuctions/${id}`);
   };
 
   useEffect(() => {
     const startDate = new Date(startRegister).toLocaleString().split(",")[0];
     const endDate = new Date(endRegister).toLocaleString().split(",")[0];
     const auctionData = property.find((item) => item._id === id);
+    if (savedProperty.find((item) => item._id === id)) {
+      setFavorite(true);
+    }
     setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);

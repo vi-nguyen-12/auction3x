@@ -63,15 +63,19 @@ const Header = ({ color, change }) => {
     setWindowSize(window.innerWidth);
   };
 
-  useEffect(async () => {
-    if (user._id && !user.KYC) {
-      const response = await authService.verifyKyc({
-        params: { userId: user._id },
-      });
-      const url = response.data.url;
-      setKycUrl(url);
-    }
+  useEffect(() => {
+    const getKYCstatus = async () => {
+      if (user._id && !user.KYC) {
+        const response = await authService.verifyKyc({
+          params: { userId: user._id },
+        });
+        const url = response.data.url;
+        setKycUrl(url);
+      }
+    };
+    getKYCstatus();
   }, [user]);
+  
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
     return () => {
@@ -813,9 +817,9 @@ const Header = ({ color, change }) => {
                     )}
                     <button
                       className="fw-bold p-3"
-                      onClick={handleOnClick("profile")}
+                      onClick={handleOnClick("Dashboard")}
                     >
-                      Profile
+                      My Dashboard
                     </button>
                     <button
                       className="fw-bold p-3"

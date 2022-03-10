@@ -1,7 +1,7 @@
 /* Dashboard Header*/
 .row {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
 .profileContainer {
@@ -211,15 +211,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-left: 50px;
-  margin-top: 50px; */
 }
 
 .profileInline {
-  height: 300px;
-  width: 260px;
+  height: 94%;
+  width: 92%;
   background-color: #c4c4c4;
   border-radius: 20px;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.listItem{
+  width: 250px;
+  height: 150px;
+  border-radius: 15px;
+  background-color: none;
 }
 
 /* Chat Messaging */

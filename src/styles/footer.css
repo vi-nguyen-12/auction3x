@@ -47,7 +47,12 @@ ul {
 
 a {
   font-size: 1.5rem;
-  color: #fff !important;
+  color: #fff;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #fff;
   text-decoration: none !important;
 }
 

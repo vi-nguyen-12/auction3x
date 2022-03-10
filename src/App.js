@@ -31,6 +31,7 @@ import ScrollTop from "./components/ScrollTop";
 import DisplayAuctions from "./RealEstate/DisplayAuctions";
 import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
 import Dashboard from "./components/Dashboard/Dashboard";
+import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -58,6 +59,7 @@ function App() {
 
   if (user._id) {
     authService.getRegistStatus().then((res) => {
+      console.log(res.data);
       dispatch(addRegistProp(res.data));
     });
     authService.getSavedProperties(user._id).then((res) => {
@@ -90,25 +92,30 @@ function App() {
         <Header color={color} change={change} />
         <ScrollTop />
         <Switch>
-          <Route exact path="/MultiSellForm">
-            <div className="sell-register-container">
-              <MultiSellForm colorChange={colorChange} />
-            </div>
-          </Route>
-
-          <Route exact path="/DisplayAuctions/:id">
+          {user._id && (
+            <Route exact path="/MultiSellForm">
+              <div className="sell-register-container">
+                <MultiSellForm colorChange={colorChange} />
+              </div>
+            </Route>
+          )}
+          <Route path="/DisplayAuctions/:id">
             <DisplayAuctions
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
           </Route>
 
-          <Route exact path="/DisplayUpcomings/:id">
+          <Route path="/DisplayUpcomings/:id">
             <DisplayUpcomings
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
           </Route>
+{/* 
+          <Route exact path="/dashboard/Auctions/SavedAuctions">
+            <SavedAuctions colorChange={colorChange} />
+          </Route> */}
 
           <Route exact path="/realEstates">
             <RealEstates
@@ -117,7 +124,7 @@ function App() {
             />
           </Route>
           {user._id && (
-            <Route exact path="/dashBoard">
+            <Route path="/Dashboard">
               <Dashboard
                 toogleShow={toogleShow}
                 colorChange={colorChange}

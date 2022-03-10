@@ -66,7 +66,7 @@ function SavedAuctionsCard({
       return toogleSignIn();
     }
     if (user.KYC) {
-      history.push(`/DisplayAuctions/${id}`);
+      window.open(`/DisplayAuctions/${id}`);
       // window.location.reload();
     } else {
       setShowKYC(true);
@@ -74,18 +74,24 @@ function SavedAuctionsCard({
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayAuctions/${id}`);
+    window.open(`/DisplayAuctions/${id}`);
     // window.setTimeout(() => {
     //   window.location.reload();
     // }, 800);
   };
 
   useEffect(() => {
-    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
+    if(auctionStartDate !== undefined){
+      const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
+      setAuctionStartDate(startDate);
+    }
+    else{
+      const startDate = "n/a";
+      setAuctionStartDate(startDate);
+    }
     const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
     const auctionData = auctions.find((item) => item._id === id);
     const propertyData = property.find((item) => item._id === id);
-    setAuctionStartDate(startDate);
     setAuctionEndDate(endDate);
     setOnGoingAuctionEnd(
       auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate

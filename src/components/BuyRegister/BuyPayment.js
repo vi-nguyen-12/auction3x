@@ -45,20 +45,23 @@ const BuyAuthoried = ({
     question5ID,
   ];
 
-  useEffect(async () => {
-    await authService.getBuyerQuestions().then((res) => {
-      setQuestion1(res.data[0].questionText);
-      setQuestion2(res.data[1].questionText);
-      setQuestion3(res.data[2].questionText);
-      setQuestion4(res.data[3].questionText);
-      setQuestion5(res.data[4].questionText);
+  useEffect(() => {
+    const getQuestion = async () => {
+      await authService.getBuyerQuestions().then((res) => {
+        setQuestion1(res.data[0].questionText);
+        setQuestion2(res.data[1].questionText);
+        setQuestion3(res.data[2].questionText);
+        setQuestion4(res.data[3].questionText);
+        setQuestion5(res.data[4].questionText);
 
-      setQuestion1ID(res.data[0]._id);
-      setQuestion2ID(res.data[1]._id);
-      setQuestion3ID(res.data[2]._id);
-      setQuestion4ID(res.data[3]._id);
-      setQuestion5ID(res.data[4]._id);
-    });
+        setQuestion1ID(res.data[0]._id);
+        setQuestion2ID(res.data[1]._id);
+        setQuestion3ID(res.data[2]._id);
+        setQuestion4ID(res.data[3]._id);
+        setQuestion5ID(res.data[4]._id);
+      });
+    };
+    getQuestion();
   }, []);
 
   // const onSubmit = () => {

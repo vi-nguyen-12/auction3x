@@ -6,7 +6,7 @@ function Confirm({ colorChange }) {
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
 
-  useEffect(async () => {
+  useEffect(() => {
     colorChange("black");
     authServices.confirmEmail(token).then((res) => {
       if (res.data.error) {
