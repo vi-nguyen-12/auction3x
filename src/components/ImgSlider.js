@@ -7,6 +7,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
+import "../styles/Search.css";
 
 const Carousel = styled(Slider)`
   height: 99vh;
@@ -224,26 +225,11 @@ const ImgSlider = () => {
                   </div>
                 </div>
               </div> */}
-              <div
-                className="col-12 col-sm-6 col-md-4 mt-3"
-                style={{
-                  width: "375px",
-                  backgroundColor: "white",
-                  display: "flex",
-                }}
-              >
-                <div className="form-group" style={{ width: "300px" }}>
+              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
+                <div className="form-group">
                   <SearchBar />
                 </div>
-                <button
-                  style={{
-                    border: "0",
-                    width: "100%",
-                    backgroundColor: "",
-                    marginRight: "-12px",
-                  }}
-                  type="submit"
-                >
+                <button type="submit">
                   <ImSearch />
                 </button>
               </div>
