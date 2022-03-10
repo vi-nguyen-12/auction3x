@@ -38,12 +38,9 @@ const Header = ({ color, change }) => {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
 
   const handleLogout = async () => {
-    await authService.logout().then((res) => {
-      if (res.data.message === "User logged out") {
-        dispatch(logout());
-        window.location.reload();
-      }
-    });
+    document.cookie = "auth_token=; path=/";
+    dispatch(logout());
+    window.location.reload();
   };
 
   const handleOnClick = (page) => () => {

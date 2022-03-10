@@ -34,7 +34,6 @@ import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
-  const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = document.cookie.split("=")[1];
