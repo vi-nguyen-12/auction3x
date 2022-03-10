@@ -25,3 +25,11 @@ a:after {
   color: black !important;
   text-decoration: none !important;
 }
+.body-color {
+  color: #b77b50;
+  border-bottom: 4px solid #b77b50;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  border: none;
+}

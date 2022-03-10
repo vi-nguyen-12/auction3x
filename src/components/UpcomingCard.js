@@ -81,9 +81,12 @@ const UpcomingCard = ({
     const startDate = new Date(startRegister).toLocaleString().split(",")[0];
     const endDate = new Date(endRegister).toLocaleString().split(",")[0];
     const auctionData = property.find((item) => item._id === id);
-    if (savedProperty.find((item) => item._id === id)) {
-      setFavorite(true);
+    if (savedProperty.length !== 0) {
+      if (savedProperty.find((item) => item._id === id)) {
+        setFavorite(true);
+      }
     }
+
     setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);

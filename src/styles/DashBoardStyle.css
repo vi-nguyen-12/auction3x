@@ -304,11 +304,3 @@
 .address Button:hover {
   background-color: transparent;
 }
-
-/* .firstLabel #active {
-  background-color: #4bd67f !important;
-} */
-
-.sideBarList #active {
-  background-color: #4bd67f;
-}

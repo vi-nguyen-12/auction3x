@@ -14,7 +14,7 @@ function Dash() {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
-  const [showSavedProp, setShowSavedProp] = useState(false);
+  const [showSavedProp, setShowSavedProp] = useState(true);
   const [showBidAuctions, setShowBidAuctions] = useState(false);
   const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
   const [liveAuctions, setLiveAuctions] = useState();
@@ -26,11 +26,19 @@ function Dash() {
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
+  const [toggle, setToggle] = React.useState(true);
+  const toggleIt = () => {
+    setToggle(!toggle)
+  }
+
 
   useEffect(() => {
     setUpcomingAuctions(property.length);
     setLiveAuctions(auctions.length);
-  }, [property, auctions]);
+    if (user._id) {
+      setSavedProp(savedProperties);
+    }
+  }, [property, auctions, savedProperties, user]);
 
   const getSavedProperty = () => {
     if (user._id) {
@@ -49,7 +57,7 @@ function Dash() {
     const data = await authServices.buyerApprovedAuctions(id);
     setApprovedAuctions(data);
   };
-
+  console.log(savedProp.length)
   return (
     // <div className="DashContainer">
     //   <div className="DashBody">
@@ -103,15 +111,17 @@ function Dash() {
 
       <Row>
         <Col>
-          <div className="tab">
+          <div className="tab" >
             <Button
               onClick={() => {
                 toogleShowApprovedAuctions(false);
                 toogleShowBidAuctions(false);
                 getSavedProperty();
                 toogleShowSavedProp(true);
+                toggleIt(toggle ? false : true)
               }}
-              className="tabs"
+              // style={{ borderBottom: color, color: textColor }}
+              className={toggle && 'body-color'}
             >
               <span>Saved Auction</span>
             </Button>
@@ -159,7 +169,7 @@ function Dash() {
       </Row>
       {showSavedProp && savedProp.length > 0 ? (
         <Row>
-          <SavedAuctionsComp savedProp = {savedProp} />
+          <SavedAuctionsComp savedProp={savedProp} />
         </Row>
       ) : (
         // savedProp.length === 0 &&
@@ -172,7 +182,7 @@ function Dash() {
 
       {showBidAuctions && bidAuctions.length > 0 ? (
         <Row>
-          <BidAuctionsComp bidAuctions = {bidAuctions} />
+          <BidAuctionsComp bidAuctions={bidAuctions} />
         </Row>
       ) : (
         // bidAuctions.length === 0 &&
@@ -185,7 +195,7 @@ function Dash() {
 
       {showApprovedAuctions && approvedAuctions.length > 0 ? (
         <Row>
-          <ApprovedAuctionsComp approvedAuctions = {approvedAuctions} />
+          <ApprovedAuctionsComp approvedAuctions={approvedAuctions} />
         </Row>
       ) : (
         // approvedAuctions.length === 0 &&

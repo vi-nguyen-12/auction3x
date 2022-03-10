@@ -13,7 +13,7 @@ const Sidebar = ({ path }) => {
             </h1> */}
       <ul className="sideBarList">
         {SidebarMenu.map((item, index) => {
-          return <SubMenu className="row" id={window.location.pathname == item.path ? "active" : ""} key={index} item={item} path={path} />;
+          return <SubMenu key={index} item={item} path={path} />;
         })}
       </ul>
     </div>
