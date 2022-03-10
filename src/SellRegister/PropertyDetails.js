@@ -913,7 +913,29 @@ const PropertyDetails = ({
                 </tbody>
               </table>
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "100px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <textarea
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    resize: "none",
+                    fontSize: "17px",
+                  }}
+                  name="description"
+                  className="form-control"
+                  placeholder="Property Description(Optional)"
+                ></textarea>
+              </div>
+
+              {/* <div style={{ display: "flex", justifyContent: "center",}}>
                 <textarea
                   style={{
                     width: "70%",
@@ -926,7 +948,7 @@ const PropertyDetails = ({
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
-              </div>
+              </div> */}
               <div className="bottom-btn" style={{ width: "100%" }}>
                 <button
                   className="pre-btn"

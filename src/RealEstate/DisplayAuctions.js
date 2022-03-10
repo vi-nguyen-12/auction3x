@@ -197,8 +197,6 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     setAuction(auctionData ? auctionData : propertyData);
     setAuctionProp(auctionData ? auctionData.property : propertyData.property);
 
-    console.log(auction, auctionProp);
-
     //set dates for ongoing auction end date
     setOnGoingAuctionEnd(
       auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
@@ -617,7 +615,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    disabled
                   >
                     Bid Now!
                   </button>
@@ -638,6 +636,49 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   </div>
                 </div>
               )}
+
+              {user._id &&
+                user.KYC &&
+                setRegistered &&
+                new Date() >= startAuction && (
+                  <div
+                    style={{
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
+                        border: "0",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      onClick={tooglePlaceBid}
+                    >
+                      Bid Now!
+                    </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
+                  </div>
+                )}
             </Col>
           </Row>
 
@@ -680,7 +721,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "20px",
-                        color:"black",
+                        color: "black",
                       }}
                     >
                       <AuctionTimer auctionEndDate={startAuction} />

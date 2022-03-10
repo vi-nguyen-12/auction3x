@@ -135,6 +135,7 @@ const Agree = ({
             height: "fit-content",
             position: "absolute",
             bottom: "200px",
+            color: "black",
           }}
         >
           <input

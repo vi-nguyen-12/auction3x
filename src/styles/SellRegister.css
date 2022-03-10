@@ -262,12 +262,11 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: -130px;
 }
 
 .list-form {
   width: 700px;
-  height: 730px;
+  height: 770px;
   box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
   border-radius: 3px;
   position: relative;
@@ -458,6 +457,7 @@ ul.dashed > li:before {
   position: absolute;
   bottom: 5px;
   align-content: center;
+  color: black;
 }
 #status p {
   font-size: 10px;
@@ -505,11 +505,13 @@ h1 {
 
 .input-form-1 {
   padding: 75px;
+  color: black;
 }
 
 .input-form-2 {
   padding: 75px;
   margin-right: -86px;
+  color: black;
 }
 
 .amount-input {
@@ -698,6 +700,7 @@ h1 {
   border-bottom: #333 solid 1px;
   justify-content: left;
   text-align: left;
+  color: black;
 }
 
 col {
@@ -721,6 +724,7 @@ summary::after {
   transition: 0.2s;
   content: "\002B";
   font-size: 28px;
+  color: black;
 }
 
 details[open] summary::after {
