@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Profile from "./Pages/Profile";
-import Setting from "./Pages/Setting";
 import BidAuctions from "./Pages/Auctions/BidAuctions";
 import SavedAuctions from "./Pages/Auctions/SavedAuctions";
 import PendingAuctions from "./Pages/Auctions/PendingAuctions";
@@ -51,7 +50,6 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
             <Route exact path="/Dashboard/Listings/PendingApproval" component={PendingListings} />
             <Route exact path="/Dashboard/Listings/SoldListings" component={SoldListings} />
             <Route exact path="/Dashboard/Profile" component={Profile} />
-            <Route exact path="/Dashboard/Setting" component={Setting} />
           </Switch>
         </div>
       </Router>

@@ -24,3 +24,31 @@
   outline: none;
   box-shadow: none;
 }
+
+.signIn-btn {
+  font-size: 16;
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0;
+}
+
+.signIn-btn:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
+}
+
+.signUp-btn {
+  font-size: 16;
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+  border: 0;
+}
+
+.signUp-btn:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none;
+}

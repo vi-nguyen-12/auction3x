@@ -106,6 +106,7 @@ const PropertyDetails = ({
                         marginBottom: "10px",
                         fontWeight: "bold",
                         fontSize: "15px",
+                        color: "black",
                       }}
                       defaultValue={property.address.formatted_street_address}
                       {...register("street_address", { required: false })}
@@ -117,6 +118,7 @@ const PropertyDetails = ({
                       fontSize: "13px",
                       bottom: "15px",
                       left: "200px",
+                      color: "black",
                     }}
                   >
                     Street Address
@@ -135,6 +137,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "100px",
+                              color: "black",
                             }}
                             type="text"
                             name="state"
@@ -154,6 +157,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "100px",
+                              color: "black",
                             }}
                             type="text"
                             name="city"
@@ -173,6 +177,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "80px",
+                              color: "black",
                             }}
                             type="number"
                             name="zipCode"
@@ -187,6 +192,7 @@ const PropertyDetails = ({
                           left: "200px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>State</td>
@@ -218,7 +224,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="text"
                             name="ownerName"
                             className="form-control"
@@ -235,7 +241,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="text"
                             name="propertyType"
                             className="form-control"
@@ -252,6 +258,7 @@ const PropertyDetails = ({
                           left: "109px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>
@@ -287,7 +294,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="rooms_count"
                             className="form-control"
@@ -304,7 +311,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="sqft"
                             className="form-control"
@@ -321,7 +328,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="beds"
                             className="form-control"
@@ -339,7 +346,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="baths"
                             className="form-control"
@@ -354,6 +361,7 @@ const PropertyDetails = ({
                           left: "109px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>
@@ -394,6 +402,7 @@ const PropertyDetails = ({
                             style={{
                               fontSize: "17px",
                               fontWeight: "bold",
+                              color: "black",
                             }}
                             type="number"
                             name="total_value"
@@ -410,6 +419,7 @@ const PropertyDetails = ({
                           style={{
                             position: "relative",
                             fontSize: "13px",
+                            color: "black",
                           }}
                         >
                           Market Value
@@ -438,6 +448,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="reservedAmount"
@@ -453,6 +464,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="discussedAmount"
@@ -461,7 +473,7 @@ const PropertyDetails = ({
                       />
                     </td>
                   </tr>
-                  <tr style={{ display: "flex" }}>
+                  <tr style={{ display: "flex", color:"black" }}>
                     <td style={{ display: "flex", marginLeft: "140px" }}>
                       Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
                     </td>
@@ -481,6 +493,7 @@ const PropertyDetails = ({
                     paddingLeft: "10px",
                     position: "absolute",
                     bottom: "15%",
+                    color: "black",
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
@@ -562,6 +575,7 @@ const PropertyDetails = ({
                     marginBottom: "10px",
                     fontWeight: "bold",
                     fontSize: "15px",
+                    color: "black",
                   }}
                   defaultValue={property.street_address}
                   {...register("street_address", { required: false })}
@@ -573,6 +587,7 @@ const PropertyDetails = ({
                   fontSize: "13px",
                   bottom: "15px",
                   left: "200px",
+                  color: "black",
                 }}
               >
                 Street Address
@@ -591,6 +606,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "100px",
+                          color: "black",
                         }}
                         defaultValue={property.state}
                         type="text"
@@ -610,6 +626,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "100px",
+                          color: "black",
                         }}
                         defaultValue={property.city}
                         type="text"
@@ -629,6 +646,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "80px",
+                          color: "black",
                         }}
                         defaultValue={property.zipCode}
                         type="number"
@@ -643,6 +661,7 @@ const PropertyDetails = ({
                       left: "200px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>State</td>
@@ -670,7 +689,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="text"
                         name="ownerName"
                         className="form-control"
@@ -686,7 +705,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="text"
                         name="propertyType"
                         className="form-control"
@@ -700,6 +719,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>
@@ -729,7 +749,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="rooms_count"
                         className="form-control"
@@ -745,7 +765,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="sqft"
                         className="form-control"
@@ -761,7 +781,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="beds"
                         className="form-control"
@@ -778,7 +798,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="baths"
                         className="form-control"
@@ -792,6 +812,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>
@@ -827,6 +848,7 @@ const PropertyDetails = ({
                           style={{
                             fontSize: "17px",
                             fontWeight: "bold",
+                            color: "black",
                           }}
                           type="number"
                           name="total_value"
@@ -841,6 +863,7 @@ const PropertyDetails = ({
                       style={{
                         position: "relative",
                         fontSize: "13px",
+                        color: "black",
                       }}
                     >
                       Market Value<span style={{ color: "#ff0000" }}>*</span>
@@ -866,6 +889,7 @@ const PropertyDetails = ({
                           style={{
                             fontSize: "17px",
                             fontWeight: "bold",
+                            color: "black",
                           }}
                           type="number"
                           name="reservedAmount"
@@ -888,6 +912,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="discussedAmount"
@@ -901,6 +926,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>
@@ -913,7 +939,30 @@ const PropertyDetails = ({
                 </tbody>
               </table>
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "100px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <textarea
+                  style={{
+                    width: "80%",
+                    height: "100%",
+                    resize: "none",
+                    fontSize: "17px",
+                    color: "black",
+                  }}
+                  name="description"
+                  className="form-control"
+                  placeholder="Property Description(Optional)"
+                ></textarea>
+              </div>
+
+              {/* <div style={{ display: "flex", justifyContent: "center",}}>
                 <textarea
                   style={{
                     width: "70%",
@@ -926,7 +975,7 @@ const PropertyDetails = ({
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
-              </div>
+              </div> */}
               <div className="bottom-btn" style={{ width: "100%" }}>
                 <button
                   className="pre-btn"

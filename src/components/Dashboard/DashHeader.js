@@ -16,7 +16,7 @@ function DashHeader({ location }) {
           <div className="search">
             <div className="searchBar">
               <input type="text" placeholder="Search Here" />
-              <FiSearch />
+              <FiSearch color="black" size={25} />
             </div>
             <Button className="bell">
               <BsBellFill color="#737b8b" size={23} />

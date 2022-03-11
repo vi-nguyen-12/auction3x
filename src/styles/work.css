@@ -1,49 +1,61 @@
-.row-custom{
-    text-align: center;
+.row-custom {
+  text-align: center;
 }
 
-.heading{
-    margin-top: 5rem !important;
-    font-size: 3.5rem;
-    font-style: normal;
-    font-weight: 700;
+.heading {
+  margin-top: 5rem !important;
+  font-size: 3.5rem;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
 }
 
-.card-work{
-    border-radius: 1rem !important;
-    margin: 0 auto;
+.card-work {
+  border-radius: 1rem !important;
+  margin: 0 auto;
 }
 
-.content-1{
-    color:  #868686;
-    font-size: 1.5rem;
+.content-1 {
+  color: #868686;
+  font-size: 1.5rem;
 }
 
-.card-content{
-    margin: 5rem 5rem;
+.card-content {
+  margin: 5rem 5rem;
 }
 
-.card-body{
-    text-align: left;
+.card-body {
+  text-align: left;
 }
 
-.card-title{
-    font-weight: bold !important;
+.card-title {
+  font-weight: bold !important;
+  color: black;
 }
 
-.card-text{
-    color: #868686;
+.card-text {
+  color: #868686;
 }
 
-h2{
-    /* margin-top: 5px !important; */
+h2 {
+  /* margin-top: 5px !important; */
 }
 
-.card-number{
-    height: 4rem;
-    width: 4rem;
-    margin-left: 2rem;
-    background: linear-gradient(90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
-    border-radius: 9px;
-    margin-top: 1rem;
+.card-number {
+  height: 4rem;
+  width: 4rem;
+  margin-left: 2rem;
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  border-radius: 9px;
+  margin-top: 1rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

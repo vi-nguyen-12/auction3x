@@ -16,17 +16,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* span{
-  color: black!important;
-} */
-
-/* h1, h2, h3, h4, h6 {
-  color: black!important;
-} */
-h4{
-  color: black!important;
-}
-
 a {
   color: #000000;
   text-decoration: none;
@@ -44,10 +33,10 @@ a {
 }
 @media only screen and (max-width: 479px) {
   body {
-      font-size: 14px;
+    font-size: 14px;
   }
 }
 
-.form-control{
-  color: #040714 !important;;
+.form-control {
+  color: #040714 !important;
 }

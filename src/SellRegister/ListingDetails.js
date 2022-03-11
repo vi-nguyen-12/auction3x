@@ -116,7 +116,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
           }}
           className="list-form"
         >
-          <h6 style={{ fontWeight: "bolder", fontSize: "20px" }}>
+          <h6 style={{ fontWeight: "bolder", fontSize: "20px", color:"black" }}>
             Search Property
           </h6>
 
@@ -161,8 +161,8 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                         : "suggestion-item";
                       // inline style for demonstration purpose
                       const style = suggestion.active
-                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                        : { backgroundColor: "#ffffff", cursor: "pointer" };
+                        ? { backgroundColor: "#fafafa", cursor: "pointer", color:"black" }
+                        : { backgroundColor: "#ffffff", cursor: "pointer", color:"black" };
                       return (
                         <div
                           key={index}
@@ -198,6 +198,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               bottom: "10px",
               fontSize: "13px",
               marginBottom: "10px",
+              color: "black",
             }}
           >
             Address Line 1<span style={{ color: "#ff0000" }}>*</span>
@@ -227,6 +228,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
               bottom: "10px",
               fontSize: "13px",
               marginBottom: "10px",
+              color: "black",
             }}
           >
             Address Line 2<span style={{ color: "#ff0000" }}>*</span>
@@ -283,6 +285,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   left: "109px",
                   fontSize: "13px",
                   bottom: "5px",
+                  color: "black",
                 }}
               >
                 <td>
@@ -341,6 +344,7 @@ const ListingDetails = ({ toogleStep, step, properties }) => {
                   left: "109px",
                   fontSize: "13px",
                   bottom: "5px",
+                  color: "black",
                 }}
               >
                 <td>

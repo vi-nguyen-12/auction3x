@@ -30,7 +30,10 @@ const Agree = ({
     await authService.getDocuSign(envelopeId).then((res) => {
       setLoader(false);
       setEnvelopeId(res.data.envelopeId);
-      if (res.data.status !== "signing_complete") {
+      if (
+        res.data.status !== "signing_complete" &&
+        res.data.status !== "viewing_complete"
+      ) {
         window.open(res.data.redirectUrl);
       }
     });
@@ -43,7 +46,10 @@ const Agree = ({
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
         setLoader(false);
-        if (res.data.status !== "signing_complete") {
+        if (
+          res.data.status !== "signing_complete" &&
+          res.data.status !== "viewing_complete"
+        ) {
           alert("Please sign the docusign before proceeding ");
         } else {
           authService
@@ -60,7 +66,10 @@ const Agree = ({
               documents,
             })
             .then((res) => {
-              if (res.status === 200) {
+              if (res.data.error) {
+                alert(res.data.error);
+              } else {
+                alert("Successfully create a property to sell");
                 history.push("/");
                 window.scrollTo(0, 0);
               }
@@ -135,6 +144,7 @@ const Agree = ({
             height: "fit-content",
             position: "absolute",
             bottom: "200px",
+            color: "black",
           }}
         >
           <input
