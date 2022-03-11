@@ -81,11 +81,12 @@ function SavedAuctionsCard({
   };
 
   useEffect(() => {
-    if(auctionStartDate !== undefined){
-      const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
+    if (auctionStartDate !== undefined) {
+      const startDate = new Date(auctionStartDate)
+        .toLocaleString()
+        .split(",")[0];
       setAuctionStartDate(startDate);
-    }
-    else{
+    } else {
       const startDate = "n/a";
       setAuctionStartDate(startDate);
     }
@@ -98,7 +99,7 @@ function SavedAuctionsCard({
     );
   }, []);
   return (
-    <div>
+    <div style={{ margin: "30px" }}>
       {auctionDate && auctionEnd && (
         <Card
           className="savedCard text-left m-auto"
@@ -112,6 +113,7 @@ function SavedAuctionsCard({
             boxShadow:
               "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
             transition: "all ease 200ms",
+            color: "black",
           }}
         >
           {showKYC && (
@@ -166,16 +168,16 @@ function SavedAuctionsCard({
             > */}
             {/* <div> */}
             <Row>
-              <Col md={5} style={{ width: "50%" }}>
+              <Col md={5} style={{ width: "50%", color: "black" }}>
                 <p style={{ fontSize: "15px", width: "100px" }}>
                   Online Auction
                 </p>
               </Col>
 
-              <Col md={6} style={{ width: "50%" }}>
+              <Col md={6} style={{ width: "50%", color: "black" }}>
                 <p
                   style={{
-                    fontSize: "12px",
+                    fontSize: "15px",
                     width: "250px",
                   }}
                 >
@@ -212,6 +214,7 @@ function SavedAuctionsCard({
                   style={{
                     fontSize: "12px",
                     width: "250px",
+                    color: "black",
                   }}
                 >
                   {data.structure.beds_count
@@ -229,7 +232,7 @@ function SavedAuctionsCard({
             {/* </div> */}
             {/* </div> */}
 
-            <hr />
+            <hr style={{ color: "black" }} />
             {/* <div
               style={{
                 display: "flex",
@@ -239,7 +242,7 @@ function SavedAuctionsCard({
             > */}
             {/* <div> */}
             <Row>
-              <Col style={{ display: "flex" }}>
+              <Col style={{ display: "grid", justifyContent: "flex-start" }}>
                 <p className="grey-small">Starting Bid</p>
                 <p className="black-bold">
                   <NumberFormat

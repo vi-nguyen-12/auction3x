@@ -68,11 +68,6 @@ export const SidebarMenu = [
     path: "/Dashboard/Profile",
     icon: <CgProfile size={30} />,
   },
-  {
-    name: "Settings",
-    path: "/Dashboard/Setting",
-    icon: <AI.AiFillSetting size={30} />,
-  },
 ];
 
 export default SidebarMenu;

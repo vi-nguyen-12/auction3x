@@ -171,7 +171,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
                   style={{ width: "50%", marginTop: "10px" }}
                   htmlFor="images-btn"
                 >
-                  <AiOutlinePlusCircle />
+                  <AiOutlinePlusCircle color="black" />
                 </label>
               </div>
             </details>

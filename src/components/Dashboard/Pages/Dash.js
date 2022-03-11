@@ -62,7 +62,7 @@ function Dash() {
               <h3>{liveAuctions}</h3>
             </div>
             <div className="progress">
-              <CircularProgressbar value={70} strokeWidth={20} stroke="red" />
+              <CircularProgressbar value={70} strokeWidth={20} />
             </div>
           </div>
         </Col>

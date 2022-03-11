@@ -241,7 +241,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
           <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD DOCUMENTS
           </h2>
-          <p>We only accept PDF Files</p>
+          <p style={{color:"black"}}>We only accept PDF Files</p>
 
           {loader ? (
             <div className="loader">
@@ -249,7 +249,7 @@ const DocumentsUpload = ({ toogleStep, step, toogleDocuments }) => {
             </div>
           ) : null}
         </Row>
-        <Row style={{ height: "1300px", overflowX: "hidden", margin: "125px" }}>
+        <Row style={{ height: "1300px", overflowX: "hidden", margin: "125px", color:"black" }}>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
               Title Report (.pdf) <span style={{ color: "#ff0000" }}>*</span>
