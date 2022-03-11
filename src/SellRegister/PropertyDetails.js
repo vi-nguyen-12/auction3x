@@ -106,6 +106,7 @@ const PropertyDetails = ({
                         marginBottom: "10px",
                         fontWeight: "bold",
                         fontSize: "15px",
+                        color: "black",
                       }}
                       defaultValue={property.address.formatted_street_address}
                       {...register("street_address", { required: false })}
@@ -136,6 +137,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "100px",
+                              color: "black",
                             }}
                             type="text"
                             name="state"
@@ -155,6 +157,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "100px",
+                              color: "black",
                             }}
                             type="text"
                             name="city"
@@ -174,6 +177,7 @@ const PropertyDetails = ({
                               fontSize: "15px",
                               fontWeight: "bold",
                               width: "80px",
+                              color: "black",
                             }}
                             type="number"
                             name="zipCode"
@@ -220,7 +224,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="text"
                             name="ownerName"
                             className="form-control"
@@ -237,7 +241,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="text"
                             name="propertyType"
                             className="form-control"
@@ -290,7 +294,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="rooms_count"
                             className="form-control"
@@ -307,7 +311,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="sqft"
                             className="form-control"
@@ -324,7 +328,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="beds"
                             className="form-control"
@@ -342,7 +346,7 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold" }}
+                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                             type="number"
                             name="baths"
                             className="form-control"
@@ -398,6 +402,7 @@ const PropertyDetails = ({
                             style={{
                               fontSize: "17px",
                               fontWeight: "bold",
+                              color: "black",
                             }}
                             type="number"
                             name="total_value"
@@ -443,6 +448,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="reservedAmount"
@@ -458,6 +464,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="discussedAmount"
@@ -486,6 +493,7 @@ const PropertyDetails = ({
                     paddingLeft: "10px",
                     position: "absolute",
                     bottom: "15%",
+                    color: "black",
                   }}
                   placeholder="Property Description(Optional)"
                 ></textarea>
@@ -567,6 +575,7 @@ const PropertyDetails = ({
                     marginBottom: "10px",
                     fontWeight: "bold",
                     fontSize: "15px",
+                    color: "black",
                   }}
                   defaultValue={property.street_address}
                   {...register("street_address", { required: false })}
@@ -597,6 +606,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "100px",
+                          color: "black",
                         }}
                         defaultValue={property.state}
                         type="text"
@@ -616,6 +626,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "100px",
+                          color: "black",
                         }}
                         defaultValue={property.city}
                         type="text"
@@ -635,6 +646,7 @@ const PropertyDetails = ({
                           fontSize: "15px",
                           fontWeight: "bold",
                           width: "80px",
+                          color: "black",
                         }}
                         defaultValue={property.zipCode}
                         type="number"
@@ -677,7 +689,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="text"
                         name="ownerName"
                         className="form-control"
@@ -693,7 +705,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="text"
                         name="propertyType"
                         className="form-control"
@@ -737,7 +749,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="rooms_count"
                         className="form-control"
@@ -753,7 +765,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="sqft"
                         className="form-control"
@@ -769,7 +781,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="beds"
                         className="form-control"
@@ -786,7 +798,7 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold" }}
+                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
                         type="number"
                         name="baths"
                         className="form-control"
@@ -836,6 +848,7 @@ const PropertyDetails = ({
                           style={{
                             fontSize: "17px",
                             fontWeight: "bold",
+                            color: "black",
                           }}
                           type="number"
                           name="total_value"
@@ -876,6 +889,7 @@ const PropertyDetails = ({
                           style={{
                             fontSize: "17px",
                             fontWeight: "bold",
+                            color: "black",
                           }}
                           type="number"
                           name="reservedAmount"
@@ -898,6 +912,7 @@ const PropertyDetails = ({
                         style={{
                           fontSize: "17px",
                           fontWeight: "bold",
+                          color: "black",
                         }}
                         type="number"
                         name="discussedAmount"
@@ -939,6 +954,7 @@ const PropertyDetails = ({
                     height: "100%",
                     resize: "none",
                     fontSize: "17px",
+                    color: "black",
                   }}
                   name="description"
                   className="form-control"
