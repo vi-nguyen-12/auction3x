@@ -612,44 +612,49 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   </div>
                 </div>
               ) : (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
+                user._id &&
+                user.KYC &&
+                !setRegistered &&
+                new Date().toISOString() > registerEnded && (
+                  <div
                     style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
                     }}
-                    onClick={toogleRegister}
-                    disabled
                   >
-                    Register to Bid
-                  </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
                     <button
                       style={{
-                        fontWeight: "500",
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
                         border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
                       }}
-                      onClick={executeScroll}
+                      onClick={toogleRegister}
+                      disabled
                     >
-                      View Documents
+                      Register to Bid
                     </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )
               )}
 
               {user._id && user.KYC && setRegistered && (
