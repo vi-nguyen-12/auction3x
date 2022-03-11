@@ -224,7 +224,11 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="text"
                             name="ownerName"
                             className="form-control"
@@ -241,7 +245,11 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="text"
                             name="propertyType"
                             className="form-control"
@@ -294,7 +302,11 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="number"
                             name="rooms_count"
                             className="form-control"
@@ -311,11 +323,19 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="number"
                             name="sqft"
                             className="form-control"
-                            defaultValue={property.structure.total_area_sq_ft}
+                            defaultValue={
+                              property.structure.total_area_sq_ft
+                                ? property.structure.total_area_sq_ft
+                                : ""
+                            }
                             {...register("sqft", { required: false })}
                           />
                         </td>
@@ -328,7 +348,11 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="number"
                             name="beds"
                             className="form-control"
@@ -346,7 +370,11 @@ const PropertyDetails = ({
                           }}
                         >
                           <input
-                            style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                            style={{
+                              fontSize: "17px",
+                              fontWeight: "bold",
+                              color: "black",
+                            }}
                             type="number"
                             name="baths"
                             className="form-control"
@@ -409,6 +437,8 @@ const PropertyDetails = ({
                             className="sell-amount"
                             defaultValue={
                               property.market_assessments[0].total_value
+                                ? property.market_assessments[0].total_value
+                                : ""
                             }
                             // {...register("total_value", { required: false })}
                           />
@@ -473,7 +503,7 @@ const PropertyDetails = ({
                       />
                     </td>
                   </tr>
-                  <tr style={{ display: "flex", color:"black" }}>
+                  <tr style={{ display: "flex", color: "black" }}>
                     <td style={{ display: "flex", marginLeft: "140px" }}>
                       Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
                     </td>
@@ -689,7 +719,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="text"
                         name="ownerName"
                         className="form-control"
@@ -705,7 +739,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="text"
                         name="propertyType"
                         className="form-control"
@@ -749,7 +787,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="number"
                         name="rooms_count"
                         className="form-control"
@@ -765,7 +807,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="number"
                         name="sqft"
                         className="form-control"
@@ -781,7 +827,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="number"
                         name="beds"
                         className="form-control"
@@ -798,7 +848,11 @@ const PropertyDetails = ({
                       }}
                     >
                       <input
-                        style={{ fontSize: "17px", fontWeight: "bold", color: "black" }}
+                        style={{
+                          fontSize: "17px",
+                          fontWeight: "bold",
+                          color: "black",
+                        }}
                         type="number"
                         name="baths"
                         className="form-control"

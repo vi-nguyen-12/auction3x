@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 import "../styles/Timers.css";
 
-const AuctionTimer = ({ auctionEndDate, toogleAuction }) => {
+const AuctionTimer = ({ auctionEndDate, toogleRegistEnded }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -24,7 +24,7 @@ const AuctionTimer = ({ auctionEndDate, toogleAuction }) => {
 
       if (distance < 0) {
         clearInterval(interval.current);
-        toogleAuction();
+        toogleRegistEnded();
       } else {
         setDays(days);
         setHours(hours);
@@ -40,7 +40,7 @@ const AuctionTimer = ({ auctionEndDate, toogleAuction }) => {
   }, []);
 
   return (
-    <Table style={{margin:"auto"}} borderless>
+    <Table style={{ margin: "auto" }} borderless>
       <thead>
         <tr className="timerHead">
           <th>{days}</th>

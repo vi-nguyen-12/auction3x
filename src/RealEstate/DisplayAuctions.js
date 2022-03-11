@@ -134,6 +134,8 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   }
   const registeredProperty = checkProperty.find((item) => item._id === id);
   const [setRegistered, setRegisteredProperty] = useState(false);
+  const [registerEnded, setRegisterEnded] = useState();
+  const [approvedToBid, setApprovedToBid] = useState(false);
 
   const auctions = useSelector((state) => state.auction);
   const properties = useSelector((state) => state.property);
@@ -197,6 +199,11 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     setAuction(auctionData ? auctionData : propertyData);
     setAuctionProp(auctionData ? auctionData.property : propertyData.property);
 
+    //set registration end
+    setRegisterEnded(
+      auctionData ? auctionData.registerEndDate : propertyData.registerEndDate
+    );
+
     //set dates for ongoing auction end date
     setOnGoingAuctionEnd(
       auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
@@ -219,6 +226,12 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     if (user._id && user.KYC) {
       if (registeredProperty !== undefined) {
         setRegisteredProperty(true);
+      }
+
+      if (registeredProperty) {
+        if (registeredProperty.isApproved === "success") {
+          setApprovedToBid(true);
+        }
       }
     }
 
@@ -557,7 +570,10 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                 </div>
               )}
 
-              {user._id && user.KYC && !setRegistered && (
+              {user._id &&
+              user.KYC &&
+              !setRegistered &&
+              new Date().toISOString() < registerEnded ? (
                 <div
                   style={{
                     display: "grid",
@@ -576,6 +592,45 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       fontSize: "20px",
                     }}
                     onClick={toogleRegister}
+                  >
+                    Register to Bid
+                  </button>
+                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                    <button
+                      style={{
+                        fontWeight: "500",
+                        border: "0",
+                        borderBottom: "1px solid #919191",
+                        backgroundColor: "transparent",
+                        width: "fit-content",
+                        pointer: "cursor",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Documents
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    display: "grid",
+                    justifyContent: "right",
+                    width: "100%",
+                  }}
+                >
+                  <button
+                    style={{
+                      backgroundColor: "#e8a676",
+                      borderRadius: "10px",
+                      border: "0",
+                      width: "200px",
+                      height: "50px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                    onClick={toogleRegister}
+                    disabled
                   >
                     Register to Bid
                   </button>
@@ -615,7 +670,8 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    disabled
+                    onClick={tooglePlaceBid}
+                    disabled={!approvedToBid}
                   >
                     Bid Now!
                   </button>
@@ -636,49 +692,6 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                   </div>
                 </div>
               )}
-
-              {user._id &&
-                user.KYC &&
-                setRegistered &&
-                new Date() >= startAuction && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
-                    <button
-                      style={{
-                        backgroundColor: "#e8a676",
-                        borderRadius: "10px",
-                        border: "0",
-                        width: "200px",
-                        height: "50px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
-                      onClick={tooglePlaceBid}
-                    >
-                      Bid Now!
-                    </button>
-                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                      <button
-                        style={{
-                          fontWeight: "500",
-                          border: "0",
-                          borderBottom: "1px solid #919191",
-                          backgroundColor: "transparent",
-                          width: "fit-content",
-                          pointer: "cursor",
-                        }}
-                        onClick={executeScroll}
-                      >
-                        View Documents
-                      </button>
-                    </div>
-                  </div>
-                )}
             </Col>
           </Row>
 
@@ -686,7 +699,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                {onGoingAuctionEnd >= new Date() ? (
+                {new Date().toISOString() < onGoingAuctionEnd ? (
                   <Col>
                     <div
                       style={{
@@ -758,7 +771,11 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "22px", color:"black" }}
+                          style={{
+                            fontWeight: "700",
+                            fontSize: "22px",
+                            color: "black",
+                          }}
                         />
                       </h4>
                       <p
@@ -791,7 +808,11 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "22px", color:"black" }}
+                          style={{
+                            fontWeight: "700",
+                            fontSize: "22px",
+                            color: "black",
+                          }}
                         />
                       </h4>
                       <p
@@ -826,7 +847,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                         padding: "8px",
                         fontWeight: "700",
                         fontSize: "22px",
-                        color:"black"
+                        color: "black",
                       }}
                     >
                       199,530
