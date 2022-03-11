@@ -28,6 +28,7 @@ import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/ChangePass";
 import EmailConfirm from "./components/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
+import Docusign from "./components/Docusign";
 import DisplayAuctions from "./RealEstate/DisplayAuctions";
 import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -112,7 +113,7 @@ function App() {
               toogleChange={toogleChange}
             />
           </Route>
-{/* 
+          {/* 
           <Route exact path="/dashboard/Auctions/SavedAuctions">
             <SavedAuctions colorChange={colorChange} />
           </Route> */}
@@ -138,6 +139,10 @@ function App() {
           <Route path="/confirm_email">
             <EmailConfirm colorChange={colorChange} />
           </Route>
+          <Route path="/docusign/callback/:envelopeId">
+            <Docusign colorChange={colorChange} />
+          </Route>
+
           <Route exact path="/">
             <ImgSlider />
             <Featured />
