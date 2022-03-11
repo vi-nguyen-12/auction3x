@@ -45,7 +45,6 @@ const Agree = ({
     } else {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
-        console.log(res);
         setLoader(false);
         if (
           res.data.status !== "signing_complete" &&
@@ -67,7 +66,10 @@ const Agree = ({
               documents,
             })
             .then((res) => {
-              if (res.status === 200) {
+              if (res.data.error) {
+                alert(res.data.error);
+              } else {
+                alert("Successfully create a property to sell");
                 history.push("/");
                 window.scrollTo(0, 0);
               }
