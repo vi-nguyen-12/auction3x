@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AgreementForm from "./AgreementForm";
 import SellWelcome from "./SellWelcome";
 import UploadForm from "./UploadForm";
-import "../styles/SellRegister.css";
+import "../../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";

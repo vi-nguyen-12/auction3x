@@ -1,20 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import authServices from "../services/authServices";
+import authServices from "../../services/authServices";
 require("react-bootstrap/ModalHeader");
 
-const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
+const Seller = ({ RegistermodalClose, ConfirmmodalOpen }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    authServices.register(data)
+    authServices.register(data);
     RegistermodalClose();
     ConfirmmodalOpen();
   };
-  //const onSubmit = (data) => console.log(data);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <table style={{ marginBottom: "8px" }}>
@@ -73,7 +72,7 @@ const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
         </tr>
       </table>
       <div className="form-group mb-2">
-        <label>Broker Id</label>
+        <label>Extra Option</label>
         <input
           type="text"
           className="form-control"
@@ -136,7 +135,7 @@ const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
         </tr>
       </table>
       <div className="form-group mb-2">
-        <label>Company Name</label>
+        <label>Extra Option</label>
         <input
           type="text"
           className="form-control"
@@ -144,7 +143,10 @@ const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
           {...register("extraOption", { required: false, maxLength: 20 })}
         />
       </div>
-      <label style={{ fontSize: "12px", color: "black" }}>By signing up you will agree to our Privacy Policy and Terms & Conditions</label>
+      <label style={{ fontSize: "12px" }}>
+        By signing up you will agree to our Privacy Policy and Terms &
+        Conditions
+      </label>
       <button
         type="submit"
         className="registerBtn"
@@ -159,6 +161,5 @@ const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
       </button>
     </form>
   );
-}
-
-export default Broker
+};
+export default Seller;

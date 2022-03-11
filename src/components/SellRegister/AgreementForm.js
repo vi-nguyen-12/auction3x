@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import "../styles/SellRegister.css";
-import authService from "../services/authServices";
+import "../../styles/SellRegister.css";
+import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";

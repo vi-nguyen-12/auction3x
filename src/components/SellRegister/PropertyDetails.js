@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import "../styles/SellRegister.css";
+import "../../styles/SellRegister.css";
 
 const PropertyDetails = ({
   toogleStep,

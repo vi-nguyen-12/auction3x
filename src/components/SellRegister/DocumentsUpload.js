@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import authService from "../services/authServices";
+import authService from "../../services/authServices";
 import { Row, Col, Container } from "react-bootstrap";
-import "../styles/SellRegister.css";
+import "../../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";

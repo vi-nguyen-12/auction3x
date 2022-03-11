@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCard } from "./UpcomingCard";
+import { UpcomingCard } from "../RealEstate/UpcomingCard";
 import { useSelector } from "react-redux";
 
 const Upcoming = (props) => {

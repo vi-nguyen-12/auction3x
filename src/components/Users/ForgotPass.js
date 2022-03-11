@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import authServices from "../services/authServices";
+import authServices from "../../services/authServices";
 
 function ForgotPass({ toogleForgotPass, toogleChangePass }) {
   const {

@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import authServices from "../services/authServices";
+import authServices from "../../services/authServices";
 import { Modal, Table } from "react-bootstrap";
-import "../styles/modalStyle.css";
+import "../../styles/modalStyle.css";
 
 require("react-bootstrap/ModalHeader");
 

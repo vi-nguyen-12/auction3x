@@ -3,17 +3,17 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Toast from "./Toast";
-import Login from "./Login";
+import Toast from "../Toast";
+import Login from "../Users/Login";
 import Modal from "react-bootstrap/Modal";
-import Confirm from "./EmailConfirm";
-import ForgotPass from "./ForgotPass";
-import ChangePass from "./ChangePass";
-import SignUp from "./SignUp";
+import Confirm from "../Users/EmailConfirm";
+import ForgotPass from "../Users/ForgotPass";
+import ChangePass from "../Users/ChangePass";
+import SignUp from "../Users/SignUp";
 import NumberFormat from "react-number-format";
-import RegistrationTimer from "../RealEstate/RegistrationTimer";
-import Timer from "../RealEstate/Timer";
-import authService from "../services/authServices";
+import RegistrationTimer from "./RegistrationTimer";
+import Timer from "./Timer";
+import authService from "../../services/authServices";
 
 const UpcomingCard = ({
   url,

@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Toast from "../../../Toast";
-import Login from "../../../Login";
+import Login from "../../../Users/Login";
 import Modal from "react-bootstrap/Modal";
-import Confirm from "../../../EmailConfirm";
-import ForgotPass from "../../../ForgotPass";
-import SignUp from "../../../SignUp";
+import Confirm from "../../../Users/EmailConfirm";
+import ForgotPass from "../../../Users/ForgotPass";
+import SignUp from "../../../Users/SignUp";
 import NumberFormat from "react-number-format";
-import AuctionTimer from "../../../../RealEstate/AuctionTimer";
+import AuctionTimer from "../../../RealEstate/AuctionTimer";
 import authService from "../../../../services/authServices";
 import "../../../../styles/Card.css";
 

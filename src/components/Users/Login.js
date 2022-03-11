@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Toast from "./Toast";
-import authServices from "../services/authServices";
+import Toast from "../Toast";
+import authServices from "../../services/authServices";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { login } from "../slice/userSlice";
+import { login } from "../../slice/userSlice";
 import { useHistory, useLocation } from "react-router-dom";
 
 require("react-bootstrap/ModalHeader");

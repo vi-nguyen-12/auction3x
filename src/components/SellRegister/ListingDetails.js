@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import authService from "../services/authServices";
+import authService from "../../services/authServices";
 import { useState } from "react";
 import PlacesAutocomplete, {
   geocodeByAddress,

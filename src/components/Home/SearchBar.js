@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../styles/Search.css";
+import "../../styles/Search.css";
 
 // let autoComplete;
 

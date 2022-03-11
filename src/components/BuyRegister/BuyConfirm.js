@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
-import AuctionTimer from "../../RealEstate/AuctionTimer";
+import AuctionTimer from "../RealEstate/AuctionTimer";
 import socket from "socket.io-client";
 
 const BuyConfirm = ({ tooglePlaceBid }) => {

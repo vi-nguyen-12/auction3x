@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import authServices from "../services/authServices";
+import authServices from "../../services/authServices";
 
 function Confirm({ colorChange }) {
   const token = useLocation().search.split("=")[1];

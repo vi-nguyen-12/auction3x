@@ -1,17 +1,17 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Featured } from "./Featured";
-import { FindInCountries } from "./FindInCountries";
+import { FindInCountries } from "../FindInCountries";
 import Header from "./Header";
-import ImgSlider from "./ImgSlider";
-import Work from "./Home/work";
-import RealEstate from "./Home/realEstate";
-import Footer from "./Home/footer";
+import ImgSlider from "../ImgSlider";
+import Work from "./work";
+import RealEstate from "./realEstate";
+import Footer from "./footer";
 import { Upcoming } from "./Upcoming";
-import MultiSellForm from "../SellRegister/MultiSellForm";
-import RealEstates from "../RealEstate/RealEstates";
-import About from "../components/Home/About";
+import MultiSellForm from "../../SellRegister/MultiSellForm";
+import RealEstates from "../../RealEstate/RealEstates";
+import About from "./About";
 import ChangePass from "../components/ChangePass";
-import EmailConfirm from "../components/EmailConfirm";
+import EmailConfirm from "../Users/EmailConfirm";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 

@@ -3,16 +3,16 @@ import { Card, Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Toast from "./Toast";
-import Login from "./Login";
+import Toast from "../../components/Toast";
+import Login from "../../components/Users/Login";
 import Modal from "react-bootstrap/Modal";
-import Confirm from "./EmailConfirm";
-import ForgotPass from "./ForgotPass";
-import SignUp from "./SignUp";
+import Confirm from "../../components/Users/EmailConfirm";
+import ForgotPass from "../../components/Users/ForgotPass";
+import SignUp from "../../components/Users/SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../RealEstate/AuctionTimer";
-import authService from "../services/authServices";
-import "../styles/Card.css";
+import authService from "../../services/authServices";
+import "../../styles/Card.css";
 
 const CardComp = ({
   url,

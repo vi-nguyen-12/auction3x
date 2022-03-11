@@ -3,12 +3,12 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../../components/Home/SearchBar";
 import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCard } from "../components/UpcomingCard";
-import "../styles/realEstate.css";
-import { CardComp } from "../components/Card";
+import { UpcomingCard } from "./UpcomingCard";
+import "../../styles/realEstate.css";
+import { CardComp } from "./Card";
 
 const Carousel = styled(Slider)`
   height: 30vh;

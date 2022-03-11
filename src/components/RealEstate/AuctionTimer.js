@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
-import "../styles/Timers.css";
+import "../../styles/Timers.css";
 
 const AuctionTimer = ({ auctionEndDate, toogleRegistEnded }) => {
   const [days, setDays] = useState();

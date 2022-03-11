@@ -1,29 +1,51 @@
 import React, { useEffect, useState, useRef } from "react";
-// import "../styles/realEstate.css";
-import { Modal, Col, Row, Table } from "react-bootstrap";
+import "../../styles/realEstate.css";
+import { Modal, Table, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import Confirm from "../components/EmailConfirm";
-import ForgotPass from "../components/ForgotPass";
-import ChangePass from "../components/ChangePass";
+import Confirm from "../Users/EmailConfirm";
+import ForgotPass from "../Users/ForgotPass";
+import ChangePass from "../Users/ChangePass";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import BuyConfirm from "../components/BuyRegister/BuyConfirm";
-import MultiBuyForm from "../components/BuyRegister/MultiBuyForm";
+import BuyConfirm from "../BuyRegister/BuyConfirm";
+import MultiBuyForm from "../BuyRegister/MultiBuyForm";
 import { useSelector } from "react-redux";
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
+import Login from "../Users/Login";
+import SignUp from "../Users/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
-import Timer from "./Timer";
+import AuctionTimer from "./AuctionTimer";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
-import "../styles/modalStyle.css";
+
+const mapStyles = {
+  height: "50vh",
+  width: "100%",
+};
+// const StreetviewStyles = {
+//   height: "50vh",
+//   width: "100%",
+// };
+
+let settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  autoplay: false,
+};
+
+let ImgSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  autoplay: true,
+};
 
 const Carousel = styled(Slider)`
   height: 50vh;
@@ -101,45 +123,28 @@ const Wrap = styled.div`
   // }
 `;
 
-// const HomeBottom = styled.div`
-//   position: absolute;
-//   bottom: 20vh;
-//   z-index: 1;
-//   left: 5vw;
-//   a {
-//     color: white !important;
-//     font-size: 24px;
-//     font-weight: bolder;
-//     box-shadow: none !important;
-//   }
-//   span {
-//     color: white;
-//     font-size: 14px;
-//     font-weight: bolder;
-//   }
-// `;
-
-function DisplayUpcomings({ colorChange, toogleChange }) {
+function DisplayAuctions({ colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
   const registProperty = useSelector((state) => state.registProperty);
-
-  const properties = useSelector((state) => state.property);
-
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
     checkProperty = [...checkProperty, registProperty[i]];
   }
   const registeredProperty = checkProperty.find((item) => item._id === id);
-
   const [setRegistered, setRegisteredProperty] = useState(false);
+  const [registerEnded, setRegisterEnded] = useState();
+  const [approvedToBid, setApprovedToBid] = useState(false);
 
-  const [property, setProperty] = useState();
-  const [propertyData, setPropertyData] = useState();
+  const auctions = useSelector((state) => state.auction);
+  const properties = useSelector((state) => state.property);
 
-  const [startAuction, setStartAuction] = useState();
-  const [endAuction, setEndAuction] = useState();
+  const [auction, setAuction] = useState([]);
+  const [auctionProp, setAuctionProp] = useState();
+  const [topBid, setTopBid] = useState();
+
+  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -155,6 +160,8 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
 
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
 
   const toogleBid = () => setBid(!bid);
@@ -164,6 +171,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
+  const [startAuction, setStartAuction] = useState();
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -176,15 +184,6 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
-  // let today = new Date().toISOString();
-  // const handlePlaceBid = () => {
-  //   if (!user._id) {
-  //     return toogleSignIn();
-  //   } else if (today < startAuction) {
-  //     return alert("Auction has not started yet!");
-  //   }
-  // };
-
   const handleKYC = () => {
     if (!user.KYC) {
       return alert("Please Complete your KYC first to bid");
@@ -194,61 +193,75 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
   useEffect(() => {
     colorChange("black");
     toogleChange();
-    //for upcoming auction property data
+    //for ongoing auction
+    const auctionData = auctions.find((item) => item._id === id);
     const propertyData = properties.find((item) => item._id === id);
-    setProperty(propertyData.property);
+    setAuction(auctionData ? auctionData : propertyData);
+    setAuctionProp(auctionData ? auctionData.property : propertyData.property);
 
-    //for auction details for upcoming auction
-    setPropertyData(propertyData);
+    //set registration end
+    setRegisterEnded(
+      auctionData ? auctionData.registerEndDate : propertyData.registerEndDate
+    );
 
-    //set dates and times for upcoming auction
-    setStartAuction(propertyData.auctionStartDate);
-    setEndAuction(propertyData.auctionEndDate);
+    //set dates for ongoing auction end date
+    setOnGoingAuctionEnd(
+      auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
+    );
+    setStartAuction(
+      auctionData ? auctionData.auctionStartDate : propertyData.auctionStartDate
+    );
 
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: propertyData.property.details.address.latitude,
-      lng: propertyData.property.details.address.longitude,
+      lat: auctionData
+        ? auctionData.property.details.address.latitude
+        : propertyData.property.details.address.latitude,
+      lng: auctionData
+        ? auctionData.property.details.address.longitude
+        : propertyData.property.details.address.longitude,
     });
-
-    // window.scrollTo(0, 0);
 
     if (user._id && user.KYC) {
       if (registeredProperty !== undefined) {
         setRegisteredProperty(true);
       }
+
+      if (registeredProperty) {
+        if (registeredProperty.isApproved === "success") {
+          setApprovedToBid(true);
+        }
+      }
     }
-  }, [registProperty]);
 
-  const mapStyles = {
-    height: "50vh",
-    width: "100%",
-  };
-
-  let settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: false,
-  };
-
-  let ImgSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-  };
+    let topBidders = [];
+    if (auctionData) {
+      for (let i = 0; i < auctionData.highestBidders.length; i++) {
+        topBidders = [...topBidders, auctionData.highestBidders[i]];
+      }
+      setTopBid(topBidders.reverse());
+    } else if (propertyData) {
+      if (propertyData.highestBidders) {
+        for (let i = 0; i < propertyData.highestBidders.length; i++) {
+          topBidders = [...topBidders, propertyData.highestBidders[i]];
+        }
+        setTopBid(topBidders.reverse());
+      } else {
+        setTopBid([]);
+      }
+    }
+  }, [auctions, registProperty]);
 
   return (
     <>
-      {property && location && startAuction && endAuction && propertyData && (
+      {auction && location && auctionProp && startAuction && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
             <img
-              src={property.images[0].url}
+              src={auctionProp.images[0].url}
               alt="Snow"
               style={{
                 display: "flex",
@@ -284,7 +297,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     border: "none",
                     position: "relative",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -306,7 +319,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -333,7 +346,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
                     >
-                      {property.images.map((item, index) => (
+                      {auctionProp.images.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
                           <img
@@ -357,7 +370,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px px solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -375,10 +388,10 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   </Modal.Header>
                   <Modal.Body style={{ height: "500px" }}>
                     <Carousel
-                      style={{ height: "100%", borderRadius: "15px" }}
+                      style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
                     >
-                      {property.videos.map((item, index) => (
+                      {auctionProp.videos.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
                           <video
@@ -388,9 +401,9 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                               margin: "auto",
 
                               width: "100%",
-                              borderRadius: "15px",
+                              borderRadius: "0",
                               position: "relative",
-                              height: "3000px!important",
+                              // height: "3000px!important",
                               cursor: "pointer",
                             }}
                             controls
@@ -411,7 +424,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     position: "relative",
                     top: "10px",
                     background: "none",
-                    borderBottom: "1px solid #e6e6e6",
+                    borderBottom: "2px  solid #e6e6e6",
                     display: "flex",
                     justifyContent: "center",
                     padding: "15px",
@@ -423,7 +436,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                 </button>
               </div>
 
-              {property && (
+              {auctionProp && (
                 <div>
                   <button
                     onClick={toggleMap}
@@ -454,7 +467,9 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       >
                         <Marker position={location} />
                       </GoogleMap>
-                      <p>{property.details.address.formatted_street_address}</p>
+                      <p>
+                        {auctionProp.details.address.formatted_street_address}
+                      </p>
                     </Modal.Body>
                   </Modal>
                 </div>
@@ -463,14 +478,14 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0 35px" }}>
+          <Row style={{ padding: "0 25px" }}>
             <Col>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                {property.details.address.formatted_street_address} {","}{" "}
-                {property.details.address.city} {","}{" "}
-                {property.details.address.state}{" "}
-                {property.details.address.zip_code}
+                {auctionProp.details.address.formatted_street_address} {","}{" "}
+                {auctionProp.details.address.city} {","}{" "}
+                {auctionProp.details.address.state}{" "}
+                {auctionProp.details.address.zip_code}
               </h5>
             </Col>
 
@@ -555,7 +570,10 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                 </div>
               )}
 
-              {user._id && user.KYC && !setRegistered && (
+              {user._id &&
+              user.KYC &&
+              !setRegistered &&
+              new Date().toISOString() < registerEnded ? (
                 <div
                   style={{
                     display: "grid",
@@ -573,7 +591,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toogleBid}
+                    onClick={toogleRegister}
                   >
                     Register to Bid
                   </button>
@@ -593,6 +611,50 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                     </button>
                   </div>
                 </div>
+              ) : (
+                user._id &&
+                user.KYC &&
+                !setRegistered &&
+                new Date().toISOString() > registerEnded && (
+                  <div
+                    style={{
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
+                        border: "0",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      onClick={toogleRegister}
+                      disabled
+                    >
+                      Register to Bid
+                    </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
+                  </div>
+                )
               )}
 
               {user._id && user.KYC && setRegistered && (
@@ -613,7 +675,8 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    disabled
+                    onClick={tooglePlaceBid}
+                    disabled={!approvedToBid}
                   >
                     Bid Now!
                   </button>
@@ -641,65 +704,135 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                <Col>
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "center",
-                      backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      borderRadius: "10px",
-                      padding: "20px",
-                    }}
-                  >
-                    <Timer auctionStartDate={startAuction} />
+                {new Date().toISOString() < onGoingAuctionEnd ? (
+                  <Col>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "left",
-                        marginLeft: "10px",
-                        marginTop: "-10px",
-                        color: "#7c7c7c",
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "20px",
                       }}
                     >
-                      <p>Auction Starts In</p>
+                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        <p>Auction Ends</p>
+                      </div>
                     </div>
-                  </div>
-                </Col>
+                  </Col>
+                ) : (
+                  <Col>
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "20px",
+                        color: "black",
+                      }}
+                    >
+                      <AuctionTimer auctionEndDate={startAuction} />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        <p>Auction Starts In</p>
+                      </div>
+                    </div>
+                  </Col>
+                )}
 
                 <Col>
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "center",
-                      backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      marginLeft: "20px",
-                      borderRadius: "10px",
-                      padding: "35px",
-                    }}
-                  >
-                    <h4 style={{ padding: "8px" }}>
-                      <NumberFormat
-                        value={propertyData.startingBid}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                        style={{ fontWeight: "700", fontSize: "20px" }}
-                      />
-                    </h4>
-                    <p
+                  {auction.highestBid ? (
+                    <div
                       style={{
-                        display: "flex",
-                        justifyContent: "left",
-                        marginLeft: "10px",
-                        marginTop: "-10px",
-                        color: "#7c7c7c",
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        marginLeft: "18px",
+                        borderRadius: "10px",
+                        padding: "33px",
                       }}
                     >
-                      Current Bid
-                    </p>
-                  </div>
+                      <h4 style={{ padding: "8px" }}>
+                        <NumberFormat
+                          value={auction.highestBid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                          style={{
+                            fontWeight: "700",
+                            fontSize: "22px",
+                            color: "black",
+                          }}
+                        />
+                      </h4>
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          marginTop: "-10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        Current Bid
+                      </p>
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        marginLeft: "18px",
+                        borderRadius: "10px",
+                        padding: "33px",
+                      }}
+                    >
+                      <h4 style={{ padding: "8px" }}>
+                        <NumberFormat
+                          value={auction.startingBid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                          style={{
+                            fontWeight: "700",
+                            fontSize: "22px",
+                            color: "black",
+                          }}
+                        />
+                      </h4>
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          marginTop: "-10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        Current Bid
+                      </p>
+                    </div>
+                  )}
                 </Col>
 
                 <Col>
@@ -711,10 +844,19 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       width: "100%",
                       marginLeft: "35px",
                       borderRadius: "10px",
-                      padding: "35px",
+                      padding: "33px",
                     }}
                   >
-                    <h4 style={{ padding: "8px" }}>199,530</h4>
+                    <h4
+                      style={{
+                        padding: "8px",
+                        fontWeight: "700",
+                        fontSize: "22px",
+                        color: "black",
+                      }}
+                    >
+                      199,530
+                    </h4>
                     <p
                       style={{
                         display: "flex",
@@ -730,7 +872,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                 </Col>
               </Row>
 
-              <Row style={{ width: "100vw" }}>
+              <Row style={{ width: "50vw" }}>
                 <div style={{ marginTop: "30px", alignItems: "center" }}>
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
                   <span
@@ -738,13 +880,14 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       fontWeight: "400",
                       fontSize: "30px",
                       marginLeft: "20px",
+                      color: "black",
                     }}
                   >
                     Property Info
                   </span>
                 </div>
 
-                <Col style={{}}>
+                <Col>
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
@@ -757,10 +900,11 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       </tr>
                       <tr>
                         <td>Property Type</td>
-                        {property.details.parcel.county_land_use_description ? (
+                        {auctionProp.details.parcel
+                          .county_land_use_description ? (
                           <td>
                             {
-                              property.details.parcel
+                              auctionProp.details.parcel
                                 .county_land_use_description
                             }
                           </td>
@@ -770,9 +914,10 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       </tr>
                       <tr>
                         <td>Building Size</td>
-                        {property.details.structure.total_area_sq_ft ? (
+                        {auctionProp.details.structure.total_area_sq_ft ? (
                           <td>
-                            {property.details.structure.total_area_sq_ft} sqft
+                            {auctionProp.details.structure.total_area_sq_ft}{" "}
+                            sqft
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -780,18 +925,18 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       </tr>
                       <tr>
                         <td>Building Class</td>
-                        {property.details.structure.quality ? (
-                          <td>{property.details.structure.quality}</td>
-                        ) : property.details.structure.condition ? (
-                          <td>{property.details.structure.condition}</td>
+                        {auctionProp.details.structure.quality ? (
+                          <td>{auctionProp.details.structure.quality}</td>
+                        ) : auctionProp.details.structure.condition ? (
+                          <td>{auctionProp.details.structure.condition}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Year Built/Renovated</td>
-                        {property.details.structure.year_built ? (
-                          <td>{property.details.structure.year_built}</td>
+                        {auctionProp.details.structure.year_built ? (
+                          <td>{auctionProp.details.structure.year_built}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -804,14 +949,18 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   </Table>
                 </Col>
 
-                <Col style={{}}>
+                <Col>
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
                         <td>Tenancy</td>
-                        {property.details.parcel.standardized_land_use_type ? (
+                        {auctionProp.details.parcel
+                          .standardized_land_use_type ? (
                           <td>
-                            {property.details.parcel.standardized_land_use_type}
+                            {
+                              auctionProp.details.parcel
+                                .standardized_land_use_type
+                            }
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -819,34 +968,35 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       </tr>
                       <tr>
                         <td>Building Height</td>
-                        {property.details.structure.stories ? (
-                          <td>{property.details.structure.stories} story</td>
+                        {auctionProp.details.structure.stories ? (
+                          <td>{auctionProp.details.structure.stories} story</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Building FAR</td>
-                        {property.details.parcel.area_acres ? (
-                          <td>{property.details.parcel.area_acres} acres</td>
+                        {auctionProp.details.parcel.area_acres ? (
+                          <td>{auctionProp.details.parcel.area_acres} acres</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Zoning</td>
-                        {property.details.parcel.zoning ? (
-                          <td>{property.details.parcel.zoning}</td>
+                        {auctionProp.details.parcel.zoning ? (
+                          <td>{auctionProp.details.parcel.zoning}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Parking</td>
-                        {property.details.structure.parking_spaces_count ? (
+                        {auctionProp.details.structure.parking_spaces_count ? (
                           <td>
-                            {property.details.structure.parking_spaces_count}{" "}
-                            spaces ({property.details.structure.parking_type})
+                            {auctionProp.details.structure.parking_spaces_count}{" "}
+                            spaces ({auctionProp.details.structure.parking_type}
+                            )
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -854,8 +1004,8 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                       </tr>
                       <tr>
                         <td>Frontage</td>
-                        {property.details.parcel.frontage_ft ? (
-                          <td>{property.details.parcel.frontage_ft} ft</td>
+                        {auctionProp.details.parcel.frontage_ft ? (
+                          <td>{auctionProp.details.parcel.frontage_ft} ft</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -870,7 +1020,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               </Row>
             </Col>
 
-            {/* <Col sm={4}>
+            <Col sm={4}>
               <Table
                 responsive
                 bordered
@@ -899,8 +1049,15 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   {topBid ? (
                     topBid.map((bid, index) => (
                       <tr key={index}>
-                        <td>{bid.userName}</td>
-                        <td>{bid.amount}</td>
+                        <td>{bid._id}</td>
+                        <td>
+                          <NumberFormat
+                            value={bid.amount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </td>
                         <td>{new Date(bid.time).toLocaleString()}</td>
                       </tr>
                     ))
@@ -911,7 +1068,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   )}
                 </tbody>
               </Table>
-            </Col>*/}
+            </Col>
           </Row>
 
           <Row style={{ padding: "35px" }}>
@@ -928,12 +1085,15 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
                   fontWeight: "400",
                   fontSize: "25px",
                   marginLeft: "20px",
+                  color: "black",
                 }}
               >
                 Executive Summary
               </span>
             </div>
-            <Col style={{ fontSize: "20px", paddingRight: "40px" }}>
+            <Col
+              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+            >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
               Office. The property is being offered in a Fee Simple interest,
@@ -953,7 +1113,9 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               19th century, and it became well known for its brewing industry.
             </Col>
 
-            <Col style={{ fontSize: "20px", paddingRight: "40px" }}>
+            <Col
+              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+            >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city
               in the past two decades include the Milwaukee Riverwalk, the
@@ -977,7 +1139,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
 
           <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
             {/* ref={myRef}
-          style={{ padding: "35px", backgroundColor: "white" }}> */}
+            style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
               activeKey={realTab}
               onSelect={() => setRealTab()}
@@ -1164,35 +1326,39 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
           </Row>
 
           {/* <Row style={{ padding: "35px" }}>
-          <div
-            style={{
-              marginTop: "30px",
-              alignItems: "center",
-              marginBottom: "20px",
-            }}
-          >
-            <span
+            <div
               style={{
-                fontWeight: "500",
-                fontSize: "30px",
-                color: "#6d6d6d",
+                marginTop: "30px",
+                alignItems: "center",
+                marginBottom: "20px",
               }}
             >
-              Similar Properties
-            </span>
-          </div>
-        </Row> */}
+              <span
+                style={{
+                  fontWeight: "500",
+                  fontSize: "30px",
+                  color: "#6d6d6d",
+                }}
+              >
+                Similar Properties
+              </span>
+            </div>
+          </Row> */}
+          <Modal size="lg" show={bid} onHide={toogleBid} centered>
+            <Modal.Body>
+              <MultiBuyForm />
+            </Modal.Body>
+          </Modal>
 
           <Modal
             size="lg"
             backdrop="static"
             keyboard={false}
-            show={bid}
-            onHide={toogleBid}
+            show={showRegister}
+            onHide={toogleRegister}
             centered
           >
             <Modal.Body>
-              {/* <BuyConfirm /> */}
               <MultiBuyForm />
             </Modal.Body>
           </Modal>
@@ -1200,7 +1366,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
           <Modal
             backdrop="static"
             keyboard={false}
-            size="lg"
+            size="md"
             show={placeBid}
             onHide={tooglePlaceBid}
             centered
@@ -1252,10 +1418,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
             show={forgotPass}
             onHide={toogleForgotPass}
           >
-            <Modal.Body
-              className="forgot-modal"
-            >
-            </Modal.Body>
+            <Modal.Body className="forgot-modal"></Modal.Body>
           </Modal>
           <Modal
             backdrop="static"
@@ -1337,6 +1500,7 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
               />
             </Modal.Body>
           </Modal>
+
           <Modal
             size="lg"
             backdrop="static"
@@ -1381,4 +1545,4 @@ function DisplayUpcomings({ colorChange, toogleChange }) {
   );
 }
 
-export default DisplayUpcomings;
+export default DisplayAuctions;

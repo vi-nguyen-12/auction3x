@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
-import "../styles/SellRegister.css";
+import "../../styles/SellRegister.css";
 // create step bar
 
 const Sell = ({ toogleStep, step }) => {

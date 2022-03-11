@@ -2,19 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { FaBars, FaGlobeAmericas } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import Login from "./Login";
+import Login from "../Users/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Table } from "react-bootstrap";
-import "../styles/modalStyle.css";
-import "../styles/Header.css";
-import ReconfirmEmail from "./ReconfirmEmail";
-import SignUp from "./SignUp";
+import "../../styles/modalStyle.css";
+import "../../styles/Header.css";
+import ReconfirmEmail from "../Users/ReconfirmEmail";
+import SignUp from "../Users/SignUp";
 import { useSelector, useDispatch } from "react-redux";
-import authService from "../services/authServices";
-import ForgotPass from "./ForgotPass";
-import ChangePass from "./ChangePass";
+import authService from "../../services/authServices";
+import ForgotPass from "../Users/ForgotPass";
+import ChangePass from "../Users/ChangePass";
 import { useHistory } from "react-router-dom";
-import { logout } from "../slice/userSlice";
+import { logout } from "../../slice/userSlice";
 
 const Header = ({ color, change }) => {
   const user = useSelector((state) => state.user);
@@ -125,11 +125,11 @@ const Header = ({ color, change }) => {
                 Yachts
               </button>
             </div>
-            <div className="nav-item mt-2 px-4 py-2">
+            {/* <div className="nav-item mt-2 px-4 py-2">
               <button className="headerNav" onClick={handleOnClick("others")}>
                 Others
               </button>
-            </div>
+            </div> */}
           </div>
           <form
             className="form-inline my-2 my-lg-0"

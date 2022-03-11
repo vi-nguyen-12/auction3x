@@ -2,12 +2,12 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import SearchBar from "../components/SearchBar.js";
+import SearchBar from "./SearchBar.js";
 import { BrowserRouter as Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
-import "../styles/Search.css";
+import "../../styles/Search.css";
 
 const Carousel = styled(Slider)`
   height: 99vh;
@@ -117,7 +117,7 @@ const ImgSlider = () => {
             {property.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
-                <a href={`/DisplayUpcomings/${item._id}`}>
+                <a href={`/DisplayAuctions/${item._id}`}>
                   <img src={item.property.images[0].url} alt="" />
                 </a>
                 <HomeBottom>

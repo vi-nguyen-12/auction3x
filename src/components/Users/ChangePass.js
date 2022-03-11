@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import authServices from "../services/authServices";
+import authServices from "../../services/authServices";
 import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
