@@ -34,8 +34,7 @@ const SidebarLabel = styled.button`
       border-left: 4px solid #b77b50;
       color: #b77b50;
       cursor: pointer;
-    }
-
+  }
 `;
 
 const FirstLabel = styled.button`
@@ -70,16 +69,24 @@ const DropdownLink = styled(Link)`
   font-size: 18px;
 `;
 
+
 const SubMenu = ({ item, path }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
-  console.log(path);
-  console.log(item.path);
-  console.log()
+  const [color, setColor] = useState('#b77b50');
+  const handleOnclick = () => {
+    item.subNav && showSubnav();
+  }
+  console.log(item.path[1, 7]);
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        < SidebarLabel className='firstLabel' >  {item.icon} < span style={{ padding: "15px" }} /> {item.name}</SidebarLabel>
+      <SidebarLink to={item.path} onClick={handleOnclick}>
+
+        < SidebarLabel style={{ color: item.path === path ? color : "none", borderLeft: item.path === path ? "4px solid #b77b50" : "" }} >
+
+          {item.icon} < span style={{ padding: "15px" }} /> {item.name}
+
+        </SidebarLabel>
         <div>
           {item.subNav && subnav
             ? item.iconOpened
@@ -92,8 +99,8 @@ const SubMenu = ({ item, path }) => {
         subnav &&
         item.subNav.map((item, index) => {
           return (
-            <DropdownLink id={window.location.pathname === item.path ? "active" : ""} to={item.path} key={index}>
-              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px" }}>{item.name}</SidebarLabel>
+            <DropdownLink to={item.path} key={index}>
+              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px", color: item.path === path ? color : "" }}>{item.name}</SidebarLabel>
             </DropdownLink>
           );
         })

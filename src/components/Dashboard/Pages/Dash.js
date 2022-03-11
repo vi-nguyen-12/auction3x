@@ -111,7 +111,7 @@ function Dash() {
       <Row>
         <Col>
           <div className="tab" >
-            {window.location.pathname === "/Dashboard" ?
+            {showSavedProp === true ? (
               <Button
                 onClick={() => {
                   toogleShowApprovedAuctions(false);
@@ -125,41 +125,70 @@ function Dash() {
               >
                 <span>Saved Auction</span>
               </Button>
-              : <Button
+            ) : (<Button
+              onClick={() => {
+                toogleShowApprovedAuctions(false);
+                toogleShowBidAuctions(false);
+                getSavedProperty();
+                toogleShowSavedProp(true);
+              }}
+              // style={{ borderBottom: color, color: textColor }}
+              className="tabs"
+            >
+              <span>Saved Auction</span>
+            </Button>
+            )}
+            {showBidAuctions === true ? (
+              <Button
                 onClick={() => {
                   toogleShowApprovedAuctions(false);
-                  toogleShowBidAuctions(false);
-                  getSavedProperty();
-                  toogleShowSavedProp(true);
+                  toogleShowSavedProp(false);
+                  getBidAuctions();
+                  toogleShowBidAuctions(true);
                 }}
-                // style={{ borderBottom: color, color: textColor }}
                 className="tabs"
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
               >
-                <span>Saved Auction</span>
-              </Button>}
-
-            <Button
-              onClick={() => {
+                <span>Bid Auction</span>
+              </Button>
+            ) : (
+              <Button onClick={() => {
                 toogleShowApprovedAuctions(false);
                 toogleShowSavedProp(false);
                 getBidAuctions();
                 toogleShowBidAuctions(true);
               }}
-              className="tabs"
-            >
-              <span>Bid Auction</span>
-            </Button>
-            <Button
-              onClick={() => {
-                toogleShowBidAuctions(false);
-                toogleShowSavedProp(false);
-                getApprovedAuctions();
-                toogleShowApprovedAuctions(true);
-              }}
-              className="tabs"
-            >
-              <span>Approved</span>
-            </Button>
+                className="tabs"
+              >
+                <span>Bid Auction</span>
+              </Button>
+            )}
+            {showApprovedAuctions === true ? (
+              <Button
+                onClick={() => {
+                  toogleShowBidAuctions(false);
+                  toogleShowSavedProp(false);
+                  getApprovedAuctions();
+                  toogleShowApprovedAuctions(true);
+                }}
+                className="tabs"
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+              >
+                <span>Approved</span>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  toogleShowBidAuctions(false);
+                  toogleShowSavedProp(false);
+                  getApprovedAuctions();
+                  toogleShowApprovedAuctions(true);
+                }}
+                className="tabs"
+              >
+                <span>Approved</span>
+              </Button>
+            )}
           </div>
         </Col>
 
