@@ -86,6 +86,7 @@ const UpcomingCard = ({
         setFavorite(true);
       }
     }
+
     setRegistrationEndDate(auctionData.registerEndDate);
     setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);
@@ -155,7 +156,7 @@ const UpcomingCard = ({
                     {data.address.formatted_street_address},{" "}
                     {data.address.state}
                   </span>
-                  <h4 style={{ marginTop: "5px" }}>Property Address</h4>
+                  <h4 style={{ marginTop: "5px", color: "black" }}>Property Address</h4>
                 </div>
                 <div
                   style={{
@@ -165,13 +166,13 @@ const UpcomingCard = ({
                   <div>
                     <Row>
                       {registEnded && startAuction ? (
-                        <Col md={5} style={{ width: "50%" }}>
+                        <Col md={5} style={{ width: "50%", color: "black" }}>
                           <p style={{ fontSize: "15px", width: "100px" }}>
                             Auction Start:
                           </p>
                         </Col>
                       ) : (
-                        <Col md={5} style={{ width: "50%" }}>
+                        <Col md={5} style={{ width: "50%", color: "black" }}>
                           <p style={{ fontSize: "15px", width: "100px" }}>
                             Registration:
                           </p>

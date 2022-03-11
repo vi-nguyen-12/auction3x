@@ -117,6 +117,7 @@ const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
               position: "relative",
               justifyContent: "left",
               marginBottom: "20px",
+              color: "black"
             }}
           >
             Bank Statement
@@ -136,6 +137,7 @@ const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
               position: "relative",
               justifyContent: "left",
               marginBottom: "20px",
+              color: "black"
             }}
           >
             Brokerage account statement
@@ -155,6 +157,7 @@ const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
               position: "relative",
               justifyContent: "left",
               marginBottom: "20px",
+              color: "black"
             }}
           >
             Crypto account statement
@@ -174,6 +177,7 @@ const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
               position: "relative",
               justifyContent: "left",
               marginBottom: "20px",
+              color: "black"
             }}
           >
             Line of credit doc
@@ -187,11 +191,11 @@ const BuyUpload = ({ toogleStep, step, toogleDocument }) => {
             />
           </div>
           <div>
-            <p>
+            <p style={{ color: "black" }}>
               lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              nisi ut aliquip exs ea commodo consequat. Duis aute irure dolor in
             </p>
           </div>
 

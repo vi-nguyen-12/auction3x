@@ -13,6 +13,9 @@
   size: 100px;
 }
 
-.term li{
+.term li {
   font-size: 20px;
+}
+.buyer-agree {
+  color: black;
 }

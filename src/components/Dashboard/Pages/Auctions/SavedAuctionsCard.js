@@ -158,7 +158,7 @@ function SavedAuctionsCard({
               <span className="golden-text">
                 {data.address.formatted_street_address}, {data.address.state}
               </span>
-              <h4 style={{ marginTop: "5px" }}>Property Address</h4>
+              <h4 style={{ marginTop: "5px", color: "black" }}>Property Address</h4>
             </Row>
             {/* </div> */}
             {/* <div
@@ -169,7 +169,7 @@ function SavedAuctionsCard({
             {/* <div> */}
             <Row>
               <Col md={5} style={{ width: "50%", color: "black" }}>
-                <p style={{ fontSize: "15px", width: "100px" }}>
+                <p style={{ fontSize: "15px", width: "100px", color: "black" }}>
                   Online Auction
                 </p>
               </Col>
@@ -179,6 +179,7 @@ function SavedAuctionsCard({
                   style={{
                     fontSize: "15px",
                     width: "250px",
+                    color: "black"
                   }}
                 >
                   Additional Info
@@ -254,7 +255,7 @@ function SavedAuctionsCard({
                 </p>
                 {/* </div> */}
               </Col>
-              {}
+              { }
               {/* <div
                 style={{
                   alignItems: "flex-end",

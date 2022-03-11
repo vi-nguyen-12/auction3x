@@ -51,7 +51,7 @@ const Sell = ({ toogleStep, step }) => {
         <div className="line"></div>
         <div className="circle">
           <p className="text">04</p>
-          <span className="spnn">Listing Fees</span>
+          <span className="spnn">Upload Documents</span>
         </div>
         <div className="line"></div>
         <div className="circle">

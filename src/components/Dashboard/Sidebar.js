@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import SidebarMenu from "../Dashboard/SidebarMenu";
 import SubMenu from "./SubMenu";
 
-const Sidebar = () => {
+const Sidebar = ({ path }) => {
   const user = useSelector((state) => state.user);
   return (
     <div className="sideBar">
@@ -13,7 +13,7 @@ const Sidebar = () => {
             </h1> */}
       <ul className="sideBarList">
         {SidebarMenu.map((item, index) => {
-          return <SubMenu key={index} item={item} />;
+          return <SubMenu key={index} item={item} path={path} />;
         })}
       </ul>
     </div>

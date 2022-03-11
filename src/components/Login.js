@@ -31,6 +31,7 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
+        console.log(response);
         if (
           response.data.error === "Invalid email or password" ||
           response.data.error === "Email is not found"
@@ -42,6 +43,7 @@ const Login = ({
           toogleConfirmModal();
         } else {
           dispatch(login(response.data.data));
+
           document.cookie = `auth_token=${response.data.data.token};path=/`;
           toogleButton();
           toogleSignIn();
@@ -84,7 +86,7 @@ const Login = ({
         }}
       >
         <div className="form-group mb-4 mt-3">
-          <label style={{ fontSize: "35px" }} htmlFor="exampleInputEmail1">
+          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputEmail1">
             Username or Email
           </label>
           <input
@@ -99,7 +101,7 @@ const Login = ({
           />
         </div>
         <div className="form-group mt-3">
-          <label style={{ fontSize: "35px" }} htmlFor="exampleInputPassword1">
+          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputPassword1">
             Password
           </label>
           <input

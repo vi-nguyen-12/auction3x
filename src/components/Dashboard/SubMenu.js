@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, NavLink } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '../../styles/sideBarStyle.css';
@@ -34,7 +34,28 @@ const SidebarLabel = styled.button`
       border-left: 4px solid #b77b50;
       color: #b77b50;
       cursor: pointer;
-    }
+  }
+`;
+
+const FirstLabel = styled.button`
+padding: 10px;
+padding-left: 15%;
+width: -webkit-fill-available;
+display: flex;
+background: none;
+border: none;
+font-weight: bold;
+font-size: 16px;
+&:hover {
+  border-left: 4px solid #b77b50;
+  color: #b77b50;
+  cursor: pointer;
+  }
+&:focus {
+    border-left: 4px solid #b77b50;
+    color: #b77b50;
+    cursor: pointer;
+  }
 `;
 
 const DropdownLink = styled(Link)`
@@ -48,13 +69,23 @@ const DropdownLink = styled(Link)`
   font-size: 18px;
 `;
 
-const SubMenu = ({ item }) => {
+
+const SubMenu = ({ item, path }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
+  const [color, setColor] = useState('#b77b50');
+  const handleOnclick = () => {
+    item.subNav && showSubnav();
+  }
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && showSubnav}>
-        <SidebarLabel > {item.icon} <span style={{ padding: "15px" }} /> {item.name}</SidebarLabel>
+      <SidebarLink to={item.path} onClick={handleOnclick}>
+
+        < SidebarLabel style={{ color: item.path === path ? color : "none", borderLeft: item.path === path ? "4px solid #b77b50" : "" }} >
+
+          {item.icon} < span style={{ padding: "15px" }} /> {item.name}
+
+        </SidebarLabel>
         <div>
           {item.subNav && subnav
             ? item.iconOpened
@@ -68,7 +99,7 @@ const SubMenu = ({ item }) => {
         item.subNav.map((item, index) => {
           return (
             <DropdownLink to={item.path} key={index}>
-              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px" }}>{item.name}</SidebarLabel>
+              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px", color: item.path === path ? color : "" }}>{item.name}</SidebarLabel>
             </DropdownLink>
           );
         })

@@ -25,3 +25,8 @@ a:after {
   color: black !important;
   text-decoration: none !important;
 }
+
+#active {
+  color: #b77b50;
+  border-bottom: 4px solid #b77b50;
+}

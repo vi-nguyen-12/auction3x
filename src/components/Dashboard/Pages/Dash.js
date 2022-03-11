@@ -14,7 +14,7 @@ function Dash() {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
-  const [showSavedProp, setShowSavedProp] = useState(false);
+  const [showSavedProp, setShowSavedProp] = useState(true);
   const [showBidAuctions, setShowBidAuctions] = useState(false);
   const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
   const [liveAuctions, setLiveAuctions] = useState();
@@ -26,11 +26,18 @@ function Dash() {
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
+  const [color, setColor] = useState('#b77b50');
+  const toogleColor = (color) => setColor(color);
+
 
   useEffect(() => {
     setUpcomingAuctions(property.length);
     setLiveAuctions(auctions.length);
-  }, [property, auctions]);
+    if (user._id) {
+      setSavedProp(savedProperties);
+      setColor('#b77b50');
+    }
+  }, [property, auctions, savedProperties, user]);
 
   const getSavedProperty = () => {
     if (user._id) {
@@ -49,7 +56,7 @@ function Dash() {
     const data = await authServices.buyerApprovedAuctions(id);
     setApprovedAuctions(data);
   };
-
+  console.log(savedProp.length)
   return (
     // <div className="DashContainer">
     //   <div className="DashBody">
@@ -103,40 +110,85 @@ function Dash() {
 
       <Row>
         <Col>
-          <div className="tab">
-            <Button
+          <div className="tab" >
+            {showSavedProp === true ? (
+              <Button
+                onClick={() => {
+                  toogleShowApprovedAuctions(false);
+                  toogleShowBidAuctions(false);
+                  getSavedProperty();
+                  toogleShowSavedProp(true);
+                }}
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
+                className="tabs"
+              >
+                <span>Saved Auction</span>
+              </Button>
+            ) : (<Button
               onClick={() => {
                 toogleShowApprovedAuctions(false);
                 toogleShowBidAuctions(false);
                 getSavedProperty();
                 toogleShowSavedProp(true);
               }}
+              // style={{ borderBottom: color, color: textColor }}
               className="tabs"
             >
               <span>Saved Auction</span>
             </Button>
-            <Button
-              onClick={() => {
+            )}
+            {showBidAuctions === true ? (
+              <Button
+                onClick={() => {
+                  toogleShowApprovedAuctions(false);
+                  toogleShowSavedProp(false);
+                  getBidAuctions();
+                  toogleShowBidAuctions(true);
+                }}
+                className="tabs"
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+              >
+                <span>Bid Auction</span>
+              </Button>
+            ) : (
+              <Button onClick={() => {
                 toogleShowApprovedAuctions(false);
                 toogleShowSavedProp(false);
                 getBidAuctions();
                 toogleShowBidAuctions(true);
               }}
-              className="tabs"
-            >
-              <span>Bid Auction</span>
-            </Button>
-            <Button
-              onClick={() => {
-                toogleShowBidAuctions(false);
-                toogleShowSavedProp(false);
-                getApprovedAuctions();
-                toogleShowApprovedAuctions(true);
-              }}
-              className="tabs"
-            >
-              <span>Approved</span>
-            </Button>
+                className="tabs"
+              >
+                <span>Bid Auction</span>
+              </Button>
+            )}
+            {showApprovedAuctions === true ? (
+              <Button
+                onClick={() => {
+                  toogleShowBidAuctions(false);
+                  toogleShowSavedProp(false);
+                  getApprovedAuctions();
+                  toogleShowApprovedAuctions(true);
+                }}
+                className="tabs"
+                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+              >
+                <span>Approved</span>
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  toogleShowBidAuctions(false);
+                  toogleShowSavedProp(false);
+                  getApprovedAuctions();
+                  toogleShowApprovedAuctions(true);
+                }}
+                className="tabs"
+              >
+                <span>Approved</span>
+              </Button>
+            )}
           </div>
         </Col>
 
@@ -159,7 +211,7 @@ function Dash() {
       </Row>
       {showSavedProp && savedProp.length > 0 ? (
         <Row>
-          <SavedAuctionsComp savedProp = {savedProp} />
+          <SavedAuctionsComp savedProp={savedProp} />
         </Row>
       ) : (
         // savedProp.length === 0 &&
@@ -172,7 +224,7 @@ function Dash() {
 
       {showBidAuctions && bidAuctions.length > 0 ? (
         <Row>
-          <BidAuctionsComp bidAuctions = {bidAuctions} />
+          <BidAuctionsComp bidAuctions={bidAuctions} />
         </Row>
       ) : (
         // bidAuctions.length === 0 &&
@@ -185,7 +237,7 @@ function Dash() {
 
       {showApprovedAuctions && approvedAuctions.length > 0 ? (
         <Row>
-          <ApprovedAuctionsComp approvedAuctions = {approvedAuctions} />
+          <ApprovedAuctionsComp approvedAuctions={approvedAuctions} />
         </Row>
       ) : (
         // approvedAuctions.length === 0 &&

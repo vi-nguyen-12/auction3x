@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import authServices from "../services/authServices";
 require("react-bootstrap/ModalHeader");
 
-const Broker=({RegistermodalClose, ConfirmmodalOpen})=> {
+const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
   const {
     register,
     handleSubmit,
@@ -144,7 +144,7 @@ const Broker=({RegistermodalClose, ConfirmmodalOpen})=> {
           {...register("extraOption", { required: false, maxLength: 20 })}
         />
       </div>
-      <label style = {{fontSize: "12px"}}>By signing up you will agree to our Privacy Policy and Terms & Conditions</label>
+      <label style={{ fontSize: "12px", color: "black" }}>By signing up you will agree to our Privacy Policy and Terms & Conditions</label>
       <button
         type="submit"
         className="registerBtn"

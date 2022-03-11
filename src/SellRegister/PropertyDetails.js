@@ -440,7 +440,7 @@ const PropertyDetails = ({
                                 ? property.market_assessments[0].total_value
                                 : ""
                             }
-                            // {...register("total_value", { required: false })}
+                          // {...register("total_value", { required: false })}
                           />
                         </td>
                       </tr>
@@ -466,11 +466,11 @@ const PropertyDetails = ({
                   <tr>
                     <td
                       className="amount-input-2"
-                      // style={{
-                      //   width: "240px",
-                      //   // position: "relative",
-                      //   // left: "105px",
-                      // }}
+                    // style={{
+                    //   width: "240px",
+                    //   // position: "relative",
+                    //   // left: "105px",
+                    // }}
                     >
                       <span className="prefix">$</span>
                       <input
@@ -593,6 +593,7 @@ const PropertyDetails = ({
                   justifyContent: "center",
                   marginBottom: "40px",
                   marginTop: "20px",
+                  color: "black",
                 }}
               >
                 Property Details
@@ -907,7 +908,7 @@ const PropertyDetails = ({
                           type="number"
                           name="total_value"
                           className="sell-amount"
-                          // {...register("total_value", { required: false })}
+                        // {...register("total_value", { required: false })}
                         />
                       </div>
                     </td>
