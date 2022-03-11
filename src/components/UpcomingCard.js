@@ -166,13 +166,13 @@ const UpcomingCard = ({
                   <div>
                     <Row>
                       {registEnded && startAuction ? (
-                        <Col md={5} style={{ width: "50%" }}>
+                        <Col md={5} style={{ width: "50%", color: "black" }}>
                           <p style={{ fontSize: "15px", width: "100px" }}>
                             Auction Start:
                           </p>
                         </Col>
                       ) : (
-                        <Col md={5} style={{ width: "50%" }}>
+                        <Col md={5} style={{ width: "50%", color: "black" }}>
                           <p style={{ fontSize: "15px", width: "100px" }}>
                             Registration:
                           </p>

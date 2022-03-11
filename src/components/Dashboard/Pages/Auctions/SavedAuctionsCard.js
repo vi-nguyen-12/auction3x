@@ -169,7 +169,7 @@ function SavedAuctionsCard({
             {/* <div> */}
             <Row>
               <Col md={5} style={{ width: "50%", color: "black" }}>
-                <p style={{ fontSize: "15px", width: "100px" }}>
+                <p style={{ fontSize: "15px", width: "100px", color: "black" }}>
                   Online Auction
                 </p>
               </Col>
@@ -179,6 +179,7 @@ function SavedAuctionsCard({
                   style={{
                     fontSize: "15px",
                     width: "250px",
+                    color: "black"
                   }}
                 >
                   Additional Info

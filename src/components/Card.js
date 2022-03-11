@@ -155,13 +155,13 @@ const CardComp = ({
               >
                 <div>
                   <Row>
-                    <Col md={5} style={{ width: "50%" }}>
+                    <Col md={5} style={{ width: "50%", color: "black" }}>
                       <p style={{ fontSize: "15px", width: "100px" }}>
                         Online Auction
                       </p>
                     </Col>
 
-                    <Col md={6} style={{ width: "50%" }}>
+                    <Col md={6} style={{ width: "50%", color: "black" }}>
                       <p
                         style={{
                           fontSize: "12px",
