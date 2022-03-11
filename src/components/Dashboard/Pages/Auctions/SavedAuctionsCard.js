@@ -262,7 +262,7 @@ function SavedAuctionsCard({
                   marginRight: "6px",
                 }}
               > */}
-              <Col xs={4}>
+              <Col xs={5}>
                 <Button
                   onClick={handleBid}
                   className="black-button text-white"

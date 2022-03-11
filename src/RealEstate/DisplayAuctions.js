@@ -758,7 +758,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "22px" }}
+                          style={{ fontWeight: "700", fontSize: "22px", color:"black" }}
                         />
                       </h4>
                       <p
@@ -791,7 +791,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
-                          style={{ fontWeight: "700", fontSize: "22px" }}
+                          style={{ fontWeight: "700", fontSize: "22px", color:"black" }}
                         />
                       </h4>
                       <p
@@ -826,6 +826,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                         padding: "8px",
                         fontWeight: "700",
                         fontSize: "22px",
+                        color:"black"
                       }}
                     >
                       199,530

@@ -117,6 +117,7 @@ const PropertyDetails = ({
                       fontSize: "13px",
                       bottom: "15px",
                       left: "200px",
+                      color: "black",
                     }}
                   >
                     Street Address
@@ -187,6 +188,7 @@ const PropertyDetails = ({
                           left: "200px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>State</td>
@@ -252,6 +254,7 @@ const PropertyDetails = ({
                           left: "109px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>
@@ -354,6 +357,7 @@ const PropertyDetails = ({
                           left: "109px",
                           fontSize: "13px",
                           bottom: "5px",
+                          color: "black",
                         }}
                       >
                         <td>
@@ -410,6 +414,7 @@ const PropertyDetails = ({
                           style={{
                             position: "relative",
                             fontSize: "13px",
+                            color: "black",
                           }}
                         >
                           Market Value
@@ -461,7 +466,7 @@ const PropertyDetails = ({
                       />
                     </td>
                   </tr>
-                  <tr style={{ display: "flex" }}>
+                  <tr style={{ display: "flex", color:"black" }}>
                     <td style={{ display: "flex", marginLeft: "140px" }}>
                       Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
                     </td>
@@ -573,6 +578,7 @@ const PropertyDetails = ({
                   fontSize: "13px",
                   bottom: "15px",
                   left: "200px",
+                  color: "black",
                 }}
               >
                 Street Address
@@ -643,6 +649,7 @@ const PropertyDetails = ({
                       left: "200px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>State</td>
@@ -700,6 +707,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>
@@ -792,6 +800,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>
@@ -841,6 +850,7 @@ const PropertyDetails = ({
                       style={{
                         position: "relative",
                         fontSize: "13px",
+                        color: "black",
                       }}
                     >
                       Market Value<span style={{ color: "#ff0000" }}>*</span>
@@ -901,6 +911,7 @@ const PropertyDetails = ({
                       left: "109px",
                       fontSize: "13px",
                       bottom: "5px",
+                      color: "black",
                     }}
                   >
                     <td>

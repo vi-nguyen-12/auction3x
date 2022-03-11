@@ -60,7 +60,9 @@ const Agree = ({
               documents,
             })
             .then((res) => {
-              if (res.status === 200) {
+              if (res.data.error) {
+                alert(res.data.error);
+              } else {
                 history.push("/");
                 window.scrollTo(0, 0);
               }
