@@ -30,7 +30,10 @@ const Agree = ({
     await authService.getDocuSign(envelopeId).then((res) => {
       setLoader(false);
       setEnvelopeId(res.data.envelopeId);
-      if (res.data.status !== "signing_complete") {
+      if (
+        res.data.status !== "signing_complete" &&
+        res.data.status !== "viewing_complete"
+      ) {
         window.open(res.data.redirectUrl);
       }
     });
@@ -42,8 +45,12 @@ const Agree = ({
     } else {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
+        console.log(res);
         setLoader(false);
-        if (res.data.status !== "signing_complete") {
+        if (
+          res.data.status !== "signing_complete" &&
+          res.data.status !== "viewing_complete"
+        ) {
           alert("Please sign the docusign before proceeding ");
         } else {
           authService
