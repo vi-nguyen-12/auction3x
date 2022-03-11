@@ -216,7 +216,7 @@ const UpcomingCard = ({
                         <p
                           style={{
                             fontSize: "12px",
-
+                            color:"black",
                             width: "250px",
                           }}
                         >
