@@ -212,16 +212,24 @@ const UpcomingCard = ({
                         </Col>
                       )}
 
-                      <Col md={6} style={{ width: "50%" }}>
+                      <Col md={6} style={{ width: "50%", color: "black" }}>
                         <p
                           style={{
                             fontSize: "12px",
-                            color:"black",
+                            color: "black",
                             width: "250px",
                           }}
                         >
-                          {data.structure.beds_count}BD | {data.structure.baths}
-                          BA | {data.structure.total_area_sq_ft} sq.ft
+                          {data.structure.beds_count
+                            ? data.structure.beds_count
+                            : "N/A-"}
+                          BD |{" "}
+                          {data.structure.baths ? data.structure.baths : "N/A-"}
+                          BA |{" "}
+                          {data.structure.total_area_sq_ft
+                            ? data.structure.total_area_sq_ft
+                            : "N/A-"}{" "}
+                          sq.ft
                         </p>
                       </Col>
                     </Row>

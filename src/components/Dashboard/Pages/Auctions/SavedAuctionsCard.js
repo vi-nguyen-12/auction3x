@@ -219,12 +219,12 @@ function SavedAuctionsCard({
                 >
                   {data.structure.beds_count
                     ? data.structure.beds_count
-                    : "N/A "}
-                  BD | {data.structure.baths ? data.structure.baths : "N/A "}BA
+                    : "N/A-"}
+                  BD | {data.structure.baths ? data.structure.baths : "N/A-"}BA
                   |{" "}
                   {data.structure.total_area_sq_ft
                     ? data.structure.total_area_sq_ft
-                    : "N/A"}{" "}
+                    : "N/A-"}{" "}
                   sq.ft
                 </p>
               </Col>
