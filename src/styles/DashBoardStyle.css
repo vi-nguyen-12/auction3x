@@ -1,6 +1,7 @@
 /* Dashboard Header*/
 
-h2, h3{
+h2,
+h3 {
   color: black;
 }
 
@@ -119,7 +120,7 @@ h2, h3{
 }
 
 .CircularProgressbar .CircularProgressbar-path {
-  stroke: #b77b50!important;
+  stroke: #b77b50 !important;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease 0s;
 }
@@ -225,7 +226,7 @@ h2, h3{
   border-radius: 20px;
 }
 
-.list{
+.list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -233,7 +234,7 @@ h2, h3{
   margin-top: 10px;
 }
 
-.listItem{
+.listItem {
   width: 250px;
   height: 150px;
   border-radius: 15px;
@@ -272,7 +273,7 @@ h2, h3{
   display: flex;
   justify-content: center;
   border: #d5d5dc;
-  width: 100px;
+  width: 100%;
   margin: 5px;
   font-size: 15px;
   padding: 10px;

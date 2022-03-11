@@ -8,10 +8,10 @@ function Messaging() {
   return (
     <Container className="profileContainer">
       <Row >
-        <Col sm={8} style = {{color:"black"}}>
+        <Col sm={8} style={{ color: "black" }}>
           <span> # RM Agent </span> | Agent Name
         </Col>
-        <Col sm={4} style = {{color:"black"}}>
+        <Col sm={4} style={{ color: "black" }}>
           Settings
         </Col>
       </Row>
@@ -29,13 +29,13 @@ function Messaging() {
         </div>
       </Row>
       <Row className='chat-message'>
-        <Col>
-          <AiFillPlusCircle size={40} color = "black" />
+        <Col style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <AiFillPlusCircle size={40} color="black" />
         </Col>
         <Col xs={10}>
           <input type="text" className="text-box" placeholder="Type your message here" />
         </Col>
-        <Col xs={1}>
+        <Col style={{ display: "flex", justifyContent: "center", alignItems: "center" }} xs={1}>
           <Button>
             <IoSend />
           </Button>
