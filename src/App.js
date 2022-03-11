@@ -107,12 +107,6 @@ function App() {
             />
           </Route>
 
-          <Route path="/DisplayUpcomings/:id">
-            <DisplayUpcomings
-              colorChange={colorChange}
-              toogleChange={toogleChange}
-            />
-          </Route>
           {/* 
           <Route exact path="/dashboard/Auctions/SavedAuctions">
             <SavedAuctions colorChange={colorChange} />

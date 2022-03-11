@@ -164,6 +164,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
               width: "100%",
               marginTop: "70px",
               textAlign: "center",
+              color: "black",
             }}
           >
             <input
@@ -171,7 +172,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
               name="terms"
               multiple
               // {...register("images", { required: false })}
-              style={{ marginRight: "10px", marginBottom: "30px", color: "black" }}
+              style={{ marginRight: "10px", marginBottom: "30px" }}
               onChange={hangleTerms}
             />
             Terms & Conditions

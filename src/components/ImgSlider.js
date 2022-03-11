@@ -117,7 +117,7 @@ const ImgSlider = () => {
             {property.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
-                <a href={`/DisplayUpcomings/${item._id}`}>
+                <a href={`/DisplayAuctions/${item._id}`}>
                   <img src={item.property.images[0].url} alt="" />
                 </a>
                 <HomeBottom>
@@ -130,7 +130,7 @@ const ImgSlider = () => {
                       prefix={"$"}
                     />
                   </h2>
-                  <span style={{ color: "white", fontSize:"20px" }}>
+                  <span style={{ color: "white", fontSize: "20px" }}>
                     HOUSE IN {item.property.details.address.city},
                     {item.property.details.address.state}, UNITED STATES
                   </span>
