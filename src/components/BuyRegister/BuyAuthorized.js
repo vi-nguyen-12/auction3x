@@ -115,7 +115,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
           style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
           contentclassname="custom-modal-title"
         >
-          Documents Upload
+          Buyer Agreement
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
@@ -171,7 +171,7 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
               name="terms"
               multiple
               // {...register("images", { required: false })}
-              style={{ marginRight: "10px", marginBottom: "30px" }}
+              style={{ marginRight: "10px", marginBottom: "30px", color: "black" }}
               onChange={hangleTerms}
             />
             Terms & Conditions

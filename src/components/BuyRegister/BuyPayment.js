@@ -95,14 +95,14 @@ const BuyAuthoried = ({
       <Modal.Body>
         <form>
           <div style={{ marginBottom: "15px" }}>
-            <p style={{ fontWeight: "bold" }}>Q.1: {question1}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>Q.1: {question1}</p>
             <input
               type="radio"
               name="answer1"
               value="yes"
               onChange={(e) => setAnswer1(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
             <input
               style={{ marginLeft: "30px" }}
               type="radio"
@@ -110,7 +110,7 @@ const BuyAuthoried = ({
               value="no"
               onChange={(e) => setAnswer1(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>No</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
             {answer1 === "yes" && (
               <div style={{ display: "grid" }}>
                 <textarea
@@ -129,21 +129,21 @@ const BuyAuthoried = ({
                     marginTop: "10px",
                   }}
                 >
-                  <Button>Upload</Button>
+                  <button>Upload</button>
                 </div>
               </div>
             )}
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold" }}>Q.2: {question2}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>Q.2: {question2}</p>
             <input
               type="radio"
               name="answer2"
               value="yes"
               onChange={(e) => setAnswer2(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
             <input
               style={{ marginLeft: "30px" }}
               type="radio"
@@ -151,7 +151,7 @@ const BuyAuthoried = ({
               value="no"
               onChange={(e) => setAnswer2(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>No</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
             {answer2 === "yes" && (
               <div style={{ display: "grid" }}>
                 <textarea
@@ -176,14 +176,14 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold" }}>Q3: {question3}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>Q3: {question3}</p>
             <input
               type="radio"
               name="answer3"
               value="yes"
               onChange={(e) => setAnswer3(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
             <input
               style={{ marginLeft: "30px" }}
               type="radio"
@@ -191,7 +191,7 @@ const BuyAuthoried = ({
               value="no"
               onChange={(e) => setAnswer3(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>No</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
             {answer3 === "yes" && (
               <div style={{ display: "grid" }}>
                 <textarea
@@ -216,14 +216,14 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold" }}>Q4: {question4}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>Q4: {question4}</p>
             <input
               type="radio"
               name="answer4"
               value="yes"
               onChange={(e) => setAnswer4(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
             <input
               style={{ marginLeft: "30px" }}
               type="radio"
@@ -231,7 +231,7 @@ const BuyAuthoried = ({
               value="no"
               onChange={(e) => setAnswer4(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>No</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
             {answer4 === "yes" && (
               <div style={{ display: "grid" }}>
                 <textarea
@@ -256,14 +256,14 @@ const BuyAuthoried = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold" }}>Q5: {question5}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>Q5: {question5}</p>
             <input
               type="radio"
               name="answer5"
               value="yes"
               onChange={(e) => setAnswer5(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>Yes</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
             <input
               style={{ marginLeft: "30px" }}
               type="radio"
@@ -271,7 +271,7 @@ const BuyAuthoried = ({
               value="no"
               onChange={(e) => setAnswer5(e.target.value)}
             />
-            <label style={{ marginLeft: "5px" }}>No</label>
+            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
             {answer5 === "yes" && (
               <div style={{ display: "grid" }}>
                 <textarea
