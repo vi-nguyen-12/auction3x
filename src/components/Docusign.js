@@ -17,9 +17,7 @@ const Docusign = () => {
         .get(
           `https://auction10x-be.azurewebsites.net/api/docusign/callback/${envelopeId}?state=${state}&event=${event}`
         )
-        .then((response) => {
-          console.log(response);
-        });
+        .then((response) => {});
     };
     postStatusDocusign();
   });
