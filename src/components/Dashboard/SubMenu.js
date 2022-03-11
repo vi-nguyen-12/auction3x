@@ -77,7 +77,6 @@ const SubMenu = ({ item, path }) => {
   const handleOnclick = () => {
     item.subNav && showSubnav();
   }
-  console.log(item.path[1, 7]);
   return (
     <>
       <SidebarLink to={item.path} onClick={handleOnclick}>

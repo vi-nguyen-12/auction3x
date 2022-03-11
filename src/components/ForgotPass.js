@@ -25,7 +25,7 @@ function ForgotPass({ toogleForgotPass, toogleChangePass }) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="form-group">
-        <label style={{ fontSize: "25px" }}>
+        <label style={{ fontSize: "25px", color: "black" }}>
           Please enter the account email
         </label>
         <input

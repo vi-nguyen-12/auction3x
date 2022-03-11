@@ -9,6 +9,7 @@
 
 .text {
   margin: auto;
+  color: black;
 }
 /*Sell Welcome*/
 .box-content {
@@ -408,8 +409,7 @@ ul.dashed > li:before {
   width: 8%;
   height: 2px;
   background-color: #f1f1f1;
-  margin: center;
-  margin-top: 48px;
+  margin-top: 48px !important;
   display: flex;
   align-items: center;
 }
@@ -417,8 +417,7 @@ ul.dashed > li:before {
   width: 8%;
   height: 2px;
   background-color: #b77b50;
-  margin: center;
-  margin-top: 48px;
+  margin-top: 48px !important;
   display: flex;
   align-items: center;
 }
@@ -426,8 +425,7 @@ ul.dashed > li:before {
   width: 8%;
   height: 2px;
   background-color: #b77b50;
-  margin: center;
-  margin-top: 48px;
+  margin-top: 48px !important;
   display: flex;
   align-items: center;
 }
@@ -435,17 +433,7 @@ ul.dashed > li:before {
   width: 8%;
   height: 2px;
   background-color: #b77b50;
-  margin: center;
-  margin-top: 48px;
-  display: flex;
-  align-items: center;
-}
-.line-4 {
-  width: 8%;
-  height: 2px;
-  background-color: #b77b50;
-  margin: center;
-  margin-top: 48px;
+  margin-top: 48px !important;
   display: flex;
   align-items: center;
 }

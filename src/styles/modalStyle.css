@@ -191,8 +191,8 @@
   background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
   position: fixed;
   display: flex;
-  margin-left: -75px;
-  margin-top: -10px;
+  margin-left: -75px !important;
+  margin-top: -10px !important;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -204,8 +204,8 @@
   background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
   position: fixed;
   display: flex;
-  margin-left: -75px;
-  margin-top: -10px;
+  margin-left: -75px !important;
+  margin-top: -10px !important;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
@@ -217,9 +217,9 @@
   background-image: linear-gradient(to right, #d58f5c, #d99462, #f9d8b3);
   position: fixed;
   display: flex;
-  margin-left: -75px;
-  margin-top: -10px;
-  border-radius: 20px;
+  margin-left: -75px !important;
+  margin-top: -10px !important;
+  border-radius: 20px !important;
   justify-content: center;
   align-items: center;
 }
