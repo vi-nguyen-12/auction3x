@@ -6,9 +6,9 @@ import Slider from "react-slick";
 import SearchBar from "../../components/Home/SearchBar";
 import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCard } from "./UpcomingCard";
+import { UpcomingCard } from "../Auctions/UpcomingCard";
 import "../../styles/realEstate.css";
-import { CardComp } from "./Card";
+import { CardComp } from "../Auctions/Card";
 
 const Carousel = styled(Slider)`
   height: 30vh;

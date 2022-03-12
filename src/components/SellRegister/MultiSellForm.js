@@ -8,11 +8,10 @@ import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
 
 const MultiSellForm = ({ colorChange }) => {
-
   useEffect(() => {
-  colorChange("black");
+    colorChange("black");
   }, []);
-  
+
   const [step, setStep] = useState(0);
   const toogleStep = (step) => {
     setStep(step);
@@ -43,12 +42,22 @@ const MultiSellForm = ({ colorChange }) => {
     setVideos(videos);
   };
 
-  
+  const [propertyType, setPropertyType] = useState();
+  const tooglePropertyType = (prop) => {
+    setPropertyType(prop);
+  };
+
+  console.log(propertyType);
+
   if (step === 0) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-        <SellWelcome toogleStep={toogleStep} step={step} test="test" />
+        <SellWelcome
+          tooglePropertyType={tooglePropertyType}
+          toogleStep={toogleStep}
+          step={step}
+        />
       </div>
     );
   } else if (step === 1) {
@@ -60,6 +69,7 @@ const MultiSellForm = ({ colorChange }) => {
           properties={properties}
           toogleStep={(data) => toogleStep(data)}
           step={step}
+          propertyType = {propertyType}
         />
       </div>
     );

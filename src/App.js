@@ -1,6 +1,6 @@
 import ImgSlider from "./components/Home/ImgSlider";
 import { FindInCountries } from "./components/Home/FindInCountries";
-import { Upcoming } from "./components/RealEstate/Upcoming";
+import { Upcoming } from "./components/Auctions/Upcoming";
 import Work from "./components/Home/work";
 import RealEstate from "./components/Home/realEstate";
 import "./App.css";
@@ -28,7 +28,7 @@ import ChangePass from "./components/Users/ChangePass";
 import EmailConfirm from "./components/Users/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
-import DisplayAuctions from "./components/RealEstate/DisplayAuctions";
+import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
@@ -57,7 +57,6 @@ function App() {
 
   if (user._id) {
     authService.getRegistStatus().then((res) => {
-      console.log(res.data);
       dispatch(addRegistProp(res.data));
     });
     authService.getSavedProperties(user._id).then((res) => {

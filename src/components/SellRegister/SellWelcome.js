@@ -1,27 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Table } from "react-bootstrap";
 import "../../styles/SellRegister.css";
 // create step bar
 
-const Sell = ({ toogleStep, step }) => {
-  const {
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+const Sell = ({ toogleStep, step, tooglePropertyType }) => {
+  const { handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    toogleStep(step + 1);
+  const [propertyType, setPropertyType] = useState();
+
+  const onSubmit = () => {
+    if (propertyType === undefined) {
+      alert("Please select property to sell");
+    } else {
+      tooglePropertyType(propertyType);
+      toogleStep(step + 1);
+    }
   };
-
-  // const btn = document.getElementById("next");
-
-  // console.log(btn);
-
-  // btn.disabled = true;
-  // setTimeout(() => {
-  //   btn.disabled = false;
-  // }, 8000);
 
   return (
     <form
@@ -65,7 +60,7 @@ const Sell = ({ toogleStep, step }) => {
             <tr>
               <th>
                 <h3 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
-                  SELECT WHAT YOU WANT TO SELL
+                  PLEASE SELECT PROPERTY TO SELL
                 </h3>
               </th>
             </tr>
@@ -74,47 +69,92 @@ const Sell = ({ toogleStep, step }) => {
           <tbody style={{ marginTop: "30px" }}>
             <tr className="sell-1">
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("realEstate")}
+                />
                 <label className="choice">Real Estate</label>
               </td>
 
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("cars")}
+                />
                 <label className="choice">Cars</label>
               </td>
 
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("collectible")}
+                />
                 <label className="choice">Collectible</label>
               </td>
             </tr>
 
             <tr className="sell-2">
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("yachts")}
+                />
                 <label className="choice">Yachts</label>
               </td>
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("jets")}
+                />
                 <label className="choice">Jets</label>
               </td>
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("helicopters")}
+                />
                 <label className="choice">Helicopters</label>
               </td>
             </tr>
 
             <tr className="sell-3">
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("jewels")}
+                />
                 <label className="choice">Jewels</label>
               </td>
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("motorcycles")}
+                />
                 <label className="choice">Motorcycle</label>
               </td>
               <td>
-                <input type="radio" name="sell" value="1" />
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("watches")}
+                />
                 <label className="choice">Watches</label>
               </td>
             </tr>

@@ -124,7 +124,7 @@ const ImgSlider = () => {
                   <h2>
                     <NumberFormat
                       style={{ fontSize: "50px", color: "white" }}
-                      value={item.property.details.assessments[0].total_value}
+                      value={item.startingBid}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
@@ -132,7 +132,7 @@ const ImgSlider = () => {
                   </h2>
                   <span style={{ color: "white", fontSize: "20px" }}>
                     HOUSE IN {item.property.details.address.city},
-                    {item.property.details.address.state}, UNITED STATES
+                    {item.property.details.address.state} UNITED STATES
                   </span>
                 </HomeBottom>
               </Wrap>
