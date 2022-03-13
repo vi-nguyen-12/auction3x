@@ -3,9 +3,12 @@ import { Button } from 'react-bootstrap'
 import '../../styles/real-estate.css'
 
 const RealEstate = (props) => {
-	return (
+    return (
         <section className='real-estate-wrap'>
             <div className='real-estate'>
+                <div className='filter'>
+                    <img src="./images/realstate.png" alt="" className='img-float' />
+                </div>
                 <div className='btn-group'>
                     <Button className='btn-custom'> Real Estate</Button>
                     <Button className='btn-custom'> Cars</Button>
@@ -15,13 +18,16 @@ const RealEstate = (props) => {
                 </div>
                 <div className='sell-real-estate'>
                     <div className='content'>
-                        <h1>Sell Real Estate <br/> on Auction 10X</h1>
+                        <h1 style={{
+                            color: "#df9e6f",
+                        }}>Sell Real Estate <br /> on Auction 10X</h1>
                         <p className='paragraph'>Attract quality leads within the highest concentration of international luxury buyers</p>
                     </div>
                 </div>
+
             </div>
         </section>
-	)
+    )
 }
 
 export default RealEstate 
