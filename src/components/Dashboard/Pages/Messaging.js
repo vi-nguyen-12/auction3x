@@ -1,18 +1,18 @@
 import React from 'react'
 import { Col, Container, Row, Button } from 'react-bootstrap'
 import { IoSend } from "react-icons/io5";
-import { AiFillPlusCircle } from 'react-icons/ai'
+import { AiFillPlusCircle, AiFillSetting } from 'react-icons/ai'
 
 
 function Messaging() {
   return (
-    <Container className="profileContainer">
-      <Row >
+    <Container className="chatContainer">
+      <Row className='top-chat'>
         <Col sm={8} style={{ color: "black" }}>
-          <span> # RM Agent </span> | Agent Name
+          <span style={{ fontWeight: "500", fontSize: "23px" }}> # RM Agent </span> | Agent Name
         </Col>
-        <Col sm={4} style={{ color: "black" }}>
-          Settings
+        <Col md={4} style={{ color: "black", display: "flex", justifyContent: "end" }}>
+          <AiFillSetting size={30} />
         </Col>
       </Row>
       <Row >
