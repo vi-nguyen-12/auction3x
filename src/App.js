@@ -30,6 +30,7 @@ import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
 import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
+import CarPage from "./components/Cars/CarPage";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -106,9 +107,14 @@ function App() {
           <Route exact path="/dashboard/Auctions/SavedAuctions">
             <SavedAuctions colorChange={colorChange} />
           </Route> */}
-
           <Route exact path="/realEstates">
             <RealEstates
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
+          </Route>
+          <Route exact path="/Cars">
+            <CarPage
               colorChange={colorChange}
               toogleChange={toogleChange}
             />

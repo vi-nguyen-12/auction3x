@@ -310,7 +310,7 @@ h3 {
   font-weight: 500;
 }
 
-.name h3 {
+/* .name h3 {
   color: black;
   font-size: 23px;
   font-weight: 700;
@@ -320,15 +320,15 @@ h3 {
   color: #4bd67f;
   font-size: 20px;
   font-weight: 700;
-}
+} */
 
-.address p {
+.address {
   color: #7c8392;
   font-size: 15px;
   font-weight: 500;
 }
 
-.address Button {
+.social Button {
   width: 55px;
   height: 55px;
   border-radius: 50%;
