@@ -1,6 +1,6 @@
-import ImgSlider from "./components/ImgSlider";
-import { FindInCountries } from "./components/FindInCountries";
-import { Upcoming } from "./components/Upcoming";
+import ImgSlider from "./components/Home/ImgSlider";
+import { FindInCountries } from "./components/Home/FindInCountries";
+import { Upcoming } from "./components/Auctions/Upcoming";
 import Work from "./components/Home/work";
 import RealEstate from "./components/Home/realEstate";
 import "./App.css";
@@ -9,30 +9,27 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useLocation,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
-import MultiSellForm from "./SellRegister/MultiSellForm";
+import MultiSellForm from "./components/SellRegister/MultiSellForm";
 import Footer from "./components/Home/footer";
-import { Featured } from "./components/Featured";
+import { Featured } from "./components/Home/Featured";
 import { addProperty } from "./slice/propertySlice";
 import { addAuction } from "./slice/auctionSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
 import authService from "./services/authServices";
-import Header from "./components/Header";
-import RealEstates from "./RealEstate/RealEstates";
+import Header from "./components/Home/Header";
+import RealEstates from "./components/RealEstate/RealEstates";
 import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
-import ChangePass from "./components/ChangePass";
-import EmailConfirm from "./components/EmailConfirm";
+import ChangePass from "./components/Users/ChangePass";
+import EmailConfirm from "./components/Users/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
-import DisplayAuctions from "./RealEstate/DisplayAuctions";
-import DisplayUpcomings from "./RealEstate/DisplayUpcomings";
+import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
-import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -60,7 +57,6 @@ function App() {
 
   if (user._id) {
     authService.getRegistStatus().then((res) => {
-      console.log(res.data);
       dispatch(addRegistProp(res.data));
     });
     authService.getSavedProperties(user._id).then((res) => {
@@ -106,7 +102,6 @@ function App() {
               toogleChange={toogleChange}
             />
           </Route>
-
           {/* 
           <Route exact path="/dashboard/Auctions/SavedAuctions">
             <SavedAuctions colorChange={colorChange} />
