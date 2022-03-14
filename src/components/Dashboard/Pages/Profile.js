@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
+import { FiEdit } from 'react-icons/fi'
 import "../../../styles/DashBoardStyle.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -94,7 +95,11 @@ function Profile() {
       <Row>
         <Col sm={3} className="profilePicCol">
           <div className="profileOutline">
-            <div className="profileInline"></div>
+            <div className="profileInline">
+              <Button>
+                <FiEdit size={25} />
+              </Button>
+            </div>
           </div>
         </Col>
         <Col sm={9}>
