@@ -22,9 +22,6 @@ const authService = {
   },
 
   login(data) {
-    // return axios.post(apiUrl + "/api/users/login", data, {
-    //   withCredentials: true,
-    // });
     return axios.post(apiUrl + "/api/users/login", data);
   },
 
@@ -160,7 +157,7 @@ const authService = {
   // },
 
   getUpcomingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/upcoming", {
+    return axios.get(apiUrl + "/api/auctions/real-estate/upcoming", {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
@@ -178,7 +175,7 @@ const authService = {
   },
 
   getOngoingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/ongoing");
+    return axios.get(apiUrl + "/api/auctions/real-estate/ongoing");
   },
 
   forgotPassword(data) {
