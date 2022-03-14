@@ -107,11 +107,7 @@ function JetForm({ toogleStep, step }) {
         >
           Previous
         </button>
-        <button
-          onClick={toogleStep(step + 1)}
-          className="nxt-btn"
-          type="submit"
-        >
+        <button className="nxt-btn" type="submit">
           Next
         </button>
       </div>
