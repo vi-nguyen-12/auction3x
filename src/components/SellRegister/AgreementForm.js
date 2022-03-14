@@ -52,28 +52,51 @@ const Agree = ({
         ) {
           alert("Please sign the docusign before proceeding ");
         } else {
-          authService
-            .saveRealEstate({
-              type: propertyData.type,
-              street_address: propertyData.street_address,
-              city: propertyData.city,
-              state: propertyData.state,
-              discussedAmount: parseFloat(propertyData.discussedAmount),
-              reservedAmount: parseFloat(propertyData.reservedAmount),
-              docusignId: res.data._id,
-              images,
-              videos,
-              documents,
-            })
-            .then((res) => {
-              if (res.data.error) {
-                alert(res.data.error);
-              } else {
-                alert("Successfully create a property to sell");
-                history.push("/");
-                window.scrollTo(0, 0);
-              }
-            });
+          if (propertyData.type === "real-estate") {
+            authService
+              .saveRealEstate({
+                type: propertyData.type,
+                street_address: propertyData.street_address,
+                city: propertyData.city,
+                state: propertyData.state,
+                discussedAmount: parseFloat(propertyData.discussedAmount),
+                reservedAmount: parseFloat(propertyData.reservedAmount),
+                docusignId: res.data._id,
+                images,
+                videos,
+                documents,
+              })
+              .then((res) => {
+                if (res.data.error) {
+                  alert(res.data.error);
+                } else {
+                  alert("Successfully create a property to sell");
+                  history.push("/");
+                  window.scrollTo(0, 0);
+                }
+              });
+          } else {
+            authService
+              .sellProperty({
+                type: propertyData.type,
+                images,
+                videos,
+                documents,
+                reservedAmount: propertyData.reservedAmount,
+                discussedAmount: propertyData.discussedAmount,
+                docusignId: res.data._id,
+                details: propertyData.details,
+              })
+              .then((res) => {
+                if (res.data.error) {
+                  alert(res.data.error);
+                } else {
+                  alert("Successfully create a property to sell");
+                  history.push("/");
+                  window.scrollTo(0, 0);
+                }
+              });
+          }
         }
       });
     }
@@ -122,7 +145,9 @@ const Agree = ({
       </div>
       <div className="agree-sell-bottom">
         <div className="header">
-          <h2 style={{ color: "black", fontWeight: "bold" }}>SELLER AGREEMENT</h2>
+          <h2 style={{ color: "black", fontWeight: "bold" }}>
+            SELLER AGREEMENT
+          </h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
         </div>
         {loader ? (

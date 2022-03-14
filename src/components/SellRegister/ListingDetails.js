@@ -120,11 +120,15 @@ const ListingDetails = ({ toogleStep, step, properties, propertyType }) => {
           properties={properties}
         />
       ) : propertyType === "cars" ? (
-        <CarForm toogleStep={toogleStep} step={step} />
+        <CarForm toogleStep={toogleStep} step={step} properties={properties} />
       ) : propertyType === "jets" ? (
-        <JetForm toogleStep={toogleStep} step={step} />
+        <JetForm toogleStep={toogleStep} step={step} properties={properties} />
       ) : propertyType === "yachts" ? (
-        <YachtForm toogleStep={toogleStep} step={step} />
+        <YachtForm
+          toogleStep={toogleStep}
+          step={step}
+          properties={properties}
+        />
       ) : null}
     </div>
   );

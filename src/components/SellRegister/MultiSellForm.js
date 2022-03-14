@@ -6,6 +6,7 @@ import "../../styles/SellRegister.css";
 import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
+import Ownership from "./Ownership";
 
 const MultiSellForm = ({ colorChange }) => {
   useEffect(() => {
@@ -47,7 +48,10 @@ const MultiSellForm = ({ colorChange }) => {
     setPropertyType(prop);
   };
 
-  console.log(propertyType);
+  const [ownership, setOwnership] = useState();
+  const getOwnerShip = (ownership) => {
+    setOwnership(ownership);
+  };
 
   if (step === 0) {
     return (
@@ -65,15 +69,23 @@ const MultiSellForm = ({ colorChange }) => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
 
+        <Ownership toogleStep={toogleStep} step={step} getOwnerShip = {getOwnerShip} />
+      </div>
+    );
+  } else if (step === 2) {
+    return (
+      <div className="sell-register-container">
+        <h1>Sell On Auction10X</h1>
+
         <ListingDetails
           properties={properties}
           toogleStep={(data) => toogleStep(data)}
           step={step}
-          propertyType = {propertyType}
+          propertyType={propertyType}
         />
       </div>
     );
-  } else if (step === 2) {
+  } else if (step === 3) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
@@ -83,10 +95,11 @@ const MultiSellForm = ({ colorChange }) => {
           property={property}
           toogleStep={(data) => toogleStep(data)}
           step={step}
+          propertyType={propertyType}
         />
       </div>
     );
-  } else if (step === 3) {
+  } else if (step === 4) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
@@ -99,16 +112,16 @@ const MultiSellForm = ({ colorChange }) => {
         />
       </div>
     );
-  } else if (step === 4) {
+  } else if (step === 5) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
 
         <DocumentsUpload
-          propertyData={propertyData}
           toogleStep={(data) => toogleStep(data)}
           step={step}
           toogleDocuments={toogleDocuments}
+          propertyType={propertyType}
         />
       </div>
     );
@@ -120,7 +133,7 @@ const MultiSellForm = ({ colorChange }) => {
     //       <ListingFees toogleStep={toogleStep} step={step} test="test" />
     //     </div>
     //   );
-  } else if (step === 5) {
+  } else if (step === 6) {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>

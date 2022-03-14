@@ -43,6 +43,15 @@ const authService = {
     });
   },
 
+  sellProperty(data) {
+    return axios.post(apiUrl + "/api/properties", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
+  },
+
   saveImages(data) {
     return axios.post(
       apiUrl + "/api/properties/real-estates/images/upload",
