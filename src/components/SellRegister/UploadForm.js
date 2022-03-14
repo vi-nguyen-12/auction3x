@@ -108,7 +108,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       <div className="sell-bottom">
         <div className="listDetails-title">
           <h2 style={{ color: "black", fontWeight: "bold" }}>
-            UPLOAD DOCUMENTS
+            UPLOAD PICTURES AND VIDEOS
           </h2>
         </div>
         {loader ? (

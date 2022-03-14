@@ -22,9 +22,6 @@ const authService = {
   },
 
   login(data) {
-    // return axios.post(apiUrl + "/api/users/login", data, {
-    //   withCredentials: true,
-    // });
     return axios.post(apiUrl + "/api/users/login", data);
   },
 
@@ -43,45 +40,33 @@ const authService = {
     });
   },
 
+  sellProperty(data) {
+    return axios.post(apiUrl + "/api/properties", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
+  },
+
   saveImages(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/images/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/images/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   saveVideos(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/videos/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
-  },
-
-  saveLives(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/videos/upload",
-      data,
-      {
-        withCredentials: true,
-        headers: { "content-type": "multipart/form-data" },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/videos/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   fetchKycStatus(data) {
@@ -102,18 +87,13 @@ const authService = {
   },
 
   saveDocuments(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/documents/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/documents/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   sendProperty(id) {
@@ -160,7 +140,7 @@ const authService = {
   // },
 
   getUpcomingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/upcoming", {
+    return axios.get(apiUrl + "/api/auctions/real-estate/upcoming", {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
@@ -178,7 +158,7 @@ const authService = {
   },
 
   getOngoingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/ongoing");
+    return axios.get(apiUrl + "/api/auctions/real-estate/ongoing");
   },
 
   forgotPassword(data) {

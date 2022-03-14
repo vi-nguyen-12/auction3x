@@ -28,7 +28,9 @@ function RealEstateForm({ toogleStep, step, properties }) {
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {
-        return item.types.includes("locality" || "sublocality");
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
       });
       setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
 

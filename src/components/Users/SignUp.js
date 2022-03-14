@@ -16,7 +16,17 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
     } else {
-      authServices.register(data).then((response) => {
+      const datas = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+        userName: data.userName,
+        country: data.country,
+        city: data.city,
+      };
+      authServices.register(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {

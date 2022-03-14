@@ -93,12 +93,21 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
                   type="radio"
                   name="sell"
                   value="1"
-                  onChange={() => setPropertyType("collectible")}
+                  onChange={() => setPropertyType("jets")}
                 />
-                <label className="choice">Collectible</label>
+                <label className="choice">Jets</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="sell"
+                  value="1"
+                  onChange={() => setPropertyType("yachts")}
+                />
+                <label className="choice">Yachts</label>
               </td>
             </tr>
-
+            {/* 
             <tr className="sell-2">
               <td>
                 <input
@@ -127,8 +136,8 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
                 />
                 <label className="choice">Helicopters</label>
               </td>
-            </tr>
-
+            </tr> */}
+            {/* 
             <tr className="sell-3">
               <td>
                 <input
@@ -157,7 +166,7 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
                 />
                 <label className="choice">Watches</label>
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </Table>
 
