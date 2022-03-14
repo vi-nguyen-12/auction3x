@@ -41,44 +41,23 @@ const authService = {
   },
 
   saveImages(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/images/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/images/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   saveVideos(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/videos/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
-  },
-
-  saveLives(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/videos/upload",
-      data,
-      {
-        withCredentials: true,
-        headers: { "content-type": "multipart/form-data" },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/videos/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   fetchKycStatus(data) {
@@ -99,18 +78,13 @@ const authService = {
   },
 
   saveDocuments(data) {
-    return axios.post(
-      apiUrl + "/api/properties/real-estates/documents/upload",
-      data,
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
-          "content-type": "multipart/form-data",
-        },
-      }
-    );
+    return axios.post(apiUrl + "/api/aws/documents/upload", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        "content-type": "multipart/form-data",
+      },
+    });
   },
 
   sendProperty(id) {
