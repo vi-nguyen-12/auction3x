@@ -216,11 +216,11 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     setLocation({
       name: "Property Location",
       lat: auctionData
-        ? auctionData.property.details.address.latitude
-        : propertyData.property.details.address.latitude,
+        ? auctionData.property.details.property_address.latitude
+        : propertyData.property.details.property_address.latitude,
       lng: auctionData
-        ? auctionData.property.details.address.longitude
-        : propertyData.property.details.address.longitude,
+        ? auctionData.property.details.property_address.longitude
+        : propertyData.property.details.property_address.longitude,
     });
 
     if (user._id && user.KYC) {
@@ -468,7 +468,10 @@ function DisplayAuctions({ colorChange, toogleChange }) {
                         <Marker position={location} />
                       </GoogleMap>
                       <p>
-                        {auctionProp.details.address.formatted_street_address}
+                        {
+                          auctionProp.details.property_address
+                            .formatted_street_address
+                        }
                       </p>
                     </Modal.Body>
                   </Modal>
@@ -482,10 +485,10 @@ function DisplayAuctions({ colorChange, toogleChange }) {
             <Col>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                {auctionProp.details.address.formatted_street_address} {","}{" "}
-                {auctionProp.details.address.city} {","}{" "}
-                {auctionProp.details.address.state}{" "}
-                {auctionProp.details.address.zip_code}
+                {auctionProp.details.property_address.formatted_street_address}{" "}
+                {","} {auctionProp.details.property_address.city} {","}{" "}
+                {auctionProp.details.property_address.state}{" "}
+                {auctionProp.details.property_address.zip_code}
               </h5>
             </Col>
 

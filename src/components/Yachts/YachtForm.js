@@ -9,24 +9,19 @@ function YachtForm({ toogleStep, step, properties }) {
   // const toogleShowOwner = () =>  setShowOwner(!showOwner);
 
   const onSubmit = (data) => {
+    console.log(data);
     const datas = {
-      ownerName: data.ownerName,
-      ownerEmail: data.ownerEmail,
-      ownerPhone: data.ownerPhone,
-      ownerAddress: data.ownerAddress,
-      brokerName: data.brokerName,
-      brokerEmail: data.brokerEmail,
-      brokerPhone: data.brokerPhone,
-      brokerAddress: data.brokerAddress,
-      vRegistration: data.vRegistration,
-      vRegistrationDate: data.vRegistrationDate,
-      manuMark: data.manuMark,
-      manuName: data.manuName,
-      engineType: data.engineType,
-      engineManuName: data.engineManuName,
-      engineDeckType: data.engineDeckType,
-      runningCost: data.runningCost,
-      crew: data.crew,
+      vessel_registration_number: data.vessel_registration_number,
+      vessel_manufacturing_date: data.vessel_manufacturing_date,
+      manufacture_mark: data.manufacture_mark,
+      manufacturer_name: data.manufacturer_name,
+      engine_type: data.engine_type,
+      engine_manufacture_name: data.engine_manufacture_name,
+      engine_deck_type: data.engine_deck_type,
+      running_cost: data.running_cost,
+      no_of_crew_required: data.no_of_crew_required,
+      detain: data.detain,
+      property_address: data.property_address,
     };
     properties(datas);
     toogleStep(step + 1);
@@ -79,9 +74,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              {...register("manufacture_mark", { required: true })}
+              {...register("property_address", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Manufacture Mark</span>
+            <span style={{ fontWeight: "600" }}>Property Address</span>
           </Col>
         </Row>
 
@@ -90,7 +85,15 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              {...register("manuName", { required: true })}
+              {...register("manufacture_mark", { required: true })}
+            />
+            <span style={{ fontWeight: "600" }}>Manufacture Mark</span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              {...register("manufacturer_name", { required: true })}
             />
             <span style={{ fontWeight: "600" }}>Manufacturer Name</span>
           </Col>
@@ -112,7 +115,7 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              {...register("engineType", { required: true })}
+              {...register("engine_type", { required: true })}
             />
             <span style={{ fontWeight: "600" }}>Engine Type</span>
           </Col>
@@ -145,13 +148,13 @@ function YachtForm({ toogleStep, step, properties }) {
             <span style={{ fontWeight: "600" }}>No. Crew Required</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "30px", height:"200px" }}>
+        <Row style={{ marginTop: "30px", height: "200px" }}>
           <Col>
             <textarea
               className="form-control"
               style={{ height: "100%" }}
               placeholder="Other information about the property"
-              {...register("description", { required: true })}
+              {...register("detain", { required: true })}
             />
           </Col>
         </Row>

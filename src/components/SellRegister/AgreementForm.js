@@ -13,7 +13,12 @@ const Agree = ({
   images,
   videos,
   documents,
+  ownership,
 }) => {
+  console.log(ownership);
+  console.log(propertyData);
+  const details = { ...propertyData.details };
+  console.log(details);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -76,26 +81,122 @@ const Agree = ({
                 }
               });
           } else {
-            authService
-              .sellProperty({
-                type: propertyData.type,
-                images,
-                videos,
-                documents,
-                reservedAmount: propertyData.reservedAmount,
-                discussedAmount: propertyData.discussedAmount,
-                docusignId: res.data._id,
-                details: propertyData.details,
-              })
-              .then((res) => {
-                if (res.data.error) {
-                  alert(res.data.error);
-                } else {
-                  alert("Successfully create a property to sell");
-                  history.push("/");
-                  window.scrollTo(0, 0);
-                }
-              });
+            if (propertyData.type === "cars") {
+              authService
+                .sellProperty({
+                  type: propertyData.type,
+                  images,
+                  videos,
+                  documents,
+                  reservedAmount: parseInt(propertyData.reservedAmount),
+                  discussedAmount: parseInt(propertyData.discussedAmount),
+                  docusignId: res.data._id,
+                  details: {
+                    make: propertyData.details.make
+                      ? propertyData.details.make
+                      : "",
+                    model: propertyData.details.model
+                      ? propertyData.details.model
+                      : "",
+                    year: propertyData.details.year
+                      ? propertyData.details.year
+                      : "",
+                    color: propertyData.details.color
+                      ? propertyData.details.color
+                      : "",
+                    mileage: propertyData.details.mileage
+                      ? propertyData.details.mileage
+                      : "",
+                    transmission: propertyData.details.transmission
+                      ? propertyData.details.transmission
+                      : "",
+                    VIN: propertyData.details.VIN
+                      ? propertyData.details.VIN
+                      : "",
+                    car_type: propertyData.details.car_type
+                      ? propertyData.details.car_type
+                      : "",
+                    property_address: propertyData.details.address
+                      ? propertyData.details.address
+                      : "",
+                    fuel_type: propertyData.details.fuel_type
+                      ? propertyData.details.fuel_type
+                      : "",
+                    condition: propertyData.details.condition
+                      ? propertyData.details.condition
+                      : "",
+                    engine: propertyData.details.engine
+                      ? propertyData.details.engine
+                      : "",
+                    power: propertyData.details.power
+                      ? propertyData.details.power
+                      : "",
+                    price: propertyData.details.price
+                      ? propertyData.details.price
+                      : "",
+                    ...ownership,
+                  },
+                })
+                .then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Successfully create a property to sell");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+            } else {
+              if (propertyData.type === "yacht") {
+                authService
+                  .sellProperty({
+                    type: propertyData.type,
+                    images,
+                    videos,
+                    documents,
+                    reservedAmount: parseInt(propertyData.reservedAmount),
+                    discussedAmount: parseInt(propertyData.discussedAmount),
+                    docusignId: res.data._id,
+                    details: {
+                      ...details,
+                      ...ownership,
+                    },
+                  })
+                  .then((res) => {
+                    if (res.data.error) {
+                      alert(res.data.error);
+                    } else {
+                      alert("Successfully create a property to sell");
+                      history.push("/");
+                      window.scrollTo(0, 0);
+                    }
+                  });
+              } else if (propertyData.type === "jet") {
+                authService
+                  .sellProperty({
+                    type: propertyData.type,
+                    images,
+                    videos,
+                    documents,
+                    reservedAmount: parseInt(propertyData.reservedAmount),
+                    discussedAmount: parseInt(propertyData.discussedAmount),
+                    docusignId: res.data._id,
+                    details: {
+                      ...details,
+                      ...ownership,
+                    },
+                  })
+                  .then((res) => {
+                    if (res.data.error) {
+                      alert(res.data.error);
+                    } else {
+                      alert("Successfully create a property to sell");
+                      history.push("/");
+                      window.scrollTo(0, 0);
+                    }
+                  });
+              }
+            }
           }
         }
       });

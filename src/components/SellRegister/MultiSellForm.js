@@ -71,7 +71,11 @@ const MultiSellForm = ({ colorChange }) => {
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
 
-        <Ownership toogleStep={toogleStep} step={step} getOwnerShip = {getOwnerShip} />
+        <Ownership
+          toogleStep={toogleStep}
+          step={step}
+          getOwnerShip={getOwnerShip}
+        />
       </div>
     );
   } else if (step === 2) {
@@ -147,6 +151,7 @@ const MultiSellForm = ({ colorChange }) => {
           images={images}
           videos={videos}
           documents={documents}
+          ownership={ownership}
         />
       </div>
     );

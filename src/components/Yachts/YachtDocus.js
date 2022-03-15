@@ -7,7 +7,7 @@ import { useState } from "react";
 import authService from "../../services/authServices";
 import { Row, Col, Container } from "react-bootstrap";
 
-function CarDocus({ toogleStep, step, toogleDocuments }) {
+function YachtDocus({ toogleStep, step, toogleDocuments }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -167,56 +167,56 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
     setDocument9(doc9.filter((document) => document.url !== url));
   };
 
-  const ownership_document = doc1.map((document) => {
-    return { ...document, officialName: "ownership_document" };
+  const vessel_registration = doc1.map((document) => {
+    return { ...document, officialName: "vessel_registration" };
   });
-  const registration_document = doc2.map((document) => {
-    return { ...document, officialName: "registration_document" };
+  const vessel_maintenance_report = doc2.map((document) => {
+    return { ...document, officialName: "vessel_maintenance_report" };
   });
-  const title_certificate = doc3.map((document) => {
-    return { ...document, officialName: "title_certificate" };
+  const vessel_engine_type = doc3.map((document) => {
+    return { ...document, officialName: "vessel_engine_type" };
   });
-  const loan_document = doc4.map((document) => {
-    return { ...document, officialName: "loan_document" };
+  const vessel_performance_report = doc4.map((document) => {
+    return { ...document, officialName: "vessel_performance_report" };
   });
-  const inspection_report = doc5.map((document) => {
-    return { ...document, officialName: "inspection_report" };
+  const vessel_deck_details = doc5.map((document) => {
+    return { ...document, officialName: "vessel_deck_details" };
   });
-  const engine_details = doc6.map((document) => {
-    return { ...document, officialName: "engine_details" };
+  const vessel_insurance = doc6.map((document) => {
+    return { ...document, officialName: "vessel_insurance" };
   });
-  const insurance_document = doc7.map((document) => {
-    return { ...document, officialName: "insurance_document" };
+  const vessel_marine_surveyor_report = doc7.map((document) => {
+    return { ...document, officialName: "vessel_marine_surveyor_report" };
   });
-  const valuation_report = doc8.map((document) => {
-    return { ...document, officialName: "valuation_report" };
+  const vessel_valuation_report = doc8.map((document) => {
+    return { ...document, officialName: "vessel_valuation_report" };
   });
   const others = doc9.map((document) => {
     return { ...document, officialName: "others" };
   });
 
   const documents = [
-    ...ownership_document,
-    ...registration_document,
-    ...title_certificate,
-    ...loan_document,
-    ...inspection_report,
-    ...engine_details,
-    ...insurance_document,
-    ...valuation_report,
+    ...vessel_registration,
+    ...vessel_maintenance_report,
+    ...vessel_engine_type,
+    ...vessel_performance_report,
+    ...vessel_deck_details,
+    ...vessel_insurance,
+    ...vessel_marine_surveyor_report,
+    ...vessel_valuation_report,
     ...others,
   ];
 
   const onSubmit = async (data) => {
     if (
-      data.ownership_document.length !== 0 ||
-      data.registration_document.length !== 0 ||
-      data.title_certificate.length !== 0 ||
-      data.loan_document.length !== 0 ||
-      data.inspection_report.length !== 0 ||
-      data.engine_details.length !== 0 ||
-      data.insurance_document.length !== 0 ||
-      data.valuation_report.length !== 0
+      vessel_registration.length !== 0 ||
+      vessel_maintenance_report.length !== 0 ||
+      vessel_engine_type.length !== 0 ||
+      vessel_performance_report.length !== 0 ||
+      vessel_deck_details.length !== 0 ||
+      vessel_insurance.length !== 0 ||
+      vessel_marine_surveyor_report.length !== 0 ||
+      vessel_valuation_report.length !== 0
     ) {
       toogleDocuments(documents);
       toogleStep(step + 1);
@@ -249,7 +249,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
         >
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Ownership Documents (.pdf){" "}
+              Vessel Registration Documents (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn1"
@@ -258,7 +258,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("ownership_document", { onChange: onChange1 })}
+                {...register("vessel_registration", { onChange: onChange1 })}
                 required
               />
               <div className="upload-cover">
@@ -316,7 +316,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Registration Documents (.pdf){" "}
+              Vessel Maintenance Report (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn2"
@@ -325,7 +325,9 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("registration_document", { onChange: onChange2 })}
+                {...register("vessel_maintenance_report", {
+                  onChange: onChange2,
+                })}
                 required
               />
               <div className="upload-cover">
@@ -384,7 +386,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Title Certificate (.pdf){" "}
+              Vessel Engine Type (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn3"
@@ -393,7 +395,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("title_certificate", { onChange: onChange3 })}
+                {...register("vessel_engine_type", { onChange: onChange3 })}
                 required
               />
               <div className="upload-cover">
@@ -452,7 +454,8 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Loan Documents (.pdf) <span style={{ color: "#ff0000" }}>*</span>
+              Vessel Performance Report (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn4"
                 accept=".pdf"
@@ -460,7 +463,9 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("loan_document", { onChange: onChange4 })}
+                {...register("vessel_performance_report", {
+                  onChange: onChange4,
+                })}
                 required
               />
               <div className="upload-cover">
@@ -519,7 +524,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Inspection Report (.pdf){" "}
+              Vessel Deck Details (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn5"
@@ -528,7 +533,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("inspection_report", { onChange: onChange5 })}
+                {...register("vessel_deck_details", { onChange: onChange5 })}
                 required
               />
               <div className="upload-cover">
@@ -586,7 +591,8 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Engine Details (.pdf) <span style={{ color: "#ff0000" }}>*</span>
+              Vessel Latest Insurance (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn6"
                 accept=".pdf"
@@ -594,7 +600,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("engine_details", { onChange: onChange6 })}
+                {...register("vessel_insurance", { onChange: onChange6 })}
                 required
               />
               <div className="upload-cover">
@@ -653,7 +659,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Insurance Documents (.pdf){" "}
+              Vessel Marine Surveyor Report(approved) (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn7"
@@ -662,7 +668,9 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("insurance_document", { onChange: onChange7 })}
+                {...register("vessel_marine_surveyor_report", {
+                  onChange: onChange7,
+                })}
                 required
               />
               <div className="upload-cover">
@@ -720,7 +728,7 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Valuation Report (.pdf)
+              Vessel Valuation Report (.pdf)
               <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn8"
@@ -729,7 +737,9 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
                 name="documents"
                 multiple
                 hidden
-                {...register("valuation_report", { onChange: onChange8 })}
+                {...register("vessel_valuation_report", {
+                  onChange: onChange8,
+                })}
               />
               <div className="upload-cover">
                 <details>
@@ -874,4 +884,4 @@ function CarDocus({ toogleStep, step, toogleDocuments }) {
   );
 }
 
-export default CarDocus;
+export default YachtDocus;

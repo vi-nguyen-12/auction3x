@@ -131,8 +131,8 @@ const ImgSlider = () => {
                     />
                   </h2>
                   <span style={{ color: "white", fontSize: "20px" }}>
-                    HOUSE IN {item.property.details.address.city},
-                    {item.property.details.address.state} UNITED STATES
+                    HOUSE IN {item.property.details.property_address.city},
+                    {item.property.details.property_address.state} UNITED STATES
                   </span>
                 </HomeBottom>
               </Wrap>
@@ -259,8 +259,9 @@ const ImgSlider = () => {
                     />
                   </h2>
                   <span>
-                    HOUSE IN {item.property.details.address.city},
-                    {item.property.details.address.state}, UNITED STATES
+                    HOUSE IN {item.property.details.property_address.city},
+                    {item.property.details.property_address.state}, UNITED
+                    STATES
                   </span>
                   {/* </HomeBottom> */}
                 </Wrap>

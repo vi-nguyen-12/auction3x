@@ -82,10 +82,6 @@ const authService = {
     });
   },
 
-  getProperties() {
-    return axios.get(apiUrl + "/api/properties/real-estates");
-  },
-
   saveDocuments(data) {
     return axios.post(apiUrl + "/api/aws/documents/upload", data, {
       headers: {
@@ -97,7 +93,7 @@ const authService = {
   },
 
   sendProperty(id) {
-    return axios.get(apiUrl + "/api/properties/real-estates/" + id);
+    return axios.get(apiUrl + "/api/properties/" + id);
   },
 
   buyerRegister(data) {
