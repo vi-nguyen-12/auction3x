@@ -53,6 +53,8 @@ const MultiSellForm = ({ colorChange }) => {
     setOwnership(ownership);
   };
 
+  console.log(ownership);
+
   if (step === 0) {
     return (
       <div className="sell-register-container">

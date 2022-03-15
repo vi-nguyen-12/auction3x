@@ -4,6 +4,7 @@ import authService from "../../services/authServices";
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
+import { Container, Row, Col } from "react-bootstrap";
 
 function RealEstateForm({ toogleStep, step, properties }) {
   const {
@@ -97,7 +98,130 @@ function RealEstateForm({ toogleStep, step, properties }) {
           Search Property
         </h6>
 
-        <div
+        <Container>
+          <Row>
+            <Col>
+              <PlacesAutocomplete
+                value={address}
+                onChange={handleChange}
+                onSelect={handleSelect}
+              >
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <div>
+                    <input
+                      {...getInputProps({
+                        placeholder: "Search address",
+                        className: "form-control",
+                      })}
+                      required
+                    />
+                    <span style={{ fontWeight: "600" }}>Street Address *</span>
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </PlacesAutocomplete>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                className="form-control"
+                type="text"
+                name="address1"
+                placeholder="Address"
+              />
+              <span style={{ fontWeight: "600" }}>Address Line 2 *</span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                className="form-control"
+                type="text"
+                name="city"
+                placeholder="City"
+                defaultValue={city}
+                {...register("city", { required: false })}
+              />
+              <span style={{ fontWeight: "600" }}>City *</span>
+            </Col>
+            <Col>
+              <input
+                className="form-control"
+                type="text"
+                name="state"
+                placeholder="State"
+                defaultValue={state}
+                {...register("state", { required: false })}
+              />
+              <span style={{ fontWeight: "600" }}>State *</span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                className="form-control"
+                type="text"
+                name="country"
+                placeholder="Country"
+                defaultValue={country}
+                {...register("country", {
+                  required: false,
+                  maxLength: 100,
+                })}
+              />
+              <span style={{ fontWeight: "600" }}>Country *</span>
+            </Col>
+            <Col>
+              <input
+                className="form-control"
+                type="text"
+                name="zip"
+                placeholder="Zip Code"
+                defaultValue={zip}
+                {...register("zipCode", { required: false })}
+              />
+              <span style={{ fontWeight: "600" }}>Zip Code *</span>
+            </Col>
+          </Row>
+        </Container>
+
+        {/* <div
           className="form-group mb-2"
           style={{
             marginTop: "80px",
@@ -164,17 +288,6 @@ function RealEstateForm({ toogleStep, step, properties }) {
               </div>
             )}
           </PlacesAutocomplete>
-          {/* <input
-          type="text"
-          className="form-control"
-          placeholder="Address"
-          style={{ width: "500px", fontSize: "17px", fontWeight: "bold" }}
-          {...register("street_address", {
-            required: false,
-            maxLength: 100,
-          })}
-          required
-        /> */}
         </div>
         <label
           style={{
@@ -352,7 +465,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
             }}
             placeholder="Property Description(Optional)"
           ></textarea>
-        </div>
+        </div> */}
         <div
           className="bottom-btn"
           style={{ width: "100%", display: "flex", justifyContent: "center" }}

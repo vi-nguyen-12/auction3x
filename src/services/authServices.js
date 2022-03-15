@@ -149,7 +149,7 @@ const authService = {
   },
 
   getRegistStatus() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/status?buyer=true", {
+    return axios.get(apiUrl + "/api/auctions/status?buyer=true", {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),

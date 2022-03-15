@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Container, Row, Col } from "react-bootstrap";
 
 function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
-    console.log(property);
+  console.log(property);
   const {
     register,
     handleSubmit,

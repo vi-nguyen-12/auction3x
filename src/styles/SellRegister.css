@@ -266,12 +266,13 @@ body {
 }
 
 .list-form {
-  width: 700px;
-  height: 770px;
+  width: 90%;
+  height: 90%;
   box-shadow: 0 0 10px rgba(192, 190, 190, 0.2);
   border-radius: 3px;
-  position: relative;
-  top: 80px;
+  /* position: relative; */
+  padding-top: 30px;
+  margin-top: 40px;
 }
 
 .list-form1 {
