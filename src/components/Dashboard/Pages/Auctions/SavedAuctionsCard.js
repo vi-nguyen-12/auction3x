@@ -95,7 +95,7 @@ function SavedAuctionsCard({
     const propertyData = property.find((item) => item._id === id);
     setAuctionEndDate(endDate);
     setOnGoingAuctionEnd(
-      auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
+      auctionData ? auctionData.auctionEndDate : propertyData ? propertyData.auctionEndDate : null
     );
   }, []);
   return (

@@ -122,11 +122,25 @@ const RealEstates = ({ colorChange, toogleChange }) => {
       },
     ],
   };
-
+  console.log(property[0].property.type);
+  console.log(window.location.pathname);
+  const path = window.location.pathname;
   return (
     <>
       <h5 className="realHeader">
-        <p style={{ fontSize: "4rem", color: "#fcbe91" }}>REAL ESTATE</p>
+        {path === "/cars" ?
+          (<p style={{ fontSize: "4rem", color: "#fcbe91" }}>CARS</p>) :
+
+          path === "/jets" ?
+            (<p style={{ fontSize: "4rem", color: "#fcbe91" }}>JETS</p>) :
+
+            path === "/yachts" ?
+              (<p style={{ fontSize: "4rem", color: "#fcbe91" }}>YACHTS</p>) :
+              (<p style={{ fontSize: "4rem", color: "#fcbe91" }}>REAL ESTATES</p>)
+        }
+
+
+
       </h5>
 
       <div className="realEstateFilter">
@@ -202,7 +216,7 @@ const RealEstates = ({ colorChange, toogleChange }) => {
               ))}
             </Carousel>
           </Row>
-          <Row style={{marginTop:"25%"}}>
+          <Row style={{ marginTop: "25%" }}>
             {property.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard

@@ -34,29 +34,30 @@ const SidebarLabel = styled.button`
       border-left: 4px solid #b77b50;
       color: #b77b50;
       cursor: pointer;
+      font-weight: 900;
   }
 `;
 
-const FirstLabel = styled.button`
-padding: 10px;
-padding-left: 15%;
-width: -webkit-fill-available;
-display: flex;
-background: none;
-border: none;
-font-weight: bold;
-font-size: 16px;
-&:hover {
-  border-left: 4px solid #b77b50;
-  color: #b77b50;
-  cursor: pointer;
-  }
-&:focus {
-    border-left: 4px solid #b77b50;
-    color: #b77b50;
-    cursor: pointer;
-  }
-`;
+// const FirstLabel = styled.button`
+// padding: 10px;
+// padding-left: 15%;
+// width: -webkit-fill-available;
+// display: flex;
+// background: none;
+// border: none;
+// font-weight: bold;
+// font-size: 16px;
+// &:hover {
+//   border-left: 4px solid #b77b50;
+//   color: #b77b50;
+//   cursor: pointer;
+//   }
+// &:focus {
+//     border-left: 4px solid #b77b50;
+//     color: #b77b50;
+//     cursor: pointer;
+//   }
+// `;
 
 const DropdownLink = styled(Link)`
   background: white;
@@ -67,6 +68,7 @@ const DropdownLink = styled(Link)`
   text-decoration: none;
   color: #96a0af;
   font-size: 18px;
+  font-weight: 400;
 `;
 
 
@@ -99,7 +101,7 @@ const SubMenu = ({ item, path }) => {
         item.subNav.map((item, index) => {
           return (
             <DropdownLink to={item.path} key={index}>
-              <SidebarLabel style={{ fontWeight: "400", border: "none", fontSize: "16px", color: item.path === path ? color : "" }}>{item.name}</SidebarLabel>
+              <SidebarLabel style={{ border: "none", fontSize: "16px", color: item.path === path ? color : "" }}>{item.name}</SidebarLabel>
             </DropdownLink>
           );
         })

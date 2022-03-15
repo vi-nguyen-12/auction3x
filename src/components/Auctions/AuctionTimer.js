@@ -24,7 +24,7 @@ const AuctionTimer = ({ auctionEndDate, toogleRegistEnded }) => {
 
       if (distance < 0) {
         clearInterval(interval.current);
-        toogleRegistEnded();
+        // toogleRegistEnded();
       } else {
         setDays(days);
         setHours(hours);
