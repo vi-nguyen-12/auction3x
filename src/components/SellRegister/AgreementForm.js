@@ -70,6 +70,10 @@ const Agree = ({
                 images,
                 videos,
                 documents,
+                details: {
+                  ...details,
+                  ...ownership,
+                },
               })
               .then((res) => {
                 if (res.data.error) {
