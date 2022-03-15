@@ -98,8 +98,8 @@ function SavedAuctionsCard({
       auctionData
         ? auctionData.auctionEndDate
         : propertyData
-        ? propertyData.auctionEndDate
-        : ""
+          ? propertyData.auctionEndDate
+          : ""
     );
   }, []);
   return (
@@ -261,7 +261,7 @@ function SavedAuctionsCard({
                 </p>
                 {/* </div> */}
               </Col>
-              {}
+              { }
               {/* <div
                 style={{
                   alignItems: "flex-end",

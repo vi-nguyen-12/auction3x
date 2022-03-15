@@ -12,6 +12,7 @@ import authService from '../../../services/authServices';
 import { AiFillPlusCircle } from 'react-icons/ai'
 import { Modal } from "react-bootstrap";
 import { FcPlus } from 'react-icons/fc'
+import { useForm } from "react-hook-form";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -95,6 +96,7 @@ function Profile({ id }) {
     autoplay: true,
     slidesToShow: savedProperty.length > 3 ? 3 : savedProperty.length,
   };
+  const { register, handleSubmit, errors } = useForm();
   const [saveLink, setSaveLink] = useState();
   const [saveLink_1, setSaveLink_1] = useState();
   const [saveLink_2, setSaveLink_2] = useState();
@@ -106,23 +108,31 @@ function Profile({ id }) {
   const toggleTwit = () => setShowTwit(!showTwit);
   const [isDisabled, setIsDisabled] = useState(true);
   const [colors, setColors] = useState("#7b7f82");
+  const [UploadPics, setUploadPics] = useState([]);
   const toogleDisable = () => {
     setIsDisabled(!isDisabled);
     setColors("black");
   };
 
+  const onChange = async (e) => {
+    const formData = new FormData();
 
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("images", e.target.files[i]);
+    }
+    await authService.saveImages(formData).then((res) => {
+      console.log(res);
+      setUploadPics(res.data[0].url);
+    });
+  };
   return (
     <Container className="profileContainer">
       <Row>
         <Col sm={3} className="profilePicCol">
           <div className="profileOutline">
             <div className="profileInline">
-              <Button onClick={() => toogleDisable()}>
-                <FiEdit size={25} />
-              </Button>
               {isDisabled === true ? (
-                <img src="https://i.ibb.co/qxXxXxq/profile-pic.png" alt="" />
+                <img src={UploadPics} alt="" className="profile-img" />
               ) : (
                 <>
                   <input
@@ -132,14 +142,23 @@ function Profile({ id }) {
                       backgroundColor: "white",
                       borderRadius: "0",
                       fontWeight: "bold",
-                      display: "inline-block",
-                      justifyContent: "center",
-                      textAlign: "center",
                     }}
                     id="example-text-input"
+                    accept="image/*"
+                    type="file"
+                    name="images"
+                    {...register("images", { onChange: onChange })}
                     hidden
+
                   />
-                  <label htmlFor="example-text-input">
+                  <label htmlFor="example-text-input" style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    height: "100%",
+                  }}>
                     <FcPlus size={50} />
                   </label>
                 </>
@@ -149,7 +168,24 @@ function Profile({ id }) {
         </Col>
         <Col sm={9}>
           <div className="descript">
+            <div className="edit-btn">
+              {isDisabled === true ? (
+                <Button onClick={() => toogleDisable()}>
+                  <FiEdit size={25} />
+                </Button>
+              ) : (
+                <>
+                  {/* <Button onClick={() => toogleDisable()}>
+                    <FiEdit size={25} />
+                  </Button> */}
+                  <Button type="submit" onClick={() => toogleDisable()}>
+                    Submit
+                  </Button>
+                </>
+              )}
+            </div>
             <h3>Description</h3>
+
             {isDisabled === true ? (
               <p>
                 <textarea
@@ -162,6 +198,7 @@ function Profile({ id }) {
                     display: "inline-block",
                     justifyContent: "center",
                     textAlign: "center",
+                    resize: "none",
                   }}
                   type="text"
                   id="example-text-input"
@@ -180,6 +217,7 @@ function Profile({ id }) {
                   should put an answer to this question so as to make your learning
                   less troublesome than mine."
                   disabled
+                  rows={15}
                 />
               </p>
             ) : (
@@ -193,11 +231,11 @@ function Profile({ id }) {
                     display: "inline-block",
                     justifyContent: "center",
                     textAlign: "center",
+                    resize: "none",
                   }}
                   type="text"
                   id="example-text-input"
-                  defaultValue={user.city + ", " + user.country}
-
+                  rows={15}
                 />
               </p>
             )}

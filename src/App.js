@@ -114,7 +114,19 @@ function App() {
             />
           </Route>
           <Route exact path="/Cars">
-            <CarPage
+            <RealEstates
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
+          </Route>
+          <Route exact path="/Jets">
+            <RealEstates
+              colorChange={colorChange}
+              toogleChange={toogleChange}
+            />
+          </Route>
+          <Route exact path="/Yachts">
+            <RealEstates
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
