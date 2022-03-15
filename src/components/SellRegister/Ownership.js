@@ -8,25 +8,19 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
   const [showBroker, setShowBroker] = useState("none");
 
   const onSubmit = (data) => {
-    if (showBroker === "block" && showOwner === "none") {
-      const datas = {
-        brokerName: data.brokerName,
-        brokerEmail: data.brokerEmail,
-        brokerPhone: data.brokerPhone,
-        brokerAddress: data.brokerAddress,
-      };
-      getOwnerShip(datas);
-      toogleStep(step + 1);
-    } else if (showBroker === "none" && showOwner === "block") {
-      const datas = {
-        ownerName: data.ownerName,
-        ownerEmail: data.ownerEmail,
-        ownerPhone: data.ownerPhone,
-        ownerAddress: data.ownerAddress,
-      };
-      getOwnerShip(datas);
-      toogleStep(step + 1);
-    }
+    const datas = {
+      ownerName : data.ownerName,
+      ownerAddress : data.ownerAddress,
+      ownerPhone : data.ownerPhone,
+      ownerEmail : data.ownerEmail,
+      brokerName: data.brokerName,
+      brokerEmail: data.brokerEmail,
+      brokerPhone: data.brokerPhone,
+      brokerId: data.brokerId,
+      brokerAddress: data.brokerAddress,
+    };
+    getOwnerShip(datas);
+    toogleStep(step + 1);
   };
   return (
     <div className="upload-box">
@@ -95,7 +89,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             style={{ display: showOwner }}
           >
             <Row>
-              <Row style={{ marginTop: "10px" }}>
+              <Row style={{ marginTop: "20px" }}>
                 <Col
                   style={{
                     borderBottom: "2px solid gray",
@@ -114,12 +108,6 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     {...register("ownerName", { required: false })}
                   />
                   <span style={{ fontWeight: "600" }}>Owner Name *</span>
-                </Col>
-              </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
-                  <input type="file" className="form-control" multiple />
-                  <span style={{ fontWeight: "600" }}>Proof of Ownership</span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
@@ -192,9 +180,17 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                   <input
                     type="text"
                     className="form-control"
+                    {...register("ownerName", { required: false })}
+                  />
+                  <span style={{ fontWeight: "600" }}>Owner Name *</span>
+                </Col>
+                <Col>
+                  <input
+                    type="text"
+                    className="form-control"
                     {...register("brokerName", { required: false })}
                   />
-                  <span style={{ fontWeight: "600" }}>Broker Name</span>
+                  <span style={{ fontWeight: "600" }}>Broker Name *</span>
                 </Col>
                 <Col>
                   <input
@@ -202,13 +198,13 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     {...register("brokerId", { required: false })}
                   />
-                  <span style={{ fontWeight: "600" }}>Broker ID</span>
+                  <span style={{ fontWeight: "600" }}>Broker ID *</span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
                 <Col>
                   <input type="file" className="form-control" multiple />
-                  <span style={{ fontWeight: "600" }}>Listing Agreement</span>
+                  <span style={{ fontWeight: "600" }}>Listing Agreement *</span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
@@ -228,7 +224,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     {...register("brokerPhone", { required: false })}
                   />
-                  <span style={{ fontWeight: "600" }}>Phone</span>
+                  <span style={{ fontWeight: "600" }}>Phone *</span>
                 </Col>
                 <Col>
                   <input
@@ -236,7 +232,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     {...register("brokerEmail", { required: false })}
                   />
-                  <span style={{ fontWeight: "600" }}>Email</span>
+                  <span style={{ fontWeight: "600" }}>Email *</span>
                 </Col>
               </Row>
             </Row>
