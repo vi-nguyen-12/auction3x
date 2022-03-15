@@ -3,6 +3,8 @@ import { Row, Container } from "react-bootstrap";
 import "../../styles/SellRegister.css";
 import RealEstateDocus from "../RealEstate/RealEstateDocus";
 import CarDocus from "../Cars/CarDocus";
+import YachtDocus from "../Yachts/YachtDocus";
+import JetDocus from "../Jets/JetDocus";
 
 const DocumentsUpload = ({
   toogleStep,
@@ -56,9 +58,17 @@ const DocumentsUpload = ({
           toogleDocuments={toogleDocuments}
         />
       ) : propertyType === "jets" ? (
-        <div>jets</div>
+        <JetDocus
+          toogleStep={toogleStep}
+          step={step}
+          toogleDocuments={toogleDocuments}
+        />
       ) : propertyType === "yachts" ? (
-        <div>yachts</div>
+        <YachtDocus
+          toogleStep={toogleStep}
+          step={step}
+          toogleDocuments={toogleDocuments}
+        />
       ) : null}
     </Container>
   );
