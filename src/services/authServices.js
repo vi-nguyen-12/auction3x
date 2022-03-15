@@ -82,10 +82,6 @@ const authService = {
     });
   },
 
-  getProperties() {
-    return axios.get(apiUrl + "/api/properties/real-estates");
-  },
-
   saveDocuments(data) {
     return axios.post(apiUrl + "/api/aws/documents/upload", data, {
       headers: {
@@ -97,7 +93,7 @@ const authService = {
   },
 
   sendProperty(id) {
-    return axios.get(apiUrl + "/api/properties/real-estates/" + id);
+    return axios.get(apiUrl + "/api/properties/" + id);
   },
 
   buyerRegister(data) {
@@ -149,7 +145,7 @@ const authService = {
   },
 
   getRegistStatus() {
-    return axios.get(apiUrl + "/api/auctions/real-estates/status?buyer=true", {
+    return axios.get(apiUrl + "/api/auctions/status?buyer=true", {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
