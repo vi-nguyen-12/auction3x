@@ -3,7 +3,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 function YachtForm({ toogleStep, step, properties }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
 
   // const toogleShowBroker = () =>  setShowBroker(!showBroker);
   // const toogleShowOwner = () =>  setShowOwner(!showOwner);

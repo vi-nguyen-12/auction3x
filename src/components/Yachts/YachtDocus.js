@@ -7,7 +7,7 @@ import { useState } from "react";
 import authService from "../../services/authServices";
 import { Row, Col, Container } from "react-bootstrap";
 
-function YachtDocus({ toogleStep, step, toogleDocuments }) {
+function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -19,6 +19,9 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
   const [doc8, setDocument8] = useState([]);
   const [doc9, setDocument9] = useState([]);
   const [loader, setLoader] = useState(false);
+  const listing_agreement = ownership.listing_agreement
+    ? ownership.listing_agreement
+    : "";
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -204,6 +207,7 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
     ...vessel_insurance,
     ...vessel_marine_surveyor_report,
     ...vessel_valuation_report,
+    ...(listing_agreement ? [...listing_agreement] : []),
     ...others,
   ];
 
@@ -799,7 +803,7 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
             <Col className="input-form-3">
               Other Documents (.pdf)
               <input
-                id="documents-btn8"
+                id="documents-btn9"
                 accept=".pdf"
                 type="file"
                 name="documents"
@@ -810,12 +814,12 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
               <div className="upload-cover">
                 <details>
                   <summary>
-                    <label htmlFor="documents-btn8">+ Documents</label>
+                    <label htmlFor="documents-btn9">+ Documents</label>
                   </summary>
                   <div>
                     <label
                       style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn8"
+                      htmlFor="documents-btn9"
                     >
                       <AiOutlinePlusCircle />
                     </label>
@@ -825,7 +829,7 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
             </Col>
             <Col>
               <div className="upload-list">
-                {doc8
+                {doc9
                   ? doc9.map((document, index, arr) => (
                       <div key={index} className="upload-list-item">
                         <span>
@@ -836,13 +840,13 @@ function YachtDocus({ toogleStep, step, toogleDocuments }) {
                             onMouseEnter={() => {
                               var tempArr = arr;
                               var temp = document;
-                              temp.onHover8 = true;
+                              temp.onHover9 = true;
                               setDocument9([...tempArr]);
                             }}
                             onMouseLeave={() => {
                               var tempArr = arr;
                               var temp = document;
-                              temp.onHover8 = false;
+                              temp.onHover9 = false;
                               let newArr = tempArr.splice(index, 0);
                               setDocument9([...tempArr, ...newArr]);
                             }}

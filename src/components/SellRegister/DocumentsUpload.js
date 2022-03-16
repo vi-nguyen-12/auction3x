@@ -11,6 +11,7 @@ const DocumentsUpload = ({
   step,
   propertyType,
   toogleDocuments,
+  ownership,
 }) => {
   return (
     <Container className="upload-box-docu">
@@ -50,24 +51,28 @@ const DocumentsUpload = ({
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          ownership={ownership}
         />
       ) : propertyType === "cars" ? (
         <CarDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          ownership={ownership}
         />
       ) : propertyType === "jets" ? (
         <JetDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          ownership={ownership}
         />
       ) : propertyType === "yachts" ? (
         <YachtDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          ownership={ownership}
         />
       ) : null}
     </Container>
