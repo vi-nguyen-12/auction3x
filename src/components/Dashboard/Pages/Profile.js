@@ -135,7 +135,9 @@ function Profile({ id }) {
       <Row>
         <Col sm={3}>
           <div className="profileOutline">
-            <div className="profileInline"></div>
+            <div className="profileInline">
+              <image src={user.profileImage} alt="profile" />
+            </div>
           </div>
         </Col>
         <Col sm={9}>

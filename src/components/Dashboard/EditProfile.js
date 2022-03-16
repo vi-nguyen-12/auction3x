@@ -71,7 +71,6 @@ function EditProfile({ getProfilePic, getDescription }) {
   };
 
   const onSubmit = async (data) => {
-    console.log(profilePic);
     const datas = {
       id: user._id,
       details: {
