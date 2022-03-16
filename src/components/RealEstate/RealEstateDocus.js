@@ -7,7 +7,7 @@ import { useState } from "react";
 import authService from "../../services/authServices";
 import { Row, Col, Container } from "react-bootstrap";
 
-function RealEstateDocus({ toogleStep, step, toogleDocuments }) {
+function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -18,6 +18,9 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments }) {
   const [doc7, setDocument7] = useState([]);
   const [doc8, setDocument8] = useState([]);
   const [loader, setLoader] = useState(false);
+  const listing_agreement = ownership.listing_agreement
+    ? ownership.listing_agreement
+    : "";
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -182,6 +185,7 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments }) {
     ...thirdpartyReport,
     ...demographics,
     ...marketandValuations,
+    ...(listing_agreement ? [...listing_agreement] : []),
     ...otherDocuments,
   ];
 

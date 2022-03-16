@@ -15,10 +15,8 @@ const Agree = ({
   documents,
   ownership,
 }) => {
-  console.log(ownership);
-  console.log(propertyData);
   const details = { ...propertyData.details };
-  console.log(details);
+  const ownerDetails = { ...ownership.details };
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -72,7 +70,7 @@ const Agree = ({
                 documents,
                 details: {
                   ...details,
-                  ...ownership,
+                  ...ownerDetails,
                 },
               })
               .then((res) => {
@@ -85,7 +83,7 @@ const Agree = ({
                 }
               });
           } else {
-            if (propertyData.type === "cars") {
+            if (propertyData.type === "car") {
               authService
                 .sellProperty({
                   type: propertyData.type,
@@ -96,49 +94,8 @@ const Agree = ({
                   discussedAmount: parseInt(propertyData.discussedAmount),
                   docusignId: res.data._id,
                   details: {
-                    make: propertyData.details.make
-                      ? propertyData.details.make
-                      : "",
-                    model: propertyData.details.model
-                      ? propertyData.details.model
-                      : "",
-                    year: propertyData.details.year
-                      ? propertyData.details.year
-                      : "",
-                    color: propertyData.details.color
-                      ? propertyData.details.color
-                      : "",
-                    mileage: propertyData.details.mileage
-                      ? propertyData.details.mileage
-                      : "",
-                    transmission: propertyData.details.transmission
-                      ? propertyData.details.transmission
-                      : "",
-                    VIN: propertyData.details.VIN
-                      ? propertyData.details.VIN
-                      : "",
-                    car_type: propertyData.details.car_type
-                      ? propertyData.details.car_type
-                      : "",
-                    property_address: propertyData.details.address
-                      ? propertyData.details.address
-                      : "",
-                    fuel_type: propertyData.details.fuel_type
-                      ? propertyData.details.fuel_type
-                      : "",
-                    condition: propertyData.details.condition
-                      ? propertyData.details.condition
-                      : "",
-                    engine: propertyData.details.engine
-                      ? propertyData.details.engine
-                      : "",
-                    power: propertyData.details.power
-                      ? propertyData.details.power
-                      : "",
-                    price: propertyData.details.price
-                      ? propertyData.details.price
-                      : "",
-                    ...ownership,
+                    ...details,
+                    ...ownerDetails,
                   },
                 })
                 .then((res) => {
@@ -163,7 +120,7 @@ const Agree = ({
                     docusignId: res.data._id,
                     details: {
                       ...details,
-                      ...ownership,
+                      ...ownerDetails,
                     },
                   })
                   .then((res) => {
@@ -187,7 +144,7 @@ const Agree = ({
                     docusignId: res.data._id,
                     details: {
                       ...details,
-                      ...ownership,
+                      ...ownerDetails,
                     },
                   })
                   .then((res) => {

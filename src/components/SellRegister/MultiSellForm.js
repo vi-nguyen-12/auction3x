@@ -53,8 +53,6 @@ const MultiSellForm = ({ colorChange }) => {
     setOwnership(ownership);
   };
 
-  console.log(ownership);
-
   if (step === 0) {
     return (
       <div className="sell-register-container">
@@ -128,6 +126,7 @@ const MultiSellForm = ({ colorChange }) => {
           step={step}
           toogleDocuments={toogleDocuments}
           propertyType={propertyType}
+          ownership={ownership}
         />
       </div>
     );

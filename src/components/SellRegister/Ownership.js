@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import authService from "../../services/authServices";
 
 function Ownership({ toogleStep, step, getOwnerShip }) {
   const { register, handleSubmit, errors } = useForm();
@@ -10,28 +11,48 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [listAgree, setListAgree] = useState([]);
+
+  const getFile = async (e) => {
+    const formData = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData).then((res) => {
+      setListAgree(res.data);
+    });
+  };
+
+  const listing_agreement = listAgree.map((document) => {
+    return { ...document, officialName: "listing_agreement" };
+  });
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else if (data.brokerName !== "") {
       const datas = {
-        owner_name: ownerName,
-        address: address,
-        phone: phone,
-        email: email,
-        broker_name: data.brokerName,
-        broker_id: data.brokerId,
+        listing_agreement: listing_agreement,
+        details: {
+          owner_name: ownerName,
+          address: address,
+          phone: phone,
+          email: email,
+          broker_name: data.brokerName,
+          broker_id: data.brokerId,
+        },
       };
       getOwnerShip(datas);
       toogleStep(step + 1);
     } else {
       if (data.brokerName === "") {
         const datas = {
-          owner_name: ownerName,
-          address: address,
-          phone: phone,
-          email: email,
+          details: {
+            owner_name: ownerName,
+            address: address,
+            phone: phone,
+            email: email,
+          },
         };
         getOwnerShip(datas);
         toogleStep(step + 1);
@@ -77,7 +98,8 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             style={{ display: "flex", width: "100%", justifyContent: "center" }}
           >
             <Button
-              style={{}}
+              className="submitBtn"
+              style={{ border: "none" }}
               onClick={() => {
                 setShowBroker("none");
                 setShowOwner("block");
@@ -86,7 +108,8 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
               Owner
             </Button>
             <Button
-              style={{ margin: "0px 10px" }}
+              className="submitBtn"
+              style={{ margin: "0px 10px", border: "none" }}
               onClick={() => {
                 setShowOwner("none");
                 setShowBroker("block");
@@ -105,7 +128,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             style={{ display: showOwner }}
           >
             <Row>
-              <Row style={{ marginTop: "20px" }}>
+              <Row style={{ marginTop: "10px" }}>
                 <Col
                   style={{
                     borderBottom: "2px solid gray",
@@ -219,8 +242,16 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
               </Row>
               <Row style={{ marginTop: "10px" }}>
                 <Col>
-                  <input type="file" className="form-control" multiple />
-                  <span style={{ fontWeight: "600" }}>Listing Agreement *</span>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    className="form-control"
+                    {...register("file", { onChange: getFile })}
+                    multiple
+                  />
+                  <span style={{ fontWeight: "600" }}>
+                    Listing Agreement(.pdf) *
+                  </span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>

@@ -7,7 +7,7 @@ import { useState } from "react";
 import authService from "../../services/authServices";
 import { Row, Col, Container } from "react-bootstrap";
 
-function JetDocus({ toogleStep, step, toogleDocuments }) {
+function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -23,6 +23,9 @@ function JetDocus({ toogleStep, step, toogleDocuments }) {
   const [doc12, setDocument12] = useState([]);
   const [doc13, setDocument13] = useState([]);
   const [loader, setLoader] = useState(false);
+  const listing_agreement = ownership.listing_agreement
+    ? ownership.listing_agreement
+    : "";
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -288,6 +291,7 @@ function JetDocus({ toogleStep, step, toogleDocuments }) {
     ...engine_details,
     ...inspection_report,
     ...valuation_report,
+    ...(listing_agreement ? [...listing_agreement] : []),
     ...others,
   ];
 

@@ -64,10 +64,10 @@ function RealEstateForm({ toogleStep, step, properties }) {
     const addres = address + " " + data.address1;
     const datas = {
       street_address: addres,
-      city: city,
-      state: state,
-      country: country,
-      zipCode: zip,
+      city: city ? city : data.city,
+      state: state ? state : data.state,
+      country: country ? country : data.country,
+      zipCode: zip ? zip : data.zipCode,
     };
 
     authService.realEstate(datas).then((res) => {
