@@ -10,10 +10,22 @@ h3 {
   padding: 0;
 }
 
+.modal-header .btn-close {
+  margin: 0;
+  padding: 0.5rem 1rem;
+}
+
+.modal-title{
+  margin:0;
+  line-height: 0;
+  font-size: 2.5rem;
+}
+
 .profileContainer {
+  width: 100vw;
   background-color: white;
   border-radius: 20px;
-  padding: 50px;
+  padding: 10px 50px 50px;
 }
 
 .container2 {
@@ -245,9 +257,21 @@ h3 {
   border-radius: 20px;
 }
 .edit-btn {
+  width: 100%;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
+}
+
+.edit-btn Button{
+  color: #216fed;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  background-color: #d3e2fb;
+  border: none;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 /* Chat Messaging */
 .chatContainer {
@@ -305,6 +329,8 @@ h3 {
 
 .descript {
   padding-left: 60px;
+  width: 100%;
+  height: 100%;
 }
 
 .descript h3 {
@@ -314,12 +340,15 @@ h3 {
 }
 
 .descript p {
+  width: 100%;
+  height: 250px;
   margin-top: 20px;
   color: #808080;
   font-weight: 500;
+  overflow-y: auto;
 }
 
-/* .name h3 {
+.name h3 {
   color: black;
   font-size: 23px;
   font-weight: 700;
@@ -329,7 +358,7 @@ h3 {
   color: #4bd67f;
   font-size: 20px;
   font-weight: 700;
-} */
+}
 
 .address {
   color: #7c8392;
@@ -337,14 +366,22 @@ h3 {
   font-weight: 500;
 }
 
-.social Button {
+.address Button {
+  border-radius: 50%;
+  margin: 10px;
+  height: 50px;
+  background-color: #d3e2fb;
+  border: none;
+}
+
+/* .social Button {
   width: 55px;
   height: 55px;
   border-radius: 50%;
   background-color: #d3e2fb;
   border: none;
   margin: auto 10px;
-}
+} */
 
 .address Button:hover {
   background-color: transparent;

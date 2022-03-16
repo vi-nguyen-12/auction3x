@@ -24,7 +24,9 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       formData.append("images", e.target.files[i]);
     }
     await authService.saveImages(formData).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setImages([...images, ...response.data]);
         setLoader(false);
       }
@@ -45,7 +47,9 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
       formData.append("videos", e.target.files[i]);
     }
     await authService.saveVideos(formData).then((response2) => {
-      if (response2.status === 200) {
+      if (response2.data.error) {
+        alert(response2.data.error);
+      } else {
         setVideos([...videos, ...response2.data]);
         setVideoLoader(false);
       }
@@ -179,35 +183,35 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <div className="upload-list">
             {images
               ? images.map((image, index, arr) => (
-                <div key={index} className="upload-list-item">
-                  <span>
-                    {image.name}
-                    <button
-                      className="delete-btn"
-                      onClick={handleDelete(image.url)}
-                      onMouseEnter={() => {
-                        var tempArr = arr;
-                        var temp = image;
-                        temp.onHover = true;
-                        setImages([...tempArr]);
-                      }}
-                      onMouseLeave={() => {
-                        var tempArr = arr;
-                        var temp = image;
-                        temp.onHover = false;
-                        let newArr = tempArr.splice(index, 0);
-                        setImages([...tempArr, ...newArr]);
-                      }}
-                    >
-                      {!image.onHover ? (
-                        <FaCheck fontSize="1.5em" color="blue" />
-                      ) : (
-                        <MdClose fontSize="1.5em" color="red" />
-                      )}
-                    </button>
-                  </span>
-                </div>
-              ))
+                  <div key={index} className="upload-list-item">
+                    <span>
+                      {image.name}
+                      <button
+                        className="delete-btn"
+                        onClick={handleDelete(image.url)}
+                        onMouseEnter={() => {
+                          var tempArr = arr;
+                          var temp = image;
+                          temp.onHover = true;
+                          setImages([...tempArr]);
+                        }}
+                        onMouseLeave={() => {
+                          var tempArr = arr;
+                          var temp = image;
+                          temp.onHover = false;
+                          let newArr = tempArr.splice(index, 0);
+                          setImages([...tempArr, ...newArr]);
+                        }}
+                      >
+                        {!image.onHover ? (
+                          <FaCheck fontSize="1.5em" color="blue" />
+                        ) : (
+                          <MdClose fontSize="1.5em" color="red" />
+                        )}
+                      </button>
+                    </span>
+                  </div>
+                ))
               : null}
           </div>
         </div>
@@ -222,7 +226,7 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
             multiple
             hidden
             {...register("videos", { onChange: onChangeVideos })}
-          // required
+            // required
           />
           <div className="upload-cover">
             <details>
@@ -250,35 +254,35 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
           <div className="upload-list">
             {videos
               ? videos.map((video, index, arr) => (
-                <div key={index} className="upload-list-item">
-                  <span>
-                    {video.name}
-                    <button
-                      className="delete-btn"
-                      onClick={handleDeleteVideo(video.url)}
-                      onMouseEnter={() => {
-                        var tempArr = arr;
-                        var temp = video;
-                        temp.onHover0 = true;
-                        setVideos([...tempArr]);
-                      }}
-                      onMouseLeave={() => {
-                        var tempArr = arr;
-                        var temp = video;
-                        temp.onHover0 = false;
-                        let newArr = tempArr.splice(index, 0);
-                        setVideos([...tempArr, ...newArr]);
-                      }}
-                    >
-                      {!video.onHover0 ? (
-                        <FaCheck fontSize="1.5em" color="blue" />
-                      ) : (
-                        <MdClose fontSize="1.5em" color="red" />
-                      )}
-                    </button>
-                  </span>
-                </div>
-              ))
+                  <div key={index} className="upload-list-item">
+                    <span>
+                      {video.name}
+                      <button
+                        className="delete-btn"
+                        onClick={handleDeleteVideo(video.url)}
+                        onMouseEnter={() => {
+                          var tempArr = arr;
+                          var temp = video;
+                          temp.onHover0 = true;
+                          setVideos([...tempArr]);
+                        }}
+                        onMouseLeave={() => {
+                          var tempArr = arr;
+                          var temp = video;
+                          temp.onHover0 = false;
+                          let newArr = tempArr.splice(index, 0);
+                          setVideos([...tempArr, ...newArr]);
+                        }}
+                      >
+                        {!video.onHover0 ? (
+                          <FaCheck fontSize="1.5em" color="blue" />
+                        ) : (
+                          <MdClose fontSize="1.5em" color="red" />
+                        )}
+                      </button>
+                    </span>
+                  </div>
+                ))
               : null}
           </div>
         </div>

@@ -239,6 +239,18 @@ const authService = {
   sellerApprovedListings(id) {
     return axios.get(apiUrl + `/api/users/${id}/seller/approvedListings`);
   },
+  editUserInfo(data) {
+    return (
+      axios.put(apiUrl + `/api/users/${data.id}`, { ...data.details }),
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
+  },
 };
 
 export default authService;
