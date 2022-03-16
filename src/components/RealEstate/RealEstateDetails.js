@@ -156,8 +156,8 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
                 }}
               >
                 <td>State</td>
-                <td style={{ paddingLeft: "10px" }}>City</td>
-                <td style={{ paddingLeft: "87px" }}>Zip Code</td>
+                <td style={{ paddingLeft: "10px", color: "black" }}>City</td>
+                <td style={{ paddingLeft: "87px", color: "black" }}>Zip Code</td>
               </tr>
             </tbody>
           </table>
@@ -396,7 +396,7 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
                         ? property.market_assessments[0].total_value
                         : ""
                     }
-                    // {...register("total_value", { required: false })}
+                  // {...register("total_value", { required: false })}
                   />
                 </td>
               </tr>
@@ -422,11 +422,11 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
           <tr>
             <td
               className="amount-input-2"
-              // style={{
-              //   width: "240px",
-              //   // position: "relative",
-              //   // left: "105px",
-              // }}
+            // style={{
+            //   width: "240px",
+            //   // position: "relative",
+            //   // left: "105px",
+            // }}
             >
               <span className="prefix">$</span>
               <input

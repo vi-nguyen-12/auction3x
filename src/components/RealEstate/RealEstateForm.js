@@ -120,7 +120,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                       })}
                       required
                     />
-                    <span style={{ fontWeight: "600" }}>Street Address *</span>
+                    <span style={{ fontWeight: "600", color: "black" }}>Street Address <span style={{ color: "#ff0000" }}>*</span></span>
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Loading...</div>}
                       {suggestions.map((suggestion, index) => {
@@ -130,15 +130,15 @@ function RealEstateForm({ toogleStep, step, properties }) {
                         // inline style for demonstration purpose
                         const style = suggestion.active
                           ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
                           : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
                         return (
                           <div
                             key={index}
@@ -165,7 +165,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 name="address1"
                 placeholder="Address"
               />
-              <span style={{ fontWeight: "600" }}>Address Line 2 *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Address Line 2</span>
             </Col>
           </Row>
           <Row style={{ marginTop: "10px" }}>
@@ -178,7 +178,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 defaultValue={city}
                 {...register("city", { required: false })}
               />
-              <span style={{ fontWeight: "600" }}>City *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>City <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
             <Col>
               <input
@@ -189,7 +189,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 defaultValue={state}
                 {...register("state", { required: false })}
               />
-              <span style={{ fontWeight: "600" }}>State *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>State <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
           </Row>
           <Row style={{ marginTop: "10px" }}>
@@ -205,7 +205,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                   maxLength: 100,
                 })}
               />
-              <span style={{ fontWeight: "600" }}>Country *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Country <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
             <Col>
               <input
@@ -216,7 +216,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 defaultValue={zip}
                 {...register("zipCode", { required: false })}
               />
-              <span style={{ fontWeight: "600" }}>Zip Code *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Zip Code <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
           </Row>
         </Container>

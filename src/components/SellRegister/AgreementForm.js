@@ -120,8 +120,8 @@ const Agree = ({
                     car_type: propertyData.details.car_type
                       ? propertyData.details.car_type
                       : "",
-                    property_address: propertyData.details.address
-                      ? propertyData.details.address
+                    property_address: propertyData.details.property_address
+                      ? propertyData.details.property_address
                       : "",
                     fuel_type: propertyData.details.fuel_type
                       ? propertyData.details.fuel_type
