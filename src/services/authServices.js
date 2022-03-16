@@ -240,8 +240,9 @@ const authService = {
     return axios.get(apiUrl + `/api/users/${id}/seller/approvedListings`);
   },
   editUserInfo(data) {
-    return (
-      axios.put(apiUrl + `/api/users/${data.id}`, { ...data.details }),
+    return axios.put(
+      apiUrl + `/api/users/${data.id}`,
+      { ...data.details },
       {
         headers: {
           Authorization:
