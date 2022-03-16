@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 
-function EditProfile({ getProfilePic }) {
+function EditProfile({ getProfilePic, getDescription }) {
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [oldPass, setOldPass] = useState();
@@ -83,8 +83,7 @@ function EditProfile({ getProfilePic }) {
         profileImage: profilePic,
       },
     };
-
-    console.log(datas);
+    getDescription(data.description);
     await authService.editUserInfo(datas).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
@@ -318,7 +317,11 @@ function EditProfile({ getProfilePic }) {
         </Row>
         <Row>
           <Col>
-            <textarea style={{ height: "150px" }} className="form-control" />
+            <textarea
+              style={{ height: "150px" }}
+              className="form-control"
+              {...register("description", { required: false })}
+            />
           </Col>
         </Row>
         <Row style={{ marginTop: "50px" }}>

@@ -99,6 +99,8 @@ function Profile({ id }) {
   const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
   const toogleEdit = () => setShowEdit(!showEdit);
+  const [description, setDescription] = useState("");
+  const getDescription = (descript) => setDescription(descript);
 
   const descriptPlaceHolder = "Please Enter Description";
   return (
@@ -126,7 +128,7 @@ function Profile({ id }) {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <EditProfile />
+            <EditProfile getDescription={getDescription} />
           </Modal.Body>
         </Modal>
       </div>
@@ -139,7 +141,7 @@ function Profile({ id }) {
         <Col sm={9}>
           <div className="descript">
             <h3>Description</h3>
-            <p>{descriptPlaceHolder}</p>
+            <p>{description ? description : descriptPlaceHolder}</p>
           </div>
         </Col>
       </Row>
