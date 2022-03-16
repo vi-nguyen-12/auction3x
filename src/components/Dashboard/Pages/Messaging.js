@@ -30,14 +30,14 @@ function Messaging() {
       </Row>
       <Row className='chat-message'>
         <Col style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <AiFillPlusCircle size={40} color="black" />
+          <AiFillPlusCircle size={40} color="#b77b50" />
         </Col>
         <Col xs={10}>
           <input type="text" className="text-box" placeholder="Type your message here" />
         </Col>
         <Col style={{ display: "flex", justifyContent: "center", alignItems: "center" }} xs={1}>
           <Button>
-            <IoSend />
+            <IoSend BackgroundColor="#b77b50" />
           </Button>
         </Col>
       </Row>
