@@ -29,8 +29,8 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
             isImport === property.imported_aircraft
               ? property.imported_aircraft
               : isImport === "Yes"
-              ? true
-              : false,
+                ? true
+                : false,
           property_address: data.property_address,
         },
       };
@@ -52,6 +52,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 borderBottom: "2px solid gray",
                 fontSize: "20px",
                 fontWeight: "bold",
+                color: "black"
               }}
             >
               Aircraft Description
@@ -65,7 +66,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.property_address}
                 {...register("property_address", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>Property Address *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Property Address  <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
           </Row>
           <Row style={{ marginTop: "20px" }}>
@@ -76,7 +77,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.registration_mark}
                 {...register("registration_mark", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>Registration Mark *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Registration Mark  <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
           </Row>
           <Row style={{ marginTop: "20px" }}>
@@ -87,8 +88,8 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.aircraft_builder_name}
                 {...register("aircraft_builder_name", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>
-                Aircraft Builder's Name *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Aircraft Builder's Name  <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
             <Col>
@@ -98,8 +99,8 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.aircraft_model_designation}
                 {...register("aircraft_model_designation", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>
-                Aircraft Model Designation *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Aircraft Model Designation  <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
           </Row>
@@ -111,7 +112,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.aircraft_serial_no}
                 {...register("aircraft_serial_no", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>Aircraft Serial No. *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Aircraft Serial No.  <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
           </Row>
           <Row style={{ marginTop: "20px" }}>
@@ -122,7 +123,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.engine_builder_name}
                 {...register("engine_builder_name", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>Engine Builder's Name *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Engine Builder's Name  <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
             <Col>
               <input
@@ -131,8 +132,8 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.engine_model_designation}
                 {...register("engine_model_designation", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>
-                Engine Model Designation *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Engine Model Designation  <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
           </Row>
@@ -144,7 +145,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.number_of_engines}
                 {...register("number_of_engines", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>Number of Engines *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Number of Engines  <span style={{ color: "#ff0000" }}>*</span></span>
             </Col>
             <Col>
               <input
@@ -153,8 +154,8 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.propeller_builder_name}
                 {...register("propeller_builder_name", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>
-                Propeller Builder's Name *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Propeller Builder's Name  <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
             <Col>
@@ -164,15 +165,15 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
                 defaultValue={property.propeller_model_designation}
                 {...register("propeller_model_designation", { required: true })}
               />
-              <span style={{ fontWeight: "600" }}>
-                Propeller Model Designation *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Propeller Model Designation  <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
           </Row>
           <Row style={{ marginTop: "20px" }}>
             <Col>
-              <span style={{ fontWeight: "600" }}>
-                Is the aircraft an import? *
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Is the aircraft an import?  <span style={{ color: "#ff0000" }}>*</span>
               </span>
               <select
                 className="form-control"
@@ -187,7 +188,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
               </select>
             </Col>
             <Col>
-              <span style={{ fontWeight: "600" }}>Number of Aircraft *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Number of Aircraft  <span style={{ color: "#ff0000" }}>*</span></span>
               <input
                 type="text"
                 className="form-control"
@@ -198,7 +199,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
           </Row>
           <Row style={{ marginTop: "20px" }}>
             <Col>
-              <span style={{ fontWeight: "600" }}>Reserved Amount *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Reserved Amount  <span style={{ color: "#ff0000" }}>*</span></span>
               <input
                 type="text"
                 className="form-control"
@@ -206,7 +207,7 @@ function JetDetails({ property, toogleStep, step, tooglePropertyData }) {
               />
             </Col>
             <Col>
-              <span style={{ fontWeight: "600" }}>Discussed Amount *</span>
+              <span style={{ fontWeight: "600", color: "black" }}>Discussed Amount  <span style={{ color: "#ff0000" }}>*</span></span>
               <input
                 type="text"
                 className="form-control"

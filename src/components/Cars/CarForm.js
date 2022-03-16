@@ -35,7 +35,7 @@ function CarForm({ toogleStep, step, properties }) {
       <Table bordered striped hover>
         <tbody>
           <tr>
-            <td>Make</td>
+            <td style={{ color: "black" }}>Make</td>
             <td>
               <input
                 type="text"
@@ -45,7 +45,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Model</td>
+            <td style={{ color: "black" }}>Model</td>
             <td>
               <input
                 type="text"
@@ -55,7 +55,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Year</td>
+            <td style={{ color: "black" }}>Year</td>
             <td>
               <input
                 type="text"
@@ -65,7 +65,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Mileage</td>
+            <td style={{ color: "black" }}>Mileage</td>
             <td>
               <input
                 type="text"
@@ -75,7 +75,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Transmission</td>
+            <td style={{ color: "black" }}>Transmission</td>
             <td>
               <input
                 type="text"
@@ -88,7 +88,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Car Type</td>
+            <td style={{ color: "black" }}>Car Type</td>
             <td>
               <input
                 type="text"
@@ -98,7 +98,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Power</td>
+            <td style={{ color: "black" }}>Power</td>
             <td>
               <input
                 type="text"
@@ -108,7 +108,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Color</td>
+            <td style={{ color: "black" }}>Color</td>
             <td>
               <input
                 type="text"
@@ -119,7 +119,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>VIN</td>
+            <td style={{ color: "black" }}>VIN</td>
             <td>
               <input
                 type="text"
@@ -130,7 +130,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Engine</td>
+            <td style={{ color: "black" }}>Engine</td>
             <td>
               <input
                 type="text"
@@ -140,7 +140,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Fuel Type</td>
+            <td style={{ color: "black" }}>Fuel Type</td>
             <td>
               <input
                 type="text"
@@ -150,7 +150,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Condition</td>
+            <td style={{ color: "black" }}>Condition</td>
             <td>
               <input
                 type="text"
@@ -160,7 +160,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Price</td>
+            <td style={{ color: "black" }}>Price</td>
             <td>
               <input
                 type="text"
@@ -170,7 +170,7 @@ function CarForm({ toogleStep, step, properties }) {
             </td>
           </tr>
           <tr>
-            <td>Address</td>
+            <td style={{ color: "black" }}>Address</td>
             <td>
               <input
                 type="text"

@@ -44,6 +44,7 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               borderBottom: "2px solid gray",
               fontWeight: "bold",
               fontSize: "20px",
+              color: "black",
             }}
           >
             Yacht Information
@@ -57,8 +58,11 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.vessel_registration_number}
               {...register("vessel_registration_number", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Vessel Registration Number
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>
+              Vessel Registration Number  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -71,7 +75,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.vessel_manufacturing_date}
               {...register("vessel_manufacturing_date", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Vessel Manufacturing Date</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Vessel Manufacturing Date  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -83,7 +90,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.property_address}
               {...register("property_address", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Property Address</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Property Address  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -95,7 +105,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.manufacture_mark}
               {...register("manufacture_mark", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Manufacture Mark</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Manufacture Mark  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -104,7 +117,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.manufacturer_name}
               {...register("manufacturer_name", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Manufacturer Name</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
 
           <Col>
@@ -116,7 +132,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
                 required: true,
               })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Manufacturer Name</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -128,7 +147,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.engine_type}
               {...register("engine_type", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Type</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Type  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -141,7 +163,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
                 required: true,
               })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Deck Type</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Deck Type  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -150,7 +175,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.running_cost}
               {...register("running_cost", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Running Cost</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Running Cost  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -159,7 +187,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.no_of_crew_required}
               {...register("no_of_crew_required", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>No. Crew Required</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>No. Crew Required  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "30px", height: "200px" }}>
@@ -181,7 +212,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("reservedAmount")}
               required
             />
-            <span style={{ fontWeight: "600" }}>Reserved Amount</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Reserved Amount  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -190,7 +224,10 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("discussedAmount")}
               required
             />
-            <span style={{ fontWeight: "600" }}>Discussed Amount</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Discussed Amount  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
       </Container>

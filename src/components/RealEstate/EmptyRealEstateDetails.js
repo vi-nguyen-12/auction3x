@@ -59,7 +59,7 @@ function EmptyRealEstateDetails({
               defaultValue={property.street_address}
               {...register("street_address", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Street Address *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Street Address <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -71,7 +71,7 @@ function EmptyRealEstateDetails({
               defaultValue={property.city}
               {...register("city", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>City *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>City <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -81,7 +81,7 @@ function EmptyRealEstateDetails({
               defaultValue={property.state}
               {...register("state", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>State *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>State <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -93,7 +93,7 @@ function EmptyRealEstateDetails({
               defaultValue={property.country}
               {...register("country", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Country *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Country <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -103,7 +103,7 @@ function EmptyRealEstateDetails({
               defaultValue={property.zipCode}
               {...register("zipCode", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Zip Code *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Zip Code <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -113,7 +113,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("ownerName", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Owner Name *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Owner Name <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -123,7 +123,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("rooms_count", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Rooms Count *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Rooms Count <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -131,7 +131,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("bedrooms", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Bedrooms *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Bedrooms <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -141,7 +141,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("propertyType", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Property Type *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Property Type <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -149,7 +149,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("bathrooms", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Bathrooms *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Bathrooms <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -158,7 +158,7 @@ function EmptyRealEstateDetails({
               placeholder="$"
               {...register("total_value", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Total Value *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Total Value <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -168,7 +168,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("sqft", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Sqft *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Sqft <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -178,7 +178,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("reservedAmount", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Reserved Amount *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Reserved Amount <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -186,13 +186,13 @@ function EmptyRealEstateDetails({
               className="form-control"
               {...register("discussedAmount", { required: false })}
             />
-            <span style={{ fontWeight: "600" }}>Discussed Amount *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Discussed Amount <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px", height:"130px" }}>
+        <Row style={{ marginTop: "10px", height: "130px" }}>
           <Col>
             <textarea
-            style={{height:"100%"}}
+              style={{ height: "100%" }}
               className="form-control"
               placeholder="Description"
               {...register("description", { required: false })}

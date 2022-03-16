@@ -37,6 +37,7 @@ function JetForm({ toogleStep, step, properties }) {
               borderBottom: "2px solid gray",
               fontSize: "20px",
               fontWeight: "bold",
+              color: "black",
             }}
           >
             Aircraft Description
@@ -49,7 +50,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("property_address", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Property Address *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Property Address  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -59,7 +60,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("registration_mark", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Registration Mark *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Registration Mark  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -69,7 +70,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("aircraft_builder_name", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Aircraft Builder's Name *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Aircraft Builder's Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -79,8 +80,8 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("aircraft_model_designation", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Aircraft Model Designation *
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Model Designation  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -91,7 +92,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("aircraft_serial_no", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Aircraft Serial No. *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Aircraft Serial No.  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -101,7 +102,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("engine_builder_name", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Builder's Name *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Engine Builder's Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -109,8 +110,8 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("engine_model_designation", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Engine Model Designation *
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Engine Model Designation  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -121,7 +122,7 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("number_of_engines", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Number of Engines *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Number of Engines  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -129,8 +130,8 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("propeller_builder_name", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Propeller Builder's Name *
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Builder's Name  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
           <Col>
@@ -139,15 +140,15 @@ function JetForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("propeller_model_designation", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Propeller Model Designation *
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Model Designation  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
           <Col>
-            <span style={{ fontWeight: "600" }}>
-              Is the aircraft an import? *
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Is the aircraft an import?  <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <select
               className="form-control"
@@ -161,7 +162,7 @@ function JetForm({ toogleStep, step, properties }) {
             </select>
           </Col>
           <Col>
-            <span style={{ fontWeight: "600" }}>Number of Aircraft *</span>
+            <span style={{ fontWeight: "600", color: "black" }}>Number of Aircraft  <span style={{ color: "#ff0000" }}>*</span></span>
             <input
               type="text"
               className="form-control"

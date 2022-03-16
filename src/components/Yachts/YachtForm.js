@@ -40,6 +40,7 @@ function YachtForm({ toogleStep, step, properties }) {
               borderBottom: "2px solid gray",
               fontWeight: "bold",
               fontSize: "20px",
+              color: "black"
             }}
           >
             Yacht Information
@@ -52,8 +53,11 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("vessel_registration_number", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>
-              Vessel Registration Number
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>
+              Vessel Registration Number  <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -65,7 +69,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("vessel_manufacturing_date", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Vessel Manufacturing Date</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Vessel Manufacturing Date  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -76,7 +83,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("property_address", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Property Address</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Property Address  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -87,7 +97,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("manufacture_mark", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Manufacture Mark</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Manufacture Mark  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -95,7 +108,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("manufacturer_name", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Manufacturer Name</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
 
           <Col>
@@ -106,7 +122,10 @@ function YachtForm({ toogleStep, step, properties }) {
                 required: true,
               })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Manufacturer Name</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
 
@@ -117,7 +136,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("engine_type", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Type</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Type  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -129,7 +151,10 @@ function YachtForm({ toogleStep, step, properties }) {
                 required: true,
               })}
             />
-            <span style={{ fontWeight: "600" }}>Engine Deck Type</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Engine Deck Type  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -137,7 +162,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("running_cost", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>Running Cost</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>Running Cost  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
           <Col>
             <input
@@ -145,7 +173,10 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               {...register("no_of_crew_required", { required: true })}
             />
-            <span style={{ fontWeight: "600" }}>No. Crew Required</span>
+            <span style={{
+              fontWeight: "600",
+              color: "black"
+            }}>No. Crew Required  <span style={{ color: "#ff0000" }}>*</span></span>
           </Col>
         </Row>
         <Row style={{ marginTop: "30px", height: "200px" }}>
@@ -175,7 +206,7 @@ function YachtForm({ toogleStep, step, properties }) {
           Next
         </button>
       </div>
-    </form>
+    </form >
   );
 }
 

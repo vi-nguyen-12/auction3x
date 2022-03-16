@@ -362,7 +362,7 @@ function Profile({ id }) {
                   <Modal.Body>
                     <Form>
                       <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Your Instagram Link (start with http://)</Form.Label>
+                        <Form.Label style={{ color: "black" }}>Your Instagram Link (start with http://)</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="Enter here" onChange={(e) => setSaveLink(e.target.value)}
@@ -395,7 +395,7 @@ function Profile({ id }) {
                   <Modal.Body>
                     <Form>
                       <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Your Facebook Link</Form.Label>
+                        <Form.Label style={{ color: "black" }}>Your Facebook Link (start with http://)</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="Enter here" onChange={(e) => setSaveLink_1(e.target.value)}
@@ -428,7 +428,7 @@ function Profile({ id }) {
                   <Modal.Body>
                     <Form>
                       <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Your Twitter Link</Form.Label>
+                        <Form.Label style={{ color: "black" }}>Your Twitter Link (start with http://)</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="Enter here" onChange={(e) => setSaveLink_2(e.target.value)}
