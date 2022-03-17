@@ -147,7 +147,7 @@ const JetCard = ({
                   {data.address.formatted_street_address}, {data.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.aircraft_builder_name} {data.aircraft_model_designation}
                 </h4>
               </div>
               <div
@@ -235,7 +235,7 @@ const JetCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",

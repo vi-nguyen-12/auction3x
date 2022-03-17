@@ -98,8 +98,8 @@ function SavedAuctionsCard({
       auctionData
         ? auctionData.auctionEndDate
         : propertyData
-        ? propertyData.auctionEndDate
-        : ""
+          ? propertyData.auctionEndDate
+          : ""
     );
   }, []);
   return (
@@ -225,13 +225,13 @@ function SavedAuctionsCard({
                     color: "black",
                   }}
                 >
-                  {data.structure.beds_count
-                    ? data.structure.beds_count
+                  {data.beds_count
+                    ? data.beds_count
                     : "N/A-"}
-                  BD | {data.structure.baths ? data.structure.baths : "N/A-"}BA
+                  BD | {data.baths ? data.baths : "N/A-"}BA
                   |{" "}
-                  {data.structure.total_area_sq_ft
-                    ? data.structure.total_area_sq_ft
+                  {data.total_area_sq_ft
+                    ? data.total_area_sq_ft
                     : "N/A-"}{" "}
                   sq.ft
                 </p>
@@ -262,7 +262,7 @@ function SavedAuctionsCard({
                 </p>
                 {/* </div> */}
               </Col>
-              {}
+              { }
               {/* <div
                 style={{
                   alignItems: "flex-end",

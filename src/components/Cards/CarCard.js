@@ -147,7 +147,7 @@ const CarCard = ({
                   {data.address.formatted_street_address}, {data.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.year} {data.make} {data.model}
                 </h4>
               </div>
               <div
@@ -235,7 +235,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",
