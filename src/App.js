@@ -5,11 +5,7 @@ import Work from "./components/Home/work";
 import RealEstate from "./components/Home/realEstate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
@@ -21,7 +17,7 @@ import { addAuction } from "./slice/auctionSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
 import authService from "./services/authServices";
 import Header from "./components/Home/Header";
-import RealEstates from "./components/RealEstate/RealEstates";
+import PropertyPages from "./components/Home/PropertyPages";
 import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
 import ChangePass from "./components/Users/ChangePass";
@@ -49,6 +45,7 @@ function App() {
   }, [dispatch]);
 
   authService.getUpcomingAuctions().then((res) => {
+    console.log(res.data);
     dispatch(addProperty(res.data));
   });
 
@@ -108,25 +105,25 @@ function App() {
             <SavedAuctions colorChange={colorChange} />
           </Route> */}
           <Route exact path="/realEstates">
-            <RealEstates
+            <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
           </Route>
           <Route exact path="/Cars">
-            <RealEstates
+            <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
           </Route>
           <Route exact path="/Jets">
-            <RealEstates
+            <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
             />
           </Route>
           <Route exact path="/Yachts">
-            <RealEstates
+            <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
             />

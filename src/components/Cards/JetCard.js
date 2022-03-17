@@ -1,27 +1,27 @@
 import React from "react";
-import { Row, Col, Button, Card, Container } from "react-bootstrap";
+import { Card, Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Toast from "../../../Toast";
-import Login from "../../../Users/Login";
+import Toast from "../Toast";
+import Login from "../Users/Login";
 import Modal from "react-bootstrap/Modal";
-import Confirm from "../../../Users/EmailConfirm";
-import ForgotPass from "../../../Users/ForgotPass";
-import SignUp from "../../../Users/SignUp";
+import Confirm from "../Users/EmailConfirm";
+import ForgotPass from "../Users/ForgotPass";
+import SignUp from "../Users/SignUp";
 import NumberFormat from "react-number-format";
-import AuctionTimer from "../../../Auctions/AuctionTimer";
-import authService from "../../../../services/authServices";
-import "../../../../styles/Card.css";
+import AuctionTimer from "../Auctions/AuctionTimer";
+import authService from "../../services/authServices";
+import "../../styles/Card.css";
 
-function SavedAuctionsCard({
+const JetCard = ({
   url,
   data,
   id,
   auctionStartDate,
   auctionEndDate,
   startingBid,
-}) {
+}) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -54,7 +54,6 @@ function SavedAuctionsCard({
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const auctions = useSelector((state) => state.auction);
-  const property = useSelector((state) => state.property);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
@@ -66,7 +65,7 @@ function SavedAuctionsCard({
       return toogleSignIn();
     }
     if (user.KYC) {
-      window.open(`/DisplayAuctions/${id}`);
+      history.push(`/DisplayAuctions/${id}`);
       // window.location.reload();
     } else {
       setShowKYC(true);
@@ -74,41 +73,28 @@ function SavedAuctionsCard({
   };
 
   const handleDisplay = () => {
-    window.open(`/DisplayAuctions/${id}`);
+    history.push(`/DisplayAuctions/${id}`);
     // window.setTimeout(() => {
     //   window.location.reload();
     // }, 800);
   };
 
   useEffect(() => {
-    if (auctionStartDate !== undefined) {
-      const startDate = new Date(auctionStartDate)
-        .toLocaleString()
-        .split(",")[0];
-      setAuctionStartDate(startDate);
-    } else {
-      const startDate = "n/a";
-      setAuctionStartDate(startDate);
-    }
+    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
     const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
     const auctionData = auctions.find((item) => item._id === id);
-    const propertyData = property.find((item) => item._id === id);
+    setAuctionStartDate(startDate);
     setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(
-      auctionData
-        ? auctionData.auctionEndDate
-        : propertyData
-        ? propertyData.auctionEndDate
-        : ""
-    );
+    setOnGoingAuctionEnd(auctionData.auctionEndDate);
   }, []);
+
   return (
-    <div style={{ margin: "30px" }}>
+    <div>
       {auctionDate && auctionEnd && (
         <Card
-          className="savedCard text-left m-auto"
+          className="cards text-left m-auto"
           style={{
-            position: "relative",
+            width: "18rem",
             background: "white",
             padding: "5px",
             width: "450px",
@@ -117,7 +103,6 @@ function SavedAuctionsCard({
             boxShadow:
               "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
             transition: "all ease 200ms",
-            color: "black",
           }}
         >
           {showKYC && (
@@ -131,7 +116,7 @@ function SavedAuctionsCard({
             className="img-fluid"
             style={{
               width: "100%",
-              height: "250px",
+              height: "300px",
               borderRadius: "10px",
               cursor: "pointer",
             }}
@@ -156,101 +141,90 @@ function SavedAuctionsCard({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            {/* <Container> */}
-            {/* <div> */}
-            <Row>
-              <span className="golden-text">
-                {data.property_address.formatted_street_address},{" "}
-                {data.property_address.state}
-              </span>
-              <h4 style={{ marginTop: "5px", color: "black" }}>
-                Property Address
-              </h4>
-            </Row>
-            {/* </div> */}
-            {/* <div
-              style={{
-                display: "inline-flex",
-              }}
-            > */}
-            {/* <div> */}
-            <Row>
-              <Col md={5} style={{ width: "50%", color: "black" }}>
-                <p style={{ fontSize: "15px", width: "100px", color: "black" }}>
-                  Online Auction
-                </p>
-              </Col>
+            <div>
+              <div>
+                <span className="golden-text">
+                  {data.address.formatted_street_address}, {data.address.state}
+                </span>
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  Property Address
+                </h4>
+              </div>
+              <div
+                style={{
+                  display: "inline-flex",
+                }}
+              >
+                <div>
+                  <Row>
+                    <Col md={5} style={{ width: "50%", color: "black" }}>
+                      <p style={{ fontSize: "15px", width: "100px" }}>
+                        Online Auction
+                      </p>
+                    </Col>
 
-              <Col md={6} style={{ width: "50%", color: "black" }}>
-                <p
-                  style={{
-                    fontSize: "15px",
-                    width: "250px",
-                    color: "black",
-                  }}
-                >
-                  Additional Info
-                </p>
-              </Col>
-            </Row>
-            <Row>
-              {auctionEnded ? (
-                <Col md={1} style={{ width: "50%" }}>
-                  <p
-                    style={{
-                      fontSize: "15px",
-                      width: "200px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Auction Ended
-                  </p>
-                </Col>
-              ) : (
-                <Col md={1} style={{ width: "50%" }}>
-                  <div style={{ fontSize: "12px", width: "200px" }}>
-                    <AuctionTimer
-                      auctionEndDate={onGoingAuctionEnd}
-                      toogleAuction={toogleAuction}
-                    />
-                  </div>
-                </Col>
-              )}
+                    <Col md={6} style={{ width: "50%", color: "black" }}>
+                      <p
+                        style={{
+                          fontSize: "12px",
 
-              <Col md={6} style={{ width: "50%" }}>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    width: "250px",
-                    color: "black",
-                  }}
-                >
-                  {data.structure.beds_count
-                    ? data.structure.beds_count
-                    : "N/A-"}
-                  BD | {data.structure.baths ? data.structure.baths : "N/A-"}BA
-                  |{" "}
-                  {data.structure.total_area_sq_ft
-                    ? data.structure.total_area_sq_ft
-                    : "N/A-"}{" "}
-                  sq.ft
-                </p>
-              </Col>
-            </Row>
-            {/* </div> */}
-            {/* </div> */}
+                          width: "250px",
+                        }}
+                      >
+                        Additional Info
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {auctionEnded ? (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <p
+                          style={{
+                            fontSize: "15px",
+                            width: "200px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Auction Ended
+                        </p>
+                      </Col>
+                    ) : (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div style={{ fontSize: "12px", width: "200px" }}>
+                          <AuctionTimer
+                            auctionEndDate={onGoingAuctionEnd}
+                            toogleAuction={toogleAuction}
+                          />
+                        </div>
+                      </Col>
+                    )}
 
-            <hr style={{ color: "black" }} />
-            {/* <div
+                    <Col md={6} style={{ width: "50%" }}>
+                      <p
+                        style={{
+                          fontSize: "12px",
+
+                          width: "250px",
+                        }}
+                      >
+                        {data.structure.beds_count}BD | {data.structure.baths}BA
+                        | {data.structure.total_area_sq_ft} sq.ft
+                      </p>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div
               style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-end",
               }}
-            > */}
-            {/* <div> */}
-            <Row>
-              <Col style={{ display: "grid", justifyContent: "flex-start" }}>
+            >
+              <div>
                 <p className="grey-small">Starting Bid</p>
                 <p className="black-bold">
                   <NumberFormat
@@ -260,17 +234,15 @@ function SavedAuctionsCard({
                     prefix={"$"}
                   />
                 </p>
-                {/* </div> */}
-              </Col>
+              </div>
               {}
-              {/* <div
+              <div
                 style={{
                   alignItems: "flex-end",
                   display: "flex",
                   marginRight: "6px",
                 }}
-              > */}
-              <Col xs={5}>
+              >
                 <Button
                   onClick={handleBid}
                   className="black-button text-white"
@@ -278,19 +250,16 @@ function SavedAuctionsCard({
                 >
                   Place Bid
                 </Button>
-              </Col>
-              {/* </div> */}
-              {/* </div> */}
-            </Row>
-            {/* </Container> */}
+              </div>
+            </div>
           </Card.Body>
           <Modal
             backdrop="static"
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
+            centered
             show={showConfirm}
             onHide={toogleConfirmModal}
-            centered
             contentclassname="confirm"
           >
             <Modal.Header closeButton>
@@ -467,6 +436,6 @@ function SavedAuctionsCard({
       )}
     </div>
   );
-}
+};
 
-export default SavedAuctionsCard;
+export { JetCard };

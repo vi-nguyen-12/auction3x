@@ -12,57 +12,75 @@ function LiveListings() {
   useEffect(() => {
     const fetchApprovedProperty = async () => {
       const id = user._id;
-      await authService.sellerApprovedAuctions(id).then((data) => {
-        console.log(data);
-        setUpcomingAuctions(data);
+      await authService.sellerApprovedListings(id).then((res) => {
+        setUpcomingAuctions(res.data);
       });
     };
     fetchApprovedProperty();
   }, []);
+
+  useEffect(() => {
+    const fetchApprovedProperty = async () => {
+      const id = user._id;
+      await authService.sellerPropInAuctions(id).then((res) => {
+        setApprovedProperty(res.data);
+      });
+    };
+    fetchApprovedProperty();
+  }, []);
+
   return (
     <Container>
       <Row>
+        <h1>Upcoming Listing Auctions</h1>
         {upcomingAuctions.length > 0 ? (
-          <Col>
-            <h1>Upcoming Auctions</h1>
-            {upcomingAuctions.map((auction) => (
-              <SavedAuctionsCard
-                data={auction.property.details}
-                url={auction.property.images[0].url}
-                id={auction._id}
-                auctionStartDate={auction.auctionStartDate}
-                auctionEndDate={auction.auctionEndDate}
-                startingBid={
-                  auction.highestBid ? auction.highestBid : auction.startingBid
-                }
-                auctionId={auction._id}
-              />
-            ))}
-          </Col>
+          upcomingAuctions
+            .slice(0, 4)
+            .map((auction) => (
+              <Col key={auction._id}>
+                {auction.type === "real-estate" ? (
+                  <SavedAuctionsCard
+                    data={auction.details}
+                    url={auction.images[0].url}
+                    id={auction._id}
+                    auctionStartDate={auction.auctionStartDate}
+                    auctionEndDate={auction.auctionEndDate}
+                    startingBid={
+                      auction.highestBid
+                        ? auction.highestBid
+                        : auction.startingBid
+                    }
+                  />
+                ) : null}
+              </Col>
+            ))
         ) : (
-          <h1>No Upcoming Auctions</h1>
+          <h1>No Upcoming Listing Auctions</h1>
         )}
       </Row>
       <Row>
+        <h1>Approved Listing Auctions</h1>
         {approvedProperty.length > 0 ? (
-          <Col>
-            <h1>Approved Auctions</h1>
-            {approvedProperty.map((auction) => (
-              <SavedAuctionsCard
-                data={auction.property.details}
-                url={auction.property.images[0].url}
-                id={auction._id}
-                auctionStartDate={auction.auctionStartDate}
-                auctionEndDate={auction.auctionEndDate}
-                startingBid={
-                  auction.highestBid ? auction.highestBid : auction.startingBid
-                }
-                auctionId={auction._id}
-              />
-            ))}
-          </Col>
+          approvedProperty.map((auction) => (
+            <Col key={auction._id}>
+              {auction.type === "real-estate" ? (
+                <SavedAuctionsCard
+                  data={auction.details}
+                  url={auction.images[0].url}
+                  id={auction._id}
+                  auctionStartDate={auction.auctionStartDate}
+                  auctionEndDate={auction.auctionEndDate}
+                  startingBid={
+                    auction.highestBid
+                      ? auction.highestBid
+                      : auction.startingBid
+                  }
+                />
+              ) : null}
+            </Col>
+          ))
         ) : (
-          <h1>No Approved Auctions</h1>
+          <h1>No Approved Listing Auctions</h1>
         )}
       </Row>
     </Container>

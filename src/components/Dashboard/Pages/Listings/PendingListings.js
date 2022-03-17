@@ -11,7 +11,7 @@ function PendingListings() {
   useEffect(() => {
     const fetchPendingListings = async () => {
       const id = user._id;
-      await authService.sellerPendingAuctions(id).then((data) => {
+      await authService.sellerApprovedListings(id).then((data) => {
         setPendingListings(data);
       });
     };

@@ -79,11 +79,13 @@ function EditProfile({ getProfilePic, getDescription }) {
         email: data.email,
         phone: data.phone,
         userName: data.userName,
-        profileImage: profilePic,
+        profileImage: profilePic ? profilePic : user.profileImage,
         social_links: {
-          facebook: data.facebook,
-          twitter: data.twitter,
-          instagram: data.instagram,
+          facebook: data.facebook ? data.facebook : "https://www.facebook.com/",
+          twitter: data.twitter ? data.twitter : "https://www.twitter.com/",
+          instagram: data.instagram
+            ? data.instagram
+            : "https://www.instagram.com/",
         },
       },
     };
@@ -93,6 +95,7 @@ function EditProfile({ getProfilePic, getDescription }) {
         alert(res.data.error);
       } else {
         alert("Profile changed successfully");
+        window.location.reload();
       }
     });
   };
@@ -184,7 +187,7 @@ function EditProfile({ getProfilePic, getDescription }) {
             <span>Instagram</span>
             <input
               className="form-control"
-              placeholder="https://www.instagram.com/"
+              defaultValue={user.social_links.instagram}
               type="text"
               {...register("instagram", { required: false })}
             />
@@ -193,7 +196,7 @@ function EditProfile({ getProfilePic, getDescription }) {
             <span>Facebook</span>
             <input
               className="form-control"
-              placeholder="https://www.facebook.com/"
+              defaultValue={user.social_links.facebook}
               type="text"
               {...register("facebook", { required: false })}
             />
@@ -202,7 +205,7 @@ function EditProfile({ getProfilePic, getDescription }) {
             <span>Twitter</span>
             <input
               className="form-control"
-              placeholder="https://www.twitter.com/"
+              defaultValue={user.social_links.twitter}
               type="text"
               {...register("twitter", { required: false })}
             />

@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
+import { UpcomingCard } from "../Auctions/UpcomingCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 
@@ -73,22 +73,22 @@ cursor: pointer;
 position: relative;
 
 
-&:hover {
-  padding: 0;
-  // border: 4px solid rgba(249, 249, 249, 0.8);
-  transition-duration: 300ms;
-}
+  &:hover {
+    padding: 0;
+    // border: 4px solid rgba(249, 249, 249, 0.8);
+    transition-duration: 300ms;
+  }
 }
 `;
 
-function CarPage({ colorChange, toogleChange }) {
+function RealEstatePage({ colorChange, toogleChange }) {
   useEffect(() => {
     colorChange("black");
     toogleChange();
   }, []);
   const property = useSelector((state) => state.property);
-  const Cars = property.filter(
-    (item) => item.property.type === "car"
+  const realEstate = property.filter(
+    (item) => item.property.type === "real-estate"
   );
   const auction = useSelector((state) => state.auction);
   let settings = {
@@ -147,10 +147,10 @@ function CarPage({ colorChange, toogleChange }) {
               ))}
             </Carousel>
           </Row>
-          <Row style={{ marginTop: "15%" }}>
-            {Cars.map((item, index) => (
+          <Row style={{ marginTop: "25%" }}>
+            {realEstate.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                <UpcomingCarCard
+                <UpcomingCard
                   url={item.property.images[0].url}
                   data={item.property.details}
                   id={item._id}
@@ -167,4 +167,4 @@ function CarPage({ colorChange, toogleChange }) {
   );
 }
 
-export default CarPage;
+export default RealEstatePage;

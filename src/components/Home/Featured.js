@@ -1,6 +1,9 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { CardComp } from "../Auctions/Card";
+import { CardComp } from "../Cards/RealEstateCard";
+import { JetCard } from "../Cards/JetCard";
+import { YachtCard } from "../Cards/YachtCard";
+import { CarCard } from "../Cards/CarCard";
 import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -137,15 +140,43 @@ const Featured = () => {
                 {auction.map((item, index) => (
                   <Wrap key={index}>
                     <Col md={12}>
-                      <CardComp
-                        url={item.property.images[0].url}
-                        data={item.property.details}
-                        id={item._id}
-                        auctionStartDate={item.auctionStartDate}
-                        auctionEndDate={item.auctionEndDate}
-                        startingBid={item.highestBid}
-                        auctionId={item._id}
-                      />
+                      {item.type === "real-estate" ? (
+                        <CardComp
+                          url={item.property.images[0].url}
+                          data={item.property.details}
+                          id={item._id}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.highestBid}
+                        />
+                      ) : item.type === "car" ? (
+                        <CarCard
+                          data={item.details}
+                          id={item._id}
+                          url={item.images[0].url}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.highestBid}
+                        />
+                      ) : item.type === "jet" ? (
+                        <JetCard
+                          data={item.details}
+                          id={item._id}
+                          url={item.images[0].url}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.highestBid}
+                        />
+                      ) : item.type === "yacht" ? (
+                        <YachtCard
+                          data={item.details}
+                          id={item._id}
+                          url={item.images[0].url}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.highestBid}
+                        />
+                      ) : null}
                     </Col>
                   </Wrap>
                 ))}

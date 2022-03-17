@@ -136,13 +136,36 @@ const authService = {
   // },
 
   getUpcomingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estate/upcoming", {
-      headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
-      },
-    });
+    return axios.get(apiUrl + "/api/auctions/upcoming");
   },
+
+  getOngoingAuctions() {
+    return axios.get(apiUrl + "/api/auctions/ongoing");
+  },
+
+  // getUpcomingCarAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/upcoming");
+  // },
+
+  // getOngoingCarAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/car/ongoing");
+  // },
+
+  // getUpcomingJetAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/jet/upcoming");
+  // },
+
+  // getOngoingJetAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/jet/ongoing");
+  // },
+
+  // getUpcomingYachtAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/yacht/upcoming");
+  // },
+
+  // getOngoingYachtAuctions() {
+  //   return axios.get(apiUrl + "/api/auctions/yacht/ongoing");
+  // },
 
   getRegistStatus() {
     return axios.get(apiUrl + "/api/auctions/status?buyer=true", {
@@ -151,10 +174,6 @@ const authService = {
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
       },
     });
-  },
-
-  getOngoingAuctions() {
-    return axios.get(apiUrl + "/api/auctions/real-estate/ongoing");
   },
 
   forgotPassword(data) {
@@ -233,12 +252,25 @@ const authService = {
   },
 
   sellerPendingAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/pendingListings`);
+    return axios.get(
+      apiUrl + `/api/users/${id}/seller/properties?status=pending`
+    );
   },
 
   sellerApprovedListings(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/approvedListings`);
+    return axios.get(
+      apiUrl +
+        `/api/users/${id}/seller/properties?status=success&inAuction=false`
+    );
   },
+
+  sellerPropInAuctions(id) {
+    return axios.get(
+      apiUrl +
+        `/api/users/${id}/seller/properties?status=success&inAuction=true`
+    );
+  },
+
   editUserInfo(data) {
     return axios.put(
       apiUrl + `/api/users/${data.id}`,

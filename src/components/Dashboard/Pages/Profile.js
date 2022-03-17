@@ -186,7 +186,7 @@ function Profile({ id }) {
             <Button
               onClick={() => {
                 window.open(
-                  user.social_links.facebook
+                  user.social_links
                     ? user.social_links.facebook
                     : "https://www.facebook.com/"
                 );
@@ -197,7 +197,7 @@ function Profile({ id }) {
             <Button
               onClick={() => {
                 window.open(
-                  user.social_links.twitter
+                  user.social_links
                     ? user.social_links.twitter
                     : "https://www.twitter.com/"
                 );

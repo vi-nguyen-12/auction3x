@@ -20,7 +20,7 @@ function CarForm({ toogleStep, step, properties }) {
       fuel_type: data.fuelType,
       condition: data.condition,
       price: data.price,
-      address: data.address,
+      property_address: data.address,
     };
     properties(datas);
     toogleStep(step + 1);

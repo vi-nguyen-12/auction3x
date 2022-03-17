@@ -17,6 +17,7 @@ const Agree = ({
 }) => {
   const details = { ...propertyData.details };
   const ownerDetails = { ...ownership.details };
+  console.log(details);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();

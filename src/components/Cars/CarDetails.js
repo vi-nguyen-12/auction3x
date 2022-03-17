@@ -28,7 +28,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
           fuel_type: data.fuelType,
           condition: data.condition,
           price: data.price,
-          address: data.address,
+          property_address: data.address,
         },
       };
       tooglePropertyData(submitedData);
