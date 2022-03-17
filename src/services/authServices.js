@@ -229,7 +229,7 @@ const authService = {
   },
 
   sellerApprovedAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/approvedAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/auctions`);
   },
 
   sellerPendingAuctions(id) {
