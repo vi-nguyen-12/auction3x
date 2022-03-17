@@ -122,8 +122,6 @@ const RealEstates = ({ colorChange, toogleChange }) => {
       },
     ],
   };
-  console.log(property[0].property.type);
-  console.log(window.location.pathname);
   const path = window.location.pathname;
   return (
     <>
