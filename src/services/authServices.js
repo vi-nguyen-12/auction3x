@@ -237,7 +237,10 @@ const authService = {
   },
 
   sellerApprovedListings(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/approvedListings`);
+    return axios.get(
+      apiUrl +
+        `/api/users/${id}/seller/properties?status=success&inAuction=true`
+    );
   },
   editUserInfo(data) {
     return axios.put(
