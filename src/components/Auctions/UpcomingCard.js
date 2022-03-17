@@ -98,11 +98,8 @@ const UpcomingCard = ({
       {startRegisterDate && endRegisterDate && startAuction && (
         <div>
           <Card
-            // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
-            //move to next page
             className="cards text-left m-auto"
             style={{
-              // width: "18rem",
               background: "white",
               padding: "5px",
               width: "450px",
@@ -117,7 +114,6 @@ const UpcomingCard = ({
             {showKYC && (
               <Toast type="warning" message="Please complete your KYC" />
             )}
-            {/* <Link to={`/Display/${id}`}> */}
             <Card.Img
               onClick={handleDisplay}
               variant="top"
@@ -130,10 +126,8 @@ const UpcomingCard = ({
                 cursor: "pointer",
               }}
             />
-            {/* </Link> */}
             <button
               onClick={toggleImage}
-              // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
               style={{
                 border: "none",
                 position: "absolute",
@@ -152,11 +146,10 @@ const UpcomingCard = ({
             <Card.Body style={{ paddingLeft: "13px" }}>
               <div>
                 <div>
-                  <span className="golden-text">
-                    {data.address.formatted_street_address},{" "}
-                    {data.address.state}
-                  </span>
-                  <h4 style={{ marginTop: "5px", color: "black" }}>Property Address</h4>
+                  <span className="golden-text">{data.address}</span>
+                  <h4 style={{ marginTop: "5px", color: "black" }}>
+                    Property Address
+                  </h4>
                 </div>
                 <div
                   style={{

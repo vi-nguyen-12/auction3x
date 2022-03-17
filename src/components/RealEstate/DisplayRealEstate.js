@@ -123,25 +123,20 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
+function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
-  //   const { id } = useParams();
-
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
     checkProperty = [...checkProperty, registProperty[i]];
   }
-  const registeredProperty = checkProperty.find((item) => item._id === auctionProp._id);
+  const registeredProperty = checkProperty.find(
+    (item) => item._id === property._id
+  );
   const [setRegistered, setRegisteredProperty] = useState(false);
   const [registerEnded, setRegisterEnded] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
 
-  const auctions = useSelector((state) => state.auction);
-  const properties = useSelector((state) => state.property);
-
-  const [auction, setAuction] = useState([]);
-//   const [auctionProp, setAuctionProp] = useState();
   const [topBid, setTopBid] = useState();
 
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
@@ -193,36 +188,23 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
   useEffect(() => {
     colorChange("black");
     toogleChange();
-    //for ongoing auction
-    const auctionData = auctions.filter((item) => item._id === id);
-    const propertyData = properties.filter((item) => item._id === id);
-    setAuction(auctionData ? auctionData : propertyData);
-    setAuctionProp(auctionData ? auctionData.property : propertyData.property);
 
     //set registration end
-    setRegisterEnded(
-      auctionData ? auctionData.registerEndDate : propertyData.registerEndDate
-    );
+    setRegisterEnded(property ? property.registerEndDate : null);
 
     //set dates for ongoing auction end date
-    setOnGoingAuctionEnd(
-      auctionData ? auctionData.auctionEndDate : propertyData.auctionEndDate
-    );
-    setStartAuction(
-      auctionData ? auctionData.auctionStartDate : propertyData.auctionStartDate
-    );
-
-    console.log(auctionData);
+    setOnGoingAuctionEnd(property ? property.auctionEndDate : null);
+    setStartAuction(property ? property.auctionStartDate : null);
 
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: auctionData
-        ? auctionData.details.property_address.latitude
-        : propertyData.details.property_address.latitude,
-      lng: auctionData
-        ? auctionData.details.property_address.longitude
-        : propertyData.details.property_address.longitude,
+      lat: property
+        ? property.property.details.property_address.latitude
+        : null,
+      lng: property
+        ? property.property.details.property_address.longitude
+        : null
     });
 
     if (user._id && user.KYC) {
@@ -238,32 +220,25 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
     }
 
     let topBidders = [];
-    if (auctionData) {
-      for (let i = 0; i < auctionData.highestBidders.length; i++) {
-        topBidders = [...topBidders, auctionData.highestBidders[i]];
+    if (property.highestBidders) {
+      for (let i = 0; i < property.highestBidders.length; i++) {
+        topBidders = [...topBidders, property.highestBidders[i]];
       }
       setTopBid(topBidders.reverse());
-    } else if (propertyData) {
-      if (propertyData.highestBidders) {
-        for (let i = 0; i < propertyData.highestBidders.length; i++) {
-          topBidders = [...topBidders, propertyData.highestBidders[i]];
-        }
-        setTopBid(topBidders.reverse());
-      } else {
-        setTopBid([]);
-      }
+    } else {
+      setTopBid([]);
     }
-  }, [auctions, registProperty]);
+  }, [property, registProperty]);
 
   return (
     <>
-      {auction && location && auctionProp && startAuction && (
+      {property && location && startAuction && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
             <img
-              src={auctionProp.images[0].url}
+              src={property.property.images[0].url}
               alt="Snow"
               style={{
                 display: "flex",
@@ -294,7 +269,6 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
               <div>
                 <button
                   onClick={toggleImage}
-                  // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
                   style={{
                     border: "none",
                     position: "relative",
@@ -348,7 +322,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
                     >
-                      {auctionProp.images.map((item, index) => (
+                      {property.property.images.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
                           <img
@@ -393,7 +367,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
                     >
-                      {auctionProp.videos.map((item, index) => (
+                      {property.property.videos.map((item, index) => (
                         <Wrap key={index}>
                           {/* <a> */}
                           <video
@@ -405,14 +379,12 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                               width: "100%",
                               borderRadius: "0",
                               position: "relative",
-                              // height: "3000px!important",
                               cursor: "pointer",
                             }}
                             controls
                           >
                             <source src={item.url} type="video/webm" />
                           </video>
-                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -438,7 +410,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                 </button>
               </div>
 
-              {auctionProp && (
+              {property && (
                 <div>
                   <button
                     onClick={toggleMap}
@@ -471,7 +443,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </GoogleMap>
                       <p>
                         {
-                          auctionProp.details.property_address
+                          property.property.details.property_address
                             .formatted_street_address
                         }
                       </p>
@@ -482,15 +454,14 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
             </div>
           </div>
 
-          {/* first row */}
           <Row style={{ padding: "0 25px" }}>
             <Col>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                {auctionProp.details.property_address.formatted_street_address}{" "}
-                {","} {auctionProp.details.property_address.city} {","}{" "}
-                {auctionProp.details.property_address.state}{" "}
-                {auctionProp.details.property_address.zip_code}
+                {property.property.details.property_address.formatted_street_address}{" "}
+                {","} {property.property.details.property_address.city} {","}{" "}
+                {property.property.details.property_address.state}{" "}
+                {property.property.details.property_address.zip_code}
               </h5>
             </Col>
 
@@ -705,7 +676,6 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
             </Col>
           </Row>
 
-          {/* second row */}
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
@@ -763,7 +733,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                 )}
 
                 <Col>
-                  {auction.highestBid ? (
+                  {property.highestBid ? (
                     <div
                       style={{
                         display: "grid",
@@ -777,7 +747,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                     >
                       <h4 style={{ padding: "8px" }}>
                         <NumberFormat
-                          value={auction.highestBid}
+                          value={property.highestBid}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -814,7 +784,7 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                     >
                       <h4 style={{ padding: "8px" }}>
                         <NumberFormat
-                          value={auction.startingBid}
+                          value={property.startingBid}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -905,11 +875,11 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </tr>
                       <tr>
                         <td>Property Type</td>
-                        {auctionProp.details.parcel
+                        {property.property.details.parcel
                           .county_land_use_description ? (
                           <td>
                             {
-                              auctionProp.details.parcel
+                              property.property.details.parcel
                                 .county_land_use_description
                             }
                           </td>
@@ -919,9 +889,9 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </tr>
                       <tr>
                         <td>Building Size</td>
-                        {auctionProp.details.structure.total_area_sq_ft ? (
+                        {property.property.details.structure.total_area_sq_ft ? (
                           <td>
-                            {auctionProp.details.structure.total_area_sq_ft}{" "}
+                            {property.property.details.structure.total_area_sq_ft}{" "}
                             sqft
                           </td>
                         ) : (
@@ -930,18 +900,18 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </tr>
                       <tr>
                         <td>Building Class</td>
-                        {auctionProp.details.structure.quality ? (
-                          <td>{auctionProp.details.structure.quality}</td>
-                        ) : auctionProp.details.structure.condition ? (
-                          <td>{auctionProp.details.structure.condition}</td>
+                        {property.property.details.structure.quality ? (
+                          <td>{property.property.details.structure.quality}</td>
+                        ) : property.property.details.structure.condition ? (
+                          <td>{property.property.details.structure.condition}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Year Built/Renovated</td>
-                        {auctionProp.details.structure.year_built ? (
-                          <td>{auctionProp.details.structure.year_built}</td>
+                        {property.property.details.structure.year_built ? (
+                          <td>{property.property.details.structure.year_built}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -959,11 +929,11 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                     <tbody className="propInfo">
                       <tr>
                         <td>Tenancy</td>
-                        {auctionProp.details.parcel
+                        {property.property.details.parcel
                           .standardized_land_use_type ? (
                           <td>
                             {
-                              auctionProp.details.parcel
+                              property.property.details.parcel
                                 .standardized_land_use_type
                             }
                           </td>
@@ -973,34 +943,34 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </tr>
                       <tr>
                         <td>Building Height</td>
-                        {auctionProp.details.structure.stories ? (
-                          <td>{auctionProp.details.structure.stories} story</td>
+                        {property.property.details.structure.stories ? (
+                          <td>{property.property.details.structure.stories} story</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Building FAR</td>
-                        {auctionProp.details.parcel.area_acres ? (
-                          <td>{auctionProp.details.parcel.area_acres} acres</td>
+                        {property.property.details.parcel.area_acres ? (
+                          <td>{property.property.details.parcel.area_acres} acres</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Zoning</td>
-                        {auctionProp.details.parcel.zoning ? (
-                          <td>{auctionProp.details.parcel.zoning}</td>
+                        {property.property.details.parcel.zoning ? (
+                          <td>{property.property.details.parcel.zoning}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td>Parking</td>
-                        {auctionProp.details.structure.parking_spaces_count ? (
+                        {property.property.details.structure.parking_spaces_count ? (
                           <td>
-                            {auctionProp.details.structure.parking_spaces_count}{" "}
-                            spaces ({auctionProp.details.structure.parking_type}
+                            {property.property.details.structure.parking_spaces_count}{" "}
+                            spaces ({property.property.details.structure.parking_type}
                             )
                           </td>
                         ) : (
@@ -1009,8 +979,8 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
                       </tr>
                       <tr>
                         <td>Frontage</td>
-                        {auctionProp.details.parcel.frontage_ft ? (
-                          <td>{auctionProp.details.parcel.frontage_ft} ft</td>
+                        {property.property.details.parcel.frontage_ft ? (
+                          <td>{property.property.details.parcel.frontage_ft} ft</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1143,8 +1113,6 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
           </Row>
 
           <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
-            {/* ref={myRef}
-              style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
               activeKey={realTab}
               onSelect={() => setRealTab()}
@@ -1329,26 +1297,6 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
               </Tab>
             </Tabs>
           </Row>
-
-          {/* <Row style={{ padding: "35px" }}>
-              <div
-                style={{
-                  marginTop: "30px",
-                  alignItems: "center",
-                  marginBottom: "20px",
-                }}
-              >
-                <span
-                  style={{
-                    fontWeight: "500",
-                    fontSize: "30px",
-                    color: "#6d6d6d",
-                  }}
-                >
-                  Similar Properties
-                </span>
-              </div>
-            </Row> */}
           <Modal size="lg" show={bid} onHide={toogleBid} centered>
             <Modal.Body>
               <MultiBuyForm />
@@ -1549,4 +1497,5 @@ function DisplayRealEstate({ colorChange, toogleChange, auctionProp }) {
     </>
   );
 }
+
 export default DisplayRealEstate;

@@ -123,7 +123,7 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayCar({ colorChange, toogleChange, property }) {
+function DisplayYacht({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
@@ -229,7 +229,6 @@ function DisplayCar({ colorChange, toogleChange, property }) {
       setTopBid([]);
     }
   }, [property, registProperty]);
-
   return (
     <>
       {location && property && startAuction && (
@@ -456,9 +455,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
           <Row style={{ padding: "0 25px" }}>
             <Col>
               <h2 style={{ color: "#b77b50" }}>
-                {property.property.details.year} {""}
-                {property.property.details.make} {""}
-                {property.property.details.model}
+                {property.property.details.manufacturer_name}
               </h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
                 {property.property.details.property_address}
@@ -883,33 +880,44 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Make</td>
-                        {property.property.details.make ? (
-                          <td>{property.property.details.make}</td>
+                        <td>Vessel Registration Number</td>
+                        {property.property.details
+                          .vessel_registration_number ? (
+                          <td>
+                            {
+                              property.property.details
+                                .vessel_registration_number
+                            }
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Model</td>
-                        {property.property.details.model ? (
-                          <td>{property.property.details.model}</td>
+                        <td>Vessel Manufacturing Date</td>
+                        {property.property.details.vessel_manufacturing_date ? (
+                          <td>
+                            {
+                              property.property.details
+                                .vessel_manufacturing_date
+                            }
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Year</td>
-                        {property.property.details.year ? (
-                          <td>{property.property.details.year}</td>
+                        <td>Manufacture Mark</td>
+                        {property.property.details.manufacture_mark ? (
+                          <td>{property.property.details.manufacture_mark}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Color</td>
-                        {property.property.details.color ? (
-                          <td>{property.property.details.color}</td>
+                        <td>Manufacturer Name</td>
+                        {property.property.details.manufacturer_name ? (
+                          <td>{property.property.details.manufacturer_name}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -922,65 +930,45 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Mileage</td>
-                        {property.property.details.mileage ? (
-                          <td>{property.property.details.mileage}</td>
+                        <td>Engine Type</td>
+                        {property.property.details.engine_type ? (
+                          <td>{property.property.details.engine_type}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Transmission</td>
-                        {property.property.details.transmission ? (
-                          <td>{property.property.details.transmission}</td>
+                        <td>Engine Manufacture Name</td>
+                        {property.property.details.engine_manufacture_name ? (
+                          <td>
+                            {property.property.details.engine_manufacture_name}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>VIN</td>
-                        {property.property.details.VIN ? (
-                          <td>{property.property.details.VIN}</td>
+                        <td>Engine Deck Type</td>
+                        {property.property.details.engine_deck_type ? (
+                          <td>{property.property.details.engine_deck_type}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Car Type</td>
-                        {property.property.details.car_type ? (
-                          <td>{property.property.details.car_type}</td>
+                        <td>Running Cost</td>
+                        {property.property.details.running_cost ? (
+                          <td>{property.property.details.running_cost}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Fuel Type</td>
-                        {property.property.details.fuel_type ? (
-                          <td>{property.property.details.fuel_type}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Condition</td>
-                        {property.property.details.condition ? (
-                          <td>{property.property.details.condition}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Engine</td>
-                        {property.property.details.engine ? (
-                          <td>{property.property.details.engine}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Power</td>
-                        {property.property.details.power ? (
-                          <td>{property.property.details.power}</td>
+                        <td>No. Of Crew Required</td>
+                        {property.property.details.no_of_crew_required ? (
+                          <td>
+                            {property.property.details.no_of_crew_required}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1110,7 +1098,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
 
           <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
             {/* ref={myRef}
-              style={{ padding: "35px", backgroundColor: "white" }}> */}
+            style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
               activeKey={realTab}
               onSelect={() => setRealTab()}
@@ -1495,4 +1483,5 @@ function DisplayCar({ colorChange, toogleChange, property }) {
     </>
   );
 }
-export default DisplayCar;
+
+export default DisplayYacht;

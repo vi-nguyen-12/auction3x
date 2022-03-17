@@ -45,7 +45,6 @@ function App() {
   }, [dispatch]);
 
   authService.getUpcomingAuctions().then((res) => {
-    console.log(res.data);
     dispatch(addProperty(res.data));
   });
 

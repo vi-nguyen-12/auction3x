@@ -123,7 +123,7 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayCar({ colorChange, toogleChange, property }) {
+function DisplayJet({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
@@ -229,7 +229,6 @@ function DisplayCar({ colorChange, toogleChange, property }) {
       setTopBid([]);
     }
   }, [property, registProperty]);
-
   return (
     <>
       {location && property && startAuction && (
@@ -456,9 +455,8 @@ function DisplayCar({ colorChange, toogleChange, property }) {
           <Row style={{ padding: "0 25px" }}>
             <Col>
               <h2 style={{ color: "#b77b50" }}>
-                {property.property.details.year} {""}
-                {property.property.details.make} {""}
-                {property.property.details.model}
+                {property.property.details.aircraft_builder_name}{" "}
+                {property.property.details.aircraft_model_designation}
               </h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
                 {property.property.details.property_address}
@@ -883,33 +881,43 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Make</td>
-                        {property.property.details.make ? (
-                          <td>{property.property.details.make}</td>
+                        <td>registration Mark</td>
+                        {property.property.details.registration_mark ? (
+                          <td>{property.property.details.registration_mark}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Model</td>
-                        {property.property.details.model ? (
-                          <td>{property.property.details.model}</td>
+                        <td>Aircraft Builder Name</td>
+                        {property.property.details.aircraft_builder_name ? (
+                          <td>
+                            {property.property.details.aircraft_builder_name}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Year</td>
-                        {property.property.details.year ? (
-                          <td>{property.property.details.year}</td>
+                        <td>Aircraft Model Designation</td>
+                        {property.property.details
+                          .aircraft_model_designation ? (
+                          <td>
+                            {
+                              property.property.details
+                                .aircraft_model_designation
+                            }
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Color</td>
-                        {property.property.details.color ? (
-                          <td>{property.property.details.color}</td>
+                        <td>Aircraft Serial No.</td>
+                        {property.property.details.aircraft_serial_no ? (
+                          <td>
+                            {property.property.details.aircraft_serial_no}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -922,65 +930,71 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Mileage</td>
-                        {property.property.details.mileage ? (
-                          <td>{property.property.details.mileage}</td>
+                        <td>Engine Builder Name</td>
+                        {property.property.details.engine_builder_name ? (
+                          <td>
+                            {property.property.details.engine_builder_name}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Transmission</td>
-                        {property.property.details.transmission ? (
-                          <td>{property.property.details.transmission}</td>
+                        <td>engine_model_designation</td>
+                        {property.property.details.engine_model_designation ? (
+                          <td>
+                            {property.property.details.engine_model_designation}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>VIN</td>
-                        {property.property.details.VIN ? (
-                          <td>{property.property.details.VIN}</td>
+                        <td>Number Of Engines</td>
+                        {property.property.details.number_of_engines ? (
+                          <td>{property.property.details.number_of_engines}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Car Type</td>
-                        {property.property.details.car_type ? (
-                          <td>{property.property.details.car_type}</td>
+                        <td>Propeller Builder Name</td>
+                        {property.property.details.propeller_builder_name ? (
+                          <td>
+                            {property.property.details.propeller_builder_name}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Fuel Type</td>
-                        {property.property.details.fuel_type ? (
-                          <td>{property.property.details.fuel_type}</td>
+                        <td>Propeller Model Designation</td>
+                        {property.property.details
+                          .propeller_model_designation ? (
+                          <td>
+                            {
+                              property.property.details
+                                .propeller_model_designation
+                            }
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Condition</td>
-                        {property.property.details.condition ? (
-                          <td>{property.property.details.condition}</td>
+                        <td>Number Of Aircraft</td>
+                        {property.property.details.number_of_aircraft ? (
+                          <td>
+                            {property.property.details.number_of_aircraft}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td>Engine</td>
-                        {property.property.details.engine ? (
-                          <td>{property.property.details.engine}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Power</td>
-                        {property.property.details.power ? (
-                          <td>{property.property.details.power}</td>
+                        <td>Imported Aircraft</td>
+                        {property.property.details.imported_aircraft ? (
+                          <td>{property.property.details.imported_aircraft}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1110,7 +1124,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
 
           <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
             {/* ref={myRef}
-              style={{ padding: "35px", backgroundColor: "white" }}> */}
+            style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
               activeKey={realTab}
               onSelect={() => setRealTab()}
@@ -1495,4 +1509,5 @@ function DisplayCar({ colorChange, toogleChange, property }) {
     </>
   );
 }
-export default DisplayCar;
+
+export default DisplayJet;
