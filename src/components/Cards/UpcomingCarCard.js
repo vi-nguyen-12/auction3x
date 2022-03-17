@@ -154,7 +154,7 @@ const UpcomingCarCard = ({
                 <div>
                   <span className="golden-text">{data.property_address}</span>
                   <h4 style={{ marginTop: "5px", color: "black" }}>
-                    2017 Rolls-Royce Boat Tail
+                    {data.year} {data.make} {data.model}
                   </h4>
                 </div>
                 <div

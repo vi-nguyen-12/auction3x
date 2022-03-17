@@ -2,6 +2,8 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "./UpcomingCard";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
+import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
+import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 import { useSelector } from "react-redux";
 
 const Upcoming = (props) => {
@@ -44,26 +46,26 @@ const Upcoming = (props) => {
                   startingBid={item.startingBid}
                 />
               ) : item.property.type === "jet" ? (
-                <div>Jet</div>
-              ) : // <UpcomingJetCard
-              // url={item.property.images[0].url}
-              // data={item.property.details}
-              // id={item._id}
-              // startRegister={item.registerStartDate}
-              // endRegister={item.registerEndDate}
-              // startingBid={item.startingBid}
-              // />
-              item.property.type === "yacht" ? (
-                <div>Yacht</div>
-              ) : // <UpcomingYachtCard
-              // url={item.property.images[0].url}
-              // data={item.property.details}
-              // id={item._id}
-              // startRegister={item.registerStartDate}
-              // endRegister={item.registerEndDate}
-              // startingBid={item.startingBid}
-              // />
-              null}
+                <UpcomingJetCard
+                  url={item.property.images[0].url}
+                  data={item.property.details}
+                  id={item._id}
+                  startRegister={item.registerStartDate}
+                  endRegister={item.registerEndDate}
+                  startingBid={item.startingBid}
+                />
+              ) :
+                item.property.type === "yacht" ? (
+                  <UpcomingYachtCard
+                    url={item.property.images[0].url}
+                    data={item.property.details}
+                    id={item._id}
+                    startRegister={item.registerStartDate}
+                    endRegister={item.registerEndDate}
+                    startingBid={item.startingBid}
+                  />
+                ) :
+                  null}
             </Col>
           ))}
         </Row>

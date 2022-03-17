@@ -147,7 +147,7 @@ const YachtCard = ({
                   {data.address.formatted_street_address}, {data.address.state}
                 </span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.manufacturer_name} {data.engine_type}
                 </h4>
               </div>
               <div
@@ -235,7 +235,7 @@ const YachtCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",
