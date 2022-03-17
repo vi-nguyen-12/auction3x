@@ -233,7 +233,9 @@ const authService = {
   },
 
   sellerPendingAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/pendingListings`);
+    return axios.get(
+      apiUrl + `/api/users/${id}/seller/properties?status=pending`
+    );
   },
 
   sellerApprovedListings(id) {
