@@ -181,7 +181,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               type="text"
               className="form-control"
               {...register("address", { required: true, maxLength: 100 })}
-              defaultValue={property.address}
+              defaultValue={property.property_address}
             />
             <span>Address</span>
           </Col>

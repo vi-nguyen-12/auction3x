@@ -31,31 +31,39 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else if (data.brokerName !== "") {
-      const datas = {
-        listing_agreement: listing_agreement,
-        details: {
-          owner_name: ownerName,
-          address: address,
-          phone: phone,
-          email: email,
-          broker_name: data.brokerName,
-          broker_id: data.brokerId,
-        },
-      };
-      getOwnerShip(datas);
-      toogleStep(step + 1);
-    } else {
-      if (data.brokerName === "") {
+      if (phone.length > 10) {
+        alert("Please enter valid phone number");
+      } else {
         const datas = {
+          listing_agreement: listing_agreement,
           details: {
             owner_name: ownerName,
             address: address,
             phone: phone,
             email: email,
+            broker_name: data.brokerName,
+            broker_id: data.brokerId,
           },
         };
         getOwnerShip(datas);
         toogleStep(step + 1);
+      }
+    } else {
+      if (data.brokerName === "") {
+        if (phone.length > 10) {
+          alert("Please enter valid phone number");
+        } else {
+          const datas = {
+            details: {
+              owner_name: ownerName,
+              address: address,
+              phone: phone,
+              email: email,
+            },
+          };
+          getOwnerShip(datas);
+          toogleStep(step + 1);
+        }
       }
     }
   };
@@ -147,7 +155,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Owner Name <span style={{ color: "#ff0000" }}>*</span></span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Owner Name <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
@@ -157,17 +167,22 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setAddress(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Address <span style={{ color: "#ff0000" }}>*</span> </span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Address <span style={{ color: "#ff0000" }}>*</span>{" "}
+                  </span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
                 <Col>
                   <input
-                    type="phone"
+                    type="number"
                     className="form-control"
                     onChange={(e) => setPhone(e.target.value)}
+                    maxLength="10"
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Phone <span style={{ color: "#ff0000" }}>*</span></span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Phone <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                 </Col>
                 <Col>
                   <input
@@ -175,7 +190,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Email <span style={{ color: "#ff0000" }}>*</span></span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Email <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                 </Col>
               </Row>
             </Row>
@@ -210,7 +227,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     borderBottom: "2px solid gray",
                     fontWeight: "bold",
                     fontSize: "18px",
-                    color: "black"
+                    color: "black",
                   }}
                 >
                   Broker Information
@@ -223,7 +240,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Owner Name *</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Owner Name *
+                  </span>
                 </Col>
                 <Col>
                   <input
@@ -231,7 +250,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     {...register("brokerName", { required: false })}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Broker Name *</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker Name *
+                  </span>
                 </Col>
                 <Col>
                   <input
@@ -239,7 +260,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     {...register("brokerId", { required: false })}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Broker ID *</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker License Number *
+                  </span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
@@ -263,7 +286,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setAddress(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Address</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Address
+                  </span>
                 </Col>
               </Row>
               <Row style={{ marginTop: "10px" }}>
@@ -273,7 +298,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setPhone(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Phone *</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Phone *
+                  </span>
                 </Col>
                 <Col>
                   <input
@@ -281,7 +308,9 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     className="form-control"
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>Email *</span>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Email *
+                  </span>
                 </Col>
               </Row>
             </Row>
@@ -301,7 +330,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
           </form>
         </Container>
       </div>
-    </div >
+    </div>
   );
 }
 

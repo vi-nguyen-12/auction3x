@@ -146,17 +146,10 @@ const UpcomingCard = ({
             <Card.Body style={{ paddingLeft: "13px" }}>
               <div>
                 <div>
-<<<<<<< HEAD
                   <span className="golden-text">{data.address}</span>
                   <h4 style={{ marginTop: "5px", color: "black" }}>
                     Property Address
                   </h4>
-=======
-                  <span className="golden-text">
-                    {data.address}
-                  </span>
-                  <h4 style={{ marginTop: "5px", color: "black" }}>Property Address</h4>
->>>>>>> cc8a7744b06ed844d8e7c6cb215ed4d245411abd
                 </div>
                 <div
                   style={{
