@@ -88,7 +88,6 @@ height: 150px;
 function Profile({ id }) {
   const savedProperty = useSelector((state) => state.savedProperty);
   const user = useSelector((state) => state.user);
-  console.log(user.profileImage);
   let settings = {
     dots: false,
     infinite: true,
@@ -96,7 +95,7 @@ function Profile({ id }) {
     autoplay: true,
     slidesToShow: savedProperty.length > 3 ? 3 : savedProperty.length,
   };
-  const { register, handleSubmit, errors } = useForm();
+  // const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
   const toogleEdit = () => setShowEdit(!showEdit);
   const [description, setDescription] = useState("");
@@ -136,7 +135,15 @@ function Profile({ id }) {
         <Col sm={3}>
           <div className="profileOutline">
             <div className="profileInline">
-              <image src={user.profileImage} alt="profile" />
+              <img
+                style={{
+                  borderRadius: "20px",
+                  width: "100%",
+                  height: "100%",
+                }}
+                src={user.profileImage}
+                alt="profile"
+              />
             </div>
           </div>
         </Col>
@@ -167,21 +174,33 @@ function Profile({ id }) {
             <p>Midnight Corner St. Suite 600 San Francisco, CADGE 94107</p>
             <Button
               onClick={() => {
-                window.open("https://www.instagram.com/");
+                window.open(
+                  user.social_links.instagram
+                    ? user.social_links.instagram
+                    : "https://www.instagram.com/"
+                );
               }}
             >
               <BsInstagram size={25} color="#216fed" />
             </Button>
             <Button
               onClick={() => {
-                window.open("https://www.facebook.com/");
+                window.open(
+                  user.social_links.facebook
+                    ? user.social_links.facebook
+                    : "https://www.facebook.com/"
+                );
               }}
             >
               <BsFacebook size={29} color="#216fed" />
             </Button>
             <Button
               onClick={() => {
-                window.open("https://www.twitter.com/");
+                window.open(
+                  user.social_links.twitter
+                    ? user.social_links.twitter
+                    : "https://www.twitter.com/"
+                );
               }}
             >
               <BsTwitter size={27} color="#216fed" />
