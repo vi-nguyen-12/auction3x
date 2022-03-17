@@ -71,7 +71,6 @@ function EditProfile({ getProfilePic, getDescription }) {
   };
 
   const onSubmit = async (data) => {
-    console.log(profilePic);
     const datas = {
       id: user._id,
       details: {
@@ -81,6 +80,11 @@ function EditProfile({ getProfilePic, getDescription }) {
         phone: data.phone,
         userName: data.userName,
         profileImage: profilePic,
+        social_links: {
+          facebook: data.facebook,
+          twitter: data.twitter,
+          instagram: data.instagram,
+        },
       },
     };
     getDescription(data.description);
@@ -182,6 +186,7 @@ function EditProfile({ getProfilePic, getDescription }) {
               className="form-control"
               placeholder="https://www.instagram.com/"
               type="text"
+              {...register("instagram", { required: false })}
             />
           </Col>
           <Col>
@@ -190,6 +195,7 @@ function EditProfile({ getProfilePic, getDescription }) {
               className="form-control"
               placeholder="https://www.facebook.com/"
               type="text"
+              {...register("facebook", { required: false })}
             />
           </Col>
           <Col>
@@ -198,6 +204,7 @@ function EditProfile({ getProfilePic, getDescription }) {
               className="form-control"
               placeholder="https://www.twitter.com/"
               type="text"
+              {...register("twitter", { required: false })}
             />
           </Col>
         </Row>
