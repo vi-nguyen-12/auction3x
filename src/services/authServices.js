@@ -240,7 +240,7 @@ const authService = {
   },
 
   buyerApprovedAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/buyer/approvedAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions?status=success`);
   },
 
   buyerWonAuctions(id) {
@@ -248,7 +248,7 @@ const authService = {
   },
 
   sellerApprovedAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/approvedAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/auctions`);
   },
 
   sellerPendingAuctions(id) {
