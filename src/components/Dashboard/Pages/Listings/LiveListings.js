@@ -28,6 +28,7 @@ function LiveListings() {
     };
     fetchApprovedProperty();
   }, []);
+  console.log(approvedProperty);
 
   return (
     <Container>
@@ -61,19 +62,19 @@ function LiveListings() {
       <Row>
         <h1>Approved Listing Auctions</h1>
         {approvedProperty.length > 0 ? (
-          approvedProperty.map((auction) => (
-            <Col key={auction._id}>
+          approvedProperty.map((auction, index) => (
+            <Col key={index}>
               {auction.type === "real-estate" ? (
                 <SavedAuctionsCard
                   data={auction.details}
                   url={auction.images[0].url}
-                  id={auction._id}
-                  auctionStartDate={auction.auctionStartDate}
-                  auctionEndDate={auction.auctionEndDate}
+                  id={auction.auctionDetails._id}
+                  auctionStartDate={auction.auctionDetails.auctionStartDate}
+                  auctionEndDate={auction.auctionDetails.auctionEndDate}
                   startingBid={
-                    auction.highestBid
-                      ? auction.highestBid
-                      : auction.startingBid
+                    auction.auctionDetails.highestBid
+                      ? auction.auctionDetails.highestBid
+                      : auction.auctionDetails.startingBid
                   }
                 />
               ) : null}

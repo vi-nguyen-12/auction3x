@@ -58,7 +58,7 @@ function CarForm({ toogleStep, step, properties }) {
             <td style={{ color: "black" }}>Year</td>
             <td>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 {...register("year", { required: true, maxLength: 100 })}
               />
@@ -68,7 +68,7 @@ function CarForm({ toogleStep, step, properties }) {
             <td style={{ color: "black" }}>Mileage</td>
             <td>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 {...register("mileage", { required: true, maxLength: 100 })}
               />
