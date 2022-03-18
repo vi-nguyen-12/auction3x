@@ -26,7 +26,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
 
 const mapStyles = {
-  height: "50vh",
+  height: "98%",
   width: "100%",
 };
 // const StreetviewStyles = {
@@ -66,7 +66,7 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -5vh;
+      top: -4vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -308,13 +308,13 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <IoImageOutline size="100%" color="C58753" />
                 </button>
                 <Modal
-                  size="lg"
+                  size="xl"
                   style={{ height: "100%" }}
                   show={showPics}
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body>
+                  <Modal.Body style={{ height: "700px" }}>
                     <div>
                       <CloseButton
                         style={{
@@ -338,7 +338,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         <Wrap key={index}>
                           {/* <a> */}
                           <img
-                            style={{ height: "50vh" }}
+                            style={{ height: "100%" }}
                             src={item.url}
                             alt=""
                           />
@@ -368,13 +368,23 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <RiVideoLine size="100%" color="C58753" />
                 </button>
 
-                <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body style={{ height: "500px" }}>
+                <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
+                  <Modal.Body style={{ height: "700px" }}>
+                    <div>
+                      <CloseButton
+                        style={{
+                          position: "absolute",
+                          right: "25px",
+                          top: "25px",
+                          width: "25px",
+                          height: "25px",
+                          zIndex: "999",
+                          backgroundColor: "white",
+                          boxShadow: "none",
+                        }}
+                        onClick={toggleVids}
+                      />
+                    </div>
                     <Carousel
                       style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
@@ -441,13 +451,23 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   >
                     <IoLocationOutline size="50px" color="C58753" />
                   </button>
-                  <Modal size="lg" show={showMap} onHide={toggleMap} centered>
-                    <Modal.Header closeButton>
-                      <Modal.Title>
-                        <h2 style={{ color: " #e9af84" }}>Property Location</h2>
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
+                  <Modal size="xl" show={showMap} onHide={toggleMap} centered>
+                    <Modal.Body style={{ height: "700px" }}>
+                      <div>
+                        <CloseButton
+                          style={{
+                            position: "absolute",
+                            right: "25px",
+                            top: "25px",
+                            width: "25px",
+                            height: "25px",
+                            zIndex: "999",
+                            backgroundColor: "white",
+                            boxShadow: "none",
+                          }}
+                          onClick={toggleMap}
+                        />
+                      </div>
                       <GoogleMap
                         mapContainerStyle={mapStyles}
                         zoom={18}
