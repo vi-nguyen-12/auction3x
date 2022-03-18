@@ -162,9 +162,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   const upcoming = properties.filter((item) => item._id === id);
   const auction = auctions.filter((item) => item._id === id);
 
-  const propAuction = upcoming ? upcoming[0] : auction[0];
-  console.log(propAuction);
-
+  const propAuction = auction ? auction[0] : upcoming[0];
   return (
     <>
       {propAuction.property.type === "real-estate" ? (

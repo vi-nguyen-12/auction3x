@@ -205,8 +205,8 @@ const CardComp = ({
                           width: "250px",
                         }}
                       >
-                        {data.structure.beds_count}BD | {data.structure.baths}BA
-                        | {data.structure.total_area_sq_ft} sq.ft
+                        {data.beds_count}BD | {data.baths}BA
+                        | {data.total_area_sq_ft} sq.ft
                       </p>
                     </Col>
                   </Row>
