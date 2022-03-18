@@ -144,7 +144,7 @@ const CarCard = ({
             <div>
               <div>
                 <span className="golden-text">
-                  {data.address.formatted_street_address}, {data.address.state}
+                  {data.property_address}
                 </span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.year} {data.make} {data.model}
@@ -203,12 +203,12 @@ const CarCard = ({
                       <p
                         style={{
                           fontSize: "12px",
-
                           width: "250px",
                         }}
                       >
-                        {data.structure.beds_count}BD | {data.structure.baths}BA
-                        | {data.structure.total_area_sq_ft} sq.ft
+                          {data.car_type ? data.car_type : "N/A"}|{" "}
+                          {data.engine ? data.engine : "N/A"}|{" "}
+                          {data.fuel_type ? data.fuel_type : "N/A"}
                       </p>
                     </Col>
                   </Row>

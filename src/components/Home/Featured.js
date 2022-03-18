@@ -140,41 +140,41 @@ const Featured = () => {
                 {auction.map((item, index) => (
                   <Wrap key={index}>
                     <Col md={12}>
-                      {item.type === "real-estate" ? (
+                      {item.property.type === "real-estate" ? (
                         <CardComp
                           url={item.property.images[0].url}
                           data={item.property.details}
                           id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.highestBid}
+                          startRegister={item.registerStartDate}
+                          endRegister={item.registerEndDate}
+                          startingBid={item.startingBid}
                         />
-                      ) : item.type === "car" ? (
+                      ) : item.property.type === "car" ? (
                         <CarCard
-                          data={item.details}
+                          url={item.property.images[0].url}
+                          data={item.property.details}
                           id={item._id}
-                          url={item.images[0].url}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.highestBid}
+                          startRegister={item.registerStartDate}
+                          endRegister={item.registerEndDate}
+                          startingBid={item.startingBid}
                         />
-                      ) : item.type === "jet" ? (
+                      ) : item.property.type === "jet" ? (
                         <JetCard
-                          data={item.details}
+                          url={item.property.images[0].url}
+                          data={item.property.details}
                           id={item._id}
-                          url={item.images[0].url}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.highestBid}
+                          startRegister={item.registerStartDate}
+                          endRegister={item.registerEndDate}
+                          startingBid={item.startingBid}
                         />
-                      ) : item.type === "yacht" ? (
+                      ) : item.property.type === "yacht" ? (
                         <YachtCard
-                          data={item.details}
+                          url={item.property.images[0].url}
+                          data={item.property.details}
                           id={item._id}
-                          url={item.images[0].url}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.highestBid}
+                          startRegister={item.registerStartDate}
+                          endRegister={item.registerEndDate}
+                          startingBid={item.startingBid}
                         />
                       ) : null}
                     </Col>
