@@ -50,7 +50,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
       }
     } else {
       if (data.brokerName === "") {
-        if (phone.length > 10) {
+        if (phone.length !== 10) {
           alert("Please enter valid phone number");
         } else {
           const datas = {

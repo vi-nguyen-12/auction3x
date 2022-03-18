@@ -49,7 +49,7 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
-  height: 50vh;
+  height: 100%;
   overflow: hidden;
 
   & > button {
@@ -108,7 +108,7 @@ const Wrap = styled.div`
 
   img {
     width: 100%;
-    height: 30vh;
+    height: 100%;
     border-radius: 4px;
     cursor: pointer;
     display: block;
