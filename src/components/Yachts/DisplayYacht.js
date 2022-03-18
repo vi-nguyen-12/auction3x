@@ -49,7 +49,7 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
-  height: 50vh;
+  height: 100%;
   overflow: hidden;
 
   & > button {
@@ -82,13 +82,13 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
+    left: -50px;
     width: 12vw;
     height: 100%;
   }
 
   .slick-next {
-    right: -75px;
+    right: -50px;
     width: 12vw;
     height: 100%;
   }
@@ -108,7 +108,7 @@ const Wrap = styled.div`
 
   img {
     width: 100%;
-    height: 30vh;
+    height: 100%;
     border-radius: 4px;
     cursor: pointer;
     display: block;
