@@ -23,6 +23,7 @@ import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const mapStyles = {
   height: "50vh",
@@ -313,12 +314,22 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Pictures</h2>
-                    </Modal.Title>
-                  </Modal.Header>
                   <Modal.Body>
+                    <div>
+                      <CloseButton
+                        style={{
+                          position: "absolute",
+                          right: "25px",
+                          top: "25px",
+                          width: "25px",
+                          height: "25px",
+                          zIndex: "999",
+                          backgroundColor: "white",
+                          boxShadow: "none",
+                        }}
+                        onClick={togglePics}
+                      />
+                    </div>
                     <Carousel
                       style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
