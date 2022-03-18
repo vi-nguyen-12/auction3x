@@ -9,6 +9,8 @@ import { Row, Col } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";
+import JetPage from "../Jets/JetPage";
+import YachtPage from "../Yachts/YachtPage";
 
 const Carousel = styled(Slider)`
   height: 30vh;
@@ -154,9 +156,9 @@ const PropertyPages = ({ colorChange, toogleChange }) => {
       ) : path === "/cars" ? (
         <CarPage colorChange={colorChange} toogleChange={toogleChange} />
       ) : path === "/jets" ? (
-        <div>Jets</div>
+        <JetPage colorChange={colorChange} toogleChange={toogleChange} />
       ) : path === "/yachts" ? (
-        <div>Yachts</div>
+        <YachtPage colorChange={colorChange} toogleChange={toogleChange} />
       ) : null}
     </>
   );

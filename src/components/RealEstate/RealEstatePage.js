@@ -10,7 +10,7 @@ import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  //height: 30vh;
   // overflow: hidden;
 
   & > button {
@@ -91,12 +91,15 @@ function RealEstatePage({ colorChange, toogleChange }) {
     (item) => item.property.type === "real-estate"
   );
   const auction = useSelector((state) => state.auction);
+  const OngoingRealEstates = auction.filter(
+    (item) => item.property.type === "real-estate"
+  );
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auction.length > 3 ? 3 : auction.length,
+    slidesToShow: OngoingRealEstates.length > 3 ? 3 : OngoingRealEstates.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -130,7 +133,7 @@ function RealEstatePage({ colorChange, toogleChange }) {
         <Col md={12} className="m-auto pt-2">
           <Row>
             <Carousel {...settings}>
-              {auction.map((item, index) => (
+              {OngoingRealEstates.map((item, index) => (
                 <Wrap key={index}>
                   <Col md={12} style={{ marginBottom: "30px" }}>
                     <CardComp
@@ -147,7 +150,7 @@ function RealEstatePage({ colorChange, toogleChange }) {
               ))}
             </Carousel>
           </Row>
-          <Row style={{ marginTop: "25%" }}>
+          <Row>
             {realEstate.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard

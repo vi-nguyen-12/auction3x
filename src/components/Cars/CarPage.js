@@ -10,7 +10,7 @@ import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  // height: 30vh;
   // overflow: hidden;
 
   & > button {
@@ -91,12 +91,15 @@ function CarPage({ colorChange, toogleChange }) {
     (item) => item.property.type === "car"
   );
   const auction = useSelector((state) => state.auction);
+  const OngoingCar = auction.filter(
+    (item) => item.property.type === "car"
+  );
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auction.length > 3 ? 3 : auction.length,
+    slidesToShow: OngoingCar.length > 3 ? 3 : OngoingCar.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -130,7 +133,7 @@ function CarPage({ colorChange, toogleChange }) {
         <Col md={12} className="m-auto pt-2">
           <Row>
             <Carousel {...settings}>
-              {auction.map((item, index) => (
+              {OngoingCar.map((item, index) => (
                 <Wrap key={index}>
                   <Col md={12} style={{ marginBottom: "30px" }}>
                     <CardComp
@@ -147,7 +150,7 @@ function CarPage({ colorChange, toogleChange }) {
               ))}
             </Carousel>
           </Row>
-          <Row style={{ marginTop: "15%" }}>
+          <Row>
             {Cars.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCarCard
