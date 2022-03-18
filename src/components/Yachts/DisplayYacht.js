@@ -23,9 +23,10 @@ import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const mapStyles = {
-  height: "50vh",
+  height: "98%",
   width: "100%",
 };
 // const StreetviewStyles = {
@@ -306,18 +307,28 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                   <IoImageOutline size="100%" color="C58753" />
                 </button>
                 <Modal
-                  size="lg"
+                  size="xl"
                   style={{ height: "100%" }}
                   show={showPics}
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Pictures</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
+                  <Modal.Body style={{ height: "700px" }}>
+                    <div>
+                      <CloseButton
+                        style={{
+                          position: "absolute",
+                          right: "25px",
+                          top: "25px",
+                          width: "25px",
+                          height: "25px",
+                          zIndex: "999",
+                          backgroundColor: "white",
+                          boxShadow: "none",
+                        }}
+                        onClick={togglePics}
+                      />
+                    </div>
                     <Carousel
                       style={{ height: "100%", borderRadius: "0" }}
                       {...ImgSettings}
@@ -326,7 +337,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         <Wrap key={index}>
                           {/* <a> */}
                           <img
-                            style={{ height: "50vh" }}
+                            style={{ height: "100%" }}
                             src={item.url}
                             alt=""
                           />
@@ -356,13 +367,23 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                   <RiVideoLine size="100%" color="C58753" />
                 </button>
 
-                <Modal size="lg" show={showVideos} onHide={toggleVids} centered>
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      <h2 style={{ color: " #e9af84" }}>Property Videos</h2>
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body style={{ height: "500px" }}>
+                <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
+                  <Modal.Body style={{ height: "700px" }}>
+                    <div>
+                      <CloseButton
+                        style={{
+                          position: "absolute",
+                          right: "25px",
+                          top: "25px",
+                          width: "25px",
+                          height: "25px",
+                          zIndex: "999",
+                          backgroundColor: "white",
+                          boxShadow: "none",
+                        }}
+                        onClick={toggleVids}
+                      />
+                    </div>
                     <Carousel
                       style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
@@ -375,11 +396,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                               display: "relative",
                               justifyContent: "center",
                               margin: "auto",
-
                               width: "100%",
                               borderRadius: "0",
                               position: "relative",
-                              // height: "3000px!important",
                               cursor: "pointer",
                             }}
                             controls
@@ -429,13 +448,23 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                   >
                     <IoLocationOutline size="50px" color="C58753" />
                   </button>
-                  <Modal size="lg" show={showMap} onHide={toggleMap} centered>
-                    <Modal.Header closeButton>
-                      <Modal.Title>
-                        <h2 style={{ color: " #e9af84" }}>Property Location</h2>
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
+                  <Modal size="xl" show={showMap} onHide={toggleMap} centered>
+                    <Modal.Body style={{ height: "700px" }}>
+                      <div>
+                        <CloseButton
+                          style={{
+                            position: "absolute",
+                            right: "25px",
+                            top: "25px",
+                            width: "25px",
+                            height: "25px",
+                            zIndex: "999",
+                            backgroundColor: "white",
+                            boxShadow: "none",
+                          }}
+                          onClick={toggleMap}
+                        />
+                      </div>
                       <GoogleMap
                         mapContainerStyle={mapStyles}
                         zoom={18}
