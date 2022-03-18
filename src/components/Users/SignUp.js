@@ -48,9 +48,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           contentclassname="custom-modal-title"
         >
           REGISTER ON AUCTION10X
-          <div style={{ display: "flex", marginBottom: "30px" }}>
+          <div>
             <button
-              style={{ fontSize: "20px" }}
+              style={{ marginTop: "35px" }}
               className="signup-link"
               onClick={() => {
                 toogleSignIn();
@@ -236,7 +236,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
             </tr>
           </tbody>
         </Table>
-        <label style={{ fontSize: "15px", marginBottom: "20px" }}>
+        <label style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}>
           By signing up you will agree to our Privacy Policy and Terms &
           Conditions
         </label>

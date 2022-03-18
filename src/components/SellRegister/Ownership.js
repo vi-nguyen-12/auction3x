@@ -274,7 +274,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                     {...register("file", { onChange: getFile })}
                     multiple
                   />
-                  <span style={{ fontWeight: "600" }}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
                     Listing Agreement(.pdf) *
                   </span>
                 </Col>

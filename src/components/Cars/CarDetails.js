@@ -54,7 +54,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("make", { required: true, maxLength: 100 })}
               defaultValue={property.make}
             />
-            <span>Make</span>
+            <span style={{ color: "black" }}>Make</span>
           </Col>
           <Col>
             <input
@@ -63,7 +63,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("model", { required: true, maxLength: 100 })}
               defaultValue={property.model}
             />
-            <span>Model</span>
+            <span style={{ color: "black" }}>Model</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -74,7 +74,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("year", { required: true, maxLength: 100 })}
               defaultValue={property.year}
             />
-            <span>Year</span>
+            <span style={{ color: "black" }}>Year</span>
           </Col>
           <Col>
             <input
@@ -83,7 +83,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("mileage", { required: true, maxLength: 100 })}
               defaultValue={property.mileage}
             />
-            <span>Mileage</span>
+            <span style={{ color: "black" }}>Mileage</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -94,7 +94,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("transmission", { required: true, maxLength: 100 })}
               defaultValue={property.transmission}
             />
-            <span>Transmission</span>
+            <span style={{ color: "black" }}>Transmission</span>
           </Col>
           <Col>
             <input
@@ -103,7 +103,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("carType", { required: true, maxLength: 100 })}
               defaultValue={property.car_type}
             />
-            <span>Car Type</span>
+            <span style={{ color: "black" }}>Car Type</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -114,7 +114,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("power", { required: true, maxLength: 100 })}
               defaultValue={property.power}
             />
-            <span>Power</span>
+            <span style={{ color: "black" }}>Power</span>
           </Col>
           <Col>
             <input
@@ -123,7 +123,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("color", { required: true, maxLength: 100 })}
               defaultValue={property.color}
             />
-            <span>Color</span>
+            <span style={{ color: "black" }}>Color</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -134,7 +134,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("vin", { required: true, maxLength: 100 })}
               defaultValue={property.VIN}
             />
-            <span>VIN</span>
+            <span style={{ color: "black" }}>VIN</span>
           </Col>
           <Col>
             <input
@@ -143,7 +143,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("engine", { required: true, maxLength: 100 })}
               defaultValue={property.engine}
             />
-            <span>Engine</span>
+            <span style={{ color: "black" }}>Engine</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -154,7 +154,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("fuelType", { required: true, maxLength: 100 })}
               defaultValue={property.fuel_type}
             />
-            <span>Fuel Type</span>
+            <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
           <Col>
             <input
@@ -163,7 +163,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("condition", { required: true, maxLength: 100 })}
               defaultValue={property.condition}
             />
-            <span>Condition</span>
+            <span style={{ color: "black" }}>Condition</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -174,7 +174,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("price", { required: true, maxLength: 100 })}
               defaultValue={property.price}
             />
-            <span>Price</span>
+            <span style={{ color: "black" }}>Price</span>
           </Col>
           <Col>
             <input
@@ -183,7 +183,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("address", { required: true, maxLength: 100 })}
               defaultValue={property.property_address}
             />
-            <span>Address</span>
+            <span style={{ color: "black" }}>Address</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>
@@ -194,7 +194,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("reservedAmount", { required: true })}
               required
             />
-            <span>Reserved Amount</span>
+            <span style={{ color: "black" }}>Reserved Amount</span>
           </Col>
           <Col>
             <input
@@ -203,7 +203,7 @@ function CarDetails({ property, toogleStep, step, tooglePropertyData }) {
               {...register("discussedAmount", { required: true })}
               required
             />
-            <span>Discussed Amount</span>
+            <span style={{ color: "black" }}>Discussed Amount</span>
           </Col>
         </Row>
       </Container>
