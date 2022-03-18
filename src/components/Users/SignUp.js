@@ -15,6 +15,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
+    } else if (data.phone.length !== 10) {
+      alert("Please enter a valid phone number!");
     } else {
       const datas = {
         firstName: data.firstName,
@@ -131,8 +133,6 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                   placeholder="Phone Number"
                   {...register("phone", {
                     required: true,
-                    minLength: 6,
-                    maxLength: 12,
                   })}
                   required
                   style={{
