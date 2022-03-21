@@ -762,83 +762,85 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                   </Col>
                 )}
 
-                <Col>
-                  {property.highestBid ? (
-                    <div
-                      style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        marginLeft: "18px",
-                        borderRadius: "10px",
-                        padding: "33px",
-                      }}
-                    >
-                      <h4 style={{ padding: "8px" }}>
-                        <NumberFormat
-                          value={property.highestBid}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          style={{
-                            fontWeight: "700",
-                            fontSize: "22px",
-                            color: "black",
-                          }}
-                        />
-                      </h4>
-                      <p
+                {approvedToBid === true ? (
+                  <Col>
+                    {property.highestBid ? (
+                      <div
                         style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          marginLeft: "10px",
-                          marginTop: "-10px",
-                          color: "#7c7c7c",
+                          display: "grid",
+                          justifyContent: "center",
+                          backgroundColor: "#e8e8e8",
+                          width: "100%",
+                          marginLeft: "18px",
+                          borderRadius: "10px",
+                          padding: "33px",
                         }}
                       >
-                        Current Bid
-                      </p>
-                    </div>
-                  ) : (
-                    <div
-                      style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        marginLeft: "18px",
-                        borderRadius: "10px",
-                        padding: "33px",
-                      }}
-                    >
-                      <h4 style={{ padding: "8px" }}>
-                        <NumberFormat
-                          value={property.startingBid}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
+                        <h4 style={{ padding: "8px" }}>
+                          <NumberFormat
+                            value={property.highestBid}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                            style={{
+                              fontWeight: "700",
+                              fontSize: "22px",
+                              color: "black",
+                            }}
+                          />
+                        </h4>
+                        <p
                           style={{
-                            fontWeight: "700",
-                            fontSize: "22px",
-                            color: "black",
+                            display: "flex",
+                            justifyContent: "left",
+                            marginLeft: "10px",
+                            marginTop: "-10px",
+                            color: "#7c7c7c",
                           }}
-                        />
-                      </h4>
-                      <p
+                        >
+                          Current Bid
+                        </p>
+                      </div>
+                    ) : (
+                      <div
                         style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          marginLeft: "10px",
-                          marginTop: "-10px",
-                          color: "#7c7c7c",
+                          display: "grid",
+                          justifyContent: "center",
+                          backgroundColor: "#e8e8e8",
+                          width: "100%",
+                          marginLeft: "18px",
+                          borderRadius: "10px",
+                          padding: "33px",
                         }}
                       >
-                        Current Bid
-                      </p>
-                    </div>
-                  )}
-                </Col>
+                        <h4 style={{ padding: "8px" }}>
+                          <NumberFormat
+                            value={property.startingBid}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                            style={{
+                              fontWeight: "700",
+                              fontSize: "22px",
+                              color: "black",
+                            }}
+                          />
+                        </h4>
+                        <p
+                          style={{
+                            display: "flex",
+                            justifyContent: "left",
+                            marginLeft: "10px",
+                            marginTop: "-10px",
+                            color: "#7c7c7c",
+                          }}
+                        >
+                          Current Bid
+                        </p>
+                      </div>
+                    )}
+                  </Col>
+                ) : null}
 
                 <Col>
                   <div

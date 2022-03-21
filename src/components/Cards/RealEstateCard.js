@@ -146,7 +146,9 @@ const CardComp = ({
                 <span className="golden-text">
                   {data.address.formatted_street_address}, {data.address.state}
                 </span>
-                <h4 style={{ marginTop: "5px", color: "black" }}>Property Address</h4>
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  Property Address
+                </h4>
               </div>
               <div
                 style={{
@@ -205,8 +207,16 @@ const CardComp = ({
                           width: "250px",
                         }}
                       >
-                        {data.beds_count}BD | {data.baths}BA
-                        | {data.total_area_sq_ft} sq.ft
+                        {data.structure.beds_count
+                          ? data.structure.beds_count
+                          : "N/A-"}
+                        BD |{" "}
+                        {data.structure.baths ? data.structure.baths : "N/A-"}BA
+                        |{" "}
+                        {data.structure.total_area_sq_ft
+                          ? data.structure.total_area_sq_ft
+                          : "N/A-"}{" "}
+                        sq.ft
                       </p>
                     </Col>
                   </Row>
@@ -233,7 +243,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

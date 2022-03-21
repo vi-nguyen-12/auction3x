@@ -53,7 +53,6 @@ const UpcomingCarCard = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const [startRegisterDate, setStartRegisterDate] = useState();
   const [endRegisterDate, setEndRegisterDate] = useState();
   const [RegistrationEndDate, setRegistrationEndDate] = useState();
   const [registEnded, setRegistEnded] = useState(false);
@@ -88,14 +87,13 @@ const UpcomingCarCard = ({
     }
 
     setRegistrationEndDate(auctionData.registerEndDate);
-    setStartRegisterDate(startDate);
     setEndRegisterDate(endDate);
     setStartAuction(auctionData.auctionStartDate);
   }, []);
 
   return (
     <>
-      {startRegisterDate && endRegisterDate && startAuction && (
+      {endRegisterDate && startAuction && (
         <div>
           <Card
             // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
