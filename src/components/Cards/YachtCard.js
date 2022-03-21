@@ -207,8 +207,9 @@ const YachtCard = ({
                           width: "250px",
                         }}
                       >
-                        {data.structure.beds_count}BD | {data.structure.baths}BA
-                        | {data.structure.total_area_sq_ft} sq.ft
+                        {data.engine_type ? data.engine_type : "N/A"}|{" "}
+                        {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
+                        {data.running_cost ? data.running_cost : "N/A"}
                       </p>
                     </Col>
                   </Row>

@@ -207,8 +207,9 @@ const JetCard = ({
                           width: "250px",
                         }}
                       >
-                        {data.structure.beds_count}BD | {data.structure.baths}BA
-                        | {data.structure.total_area_sq_ft} sq.ft
+                        {data.number_of_engines ? data.number_of_engines + " Engines" : "N/A"}|{" "}
+                        {data.number_of_aircraft ? data.number_of_aircraft + " Aircraft" : "N/A"}|{" "}
+                        {data.registration_mark ? data.registration_mark : "N/A"}
                       </p>
                     </Col>
                   </Row>
