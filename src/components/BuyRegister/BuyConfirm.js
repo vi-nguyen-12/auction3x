@@ -21,7 +21,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
   const properties = useSelector((state) => state.auction);
   const propId = properties.find((item) => item._id === id);
-
+  console.log(propId);
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
 

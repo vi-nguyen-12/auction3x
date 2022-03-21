@@ -1,8 +1,10 @@
 .real-estate {
-  /* height: 75%;
-  margin: 0 auto; */
+  height: 100%;
+  /* margin: 0 auto; */
   /* width: 85%; */
-  background-image: url("/src/realstate-1.png");
+  background-image: url("/src/realstate.png");
+  background-color: #646363;
+  background-blend-mode: multiply;
   /* background-size: contain; */
   /* margin-left: rem; */
   border-radius: 2rem;
@@ -10,7 +12,7 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   /* background-blend-mode: darken; */
-  padding-bottom: 10rem;
+  padding-bottom: 15rem;
   margin: auto;
 }
 .img-float {
@@ -36,16 +38,23 @@
   font-weight: 800;
 }
 .real-estate-wrap {
-  padding: 20px;
+  padding: 100px;
 }
 
 .btn-custom {
+  /* font family: Josefin Slab semi bold*/
+  font-family: "Josefin Slab", serif;
   height: 3rem;
   width: 10rem;
   margin-right: 3rem;
   border-radius: 0.7rem !important;
   border: 3px solid #ffffff !important;
+  background-color: transparent !important;
+}
+.btn-custom:focus {
   border: 3px solid #edb48b !important;
+  /* text color: #edb48b */
+  color: #edb48b !important;
   border-color: linear-gradient(
     90deg,
     #d58f5c 0%,
@@ -53,10 +62,10 @@
     #dd9c6d 62.5%,
     #edb48b 100%
   ) !important;
-
+  outline: none !important;
+  box-shadow: none !important;
   background-color: transparent !important;
 }
-
 .sell-real-estate {
   margin-top: 8rem;
 }
@@ -81,7 +90,8 @@ h1 {
   margin-left: 4rem;
   width: 28%;
   font-weight: 400;
-  font-family: Montserrat !important;
+  /* font family : Montserrat */
+  font-family: "Montserrat", sans-serif;
   color: #fff;
   font-size: 1.8rem;
   position: relative;

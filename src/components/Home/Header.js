@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaBars, FaGlobeAmericas } from "react-icons/fa";
+import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Login from "../Users/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,15 +11,22 @@ import "../../styles/Header.css";
 import ReconfirmEmail from "../Users/ReconfirmEmail";
 import SignUp from "../Users/SignUp";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import ForgotPass from "../Users/ForgotPass";
 import ChangePass from "../Users/ChangePass";
-import { useHistory } from "react-router-dom";
 import { logout } from "../../slice/userSlice";
 
 const Header = ({ color, change }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+
+  // const { id } = useParams();
+  // const properties = useSelector((state) => state.auction);
+  // const propId = properties.find((item) => item._id === id);
+  // console.log(propId);
+
   const history = useHistory();
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -919,6 +927,34 @@ const Header = ({ color, change }) => {
             )}
           </div>
         )}
+        <div className="dropdown">
+          <button
+            className="customButton border-0 mt-0"
+            style={{
+              backgroundColor: "#fcba7d",
+              color: "black",
+              borderColor: "transparent",
+              fontSize: "20px",
+              padding: "9px",
+              marginLeft: "10px",
+            }}>
+            <IoWallet />
+          </button>
+          <div className="dropdown-content-1">
+            <button
+              className="fw-bold p-3"
+              onClick={handleOnClick("Dashboard")}
+            >
+              Amount
+            </button>
+            <button
+              className="fw-bold p-3"
+              onClick={handleOnClick("ads")}
+            >
+              My Ads
+            </button>
+          </div>
+        </div>
       </nav>
     </Nav>
   );
