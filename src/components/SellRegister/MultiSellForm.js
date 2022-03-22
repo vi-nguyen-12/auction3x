@@ -53,6 +53,13 @@ const MultiSellForm = ({ colorChange }) => {
     setOwnership(ownership);
   };
 
+  const [propId, setPropId] = useState();
+  const getPropId = (propId) => {
+    setPropId(propId);
+  };
+
+  console.log(property);
+
   if (step === 0) {
     return (
       <div className="sell-register-container">
@@ -73,6 +80,8 @@ const MultiSellForm = ({ colorChange }) => {
           toogleStep={toogleStep}
           step={step}
           getOwnerShip={getOwnerShip}
+          propertyType={propertyType}
+          getPropId={getPropId}
         />
       </div>
     );
@@ -100,6 +109,8 @@ const MultiSellForm = ({ colorChange }) => {
           toogleStep={(data) => toogleStep(data)}
           step={step}
           propertyType={propertyType}
+          propId={propId}
+          ownership={ownership}
         />
       </div>
     );

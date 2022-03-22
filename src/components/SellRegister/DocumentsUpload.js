@@ -46,7 +46,7 @@ const DocumentsUpload = ({
           <span className="spnn">Agreement</span>
         </div> */}
       </Row>
-      {propertyType === "realEstate" ? (
+      {propertyType === "real-estate" ? (
         <RealEstateDocus
           toogleStep={toogleStep}
           step={step}

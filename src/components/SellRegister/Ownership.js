@@ -3,11 +3,13 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 
-function Ownership({ toogleStep, step, getOwnerShip }) {
-  const { register, handleSubmit, errors } = useForm();
+function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) {
+  const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
   const [ownerName, setOwnerName] = useState("");
+  const [brokerName, setBrokerName] = useState("");
+  const [brokerId, setBrokerId] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -26,6 +28,30 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
   const listing_agreement = listAgree.map((document) => {
     return { ...document, officialName: "listing_agreement" };
   });
+
+  const saveInfo = async () => {
+    const data = {
+      type: propertyType,
+      details: {
+        owner_name: ownerName,
+        broker_name: brokerName ? brokerName : "N/A",
+        broker_id: brokerId ? brokerId : "N/A",
+        phone: phone,
+        email: email,
+        address: address,
+      },
+      step: 1,
+    };
+    authService.savePropInfo(data).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        console.log(res.data);
+        getPropId(res.data._id);
+        alert("Successfully saved");
+      }
+    });
+  };
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
@@ -107,7 +133,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
           >
             <Button
               className="submitBtn"
-              style={{ border: "none" }}
+              style={{ border: "none", color: "black", fontWeight: "bold" }}
               onClick={() => {
                 setShowBroker("none");
                 setShowOwner("block");
@@ -117,7 +143,12 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             </Button>
             <Button
               className="submitBtn"
-              style={{ margin: "0px 10px", border: "none" }}
+              style={{
+                margin: "0px 10px",
+                border: "none",
+                color: "black",
+                fontWeight: "bold",
+              }}
               onClick={() => {
                 setShowOwner("none");
                 setShowBroker("block");
@@ -198,6 +229,14 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             </Row>
             <Row>
               <div className="bottom-btn">
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50px",
+                  }}
+                >
+                  <Button onClick={saveInfo}>Save</Button>
+                </div>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}
@@ -248,6 +287,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                   <input
                     type="text"
                     className="form-control"
+                    onChange={(e) => setBrokerName(e.target.value)}
                     {...register("brokerName", { required: false })}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -258,6 +298,7 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
                   <input
                     type="text"
                     className="form-control"
+                    onChange={(e) => setBrokerId(e.target.value)}
                     {...register("brokerId", { required: false })}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -316,6 +357,14 @@ function Ownership({ toogleStep, step, getOwnerShip }) {
             </Row>
             <Row>
               <div className="bottom-btn">
+                <div
+                  style={{
+                    position: "absolute",
+                    left: "50px",
+                  }}
+                >
+                  <button className="submitBtn">Save</button>
+                </div>
                 <button
                   className="pre-btn"
                   onClick={() => toogleStep(step - 1)}

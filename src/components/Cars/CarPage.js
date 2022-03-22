@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import "../../styles/realEstate.css";
-import { CardComp } from "../Cards/RealEstateCard";
+import { CarCard } from "../Cards/CarCard";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -87,13 +87,9 @@ function CarPage({ colorChange, toogleChange }) {
     toogleChange();
   }, []);
   const property = useSelector((state) => state.property);
-  const Cars = property.filter(
-    (item) => item.property.type === "car"
-  );
+  const Cars = property.filter((item) => item.property.type === "car");
   const auction = useSelector((state) => state.auction);
-  const OngoingCar = auction.filter(
-    (item) => item.property.type === "car"
-  );
+  const OngoingCar = auction.filter((item) => item.property.type === "car");
   let settings = {
     dots: false,
     infinite: true,
@@ -136,7 +132,7 @@ function CarPage({ colorChange, toogleChange }) {
               {OngoingCar.map((item, index) => (
                 <Wrap key={index}>
                   <Col md={12} style={{ marginBottom: "30px" }}>
-                    <CardComp
+                    <CarCard
                       url={item.property.images[0].url}
                       data={item.property.details}
                       id={item._id}
