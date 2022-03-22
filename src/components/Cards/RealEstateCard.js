@@ -203,7 +203,6 @@ const CardComp = ({
                       <p
                         style={{
                           fontSize: "12px",
-
                           width: "250px",
                         }}
                       >
