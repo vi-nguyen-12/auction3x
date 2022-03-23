@@ -145,8 +145,8 @@ const Featured = () => {
                           url={item.property.images[0].url}
                           data={item.property.details}
                           id={item._id}
-                          startRegister={item.registerStartDate}
-                          endRegister={item.registerEndDate}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                         />
                       ) : item.property.type === "car" ? (
@@ -154,8 +154,8 @@ const Featured = () => {
                           url={item.property.images[0].url}
                           data={item.property.details}
                           id={item._id}
-                          startRegister={item.registerStartDate}
-                          endRegister={item.registerEndDate}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                         />
                       ) : item.property.type === "jet" ? (
@@ -163,8 +163,8 @@ const Featured = () => {
                           url={item.property.images[0].url}
                           data={item.property.details}
                           id={item._id}
-                          startRegister={item.registerStartDate}
-                          endRegister={item.registerEndDate}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                         />
                       ) : item.property.type === "yacht" ? (
@@ -172,8 +172,8 @@ const Featured = () => {
                           url={item.property.images[0].url}
                           data={item.property.details}
                           id={item._id}
-                          startRegister={item.registerStartDate}
-                          endRegister={item.registerEndDate}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                         />
                       ) : null}

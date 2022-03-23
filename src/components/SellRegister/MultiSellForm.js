@@ -58,7 +58,7 @@ const MultiSellForm = ({ colorChange }) => {
     setPropId(propId);
   };
 
-  console.log(property);
+  console.log(propId);
 
   if (step === 0) {
     return (

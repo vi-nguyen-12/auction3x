@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import authService from "../../services/authServices";
 
 function EmptyRealEstateDetails({
   property,
@@ -9,8 +10,8 @@ function EmptyRealEstateDetails({
   tooglePropertyData,
   propId,
   ownership,
+  propertyType,
 }) {
-  console.log(property);
   const {
     register,
     handleSubmit,
@@ -34,23 +35,54 @@ function EmptyRealEstateDetails({
   const saveInfo = () => {
     if (propId) {
       const datas = {
-        street_address: address ? address : property.street_address,
-        city: city ? city : property.city,
-        state: state ? state : property.state,
-        country: country ? country : property.country,
-        zip_code: zip ? zip : property.zip,
-        owner_name: ownerName,
-        rooms_count: rooms,
-        baths_count: bathrooms,
-        beds_count: bedrooms,
-        standardized_land_use_type: propType,
-        total_value: totalValue,
-        area_sq_ft: sqft,
-        reservedAmount: reservedAmount,
-        discussedAmount: discussedAmount,
-        details: ownership,
-        step: 2,
+        id: propId,
+        details: {
+          type: propertyType,
+          street_address: address ? address : property.street_address,
+          city: city ? city : property.city,
+          state: state ? state : property.state,
+          country: country ? country : property.country,
+          zip_code: zip ? zip : property.zip_code,
+          owner_name: ownerName,
+          rooms_count: rooms,
+          baths_count: bathrooms,
+          beds_count: bedrooms,
+          standardized_land_use_type: propType,
+          total_value: totalValue,
+          area_sq_ft: sqft,
+          reservedAmount: reservedAmount,
+          discussedAmount: discussedAmount,
+          step: 2,
+        },
       };
+      authService.saveInfo(datas).then((res) => {
+        console.log(res);
+      });
+    } else {
+      const datas = {
+        details: {
+          type: propertyType,
+          street_address: address ? address : property.street_address,
+          city: city ? city : property.city,
+          state: state ? state : property.state,
+          country: country ? country : property.country,
+          zip_code: zip ? zip : property.zip_code,
+          owner_name: ownerName,
+          rooms_count: rooms,
+          baths_count: bathrooms,
+          beds_count: bedrooms,
+          standardized_land_use_type: propType,
+          total_value: totalValue,
+          area_sq_ft: sqft,
+          reservedAmount: reservedAmount,
+          discussedAmount: discussedAmount,
+          details: { ...ownership },
+          step: 2,
+        },
+      };
+      authService.savePropInfo(datas).then((res) => {
+        console.log(res);
+      });
     }
   };
 

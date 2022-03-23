@@ -2,6 +2,7 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import "react-circular-progressbar/dist/styles.css";
 import SavedAuctionsCard from "../../Auctions/SavedAuctionsCard";
+import SavedAuctions from "../SavedAuctions";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -83,34 +84,18 @@ function SavedAuctionsComp({ savedProp }) {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: savedProp.length > 3 ? 2 : savedProp.length,
+    slidesToShow: 1,
   };
 
   return (
     <>
-      {savedProp.length > 0 && (
-        <Carousel {...settings}>
-          {savedProp.map((property, index) => (
-            <Wrap key={index}>
-              <Col>
-                <SavedAuctionsCard
-                  url={property.property.images[0].url}
-                  data={property.property.details}
-                  id={property._id}
-                  auctionStartDate={property.auctionStartDate}
-                  auctionEndDate={property.auctionEndDate}
-                  startingBid={
-                    property.highestBid
-                      ? property.highestBid
-                      : property.startingBid
-                  }
-                  auctionId={property._id}
-                />
-              </Col>
-            </Wrap>
-          ))}
-        </Carousel>
-      )}
+      <Carousel {...settings}>
+        <Wrap>
+          <Col>
+            <SavedAuctions />
+          </Col>
+        </Wrap>
+      </Carousel>
     </>
   );
 }

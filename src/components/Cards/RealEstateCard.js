@@ -14,14 +14,7 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const CardComp = ({
-  url,
-  data,
-  id,
-  auctionStartDate,
-  auctionEndDate,
-  startingBid,
-}) => {
+const CardComp = ({ url, data, id, auctionEndDate, startingBid }) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -31,8 +24,6 @@ const CardComp = ({
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const [auctionDate, setAuctionStartDate] = useState();
-  const [auctionEnd, setAuctionEndDate] = useState();
   const toggleImage = () => {
     const userId = user._id;
     const data = {
@@ -53,10 +44,8 @@ const CardComp = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const auctions = useSelector((state) => state.auction);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const history = useHistory();
 
@@ -79,18 +68,9 @@ const CardComp = ({
     // }, 800);
   };
 
-  useEffect(() => {
-    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
-    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
-    const auctionData = auctions.find((item) => item._id === id);
-    setAuctionStartDate(startDate);
-    setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(auctionData.auctionEndDate);
-  }, []);
-
   return (
     <div>
-      {auctionDate && auctionEnd && (
+      {auctionEndDate && (
         <Card
           className="cards text-left m-auto"
           style={{
@@ -192,7 +172,7 @@ const CardComp = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={onGoingAuctionEnd}
+                            auctionEndDate={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>

@@ -60,6 +60,7 @@ const PropertyDetails = ({
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
+              propertyType={propertyType}
             />
           ) : (
             <EmptyRealEstateDetails
@@ -69,6 +70,7 @@ const PropertyDetails = ({
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
+              propertyType={propertyType}
             />
           )
         ) : propertyType === "cars" ? (
@@ -77,6 +79,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : propertyType === "jets" ? (
           <JetDetails
@@ -84,6 +89,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : propertyType === "yachts" ? (
           <YachtDetails
@@ -91,6 +99,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : null}
       </div>

@@ -3,7 +3,13 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 
-function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) {
+function Ownership({
+  toogleStep,
+  step,
+  getOwnerShip,
+  propertyType,
+  getPropId,
+}) {
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -34,12 +40,13 @@ function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) 
       type: propertyType,
       details: {
         owner_name: ownerName,
-        broker_name: brokerName ? brokerName : "N/A",
-        broker_id: brokerId ? brokerId : "N/A",
+        broker_name: brokerName ? brokerName : null,
+        broker_id: brokerId ? brokerId : null,
         phone: phone,
         email: email,
         address: address,
       },
+      documents: listing_agreement ? listing_agreement : null,
       step: 1,
     };
     authService.savePropInfo(data).then((res) => {
@@ -287,8 +294,8 @@ function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) 
                   <input
                     type="text"
                     className="form-control"
-                    onChange={(e) => setBrokerName(e.target.value)}
                     {...register("brokerName", { required: false })}
+                    onChange={(e) => setBrokerName(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker Name *
@@ -298,8 +305,8 @@ function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) 
                   <input
                     type="text"
                     className="form-control"
-                    onChange={(e) => setBrokerId(e.target.value)}
                     {...register("brokerId", { required: false })}
+                    onChange={(e) => setBrokerId(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker License Number *
@@ -363,7 +370,7 @@ function Ownership({ toogleStep, step, getOwnerShip, propertyType, getPropId }) 
                     left: "50px",
                   }}
                 >
-                  <button className="submitBtn">Save</button>
+                  <Button onClick={saveInfo}>Save</Button>
                 </div>
                 <button
                   className="pre-btn"

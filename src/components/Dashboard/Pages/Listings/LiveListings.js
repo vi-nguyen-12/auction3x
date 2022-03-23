@@ -2,18 +2,28 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import SavedAuctionsCard from "../Auctions/SavedAuctionsCard";
+import { CarCard } from "../../../Cards/CarCard";
+import { JetCard } from "../../../Cards/JetCard";
+import { YachtCard } from "../../../Cards/YachtCard";
+import { CardComp } from "../../../Cards/RealEstateCard";
+import { UpcomingCard } from "../../../Auctions/UpcomingCard";
+import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
+import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
+import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
 import authService from "../../../../services/authServices";
+import ApprovedListings from "./ApprovedListings";
 
 function LiveListings() {
   const user = useSelector((state) => state.user);
-  const [approvedProperty, setApprovedProperty] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  const auction = useSelector((state) => state.auction);
+  const [approvedListings, setApprovedListings] = useState([]);
+  const [upcomingListings, setUpcomingListings] = useState([]);
 
   useEffect(() => {
     const fetchApprovedProperty = async () => {
       const id = user._id;
       await authService.sellerApprovedListings(id).then((res) => {
-        setUpcomingAuctions(res.data);
+        setUpcomingListings(res.data);
       });
     };
     fetchApprovedProperty();
@@ -23,19 +33,18 @@ function LiveListings() {
     const fetchApprovedProperty = async () => {
       const id = user._id;
       await authService.sellerPropInAuctions(id).then((res) => {
-        setApprovedProperty(res.data);
+        setApprovedListings(res.data);
       });
     };
     fetchApprovedProperty();
   }, []);
-  console.log(approvedProperty);
 
   return (
     <Container>
       <Row>
         <h1>Upcoming Listing Auctions</h1>
-        {upcomingAuctions.length > 0 ? (
-          upcomingAuctions
+        {upcomingListings.length > 0 ? (
+          upcomingListings
             .slice(0, 4)
             .map((auction) => (
               <Col key={auction._id}>
@@ -44,6 +53,7 @@ function LiveListings() {
                     data={auction.details}
                     url={auction.images[0].url}
                     id={auction._id}
+                    type={auction.type}
                     auctionStartDate={auction.auctionStartDate}
                     auctionEndDate={auction.auctionEndDate}
                     startingBid={
@@ -61,28 +71,7 @@ function LiveListings() {
       </Row>
       <Row>
         <h1>Approved Listing Auctions</h1>
-        {approvedProperty.length > 0 ? (
-          approvedProperty.map((auction, index) => (
-            <Col key={index}>
-              {auction.type === "real-estate" ? (
-                <SavedAuctionsCard
-                  data={auction.details}
-                  url={auction.images[0].url}
-                  id={auction.auctionDetails._id}
-                  auctionStartDate={auction.auctionDetails.auctionStartDate}
-                  auctionEndDate={auction.auctionDetails.auctionEndDate}
-                  startingBid={
-                    auction.auctionDetails.highestBid
-                      ? auction.auctionDetails.highestBid
-                      : auction.auctionDetails.startingBid
-                  }
-                />
-              ) : null}
-            </Col>
-          ))
-        ) : (
-          <h1>No Approved Listing Auctions</h1>
-        )}
+        <ApprovedListings />
       </Row>
     </Container>
   );

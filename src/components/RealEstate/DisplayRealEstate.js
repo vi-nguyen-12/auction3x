@@ -18,6 +18,7 @@ import SignUp from "../Users/SignUp";
 import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
+import RegistrationTimer from "../Auctions/RegistrationTimer";
 import { BsStar, BsStarFill } from "react-icons/bs";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
@@ -135,7 +136,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
     (item) => item._id === property._id
   );
   const [setRegistered, setRegisteredProperty] = useState(false);
-  const [registerEnded, setRegisterEnded] = useState();
+  const [registerEnd, setRegisterEnd] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
 
   const [topBid, setTopBid] = useState();
@@ -157,6 +158,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [registEnded, setRegistEnded] = useState(false);
+  const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
 
@@ -191,7 +194,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
     toogleChange();
 
     //set registration end
-    setRegisterEnded(property ? property.registerEndDate : null);
+    console.log(property.registerEndDate);
+    setRegisterEnd(property ? property.registerEndDate : null);
 
     //set dates for ongoing auction end date
     setOnGoingAuctionEnd(property ? property.auctionEndDate : null);
@@ -583,7 +587,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
               {user._id &&
               user.KYC &&
               !setRegistered &&
-              new Date().toISOString() < registerEnded ? (
+              new Date().toISOString() < registerEnd ? (
                 <div
                   style={{
                     display: "grid",
@@ -625,7 +629,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 user._id &&
                 user.KYC &&
                 !setRegistered &&
-                new Date().toISOString() > registerEnded && (
+                new Date().toISOString() > registerEnd && (
                   <div
                     style={{
                       display: "grid",
@@ -711,8 +715,62 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           </Row>
 
           <Row style={{ padding: "35px" }}>
-            <Col sm={8} style={{ display: "grid" }}>
+            <Col style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
+                {!registEnded ? (
+                  <Col>
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "20px",
+                      }}
+                    >
+                      <RegistrationTimer
+                        toogleRegistEnded={toogleRegistEnded}
+                        RegistrationEndDate={registerEnd}
+                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "#7c7c7c",
+                        }}
+                      >
+                        <p>Registration Ends</p>
+                      </div>
+                    </div>
+                  </Col>
+                ) : (
+                  <Col>
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        backgroundColor: "#e8e8e8",
+                        width: "100%",
+                        borderRadius: "10px",
+                        padding: "53px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "left",
+                          marginLeft: "10px",
+                          color: "Black",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <p>Registration Ended</p>
+                      </div>
+                    </div>
+                  </Col>
+                )}
                 {new Date().toISOString() < onGoingAuctionEnd ? (
                   <Col>
                     <div
@@ -883,7 +941,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 </Col>
               </Row>
 
-              <Row style={{ width: "50vw" }}>
+              <Row>
                 <div style={{ marginTop: "30px", alignItems: "center" }}>
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
                   <span
@@ -1046,57 +1104,56 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </tbody>
                   </Table>
                 </Col>
-              </Row>
-            </Col>
-
-            <Col sm={4}>
-              <Table
-                responsive
-                bordered
-                style={{
-                  margin: "auto",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  width: "auto",
-                  height: "auto",
-                  marginTop: "50px",
-                }}
-              >
-                <thead style={{ backgroundColor: "#d58f5c" }}>
-                  <tr>
-                    <th colSpan={3}>Top Bidders</th>
-                  </tr>
-                </thead>
-                <thead style={{ backgroundColor: "#d58f5c" }}>
-                  <tr>
-                    <th>Bidder ID</th>
-                    <th>Bid Amount</th>
-                    <th>Date/Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {topBid ? (
-                    topBid.map((bid, index) => (
-                      <tr key={index}>
-                        <td>{bid._id}</td>
-                        <td>
-                          <NumberFormat
-                            value={bid.amount}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"$"}
-                          />
-                        </td>
-                        <td>{new Date(bid.time).toLocaleString()}</td>
+                <Col>
+                  <Table
+                    responsive
+                    bordered
+                    style={{
+                      margin: "auto",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      width: "auto",
+                      height: "auto",
+                      marginTop: "50px",
+                    }}
+                  >
+                    <thead style={{ backgroundColor: "#d58f5c" }}>
+                      <tr>
+                        <th colSpan={3}>Top Bidders</th>
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td>No bids yet</td>
-                    </tr>
-                  )}
-                </tbody>
-              </Table>
+                    </thead>
+                    <thead style={{ backgroundColor: "#d58f5c" }}>
+                      <tr>
+                        <th>Bidder ID</th>
+                        <th>Bid Amount</th>
+                        <th>Date/Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {topBid ? (
+                        topBid.map((bid, index) => (
+                          <tr key={index}>
+                            <td>{bid._id}</td>
+                            <td>
+                              <NumberFormat
+                                value={bid.amount}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"$"}
+                              />
+                            </td>
+                            <td>{new Date(bid.time).toLocaleString()}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td>No bids yet</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
             </Col>
           </Row>
 
