@@ -11,8 +11,8 @@ function BidAuctions() {
   useEffect(() => {
     const fetchBidAuctions = async () => {
       const id = user._id;
-      await authService.getUserBidAuctions(id).then((data) => {
-        setBidAuctions(data);
+      await authService.getUserBidAuctions(id).then((res) => {
+        setBidAuctions(res.data);
       });
     };
     fetchBidAuctions();

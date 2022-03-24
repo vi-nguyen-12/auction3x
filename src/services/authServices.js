@@ -286,7 +286,7 @@ const authService = {
   },
 
   savePropInfo(data) {
-    return axios.post(apiUrl + "/api/properties/real-estate", data, {
+    return axios.post(apiUrl + "/api/properties/real-estate", data.details, {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
@@ -297,7 +297,7 @@ const authService = {
   saveInfo(data) {
     return axios.put(
       apiUrl + `/api/properties/real-estate/${data.id}`,
-      { ...data.details },
+      data.details,
       {
         headers: {
           Authorization:

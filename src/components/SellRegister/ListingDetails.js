@@ -44,11 +44,11 @@ const ListingDetails = ({ toogleStep, step, properties, propertyType }) => {
           step={step}
           properties={properties}
         />
-      ) : propertyType === "cars" ? (
+      ) : propertyType === "car" ? (
         <CarForm toogleStep={toogleStep} step={step} properties={properties} />
-      ) : propertyType === "jets" ? (
+      ) : propertyType === "jet" ? (
         <JetForm toogleStep={toogleStep} step={step} properties={properties} />
-      ) : propertyType === "yachts" ? (
+      ) : propertyType === "yacht" ? (
         <YachtForm
           toogleStep={toogleStep}
           step={step}

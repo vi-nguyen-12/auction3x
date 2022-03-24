@@ -11,8 +11,8 @@ function WinAuctions() {
   useEffect(() => {
     const fetchWinAuctions = async () => {
       const id = user._id;
-      await authService.buyerWonAuctions(id).then((data) => {
-        setWinAuctions(data);
+      await authService.buyerWonAuctions(id).then((res) => {
+        setWinAuctions(res.data);
       });
     };
     fetchWinAuctions();

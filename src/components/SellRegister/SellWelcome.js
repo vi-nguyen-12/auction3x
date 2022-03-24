@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
+import { BsFillHouseFill } from "react-icons/bs";
+import { IoCarSportSharp } from "react-icons/io5";
+import { IoAirplaneSharp } from "react-icons/io5";
+import { IoIosBoat } from "react-icons/io";
 import "../../styles/SellRegister.css";
 // create step bar
 
@@ -64,47 +68,94 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
                 </h3>
               </th>
             </tr>
-            {/* <p style={{ color: "#6d6d6d" }}>sdfshdfh auihdasd auhdha auhda</p> */}
           </thead>
           <tbody style={{ marginTop: "30px" }}>
             <tr className="sell-1">
               <td>
-                <input
+                {/* <input
                   type="radio"
                   name="sell"
                   value="1"
                   onChange={() => setPropertyType("real-estate")}
                 />
-                <label className="choice">Real Estate</label>
+                <label className="choice">Real Estate</label> */}
+                <Button
+                  className="btn-sell"
+                  onClick={() => setPropertyType("real-estate")}
+                >
+                  <BsFillHouseFill size={40} />
+                  <label>Real Estate</label>
+                </Button>
               </td>
 
               <td>
-                <input
+                {/* <input
                   type="radio"
                   name="sell"
                   value="1"
                   onChange={() => setPropertyType("cars")}
                 />
-                <label className="choice">Cars</label>
+                <label className="choice">Cars</label> */}
+                <Button
+                  onClick={() => setPropertyType("car")}
+                  className="btn-sell1"
+                >
+                  <IoCarSportSharp size={40} />
+                  <label
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Cars
+                  </label>
+                </Button>
               </td>
 
               <td>
-                <input
+                {/* <input
                   type="radio"
                   name="sell"
                   value="1"
-                  onChange={() => setPropertyType("jets")}
+                  onChange={() => setPropertyType("jet")}
                 />
-                <label className="choice">Jets</label>
+                <label className="choice">Jets</label> */}
+                <Button
+                  onClick={() => setPropertyType("jet")}
+                  className="btn-sell1"
+                >
+                  <IoAirplaneSharp size={40} />
+                  <label
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "bold",
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    Jet
+                  </label>
+                </Button>
               </td>
               <td>
-                <input
+                {/* <input
                   type="radio"
                   name="sell"
                   value="1"
-                  onChange={() => setPropertyType("yachts")}
+                  onChange={() => setPropertyType("yacht")}
                 />
-                <label className="choice">Yachts</label>
+                <label className="choice">Yachts</label> */}
+                <Button
+                  onClick={() => setPropertyType("yacht")}
+                  className="btn-sell"
+                >
+                  <IoIosBoat size={40} />
+                  <label>Yachts</label>
+                </Button>
               </td>
             </tr>
             {/* 

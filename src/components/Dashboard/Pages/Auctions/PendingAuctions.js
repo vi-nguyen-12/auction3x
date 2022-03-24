@@ -5,9 +5,7 @@ import SavedAuctionsCard from "./SavedAuctionsCard";
 import authService from "../../../../services/authServices";
 
 function PendingAuctions() {
-  const user = useSelector((state) => state.user);
   const registProperty = useSelector((state) => state.registProperty);
-
   return (
     <Container>
       {registProperty.length > 0 ? (
