@@ -14,6 +14,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
   } = useForm();
 
   const [address, setAddress] = useState("");
+  const [address1, setAddress1] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -61,25 +62,29 @@ function RealEstateForm({ toogleStep, step, properties }) {
   };
 
   const onSubmit = (data) => {
-    const addres = address + " " + data.address1;
+    const addres = address1 ? address + ", " + address1 : address;
     const datas = {
       street_address: addres,
       city: city ? city : data.city,
       state: state ? state : data.state,
       country: country ? country : data.country,
-      zipCode: zip ? zip : data.zipCode,
+      zip_code: zip ? zip : data.zipCode,
     };
 
     authService.realEstate(datas).then((res) => {
       if (res.data.length !== 0) {
-        properties(res.data);
+        properties(
+          res.data.name !== "Error"
+            ? res.data
+            : res.data.name === "Error"
+            ? datas
+            : ""
+        );
         toogleStep(step + 1);
       } else if (res.data.length === 0) {
         alert(
           "Could not find property information! Please fill out the property details."
         );
-        properties(datas);
-        toogleStep(step + 1);
       }
     });
   };
@@ -166,6 +171,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 type="text"
                 name="address1"
                 placeholder="Address"
+                onChange={(e) => setAddress1(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Address Line 2

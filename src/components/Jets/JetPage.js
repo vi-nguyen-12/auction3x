@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import "../../styles/realEstate.css";
-import { CardComp } from "../Cards/RealEstateCard";
+import { JetCard } from "../Cards/JetCard";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -82,92 +82,88 @@ position: relative;
 `;
 
 function JetPage({ colorChange, toogleChange }) {
-    useEffect(() => {
-        colorChange("black");
-        toogleChange();
-    }, []);
-    const property = useSelector((state) => state.property);
-    const Cars = property.filter(
-        (item) => item.property.type === "jet"
-    );
-    const auction = useSelector((state) => state.auction);
-    const OngoingJet = auction.filter(
-        (item) => item.property.type === "jet"
-    );
-    let settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: false,
-        slidesToShow: OngoingJet.length > 3 ? 3 : OngoingJet.length,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                },
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    initialSlide: 1,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
-    return (
-        <>
-            <div className="mt-5">
-                <Col md={12} className="m-auto pt-2">
-                    <Row>
-                        <Carousel {...settings}>
-                            {OngoingJet.map((item, index) => (
-                                <Wrap key={index}>
-                                    <Col md={12} style={{ marginBottom: "30px" }}>
-                                        <CardComp
-                                            url={item.property.images[0].url}
-                                            data={item.property.details}
-                                            id={item._id}
-                                            auctionStartDate={item.auctionStartDate}
-                                            auctionEndDate={item.auctionEndDate}
-                                            startingBid={item.startingBid}
-                                            auctionId={item._id}
-                                        />
-                                    </Col>
-                                </Wrap>
-                            ))}
-                        </Carousel>
-                    </Row>
-                    <Row>
-                        {Cars.map((item, index) => (
-                            <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                                <UpcomingJetCard
-                                    url={item.property.images[0].url}
-                                    data={item.property.details}
-                                    id={item._id}
-                                    startRegister={item.registerStartDate}
-                                    endRegister={item.registerEndDate}
-                                    startingBid={item.startingBid}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                </Col>
-            </div>
-        </>
-    );
+  useEffect(() => {
+    colorChange("black");
+    toogleChange();
+  }, []);
+  const property = useSelector((state) => state.property);
+  const Jets = property.filter((item) => item.property.type === "jet");
+  const auction = useSelector((state) => state.auction);
+  const OngoingJet = auction.filter((item) => item.property.type === "jet");
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow: OngoingJet.length > 3 ? 3 : OngoingJet.length,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  return (
+    <>
+      <div className="mt-5">
+        <Col md={12} className="m-auto pt-2">
+          <Row>
+            <Carousel {...settings}>
+              {OngoingJet.map((item, index) => (
+                <Wrap key={index}>
+                  <Col md={12} style={{ marginBottom: "30px" }}>
+                    <JetCard
+                      url={item.property.images[0].url}
+                      data={item.property.details}
+                      id={item._id}
+                      auctionStartDate={item.auctionStartDate}
+                      auctionEndDate={item.auctionEndDate}
+                      startingBid={item.startingBid}
+                      auctionId={item._id}
+                    />
+                  </Col>
+                </Wrap>
+              ))}
+            </Carousel>
+          </Row>
+          <Row>
+            {Jets.map((item, index) => (
+              <Col key={index} md={4} style={{ marginBottom: "30px" }}>
+                <UpcomingJetCard
+                  url={item.property.images[0].url}
+                  data={item.property.details}
+                  id={item._id}
+                  startRegister={item.registerStartDate}
+                  endRegister={item.registerEndDate}
+                  startingBid={item.startingBid}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </div>
+    </>
+  );
 }
 
 export default JetPage;

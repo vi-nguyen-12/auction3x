@@ -39,7 +39,7 @@ const RegistrationTimer = ({ RegistrationEndDate, toogleRegistEnded }) => {
   }, []);
 
   return (
-    <Table borderless hover>
+    <Table style={{ margin: "auto" }} borderless hover>
       <thead>
         <tr className="timerHead">
           <th>{days}</th>

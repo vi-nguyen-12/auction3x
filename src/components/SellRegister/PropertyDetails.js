@@ -12,6 +12,8 @@ const PropertyDetails = ({
   property,
   tooglePropertyData,
   propertyType,
+  propId,
+  ownership,
 }) => {
   return (
     <div className="listDetail-content">
@@ -47,7 +49,7 @@ const PropertyDetails = ({
             </div> */}
       </div>
       <div className="list-sell-bottom">
-        {propertyType === "realEstate" ? (
+        {propertyType === "real-estate" ? (
           property.address &&
           property.structure &&
           property.market_assessments ? (
@@ -56,6 +58,9 @@ const PropertyDetails = ({
               step={step}
               property={property}
               tooglePropertyData={tooglePropertyData}
+              propId={propId}
+              ownership={ownership}
+              propertyType={propertyType}
             />
           ) : (
             <EmptyRealEstateDetails
@@ -63,6 +68,9 @@ const PropertyDetails = ({
               step={step}
               property={property}
               tooglePropertyData={tooglePropertyData}
+              propId={propId}
+              ownership={ownership}
+              propertyType={propertyType}
             />
           )
         ) : propertyType === "cars" ? (
@@ -71,6 +79,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : propertyType === "jets" ? (
           <JetDetails
@@ -78,6 +89,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : propertyType === "yachts" ? (
           <YachtDetails
@@ -85,6 +99,9 @@ const PropertyDetails = ({
             step={step}
             property={property}
             tooglePropertyData={tooglePropertyData}
+            propId={propId}
+            ownership={ownership}
+            propertyType={propertyType}
           />
         ) : null}
       </div>

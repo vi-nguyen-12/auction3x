@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col, Button, Card, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Toast from "../../../Toast";
 import Login from "../../../Users/Login";
@@ -11,6 +10,7 @@ import ForgotPass from "../../../Users/ForgotPass";
 import SignUp from "../../../Users/SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../../../Auctions/AuctionTimer";
+import RegistrationTimer from "../../../Auctions/RegistrationTimer";
 import authService from "../../../../services/authServices";
 import "../../../../styles/Card.css";
 
@@ -21,6 +21,9 @@ function SavedAuctionsCard({
   auctionStartDate,
   auctionEndDate,
   startingBid,
+  startRegister,
+  endRegister,
+  type,
 }) {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
@@ -31,8 +34,6 @@ function SavedAuctionsCard({
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const [auctionDate, setAuctionStartDate] = useState();
-  const [auctionEnd, setAuctionEndDate] = useState();
   const toggleImage = () => {
     const userId = user._id;
     const data = {
@@ -57,9 +58,8 @@ function SavedAuctionsCard({
   const property = useSelector((state) => state.property);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
-
-  const history = useHistory();
+  const [inAuction, setInAuction] = useState(false);
+  const [upcoming, setUpcoming] = useState(false);
 
   const handleBid = () => {
     if (!user._id) {
@@ -75,36 +75,22 @@ function SavedAuctionsCard({
 
   const handleDisplay = () => {
     window.open(`/DisplayAuctions/${id}`);
-    // window.setTimeout(() => {
-    //   window.location.reload();
-    // }, 800);
   };
 
   useEffect(() => {
-    if (auctionStartDate !== undefined) {
-      const startDate = new Date(auctionStartDate)
-        .toLocaleString()
-        .split(",")[0];
-      setAuctionStartDate(startDate);
-    } else {
-      const startDate = "n/a";
-      setAuctionStartDate(startDate);
+    const checkAuction = auctions.filter((auction) => auction._id === id);
+    const checkProperty = property.filter((property) => property._id === id);
+    if (checkAuction.length > 0) {
+      setInAuction(true);
     }
-    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
-    const auctionData = auctions.find((item) => item._id === id);
-    const propertyData = property.find((item) => item._id === id);
-    setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(
-      auctionData
-        ? auctionData.auctionEndDate
-        : propertyData
-          ? propertyData.auctionEndDate
-          : ""
-    );
+    if (checkProperty.length > 0) {
+      setFavorite(true);
+    }
   }, []);
+
   return (
     <div style={{ margin: "30px" }}>
-      {auctionDate && auctionEnd && (
+      {data && (
         <Card
           className="savedCard text-left m-auto"
           style={{
@@ -123,7 +109,6 @@ function SavedAuctionsCard({
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          {/* <Link to={`/Display/${id}`}> */}
           <Card.Img
             onClick={handleDisplay}
             variant="top"
@@ -136,10 +121,8 @@ function SavedAuctionsCard({
               cursor: "pointer",
             }}
           />
-          {/* </Link> */}
           <button
             onClick={toggleImage}
-            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
             style={{
               border: "none",
               position: "absolute",
@@ -156,24 +139,33 @@ function SavedAuctionsCard({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            {/* <Container> */}
-            {/* <div> */}
             <Row>
-              <span className="golden-text">
-                {data.property_address.formatted_street_address},{" "}
-                {data.property_address.state}
-              </span>
-              <h4 style={{ marginTop: "5px", color: "black" }}>
-                Property Address
-              </h4>
+              {type === "real-estate" ? (
+                <span className="golden-text">
+                  {data.property_address.formatted_street_address},{" "}
+                  {data.property_address.state}
+                </span>
+              ) : (
+                <span className="golden-text">{data.address}</span>
+              )}
+              {type === "real-estate" ? (
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  Property Address
+                </h4>
+              ) : type === "car" ? (
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  {data.year} {data.make} {data.model}
+                </h4>
+              ) : type === "jet" ? (
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  {data.aircraft_builder_name} {data.aircraft_model_designation}
+                </h4>
+              ) : type === "yacht" ? (
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  {data.manufacturer_name} {data.engine_type}
+                </h4>
+              ) : null}
             </Row>
-            {/* </div> */}
-            {/* <div
-              style={{
-                display: "inline-flex",
-              }}
-            > */}
-            {/* <div> */}
             <Row>
               <Col md={5} style={{ width: "50%", color: "black" }}>
                 <p style={{ fontSize: "15px", width: "100px", color: "black" }}>
@@ -210,7 +202,7 @@ function SavedAuctionsCard({
                 <Col md={1} style={{ width: "50%" }}>
                   <div style={{ fontSize: "12px", width: "200px" }}>
                     <AuctionTimer
-                      auctionEndDate={onGoingAuctionEnd}
+                      auctionEndDate={auctionEndDate}
                       toogleAuction={toogleAuction}
                     />
                   </div>
@@ -218,37 +210,64 @@ function SavedAuctionsCard({
               )}
 
               <Col md={6} style={{ width: "50%" }}>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    width: "250px",
-                    color: "black",
-                  }}
-                >
-                  {data.beds_count
-                    ? data.beds_count
-                    : "N/A-"}
-                  BD | {data.baths ? data.baths : "N/A-"}BA
-                  |{" "}
-                  {data.total_area_sq_ft
-                    ? data.total_area_sq_ft
-                    : "N/A-"}{" "}
-                  sq.ft
-                </p>
+                {type === "real-estate" ? (
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      width: "250px",
+                      color: "black",
+                    }}
+                  >
+                    {data.beds_count ? data.beds_count : "N/A-"}
+                    BD | {data.baths ? data.baths : "N/A-"}BA |{" "}
+                    {data.total_area_sq_ft ? data.total_area_sq_ft : "N/A-"}{" "}
+                    sq.ft
+                  </p>
+                ) : type === "car" ? (
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      width: "250px",
+                      color: "black",
+                    }}
+                  >
+                    {data.car_type ? data.car_type : "N/A"}|{" "}
+                    {data.engine ? data.engine : "N/A"}|{" "}
+                    {data.fuel_type ? data.fuel_type : "N/A"}
+                  </p>
+                ) : type === "jet" ? (
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      width: "250px",
+                      color: "black",
+                    }}
+                  >
+                    {data.number_of_engines
+                      ? data.number_of_engines + " Engines"
+                      : "N/A"}
+                    |{" "}
+                    {data.number_of_aircraft
+                      ? data.number_of_aircraft + " Aircraft"
+                      : "N/A"}
+                    | {data.registration_mark ? data.registration_mark : "N/A"}
+                  </p>
+                ) : type === "yacht" ? (
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      width: "250px",
+                      color: "black",
+                    }}
+                  >
+                    {data.engine_type ? data.engine_type : "N/A"}|{" "}
+                    {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
+                    {data.running_cost ? data.running_cost : "N/A"}
+                  </p>
+                ) : null}
               </Col>
             </Row>
-            {/* </div> */}
-            {/* </div> */}
-
             <hr style={{ color: "black" }} />
-            {/* <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-              }}
-            > */}
-            {/* <div> */}
             <Row>
               <Col style={{ display: "grid", justifyContent: "flex-start" }}>
                 <p className="grey-small">Starting Bid</p>
@@ -260,16 +279,7 @@ function SavedAuctionsCard({
                     prefix={"$"}
                   />
                 </p>
-                {/* </div> */}
               </Col>
-              { }
-              {/* <div
-                style={{
-                  alignItems: "flex-end",
-                  display: "flex",
-                  marginRight: "6px",
-                }}
-              > */}
               <Col xs={5}>
                 <Button
                   onClick={handleBid}
@@ -279,10 +289,7 @@ function SavedAuctionsCard({
                   Place Bid
                 </Button>
               </Col>
-              {/* </div> */}
-              {/* </div> */}
             </Row>
-            {/* </Container> */}
           </Card.Body>
           <Modal
             backdrop="static"

@@ -14,14 +14,7 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const CarCard = ({
-  url,
-  data,
-  id,
-  auctionStartDate,
-  auctionEndDate,
-  startingBid,
-}) => {
+const CarCard = ({ url, data, id, startingBid, auctionEndDate }) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -31,8 +24,6 @@ const CarCard = ({
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const [auctionDate, setAuctionStartDate] = useState();
-  const [auctionEnd, setAuctionEndDate] = useState();
   const toggleImage = () => {
     const userId = user._id;
     const data = {
@@ -53,10 +44,8 @@ const CarCard = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const auctions = useSelector((state) => state.auction);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const history = useHistory();
 
@@ -66,7 +55,6 @@ const CarCard = ({
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
-      // window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -74,23 +62,11 @@ const CarCard = ({
 
   const handleDisplay = () => {
     history.push(`/DisplayAuctions/${id}`);
-    // window.setTimeout(() => {
-    //   window.location.reload();
-    // }, 800);
   };
-
-  useEffect(() => {
-    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
-    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
-    const auctionData = auctions.find((item) => item._id === id);
-    setAuctionStartDate(startDate);
-    setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(auctionData.auctionEndDate);
-  }, []);
 
   return (
     <div>
-      {auctionDate && auctionEnd && (
+      {auctionEndDate && (
         <Card
           className="cards text-left m-auto"
           style={{
@@ -108,7 +84,6 @@ const CarCard = ({
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          {/* <Link to={`/Display/${id}`}> */}
           <Card.Img
             onClick={handleDisplay}
             variant="top"
@@ -121,10 +96,8 @@ const CarCard = ({
               cursor: "pointer",
             }}
           />
-          {/* </Link> */}
           <button
             onClick={toggleImage}
-            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
             style={{
               border: "none",
               position: "absolute",
@@ -143,9 +116,7 @@ const CarCard = ({
           <Card.Body style={{ paddingLeft: "13px" }}>
             <div>
               <div>
-                <span className="golden-text">
-                  {data.property_address}
-                </span>
+                <span className="golden-text">{data.property_address}</span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.year} {data.make} {data.model}
                 </h4>
@@ -192,7 +163,7 @@ const CarCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={onGoingAuctionEnd}
+                            auctionEndDate={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>
@@ -206,9 +177,9 @@ const CarCard = ({
                           width: "250px",
                         }}
                       >
-                          {data.car_type ? data.car_type : "N/A"}|{" "}
-                          {data.engine ? data.engine : "N/A"}|{" "}
-                          {data.fuel_type ? data.fuel_type : "N/A"}
+                        {data.car_type ? data.car_type : "N/A"}|{" "}
+                        {data.engine ? data.engine : "N/A"}|{" "}
+                        {data.fuel_type ? data.fuel_type : "N/A"}
                       </p>
                     </Col>
                   </Row>
@@ -235,7 +206,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

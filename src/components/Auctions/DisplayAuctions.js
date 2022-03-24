@@ -65,7 +65,9 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           colorChange={colorChange}
           toogleChange={toogleChange}
         />
-      ) : null}
+      ) : (
+        <h1>Property not found, please check the url and try again.</h1>
+      )}
     </>
   );
 }

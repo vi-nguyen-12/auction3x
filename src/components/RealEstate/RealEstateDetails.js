@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
-function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
-  // alert(
-  //   "Please check the property information below and confirm that it is correct, if it is not, please fill in the correct information!"
-  // );
+function RealEstateDetails({
+  property,
+  toogleStep,
+  step,
+  tooglePropertyData,
+  propId,
+}) {
+  const { register, handleSubmit } = useForm();
+
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [zip, setZip] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [bathrooms, setBathrooms] = useState("");
+  const [bedrooms, setBedrooms] = useState("");
+  const [propType, setPropType] = useState("");
+  const [totalValue, setTotalValue] = useState("");
+  const [sqft, setSqft] = useState("");
+  const [reservedAmount, setReservedAmount] = useState("");
+  const [discussedAmount, setDiscussedAmount] = useState("");
+
+  console.log(address);
+
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
@@ -58,6 +75,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
                   ? property.address.formatted_street_address
                   : ""
               }
+              onChange={(e) => {
+                setAddress(e.target.value);
+              }}
               {...register("street_address", { required: false })}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -73,6 +93,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               name="city"
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.address.city ? property.address.city : ""}
+              onChange={(e) => {
+                setCity(e.target.value);
+              }}
               {...register("city", { required: false })}
             />
             <span style={{ fontWeight: "600", color: "black" }}>City *</span>
@@ -86,6 +109,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={
                 property.address.state ? property.address.state : ""
               }
+              onChange={(e) => {
+                setState(e.target.value);
+              }}
               {...register("state", { required: false })}
             />
             <span style={{ fontWeight: "600", color: "black" }}>State *</span>
@@ -101,6 +127,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={
                 property.address.country ? property.address.country : ""
               }
+              onChange={(e) => {
+                setCountry(e.target.value);
+              }}
               {...register("country", { required: false })}
             />
             <span style={{ fontWeight: "600", color: "black" }}>Country *</span>
@@ -113,6 +142,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.address.zip_code}
               {...register("zipCode", { required: false })}
+              onChange={(e) => {
+                setZip(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code *
@@ -127,6 +159,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.owner.name}
               {...register("ownerName", { required: false })}
+              onChange={(e) => {
+                setOwnerName(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Owner Name *
@@ -141,6 +176,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.structure.rooms_count}
               {...register("rooms_count", { required: false })}
+              onChange={(e) => {
+                setRooms(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Rooms Count *
@@ -153,6 +191,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.structure.beds_count}
               {...register("bedrooms", { required: false })}
+              onChange={(e) => {
+                setBedrooms(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bedrooms *
@@ -167,6 +208,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               style={{ color: "black", fontWeight: "bold" }}
               defaultValue={property.parcel.standardized_land_use_type}
               {...register("propertyType", { required: false })}
+              onChange={(e) => {
+                setPropType(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type *
@@ -179,6 +223,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               defaultValue={property.structure.baths}
               style={{ color: "black", fontWeight: "bold" }}
               {...register("bathrooms", { required: false })}
+              onChange={(e) => {
+                setBathrooms(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bathrooms *
@@ -198,6 +245,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               }
               placeholder="$"
               {...register("total_value", { required: false })}
+              onChange={(e) => {
+                setTotalValue(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Total Value *
@@ -216,6 +266,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
                   : ""
               }
               {...register("sqft", { required: false })}
+              onChange={(e) => {
+                setSqft(e.target.value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
           </Col>
@@ -227,6 +280,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
               {...register("reservedAmount", { required: false })}
+              onChange={(e) => {
+                setReservedAmount(e.target.value);
+              }}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -239,6 +295,9 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
               {...register("discussedAmount", { required: false })}
+              onChange={(e) => {
+                setDiscussedAmount(e.target.value);
+              }}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -258,6 +317,14 @@ function RealEstateDetails({ property, toogleStep, step, tooglePropertyData }) {
         </Row>
       </Container>
       <div className="bottom-btn" style={{ width: "100%" }}>
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+          }}
+        >
+          <Button>Save</Button>
+        </div>
         <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
           Previous
         </button>

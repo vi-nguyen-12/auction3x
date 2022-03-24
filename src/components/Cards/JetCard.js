@@ -14,14 +14,7 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const JetCard = ({
-  url,
-  data,
-  id,
-  auctionStartDate,
-  auctionEndDate,
-  startingBid,
-}) => {
+const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -31,8 +24,6 @@ const JetCard = ({
   const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const [auctionDate, setAuctionStartDate] = useState();
-  const [auctionEnd, setAuctionEndDate] = useState();
   const toggleImage = () => {
     const userId = user._id;
     const data = {
@@ -53,10 +44,8 @@ const JetCard = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const auctions = useSelector((state) => state.auction);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const history = useHistory();
 
@@ -66,7 +55,6 @@ const JetCard = ({
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
-      // window.location.reload();
     } else {
       setShowKYC(true);
     }
@@ -74,23 +62,11 @@ const JetCard = ({
 
   const handleDisplay = () => {
     history.push(`/DisplayAuctions/${id}`);
-    // window.setTimeout(() => {
-    //   window.location.reload();
-    // }, 800);
   };
-
-  useEffect(() => {
-    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
-    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
-    const auctionData = auctions.find((item) => item._id === id);
-    setAuctionStartDate(startDate);
-    setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(auctionData.auctionEndDate);
-  }, []);
 
   return (
     <div>
-      {auctionDate && auctionEnd && (
+      {auctionEndDate && (
         <Card
           className="cards text-left m-auto"
           style={{
@@ -192,7 +168,7 @@ const JetCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={onGoingAuctionEnd}
+                            auctionEndDate={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>
@@ -207,9 +183,17 @@ const JetCard = ({
                           width: "250px",
                         }}
                       >
-                        {data.number_of_engines ? data.number_of_engines + " Engines" : "N/A"}|{" "}
-                        {data.number_of_aircraft ? data.number_of_aircraft + " Aircraft" : "N/A"}|{" "}
-                        {data.registration_mark ? data.registration_mark : "N/A"}
+                        {data.number_of_engines
+                          ? data.number_of_engines + " Engines"
+                          : "N/A"}
+                        |{" "}
+                        {data.number_of_aircraft
+                          ? data.number_of_aircraft + " Aircraft"
+                          : "N/A"}
+                        |{" "}
+                        {data.registration_mark
+                          ? data.registration_mark
+                          : "N/A"}
                       </p>
                     </Col>
                   </Row>
@@ -236,7 +220,7 @@ const JetCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

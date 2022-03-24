@@ -86,6 +86,7 @@ position: relative;
 
 const PropertyPages = ({ colorChange, toogleChange }) => {
   const path = window.location.pathname;
+  console.log(path);
   return (
     <>
       <h5 className="realHeader">

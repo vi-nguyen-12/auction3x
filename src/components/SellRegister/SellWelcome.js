@@ -73,7 +73,7 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
                   type="radio"
                   name="sell"
                   value="1"
-                  onChange={() => setPropertyType("realEstate")}
+                  onChange={() => setPropertyType("real-estate")}
                 />
                 <label className="choice">Real Estate</label>
               </td>

@@ -284,6 +284,29 @@ const authService = {
       }
     );
   },
+
+  savePropInfo(data) {
+    return axios.post(apiUrl + "/api/properties/real-estate", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
+  },
+
+  saveInfo(data) {
+    return axios.put(
+      apiUrl + `/api/properties/real-estate/${data.id}`,
+      { ...data.details },
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
+  },
 };
 
 export default authService;

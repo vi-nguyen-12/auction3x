@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 import "../../styles/realEstate.css";
-import { CardComp } from "../Cards/RealEstateCard";
+import { YachtCard } from "../Cards/YachtCard";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -87,7 +87,7 @@ function YachtPage({ colorChange, toogleChange }) {
         toogleChange();
     }, []);
     const property = useSelector((state) => state.property);
-    const Cars = property.filter(
+    const Yachts = property.filter(
         (item) => item.property.type === "yacht"
     );
     const auction = useSelector((state) => state.auction);
@@ -136,7 +136,7 @@ function YachtPage({ colorChange, toogleChange }) {
                             {OngoingYachts.map((item, index) => (
                                 <Wrap key={index}>
                                     <Col md={12} style={{ marginBottom: "30px" }}>
-                                        <CardComp
+                                        <YachtCard
                                             url={item.property.images[0].url}
                                             data={item.property.details}
                                             id={item._id}
@@ -151,7 +151,7 @@ function YachtPage({ colorChange, toogleChange }) {
                         </Carousel>
                     </Row>
                     <Row>
-                        {Cars.map((item, index) => (
+                        {Yachts.map((item, index) => (
                             <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                                 <UpcomingYachtCard
                                     url={item.property.images[0].url}

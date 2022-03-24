@@ -2,47 +2,107 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import SavedAuctionsCard from "./SavedAuctionsCard";
+import { CarCard } from "../../../Cards/CarCard";
+import { JetCard } from "../../../Cards/JetCard";
+import { YachtCard } from "../../../Cards/YachtCard";
+import { CardComp } from "../../../Cards/RealEstateCard";
+import { UpcomingCard } from "../../../Auctions/UpcomingCard";
+import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
+import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
+import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
 import Pagination from "../Pagination";
 
 function SavedAuctions() {
   const savedProperty = useSelector((state) => state.savedProperty);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [cardPerPage] = useState(4);
-
-  const indexOfLastCard = currentPage * cardPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardPerPage;
-  const currentCard = savedProperty.slice(indexOfFirstCard, indexOfLastCard);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  console.log(currentCard);
+  const auction = useSelector((state) => state.auction);
   return (
     <Container>
       <Row>
-        {currentCard.map((property, index) => (
+        {savedProperty.map((property, index) => (
           <Col key={index}>
-            <SavedAuctionsCard
-              data={property.property.details}
-              url={property.property.images[0].url}
-              id={property._id}
-              auctionStartDate={property.auctionStartDate}
-              auctionEndDate={property.auctionEndDate}
-              startingBid={
-                property.highestBid ? property.highestBid : property.startingBid
-              }
-              auctionId={property._id}
-            />
+            {property.property.type === "real-estate" ? (
+              auction.filter((item) => item._id === property._id) ? (
+                <CardComp
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={property.startingBid}
+                />
+              ) : (
+                <UpcomingCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  startRegister={property.registerStartDate}
+                  endRegister={property.registerEndDate}
+                  startingBid={property.startingBid}
+                />
+              )
+            ) : property.property.type === "car" ? (
+              auction.filter((item) => item._id === property._id) ? (
+                <CarCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={property.startingBid}
+                />
+              ) : (
+                <UpcomingCarCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  startRegister={property.registerStartDate}
+                  endRegister={property.registerEndDate}
+                  startingBid={property.startingBid}
+                />
+              )
+            ) : property.property.type === "jet" ? (
+              auction.filter((item) => item._id === property._id) ? (
+                <JetCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={property.startingBid}
+                />
+              ) : (
+                <UpcomingJetCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  startRegister={property.registerStartDate}
+                  endRegister={property.registerEndDate}
+                  startingBid={property.startingBid}
+                />
+              )
+            ) : property.property.type === "yacht" ? (
+              auction.filter((item) => item._id === property._id) ? (
+                <YachtCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={property.startingBid}
+                />
+              ) : (
+                <UpcomingYachtCard
+                  url={property.property.images[0].url}
+                  data={property.property.details}
+                  id={property._id}
+                  startRegister={property.registerStartDate}
+                  endRegister={property.registerEndDate}
+                  startingBid={property.startingBid}
+                />
+              )
+            ) : null}
           </Col>
         ))}
-      </Row>
-      <Row>
-        <Col>
-          <Pagination
-            cardPerPage={cardPerPage}
-            totalCard={savedProperty.length}
-            paginate={paginate}
-          />
-        </Col>
       </Row>
     </Container>
   );
