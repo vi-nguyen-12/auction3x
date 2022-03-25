@@ -19,3 +19,7 @@
 .buyer-agree {
   color: black;
 }
+
+.term input{
+  margin-left: 30px;
+}
