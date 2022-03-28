@@ -139,6 +139,7 @@
   z-index: 1;
 }
 .dropdown-content-1 {
+  color: black;
   display: none;
   position: absolute;
   text-align: center;

@@ -695,6 +695,26 @@ const Header = ({ color, change }) => {
                 >
                   <FaGlobeAmericas size={25} />
                 </Button>
+                <div className="dropdown">
+                  <Button
+                    style={{
+                      backgroundColor: "#fcba7d",
+                      color: "black",
+                      borderColor: "transparent",
+                      fontSize: "20px",
+                      padding: "9px",
+                      marginLeft: "10px",
+                    }}>
+                    <IoWallet />
+                  </Button>
+                  <div className="dropdown-content-1">
+                    <Button
+                      className="fw-bold p-3"
+                    >
+                      Amount
+                    </Button>
+                  </div>
+                </div>
               </>
             ) : (
               <>
@@ -849,6 +869,27 @@ const Header = ({ color, change }) => {
                 >
                   <FaGlobeAmericas size={25} />
                 </Button>
+                <div className="dropdown">
+                  <Button
+                    className="customButton border-0 mt-0"
+                    style={{
+                      backgroundColor: "#fcba7d",
+                      color: "black",
+                      borderColor: "transparent",
+                      fontSize: "20px",
+                      padding: "9px",
+                      marginLeft: "10px",
+                    }}>
+                    <IoWallet />
+                  </Button>
+                  <div className="dropdown-content-1">
+                    <Button
+                      className="fw-bold p-3"
+                    >
+                      Amount
+                    </Button>
+                  </div>
+                </div>
               </>
             ) : (
               <>
@@ -927,34 +968,6 @@ const Header = ({ color, change }) => {
             )}
           </div>
         )}
-        <div className="dropdown">
-          <button
-            className="customButton border-0 mt-0"
-            style={{
-              backgroundColor: "#fcba7d",
-              color: "black",
-              borderColor: "transparent",
-              fontSize: "20px",
-              padding: "9px",
-              marginLeft: "10px",
-            }}>
-            <IoWallet />
-          </button>
-          <div className="dropdown-content-1">
-            <button
-              className="fw-bold p-3"
-              onClick={handleOnClick("Dashboard")}
-            >
-              Amount
-            </button>
-            <button
-              className="fw-bold p-3"
-              onClick={handleOnClick("ads")}
-            >
-              My Ads
-            </button>
-          </div>
-        </div>
       </nav>
     </Nav>
   );
