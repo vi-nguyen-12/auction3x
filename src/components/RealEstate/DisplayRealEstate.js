@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../styles/realEstate.css";
 import { Modal, Table, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import Confirm from "../Users/EmailConfirm";
 import ForgotPass from "../Users/ForgotPass";
@@ -194,7 +193,6 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
     toogleChange();
 
     //set registration end
-    console.log(property.registerEndDate);
     setRegisterEnd(property ? property.registerEndDate : null);
 
     //set dates for ongoing auction end date
@@ -242,6 +240,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
+            <span className="badge">Reserved Met!</span>
             <img
               src={property.property.images[0].url}
               alt="Snow"

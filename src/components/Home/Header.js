@@ -15,8 +15,8 @@ import ForgotPass from "../Users/ForgotPass";
 import ChangePass from "../Users/ChangePass";
 import { useHistory } from "react-router-dom";
 import { logout } from "../../slice/userSlice";
-import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
-import CloseButton from "react-bootstrap/CloseButton";
+// import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
+// import CloseButton from "react-bootstrap/CloseButton";
 
 const Header = ({ color, change }) => {
   const user = useSelector((state) => state.user);
@@ -24,7 +24,7 @@ const Header = ({ color, change }) => {
   const history = useHistory();
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
-  const [showFundReq, popFundReq] = useState(false);
+  // const [showFundReq, popFundReq] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
@@ -39,7 +39,7 @@ const Header = ({ color, change }) => {
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const toogleFundReq = () => popFundReq(!showFundReq);
+  // const toogleFundReq = () => popFundReq(!showFundReq);
 
   const handleLogout = async () => {
     document.cookie = "auth_token=; path=/";
@@ -572,7 +572,7 @@ const Header = ({ color, change }) => {
         </Menu>
         {change === false ? (
           <>
-            {user._id ? (
+            {/* {user._id ? (
               <Button onClick={toogleFundReq} className="fund-btn">
                 Request Fund
               </Button>
@@ -603,7 +603,7 @@ const Header = ({ color, change }) => {
               <Modal.Body className="fund-modal">
                 <MultiFundForm />
               </Modal.Body>
-            </Modal>
+            </Modal> */}
             <div className="d-flex flex-row ">
               <Button
                 className="sell_btn bg-transparent border-0"

@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/SellRegister.css";
 import authService from "../../services/authServices";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";
 
@@ -17,7 +17,6 @@ const Agree = ({
 }) => {
   const details = { ...propertyData.details };
   const ownerDetails = { ...ownership.details };
-  console.log(details);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();

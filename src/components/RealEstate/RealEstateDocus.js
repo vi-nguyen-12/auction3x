@@ -191,13 +191,13 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
 
   const onSubmit = async (data) => {
     if (
-      titleReport.length !== 0 ||
-      insuranceCopy.length !== 0 ||
-      financialDocuments.length !== 0 ||
-      purchaseAgreement.length !== 0 ||
-      thirdpartyReport.length !== 0 ||
-      demographics.length !== 0 ||
-      marketandValuations.length !== 0
+      data.titleReport.length !== 0 ||
+      data.insuranceCopy.length !== 0 ||
+      data.financialDocuments.length !== 0 ||
+      data.purchaseAgreement.length !== 0 ||
+      data.thirdpartyReport.length !== 0 ||
+      data.demographics.length !== 0 ||
+      data.marketandValuations.length !== 0
     ) {
       toogleDocuments(documents);
       toogleStep(step + 1);

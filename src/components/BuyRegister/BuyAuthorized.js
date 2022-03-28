@@ -6,14 +6,14 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
-const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
+const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
+  console.log(document);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
-  const location = useLocation();
   const [url, setUrl] = useState();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -30,6 +30,15 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
       setIp(res.data.ip);
     });
   };
+
+  const documents = [];
+
+  //push document to array if it is not empty
+  document.map((item) => {
+    if (item.url) {
+      documents.push(item);
+    }
+  });
 
   useEffect(() => {
     getIp();
@@ -74,6 +83,7 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
           TC: { time: agree, IPAddress: ip },
           answers: answers,
           docusign: docId,
+          documents: documents,
         })
         .then((res) => {
           if (res.data.error) {

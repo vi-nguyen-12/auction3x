@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BuyAgreement from "./BuyAgreement";
 import BuyAuthorized from "./BuyAuthorized";
-import BuyPayment from "./BuyPayment";
+import BuyQuestionair from "./BuyQuestionair";
+import FundUpload from "./Fund Request/FundUpload";
 
 const MultiBuyForm = () => {
   const [step, setStep] = useState(0);
@@ -9,6 +10,15 @@ const MultiBuyForm = () => {
   const toogleStep = (step) => {
     setStep(step);
   };
+
+  const [document, setDocument] = useState();
+  const toogleDocument = (document) => {
+    setDocument(document);
+  };
+
+  useEffect(() => {
+    toogleDocument(document);
+  }, [document]);
 
   const [questionID, setQuestionID] = useState();
 
@@ -30,7 +40,17 @@ const MultiBuyForm = () => {
   } else if (step === 1) {
     return (
       <div className="buy-register-container">
-        <BuyPayment
+        <FundUpload
+          toogleStep={toogleStep}
+          step={step}
+          toogleDocument={toogleDocument}
+        />
+      </div>
+    );
+  } else if (step === 2) {
+    return (
+      <div className="buy-register-container">
+        <BuyQuestionair
           toogleStep={toogleStep}
           step={step}
           toogleAnswer={toogleAnswer}
@@ -38,7 +58,7 @@ const MultiBuyForm = () => {
         />
       </div>
     );
-  } else if (step === 2) {
+  } else if (step === 3) {
     return (
       <div className="buy-register-container">
         <BuyAuthorized
@@ -46,6 +66,7 @@ const MultiBuyForm = () => {
           step={step}
           answer={answer}
           questionID={questionID}
+          document={document}
         />
       </div>
     );
