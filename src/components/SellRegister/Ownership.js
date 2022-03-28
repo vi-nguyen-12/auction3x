@@ -47,7 +47,7 @@ function Ownership({
         address: address,
       },
       documents: listing_agreement ? listing_agreement : null,
-      step: 1,
+      step: parseInt(1),
     };
     authService.savePropInfo(data).then((res) => {
       if (res.data.error) {

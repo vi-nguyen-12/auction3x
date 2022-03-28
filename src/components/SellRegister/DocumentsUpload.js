@@ -53,21 +53,21 @@ const DocumentsUpload = ({
           toogleDocuments={toogleDocuments}
           ownership={ownership}
         />
-      ) : propertyType === "cars" ? (
+      ) : propertyType === "car" ? (
         <CarDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
           ownership={ownership}
         />
-      ) : propertyType === "jets" ? (
+      ) : propertyType === "jet" ? (
         <JetDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
           ownership={ownership}
         />
-      ) : propertyType === "yachts" ? (
+      ) : propertyType === "yacht" ? (
         <YachtDocus
           toogleStep={toogleStep}
           step={step}

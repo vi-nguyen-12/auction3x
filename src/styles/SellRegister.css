@@ -9,7 +9,8 @@
 
 .text {
   margin: auto;
-  color: black;
+  color: white;
+  font-weight: bold;
 }
 /*Sell Welcome*/
 .box-content {
@@ -408,7 +409,7 @@ ul.dashed > li:before {
 
 .line {
   width: 8%;
-  height: 2px;
+  height: 4px;
   background-color: #f1f1f1;
   margin-top: 48px !important;
   display: flex;
@@ -441,12 +442,12 @@ ul.dashed > li:before {
 
 .spnn {
   margin-left: 2px;
-  font-size: 10px;
-  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
   position: absolute;
   bottom: 5px;
   align-content: center;
-  color: black;
+  color: #6d6d6d;
 }
 #status p {
   font-size: 10px;
@@ -686,4 +687,38 @@ summary::after {
 details[open] summary::after {
   transform: rotate(180deg);
   content: "\002D";
+}
+
+.btn-sell {
+  width: 100px;
+  height: 100px;
+  border-radius: 25%;
+  background-color: #ac744b;
+  box-shadow: 0px 0px 10px #ac744b;
+  border: none;
+}
+
+.btn-sell1 {
+  width: 100px;
+  height: 100px;
+  border-radius: 25%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #ac744b;
+  box-shadow: 0px 0px 10px #ac744b;
+  border: none;
+}
+
+.btn-sell label {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-sell1 label {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
 }

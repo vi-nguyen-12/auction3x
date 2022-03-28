@@ -52,3 +52,38 @@
   border: none !important;
   box-shadow: none;
 }
+
+.fund-btn {
+  padding: 8px 20px;
+  height: 50px;
+  margin-right: 50px;
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: rgb(252, 186, 125);
+  background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
+  border: none;
+}
+.fund-btn:hover {
+  color: black;
+  background-image: none;
+  background-color: rgb(252, 186, 125);
+}
+.fund-btn:active {
+  color: black;
+  background-image: none;
+  background-color: rgb(252, 186, 125);
+  border: none;
+  transform: scale(0.96);
+}
+
+.fund-btn:focus {
+  outline: none;
+  box-shadow: none;
+  color: black;
+}
+
+/* fund modal */
+.fund-modal{
+  padding: 50px 20px;
+}

@@ -52,16 +52,21 @@ function EmptyRealEstateDetails({
           area_sq_ft: sqft,
           reservedAmount: reservedAmount,
           discussedAmount: discussedAmount,
-          step: 2,
+          step: parseInt(2),
         },
       };
       authService.saveInfo(datas).then((res) => {
-        console.log(res);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          console.log(res.data);
+        }
       });
     } else {
       const datas = {
+        id: propId,
         details: {
-          type: propertyType,
+          type: ownership.type ? ownership.type : propertyType,
           street_address: address ? address : property.street_address,
           city: city ? city : property.city,
           state: state ? state : property.state,
@@ -76,12 +81,18 @@ function EmptyRealEstateDetails({
           area_sq_ft: sqft,
           reservedAmount: reservedAmount,
           discussedAmount: discussedAmount,
-          details: { ...ownership },
-          step: 2,
+          ...ownership,
+          documents: ownership.listing_agreement,
+          step: parseInt(2),
         },
       };
+      delete datas.details.listing_agreement;
       authService.savePropInfo(datas).then((res) => {
-        console.log(res);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          console.log(res.data);
+        }
       });
     }
   };

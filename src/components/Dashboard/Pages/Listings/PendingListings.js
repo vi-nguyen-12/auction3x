@@ -11,12 +11,14 @@ function PendingListings() {
   useEffect(() => {
     const fetchPendingListings = async () => {
       const id = user._id;
-      await authService.sellerApprovedListings(id).then((data) => {
-        setPendingListings(data);
+      await authService.sellerApprovedListings(id).then((res) => {
+        setPendingListings(res.data);
       });
     };
     fetchPendingListings();
   }, []);
+
+  console.log(pendingListings);
 
   return (
     <Container>
@@ -25,8 +27,8 @@ function PendingListings() {
           {pendingListings.map((auction) => (
             <Col key={auction._id}>
               <SavedAuctionsCard
-                data={auction.property.details}
-                url={auction.property.images[0].url}
+                data={auction.details}
+                url={auction.images[0].url}
                 id={auction._id}
                 auctionStartDate={auction.auctionStartDate}
                 auctionEndDate={auction.auctionEndDate}

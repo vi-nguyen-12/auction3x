@@ -1,3 +1,7 @@
+.App {
+  color: black;
+}
+
 .customButton {
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   border: none;

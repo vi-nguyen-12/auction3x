@@ -312,6 +312,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 </button>
                 <Modal
                   size="xl"
+                  backdrop="static"
+                  keyboard={false}
                   style={{ height: "100%" }}
                   show={showPics}
                   onHide={togglePics}
@@ -371,7 +373,14 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   <RiVideoLine size="100%" color="C58753" />
                 </button>
 
-                <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
+                <Modal
+                  backdrop="static"
+                  keyboard={false}
+                  size="xl"
+                  show={showVideos}
+                  onHide={toggleVids}
+                  centered
+                >
                   <Modal.Body style={{ height: "700px" }}>
                     <div>
                       <CloseButton
@@ -452,7 +461,14 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   >
                     <IoLocationOutline size="50px" color="C58753" />
                   </button>
-                  <Modal size="xl" show={showMap} onHide={toggleMap} centered>
+                  <Modal
+                    backdrop="static"
+                    keyboard={false}
+                    size="xl"
+                    show={showMap}
+                    onHide={toggleMap}
+                    centered
+                  >
                     <Modal.Body style={{ height: "700px" }}>
                       <div>
                         <CloseButton
@@ -955,176 +971,170 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     Property Info
                   </span>
                 </div>
-
                 <Col>
-                  <Table responsive>
-                    <tbody className="propInfo">
-                      <tr>
-                        <td>Sale Type</td>
-                        <td>Auction</td>
-                      </tr>
-                      <tr>
-                        <td>Sale Condition</td>
-                        <td>Auction Sale</td>
-                      </tr>
-                      <tr>
-                        <td>Property Type</td>
-                        {property.property.details.parcel
-                          .county_land_use_description ? (
-                          <td>
-                            {
-                              property.property.details.parcel
-                                .county_land_use_description
-                            }
-                          </td>
-                        ) : (
+                  <Col>
+                    <Table responsive>
+                      <tbody className="propInfo">
+                        <tr>
+                          <td>Sale Type</td>
+                          <td>Auction</td>
+                        </tr>
+                        <tr>
+                          <td>Sale Condition</td>
+                          <td>Auction Sale</td>
+                        </tr>
+                        <tr>
+                          <td>Property Type</td>
+                          {property.property.details.parcel
+                            .county_land_use_description ? (
+                            <td>
+                              {
+                                property.property.details.parcel
+                                  .county_land_use_description
+                              }
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Building Size</td>
+                          {property.property.details.structure
+                            .total_area_sq_ft ? (
+                            <td>
+                              {
+                                property.property.details.structure
+                                  .total_area_sq_ft
+                              }{" "}
+                              sqft
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Building Class</td>
+                          {property.property.details.structure.quality ? (
+                            <td>
+                              {property.property.details.structure.quality}
+                            </td>
+                          ) : property.property.details.structure.condition ? (
+                            <td>
+                              {property.property.details.structure.condition}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Year Built/Renovated</td>
+                          {property.property.details.structure.year_built ? (
+                            <td>
+                              {property.property.details.structure.year_built}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Percent Leased</td>
                           <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Building Size</td>
-                        {property.property.details.structure
-                          .total_area_sq_ft ? (
-                          <td>
-                            {
-                              property.property.details.structure
-                                .total_area_sq_ft
-                            }{" "}
-                            sqft
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Building Class</td>
-                        {property.property.details.structure.quality ? (
-                          <td>{property.property.details.structure.quality}</td>
-                        ) : property.property.details.structure.condition ? (
-                          <td>
-                            {property.property.details.structure.condition}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Year Built/Renovated</td>
-                        {property.property.details.structure.year_built ? (
-                          <td>
-                            {property.property.details.structure.year_built}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Percent Leased</td>
-                        <td>N/A</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Col>
-
-                <Col>
-                  <Table responsive>
-                    <tbody className="propInfo">
-                      <tr>
-                        <td>Tenancy</td>
-                        {property.property.details.parcel
-                          .standardized_land_use_type ? (
-                          <td>
-                            {
-                              property.property.details.parcel
-                                .standardized_land_use_type
-                            }
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Building Height</td>
-                        {property.property.details.structure.stories ? (
-                          <td>
-                            {property.property.details.structure.stories} story
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Building FAR</td>
-                        {property.property.details.parcel.area_acres ? (
-                          <td>
-                            {property.property.details.parcel.area_acres} acres
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Zoning</td>
-                        {property.property.details.parcel.zoning ? (
-                          <td>{property.property.details.parcel.zoning}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Parking</td>
-                        {property.property.details.structure
-                          .parking_spaces_count ? (
-                          <td>
-                            {
-                              property.property.details.structure
-                                .parking_spaces_count
-                            }{" "}
-                            spaces (
-                            {property.property.details.structure.parking_type})
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Frontage</td>
-                        {property.property.details.parcel.frontage_ft ? (
-                          <td>
-                            {property.property.details.parcel.frontage_ft} ft
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Opportunity Zone</td>
-                        <td>No</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                        </tr>
+                        <tr>
+                          <td>Tenancy</td>
+                          {property.property.details.parcel
+                            .standardized_land_use_type ? (
+                            <td>
+                              {
+                                property.property.details.parcel
+                                  .standardized_land_use_type
+                              }
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Building Height</td>
+                          {property.property.details.structure.stories ? (
+                            <td>
+                              {property.property.details.structure.stories}{" "}
+                              story
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Building FAR</td>
+                          {property.property.details.parcel.area_acres ? (
+                            <td>
+                              {property.property.details.parcel.area_acres}{" "}
+                              acres
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Zoning</td>
+                          {property.property.details.parcel.zoning ? (
+                            <td>{property.property.details.parcel.zoning}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Parking</td>
+                          {property.property.details.structure
+                            .parking_spaces_count ? (
+                            <td>
+                              {
+                                property.property.details.structure
+                                  .parking_spaces_count
+                              }{" "}
+                              spaces (
+                              {property.property.details.structure.parking_type}
+                              )
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Frontage</td>
+                          {property.property.details.parcel.frontage_ft ? (
+                            <td>
+                              {property.property.details.parcel.frontage_ft} ft
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Opportunity Zone</td>
+                          <td>No</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
                 </Col>
                 <Col>
                   <Table
                     responsive
-                    bordered
+                    striped
                     style={{
                       margin: "auto",
                       justifyContent: "center",
                       textAlign: "center",
                       width: "auto",
                       height: "auto",
-                      marginTop: "50px",
                     }}
                   >
                     <thead style={{ backgroundColor: "#d58f5c" }}>
                       <tr>
-                        <th colSpan={3}>Top Bidders</th>
-                      </tr>
-                    </thead>
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>Bidder ID</th>
+                        <th>#</th>
+                        <th>User</th>
                         <th>Bid Amount</th>
                         <th>Date/Time</th>
                       </tr>
@@ -1133,7 +1143,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       {topBid ? (
                         topBid.map((bid, index) => (
                           <tr key={index}>
-                            <td>{bid._id}</td>
+                            <td>{index + 1}</td>
+                            <td>{bid.userId}</td>
                             <td>
                               <NumberFormat
                                 value={bid.amount}

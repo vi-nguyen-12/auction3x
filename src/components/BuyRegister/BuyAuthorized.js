@@ -10,7 +10,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
-const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
+const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const location = useLocation();
@@ -58,23 +58,6 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
     setAgree(dateTime);
   };
 
-  const documents = [];
-
-  //push document to array if it is not empty
-  document.map((item) => {
-    if (item.name) {
-      documents.push(item);
-    }
-  });
-
-  const realDocuments = documents.map((item) => {
-    return {
-      officialName: item.officialName,
-      name: item.name,
-      url: item.url,
-    };
-  });
-
   const answers = [
     { questionId: questionID[0], answer: answer[0] },
     { questionId: questionID[1], answer: answer[1] },
@@ -88,18 +71,14 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
       await authService
         .buyerRegister({
           auctionId: auctionId ? auctionId._id : onGoingAuction._id,
-          documents: realDocuments,
           TC: { time: agree, IPAddress: ip },
           answers: answers,
           docusign: docId,
-          // explanation: explanations,
-          // files: files,
         })
         .then((res) => {
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            // history.push(location.pathname);
             window.location.reload();
           }
         });
@@ -190,19 +169,6 @@ const BuyAuthoried = ({ toogleStep, step, document, answer, questionID }) => {
           </div>
         </form>
       </Modal.Body>
-      {/* <Modal.Footer style={{ justifyContent: "center" }}>
-        <div
-          style={{ position: "sticky", padding: "auto" }}
-          className="bottom-btn"
-        >
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
-            Previous
-          </button>
-          <button className="nxt-btn" type="submit">
-            Submit
-          </button>
-        </div>
-      </Modal.Footer> */}
     </>
   );
 };

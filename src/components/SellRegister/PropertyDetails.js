@@ -73,7 +73,7 @@ const PropertyDetails = ({
               propertyType={propertyType}
             />
           )
-        ) : propertyType === "cars" ? (
+        ) : propertyType === "car" ? (
           <CarDetails
             toogleStep={toogleStep}
             step={step}
@@ -83,7 +83,7 @@ const PropertyDetails = ({
             ownership={ownership}
             propertyType={propertyType}
           />
-        ) : propertyType === "jets" ? (
+        ) : propertyType === "jet" ? (
           <JetDetails
             toogleStep={toogleStep}
             step={step}
@@ -93,7 +93,7 @@ const PropertyDetails = ({
             ownership={ownership}
             propertyType={propertyType}
           />
-        ) : propertyType === "yachts" ? (
+        ) : propertyType === "yacht" ? (
           <YachtDetails
             toogleStep={toogleStep}
             step={step}

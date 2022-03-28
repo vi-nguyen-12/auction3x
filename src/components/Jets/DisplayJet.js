@@ -1012,13 +1012,6 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                           <td>N/A</td>
                         )}
                       </tr>
-                    </tbody>
-                  </Table>
-                </Col>
-
-                <Col>
-                  <Table responsive>
-                    <tbody className="propInfo">
                       <tr>
                         <td>Engine Builder Name</td>
                         {property.property.details.engine_builder_name ? (
@@ -1095,23 +1088,18 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                 <Col>
                   <Table
                     responsive
-                    bordered
+                    striped
                     style={{
                       margin: "auto",
                       justifyContent: "center",
                       textAlign: "center",
                       width: "auto",
                       height: "auto",
-                      marginTop: "50px",
                     }}
                   >
                     <thead style={{ backgroundColor: "#d58f5c" }}>
                       <tr>
-                        <th colSpan={3}>Top Bidders</th>
-                      </tr>
-                    </thead>
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
+                        <th>#</th>
                         <th>Bidder ID</th>
                         <th>Bid Amount</th>
                         <th>Date/Time</th>
@@ -1121,7 +1109,8 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                       {topBid ? (
                         topBid.map((bid, index) => (
                           <tr key={index}>
-                            <td>{bid._id}</td>
+                            <td>{index + 1}</td>
+                            <td>{bid.userId}</td>
                             <td>
                               <NumberFormat
                                 value={bid.amount}

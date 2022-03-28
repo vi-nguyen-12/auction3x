@@ -124,7 +124,8 @@ const CardComp = ({ url, data, id, auctionEndDate, startingBid }) => {
             <div>
               <div>
                 <span className="golden-text">
-                  {data.address.formatted_street_address}, {data.address.state}
+                  {data.property_address.formatted_street_address},{" "}
+                  {data.property_address.state}
                 </span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   Property Address

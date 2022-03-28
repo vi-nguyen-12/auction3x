@@ -25,6 +25,7 @@ function SavedAuctionsCard({
   endRegister,
   type,
 }) {
+  console.log(data);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -56,10 +57,12 @@ function SavedAuctionsCard({
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
+  const registProperty = useSelector((state) => state.registProperty);
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
   const [inAuction, setInAuction] = useState(false);
   const [upcoming, setUpcoming] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const handleBid = () => {
     if (!user._id) {
@@ -80,13 +83,19 @@ function SavedAuctionsCard({
   useEffect(() => {
     const checkAuction = auctions.filter((auction) => auction._id === id);
     const checkProperty = property.filter((property) => property._id === id);
+    const checkRegist = registProperty.filter(
+      (property) => property._id === id
+    );
     if (checkAuction.length > 0) {
       setInAuction(true);
     }
     if (checkProperty.length > 0) {
-      setFavorite(true);
+      setUpcoming(true);
     }
-  }, []);
+    if (checkRegist.length > 0) {
+      setRegistered(true);
+    }
+  }, [auctions, property, registProperty]);
 
   return (
     <div style={{ margin: "30px" }}>
