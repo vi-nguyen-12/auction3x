@@ -213,14 +213,14 @@ function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
 
   const onSubmit = async (data) => {
     if (
-      vessel_registration.length !== 0 ||
-      vessel_maintenance_report.length !== 0 ||
-      vessel_engine_type.length !== 0 ||
-      vessel_performance_report.length !== 0 ||
-      vessel_deck_details.length !== 0 ||
-      vessel_insurance.length !== 0 ||
-      vessel_marine_surveyor_report.length !== 0 ||
-      vessel_valuation_report.length !== 0
+      data.vessel_registration.length !== 0 &&
+      data.vessel_maintenance_report.length !== 0 &&
+      data.vessel_engine_type.length !== 0 &&
+      data.vessel_performance_report.length !== 0 &&
+      data.vessel_deck_details.length !== 0 &&
+      data.vessel_insurance.length !== 0 &&
+      data.vessel_marine_surveyor_report.length !== 0 &&
+      data.vessel_valuation_report.length !== 0
     ) {
       toogleDocuments(documents);
       toogleStep(step + 1);

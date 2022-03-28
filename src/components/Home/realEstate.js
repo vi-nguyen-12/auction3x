@@ -15,7 +15,7 @@ const RealEstate = (props) => {
                 </div>
                 <div className='sell-real-estate'>
                     <div className='content'>
-                        <h1 style={{ color: "#edb48b", marginLeft: "60px" }}>Sell Real Estate <br /> on Auction 10X</h1>
+                        <h1 style={{ color: "#edb48b", marginLeft: "60px", fontFamily: "Josefinslab" }}>Sell Real Estate <br /> on Auction 10X</h1>
                         <p className='paragraph'>Attract quality leads within the highest concentration of international luxury buyers</p>
                     </div>
                 </div>

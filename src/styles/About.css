@@ -1,63 +1,213 @@
-.about{
-    padding: 100px;
+/* .about {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 50%;
 }
 .about h2 {
-    font-size: 2.5em;
-    color: #EDB48B;
-    text-align: center;
-
+  font-size: 2.5em;
+  color: #edb48b;
+  text-align: center;
 }
 .about p {
-    font-size: 1.5em;
-    color: black;
-    text-align: left;
- 
+  font-size: 1.5em;
+  color: black;
+  text-align: left;
 }
-.side-button{
-    display: inline;
-    padding-left: 20px;
+.side-button {
+  display: inline;
+  padding-left: 20px;
 }
 .button-container button {
-    background: linear-gradient(
-90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
-    width: 25%;
-    border: none;
-    border-radius:3px;
-    width: 150px;
-    }
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  width: 25%;
+  border: none;
+  border-radius: 3px;
+  width: 150px;
+}
 
-.content-left{
-    padding: 100px;
+.content-left {
+  padding: 100px;
 }
 .content-left h2 {
-    font-size: 2.5em;
-    color: #EDB48B;
-    text-align: center;
-
+  font-size: 2.5em;
+  color: #edb48b;
+  text-align: center;
 }
 .content-left p {
-    font-size: 1.5em;
-    color: black;
-    text-align: left;
+  font-size: 1.5em;
+  color: black;
+  text-align: left;
 }
-.content-right{
-    padding: 150px;
+.content-right {
+  padding: 150px;
 }
-.content-right button{ 
-display: block;
-width: 90%;
-background: linear-gradient(
-90deg, #D58F5C 0%, #FFC195 31.25%, #DD9C6D 62.5%, #EDB48B 100%);
-border: none;
-border-radius:3px;
-font-weight: bold;
+.content-right button {
+  display: block;
+  width: 90%;
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
 }
-.content-right input{
-   width: 90%;
-   background-color: transparent;
-   border: 2px solid #D58F5C;
-   border-radius: 3px;
+.content-right input {
+  width: 90%;
+  background-color: transparent;
+  border: 2px solid #d58f5c;
+  border-radius: 3px;
 }
-.banner-container{
-    background-color: white;
+.banner-container {
+  background-color: white;
+  width: 100% !important;
+  height: 100vh;
+}
+
+.investor {
+  width: 100%;
+  padding-left: none !important;
+}
+
+.bottom-container {
+  background-color: #f8f8f8;
+  width: 100%;
+  padding-left: -200 !important;
+  padding-right: none !important;
+} */
+
+.banner-container {
+  height: 100%;
+  display: flex;
+}
+.banner-top-left {
+  border: none;
+  background-size: cover;
+  width: 50%;
+}
+.banner-top-right {
+  width: 50%;
+  background: white;
+  padding: 80px !important;
+}
+.banner-top-left-2 {
+  border: none;
+  background-size: cover;
+  width: 50%;
+  width: 50%;
+  background: white;
+  padding: 80px !important;
+}
+.bottom-container {
+  background-color: #f8f8f8;
+  width: 100%;
+  padding-left: -200 !important;
+  padding-right: none !important;
+}
+.button-container button {
+  font-size: 30px;
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  border: none;
+  border-radius: 3px;
+  width: 250px;
+  padding: 10px;
+  color: white;
+  font-family: "Josefin Slab", serif;
+}
+.side-button {
+  display: inline;
+  padding-left: 20px;
+}
+
+.content-right {
+  margin-top: 15%;
+}
+.content-right button {
+  display: block;
+  width: 90%;
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  height: 74px;
+}
+.content-right input {
+  width: 90%;
+  height: 74px;
+  background-color: transparent;
+  border: 2px solid #d58f5c;
+  border-radius: 3px;
+}
+
+.banner-top-left-2 p {
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.banner-top-left-2 h2 {
+  color: #b77b50;
+  font-size: 65px;
+  font-family: "Josefin Slab", serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.banner-top-right p {
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.banner-top-right h2 {
+  color: #b77b50;
+  font-size: 65px;
+  font-family: "Josefin Slab", serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.banner-left {
+  border: none;
+  background-size: cover;
+  width: 50%;
+  width: 50%;
+  background: #f8f8f8;
+  padding: 80px !important;
+}
+
+.banner-left h2 {
+  color: #b77b50;
+  font-size: 45px;
+  font-family: "Josefin Slab", serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.banner-left p {
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

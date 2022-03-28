@@ -1,26 +1,40 @@
 import React from "react";
 import styled from "styled-components";
 import { FaBars, FaGlobeAmericas } from "react-icons/fa";
+import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Login from "../Users/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Modal, Table } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Table,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 import "../../styles/modalStyle.css";
 import "../../styles/Header.css";
 import ReconfirmEmail from "../Users/ReconfirmEmail";
 import SignUp from "../Users/SignUp";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import ForgotPass from "../Users/ForgotPass";
 import ChangePass from "../Users/ChangePass";
-import { useHistory } from "react-router-dom";
 import { logout } from "../../slice/userSlice";
+import NumberFormat from "react-number-format";
 // import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
 // import CloseButton from "react-bootstrap/CloseButton";
 
 const Header = ({ color, change }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  // const { id } = useParams();
+  // const properties = useSelector((state) => state.auction);
+  // const propId = properties.find((item) => item._id === id);
+  // console.log(propId);
+
   const history = useHistory();
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -40,6 +54,7 @@ const Header = ({ color, change }) => {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   // const toogleFundReq = () => popFundReq(!showFundReq);
+  const [showWallet, setShowWallet] = useState(false);
 
   const handleLogout = async () => {
     document.cookie = "auth_token=; path=/";
@@ -48,6 +63,7 @@ const Header = ({ color, change }) => {
   };
 
   const handleOnClick = (page) => () => {
+    console.log(page);
     history.push(`/${page}`);
   };
 
@@ -348,6 +364,7 @@ const Header = ({ color, change }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            history.push("/realEstates");
                           }}
                         >
                           REAL ESTATE
@@ -392,6 +409,7 @@ const Header = ({ color, change }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            history.push("/cars");
                           }}
                         >
                           CARS
@@ -437,6 +455,7 @@ const Header = ({ color, change }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            history.push("/yachts");
                           }}
                         >
                           YACHTS
@@ -451,6 +470,11 @@ const Header = ({ color, change }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            if (user._id) {
+                              history.push("/Dashboard");
+                            } else {
+                              toogleSignIn();
+                            }
                           }}
                         >
                           DASHBOARD
@@ -481,6 +505,7 @@ const Header = ({ color, change }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            history.push("/jets");
                           }}
                         >
                           JETS
@@ -647,52 +672,41 @@ const Header = ({ color, change }) => {
                     >
                       Hello, {user.firstName}
                     </button>
-                    <div className="dropdown-content ">
-                      {windowSize < 992 && (
-                        <>
-                          <button
-                            className="headerNav fw-bold p-3"
-                            onClick={handleOnClick("realEstates")}
-                          >
-                            Real Estates
-                          </button>
-                          <button
-                            className="headerNav fw-bold p-3"
-                            onClick={handleOnClick("cars")}
-                          >
-                            Cars
-                          </button>
-                          <button
-                            className="headerNav fw-bold p-3"
-                            onClick={handleOnClick("jets")}
-                          >
-                            Jets
-                          </button>
-                          <button
-                            className="headerNav fw-bold p-3"
-                            onClick={handleOnClick("yachts")}
-                          >
-                            Yatches
-                          </button>
-                        </>
-                      )}
+                    <div className="dropdown-content">
                       <button
                         className="fw-bold p-3"
                         onClick={handleOnClick("Dashboard")}
                       >
-                        My DashBoard
+                        DashBoard
                       </button>
-                      <button
+                      {/* <button
                         className="fw-bold p-3"
                         onClick={handleOnClick("ads")}
                       >
                         My Ads
-                      </button>
+                      </button> */}
                       <button className="fw-bold p-3" onClick={handleLogout}>
                         Log Out
                       </button>
                     </div>
                   </div>
+                  <DropdownButton
+                    style={{ marginRight: "15px" }}
+                    id="dropdown-basic-button"
+                    title={<IoWallet size={36} />}
+                    show={showWallet}
+                    onMouseEnter={() => setShowWallet(true)}
+                    onMouseLeave={() => setShowWallet(false)}
+                  >
+                    <Dropdown.Item href="#">
+                      <NumberFormat
+                        value={user.wallet}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </Dropdown.Item>
+                  </DropdownButton>
                   <Button
                     style={{
                       backgroundColor: "#fcba7d",
@@ -743,8 +757,7 @@ const Header = ({ color, change }) => {
                   </div>
                   <Button
                     style={{
-                      backgroundImage:
-                        "linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b)",
+                      backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
                       marginRight: "10px",
@@ -758,8 +771,7 @@ const Header = ({ color, change }) => {
 
                   <Button
                     style={{
-                      backgroundImage:
-                        "linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b)",
+                      backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
                     }}
@@ -798,56 +810,46 @@ const Header = ({ color, change }) => {
                       backgroundImage: "none",
                       backgroundColor: "#fcba7d",
                       marginRight: "50px",
+                      padding: "8px 20px",
                     }}
                   >
                     Hello, {user.firstName}
                   </button>
                   <div className="dropdown-content ">
-                    {windowSize < 992 && (
-                      <>
-                        <button
-                          className="headerNav fw-bold p-3"
-                          onClick={handleOnClick("realEstates")}
-                        >
-                          Real Estates
-                        </button>
-                        <button
-                          className="headerNav fw-bold p-3"
-                          onClick={handleOnClick("cars")}
-                        >
-                          Cars
-                        </button>
-                        <button
-                          className="headerNav fw-bold p-3"
-                          onClick={handleOnClick("jets")}
-                        >
-                          Jets
-                        </button>
-                        <button
-                          className="headerNav fw-bold p-3"
-                          onClick={handleOnClick("yachts")}
-                        >
-                          Yatches
-                        </button>
-                      </>
-                    )}
                     <button
                       className="fw-bold p-3"
                       onClick={handleOnClick("Dashboard")}
                     >
-                      My Dashboard
+                      Dashboard
                     </button>
-                    <button
+                    {/* <button
                       className="fw-bold p-3"
                       onClick={handleOnClick("ads")}
                     >
                       My Ads
-                    </button>
+                    </button> */}
                     <button className="fw-bold p-3" onClick={handleLogout}>
                       Log Out
                     </button>
                   </div>
                 </div>
+                <DropdownButton
+                  style={{ marginRight: "15px" }}
+                  id="dropdown-basic-button"
+                  title={<IoWallet size={36} />}
+                  show={showWallet}
+                  onMouseEnter={() => setShowWallet(true)}
+                  onMouseLeave={() => setShowWallet(false)}
+                >
+                  <Dropdown.Item href="#">
+                    <NumberFormat
+                      value={user.wallet}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </Dropdown.Item>
+                </DropdownButton>
                 <Button
                   style={{
                     backgroundColor: "#fcba7d",

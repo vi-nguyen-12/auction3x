@@ -57,7 +57,6 @@ function Dash() {
     const data = await authServices.buyerApprovedAuctions(id);
     setApprovedAuctions(data);
   };
-  console.log(bidAuctions);
   return (
     // <div className="DashContainer">
     //   <div className="DashBody">
