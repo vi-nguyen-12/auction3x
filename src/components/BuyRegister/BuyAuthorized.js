@@ -14,10 +14,8 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
   console.log(document);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
-  const [url, setUrl] = useState();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
-  const [docId, setDocId] = useState();
   const properties = useSelector((state) => state.property);
   const auction = useSelector((state) => state.auction);
   const onGoingAuction = auction.find((item) => item._id === id);
@@ -42,24 +40,7 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
 
   useEffect(() => {
     getIp();
-    authService.getDocuSign().then((res) => {
-      setUrl(res.data.redirectUrl);
-      setEnvelopeId(res.data.envelopeId);
-    });
   }, []);
-
-  useEffect(() => {
-    setLoader(true);
-    authService.getDocuSignStatus(envelopeId).then((res) => {
-      setDocId(res.data._id);
-      if (envelopeId) {
-        setLoader(false);
-      }
-    });
-  }, [envelopeId]);
-
-  const history = useHistory();
-  // console.log(ip);
 
   const [agree, setAgree] = useState(false);
   const dateTime = new Date().toISOString();
@@ -75,23 +56,45 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
     { questionId: questionID[4], answer: answer[4] },
   ];
 
-  const onSubmit = async (data) => {
+  const handleSignDocusign = async () => {
+    setLoader(true);
+    await authService.getDocuSign(envelopeId).then((res) => {
+      setLoader(false);
+      setEnvelopeId(res.data.envelopeId);
+      if (
+        res.data.status !== "signing_complete" &&
+        res.data.status !== "viewing_complete"
+      ) {
+        window.open(res.data.redirectUrl);
+      }
+      console.log(res.data);
+    });
+  };
+  const onSubmit = async () => {
     if (agree) {
-      await authService
-        .buyerRegister({
-          auctionId: auctionId ? auctionId._id : onGoingAuction._id,
-          TC: { time: agree, IPAddress: ip },
-          answers: answers,
-          docusign: docId,
-          documents: documents,
-        })
-        .then((res) => {
-          if (res.data.error) {
-            alert(res.data.error);
-          } else {
-            window.location.reload();
-          }
-        });
+      setLoader(true);
+      await authService.getDocuSignStatus(envelopeId).then((res) => {
+        setLoader(false);
+        if (
+          res.data.status !== "signing_complete" &&
+          res.data.status !== "viewing_complete"
+        ) {
+          alert("Please sign the docusign before proceeding ");
+        } else {
+          authService
+            .buyerRegister({
+              auctionId: auctionId ? auctionId._id : onGoingAuction._id,
+              TC: { time: agree, IPAddress: ip },
+              answers: answers,
+              docusignId: res.data._id,
+              documents,
+            })
+            .then((res) => {
+              window.location.reload();
+              alert("You have successfully registered to buy this auction");
+            });
+        }
+      });
     } else {
       alert("Please agree to the terms and conditions");
     }
@@ -131,9 +134,10 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
           >
             <Button
               className="btn btn-primary"
-              onClick={() => {
-                window.open(url);
-              }}
+              // onClick={() => {
+              //   window.open(url);
+              // }}
+              onClick={handleSignDocusign}
             >
               <SiDocusign />
               <span style={{ marginLeft: "10px" }}>
