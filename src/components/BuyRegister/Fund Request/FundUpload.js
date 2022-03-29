@@ -102,16 +102,11 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
   };
 
   return (
-    <div
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-        }
-      }}
-      style={{ display: "inline", justifyContent: "center" }}
-    >
-      <Container>
-        <Row>
+    <>
+      <Modal.Header closeButton>
+        <Modal.Title
+          style={{ display: "grid", width: "100%", justifyContent: "center", textAlign:"center" }}
+        >
           <h2
             style={{
               color: "#6d6d6d",
@@ -123,156 +118,168 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
           >
             UPLOAD DOCUMENTS
           </h2>
-          <p style={{ color: "black" }}>*We only accept PDF Files*</p>
-
+          <p style={{ color: "black", fontSize: "14px" }}>
+            *We only accept PDF Files*
+          </p>
+        </Modal.Title>
+      </Modal.Header>
+      <div
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+        style={{ display: "inline", justifyContent: "center" }}
+      >
+        <Container>
           {loader ? (
             <div className="loader">
               <div className="spinning" />
             </div>
           ) : null}
-        </Row>
-        <Row
-          style={{
-            overflowX: "hidden",
-            margin: "0 50px",
-            color: "black",
-          }}
-        >
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Bank Statement (.pdf) <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn1"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("document1", { onChange: onChange1 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn1">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn1"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {document1
-                  ? document1.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = true;
-                              setDocument1([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument1([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover1 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Brokerage account statement{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn2"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("document2", { onChange: onChange2 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn2">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn2"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {document2
-                  ? document2.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = true;
-                              setDocument2([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument2([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover2 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
+          <Row
+            style={{
+              overflowX: "hidden",
+              margin: "0 50px",
+              color: "black",
+            }}
+          >
+            <Row style={{ borderBottom: "#333 solid 1px" }}>
+              <Col className="input-form-3">
+                Bank Statement (.pdf){" "}
+                <span style={{ color: "#ff0000" }}>*</span>
+                <input
+                  id="documents-btn1"
+                  accept=".pdf"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("document1", { onChange: onChange1 })}
+                  required
+                />
+                <div className="upload-cover">
+                  <details>
+                    <summary>
+                      <label htmlFor="documents-btn1">+ Documents</label>
+                    </summary>
+                    <div>
+                      <label
+                        style={{ width: "50%", marginTop: "10px" }}
+                        htmlFor="documents-btn1"
+                      >
+                        <AiOutlinePlusCircle />
+                      </label>
+                    </div>
+                  </details>
+                </div>
+              </Col>
+              <Col>
+                <div className="upload-list">
+                  {document1
+                    ? document1.map((document, index, arr) => (
+                        <div key={index} className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                              onMouseEnter={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover1 = true;
+                                setDocument1([...tempArr]);
+                              }}
+                              onMouseLeave={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover1 = false;
+                                let newArr = tempArr.splice(index, 0);
+                                setDocument1([...tempArr, ...newArr]);
+                              }}
+                            >
+                              {!document.onHover1 ? (
+                                <FaCheck fontSize="1.5em" color="blue" />
+                              ) : (
+                                <MdClose fontSize="1.5em" color="red" />
+                              )}
+                            </button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </Col>
+            </Row>
+            <Row style={{ borderBottom: "#333 solid 1px" }}>
+              <Col className="input-form-3">
+                Brokerage account statement{" "}
+                <span style={{ color: "#ff0000" }}>*</span>
+                <input
+                  id="documents-btn2"
+                  accept=".pdf"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("document2", { onChange: onChange2 })}
+                  required
+                />
+                <div className="upload-cover">
+                  <details>
+                    <summary>
+                      <label htmlFor="documents-btn2">+ Documents</label>
+                    </summary>
+                    <div>
+                      <label
+                        style={{ width: "50%", marginTop: "10px" }}
+                        htmlFor="documents-btn2"
+                      >
+                        <AiOutlinePlusCircle />
+                      </label>
+                    </div>
+                  </details>
+                </div>
+              </Col>
+              <Col>
+                <div className="upload-list">
+                  {document2
+                    ? document2.map((document, index, arr) => (
+                        <div key={index} className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                              onMouseEnter={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover2 = true;
+                                setDocument2([...tempArr]);
+                              }}
+                              onMouseLeave={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover2 = false;
+                                let newArr = tempArr.splice(index, 0);
+                                setDocument2([...tempArr, ...newArr]);
+                              }}
+                            >
+                              {!document.onHover2 ? (
+                                <FaCheck fontSize="1.5em" color="blue" />
+                              ) : (
+                                <MdClose fontSize="1.5em" color="red" />
+                              )}
+                            </button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </Col>
+            </Row>
 
-          {/* <Row style={{ borderBottom: "#333 solid 1px" }}>
+            {/* <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
               Crypto account statement (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
@@ -340,100 +347,101 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
             </Col>
           </Row> */}
 
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Line of credit doc (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn3"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("document3", { onChange: onChange3 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn3">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn3"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {document3
-                  ? document3.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = true;
-                              setDocument3([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument3([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover3 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
+            <Row style={{ borderBottom: "#333 solid 1px" }}>
+              <Col className="input-form-3">
+                Line of credit doc (.pdf){" "}
+                <span style={{ color: "#ff0000" }}>*</span>
+                <input
+                  id="documents-btn3"
+                  accept=".pdf"
+                  type="file"
+                  name="documents"
+                  multiple
+                  hidden
+                  {...register("document3", { onChange: onChange3 })}
+                  required
+                />
+                <div className="upload-cover">
+                  <details>
+                    <summary>
+                      <label htmlFor="documents-btn3">+ Documents</label>
+                    </summary>
+                    <div>
+                      <label
+                        style={{ width: "50%", marginTop: "10px" }}
+                        htmlFor="documents-btn3"
+                      >
+                        <AiOutlinePlusCircle />
+                      </label>
+                    </div>
+                  </details>
+                </div>
+              </Col>
+              <Col>
+                <div className="upload-list">
+                  {document3
+                    ? document3.map((document, index, arr) => (
+                        <div key={index} className="upload-list-item">
+                          <span>
+                            {document.name}
+                            <button
+                              className="delete-btn"
+                              onClick={handleDelete(document.url)}
+                              onMouseEnter={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover3 = true;
+                                setDocument3([...tempArr]);
+                              }}
+                              onMouseLeave={() => {
+                                var tempArr = arr;
+                                var temp = document;
+                                temp.onHover3 = false;
+                                let newArr = tempArr.splice(index, 0);
+                                setDocument3([...tempArr, ...newArr]);
+                              }}
+                            >
+                              {!document.onHover3 ? (
+                                <FaCheck fontSize="1.5em" color="blue" />
+                              ) : (
+                                <MdClose fontSize="1.5em" color="red" />
+                              )}
+                            </button>
+                          </span>
+                        </div>
+                      ))
+                    : null}
+                </div>
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Container>
+        </Container>
 
-      <div
-        style={{ position: "sticky", padding: "auto", marginTop: "30px" }}
-        className="bottom-btn"
-      >
-        <button
-          className="pre-btn"
-          onClick={() => {
-            toogleStep(step - 1);
-          }}
+        <div
+          style={{ position: "sticky", padding: "auto", marginTop: "30px" }}
+          className="bottom-btn"
         >
-          Previous
-        </button>
-        <button
-          className="nxt-btn"
-          type="submit"
-          onClick={() => {
-            toogleDocument(document);
-            toogleStep(step + 1);
-          }}
-        >
-          Next
-        </button>
+          <button
+            className="pre-btn"
+            onClick={() => {
+              toogleStep(step - 1);
+            }}
+          >
+            Previous
+          </button>
+          <button
+            className="nxt-btn"
+            type="submit"
+            onClick={() => {
+              toogleDocument(document);
+              toogleStep(step + 1);
+            }}
+          >
+            Next
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -28,7 +28,7 @@
 .footer-title {
   color: #fff;
   font-family: Josefin Slab;
-  font-size: 2rem;
+  font-size: 3rem;
   margin-top: 2rem;
   text-align: left;
   padding-left: 6rem;
@@ -36,13 +36,13 @@
 
 li {
   padding: 0.2rem;
-  font-size: 2rem;
+  font-size: 1rem;
   font-size: 1.8rem;
   text-align: left;
 }
 
 ul {
-  padding-left: 6rem !important;
+  padding-left: 6.5rem !important;
 }
 
 a {
