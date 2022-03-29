@@ -86,7 +86,7 @@ const Featured = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: true,
+    autoplay: false,
     slidesToShow: auction.length > 3 ? 2 : auction.length,
     responsive: [
       {

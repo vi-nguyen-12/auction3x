@@ -13,7 +13,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
   const [document3, setDocument3] = useState([]);
-  const [document4, setDocument4] = useState([]);
+  // const [document4, setDocument4] = useState([]);
   const [loader, setLoader] = useState(false);
 
   const onChange1 = async (e) => {
@@ -61,20 +61,20 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
     });
   };
 
-  const onChange4 = async (e) => {
-    setLoader(true);
-    const formData4 = new FormData();
+  // const onChange4 = async (e) => {
+  //   setLoader(true);
+  //   const formData4 = new FormData();
 
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData4.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData4).then((response) => {
-      if (response.status === 200) {
-        setDocument4([...document4, ...response.data]);
-        setLoader(false);
-      }
-    });
-  };
+  //   for (let i = 0; i < e.target.files.length; i++) {
+  //     formData4.append("documents", e.target.files[i]);
+  //   }
+  //   await authService.saveDocuments(formData4).then((response) => {
+  //     if (response.status === 200) {
+  //       setDocument4([...document4, ...response.data]);
+  //       setLoader(false);
+  //     }
+  //   });
+  // };
 
   const bankStatment = document1.map((item) => {
     return { ...item, officialName: "bank_statement" };
@@ -84,21 +84,21 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
     return { ...item, officialName: "brokerage_account_statement" };
   });
 
-  const crypto = document3.map((item) => {
-    return { ...item, officialName: "crypto_account_statement" };
-  });
+  // const crypto = document3.map((item) => {
+  //   return { ...item, officialName: "crypto_account_statement" };
+  // });
 
-  const lineCredit = document4.map((item) => {
+  const lineCredit = document3.map((item) => {
     return { ...item, officialName: "line_of_credit_doc" };
   });
 
-  const document = [...bankStatment, ...broker, ...crypto, ...lineCredit];
+  const document = [...bankStatment, ...broker, ...lineCredit];
 
   const handleDelete = (url) => () => {
     setDocument1(document1.filter((document) => document.url !== url));
     setDocument2(document2.filter((document) => document.url !== url));
     setDocument3(document3.filter((document) => document.url !== url));
-    setDocument4(document4.filter((document) => document.url !== url));
+    // setDocument4(document4.filter((document) => document.url !== url));
   };
 
   return (
@@ -272,7 +272,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
             </Col>
           </Row>
 
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
+          {/* <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
               Crypto account statement (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
@@ -338,31 +338,31 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
                   : null}
               </div>
             </Col>
-          </Row>
+          </Row> */}
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
               Line of credit doc (.pdf){" "}
               <span style={{ color: "#ff0000" }}>*</span>
               <input
-                id="documents-btn4"
+                id="documents-btn3"
                 accept=".pdf"
                 type="file"
                 name="documents"
                 multiple
                 hidden
-                {...register("document4", { onChange: onChange4 })}
+                {...register("document3", { onChange: onChange3 })}
                 required
               />
               <div className="upload-cover">
                 <details>
                   <summary>
-                    <label htmlFor="documents-btn4">+ Documents</label>
+                    <label htmlFor="documents-btn3">+ Documents</label>
                   </summary>
                   <div>
                     <label
                       style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn4"
+                      htmlFor="documents-btn3"
                     >
                       <AiOutlinePlusCircle />
                     </label>
@@ -372,8 +372,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
             </Col>
             <Col>
               <div className="upload-list">
-                {document4
-                  ? document4.map((document, index, arr) => (
+                {document3
+                  ? document3.map((document, index, arr) => (
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
@@ -383,18 +383,18 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
                             onMouseEnter={() => {
                               var tempArr = arr;
                               var temp = document;
-                              temp.onHover4 = true;
-                              setDocument4([...tempArr]);
+                              temp.onHover3 = true;
+                              setDocument3([...tempArr]);
                             }}
                             onMouseLeave={() => {
                               var tempArr = arr;
                               var temp = document;
-                              temp.onHover4 = false;
+                              temp.onHover3 = false;
                               let newArr = tempArr.splice(index, 0);
-                              setDocument4([...tempArr, ...newArr]);
+                              setDocument3([...tempArr, ...newArr]);
                             }}
                           >
-                            {!document.onHover4 ? (
+                            {!document.onHover3 ? (
                               <FaCheck fontSize="1.5em" color="blue" />
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />

@@ -297,18 +297,18 @@ function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
 
   const onSubmit = async (data) => {
     if (
-      ownership_document.length !== 0 ||
-      registration_document.length !== 0 ||
-      title_certificate.length !== 0 ||
-      detail_specification.length !== 0 ||
-      insurance_document.length !== 0 ||
-      loan_document.length !== 0 ||
-      jet_detail_history.length !== 0 ||
-      fitness_report.length !== 0 ||
-      electric_work_details.length !== 0 ||
-      engine_details.length !== 0 ||
-      inspection_report.length !== 0 ||
-      valuation_report.length !== 0
+      data.ownership_document.length !== 0 &&
+      data.registration_document.length !== 0 &&
+      data.title_certificate.length !== 0 &&
+      data.detail_specification.length !== 0 &&
+      data.insurance_document.length !== 0 &&
+      data.loan_document.length !== 0 &&
+      data.jet_detail_history.length !== 0 &&
+      data.fitness_report.length !== 0 &&
+      data.electric_work_details.length !== 0 &&
+      data.engine_details.length !== 0 &&
+      data.inspection_report.length !== 0 &&
+      data.valuation_report.length !== 0
     ) {
       toogleDocuments(documents);
       toogleStep(step + 1);

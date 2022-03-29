@@ -20,6 +20,14 @@
   color: black;
 }
 
-.term input{
+.term input {
   margin-left: 30px;
+}
+
+.fund-container{
+  margin-top: -60px;
+}
+
+.fund-container .row {
+  margin: 20px;
 }

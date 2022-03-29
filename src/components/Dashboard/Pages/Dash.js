@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Button, Container, Modal } from "react-bootstrap";
 import { CircularProgressbar } from "react-circular-progressbar";
 import { RiFilter2Fill } from "react-icons/ri";
-import { MdOutlineRefresh } from "react-icons/md";
+import { GoPlus } from "react-icons/go";
 import "react-circular-progressbar/dist/styles.css";
 import authServices from "../../../services/authServices";
 import { useSelector } from "react-redux";
 import SavedAuctionsComp from "./Auctions/TabsComponents/SavedAuctionsComp";
 import BidAuctionsComp from "./Auctions/TabsComponents/BidAuctionsComp";
 import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp";
+import CloseButton from "react-bootstrap/CloseButton";
+import MultiFundForm from "../../BuyRegister/Fund Request/MultiFundForm";
+import AddFund from "../../BuyRegister/AddFund";
 
 function Dash() {
   const [savedProp, setSavedProp] = useState([]);
@@ -26,15 +29,14 @@ function Dash() {
   const auctions = useSelector((state) => state.auction);
   const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
-  const [color, setColor] = useState("#b77b50");
-  const toogleColor = (color) => setColor(color);
+  const [showFundReq, popFundReq] = useState(false);
+  const toogleFundReq = () => popFundReq(!showFundReq);
 
   useEffect(() => {
     setUpcomingAuctions(property.length);
     setLiveAuctions(auctions.length);
     if (user._id) {
       setSavedProp(savedProperties);
-      setColor("#b77b50");
     }
   }, [property, auctions, savedProperties, user]);
 
@@ -201,9 +203,9 @@ function Dash() {
               </button>
             </div>
             <div className="refresh">
-              <MdOutlineRefresh color="white" size={28} />
-              <button className="resetBtn">
-                <span>Refresh</span>
+              <GoPlus color="white" size={28} />
+              <button onClick={toogleFundReq} className="resetBtn">
+                <span>Add Fund</span>
               </button>
             </div>
           </div>
@@ -247,6 +249,33 @@ function Dash() {
           </div>
         )
       )}
+      <Modal
+        backdrop="static"
+        keyboard={false}
+        size="lg"
+        show={showFundReq}
+        onHide={toogleFundReq}
+        centered
+      >
+        <div>
+          <CloseButton
+            style={{
+              position: "absolute",
+              right: "25px",
+              top: "25px",
+              width: "25px",
+              height: "25px",
+              zIndex: "999",
+              backgroundColor: "white",
+              boxShadow: "none",
+            }}
+            onClick={toogleFundReq}
+          />
+        </div>
+        <Modal.Body>
+          <AddFund />
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 }

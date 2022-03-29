@@ -6,10 +6,12 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
-const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
+const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
+  console.log(document);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
@@ -21,12 +23,22 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
 
   const [ip, setIp] = useState();
 
+  const getIp = async () => {
+    await axious.get("https://api.ipify.org?format=json").then((res) => {
+      setIp(res.data.ip);
+    });
+  };
+
+  const documents = [];
+
+  //push document to array if it is not empty
+  document.map((item) => {
+    if (item.url) {
+      documents.push(item);
+    }
+  });
+
   useEffect(() => {
-    const getIp = async () => {
-      await axious.get("https://api.ipify.org?format=json").then((res) => {
-        setIp(res.data.ip);
-      });
-    };
     getIp();
   }, []);
 
@@ -60,7 +72,7 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
   };
   const onSubmit = async () => {
     if (agree) {
-      setLoader();
+      setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
         setLoader(false);
         if (
@@ -75,6 +87,7 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID }) => {
               TC: { time: agree, IPAddress: ip },
               answers: answers,
               docusignId: res.data._id,
+              documents,
             })
             .then((res) => {
               window.location.reload();

@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
 
-const BuyAuthoried = ({
+const BuyQuestionair = ({
   toogleStep,
   step,
   toogleAnswer,
@@ -328,4 +328,4 @@ const BuyAuthoried = ({
   );
 };
 
-export default BuyAuthoried;
+export default BuyQuestionair;
