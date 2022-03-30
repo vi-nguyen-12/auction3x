@@ -9,6 +9,7 @@ function Ownership({
   getOwnerShip,
   propertyType,
   getPropId,
+  toogleSellStep,
 }) {
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
@@ -55,6 +56,7 @@ function Ownership({
       } else {
         console.log(res.data);
         getPropId(res.data._id);
+        toogleSellStep(1);
         alert("Successfully saved");
       }
     });
@@ -68,15 +70,17 @@ function Ownership({
         alert("Please enter valid phone number");
       } else {
         const datas = {
-          listing_agreement: listing_agreement,
+          type: propertyType,
           details: {
             owner_name: ownerName,
-            address: address,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
             phone: phone,
             email: email,
-            broker_name: data.brokerName,
-            broker_id: data.brokerId,
+            address: address,
           },
+          documents: listing_agreement ? listing_agreement : null,
+          step: parseInt(1),
         };
         getOwnerShip(datas);
         toogleStep(step + 1);
@@ -87,12 +91,14 @@ function Ownership({
           alert("Please enter valid phone number");
         } else {
           const datas = {
+            type: propertyType,
             details: {
               owner_name: ownerName,
-              address: address,
               phone: phone,
               email: email,
+              address: address,
             },
+            step: parseInt(1),
           };
           getOwnerShip(datas);
           toogleStep(step + 1);

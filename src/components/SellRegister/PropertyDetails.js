@@ -14,6 +14,8 @@ const PropertyDetails = ({
   propertyType,
   propId,
   ownership,
+  getPropId,
+  toogleSellStep,
 }) => {
   return (
     <div className="listDetail-content">
@@ -60,7 +62,8 @@ const PropertyDetails = ({
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
-              propertyType={propertyType}
+              getPropId={getPropId}
+              toogleSellStep={toogleSellStep}
             />
           ) : (
             <EmptyRealEstateDetails
@@ -70,7 +73,8 @@ const PropertyDetails = ({
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
-              propertyType={propertyType}
+              getPropId={getPropId}
+              toogleSellStep={toogleSellStep}
             />
           )
         ) : propertyType === "car" ? (
@@ -81,7 +85,8 @@ const PropertyDetails = ({
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}
-            propertyType={propertyType}
+            getPropId={getPropId}
+            toogleSellStep={toogleSellStep}
           />
         ) : propertyType === "jet" ? (
           <JetDetails
@@ -91,7 +96,8 @@ const PropertyDetails = ({
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}
-            propertyType={propertyType}
+            getPropId={getPropId}
+            toogleSellStep={toogleSellStep}
           />
         ) : propertyType === "yacht" ? (
           <YachtDetails
@@ -101,7 +107,8 @@ const PropertyDetails = ({
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}
-            propertyType={propertyType}
+            getPropId={getPropId}
+            toogleSellStep={toogleSellStep}
           />
         ) : null}
       </div>

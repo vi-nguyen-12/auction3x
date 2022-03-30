@@ -12,6 +12,13 @@ const DocumentsUpload = ({
   propertyType,
   toogleDocuments,
   ownership,
+  propId,
+  images,
+  videos,
+  propertyData,
+  toogleSellStep,
+  sellStep,
+  getPropId,
 }) => {
   return (
     <Container className="upload-box-docu">
@@ -51,28 +58,56 @@ const DocumentsUpload = ({
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
           ownership={ownership}
+          images={images}
+          videos={videos}
+          getPropId={getPropId}
         />
       ) : propertyType === "car" ? (
         <CarDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
           ownership={ownership}
+          images={images}
+          videos={videos}
+          getPropId={getPropId}
         />
       ) : propertyType === "jet" ? (
         <JetDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
           ownership={ownership}
+          images={images}
+          videos={videos}
+          getPropId={getPropId}
         />
       ) : propertyType === "yacht" ? (
         <YachtDocus
           toogleStep={toogleStep}
           step={step}
           toogleDocuments={toogleDocuments}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
           ownership={ownership}
+          images={images}
+          videos={videos}
+          getPropId={getPropId}
         />
       ) : null}
     </Container>
