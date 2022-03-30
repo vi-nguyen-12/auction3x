@@ -202,7 +202,7 @@ const authService = {
   getDocuSign(data) {
     return axios.get(
       apiUrl +
-        `/api/docusign/signature/sellerAgreement/uiviews?envelopeId=${data}`,
+      `/api/docusign/signature/sellerAgreement/uiviews?envelopeId=${data}`,
       {
         headers: {
           Authorization:
@@ -230,6 +230,11 @@ const authService = {
       apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`
     );
   },
+
+  getIncompleteProperty(id) {
+    return axios.get(apiUrl + `/api/users/${id}/seller/properties?completed=false`);
+  },
+
 
   getSavedProperties(id) {
     return axios.get(apiUrl + `/api/users/${id}/likes`);
@@ -260,14 +265,14 @@ const authService = {
   sellerApprovedListings(id) {
     return axios.get(
       apiUrl +
-        `/api/users/${id}/seller/properties?status=success&inAuction=false`
+      `/api/users/${id}/seller/properties?status=success&inAuction=false`
     );
   },
 
   sellerPropInAuctions(id) {
     return axios.get(
       apiUrl +
-        `/api/users/${id}/seller/properties?status=success&inAuction=true`
+      `/api/users/${id}/seller/properties?status=success&inAuction=true`
     );
   },
 

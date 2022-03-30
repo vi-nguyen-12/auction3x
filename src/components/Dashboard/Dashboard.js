@@ -17,6 +17,7 @@ import SoldListings from "./Pages/Listings/SoldListings";
 import Dash from "./Pages/Dash";
 import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
+import IncompleteListing from "./Pages/Listings/IncompleteListing";
 
 function Dashboard({ colorChange, toogleChange, toogleShow }) {
   useEffect(() => {
@@ -49,6 +50,7 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
             <Route exact path="/Dashboard/Listings/AuctionListings" component={LiveListings} />
             <Route exact path="/Dashboard/Listings/PendingApproval" component={PendingListings} />
             <Route exact path="/Dashboard/Listings/SoldListings" component={SoldListings} />
+            <Route exact path="/Dashboard/Listings/IncompleteListing" component={IncompleteListing} />
             <Route exact path="/Dashboard/Profile" component={Profile} />
           </Switch>
         </div>
