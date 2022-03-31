@@ -443,3 +443,9 @@ h3 {
     0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
     0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
 }
+
+.table td {
+  padding: 15px 10px;
+  text-align: left;
+  vertical-align: top;
+}

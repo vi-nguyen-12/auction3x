@@ -7,16 +7,25 @@ import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
 import Ownership from "./Ownership";
+import { useParams } from "react-router-dom";
 
 const MultiSellForm = ({ colorChange }) => {
-  useEffect(() => {
-    colorChange("black");
-  }, []);
-
   const [step, setStep] = useState(0);
   const toogleStep = (step) => {
     setStep(step);
   };
+
+  const params = useParams();
+  console.log(params);
+
+  useEffect(() => {
+    colorChange("black");
+    if (params.step) {
+      setStep(parseInt(params.step));
+    }
+  }, [params.step]);
+
+  console.log(step);
 
   const [propertyData, setPropertyData] = useState({});
   const tooglePropertyData = (propertyData) => {
