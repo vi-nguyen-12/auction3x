@@ -74,13 +74,13 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
     if (agree) {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
-        setLoader(false);
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
           alert("Please sign the docusign before proceeding ");
         } else {
+          setLoader(false);
           authService
             .buyerRegister({
               auctionId: auctionId ? auctionId._id : onGoingAuction._id,
