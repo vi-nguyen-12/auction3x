@@ -15,8 +15,8 @@ h3 {
   padding: 0.5rem 1rem;
 }
 
-.modal-title{
-  margin:0;
+.modal-title {
+  margin: 0;
   line-height: 0;
   font-size: 2.5rem;
 }
@@ -130,7 +130,10 @@ h3 {
   background-color: transparent;
   margin: auto;
 }
-
+.progress-1 {
+  width: 80px;
+  height: 80px;
+}
 .CircularProgressbar .CircularProgressbar-path {
   stroke: #b77b50 !important;
   stroke-linecap: round;
@@ -262,7 +265,7 @@ h3 {
   justify-content: flex-end;
 }
 
-.edit-btn Button{
+.edit-btn Button {
   color: #216fed;
   display: flex;
   align-items: center;
@@ -385,4 +388,58 @@ h3 {
 
 .address Button:hover {
   background-color: transparent;
+}
+
+/* Incomplete*/
+.img-placeholder {
+  width: 275px;
+  height: 275px;
+  background-color: #d3e2fb;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+.incompleteCard {
+  width: 300px;
+  background-color: #fafafb;
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px 0px rgba(87, 115, 240, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.incompleteCard:hover {
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+.resume-btn {
+  background: #fcba7d;
+  padding: 20px;
+  border-radius: 20px;
+  border: none;
+}
+.resume-btn:hover {
+  background: #f9a867;
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+
+.del-btn {
+  background: #737b8b;
+  padding: 20px;
+  border-radius: 20px;
+  border: none;
+}
+.del-btn:hover {
+  background: #6d6f7b;
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
 }
