@@ -130,7 +130,10 @@ h3 {
   background-color: transparent;
   margin: auto;
 }
-
+.progress-1 {
+  width: 80px;
+  height: 80px;
+}
 .CircularProgressbar .CircularProgressbar-path {
   stroke: #b77b50 !important;
   stroke-linecap: round;

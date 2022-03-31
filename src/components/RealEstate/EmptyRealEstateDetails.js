@@ -10,7 +10,8 @@ function EmptyRealEstateDetails({
   tooglePropertyData,
   propId,
   ownership,
-  propertyType,
+  toogleSellStep,
+  getPropId,
 }) {
   const {
     register,
@@ -37,7 +38,6 @@ function EmptyRealEstateDetails({
       const datas = {
         id: propId,
         details: {
-          type: propertyType,
           street_address: address ? address : property.street_address,
           city: city ? city : property.city,
           state: state ? state : property.state,
@@ -50,8 +50,8 @@ function EmptyRealEstateDetails({
           standardized_land_use_type: propType,
           total_value: totalValue,
           area_sq_ft: sqft,
-          reservedAmount: reservedAmount,
-          discussedAmount: discussedAmount,
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
           step: parseInt(2),
         },
       };
@@ -59,39 +59,38 @@ function EmptyRealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          console.log(res.data);
+          toogleSellStep(2);
+          alert("Saved Successfully!");
         }
       });
     } else {
       const datas = {
-        id: propId,
-        details: {
-          type: ownership.type ? ownership.type : propertyType,
-          street_address: address ? address : property.street_address,
-          city: city ? city : property.city,
-          state: state ? state : property.state,
-          country: country ? country : property.country,
-          zip_code: zip ? zip : property.zip_code,
-          owner_name: ownerName,
-          rooms_count: rooms,
-          baths_count: bathrooms,
-          beds_count: bedrooms,
-          standardized_land_use_type: propType,
-          total_value: totalValue,
-          area_sq_ft: sqft,
-          reservedAmount: reservedAmount,
-          discussedAmount: discussedAmount,
-          ...ownership,
-          documents: ownership.listing_agreement,
-          step: parseInt(2),
-        },
+        street_address: address ? address : property.street_address,
+        city: city ? city : property.city,
+        state: state ? state : property.state,
+        country: country ? country : property.country,
+        zip_code: zip ? zip : property.zip_code,
+        owner_name: ownerName,
+        rooms_count: rooms,
+        baths_count: bathrooms,
+        beds_count: bedrooms,
+        standardized_land_use_type: propType,
+        total_value: totalValue,
+        area_sq_ft: sqft,
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        ...ownership,
+        documents: ownership.listing_agreement,
+        step: parseInt(2),
       };
-      delete datas.details.listing_agreement;
+      delete datas.listing_agreement;
       authService.savePropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          console.log(res.data);
+          toogleSellStep(2);
+          getPropId(res.data._id);
+          alert("Saved Successfully!");
         }
       });
     }
@@ -102,19 +101,20 @@ function EmptyRealEstateDetails({
       alert("Reserved amount should be greater than discussed amount");
     } else {
       const submitedData = {
-        type: "real-estate",
-        street_address: data.street_address,
-        city: data.city,
-        state: data.state,
-        zipCode: data.zipCode,
-        discussedAmount: data.discussedAmount,
-        reservedAmount: data.reservedAmount,
-        fields: {
-          beds_count: data.bedrooms,
-          baths: data.bathrooms,
-          rooms_count: data.rooms_count,
-          total_value: data.total_value,
-        },
+        street_address: address ? address : property.street_address,
+        city: city ? city : property.city,
+        state: state ? state : property.state,
+        country: country ? country : property.country,
+        zip_code: zip ? zip : property.zip_code,
+        owner_name: ownerName,
+        rooms_count: rooms,
+        baths_count: bathrooms,
+        beds_count: bedrooms,
+        standardized_land_use_type: propType,
+        total_value: totalValue,
+        area_sq_ft: sqft,
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
       };
 
       tooglePropertyData(submitedData);
@@ -325,7 +325,7 @@ function EmptyRealEstateDetails({
           </Col>
         </Row>
       </Container>
-      <div className="bottom-btn" style={{ width: "100%" }}>
+      <div className="bottom-btn">
         <div
           style={{
             position: "absolute",

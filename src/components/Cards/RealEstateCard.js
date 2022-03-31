@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Toast from "../Toast";
 import Login from "../Users/Login";
 import Modal from "react-bootstrap/Modal";
@@ -61,7 +61,18 @@ const CardComp = ({ url, data, id, auctionEndDate, startingBid }) => {
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayAuctions/${id}`);
+    if (auctionEnded) {
+      alert("Auction has ended");
+    } else if (!auctionEnded) {
+      if (
+        history.location.pathname === "/Dashboard" ||
+        history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
+      ) {
+        window.open(`/DisplayAuctions/${id}`);
+      } else {
+        history.push(`/DisplayAuctions/${id}`);
+      }
+    }
   };
 
   return (

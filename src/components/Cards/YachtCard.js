@@ -73,10 +73,18 @@ const YachtCard = ({
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayAuctions/${id}`);
-    // window.setTimeout(() => {
-    //   window.location.reload();
-    // }, 800);
+    if (auctionEnded) {
+      alert("Auction has ended");
+    } else if (!auctionEnded) {
+      if (
+        history.location.pathname === "/Dashboard" ||
+        history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
+      ) {
+        window.open(`/DisplayAuctions/${id}`);
+      } else {
+        history.push(`/DisplayAuctions/${id}`);
+      }
+    }
   };
 
   useEffect(() => {

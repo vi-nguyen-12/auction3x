@@ -25,7 +25,6 @@ function SavedAuctionsCard({
   endRegister,
   type,
 }) {
-  console.log(data);
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -70,7 +69,6 @@ function SavedAuctionsCard({
     }
     if (user.KYC) {
       window.open(`/DisplayAuctions/${id}`);
-      // window.location.reload();
     } else {
       setShowKYC(true);
     }

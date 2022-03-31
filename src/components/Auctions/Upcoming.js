@@ -25,37 +25,37 @@ const Upcoming = (props) => {
       </Row>
       <Col md={12} className="m-auto pt-2">
         <Row>
-          {property.slice(0, 6).map((item) => (
-            <Col key={item._id} md={4} style={{ marginBottom: "30px" }}>
-              {item.property.type === "real-estate" ? (
-                <UpcomingCard
-                  url={item.property.images[0].url}
-                  data={item.property.details}
-                  id={item._id}
-                  startRegister={item.registerStartDate}
-                  endRegister={item.registerEndDate}
-                  startingBid={item.startingBid}
-                />
-              ) : item.property.type === "car" ? (
-                <UpcomingCarCard
-                  url={item.property.images[0].url}
-                  data={item.property.details}
-                  id={item._id}
-                  startRegister={item.registerStartDate}
-                  endRegister={item.registerEndDate}
-                  startingBid={item.startingBid}
-                />
-              ) : item.property.type === "jet" ? (
-                <UpcomingJetCard
-                  url={item.property.images[0].url}
-                  data={item.property.details}
-                  id={item._id}
-                  startRegister={item.registerStartDate}
-                  endRegister={item.registerEndDate}
-                  startingBid={item.startingBid}
-                />
-              ) :
-                item.property.type === "yacht" ? (
+          {property.length > 0 ? (
+            property.slice(0, 6).map((item) => (
+              <Col key={item._id} md={4} style={{ marginBottom: "30px" }}>
+                {item.property.type === "real-estate" ? (
+                  <UpcomingCard
+                    url={item.property.images[0].url}
+                    data={item.property.details}
+                    id={item._id}
+                    startRegister={item.registerStartDate}
+                    endRegister={item.registerEndDate}
+                    startingBid={item.startingBid}
+                  />
+                ) : item.property.type === "car" ? (
+                  <UpcomingCarCard
+                    url={item.property.images[0].url}
+                    data={item.property.details}
+                    id={item._id}
+                    startRegister={item.registerStartDate}
+                    endRegister={item.registerEndDate}
+                    startingBid={item.startingBid}
+                  />
+                ) : item.property.type === "jet" ? (
+                  <UpcomingJetCard
+                    url={item.property.images[0].url}
+                    data={item.property.details}
+                    id={item._id}
+                    startRegister={item.registerStartDate}
+                    endRegister={item.registerEndDate}
+                    startingBid={item.startingBid}
+                  />
+                ) : item.property.type === "yacht" ? (
                   <UpcomingYachtCard
                     url={item.property.images[0].url}
                     data={item.property.details}
@@ -64,10 +64,28 @@ const Upcoming = (props) => {
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
                   />
-                ) :
-                  null}
-            </Col>
-          ))}
+                ) : null}
+              </Col>
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+                marginTop: "30px",
+                backgroundColor: "#e8e8e8",
+                boxShadow: "0px 0px 10px #00000029",
+                borderRadius: "10px",
+                padding: "20px",
+              }}
+            >
+              <h1 style={{ margin: "0" }}>
+                No Upcoming Auctions at the moment, please check again later for
+                upcoming auctions.
+              </h1>
+            </div>
+          )}
         </Row>
       </Col>
     </div>

@@ -1374,11 +1374,11 @@ function DisplayCar({ colorChange, toogleChange, property }) {
               </Tab>
             </Tabs>
           </Row>
-          <Modal size="lg" show={bid} onHide={toogleBid} centered>
+          {/* <Modal size="lg" show={bid} onHide={toogleBid} centered>
             <Modal.Body>
               <MultiBuyForm />
             </Modal.Body>
-          </Modal>
+          </Modal> */}
 
           <Modal
             size="lg"
