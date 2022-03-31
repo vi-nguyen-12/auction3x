@@ -30,12 +30,16 @@
   justify-content: center;
   align-items: center;
   margin: 6rem 3rem;
-  padding: 10px;
+  padding: 10px 250px;
+  position: relative;
+  top: 7em;
 }
 
 .content h1 {
-  color: black;
-  font-weight: 800;
+  font-weight: 500;
+  background: -webkit-linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .real-estate-wrap {
   padding: 100px;
@@ -50,7 +54,19 @@
   border-radius: 0.7rem !important;
   border: 3px solid #ffffff !important;
   background-color: transparent !important;
+  font-size: 25px !important;
+  /* display: flex !important;
+  justify-content: center !important;
+  text-align: center !important; */
 }
+
+.btn-custom:hover {
+  background: -webkit-linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-color: #d58f5c !important;
+}
+
 .btn-custom:focus {
   border: 3px solid #edb48b !important;
   /* text color: #edb48b */
@@ -67,7 +83,8 @@
   background-color: transparent !important;
 }
 .sell-real-estate {
-  margin-top: 8rem;
+  position: relative;
+  top: 10em;
 }
 
 h1 {

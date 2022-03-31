@@ -5,9 +5,21 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../../services/authServices";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 
-function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
+function RealEstateDocus({
+  toogleStep,
+  step,
+  toogleDocuments,
+  ownership,
+  propId,
+  images,
+  videos,
+  propertyData,
+  toogleSellStep,
+  sellStep,
+  getPropId,
+}) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -177,6 +189,26 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const otherDocuments = doc8.map((document) => {
     return { ...document, officialName: "other_documents" };
   });
+
+  if (
+    titleReport.onHover1 ||
+    insuranceCopy.onHover2 ||
+    financialDocuments.onHover3 ||
+    purchaseAgreement.onHover4 ||
+    thirdpartyReport.onHover5 ||
+    demographics.onHover6 ||
+    marketandValuations.onHover7 ||
+    otherDocuments.onHover8
+  ) {
+    delete titleReport.onHover1 ||
+      delete insuranceCopy.onHover2 ||
+      delete financialDocuments.onHover3 ||
+      delete purchaseAgreement.onHover4 ||
+      delete thirdpartyReport.onHover5 ||
+      delete demographics.onHover6 ||
+      delete marketandValuations.onHover7 ||
+      delete otherDocuments.onHover8;
+  }
   const documents = [
     ...titleReport,
     ...insuranceCopy,
@@ -188,6 +220,83 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
     ...(listing_agreement ? [...listing_agreement] : []),
     ...otherDocuments,
   ];
+
+  const saveInfo = async (data) => {
+    if (propId) {
+      if (sellStep === 1) {
+        const datas = {
+          id: propId,
+          details: {
+            ...propertyData,
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(4);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep === 2) {
+        const datas = {
+          id: propId,
+          details: {
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(5);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep === 3) {
+        const datas = {
+          id: propId,
+          details: {
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(6);
+            alert("Saved Successfully!");
+          }
+        });
+      }
+    } else {
+      const datas = {
+        ...ownership,
+        ...propertyData,
+        images,
+        videos,
+        documents,
+        step: 4,
+      };
+      await authService.savePropInfo(datas).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          toogleSellStep(4);
+          getPropId(response.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
+  };
 
   const onSubmit = async (data) => {
     if (
@@ -775,6 +884,14 @@ function RealEstateDocus({ toogleStep, step, toogleDocuments, ownership }) {
         className="bottom-btn"
       >
         <div className="bottom-btn">
+          <div
+            style={{
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            <Button onClick={saveInfo}>Save</Button>
+          </div>
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>

@@ -58,7 +58,8 @@ const MultiSellForm = ({ colorChange }) => {
     setPropId(propId);
   };
 
-  console.log(propId);
+  const [sellStep, setSellStep] = useState(0);
+  const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
   if (step === 0) {
     return (
@@ -82,6 +83,7 @@ const MultiSellForm = ({ colorChange }) => {
           getOwnerShip={getOwnerShip}
           propertyType={propertyType}
           getPropId={getPropId}
+          toogleSellStep={toogleSellStep}
         />
       </div>
     );
@@ -95,6 +97,7 @@ const MultiSellForm = ({ colorChange }) => {
           toogleStep={(data) => toogleStep(data)}
           step={step}
           propertyType={propertyType}
+          toogleSellStep={toogleSellStep}
         />
       </div>
     );
@@ -111,6 +114,8 @@ const MultiSellForm = ({ colorChange }) => {
           propertyType={propertyType}
           propId={propId}
           ownership={ownership}
+          getPropId={getPropId}
+          toogleSellStep={toogleSellStep}
         />
       </div>
     );
@@ -118,12 +123,17 @@ const MultiSellForm = ({ colorChange }) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-
         <UploadForm
           toogleImages={toogleImages}
           toogleVideos={toogleVideos}
           toogleStep={(data) => toogleStep(data)}
           step={step}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
+          ownership={ownership}
+          getPropId={getPropId}
         />
       </div>
     );
@@ -137,7 +147,14 @@ const MultiSellForm = ({ colorChange }) => {
           step={step}
           toogleDocuments={toogleDocuments}
           propertyType={propertyType}
+          toogleSellStep={toogleSellStep}
+          sellStep={sellStep}
+          propertyData={propertyData}
+          propId={propId}
           ownership={ownership}
+          images={images}
+          videos={videos}
+          getPropId={getPropId}
         />
       </div>
     );
@@ -162,6 +179,8 @@ const MultiSellForm = ({ colorChange }) => {
           videos={videos}
           documents={documents}
           ownership={ownership}
+          sellStep={sellStep}
+          propId={propId}
         />
       </div>
     );

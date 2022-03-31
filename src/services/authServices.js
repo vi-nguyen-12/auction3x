@@ -299,7 +299,7 @@ const authService = {
   },
 
   savePropInfo(data) {
-    return axios.post(apiUrl + "/api/properties/real-estate", data.details, {
+    return axios.post(apiUrl + "/api/properties/real-estate", data, {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),

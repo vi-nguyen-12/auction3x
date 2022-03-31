@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import authService from "../../services/authServices";
 
 function RealEstateDetails({
   property,
@@ -8,6 +9,9 @@ function RealEstateDetails({
   step,
   tooglePropertyData,
   propId,
+  ownership,
+  toogleSellStep,
+  getPropId,
 }) {
   const { register, handleSubmit } = useForm();
 
@@ -26,28 +30,89 @@ function RealEstateDetails({
   const [reservedAmount, setReservedAmount] = useState("");
   const [discussedAmount, setDiscussedAmount] = useState("");
 
-  console.log(address);
+  const saveInfo = () => {
+    if (propId) {
+      const datas = {
+        id: propId,
+        details: {
+          street_address: address ? address : property.street_address,
+          city: city ? city : property.city,
+          state: state ? state : property.state,
+          country: country ? country : property.country,
+          zip_code: zip ? zip : property.zip_code,
+          owner_name: ownerName,
+          rooms_count: rooms,
+          baths_count: bathrooms,
+          beds_count: bedrooms,
+          standardized_land_use_type: propType,
+          total_value: totalValue,
+          area_sq_ft: sqft,
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          step: parseInt(2),
+        },
+      };
+      authService.saveInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          toogleSellStep(2);
+          alert("Saved Successfully!");
+        }
+      });
+    } else {
+      const datas = {
+        street_address: address ? address : property.street_address,
+        city: city ? city : property.city,
+        state: state ? state : property.state,
+        country: country ? country : property.country,
+        zip_code: zip ? zip : property.zip_code,
+        owner_name: ownerName,
+        rooms_count: rooms,
+        baths_count: bathrooms,
+        beds_count: bedrooms,
+        standardized_land_use_type: propType,
+        total_value: totalValue,
+        area_sq_ft: sqft,
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        ...ownership,
+        documents: ownership.listing_agreement,
+        step: parseInt(2),
+      };
+      delete datas.listing_agreement;
+      authService.savePropInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          toogleSellStep(2);
+          getPropId(res.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
+  };
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
       const submitedData = {
-        type: "real-estate",
-        street_address: data.street_address,
-        city: data.city,
-        state: data.state,
-        zipCode: data.zipCode,
-        discussedAmount: data.discussedAmount,
-        reservedAmount: data.reservedAmount,
-        fields: {
-          beds_count: data.bedrooms,
-          baths: data.bathrooms,
-          rooms_count: data.rooms_count,
-          total_value: data.total_value,
-        },
+        street_address: address ? address : property.street_address,
+        city: city ? city : property.city,
+        state: state ? state : property.state,
+        country: country ? country : property.country,
+        zip_code: zip ? zip : property.zip_code,
+        owner_name: ownerName,
+        rooms_count: rooms,
+        baths_count: bathrooms,
+        beds_count: bedrooms,
+        standardized_land_use_type: propType,
+        total_value: totalValue,
+        area_sq_ft: sqft,
+        reservedAmount: reservedAmount,
+        discussedAmount: discussedAmount,
       };
-
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
     }
@@ -276,7 +341,7 @@ function RealEstateDetails({
         <Row style={{ marginTop: "10px" }}>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
               {...register("reservedAmount", { required: false })}
@@ -291,7 +356,7 @@ function RealEstateDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
               {...register("discussedAmount", { required: false })}
@@ -316,14 +381,14 @@ function RealEstateDetails({
           </Col>
         </Row>
       </Container>
-      <div className="bottom-btn" style={{ width: "100%" }}>
+      <div className="bottom-btn">
         <div
           style={{
             position: "absolute",
             left: "50px",
           }}
         >
-          <Button>Save</Button>
+          <Button onClick={saveInfo}>Save</Button>
         </div>
         <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
           Previous

@@ -61,7 +61,18 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
   };
 
   const handleDisplay = () => {
-    history.push(`/DisplayAuctions/${id}`);
+    if (auctionEnded) {
+      alert("Auction has ended");
+    } else if (!auctionEnded) {
+      if (
+        history.location.pathname === "/Dashboard" ||
+        history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
+      ) {
+        window.open(`/DisplayAuctions/${id}`);
+      } else {
+        history.push(`/DisplayAuctions/${id}`);
+      }
+    }
   };
 
   return (

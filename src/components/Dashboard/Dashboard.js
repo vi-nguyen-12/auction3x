@@ -26,7 +26,6 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
   }, []);
   const location = useLocation();
   const path = window.location.pathname;
-  console.log(path);
   return (
     <div style={{ display: "flex" }}>
       <Router>
@@ -42,13 +41,41 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
           <Switch>
             <Route exact path="/Dashboard" component={Dash} />
             <Route exact path="/Dashboard/Messaging" component={Messaging} />
-            <Route exact path="/Dashboard/Auctions/BidAuctions" component={BidAuctions} />
-            <Route exact path="/Dashboard/Auctions/PendingAuctions" component={PendingAuctions} />
-            <Route exact path="/Dashboard/Auctions/SavedAuctions" component={SavedAuctions} />
-            <Route exact path="/Dashboard/Auctions/WinAuctions" component={WinAuctions} />
-            <Route exact path="/Dashboard/Listings/AuctionListings" component={LiveListings} />
-            <Route exact path="/Dashboard/Listings/PendingApproval" component={PendingListings} />
-            <Route exact path="/Dashboard/Listings/SoldListings" component={SoldListings} />
+            <Route
+              exact
+              path="/Dashboard/Auctions/BidAuctions"
+              component={BidAuctions}
+            />
+            <Route
+              exact
+              path="/Dashboard/Auctions/PendingAuctions"
+              component={PendingAuctions}
+            />
+            <Route
+              exact
+              path="/Dashboard/Auctions/SavedAuctions"
+              component={SavedAuctions}
+            />
+            <Route
+              exact
+              path="/Dashboard/Auctions/WinAuctions"
+              component={WinAuctions}
+            />
+            <Route
+              exact
+              path="/Dashboard/Listings/AuctionListings"
+              component={LiveListings}
+            />
+            <Route
+              exact
+              path="/Dashboard/Listings/PendingApproval"
+              component={PendingListings}
+            />
+            <Route
+              exact
+              path="/Dashboard/Listings/SoldListings"
+              component={SoldListings}
+            />
             <Route exact path="/Dashboard/Profile" component={Profile} />
           </Switch>
         </div>

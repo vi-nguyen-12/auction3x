@@ -5,9 +5,21 @@ import authService from "../../services/authServices";
 import "../../styles/SellRegister.css";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import { Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
+const UploadForm = ({
+  toogleStep,
+  step,
+  toogleImages,
+  toogleVideos,
+  toogleSellStep,
+  sellStep,
+  propertyData,
+  propId,
+  ownership,
+  getPropId,
+}) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -54,6 +66,64 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         setVideoLoader(false);
       }
     });
+  };
+
+  const saveInfo = async (data) => {
+    if (propId) {
+      if (sellStep === 2) {
+        const datas = {
+          id: propId,
+          details: {
+            images,
+            videos,
+            step: 3,
+          },
+        };
+        await authService.saveSellInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(3);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep === 1) {
+        const datas = {
+          id: propId,
+          details: {
+            ...propertyData,
+            images,
+            videos,
+            step: 3,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(3);
+            alert("Saved Successfully!");
+          }
+        });
+      }
+    } else {
+      const datas = {
+        ...ownership,
+        ...propertyData,
+        images,
+        videos,
+        step: 3,
+      };
+      await authService.savePropInfo(datas).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          toogleSellStep(3);
+          getPropId(response.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
   };
 
   const handleDelete = (url) => () => {
@@ -288,6 +358,14 @@ const UploadForm = ({ toogleStep, step, toogleImages, toogleVideos }) => {
         </div>
 
         <div className="bottom-btn">
+          <div
+            style={{
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            <Button onClick={saveInfo}>Save</Button>
+          </div>
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
