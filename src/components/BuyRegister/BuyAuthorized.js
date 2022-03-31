@@ -58,7 +58,7 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
 
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getDocuSign(envelopeId).then((res) => {
+    await authService.getBuyingDocuSign(envelopeId).then((res) => {
       setLoader(false);
       setEnvelopeId(res.data.envelopeId);
       if (

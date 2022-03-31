@@ -199,10 +199,23 @@ const authService = {
     });
   },
 
-  getDocuSign(data) {
+  getSellingDocuSign(data) {
     return axios.get(
       apiUrl +
-      `/api/docusign/signature/sellerAgreement/uiviews?envelopeId=${data}`,
+      `/api/docusign/signature/selling_agreement/uiviews?envelopeId=${data}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
+  },
+  getBuyingDocuSign(data) {
+    return axios.get(
+      apiUrl +
+      `/api/docusign/signature/buying_agreement/uiviews?envelopeId=${data}`,
       {
         headers: {
           Authorization:
