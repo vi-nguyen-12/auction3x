@@ -30,7 +30,7 @@ const Agree = ({
 
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getDocuSign(envelopeId).then((res) => {
+    await authService.getSellingDocuSign(envelopeId).then((res) => {
       setLoader(false);
       setEnvelopeId(res.data.envelopeId);
       if (
