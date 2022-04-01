@@ -94,7 +94,7 @@ function App() {
             </Route>
           )}
 
-          <Route exact path="/MultiSellForm/:id/:step">
+          <Route exact path="/MultiSellForm/:userId/:id/:step">
             <div className="sell-register-container">
               <MultiSellForm colorChange={colorChange} />
             </div>

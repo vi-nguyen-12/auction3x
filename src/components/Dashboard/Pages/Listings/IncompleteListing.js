@@ -58,7 +58,7 @@ function IncompleteListing() {
                     <button
                       onClick={() => {
                         window.open(
-                          `/MultiSellForm/${listing._id}/${listing.step}`
+                          `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
                         );
                       }}
                       className="resume-btn"

@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import authService from "../../services/authServices";
 
 function CarForm({ toogleStep, step, properties }) {
   const { handleSubmit, register } = useForm();
+
+  const [property, setProperty] = useState();
+
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const prop = res.data.filter((item) => item._id === params.id);
+        setProperty(prop[0]);
+      });
+    }
+  }, []);
 
   const onSubmit = (data) => {
     const datas = {
@@ -30,7 +45,7 @@ function CarForm({ toogleStep, step, properties }) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="list-sell-bottom"
-      style={{ justifyContent: "flex-start", display: "block" }}
+      style={{ justifyContent: "flex-start", display: "block", overflowY: "auto" }}
     >
       <Table bordered striped hover>
         <tbody>
@@ -40,6 +55,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.make : ""}
                 {...register("make", { required: true, maxLength: 100 })}
               />
             </td>
@@ -50,6 +66,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.model : ""}
                 {...register("model", { required: true, maxLength: 100 })}
               />
             </td>
@@ -60,6 +77,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="number"
                 className="form-control"
+                defaultValue={property ? property.details.year : ""}
                 {...register("year", { required: true, maxLength: 100 })}
               />
             </td>
@@ -70,6 +88,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="number"
                 className="form-control"
+                defaultValue={property ? property.details.mileage : ""}
                 {...register("mileage", { required: true, maxLength: 100 })}
               />
             </td>
@@ -80,6 +99,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.transmission : ""}
                 {...register("transmission", {
                   required: true,
                   maxLength: 100,
@@ -93,6 +113,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.car_type : ""}
                 {...register("carType", { maxLength: 100 })}
               />
             </td>
@@ -103,6 +124,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.power : ""}
                 {...register("power", { maxLength: 100 })}
               />
             </td>
@@ -113,6 +135,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.color : ""}
                 {...register("color", { required: true, maxLength: 100 })}
                 required
               />
@@ -124,6 +147,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.VIN : ""}
                 {...register("vin", { required: true })}
                 required
               />
@@ -135,6 +159,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.engine : ""}
                 {...register("engine", { required: true, maxLength: 100 })}
               />
             </td>
@@ -145,6 +170,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.fuel_type : ""}
                 {...register("fuelType", { required: true, maxLength: 100 })}
               />
             </td>
@@ -155,6 +181,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.condition : ""}
                 {...register("condition", { required: true, maxLength: 100 })}
               />
             </td>
@@ -165,6 +192,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.price : ""}
                 {...register("price", { required: true, maxLength: 100 })}
               />
             </td>
@@ -175,6 +203,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
+                defaultValue={property ? property.details.property_address : ""}
                 {...register("address", { required: true })}
               />
             </td>
@@ -184,7 +213,7 @@ function CarForm({ toogleStep, step, properties }) {
 
       <div
         className="bottom-btn"
-        style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative", bottom: "0" }}
       >
         <button
           className="pre-btn"

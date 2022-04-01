@@ -7,6 +7,7 @@ import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 import DocumentsUpload from "./DocumentsUpload";
 import Ownership from "./Ownership";
+import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 
 const MultiSellForm = ({ colorChange }) => {
@@ -17,13 +18,6 @@ const MultiSellForm = ({ colorChange }) => {
 
   const params = useParams();
   console.log(params);
-
-  useEffect(() => {
-    colorChange("black");
-    if (params.step) {
-      setStep(parseInt(params.step));
-    }
-  }, [params.step]);
 
   console.log(step);
 
@@ -70,6 +64,20 @@ const MultiSellForm = ({ colorChange }) => {
   const [sellStep, setSellStep] = useState(0);
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
+  useEffect(() => {
+    colorChange("black");
+    if (params.step) {
+      setStep(parseInt(params.step) + 1);
+    }
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const property = res.data.filter((prop) => prop._id === params.id);
+        console.log(property);
+        setPropertyType(property[0].type);
+      });
+    }
+  }, [params.step]);
+
   if (step === 0) {
     return (
       <div className="sell-register-container">
@@ -93,6 +101,7 @@ const MultiSellForm = ({ colorChange }) => {
           propertyType={propertyType}
           getPropId={getPropId}
           toogleSellStep={toogleSellStep}
+          ownership={ownership}
         />
       </div>
     );
@@ -190,6 +199,7 @@ const MultiSellForm = ({ colorChange }) => {
           ownership={ownership}
           sellStep={sellStep}
           propId={propId}
+          propertyType={propertyType}
         />
       </div>
     );

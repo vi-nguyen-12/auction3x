@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../../services/authServices";
@@ -7,6 +7,7 @@ import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 
 const UploadForm = ({
   toogleStep,
@@ -27,6 +28,8 @@ const UploadForm = ({
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
   const toogleExtra = () => setExtra(!extra);
+
+  const params = useParams();
 
   const onChange = async (e) => {
     setLoader(true);
@@ -125,6 +128,24 @@ const UploadForm = ({
       });
     }
   };
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const property = response.data.filter(
+            (item) => item._id === params.id
+          );
+          if (property.length > 0) {
+            setImages(property[0].images.length > 0 ? property[0].images : []);
+            setVideos(property[0].videos.length > 0 ? property[0].videos : []);
+          }
+        }
+      });
+    }
+  }, []);
 
   const handleDelete = (url) => () => {
     setImages(images.filter((image) => image.url !== url));

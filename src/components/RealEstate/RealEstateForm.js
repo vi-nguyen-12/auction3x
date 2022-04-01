@@ -5,6 +5,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
 import { Container, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 function RealEstateForm({ toogleStep, step, properties }) {
   const {
@@ -12,6 +13,8 @@ function RealEstateForm({ toogleStep, step, properties }) {
     handleSubmit,
     //formState: { errors },
   } = useForm();
+
+  const params = useParams();
 
   const [address, setAddress] = useState("");
   const [address1, setAddress1] = useState("");
@@ -60,6 +63,39 @@ function RealEstateForm({ toogleStep, step, properties }) {
       );
     });
   };
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const property = res.data.filter((prop) => prop._id === params.id);
+        setAddress(
+          property[0].details.property_address
+            ? property[0].details.property_address.formatted_street_address
+            : ""
+        );
+        setCity(
+          property[0].details.property_address
+            ? property[0].details.property_address.city
+            : ""
+        );
+        setState(
+          property[0].details.property_address
+            ? property[0].details.property_address.state
+            : ""
+        );
+        setCountry(
+          property[0].details.property_address
+            ? property[0].details.property_address.country
+            : ""
+        );
+        setZip(
+          property[0].details.property_address
+            ? property[0].details.property_address.zip_code
+            : ""
+        );
+      });
+    }
+  }, [params.id]);
 
   const onSubmit = (data) => {
     const addres = address1 ? address + ", " + address1 : address;

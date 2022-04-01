@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
 import { Row, Col, Container, Button } from "react-bootstrap";
 
@@ -31,9 +31,13 @@ function CarDocus({
   const [doc8, setDocument8] = useState([]);
   const [doc9, setDocument9] = useState([]);
   const [loader, setLoader] = useState(false);
-  const listing_agreement = ownership.listing_agreement
-    ? ownership.listing_agreement
-    : "";
+  const listing_agreement = ownership
+    ? ownership.documents.length > 0
+      ? ownership.documents
+      : null
+    : null;
+
+  const params = useParams();
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -169,6 +173,33 @@ function CarDocus({
       }
     });
   };
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const property = response.data.filter(
+            (property) => property._id === params.id
+          );
+          setDocument1([property[0].documents[0]]);
+          setDocument2([property[0].documents[1]]);
+          setDocument3([property[0].documents[2]]);
+          setDocument4([property[0].documents[3]]);
+          setDocument5([property[0].documents[4]]);
+          setDocument6([property[0].documents[5]]);
+          setDocument7([property[0].documents[6]]);
+          setDocument8([property[0].documents[7]]);
+          if (property[0].documents.length > 9) {
+            if (property[0].documents[9].officialName === "others") {
+              setDocument9([property[0].documents[8]]);
+            }
+          }
+        }
+      });
+    }
+  }, []);
 
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));

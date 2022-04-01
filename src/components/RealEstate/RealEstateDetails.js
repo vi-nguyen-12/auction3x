@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
+import { useParams } from "react-router-dom";
 
 function RealEstateDetails({
   property,
@@ -30,10 +31,12 @@ function RealEstateDetails({
   const [reservedAmount, setReservedAmount] = useState("");
   const [discussedAmount, setDiscussedAmount] = useState("");
 
+  const params = useParams();
+
   const saveInfo = () => {
-    if (propId) {
+    if (propId || params.id) {
       const datas = {
-        id: propId,
+        id: propId ? propId : params.id,
         details: {
           street_address: address ? address : property.street_address,
           city: city ? city : property.city,
@@ -92,6 +95,82 @@ function RealEstateDetails({
       });
     }
   };
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          const property = res.data.filter((prop) => prop._id === params.id);
+          setOwnerName(
+            property[0].details.owner ? property[0].details.owner.name : ""
+          );
+          setRooms(
+            property[0].details.structure
+              ? property[0].details.structure.rooms
+              : ""
+          );
+          setBathrooms(
+            property[0].details.structure
+              ? property[0].details.structure.baths
+              : ""
+          );
+          setBedrooms(
+            property[0].details.structure
+              ? property[0].details.structure.beds_count
+              : ""
+          );
+          setPropType(
+            property[0].details.parcel
+              ? property[0].details.parcel.standardized_land_use_type
+              : ""
+          );
+          setSqft(
+            property[0].details.parcel
+              ? property[0].details.parcel.area_sq_ft
+              : ""
+          );
+          setTotalValue(
+            property[0].details.market_assessments
+              ? property[0].details.market_assessments[0].total_value
+              : ""
+          );
+          setReservedAmount(
+            property[0].reservedAmount ? property[0].reservedAmount : ""
+          );
+          setDiscussedAmount(
+            property[0].discussedAmount ? property[0].discussedAmount : ""
+          );
+          setAddress(
+            property[0].details.property_address
+              ? property[0].details.property_address.formatted_street_address
+              : ""
+          );
+          setCity(
+            property[0].details.property_address
+              ? property[0].details.property_address.city
+              : ""
+          );
+          setState(
+            property[0].details.property_address
+              ? property[0].details.property_address.state
+              : ""
+          );
+          setCountry(
+            property[0].details.property_address
+              ? property[0].details.property_address.country
+              : ""
+          );
+          setZip(
+            property[0].details.property_address
+              ? property[0].details.property_address.zip_code
+              : ""
+          );
+        }
+      });
+    }
+  }, []);
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {

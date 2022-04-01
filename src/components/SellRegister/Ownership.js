@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
+import { useParams } from "react-router-dom";
 
 function Ownership({
   toogleStep,
@@ -21,6 +22,8 @@ function Ownership({
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [listAgree, setListAgree] = useState([]);
+
+  const params = useParams();
 
   const getFile = async (e) => {
     const formData = new FormData();
@@ -61,6 +64,31 @@ function Ownership({
       }
     });
   };
+
+  useEffect(() => {
+    if (params.step) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const property = res.data.filter((prop) => prop._id === params.id);
+        if (property[0].details.broker_id) {
+          setShowBroker("block");
+          setShowOwner("none");
+          setBrokerName(property[0].details.broker_name);
+          setBrokerId(property[0].details.broker_id);
+          setOwnerName(property[0].details.owner_name);
+          setPhone(property[0].details.phone);
+          setEmail(property[0].details.email);
+          setAddress(property[0].details.address);
+        } else if (!property[0].details.broker_id) {
+          setShowOwner("block");
+          setShowBroker("none");
+          setOwnerName(property[0].details.owner_name);
+          setPhone(property[0].details.phone);
+          setEmail(property[0].details.email);
+          setAddress(property[0].details.address);
+        }
+      });
+    }
+  }, [params.step]);
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
@@ -197,6 +225,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -209,6 +238,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -221,6 +251,7 @@ function Ownership({
                   <input
                     type="number"
                     className="form-control"
+                    defaultValue={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     maxLength="10"
                   />
@@ -232,6 +263,7 @@ function Ownership({
                   <input
                     type="email"
                     className="form-control"
+                    defaultValue={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -290,6 +322,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={ownerName}
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -300,6 +333,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={brokerName}
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
                   />
@@ -311,6 +345,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={brokerId}
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
                   />
@@ -338,6 +373,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
+                    defaultValue={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -350,6 +386,7 @@ function Ownership({
                   <input
                     type="phone"
                     className="form-control"
+                    defaultValue={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -360,6 +397,7 @@ function Ownership({
                   <input
                     type="email"
                     className="form-control"
+                    defaultValue={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>

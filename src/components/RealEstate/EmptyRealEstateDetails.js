@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
+import { useParams } from "react-router-dom";
 
 function EmptyRealEstateDetails({
   property,
@@ -18,6 +19,9 @@ function EmptyRealEstateDetails({
     handleSubmit,
     //formState: { errors },
   } = useForm();
+
+  const params = useParams();
+
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -96,6 +100,82 @@ function EmptyRealEstateDetails({
     }
   };
 
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          const property = res.data.filter((prop) => prop._id === params.id);
+          setOwnerName(
+            property[0].details.owner ? property[0].details.owner.name : ""
+          );
+          setRooms(
+            property[0].details.structure
+              ? property[0].details.structure.rooms
+              : ""
+          );
+          setBathrooms(
+            property[0].details.structure
+              ? property[0].details.structure.baths
+              : ""
+          );
+          setBedrooms(
+            property[0].details.structure
+              ? property[0].details.structure.beds_count
+              : ""
+          );
+          setPropType(
+            property[0].details.parcel
+              ? property[0].details.parcel.standardized_land_use_type
+              : ""
+          );
+          setSqft(
+            property[0].details.parcel
+              ? property[0].details.parcel.area_sq_ft
+              : ""
+          );
+          setTotalValue(
+            property[0].details.market_assessments
+              ? property[0].details.market_assessments[0].total_value
+              : ""
+          );
+          setReservedAmount(
+            property[0].reservedAmount ? property[0].reservedAmount : ""
+          );
+          setDiscussedAmount(
+            property[0].discussedAmount ? property[0].discussedAmount : ""
+          );
+          setAddress(
+            property[0].details.property_address
+              ? property[0].details.property_address.formatted_street_address
+              : ""
+          );
+          setCity(
+            property[0].details.property_address
+              ? property[0].details.property_address.city
+              : ""
+          );
+          setState(
+            property[0].details.property_address
+              ? property[0].details.property_address.state
+              : ""
+          );
+          setCountry(
+            property[0].details.property_address
+              ? property[0].details.property_address.country
+              : ""
+          );
+          setZip(
+            property[0].details.property_address
+              ? property[0].details.property_address.zip_code
+              : ""
+          );
+        }
+      });
+    }
+  }, []);
+
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
@@ -138,7 +218,9 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="street_address"
-              defaultValue={property.street_address}
+              defaultValue={
+                property.street_address ? property.street_address : address
+              }
               {...register("street_address", { required: false })}
               onChange={(e) => setAddress(e.target.value)}
             />
@@ -153,7 +235,7 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="city"
-              defaultValue={property.city}
+              defaultValue={property.city ? property.city : city}
               {...register("city", { required: false })}
               onChange={(e) => setCity(e.target.value)}
             />
@@ -166,7 +248,7 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="state"
-              defaultValue={property.state}
+              defaultValue={property.state ? property.state : state}
               {...register("state", { required: false })}
               onChange={(e) => setState(e.target.value)}
             />
@@ -181,7 +263,7 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="country"
-              defaultValue={property.country}
+              defaultValue={property.country ? property.country : country}
               {...register("country", { required: false })}
               onChange={(e) => setCountry(e.target.value)}
             />
@@ -194,7 +276,7 @@ function EmptyRealEstateDetails({
               type="number"
               className="form-control"
               name="zipCode"
-              defaultValue={property.zip_code}
+              defaultValue={property.zip_code ? property.zip_code : zip}
               {...register("zipCode", { required: false })}
               onChange={(e) => setZip(e.target.value)}
             />
@@ -208,6 +290,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={ownerName}
               {...register("ownerName", { required: false })}
               name="ownerName"
               onChange={(e) => setOwnerName(e.target.value)}
@@ -222,6 +305,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={rooms}
               {...register("rooms_count", { required: false })}
               onChange={(e) => setRooms(e.target.value)}
             />
@@ -233,6 +317,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={bedrooms}
               {...register("bedrooms", { required: false })}
               onChange={(e) => setBedrooms(e.target.value)}
             />
@@ -246,6 +331,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={propType}
               {...register("propertyType", { required: false })}
               onChange={(e) => setPropType(e.target.value)}
             />
@@ -257,6 +343,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={bathrooms}
               {...register("bathrooms", { required: false })}
               onChange={(e) => setBathrooms(e.target.value)}
             />
@@ -269,6 +356,7 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               placeholder="$"
+              defaultValue={totalValue}
               {...register("total_value", { required: false })}
               onChange={(e) => setTotalValue(e.target.value)}
             />
@@ -282,6 +370,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={sqft}
               {...register("sqft", { required: false })}
               onChange={(e) => setSqft(e.target.value)}
             />
@@ -295,6 +384,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
               onChange={(e) => setReservedAmount(e.target.value)}
             />
@@ -306,6 +396,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}
               onChange={(e) => setDiscussedAmount(e.target.value)}
             />

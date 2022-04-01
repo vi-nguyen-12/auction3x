@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../../styles/SellRegister.css";
 import authService from "../../services/authServices";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";
+import { useParams } from "react-router-dom";
 
 const Agree = ({
   toogleStep,
@@ -16,9 +16,8 @@ const Agree = ({
   ownership,
   sellStep,
   propId,
+  propertyType,
 }) => {
-  const details = { ...propertyData.details };
-  const ownerDetails = { ...ownership.details };
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -27,7 +26,7 @@ const Agree = ({
     setAgree(!agree);
   };
   const { handleSubmit } = useForm();
-
+  const params = useParams();
   const history = useHistory();
 
   const handleSignDocusign = async () => {
@@ -57,11 +56,11 @@ const Agree = ({
         ) {
           alert("Please sign the docusign before proceeding ");
         } else {
-          if (ownership.type === "real-estate") {
-            if (propId) {
-              if (sellStep === 1) {
+          if (params.id) {
+            if (propertyType === "real-estate") {
+              if (params.step === "1") {
                 const datas = {
-                  id: propId,
+                  id: params.id,
                   details: {
                     ...propertyData,
                     images,
@@ -77,12 +76,11 @@ const Agree = ({
                   } else {
                     alert("Property Successfully Created!");
                     history.push("/");
-                    window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 2) {
+              } else if (params.step === "2") {
                 const datas = {
-                  id: propId,
+                  id: params.id,
                   details: {
                     images,
                     videos,
@@ -100,9 +98,9 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 3) {
+              } else if (params.step === "3") {
                 const datas = {
-                  id: propId,
+                  id: params.id,
                   details: {
                     documents,
                     step: 5,
@@ -118,12 +116,12 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 4) {
+              } else if (params.step === "4") {
                 const datas = {
-                  id: propId,
+                  id: params.id,
                   details: {
-                    docusignId: res.data._id,
                     step: 5,
+                    docusignId: res.data._id,
                   },
                 };
                 authService.saveInfo(datas).then((res) => {
@@ -136,28 +134,240 @@ const Agree = ({
                   }
                 });
               }
-            } else {
-              const datas = {
-                ...ownership,
-                ...propertyData,
-                images,
-                videos,
-                documents,
-                step: 5,
-                docusignId: res.data._id,
-              };
-              authService.savePropInfo(datas).then((res) => {
-                if (res.data.error) {
-                  alert(res.data.error);
-                } else {
-                  alert("Property Successfully Created!");
-                  history.push("/");
-                  window.scrollTo(0, 0);
-                }
-              });
+            } else if (propertyType === "car") {
+              if (params.step === "1") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    ...propertyData,
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                  }
+                });
+              } else if (params.step === "2") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "3") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "4") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              }
+            } else if (propertyType === "jet") {
+              if (params.step === "1") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    ...propertyData,
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                  }
+                });
+              } else if (params.step === "2") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "3") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "4") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              }
+            } else if (propertyType === "yacht") {
+              if (params.step === "1") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    ...propertyData,
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                  }
+                });
+              } else if (params.step === "2") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    images,
+                    videos,
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "3") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    documents,
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              } else if (params.step === "4") {
+                const datas = {
+                  id: params.id,
+                  details: {
+                    step: 5,
+                    docusignId: res.data._id,
+                  },
+                };
+                authService.saveInfo(datas).then((res) => {
+                  if (res.data.error) {
+                    alert(res.data.error);
+                  } else {
+                    alert("Property Successfully Created!");
+                    history.push("/");
+                    window.scrollTo(0, 0);
+                  }
+                });
+              }
             }
           } else {
-            if (ownership.type === "car") {
+            if (ownership.type === "real-estate") {
               if (propId) {
                 if (sellStep === 1) {
                   const datas = {
@@ -257,7 +467,7 @@ const Agree = ({
                 });
               }
             } else {
-              if (ownership.type === "yacht") {
+              if (ownership.type === "car") {
                 if (propId) {
                   if (sellStep === 1) {
                     const datas = {
@@ -356,76 +566,97 @@ const Agree = ({
                     }
                   });
                 }
-              } else if (ownership.type === "jet") {
-                if (propId) {
-                  if (sellStep === 1) {
+              } else {
+                if (ownership.type === "yacht") {
+                  if (propId) {
+                    if (sellStep === 1) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          ...propertyData,
+                          images,
+                          videos,
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 2) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          images,
+                          videos,
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 3) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 4) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          docusignId: res.data._id,
+                          step: 5,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    }
+                  } else {
                     const datas = {
-                      id: propId,
-                      details: {
-                        ...propertyData,
-                        images,
-                        videos,
-                        documents,
-                        step: 5,
-                        docusignId: res.data._id,
-                      },
+                      ...ownership,
+                      ...propertyData,
+                      images,
+                      videos,
+                      documents,
+                      step: 5,
+                      docusignId: res.data._id,
                     };
-                    authService.saveInfo(datas).then((res) => {
-                      if (res.data.error) {
-                        alert(res.data.error);
-                      } else {
-                        alert("Property Successfully Created!");
-                        history.push("/");
-                        window.scrollTo(0, 0);
-                      }
-                    });
-                  } else if (sellStep === 2) {
-                    const datas = {
-                      id: propId,
-                      details: {
-                        images,
-                        videos,
-                        documents,
-                        step: 5,
-                        docusignId: res.data._id,
-                      },
-                    };
-                    authService.saveInfo(datas).then((res) => {
-                      if (res.data.error) {
-                        alert(res.data.error);
-                      } else {
-                        alert("Property Successfully Created!");
-                        history.push("/");
-                        window.scrollTo(0, 0);
-                      }
-                    });
-                  } else if (sellStep === 3) {
-                    const datas = {
-                      id: propId,
-                      details: {
-                        documents,
-                        step: 5,
-                        docusignId: res.data._id,
-                      },
-                    };
-                    authService.saveInfo(datas).then((res) => {
-                      if (res.data.error) {
-                        alert(res.data.error);
-                      } else {
-                        alert("Property Successfully Created!");
-                        history.push("/");
-                        window.scrollTo(0, 0);
-                      }
-                    });
-                  } else if (sellStep === 4) {
-                    const datas = {
-                      id: propId,
-                      details: {
-                        docusignId: res.data._id,
-                        step: 5,
-                      },
-                    };
-                    authService.saveInfo(datas).then((res) => {
+                    authService.savePropInfo(datas).then((res) => {
                       if (res.data.error) {
                         alert(res.data.error);
                       } else {
@@ -435,25 +666,105 @@ const Agree = ({
                       }
                     });
                   }
-                } else {
-                  const datas = {
-                    ...ownership,
-                    ...propertyData,
-                    images,
-                    videos,
-                    documents,
-                    step: 5,
-                    docusignId: res.data._id,
-                  };
-                  authService.savePropInfo(datas).then((res) => {
-                    if (res.data.error) {
-                      alert(res.data.error);
-                    } else {
-                      alert("Property Successfully Created!");
-                      history.push("/");
-                      window.scrollTo(0, 0);
+                } else if (ownership.type === "jet") {
+                  if (propId) {
+                    if (sellStep === 1) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          ...propertyData,
+                          images,
+                          videos,
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 2) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          images,
+                          videos,
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 3) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          documents,
+                          step: 5,
+                          docusignId: res.data._id,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
+                    } else if (sellStep === 4) {
+                      const datas = {
+                        id: propId,
+                        details: {
+                          docusignId: res.data._id,
+                          step: 5,
+                        },
+                      };
+                      authService.saveInfo(datas).then((res) => {
+                        if (res.data.error) {
+                          alert(res.data.error);
+                        } else {
+                          alert("Property Successfully Created!");
+                          history.push("/");
+                          window.scrollTo(0, 0);
+                        }
+                      });
                     }
-                  });
+                  } else {
+                    const datas = {
+                      ...ownership,
+                      ...propertyData,
+                      images,
+                      videos,
+                      documents,
+                      step: 5,
+                      docusignId: res.data._id,
+                    };
+                    authService.savePropInfo(datas).then((res) => {
+                      if (res.data.error) {
+                        alert(res.data.error);
+                      } else {
+                        alert("Property Successfully Created!");
+                        history.push("/");
+                        window.scrollTo(0, 0);
+                      }
+                    });
+                  }
                 }
               }
             }

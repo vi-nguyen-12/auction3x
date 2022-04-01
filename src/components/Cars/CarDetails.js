@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
+import { useParams } from "react-router-dom";
 
 function CarDetails({
   property,
@@ -30,6 +31,8 @@ function CarDetails({
   const [address, setAddress] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
+
+  const params = useParams();
 
   const saveInfo = () => {
     if (propId) {
@@ -98,6 +101,30 @@ function CarDetails({
     }
   };
 
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const property = res.data.filter((prop) => prop._id === params.id);
+        setMake(property[0].details.make);
+        setModel(property[0].details.model);
+        setYear(property[0].details.year);
+        setMileage(property[0].details.mileage);
+        setTransmission(property[0].details.transmission);
+        setCarType(property[0].details.car_type);
+        setPower(property[0].details.power);
+        setColor(property[0].details.color);
+        setVin(property[0].details.VIN);
+        setEngine(property[0].details.engine);
+        setFuelType(property[0].details.fuel_type);
+        setCondition(property[0].details.condition);
+        setPrice(property[0].details.price);
+        setAddress(property[0].details.property_address);
+        setReservedAmount(property[0].details.reservedAmount);
+        setDiscussedAmount(property[0].details.discussedAmount);
+      });
+    }
+  }, []);
+
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
@@ -142,7 +169,7 @@ function CarDetails({
               className="form-control"
               {...register("make", { required: true, maxLength: 100 })}
               onChange={(e) => setMake(e.target.value)}
-              defaultValue={property.make}
+              defaultValue={property.make ? property.make : make}
             />
             <span style={{ color: "black" }}>Make</span>
           </Col>
@@ -152,7 +179,7 @@ function CarDetails({
               className="form-control"
               {...register("model", { required: true, maxLength: 100 })}
               onChange={(e) => setModel(e.target.value)}
-              defaultValue={property.model}
+              defaultValue={property.model ? property.model : model}
             />
             <span style={{ color: "black" }}>Model</span>
           </Col>
@@ -164,7 +191,7 @@ function CarDetails({
               className="form-control"
               {...register("year", { required: true, maxLength: 100 })}
               onChange={(e) => setYear(e.target.value)}
-              defaultValue={property.year}
+              defaultValue={property.year ? property.year : year}
             />
             <span style={{ color: "black" }}>Year</span>
           </Col>
@@ -174,7 +201,7 @@ function CarDetails({
               className="form-control"
               {...register("mileage", { required: true, maxLength: 100 })}
               onChange={(e) => setMileage(e.target.value)}
-              defaultValue={property.mileage}
+              defaultValue={property.mileage ? property.mileage : mileage}
             />
             <span style={{ color: "black" }}>Mileage</span>
           </Col>
@@ -186,7 +213,9 @@ function CarDetails({
               className="form-control"
               {...register("transmission", { required: true, maxLength: 100 })}
               onChange={(e) => setTransmission(e.target.value)}
-              defaultValue={property.transmission}
+              defaultValue={
+                property.transmission ? property.transmission : transmission
+              }
             />
             <span style={{ color: "black" }}>Transmission</span>
           </Col>
@@ -196,7 +225,7 @@ function CarDetails({
               className="form-control"
               {...register("carType", { required: true, maxLength: 100 })}
               onChange={(e) => setCarType(e.target.value)}
-              defaultValue={property.car_type}
+              defaultValue={property.car_type ? property.car_type : carType}
             />
             <span style={{ color: "black" }}>Car Type</span>
           </Col>
@@ -208,7 +237,7 @@ function CarDetails({
               className="form-control"
               {...register("power", { required: true, maxLength: 100 })}
               onChange={(e) => setPower(e.target.value)}
-              defaultValue={property.power}
+              defaultValue={property.power ? property.power : power}
             />
             <span style={{ color: "black" }}>Power</span>
           </Col>
@@ -218,7 +247,7 @@ function CarDetails({
               className="form-control"
               {...register("color", { required: true, maxLength: 100 })}
               onChange={(e) => setColor(e.target.value)}
-              defaultValue={property.color}
+              defaultValue={property.color ? property.color : color}
             />
             <span style={{ color: "black" }}>Color</span>
           </Col>
@@ -230,7 +259,7 @@ function CarDetails({
               className="form-control"
               {...register("vin", { required: true, maxLength: 100 })}
               onChange={(e) => setVin(e.target.value)}
-              defaultValue={property.VIN}
+              defaultValue={property.VIN ? property.VIN : vin}
             />
             <span style={{ color: "black" }}>VIN</span>
           </Col>
@@ -240,7 +269,7 @@ function CarDetails({
               className="form-control"
               {...register("engine", { required: true, maxLength: 100 })}
               onChange={(e) => setEngine(e.target.value)}
-              defaultValue={property.engine}
+              defaultValue={property.engine ? property.engine : engine}
             />
             <span style={{ color: "black" }}>Engine</span>
           </Col>
@@ -252,7 +281,7 @@ function CarDetails({
               className="form-control"
               {...register("fuelType", { required: true, maxLength: 100 })}
               onChange={(e) => setFuelType(e.target.value)}
-              defaultValue={property.fuel_type}
+              defaultValue={property.fuel_type ? property.fuel_type : fuelType}
             />
             <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
@@ -262,7 +291,7 @@ function CarDetails({
               className="form-control"
               {...register("condition", { required: true, maxLength: 100 })}
               onChange={(e) => setCondition(e.target.value)}
-              defaultValue={property.condition}
+              defaultValue={property.condition ? property.condition : condition}
             />
             <span style={{ color: "black" }}>Condition</span>
           </Col>
@@ -274,7 +303,7 @@ function CarDetails({
               className="form-control"
               {...register("price", { required: true, maxLength: 100 })}
               onChange={(e) => setPrice(e.target.value)}
-              defaultValue={property.price}
+              defaultValue={property.price ? property.price : price}
             />
             <span style={{ color: "black" }}>Price</span>
           </Col>
@@ -284,7 +313,9 @@ function CarDetails({
               className="form-control"
               {...register("address", { required: true, maxLength: 100 })}
               onChange={(e) => setAddress(e.target.value)}
-              defaultValue={property.property_address}
+              defaultValue={
+                property.property_address ? property.property_address : address
+              }
             />
             <span style={{ color: "black" }}>Address</span>
           </Col>
@@ -296,6 +327,7 @@ function CarDetails({
               className="form-control"
               {...register("reservedAmount", { required: true })}
               onChange={(e) => setReservedAmount(e.target.value)}
+              defaultValue={reservedAmount}
               required
             />
             <span style={{ color: "black" }}>Reserved Amount</span>
@@ -306,6 +338,7 @@ function CarDetails({
               className="form-control"
               {...register("discussedAmount", { required: true })}
               onChange={(e) => setDiscussedAmount(e.target.value)}
+              defaultValue={discussedAmount}
               required
             />
             <span style={{ color: "black" }}>Discussed Amount</span>
