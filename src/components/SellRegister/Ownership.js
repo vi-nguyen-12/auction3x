@@ -11,7 +11,9 @@ function Ownership({
   propertyType,
   getPropId,
   toogleSellStep,
+  propId,
 }) {
+  console.log(propertyType);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");

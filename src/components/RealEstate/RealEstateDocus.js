@@ -169,16 +169,18 @@ function RealEstateDocus({
           const property = response.data.filter(
             (property) => property._id === params.id
           );
-          setDocument1([property[0].documents[0]]);
-          setDocument2([property[0].documents[1]]);
-          setDocument3([property[0].documents[2]]);
-          setDocument4([property[0].documents[3]]);
-          setDocument5([property[0].documents[4]]);
-          setDocument6([property[0].documents[5]]);
-          setDocument7([property[0].documents[6]]);
-          if (property[0].documents.length > 7) {
-            if (property[0].documents[7].officialName === "others") {
-              setDocument8([property[0].documents[7]]);
+          if (property[0].documents.length > 0) {
+            setDocument1([property[0].documents[0]]);
+            setDocument2([property[0].documents[1]]);
+            setDocument3([property[0].documents[2]]);
+            setDocument4([property[0].documents[3]]);
+            setDocument5([property[0].documents[4]]);
+            setDocument6([property[0].documents[5]]);
+            setDocument7([property[0].documents[6]]);
+            if (property[0].documents.length > 7) {
+              if (property[0].documents[7].officialName === "others") {
+                setDocument8([property[0].documents[7]]);
+              }
             }
           }
         }
@@ -254,10 +256,10 @@ function RealEstateDocus({
   ];
 
   const saveInfo = async (data) => {
-    if (propId) {
-      if (sellStep === 1) {
+    if (propId || params.id) {
+      if (sellStep || parseInt(params.step) === 1) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             ...propertyData,
             images,
@@ -274,9 +276,9 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2) {
+      } else if (sellStep || parseInt(params.step) === 2) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             images,
             videos,
@@ -292,9 +294,25 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3) {
+      } else if (sellStep || parseInt(params.step) === 3) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
+          details: {
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(6);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep || parseInt(params.step) === 4) {
+        const datas = {
+          id: propId ? propId : params.id,
           details: {
             documents,
             step: 4,

@@ -71,18 +71,19 @@ const UploadForm = ({
     });
   };
 
-  const saveInfo = async (data) => {
-    if (propId) {
-      if (sellStep === 2) {
+  const saveInfo = async () => {
+    if (propId || params.id) {
+      if (sellStep || parseInt(params.step) === 2) {
+        console.log("Hello");
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             images,
             videos,
             step: 3,
           },
         };
-        await authService.saveSellInfo(datas).then((response) => {
+        await authService.saveInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
@@ -90,9 +91,10 @@ const UploadForm = ({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 1) {
+      } else if (sellStep || parseInt(params.step) === 1) {
+        console.log("Hello");
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             ...propertyData,
             images,
@@ -156,7 +158,10 @@ const UploadForm = ({
     setVideos(videos.filter((video) => video.url !== url));
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = () => {
+    handleError();
+    toogleImages(images);
+    toogleVideos(videos);
     toogleStep(step + 1);
   };
   return (
@@ -222,11 +227,9 @@ const UploadForm = ({
             id="images-btn"
             accept="image/*"
             type="file"
-            name="images"
             multiple
             hidden
             {...register("images", { onChange: onChange })}
-            required
           />
           <div className="upload-cover">
             <details>
@@ -390,16 +393,7 @@ const UploadForm = ({
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
-          <button
-            className="nxt-btn"
-            onClick={() => {
-              handleError();
-              toogleImages(images);
-              toogleVideos(videos);
-            }}
-            id="next"
-            type="submit"
-          >
+          <button className="nxt-btn" id="next" type="submit">
             Next
           </button>
         </div>

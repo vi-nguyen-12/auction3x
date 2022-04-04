@@ -84,10 +84,9 @@ function EmptyRealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         ...ownership,
-        documents: ownership.listing_agreement,
         step: parseInt(2),
       };
-      delete datas.listing_agreement;
+      delete datas.documents;
       authService.savePropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
@@ -107,12 +106,13 @@ function EmptyRealEstateDetails({
           alert(res.data.error);
         } else {
           const property = res.data.filter((prop) => prop._id === params.id);
+          console.log(property);
           setOwnerName(
             property[0].details.owner ? property[0].details.owner.name : ""
           );
           setRooms(
             property[0].details.structure
-              ? property[0].details.structure.rooms
+              ? property[0].details.structure.rooms_count
               : ""
           );
           setBathrooms(

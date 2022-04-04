@@ -64,6 +64,8 @@ const MultiSellForm = ({ colorChange }) => {
   const [sellStep, setSellStep] = useState(0);
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
+  console.log(ownership);
+
   useEffect(() => {
     colorChange("black");
     if (params.step) {
@@ -93,7 +95,6 @@ const MultiSellForm = ({ colorChange }) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-
         <Ownership
           toogleStep={toogleStep}
           step={step}
@@ -102,6 +103,7 @@ const MultiSellForm = ({ colorChange }) => {
           getPropId={getPropId}
           toogleSellStep={toogleSellStep}
           ownership={ownership}
+          propId={propId}
         />
       </div>
     );
@@ -159,7 +161,6 @@ const MultiSellForm = ({ colorChange }) => {
     return (
       <div className="sell-register-container">
         <h1>Sell On Auction10X</h1>
-
         <DocumentsUpload
           toogleStep={(data) => toogleStep(data)}
           step={step}

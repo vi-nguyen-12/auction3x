@@ -175,7 +175,22 @@ function RealEstateDetails({
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
-    } else {
+    } else if (
+      address !== "" &&
+      city !== "" &&
+      state !== "" &&
+      country !== "" &&
+      zip !== "" &&
+      ownerName !== "" &&
+      rooms !== "" &&
+      bathrooms !== "" &&
+      bedrooms !== "" &&
+      propType !== "" &&
+      totalValue !== "" &&
+      sqft !== "" &&
+      reservedAmount !== "" &&
+      discussedAmount !== ""
+    ) {
       const submitedData = {
         street_address: address ? address : property.street_address,
         city: city ? city : property.city,
@@ -194,6 +209,8 @@ function RealEstateDetails({
       };
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
+    } else {
+      alert("Please fill all the required fields");
     }
   };
   return (

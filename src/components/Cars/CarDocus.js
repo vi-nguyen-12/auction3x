@@ -32,10 +32,12 @@ function CarDocus({
   const [doc9, setDocument9] = useState([]);
   const [loader, setLoader] = useState(false);
   const listing_agreement = ownership
-    ? ownership.documents.length > 0
-      ? ownership.documents
-      : null
-    : null;
+    ? ownership.documents
+      ? ownership.documents.length > 0
+        ? ownership.documents
+        : []
+      : []
+    : [];
 
   const params = useParams();
 
@@ -183,17 +185,19 @@ function CarDocus({
           const property = response.data.filter(
             (property) => property._id === params.id
           );
-          setDocument1([property[0].documents[0]]);
-          setDocument2([property[0].documents[1]]);
-          setDocument3([property[0].documents[2]]);
-          setDocument4([property[0].documents[3]]);
-          setDocument5([property[0].documents[4]]);
-          setDocument6([property[0].documents[5]]);
-          setDocument7([property[0].documents[6]]);
-          setDocument8([property[0].documents[7]]);
-          if (property[0].documents.length > 9) {
-            if (property[0].documents[9].officialName === "others") {
-              setDocument9([property[0].documents[8]]);
+          if (property[0].documents.length > 0) {
+            setDocument1([property[0].documents[0]]);
+            setDocument2([property[0].documents[1]]);
+            setDocument3([property[0].documents[2]]);
+            setDocument4([property[0].documents[3]]);
+            setDocument5([property[0].documents[4]]);
+            setDocument6([property[0].documents[5]]);
+            setDocument7([property[0].documents[6]]);
+            setDocument8([property[0].documents[7]]);
+            if (property[0].documents.length > 9) {
+              if (property[0].documents[9].officialName === "others") {
+                setDocument9([property[0].documents[8]]);
+              }
             }
           }
         }
@@ -255,10 +259,10 @@ function CarDocus({
   ];
 
   const saveInfo = async (data) => {
-    if (propId) {
-      if (sellStep === 1) {
+    if (propId || params.id) {
+      if (sellStep || parseInt(params.step) === 1) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             ...propertyData,
             images,
@@ -275,9 +279,9 @@ function CarDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2) {
+      } else if (sellStep || parseInt(params.step) === 2) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             images,
             videos,
@@ -293,9 +297,9 @@ function CarDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3) {
+      } else if (sellStep || parseInt(params.step) === 3) {
         const datas = {
-          id: propId,
+          id: propId ? propId : params.id,
           details: {
             documents,
             step: 4,
@@ -989,6 +993,8 @@ function CarDocus({
           style={{
             position: "absolute",
             left: "50px",
+            bottom: "20px",
+            zIndex: "1",
           }}
         >
           <Button onClick={saveInfo}>Save</Button>

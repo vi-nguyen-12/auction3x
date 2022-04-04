@@ -21,31 +21,54 @@ function CarForm({ toogleStep, step, properties }) {
   }, []);
 
   const onSubmit = (data) => {
-    const datas = {
-      make: data.make,
-      model: data.model,
-      year: data.year,
-      mileage: data.mileage,
-      transmission: data.transmission,
-      car_type: data.carType,
-      power: data.power,
-      color: data.color,
-      VIN: data.vin,
-      engine: data.engine,
-      fuel_type: data.fuelType,
-      condition: data.condition,
-      price: data.price,
-      property_address: data.address,
-    };
-    properties(datas);
-    toogleStep(step + 1);
+    if (
+      data.year !== "" &&
+      data.make !== "" &&
+      data.model !== "" &&
+      data.vin !== "" &&
+      data.mileage !== "" &&
+      data.price !== "" &&
+      data.description !== "" &&
+      data.address !== "" &&
+      data.color !== "" &&
+      data.transmission !== "" &&
+      data.carType !== "" &&
+      data.power !== "" &&
+      data.engine !== "" &&
+      data.fuelType !== ""
+    ) {
+      const datas = {
+        make: data.make,
+        model: data.model,
+        year: data.year,
+        mileage: data.mileage,
+        transmission: data.transmission,
+        car_type: data.carType,
+        power: data.power,
+        color: data.color,
+        VIN: data.vin,
+        engine: data.engine,
+        fuel_type: data.fuelType,
+        condition: data.condition,
+        price: data.price,
+        property_address: data.address,
+      };
+      properties(datas);
+      toogleStep(step + 1);
+    } else {
+      alert("Please fill all the required fields");
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="list-sell-bottom"
-      style={{ justifyContent: "flex-start", display: "block", overflowY: "auto" }}
+      style={{
+        justifyContent: "flex-start",
+        display: "block",
+        overflowY: "auto",
+      }}
     >
       <Table bordered striped hover>
         <tbody>
@@ -56,7 +79,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.make : ""}
-                {...register("make", { required: true, maxLength: 100 })}
+                {...register("make", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -67,7 +90,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.model : ""}
-                {...register("model", { required: true, maxLength: 100 })}
+                {...register("model", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -78,7 +101,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="number"
                 className="form-control"
                 defaultValue={property ? property.details.year : ""}
-                {...register("year", { required: true, maxLength: 100 })}
+                {...register("year", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -89,7 +112,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="number"
                 className="form-control"
                 defaultValue={property ? property.details.mileage : ""}
-                {...register("mileage", { required: true, maxLength: 100 })}
+                {...register("mileage", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -101,7 +124,6 @@ function CarForm({ toogleStep, step, properties }) {
                 className="form-control"
                 defaultValue={property ? property.details.transmission : ""}
                 {...register("transmission", {
-                  required: true,
                   maxLength: 100,
                 })}
               />
@@ -136,8 +158,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.color : ""}
-                {...register("color", { required: true, maxLength: 100 })}
-                required
+                {...register("color", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -148,8 +169,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.VIN : ""}
-                {...register("vin", { required: true })}
-                required
+                {...register("vin")}
               />
             </td>
           </tr>
@@ -160,7 +180,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.engine : ""}
-                {...register("engine", { required: true, maxLength: 100 })}
+                {...register("engine", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -171,7 +191,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.fuel_type : ""}
-                {...register("fuelType", { required: true, maxLength: 100 })}
+                {...register("fuelType", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -182,7 +202,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.condition : ""}
-                {...register("condition", { required: true, maxLength: 100 })}
+                {...register("condition", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -193,7 +213,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.price : ""}
-                {...register("price", { required: true, maxLength: 100 })}
+                {...register("price", { maxLength: 100 })}
               />
             </td>
           </tr>
@@ -213,7 +233,13 @@ function CarForm({ toogleStep, step, properties }) {
 
       <div
         className="bottom-btn"
-        style={{ width: "100%", display: "flex", justifyContent: "center", position: "relative", bottom: "0" }}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+          bottom: "0",
+        }}
       >
         <button
           className="pre-btn"
