@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import authService from "../../services/authServices";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
-function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
+function JetDocus({
+  toogleStep,
+  step,
+  toogleDocuments,
+  ownership,
+  propId,
+  images,
+  videos,
+  propertyData,
+  toogleSellStep,
+  sellStep,
+  getPropId,
+}) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -23,9 +35,15 @@ function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const [doc12, setDocument12] = useState([]);
   const [doc13, setDocument13] = useState([]);
   const [loader, setLoader] = useState(false);
-  const listing_agreement = ownership.listing_agreement
-    ? ownership.listing_agreement
-    : "";
+  const listing_agreement = ownership
+    ? ownership.documents
+      ? ownership.documents.length > 0
+        ? ownership.documents
+        : []
+      : []
+    : [];
+
+  const params = useParams();
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -222,6 +240,37 @@ function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
     });
   };
 
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const property = response.data.filter(
+            (property) => property._id === params.id
+          );
+          if (property[0].documents.length > 0) {
+            setDocument1(property[0].documents[0]);
+            setDocument2(property[0].documents[1]);
+            setDocument3(property[0].documents[2]);
+            setDocument4(property[0].documents[3]);
+            setDocument5(property[0].documents[4]);
+            setDocument6(property[0].documents[5]);
+            setDocument7(property[0].documents[6]);
+            setDocument8(property[0].documents[7]);
+            setDocument9(property[0].documents[8]);
+            setDocument10(property[0].documents[9]);
+            setDocument11(property[0].documents[10]);
+            setDocument12(property[0].documents[11]);
+            if (property[0].documents.length > 12) {
+              setDocument13(property[0].documents[12]);
+            }
+          }
+        }
+      });
+    }
+  }, []);
+
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));
@@ -291,9 +340,86 @@ function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
     ...engine_details,
     ...inspection_report,
     ...valuation_report,
-    ...(listing_agreement ? [...listing_agreement] : []),
     ...others,
+    ...(listing_agreement ? [...listing_agreement] : []),
   ];
+
+  const saveInfo = async (data) => {
+    if (propId || params.id) {
+      if (sellStep || parseInt(params.step) === 1) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            ...propertyData,
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(4);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep || parseInt(params.step) === 2) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(5);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep || parseInt(params.step) === 3) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(6);
+            alert("Saved Successfully!");
+          }
+        });
+      }
+    } else {
+      const datas = {
+        ...ownership,
+        ...propertyData,
+        images,
+        videos,
+        documents,
+        step: 4,
+      };
+      await authService.savePropInfo(datas).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          toogleSellStep(4);
+          getPropId(response.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
+  };
 
   const onSubmit = async (data) => {
     if (
@@ -1238,6 +1364,14 @@ function JetDocus({ toogleStep, step, toogleDocuments, ownership }) {
         }}
         className="bottom-btn"
       >
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+          }}
+        >
+          <Button onClick={saveInfo}>Save</Button>
+        </div>
         <div className="bottom-btn">
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous

@@ -178,9 +178,7 @@ function RealEstateDocus({
             setDocument6([property[0].documents[5]]);
             setDocument7([property[0].documents[6]]);
             if (property[0].documents.length > 7) {
-              if (property[0].documents[7].officialName === "others") {
-                setDocument8([property[0].documents[7]]);
-              }
+              setDocument8([property[0].documents[7]]);
             }
           }
         }
@@ -221,7 +219,7 @@ function RealEstateDocus({
     return { ...document, officialName: "market_and_valuations" };
   });
   const otherDocuments = doc8.map((document) => {
-    return { ...document, officialName: "other_documents" };
+    return { ...document, officialName: "others" };
   });
 
   if (
@@ -251,8 +249,8 @@ function RealEstateDocus({
     ...thirdpartyReport,
     ...demographics,
     ...marketandValuations,
-    ...(listing_agreement ? [...listing_agreement] : []),
     ...otherDocuments,
+    ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
   const saveInfo = async (data) => {

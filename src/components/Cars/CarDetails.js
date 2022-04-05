@@ -14,7 +14,6 @@ function CarDetails({
   propId,
   ownership,
 }) {
-  console.log(ownership);
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState();
   const [model, setModel] = useState();
@@ -34,6 +33,51 @@ function CarDetails({
   const [discussedAmount, setDiscussedAmount] = useState();
 
   const params = useParams();
+
+  useEffect(() => {
+    if (params.id) {
+      authService.getIncompleteProperty(params.userId).then((res) => {
+        const property = res.data.filter((prop) => prop._id === params.id);
+        console.log(property);
+        setMake(property[0].details.make ? property[0].details.make : "");
+        setModel(property[0].details.model ? property[0].details.model : "");
+        setYear(property[0].details.year ? property[0].details.year : "");
+        setMileage(
+          property[0].details.mileage ? property[0].details.mileage : ""
+        );
+        setTransmission(
+          property[0].details.transmission
+            ? property[0].details.transmission
+            : ""
+        );
+        setCarType(
+          property[0].details.car_type ? property[0].details.car_type : ""
+        );
+        setPower(property[0].details.power ? property[0].details.power : "");
+        setColor(property[0].details.color ? property[0].details.color : "");
+        setVin(property[0].details.VIN ? property[0].details.VIN : "");
+        setEngine(property[0].details.engine ? property[0].details.engine : "");
+        setFuelType(
+          property[0].details.fuel_type ? property[0].details.fuel_type : ""
+        );
+        setCondition(
+          property[0].details.condition ? property[0].details.condition : ""
+        );
+        setPrice(property[0].details.price ? property[0].details.price : "");
+        setAddress(
+          property[0].details.property_address
+            ? property[0].details.property_address
+            : ""
+        );
+        setReservedAmount(
+          property[0].reservedAmount ? property[0].reservedAmount : ""
+        );
+        setDiscussedAmount(
+          property[0].discussedAmount ? property[0].discussedAmount : ""
+        );
+      });
+    }
+  }, []);
 
   const saveInfo = () => {
     if (propId || params.id) {
@@ -100,51 +144,6 @@ function CarDetails({
       });
     }
   };
-
-  useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        const property = res.data.filter((prop) => prop._id === params.id);
-        console.log(property);
-        setMake(property[0].details.make ? property[0].details.make : "");
-        setModel(property[0].details.model ? property[0].details.model : "");
-        setYear(property[0].details.year ? property[0].details.year : "");
-        setMileage(
-          property[0].details.mileage ? property[0].details.mileage : ""
-        );
-        setTransmission(
-          property[0].details.transmission
-            ? property[0].details.transmission
-            : ""
-        );
-        setCarType(
-          property[0].details.car_type ? property[0].details.car_type : ""
-        );
-        setPower(property[0].details.power ? property[0].details.power : "");
-        setColor(property[0].details.color ? property[0].details.color : "");
-        setVin(property[0].details.VIN ? property[0].details.VIN : "");
-        setEngine(property[0].details.engine ? property[0].details.engine : "");
-        setFuelType(
-          property[0].details.fuel_type ? property[0].details.fuel_type : ""
-        );
-        setCondition(
-          property[0].details.condition ? property[0].details.condition : ""
-        );
-        setPrice(property[0].details.price ? property[0].details.price : "");
-        setAddress(
-          property[0].details.property_address
-            ? property[0].details.property_address
-            : ""
-        );
-        setReservedAmount(
-          property[0].reservedAmount ? property[0].reservedAmount : ""
-        );
-        setDiscussedAmount(
-          property[0].discussedAmount ? property[0].discussedAmount : ""
-        );
-      });
-    }
-  }, []);
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {

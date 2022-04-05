@@ -15,6 +15,7 @@ import { Featured } from "./components/Home/Featured";
 import { addProperty } from "./slice/propertySlice";
 import { addAuction } from "./slice/auctionSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
+import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
 import Header from "./components/Home/Header";
 import PropertyPages from "./components/Home/PropertyPages";
@@ -58,6 +59,9 @@ function App() {
     });
     authService.getSavedProperties(user._id).then((res) => {
       dispatch(addSavedProperty(res.data));
+    });
+    authService.getIncompleteProperty(user._id).then((res) => {
+      dispatch(addIncompProperty(res.data));
     });
   }
 

@@ -1,34 +1,248 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import authService from "../../services/authServices";
 
-function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
+function YachtDetails({
+  property,
+  toogleStep,
+  step,
+  tooglePropertyData,
+  toogleSellStep,
+  getPropId,
+  propId,
+  ownership,
+}) {
   const { register, handleSubmit, errors } = useForm();
+  const incompleteProp = useSelector((state) => state.incompProperty);
+  const params = useParams();
+  const [vessel_registration_number, setVessel_registration_number] =
+    useState();
+  const [vessel_manufacturing_date, setVessel_manufacturing_date] = useState();
+  const [manufacture_mark, setManufacture_mark] = useState();
+  const [manufacturer_name, setManufacturer_name] = useState();
+  const [engine_type, setEngine_type] = useState();
+  const [engine_deck_type, setEngine_deck_type] = useState();
+  const [engine_manufacture_name, setEngine_manufacture_name] = useState();
+  const [running_cost, setRunning_cost] = useState();
+  const [no_of_crew_required, setNo_of_crew_required] = useState();
+  const [property_address, setProperty_address] = useState();
+  const [otherDetails, setOtherDetails] = useState();
+  const [reservedAmount, setReservedAmount] = useState();
+  const [discussedAmount, setDiscussedAmount] = useState();
+
+  const prop = incompleteProp.filter((item) => item._id === params.id);
+
+  useEffect(() => {
+    if (params.id && prop.length > 0) {
+      setVessel_registration_number(
+        prop[0].details.vessel_registration_number
+          ? prop[0].details.vessel_registration_number
+          : ""
+      );
+      setVessel_manufacturing_date(
+        prop[0].details.vessel_manufacturing_date
+          ? prop[0].details.vessel_manufacturing_date
+          : ""
+      );
+      setManufacture_mark(
+        prop[0].details.manufacture_mark ? prop[0].details.manufacture_mark : ""
+      );
+      setManufacturer_name(
+        prop[0].details.manufacturer_name
+          ? prop[0].details.manufacturer_name
+          : ""
+      );
+      setEngine_type(
+        prop[0].details.engine_type ? prop[0].details.engine_type : ""
+      );
+      setEngine_deck_type(
+        prop[0].details.engine_deck_type ? prop[0].details.engine_deck_type : ""
+      );
+      setEngine_manufacture_name(
+        prop[0].details.engine_manufacture_name
+          ? prop[0].details.engine_manufacture_name
+          : ""
+      );
+      setRunning_cost(
+        prop[0].details.running_cost ? prop[0].details.running_cost : ""
+      );
+      setNo_of_crew_required(
+        prop[0].details.no_of_crew_required
+          ? prop[0].details.no_of_crew_required
+          : ""
+      );
+      setProperty_address(
+        prop[0].details.property_address ? prop[0].details.property_address : ""
+      );
+      setOtherDetails(
+        prop[0].details.otherDetails ? prop[0].details.otherDetails : ""
+      );
+      setReservedAmount(
+        prop[0].details.reservedAmount ? prop[0].details.reservedAmount : ""
+      );
+      setDiscussedAmount(
+        prop[0].details.discussedAmount ? prop[0].details.discussedAmount : ""
+      );
+    }
+  }, [params.id, prop]);
+
+  const saveInfo = () => {
+    if (propId || params.id) {
+      const datas = {
+        id: propId ? propId : params.id,
+        details: {
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          vessel_registration_number: property.vessel_registration_number
+            ? property.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: property.vessel_manufacturing_date
+            ? property.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: property.manufacture_mark
+            ? property.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: property.manufacturer_name
+            ? property.manufacturer_name
+            : manufacturer_name,
+          engine_type: property.engine_type
+            ? property.engine_type
+            : engine_type,
+          engine_manufacture_name: property.engine_manufacture_name
+            ? property.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: property.engine_deck_type
+            ? property.engine_deck_type
+            : engine_deck_type,
+          running_cost: property.running_cost
+            ? property.running_cost
+            : running_cost,
+          no_of_crew_required: property.no_of_crew_required
+            ? property.no_of_crew_required
+            : no_of_crew_required,
+          property_address: property.property_address
+            ? property.property_address
+            : property_address,
+          detain: property.detain ? property.detain : otherDetails,
+          step: parseInt(2),
+        },
+      };
+      authService.saveInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          toogleSellStep(2);
+          alert("Saved Successfully!");
+        }
+      });
+    } else {
+      const datas = {
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        vessel_registration_number: property.vessel_registration_number
+          ? property.vessel_registration_number
+          : vessel_registration_number,
+        vessel_manufacturing_date: property.vessel_manufacturing_date
+          ? property.vessel_manufacturing_date
+          : vessel_manufacturing_date,
+        manufacture_mark: property.manufacture_mark
+          ? property.manufacture_mark
+          : manufacture_mark,
+        manufacturer_name: property.manufacturer_name
+          ? property.manufacturer_name
+          : manufacturer_name,
+        engine_type: property.engine_type ? property.engine_type : engine_type,
+        engine_manufacture_name: property.engine_manufacture_name
+          ? property.engine_manufacture_name
+          : engine_manufacture_name,
+        engine_deck_type: property.engine_deck_type
+          ? property.engine_deck_type
+          : engine_deck_type,
+        running_cost: property.running_cost
+          ? property.running_cost
+          : running_cost,
+        no_of_crew_required: property.no_of_crew_required
+          ? property.no_of_crew_required
+          : no_of_crew_required,
+        property_address: property.property_address
+          ? property.property_address
+          : property_address,
+        detain: property.detain ? property.detain : otherDetails,
+        ...ownership,
+        step: parseInt(2),
+      };
+      delete datas.documents;
+      authService.savePropInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          toogleSellStep(2);
+          getPropId(res.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
+  };
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
-    } else {
+    } else if (
+      data.vessel_registration_number !== "" &&
+      data.vessel_manufacturing_date !== "" &&
+      data.manufacture_mark !== "" &&
+      data.manufacturer_name !== "" &&
+      data.engine_type !== "" &&
+      data.engine_manufacture_name !== "" &&
+      data.engine_deck_type !== "" &&
+      data.running_cost !== "" &&
+      data.no_of_crew_required !== "" &&
+      data.property_address !== "" &&
+      data.reservedAmount !== "" &&
+      data.discussedAmount !== ""
+    ) {
       const submitedData = {
-        type: "yacht",
-        reservedAmount: data.reservedAmount,
-        discussedAmount: data.discussedAmount,
-        details: {
-          vessel_registration_number: data.vessel_registration_number,
-          vessel_manufacturing_date: data.vessel_manufacturing_date,
-          manufacture_mark: data.manufacture_mark,
-          manufacturer_name: data.manufacturer_name,
-          engine_type: data.engine_type,
-          engine_manufacture_name: data.engine_manufacture_name,
-          engine_deck_type: data.engine_deck_type,
-          running_cost: data.running_cost,
-          no_of_crew_required: data.no_of_crew_required,
-          property_address: data.property_address,
-          detain: data.detain,
-        },
+        reservedAmount: data.reservedAmount
+          ? data.reservedAmount
+          : reservedAmount,
+        discussedAmount: data.discussedAmount
+          ? data.discussedAmount
+          : discussedAmount,
+        vessel_registration_number: data.vessel_registration_number
+          ? data.vessel_registration_number
+          : vessel_registration_number,
+        vessel_manufacturing_date: data.vessel_manufacturing_date
+          ? data.vessel_manufacturing_date
+          : vessel_manufacturing_date,
+        manufacture_mark: data.manufacture_mark
+          ? data.manufacture_mark
+          : manufacture_mark,
+        manufacturer_name: data.manufacturer_name
+          ? data.manufacturer_name
+          : manufacturer_name,
+        engine_type: data.engine_type ? data.engine_type : engine_type,
+        engine_manufacture_name: data.engine_manufacture_name
+          ? data.engine_manufacture_name
+          : engine_manufacture_name,
+        engine_deck_type: data.engine_deck_type
+          ? data.engine_deck_type
+          : engine_deck_type,
+        running_cost: data.running_cost ? data.running_cost : running_cost,
+        no_of_crew_required: data.no_of_crew_required
+          ? data.no_of_crew_required
+          : no_of_crew_required,
+        property_address: data.property_address
+          ? data.property_address
+          : property_address,
+        detain: data.detain ? data.detain : otherDetails,
       };
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
+    } else {
+      alert("Please fill all the required fields");
     }
   };
   return (
@@ -55,14 +269,22 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property.vessel_registration_number}
-              {...register("vessel_registration_number", { required: true })}
+              defaultValue={
+                property.vessel_registration_number
+                  ? property.vessel_registration_number
+                  : prop.details.vessel_registration_number
+              }
+              {...register("vessel_registration_number")}
+              onChange={(e) => setVessel_registration_number(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>
-              Vessel Registration Number  <span style={{ color: "#ff0000" }}>*</span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Vessel Registration Number{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -72,13 +294,23 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="date"
               className="form-control"
-              defaultValue={property.vessel_manufacturing_date}
-              {...register("vessel_manufacturing_date", { required: true })}
+              defaultValue={
+                property.vessel_manufacturing_date
+                  ? property.vessel_manufacturing_date
+                  : prop.details.vessel_manufacturing_date
+              }
+              {...register("vessel_manufacturing_date")}
+              onChange={(e) => setVessel_manufacturing_date(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Vessel Manufacturing Date  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Vessel Manufacturing Date{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
 
@@ -87,13 +319,22 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property.property_address}
-              {...register("property_address", { required: true })}
+              defaultValue={
+                property.property_address
+                  ? property.property_address
+                  : prop.details.property_address
+              }
+              {...register("property_address")}
+              onChange={(e) => setProperty_address(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Property Address  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Property Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
 
@@ -102,40 +343,66 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property.manufacture_mark}
-              {...register("manufacture_mark", { required: true })}
+              defaultValue={
+                property.manufacture_mark
+                  ? property.manufacture_mark
+                  : prop.details.manufacture_mark
+              }
+              {...register("manufacture_mark")}
+              onChange={(e) => setManufacture_mark(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Manufacture Mark  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Manufacture Mark <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col>
             <input
               type="text"
               className="form-control"
-              defaultValue={property.manufacturer_name}
-              {...register("manufacturer_name", { required: true })}
+              defaultValue={
+                property.manufacturer_name
+                  ? property.manufacturer_name
+                  : prop.details.manufacturer_name
+              }
+              {...register("manufacturer_name")}
+              onChange={(e) => setManufacturer_name(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Manufacturer Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
 
           <Col>
             <input
               type="text"
               className="form-control"
-              defaultValue={property.engine_manufacture_name}
-              {...register("engine_manufacture_name", {
-                required: true,
-              })}
+              defaultValue={
+                property.engine_manufacture_name
+                  ? property.engine_manufacture_name
+                  : prop.details.engine_manufacture_name
+              }
+              {...register("engine_manufacture_name")}
+              onChange={(e) => setEngine_manufacture_name(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Engine Manufacturer Name  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Engine Manufacturer Name{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
 
@@ -144,13 +411,22 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property.engine_type}
-              {...register("engine_type", { required: true })}
+              defaultValue={
+                property.engine_type
+                  ? property.engine_type
+                  : prop.details.engine_type
+              }
+              {...register("engine_type")}
+              onChange={(e) => setEngine_type(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Engine Type  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Engine Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row style={{ marginTop: "10px" }}>
@@ -158,39 +434,64 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property.engine_deck_type}
-              {...register("engine_deck_type", {
-                required: true,
-              })}
+              defaultValue={
+                property.engine_deck_type
+                  ? property.engine_deck_type
+                  : prop.details.engine_deck_type
+              }
+              {...register("engine_deck_type")}
+              onChange={(e) => setEngine_deck_type(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Engine Deck Type  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Engine Deck Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col>
             <input
               type="text"
               className="form-control"
-              defaultValue={property.running_cost}
-              {...register("running_cost", { required: true })}
+              defaultValue={
+                property.running_cost
+                  ? property.running_cost
+                  : prop.details.running_cost
+              }
+              {...register("running_cost")}
+              onChange={(e) => setRunning_cost(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Running Cost  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Running Cost <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col>
             <input
               type="text"
               className="form-control"
-              defaultValue={property.no_of_crew_required}
-              {...register("no_of_crew_required", { required: true })}
+              defaultValue={
+                property.no_of_crew_required
+                  ? property.no_of_crew_required
+                  : prop.details.no_of_crew_required
+              }
+              {...register("no_of_crew_required")}
+              onChange={(e) => setNo_of_crew_required(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>No. Crew Required  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              No. Crew Required <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row style={{ marginTop: "30px", height: "200px" }}>
@@ -198,9 +499,12 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <textarea
               className="form-control"
               style={{ height: "100%" }}
-              defaultValue={property.detain}
+              defaultValue={
+                property.detain ? property.detain : prop.details.detain
+              }
               placeholder="Other information about the property"
-              {...register("detain", { required: true })}
+              {...register("detain")}
+              onChange={(e) => setOtherDetails(e.target.value)}
             />
           </Col>
         </Row>
@@ -209,32 +513,47 @@ function YachtDetails({ property, toogleStep, step, tooglePropertyData }) {
             <input
               type="number"
               className="form-control"
+              defaultValue={prop.reservedAmount ? prop.reservedAmount : 0}
               {...register("reservedAmount")}
-              required
+              onChange={(e) => setReservedAmount(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Reserved Amount  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col>
             <input
               type="number"
               className="form-control"
+              defaultValue={prop.discussedAmount ? prop.discussedAmount : 0}
               {...register("discussedAmount")}
-              required
+              onChange={(e) => setDiscussedAmount(e.target.value)}
             />
-            <span style={{
-              fontWeight: "600",
-              color: "black"
-            }}>Discussed Amount  <span style={{ color: "#ff0000" }}>*</span></span>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
       </Container>
-      <div
-        className="bottom-btn"
-        style={{ width: "100%", display: "flex", justifyContent: "center" }}
-      >
+      <div className="bottom-btn">
+        <div
+          style={{
+            position: "absolute",
+            left: "50px",
+          }}
+        >
+          <Button onClick={saveInfo}>Save</Button>
+        </div>
         <button
           className="pre-btn"
           onClick={() => {

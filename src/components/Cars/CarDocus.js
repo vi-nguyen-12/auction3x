@@ -194,10 +194,8 @@ function CarDocus({
             setDocument6([property[0].documents[5]]);
             setDocument7([property[0].documents[6]]);
             setDocument8([property[0].documents[7]]);
-            if (property[0].documents.length > 9) {
-              if (property[0].documents[9].officialName === "others") {
-                setDocument9([property[0].documents[8]]);
-              }
+            if (property[0].documents.length > 8) {
+              setDocument9([property[0].documents[8]]);
             }
           }
         }
@@ -254,8 +252,8 @@ function CarDocus({
     ...engine_details,
     ...insurance_document,
     ...valuation_report,
-    ...(listing_agreement ? [...listing_agreement] : []),
     ...others,
+    ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
   const saveInfo = async (data) => {
@@ -989,17 +987,15 @@ function CarDocus({
         }}
         className="bottom-btn"
       >
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-            bottom: "20px",
-            zIndex: "1",
-          }}
-        >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
         <div className="bottom-btn">
+          <div
+            style={{
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            <Button onClick={saveInfo}>Save</Button>
+          </div>
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>

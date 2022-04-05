@@ -2,21 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import authService from "../../services/authServices";
+import { useSelector } from "react-redux";
 
 function CarForm({ toogleStep, step, properties }) {
   const { handleSubmit, register } = useForm();
-
-  const [property, setProperty] = useState();
-
+  const [property, setProperty] = useState({});
   const params = useParams();
+  const incompleteProperty = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
     if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        const prop = res.data.filter((item) => item._id === params.id);
-        setProperty(prop[0]);
-      });
+      const prop = incompleteProperty.filter((item) => item._id === params.id);
+      setProperty(prop[0]);
     }
   }, []);
 
@@ -79,7 +76,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.make : ""}
-                {...register("make", { maxLength: 100 })}
+                {...register("make")}
               />
             </td>
           </tr>
@@ -90,7 +87,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.model : ""}
-                {...register("model", { maxLength: 100 })}
+                {...register("model")}
               />
             </td>
           </tr>
@@ -101,7 +98,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="number"
                 className="form-control"
                 defaultValue={property ? property.details.year : ""}
-                {...register("year", { maxLength: 100 })}
+                {...register("year")}
               />
             </td>
           </tr>
@@ -112,7 +109,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="number"
                 className="form-control"
                 defaultValue={property ? property.details.mileage : ""}
-                {...register("mileage", { maxLength: 100 })}
+                {...register("mileage")}
               />
             </td>
           </tr>
@@ -123,9 +120,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.transmission : ""}
-                {...register("transmission", {
-                  maxLength: 100,
-                })}
+                {...register("transmission")}
               />
             </td>
           </tr>
@@ -136,7 +131,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.car_type : ""}
-                {...register("carType", { maxLength: 100 })}
+                {...register("carType")}
               />
             </td>
           </tr>
@@ -147,7 +142,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.power : ""}
-                {...register("power", { maxLength: 100 })}
+                {...register("power")}
               />
             </td>
           </tr>
@@ -158,7 +153,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.color : ""}
-                {...register("color", { maxLength: 100 })}
+                {...register("color")}
               />
             </td>
           </tr>
@@ -180,7 +175,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.engine : ""}
-                {...register("engine", { maxLength: 100 })}
+                {...register("engine")}
               />
             </td>
           </tr>
@@ -191,7 +186,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.fuel_type : ""}
-                {...register("fuelType", { maxLength: 100 })}
+                {...register("fuelType")}
               />
             </td>
           </tr>
@@ -202,7 +197,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.condition : ""}
-                {...register("condition", { maxLength: 100 })}
+                {...register("condition")}
               />
             </td>
           </tr>
@@ -213,7 +208,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.price : ""}
-                {...register("price", { maxLength: 100 })}
+                {...register("price")}
               />
             </td>
           </tr>
@@ -224,7 +219,7 @@ function CarForm({ toogleStep, step, properties }) {
                 type="text"
                 className="form-control"
                 defaultValue={property ? property.details.property_address : ""}
-                {...register("address", { required: true })}
+                {...register("address")}
               />
             </td>
           </tr>

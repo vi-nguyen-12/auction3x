@@ -39,22 +39,41 @@ function JetDetails({
       const datas = {
         id: propId ? propId : params.id,
         details: {
-          registration_mark: registration_mark,
-          aircraft_builder_name: aircraft_builder_name,
-          aircraft_model_designation: aircraft_model_designation,
-          aircraft_serial_no: aircraft_serial_no,
-          engine_builder_name: engine_builder_name,
-          engine_model_designation: engine_model_designation,
-          number_of_engines: number_of_engines,
-          propeller_builder_name: propeller_builder_name,
-          propeller_model_designation: propeller_model_designation,
-          number_of_aircraft: number_of_aircraft,
-          imported_aircraft:
-            isImport === property.imported_aircraft
-              ? property.imported_aircraft
-              : isImport === "Yes"
-              ? true
-              : false,
+          registration_mark: registration_mark
+            ? registration_mark
+            : property.registration_mark,
+          aircraft_builder_name: aircraft_builder_name
+            ? aircraft_builder_name
+            : property.aircraft_builder_name,
+          aircraft_model_designation: aircraft_model_designation
+            ? aircraft_model_designation
+            : property.aircraft_model_designation,
+          aircraft_serial_no: aircraft_serial_no
+            ? aircraft_serial_no
+            : property.aircraft_serial_no,
+          engine_builder_name: engine_builder_name
+            ? engine_builder_name
+            : property.engine_builder_name,
+          engine_model_designation: engine_model_designation
+            ? engine_model_designation
+            : property.engine_model_designation,
+          number_of_engines: number_of_engines
+            ? number_of_engines
+            : property.number_of_engines,
+          propeller_builder_name: propeller_builder_name
+            ? propeller_builder_name
+            : property.propeller_builder_name,
+          propeller_model_designation: propeller_model_designation
+            ? propeller_model_designation
+            : property.propeller_model_designation,
+          number_of_aircraft: number_of_aircraft
+            ? number_of_aircraft
+            : property.number_of_aircraft,
+          imported_aircraft: property.imported_aircraft
+            ? property.imported_aircraft
+            : isImport === "Yes"
+            ? true
+            : false,
           property_address: address,
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
@@ -71,23 +90,38 @@ function JetDetails({
       });
     } else {
       const datas = {
-        registration_mark: registration_mark,
-        aircraft_builder_name: aircraft_builder_name,
-        aircraft_model_designation: aircraft_model_designation,
-        aircraft_serial_no: aircraft_serial_no,
-        engine_builder_name: engine_builder_name,
-        engine_model_designation: engine_model_designation,
-        number_of_engines: number_of_engines,
-        propeller_builder_name: propeller_builder_name,
-        propeller_model_designation: propeller_model_designation,
-        number_of_aircraft: number_of_aircraft,
-        imported_aircraft:
-          isImport === property.imported_aircraft
-            ? property.imported_aircraft
-            : isImport === "Yes"
-            ? true
-            : false,
-        property_address: address,
+        registration_mark: registration_mark
+          ? registration_mark
+          : property.registration_mark,
+        aircraft_builder_name: aircraft_builder_name
+          ? aircraft_builder_name
+          : property.aircraft_builder_name,
+        aircraft_model_designation: aircraft_model_designation
+          ? aircraft_model_designation
+          : property.aircraft_model_designation,
+        aircraft_serial_no: aircraft_serial_no
+          ? aircraft_serial_no
+          : property.aircraft_serial_no,
+        engine_builder_name: engine_builder_name
+          ? engine_builder_name
+          : property.engine_builder_name,
+        engine_model_designation: engine_model_designation
+          ? engine_model_designation
+          : property.engine_model_designation,
+        number_of_engines: number_of_engines
+          ? number_of_engines
+          : property.number_of_engines,
+        propeller_builder_name: propeller_builder_name
+          ? propeller_builder_name
+          : property.propeller_builder_name,
+        propeller_model_designation: propeller_model_designation
+          ? propeller_model_designation
+          : property.propeller_model_designation,
+        number_of_aircraft: number_of_aircraft
+          ? number_of_aircraft
+          : property.number_of_aircraft,
+        imported_aircraft: isImport ? isImport : property.imported_aircraft,
+        property_address: address ? address : property.property_address,
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         ...ownership,
@@ -250,7 +284,8 @@ function JetDetails({
                     ? property.property_address
                     : address
                 }
-                {...register("property_address", { required: true })}
+                {...register("property_address")}
+                onChange={(e) => setAddress(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Property Address <span style={{ color: "#ff0000" }}>*</span>
@@ -267,7 +302,8 @@ function JetDetails({
                     ? property.registration_mark
                     : registration_mark
                 }
-                {...register("registration_mark", { required: true })}
+                {...register("registration_mark")}
+                onChange={(e) => setRegistration_mark(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Registration Mark <span style={{ color: "#ff0000" }}>*</span>
@@ -284,7 +320,8 @@ function JetDetails({
                     ? property.aircraft_builder_name
                     : aircraft_builder_name
                 }
-                {...register("aircraft_builder_name", { required: true })}
+                {...register("aircraft_builder_name")}
+                onChange={(e) => setAircraft_builder_name(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Aircraft Builder's Name{" "}
@@ -300,7 +337,8 @@ function JetDetails({
                     ? property.aircraft_model_designation
                     : aircraft_model_designation
                 }
-                {...register("aircraft_model_designation", { required: true })}
+                {...register("aircraft_model_designation")}
+                onChange={(e) => setAircraft_model_designation(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Aircraft Model Designation{" "}
@@ -318,7 +356,8 @@ function JetDetails({
                     ? property.aircraft_serial_no
                     : aircraft_serial_no
                 }
-                {...register("aircraft_serial_no", { required: true })}
+                {...register("aircraft_serial_no")}
+                onChange={(e) => setAircraft_serial_no(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
@@ -335,7 +374,8 @@ function JetDetails({
                     ? property.engine_builder_name
                     : engine_builder_name
                 }
-                {...register("engine_builder_name", { required: true })}
+                {...register("engine_builder_name")}
+                onChange={(e) => setEngine_builder_name(e.target.value)}
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Engine Builder's Name{" "}
@@ -421,7 +461,7 @@ function JetDetails({
               <select
                 className="form-control"
                 onChange={(e) => {
-                  setIsImport(e.target.value);
+                  setIsImport(e.target.value === "Yes" ? true : false);
                 }}
               >
                 <option value="">Select</option>

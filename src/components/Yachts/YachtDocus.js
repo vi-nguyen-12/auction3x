@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import authService from "../../services/authServices";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
+function YachtDocus({
+  toogleStep,
+  step,
+  toogleDocuments,
+  ownership,
+  propId,
+  images,
+  videos,
+  propertyData,
+  toogleSellStep,
+  sellStep,
+  getPropId,
+}) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -19,9 +32,17 @@ function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
   const [doc8, setDocument8] = useState([]);
   const [doc9, setDocument9] = useState([]);
   const [loader, setLoader] = useState(false);
-  const listing_agreement = ownership.listing_agreement
-    ? ownership.listing_agreement
-    : "";
+  const listing_agreement = ownership
+    ? ownership.documents
+      ? ownership.documents.length > 0
+        ? ownership.documents
+        : []
+      : []
+    : [];
+
+  const params = useParams();
+  const incompProperty = useSelector((state) => state.incompProperty);
+  const prop = incompProperty.filter((item) => item._id === params.id);
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -158,6 +179,22 @@ function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
     });
   };
 
+  useEffect(() => {
+    if (params.id && prop.length > 0) {
+      if (prop.documents.length > 0) {
+        setDocument1(prop.documents[0]);
+        setDocument2(prop.documents[1]);
+        setDocument3(prop.documents[2]);
+        setDocument4(prop.documents[3]);
+        setDocument5(prop.documents[4]);
+        setDocument6(prop.documents[5]);
+        setDocument7(prop.documents[6]);
+        setDocument8(prop.documents[7]);
+        setDocument9(prop.documents[8]);
+      }
+    }
+  }, [incompProperty]);
+
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));
@@ -207,9 +244,86 @@ function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
     ...vessel_insurance,
     ...vessel_marine_surveyor_report,
     ...vessel_valuation_report,
-    ...(listing_agreement ? [...listing_agreement] : []),
     ...others,
+    ...(listing_agreement ? [...listing_agreement] : []),
   ];
+
+  const saveInfo = async (data) => {
+    if (propId || params.id) {
+      if (sellStep || parseInt(params.step) === 1) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            ...propertyData,
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(4);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep || parseInt(params.step) === 2) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            images,
+            videos,
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(5);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep || parseInt(params.step) === 3) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(6);
+            alert("Saved Successfully!");
+          }
+        });
+      }
+    } else {
+      const datas = {
+        ...ownership,
+        ...propertyData,
+        images,
+        videos,
+        documents,
+        step: 4,
+      };
+      await authService.savePropInfo(datas).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          toogleSellStep(4);
+          getPropId(response.data._id);
+          alert("Saved Successfully!");
+        }
+      });
+    }
+  };
 
   const onSubmit = async (data) => {
     if (
@@ -876,6 +990,14 @@ function YachtDocus({ toogleStep, step, toogleDocuments, ownership }) {
         className="bottom-btn"
       >
         <div className="bottom-btn">
+          <div
+            style={{
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            <Button onClick={saveInfo}>Save</Button>
+          </div>
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>
