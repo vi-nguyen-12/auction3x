@@ -144,27 +144,27 @@ const authService = {
   },
 
   // getUpcomingCarAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/upcoming");
+  //   return axios.get(apiUrl + "/api/auctions/upcoming/car");
   // },
 
   // getOngoingCarAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/car/ongoing");
+  //   return axios.get(apiUrl + "/api/auctions/ongoing/car");
   // },
 
   // getUpcomingJetAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/jet/upcoming");
+  //   return axios.get(apiUrl + "/api/auctions/upcoming/jet");
   // },
 
   // getOngoingJetAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/jet/ongoing");
+  //   return axios.get(apiUrl + "/api/auctions/ongoing/jet");
   // },
 
   // getUpcomingYachtAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/yacht/upcoming");
+  //   return axios.get(apiUrl + "/api/auctions/upcoming/yacht");
   // },
 
   // getOngoingYachtAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/yacht/ongoing");
+  //   return axios.get(apiUrl + "/api/auctions/ongoing/yacht");
   // },
 
   getRegistStatus() {
