@@ -20,6 +20,9 @@ const UploadForm = ({
   propId,
   ownership,
   getPropId,
+  propertyType,
+  image,
+  video,
 }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
@@ -72,62 +75,120 @@ const UploadForm = ({
   };
 
   const saveInfo = async () => {
-    if (propId || params.id) {
-      if (sellStep || parseInt(params.step) === 2) {
-        console.log("Hello");
+    if (propertyType === "real-estate") {
+      if (propId || params.id) {
+        if (sellStep === 2 || parseInt(params.step) === 2) {
+          console.log("Hello");
+          const datas = {
+            id: propId ? propId : params.id,
+            details: {
+              images,
+              videos,
+              step: 3,
+            },
+          };
+          await authService.putRealEstateInfo(datas).then((response) => {
+            if (response.data.error) {
+              alert(response.data.error);
+            } else {
+              toogleSellStep(3);
+              alert("Saved Successfully!");
+            }
+          });
+        } else if (sellStep === 1 || parseInt(params.step) === 1) {
+          console.log("Hello");
+          const datas = {
+            id: propId ? propId : params.id,
+            details: {
+              ...propertyData,
+              images,
+              videos,
+              step: 3,
+            },
+          };
+          await authService.putRealEstateInfo(datas).then((response) => {
+            if (response.data.error) {
+              alert(response.data.error);
+            } else {
+              toogleSellStep(3);
+              alert("Saved Successfully!");
+            }
+          });
+        }
+      } else {
         const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            images,
-            videos,
-            step: 3,
-          },
+          ...ownership,
+          ...propertyData,
+          images,
+          videos,
+          step: 3,
         };
-        await authService.saveInfo(datas).then((response) => {
+        await authService.postRealEstateInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
             toogleSellStep(3);
-            alert("Saved Successfully!");
-          }
-        });
-      } else if (sellStep || parseInt(params.step) === 1) {
-        console.log("Hello");
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            ...propertyData,
-            images,
-            videos,
-            step: 3,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toogleSellStep(3);
+            getPropId(response.data._id);
             alert("Saved Successfully!");
           }
         });
       }
     } else {
-      const datas = {
-        ...ownership,
-        ...propertyData,
-        images,
-        videos,
-        step: 3,
-      };
-      await authService.savePropInfo(datas).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          toogleSellStep(3);
-          getPropId(response.data._id);
-          alert("Saved Successfully!");
+      if (propId || params.id) {
+        if (sellStep === 2 || parseInt(params.step) === 2) {
+          const datas = {
+            id: propId ? propId : params.id,
+            details: {
+              images,
+              videos,
+              step: 3,
+            },
+          };
+          await authService.saveInfo(datas).then((response) => {
+            if (response.data.error) {
+              alert(response.data.error);
+            } else {
+              toogleSellStep(3);
+              alert("Saved Successfully!");
+            }
+          });
+        } else if (sellStep === 1 || parseInt(params.step) === 1) {
+          const datas = {
+            id: propId ? propId : params.id,
+            details: {
+              ...propertyData,
+              images,
+              videos,
+              step: 3,
+            },
+          };
+          await authService.saveInfo(datas).then((response) => {
+            if (response.data.error) {
+              alert(response.data.error);
+            } else {
+              toogleSellStep(3);
+              alert("Saved Successfully!");
+            }
+          });
         }
-      });
+      } else {
+        const datas = {
+          ...ownership,
+          ...propertyData,
+          images,
+          videos,
+          step: 3,
+        };
+        await authService.savePropInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(3);
+            getPropId(response.data._id);
+            alert("Saved Successfully!");
+          }
+        });
+      }
     }
   };
 
@@ -141,8 +202,20 @@ const UploadForm = ({
             (item) => item._id === params.id
           );
           if (property.length > 0) {
-            setImages(property[0].images.length > 0 ? property[0].images : []);
-            setVideos(property[0].videos.length > 0 ? property[0].videos : []);
+            setImages(
+              property[0].images.length > 0
+                ? property[0].images
+                : image
+                ? image
+                : []
+            );
+            setVideos(
+              property[0].videos.length > 0
+                ? property[0].videos
+                : video
+                ? video
+                : []
+            );
           }
         }
       });

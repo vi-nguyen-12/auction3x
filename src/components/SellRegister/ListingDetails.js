@@ -4,7 +4,13 @@ import CarForm from "../Cars/CarForm";
 import JetForm from "../Jets/JetForm";
 import YachtForm from "../Yachts/YachtForm";
 
-const ListingDetails = ({ toogleStep, step, properties, propertyType }) => {
+const ListingDetails = ({
+  toogleStep,
+  step,
+  properties,
+  propertyType,
+  property,
+}) => {
   return (
     <div className="listDetail-content">
       <div className="sell-top">
@@ -43,16 +49,28 @@ const ListingDetails = ({ toogleStep, step, properties, propertyType }) => {
           toogleStep={toogleStep}
           step={step}
           properties={properties}
+          property={property}
         />
       ) : propertyType === "car" ? (
-        <CarForm toogleStep={toogleStep} step={step} properties={properties} />
+        <CarForm
+          toogleStep={toogleStep}
+          step={step}
+          properties={properties}
+          property={property}
+        />
       ) : propertyType === "jet" ? (
-        <JetForm toogleStep={toogleStep} step={step} properties={properties} />
+        <JetForm
+          toogleStep={toogleStep}
+          step={step}
+          properties={properties}
+          property={property}
+        />
       ) : propertyType === "yacht" ? (
         <YachtForm
           toogleStep={toogleStep}
           step={step}
           properties={properties}
+          property={property}
         />
       ) : null}
     </div>

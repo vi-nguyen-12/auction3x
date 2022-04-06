@@ -256,9 +256,9 @@ function CarDocus({
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
-  const saveInfo = async (data) => {
+  const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep || parseInt(params.step) === 1) {
+      if (sellStep === 1 || parseInt(params.step) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -277,7 +277,7 @@ function CarDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 2) {
+      } else if (sellStep === 2 || parseInt(params.step) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -291,11 +291,11 @@ function CarDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(5);
+            toogleSellStep(4);
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 3) {
+      } else if (sellStep === 3 || parseInt(params.step) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -307,7 +307,7 @@ function CarDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(6);
+            toogleSellStep(4);
             alert("Saved Successfully!");
           }
         });

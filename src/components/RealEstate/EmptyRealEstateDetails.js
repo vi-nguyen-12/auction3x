@@ -38,9 +38,9 @@ function EmptyRealEstateDetails({
   const [discussedAmount, setDiscussedAmount] = useState("");
 
   const saveInfo = () => {
-    if (propId) {
+    if (propId || params.id) {
       const datas = {
-        id: propId,
+        id: propId ? propId : params.id,
         details: {
           street_address: address ? address : property.street_address,
           city: city ? city : property.city,
@@ -59,7 +59,7 @@ function EmptyRealEstateDetails({
           step: parseInt(2),
         },
       };
-      authService.saveInfo(datas).then((res) => {
+      authService.putRealEstateInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -87,7 +87,7 @@ function EmptyRealEstateDetails({
         step: parseInt(2),
       };
       delete datas.documents;
-      authService.savePropInfo(datas).then((res) => {
+      authService.postRealEstateInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -141,10 +141,10 @@ function EmptyRealEstateDetails({
               : ""
           );
           setReservedAmount(
-            property[0].reservedAmount ? property[0].reservedAmount : ""
+            property[0].reservedAmount ? property[0].reservedAmount : 0
           );
           setDiscussedAmount(
-            property[0].discussedAmount ? property[0].discussedAmount : ""
+            property[0].discussedAmount ? property[0].discussedAmount : 0
           );
           setAddress(
             property[0].details.property_address
@@ -219,7 +219,11 @@ function EmptyRealEstateDetails({
               className="form-control"
               name="street_address"
               defaultValue={
-                property.street_address ? property.street_address : address
+                property.street_address
+                  ? property.street_address
+                  : address
+                  ? address
+                  : ""
               }
               {...register("street_address", { required: false })}
               onChange={(e) => setAddress(e.target.value)}
@@ -235,7 +239,7 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="city"
-              defaultValue={property.city ? property.city : city}
+              defaultValue={property.city ? property.city : city ? city : ""}
               {...register("city", { required: false })}
               onChange={(e) => setCity(e.target.value)}
             />
@@ -248,7 +252,9 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="state"
-              defaultValue={property.state ? property.state : state}
+              defaultValue={
+                property.state ? property.state : state ? state : ""
+              }
               {...register("state", { required: false })}
               onChange={(e) => setState(e.target.value)}
             />
@@ -263,7 +269,9 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="country"
-              defaultValue={property.country ? property.country : country}
+              defaultValue={
+                property.country ? property.country : country ? country : ""
+              }
               {...register("country", { required: false })}
               onChange={(e) => setCountry(e.target.value)}
             />
@@ -276,7 +284,9 @@ function EmptyRealEstateDetails({
               type="number"
               className="form-control"
               name="zipCode"
-              defaultValue={property.zip_code ? property.zip_code : zip}
+              defaultValue={
+                property.zip_code ? property.zip_code : zip ? zip : ""
+              }
               {...register("zipCode", { required: false })}
               onChange={(e) => setZip(e.target.value)}
             />
@@ -290,7 +300,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={ownerName}
+              defaultValue={ownerName ? ownerName : ""}
               {...register("ownerName", { required: false })}
               name="ownerName"
               onChange={(e) => setOwnerName(e.target.value)}
@@ -303,9 +313,9 @@ function EmptyRealEstateDetails({
         <Row style={{ marginTop: "10px" }}>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={rooms}
+              defaultValue={rooms ? rooms : 0}
               {...register("rooms_count", { required: false })}
               onChange={(e) => setRooms(e.target.value)}
             />
@@ -315,9 +325,9 @@ function EmptyRealEstateDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={bedrooms}
+              defaultValue={bedrooms ? bedrooms : 0}
               {...register("bedrooms", { required: false })}
               onChange={(e) => setBedrooms(e.target.value)}
             />
@@ -331,7 +341,7 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={propType}
+              defaultValue={propType ? propType : ""}
               {...register("propertyType", { required: false })}
               onChange={(e) => setPropType(e.target.value)}
             />
@@ -341,9 +351,9 @@ function EmptyRealEstateDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={bathrooms}
+              defaultValue={bathrooms ? bathrooms : 0}
               {...register("bathrooms", { required: false })}
               onChange={(e) => setBathrooms(e.target.value)}
             />
@@ -353,10 +363,10 @@ function EmptyRealEstateDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="$"
-              defaultValue={totalValue}
+              defaultValue={totalValue ? totalValue : 0}
               {...register("total_value", { required: false })}
               onChange={(e) => setTotalValue(e.target.value)}
             />
@@ -368,9 +378,9 @@ function EmptyRealEstateDetails({
         <Row style={{ marginTop: "10px" }}>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={sqft}
+              defaultValue={sqft ? sqft : 0}
               {...register("sqft", { required: false })}
               onChange={(e) => setSqft(e.target.value)}
             />
@@ -382,7 +392,7 @@ function EmptyRealEstateDetails({
         <Row style={{ marginTop: "10px" }}>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
@@ -394,7 +404,7 @@ function EmptyRealEstateDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}

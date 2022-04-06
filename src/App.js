@@ -93,14 +93,20 @@ function App() {
           {user._id && (
             <Route exact path="/MultiSellForm">
               <div className="sell-register-container">
-                <MultiSellForm colorChange={colorChange} />
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toogleShow={toogleShow}
+                />
               </div>
             </Route>
           )}
 
           <Route exact path="/MultiSellForm/:userId/:id/:step">
             <div className="sell-register-container">
-              <MultiSellForm colorChange={colorChange} />
+              <MultiSellForm
+                colorChange={colorChange}
+                toogleShow={toogleShow}
+              />
             </div>
           </Route>
 

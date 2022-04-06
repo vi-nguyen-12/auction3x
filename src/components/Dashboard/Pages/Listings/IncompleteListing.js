@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Card, Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 import "../../../../styles/DashBoardStyle.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { BsFillHouseFill } from "react-icons/bs";
-import { useHistory } from "react-router-dom";
 
 function IncompleteListing() {
   const user = useSelector((state) => state.user);
   const [IncompleteListings, setIncompleteListings] = useState([]);
 
-  const history = useHistory();
-  console.log(history);
   useEffect(() => {
     const fetchIncompleteListings = async () => {
       await authService.getIncompleteProperty(user._id).then((res) => {
         setIncompleteListings(res.data);
-        console.log(res.data);
       });
     };
     fetchIncompleteListings();
   }, []);
+
+  const handleDelete = async (id) => {
+    await authService.deleteProperty(id).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        alert("Property Deleted Successfully");
+        window.location.reload();
+      }
+    });
+  };
   return (
     <div>
       {IncompleteListings.length > 0 ? (
@@ -65,7 +72,12 @@ function IncompleteListing() {
                     >
                       Resume
                     </button>{" "}
-                    <button className="del-btn">Delete</button>
+                    <button
+                      onClick={() => handleDelete(listing._id)}
+                      className="del-btn"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

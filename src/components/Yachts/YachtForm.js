@@ -6,31 +6,89 @@ import { useSelector } from "react-redux";
 
 function YachtForm({ toogleStep, step, properties }) {
   const { register, handleSubmit } = useForm();
-  const [property, setProperty] = useState({});
+  const [vessel_registration_number, setVessel_registration_number] =
+    useState();
+  const [vessel_manufacturing_date, setVessel_manufacturing_date] = useState();
+  const [manufacture_mark, setManufacture_mark] = useState();
+  const [manufacturer_name, setManufacturer_name] = useState();
+  const [engine_type, setEngine_type] = useState();
+  const [engine_deck_type, setEngine_deck_type] = useState();
+  const [engine_manufacture_name, setEngine_manufacture_name] = useState();
+  const [running_cost, setRunning_cost] = useState();
+  const [no_of_crew_required, setNo_of_crew_required] = useState();
+  const [property_address, setProperty_address] = useState();
+  const [otherDetails, setOtherDetails] = useState();
+
   const params = useParams();
-  const incompleteProperty = useSelector((state) => state.incompProperty);
+  const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
     if (params.id) {
-      const prop = incompleteProperty.filter((item) => item._id === params.id);
-      setProperty(prop[0]);
+      const property = prop.filter((item) => item._id === params.id);
+      setVessel_registration_number(
+        property[0].details.vessel_registration_number
+          ? property[0].details.vessel_registration_number
+          : ""
+      );
+      setVessel_manufacturing_date(
+        property[0].details.vessel_manufacturing_date
+          ? property[0].details.vessel_manufacturing_date
+          : ""
+      );
+      setManufacture_mark(
+        property[0].details.manufacture_mark
+          ? property[0].details.manufacture_mark
+          : ""
+      );
+      setManufacturer_name(
+        property[0].details.manufacturer_name
+          ? property[0].details.manufacturer_name
+          : ""
+      );
+      setEngine_type(
+        property[0].details.engine_type ? property[0].details.engine_type : ""
+      );
+      setEngine_deck_type(
+        property[0].details.engine_deck_type
+          ? property[0].details.engine_deck_type
+          : ""
+      );
+      setEngine_manufacture_name(
+        property[0].details.engine_manufacture_name
+          ? property[0].details.engine_manufacture_name
+          : ""
+      );
+      setRunning_cost(
+        property[0].details.running_cost ? property[0].details.running_cost : ""
+      );
+      setNo_of_crew_required(
+        property[0].details.no_of_crew_required
+          ? property[0].details.no_of_crew_required
+          : ""
+      );
+      setProperty_address(
+        property[0].details.property_address
+          ? prop[0].details.property_address
+          : ""
+      );
+      setOtherDetails(
+        property[0].details.otherDetails ? property[0].details.otherDetails : ""
+      );
     }
-  }, [incompleteProperty]);
+  }, [prop]);
 
   const onSubmit = (data) => {
     if (
-      data.vessel_registration_number !== "" &&
-      data.vessel_manufacturing_date !== "" &&
-      data.manufacture_mark !== "" &&
-      data.manufacturer_name !== "" &&
-      data.engine_type !== "" &&
-      data.engine_manufacture_name !== "" &&
-      data.engine_deck_type !== "" &&
-      data.running_cost !== "" &&
-      data.no_of_crew_required !== "" &&
-      data.property_address !== "" &&
-      data.reservedAmount !== "" &&
-      data.discussedAmount !== ""
+      vessel_registration_number !== "" &&
+      vessel_manufacturing_date !== "" &&
+      manufacture_mark !== "" &&
+      manufacturer_name !== "" &&
+      engine_type !== "" &&
+      engine_manufacture_name !== "" &&
+      engine_deck_type !== "" &&
+      running_cost !== "" &&
+      no_of_crew_required !== "" &&
+      property_address !== ""
     ) {
       const datas = {
         vessel_registration_number: data.vessel_registration_number,
@@ -77,9 +135,10 @@ function YachtForm({ toogleStep, step, properties }) {
               type="text"
               className="form-control"
               defaultValue={
-                property ? property.details.vessel_registration_number : ""
+                vessel_registration_number ? vessel_registration_number : ""
               }
               {...register("vessel_registration_number")}
+              onChange={(e) => setVessel_registration_number(e.target.value)}
             />
             <span
               style={{
@@ -99,9 +158,10 @@ function YachtForm({ toogleStep, step, properties }) {
               type="date"
               className="form-control"
               defaultValue={
-                property ? property.details.vessel_manufacturing_date : ""
+                vessel_manufacturing_date ? vessel_manufacturing_date : ""
               }
               {...register("vessel_manufacturing_date")}
+              onChange={(e) => setVessel_manufacturing_date(e.target.value)}
             />
             <span
               style={{
@@ -120,8 +180,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property ? property.details.property_address : ""}
+              defaultValue={property_address ? property_address : ""}
               {...register("property_address")}
+              onChange={(e) => setProperty_address(e.target.value)}
             />
             <span
               style={{
@@ -139,8 +200,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property ? property.details.manufacture_mark : ""}
+              defaultValue={manufacture_mark ? manufacture_mark : ""}
               {...register("manufacture_mark")}
+              onChange={(e) => setManufacture_mark(e.target.value)}
             />
             <span
               style={{
@@ -155,8 +217,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property ? property.details.manufacturer_name : ""}
+              defaultValue={manufacturer_name ? manufacturer_name : ""}
               {...register("manufacturer_name")}
+              onChange={(e) => setManufacturer_name(e.target.value)}
             />
             <span
               style={{
@@ -173,9 +236,10 @@ function YachtForm({ toogleStep, step, properties }) {
               type="text"
               className="form-control"
               defaultValue={
-                property ? property.details.engine_manufacture_name : ""
+                engine_manufacture_name ? engine_manufacture_name : ""
               }
               {...register("engine_manufacture_name")}
+              onChange={(e) => setEngine_manufacture_name(e.target.value)}
             />
             <span
               style={{
@@ -194,8 +258,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property ? property.details.engine_type : ""}
+              defaultValue={engine_type ? engine_type : ""}
               {...register("engine_type")}
+              onChange={(e) => setEngine_type(e.target.value)}
             />
             <span
               style={{
@@ -212,8 +277,9 @@ function YachtForm({ toogleStep, step, properties }) {
             <input
               type="text"
               className="form-control"
-              defaultValue={property ? property.details.engine_deck_type : ""}
+              defaultValue={engine_deck_type ? engine_deck_type : ""}
               {...register("engine_deck_type")}
+              onChange={(e) => setEngine_deck_type(e.target.value)}
             />
             <span
               style={{
@@ -226,10 +292,11 @@ function YachtForm({ toogleStep, step, properties }) {
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={property ? property.details.running_cost : ""}
+              defaultValue={running_cost ? running_cost : ""}
               {...register("running_cost")}
+              onChange={(e) => setRunning_cost(e.target.value)}
             />
             <span
               style={{
@@ -242,12 +309,11 @@ function YachtForm({ toogleStep, step, properties }) {
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={
-                property ? property.details.no_of_crew_required : ""
-              }
+              defaultValue={no_of_crew_required ? no_of_crew_required : ""}
               {...register("no_of_crew_required")}
+              onChange={(e) => setNo_of_crew_required(e.target.value)}
             />
             <span
               style={{
@@ -265,8 +331,9 @@ function YachtForm({ toogleStep, step, properties }) {
               className="form-control"
               style={{ height: "100%" }}
               placeholder="Other information about the property"
-              defaultValue={property ? property.details.detain : ""}
+              defaultValue={otherDetails ? otherDetails : ""}
               {...register("detain")}
+              onChange={(e) => setOtherDetails(e.target.value)}
             />
           </Col>
         </Row>

@@ -1,38 +1,79 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Row, Col, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function CarForm({ toogleStep, step, properties }) {
   const { handleSubmit, register } = useForm();
-  const [property, setProperty] = useState({});
+  const [make, setMake] = useState();
+  const [model, setModel] = useState();
+  const [year, setYear] = useState();
+  const [color, setColor] = useState();
+  const [vin, setVin] = useState();
+  const [mileage, setMileage] = useState();
+  const [engine, setEngine] = useState();
+  const [transmission, setTransmission] = useState();
+  const [power, setPower] = useState();
+  const [carType, setCarType] = useState();
+  const [fuelType, setFuelType] = useState();
+  const [condition, setCondition] = useState();
+  const [price, setPrice] = useState();
+  const [address, setAddress] = useState();
+
   const params = useParams();
-  const incompleteProperty = useSelector((state) => state.incompProperty);
+  const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
     if (params.id) {
-      const prop = incompleteProperty.filter((item) => item._id === params.id);
-      setProperty(prop[0]);
+      const property = prop.filter((item) => item._id === params.id);
+      setMake(property[0].details.make ? property[0].details.make : "");
+      setModel(property[0].details.model ? property[0].details.model : "");
+      setYear(property[0].details.year ? property[0].details.year : "");
+      setMileage(
+        property[0].details.mileage ? property[0].details.mileage : ""
+      );
+      setTransmission(
+        property[0].details.transmission ? property[0].details.transmission : ""
+      );
+      setCarType(
+        property[0].details.car_type ? property[0].details.car_type : ""
+      );
+      setPower(property[0].details.power ? property[0].details.power : "");
+      setColor(property[0].details.color ? property[0].details.color : "");
+      setVin(property[0].details.VIN ? property[0].details.VIN : "");
+      setEngine(property[0].details.engine ? property[0].details.engine : "");
+      setFuelType(
+        property[0].details.fuel_type ? property[0].details.fuel_type : ""
+      );
+      setCondition(
+        property[0].details.condition ? property[0].details.condition : ""
+      );
+      setPrice(property[0].details.price ? property[0].details.price : "");
+      setAddress(
+        property[0].details.property_address
+          ? property[0].details.property_address
+          : ""
+      );
     }
-  }, []);
+  }, [prop]);
 
   const onSubmit = (data) => {
     if (
-      data.year !== "" &&
-      data.make !== "" &&
-      data.model !== "" &&
-      data.vin !== "" &&
-      data.mileage !== "" &&
-      data.price !== "" &&
-      data.description !== "" &&
-      data.address !== "" &&
-      data.color !== "" &&
-      data.transmission !== "" &&
-      data.carType !== "" &&
-      data.power !== "" &&
-      data.engine !== "" &&
-      data.fuelType !== ""
+      year !== "" &&
+      make !== "" &&
+      model !== "" &&
+      vin !== "" &&
+      mileage !== "" &&
+      price !== "" &&
+      address !== "" &&
+      color !== "" &&
+      transmission !== "" &&
+      carType !== "" &&
+      power !== "" &&
+      engine !== "" &&
+      condition !== "" &&
+      fuelType !== ""
     ) {
       const datas = {
         make: data.make,
@@ -67,7 +108,174 @@ function CarForm({ toogleStep, step, properties }) {
         overflowY: "auto",
       }}
     >
-      <Table bordered striped hover>
+      <Container style={{ marginTop: "50px" }}>
+        <Row style={{ marginTop: "20px" }}>
+          <Col
+            style={{
+              borderBottom: "2px solid gray",
+              fontWeight: "bold",
+              fontSize: "20px",
+              color: "black",
+            }}
+          >
+            <h3>Car Details</h3>
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>Year</label>
+            <input
+              type="number"
+              name="year"
+              className="form-control"
+              defaultValue={year ? year : ""}
+              {...register("year", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Make</label>
+            <input
+              type="text"
+              name="make"
+              className="form-control"
+              defaultValue={make ? make : ""}
+              {...register("make", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Model</label>
+            <input
+              type="text"
+              name="model"
+              className="form-control"
+              defaultValue={model ? model : ""}
+              {...register("model", { required: false })}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>VIN</label>
+            <input
+              type="text"
+              name="vin"
+              className="form-control"
+              defaultValue={vin ? vin : ""}
+              {...register("vin", { required: false })}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>Mileage</label>
+            <input
+              type="number"
+              name="mileage"
+              className="form-control"
+              defaultValue={mileage ? mileage : ""}
+              {...register("mileage", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Transmission</label>
+            <input
+              type="text"
+              name="transmission"
+              className="form-control"
+              defaultValue={transmission ? transmission : ""}
+              {...register("transmission", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Car Type</label>
+            <input
+              type="text"
+              name="carType"
+              className="form-control"
+              defaultValue={carType ? carType : ""}
+              {...register("carType", { required: false })}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>Power</label>
+            <input
+              type="number"
+              name="power"
+              className="form-control"
+              defaultValue={power ? power : ""}
+              {...register("power", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Engine</label>
+            <input
+              type="text"
+              name="engine"
+              className="form-control"
+              defaultValue={engine ? engine : ""}
+              {...register("engine", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Fuel Type</label>
+            <input
+              type="text"
+              name="fuelType"
+              className="form-control"
+              defaultValue={fuelType ? fuelType : ""}
+              {...register("fuelType", { required: false })}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>Color</label>
+            <input
+              type="text"
+              name="color"
+              className="form-control"
+              defaultValue={color ? color : ""}
+              {...register("color", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Condition</label>
+            <input
+              type="text"
+              name="condition"
+              className="form-control"
+              defaultValue={condition ? condition : ""}
+              {...register("condition", { required: false })}
+            />
+          </Col>
+          <Col>
+            <label>Price</label>
+            <input
+              type="number"
+              name="price"
+              className="form-control"
+              defaultValue={price ? price : ""}
+              {...register("price", { required: false })}
+            />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "20px" }}>
+          <Col>
+            <label>Address</label>
+            <input
+              type="text"
+              name="address"
+              className="form-control"
+              defaultValue={address ? address : ""}
+              {...register("address", { required: false })}
+            />
+          </Col>
+        </Row>
+      </Container>
+
+      {/* <Table bordered striped hover>
         <tbody>
           <tr>
             <td style={{ color: "black" }}>Make</td>
@@ -75,8 +283,8 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.make : ""}
-                {...register("make")}
+                defaultValue={make ? make : ""}
+                {...register("make", { required: false })}
               />
             </td>
           </tr>
@@ -86,8 +294,8 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.model : ""}
-                {...register("model")}
+                defaultValue={model ? model : ""}
+                {...register("model", { required: false })}
               />
             </td>
           </tr>
@@ -97,8 +305,8 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="number"
                 className="form-control"
-                defaultValue={property ? property.details.year : ""}
-                {...register("year")}
+                defaultValue={year ? year : ""}
+                {...register("year", { required: false })}
               />
             </td>
           </tr>
@@ -108,8 +316,8 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="number"
                 className="form-control"
-                defaultValue={property ? property.details.mileage : ""}
-                {...register("mileage")}
+                defaultValue={mileage ? mileage : ""}
+                {...register("mileage", { required: false })}
               />
             </td>
           </tr>
@@ -119,7 +327,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.transmission : ""}
+                defaultValue={transmission ? transmission : ""}
                 {...register("transmission")}
               />
             </td>
@@ -130,7 +338,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.car_type : ""}
+                defaultValue={carType ? carType : ""}
                 {...register("carType")}
               />
             </td>
@@ -141,7 +349,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.power : ""}
+                defaultValue={power ? power : ""}
                 {...register("power")}
               />
             </td>
@@ -152,7 +360,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.color : ""}
+                defaultValue={color ? color : ""}
                 {...register("color")}
               />
             </td>
@@ -163,7 +371,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.VIN : ""}
+                defaultValue={vin ? vin : ""}
                 {...register("vin")}
               />
             </td>
@@ -174,7 +382,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.engine : ""}
+                defaultValue={engine ? engine : ""}
                 {...register("engine")}
               />
             </td>
@@ -185,7 +393,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.fuel_type : ""}
+                defaultValue={fuelType ? fuelType : ""}
                 {...register("fuelType")}
               />
             </td>
@@ -196,7 +404,7 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.condition : ""}
+                defaultValue={condition ? condition : ""}
                 {...register("condition")}
               />
             </td>
@@ -205,9 +413,9 @@ function CarForm({ toogleStep, step, properties }) {
             <td style={{ color: "black" }}>Price</td>
             <td>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                defaultValue={property ? property.details.price : ""}
+                defaultValue={price ? price : ""}
                 {...register("price")}
               />
             </td>
@@ -218,14 +426,13 @@ function CarForm({ toogleStep, step, properties }) {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={property ? property.details.property_address : ""}
+                defaultValue={address ? address : ""}
                 {...register("address")}
               />
             </td>
           </tr>
         </tbody>
-      </Table>
-
+      </Table> */}
       <div
         className="bottom-btn"
         style={{
@@ -234,6 +441,7 @@ function CarForm({ toogleStep, step, properties }) {
           justifyContent: "center",
           position: "relative",
           bottom: "0",
+          marginTop: "50px",
         }}
       >
         <button

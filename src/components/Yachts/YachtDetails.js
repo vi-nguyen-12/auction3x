@@ -16,7 +16,7 @@ function YachtDetails({
   ownership,
 }) {
   const { register, handleSubmit, errors } = useForm();
-  const incompleteProp = useSelector((state) => state.incompProperty);
+  const prop = useSelector((state) => state.incompProperty);
   const params = useParams();
   const [vessel_registration_number, setVessel_registration_number] =
     useState();
@@ -33,58 +33,63 @@ function YachtDetails({
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
-  const prop = incompleteProp.filter((item) => item._id === params.id);
-
   useEffect(() => {
-    if (params.id && prop.length > 0) {
+    if (params.id) {
+      const property = prop.filter((item) => item._id === params.id);
       setVessel_registration_number(
-        prop[0].details.vessel_registration_number
-          ? prop[0].details.vessel_registration_number
+        property[0].details.vessel_registration_number
+          ? property[0].details.vessel_registration_number
           : ""
       );
       setVessel_manufacturing_date(
-        prop[0].details.vessel_manufacturing_date
-          ? prop[0].details.vessel_manufacturing_date
+        property[0].details.vessel_manufacturing_date
+          ? property[0].details.vessel_manufacturing_date
           : ""
       );
       setManufacture_mark(
-        prop[0].details.manufacture_mark ? prop[0].details.manufacture_mark : ""
+        property[0].details.manufacture_mark
+          ? property[0].details.manufacture_mark
+          : ""
       );
       setManufacturer_name(
-        prop[0].details.manufacturer_name
-          ? prop[0].details.manufacturer_name
+        property[0].details.manufacturer_name
+          ? property[0].details.manufacturer_name
           : ""
       );
       setEngine_type(
-        prop[0].details.engine_type ? prop[0].details.engine_type : ""
+        property[0].details.engine_type ? property[0].details.engine_type : ""
       );
       setEngine_deck_type(
-        prop[0].details.engine_deck_type ? prop[0].details.engine_deck_type : ""
+        property[0].details.engine_deck_type
+          ? property[0].details.engine_deck_type
+          : ""
       );
       setEngine_manufacture_name(
-        prop[0].details.engine_manufacture_name
-          ? prop[0].details.engine_manufacture_name
+        property[0].details.engine_manufacture_name
+          ? property[0].details.engine_manufacture_name
           : ""
       );
       setRunning_cost(
-        prop[0].details.running_cost ? prop[0].details.running_cost : ""
+        property[0].details.running_cost ? property[0].details.running_cost : ""
       );
       setNo_of_crew_required(
-        prop[0].details.no_of_crew_required
-          ? prop[0].details.no_of_crew_required
+        property[0].details.no_of_crew_required
+          ? property[0].details.no_of_crew_required
           : ""
       );
       setProperty_address(
-        prop[0].details.property_address ? prop[0].details.property_address : ""
+        property[0].details.property_address
+          ? property[0].details.property_address
+          : ""
       );
       setOtherDetails(
-        prop[0].details.otherDetails ? prop[0].details.otherDetails : ""
+        property[0].details.otherDetails ? property[0].details.otherDetails : ""
       );
       setReservedAmount(
-        prop[0].details.reservedAmount ? prop[0].details.reservedAmount : ""
+        property[0].reservedAmount ? property[0].reservedAmount : 0
       );
       setDiscussedAmount(
-        prop[0].details.discussedAmount ? prop[0].details.discussedAmount : ""
+        property[0].discussedAmount ? property[0].discussedAmount : 0
       );
     }
   }, [params.id, prop]);
@@ -174,7 +179,6 @@ function YachtDetails({
         ...ownership,
         step: parseInt(2),
       };
-      delete datas.documents;
       authService.savePropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
@@ -191,18 +195,18 @@ function YachtDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else if (
-      data.vessel_registration_number !== "" &&
-      data.vessel_manufacturing_date !== "" &&
-      data.manufacture_mark !== "" &&
-      data.manufacturer_name !== "" &&
-      data.engine_type !== "" &&
-      data.engine_manufacture_name !== "" &&
-      data.engine_deck_type !== "" &&
-      data.running_cost !== "" &&
-      data.no_of_crew_required !== "" &&
-      data.property_address !== "" &&
-      data.reservedAmount !== "" &&
-      data.discussedAmount !== ""
+      vessel_registration_number !== "" &&
+      vessel_manufacturing_date !== "" &&
+      manufacture_mark !== "" &&
+      manufacturer_name !== "" &&
+      engine_type !== "" &&
+      engine_manufacture_name !== "" &&
+      engine_deck_type !== "" &&
+      running_cost !== "" &&
+      no_of_crew_required !== "" &&
+      property_address !== "" &&
+      reservedAmount !== "" &&
+      discussedAmount !== ""
     ) {
       const submitedData = {
         reservedAmount: data.reservedAmount
@@ -272,7 +276,9 @@ function YachtDetails({
               defaultValue={
                 property.vessel_registration_number
                   ? property.vessel_registration_number
-                  : prop.details.vessel_registration_number
+                  : vessel_registration_number
+                  ? vessel_registration_number
+                  : ""
               }
               {...register("vessel_registration_number")}
               onChange={(e) => setVessel_registration_number(e.target.value)}
@@ -297,7 +303,9 @@ function YachtDetails({
               defaultValue={
                 property.vessel_manufacturing_date
                   ? property.vessel_manufacturing_date
-                  : prop.details.vessel_manufacturing_date
+                  : vessel_manufacturing_date
+                  ? vessel_manufacturing_date
+                  : ""
               }
               {...register("vessel_manufacturing_date")}
               onChange={(e) => setVessel_manufacturing_date(e.target.value)}
@@ -322,7 +330,9 @@ function YachtDetails({
               defaultValue={
                 property.property_address
                   ? property.property_address
-                  : prop.details.property_address
+                  : property_address
+                  ? property_address
+                  : ""
               }
               {...register("property_address")}
               onChange={(e) => setProperty_address(e.target.value)}
@@ -346,7 +356,9 @@ function YachtDetails({
               defaultValue={
                 property.manufacture_mark
                   ? property.manufacture_mark
-                  : prop.details.manufacture_mark
+                  : manufacture_mark
+                  ? manufacture_mark
+                  : ""
               }
               {...register("manufacture_mark")}
               onChange={(e) => setManufacture_mark(e.target.value)}
@@ -367,7 +379,9 @@ function YachtDetails({
               defaultValue={
                 property.manufacturer_name
                   ? property.manufacturer_name
-                  : prop.details.manufacturer_name
+                  : manufacturer_name
+                  ? manufacturer_name
+                  : ""
               }
               {...register("manufacturer_name")}
               onChange={(e) => setManufacturer_name(e.target.value)}
@@ -389,7 +403,9 @@ function YachtDetails({
               defaultValue={
                 property.engine_manufacture_name
                   ? property.engine_manufacture_name
-                  : prop.details.engine_manufacture_name
+                  : engine_manufacture_name
+                  ? engine_manufacture_name
+                  : ""
               }
               {...register("engine_manufacture_name")}
               onChange={(e) => setEngine_manufacture_name(e.target.value)}
@@ -414,7 +430,9 @@ function YachtDetails({
               defaultValue={
                 property.engine_type
                   ? property.engine_type
-                  : prop.details.engine_type
+                  : engine_type
+                  ? engine_type
+                  : ""
               }
               {...register("engine_type")}
               onChange={(e) => setEngine_type(e.target.value)}
@@ -437,7 +455,9 @@ function YachtDetails({
               defaultValue={
                 property.engine_deck_type
                   ? property.engine_deck_type
-                  : prop.details.engine_deck_type
+                  : engine_deck_type
+                  ? engine_deck_type
+                  : ""
               }
               {...register("engine_deck_type")}
               onChange={(e) => setEngine_deck_type(e.target.value)}
@@ -458,7 +478,9 @@ function YachtDetails({
               defaultValue={
                 property.running_cost
                   ? property.running_cost
-                  : prop.details.running_cost
+                  : running_cost
+                  ? running_cost
+                  : ""
               }
               {...register("running_cost")}
               onChange={(e) => setRunning_cost(e.target.value)}
@@ -479,7 +501,9 @@ function YachtDetails({
               defaultValue={
                 property.no_of_crew_required
                   ? property.no_of_crew_required
-                  : prop.details.no_of_crew_required
+                  : no_of_crew_required
+                  ? no_of_crew_required
+                  : ""
               }
               {...register("no_of_crew_required")}
               onChange={(e) => setNo_of_crew_required(e.target.value)}
@@ -500,7 +524,11 @@ function YachtDetails({
               className="form-control"
               style={{ height: "100%" }}
               defaultValue={
-                property.detain ? property.detain : prop.details.detain
+                property.detain
+                  ? property.detain
+                  : otherDetails
+                  ? otherDetails
+                  : ""
               }
               placeholder="Other information about the property"
               {...register("detain")}
@@ -513,7 +541,7 @@ function YachtDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={prop.reservedAmount ? prop.reservedAmount : 0}
+              defaultValue={reservedAmount}
               {...register("reservedAmount")}
               onChange={(e) => setReservedAmount(e.target.value)}
             />
@@ -530,7 +558,7 @@ function YachtDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={prop.discussedAmount ? prop.discussedAmount : 0}
+              defaultValue={discussedAmount}
               {...register("discussedAmount")}
               onChange={(e) => setDiscussedAmount(e.target.value)}
             />

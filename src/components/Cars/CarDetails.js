@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CarDetails({
   property,
@@ -33,51 +34,47 @@ function CarDetails({
   const [discussedAmount, setDiscussedAmount] = useState();
 
   const params = useParams();
+  const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
     if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        const property = res.data.filter((prop) => prop._id === params.id);
-        console.log(property);
-        setMake(property[0].details.make ? property[0].details.make : "");
-        setModel(property[0].details.model ? property[0].details.model : "");
-        setYear(property[0].details.year ? property[0].details.year : "");
-        setMileage(
-          property[0].details.mileage ? property[0].details.mileage : ""
-        );
-        setTransmission(
-          property[0].details.transmission
-            ? property[0].details.transmission
-            : ""
-        );
-        setCarType(
-          property[0].details.car_type ? property[0].details.car_type : ""
-        );
-        setPower(property[0].details.power ? property[0].details.power : "");
-        setColor(property[0].details.color ? property[0].details.color : "");
-        setVin(property[0].details.VIN ? property[0].details.VIN : "");
-        setEngine(property[0].details.engine ? property[0].details.engine : "");
-        setFuelType(
-          property[0].details.fuel_type ? property[0].details.fuel_type : ""
-        );
-        setCondition(
-          property[0].details.condition ? property[0].details.condition : ""
-        );
-        setPrice(property[0].details.price ? property[0].details.price : "");
-        setAddress(
-          property[0].details.property_address
-            ? property[0].details.property_address
-            : ""
-        );
-        setReservedAmount(
-          property[0].reservedAmount ? property[0].reservedAmount : ""
-        );
-        setDiscussedAmount(
-          property[0].discussedAmount ? property[0].discussedAmount : ""
-        );
-      });
+      const property = prop.filter((prop) => prop._id === params.id);
+      setMake(property[0].details.make ? property[0].details.make : "");
+      setModel(property[0].details.model ? property[0].details.model : "");
+      setYear(property[0].details.year ? property[0].details.year : "");
+      setMileage(
+        property[0].details.mileage ? property[0].details.mileage : ""
+      );
+      setTransmission(
+        property[0].details.transmission ? property[0].details.transmission : ""
+      );
+      setCarType(
+        property[0].details.car_type ? property[0].details.car_type : ""
+      );
+      setPower(property[0].details.power ? property[0].details.power : "");
+      setColor(property[0].details.color ? property[0].details.color : "");
+      setVin(property[0].details.VIN ? property[0].details.VIN : "");
+      setEngine(property[0].details.engine ? property[0].details.engine : "");
+      setFuelType(
+        property[0].details.fuel_type ? property[0].details.fuel_type : ""
+      );
+      setCondition(
+        property[0].details.condition ? property[0].details.condition : ""
+      );
+      setPrice(property[0].details.price ? property[0].details.price : "");
+      setAddress(
+        property[0].details.property_address
+          ? property[0].details.property_address
+          : ""
+      );
+      setReservedAmount(
+        property[0].reservedAmount ? property[0].reservedAmount : ""
+      );
+      setDiscussedAmount(
+        property[0].discussedAmount ? property[0].discussedAmount : ""
+      );
     }
-  }, []);
+  }, [prop]);
 
   const saveInfo = () => {
     if (propId || params.id) {
@@ -208,7 +205,7 @@ function CarDetails({
               className="form-control"
               {...register("make", { maxLength: 100 })}
               onChange={(e) => setMake(e.target.value)}
-              defaultValue={property.make ? property.make : make}
+              defaultValue={property.make ? property.make : make ? make : ""}
             />
             <span style={{ color: "black" }}>Make</span>
           </Col>
@@ -218,7 +215,9 @@ function CarDetails({
               className="form-control"
               {...register("model", { maxLength: 100 })}
               onChange={(e) => setModel(e.target.value)}
-              defaultValue={property.model ? property.model : model}
+              defaultValue={
+                property.model ? property.model : model ? model : ""
+              }
             />
             <span style={{ color: "black" }}>Model</span>
           </Col>
@@ -230,7 +229,7 @@ function CarDetails({
               className="form-control"
               {...register("year", { maxLength: 100 })}
               onChange={(e) => setYear(e.target.value)}
-              defaultValue={property.year ? property.year : year}
+              defaultValue={property.year ? property.year : year ? year : ""}
             />
             <span style={{ color: "black" }}>Year</span>
           </Col>
@@ -240,7 +239,9 @@ function CarDetails({
               className="form-control"
               {...register("mileage", { maxLength: 100 })}
               onChange={(e) => setMileage(e.target.value)}
-              defaultValue={property.mileage ? property.mileage : mileage}
+              defaultValue={
+                property.mileage ? property.mileage : mileage ? mileage : ""
+              }
             />
             <span style={{ color: "black" }}>Mileage</span>
           </Col>
@@ -253,7 +254,11 @@ function CarDetails({
               {...register("transmission", { maxLength: 100 })}
               onChange={(e) => setTransmission(e.target.value)}
               defaultValue={
-                property.transmission ? property.transmission : transmission
+                property.transmission
+                  ? property.transmission
+                  : transmission
+                  ? transmission
+                  : ""
               }
             />
             <span style={{ color: "black" }}>Transmission</span>
@@ -264,7 +269,9 @@ function CarDetails({
               className="form-control"
               {...register("carType", { maxLength: 100 })}
               onChange={(e) => setCarType(e.target.value)}
-              defaultValue={property.car_type ? property.car_type : carType}
+              defaultValue={
+                property.car_type ? property.car_type : carType ? carType : ""
+              }
             />
             <span style={{ color: "black" }}>Car Type</span>
           </Col>
@@ -276,7 +283,9 @@ function CarDetails({
               className="form-control"
               {...register("power", { maxLength: 100 })}
               onChange={(e) => setPower(e.target.value)}
-              defaultValue={property.power ? property.power : power}
+              defaultValue={
+                property.power ? property.power : power ? power : ""
+              }
             />
             <span style={{ color: "black" }}>Power</span>
           </Col>
@@ -286,7 +295,9 @@ function CarDetails({
               className="form-control"
               {...register("color", { maxLength: 100 })}
               onChange={(e) => setColor(e.target.value)}
-              defaultValue={property.color ? property.color : color}
+              defaultValue={
+                property.color ? property.color : color ? color : ""
+              }
             />
             <span style={{ color: "black" }}>Color</span>
           </Col>
@@ -298,7 +309,7 @@ function CarDetails({
               className="form-control"
               {...register("vin", { maxLength: 100 })}
               onChange={(e) => setVin(e.target.value)}
-              defaultValue={property.VIN ? property.VIN : vin}
+              defaultValue={property.VIN ? property.VIN : vin ? vin : ""}
             />
             <span style={{ color: "black" }}>VIN</span>
           </Col>
@@ -308,7 +319,9 @@ function CarDetails({
               className="form-control"
               {...register("engine", { maxLength: 100 })}
               onChange={(e) => setEngine(e.target.value)}
-              defaultValue={property.engine ? property.engine : engine}
+              defaultValue={
+                property.engine ? property.engine : engine ? engine : ""
+              }
             />
             <span style={{ color: "black" }}>Engine</span>
           </Col>
@@ -320,7 +333,13 @@ function CarDetails({
               className="form-control"
               {...register("fuelType", { maxLength: 100 })}
               onChange={(e) => setFuelType(e.target.value)}
-              defaultValue={property.fuel_type ? property.fuel_type : fuelType}
+              defaultValue={
+                property.fuel_type
+                  ? property.fuel_type
+                  : fuelType
+                  ? fuelType
+                  : ""
+              }
             />
             <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
@@ -330,7 +349,13 @@ function CarDetails({
               className="form-control"
               {...register("condition", { maxLength: 100 })}
               onChange={(e) => setCondition(e.target.value)}
-              defaultValue={property.condition ? property.condition : condition}
+              defaultValue={
+                property.condition
+                  ? property.condition
+                  : condition
+                  ? condition
+                  : ""
+              }
             />
             <span style={{ color: "black" }}>Condition</span>
           </Col>
@@ -342,7 +367,9 @@ function CarDetails({
               className="form-control"
               {...register("price", { maxLength: 100 })}
               onChange={(e) => setPrice(e.target.value)}
-              defaultValue={property.price ? property.price : price}
+              defaultValue={
+                property.price ? property.price : price ? price : ""
+              }
             />
             <span style={{ color: "black" }}>Price</span>
           </Col>
@@ -353,7 +380,11 @@ function CarDetails({
               {...register("address", { maxLength: 100 })}
               onChange={(e) => setAddress(e.target.value)}
               defaultValue={
-                property.property_address ? property.property_address : address
+                property.property_address
+                  ? property.property_address
+                  : address
+                  ? address
+                  : ""
               }
             />
             <span style={{ color: "black" }}>Address</span>
@@ -366,7 +397,7 @@ function CarDetails({
               className="form-control"
               {...register("reservedAmount")}
               onChange={(e) => setReservedAmount(e.target.value)}
-              defaultValue={reservedAmount}
+              defaultValue={reservedAmount ? reservedAmount : ""}
             />
             <span style={{ color: "black" }}>Reserved Amount</span>
           </Col>
@@ -376,7 +407,7 @@ function CarDetails({
               className="form-control"
               {...register("discussedAmount")}
               onChange={(e) => setDiscussedAmount(e.target.value)}
-              defaultValue={discussedAmount}
+              defaultValue={discussedAmount ? discussedAmount : ""}
             />
             <span style={{ color: "black" }}>Discussed Amount</span>
           </Col>

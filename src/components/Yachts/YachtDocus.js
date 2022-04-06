@@ -42,7 +42,6 @@ function YachtDocus({
 
   const params = useParams();
   const incompProperty = useSelector((state) => state.incompProperty);
-  const prop = incompProperty.filter((item) => item._id === params.id);
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -180,7 +179,8 @@ function YachtDocus({
   };
 
   useEffect(() => {
-    if (params.id && prop.length > 0) {
+    if (params.id) {
+      const prop = incompProperty.filter((item) => item._id === params.id);
       if (prop.documents.length > 0) {
         setDocument1(prop.documents[0]);
         setDocument2(prop.documents[1]);
@@ -250,7 +250,7 @@ function YachtDocus({
 
   const saveInfo = async (data) => {
     if (propId || params.id) {
-      if (sellStep || parseInt(params.step) === 1) {
+      if (sellStep === 1 || parseInt(params.step) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -269,7 +269,7 @@ function YachtDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 2) {
+      } else if (sellStep === 2 || parseInt(params.step) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -283,11 +283,11 @@ function YachtDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(5);
+            toogleSellStep(4);
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 3) {
+      } else if (sellStep === 3 || parseInt(params.step) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -299,7 +299,7 @@ function YachtDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(6);
+            toogleSellStep(4);
             alert("Saved Successfully!");
           }
         });

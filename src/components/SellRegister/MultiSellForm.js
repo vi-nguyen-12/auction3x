@@ -10,16 +10,13 @@ import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 
-const MultiSellForm = ({ colorChange }) => {
+const MultiSellForm = ({ colorChange, toogleShow }) => {
   const [step, setStep] = useState(0);
   const toogleStep = (step) => {
     setStep(step);
   };
 
   const params = useParams();
-  console.log(params);
-
-  console.log(step);
 
   const [propertyData, setPropertyData] = useState({});
   const tooglePropertyData = (propertyData) => {
@@ -64,10 +61,9 @@ const MultiSellForm = ({ colorChange }) => {
   const [sellStep, setSellStep] = useState(0);
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
-  console.log(ownership);
-
   useEffect(() => {
     colorChange("black");
+    toogleShow();
     if (params.step) {
       setStep(parseInt(params.step) + 1);
     }
@@ -117,7 +113,7 @@ const MultiSellForm = ({ colorChange }) => {
           toogleStep={(data) => toogleStep(data)}
           step={step}
           propertyType={propertyType}
-          toogleSellStep={toogleSellStep}
+          property={property}
         />
       </div>
     );
@@ -136,6 +132,7 @@ const MultiSellForm = ({ colorChange }) => {
           ownership={ownership}
           getPropId={getPropId}
           toogleSellStep={toogleSellStep}
+          propertyData={propertyData}
         />
       </div>
     );
@@ -154,6 +151,9 @@ const MultiSellForm = ({ colorChange }) => {
           propId={propId}
           ownership={ownership}
           getPropId={getPropId}
+          propertyType={propertyType}
+          image={images}
+          video={videos}
         />
       </div>
     );
@@ -174,6 +174,7 @@ const MultiSellForm = ({ colorChange }) => {
           images={images}
           videos={videos}
           getPropId={getPropId}
+          document={documents}
         />
       </div>
     );

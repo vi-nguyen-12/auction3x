@@ -313,8 +313,40 @@ const authService = {
     });
   },
 
+  postRealEstateInfo(data) {
+    return axios.post(apiUrl + "/api/properties/real-estate", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
+  },
+
+  putRealEstateInfo(data) {
+    return axios.put(
+      apiUrl + `/api/properties/real-estate/${data.id}`,
+      data.details,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
+  },
+
   saveInfo(data) {
     return axios.put(apiUrl + `/api/properties/${data.id}`, data.details, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
+  },
+
+  deleteProperty(id) {
+    return axios.delete(apiUrl + `/api/properties/${id}`, {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),

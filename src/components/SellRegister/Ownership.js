@@ -12,8 +12,8 @@ function Ownership({
   getPropId,
   toogleSellStep,
   propId,
+  ownership,
 }) {
-  console.log(propertyType);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -59,7 +59,6 @@ function Ownership({
       if (res.data.error) {
         alert(res.data.error);
       } else {
-        console.log(res.data);
         getPropId(res.data._id);
         toogleSellStep(1);
         alert("Successfully saved");
@@ -90,13 +89,35 @@ function Ownership({
         }
       });
     }
+
+    if (ownership) {
+      if (ownership.details.broker_id) {
+        setShowBroker("block");
+        setOwnerName(ownership.details.owner_name);
+        setPhone(ownership.details.phone);
+        setEmail(ownership.details.email);
+        setAddress(ownership.details.address);
+        setBrokerName(
+          ownership.details.broker_name ? ownership.details.broker_name : null
+        );
+        setBrokerId(
+          ownership.details.broker_id ? ownership.details.broker_id : null
+        );
+      } else {
+        setShowOwner("block");
+        setOwnerName(ownership.details.owner_name);
+        setPhone(ownership.details.phone);
+        setEmail(ownership.details.email);
+        setAddress(ownership.details.address);
+      }
+    }
   }, [params.step]);
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else if (data.brokerName !== "") {
-      if (phone.length > 10) {
+      if (phone.length !== 10) {
         alert("Please enter valid phone number");
       } else {
         const datas = {
@@ -227,8 +248,15 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={ownerName}
+                    defaultValue={
+                      ownerName
+                        ? ownerName
+                        : ownership
+                        ? ownership.details.owner_name
+                        : ""
+                    }
                     onChange={(e) => setOwnerName(e.target.value)}
+                    required
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Owner Name <span style={{ color: "#ff0000" }}>*</span>
@@ -240,7 +268,13 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={address}
+                    defaultValue={
+                      address
+                        ? address
+                        : ownership
+                        ? ownership.details.address
+                        : ""
+                    }
                     onChange={(e) => setAddress(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -253,7 +287,9 @@ function Ownership({
                   <input
                     type="number"
                     className="form-control"
-                    defaultValue={phone}
+                    defaultValue={
+                      phone ? phone : ownership ? ownership.details.phone : null
+                    }
                     onChange={(e) => setPhone(e.target.value)}
                     maxLength="10"
                   />
@@ -265,7 +301,9 @@ function Ownership({
                   <input
                     type="email"
                     className="form-control"
-                    defaultValue={email}
+                    defaultValue={
+                      email ? email : ownership ? ownership.details.email : ""
+                    }
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -324,7 +362,13 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={ownerName}
+                    defaultValue={
+                      ownerName
+                        ? ownerName
+                        : ownership
+                        ? ownership.details.owner_name
+                        : ""
+                    }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -335,7 +379,13 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={brokerName}
+                    defaultValue={
+                      brokerName
+                        ? brokerName
+                        : ownership
+                        ? ownership.details.broker_name
+                        : ""
+                    }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
                   />
@@ -347,7 +397,13 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={brokerId}
+                    defaultValue={
+                      brokerId
+                        ? brokerId
+                        : ownership
+                        ? ownership.details.broker_id
+                        : ""
+                    }
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
                   />
@@ -375,7 +431,13 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={address}
+                    defaultValue={
+                      address
+                        ? address
+                        : ownership
+                        ? ownership.details.address
+                        : ""
+                    }
                     onChange={(e) => setAddress(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -388,7 +450,9 @@ function Ownership({
                   <input
                     type="phone"
                     className="form-control"
-                    defaultValue={phone}
+                    defaultValue={
+                      phone ? phone : ownership ? ownership.details.phone : null
+                    }
                     onChange={(e) => setPhone(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -399,7 +463,9 @@ function Ownership({
                   <input
                     type="email"
                     className="form-control"
-                    defaultValue={email}
+                    defaultValue={
+                      email ? email : ownership ? ownership.details.email : ""
+                    }
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>

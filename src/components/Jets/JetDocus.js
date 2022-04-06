@@ -53,7 +53,9 @@ function JetDocus({
       formData1.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData1).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument1([...doc1, ...response.data]);
         setLoader(false);
       }
@@ -68,7 +70,9 @@ function JetDocus({
       formData2.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData2).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument2([...doc2, ...response.data]);
         setLoader(false);
       }
@@ -83,7 +87,9 @@ function JetDocus({
       formData3.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData3).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument3([...doc3, ...response.data]);
         setLoader(false);
       }
@@ -98,7 +104,9 @@ function JetDocus({
       formData4.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData4).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument4([...doc4, ...response.data]);
         setLoader(false);
       }
@@ -113,7 +121,9 @@ function JetDocus({
       formData5.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData5).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument5([...doc5, ...response.data]);
         setLoader(false);
       }
@@ -128,7 +138,9 @@ function JetDocus({
       formData6.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData6).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument6([...doc6, ...response.data]);
         setLoader(false);
       }
@@ -143,7 +155,9 @@ function JetDocus({
       formData7.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData7).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument7([...doc7, ...response.data]);
         setLoader(false);
       }
@@ -158,7 +172,9 @@ function JetDocus({
       formData8.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData8).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument8([...doc8, ...response.data]);
         setLoader(false);
       }
@@ -173,7 +189,9 @@ function JetDocus({
       formData9.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData9).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument9([...doc9, ...response.data]);
         setLoader(false);
       }
@@ -188,7 +206,9 @@ function JetDocus({
       formData10.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData10).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument10([...doc10, ...response.data]);
         setLoader(false);
       }
@@ -203,7 +223,9 @@ function JetDocus({
       formData11.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData11).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument11([...doc11, ...response.data]);
         setLoader(false);
       }
@@ -218,7 +240,9 @@ function JetDocus({
       formData12.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData12).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument12([...doc12, ...response.data]);
         setLoader(false);
       }
@@ -233,7 +257,9 @@ function JetDocus({
       formData13.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData13).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
         setDocument13([...doc13, ...response.data]);
         setLoader(false);
       }
@@ -250,20 +276,27 @@ function JetDocus({
             (property) => property._id === params.id
           );
           if (property[0].documents.length > 0) {
-            setDocument1(property[0].documents[0]);
-            setDocument2(property[0].documents[1]);
-            setDocument3(property[0].documents[2]);
-            setDocument4(property[0].documents[3]);
-            setDocument5(property[0].documents[4]);
-            setDocument6(property[0].documents[5]);
-            setDocument7(property[0].documents[6]);
-            setDocument8(property[0].documents[7]);
-            setDocument9(property[0].documents[8]);
-            setDocument10(property[0].documents[9]);
-            setDocument11(property[0].documents[10]);
-            setDocument12(property[0].documents[11]);
-            if (property[0].documents.length > 12) {
-              setDocument13(property[0].documents[12]);
+            const documents = property[0].documents.map((document) => {
+              if (document.isVerified && document._id) {
+                delete document.isVerified;
+                delete document._id;
+                return document;
+              }
+            });
+            setDocument1([documents[0]]);
+            setDocument2([documents[1]]);
+            setDocument3([documents[2]]);
+            setDocument4([documents[3]]);
+            setDocument5([documents[4]]);
+            setDocument6([documents[5]]);
+            setDocument7([documents[6]]);
+            setDocument8([documents[7]]);
+            setDocument9([documents[8]]);
+            setDocument10([documents[9]]);
+            setDocument11([documents[10]]);
+            setDocument12([documents[11]]);
+            if (documents.length > 12) {
+              setDocument13([documents[12]]);
             }
           }
         }
@@ -288,43 +321,108 @@ function JetDocus({
   };
 
   const ownership_document = doc1.map((document) => {
-    return { ...document, officialName: "ownership_document" };
+    if (document.onHover1) {
+      delete document.onHover1;
+      return { ...document, officialName: "ownership_document" };
+    } else {
+      return { ...document, officialName: "ownership_document" };
+    }
   });
   const registration_document = doc2.map((document) => {
-    return { ...document, officialName: "registration_document" };
+    if (document.onHover2) {
+      delete document.onHover2;
+      return { ...document, officialName: "registration_document" };
+    } else {
+      return { ...document, officialName: "registration_document" };
+    }
   });
   const title_certificate = doc3.map((document) => {
-    return { ...document, officialName: "title_certificate" };
+    if (document.onHover3) {
+      delete document.onHover3;
+      return { ...document, officialName: "title_certificate" };
+    } else {
+      return { ...document, officialName: "title_certificate" };
+    }
   });
   const detail_specification = doc4.map((document) => {
-    return { ...document, officialName: "detail_specification" };
+    if (document.onHover4) {
+      delete document.onHover4;
+      return { ...document, officialName: "detail_specification" };
+    } else {
+      return { ...document, officialName: "detail_specification" };
+    }
   });
   const insurance_document = doc5.map((document) => {
-    return { ...document, officialName: "insurance_document" };
+    if (document.onHover5) {
+      delete document.onHover5;
+      return { ...document, officialName: "insurance_document" };
+    } else {
+      return { ...document, officialName: "insurance_document" };
+    }
   });
   const loan_document = doc6.map((document) => {
-    return { ...document, officialName: "loan_document" };
+    if (document.onHover6) {
+      delete document.onHover6;
+      return { ...document, officialName: "loan_document" };
+    } else {
+      return { ...document, officialName: "loan_document" };
+    }
   });
   const jet_detail_history = doc7.map((document) => {
-    return { ...document, officialName: "jet_detail_history" };
+    if (document.onHover7) {
+      delete document.onHover7;
+      return { ...document, officialName: "jet_detail_history" };
+    } else {
+      return { ...document, officialName: "jet_detail_history" };
+    }
   });
   const fitness_report = doc8.map((document) => {
-    return { ...document, officialName: "fitness_report" };
+    if (document.onHover8) {
+      delete document.onHover8;
+      return { ...document, officialName: "fitness_report" };
+    } else {
+      return { ...document, officialName: "fitness_report" };
+    }
   });
   const electric_work_details = doc9.map((document) => {
-    return { ...document, officialName: "electric_work_details" };
+    if (document.onHover9) {
+      delete document.onHover9;
+      return { ...document, officialName: "electric_work_details" };
+    } else {
+      return { ...document, officialName: "electric_work_details" };
+    }
   });
   const engine_details = doc10.map((document) => {
-    return { ...document, officialName: "engine_details" };
+    if (document.onHover10) {
+      delete document.onHover10;
+      return { ...document, officialName: "engine_details" };
+    } else {
+      return { ...document, officialName: "engine_details" };
+    }
   });
   const inspection_report = doc11.map((document) => {
-    return { ...document, officialName: "inspection_report" };
+    if (document.onHover11) {
+      delete document.onHover11;
+      return { ...document, officialName: "inspection_report" };
+    } else {
+      return { ...document, officialName: "inspection_report" };
+    }
   });
   const valuation_report = doc12.map((document) => {
-    return { ...document, officialName: "valuation_report" };
+    if (document.onHover12) {
+      delete document.onHover12;
+      return { ...document, officialName: "valuation_report" };
+    } else {
+      return { ...document, officialName: "valuation_report" };
+    }
   });
   const others = doc13.map((document) => {
-    return { ...document, officialName: "others" };
+    if (document.onHover13) {
+      delete document.onHover13;
+      return { ...document, officialName: "others" };
+    } else {
+      return { ...document, officialName: "others" };
+    }
   });
 
   const documents = [
@@ -344,9 +442,9 @@ function JetDocus({
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
-  const saveInfo = async (data) => {
+  const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep || parseInt(params.step) === 1) {
+      if (sellStep === 1 || parseInt(params.step) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -365,7 +463,7 @@ function JetDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 2) {
+      } else if (sellStep === 2 || parseInt(params.step) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -383,7 +481,23 @@ function JetDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 3) {
+      } else if (sellStep === 3 || parseInt(params.step) === 3) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            documents,
+            step: 4,
+          },
+        };
+        await authService.saveInfo(datas).then((response) => {
+          if (response.data.error) {
+            alert(response.data.error);
+          } else {
+            toogleSellStep(6);
+            alert("Saved Successfully!");
+          }
+        });
+      } else if (sellStep === 4 || parseInt(params.step) === 4) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -423,18 +537,18 @@ function JetDocus({
 
   const onSubmit = async (data) => {
     if (
-      data.ownership_document.length !== 0 &&
-      data.registration_document.length !== 0 &&
-      data.title_certificate.length !== 0 &&
-      data.detail_specification.length !== 0 &&
-      data.insurance_document.length !== 0 &&
-      data.loan_document.length !== 0 &&
-      data.jet_detail_history.length !== 0 &&
-      data.fitness_report.length !== 0 &&
-      data.electric_work_details.length !== 0 &&
-      data.engine_details.length !== 0 &&
-      data.inspection_report.length !== 0 &&
-      data.valuation_report.length !== 0
+      ownership_document.length !== 0 &&
+      registration_document.length !== 0 &&
+      title_certificate.length !== 0 &&
+      detail_specification.length !== 0 &&
+      insurance_document.length !== 0 &&
+      loan_document.length !== 0 &&
+      jet_detail_history.length !== 0 &&
+      fitness_report.length !== 0 &&
+      electric_work_details.length !== 0 &&
+      engine_details.length !== 0 &&
+      inspection_report.length !== 0 &&
+      valuation_report.length !== 0
     ) {
       toogleDocuments(documents);
       toogleStep(step + 1);
@@ -442,6 +556,7 @@ function JetDocus({
       alert("Please upload the required documents");
     }
   };
+
   return (
     <>
       <Container className="sell-bottom-docu">
@@ -1303,7 +1418,7 @@ function JetDocus({
               <div className="upload-cover">
                 <details>
                   <summary>
-                    <label htmlFor="documents-btn8">+ Documents</label>
+                    <label htmlFor="documents-btn13">+ Documents</label>
                   </summary>
                   <div>
                     <label
@@ -1364,15 +1479,15 @@ function JetDocus({
         }}
         className="bottom-btn"
       >
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-          }}
-        >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
         <div className="bottom-btn">
+          <div
+            style={{
+              position: "absolute",
+              left: "50px",
+            }}
+          >
+            <Button onClick={saveInfo}>Save</Button>
+          </div>
           <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
           </button>

@@ -170,15 +170,22 @@ function RealEstateDocus({
             (property) => property._id === params.id
           );
           if (property[0].documents.length > 0) {
-            setDocument1([property[0].documents[0]]);
-            setDocument2([property[0].documents[1]]);
-            setDocument3([property[0].documents[2]]);
-            setDocument4([property[0].documents[3]]);
-            setDocument5([property[0].documents[4]]);
-            setDocument6([property[0].documents[5]]);
-            setDocument7([property[0].documents[6]]);
-            if (property[0].documents.length > 7) {
-              setDocument8([property[0].documents[7]]);
+            const documents = property[0].documents.map((document) => {
+              if (document.isVerified && document._id) {
+                delete document.isVerified;
+                delete document._id;
+                return document;
+              }
+            });
+            setDocument1([documents[0]]);
+            setDocument2([documents[1]]);
+            setDocument3([documents[2]]);
+            setDocument4([documents[3]]);
+            setDocument5([documents[4]]);
+            setDocument6([documents[5]]);
+            setDocument7([documents[6]]);
+            if (documents.length > 7) {
+              setDocument8([documents[7]]);
             }
           }
         }
@@ -198,49 +205,70 @@ function RealEstateDocus({
   };
 
   const titleReport = doc1.map((document) => {
-    return { ...document, officialName: "title_report" };
+    if (document.onHover1) {
+      delete document.onHover1;
+      return { ...document, officialName: "title_report" };
+    } else {
+      return { ...document, officialName: "title_report" };
+    }
   });
   const insuranceCopy = doc2.map((document) => {
-    return { ...document, officialName: "insurance_copy" };
+    if (document.onHover2) {
+      delete document.onHover2;
+      return { ...document, officialName: "insurance_copy" };
+    } else {
+      return { ...document, officialName: "insurance_copy" };
+    }
   });
   const financialDocuments = doc3.map((document) => {
-    return { ...document, officialName: "financial_document" };
+    if (document.onHover3) {
+      delete document.onHover3;
+      return { ...document, officialName: "financial_document" };
+    } else {
+      return { ...document, officialName: "financial_document" };
+    }
   });
   const purchaseAgreement = doc4.map((document) => {
-    return { ...document, officialName: "purchase_agreement" };
+    if (document.onHover4) {
+      delete document.onHover4;
+      return { ...document, officialName: "purchase_agreement" };
+    } else {
+      return { ...document, officialName: "purchase_agreement" };
+    }
   });
   const thirdpartyReport = doc5.map((document) => {
-    return { ...document, officialName: "third-party_report" };
+    if (document.onHover5) {
+      delete document.onHover5;
+      return { ...document, officialName: "third-party_report" };
+    } else {
+      return { ...document, officialName: "third-party_report" };
+    }
   });
   const demographics = doc6.map((document) => {
-    return { ...document, officialName: "demographics" };
+    if (document.onHover6) {
+      delete document.onHover6;
+      return { ...document, officialName: "demographics" };
+    } else {
+      return { ...document, officialName: "demographics" };
+    }
   });
   const marketandValuations = doc7.map((document) => {
-    return { ...document, officialName: "market_and_valuations" };
+    if (document.onHover7) {
+      delete document.onHover7;
+      return { ...document, officialName: "market_and_valuations" };
+    } else {
+      return { ...document, officialName: "market_and_valuations" };
+    }
   });
   const otherDocuments = doc8.map((document) => {
-    return { ...document, officialName: "others" };
+    if (document.onHover8) {
+      delete document.onHover8;
+      return { ...document, officialName: "others" };
+    } else {
+      return { ...document, officialName: "others" };
+    }
   });
 
-  if (
-    titleReport.onHover1 ||
-    insuranceCopy.onHover2 ||
-    financialDocuments.onHover3 ||
-    purchaseAgreement.onHover4 ||
-    thirdpartyReport.onHover5 ||
-    demographics.onHover6 ||
-    marketandValuations.onHover7 ||
-    otherDocuments.onHover8
-  ) {
-    delete titleReport.onHover1 ||
-      delete insuranceCopy.onHover2 ||
-      delete financialDocuments.onHover3 ||
-      delete purchaseAgreement.onHover4 ||
-      delete thirdpartyReport.onHover5 ||
-      delete demographics.onHover6 ||
-      delete marketandValuations.onHover7 ||
-      delete otherDocuments.onHover8;
-  }
   const documents = [
     ...titleReport,
     ...insuranceCopy,
@@ -253,9 +281,9 @@ function RealEstateDocus({
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
-  const saveInfo = async (data) => {
+  const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep || parseInt(params.step) === 1) {
+      if (sellStep === 1 || parseInt(params.step) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -266,7 +294,7 @@ function RealEstateDocus({
             step: 4,
           },
         };
-        await authService.saveInfo(datas).then((response) => {
+        await authService.putRealEstateInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
@@ -274,7 +302,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 2) {
+      } else if (sellStep === 2 || parseInt(params.step) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -284,7 +312,7 @@ function RealEstateDocus({
             step: 4,
           },
         };
-        await authService.saveInfo(datas).then((response) => {
+        await authService.putRealEstateInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
@@ -292,7 +320,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 3) {
+      } else if (sellStep === 3 || parseInt(params.step) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -300,7 +328,7 @@ function RealEstateDocus({
             step: 4,
           },
         };
-        await authService.saveInfo(datas).then((response) => {
+        await authService.putRealEstateInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
@@ -308,7 +336,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep || parseInt(params.step) === 4) {
+      } else if (sellStep === 4 || parseInt(params.step) === 4) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -316,7 +344,7 @@ function RealEstateDocus({
             step: 4,
           },
         };
-        await authService.saveInfo(datas).then((response) => {
+        await authService.putRealEstateInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
@@ -334,7 +362,7 @@ function RealEstateDocus({
         documents,
         step: 4,
       };
-      await authService.savePropInfo(datas).then((response) => {
+      await authService.postRealEstateInfo(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
