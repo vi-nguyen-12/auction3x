@@ -40,6 +40,8 @@ function RealEstateDocus({
 
   const params = useParams();
 
+  const steps = sellStep ? sellStep : params.step ? params.step : 0;
+
   const onChange1 = async (e) => {
     setLoader(true);
     const formData1 = new FormData();
@@ -283,7 +285,7 @@ function RealEstateDocus({
 
   const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep === 1 || parseInt(params.step) === 1) {
+      if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -302,7 +304,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2 || parseInt(params.step) === 2) {
+      } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -320,7 +322,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3 || parseInt(params.step) === 3) {
+      } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -336,7 +338,7 @@ function RealEstateDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 4 || parseInt(params.step) === 4) {
+      } else if (parseInt(steps) === 4) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -410,7 +412,7 @@ function RealEstateDocus({
   };
   return (
     <>
-      <Container className="sell-bottom-docu">
+      <Container className="sell-bottom-docu" style={{bottom:"250px"}}>
         <Row className="listDetails-title">
           <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD DOCUMENTS
@@ -425,9 +427,9 @@ function RealEstateDocus({
         </Row>
         <Row
           style={{
-            height: "1300px",
-            overflowX: "hidden",
-            margin: "125px",
+            // height: "1300px",
+            overflowY: "scroll",
+            margin: "150px 0 0 0",
             color: "black",
           }}
         >

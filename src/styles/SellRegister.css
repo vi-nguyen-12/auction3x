@@ -179,9 +179,9 @@ body {
   border: 0;
   position: absolute;
   flex-wrap: wrap;
-  height: 85%;
+  /* height: 85%; */
   width: 100%;
-  bottom: 120px;
+  bottom: 150px;
 }
 
 .fee-sell-bottom {

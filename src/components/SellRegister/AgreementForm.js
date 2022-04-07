@@ -18,7 +18,6 @@ const Agree = ({
   propId,
   propertyType,
 }) => {
-  console.log(sellStep);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -29,6 +28,8 @@ const Agree = ({
   const { handleSubmit } = useForm();
   const params = useParams();
   const history = useHistory();
+
+  const steps = sellStep ? sellStep : params.step ? params.step : 0;
 
   const handleSignDocusign = async () => {
     setLoader(true);
@@ -50,7 +51,12 @@ const Agree = ({
     } else {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
-        setLoader(false);
+        if (
+          res.data.status === "viewing_complete" &&
+          res.data.status === "signing_complete"
+        ) {
+          setLoader(false);
+        }
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
@@ -59,7 +65,7 @@ const Agree = ({
         } else {
           if (propertyType === "real-estate") {
             if (params.id || propId) {
-              if (sellStep === 1 || parseInt(params.step) === 1) {
+              if (steps === 1) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -79,7 +85,7 @@ const Agree = ({
                     history.push("/");
                   }
                 });
-              } else if (sellStep === 2 || parseInt(params.step) === 2) {
+              } else if (steps === 2) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -99,7 +105,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 3 || parseInt(params.step) === 3) {
+              } else if (steps === 3) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -117,7 +123,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 4 || parseInt(params.step) === 4) {
+              } else if (steps === 4) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -157,7 +163,7 @@ const Agree = ({
             }
           } else {
             if (params.id || propId) {
-              if (sellStep === 1 || parseInt(params.step) === 1) {
+              if (steps === 1) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -177,7 +183,7 @@ const Agree = ({
                     history.push("/");
                   }
                 });
-              } else if (sellStep === 2 || parseInt(params.step) === 2) {
+              } else if (steps === 2) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -197,7 +203,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 3 || parseInt(params.step) === 3) {
+              } else if (steps === 3) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -215,7 +221,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (sellStep === 4 || parseInt(params.step) === 4) {
+              } else if (steps === 4) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {

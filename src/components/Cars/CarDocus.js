@@ -19,6 +19,7 @@ function CarDocus({
   toogleSellStep,
   sellStep,
   getPropId,
+  document,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -40,6 +41,8 @@ function CarDocus({
     : [];
 
   const params = useParams();
+
+  const steps = sellStep ? sellStep : params.step ? params.step : 0;
 
   const onChange1 = async (e) => {
     setLoader(true);
@@ -185,17 +188,71 @@ function CarDocus({
           const property = response.data.filter(
             (property) => property._id === params.id
           );
-          if (property[0].documents.length > 0) {
-            setDocument1([property[0].documents[0]]);
-            setDocument2([property[0].documents[1]]);
-            setDocument3([property[0].documents[2]]);
-            setDocument4([property[0].documents[3]]);
-            setDocument5([property[0].documents[4]]);
-            setDocument6([property[0].documents[5]]);
-            setDocument7([property[0].documents[6]]);
-            setDocument8([property[0].documents[7]]);
-            if (property[0].documents.length > 8) {
-              setDocument9([property[0].documents[8]]);
+          if (property[0].documents.length > 1) {
+            setDocument1([
+              property[0].documents[0]
+                ? property[0].documents[0]
+                : document
+                ? document[0]
+                : [],
+            ]);
+            setDocument2([
+              property[0].documents[1]
+                ? property[0].documents[1]
+                : document
+                ? document[1]
+                : [],
+            ]);
+            setDocument3([
+              property[0].documents[2]
+                ? property[0].documents[2]
+                : document
+                ? document[2]
+                : [],
+            ]);
+            setDocument4([
+              property[0].documents[3]
+                ? property[0].documents[3]
+                : document
+                ? document[3]
+                : [],
+            ]);
+            setDocument5([
+              property[0].documents[4]
+                ? property[0].documents[4]
+                : document
+                ? document[4]
+                : [],
+            ]);
+            setDocument6([
+              property[0].documents[5]
+                ? property[0].documents[5]
+                : document
+                ? document[5]
+                : [],
+            ]);
+            setDocument7([
+              property[0].documents[6]
+                ? property[0].documents[6]
+                : document
+                ? document[6]
+                : [],
+            ]);
+            setDocument8([
+              property[0].documents[7]
+                ? property[0].documents[7]
+                : document
+                ? document[7]
+                : [],
+            ]);
+            if (property[0].documents.length > 8 || document.length > 8) {
+              setDocument9([
+                property[0].documents[8]
+                  ? property[0].documents[8]
+                  : document
+                  ? document[8]
+                  : [],
+              ]);
             }
           }
         }
@@ -258,7 +315,7 @@ function CarDocus({
 
   const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep === 1 || parseInt(params.step) === 1) {
+      if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -277,7 +334,7 @@ function CarDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2 || parseInt(params.step) === 2) {
+      } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -295,11 +352,11 @@ function CarDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3 || parseInt(params.step) === 3) {
+      } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
-            documents,
+            documents: [...documents],
             step: 4,
           },
         };
@@ -367,9 +424,9 @@ function CarDocus({
         </Row>
         <Row
           style={{
-            height: "1300px",
-            overflowX: "hidden",
-            margin: "125px",
+            // height: "1300px",
+            overflowY: "scroll",
+            margin: "120px 0 0 0",
             color: "black",
           }}
         >

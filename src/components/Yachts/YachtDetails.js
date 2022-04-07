@@ -91,6 +91,38 @@ function YachtDetails({
       setDiscussedAmount(
         property[0].discussedAmount ? property[0].discussedAmount : 0
       );
+    } else {
+      setVessel_registration_number(
+        property.vessel_registration_number
+          ? property.vessel_registration_number
+          : ""
+      );
+      setVessel_manufacturing_date(
+        property.vessel_manufacturing_date
+          ? property.vessel_manufacturing_date
+          : ""
+      );
+      setManufacture_mark(
+        property.manufacture_mark ? property.manufacture_mark : ""
+      );
+      setManufacturer_name(
+        property.manufacturer_name ? property.manufacturer_name : ""
+      );
+      setEngine_type(property.engine_type ? property.engine_type : "");
+      setEngine_deck_type(
+        property.engine_deck_type ? property.engine_deck_type : ""
+      );
+      setEngine_manufacture_name(
+        property.engine_manufacture_name ? property.engine_manufacture_name : ""
+      );
+      setRunning_cost(property.running_cost ? property.running_cost : "");
+      setNo_of_crew_required(
+        property.no_of_crew_required ? property.no_of_crew_required : ""
+      );
+      setProperty_address(
+        property.property_address ? property.property_address : ""
+      );
+      setOtherDetails(property.otherDetails ? property.otherDetails : "");
     }
   }, [params.id, prop]);
 

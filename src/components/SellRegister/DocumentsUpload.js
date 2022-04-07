@@ -19,6 +19,7 @@ const DocumentsUpload = ({
   toogleSellStep,
   sellStep,
   getPropId,
+  document,
 }) => {
   return (
     <Container className="upload-box-docu">
@@ -66,6 +67,7 @@ const DocumentsUpload = ({
           images={images}
           videos={videos}
           getPropId={getPropId}
+          document={document}
         />
       ) : propertyType === "car" ? (
         <CarDocus
@@ -80,6 +82,7 @@ const DocumentsUpload = ({
           images={images}
           videos={videos}
           getPropId={getPropId}
+          document={document}
         />
       ) : propertyType === "jet" ? (
         <JetDocus
@@ -94,6 +97,7 @@ const DocumentsUpload = ({
           images={images}
           videos={videos}
           getPropId={getPropId}
+          document={document}
         />
       ) : propertyType === "yacht" ? (
         <YachtDocus
@@ -108,6 +112,7 @@ const DocumentsUpload = ({
           images={images}
           videos={videos}
           getPropId={getPropId}
+          document={document}
         />
       ) : null}
     </Container>

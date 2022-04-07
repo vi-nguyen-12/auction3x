@@ -130,7 +130,7 @@ function JetDetails({
         ...ownership,
         step: parseInt(2),
       };
-      delete datas.documents;
+      // delete datas.documents;
       authService.savePropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
@@ -242,10 +242,59 @@ function JetDetails({
           ? property[0].details.imported_aircraft
           : ""
       );
+    } else {
+      setRegistration_mark(
+        propertyData.registration_mark ? propertyData.registration_mark : ""
+      );
+      setAircraft_builder_name(
+        propertyData.aircraft_builder_name
+          ? propertyData.aircraft_builder_name
+          : ""
+      );
+      setAircraft_model_designation(
+        propertyData.aircraft_model_designation
+          ? propertyData.aircraft_model_designation
+          : ""
+      );
+      setAircraft_serial_no(
+        propertyData.aircraft_serial_no ? propertyData.aircraft_serial_no : ""
+      );
+      setEngine_builder_name(
+        propertyData.engine_builder_name ? propertyData.engine_builder_name : ""
+      );
+      setEngine_model_designation(
+        propertyData.engine_model_designation
+          ? propertyData.engine_model_designation
+          : ""
+      );
+      setNumber_of_engines(
+        propertyData.number_of_engines ? propertyData.number_of_engines : ""
+      );
+      setPropeller_builder_name(
+        propertyData.propeller_builder_name
+          ? propertyData.propeller_builder_name
+          : ""
+      );
+      setPropeller_model_designation(
+        propertyData.propeller_model_designation
+          ? propertyData.propeller_model_designation
+          : ""
+      );
+      setNumber_of_aircraft(
+        propertyData.number_of_aircraft ? propertyData.number_of_aircraft : ""
+      );
+      setAddress(
+        propertyData.property_address ? propertyData.property_address : ""
+      );
+      setReservedAmount(
+        propertyData.reservedAmount ? propertyData.reservedAmount : 0
+      );
+      setDiscussedAmount(
+        propertyData.discussedAmount ? propertyData.discussedAmount : 0
+      );
+      setIsImport(property.imported_aircraft ? property.imported_aircraft : "");
     }
   }, []);
-
-  console.log(reservedAmount);
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {

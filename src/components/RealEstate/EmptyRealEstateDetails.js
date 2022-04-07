@@ -173,6 +173,12 @@ function EmptyRealEstateDetails({
           );
         }
       });
+    } else {
+      setAddress(property.street_address);
+      setCity(property.city);
+      setState(property.state);
+      setCountry(property.country);
+      setZip(property.zip_code);
     }
   }, []);
 

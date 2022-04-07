@@ -55,7 +55,7 @@ function RealEstateDetails({
           step: parseInt(2),
         },
       };
-      authService.saveInfo(datas).then((res) => {
+      authService.putRealEstateInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -80,11 +80,10 @@ function RealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         ...ownership,
-        documents: ownership.listing_agreement,
         step: parseInt(2),
       };
-      delete datas.listing_agreement;
-      authService.savePropInfo(datas).then((res) => {
+      delete datas.documents;
+      authService.postRealEstateInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -169,6 +168,12 @@ function RealEstateDetails({
           );
         }
       });
+    } else {
+      setAddress(property.street_address);
+      setCity(property.city);
+      setState(property.state);
+      setCountry(property.country);
+      setZip(property.zip_code);
     }
   }, []);
 

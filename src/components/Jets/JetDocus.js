@@ -45,6 +45,8 @@ function JetDocus({
 
   const params = useParams();
 
+  const steps = sellStep ? sellStep : params.step ? params.step : 0;
+
   const onChange1 = async (e) => {
     setLoader(true);
     const formData1 = new FormData();
@@ -444,7 +446,7 @@ function JetDocus({
 
   const saveInfo = async () => {
     if (propId || params.id) {
-      if (sellStep === 1 || parseInt(params.step) === 1) {
+      if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -463,7 +465,7 @@ function JetDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2 || parseInt(params.step) === 2) {
+      } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -481,7 +483,7 @@ function JetDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3 || parseInt(params.step) === 3) {
+      } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -497,7 +499,7 @@ function JetDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 4 || parseInt(params.step) === 4) {
+      } else if (parseInt(steps) === 4) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -575,8 +577,8 @@ function JetDocus({
         <Row
           style={{
             height: "1300px",
-            overflowX: "hidden",
-            margin: "125px",
+            overflowY: "scroll",
+            margin: "150px 0 0 0",
             color: "black",
           }}
         >

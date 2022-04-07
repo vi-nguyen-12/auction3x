@@ -42,28 +42,78 @@ function Ownership({
   });
 
   const saveInfo = async () => {
-    const data = {
-      type: propertyType,
-      details: {
-        owner_name: ownerName,
-        broker_name: brokerName ? brokerName : null,
-        broker_id: brokerId ? brokerId : null,
-        phone: phone,
-        email: email,
-        address: address,
-      },
-      documents: listing_agreement ? listing_agreement : null,
-      step: parseInt(1),
-    };
-    authService.savePropInfo(data).then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
+    if (propertyType === "real-estate") {
+      if (propId || params.id) {
+        const datas = {
+          type: propertyType,
+          id: propId ? propId : params.id,
+          details: {
+            owner_name: ownerName,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
+            phone: phone,
+            email: email,
+            address: address,
+          },
+          documents: listing_agreement ? listing_agreement : null,
+          step: parseInt(1),
+        };
+        await authService.putRealEstateInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            alert("Successfully updated");
+            toogleSellStep(1);
+          }
+        });
       } else {
-        getPropId(res.data._id);
-        toogleSellStep(1);
-        alert("Successfully saved");
+        const datas = {
+          type: propertyType,
+          details: {
+            owner_name: ownerName,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
+            phone: phone,
+            email: email,
+            address: address,
+          },
+          documents: listing_agreement ? listing_agreement : null,
+          step: parseInt(1),
+        };
+        await authService.postRealEstateInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            getPropId(res.data._id);
+            alert("Successfully updated");
+            toogleSellStep(1);
+          }
+        });
       }
-    });
+    } else {
+      const data = {
+        type: propertyType,
+        details: {
+          owner_name: ownerName,
+          broker_name: brokerName ? brokerName : null,
+          broker_id: brokerId ? brokerId : null,
+          phone: phone,
+          email: email,
+          address: address,
+        },
+        documents: listing_agreement ? listing_agreement : null,
+        step: parseInt(1),
+      };
+      authService.savePropInfo(data).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          getPropId(res.data._id);
+          toogleSellStep(1);
+          alert("Successfully saved");
+        }
+      });
+    }
   };
 
   useEffect(() => {

@@ -24,6 +24,7 @@ const UploadForm = ({
   image,
   video,
 }) => {
+  console.log(image);
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);

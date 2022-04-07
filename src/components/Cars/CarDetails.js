@@ -73,6 +73,21 @@ function CarDetails({
       setDiscussedAmount(
         property[0].discussedAmount ? property[0].discussedAmount : ""
       );
+    } else {
+      setAddress(property.property_address ? property.property_address : "");
+      setPrice(property.price ? property.price : "");
+      setCondition(property.condition ? property.condition : "");
+      setFuelType(property.fuel_type ? property.fuel_type : "");
+      setEngine(property.engine ? property.engine : "");
+      setVin(property.VIN ? property.VIN : "");
+      setColor(property.color ? property.color : "");
+      setPower(property.power ? property.power : "");
+      setCarType(property.car_type ? property.car_type : "");
+      setTransmission(property.transmission ? property.transmission : "");
+      setMileage(property.mileage ? property.mileage : "");
+      setYear(property.year ? property.year : "");
+      setModel(property.model ? property.model : "");
+      setMake(property.make ? property.make : "");
     }
   }, [prop]);
 
@@ -129,7 +144,6 @@ function CarDetails({
         ...ownership,
         step: parseInt(2),
       };
-      delete datas.documents;
       authService.savePropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);

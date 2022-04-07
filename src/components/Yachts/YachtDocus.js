@@ -20,6 +20,7 @@ function YachtDocus({
   toogleSellStep,
   sellStep,
   getPropId,
+  document,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -41,6 +42,7 @@ function YachtDocus({
     : [];
 
   const params = useParams();
+  const steps = sellStep ? sellStep : params.step ? params.step : 0;
   const incompProperty = useSelector((state) => state.incompProperty);
 
   const onChange1 = async (e) => {
@@ -181,16 +183,36 @@ function YachtDocus({
   useEffect(() => {
     if (params.id) {
       const prop = incompProperty.filter((item) => item._id === params.id);
-      if (prop.documents.length > 0) {
-        setDocument1(prop.documents[0]);
-        setDocument2(prop.documents[1]);
-        setDocument3(prop.documents[2]);
-        setDocument4(prop.documents[3]);
-        setDocument5(prop.documents[4]);
-        setDocument6(prop.documents[5]);
-        setDocument7(prop.documents[6]);
-        setDocument8(prop.documents[7]);
-        setDocument9(prop.documents[8]);
+      if (prop[0].documents.length > 1) {
+        setDocument1(
+          prop.documents[0] ? prop.documents[0] : document ? document[0] : []
+        );
+        setDocument2(
+          prop.documents[1] ? prop.documents[1] : document ? document[1] : []
+        );
+        setDocument3(
+          prop.documents[2] ? prop.documents[2] : document ? document[2] : []
+        );
+        setDocument4(
+          prop.documents[3] ? prop.documents[3] : document ? document[3] : []
+        );
+        setDocument5(
+          prop.documents[4] ? prop.documents[4] : document ? document[4] : []
+        );
+        setDocument6(
+          prop.documents[5] ? prop.documents[5] : document ? document[5] : []
+        );
+        setDocument7(
+          prop.documents[6] ? prop.documents[6] : document ? document[6] : []
+        );
+        setDocument8(
+          prop.documents[7] ? prop.documents[7] : document ? document[7] : []
+        );
+        if (prop[0].documents.length > 8 || document.length > 8) {
+          setDocument9(
+            prop.documents[8] ? prop.documents[8] : document ? document[8] : []
+          );
+        }
       }
     }
   }, [incompProperty]);
@@ -250,7 +272,7 @@ function YachtDocus({
 
   const saveInfo = async (data) => {
     if (propId || params.id) {
-      if (sellStep === 1 || parseInt(params.step) === 1) {
+      if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -269,7 +291,7 @@ function YachtDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 2 || parseInt(params.step) === 2) {
+      } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -287,7 +309,7 @@ function YachtDocus({
             alert("Saved Successfully!");
           }
         });
-      } else if (sellStep === 3 || parseInt(params.step) === 3) {
+      } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
           details: {
@@ -360,8 +382,8 @@ function YachtDocus({
         <Row
           style={{
             height: "1300px",
-            overflowX: "hidden",
-            margin: "125px",
+            overflowY: "scroll",
+            margin: "150px 0 0 0",
             color: "black",
           }}
         >
