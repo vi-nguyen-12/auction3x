@@ -814,6 +814,17 @@ const Header = ({ color, change }) => {
             )}
             {user._id ? (
               <>
+                <Button
+                  className="sell_btn bg-transparent border-0 outline-none"
+                  onClick={handleSell}
+                  style={{
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Sell
+                </Button>
                 <div className="dropdown">
                   <button
                     className="customButton border-0 mt-0"
@@ -845,23 +856,31 @@ const Header = ({ color, change }) => {
                     </button>
                   </div>
                 </div>
-                <DropdownButton
-                  style={{ marginRight: "15px" }}
+                <Button
+                  style={{
+                    marginRight: "15px",
+                    backgroundColor: "#fcba7d",
+                    color: "black",
+                    borderColor: "transparent",
+                    padding: "5px",
+                  }}
                   id="dropdown-basic-button"
                   title={<IoWallet size={36} />}
                   show={showWallet}
                   onMouseEnter={() => setShowWallet(true)}
                   onMouseLeave={() => setShowWallet(false)}
                 >
-                  <Dropdown.Item href="#">
-                    <NumberFormat
-                      value={user.wallet}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                  </Dropdown.Item>
-                </DropdownButton>
+                  {/* <Dropdown.Item href="#"> */}
+                  <IoWallet size={36} />
+                  <NumberFormat
+                    style={{ fontSize: "20px", marginLeft: "10px", fontWeight: "bold" }}
+                    value={user.wallet}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                  {/* </Dropdown.Item> */}
+                </Button>
                 <Button
                   style={{
                     backgroundColor: "#fcba7d",

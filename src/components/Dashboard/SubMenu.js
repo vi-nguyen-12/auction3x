@@ -18,7 +18,6 @@ const SidebarLink = styled(Link)`
 const SidebarLabel = styled.button`
   padding: 10px;
   padding-left: 15%;
-  width: -webkit-fill-available;
   display: flex;
   background: none;
   border: none;

@@ -62,6 +62,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange2 = async (e) => {
@@ -79,6 +80,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange3 = async (e) => {
@@ -96,6 +98,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange4 = async (e) => {
@@ -113,6 +116,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange5 = async (e) => {
@@ -130,6 +134,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange6 = async (e) => {
@@ -147,6 +152,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange7 = async (e) => {
@@ -164,6 +170,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange8 = async (e) => {
@@ -181,6 +188,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange9 = async (e) => {
@@ -198,6 +206,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange10 = async (e) => {
@@ -215,6 +224,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange11 = async (e) => {
@@ -232,6 +242,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange12 = async (e) => {
@@ -249,6 +260,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange13 = async (e) => {
@@ -266,6 +278,7 @@ function JetDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   useEffect(() => {

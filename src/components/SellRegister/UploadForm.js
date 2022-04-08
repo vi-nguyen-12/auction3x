@@ -50,6 +50,7 @@ const UploadForm = ({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const handleError = () => {
@@ -73,9 +74,18 @@ const UploadForm = ({
         setVideoLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const saveInfo = async () => {
+    images = images.map((image) => {
+      delete image.onHover;
+      return image;
+    });
+    videos = videos.map((video) => {
+      delete video.onHover;
+      return video;
+    });
     if (propertyType === "real-estate") {
       if (propId || params.id) {
         if (sellStep === 2 || parseInt(params.step) === 2) {

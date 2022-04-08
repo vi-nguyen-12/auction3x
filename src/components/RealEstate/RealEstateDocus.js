@@ -55,6 +55,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.vallue = null;
   };
 
   const onChange2 = async (e) => {
@@ -70,6 +71,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange3 = async (e) => {
@@ -85,6 +87,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange4 = async (e) => {
@@ -100,6 +103,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange5 = async (e) => {
@@ -115,6 +119,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange6 = async (e) => {
@@ -130,6 +135,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange7 = async (e) => {
@@ -145,6 +151,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange8 = async (e) => {
@@ -160,6 +167,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   useEffect(() => {
@@ -412,7 +420,7 @@ function RealEstateDocus({
   };
   return (
     <>
-      <Container className="sell-bottom-docu" style={{bottom:"250px"}}>
+      <Container className="sell-bottom-docu" style={{ bottom: "250px" }}>
         <Row className="listDetails-title">
           <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD DOCUMENTS

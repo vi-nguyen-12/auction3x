@@ -29,6 +29,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange2 = async (e) => {
@@ -44,6 +45,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange3 = async (e) => {
@@ -59,6 +61,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   // const onChange4 = async (e) => {
@@ -92,7 +95,10 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
     return { ...item, officialName: "line_of_credit_doc" };
   });
 
-  const document = [...bankStatment, ...broker, ...lineCredit];
+  const document = [...bankStatment, ...broker, ...lineCredit].map((item) => {
+    delete item.onHover;
+    return item;
+  });
 
   const handleDelete = (url) => () => {
     setDocument1(document1.filter((document) => document.url !== url));
@@ -105,7 +111,12 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
     <>
       <Modal.Header closeButton>
         <Modal.Title
-          style={{ display: "grid", width: "100%", justifyContent: "center", textAlign:"center" }}
+          style={{
+            display: "grid",
+            width: "100%",
+            justifyContent: "center",
+            textAlign: "center",
+          }}
         >
           <h2
             style={{

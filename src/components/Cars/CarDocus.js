@@ -57,6 +57,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange2 = async (e) => {
@@ -72,9 +73,11 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange3 = async (e) => {
+    console.log("test");
     setLoader(true);
 
     const formData3 = new FormData();
@@ -87,6 +90,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange4 = async (e) => {
@@ -102,6 +106,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange5 = async (e) => {
@@ -117,6 +122,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange6 = async (e) => {
@@ -132,6 +138,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange7 = async (e) => {
@@ -147,6 +154,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange8 = async (e) => {
@@ -162,6 +170,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange9 = async (e) => {
@@ -177,6 +186,7 @@ function CarDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   useEffect(() => {
@@ -300,7 +310,7 @@ function CarDocus({
     return { ...document, officialName: "others" };
   });
 
-  const documents = [
+  let documents = [
     ...ownership_document,
     ...registration_document,
     ...title_certificate,
@@ -314,6 +324,10 @@ function CarDocus({
   ];
 
   const saveInfo = async () => {
+    documents = documents.map((item) => {
+      delete item.onHover;
+      return item;
+    });
     if (propId || params.id) {
       if (parseInt(steps) === 1) {
         const datas = {
@@ -609,6 +623,7 @@ function CarDocus({
                               var tempArr = arr;
                               var temp = document;
                               temp.onHover3 = true;
+                              console.log([...tempArr]);
                               setDocument3([...tempArr]);
                             }}
                             onMouseLeave={() => {
