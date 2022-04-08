@@ -18,6 +18,7 @@ const Agree = ({
   propId,
   propertyType,
 }) => {
+  console.log(ownership);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -56,8 +57,7 @@ const Agree = ({
           res.data.status === "signing_complete"
         ) {
           setLoader(false);
-        }
-        if (
+        } else if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
@@ -240,6 +240,7 @@ const Agree = ({
                 });
               }
             } else {
+              console.log(ownership);
               const datas = {
                 ...ownership,
                 ...propertyData,
@@ -249,6 +250,7 @@ const Agree = ({
                 step: 5,
                 docusignId: res.data._id,
               };
+              console.log(datas);
               authService.savePropInfo(datas).then((res) => {
                 if (res.data.error) {
                   alert(res.data.error);

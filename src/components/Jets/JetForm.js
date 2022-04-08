@@ -30,118 +30,164 @@ function JetForm({ toogleStep, step, properties, property }) {
       setRegistration_mark(
         properti[0].details.registration_mark
           ? properti[0].details.registration_mark
-          : property.registration_mark
-          ? property.registration_mark
-          : ""
+          : undefined
       );
       setAircraft_builder_name(
         properti[0].details.aircraft_builder_name
           ? properti[0].details.aircraft_builder_name
-          : property.aircraft_builder_name
-          ? property.aircraft_builder_name
-          : ""
+          : undefined
       );
       setAircraft_model_designation(
         properti[0].details.aircraft_model_designation
           ? properti[0].details.aircraft_model_designation
-          : property.aircraft_model_designation
-          ? property.aircraft_model_designation
-          : ""
+          : undefined
       );
       setAircraft_serial_no(
         properti[0].details.aircraft_serial_no
           ? properti[0].details.aircraft_serial_no
-          : property.aircraft_serial_no
-          ? property.aircraft_serial_no
-          : ""
+          : undefined
       );
       setEngine_builder_name(
         properti[0].details.engine_builder_name
           ? properti[0].details.engine_builder_name
-          : property.engine_builder_name
-          ? property.engine_builder_name
-          : ""
+          : undefined
       );
       setEngine_model_designation(
         properti[0].details.engine_model_designation
           ? properti[0].details.engine_model_designation
-          : property.engine_model_designation
-          ? property.engine_model_designation
-          : ""
+          : undefined
       );
       setNumber_of_engines(
         properti[0].details.number_of_engines
           ? properti[0].details.number_of_engines
-          : property.number_of_engines
-          ? property.number_of_engines
-          : ""
+          : undefined
       );
       setPropeller_builder_name(
         properti[0].details.propeller_builder_name
           ? properti[0].details.propeller_builder_name
-          : property.propeller_builder_name
-          ? property.propeller_builder_name
-          : ""
+          : undefined
       );
       setPropeller_model_designation(
-        property[0].details.propeller_model_designation
-          ? property[0].details.propeller_model_designation
-          : property.propeller_model_designation
-          ? property.propeller_model_designation
-          : ""
+        properti[0].details.propeller_model_designation
+          ? properti[0].details.propeller_model_designation
+          : undefined
       );
       setNumber_of_aircraft(
         properti[0].details.number_of_aircraft
           ? properti[0].details.number_of_aircraft
-          : property.number_of_aircraft
-          ? property.number_of_aircraft
-          : ""
+          : undefined
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
-          : property.property_address
-          ? property.property_address
-          : ""
+          : undefined
       );
       setIsImport(
         properti[0].details.imported_aircraft
           ? properti[0].details.imported_aircraft
-          : property.imported_aircraft
-          ? property.imported_aircraft
-          : ""
+          : undefined
+      );
+    } else {
+      setRegistration_mark(
+        property.registration_mark ? property.registration_mark : undefined
+      );
+      setAircraft_builder_name(
+        property.aircraft_builder_name
+          ? property.aircraft_builder_name
+          : undefined
+      );
+      setAircraft_model_designation(
+        property.aircraft_model_designation
+          ? property.aircraft_model_designation
+          : undefined
+      );
+      setAircraft_serial_no(
+        property.aircraft_serial_no ? property.aircraft_serial_no : undefined
+      );
+      setEngine_builder_name(
+        property.engine_builder_name ? property.engine_builder_name : undefined
+      );
+      setEngine_model_designation(
+        property.engine_model_designation
+          ? property.engine_model_designation
+          : undefined
+      );
+      setNumber_of_engines(
+        property.number_of_engines ? property.number_of_engines : undefined
+      );
+      setPropeller_builder_name(
+        property.propeller_builder_name
+          ? property.propeller_builder_name
+          : undefined
+      );
+      setPropeller_model_designation(
+        property.propeller_model_designation
+          ? property.propeller_model_designation
+          : undefined
+      );
+      setNumber_of_aircraft(
+        property.number_of_aircraft ? property.number_of_aircraft : undefined
+      );
+      setAddress(
+        property.property_address ? property.property_address : undefined
+      );
+      setIsImport(
+        property.imported_aircraft ? property.imported_aircraft : undefined
       );
     }
   }, []);
 
+  console.log(address);
+
   const onSubmit = (data) => {
     if (
-      registration_mark !== "" &&
-      aircraft_builder_name !== "" &&
-      aircraft_model_designation !== "" &&
-      aircraft_serial_no !== "" &&
-      engine_builder_name !== "" &&
-      engine_model_designation !== "" &&
-      number_of_engines !== "" &&
-      propeller_builder_name !== "" &&
-      propeller_model_designation !== "" &&
-      number_of_aircraft !== "" &&
-      isImport !== null &&
-      address !== ""
+      registration_mark !== undefined &&
+      aircraft_builder_name !== undefined &&
+      aircraft_model_designation !== undefined &&
+      aircraft_serial_no !== undefined &&
+      engine_builder_name !== undefined &&
+      engine_model_designation !== undefined &&
+      number_of_engines !== undefined &&
+      propeller_builder_name !== undefined &&
+      propeller_model_designation !== undefined &&
+      number_of_aircraft !== undefined &&
+      address !== undefined
     ) {
       const datas = {
-        registration_mark: data.registration_mark,
-        aircraft_builder_name: data.aircraft_builder_name,
-        aircraft_model_designation: data.aircraft_model_designation,
-        aircraft_serial_no: data.aircraft_serial_no,
-        engine_builder_name: data.engine_builder_name,
-        engine_model_designation: data.engine_model_designation,
-        number_of_engines: data.number_of_engines,
-        propeller_builder_name: data.propeller_builder_name,
-        propeller_model_designation: data.propeller_model_designation,
-        number_of_aircraft: data.number_of_aircraft,
+        registration_mark: data.registration_mark
+          ? data.registration_mark
+          : registration_mark,
+        aircraft_builder_name: data.aircraft_builder_name
+          ? data.aircraft_builder_name
+          : aircraft_builder_name,
+        aircraft_model_designation: data.aircraft_model_designation
+          ? data.aircraft_model_designation
+          : aircraft_model_designation,
+        aircraft_serial_no: data.aircraft_serial_no
+          ? data.aircraft_serial_no
+          : aircraft_serial_no,
+        engine_builder_name: data.engine_builder_name
+          ? data.engine_builder_name
+          : engine_builder_name,
+        engine_model_designation: data.engine_model_designation
+          ? data.engine_model_designation
+          : engine_model_designation,
+        number_of_engines: data.number_of_engines
+          ? data.number_of_engines
+          : number_of_engines,
+        propeller_builder_name: data.propeller_builder_name
+          ? data.propeller_builder_name
+          : propeller_builder_name,
+        propeller_model_designation: data.propeller_model_designation
+          ? data.propeller_model_designation
+          : propeller_model_designation,
+        number_of_aircraft: data.number_of_aircraft
+          ? data.number_of_aircraft
+          : number_of_aircraft,
         imported_aircraft: isImport,
-        property_address: data.property_address,
+        property_address: data.property_address
+          ? data.property_address
+          : address,
       };
       properties(datas);
       toogleStep(step + 1);
@@ -149,6 +195,7 @@ function JetForm({ toogleStep, step, properties, property }) {
       alert("Please fill all the required fields");
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -175,6 +222,7 @@ function JetForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={address ? address : ""}
               {...register("property_address")}
+              onChange={(e) => setAddress(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Address <span style={{ color: "#ff0000" }}>*</span>
@@ -188,6 +236,7 @@ function JetForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={registration_mark ? registration_mark : ""}
               {...register("registration_mark")}
+              onChange={(e) => setRegistration_mark(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Registration Mark <span style={{ color: "#ff0000" }}>*</span>
@@ -201,6 +250,7 @@ function JetForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={aircraft_builder_name ? aircraft_builder_name : ""}
               {...register("aircraft_builder_name")}
+              onChange={(e) => setAircraft_builder_name(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Aircraft Builder's Name{" "}
@@ -217,6 +267,7 @@ function JetForm({ toogleStep, step, properties, property }) {
                 aircraft_model_designation ? aircraft_model_designation : ""
               }
               {...register("aircraft_model_designation")}
+              onChange={(e) => setAircraft_model_designation(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Aircraft Model Designation{" "}
@@ -231,6 +282,7 @@ function JetForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={aircraft_serial_no ? aircraft_serial_no : ""}
               {...register("aircraft_serial_no")}
+              onChange={(e) => setAircraft_serial_no(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
@@ -244,6 +296,7 @@ function JetForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={engine_builder_name ? engine_builder_name : ""}
               {...register("engine_builder_name")}
+              onChange={(e) => setEngine_builder_name(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
@@ -257,6 +310,7 @@ function JetForm({ toogleStep, step, properties, property }) {
                 engine_model_designation ? engine_model_designation : ""
               }
               {...register("engine_model_designation")}
+              onChange={(e) => setEngine_model_designation(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Engine Model Designation{" "}
@@ -267,10 +321,11 @@ function JetForm({ toogleStep, step, properties, property }) {
         <Row style={{ marginTop: "20px" }}>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={number_of_engines ? number_of_engines : ""}
+              defaultValue={number_of_engines ? number_of_engines : 0}
               {...register("number_of_engines")}
+              onChange={(e) => setNumber_of_engines(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
@@ -284,6 +339,7 @@ function JetForm({ toogleStep, step, properties, property }) {
                 propeller_builder_name ? propeller_builder_name : ""
               }
               {...register("propeller_builder_name")}
+              onChange={(e) => setPropeller_builder_name(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Propeller Builder's Name{" "}
@@ -298,6 +354,7 @@ function JetForm({ toogleStep, step, properties, property }) {
                 propeller_model_designation ? propeller_model_designation : ""
               }
               {...register("propeller_model_designation")}
+              onChange={(e) => setPropeller_model_designation(e.target.value)}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Propeller Model Designation{" "}
@@ -317,7 +374,7 @@ function JetForm({ toogleStep, step, properties, property }) {
                 setIsImport(e.target.value === "Yes" ? true : false);
               }}
               defaultValue={
-                isImport ? (isImport === true ? "Yes" : "No") : "No"
+                isImport === true ? "Yes" : isImport === false ? "No" : ""
               }
             >
               <option value="">Select</option>
@@ -330,10 +387,11 @@ function JetForm({ toogleStep, step, properties, property }) {
               Number of Aircraft <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
-              type="text"
+              type="number"
               className="form-control"
-              defaultValue={number_of_aircraft ? number_of_aircraft : ""}
+              defaultValue={number_of_aircraft ? number_of_aircraft : 0}
               {...register("number_of_aircraft")}
+              onChange={(e) => setNumber_of_aircraft(e.target.value)}
             />
           </Col>
         </Row>

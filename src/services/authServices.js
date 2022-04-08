@@ -234,13 +234,27 @@ const authService = {
 
   saveProperty(data) {
     return axios.put(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`
+      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
     );
   },
 
   removeProperty(data) {
     return axios.delete(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`
+      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
     );
   },
 

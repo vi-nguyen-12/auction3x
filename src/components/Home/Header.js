@@ -127,22 +127,22 @@ const Header = ({ color, change }) => {
                 className="headerNav"
                 onClick={handleOnClick("realEstates")}
               >
-                Real Estates
+                Real Estate
               </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
               <button className="headerNav" onClick={handleOnClick("cars")}>
-                Cars
+                Car
               </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
               <button className="headerNav" onClick={handleOnClick("jets")}>
-                Jets
+                Jet
               </button>
             </div>
             <div className="nav-item mt-2 px-4 py-2">
               <button className="headerNav" onClick={handleOnClick("yachts")}>
-                Yachts
+                Yacht
               </button>
             </div>
             {/* <div className="nav-item mt-2 px-4 py-2">
@@ -395,7 +395,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          BROKERS
+                          BROKER
                         </button>
                       </td>
                     </tr>
@@ -412,7 +412,7 @@ const Header = ({ color, change }) => {
                             history.push("/cars");
                           }}
                         >
-                          CARS
+                          CAR
                         </button>
                       </td>
                       <td>
@@ -441,7 +441,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          BUYERS
+                          BUYER
                         </button>
                       </td>
                     </tr>
@@ -458,7 +458,7 @@ const Header = ({ color, change }) => {
                             history.push("/yachts");
                           }}
                         >
-                          YACHTS
+                          YACHT
                         </button>
                       </td>
                       <td>
@@ -491,7 +491,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          SELLERS
+                          SELLER
                         </button>
                       </td>
                     </tr>
@@ -508,7 +508,7 @@ const Header = ({ color, change }) => {
                             history.push("/jets");
                           }}
                         >
-                          JETS
+                          JET
                         </button>
                       </td>
                       <td>
@@ -522,7 +522,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          CAREERS
+                          CAREER
                         </button>
                       </td>
                     </tr>
@@ -538,7 +538,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          JEWELS
+                          JEWEL
                         </button>
                       </td>
                       <td>
@@ -568,7 +568,7 @@ const Header = ({ color, change }) => {
                             toogleOpen();
                           }}
                         >
-                          JOURNOULS
+                          JOURNOUL
                         </button>
                       </td>
                     </tr>
@@ -707,7 +707,11 @@ const Header = ({ color, change }) => {
                     {/* <Dropdown.Item href="#"> */}
                     <IoWallet size={36} />
                     <NumberFormat
-                      style={{ fontSize: "20px", marginLeft: "10px", fontWeight: "bold" }}
+                      style={{
+                        fontSize: "20px",
+                        marginLeft: "10px",
+                        fontWeight: "bold",
+                      }}
                       value={user.wallet}
                       displayType={"text"}
                       thousandSeparator={true}

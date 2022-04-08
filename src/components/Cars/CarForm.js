@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function CarForm({ toogleStep, step, properties }) {
+function CarForm({ toogleStep, step, properties, property }) {
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState();
   const [model, setModel] = useState();
@@ -55,25 +55,41 @@ function CarForm({ toogleStep, step, properties }) {
           ? property[0].details.property_address
           : ""
       );
+    } else {
+      setMake(property ? property.make : "");
+      setModel(property ? property.model : "");
+      setYear(property ? property.year : "");
+      setMileage(property ? property.mileage : "");
+      setTransmission(property ? property.transmission : "");
+      setCarType(property ? property.car_type : "");
+      setPower(property ? property.power : "");
+      setColor(property ? property.color : "");
+      setVin(property ? property.VIN : "");
+      setEngine(property ? property.engine : "");
+      setFuelType(property ? property.fuel_type : "");
+      setCondition(property ? property.condition : "");
+      setPrice(property ? property.price : "");
+      setAddress(property ? property.property_address : "");
     }
   }, [prop]);
 
   const onSubmit = (data) => {
+    console.log(make);
     if (
-      year !== "" &&
-      make !== "" &&
-      model !== "" &&
-      vin !== "" &&
-      mileage !== "" &&
-      price !== "" &&
-      address !== "" &&
-      color !== "" &&
-      transmission !== "" &&
-      carType !== "" &&
-      power !== "" &&
-      engine !== "" &&
-      condition !== "" &&
-      fuelType !== ""
+      year !== undefined &&
+      make !== undefined &&
+      model !== undefined &&
+      vin !== undefined &&
+      mileage !== undefined &&
+      price !== undefined &&
+      address !== undefined &&
+      color !== undefined &&
+      transmission !== undefined &&
+      carType !== undefined &&
+      power !== undefined &&
+      engine !== undefined &&
+      condition !== undefined &&
+      fuelType !== undefined
     ) {
       const datas = {
         make: data.make,
@@ -130,6 +146,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={year ? year : ""}
               {...register("year", { required: false })}
+              onChange={(e) => setYear(e.target.value)}
             />
           </Col>
           <Col>
@@ -140,6 +157,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={make ? make : ""}
               {...register("make", { required: false })}
+              onChange={(e) => setMake(e.target.value)}
             />
           </Col>
           <Col>
@@ -150,6 +168,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={model ? model : ""}
               {...register("model", { required: false })}
+              onChange={(e) => setModel(e.target.value)}
             />
           </Col>
         </Row>
@@ -162,6 +181,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={vin ? vin : ""}
               {...register("vin", { required: false })}
+              onChange={(e) => setVin(e.target.value)}
             />
           </Col>
         </Row>
@@ -174,6 +194,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={mileage ? mileage : ""}
               {...register("mileage", { required: false })}
+              onChange={(e) => setMileage(e.target.value)}
             />
           </Col>
           <Col>
@@ -184,6 +205,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={transmission ? transmission : ""}
               {...register("transmission", { required: false })}
+              onChange={(e) => setTransmission(e.target.value)}
             />
           </Col>
           <Col>
@@ -194,6 +216,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={carType ? carType : ""}
               {...register("carType", { required: false })}
+              onChange={(e) => setCarType(e.target.value)}
             />
           </Col>
         </Row>
@@ -206,6 +229,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={power ? power : ""}
               {...register("power", { required: false })}
+              onChange={(e) => setPower(e.target.value)}
             />
           </Col>
           <Col>
@@ -216,6 +240,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={engine ? engine : ""}
               {...register("engine", { required: false })}
+              onChange={(e) => setEngine(e.target.value)}
             />
           </Col>
           <Col>
@@ -226,6 +251,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={fuelType ? fuelType : ""}
               {...register("fuelType", { required: false })}
+              onChange={(e) => setFuelType(e.target.value)}
             />
           </Col>
         </Row>
@@ -238,6 +264,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={color ? color : ""}
               {...register("color", { required: false })}
+              onChange={(e) => setColor(e.target.value)}
             />
           </Col>
           <Col>
@@ -248,6 +275,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={condition ? condition : ""}
               {...register("condition", { required: false })}
+              onChange={(e) => setCondition(e.target.value)}
             />
           </Col>
           <Col>
@@ -258,6 +286,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={price ? price : ""}
               {...register("price", { required: false })}
+              onChange={(e) => setPrice(e.target.value)}
             />
           </Col>
         </Row>
@@ -270,6 +299,7 @@ function CarForm({ toogleStep, step, properties }) {
               className="form-control"
               defaultValue={address ? address : ""}
               {...register("address", { required: false })}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </Col>
         </Row>
