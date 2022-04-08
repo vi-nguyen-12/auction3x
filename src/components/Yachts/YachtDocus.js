@@ -58,6 +58,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange2 = async (e) => {
@@ -73,6 +74,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange3 = async (e) => {
@@ -88,6 +90,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange4 = async (e) => {
@@ -103,6 +106,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange5 = async (e) => {
@@ -118,6 +122,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange6 = async (e) => {
@@ -133,6 +138,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange7 = async (e) => {
@@ -148,6 +154,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange8 = async (e) => {
@@ -163,6 +170,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   const onChange9 = async (e) => {
@@ -178,6 +186,7 @@ function YachtDocus({
         setLoader(false);
       }
     });
+    e.target.value = null;
   };
 
   useEffect(() => {
@@ -257,7 +266,7 @@ function YachtDocus({
     return { ...document, officialName: "others" };
   });
 
-  const documents = [
+  let documents = [
     ...vessel_registration,
     ...vessel_maintenance_report,
     ...vessel_engine_type,
@@ -271,6 +280,10 @@ function YachtDocus({
   ];
 
   const saveInfo = async (data) => {
+    documents = documents.map((item) => {
+      delete item.onHover;
+      return item;
+    });
     if (propId || params.id) {
       if (parseInt(steps) === 1) {
         const datas = {
