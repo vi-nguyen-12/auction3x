@@ -77,7 +77,7 @@ const UploadForm = ({
       return image;
     });
     videos = videos.map((video) => {
-      delete video.onHover;
+      delete video.onHover0;
       return video;
     });
     if (propertyType === "real-estate") {
