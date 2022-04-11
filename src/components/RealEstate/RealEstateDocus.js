@@ -215,71 +215,31 @@ function RealEstateDocus({
   };
 
   const titleReport = doc1.map((document) => {
-    if (document.onHover1) {
-      delete document.onHover1;
-      return { ...document, officialName: "title_report" };
-    } else {
-      return { ...document, officialName: "title_report" };
-    }
+    return { ...document, officialName: "title_report" };
   });
   const insuranceCopy = doc2.map((document) => {
-    if (document.onHover2) {
-      delete document.onHover2;
-      return { ...document, officialName: "insurance_copy" };
-    } else {
-      return { ...document, officialName: "insurance_copy" };
-    }
+    return { ...document, officialName: "insurance_copy" };
   });
   const financialDocuments = doc3.map((document) => {
-    if (document.onHover3) {
-      delete document.onHover3;
-      return { ...document, officialName: "financial_document" };
-    } else {
-      return { ...document, officialName: "financial_document" };
-    }
+    return { ...document, officialName: "financial_document" };
   });
   const purchaseAgreement = doc4.map((document) => {
-    if (document.onHover4) {
-      delete document.onHover4;
-      return { ...document, officialName: "purchase_agreement" };
-    } else {
-      return { ...document, officialName: "purchase_agreement" };
-    }
+    return { ...document, officialName: "purchase_agreement" };
   });
   const thirdpartyReport = doc5.map((document) => {
-    if (document.onHover5) {
-      delete document.onHover5;
-      return { ...document, officialName: "third-party_report" };
-    } else {
-      return { ...document, officialName: "third-party_report" };
-    }
+    return { ...document, officialName: "third-party_report" };
   });
   const demographics = doc6.map((document) => {
-    if (document.onHover6) {
-      delete document.onHover6;
-      return { ...document, officialName: "demographics" };
-    } else {
-      return { ...document, officialName: "demographics" };
-    }
+    return { ...document, officialName: "demographics" };
   });
   const marketandValuations = doc7.map((document) => {
-    if (document.onHover7) {
-      delete document.onHover7;
-      return { ...document, officialName: "market_and_valuations" };
-    } else {
-      return { ...document, officialName: "market_and_valuations" };
-    }
+    return { ...document, officialName: "market_and_valuations" };
   });
   const otherDocuments = doc8.map((document) => {
-    if (document.onHover8) {
-      delete document.onHover8;
-      return { ...document, officialName: "others" };
-    } else {
-      return { ...document, officialName: "others" };
-    }
+    return { ...document, officialName: "others" };
   });
 
-  const documents = [
+  let documents = [
     ...titleReport,
     ...insuranceCopy,
     ...financialDocuments,
@@ -292,6 +252,17 @@ function RealEstateDocus({
   ];
 
   const saveInfo = async () => {
+    documents = documents.map((item) => {
+      delete item.onHover1;
+      delete item.onHover2;
+      delete item.onHover3;
+      delete item.onHover4;
+      delete item.onHover5;
+      delete item.onHover6;
+      delete item.onHover7;
+      delete item.onHover8;
+      return item;
+    });
     if (propId || params.id) {
       if (parseInt(steps) === 1) {
         const datas = {
