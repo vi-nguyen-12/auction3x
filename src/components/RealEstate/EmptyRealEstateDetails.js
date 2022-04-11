@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 function EmptyRealEstateDetails({
   property,
+  propertyData,
   toogleStep,
   step,
   tooglePropertyData,
@@ -105,80 +106,198 @@ function EmptyRealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          const property = res.data.filter((prop) => prop._id === params.id);
-          console.log(property);
+          const properti = res.data.filter((prop) => prop._id === params.id);
           setOwnerName(
-            property[0].details.owner ? property[0].details.owner.name : ""
+            properti[0].details.owner
+              ? properti[0].details.owner.name
+              : propertyData.owner_name
+              ? propertyData.owner_name
+              : property.owner_name
+              ? property.owner_name
+              : ""
           );
           setRooms(
-            property[0].details.structure
-              ? property[0].details.structure.rooms_count
+            properti[0].details.structure
+              ? properti[0].details.structure.rooms_count
+              : propertyData.rooms_count
+              ? propertyData.rooms_count
+              : property.rooms_count
+              ? property.rooms_count
               : ""
           );
           setBathrooms(
-            property[0].details.structure
-              ? property[0].details.structure.baths
+            properti[0].details.structure
+              ? properti[0].details.structure.baths
+              : propertyData.baths_count
+              ? propertyData.baths_count
+              : property.baths_count
+              ? property.baths_count
               : ""
           );
           setBedrooms(
-            property[0].details.structure
-              ? property[0].details.structure.beds_count
+            properti[0].details.structure
+              ? properti[0].details.structure.beds_count
+              : propertyData.beds_count
+              ? propertyData.beds_count
+              : property.beds_count
+              ? property.beds_count
               : ""
           );
           setPropType(
-            property[0].details.parcel
-              ? property[0].details.parcel.standardized_land_use_type
+            properti[0].details.parcel
+              ? properti[0].details.parcel.standardized_land_use_type
+              : propertyData.standardized_land_use_type
+              ? propertyData.standardized_land_use_type
+              : property.standardized_land_use_type
+              ? property.standardized_land_use_type
               : ""
           );
           setSqft(
-            property[0].details.parcel
-              ? property[0].details.parcel.area_sq_ft
+            properti[0].details.parcel
+              ? properti[0].details.parcel.area_sq_ft
+              : propertyData.area_sq_ft
+              ? propertyData.area_sq_ft
+              : property.area_sq_ft
+              ? property.area_sq_ft
               : ""
           );
           setTotalValue(
-            property[0].details.market_assessments
-              ? property[0].details.market_assessments[0].total_value
+            properti[0].details.market_assessments
+              ? properti[0].details.market_assessments[0].total_value
+              : propertyData.total_value
+              ? propertyData.total_value
+              : property.total_value
+              ? property.total_value
               : ""
           );
           setReservedAmount(
-            property[0].reservedAmount ? property[0].reservedAmount : 0
+            properti[0].reservedAmount
+              ? properti[0].reservedAmount
+              : propertyData.reservedAmount
+              ? propertyData.reservedAmount
+              : ""
           );
           setDiscussedAmount(
-            property[0].discussedAmount ? property[0].discussedAmount : 0
+            properti[0].discussedAmount
+              ? properti[0].discussedAmount
+              : propertyData.discussedAmount
+              ? propertyData.discussedAmount
+              : ""
           );
           setAddress(
-            property[0].details.property_address
-              ? property[0].details.property_address.formatted_street_address
+            properti[0].details.property_address
+              ? properti[0].details.property_address.formatted_street_address
+              : propertyData.street_address
+              ? propertyData.street_address
+              : property.street_address
+              ? property.street_address
               : ""
           );
           setCity(
-            property[0].details.property_address
-              ? property[0].details.property_address.city
+            properti[0].details.property_address
+              ? properti[0].details.property_address.city
+              : propertyData.city
+              ? propertyData.city
+              : property.city
+              ? property.city
               : ""
           );
           setState(
-            property[0].details.property_address
-              ? property[0].details.property_address.state
+            properti[0].details.property_address
+              ? properti[0].details.property_address.state
+              : propertyData.state
+              ? propertyData.state
+              : property.state
+              ? property.state
               : ""
           );
           setCountry(
-            property[0].details.property_address
-              ? property[0].details.property_address.country
+            properti[0].details.property_address
+              ? properti[0].details.property_address.country
+              : propertyData.country
+              ? propertyData.country
+              : property.country
+              ? property.country
               : ""
           );
           setZip(
-            property[0].details.property_address
-              ? property[0].details.property_address.zip_code
+            properti[0].details.property_address
+              ? properti[0].details.property_address.zip_code
+              : propertyData.zip_code
+              ? propertyData.zip_code
+              : property.zip_code
+              ? property.zip_code
               : ""
           );
         }
       });
     } else {
-      setAddress(property.street_address);
-      setCity(property.city);
-      setState(property.state);
-      setCountry(property.country);
-      setZip(property.zip_code);
+      setAddress(
+        propertyData.street_address
+          ? propertyData.street_address
+          : property.street_address
+      );
+      setCity(propertyData.city ? propertyData.city : property.city);
+      setState(propertyData.state ? propertyData.state : property.state);
+      setCountry(
+        propertyData.country ? propertyData.country : property.country
+      );
+      setZip(propertyData.zip_code ? propertyData.zip_code : property.zip_code);
+      setOwnerName(
+        propertyData.owner_name
+          ? propertyData.owner_name
+          : property
+          ? property.owner_name
+          : ""
+      );
+      setRooms(
+        propertyData.rooms_count
+          ? propertyData.rooms_count
+          : property
+          ? property.rooms_count
+          : ""
+      );
+      setBathrooms(
+        propertyData.baths_count
+          ? propertyData.baths_count
+          : property
+          ? property.baths_count
+          : ""
+      );
+      setBedrooms(
+        propertyData.beds_count
+          ? propertyData.beds_count
+          : property
+          ? property.beds_count
+          : ""
+      );
+      setPropType(
+        propertyData.standardized_land_use_type
+          ? propertyData.standardized_land_use_type
+          : property
+          ? property.standardized_land_use_type
+          : ""
+      );
+      setSqft(
+        propertyData.area_sq_ft
+          ? propertyData.area_sq_ft
+          : property
+          ? property.area_sq_ft
+          : ""
+      );
+      setTotalValue(
+        propertyData.total_value
+          ? propertyData.total_value
+          : property
+          ? property.total_value
+          : ""
+      );
+      setReservedAmount(
+        propertyData.reservedAmount ? propertyData.reservedAmount : ""
+      );
+      setDiscussedAmount(
+        propertyData.discussedAmount ? propertyData.discussedAmount : ""
+      );
     }
   }, []);
 
@@ -202,7 +321,7 @@ function EmptyRealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-
+      console.log(submitedData);
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
     }
@@ -224,15 +343,10 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="street_address"
-              defaultValue={
-                property.street_address
-                  ? property.street_address
-                  : address
-                  ? address
-                  : ""
-              }
+              defaultValue={address}
               {...register("street_address", { required: false })}
               onChange={(e) => setAddress(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Street Address <span style={{ color: "#ff0000" }}>*</span>
@@ -245,9 +359,10 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="city"
-              defaultValue={property.city ? property.city : city ? city : ""}
+              defaultValue={city}
               {...register("city", { required: false })}
               onChange={(e) => setCity(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               City <span style={{ color: "#ff0000" }}>*</span>
@@ -258,11 +373,10 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="state"
-              defaultValue={
-                property.state ? property.state : state ? state : ""
-              }
+              defaultValue={state}
               {...register("state", { required: false })}
               onChange={(e) => setState(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               State <span style={{ color: "#ff0000" }}>*</span>
@@ -275,11 +389,10 @@ function EmptyRealEstateDetails({
               type="text"
               className="form-control"
               name="country"
-              defaultValue={
-                property.country ? property.country : country ? country : ""
-              }
+              defaultValue={country}
               {...register("country", { required: false })}
               onChange={(e) => setCountry(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Country <span style={{ color: "#ff0000" }}>*</span>
@@ -290,11 +403,10 @@ function EmptyRealEstateDetails({
               type="number"
               className="form-control"
               name="zipCode"
-              defaultValue={
-                property.zip_code ? property.zip_code : zip ? zip : ""
-              }
+              defaultValue={zip}
               {...register("zipCode", { required: false })}
               onChange={(e) => setZip(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code <span style={{ color: "#ff0000" }}>*</span>
@@ -306,10 +418,11 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={ownerName ? ownerName : ""}
+              defaultValue={ownerName}
               {...register("ownerName", { required: false })}
               name="ownerName"
               onChange={(e) => setOwnerName(e.target.value)}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Owner Name <span style={{ color: "#ff0000" }}>*</span>
@@ -321,9 +434,11 @@ function EmptyRealEstateDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={rooms ? rooms : 0}
+              defaultValue={rooms}
               {...register("rooms_count", { required: false })}
               onChange={(e) => setRooms(e.target.value)}
+              name="rooms"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Rooms Count <span style={{ color: "#ff0000" }}>*</span>
@@ -333,9 +448,11 @@ function EmptyRealEstateDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={bedrooms ? bedrooms : 0}
+              defaultValue={bedrooms}
               {...register("bedrooms", { required: false })}
               onChange={(e) => setBedrooms(e.target.value)}
+              name="bedrooms"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bedrooms <span style={{ color: "#ff0000" }}>*</span>
@@ -347,9 +464,11 @@ function EmptyRealEstateDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={propType ? propType : ""}
+              defaultValue={propType}
               {...register("propertyType", { required: false })}
               onChange={(e) => setPropType(e.target.value)}
+              name="propertyType"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type <span style={{ color: "#ff0000" }}>*</span>
@@ -359,9 +478,11 @@ function EmptyRealEstateDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={bathrooms ? bathrooms : 0}
+              defaultValue={bathrooms}
               {...register("bathrooms", { required: false })}
               onChange={(e) => setBathrooms(e.target.value)}
+              name="bathrooms"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bathrooms <span style={{ color: "#ff0000" }}>*</span>
@@ -372,9 +493,11 @@ function EmptyRealEstateDetails({
               type="number"
               className="form-control"
               placeholder="$"
-              defaultValue={totalValue ? totalValue : 0}
+              defaultValue={totalValue}
               {...register("total_value", { required: false })}
               onChange={(e) => setTotalValue(e.target.value)}
+              name="total_value"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Total Value <span style={{ color: "#ff0000" }}>*</span>
@@ -386,9 +509,11 @@ function EmptyRealEstateDetails({
             <input
               type="number"
               className="form-control"
-              defaultValue={sqft ? sqft : 0}
+              defaultValue={sqft}
               {...register("sqft", { required: false })}
               onChange={(e) => setSqft(e.target.value)}
+              name="sqft"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Sqft <span style={{ color: "#ff0000" }}>*</span>
@@ -403,6 +528,8 @@ function EmptyRealEstateDetails({
               defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
               onChange={(e) => setReservedAmount(e.target.value)}
+              name="reservedAmount"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
@@ -415,13 +542,15 @@ function EmptyRealEstateDetails({
               defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}
               onChange={(e) => setDiscussedAmount(e.target.value)}
+              name="discussedAmount"
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px", height: "130px" }}>
+        {/* <Row style={{ marginTop: "10px", height: "130px" }}>
           <Col>
             <textarea
               style={{ height: "100%" }}
@@ -430,7 +559,7 @@ function EmptyRealEstateDetails({
               {...register("description", { required: false })}
             />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
       <div className="bottom-btn">
         <div

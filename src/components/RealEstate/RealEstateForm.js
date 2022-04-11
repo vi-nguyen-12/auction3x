@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
-function RealEstateForm({ toogleStep, step, properties }) {
+function RealEstateForm({ toogleStep, step, properties, property }) {
   const {
     register,
     handleSubmit,
@@ -16,12 +16,12 @@ function RealEstateForm({ toogleStep, step, properties }) {
 
   const params = useParams();
 
-  const [address, setAddress] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
+  const [address, setAddress] = useState();
+  const [address1, setAddress1] = useState();
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
+  const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
 
   const handleChange = (address) => {
     setAddress(address);
@@ -67,33 +67,49 @@ function RealEstateForm({ toogleStep, step, properties }) {
   useEffect(() => {
     if (params.id) {
       authService.getIncompleteProperty(params.userId).then((res) => {
-        const property = res.data.filter((prop) => prop._id === params.id);
+        const properti = res.data.filter((prop) => prop._id === params.id);
         setAddress(
-          property[0].details.property_address
-            ? property[0].details.property_address.formatted_street_address
+          properti[0].details.property_address.formatted_street_address
+            ? properti[0].details.property_address.formatted_street_address
+            : property.street_address
+            ? property.street_address
             : ""
         );
         setCity(
-          property[0].details.property_address
-            ? property[0].details.property_address.city
+          properti[0].details.property_address.city
+            ? properti[0].details.property_address.city
+            : property.city
+            ? property.city
             : ""
         );
         setState(
-          property[0].details.property_address
-            ? property[0].details.property_address.state
+          properti[0].details.property_address.state
+            ? properti[0].details.property_address.state
+            : property.state
+            ? property.state
             : ""
         );
         setCountry(
-          property[0].details.property_address
-            ? property[0].details.property_address.country
+          properti[0].details.property_address.country
+            ? properti[0].details.property_address.country
+            : property.country
+            ? property.country
             : ""
         );
         setZip(
-          property[0].details.property_address
-            ? property[0].details.property_address.zip_code
+          properti[0].details.property_address.zip_code
+            ? properti[0].details.property_address.zip_code
+            : property.zip_code
+            ? property.zip_code
             : ""
         );
       });
+    } else {
+      setAddress(property.street_address ? property.street_address : "");
+      setCity(property.city ? property.city : "");
+      setState(property.state ? property.state : "");
+      setCountry(property.country ? property.country : "");
+      setZip(property.zip_code ? property.zip_code : "");
     }
   }, [params.id]);
 
@@ -223,6 +239,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 placeholder="City"
                 defaultValue={city}
                 {...register("city", { required: false })}
+                required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 City <span style={{ color: "#ff0000" }}>*</span>
@@ -236,6 +253,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 placeholder="State"
                 defaultValue={state}
                 {...register("state", { required: false })}
+                required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 State <span style={{ color: "#ff0000" }}>*</span>
@@ -254,6 +272,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                   required: false,
                   maxLength: 100,
                 })}
+                required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Country <span style={{ color: "#ff0000" }}>*</span>
@@ -267,6 +286,7 @@ function RealEstateForm({ toogleStep, step, properties }) {
                 placeholder="Zip Code"
                 defaultValue={zip}
                 {...register("zipCode", { required: false, maxLength: 10 })}
+                required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Zip Code <span style={{ color: "#ff0000" }}>*</span>

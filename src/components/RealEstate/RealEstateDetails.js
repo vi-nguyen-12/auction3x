@@ -13,6 +13,7 @@ function RealEstateDetails({
   ownership,
   toogleSellStep,
   getPropId,
+  propertyData,
 }) {
   const { register, handleSubmit } = useForm();
 
@@ -101,101 +102,205 @@ function RealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          const property = res.data.filter((prop) => prop._id === params.id);
+          const properti = res.data.filter((prop) => prop._id === params.id);
           setOwnerName(
-            property[0].details.owner ? property[0].details.owner.name : ""
+            properti[0].details.owner
+              ? properti[0].details.owner.name
+              : propertyData.owner_name
+              ? propertyData.owner_name
+              : property.owner_name
+              ? property.owner_name
+              : ""
           );
           setRooms(
-            property[0].details.structure
-              ? property[0].details.structure.rooms
+            properti[0].details.structure
+              ? properti[0].details.structure.rooms_count
+              : propertyData.rooms_count
+              ? propertyData.rooms_count
+              : property.rooms_count
+              ? property.rooms_count
               : ""
           );
           setBathrooms(
-            property[0].details.structure
-              ? property[0].details.structure.baths
+            properti[0].details.structure
+              ? properti[0].details.structure.baths
+              : propertyData.baths_count
+              ? propertyData.baths_count
+              : property.baths_count
+              ? property.baths_count
               : ""
           );
           setBedrooms(
-            property[0].details.structure
-              ? property[0].details.structure.beds_count
+            properti[0].details.structure
+              ? properti[0].details.structure.beds_count
+              : propertyData.beds_count
+              ? propertyData.beds_count
+              : property.beds_count
+              ? property.beds_count
               : ""
           );
           setPropType(
-            property[0].details.parcel
-              ? property[0].details.parcel.standardized_land_use_type
+            properti[0].details.parcel
+              ? properti[0].details.parcel.standardized_land_use_type
+              : propertyData.standardized_land_use_type
+              ? propertyData.standardized_land_use_type
+              : property.standardized_land_use_type
+              ? property.standardized_land_use_type
               : ""
           );
           setSqft(
-            property[0].details.parcel
-              ? property[0].details.parcel.area_sq_ft
+            properti[0].details.parcel
+              ? properti[0].details.parcel.area_sq_ft
+              : propertyData.area_sq_ft
+              ? propertyData.area_sq_ft
+              : property.area_sq_ft
+              ? property.area_sq_ft
               : ""
           );
           setTotalValue(
-            property[0].details.market_assessments
-              ? property[0].details.market_assessments[0].total_value
+            properti[0].details.market_assessments
+              ? properti[0].details.market_assessments[0].total_value
+              : propertyData.total_value
+              ? propertyData.total_value
+              : property.total_value
+              ? property.total_value
               : ""
           );
           setReservedAmount(
-            property[0].reservedAmount ? property[0].reservedAmount : ""
+            properti[0].reservedAmount
+              ? properti[0].reservedAmount
+              : propertyData.reservedAmount
+              ? propertyData.reservedAmount
+              : 0
           );
           setDiscussedAmount(
-            property[0].discussedAmount ? property[0].discussedAmount : ""
+            properti[0].discussedAmount
+              ? properti[0].discussedAmount
+              : propertyData.discussedAmount
+              ? propertyData.discussedAmount
+              : 0
           );
           setAddress(
-            property[0].details.property_address
-              ? property[0].details.property_address.formatted_street_address
+            properti[0].details.property_address
+              ? properti[0].details.property_address.formatted_street_address
+              : propertyData.street_address
+              ? propertyData.street_address
+              : property.street_address
+              ? property.street_address
               : ""
           );
           setCity(
-            property[0].details.property_address
-              ? property[0].details.property_address.city
+            properti[0].details.property_address
+              ? properti[0].details.property_address.city
+              : propertyData.city
+              ? propertyData.city
+              : property.city
+              ? property.city
               : ""
           );
           setState(
-            property[0].details.property_address
-              ? property[0].details.property_address.state
+            properti[0].details.property_address
+              ? properti[0].details.property_address.state
+              : propertyData.state
+              ? propertyData.state
+              : property.state
+              ? property.state
               : ""
           );
           setCountry(
-            property[0].details.property_address
-              ? property[0].details.property_address.country
+            properti[0].details.property_address
+              ? properti[0].details.property_address.country
+              : propertyData.country
+              ? propertyData.country
+              : property.country
+              ? property.country
               : ""
           );
           setZip(
-            property[0].details.property_address
-              ? property[0].details.property_address.zip_code
+            properti[0].details.property_address
+              ? properti[0].details.property_address.zip_code
+              : propertyData.zip_code
+              ? propertyData.zip_code
+              : property.zip_code
+              ? property.zip_code
               : ""
           );
         }
       });
     } else {
-      setAddress(property.street_address);
-      setCity(property.city);
-      setState(property.state);
-      setCountry(property.country);
-      setZip(property.zip_code);
+      setAddress(
+        propertyData.street_address
+          ? propertyData.street_address
+          : property.street_address
+      );
+      setCity(propertyData.city ? propertyData.city : property.city);
+      setState(propertyData.state ? propertyData.state : property.state);
+      setCountry(
+        propertyData.country ? propertyData.country : property.country
+      );
+      setZip(propertyData.zip_code ? propertyData.zip_code : property.zip_code);
+      setOwnerName(
+        propertyData.owner_name
+          ? propertyData.owner_name
+          : property
+          ? property.owner_name
+          : ""
+      );
+      setRooms(
+        propertyData.rooms_count
+          ? propertyData.rooms_count
+          : property
+          ? property.rooms_count
+          : ""
+      );
+      setBathrooms(
+        propertyData.baths_count
+          ? propertyData.baths_count
+          : property
+          ? property.baths_count
+          : ""
+      );
+      setBedrooms(
+        propertyData.beds_count
+          ? propertyData.beds_count
+          : property
+          ? property.beds_count
+          : ""
+      );
+      setPropType(
+        propertyData.standardized_land_use_type
+          ? propertyData.standardized_land_use_type
+          : property
+          ? property.standardized_land_use_type
+          : ""
+      );
+      setSqft(
+        propertyData.area_sq_ft
+          ? propertyData.area_sq_ft
+          : property
+          ? property.area_sq_ft
+          : ""
+      );
+      setTotalValue(
+        propertyData.total_value
+          ? propertyData.total_value
+          : property
+          ? property.total_value
+          : ""
+      );
+      setReservedAmount(
+        propertyData.reservedAmount ? propertyData.reservedAmount : 0
+      );
+      setDiscussedAmount(
+        propertyData.discussedAmount ? propertyData.discussedAmount : 0
+      );
     }
   }, []);
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
-    } else if (
-      address !== "" &&
-      city !== "" &&
-      state !== "" &&
-      country !== "" &&
-      zip !== "" &&
-      ownerName !== "" &&
-      rooms !== "" &&
-      bathrooms !== "" &&
-      bedrooms !== "" &&
-      propType !== "" &&
-      totalValue !== "" &&
-      sqft !== "" &&
-      reservedAmount !== "" &&
-      discussedAmount !== ""
-    ) {
+    } else {
       const submitedData = {
         street_address: address ? address : property.street_address,
         city: city ? city : property.city,
@@ -214,8 +319,6 @@ function RealEstateDetails({
       };
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
-    } else {
-      alert("Please fill all the required fields");
     }
   };
   return (
@@ -245,6 +348,7 @@ function RealEstateDetails({
                 setAddress(e.target.value);
               }}
               {...register("street_address", { required: false })}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Street Address *
@@ -263,6 +367,7 @@ function RealEstateDetails({
                 setCity(e.target.value);
               }}
               {...register("city", { required: false })}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>City *</span>
           </Col>
@@ -279,6 +384,7 @@ function RealEstateDetails({
                 setState(e.target.value);
               }}
               {...register("state", { required: false })}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>State *</span>
           </Col>
@@ -297,6 +403,7 @@ function RealEstateDetails({
                 setCountry(e.target.value);
               }}
               {...register("country", { required: false })}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>Country *</span>
           </Col>
@@ -311,6 +418,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setZip(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code *
@@ -328,6 +436,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setOwnerName(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Owner Name *
@@ -345,6 +454,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setRooms(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Rooms Count *
@@ -360,6 +470,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setBedrooms(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bedrooms *
@@ -377,6 +488,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setPropType(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type *
@@ -392,6 +504,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setBathrooms(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Bathrooms *
@@ -414,6 +527,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setTotalValue(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Total Value *
@@ -435,6 +549,7 @@ function RealEstateDetails({
               onChange={(e) => {
                 setSqft(e.target.value);
               }}
+              required
             />
             <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
           </Col>
@@ -445,6 +560,7 @@ function RealEstateDetails({
               type="number"
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
+              defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
               onChange={(e) => {
                 setReservedAmount(e.target.value);
@@ -460,6 +576,7 @@ function RealEstateDetails({
               type="number"
               className="form-control"
               style={{ color: "black", fontWeight: "bold" }}
+              defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}
               onChange={(e) => {
                 setDiscussedAmount(e.target.value);

@@ -76,6 +76,8 @@ const MultiSellForm = ({ colorChange, toogleShow }) => {
     }
   }, [params.step]);
 
+  console.log(images);
+
   if (step === 0) {
     return (
       <div className="sell-register-container">

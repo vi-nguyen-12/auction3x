@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Col, Row, Container } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -8,7 +8,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import authService from "../../../services/authServices";
 import "../../../styles/Buyer.css";
 
-const FundUpload = ({ toogleStep, step, toogleDocument }) => {
+const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
@@ -79,6 +79,14 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
   //   });
   // };
 
+  useEffect(() => {
+    if (docu.length > 0) {
+      setDocument1([docu[0] ? docu[0] : []]);
+      setDocument2([docu[1] ? docu[1] : []]);
+      setDocument3([docu[2] ? docu[2] : []]);
+    }
+  }, []);
+
   const bankStatment = document1.map((item) => {
     return { ...item, officialName: "bank_statement" };
   });
@@ -109,6 +117,14 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
     // setDocument4(document4.filter((document) => document.url !== url));
   };
 
+  const handleUpload = () => {
+    if (document.length >= 1) {
+      toogleDocument(document);
+      toogleStep(step + 1);
+    } else {
+      alert("Please upload atleast one document");
+    }
+  };
   return (
     <>
       <Modal.Header closeButton>
@@ -446,8 +462,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
             className="nxt-btn"
             type="submit"
             onClick={() => {
-              toogleDocument(document);
-              toogleStep(step + 1);
+              handleUpload();
             }}
           >
             Next
