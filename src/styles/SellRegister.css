@@ -633,6 +633,18 @@ h1 {
   color: black;
 }
 
+.delete-btn:hover {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.delete-btn:focus {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
 .listDetails-body {
   display: inline;
   margin: auto;

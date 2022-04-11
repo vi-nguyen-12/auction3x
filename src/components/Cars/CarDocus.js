@@ -480,7 +480,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -502,7 +502,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -547,7 +547,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -569,7 +569,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -615,7 +615,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -638,7 +638,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -683,7 +683,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -705,7 +705,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -751,7 +751,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -773,7 +773,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -817,7 +817,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -839,7 +839,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -885,7 +885,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -907,7 +907,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -951,7 +951,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -973,7 +973,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1017,7 +1017,7 @@ function CarDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                             onMouseEnter={() => {
@@ -1039,7 +1039,7 @@ function CarDocus({
                             ) : (
                               <MdClose fontSize="1.5em" color="red" />
                             )}
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))

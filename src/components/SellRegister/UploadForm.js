@@ -53,12 +53,6 @@ const UploadForm = ({
     e.target.value = null;
   };
 
-  const handleError = () => {
-    if (images.length === 0) {
-      alert("Please upload atleast one image");
-    }
-  };
-
   const onChangeVideos = async (e) => {
     setVideoLoader(true);
     const formData = new FormData();
@@ -243,10 +237,13 @@ const UploadForm = ({
   };
 
   const onSubmit = () => {
-    handleError();
-    toogleImages(images);
-    toogleVideos(videos);
-    toogleStep(step + 1);
+    if (images.length !== 0) {
+      toogleImages(images);
+      toogleVideos(videos);
+      toogleStep(step + 1);
+    } else {
+      alert("Please upload at least one image!");
+    }
   };
   return (
     <form
@@ -364,7 +361,7 @@ const UploadForm = ({
                   <div key={index} className="upload-list-item">
                     <span>
                       {image.name}
-                      <button
+                      <Button
                         className="delete-btn"
                         onClick={handleDelete(image.url)}
                         onMouseEnter={() => {
@@ -386,7 +383,7 @@ const UploadForm = ({
                         ) : (
                           <MdClose fontSize="1.5em" color="red" />
                         )}
-                      </button>
+                      </Button>
                     </span>
                   </div>
                 ))
@@ -435,7 +432,7 @@ const UploadForm = ({
                   <div key={index} className="upload-list-item">
                     <span>
                       {video.name}
-                      <button
+                      <Button
                         className="delete-btn"
                         onClick={handleDeleteVideo(video.url)}
                         onMouseEnter={() => {
@@ -457,7 +454,7 @@ const UploadForm = ({
                         ) : (
                           <MdClose fontSize="1.5em" color="red" />
                         )}
-                      </button>
+                      </Button>
                     </span>
                   </div>
                 ))
