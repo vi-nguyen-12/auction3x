@@ -193,36 +193,107 @@ function YachtDocus({
     if (params.id) {
       const prop = incompProperty.filter((item) => item._id === params.id);
       if (prop[0].documents.length > 1) {
-        setDocument1(
-          prop.documents[0] ? prop.documents[0] : document ? document[0] : []
-        );
-        setDocument2(
-          prop.documents[1] ? prop.documents[1] : document ? document[1] : []
-        );
-        setDocument3(
-          prop.documents[2] ? prop.documents[2] : document ? document[2] : []
-        );
-        setDocument4(
-          prop.documents[3] ? prop.documents[3] : document ? document[3] : []
-        );
-        setDocument5(
-          prop.documents[4] ? prop.documents[4] : document ? document[4] : []
-        );
-        setDocument6(
-          prop.documents[5] ? prop.documents[5] : document ? document[5] : []
-        );
-        setDocument7(
-          prop.documents[6] ? prop.documents[6] : document ? document[6] : []
-        );
-        setDocument8(
-          prop.documents[7] ? prop.documents[7] : document ? document[7] : []
-        );
-        if (prop[0].documents.length > 8 || document.length > 8) {
-          setDocument9(
-            prop.documents[8] ? prop.documents[8] : document ? document[8] : []
-          );
+        const documents = prop[0].documents.map((document) => {
+          if (document.isVerified && document._id) {
+            delete document.isVerified;
+            delete document._id;
+            return document;
+          }
+        });
+        setDocument1([
+          documents[0]
+            ? documents[0]
+            : document
+            ? document[0]
+              ? document[0]
+              : []
+            : [],
+        ]);
+        setDocument2([
+          documents[1]
+            ? documents[1]
+            : document
+            ? document[1]
+              ? document[1]
+              : []
+            : [],
+        ]);
+        setDocument3([
+          documents[2]
+            ? documents[2]
+            : document
+            ? document[2]
+              ? document[2]
+              : []
+            : [],
+        ]);
+        setDocument4([
+          documents[3]
+            ? documents[3]
+            : document
+            ? document[3]
+              ? document[3]
+              : []
+            : [],
+        ]);
+        setDocument5([
+          documents[4]
+            ? documents[4]
+            : document
+            ? document[4]
+              ? document[4]
+              : []
+            : [],
+        ]);
+        setDocument6([
+          documents[5]
+            ? documents[5]
+            : document
+            ? document[5]
+              ? document[5]
+              : []
+            : [],
+        ]);
+        setDocument7([
+          documents[6]
+            ? documents[6]
+            : document
+            ? document[6]
+              ? document[6]
+              : []
+            : [],
+        ]);
+        setDocument8([
+          documents[7]
+            ? documents[7]
+            : document
+            ? document[7]
+              ? document[7]
+              : []
+            : [],
+        ]);
+        if (documents.length > 9 || document.length > 9) {
+          setDocument9([
+            documents[8]
+              ? documents[8]
+              : document
+              ? document[8]
+                ? document[8]
+                : []
+              : [],
+          ]);
         }
       }
+    } else {
+      setDocument1([document ? (document[0] ? document[0] : []) : []]);
+      setDocument2([document ? (document[1] ? document[1] : []) : []]);
+      setDocument3([document ? (document[2] ? document[2] : []) : []]);
+      setDocument4([document ? (document[3] ? document[3] : []) : []]);
+      setDocument5([document ? (document[4] ? document[4] : []) : []]);
+      setDocument6([document ? (document[5] ? document[5] : []) : []]);
+      setDocument7([document ? (document[6] ? document[6] : []) : []]);
+      setDocument8([document ? (document[7] ? document[7] : []) : []]);
+      setDocument9([document ? (document[8] ? document[8] : []) : []]);
     }
   }, [incompProperty]);
 

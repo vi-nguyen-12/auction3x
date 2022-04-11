@@ -16,6 +16,7 @@ const PropertyDetails = ({
   ownership,
   getPropId,
   toogleSellStep,
+  propertyData,
 }) => {
   return (
     <div className="listDetail-content">
@@ -59,6 +60,7 @@ const PropertyDetails = ({
               toogleStep={toogleStep}
               step={step}
               property={property}
+              propertyData={propertyData}
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
@@ -70,6 +72,7 @@ const PropertyDetails = ({
               toogleStep={toogleStep}
               step={step}
               property={property}
+              propertyData={propertyData}
               tooglePropertyData={tooglePropertyData}
               propId={propId}
               ownership={ownership}
@@ -82,6 +85,7 @@ const PropertyDetails = ({
             toogleStep={toogleStep}
             step={step}
             property={property}
+            propertyData={propertyData}
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}
@@ -93,6 +97,7 @@ const PropertyDetails = ({
             toogleStep={toogleStep}
             step={step}
             property={property}
+            propertyData={propertyData}
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}
@@ -104,6 +109,7 @@ const PropertyDetails = ({
             toogleStep={toogleStep}
             step={step}
             property={property}
+            propertyData={propertyData}
             tooglePropertyData={tooglePropertyData}
             propId={propId}
             ownership={ownership}

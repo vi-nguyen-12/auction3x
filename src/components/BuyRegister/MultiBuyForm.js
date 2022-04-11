@@ -44,6 +44,7 @@ const MultiBuyForm = () => {
           toogleStep={toogleStep}
           step={step}
           toogleDocument={toogleDocument}
+          docu = {document}
         />
       </div>
     );

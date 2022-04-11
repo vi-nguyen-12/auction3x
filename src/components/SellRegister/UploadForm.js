@@ -224,6 +224,9 @@ const UploadForm = ({
           }
         }
       });
+    } else {
+      setImages(image ? image : []);
+      setVideos(video ? video : []);
     }
   }, []);
 
@@ -253,6 +256,8 @@ const UploadForm = ({
       alert("Please upload at least one image!");
     }
   };
+
+  console.log(images);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

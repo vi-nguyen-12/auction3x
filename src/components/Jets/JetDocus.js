@@ -19,6 +19,7 @@ function JetDocus({
   toogleSellStep,
   sellStep,
   getPropId,
+  document,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -290,7 +291,7 @@ function JetDocus({
           const property = response.data.filter(
             (property) => property._id === params.id
           );
-          if (property[0].documents.length > 0) {
+          if (property[0].documents.length > 1) {
             const documents = property[0].documents.map((document) => {
               if (document.isVerified && document._id) {
                 delete document.isVerified;
@@ -298,24 +299,142 @@ function JetDocus({
                 return document;
               }
             });
-            setDocument1([documents[0]]);
-            setDocument2([documents[1]]);
-            setDocument3([documents[2]]);
-            setDocument4([documents[3]]);
-            setDocument5([documents[4]]);
-            setDocument6([documents[5]]);
-            setDocument7([documents[6]]);
-            setDocument8([documents[7]]);
-            setDocument9([documents[8]]);
-            setDocument10([documents[9]]);
-            setDocument11([documents[10]]);
-            setDocument12([documents[11]]);
-            if (documents.length > 12) {
-              setDocument13([documents[12]]);
+            setDocument1([
+              documents[0]
+                ? documents[0]
+                : document
+                ? document[0]
+                  ? document[0]
+                  : []
+                : [],
+            ]);
+            setDocument2([
+              documents[1]
+                ? documents[1]
+                : document
+                ? document[1]
+                  ? document[1]
+                  : []
+                : [],
+            ]);
+            setDocument3([
+              documents[2]
+                ? documents[2]
+                : document
+                ? document[2]
+                  ? document[2]
+                  : []
+                : [],
+            ]);
+            setDocument4([
+              documents[3]
+                ? documents[3]
+                : document
+                ? document[3]
+                  ? document[3]
+                  : []
+                : [],
+            ]);
+            setDocument5([
+              documents[4]
+                ? documents[4]
+                : document
+                ? document[4]
+                  ? document[4]
+                  : []
+                : [],
+            ]);
+            setDocument6([
+              documents[5]
+                ? documents[5]
+                : document
+                ? document[5]
+                  ? document[5]
+                  : []
+                : [],
+            ]);
+            setDocument7([
+              documents[6]
+                ? documents[6]
+                : document
+                ? document[6]
+                  ? document[6]
+                  : []
+                : [],
+            ]);
+            setDocument8([
+              documents[7]
+                ? documents[7]
+                : document
+                ? document[7]
+                  ? document[7]
+                  : []
+                : [],
+            ]);
+            setDocument9([
+              documents[8]
+                ? documents[8]
+                : document
+                ? document[8]
+                  ? document[8]
+                  : []
+                : [],
+            ]);
+            setDocument10([
+              documents[9]
+                ? documents[9]
+                : document
+                ? document[9]
+                  ? document[9]
+                  : []
+                : [],
+            ]);
+            setDocument11([
+              documents[10]
+                ? documents[10]
+                : document
+                ? document[10]
+                  ? document[10]
+                  : []
+                : [],
+            ]);
+            setDocument12([
+              documents[11]
+                ? documents[11]
+                : document
+                ? document[11]
+                  ? document[11]
+                  : []
+                : [],
+            ]);
+            if (documents.length > 12 || document.length > 12) {
+              setDocument13([
+                documents[12]
+                  ? documents[12]
+                  : document
+                  ? document[12]
+                    ? document[12]
+                    : []
+                  : [],
+              ]);
             }
           }
         }
       });
+    } else {
+      setDocument1([document ? (document[0] ? document[0] : []) : []]);
+      setDocument2([document ? (document[1] ? document[1] : []) : []]);
+      setDocument3([document ? (document[2] ? document[2] : []) : []]);
+      setDocument4([document ? (document[3] ? document[3] : []) : []]);
+      setDocument5([document ? (document[4] ? document[4] : []) : []]);
+      setDocument6([document ? (document[5] ? document[5] : []) : []]);
+      setDocument7([document ? (document[6] ? document[6] : []) : []]);
+      setDocument8([document ? (document[7] ? document[7] : []) : []]);
+      setDocument9([document ? (document[8] ? document[8] : []) : []]);
+      setDocument10([document ? (document[9] ? document[9] : []) : []]);
+      setDocument11([document ? (document[10] ? document[10] : []) : []]);
+      setDocument12([document ? (document[11] ? document[11] : []) : []]);
+      setDocument13([document ? (document[12] ? document[12] : []) : []]);
     }
   }, []);
 
