@@ -96,7 +96,9 @@ const FundUpload = ({ toogleStep, step, toogleDocument }) => {
   });
 
   const document = [...bankStatment, ...broker, ...lineCredit].map((item) => {
-    delete item.onHover;
+    delete item.onHover1;
+    delete item.onHover2;
+    delete item.onHover3;
     return item;
   });
 
