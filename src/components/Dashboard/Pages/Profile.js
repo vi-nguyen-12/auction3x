@@ -211,24 +211,26 @@ function Profile({ id }) {
           <h3>Listed Property</h3>
           <Row>
             <Carousel {...settings}>
-              {savedProperty.map((property, index) => (
-                <Wrap key={index}>
-                  <div className="listItem">
-                    <img
-                      src={property.property.images[0].url}
-                      alt="property"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "15px",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </div>
-                </Wrap>
-              ))}
+              {savedProperty.length > 0
+                ? savedProperty.map((property, index) => (
+                    <Wrap key={index}>
+                      <div className="listItem">
+                        <img
+                          src={property.property.images[0].url}
+                          alt="property"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "15px",
+                            cursor: "pointer",
+                          }}
+                        />
+                      </div>
+                    </Wrap>
+                  ))
+                : null}
             </Carousel>
           </Row>
         </Col>
