@@ -37,8 +37,6 @@ function JetDetails({
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
 
-  console.log(property);
-
   const saveInfo = () => {
     if (propId || params.id) {
       const datas = {
@@ -316,28 +314,42 @@ function JetDetails({
         alert("Reserved amount should be greater than discussed amount");
       } else {
         const submitedData = {
-          type: "jet",
-          reservedAmount: data.reservedAmount,
-          discussedAmount: data.discussedAmount,
-          details: {
-            registration_mark: data.registration_mark,
-            aircraft_builder_name: data.aircraft_builder_name,
-            aircraft_model_designation: data.aircraft_model_designation,
-            aircraft_serial_no: data.aircraft_serial_no,
-            engine_builder_name: data.engine_builder_name,
-            engine_model_designation: data.engine_model_designation,
-            number_of_engines: data.number_of_engines,
-            propeller_builder_name: data.propeller_builder_name,
-            propeller_model_designation: data.propeller_model_designation,
-            number_of_aircraft: data.number_of_aircraft,
-            imported_aircraft:
-              isImport === property.imported_aircraft
-                ? property.imported_aircraft
-                : isImport === "Yes"
-                ? true
-                : false,
-            property_address: data.property_address,
-          },
+          registration_mark: registration_mark
+            ? registration_mark
+            : property.registration_mark,
+          aircraft_builder_name: aircraft_builder_name
+            ? aircraft_builder_name
+            : property.aircraft_builder_name,
+          aircraft_model_designation: aircraft_model_designation
+            ? aircraft_model_designation
+            : property.aircraft_model_designation,
+          aircraft_serial_no: aircraft_serial_no
+            ? aircraft_serial_no
+            : property.aircraft_serial_no,
+          engine_builder_name: engine_builder_name
+            ? engine_builder_name
+            : property.engine_builder_name,
+          engine_model_designation: engine_model_designation
+            ? engine_model_designation
+            : property.engine_model_designation,
+          number_of_engines: number_of_engines
+            ? number_of_engines
+            : property.number_of_engines,
+          propeller_builder_name: propeller_builder_name
+            ? propeller_builder_name
+            : property.propeller_builder_name,
+          propeller_model_designation: propeller_model_designation
+            ? propeller_model_designation
+            : property.propeller_model_designation,
+          number_of_aircraft: number_of_aircraft
+            ? number_of_aircraft
+            : property.number_of_aircraft,
+          imported_aircraft: property.imported_aircraft
+            ? property.imported_aircraft
+            : isImport,
+          property_address: address ? address : property.property_address,
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
         };
         tooglePropertyData(submitedData);
         toogleStep(step + 1);
