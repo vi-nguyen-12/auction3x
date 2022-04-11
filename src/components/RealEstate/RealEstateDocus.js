@@ -55,7 +55,7 @@ function RealEstateDocus({
         setLoader(false);
       }
     });
-    e.target.vallue = null;
+    e.target.value = null;
   };
 
   const onChange2 = async (e) => {
