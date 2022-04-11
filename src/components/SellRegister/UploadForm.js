@@ -72,11 +72,11 @@ const UploadForm = ({
   };
 
   const saveInfo = async () => {
-    images = images.map((image) => {
+    let savedImages = images.map((image) => {
       delete image.onHover;
       return image;
     });
-    videos = videos.map((video) => {
+    let savedVideos = videos.map((video) => {
       delete video.onHover0;
       return video;
     });
@@ -87,8 +87,8 @@ const UploadForm = ({
           const datas = {
             id: propId ? propId : params.id,
             details: {
-              images,
-              videos,
+              images: savedImages,
+              videos: savedVideos,
               step: 3,
             },
           };
@@ -237,9 +237,17 @@ const UploadForm = ({
   };
 
   const onSubmit = () => {
+    let savedImages = images.map((image) => {
+      delete image.onHover;
+      return image;
+    });
+    let savedVideos = videos.map((video) => {
+      delete video.onHover;
+      return video;
+    });
     if (images.length !== 0) {
-      toogleImages(images);
-      toogleVideos(videos);
+      toogleImages(savedImages);
+      toogleVideos(savedVideos);
       toogleStep(step + 1);
     } else {
       alert("Please upload at least one image!");
