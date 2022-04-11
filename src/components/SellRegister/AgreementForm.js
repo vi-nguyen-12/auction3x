@@ -18,6 +18,7 @@ const Agree = ({
   propId,
   propertyType,
 }) => {
+  console.log(ownership);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -56,8 +57,7 @@ const Agree = ({
           res.data.status === "signing_complete"
         ) {
           setLoader(false);
-        }
-        if (
+        } else if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
@@ -65,7 +65,7 @@ const Agree = ({
         } else {
           if (propertyType === "real-estate") {
             if (params.id || propId) {
-              if (steps === 1) {
+              if (parseInt(steps) === 1) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -85,7 +85,7 @@ const Agree = ({
                     history.push("/");
                   }
                 });
-              } else if (steps === 2) {
+              } else if (parseInt(steps) === 2) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -105,7 +105,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (steps === 3) {
+              } else if (parseInt(steps) === 3) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -123,7 +123,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (steps === 4) {
+              } else if (parseInt(steps) === 4) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -163,7 +163,7 @@ const Agree = ({
             }
           } else {
             if (params.id || propId) {
-              if (steps === 1) {
+              if (parseInt(steps) === 1) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -183,7 +183,7 @@ const Agree = ({
                     history.push("/");
                   }
                 });
-              } else if (steps === 2) {
+              } else if (parseInt(steps) === 2) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -203,7 +203,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (steps === 3) {
+              } else if (parseInt(steps) === 3) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -221,7 +221,7 @@ const Agree = ({
                     window.scrollTo(0, 0);
                   }
                 });
-              } else if (steps === 4) {
+              } else if (parseInt(steps) === 4) {
                 const datas = {
                   id: params.id ? params.id : propId,
                   details: {
@@ -240,6 +240,7 @@ const Agree = ({
                 });
               }
             } else {
+              console.log(ownership);
               const datas = {
                 ...ownership,
                 ...propertyData,
@@ -249,6 +250,7 @@ const Agree = ({
                 step: 5,
                 docusignId: res.data._id,
               };
+              console.log(datas);
               authService.savePropInfo(datas).then((res) => {
                 if (res.data.error) {
                   alert(res.data.error);

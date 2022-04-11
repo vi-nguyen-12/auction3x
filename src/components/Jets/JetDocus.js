@@ -551,20 +551,7 @@ function JetDocus({
   };
 
   const onSubmit = async (data) => {
-    if (
-      ownership_document.length !== 0 &&
-      registration_document.length !== 0 &&
-      title_certificate.length !== 0 &&
-      detail_specification.length !== 0 &&
-      insurance_document.length !== 0 &&
-      loan_document.length !== 0 &&
-      jet_detail_history.length !== 0 &&
-      fitness_report.length !== 0 &&
-      electric_work_details.length !== 0 &&
-      engine_details.length !== 0 &&
-      inspection_report.length !== 0 &&
-      valuation_report.length !== 0
-    ) {
+    if (documents.length >= 12) {
       toogleDocuments(documents);
       toogleStep(step + 1);
     } else {

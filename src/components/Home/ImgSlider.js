@@ -240,7 +240,7 @@ const ImgSlider = () => {
             </div>
           </div>
         </>
-      ) : (
+      ) : auction.length > 0 ? (
         <>
           <Carousel {...settings}>
             {auction.slice(0, 5).map((item, index) => (
@@ -368,7 +368,7 @@ const ImgSlider = () => {
             </div>
           </div>
         </>
-      )}
+      ) : null}
     </div>
   );
 };

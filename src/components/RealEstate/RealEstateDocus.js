@@ -386,35 +386,18 @@ function RealEstateDocus({
 
   const onSubmit = async (data) => {
     if (params.id) {
-      if (
-        titleReport.length !== 0 &&
-        insuranceCopy.length !== 0 &&
-        financialDocuments.length !== 0 &&
-        purchaseAgreement.length !== 0 &&
-        thirdpartyReport.length !== 0 &&
-        demographics.length !== 0 &&
-        marketandValuations.length !== 0 &&
-        otherDocuments.length !== 0
-      ) {
+      if (documents.length >= 7) {
         toogleDocuments(documents);
         toogleStep(step + 1);
       } else {
-        alert("Please upload all documents");
+        alert("Please upload all required documents");
       }
     } else {
-      if (
-        data.titleReport.length !== 0 &&
-        data.insuranceCopy.length !== 0 &&
-        data.financialDocuments.length !== 0 &&
-        data.purchaseAgreement.length !== 0 &&
-        data.thirdpartyReport.length !== 0 &&
-        data.demographics.length !== 0 &&
-        data.marketandValuations.length !== 0
-      ) {
+      if (documents.length >= 7) {
         toogleDocuments(documents);
         toogleStep(step + 1);
       } else {
-        alert("Please upload the required documents");
+        alert("Please upload all required documents");
       }
     }
   };

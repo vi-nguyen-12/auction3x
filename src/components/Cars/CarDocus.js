@@ -413,16 +413,7 @@ function CarDocus({
   };
 
   const onSubmit = async (data) => {
-    if (
-      data.ownership_document.length !== 0 &&
-      data.registration_document.length !== 0 &&
-      data.title_certificate.length !== 0 &&
-      data.loan_document.length !== 0 &&
-      data.inspection_report.length !== 0 &&
-      data.engine_details.length !== 0 &&
-      data.insurance_document.length !== 0 &&
-      data.valuation_report.length !== 0
-    ) {
+    if (documents.length >= 8) {
       toogleDocuments(documents);
       toogleStep(step + 1);
     } else {

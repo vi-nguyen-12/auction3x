@@ -244,88 +244,118 @@ function JetDetails({
       );
     } else {
       setRegistration_mark(
-        propertyData.registration_mark ? propertyData.registration_mark : ""
+        property ? property.registration_mark : propertyData.registration_mark
       );
       setAircraft_builder_name(
-        propertyData.aircraft_builder_name
-          ? propertyData.aircraft_builder_name
-          : ""
+        property
+          ? property.aircraft_builder_name
+          : propertyData.aircraft_builder_name
       );
       setAircraft_model_designation(
-        propertyData.aircraft_model_designation
-          ? propertyData.aircraft_model_designation
-          : ""
+        property
+          ? property.aircraft_model_designation
+          : propertyData.aircraft_model_designation
       );
       setAircraft_serial_no(
-        propertyData.aircraft_serial_no ? propertyData.aircraft_serial_no : ""
+        property ? property.aircraft_serial_no : propertyData.aircraft_serial_no
       );
       setEngine_builder_name(
-        propertyData.engine_builder_name ? propertyData.engine_builder_name : ""
+        property
+          ? property.engine_builder_name
+          : propertyData.engine_builder_name
       );
       setEngine_model_designation(
-        propertyData.engine_model_designation
-          ? propertyData.engine_model_designation
-          : ""
+        property
+          ? property.engine_model_designation
+          : propertyData.engine_model_designation
       );
       setNumber_of_engines(
-        propertyData.number_of_engines ? propertyData.number_of_engines : ""
+        property ? property.number_of_engines : propertyData.number_of_engines
       );
       setPropeller_builder_name(
-        propertyData.propeller_builder_name
-          ? propertyData.propeller_builder_name
-          : ""
+        property
+          ? property.propeller_builder_name
+          : propertyData.propeller_builder_name
       );
       setPropeller_model_designation(
-        propertyData.propeller_model_designation
-          ? propertyData.propeller_model_designation
-          : ""
+        property
+          ? property.propeller_model_designation
+          : propertyData.propeller_model_designation
       );
       setNumber_of_aircraft(
-        propertyData.number_of_aircraft ? propertyData.number_of_aircraft : ""
+        property ? property.number_of_aircraft : propertyData.number_of_aircraft
       );
       setAddress(
-        propertyData.property_address ? propertyData.property_address : ""
+        property ? property.property_address : propertyData.property_address
       );
-      setReservedAmount(
-        propertyData.reservedAmount ? propertyData.reservedAmount : 0
-      );
-      setDiscussedAmount(
-        propertyData.discussedAmount ? propertyData.discussedAmount : 0
-      );
-      setIsImport(property.imported_aircraft ? property.imported_aircraft : "");
+      setReservedAmount(propertyData ? propertyData.reservedAmount : 0);
+      setDiscussedAmount(propertyData ? propertyData.discussedAmount : 0);
+      setIsImport(property ? property.imported_aircraft : false);
     }
   }, []);
 
   const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
+    if (
+      registration_mark !== undefined &&
+      aircraft_builder_name !== undefined &&
+      aircraft_model_designation !== undefined &&
+      aircraft_serial_no !== undefined &&
+      engine_builder_name !== undefined &&
+      engine_model_designation !== undefined &&
+      number_of_engines !== undefined &&
+      propeller_builder_name !== undefined &&
+      propeller_model_designation !== undefined &&
+      number_of_aircraft !== undefined &&
+      address !== undefined &&
+      reservedAmount !== undefined &&
+      discussedAmount !== undefined
+    ) {
+      if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
+        alert("Reserved amount should be greater than discussed amount");
+      } else {
+        const submitedData = {
+          registration_mark: registration_mark
+            ? registration_mark
+            : property.registration_mark,
+          aircraft_builder_name: aircraft_builder_name
+            ? aircraft_builder_name
+            : property.aircraft_builder_name,
+          aircraft_model_designation: aircraft_model_designation
+            ? aircraft_model_designation
+            : property.aircraft_model_designation,
+          aircraft_serial_no: aircraft_serial_no
+            ? aircraft_serial_no
+            : property.aircraft_serial_no,
+          engine_builder_name: engine_builder_name
+            ? engine_builder_name
+            : property.engine_builder_name,
+          engine_model_designation: engine_model_designation
+            ? engine_model_designation
+            : property.engine_model_designation,
+          number_of_engines: number_of_engines
+            ? number_of_engines
+            : property.number_of_engines,
+          propeller_builder_name: propeller_builder_name
+            ? propeller_builder_name
+            : property.propeller_builder_name,
+          propeller_model_designation: propeller_model_designation
+            ? propeller_model_designation
+            : property.propeller_model_designation,
+          number_of_aircraft: number_of_aircraft
+            ? number_of_aircraft
+            : property.number_of_aircraft,
+          imported_aircraft: property.imported_aircraft
+            ? property.imported_aircraft
+            : isImport,
+          property_address: address ? address : property.property_address,
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+        };
+        tooglePropertyData(submitedData);
+        toogleStep(step + 1);
+      }
     } else {
-      const submitedData = {
-        type: "jet",
-        reservedAmount: data.reservedAmount,
-        discussedAmount: data.discussedAmount,
-        details: {
-          registration_mark: data.registration_mark,
-          aircraft_builder_name: data.aircraft_builder_name,
-          aircraft_model_designation: data.aircraft_model_designation,
-          aircraft_serial_no: data.aircraft_serial_no,
-          engine_builder_name: data.engine_builder_name,
-          engine_model_designation: data.engine_model_designation,
-          number_of_engines: data.number_of_engines,
-          propeller_builder_name: data.propeller_builder_name,
-          propeller_model_designation: data.propeller_model_designation,
-          number_of_aircraft: data.number_of_aircraft,
-          imported_aircraft:
-            isImport === property.imported_aircraft
-              ? property.imported_aircraft
-              : isImport === "Yes"
-              ? true
-              : false,
-          property_address: data.property_address,
-        },
-      };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      alert("Please fill all the fields");
     }
   };
   return (
@@ -554,10 +584,10 @@ function JetDetails({
               </span>
               <select
                 className="form-control"
+                defaultValue={isImport === true ? "Yes" : "No"}
                 onChange={(e) => {
                   setIsImport(e.target.value === "Yes" ? true : false);
                 }}
-                defaultValue={isImport === true ? "Yes" : "No"}
               >
                 <option value="">Select</option>
                 <option value="Yes">Yes</option>

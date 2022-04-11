@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function YachtForm({ toogleStep, step, properties }) {
+function YachtForm({ toogleStep, step, properties, property }) {
   const { register, handleSubmit } = useForm();
   const [vessel_registration_number, setVessel_registration_number] =
     useState();
@@ -28,67 +28,93 @@ function YachtForm({ toogleStep, step, properties }) {
       setVessel_registration_number(
         property[0].details.vessel_registration_number
           ? property[0].details.vessel_registration_number
-          : ""
+          : undefined
       );
       setVessel_manufacturing_date(
         property[0].details.vessel_manufacturing_date
           ? property[0].details.vessel_manufacturing_date
-          : ""
+          : undefined
       );
       setManufacture_mark(
         property[0].details.manufacture_mark
           ? property[0].details.manufacture_mark
-          : ""
+          : undefined
       );
       setManufacturer_name(
         property[0].details.manufacturer_name
           ? property[0].details.manufacturer_name
-          : ""
+          : undefined
       );
       setEngine_type(
-        property[0].details.engine_type ? property[0].details.engine_type : ""
+        property[0].details.engine_type
+          ? property[0].details.engine_type
+          : undefined
       );
       setEngine_deck_type(
         property[0].details.engine_deck_type
           ? property[0].details.engine_deck_type
-          : ""
+          : undefined
       );
       setEngine_manufacture_name(
         property[0].details.engine_manufacture_name
           ? property[0].details.engine_manufacture_name
-          : ""
+          : undefined
       );
       setRunning_cost(
-        property[0].details.running_cost ? property[0].details.running_cost : ""
+        property[0].details.running_cost
+          ? property[0].details.running_cost
+          : undefined
       );
       setNo_of_crew_required(
         property[0].details.no_of_crew_required
           ? property[0].details.no_of_crew_required
-          : ""
+          : undefined
       );
       setProperty_address(
         property[0].details.property_address
           ? prop[0].details.property_address
-          : ""
+          : undefined
       );
       setOtherDetails(
-        property[0].details.otherDetails ? property[0].details.otherDetails : ""
+        property[0].details.otherDetails
+          ? property[0].details.otherDetails
+          : undefined
       );
+    } else {
+      setVessel_registration_number(
+        property ? property.vessel_registration_number : undefined
+      );
+      setVessel_manufacturing_date(
+        property ? property.vessel_manufacturing_date : undefined
+      );
+      setManufacture_mark(property ? property.manufacture_mark : undefined);
+      setManufacturer_name(property ? property.manufacturer_name : undefined);
+      setEngine_type(property ? property.engine_type : undefined);
+      setEngine_deck_type(property ? property.engine_deck_type : undefined);
+      setEngine_manufacture_name(
+        property ? property.engine_manufacture_name : undefined
+      );
+      setRunning_cost(property ? property.running_cost : undefined);
+      setNo_of_crew_required(
+        property ? property.no_of_crew_required : undefined
+      );
+      setProperty_address(property ? property.property_address : undefined);
+      setOtherDetails(property ? property.detain : undefined);
     }
   }, [prop]);
 
   const onSubmit = (data) => {
     if (
-      vessel_registration_number !== "" &&
-      vessel_manufacturing_date !== "" &&
-      manufacture_mark !== "" &&
-      manufacturer_name !== "" &&
-      engine_type !== "" &&
-      engine_manufacture_name !== "" &&
-      engine_deck_type !== "" &&
-      running_cost !== "" &&
-      no_of_crew_required !== "" &&
-      property_address !== ""
+      vessel_registration_number !== undefined &&
+      vessel_manufacturing_date !== undefined &&
+      manufacture_mark !== undefined &&
+      manufacturer_name !== undefined &&
+      engine_type !== undefined &&
+      engine_manufacture_name !== undefined &&
+      engine_deck_type !== undefined &&
+      running_cost !== undefined &&
+      no_of_crew_required !== undefined &&
+      property_address !== undefined
     ) {
       const datas = {
         vessel_registration_number: data.vessel_registration_number,
