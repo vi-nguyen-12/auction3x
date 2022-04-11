@@ -233,6 +233,7 @@ const authService = {
   },
 
   saveProperty(data) {
+    console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
       apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
       {
@@ -265,7 +266,12 @@ const authService = {
   },
 
   getSavedProperties(id) {
-    return axios.get(apiUrl + `/api/users/${id}/likes`);
+    return axios.get(apiUrl + `/api/users/${id}/likes`, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   getUserBidAuctions(id) {
