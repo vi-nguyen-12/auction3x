@@ -112,135 +112,7 @@ const ImgSlider = () => {
 
   return (
     <div>
-      {property.length > 0 ? (
-        <>
-          <Carousel {...settings}>
-            {property.slice(0, 5).map((item, index) => (
-              // <Link to={`/Display/${item._id}`} key={item._id}>
-              <Wrap key={index}>
-                <a href={`/DisplayAuctions/${item._id}`}>
-                  <img src={item.property.images[0].url} alt="" />
-                </a>
-                <HomeBottom>
-                  <h2>
-                    <NumberFormat
-                      style={{ fontSize: "50px", color: "white" }}
-                      value={item.startingBid}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                  </h2>
-                  <span style={{ color: "white", fontSize: "20px" }}>
-                    HOUSE IN {item.property.details.property_address.city},
-                    {item.property.details.property_address.state} UNITED STATES
-                  </span>
-                </HomeBottom>
-              </Wrap>
-              // </Link>
-            ))}
-          </Carousel>
-          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
-            <div className="row px-lg-5">
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown w-100">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Property</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Categories</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Countries</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
-                <div className="form-group">
-                  <SearchBar />
-                </div>
-                <button type="submit">
-                  <ImSearch />
-                </button>
-              </div>
-              {/* <div className="col-12 col-sm-6 col-md-1 mt-3">
-
-              </div> */}
-            </div>
-          </div>
-        </>
-      ) : auction.length > 0 ? (
+      {auction.length > 0 ? (
         <>
           <Carousel {...settings}>
             {auction.slice(0, 5).map((item, index) => (
@@ -365,6 +237,47 @@ const ImgSlider = () => {
               {/* <div className="col-12 col-sm-6 col-md-1 mt-3">
 
               </div> */}
+            </div>
+          </div>
+        </>
+      ) : property.length > 0 ? (
+        <>
+          <Carousel {...settings}>
+            {property.slice(0, 5).map((item, index) => (
+              // <Link to={`/Display/${item._id}`} key={item._id}>
+              <Wrap key={index}>
+                <a href={`/DisplayAuctions/${item._id}`}>
+                  <img src={item.property.images[0].url} alt="" />
+                </a>
+                <HomeBottom>
+                  <h2>
+                    <NumberFormat
+                      style={{ fontSize: "50px", color: "white" }}
+                      value={item.startingBid}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </h2>
+                  <span style={{ color: "white", fontSize: "20px" }}>
+                    HOUSE IN {item.property.details.property_address.city},
+                    {item.property.details.property_address.state} UNITED STATES
+                  </span>
+                </HomeBottom>
+              </Wrap>
+              // </Link>
+            ))}
+          </Carousel>
+          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+            <div className="row px-lg-5">
+              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
+                <div className="form-group">
+                  <SearchBar />
+                </div>
+                <button type="submit">
+                  <ImSearch />
+                </button>
+              </div>
             </div>
           </div>
         </>
