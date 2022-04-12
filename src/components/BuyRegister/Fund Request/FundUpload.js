@@ -9,6 +9,7 @@ import authService from "../../../services/authServices";
 import "../../../styles/Buyer.css";
 
 const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
+  console.log(docu);
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
@@ -80,19 +81,23 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
   // };
 
   useEffect(() => {
-    if (docu.length > 0) {
-      setDocument1([docu[0] ? docu[0] : []]);
-      setDocument2([docu[1] ? docu[1] : []]);
-      setDocument3([docu[2] ? docu[2] : []]);
+    if (docu !== undefined) {
+      setDocument1(docu[0] ? [docu[0]] : []);
+      setDocument2(docu[1] ? [docu[1]] : []);
+      setDocument3(docu[2] ? [docu[2]] : []);
     }
   }, []);
 
   const bankStatment = document1.map((item) => {
-    return { ...item, officialName: "bank_statement" };
+    return { ...item, officialName: "bank_statement", isSelf: true };
   });
 
   const broker = document2.map((item) => {
-    return { ...item, officialName: "brokerage_account_statement" };
+    return {
+      ...item,
+      officialName: "brokerage_account_statement",
+      isSelf: true,
+    };
   });
 
   // const crypto = document3.map((item) => {
@@ -100,7 +105,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
   // });
 
   const lineCredit = document3.map((item) => {
-    return { ...item, officialName: "line_of_credit_doc" };
+    return { ...item, officialName: "line_of_credit_doc", isSelf: true };
   });
 
   const document = [...bankStatment, ...broker, ...lineCredit].map((item) => {

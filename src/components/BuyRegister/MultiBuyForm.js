@@ -15,6 +15,7 @@ const MultiBuyForm = () => {
   const toogleDocument = (document) => {
     setDocument(document);
   };
+  console.log(document);
 
   useEffect(() => {
     toogleDocument(document);

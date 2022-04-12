@@ -67,7 +67,6 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
       ) {
         window.open(res.data.redirectUrl);
       }
-      console.log(res.data);
     });
   };
   const onSubmit = async () => {
@@ -78,9 +77,9 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
+          setLoader(false);
           alert("Please sign the docusign before proceeding ");
         } else {
-          setLoader(false);
           authService
             .buyerRegister({
               auctionId: auctionId ? auctionId._id : onGoingAuction._id,
@@ -90,8 +89,14 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
               documents,
             })
             .then((res) => {
-              window.location.reload();
-              alert("You have successfully registered to buy this auction");
+              if (res.data.error) {
+                setLoader(false);
+                alert(res.data.error);
+              } else {
+                setLoader(false);
+                alert("You have successfully registered to buy this auction");
+                window.location.reload();
+              }
             });
         }
       });
