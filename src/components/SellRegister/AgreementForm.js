@@ -31,6 +31,7 @@ const Agree = ({
   const history = useHistory();
 
   const steps = sellStep ? sellStep : params.step ? params.step : 0;
+  console.log(steps);
 
   const handleSignDocusign = async () => {
     setLoader(true);

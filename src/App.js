@@ -27,19 +27,24 @@ import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
 import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
-import CarPage from "./components/Cars/CarPage";
+import { useHistory } from "react-router-dom";
 
 function App() {
+  const history = useHistory();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
     const authToken = document.cookie.split("=")[1];
     if (authToken) {
       const getUser = async () => {
-        const response = await authService.getUsers(authToken);
-        if (response.data.message === "User Logged In") {
-          dispatch(login(response.data.user));
-        }
+        await authService.getUsers(authToken).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+            history.push("/");
+          } else {
+            dispatch(login(res.data));
+          }
+        });
       };
       getUser();
     }
