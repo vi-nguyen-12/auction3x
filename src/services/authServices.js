@@ -143,6 +143,9 @@ const authService = {
     return axios.get(apiUrl + "/api/auctions/ongoing");
   },
 
+  getAuction(id) {
+    return axios.get(apiUrl + `/api/auctions/${id}`);
+  },
   // getUpcomingCarAuctions() {
   //   return axios.get(apiUrl + "/api/auctions/upcoming/car");
   // },
