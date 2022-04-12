@@ -12,8 +12,10 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   const auctions = useSelector((state) => state.auction);
   const properties = useSelector((state) => state.property);
 
-  const upcoming = properties.filter((item) => item._id === id);
-  const auction = auctions.filter((item) => item._id === id);
+  const upcoming =
+    properties.length > 0 ? properties.filter((item) => item._id === id) : [];
+  const auction =
+    auctions.length > 0 ? auctions.filter((item) => item._id === id) : [];
 
   const propAuction =
     auction.length > 0 ? auction[0] : upcoming.length > 0 ? upcoming[0] : null;

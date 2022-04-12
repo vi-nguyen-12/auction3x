@@ -37,14 +37,13 @@ function App() {
     const authToken = document.cookie.split("=")[1];
     if (authToken) {
       const getUser = async () => {
-        await authService.getUsers(authToken).then((res) => {
-          if (res.data.error) {
-            alert(res.data.error);
-            history.push("/");
-          } else {
-            dispatch(login(res.data));
-          }
-        });
+        const response = await authService.getUsers(authToken);
+        if (response.data.message === "User Logged In") {
+          dispatch(login(response.data.user));
+        } else {
+          history.push("/");
+          window.location.reload();
+        }
       };
       getUser();
     }

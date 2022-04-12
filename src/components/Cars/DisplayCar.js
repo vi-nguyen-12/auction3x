@@ -781,7 +781,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} toogleAuction />
                       <div
                         style={{
                           display: "flex",
@@ -807,7 +807,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer auctionEndDate={startAuction} toogleAuction />
                       <div
                         style={{
                           display: "flex",
