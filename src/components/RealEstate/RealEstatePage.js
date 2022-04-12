@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,6 +8,7 @@ import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../Auctions/UpcomingCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
+import authService from "../../services/authServices";
 
 const Carousel = styled(Slider)`
   //height: 30vh;
@@ -82,24 +83,38 @@ position: relative;
 `;
 
 function RealEstatePage({ colorChange, toogleChange }) {
+  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
+  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  useEffect(() => {
+    authService
+      .getOngoingAuctionsByType("real-estate")
+      .then((res) => {
+        setOnGoingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    authService
+      .getUpcomingAuctionsByType("real-estate")
+      .then((res) => {
+        setUpcomingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
+
   useEffect(() => {
     colorChange("black");
     toogleChange();
   }, []);
-  const property = useSelector((state) => state.property);
-  const realEstate = property.filter(
-    (item) => item.property.type === "real-estate"
-  );
-  const auction = useSelector((state) => state.auction);
-  const OngoingRealEstates = auction.filter(
-    (item) => item.property.type === "real-estate"
-  );
+
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: OngoingRealEstates.length > 3 ? 3 : OngoingRealEstates.length,
+    slidesToShow: onGoingAuctions.length > 3 ? 3 : onGoingAuctions.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -133,7 +148,7 @@ function RealEstatePage({ colorChange, toogleChange }) {
         <Col md={12} className="m-auto pt-2">
           <Row>
             <Carousel {...settings}>
-              {OngoingRealEstates.map((item, index) => (
+              {onGoingAuctions.map((item, index) => (
                 <Wrap key={index}>
                   <Col md={12} style={{ marginBottom: "30px" }}>
                     <CardComp
@@ -151,7 +166,7 @@ function RealEstatePage({ colorChange, toogleChange }) {
             </Carousel>
           </Row>
           <Row>
-            {realEstate.map((item, index) => (
+            {upcomingAuctions.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCard
                   url={item.property.images[0].url}
