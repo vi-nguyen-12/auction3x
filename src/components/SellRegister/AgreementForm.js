@@ -61,6 +61,7 @@ const Agree = ({
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
+          setLoader(false);
           alert("Please sign the docusign before proceeding ");
         } else {
           if (propertyType === "real-estate") {
