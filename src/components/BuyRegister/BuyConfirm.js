@@ -14,13 +14,13 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
   //   const transport = socket.io.engine.transport.name;
   //   console.log(transport);
   // });
+  const properties = useSelector((state) => state.auction);
+  const propId = properties.find((item) => item._id === id);
   const { register, handleSubmit } = useForm();
-  const [bid, setBid] = useState();
+  const [bid, setBid] = useState(propId.highestBid + propId.incrementAmount);
   const { id } = useParams();
   const history = useHistory();
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
-  const properties = useSelector((state) => state.auction);
-  const propId = properties.find((item) => item._id === id);
   console.log(propId);
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
@@ -129,7 +129,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                   </td>
                 )}
               </tr>
-              <tr>
+              {/* <tr>
                 {propId.highestBid ? (
                   <td
                     style={{
@@ -193,7 +193,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                     </button>
                   </td>
                 )}
-              </tr>
+              </tr> */}
               <tr>
                 <td
                   style={{
