@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/realEstate.css";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import authService from "../../services/authServices";
 import DisplayRealEstate from "../RealEstate/DisplayRealEstate";
 import DisplayCar from "../Cars/DisplayCar";
 import DisplayJet from "../Jets/DisplayJet";
@@ -9,41 +9,37 @@ import DisplayYacht from "../Yachts/DisplayYacht";
 
 function DisplayAuctions({ colorChange, toogleChange }) {
   const { id } = useParams();
-  const auctions = useSelector((state) => state.auction);
-  const properties = useSelector((state) => state.property);
+  const [auction, setAuction] = useState();
 
-  const upcoming =
-    properties.length > 0 ? properties.filter((item) => item._id === id) : [];
-  const auction =
-    auctions.length > 0 ? auctions.filter((item) => item._id === id) : [];
-
-  const propAuction =
-    auction.length > 0 ? auction[0] : upcoming.length > 0 ? upcoming[0] : null;
-
+  useEffect(() => {
+    authService.getAuction(id).then((res) => {
+      setAuction(res.data);
+    });
+  }, []);
   return (
     <>
-      {propAuction ? (
-        propAuction.property.type === "real-estate" ? (
+      {auction ? (
+        auction.property.type === "real-estate" ? (
           <DisplayRealEstate
-            property={propAuction}
+            property={auction}
             colorChange={colorChange}
             toogleChange={toogleChange}
           />
-        ) : propAuction.property.type === "car" ? (
+        ) : auction.property.type === "car" ? (
           <DisplayCar
-            property={propAuction}
+            property={auction}
             colorChange={colorChange}
             toogleChange={toogleChange}
           />
-        ) : propAuction.property.type === "jet" ? (
+        ) : auction.property.type === "jet" ? (
           <DisplayJet
-            property={propAuction}
+            property={auction}
             colorChange={colorChange}
             toogleChange={toogleChange}
           />
-        ) : propAuction.property.type === "yacht" ? (
+        ) : auction.property.type === "yacht" ? (
           <DisplayYacht
-            property={propAuction}
+            property={auction}
             colorChange={colorChange}
             toogleChange={toogleChange}
           />

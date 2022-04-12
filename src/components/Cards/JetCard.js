@@ -16,6 +16,7 @@ import "../../styles/Card.css";
 
 const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -74,6 +75,15 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
       }
     }
   };
+
+  useEffect(() => {
+    const saved = savedProperty.filter((property) => property._id === id);
+    if (saved) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [savedProperty]);
 
   return (
     <div>

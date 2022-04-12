@@ -143,6 +143,9 @@ const authService = {
     return axios.get(apiUrl + "/api/auctions/ongoing");
   },
 
+  getAuction(id) {
+    return axios.get(apiUrl + `/api/auctions/${id}`);
+  },
   // getUpcomingCarAuctions() {
   //   return axios.get(apiUrl + "/api/auctions/upcoming/car");
   // },
@@ -235,7 +238,7 @@ const authService = {
   saveProperty(data) {
     console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+      apiUrl + `/api/users/${data.userId}/${data.auctionId}/liked`,
       {},
       {
         headers: {
@@ -248,8 +251,9 @@ const authService = {
   },
 
   removeProperty(data) {
-    return axios.delete(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+    return axios.put(
+      apiUrl + `/api/users/${data.userId}/${data.auctionId}/unliked`,
+      {},
       {
         headers: {
           Authorization:
@@ -277,6 +281,19 @@ const authService = {
 
   getUserBidAuctions(id) {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`);
+  },
+
+  getBuyerPendingAuctions(id) {
+    return axios.get(
+      apiUrl + `/api/users/${id}/buyer/auctions?status=pending`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
   },
 
   buyerApprovedAuctions(id) {
