@@ -21,6 +21,7 @@ function RealEstateDocus({
   getPropId,
   document,
 }) {
+  console.log(document);
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -31,6 +32,7 @@ function RealEstateDocus({
   const [doc7, setDocument7] = useState([]);
   const [doc8, setDocument8] = useState([]);
   const [loader, setLoader] = useState(false);
+  // const [documents, setDocuments] = useState([]);
   const listing_agreement = ownership
     ? ownership.documents
       ? ownership.documents.length > 0
@@ -170,6 +172,31 @@ function RealEstateDocus({
     });
     e.target.value = null;
   };
+
+  // const onChange = (officialName) => async (e) => {
+  //   setLoader(true);
+
+  //   const formData = new FormData();
+  //   for (let i = 0; i < e.target.files.length; i++) {
+  //     formData.append("documents", e.target.files[i]);
+  //   }
+  //   await authService.saveDocuments(formData).then((response) => {
+  //     if (response.status === 200) {
+  //       let newDocuments = response.data.map((item) => {
+  //         return { ...item, officialName };
+  //       });
+  //       setDocuments([...documents, ...newDocuments]);
+  //       setLoader(false);
+  //     }
+  //   });
+  //   e.target.value = null;
+  // };
+  // let documents1=documents.filter(item=>item.officialName==="title_report")
+  // let documents2=documents.filter(item=>item.officialName==="title_report")
+  // let documents3=documents.filter(item=>item.officialName==="title_report")
+  // let documents4=documents.filter(item=>item.officialName==="title_report")
+  // let documents5=documents.filter(item=>item.officialName==="title_report")
+  // let documents6=documents.filter(item=>item.officialName==="title_report")
 
   useEffect(() => {
     if (params.id) {
@@ -314,6 +341,8 @@ function RealEstateDocus({
     ...otherDocuments,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
+  console.log(titleReport);
+  console.log(documents);
 
   const saveInfo = async () => {
     documents = documents.map((item) => {
@@ -481,6 +510,7 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("titleReport", { onChange: onChange1 })}
+                // {...register("titleReport", { onChange: onChange })}
                 required
               />
               <div className="upload-cover">
@@ -533,6 +563,38 @@ function RealEstateDocus({
                       </div>
                     ))
                   : null}
+                {/* {documents1.length > 0
+                  ? documents1.map((document, index, arr) => (
+                      <div key={index} className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                            onMouseEnter={() => {
+                              var tempArr = arr;
+                              var temp = document;
+                              temp.onHover1 = true;
+                              setDocument1([...tempArr]);
+                            }}
+                            onMouseLeave={() => {
+                              var tempArr = arr;
+                              var temp = document;
+                              temp.onHover1 = false;
+                              let newArr = tempArr.splice(index, 0);
+                              setDocument1([...tempArr, ...newArr]);
+                            }}
+                          >
+                            {!document.onHover1 ? (
+                              <FaCheck fontSize="1.5em" color="blue" />
+                            ) : (
+                              <MdClose fontSize="1.5em" color="red" />
+                            )}
+                          </button>
+                        </span>
+                      </div>
+                    ))
+                  : null} */}
               </div>
             </Col>
           </Row>
@@ -547,6 +609,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("insuranceCopy", { onChange: onChange2 })}
+                // {...register("insuranceCopy", {
+                //   onChange: onChange("insurance_copy"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -615,6 +680,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("financialDocuments", { onChange: onChange3 })}
+                // {...register("financialDocuments", {
+                //   onChange: onChange("financial_document"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -683,6 +751,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("purchaseAgreement", { onChange: onChange4 })}
+                // {...register("purchaseAgreement", {
+                //   onChange: onChange("purchase_agreement"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -750,7 +821,10 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("thirdpartyReport", { onChange: onChange5 })}
+                {...register("thirdPartyReport", { onChange: onChange5 })}
+                // {...register("thirdpartyReport", {
+                //   onChange: onChange("third_party_report"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -817,6 +891,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("demographics", { onChange: onChange6 })}
+                // {...register("demographics", {
+                //   onChange: onChange("demographics"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -884,7 +961,10 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("marketandValuations", { onChange: onChange7 })}
+                {...register("marketValuations", { onChange: onChange7 })}
+                // {...register("marketandValuations", {
+                //   onChange: onChange("market_and_evaluations"),
+                // })}
                 required
               />
               <div className="upload-cover">
@@ -951,6 +1031,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("otherDocuments", { onChange: onChange8 })}
+                // {...register("otherDocuments", {
+                //   onChange: onChange("others"),
+                // })}
               />
               <div className="upload-cover">
                 <details>
