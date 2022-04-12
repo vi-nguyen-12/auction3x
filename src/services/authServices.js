@@ -238,7 +238,7 @@ const authService = {
   saveProperty(data) {
     console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+      apiUrl + `/api/users/${data.userId}/${data.auctionId}/liked`,
       {},
       {
         headers: {
@@ -251,8 +251,9 @@ const authService = {
   },
 
   removeProperty(data) {
-    return axios.delete(
-      apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+    return axios.put(
+      apiUrl + `/api/users/${data.userId}/${data.auctionId}/unliked`,
+      {},
       {
         headers: {
           Authorization:
