@@ -58,11 +58,6 @@ const Agree = ({
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
         if (
-          res.data.status === "viewing_complete" &&
-          res.data.status === "signing_complete"
-        ) {
-          setLoader(false);
-        } else if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
@@ -84,8 +79,10 @@ const Agree = ({
                 };
                 authService.putRealEstateInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                   }
@@ -103,8 +100,10 @@ const Agree = ({
                 };
                 authService.putRealEstateInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -121,8 +120,10 @@ const Agree = ({
                 };
                 authService.putRealEstateInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -138,8 +139,10 @@ const Agree = ({
                 };
                 authService.putRealEstateInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -158,8 +161,10 @@ const Agree = ({
               };
               authService.postRealEstateInfo(datas).then((res) => {
                 if (res.data.error) {
+                  setLoader(false);
                   alert(res.data.error);
                 } else {
+                  setLoader(false);
                   alert("Property Successfully Created!");
                   history.push("/");
                   window.scrollTo(0, 0);
@@ -182,8 +187,10 @@ const Agree = ({
                 };
                 authService.saveInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                   }
@@ -201,8 +208,10 @@ const Agree = ({
                 };
                 authService.saveInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -219,8 +228,10 @@ const Agree = ({
                 };
                 authService.saveInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -236,8 +247,10 @@ const Agree = ({
                 };
                 authService.saveInfo(datas).then((res) => {
                   if (res.data.error) {
+                    setLoader(false);
                     alert(res.data.error);
                   } else {
+                    setLoader(false);
                     alert("Property Successfully Created!");
                     history.push("/");
                     window.scrollTo(0, 0);
@@ -245,7 +258,6 @@ const Agree = ({
                 });
               }
             } else {
-              console.log(ownership);
               const datas = {
                 ...ownership,
                 ...propertyData,
@@ -255,11 +267,12 @@ const Agree = ({
                 step: 5,
                 docusignId: res.data._id,
               };
-              console.log(datas);
               authService.savePropInfo(datas).then((res) => {
                 if (res.data.error) {
+                  setLoader(false);
                   alert(res.data.error);
                 } else {
+                  setLoader(false);
                   alert("Property Successfully Created!");
                   history.push("/");
                   window.scrollTo(0, 0);
