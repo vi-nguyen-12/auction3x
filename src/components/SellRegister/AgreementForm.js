@@ -34,16 +34,21 @@ const Agree = ({
 
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getSellingDocuSign(envelopeId).then((res) => {
-      setLoader(false);
-      setEnvelopeId(res.data.envelopeId);
-      if (
-        res.data.status !== "signing_complete" &&
-        res.data.status !== "viewing_complete"
-      ) {
-        window.open(res.data.redirectUrl);
-      }
-    });
+    await authService
+      .getSellingDocuSign(envelopeId)
+      .then((res) => {
+        setLoader(false);
+        setEnvelopeId(res.data.envelopeId);
+        if (
+          res.data.status !== "signing_complete" &&
+          res.data.status !== "viewing_complete"
+        ) {
+          window.open(res.data.redirectUrl);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   const onSubmit = async (data) => {

@@ -420,6 +420,17 @@ function RealEstateDocus({
   };
 
   const onSubmit = async (data) => {
+    documents = documents.map((item) => {
+      delete item.onHover1;
+      delete item.onHover2;
+      delete item.onHover3;
+      delete item.onHover4;
+      delete item.onHover5;
+      delete item.onHover6;
+      delete item.onHover7;
+      delete item.onHover8;
+      return item;
+    });
     if (params.id) {
       if (documents.length >= 7) {
         toogleDocuments(documents);
