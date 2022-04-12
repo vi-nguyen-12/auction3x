@@ -236,6 +236,7 @@ const authService = {
     console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
       apiUrl + `/api/users/${data.userId}/likes/${data.auctionId}`,
+      {},
       {
         headers: {
           Authorization:
