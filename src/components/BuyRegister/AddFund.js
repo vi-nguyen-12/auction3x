@@ -1,12 +1,35 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import authService from "../../services/authServices";
+import { useForm } from "react-hook-form";
 import "../../styles/Buyer.css";
 
 function AddFund() {
+  const { register, handleSubmit } = useForm();
+  const [loader, setLoader] = useState(false);
   const [other, setOther] = useState(false);
   const [self, setSelf] = useState(false);
   const toogleSelf = () => setSelf(!self);
   const toogleOther = () => setOther(!other);
+
+  const [document, setDocument] = useState([]);
+
+  const onChange1 = async (e) => {
+    setLoader(true);
+    const formData1 = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData1.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData1).then((response) => {
+      if (response.status === 200) {
+        setDocument([...document, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
+  };
+
   return (
     <Container className="fund-container">
       <h1>Add Fund</h1>
@@ -39,7 +62,7 @@ function AddFund() {
         <>
           <Row>
             <Col>
-              <label>Name of Proof of Fund</label>
+              <label style={{ color: "black" }}>Name of Proof of Fund</label>
               <input
                 type="text"
                 name="fund"
@@ -49,7 +72,7 @@ function AddFund() {
               />
             </Col>
             <Col>
-              <label>Fund Amount</label>
+              <label style={{ color: "black" }}>Fund Amount</label>
               <input
                 type="number"
                 name="fund"
@@ -61,7 +84,7 @@ function AddFund() {
           </Row>
           <Row>
             <Col>
-              <label>Provider</label>
+              <label style={{ color: "black" }}>Provider</label>
               <input
                 type="text"
                 name="provider"
@@ -71,7 +94,7 @@ function AddFund() {
               />
             </Col>
             <Col>
-              <label>Validity Date</label>
+              <label style={{ color: "black" }}>Validity Date</label>
               <input
                 type="date"
                 name="validity"
@@ -84,7 +107,7 @@ function AddFund() {
           <Row>
             <Col>
               <div>
-                <label>Name</label>
+                <label style={{ color: "black" }}>Name</label>
                 <input
                   type="text"
                   name="name"
@@ -93,12 +116,13 @@ function AddFund() {
                 />
               </div>
               <div>
-                <label>Proof Of Fund</label>
+                <label style={{ color: "black" }}>Proof Of Fund</label>
                 <input
                   type="file"
                   name="form"
                   className="form-control"
                   placeholder="Form"
+                  {...register("document", { onChange: onChange1 })}
                 />
               </div>
             </Col>
@@ -117,7 +141,7 @@ function AddFund() {
         <Row>
           <Row>
             <Col>
-              <label>Proof Of Fund</label>
+              <label style={{ color: "black" }}>Proof Of Fund</label>
               <input
                 type="file"
                 name="form"
@@ -126,7 +150,7 @@ function AddFund() {
               />
             </Col>
             <Col>
-              <label>Validity Date</label>
+              <label style={{ color: "black" }}>Validity Date</label>
               <input
                 type="date"
                 name="validity"
