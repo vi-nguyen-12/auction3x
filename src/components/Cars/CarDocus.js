@@ -206,102 +206,102 @@ function CarDocus({
                 return document;
               }
             });
-            setDocument1([
+            setDocument1(
               documents[0]
-                ? documents[0]
+                ? [documents[0]]
                 : document
                 ? document[0]
-                  ? document[0]
+                  ? [document[0]]
                   : []
-                : [],
-            ]);
-            setDocument2([
+                : []
+            );
+            setDocument2(
               documents[1]
-                ? documents[1]
+                ? [documents[1]]
                 : document
                 ? document[1]
-                  ? document[1]
+                  ? [document[1]]
                   : []
-                : [],
-            ]);
-            setDocument3([
+                : []
+            );
+            setDocument3(
               documents[2]
-                ? documents[2]
+                ? [documents[2]]
                 : document
                 ? document[2]
-                  ? document[2]
+                  ? [document[2]]
                   : []
-                : [],
-            ]);
-            setDocument4([
+                : []
+            );
+            setDocument4(
               documents[3]
-                ? documents[3]
+                ? [documents[3]]
                 : document
                 ? document[3]
-                  ? document[3]
+                  ? [document[3]]
                   : []
-                : [],
-            ]);
-            setDocument5([
+                : []
+            );
+            setDocument5(
               documents[4]
-                ? documents[4]
+                ? [documents[4]]
                 : document
                 ? document[4]
-                  ? document[4]
+                  ? [document[4]]
                   : []
-                : [],
-            ]);
-            setDocument6([
+                : []
+            );
+            setDocument6(
               documents[5]
-                ? documents[5]
+                ? [documents[5]]
                 : document
                 ? document[5]
-                  ? document[5]
+                  ? [document[5]]
                   : []
-                : [],
-            ]);
-            setDocument7([
+                : []
+            );
+            setDocument7(
               documents[6]
-                ? documents[6]
+                ? [documents[6]]
                 : document
                 ? document[6]
-                  ? document[6]
+                  ? [document[6]]
                   : []
-                : [],
-            ]);
-            setDocument8([
+                : []
+            );
+            setDocument8(
               documents[7]
-                ? documents[7]
+                ? [documents[7]]
                 : document
                 ? document[7]
-                  ? document[7]
+                  ? [document[7]]
                   : []
-                : [],
-            ]);
+                : []
+            );
             if (documents.length > 8 || document.length > 8) {
-              setDocument9([
+              setDocument9(
                 documents[8]
-                  ? documents[8]
+                  ? [documents[8]]
                   : document
                   ? document[8]
-                    ? document[8]
+                    ? [document[8]]
                     : []
-                  : [],
-              ]);
+                  : []
+              );
             }
           }
         }
       });
     } else {
-      setDocument1([document ? (document[0] ? document[0] : []) : []]);
-      setDocument2([document ? (document[1] ? document[1] : []) : []]);
-      setDocument3([document ? (document[2] ? document[2] : []) : []]);
-      setDocument4([document ? (document[3] ? document[3] : []) : []]);
-      setDocument5([document ? (document[4] ? document[4] : []) : []]);
-      setDocument6([document ? (document[5] ? document[5] : []) : []]);
-      setDocument7([document ? (document[6] ? document[6] : []) : []]);
-      setDocument8([document ? (document[7] ? document[7] : []) : []]);
-      setDocument9([document ? (document[8] ? document[8] : []) : []]);
+      setDocument1(document ? (document[0] ? [document[0]] : []) : []);
+      setDocument2(document ? (document[1] ? [document[1]] : []) : []);
+      setDocument3(document ? (document[2] ? [document[2]] : []) : []);
+      setDocument4(document ? (document[3] ? [document[3]] : []) : []);
+      setDocument5(document ? (document[4] ? [document[4]] : []) : []);
+      setDocument6(document ? (document[5] ? [document[5]] : []) : []);
+      setDocument7(document ? (document[6] ? [document[6]] : []) : []);
+      setDocument8(document ? (document[7] ? [document[7]] : []) : []);
+      setDocument9(document ? (document[8] ? [document[8]] : []) : []);
     }
   }, []);
 
