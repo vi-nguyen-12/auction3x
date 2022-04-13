@@ -10,7 +10,6 @@ import { UpcomingCard } from "../../../Auctions/UpcomingCard";
 import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
-import Pagination from "../Pagination";
 
 function SavedAuctions() {
   const savedProperty = useSelector((state) => state.savedProperty);

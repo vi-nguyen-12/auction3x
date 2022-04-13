@@ -220,7 +220,6 @@ const authService = {
   },
 
   saveProperty(data) {
-    console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
       apiUrl + `/api/users/${data.userId}/${data.auctionId}/liked`,
       {},
