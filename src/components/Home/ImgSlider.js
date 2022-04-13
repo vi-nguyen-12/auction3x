@@ -1,13 +1,14 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "./SearchBar.js";
-import { BrowserRouter as Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
 import "../../styles/Search.css";
+import { Link } from "react-router-dom";
+import authService from "../../services/authServices.js";
 
 const Carousel = styled(Slider)`
   height: 99vh;
@@ -55,7 +56,6 @@ const Carousel = styled(Slider)`
 `;
 
 const Wrap = styled.div`
-  //border-radius: 4px;
   cursor: pointer;
   position: relative;
 
@@ -70,12 +70,6 @@ const Wrap = styled.div`
       width: 100%;
       height: 100vh;
     }
-
-    // &:hover {
-    //   padding: 0;
-    //   // border: 4px solid rgba(249, 249, 249, 0.8);
-    //   transition-duration: 300ms;
-    // }
   }
 `;
 
@@ -106,16 +100,23 @@ const ImgSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
-
-  const property = useSelector((state) => state.property);
-  const auction = useSelector((state) => state.auction);
+  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
+  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  useEffect(() => {
+    authService.getUpcomingAuctions().then((res) => {
+      setUpcomingAuctions(res.data);
+    });
+    authService.getOngoingAuctions().then((res) => {
+      setOnGoingAuctions(res.data);
+    });
+  }, []);
 
   return (
     <div>
-      {auction.length > 0 ? (
+      {onGoingAuctions.length > 0 ? (
         <>
           <Carousel {...settings}>
-            {auction.slice(0, 5).map((item, index) => (
+            {onGoingAuctions.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
                 <a href={`/DisplayAuctions/${item._id}`}>
@@ -142,90 +143,6 @@ const ImgSlider = () => {
           </Carousel>
           <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown w-100">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Property</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Categories</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="col-12 col-sm-6 col-md-2 mt-3">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle w-100"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="pr-5">All Countries</span>
-                  </button>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
-              </div> */}
               <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
                 <div className="form-group">
                   <SearchBar />
@@ -234,16 +151,13 @@ const ImgSlider = () => {
                   <ImSearch />
                 </button>
               </div>
-              {/* <div className="col-12 col-sm-6 col-md-1 mt-3">
-
-              </div> */}
             </div>
           </div>
         </>
-      ) : property.length > 0 ? (
+      ) : upcomingAuctions.length > 0 ? (
         <>
           <Carousel {...settings}>
-            {property.slice(0, 5).map((item, index) => (
+            {upcomingAuctions.slice(0, 5).map((item, index) => (
               // <Link to={`/Display/${item._id}`} key={item._id}>
               <Wrap key={index}>
                 <a href={`/DisplayAuctions/${item._id}`}>

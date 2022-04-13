@@ -74,8 +74,8 @@ const UpcomingCarCard = ({
 
   const handleDisplay = () => {
     if (
-      history.location.pathname === "/Dashboard" ||
-      history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
+      history.location.pathname === "/dashboard" ||
+      history.location.pathname === "/dashboard/Auctions/SavedAuctions"
     ) {
       window.open(`/DisplayAuctions/${id}`);
     } else {

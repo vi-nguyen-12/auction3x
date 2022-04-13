@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 import "../../styles/realEstate.css";
 import { YachtCard } from "../Cards/YachtCard";
+import authService from "../../services/authServices";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -82,92 +82,104 @@ position: relative;
 `;
 
 function YachtPage({ colorChange, toogleChange }) {
-    useEffect(() => {
-        colorChange("black");
-        toogleChange();
-    }, []);
-    const property = useSelector((state) => state.property);
-    const Yachts = property.filter(
-        (item) => item.property.type === "yacht"
-    );
-    const auction = useSelector((state) => state.auction);
-    const OngoingYachts = auction.filter(
-        (item) => item.property.type === "yacht"
-    );
-    let settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: false,
-        slidesToShow: OngoingYachts.length > 3 ? 3 : OngoingYachts.length,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: false,
-                },
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    initialSlide: 1,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
-    return (
-        <>
-            <div className="mt-5">
-                <Col md={12} className="m-auto pt-2">
-                    <Row>
-                        <Carousel {...settings}>
-                            {OngoingYachts.map((item, index) => (
-                                <Wrap key={index}>
-                                    <Col md={12} style={{ marginBottom: "30px" }}>
-                                        <YachtCard
-                                            url={item.property.images[0].url}
-                                            data={item.property.details}
-                                            id={item._id}
-                                            auctionStartDate={item.auctionStartDate}
-                                            auctionEndDate={item.auctionEndDate}
-                                            startingBid={item.startingBid}
-                                            auctionId={item._id}
-                                        />
-                                    </Col>
-                                </Wrap>
-                            ))}
-                        </Carousel>
-                    </Row>
-                    <Row>
-                        {Yachts.map((item, index) => (
-                            <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                                <UpcomingYachtCard
-                                    url={item.property.images[0].url}
-                                    data={item.property.details}
-                                    id={item._id}
-                                    startRegister={item.registerStartDate}
-                                    endRegister={item.registerEndDate}
-                                    startingBid={item.startingBid}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                </Col>
-            </div>
-        </>
-    );
+  useEffect(() => {
+    colorChange("black");
+    toogleChange();
+  }, []);
+  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
+  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  useEffect(() => {
+    authService
+      .getOngoingAuctionsByType("yacht")
+      .then((res) => {
+        setOnGoingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    authService
+      .getUpcomingAuctionsByType("yacht")
+      .then((res) => {
+        setUpcomingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow: onGoingAuctions.length > 3 ? 3 : onGoingAuctions.length,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  return (
+    <>
+      <div className="mt-5">
+        <Col md={12} className="m-auto pt-2">
+          <Row>
+            <Carousel {...settings}>
+              {onGoingAuctions.map((item, index) => (
+                <Wrap key={index}>
+                  <Col md={12} style={{ marginBottom: "30px" }}>
+                    <YachtCard
+                      url={item.property.images[0].url}
+                      data={item.property.details}
+                      id={item._id}
+                      auctionStartDate={item.auctionStartDate}
+                      auctionEndDate={item.auctionEndDate}
+                      startingBid={item.startingBid}
+                      auctionId={item._id}
+                    />
+                  </Col>
+                </Wrap>
+              ))}
+            </Carousel>
+          </Row>
+          <Row>
+            {upcomingAuctions.map((item, index) => (
+              <Col key={index} md={4} style={{ marginBottom: "30px" }}>
+                <UpcomingYachtCard
+                  url={item.property.images[0].url}
+                  data={item.property.details}
+                  id={item._id}
+                  startRegister={item.registerStartDate}
+                  endRegister={item.registerEndDate}
+                  startingBid={item.startingBid}
+                />
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </div>
+    </>
+  );
 }
 
 export default YachtPage;

@@ -471,7 +471,7 @@ const Header = ({ color, change }) => {
                           onClick={() => {
                             toogleOpen();
                             if (user._id) {
-                              history.push("/Dashboard");
+                              history.push("/dashboard");
                             } else {
                               toogleSignIn();
                             }
@@ -873,7 +873,11 @@ const Header = ({ color, change }) => {
                   {/* <Dropdown.Item href="#"> */}
                   <IoWallet size={36} />
                   <NumberFormat
-                    style={{ fontSize: "20px", marginLeft: "10px", fontWeight: "bold" }}
+                    style={{
+                      fontSize: "20px",
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                    }}
                     value={user.wallet}
                     displayType={"text"}
                     thousandSeparator={true}

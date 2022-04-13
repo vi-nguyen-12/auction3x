@@ -9,12 +9,12 @@ const path = window.location.pathname;
 export const SidebarMenu = [
   {
     name: "Dashboard",
-    path: "/Dashboard",
+    path: "/dashboard",
     icon: <AI.AiFillHome size={30} />,
   },
   {
     name: "Messaging",
-    path: "/Dashboard/Messaging",
+    path: "/dashboard/Messaging",
     icon: <AI.AiFillMessage size={30} />,
   },
   {
@@ -26,19 +26,19 @@ export const SidebarMenu = [
     subNav: [
       {
         name: "Saved Auctions",
-        path: "/Dashboard/Auctions/SavedAuctions",
+        path: "/dashboard/Auctions/SavedAuctions",
       },
       {
         name: "Pending Auctions",
-        path: "/Dashboard/Auctions/PendingAuctions",
+        path: "/dashboard/Auctions/PendingAuctions",
       },
       {
         name: "Bid Auctions",
-        path: "/Dashboard/Auctions/BidAuctions",
+        path: "/dashboard/Auctions/BidAuctions",
       },
       {
         name: "Win Auctions",
-        path: "/Dashboard/Auctions/WinAuctions",
+        path: "/dashboard/Auctions/WinAuctions",
       },
     ],
   },
@@ -51,25 +51,25 @@ export const SidebarMenu = [
     subNav: [
       {
         name: "Pending Approval",
-        path: "/Dashboard/Listings/PendingApproval",
+        path: "/dashboard/Listings/PendingApproval",
       },
       {
         name: "Auction Listings",
-        path: "/Dashboard/Listings/AuctionListings",
+        path: "/dashboard/Listings/AuctionListings",
       },
       {
         name: "Sold Listings",
-        path: "/Dashboard/Listings/SoldListings",
+        path: "/dashboard/Listings/SoldListings",
       },
       {
         name: "Incomplete Listing",
-        path: "/Dashboard/Listings/IncompleteListing",
+        path: "/dashboard/Listings/IncompleteListing",
       },
     ],
   },
   {
     name: "Profile",
-    path: "/Dashboard/Profile",
+    path: "/dashboard/Profile",
     icon: <CgProfile size={30} />,
   },
 ];

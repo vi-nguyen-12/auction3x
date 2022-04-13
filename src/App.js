@@ -149,7 +149,7 @@ function App() {
             />
           </Route>
           {user._id && (
-            <Route path="/Dashboard">
+            <Route path="/dashboard">
               <Dashboard
                 toogleShow={toogleShow}
                 colorChange={colorChange}

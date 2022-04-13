@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const savedPropState = {};
+const savedPropState = [];
 
 export const savedPropertySlice = createSlice({
   name: "savedProperty",
