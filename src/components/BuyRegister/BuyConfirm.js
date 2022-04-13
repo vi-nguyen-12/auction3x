@@ -14,11 +14,11 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
   //   const transport = socket.io.engine.transport.name;
   //   console.log(transport);
   // });
+  const { id } = useParams();
   const properties = useSelector((state) => state.auction);
   const propId = properties.find((item) => item._id === id);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(propId.highestBid + propId.incrementAmount);
-  const { id } = useParams();
   const history = useHistory();
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
   console.log(propId);
@@ -87,7 +87,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
         <>
           {onGoingAuctionEnd && (
             <div style={{ marginLeft: "15%", marginTop: "20px" }}>
-              <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+              <AuctionTimer auctionEndDate={onGoingAuctionEnd} toogleAuction />
             </div>
           )}
           <Table borderless>
@@ -129,6 +129,25 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                   </td>
                 )}
               </tr>
+              <tr>
+                <td
+                  style={{
+                    position: "relative",
+                    fontWeight: "bold",
+                    padding: "15px",
+                  }}
+                >
+                  Increment Amount:
+                  <NumberFormat
+                    style={{ marginLeft: "10px", fontWeight: "normal" }}
+                    value={propId.incrementAmount}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </td>
+              </tr>
+
               {/* <tr>
                 {propId.highestBid ? (
                   <td

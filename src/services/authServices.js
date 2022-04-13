@@ -267,6 +267,19 @@ const authService = {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`);
   },
 
+  getBuyerPendingAuctions(id) {
+    return axios.get(
+      apiUrl + `/api/users/${id}/buyer/auctions?status=pending`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            (auth_token ? auth_token : document.cookie.split("=")[1]),
+        },
+      }
+    );
+  },
+
   buyerApprovedAuctions(id) {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions?status=success`);
   },

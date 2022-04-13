@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Toast from "../Toast";
 import Login from "../Users/Login";
 import Modal from "react-bootstrap/Modal";
@@ -16,6 +16,7 @@ import "../../styles/Card.css";
 
 const CardComp = ({ url, data, id, auctionEndDate, startingBid }) => {
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -74,6 +75,15 @@ const CardComp = ({ url, data, id, auctionEndDate, startingBid }) => {
       }
     }
   };
+
+  useEffect(() => {
+    const saved = savedProperty.filter((property) => property._id === id);
+    if (saved) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [savedProperty]);
 
   return (
     <div>

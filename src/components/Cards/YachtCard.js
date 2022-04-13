@@ -23,6 +23,7 @@ const YachtCard = ({
   startingBid,
 }) => {
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -87,14 +88,23 @@ const YachtCard = ({
     }
   };
 
+  // useEffect(() => {
+  //   const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
+  //   const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
+  //   const auctionData = auctions.find((item) => item._id === id);
+  //   setAuctionStartDate(startDate);
+  //   setAuctionEndDate(endDate);
+  //   setOnGoingAuctionEnd(auctionData.auctionEndDate);
+  // }, []);
+
   useEffect(() => {
-    const startDate = new Date(auctionStartDate).toLocaleString().split(",")[0];
-    const endDate = new Date(auctionEndDate).toLocaleString().split(",")[0];
-    const auctionData = auctions.find((item) => item._id === id);
-    setAuctionStartDate(startDate);
-    setAuctionEndDate(endDate);
-    setOnGoingAuctionEnd(auctionData.auctionEndDate);
-  }, []);
+    const saved = savedProperty.filter((item) => item._id === id);
+    if (saved) {
+      setFavorite(true);
+    } else {
+      setFavorite(false);
+    }
+  }, [savedProperty]);
 
   return (
     <div>
@@ -184,7 +194,7 @@ const YachtCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={onGoingAuctionEnd}
+                            auctionEndDate={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>

@@ -5,12 +5,21 @@ import SavedAuctionsCard from "./SavedAuctionsCard";
 import authService from "../../../../services/authServices";
 
 function PendingAuctions() {
-  const registProperty = useSelector((state) => state.registProperty);
+  const user = useSelector((state) => state.user);
+  const [PendingAuctions, setPendingAuctions] = useState([]);
+
+  useEffect(() => {
+    authService.getBuyerPendingAuctions(user._id).then((res) => {
+      setPendingAuctions(res.data);
+    });
+  }, []);
+
+  console.log(PendingAuctions);
   return (
     <Container>
-      {registProperty.length > 0 ? (
+      {PendingAuctions > 0 ? (
         <Row>
-          {registProperty.map((property) => (
+          {PendingAuctions.map((property) => (
             <Col key={property._id}>
               <SavedAuctionsCard
                 data={property.property.details}
