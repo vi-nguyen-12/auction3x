@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const registProp = {};
+const registProp = [];
 
 export const registPropertySlice = createSlice({
   name: "Registered property",
