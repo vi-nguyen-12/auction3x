@@ -3,7 +3,6 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCard } from "../Auctions/UpcomingCard";
 import "../../styles/realEstate.css";

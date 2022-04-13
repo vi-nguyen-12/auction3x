@@ -153,29 +153,6 @@ const authService = {
   getAuction(id) {
     return axios.get(apiUrl + `/api/auctions/${id}`);
   },
-  // getUpcomingCarAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/upcoming/car");
-  // },
-
-  // getOngoingCarAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/ongoing/car");
-  // },
-
-  // getUpcomingJetAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/upcoming/jet");
-  // },
-
-  // getOngoingJetAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/ongoing/jet");
-  // },
-
-  // getUpcomingYachtAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/upcoming/yacht");
-  // },
-
-  // getOngoingYachtAuctions() {
-  //   return axios.get(apiUrl + "/api/auctions/ongoing/yacht");
-  // },
 
   getRegistStatus() {
     return axios.get(apiUrl + "/api/auctions/status?buyer=true", {

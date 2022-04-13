@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import "../../styles/realEstate.css";
 import { CarCard } from "../Cards/CarCard";
+import authService from "../../services/authServices";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -86,16 +86,32 @@ function CarPage({ colorChange, toogleChange }) {
     colorChange("black");
     toogleChange();
   }, []);
-  const property = useSelector((state) => state.property);
-  const Cars = property.filter((item) => item.property.type === "car");
-  const auction = useSelector((state) => state.auction);
-  const OngoingCar = auction.filter((item) => item.property.type === "car");
+  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
+  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  useEffect(() => {
+    authService
+      .getOngoingAuctionsByType("car")
+      .then((res) => {
+        setOnGoingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    authService
+      .getUpcomingAuctionsByType("car")
+      .then((res) => {
+        setUpcomingAuctions(res.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }, []);
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: OngoingCar.length > 3 ? 3 : OngoingCar.length,
+    slidesToShow: onGoingAuctions.length > 3 ? 3 : onGoingAuctions.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -129,7 +145,7 @@ function CarPage({ colorChange, toogleChange }) {
         <Col md={12} className="m-auto pt-2">
           <Row>
             <Carousel {...settings}>
-              {OngoingCar.map((item, index) => (
+              {onGoingAuctions.map((item, index) => (
                 <Wrap key={index}>
                   <Col md={12} style={{ marginBottom: "30px" }}>
                     <CarCard
@@ -147,7 +163,7 @@ function CarPage({ colorChange, toogleChange }) {
             </Carousel>
           </Row>
           <Row>
-            {Cars.map((item, index) => (
+            {upcomingAuctions.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingCarCard
                   url={item.property.images[0].url}
