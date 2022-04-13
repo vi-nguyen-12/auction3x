@@ -293,10 +293,12 @@ function EmptyRealEstateDetails({
           : ""
       );
       setReservedAmount(
-        propertyData.reservedAmount ? propertyData.reservedAmount : ""
+        propertyData.reservedAmount ? parseInt(propertyData.reservedAmount) : ""
       );
       setDiscussedAmount(
-        propertyData.discussedAmount ? propertyData.discussedAmount : ""
+        propertyData.discussedAmount
+          ? parseInt(propertyData.discussedAmount)
+          : ""
       );
     }
   }, []);
@@ -527,7 +529,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
-              onChange={(e) => setReservedAmount(e.target.value)}
+              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
               name="reservedAmount"
               required
             />
@@ -541,7 +543,7 @@ function EmptyRealEstateDetails({
               className="form-control"
               defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}
-              onChange={(e) => setDiscussedAmount(e.target.value)}
+              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
               name="discussedAmount"
               required
             />

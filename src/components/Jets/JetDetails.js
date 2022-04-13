@@ -617,7 +617,7 @@ function JetDetails({
                 className="form-control"
                 defaultValue={reservedAmount}
                 {...register("reservedAmount")}
-                onChange={(e) => setReservedAmount(e.target.value)}
+                onChange={(e) => setReservedAmount(parseInt(e.target.value))}
                 required
               />
             </Col>
@@ -630,7 +630,7 @@ function JetDetails({
                 className="form-control"
                 defaultValue={discussedAmount}
                 {...register("discussedAmount")}
-                onChange={(e) => setDiscussedAmount(e.target.value)}
+                onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
                 required
               />
             </Col>

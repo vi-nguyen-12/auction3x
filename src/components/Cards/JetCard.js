@@ -77,11 +77,15 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
   };
 
   useEffect(() => {
-    const saved = savedProperty.filter((property) => property._id === id);
-    if (saved) {
-      setFavorite(true);
-    } else {
-      setFavorite(false);
+    if (user._id) {
+      if (savedProperty.length > 0) {
+        const saved = savedProperty.filter((property) => property._id === id);
+        if (saved) {
+          setFavorite(true);
+        } else {
+          setFavorite(false);
+        }
+      }
     }
   }, [savedProperty]);
 

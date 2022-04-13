@@ -200,10 +200,10 @@ function YachtDetails({
           : ""
       );
       setOtherDetails(
-        propertyData.otherDetails
-          ? propertyData.otherDetails
-          : property.otherDetails
-          ? property.otherDetails
+        propertyData.others
+          ? propertyData.others
+          : property.detain
+          ? property.detain
           : ""
       );
     }
@@ -246,7 +246,7 @@ function YachtDetails({
           property_address: property.property_address
             ? property.property_address
             : property_address,
-          detain: property.detain ? property.detain : otherDetails,
+          others: property.detain ? property.detain : otherDetails,
           step: parseInt(2),
         },
       };
@@ -290,7 +290,7 @@ function YachtDetails({
         property_address: property.property_address
           ? property.property_address
           : property_address,
-        detain: property.detain ? property.detain : otherDetails,
+        others: property.detain ? property.detain : otherDetails,
         ...ownership,
         step: parseInt(2),
       };
@@ -312,11 +312,11 @@ function YachtDetails({
     } else {
       const submitedData = {
         reservedAmount: data.reservedAmount
-          ? data.reservedAmount
-          : reservedAmount,
+          ? parseInt(data.reservedAmount)
+          : parseInt(reservedAmount),
         discussedAmount: data.discussedAmount
-          ? data.discussedAmount
-          : discussedAmount,
+          ? parseInt(data.discussedAmount)
+          : parseInt(discussedAmount),
         vessel_registration_number: data.vessel_registration_number
           ? data.vessel_registration_number
           : vessel_registration_number,
@@ -343,7 +343,7 @@ function YachtDetails({
         property_address: data.property_address
           ? data.property_address
           : property_address,
-        detain: data.detain ? data.detain : otherDetails,
+        others: data.detain ? data.detain : otherDetails,
       };
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
@@ -587,7 +587,7 @@ function YachtDetails({
               className="form-control"
               defaultValue={reservedAmount}
               {...register("reservedAmount")}
-              onChange={(e) => setReservedAmount(e.target.value)}
+              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
             />
             <span
               style={{
@@ -604,7 +604,7 @@ function YachtDetails({
               className="form-control"
               defaultValue={discussedAmount}
               {...register("discussedAmount")}
-              onChange={(e) => setDiscussedAmount(e.target.value)}
+              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
             />
             <span
               style={{

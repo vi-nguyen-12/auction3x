@@ -563,7 +563,7 @@ function RealEstateDetails({
               defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
               onChange={(e) => {
-                setReservedAmount(e.target.value);
+                setReservedAmount(parseInt(e.target.value));
               }}
               required
             />
@@ -579,7 +579,7 @@ function RealEstateDetails({
               defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}
               onChange={(e) => {
-                setDiscussedAmount(e.target.value);
+                setDiscussedAmount(parseInt(e.target.value));
               }}
               required
             />

@@ -98,11 +98,15 @@ const YachtCard = ({
   // }, []);
 
   useEffect(() => {
-    const saved = savedProperty.filter((item) => item._id === id);
-    if (saved) {
-      setFavorite(true);
-    } else {
-      setFavorite(false);
+    if (user._id) {
+      if (savedProperty.length > 0) {
+        const saved = savedProperty.filter((item) => item._id === id);
+        if (saved) {
+          setFavorite(true);
+        } else {
+          setFavorite(false);
+        }
+      }
     }
   }, [savedProperty]);
 
