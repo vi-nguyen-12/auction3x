@@ -358,8 +358,6 @@ function JetDetails({
     }
   }, []);
 
-  console.log(isImport);
-
   const onSubmit = (data) => {
     if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");

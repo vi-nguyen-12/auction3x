@@ -14,7 +14,7 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
+const JetCard = ({ url, data, id, startingBid, auctionEndDate, reserveMet }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
@@ -96,7 +96,6 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          {/* <Link to={`/Display/${id}`}> */}
           <Card.Img
             onClick={handleDisplay}
             variant="top"
@@ -109,10 +108,11 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate }) => {
               cursor: "pointer",
             }}
           />
-          {/* </Link> */}
+          {reserveMet === true && (
+            <div className="badge-label" aria-label="Reserved Met !" />
+          )}
           <button
             onClick={toggleImage}
-            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
             style={{
               border: "none",
               position: "absolute",

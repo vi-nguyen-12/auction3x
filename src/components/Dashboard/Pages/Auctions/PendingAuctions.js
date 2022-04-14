@@ -14,7 +14,6 @@ function PendingAuctions() {
     });
   }, []);
 
-  console.log(PendingAuctions);
   return (
     <Container>
       {PendingAuctions > 0 ? (

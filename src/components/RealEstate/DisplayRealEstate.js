@@ -126,6 +126,7 @@ const Wrap = styled.div`
 
 function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
+  const auction = useSelector((state) => state.auction);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
@@ -137,6 +138,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [setRegistered, setRegisteredProperty] = useState(false);
   const [registerEnd, setRegisterEnd] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
+  const [socket, setSocket] = useState();
 
   const [topBid, setTopBid] = useState();
 
@@ -222,6 +225,13 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
       }
     }
 
+    if (auction.length > 0) {
+      const prop = auction.filter((item) => item._id === property._id);
+      if (prop.length > 0) {
+        setReserveMet(prop[0].isReservedMet);
+      }
+    }
+
     let topBidders = [];
     if (property.highestBidders) {
       for (let i = 0; i < property.highestBidders.length; i++) {
@@ -231,7 +241,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
     } else {
       setTopBid([]);
     }
-  }, [property, registProperty]);
+  }, [property, registProperty, auction]);
 
   return (
     <>
@@ -240,7 +250,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
-            <span className="badge">Reserved Met!</span>
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"

@@ -7,13 +7,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
-import socket from "socket.io-client";
 
 const BuyConfirm = ({ tooglePlaceBid }) => {
-  // socket.on("connect", () => {
-  //   const transport = socket.io.engine.transport.name;
-  //   console.log(transport);
-  // });
   const { id } = useParams();
   const properties = useSelector((state) => state.auction);
   const propId = properties.find((item) => item._id === id);

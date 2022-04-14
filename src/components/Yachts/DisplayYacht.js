@@ -127,6 +127,7 @@ const Wrap = styled.div`
 
 function DisplayYacht({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
+  const auction = useSelector((state) => state.auction);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
@@ -140,6 +141,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [topBid, setTopBid] = useState();
 
@@ -223,6 +225,13 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
       }
     }
 
+    if (auction.length > 0) {
+      const prop = auction.filter((item) => item.propertyId === property._id);
+      if (prop.length > 0) {
+        setReserveMet(prop[0].isReservedMet);
+      }
+    }
+
     let topBidders = [];
     if (property.highestBidders) {
       for (let i = 0; i < property.highestBidders.length; i++) {
@@ -240,6 +249,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"

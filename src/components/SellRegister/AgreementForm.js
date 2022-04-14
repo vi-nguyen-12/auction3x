@@ -18,7 +18,6 @@ const Agree = ({
   propId,
   propertyType,
 }) => {
-  console.log(ownership);
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -31,7 +30,6 @@ const Agree = ({
   const history = useHistory();
 
   const steps = sellStep ? sellStep : params.step ? params.step : 0;
-  console.log(steps);
 
   const handleSignDocusign = async () => {
     setLoader(true);
