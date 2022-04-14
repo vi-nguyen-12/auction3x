@@ -126,21 +126,7 @@ const Wrap = styled.div`
 
 function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
-  const registProperty = useSelector((state) => state.registProperty);
-  let checkProperty = [];
-  for (let i = 0; i < registProperty.length; i++) {
-    checkProperty = [...checkProperty, registProperty[i]];
-  }
-  const registeredProperty = checkProperty.find(
-    (item) => item._id === property._id
-  );
-  const [setRegistered, setRegisteredProperty] = useState(false);
-  const [registerEnd, setRegisterEnd] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
-
-  const [topBid, setTopBid] = useState();
-
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -158,10 +144,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
-
   const toogleBid = () => setBid(!bid);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -169,7 +153,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
-  const [startAuction, setStartAuction] = useState();
+
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -178,64 +162,19 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
-  //if auction id is found, then set property as already registered
+  // if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
-
-  const handleKYC = () => {
-    if (!user.KYC) {
-      return alert("Please Complete your KYC first to bid");
-    }
-  };
 
   useEffect(() => {
     colorChange("black");
     toogleChange();
-
-    //set registration end
-    setRegisterEnd(property ? property.registerEndDate : null);
-
-    //set dates for ongoing auction end date
-    setOnGoingAuctionEnd(property ? property.auctionEndDate : null);
-    setStartAuction(property ? property.auctionStartDate : null);
-
-    //set location for map
-    setLocation({
-      name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
-    });
-
-    if (user._id && user.KYC) {
-      if (registeredProperty !== undefined) {
-        setRegisteredProperty(true);
-      }
-
-      if (registeredProperty) {
-        if (registeredProperty.isApproved === "success") {
-          setApprovedToBid(true);
-        }
-      }
-    }
-
-    let topBidders = [];
-    if (property.highestBidders) {
-      for (let i = 0; i < property.highestBidders.length; i++) {
-        topBidders = [...topBidders, property.highestBidders[i]];
-      }
-      setTopBid(topBidders.reverse());
-    } else {
-      setTopBid([]);
-    }
-  }, [property, registProperty]);
+  }, []);
 
   return (
     <>
-      {property && location && startAuction && (
+      {/* {property && location && startAuction && ( */}
+      {property && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
@@ -558,7 +497,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   </div>
                 </div>
               )}
-
+              {/* 
               {user._id && !user.KYC && (
                 <div
                   style={{
@@ -597,9 +536,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </button>
                   </div>
                 </div>
-              )}
+              )} */}
 
-              {user._id &&
+              {/* {user._id &&
               user.KYC &&
               !setRegistered &&
               new Date().toISOString() < registerEnd ? (
@@ -684,9 +623,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </div>
                   </div>
                 )
-              )}
+              )} */}
 
-              {user._id && user.KYC && setRegistered && (
+              {user._id && user.KYC && (
                 <div
                   style={{
                     display: "grid",
@@ -705,7 +644,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={!approvedToBid}
+                    disabled={!property.highestBidders}
                   >
                     Bid Now!
                   </button>
@@ -744,10 +683,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         padding: "20px",
                       }}
                     >
-                      <RegistrationTimer
-                        toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
-                      />
+                      <RegistrationTimer time={property.registerEndDate} />
                       <div
                         style={{
                           display: "flex",
@@ -786,7 +722,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </div>
                   </Col>
                 )}
-                {new Date().toISOString() < onGoingAuctionEnd ? (
+                {new Date().toISOString() < property.auctionEndDate ? (
                   <Col>
                     <div
                       style={{
@@ -798,7 +734,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer time={property.auctionEndDate} />
                       <div
                         style={{
                           display: "flex",
@@ -824,7 +760,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer time={property.auctionStartDate} />
                       <div
                         style={{
                           display: "flex",
@@ -1139,22 +1075,25 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
+                      {property.highestBidders?.length > 0 ? (
+                        property.highestBidders
+                          .slice()
+                          .reverse()
+                          .map((bid, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{bid.userId}</td>
+                              <td>
+                                <NumberFormat
+                                  value={bid.amount}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              </td>
+                              <td>{new Date(bid.time).toLocaleString()}</td>
+                            </tr>
+                          ))
                       ) : (
                         <tr>
                           <td>No bids yet</td>
@@ -1446,7 +1385,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
+              <BuyConfirm tooglePlaceBid={tooglePlaceBid} property={property} />
             </Modal.Body>
           </Modal>
           <Modal

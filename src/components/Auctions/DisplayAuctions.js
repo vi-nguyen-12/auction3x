@@ -18,7 +18,11 @@ function DisplayAuctions({ colorChange, toogleChange }) {
       setAuction(res.data);
     });
     // let serverUrl = process.env.REACT_APP_API_URL;
-    let serverUrl = "http://localhost:5000";
+    let serverUrl =
+      process.env.REACT_APP_NODE_ENV === "production"
+        ? process.env.REACT_APP_API_URL
+        : "http://localhost:5000";
+
     const newSocket = io(serverUrl, { withCredentials: true });
     setSocket(newSocket);
     newSocket.on("connect", () => {
