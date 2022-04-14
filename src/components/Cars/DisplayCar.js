@@ -976,15 +976,15 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Sale Type</td>
+                        <td style={{ fontWeight: "700" }}>Sale Type</td>
                         <td>Auction</td>
                       </tr>
                       <tr>
-                        <td>Sale Condition</td>
+                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
                         <td>Auction Sale</td>
                       </tr>
                       <tr>
-                        <td>Property Type</td>
+                        <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
                           <td>{property.property.type}</td>
                         ) : (
@@ -992,7 +992,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Make</td>
+                        <td style={{ fontWeight: "700" }}>Make</td>
                         {property.property.details.make ? (
                           <td>{property.property.details.make}</td>
                         ) : (
@@ -1000,7 +1000,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Model</td>
+                        <td style={{ fontWeight: "700" }}>Model</td>
                         {property.property.details.model ? (
                           <td>{property.property.details.model}</td>
                         ) : (
@@ -1008,7 +1008,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Year</td>
+                        <td style={{ fontWeight: "700" }}>Year</td>
                         {property.property.details.year ? (
                           <td>{property.property.details.year}</td>
                         ) : (
@@ -1016,7 +1016,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Color</td>
+                        <td style={{ fontWeight: "700" }}>Color</td>
                         {property.property.details.color ? (
                           <td>{property.property.details.color}</td>
                         ) : (
@@ -1024,7 +1024,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Mileage</td>
+                        <td style={{ fontWeight: "700" }}>Mileage</td>
                         {property.property.details.mileage ? (
                           <td>{property.property.details.mileage}</td>
                         ) : (
@@ -1032,7 +1032,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Transmission</td>
+                        <td style={{ fontWeight: "700" }}>Transmission</td>
                         {property.property.details.transmission ? (
                           <td>{property.property.details.transmission}</td>
                         ) : (
@@ -1040,7 +1040,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>VIN</td>
+                        <td style={{ fontWeight: "700" }}>VIN</td>
                         {property.property.details.VIN ? (
                           <td>{property.property.details.VIN}</td>
                         ) : (
@@ -1048,7 +1048,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Car Type</td>
+                        <td style={{ fontWeight: "700" }}>Car Type</td>
                         {property.property.details.car_type ? (
                           <td>{property.property.details.car_type}</td>
                         ) : (
@@ -1056,7 +1056,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Fuel Type</td>
+                        <td style={{ fontWeight: "700" }}>Fuel Type</td>
                         {property.property.details.fuel_type ? (
                           <td>{property.property.details.fuel_type}</td>
                         ) : (
@@ -1064,7 +1064,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Condition</td>
+                        <td style={{ fontWeight: "700" }}>Condition</td>
                         {property.property.details.condition ? (
                           <td>{property.property.details.condition}</td>
                         ) : (
@@ -1072,7 +1072,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine</td>
+                        <td style={{ fontWeight: "700" }}>Engine</td>
                         {property.property.details.engine ? (
                           <td>{property.property.details.engine}</td>
                         ) : (
@@ -1080,7 +1080,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Power</td>
+                        <td style={{ fontWeight: "700" }}>Power</td>
                         {property.property.details.power ? (
                           <td>{property.property.details.power}</td>
                         ) : (
@@ -1090,51 +1090,53 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     </tbody>
                   </Table>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>Bidder ID</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
-                      ) : (
+                {user._id && user.KYC && approvedToBid === true && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead style={{ backgroundColor: "#d58f5c" }}>
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>Bidder ID</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {topBid ? (
+                          topBid.map((bid, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{bid.userId}</td>
+                              <td>
+                                <NumberFormat
+                                  value={bid.amount}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              </td>
+                              <td>{new Date(bid.time).toLocaleString()}</td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>

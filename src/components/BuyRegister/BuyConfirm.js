@@ -37,7 +37,7 @@ const BuyConfirm = ({ tooglePlaceBid, property }) => {
         } else {
           alert("Bid Successful!");
           // tooglePlaceBid();
-          // window.location.reload();
+          window.location.reload();
         }
       });
     }
