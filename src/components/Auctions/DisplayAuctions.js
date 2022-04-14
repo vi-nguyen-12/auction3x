@@ -42,7 +42,7 @@ function DisplayAuctions({ colorChange, toogleChange }) {
           isReservedMet,
         }) => {
           console.log(auction);
-          if (auctionId === auction._id.toString()) {
+          if (auctionId === id) {
             setAuction((prev) => {
               prev.highestBidders = highestBidders;
               prev.highestBid = highestBid;
@@ -54,7 +54,9 @@ function DisplayAuctions({ colorChange, toogleChange }) {
         }
       );
     }
-  }, [socket, setAuction]);
+  }, [socket]);
+
+  console.log(auction);
   return (
     <>
       {auction ? (

@@ -8,21 +8,23 @@ import { useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
 
-const BuyConfirm = ({ tooglePlaceBid }) => {
+const BuyConfirm = ({ tooglePlaceBid, property }) => {
   const { id } = useParams();
   const properties = useSelector((state) => state.auction);
+  const [leadingBid, setLeadingBid] = useState();
+  const [increment, setIncrement] = useState();
   const propId = properties.find((item) => item._id === id);
   const { register, handleSubmit } = useForm();
-  const [bid, setBid] = useState(propId.highestBid + propId.incrementAmount);
+  const [bid, setBid] = useState();
   const history = useHistory();
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
-  console.log(propId);
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
 
   useEffect(() => {
     setOnGoingAuctionEnd(propId.auctionEndDate);
-  }, [propId]);
+    setBid(property.highestBid + property.incrementAmount);
+  }, [property]);
 
   const onSubmit = async (data) => {
     if (bid === undefined) {
@@ -35,7 +37,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
         } else {
           alert("Bid Successful!");
           // tooglePlaceBid();
-          window.location.reload();
+          // window.location.reload();
         }
       });
     }
@@ -88,7 +90,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
           <Table borderless>
             <tbody className="auction-info">
               <tr>
-                {propId.highestBid ? (
+                {property.highestBid ? (
                   <td
                     style={{
                       position: "relative",
@@ -99,7 +101,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                     Leading Bid:
                     <NumberFormat
                       style={{ marginLeft: "10px", fontWeight: "normal" }}
-                      value={propId.highestBid}
+                      value={property.highestBid}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
@@ -116,7 +118,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                     Leading Bid:
                     <NumberFormat
                       style={{ marginLeft: "10px", fontWeight: "normal" }}
-                      value={propId.startingBid}
+                      value={property.startingBid}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
@@ -135,7 +137,7 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
                   Increment Amount:
                   <NumberFormat
                     style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={propId.incrementAmount}
+                    value={property.incrementAmount}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}

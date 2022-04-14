@@ -139,9 +139,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [registerEnd, setRegisterEnd] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
   const [reserveMet, setReserveMet] = useState(false);
-  const [socket, setSocket] = useState();
 
-  const [topBid, setTopBid] = useState();
+  // const [topBid, setTopBid] = useState();
 
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
@@ -232,15 +231,15 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
       }
     }
 
-    let topBidders = [];
-    if (property.highestBidders) {
-      for (let i = 0; i < property.highestBidders.length; i++) {
-        topBidders = [...topBidders, property.highestBidders[i]];
-      }
-      setTopBid(topBidders.reverse());
-    } else {
-      setTopBid([]);
-    }
+    // let topBidders = [];
+    // if (property.highestBidders) {
+    //   for (let i = 0; i < property.highestBidders.length; i++) {
+    //     topBidders = [...topBidders, property.highestBidders[i]];
+    //   }
+    //   setTopBid(topBidders.reverse());
+    // } else {
+    //   setTopBid([]);
+    // }
   }, [property, registProperty, auction]);
 
   return (
@@ -1151,8 +1150,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
+                      {property.highestBidders ? (
+                        property.highestBidders.reverse().map((bid, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{bid.userId}</td>
@@ -1458,7 +1457,10 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
+              <BuyConfirm
+                tooglePlaceBid={tooglePlaceBid}
+                property={property}
+              />
             </Modal.Body>
           </Modal>
           <Modal
