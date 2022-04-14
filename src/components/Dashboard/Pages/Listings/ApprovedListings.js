@@ -104,7 +104,6 @@ function ApprovedListings({ auctions }) {
     });
   }, []);
 
-  console.log(approvedLists);
   return (
     <Container>
       {approvedLists.length > 0 ? (

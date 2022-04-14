@@ -21,7 +21,6 @@ function RealEstateDocus({
   getPropId,
   document,
 }) {
-  console.log(document);
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
   const [doc2, setDocument2] = useState([]);
@@ -341,8 +340,6 @@ function RealEstateDocus({
     ...otherDocuments,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
-  console.log(titleReport);
-  console.log(documents);
 
   const saveInfo = async () => {
     documents = documents.map((item) => {

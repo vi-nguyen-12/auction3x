@@ -127,6 +127,7 @@ const Wrap = styled.div`
 function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -179,7 +180,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
-            <span className="badge">Reserved Met!</span>
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"
@@ -911,15 +914,15 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     <Table responsive>
                       <tbody className="propInfo">
                         <tr>
-                          <td>Sale Type</td>
+                          <td style={{ fontWeight: "700" }}>Sale Type</td>
                           <td>Auction</td>
                         </tr>
                         <tr>
-                          <td>Sale Condition</td>
+                          <td style={{ fontWeight: "700" }}>Sale Condition</td>
                           <td>Auction Sale</td>
                         </tr>
                         <tr>
-                          <td>Property Type</td>
+                          <td style={{ fontWeight: "700" }}>Property Type</td>
                           {property.property.details.parcel
                             .county_land_use_description ? (
                             <td>
@@ -933,7 +936,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Size</td>
+                          <td style={{ fontWeight: "700" }}>Building Size</td>
                           {property.property.details.structure
                             .total_area_sq_ft ? (
                             <td>
@@ -948,7 +951,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Class</td>
+                          <td style={{ fontWeight: "700" }}>Building Class</td>
                           {property.property.details.structure.quality ? (
                             <td>
                               {property.property.details.structure.quality}
@@ -962,7 +965,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Year Built/Renovated</td>
+                          <td style={{ fontWeight: "700" }}>
+                            Year Built/Renovated
+                          </td>
                           {property.property.details.structure.year_built ? (
                             <td>
                               {property.property.details.structure.year_built}
@@ -972,11 +977,11 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Percent Leased</td>
+                          <td style={{ fontWeight: "700" }}>Percent Leased</td>
                           <td>N/A</td>
                         </tr>
                         <tr>
-                          <td>Tenancy</td>
+                          <td style={{ fontWeight: "700" }}>Tenancy</td>
                           {property.property.details.parcel
                             .standardized_land_use_type ? (
                             <td>
@@ -990,7 +995,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Height</td>
+                          <td style={{ fontWeight: "700" }}>Building Height</td>
                           {property.property.details.structure.stories ? (
                             <td>
                               {property.property.details.structure.stories}{" "}
@@ -1001,7 +1006,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building FAR</td>
+                          <td style={{ fontWeight: "700" }}>Building FAR</td>
                           {property.property.details.parcel.area_acres ? (
                             <td>
                               {property.property.details.parcel.area_acres}{" "}
@@ -1012,7 +1017,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Zoning</td>
+                          <td style={{ fontWeight: "700" }}>Zoning</td>
                           {property.property.details.parcel.zoning ? (
                             <td>{property.property.details.parcel.zoning}</td>
                           ) : (
@@ -1020,7 +1025,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Parking</td>
+                          <td style={{ fontWeight: "700" }}>Parking</td>
                           {property.property.details.structure
                             .parking_spaces_count ? (
                             <td>
@@ -1037,7 +1042,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Frontage</td>
+                          <td style={{ fontWeight: "700" }}>Frontage</td>
                           {property.property.details.parcel.frontage_ft ? (
                             <td>
                               {property.property.details.parcel.frontage_ft} ft
@@ -1047,61 +1052,68 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Opportunity Zone</td>
+                          <td style={{ fontWeight: "700" }}>
+                            Opportunity Zone
+                          </td>
                           <td>No</td>
                         </tr>
                       </tbody>
                     </Table>
                   </Col>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>User</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {property.highestBidders?.length > 0 ? (
-                        property.highestBidders
-                          .slice()
-                          .reverse()
-                          .map((bid, index) => (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{bid.userId}</td>
-                              <td>
-                                <NumberFormat
-                                  value={bid.amount}
-                                  displayType={"text"}
-                                  thousandSeparator={true}
-                                  prefix={"$"}
-                                />
-                              </td>
-                              <td>{new Date(bid.time).toLocaleString()}</td>
-                            </tr>
-                          ))
-                      ) : (
+                {user._id && user.KYC && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead
+                        style={{
+                          backgroundColor: "#d58f5c",
+                        }}
+                      >
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>User</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {property.highestBidders?.length > 0 ? (
+                          property.highestBidders
+                            .reverse()
+                            .map((bid, index) => (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{bid.userId}</td>
+                                <td>
+                                  <NumberFormat
+                                    value={bid.amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"$"}
+                                  />
+                                </td>
+                                <td>{new Date(bid.time).toLocaleString()}</td>
+                              </tr>
+                            ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>

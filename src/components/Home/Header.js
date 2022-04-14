@@ -63,7 +63,6 @@ const Header = ({ color, change }) => {
   };
 
   const handleOnClick = (page) => () => {
-    console.log(page);
     history.push(`/${page}`);
   };
 

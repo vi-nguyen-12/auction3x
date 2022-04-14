@@ -77,7 +77,6 @@ function CarDocus({
   };
 
   const onChange3 = async (e) => {
-    console.log("test");
     setLoader(true);
 
     const formData3 = new FormData();
@@ -657,7 +656,6 @@ function CarDocus({
                               var tempArr = arr;
                               var temp = document;
                               temp.onHover3 = true;
-                              console.log([...tempArr]);
                               setDocument3([...tempArr]);
                             }}
                             onMouseLeave={() => {

@@ -70,13 +70,10 @@ const MultiSellForm = ({ colorChange, toogleShow }) => {
     if (params.id) {
       authService.getIncompleteProperty(params.userId).then((res) => {
         const property = res.data.filter((prop) => prop._id === params.id);
-        console.log(property);
         setPropertyType(property[0].type);
       });
     }
   }, [params.step]);
-
-  console.log(images);
 
   if (step === 0) {
     return (

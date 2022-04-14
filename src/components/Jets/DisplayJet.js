@@ -127,6 +127,7 @@ const Wrap = styled.div`
 
 function DisplayJet({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
+  const auction = useSelector((state) => state.auction);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
@@ -140,6 +141,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [topBid, setTopBid] = useState();
 
@@ -223,6 +225,13 @@ function DisplayJet({ colorChange, toogleChange, property }) {
       }
     }
 
+    if (auction.length > 0) {
+      const prop = auction.filter((item) => item._id === property._id);
+      if (prop.length > 0) {
+        setReserveMet(prop[0].isReservedMet);
+      }
+    }
+
     let topBidders = [];
     if (property.highestBidders) {
       for (let i = 0; i < property.highestBidders.length; i++) {
@@ -240,6 +249,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"
@@ -819,7 +831,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                   </Col>
                 )}
 
-                {approvedToBid === true ? (
+                {approvedToBid === true && user._id && user.KYC && (
                   <Col>
                     {property.highestBid ? (
                       <div
@@ -897,7 +909,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                       </div>
                     )}
                   </Col>
-                ) : null}
+                )}
 
                 <Col>
                   <div
@@ -955,15 +967,15 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Sale Type</td>
-                        <td>Auction</td>
+                        <td style={{ fontWeight: "700" }}>Sale Type</td>
+                        <td style={{ fontWeight: "700" }}>Auction</td>
                       </tr>
                       <tr>
-                        <td>Sale Condition</td>
-                        <td>Auction Sale</td>
+                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
+                        <td style={{ fontWeight: "700" }}>Auction Sale</td>
                       </tr>
                       <tr>
-                        <td>Property Type</td>
+                        <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
                           <td>{property.property.type}</td>
                         ) : (
@@ -971,7 +983,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>registration Mark</td>
+                        <td style={{ fontWeight: "700" }}>registration Mark</td>
                         {property.property.details.registration_mark ? (
                           <td>{property.property.details.registration_mark}</td>
                         ) : (
@@ -979,7 +991,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Aircraft Builder Name</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Aircraft Builder Name
+                        </td>
                         {property.property.details.aircraft_builder_name ? (
                           <td>
                             {property.property.details.aircraft_builder_name}
@@ -989,7 +1003,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Aircraft Model Designation</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Aircraft Model Designation
+                        </td>
                         {property.property.details
                           .aircraft_model_designation ? (
                           <td>
@@ -1003,7 +1019,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Aircraft Serial No.</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Aircraft Serial No.
+                        </td>
                         {property.property.details.aircraft_serial_no ? (
                           <td>
                             {property.property.details.aircraft_serial_no}
@@ -1013,7 +1031,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine Builder Name</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Engine Builder Name
+                        </td>
                         {property.property.details.engine_builder_name ? (
                           <td>
                             {property.property.details.engine_builder_name}
@@ -1023,7 +1043,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>engine_model_designation</td>
+                        <td style={{ fontWeight: "700" }}>
+                          engine_model_designation
+                        </td>
                         {property.property.details.engine_model_designation ? (
                           <td>
                             {property.property.details.engine_model_designation}
@@ -1033,7 +1055,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Number Of Engines</td>
+                        <td style={{ fontWeight: "700" }}>Number Of Engines</td>
                         {property.property.details.number_of_engines ? (
                           <td>{property.property.details.number_of_engines}</td>
                         ) : (
@@ -1041,7 +1063,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Propeller Builder Name</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Propeller Builder Name
+                        </td>
                         {property.property.details.propeller_builder_name ? (
                           <td>
                             {property.property.details.propeller_builder_name}
@@ -1051,7 +1075,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Propeller Model Designation</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Propeller Model Designation
+                        </td>
                         {property.property.details
                           .propeller_model_designation ? (
                           <td>
@@ -1065,7 +1091,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Number Of Aircraft</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Number Of Aircraft
+                        </td>
                         {property.property.details.number_of_aircraft ? (
                           <td>
                             {property.property.details.number_of_aircraft}
@@ -1075,7 +1103,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Imported Aircraft</td>
+                        <td style={{ fontWeight: "700" }}>Imported Aircraft</td>
                         {property.property.details.imported_aircraft ? (
                           <td>{property.property.details.imported_aircraft}</td>
                         ) : (
@@ -1085,51 +1113,53 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                     </tbody>
                   </Table>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>Bidder ID</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
-                      ) : (
+                {user._id && user.KYC && approvedToBid === true && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead style={{ backgroundColor: "#d58f5c" }}>
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>Bidder ID</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {topBid ? (
+                          topBid.map((bid, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{bid.userId}</td>
+                              <td>
+                                <NumberFormat
+                                  value={bid.amount}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              </td>
+                              <td>{new Date(bid.time).toLocaleString()}</td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>

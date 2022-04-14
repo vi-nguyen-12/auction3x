@@ -17,7 +17,6 @@ function MultiFundForm() {
     toogleDocument(document);
   }, [document]);
 
-  console.log(document);
   if (step === 0) {
     return (
       <div className="buy-register-container">

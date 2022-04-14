@@ -29,7 +29,6 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      console.log(results);
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {

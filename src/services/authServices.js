@@ -6,8 +6,6 @@ const apiUrl =
     : "http://localhost:5000";
 const auth_token = document.cookie.split("=")[1];
 
-console.log(apiUrl);
-
 const authService = {
   register(user) {
     return axios.post(apiUrl + "/api/users/register", user);
