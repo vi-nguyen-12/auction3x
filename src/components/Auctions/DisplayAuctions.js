@@ -32,34 +32,38 @@ function DisplayAuctions({ colorChange, toogleChange }) {
   }, []);
   useEffect(() => {
     if (socket) {
-      socket.on(
-        "bid",
-        ({
-          auctionId,
-          highestBid,
-          numberOfBids,
-          highestBidders,
-          isReservedMet,
-        }) => {
-          console.log(auction);
-          if (auctionId === auction._id.toString()) {
-            setAuction((prev) => {
-              prev.highestBidders = highestBidders;
-              prev.highestBid = highestBid;
-              prev.numberOfBids = numberOfBids;
-              prev.isReservedMet = isReservedMet;
-              return prev;
-            });
+      socket
+        .off("bid")
+        .on(
+          "bid",
+          ({
+            auctionId,
+            highestBid,
+            numberOfBids,
+            highestBidders,
+            isReservedMet,
+          }) => {
+            if (auction && auctionId === auction._id) {
+              setAuction((prev) => {
+                return {
+                  ...prev,
+                  highestBid,
+                  numberOfBids,
+                  highestBidders,
+                  isReservedMet,
+                };
+              });
+            }
           }
-        }
-      );
+        );
     }
-  }, [socket, setAuction]);
+  }, [socket, auction]);
   return (
     <>
       {auction ? (
         auction.property.type === "real-estate" ? (
           <DisplayRealEstate
+            socket={socket}
             property={auction}
             colorChange={colorChange}
             toogleChange={toogleChange}
