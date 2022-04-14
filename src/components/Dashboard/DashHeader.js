@@ -3,7 +3,7 @@ import { Row, Col, Button, Container } from "react-bootstrap";
 import { FiSearch } from "react-icons/fi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
-import "../../styles/dashBoardStyle.css";
+import "../../styles/DashBoardStyle.css";
 
 function DashHeader({ location }) {
   return (

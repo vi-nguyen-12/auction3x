@@ -142,7 +142,6 @@ const authService = {
   getOngoingAuctions() {
     return axios.get(apiUrl + "/api/auctions/ongoing");
   },
-
   getOngoingAuctionsByType(type) {
     return axios.get(apiUrl + `/api/auctions/ongoing/${type}`);
   },
@@ -151,7 +150,12 @@ const authService = {
   },
 
   getAuction(id) {
-    return axios.get(apiUrl + `/api/auctions/${id}`);
+    return axios.get(apiUrl + `/api/auctions/${id}`, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   getRegistStatus() {

@@ -6,8 +6,10 @@ import DisplayRealEstate from "../RealEstate/DisplayRealEstate";
 import DisplayCar from "../Cars/DisplayCar";
 import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
+import io from "socket.io-client";
 
 function DisplayAuctions({ colorChange, toogleChange }) {
+  const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
 
@@ -15,7 +17,44 @@ function DisplayAuctions({ colorChange, toogleChange }) {
     authService.getAuction(id).then((res) => {
       setAuction(res.data);
     });
+    // let serverUrl = process.env.REACT_APP_API_URL;
+    let serverUrl = "http://localhost:5000";
+    const newSocket = io(serverUrl, { withCredentials: true });
+    setSocket(newSocket);
+    newSocket.on("connect", () => {
+      console.log("connected socket with back-end");
+    });
+    return () => {
+      newSocket.on("disconnect", () => {
+        console.log("disconnected socket with back-end");
+      });
+    };
   }, []);
+  useEffect(() => {
+    if (socket) {
+      socket.on(
+        "bid",
+        ({
+          auctionId,
+          highestBid,
+          numberOfBids,
+          highestBidders,
+          isReservedMet,
+        }) => {
+          console.log(auction);
+          if (auctionId === auction._id.toString()) {
+            setAuction((prev) => {
+              prev.highestBidders = highestBidders;
+              prev.highestBid = highestBid;
+              prev.numberOfBids = numberOfBids;
+              prev.isReservedMet = isReservedMet;
+              return prev;
+            });
+          }
+        }
+      );
+    }
+  }, [socket, setAuction]);
   return (
     <>
       {auction ? (
