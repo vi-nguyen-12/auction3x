@@ -188,7 +188,7 @@ const CardComp = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={auctionEndDate}
+                            time={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>

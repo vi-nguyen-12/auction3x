@@ -180,8 +180,6 @@ function DisplayJet({ colorChange, toogleChange, property }) {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
-  const [auctionEnded, setAuctionEnded] = useState(false);
-  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -726,7 +724,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                {!registEnded ? (
+                {registEnded === false ? (
                   <Col>
                     <div
                       style={{
@@ -740,7 +738,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                     >
                       <RegistrationTimer
                         toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
+                        time={registerEnd}
                       />
                       <div
                         style={{
@@ -792,10 +790,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer
-                        auctionEndDate={onGoingAuctionEnd}
-                        toogleAuction={toogleAuction}
-                      />
+                      <AuctionTimer time={onGoingAuctionEnd} />
                       <div
                         style={{
                           display: "flex",
@@ -821,10 +816,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer
-                        auctionEndDate={startAuction}
-                        toogleAuction={toogleAuction}
-                      />
+                      <AuctionTimer time={startAuction} />
                       <div
                         style={{
                           display: "flex",
