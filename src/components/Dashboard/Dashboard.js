@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -27,6 +27,10 @@ function Dashboard({ colorChange, toogleChange, toogleShow }) {
   }, []);
   const location = useLocation();
   const path = window.location.pathname;
+  const [isAuthenticated, setisAuthenticated] = useState(false);
+  useEffect(() => {
+    let auth_token = document.cookie.split("=")[1];
+  }, []);
   return (
     <div style={{ display: "flex" }}>
       <Router>

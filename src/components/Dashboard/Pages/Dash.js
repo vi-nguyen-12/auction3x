@@ -119,7 +119,7 @@ function Dash() {
                   getSavedProperty();
                   toogleShowSavedProp(true);
                 }}
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                id={window.location.pathname === "/dashboard" ? "active" : ""}
                 // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
                 className="tabs"
               >
@@ -148,7 +148,7 @@ function Dash() {
                   toogleShowBidAuctions(true);
                 }}
                 className="tabs"
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                id={window.location.pathname === "/dashboard" ? "active" : ""}
               >
                 <span>Bid Auction</span>
               </Button>
@@ -174,7 +174,7 @@ function Dash() {
                   toogleShowApprovedAuctions(true);
                 }}
                 className="tabs"
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                id={window.location.pathname === "/dashboard" ? "active" : ""}
               >
                 <span>Approved</span>
               </Button>

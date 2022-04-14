@@ -39,6 +39,7 @@ function App() {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
         if (response.data.message === "User Logged In") {
+          localStorage.setItem("userId", response.data.user._id);
           dispatch(login(response.data.user));
         } else {
           history.push("/");
