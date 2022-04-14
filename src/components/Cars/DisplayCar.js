@@ -739,7 +739,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                       }}
                     >
                       <RegistrationTimer
-                        toogleRegistEnded={toogleRegistEnded}
+                        time={toogleRegistEnded}
                         RegistrationEndDate={registerEnd}
                       />
                       <div

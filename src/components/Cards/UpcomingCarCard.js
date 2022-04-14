@@ -210,7 +210,7 @@ const UpcomingCarCard = ({
                         <Col md={1} style={{ width: "50%" }}>
                           <div style={{ fontSize: "12px", width: "200px" }}>
                             <RegistrationTimer
-                              RegistrationEndDate={RegistrationEndDate}
+                              time={RegistrationEndDate}
                               toogleRegistEnded={toogleRegistEnded}
                             />
                           </div>

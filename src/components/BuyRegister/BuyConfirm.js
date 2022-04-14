@@ -5,7 +5,7 @@ import authService from "../../services/authServices";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
 
-const BuyConfirm = ({ tooglePlaceBid, property }) => {
+const BuyConfirm = ({ property }) => {
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount

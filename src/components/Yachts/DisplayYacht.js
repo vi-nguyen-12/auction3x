@@ -735,7 +735,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                     >
                       <RegistrationTimer
                         toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
+                        time={registerEnd}
                       />
                       <div
                         style={{

@@ -1397,7 +1397,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} property={property} />
+              <BuyConfirm property={property} />
             </Modal.Body>
           </Modal>
           <Modal
