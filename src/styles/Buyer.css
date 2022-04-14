@@ -31,3 +31,23 @@
 .fund-container .row {
   margin: 20px;
 }
+
+/* Buy COnfirm */
+.prefix {
+  position: relative;
+  right: -10px;
+}
+.has-prefix {
+  padding: 10px;
+  padding-left: 30px;
+  width: 100%; 
+  border-radius: 8px;
+  border: 0;
+  /* background-color: #f2f6fc; */
+  background-color: #f2f6fc;
+}
+
+input.has-prefix {
+  padding-left: 30px;
+  margin-left: -10px;
+}

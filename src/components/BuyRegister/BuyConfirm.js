@@ -252,16 +252,10 @@ const BuyConfirm = ({ tooglePlaceBid }) => {
               padding: "15px",
             }}
           >
+            <span class="prefix">$</span>
             <input
-              style={{
-                padding: "10px",
-                paddingLeft: "20px",
-                width: "100%",
-                borderRadius: "8px",
-                border: "none",
-                backgroundColor: "#f2f6fc",
-              }}
-              type="text"
+              class="has-prefix"
+              type="number"
               placeholder="Enter Amount"
               name="bid"
               defaultValue={bid}
