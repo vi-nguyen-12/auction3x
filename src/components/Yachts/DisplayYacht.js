@@ -180,6 +180,8 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
+  const [auctionEnded, setAuctionEnded] = useState(false);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -787,7 +789,10 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer
+                        auctionEndDate={onGoingAuctionEnd}
+                        toogleAuction={toogleAuction}
+                      />
                       <div
                         style={{
                           display: "flex",
@@ -813,7 +818,10 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer
+                        auctionEndDate={startAuction}
+                        toogleAuction={toogleAuction}
+                      />
                       <div
                         style={{
                           display: "flex",

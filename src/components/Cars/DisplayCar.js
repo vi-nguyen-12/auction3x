@@ -180,6 +180,8 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
+  const [auctionEnded, setAuctionEnded] = useState(false);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -795,7 +797,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     >
                       <AuctionTimer
                         auctionEndDate={onGoingAuctionEnd}
-                        toogleAuction
+                        toogleAuction={toogleAuction}
                       />
                       <div
                         style={{
@@ -824,7 +826,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     >
                       <AuctionTimer
                         auctionEndDate={startAuction}
-                        toogleAuction
+                        toogleAuction = {toogleAuction}
                       />
                       <div
                         style={{

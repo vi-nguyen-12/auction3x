@@ -179,6 +179,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
+  const [auctionEnded, setAuctionEnded] = useState(false);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -809,7 +811,10 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer
+                        auctionEndDate={onGoingAuctionEnd}
+                        toogleAuction={toogleAuction}
+                      />
                       <div
                         style={{
                           display: "flex",
@@ -835,7 +840,10 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer
+                        auctionEndDate={startAuction}
+                        toogleAuction={toogleAuction}
+                      />
                       <div
                         style={{
                           display: "flex",

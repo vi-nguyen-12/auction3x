@@ -20,6 +20,8 @@ const BuyConfirm = ({ tooglePlaceBid, property }) => {
   const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
+  const [auctionEnded, setAuctionEnded] = useState(false);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   useEffect(() => {
     setOnGoingAuctionEnd(propId.auctionEndDate);
@@ -84,7 +86,7 @@ const BuyConfirm = ({ tooglePlaceBid, property }) => {
         <>
           {onGoingAuctionEnd && (
             <div style={{ marginLeft: "15%", marginTop: "20px" }}>
-              <AuctionTimer auctionEndDate={onGoingAuctionEnd} toogleAuction />
+              <AuctionTimer auctionEndDate={onGoingAuctionEnd} toogleAuction={toogleAuction} />
             </div>
           )}
           <Table borderless>
