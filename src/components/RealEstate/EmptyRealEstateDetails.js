@@ -323,7 +323,6 @@ function EmptyRealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-      console.log(submitedData);
       tooglePropertyData(submitedData);
       toogleStep(step + 1);
     }

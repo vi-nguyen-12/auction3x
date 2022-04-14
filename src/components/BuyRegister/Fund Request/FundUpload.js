@@ -9,7 +9,6 @@ import authService from "../../../services/authServices";
 import "../../../styles/Buyer.css";
 
 const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
-  console.log(docu);
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);

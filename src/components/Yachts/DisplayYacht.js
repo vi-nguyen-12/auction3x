@@ -127,6 +127,7 @@ const Wrap = styled.div`
 
 function DisplayYacht({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
+  const auction = useSelector((state) => state.auction);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
@@ -140,6 +141,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [topBid, setTopBid] = useState();
 
@@ -223,6 +225,13 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
       }
     }
 
+    if (auction.length > 0) {
+      const prop = auction.filter((item) => item.propertyId === property._id);
+      if (prop.length > 0) {
+        setReserveMet(prop[0].isReservedMet);
+      }
+    }
+
     let topBidders = [];
     if (property.highestBidders) {
       for (let i = 0; i < property.highestBidders.length; i++) {
@@ -240,6 +249,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"
@@ -709,7 +721,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                {!registEnded ? (
+                {registEnded === false ? (
                   <Col>
                     <div
                       style={{
@@ -723,7 +735,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                     >
                       <RegistrationTimer
                         toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
+                        time={registerEnd}
                       />
                       <div
                         style={{
@@ -775,7 +787,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer time={onGoingAuctionEnd} />
                       <div
                         style={{
                           display: "flex",
@@ -801,7 +813,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer time={startAuction} />
                       <div
                         style={{
                           display: "flex",
@@ -952,15 +964,15 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Sale Type</td>
+                        <td style={{ fontWeight: "700" }}>Sale Type</td>
                         <td>Auction</td>
                       </tr>
                       <tr>
-                        <td>Sale Condition</td>
+                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
                         <td>Auction Sale</td>
                       </tr>
                       <tr>
-                        <td>Property Type</td>
+                        <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
                           <td>{property.property.type}</td>
                         ) : (
@@ -968,7 +980,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Vessel Registration Number</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Vessel Registration Number
+                        </td>
                         {property.property.details
                           .vessel_registration_number ? (
                           <td>
@@ -982,7 +996,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Vessel Manufacturing Date</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Vessel Manufacturing Date
+                        </td>
                         {property.property.details.vessel_manufacturing_date ? (
                           <td>
                             {
@@ -995,7 +1011,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Manufacture Mark</td>
+                        <td style={{ fontWeight: "700" }}>Manufacture Mark</td>
                         {property.property.details.manufacture_mark ? (
                           <td>{property.property.details.manufacture_mark}</td>
                         ) : (
@@ -1003,7 +1019,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Manufacturer Name</td>
+                        <td style={{ fontWeight: "700" }}>Manufacturer Name</td>
                         {property.property.details.manufacturer_name ? (
                           <td>{property.property.details.manufacturer_name}</td>
                         ) : (
@@ -1011,7 +1027,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine Type</td>
+                        <td style={{ fontWeight: "700" }}>Engine Type</td>
                         {property.property.details.engine_type ? (
                           <td>{property.property.details.engine_type}</td>
                         ) : (
@@ -1019,7 +1035,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine Manufacture Name</td>
+                        <td style={{ fontWeight: "700" }}>
+                          Engine Manufacture Name
+                        </td>
                         {property.property.details.engine_manufacture_name ? (
                           <td>
                             {property.property.details.engine_manufacture_name}
@@ -1029,7 +1047,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine Deck Type</td>
+                        <td style={{ fontWeight: "700" }}>Engine Deck Type</td>
                         {property.property.details.engine_deck_type ? (
                           <td>{property.property.details.engine_deck_type}</td>
                         ) : (
@@ -1037,7 +1055,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Running Cost</td>
+                        <td style={{ fontWeight: "700" }}>Running Cost</td>
                         {property.property.details.running_cost ? (
                           <td>{property.property.details.running_cost}</td>
                         ) : (
@@ -1045,7 +1063,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>No. Of Crew Required</td>
+                        <td style={{ fontWeight: "700" }}>
+                          No. Of Crew Required
+                        </td>
                         {property.property.details.no_of_crew_required ? (
                           <td>
                             {property.property.details.no_of_crew_required}
@@ -1057,51 +1077,53 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                     </tbody>
                   </Table>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>Bidder ID</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
-                      ) : (
+                {user._id && user.KYC && approvedToBid === true && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead style={{ backgroundColor: "#d58f5c" }}>
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>Bidder ID</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {topBid ? (
+                          topBid.map((bid, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{bid.userId}</td>
+                              <td>
+                                <NumberFormat
+                                  value={bid.amount}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              </td>
+                              <td>{new Date(bid.time).toLocaleString()}</td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>

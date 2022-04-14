@@ -10,7 +10,6 @@ import ForgotPass from "../../../Users/ForgotPass";
 import SignUp from "../../../Users/SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../../../Auctions/AuctionTimer";
-import RegistrationTimer from "../../../Auctions/RegistrationTimer";
 import authService from "../../../../services/authServices";
 import "../../../../styles/Card.css";
 

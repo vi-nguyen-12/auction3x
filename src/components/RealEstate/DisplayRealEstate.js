@@ -126,21 +126,8 @@ const Wrap = styled.div`
 
 function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
-  const registProperty = useSelector((state) => state.registProperty);
-  let checkProperty = [];
-  for (let i = 0; i < registProperty.length; i++) {
-    checkProperty = [...checkProperty, registProperty[i]];
-  }
-  const registeredProperty = checkProperty.find(
-    (item) => item._id === property._id
-  );
-  const [setRegistered, setRegisteredProperty] = useState(false);
-  const [registerEnd, setRegisterEnd] = useState();
   const [approvedToBid, setApprovedToBid] = useState(false);
-
-  const [topBid, setTopBid] = useState();
-
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -161,7 +148,6 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
-
   const toogleBid = () => setBid(!bid);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -169,7 +155,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
-  const [startAuction, setStartAuction] = useState();
+
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -178,69 +164,26 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const [realTab, setRealTab] = useState("Investment Opportunity");
 
-  //if auction id is found, then set property as already registered
+  // if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
-
-  const handleKYC = () => {
-    if (!user.KYC) {
-      return alert("Please Complete your KYC first to bid");
-    }
-  };
 
   useEffect(() => {
     colorChange("black");
     toogleChange();
-
-    //set registration end
-    setRegisterEnd(property ? property.registerEndDate : null);
-
-    //set dates for ongoing auction end date
-    setOnGoingAuctionEnd(property ? property.auctionEndDate : null);
-    setStartAuction(property ? property.auctionStartDate : null);
-
-    //set location for map
-    setLocation({
-      name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
-    });
-
-    if (user._id && user.KYC) {
-      if (registeredProperty !== undefined) {
-        setRegisteredProperty(true);
-      }
-
-      if (registeredProperty) {
-        if (registeredProperty.isApproved === "success") {
-          setApprovedToBid(true);
-        }
-      }
-    }
-
-    let topBidders = [];
-    if (property.highestBidders) {
-      for (let i = 0; i < property.highestBidders.length; i++) {
-        topBidders = [...topBidders, property.highestBidders[i]];
-      }
-      setTopBid(topBidders.reverse());
-    } else {
-      setTopBid([]);
-    }
-  }, [property, registProperty]);
+  }, []);
 
   return (
     <>
-      {property && location && startAuction && (
+      {/* {property && location && startAuction && ( */}
+      {property && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
-            <span className="badge">Reserved Met!</span>
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"
@@ -558,7 +501,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   </div>
                 </div>
               )}
-
+              {/* 
               {user._id && !user.KYC && (
                 <div
                   style={{
@@ -597,9 +540,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </button>
                   </div>
                 </div>
-              )}
+              )} */}
 
-              {user._id &&
+              {/* {user._id &&
               user.KYC &&
               !setRegistered &&
               new Date().toISOString() < registerEnd ? (
@@ -684,9 +627,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </div>
                   </div>
                 )
-              )}
+              )} */}
 
-              {user._id && user.KYC && setRegistered && (
+              {user._id && user.KYC && (
                 <div
                   style={{
                     display: "grid",
@@ -705,7 +648,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={!approvedToBid}
+                    disabled={!property.highestBidders}
                   >
                     Bid Now!
                   </button>
@@ -732,7 +675,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           <Row style={{ padding: "35px" }}>
             <Col style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                {!registEnded ? (
+                {registEnded === false ? (
                   <Col>
                     <div
                       style={{
@@ -745,8 +688,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       }}
                     >
                       <RegistrationTimer
+                        time={property.registerEndDate}
                         toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
                       />
                       <div
                         style={{
@@ -786,7 +729,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </div>
                   </Col>
                 )}
-                {new Date().toISOString() < onGoingAuctionEnd ? (
+                {new Date().toISOString() < property.auctionEndDate ? (
                   <Col>
                     <div
                       style={{
@@ -798,7 +741,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} />
+                      <AuctionTimer time={property.auctionEndDate} />
                       <div
                         style={{
                           display: "flex",
@@ -824,7 +767,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} />
+                      <AuctionTimer time={property.auctionStartDate} />
                       <div
                         style={{
                           display: "flex",
@@ -975,15 +918,15 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     <Table responsive>
                       <tbody className="propInfo">
                         <tr>
-                          <td>Sale Type</td>
+                          <td style={{ fontWeight: "700" }}>Sale Type</td>
                           <td>Auction</td>
                         </tr>
                         <tr>
-                          <td>Sale Condition</td>
+                          <td style={{ fontWeight: "700" }}>Sale Condition</td>
                           <td>Auction Sale</td>
                         </tr>
                         <tr>
-                          <td>Property Type</td>
+                          <td style={{ fontWeight: "700" }}>Property Type</td>
                           {property.property.details.parcel
                             .county_land_use_description ? (
                             <td>
@@ -997,7 +940,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Size</td>
+                          <td style={{ fontWeight: "700" }}>Building Size</td>
                           {property.property.details.structure
                             .total_area_sq_ft ? (
                             <td>
@@ -1012,7 +955,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Class</td>
+                          <td style={{ fontWeight: "700" }}>Building Class</td>
                           {property.property.details.structure.quality ? (
                             <td>
                               {property.property.details.structure.quality}
@@ -1026,7 +969,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Year Built/Renovated</td>
+                          <td style={{ fontWeight: "700" }}>
+                            Year Built/Renovated
+                          </td>
                           {property.property.details.structure.year_built ? (
                             <td>
                               {property.property.details.structure.year_built}
@@ -1036,11 +981,11 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Percent Leased</td>
+                          <td style={{ fontWeight: "700" }}>Percent Leased</td>
                           <td>N/A</td>
                         </tr>
                         <tr>
-                          <td>Tenancy</td>
+                          <td style={{ fontWeight: "700" }}>Tenancy</td>
                           {property.property.details.parcel
                             .standardized_land_use_type ? (
                             <td>
@@ -1054,7 +999,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building Height</td>
+                          <td style={{ fontWeight: "700" }}>Building Height</td>
                           {property.property.details.structure.stories ? (
                             <td>
                               {property.property.details.structure.stories}{" "}
@@ -1065,7 +1010,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Building FAR</td>
+                          <td style={{ fontWeight: "700" }}>Building FAR</td>
                           {property.property.details.parcel.area_acres ? (
                             <td>
                               {property.property.details.parcel.area_acres}{" "}
@@ -1076,7 +1021,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Zoning</td>
+                          <td style={{ fontWeight: "700" }}>Zoning</td>
                           {property.property.details.parcel.zoning ? (
                             <td>{property.property.details.parcel.zoning}</td>
                           ) : (
@@ -1084,7 +1029,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Parking</td>
+                          <td style={{ fontWeight: "700" }}>Parking</td>
                           {property.property.details.structure
                             .parking_spaces_count ? (
                             <td>
@@ -1101,7 +1046,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Frontage</td>
+                          <td style={{ fontWeight: "700" }}>Frontage</td>
                           {property.property.details.parcel.frontage_ft ? (
                             <td>
                               {property.property.details.parcel.frontage_ft} ft
@@ -1111,58 +1056,68 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                           )}
                         </tr>
                         <tr>
-                          <td>Opportunity Zone</td>
+                          <td style={{ fontWeight: "700" }}>
+                            Opportunity Zone
+                          </td>
                           <td>No</td>
                         </tr>
                       </tbody>
                     </Table>
                   </Col>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>User</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
-                      ) : (
+                {user._id && user.KYC && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead
+                        style={{
+                          backgroundColor: "#d58f5c",
+                        }}
+                      >
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>User</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {property.highestBidders?.length > 0 ? (
+                          property.highestBidders
+                            .reverse()
+                            .map((bid, index) => (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{bid.userId}</td>
+                                <td>
+                                  <NumberFormat
+                                    value={bid.amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"$"}
+                                  />
+                                </td>
+                                <td>{new Date(bid.time).toLocaleString()}</td>
+                              </tr>
+                            ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>
@@ -1446,7 +1401,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
+              <BuyConfirm property={property} />
             </Modal.Body>
           </Modal>
           <Modal

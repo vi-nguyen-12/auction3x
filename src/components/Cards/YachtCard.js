@@ -18,7 +18,7 @@ const YachtCard = ({
   url,
   data,
   id,
-  auctionStartDate,
+  reserveMet,
   auctionEndDate,
   startingBid,
 }) => {
@@ -129,6 +129,9 @@ const YachtCard = ({
               cursor: "pointer",
             }}
           />
+          {reserveMet === true && (
+            <div className="badge-label" aria-label="Reserved Met !" />
+          )}
           <button
             onClick={toggleImage}
             style={{
@@ -198,7 +201,7 @@ const YachtCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={auctionEndDate}
+                            time={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>

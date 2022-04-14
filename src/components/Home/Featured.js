@@ -148,6 +148,7 @@ const Featured = () => {
                           auctionStartDate={item.auctionStartDate}
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
                         />
                       ) : item.property.type === "car" ? (
                         <CarCard
@@ -157,6 +158,7 @@ const Featured = () => {
                           auctionStartDate={item.auctionStartDate}
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
                         />
                       ) : item.property.type === "jet" ? (
                         <JetCard
@@ -166,6 +168,7 @@ const Featured = () => {
                           auctionStartDate={item.auctionStartDate}
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
                         />
                       ) : item.property.type === "yacht" ? (
                         <YachtCard
@@ -175,6 +178,7 @@ const Featured = () => {
                           auctionStartDate={item.auctionStartDate}
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
                         />
                       ) : null}
                     </Col>

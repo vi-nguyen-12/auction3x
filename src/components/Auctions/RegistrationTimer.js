@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 
-const RegistrationTimer = ({ RegistrationEndDate, toogleRegistEnded }) => {
+const RegistrationTimer = ({ time, toogleRegistEnded }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -10,7 +10,7 @@ const RegistrationTimer = ({ RegistrationEndDate, toogleRegistEnded }) => {
   let interval = useRef();
   const startTimer = () => {
     interval.current = setInterval(() => {
-      const countDownDate = new Date(RegistrationEndDate).getTime();
+      const countDownDate = new Date(time).getTime();
       const now = new Date().getTime();
       const distance = countDownDate - now;
 

@@ -6,8 +6,6 @@ const apiUrl =
     : "http://localhost:5000";
 const auth_token = document.cookie.split("=")[1];
 
-console.log(apiUrl);
-
 const authService = {
   register(user) {
     return axios.post(apiUrl + "/api/users/register", user);
@@ -142,7 +140,6 @@ const authService = {
   getOngoingAuctions() {
     return axios.get(apiUrl + "/api/auctions/ongoing");
   },
-
   getOngoingAuctionsByType(type) {
     return axios.get(apiUrl + `/api/auctions/ongoing/${type}`);
   },
@@ -151,7 +148,12 @@ const authService = {
   },
 
   getAuction(id) {
-    return axios.get(apiUrl + `/api/auctions/${id}`);
+    return axios.get(apiUrl + `/api/auctions/${id}`, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   getRegistStatus() {
@@ -220,7 +222,6 @@ const authService = {
   },
 
   saveProperty(data) {
-    console.log(auth_token ? auth_token : document.cookie.split("=")[1]);
     return axios.put(
       apiUrl + `/api/users/${data.userId}/${data.auctionId}/liked`,
       {},

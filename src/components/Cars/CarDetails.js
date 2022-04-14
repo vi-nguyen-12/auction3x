@@ -318,7 +318,6 @@ function CarDetails({
   };
 
   const onSubmit = (data) => {
-    console.log(reservedAmount);
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {

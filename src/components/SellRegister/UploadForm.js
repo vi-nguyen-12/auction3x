@@ -24,7 +24,6 @@ const UploadForm = ({
   image,
   video,
 }) => {
-  console.log(image);
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -83,7 +82,6 @@ const UploadForm = ({
     if (propertyType === "real-estate") {
       if (propId || params.id) {
         if (sellStep === 2 || parseInt(params.step) === 2) {
-          console.log("Hello");
           const datas = {
             id: propId ? propId : params.id,
             details: {
@@ -101,7 +99,6 @@ const UploadForm = ({
             }
           });
         } else if (sellStep === 1 || parseInt(params.step) === 1) {
-          console.log("Hello");
           const datas = {
             id: propId ? propId : params.id,
             details: {
@@ -257,7 +254,6 @@ const UploadForm = ({
     }
   };
 
-  console.log(images);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

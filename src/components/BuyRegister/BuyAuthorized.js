@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
 const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
-  console.log(document);
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);

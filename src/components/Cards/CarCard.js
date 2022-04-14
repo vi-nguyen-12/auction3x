@@ -14,7 +14,14 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const CarCard = ({ url, data, id, startingBid, auctionEndDate }) => {
+const CarCard = ({
+  url,
+  data,
+  id,
+  startingBid,
+  auctionEndDate,
+  reserveMet,
+}) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
@@ -108,6 +115,9 @@ const CarCard = ({ url, data, id, startingBid, auctionEndDate }) => {
               cursor: "pointer",
             }}
           />
+          {reserveMet === true && (
+            <div className="badge-label" aria-label="Reserved Met !" />
+          )}
           <button
             onClick={toggleImage}
             style={{
@@ -175,7 +185,7 @@ const CarCard = ({ url, data, id, startingBid, auctionEndDate }) => {
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
-                            auctionEndDate={auctionEndDate}
+                            time={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
                         </div>

@@ -127,6 +127,7 @@ const Wrap = styled.div`
 
 function DisplayCar({ colorChange, toogleChange, property }) {
   const user = useSelector((state) => state.user);
+  const auction = useSelector((state) => state.auction);
   const registProperty = useSelector((state) => state.registProperty);
   let checkProperty = [];
   for (let i = 0; i < registProperty.length; i++) {
@@ -140,6 +141,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
   const [approvedToBid, setApprovedToBid] = useState(false);
+  const [reserveMet, setReserveMet] = useState(false);
 
   const [topBid, setTopBid] = useState();
 
@@ -223,6 +225,13 @@ function DisplayCar({ colorChange, toogleChange, property }) {
       }
     }
 
+    if (auction.length > 0) {
+      const prop = auction.filter((item) => item.property._id === property._id);
+      if (prop.length > 0) {
+        setReserveMet(prop[0].isReservedMet);
+      }
+    }
+
     let topBidders = [];
     if (property.highestBidders) {
       for (let i = 0; i < property.highestBidders.length; i++) {
@@ -241,6 +250,9 @@ function DisplayCar({ colorChange, toogleChange, property }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
+            {reserveMet === true && (
+              <span className="badge">Reserved Met!</span>
+            )}
             <img
               src={property.property.images[0].url}
               alt="Snow"
@@ -714,7 +726,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
           <Row style={{ padding: "35px" }}>
             <Col sm={8} style={{ display: "grid" }}>
               <Row xs="auto" style={{ width: "100vw" }}>
-                {!registEnded ? (
+                {registEnded === false ? (
                   <Col>
                     <div
                       style={{
@@ -728,7 +740,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     >
                       <RegistrationTimer
                         toogleRegistEnded={toogleRegistEnded}
-                        RegistrationEndDate={registerEnd}
+                        time={registerEnd}
                       />
                       <div
                         style={{
@@ -781,7 +793,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={onGoingAuctionEnd} toogleAuction />
+                      <AuctionTimer time={onGoingAuctionEnd} />
                       <div
                         style={{
                           display: "flex",
@@ -807,7 +819,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer auctionEndDate={startAuction} toogleAuction />
+                      <AuctionTimer time={startAuction} />
                       <div
                         style={{
                           display: "flex",
@@ -958,15 +970,15 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Table responsive>
                     <tbody className="propInfo">
                       <tr>
-                        <td>Sale Type</td>
+                        <td style={{ fontWeight: "700" }}>Sale Type</td>
                         <td>Auction</td>
                       </tr>
                       <tr>
-                        <td>Sale Condition</td>
+                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
                         <td>Auction Sale</td>
                       </tr>
                       <tr>
-                        <td>Property Type</td>
+                        <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
                           <td>{property.property.type}</td>
                         ) : (
@@ -974,7 +986,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Make</td>
+                        <td style={{ fontWeight: "700" }}>Make</td>
                         {property.property.details.make ? (
                           <td>{property.property.details.make}</td>
                         ) : (
@@ -982,7 +994,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Model</td>
+                        <td style={{ fontWeight: "700" }}>Model</td>
                         {property.property.details.model ? (
                           <td>{property.property.details.model}</td>
                         ) : (
@@ -990,7 +1002,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Year</td>
+                        <td style={{ fontWeight: "700" }}>Year</td>
                         {property.property.details.year ? (
                           <td>{property.property.details.year}</td>
                         ) : (
@@ -998,7 +1010,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Color</td>
+                        <td style={{ fontWeight: "700" }}>Color</td>
                         {property.property.details.color ? (
                           <td>{property.property.details.color}</td>
                         ) : (
@@ -1006,7 +1018,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Mileage</td>
+                        <td style={{ fontWeight: "700" }}>Mileage</td>
                         {property.property.details.mileage ? (
                           <td>{property.property.details.mileage}</td>
                         ) : (
@@ -1014,7 +1026,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Transmission</td>
+                        <td style={{ fontWeight: "700" }}>Transmission</td>
                         {property.property.details.transmission ? (
                           <td>{property.property.details.transmission}</td>
                         ) : (
@@ -1022,7 +1034,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>VIN</td>
+                        <td style={{ fontWeight: "700" }}>VIN</td>
                         {property.property.details.VIN ? (
                           <td>{property.property.details.VIN}</td>
                         ) : (
@@ -1030,7 +1042,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Car Type</td>
+                        <td style={{ fontWeight: "700" }}>Car Type</td>
                         {property.property.details.car_type ? (
                           <td>{property.property.details.car_type}</td>
                         ) : (
@@ -1038,7 +1050,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Fuel Type</td>
+                        <td style={{ fontWeight: "700" }}>Fuel Type</td>
                         {property.property.details.fuel_type ? (
                           <td>{property.property.details.fuel_type}</td>
                         ) : (
@@ -1046,7 +1058,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Condition</td>
+                        <td style={{ fontWeight: "700" }}>Condition</td>
                         {property.property.details.condition ? (
                           <td>{property.property.details.condition}</td>
                         ) : (
@@ -1054,7 +1066,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Engine</td>
+                        <td style={{ fontWeight: "700" }}>Engine</td>
                         {property.property.details.engine ? (
                           <td>{property.property.details.engine}</td>
                         ) : (
@@ -1062,7 +1074,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         )}
                       </tr>
                       <tr>
-                        <td>Power</td>
+                        <td style={{ fontWeight: "700" }}>Power</td>
                         {property.property.details.power ? (
                           <td>{property.property.details.power}</td>
                         ) : (
@@ -1072,51 +1084,53 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     </tbody>
                   </Table>
                 </Col>
-                <Col>
-                  <Table
-                    responsive
-                    striped
-                    style={{
-                      margin: "auto",
-                      justifyContent: "center",
-                      textAlign: "center",
-                      width: "auto",
-                      height: "auto",
-                    }}
-                  >
-                    <thead style={{ backgroundColor: "#d58f5c" }}>
-                      <tr>
-                        <th>#</th>
-                        <th>Bidder ID</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topBid ? (
-                        topBid.map((bid, index) => (
-                          <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{bid.userId}</td>
-                            <td>
-                              <NumberFormat
-                                value={bid.amount}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"$"}
-                              />
-                            </td>
-                            <td>{new Date(bid.time).toLocaleString()}</td>
-                          </tr>
-                        ))
-                      ) : (
+                {user._id && user.KYC && approvedToBid === true && (
+                  <Col>
+                    <Table
+                      responsive
+                      striped
+                      style={{
+                        margin: "auto",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        width: "auto",
+                        height: "auto",
+                      }}
+                    >
+                      <thead style={{ backgroundColor: "#d58f5c" }}>
                         <tr>
-                          <td>No bids yet</td>
+                          <th>#</th>
+                          <th>Bidder ID</th>
+                          <th>Bid Amount</th>
+                          <th>Date/Time</th>
                         </tr>
-                      )}
-                    </tbody>
-                  </Table>
-                </Col>
+                      </thead>
+                      <tbody>
+                        {topBid ? (
+                          topBid.map((bid, index) => (
+                            <tr key={index}>
+                              <td>{index + 1}</td>
+                              <td>{bid.userId}</td>
+                              <td>
+                                <NumberFormat
+                                  value={bid.amount}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"$"}
+                                />
+                              </td>
+                              <td>{new Date(bid.time).toLocaleString()}</td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td>No bids yet</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </Table>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>
