@@ -144,7 +144,6 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
   const toggleImage = () => setFavorite(!favorite);
 
   const [bid, setBid] = useState(false);
-  const [topBidders, setTopBidders] = useState([]);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const toogleRegister = () => setShowRegister(!showRegister);
@@ -189,12 +188,6 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
         ? property.property.details.property_address.longitude
         : null,
     });
-
-    //reverse top bidders table
-    if (property.highestBidders) {
-      let topBidders = property.highestBidders.reverse();
-      setTopBidders(topBidders);
-    }
   }, [property]);
 
   return (
@@ -502,7 +495,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                 </div>
               )}
 
-              {user._id && !user.KYC && (
+              {/* {user._id && !user.KYC && (
                 <div
                   style={{
                     display: "grid",
@@ -540,10 +533,11 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                     </button>
                   </div>
                 </div>
-              )}
+              )} */}
 
               {user._id &&
               property.isNotRegisteredToBuy &&
+              !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
                 <div
                   style={{
@@ -585,6 +579,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
               ) : (
                 user._id &&
                 property.isNotRegisteredToBuy &&
+                property.isOwner &&
                 new Date().toISOString() > property.registerEndDate && (
                   <div
                     style={{
@@ -627,7 +622,7 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                 )
               )}
 
-              {user._id && !property.isNotRegisteredToBuy && (
+              {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
                 <div
                   style={{
                     display: "grid",
@@ -1052,8 +1047,9 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {property.highestBidders.length > 0 ? (
+                        {property.highestBidders?.length > 0 ? (
                           property.highestBidders
+                            .slice()
                             .reverse()
                             .map((bid, index) => (
                               <tr key={index}>

@@ -541,6 +541,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
 
               {user._id &&
               property.isNotRegisteredToBuy &&
+              !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
                 <div
                   style={{
@@ -582,6 +583,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
               ) : (
                 user._id &&
                 property.isNotRegisteredToBuy &&
+                property.isOwner &&
                 new Date().toISOString() > property.registerEndDate && (
                   <div
                     style={{
@@ -624,7 +626,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                 )
               )}
 
-              {user._id && !property.isNotRegisteredToBuy && (
+              {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
                 <div
                   style={{
                     display: "grid",
@@ -1082,8 +1084,9 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {property.highestBidders.length > 0 ? (
+                        {property.highestBidders?.length > 0 ? (
                           property.highestBidders
+                            .slice()
                             .reverse()
                             .map((bid, index) => (
                               <tr key={index}>

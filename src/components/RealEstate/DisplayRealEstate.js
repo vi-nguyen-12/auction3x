@@ -140,7 +140,6 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toggleImage = () => setFavorite(!favorite);
 
   const [bid, setBid] = useState(false);
-  const [topBidders, setTopBidders] = useState([]);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [registEnded, setRegistEnded] = useState(false);
@@ -181,16 +180,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
         ? property.property.details.property_address.longitude
         : null,
     });
-
-    if (property.highestBidders) {
-      if (property.highestBidders.length > 0) {
-        let topBidders = property.highestBidders.reverse();
-        setTopBidders(topBidders);
-      }
-    }
   }, [property]);
-
-  console.log(topBidders);
 
   return (
     <>
@@ -648,9 +638,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 )
               )}
 
-              {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner ? (
+              {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
                 <div
                   style={{
                     display: "grid",
@@ -689,47 +677,6 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </button>
                   </div>
                 </div>
-              ) : (
-                property.isOwner && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
-                    <button
-                      style={{
-                        backgroundColor: "#e8a676",
-                        borderRadius: "10px",
-                        border: "0",
-                        width: "200px",
-                        height: "50px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
-                      onClick={tooglePlaceBid}
-                      disabled
-                    >
-                      Bid Now!
-                    </button>
-                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                      <button
-                        style={{
-                          fontWeight: "500",
-                          border: "0",
-                          borderBottom: "1px solid #919191",
-                          backgroundColor: "transparent",
-                          width: "fit-content",
-                          pointer: "cursor",
-                        }}
-                        onClick={executeScroll}
-                      >
-                        View Documents
-                      </button>
-                    </div>
-                  </div>
-                )
               )}
             </Col>
           </Row>
