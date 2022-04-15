@@ -29,7 +29,10 @@
   border-radius: 4px;
   padding: 8px;
   font-weight: 800;
-  height: 50px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sell-register-container {

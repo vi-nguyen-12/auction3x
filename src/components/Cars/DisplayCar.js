@@ -126,26 +126,10 @@ const Wrap = styled.div`
 `;
 
 function DisplayCar({ colorChange, toogleChange, property }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
-  const auction = useSelector((state) => state.auction);
-  const registProperty = useSelector((state) => state.registProperty);
-  let checkProperty = [];
-  for (let i = 0; i < registProperty.length; i++) {
-    checkProperty = [...checkProperty, registProperty[i]];
-  }
-  const registeredProperty = checkProperty.find(
-    (item) => item._id === property._id
-  );
-  const [setRegistered, setRegisteredProperty] = useState(false);
-  const [registerEnd, setRegisterEnd] = useState();
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
-  const [approvedToBid, setApprovedToBid] = useState(false);
-  const [reserveMet, setReserveMet] = useState(false);
-
-  const [topBid, setTopBid] = useState();
-
-  const [onGoingAuctionEnd, setOnGoingAuctionEnd] = useState();
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -159,20 +143,17 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => setFavorite(!favorite);
 
-  const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
 
-  const toogleBid = () => setBid(!bid);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
-  const [startAuction, setStartAuction] = useState();
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -195,13 +176,6 @@ function DisplayCar({ colorChange, toogleChange, property }) {
     colorChange("black");
     toogleChange();
 
-    //set registration end
-    setRegisterEnd(property ? property.registerEndDate : null);
-
-    //set dates for ongoing auction end date
-    setOnGoingAuctionEnd(property ? property.auctionEndDate : null);
-    setStartAuction(property ? property.auctionStartDate : null);
-
     //set location for map
     setLocation({
       name: "Property Location",
@@ -212,45 +186,16 @@ function DisplayCar({ colorChange, toogleChange, property }) {
         ? property.property.details.property_address.longitude
         : null,
     });
-
-    if (user._id && user.KYC) {
-      if (registeredProperty !== undefined) {
-        setRegisteredProperty(true);
-      }
-
-      if (registeredProperty) {
-        if (registeredProperty.isApproved === "success") {
-          setApprovedToBid(true);
-        }
-      }
-    }
-
-    if (auction.length > 0) {
-      const prop = auction.filter((item) => item.property._id === property._id);
-      if (prop.length > 0) {
-        setReserveMet(prop[0].isReservedMet);
-      }
-    }
-
-    let topBidders = [];
-    if (property.highestBidders) {
-      for (let i = 0; i < property.highestBidders.length; i++) {
-        topBidders = [...topBidders, property.highestBidders[i]];
-      }
-      setTopBid(topBidders.reverse());
-    } else {
-      setTopBid([]);
-    }
-  }, [property, registProperty]);
+  }, [property]);
 
   return (
     <>
-      {location && property && startAuction && (
+      {location && property && (
         <>
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
-            {reserveMet === true && (
+            {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
             )}
             <img
@@ -552,7 +497,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                 </div>
               )}
 
-              {user._id && !user.KYC && (
+              {/* {user._id && !user.KYC && (
                 <div
                   style={{
                     display: "grid",
@@ -590,12 +535,11 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     </button>
                   </div>
                 </div>
-              )}
+              )} */}
 
               {user._id &&
-              user.KYC &&
-              !setRegistered &&
-              new Date().toISOString() < registerEnd ? (
+              property.isNotRegisteredToBuy &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div
                   style={{
                     display: "grid",
@@ -635,9 +579,8 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                 </div>
               ) : (
                 user._id &&
-                user.KYC &&
-                !setRegistered &&
-                new Date().toISOString() > registerEnd && (
+                property.isNotRegisteredToBuy &&
+                new Date().toISOString() > property.registerEndDate && (
                   <div
                     style={{
                       display: "grid",
@@ -679,7 +622,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                 )
               )}
 
-              {user._id && user.KYC && setRegistered && (
+              {user._id && !property.isNotRegisteredToBuy && (
                 <div
                   style={{
                     display: "grid",
@@ -698,7 +641,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={!approvedToBid}
+                    disabled={property.highestBidders ? false : true}
                   >
                     Bid Now!
                   </button>
@@ -740,7 +683,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     >
                       <RegistrationTimer
                         toogleRegistEnded={toogleRegistEnded}
-                        time={registerEnd}
+                        time={property.registerEndDate}
                       />
                       <div
                         style={{
@@ -780,8 +723,8 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     </div>
                   </Col>
                 )}
-                {new Date().toISOString() < onGoingAuctionEnd &&
-                new Date().toISOString() > startAuction ? (
+                {new Date().toISOString() < property.auctionEndDate &&
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -793,7 +736,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer time={onGoingAuctionEnd} />
+                      <AuctionTimer time={property.auctionEndDate} />
                       <div
                         style={{
                           display: "flex",
@@ -819,7 +762,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer time={startAuction} />
+                      <AuctionTimer time={property.auctionStartDate} />
                       <div
                         style={{
                           display: "flex",
@@ -834,7 +777,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   </Col>
                 )}
 
-                {approvedToBid === true ? (
+                {property.highestBidders && (
                   <Col>
                     {property.highestBid ? (
                       <div
@@ -912,7 +855,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                       </div>
                     )}
                   </Col>
-                ) : null}
+                )}
 
                 <Col>
                   <div
@@ -1084,7 +1027,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     </tbody>
                   </Table>
                 </Col>
-                {user._id && user.KYC && approvedToBid === true && (
+                {user._id && user.KYC && property.highestBidders && (
                   <Col>
                     <Table
                       responsive
@@ -1106,22 +1049,24 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {topBid ? (
-                          topBid.map((bid, index) => (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{bid.userId}</td>
-                              <td>
-                                <NumberFormat
-                                  value={bid.amount}
-                                  displayType={"text"}
-                                  thousandSeparator={true}
-                                  prefix={"$"}
-                                />
-                              </td>
-                              <td>{new Date(bid.time).toLocaleString()}</td>
-                            </tr>
-                          ))
+                        {property.highestBidders ? (
+                          property.highestBidders
+                            .reverse()
+                            .map((bid, index) => (
+                              <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{bid.userId}</td>
+                                <td>
+                                  <NumberFormat
+                                    value={bid.amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"$"}
+                                  />
+                                </td>
+                                <td>{new Date(bid.time).toLocaleString()}</td>
+                              </tr>
+                            ))
                         ) : (
                           <tr>
                             <td>No bids yet</td>

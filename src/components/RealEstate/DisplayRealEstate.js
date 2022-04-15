@@ -126,8 +126,6 @@ const Wrap = styled.div`
 
 function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const user = useSelector((state) => state.user);
-  const [approvedToBid, setApprovedToBid] = useState(false);
-  const [reserveMet, setReserveMet] = useState(false);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -142,6 +140,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   const toggleImage = () => setFavorite(!favorite);
 
   const [bid, setBid] = useState(false);
+  const [topBidders, setTopBidders] = useState([]);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [registEnded, setRegistEnded] = useState(false);
@@ -171,7 +170,27 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
   useEffect(() => {
     colorChange("black");
     toogleChange();
-  }, []);
+
+    //set location for map
+    setLocation({
+      name: "Property Location",
+      lat: property
+        ? property.property.details.property_address.latitude
+        : null,
+      lng: property
+        ? property.property.details.property_address.longitude
+        : null,
+    });
+
+    if (property.highestBidders) {
+      if (property.highestBidders.length > 0) {
+        let topBidders = property.highestBidders.reverse();
+        setTopBidders(topBidders);
+      }
+    }
+  }, [property]);
+
+  console.log(topBidders);
 
   return (
     <>
@@ -181,7 +200,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
           <div
             style={{ position: "relative", width: "100%", marginTop: "70px" }}
           >
-            {reserveMet === true && (
+            {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
             )}
             <img
@@ -501,8 +520,8 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   </div>
                 </div>
               )}
-              {/* 
-              {user._id && !user.KYC && (
+
+              {/* {user._id && !user.KYC && (
                 <div
                   style={{
                     display: "grid",
@@ -542,10 +561,10 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 </div>
               )} */}
 
-              {/* {user._id &&
-              user.KYC &&
-              !setRegistered &&
-              new Date().toISOString() < registerEnd ? (
+              {user._id &&
+              property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div
                   style={{
                     display: "grid",
@@ -585,9 +604,9 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                 </div>
               ) : (
                 user._id &&
-                user.KYC &&
-                !setRegistered &&
-                new Date().toISOString() > registerEnd && (
+                property.isNotRegisteredToBuy &&
+                property.isOwner &&
+                new Date().toISOString() > property.registerEndDate && (
                   <div
                     style={{
                       display: "grid",
@@ -627,9 +646,11 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </div>
                   </div>
                 )
-              )} */}
+              )}
 
-              {user._id && user.KYC && (
+              {user._id &&
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner ? (
                 <div
                   style={{
                     display: "grid",
@@ -648,7 +669,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={!property.highestBidders}
+                    disabled={property.highestBidders ? false : true}
                   >
                     Bid Now!
                   </button>
@@ -668,6 +689,47 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </button>
                   </div>
                 </div>
+              ) : (
+                property.isOwner && (
+                  <div
+                    style={{
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
+                        border: "0",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      onClick={tooglePlaceBid}
+                      disabled
+                    >
+                      Bid Now!
+                    </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
+                  </div>
+                )
               )}
             </Col>
           </Row>
@@ -782,7 +844,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                   </Col>
                 )}
 
-                {approvedToBid === true ? (
+                {property.highestBidders && (
                   <Col>
                     {property.highestBid ? (
                       <div
@@ -860,7 +922,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       </div>
                     )}
                   </Col>
-                ) : null}
+                )}
 
                 <Col>
                   <div
@@ -1065,7 +1127,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                     </Table>
                   </Col>
                 </Col>
-                {user._id && user.KYC && (
+                {user._id && user.KYC && property.highestBidders && (
                   <Col>
                     <Table
                       responsive
@@ -1093,6 +1155,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       <tbody>
                         {property.highestBidders?.length > 0 ? (
                           property.highestBidders
+                            .slice()
                             .reverse()
                             .map((bid, index) => (
                               <tr key={index}>

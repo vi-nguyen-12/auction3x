@@ -17,7 +17,6 @@ const BuyConfirm = ({ property }) => {
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   const onSubmit = async (data) => {
-    console.log({ id: property._id, biddingTimes, bidding: parseInt(bid) });
     if (bid === undefined) {
       alert("Please enter a bid amount");
     } else {
@@ -154,9 +153,9 @@ const BuyConfirm = ({ property }) => {
               padding: "15px",
             }}
           >
-            <span class="prefix">$</span>
+            <span className="prefix">$</span>
             <input
-              class="has-prefix"
+              className="has-prefix"
               type="number"
               placeholder="Enter Amount"
               name="bid"

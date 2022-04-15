@@ -113,7 +113,7 @@ const Header = ({ color, change }) => {
             <div>
               <img src="/images/logo.png" alt="" />
             </div>
-            <div style={{ marginTop: 5, marginLeft: 15 }}>
+            <div style={{ marginLeft: 15 }}>
               <img src="/images/name.png" alt="" />
             </div>
           </Logo>
@@ -121,7 +121,7 @@ const Header = ({ color, change }) => {
 
         <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03">
           <div className="navbar-nav m-auto">
-            <div className="nav-item mt-2 px-4 py-2">
+            <div className="nav-item px-4">
               <button
                 className="headerNav"
                 onClick={handleOnClick("realEstates")}
@@ -129,17 +129,17 @@ const Header = ({ color, change }) => {
                 Real Estate
               </button>
             </div>
-            <div className="nav-item mt-2 px-4 py-2">
+            <div className="nav-item px-4">
               <button className="headerNav" onClick={handleOnClick("cars")}>
                 Car
               </button>
             </div>
-            <div className="nav-item mt-2 px-4 py-2">
+            <div className="nav-item px-4">
               <button className="headerNav" onClick={handleOnClick("jets")}>
                 Jet
               </button>
             </div>
-            <div className="nav-item mt-2 px-4 py-2">
+            <div className="nav-item px-4">
               <button className="headerNav" onClick={handleOnClick("yachts")}>
                 Yacht
               </button>
@@ -629,17 +629,25 @@ const Header = ({ color, change }) => {
               </Modal.Body>
             </Modal> */}
             <div className="d-flex flex-row ">
-              <Button
-                className="sell_btn bg-transparent border-0"
-                onClick={handleSell}
-                style={{
-                  color: "white",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
-              >
-                Sell
-              </Button>
+              {user._id ? (
+                <button onClick={handleSell} className="sellBtn">
+                  Sell
+                </button>
+              ) : (
+                <button
+                  onClick={toogleSignIn}
+                  className="customButton"
+                  style={{
+                    marginRight: "30px",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    padding: "0 20px",
+                  }}
+                >
+                  Sell
+                </button>
+              )}
+
               {user._id && !user.KYC && (
                 <>
                   <div className="dropdown">
@@ -665,7 +673,7 @@ const Header = ({ color, change }) => {
                         fontSize: "16px",
                         backgroundImage: "none",
                         backgroundColor: "#fcba7d",
-                        marginRight: "50px",
+                        marginRight: "15px",
                         padding: "8px 20px",
                       }}
                     >
@@ -695,7 +703,9 @@ const Header = ({ color, change }) => {
                       backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
-                      padding: "5px",
+                      display:"flex",
+                      alignItems:"center",
+                      justifyContent:"center",
                     }}
                     id="dropdown-basic-button"
                     title={<IoWallet size={36} />}
@@ -704,10 +714,10 @@ const Header = ({ color, change }) => {
                     onMouseLeave={() => setShowWallet(false)}
                   >
                     {/* <Dropdown.Item href="#"> */}
-                    <IoWallet size={36} />
+                    <IoWallet size={30} />
                     <NumberFormat
                       style={{
-                        fontSize: "20px",
+                        fontSize: "16px",
                         marginLeft: "10px",
                         fontWeight: "bold",
                       }}
@@ -767,8 +777,9 @@ const Header = ({ color, change }) => {
                     </Button>
                   </div>
                   <Button
+                    className="customButton border-0 mt-0"
                     style={{
-                      backgroundColor: "#fcba7d",
+                      // backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
                       marginRight: "10px",
@@ -781,8 +792,9 @@ const Header = ({ color, change }) => {
                   </Button>
 
                   <Button
+                    className="customButton border-0 mt-0"
                     style={{
-                      backgroundColor: "#fcba7d",
+                      // backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
                     }}
@@ -985,7 +997,7 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 5%);
   z-index: 3;
 `;
 
