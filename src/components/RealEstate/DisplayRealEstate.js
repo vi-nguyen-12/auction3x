@@ -1093,6 +1093,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       <tbody>
                         {property.highestBidders?.length > 0 ? (
                           property.highestBidders
+                            .slice()
                             .reverse()
                             .map((bid, index) => (
                               <tr key={index}>
