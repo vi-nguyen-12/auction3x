@@ -696,7 +696,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={!approvedToBid}
+                    disabled={!property.highestBidders}
                   >
                     Bid Now!
                   </button>
