@@ -129,7 +129,7 @@ const YachtCard = ({
               cursor: "pointer",
             }}
           />
-          {reserveMet === true && (
+          {reserveMet === true && user._id && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
           <button

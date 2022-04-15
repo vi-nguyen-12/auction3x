@@ -14,7 +14,14 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
 import "../../styles/Card.css";
 
-const JetCard = ({ url, data, id, startingBid, auctionEndDate, reserveMet }) => {
+const JetCard = ({
+  url,
+  data,
+  id,
+  startingBid,
+  auctionEndDate,
+  reserveMet,
+}) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
@@ -108,7 +115,7 @@ const JetCard = ({ url, data, id, startingBid, auctionEndDate, reserveMet }) => 
               cursor: "pointer",
             }}
           />
-          {reserveMet === true && (
+          {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
           <button
