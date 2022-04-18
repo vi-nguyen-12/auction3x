@@ -30,10 +30,6 @@ const mapStyles = {
   height: "98%",
   width: "100%",
 };
-// const StreetviewStyles = {
-//   height: "50vh",
-//   width: "100%",
-// };
 
 let settings = {
   dots: true,
@@ -100,13 +96,6 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  // a {
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  //   display: block;
-  //   position: relative;
-  //   padding: 0;
-
   img {
     width: 100%;
     height: 100%;
@@ -116,13 +105,6 @@ const Wrap = styled.div`
     position: relative;
     padding: 0;
   }
-
-  // &:hover {
-  //   padding: 0;
-  //   // border: 4px solid rgba(249, 249, 249, 0.8);
-  //   transition-duration: 300ms;
-  // }
-  // }
 `;
 
 function DisplayCar({ colorChange, toogleChange, property }) {
@@ -165,12 +147,6 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
-
-  const handleKYC = () => {
-    if (!user.KYC) {
-      return alert("Please Complete your KYC first to bid");
-    }
-  };
 
   useEffect(() => {
     colorChange("black");

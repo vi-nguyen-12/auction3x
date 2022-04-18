@@ -168,12 +168,6 @@ function DisplayYacht({ colorChange, toogleChange, property }) {
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
-  const handleKYC = () => {
-    if (!user.KYC) {
-      return alert("Please Complete your KYC first to bid");
-    }
-  };
-
   useEffect(() => {
     colorChange("black");
     toogleChange();

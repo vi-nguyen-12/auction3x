@@ -192,7 +192,7 @@ function SavedAuctionsCard({
               </Col>
             </Row>
             <Row>
-              {auctionEnded ? (
+              {auctionEndDate < new Date().toISOString() ? (
                 <Col md={1} style={{ width: "50%" }}>
                   <p
                     style={{
@@ -207,10 +207,7 @@ function SavedAuctionsCard({
               ) : (
                 <Col md={1} style={{ width: "50%" }}>
                   <div style={{ fontSize: "12px", width: "200px" }}>
-                    <AuctionTimer
-                      auctionEndDate={auctionEndDate}
-                      toogleAuction={toogleAuction}
-                    />
+                    <AuctionTimer time={auctionEndDate} />
                   </div>
                 </Col>
               )}
@@ -224,9 +221,12 @@ function SavedAuctionsCard({
                       color: "black",
                     }}
                   >
-                    {data.beds_count ? data.beds_count : "N/A-"}
-                    BD | {data.baths ? data.baths : "N/A-"}BA |{" "}
-                    {data.total_area_sq_ft ? data.total_area_sq_ft : "N/A-"}{" "}
+                    {data.structure.beds_count
+                      ? data.structure.beds_count
+                      : "N/A-"}
+                    BD | {data.structure.baths ? data.structure.baths : "N/A-"}
+                    BA |{" "}
+                    {data.parcel.area_sq_ft ? data.parcel.area_sq_ft : "N/A-"}{" "}
                     sq.ft
                   </p>
                 ) : type === "car" ? (
