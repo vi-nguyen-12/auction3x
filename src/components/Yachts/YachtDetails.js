@@ -43,6 +43,8 @@ function YachtDetails({
           : propertyData.vessel_registration_number
           ? propertyData.vessel_registration_number
           : property.vessel_registration_number
+          ? property.vessel_registration_number
+          : ""
       );
       setVessel_manufacturing_date(
         properti[0].details.vessel_manufacturing_date
@@ -50,6 +52,8 @@ function YachtDetails({
           : propertyData.vessel_manufacturing_date
           ? propertyData.vessel_manufacturing_date
           : property.vessel_manufacturing_date
+          ? property.vessel_manufacturing_date
+          : ""
       );
       setManufacture_mark(
         properti[0].details.manufacture_mark
@@ -57,6 +61,8 @@ function YachtDetails({
           : propertyData.manufacture_mark
           ? propertyData.manufacture_mark
           : property.manufacture_mark
+          ? property.manufacture_mark
+          : ""
       );
       setManufacturer_name(
         properti[0].details.manufacturer_name
@@ -64,6 +70,8 @@ function YachtDetails({
           : propertyData.manufacturer_name
           ? propertyData.manufacturer_name
           : property.manufacturer_name
+          ? property.manufacturer_name
+          : ""
       );
       setEngine_type(
         properti[0].details.engine_type
@@ -71,6 +79,8 @@ function YachtDetails({
           : propertyData.engine_type
           ? propertyData.engine_type
           : property.engine_type
+          ? property.engine_type
+          : ""
       );
       setEngine_deck_type(
         properti[0].details.engine_deck_type
@@ -78,6 +88,8 @@ function YachtDetails({
           : propertyData.engine_deck_type
           ? propertyData.engine_deck_type
           : property.engine_deck_type
+          ? property.engine_deck_type
+          : ""
       );
       setEngine_manufacture_name(
         properti[0].details.engine_manufacture_name
@@ -85,6 +97,8 @@ function YachtDetails({
           : propertyData.engine_manufacture_name
           ? propertyData.engine_manufacture_name
           : property.engine_manufacture_name
+          ? property.engine_manufacture_name
+          : ""
       );
       setRunning_cost(
         properti[0].details.running_cost
@@ -92,6 +106,8 @@ function YachtDetails({
           : propertyData.running_cost
           ? propertyData.running_cost
           : property.running_cost
+          ? property.running_cost
+          : ""
       );
       setNo_of_crew_required(
         properti[0].details.no_of_crew_required
@@ -99,6 +115,8 @@ function YachtDetails({
           : propertyData.no_of_crew_required
           ? propertyData.no_of_crew_required
           : property.no_of_crew_required
+          ? property.no_of_crew_required
+          : ""
       );
       setProperty_address(
         properti[0].details.property_address
@@ -106,6 +124,8 @@ function YachtDetails({
           : propertyData.property_address
           ? propertyData.property_address
           : property.property_address
+          ? property.property_address
+          : ""
       );
       setOtherDetails(
         properti[0].details.otherDetails
@@ -113,6 +133,8 @@ function YachtDetails({
           : propertyData.otherDetails
           ? propertyData.otherDetails
           : property.otherDetails
+          ? property.otherDetails
+          : ""
       );
       setReservedAmount(
         properti[0].reservedAmount

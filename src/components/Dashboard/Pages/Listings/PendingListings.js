@@ -12,6 +12,7 @@ function PendingListings() {
     const fetchPendingListings = async () => {
       const id = user._id;
       await authService.sellerPendingAuctions(id).then((res) => {
+        console.log(res.data);
         setPendingListings(res.data);
       });
     };
