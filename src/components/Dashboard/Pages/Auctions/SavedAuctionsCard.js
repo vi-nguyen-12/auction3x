@@ -11,6 +11,7 @@ import SignUp from "../../../Users/SignUp";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../../../Auctions/AuctionTimer";
 import authService from "../../../../services/authServices";
+import { useHistory } from "react-router-dom";
 import "../../../../styles/Card.css";
 
 function SavedAuctionsCard({
@@ -24,6 +25,7 @@ function SavedAuctionsCard({
   endRegister,
   type,
 }) {
+  let history = useHistory();
   const user = useSelector((state) => state.user);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -53,46 +55,10 @@ function SavedAuctionsCard({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const auctions = useSelector((state) => state.auction);
-  const property = useSelector((state) => state.property);
-  const registProperty = useSelector((state) => state.registProperty);
-  const [auctionEnded, setAuctionEnded] = useState(false);
-  const toogleAuction = () => setAuctionEnded(!auctionEnded);
-  const [inAuction, setInAuction] = useState(false);
-  const [upcoming, setUpcoming] = useState(false);
-  const [registered, setRegistered] = useState(false);
-
   const handleBid = () => {
-    if (!user._id) {
-      return toogleSignIn();
-    }
-    if (user.KYC) {
-      window.open(`/DisplayAuctions/${id}`);
-    } else {
-      setShowKYC(true);
-    }
+    console.log("test");
+    history.push(`/DisplayAuctions/${id}`);
   };
-
-  const handleDisplay = () => {
-    window.open(`/DisplayAuctions/${id}`);
-  };
-
-  useEffect(() => {
-    const checkAuction = auctions.filter((auction) => auction._id === id);
-    const checkProperty = property.filter((property) => property._id === id);
-    const checkRegist = registProperty.filter(
-      (property) => property._id === id
-    );
-    if (checkAuction.length > 0) {
-      setInAuction(true);
-    }
-    if (checkProperty.length > 0) {
-      setUpcoming(true);
-    }
-    if (checkRegist.length > 0) {
-      setRegistered(true);
-    }
-  }, [auctions, property, registProperty]);
 
   return (
     <div style={{ margin: "30px" }}>
@@ -116,7 +82,7 @@ function SavedAuctionsCard({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Card.Img
-            onClick={handleDisplay}
+            onClick={handleBid}
             variant="top"
             src={url}
             className="img-fluid"
