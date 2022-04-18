@@ -38,8 +38,9 @@ function CarDetails({
   const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
-    if (params.id) {
+    if (params.id && prop.length > 0) {
       const property = prop.filter((prop) => prop._id === params.id);
+      console.log(property);
       setMake(
         property[0].details.make
           ? property[0].details.make

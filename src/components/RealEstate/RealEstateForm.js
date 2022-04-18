@@ -6,8 +6,10 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function RealEstateForm({ toogleStep, step, properties, property }) {
+  const prop = useSelector((state) => state.incompProperty);
   const {
     register,
     handleSubmit,
@@ -64,45 +66,44 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
   };
 
   useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        const properti = res.data.filter((prop) => prop._id === params.id);
-        setAddress(
-          properti[0].details.property_address.formatted_street_address
-            ? properti[0].details.property_address.formatted_street_address
-            : property.street_address
-            ? property.street_address
-            : ""
-        );
-        setCity(
-          properti[0].details.property_address.city
-            ? properti[0].details.property_address.city
-            : property.city
-            ? property.city
-            : ""
-        );
-        setState(
-          properti[0].details.property_address.state
-            ? properti[0].details.property_address.state
-            : property.state
-            ? property.state
-            : ""
-        );
-        setCountry(
-          properti[0].details.property_address.country
-            ? properti[0].details.property_address.country
-            : property.country
-            ? property.country
-            : ""
-        );
-        setZip(
-          properti[0].details.property_address.zip_code
-            ? properti[0].details.property_address.zip_code
-            : property.zip_code
-            ? property.zip_code
-            : ""
-        );
-      });
+    if (params.id && prop.length > 0) {
+      const properti = prop.filter((prop) => prop._id === params.id);
+      console.log(properti);
+      setAddress(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.formatted_street_address
+          : property.street_address
+          ? property.street_address
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+          : property.city
+          ? property.city
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+          : property.state
+          ? property.state
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+          : property.country
+          ? property.country
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip_code
+          : property.zip_code
+          ? property.zip_code
+          : ""
+      );
     } else {
       setAddress(property.street_address ? property.street_address : "");
       setCity(property.city ? property.city : "");

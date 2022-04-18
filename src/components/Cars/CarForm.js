@@ -25,7 +25,7 @@ function CarForm({ toogleStep, step, properties, property }) {
   const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
-    if (params.id) {
+    if (params.id && prop.length > 0) {
       const properti = prop.filter((item) => item._id === params.id);
       setMake(
         properti[0].details.make
