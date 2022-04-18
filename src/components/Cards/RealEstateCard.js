@@ -23,6 +23,7 @@ const CardComp = ({
   reserveMet,
 }) => {
   const user = useSelector((state) => state.user);
+  console.log(data);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -115,7 +116,7 @@ const CardComp = ({
               cursor: "pointer",
             }}
           />
-          {reserveMet === true && (
+          {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
           <button
@@ -208,8 +209,8 @@ const CardComp = ({
                         BD |{" "}
                         {data.structure.baths ? data.structure.baths : "N/A-"}BA
                         |{" "}
-                        {data.structure.total_area_sq_ft
-                          ? data.structure.total_area_sq_ft
+                        {data.parcel.area_sq_ft
+                          ? data.parcel.area_sq_ft
                           : "N/A-"}{" "}
                         sq.ft
                       </p>

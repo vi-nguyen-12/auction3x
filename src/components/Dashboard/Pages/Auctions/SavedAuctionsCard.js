@@ -226,7 +226,9 @@ function SavedAuctionsCard({
                       : "N/A-"}
                     BD | {data.structure.baths ? data.structure.baths : "N/A-"}
                     BA |{" "}
-                    {data.parcel.area_sq_ft ? data.parcel.area_sq_ft : "N/A-"}{" "}
+                    {data.parcel.area_sq_ft
+                      ? data.parcel.area_sq_ft
+                      : "N/A-"}{" "}
                     sq.ft
                   </p>
                 ) : type === "car" ? (

@@ -6,7 +6,7 @@
 .row-1 {
   /* margin-left: 10rem !important;
   margin-right: 10rem !important; */
-  padding: 5rem 3rem !important;
+  padding: 4rem 3rem !important;
 }
 
 .img-flex {
@@ -27,22 +27,25 @@
 
 .footer-title {
   color: #fff;
-  font-family: Josefin Slab;
-  font-size: 3rem;
+  font-family: "Josefin Slab";
+  font-size: 1.7rem;
+  font-weight: bold;
   margin-top: 2rem;
   text-align: left;
   padding-left: 6rem;
+
 }
 
 li {
-  padding: 0.2rem;
+  padding: 0.1rem;
   font-size: 1rem;
   font-size: 1.8rem;
+  font-weight: 350;
   text-align: left;
 }
 
 ul {
-  padding-left: 6.5rem !important;
+  padding-left: 6rem !important;
 }
 
 a {

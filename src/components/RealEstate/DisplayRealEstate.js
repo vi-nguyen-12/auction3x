@@ -722,7 +722,7 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       </div>
                     </div>
                   </Col>
-                ) : (
+                ) : new Date().toISOString() < property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -748,6 +748,33 @@ function DisplayRealEstate({ property, colorChange, toogleChange }) {
                       </div>
                     </div>
                   </Col>
+                ) : (
+                  new Date().toISOString() > property.auctionEndDate && (
+                    <Col>
+                      <div
+                        style={{
+                          display: "grid",
+                          justifyContent: "center",
+                          backgroundColor: "#e8e8e8",
+                          width: "100%",
+                          borderRadius: "10px",
+                          padding: "53px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "left",
+                            marginLeft: "10px",
+                            color: "Black",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          <p>Auction Ended</p>
+                        </div>
+                      </div>
+                    </Col>
+                  )
                 )}
 
                 {property.highestBidders && (

@@ -115,7 +115,7 @@ const CarCard = ({
               cursor: "pointer",
             }}
           />
-          {reserveMet === true && (
+          {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
           <button
