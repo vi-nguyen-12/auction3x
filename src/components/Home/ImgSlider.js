@@ -184,7 +184,7 @@ const ImgSlider = () => {
           </Carousel>
           <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
-              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
+              <div className="search-box col-12 col-sm-6 col-md-4 mt-3 p-0">
                 <div className="form-group">
                   <SearchBar />
                 </div>
