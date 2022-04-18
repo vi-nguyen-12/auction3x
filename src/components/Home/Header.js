@@ -703,12 +703,12 @@ const Header = ({ color, change }) => {
                       backgroundColor: "#fcba7d",
                       color: "black",
                       borderColor: "transparent",
-                      display:"flex",
-                      alignItems:"center",
-                      justifyContent:"center",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                     id="dropdown-basic-button"
-                    title={<IoWallet size={36} />}
+                    title={<IoWallet size={30} />}
                     show={showWallet}
                     onMouseEnter={() => setShowWallet(true)}
                     onMouseLeave={() => setShowWallet(false)}
@@ -873,19 +873,19 @@ const Header = ({ color, change }) => {
                     backgroundColor: "#fcba7d",
                     color: "black",
                     borderColor: "transparent",
-                    padding: "5px",
+                    padding: "8px 20px",
                   }}
                   id="dropdown-basic-button"
-                  title={<IoWallet size={36} />}
+                  title={<IoWallet size={30} />}
                   show={showWallet}
                   onMouseEnter={() => setShowWallet(true)}
                   onMouseLeave={() => setShowWallet(false)}
                 >
                   {/* <Dropdown.Item href="#"> */}
-                  <IoWallet size={36} />
+                  <IoWallet size={30} />
                   <NumberFormat
                     style={{
-                      fontSize: "20px",
+                      fontSize: "16px",
                       marginLeft: "10px",
                       fontWeight: "bold",
                     }}
