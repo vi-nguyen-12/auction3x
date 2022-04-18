@@ -15,8 +15,6 @@ import ApprovedListings from "./ApprovedListings";
 
 function LiveListings() {
   const user = useSelector((state) => state.user);
-  const auction = useSelector((state) => state.auction);
-  const [approvedListings, setApprovedListings] = useState([]);
   const [upcomingListings, setUpcomingListings] = useState([]);
 
   useEffect(() => {
@@ -24,16 +22,7 @@ function LiveListings() {
       const id = user._id;
       await authService.sellerApprovedListings(id).then((res) => {
         setUpcomingListings(res.data);
-      });
-    };
-    fetchApprovedProperty();
-  }, []);
-
-  useEffect(() => {
-    const fetchApprovedProperty = async () => {
-      const id = user._id;
-      await authService.sellerPropInAuctions(id).then((res) => {
-        setApprovedListings(res.data);
+        console.log(res.data);
       });
     };
     fetchApprovedProperty();

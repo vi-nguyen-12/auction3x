@@ -95,12 +95,12 @@ function ApprovedListings({ auctions }) {
     slidesToShow: 2,
   };
   const user = useSelector((state) => state.user);
-  const auction = useSelector((state) => state.auction);
   const [approvedLists, setApprovedLists] = useState([]);
 
   useEffect(() => {
     authService.sellerPropInAuctions(user._id).then((res) => {
       setApprovedLists(res.data);
+      console.log(res.data);
     });
   }, []);
 
