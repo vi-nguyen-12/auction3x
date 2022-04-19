@@ -186,8 +186,23 @@
 }
 
 .circularCard img {
-  border-radius: 4%;
+  border-radius: 10px;
   width: -webkit-fill-available;
+  cursor: pointer;
+}
+
+.circularCard span {
+  font-size: 15px;
+  color: white;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  top: -100px;
+}
+
+.circularCard h2 {
+  color: white;
 }
 
 .btn-success {

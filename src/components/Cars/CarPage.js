@@ -81,9 +81,8 @@ position: relative;
 }
 `;
 
-function CarPage({ colorChange, toogleChange }) {
+function CarPage({ toogleChange }) {
   useEffect(() => {
-    colorChange("black");
     toogleChange();
   }, []);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);

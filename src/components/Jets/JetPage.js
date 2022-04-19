@@ -81,11 +81,10 @@ position: relative;
 }
 `;
 
-function JetPage({ colorChange, toogleChange }) {
+function JetPage({ toogleChange }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
-    colorChange("black");
     toogleChange();
   }, []);
   useEffect(() => {

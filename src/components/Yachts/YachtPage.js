@@ -81,9 +81,8 @@ position: relative;
 }
 `;
 
-function YachtPage({ colorChange, toogleChange }) {
+function YachtPage({ toogleChange }) {
   useEffect(() => {
-    colorChange("black");
     toogleChange();
   }, []);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);

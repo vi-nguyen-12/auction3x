@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ colorChange, toogleChange }) {
+function RealEstatePage({ toogleChange }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -104,7 +104,6 @@ function RealEstatePage({ colorChange, toogleChange }) {
   }, []);
 
   useEffect(() => {
-    colorChange("black");
     toogleChange();
   }, []);
 

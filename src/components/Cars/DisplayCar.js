@@ -107,7 +107,7 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayCar({ colorChange, toogleChange, property }) {
+function DisplayCar({ toogleChange, property }) {
   console.log(property);
   const user = useSelector((state) => state.user);
   const [registEnded, setRegistEnded] = useState(false);
@@ -149,7 +149,6 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
   useEffect(() => {
-    colorChange("black");
     toogleChange();
 
     //set location for map
@@ -169,8 +168,21 @@ function DisplayCar({ colorChange, toogleChange, property }) {
       {location && property && (
         <>
           <div
-            style={{ position: "relative", width: "100%", marginTop: "70px" }}
+            style={{ position: "relative", width: "100%", }}
           >
+            <div className="mini-header">
+              {new Date().toISOString() < property.auctionStartDate ? (
+                <div className="mini-header-text">
+                  UPCOMING AUCTION | STARTS IN{" "}
+                  {new Date(property.auctionStartDate).toLocaleString()}
+                </div>
+              ) : new Date().toISOString() > property.auctionStartDate ? (
+                <div className="mini-header-text">
+                  AUCTION IN PROGRESS | ENDS IN{" "}
+                  {new Date(property.auctionEndDate).toLocaleString()}
+                </div>
+              ) : null}
+            </div>
             {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
             )}
@@ -181,7 +193,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                 display: "flex",
                 justifyContent: "center",
                 margin: "auto",
-                padding: "35px",
+                padding: "5px 35px",
                 width: "100%",
                 borderRadius: "15px",
                 position: "relative",

@@ -73,8 +73,8 @@ function App() {
 
   const [color, setColor] = useState("");
   const [show, setShow] = useState(true);
-  const toogleShow = () => {
-    setShow(!show);
+  const toogleShow = (value) => {
+    setShow(value);
   };
 
   const colorChange = (color) => {
@@ -160,7 +160,7 @@ function App() {
             </Route>
           )}
           <Route path="/reset_password">
-            <ChangePass colorChange={colorChange} />
+            <ChangePass colorChange={colorChange} toogleShow={toogleShow} />
           </Route>
           <Route path="/confirm_email">
             <EmailConfirm colorChange={colorChange} />

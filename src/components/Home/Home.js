@@ -17,11 +17,6 @@ import { useSelector } from "react-redux";
 
 const Home = (props) => {
   // const property = useSelector(state => state.property);
-  const [color, setColor] = useState("");
-
-  const colorChange = (color) => {
-    setColor(color);
-  };
 
   return (
     <>
@@ -39,18 +34,18 @@ const Home = (props) => {
           </Route>
           <Route exact path="/MultiSellForm">
             <div className="sell-register-container">
-              <MultiSellForm colorChange={colorChange} />
+              <MultiSellForm />
             </div>
           </Route>
 
           <Route exact path="/RealEstates">
-            <RealEstates colorChange={colorChange} />
+            <RealEstates />
           </Route>
           <Route path="/reset_password">
-            <ChangePass colorChange={colorChange} />
+            <ChangePass />
           </Route>
           <Route path="/confirm_email">
-            <EmailConfirm colorChange={colorChange} />
+            <EmailConfirm />
           </Route>
         </Switch>
       </Router>

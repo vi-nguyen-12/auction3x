@@ -8,7 +8,7 @@ import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
 import io from "socket.io-client";
 
-function DisplayAuctions({ colorChange, toogleChange }) {
+function DisplayAuctions({ toogleChange }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
@@ -62,34 +62,71 @@ function DisplayAuctions({ colorChange, toogleChange }) {
         );
     }
   }, [socket, auction]);
+
   return (
     <>
+      {auction && (
+        <h5 className="realHeader">
+          {auction.property.type === "car" ? (
+            <p
+              style={{
+                fontSize: "4rem",
+                color: "#fcbe91",
+                margin: "0",
+                alignItems: "center",
+              }}
+            >
+              CAR
+            </p>
+          ) : auction.property.type === "jet" ? (
+            <p
+              style={{
+                fontSize: "4rem",
+                color: "#fcbe91",
+                margin: "0",
+                alignItems: "center",
+              }}
+            >
+              JET
+            </p>
+          ) : auction.property.type === "yacht" ? (
+            <p
+              style={{
+                fontSize: "4rem",
+                color: "#fcbe91",
+                margin: "0",
+                alignItems: "center",
+              }}
+            >
+              YACHT
+            </p>
+          ) : (
+            <p
+              style={{
+                fontSize: "4rem",
+                color: "#fcbe91",
+                margin: "0",
+                alignItems: "center",
+              }}
+            >
+              REAL ESTATE
+            </p>
+          )}
+        </h5>
+      )}
       {auction ? (
         auction.property.type === "real-estate" ? (
           <DisplayRealEstate
             socket={socket}
             property={auction}
-            colorChange={colorChange}
             toogleChange={toogleChange}
           />
         ) : auction.property.type === "car" ? (
-          <DisplayCar
-            property={auction}
-            colorChange={colorChange}
-            toogleChange={toogleChange}
-          />
+          <DisplayCar property={auction} toogleChange={toogleChange} />
         ) : auction.property.type === "jet" ? (
-          <DisplayJet
-            property={auction}
-            colorChange={colorChange}
-            toogleChange={toogleChange}
-          />
+          <DisplayJet property={auction} toogleChange={toogleChange} />
         ) : auction.property.type === "yacht" ? (
-          <DisplayYacht
-            property={auction}
-            colorChange={colorChange}
-            toogleChange={toogleChange}
-          />
+          <DisplayYacht property={auction} toogleChange={toogleChange} />
         ) : null
       ) : (
         <div

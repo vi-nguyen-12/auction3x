@@ -125,7 +125,7 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayJet({ colorChange, toogleChange, property }) {
+function DisplayJet({ toogleChange, property }) {
   const user = useSelector((state) => state.user);
   const [registerEnd, setRegisterEnd] = useState();
   const [registEnded, setRegistEnded] = useState(false);
@@ -176,7 +176,6 @@ function DisplayJet({ colorChange, toogleChange, property }) {
   };
 
   useEffect(() => {
-    colorChange("black");
     toogleChange();
 
     //set location for map
@@ -195,9 +194,20 @@ function DisplayJet({ colorChange, toogleChange, property }) {
     <>
       {location && property && (
         <>
-          <div
-            style={{ position: "relative", width: "100%", marginTop: "70px" }}
-          >
+          <div style={{ position: "relative", width: "100%" }}>
+            <div className="mini-header">
+              {new Date().toISOString() < property.auctionStartDate ? (
+                <div className="mini-header-text">
+                  UPCOMING AUCTION | STARTS IN{" "}
+                  {new Date(property.auctionStartDate).toLocaleString()}
+                </div>
+              ) : new Date().toISOString() > property.auctionStartDate ? (
+                <div className="mini-header-text">
+                  AUCTION IN PROGRESS | ENDS IN{" "}
+                  {new Date(property.auctionEndDate).toLocaleString()}
+                </div>
+              ) : null}
+            </div>
             {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
             )}
@@ -208,7 +218,7 @@ function DisplayJet({ colorChange, toogleChange, property }) {
                 display: "flex",
                 justifyContent: "center",
                 margin: "auto",
-                padding: "35px",
+                padding: "5px 35px",
                 width: "100%",
                 borderRadius: "15px",
                 position: "relative",

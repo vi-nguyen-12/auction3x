@@ -10,7 +10,7 @@ import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 
-const MultiSellForm = ({ colorChange, toogleShow }) => {
+const MultiSellForm = ({ toogleShow }) => {
   const [step, setStep] = useState(0);
   const toogleStep = (step) => {
     setStep(step);
@@ -62,7 +62,6 @@ const MultiSellForm = ({ colorChange, toogleShow }) => {
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
   useEffect(() => {
-    colorChange("black");
     toogleShow();
     if (params.step) {
       setStep(parseInt(params.step) + 1);

@@ -5,19 +5,13 @@ import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Login from "../Users/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  Modal,
-  Table,
-  DropdownButton,
-  Dropdown,
-} from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import "../../styles/modalStyle.css";
 import "../../styles/Header.css";
 import ReconfirmEmail from "../Users/ReconfirmEmail";
 import SignUp from "../Users/SignUp";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import ForgotPass from "../Users/ForgotPass";
 import ChangePass from "../Users/ChangePass";
@@ -26,7 +20,7 @@ import NumberFormat from "react-number-format";
 // import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
 // import CloseButton from "react-bootstrap/CloseButton";
 
-const Header = ({ color, change }) => {
+const Header = ({ change, color }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -44,6 +38,7 @@ const Header = ({ color, change }) => {
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
   const [kycUrl, setKycUrl] = useState("");
+  const [colors, setColors] = useState("");
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [open, setOpen] = useState(false);
   const toogleOpen = () => setOpen(!open);
@@ -93,6 +88,16 @@ const Header = ({ color, change }) => {
       }
     };
     getKYCstatus();
+
+    if (window.onscroll !== undefined) {
+      window.onscroll = function () {
+        if (window.scrollY > 500) {
+          setColors("rgba(0, 0, 0, 50%)");
+        } else {
+          setColors("");
+        }
+      };
+    }
   }, [user]);
 
   useEffect(() => {
@@ -105,10 +110,10 @@ const Header = ({ color, change }) => {
   return (
     <Nav style={{ position: "fixed", top: 0, zIndex: 100 }}>
       <nav
-        className="navbar navbar-expand-lg p-0 pe-4"
-        style={{ backgroundColor: color }}
+        className="navbar navbar-expand-lg p-0 pe-5"
+        style={{ backgroundColor: colors ? colors : color }}
       >
-        <div className="navbar-brand mt-2">
+        <div className="navbar-brand mt-2" style={{ paddingBottom: "1rem" }}>
           <Logo href="/">
             <div>
               <img src="/images/logo.png" alt="" />

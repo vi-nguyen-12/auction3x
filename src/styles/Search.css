@@ -20,6 +20,7 @@
   background-color: transparent;
   border-radius: 2rem 0 0 2rem;
   padding: 10px;
+  padding-left: 20px;
 }
 
 .search-location-input input:focus  {

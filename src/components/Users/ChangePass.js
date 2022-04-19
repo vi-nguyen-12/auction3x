@@ -4,7 +4,7 @@ import authServices from "../../services/authServices";
 import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
-const ChangePass = ({ toogleChangePass, colorChange }) => {
+const ChangePass = ({ colorChange, toogleShow }) => {
   const {
     register,
     handleSubmit,
@@ -12,10 +12,6 @@ const ChangePass = ({ toogleChangePass, colorChange }) => {
   } = useForm();
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
-
-  useEffect(() => {
-    colorChange("black");
-  }, []);
 
   const onSubmit = (data) => {
     const datas = {
@@ -34,8 +30,19 @@ const ChangePass = ({ toogleChangePass, colorChange }) => {
       });
     }
   };
+
+  useEffect(() => {
+    colorChange("black");
+    toogleShow(false);
+  }, []);
+
   return (
     <div>
+      <h1
+        style={{ margin: "0 auto", marginTop: "100px", marginBottom: "-200px" }}
+      >
+        Reset Password
+      </h1>
       <div
         className="listDetail-content"
         style={{

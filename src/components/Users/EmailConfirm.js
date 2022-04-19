@@ -2,12 +2,11 @@ import { useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import authServices from "../../services/authServices";
 
-function Confirm({ colorChange }) {
+function Confirm() {
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
 
   useEffect(() => {
-    colorChange("black");
     authServices.confirmEmail(token).then((res) => {
       if (res.data.error) {
         alert(res.data.error);

@@ -84,19 +84,55 @@ position: relative;
 }
 `;
 
-const PropertyPages = ({ colorChange, toogleChange }) => {
+const PropertyPages = ({ toogleChange }) => {
   const path = window.location.pathname;
   return (
     <>
       <h5 className="realHeader">
         {path === "/cars" ? (
-          <p style={{ fontSize: "4rem", color: "#fcbe91" }}>CARS</p>
+          <p
+            style={{
+              fontSize: "4rem",
+              color: "#fcbe91",
+              margin: "0",
+              alignItems: "center",
+            }}
+          >
+            CAR
+          </p>
         ) : path === "/jets" ? (
-          <p style={{ fontSize: "4rem", color: "#fcbe91" }}>JETS</p>
+          <p
+            style={{
+              fontSize: "4rem",
+              color: "#fcbe91",
+              margin: "0",
+              alignItems: "center",
+            }}
+          >
+            JET
+          </p>
         ) : path === "/yachts" ? (
-          <p style={{ fontSize: "4rem", color: "#fcbe91" }}>YACHTS</p>
+          <p
+            style={{
+              fontSize: "4rem",
+              color: "#fcbe91",
+              margin: "0",
+              alignItems: "center",
+            }}
+          >
+            YACHT
+          </p>
         ) : (
-          <p style={{ fontSize: "4rem", color: "#fcbe91" }}>REAL ESTATES</p>
+          <p
+            style={{
+              fontSize: "4rem",
+              color: "#fcbe91",
+              margin: "0",
+              alignItems: "center",
+            }}
+          >
+            REAL ESTATE
+          </p>
         )}
       </h5>
       <div className="realEstateFilter">
@@ -152,13 +188,13 @@ const PropertyPages = ({ colorChange, toogleChange }) => {
         </div>
       </div>
       {path === "/realEstates" ? (
-        <RealEstatePage colorChange={colorChange} toogleChange={toogleChange} />
+        <RealEstatePage toogleChange={toogleChange} />
       ) : path === "/cars" ? (
-        <CarPage colorChange={colorChange} toogleChange={toogleChange} />
+        <CarPage toogleChange={toogleChange} />
       ) : path === "/jets" ? (
-        <JetPage colorChange={colorChange} toogleChange={toogleChange} />
+        <JetPage toogleChange={toogleChange} />
       ) : path === "/yachts" ? (
-        <YachtPage colorChange={colorChange} toogleChange={toogleChange} />
+        <YachtPage toogleChange={toogleChange} />
       ) : null}
     </>
   );
