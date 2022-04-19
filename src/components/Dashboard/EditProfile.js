@@ -185,30 +185,30 @@ function EditProfile({ getProfilePic, getDescription }) {
         <Row>
           <Col>
             <span>Instagram</span>
-            <input
+            {/* <input
               className="form-control"
-              defaultValue={user.social_links.instagram}
+              defaultValue={user.social_links.instagram ? user.social_links.instagram : ""}
               type="text"
               {...register("instagram", { required: false })}
-            />
+            /> */}
           </Col>
           <Col>
             <span>Facebook</span>
-            <input
+            {/* <input
               className="form-control"
-              defaultValue={user.social_links.facebook}
+              defaultValue={user.social_links.facebook ? user.social_links.facebook : ""}
               type="text"
               {...register("facebook", { required: false })}
-            />
+            /> */}
           </Col>
           <Col>
             <span>Twitter</span>
-            <input
+            {/* <input
               className="form-control"
-              defaultValue={user.social_links.twitter}
+              defaultValue={user.social_links.twitter ? user.social_links.twitter : ""}
               type="text"
               {...register("twitter", { required: false })}
-            />
+            /> */}
           </Col>
         </Row>
         <Row

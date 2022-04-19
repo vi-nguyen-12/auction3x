@@ -28,6 +28,7 @@ import Docusign from "./components/Docusign";
 import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { useHistory } from "react-router-dom";
+import ButtontoTop from "./components/ButtontoTop";
 
 function App() {
   const history = useHistory();
@@ -92,6 +93,7 @@ function App() {
 
   return (
     <div className="App">
+      <ButtontoTop />
       <Router>
         <Header color={color} change={change} />
         <ScrollTop />

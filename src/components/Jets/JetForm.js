@@ -25,7 +25,7 @@ function JetForm({ toogleStep, step, properties, property }) {
   const params = useParams();
 
   useEffect(() => {
-    if (params.id) {
+    if (params.id && prop.length > 0) {
       const properti = prop.filter((item) => item._id === params.id);
       setRegistration_mark(
         properti[0].details.registration_mark

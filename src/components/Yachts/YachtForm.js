@@ -23,84 +23,84 @@ function YachtForm({ toogleStep, step, properties, property }) {
   const prop = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
-    if (params.id) {
+    if (params.id && prop.length > 0) {
       const properti = prop.filter((item) => item._id === params.id);
       setVessel_registration_number(
         properti[0].details.vessel_registration_number
           ? properti[0].details.vessel_registration_number
           : property.vessel_registration_number
-          ? property.vessel_registration_number
-          : ""
+            ? property.vessel_registration_number
+            : ""
       );
       setVessel_manufacturing_date(
         properti[0].details.vessel_manufacturing_date
           ? properti[0].details.vessel_manufacturing_date
           : property.vessel_manufacturing_date
-          ? property.vessel_manufacturing_date
-          : ""
+            ? property.vessel_manufacturing_date
+            : ""
       );
       setManufacture_mark(
         properti[0].details.manufacture_mark
           ? properti[0].details.manufacture_mark
           : property.manufacture_mark
-          ? property.manufacture_mark
-          : ""
+            ? property.manufacture_mark
+            : ""
       );
       setManufacturer_name(
         properti[0].details.manufacturer_name
           ? properti[0].details.manufacturer_name
           : property.manufacturer_name
-          ? property.manufacturer_name
-          : ""
+            ? property.manufacturer_name
+            : ""
       );
       setEngine_type(
         properti[0].details.engine_type
           ? properti[0].details.engine_type
           : property.engine_type
-          ? property.engine_type
-          : ""
+            ? property.engine_type
+            : ""
       );
       setEngine_deck_type(
         properti[0].details.engine_deck_type
           ? properti[0].details.engine_deck_type
           : property.engine_deck_type
-          ? property.engine_deck_type
-          : ""
+            ? property.engine_deck_type
+            : ""
       );
       setEngine_manufacture_name(
         properti[0].details.engine_manufacture_name
           ? properti[0].details.engine_manufacture_name
           : property.engine_manufacture_name
-          ? property.engine_manufacture_name
-          : ""
+            ? property.engine_manufacture_name
+            : ""
       );
       setRunning_cost(
         properti[0].details.running_cost
           ? properti[0].details.running_cost
           : property.running_cost
-          ? property.running_cost
-          : ""
+            ? property.running_cost
+            : ""
       );
       setNo_of_crew_required(
         properti[0].details.no_of_crew_required
           ? properti[0].details.no_of_crew_required
           : property.no_of_crew_required
-          ? property.no_of_crew_required
-          : ""
+            ? property.no_of_crew_required
+            : ""
       );
       setProperty_address(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : property.property_address
-          ? property.property_address
-          : ""
+            ? property.property_address
+            : ""
       );
       setOtherDetails(
         properti[0].details.otherDetails
           ? properti[0].details.otherDetails
           : property.otherDetails
-          ? property.otherDetails
-          : ""
+            ? property.otherDetails
+            : ""
       );
     } else {
       setVessel_registration_number(
