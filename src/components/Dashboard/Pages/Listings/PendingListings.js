@@ -18,7 +18,7 @@ function PendingListings() {
     };
     fetchPendingListings();
   }, []);
-
+  console.log(pendingListings);
   return (
     <Table>
       <thead>

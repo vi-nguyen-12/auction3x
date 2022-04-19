@@ -19,12 +19,14 @@ import { Tab, Tabs } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
 import RegistrationTimer from "../Auctions/RegistrationTimer";
-import { BsStar, BsStarFill } from "react-icons/bs";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
+import "../../styles/PropDisplay.css";
+import authService from "../../services/authServices";
 
 const mapStyles = {
   height: "98%",
@@ -110,6 +112,7 @@ const Wrap = styled.div`
 function DisplayCar({ colorChange, toogleChange, property }) {
   console.log(property);
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
 
@@ -123,7 +126,21 @@ function DisplayCar({ colorChange, toogleChange, property }) {
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
-  const toggleImage = () => setFavorite(!favorite);
+  const toggleImage = () => {
+    const userId = user._id;
+    const data = {
+      userId: userId,
+      auctionId: property._id,
+    };
+    if (favorite === false) {
+      authService.saveProperty(data);
+      setFavorite(!favorite);
+    } else if (favorite === true) {
+      authService.removeProperty(data);
+      setFavorite(!favorite);
+    }
+    console.log(data);
+  }
 
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -164,6 +181,18 @@ function DisplayCar({ colorChange, toogleChange, property }) {
     });
   }, [property]);
 
+  useEffect(() => {
+    if (user._id) {
+      if (savedProperty.length > 0) {
+        const saved = savedProperty.filter((property) => property._id === property._id);
+        if (saved.length > 0) {
+          setFavorite(true);
+        } else {
+          setFavorite(false);
+        }
+      }
+    }
+  }, [savedProperty]);
   return (
     <>
       {location && property && (
@@ -177,68 +206,28 @@ function DisplayCar({ colorChange, toogleChange, property }) {
             <img
               src={property.property.images[0].url}
               alt="Snow"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "auto",
-                padding: "35px",
-                width: "100%",
-                borderRadius: "15px",
-                position: "relative",
-                height: "auto",
-              }}
+              className="display-property"
             />
             <div
-              style={{
-                display: "inline-block",
-                position: "absolute",
-                top: "50%",
-                left: "92%",
-                transform: "translate(-50%, -50%)",
-                height: "420px",
-                marginRight: "100%",
-                border: "none",
-                cursor: "pointer",
-                backgroundColor: "white",
-                borderRadius: "10px",
-              }}
+              className="info-box"
             >
               <div>
                 <button
                   onClick={toggleImage}
                   // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-                  style={{
-                    border: "none",
-                    position: "relative",
-                    background: "none",
-                    borderBottom: "2px solid #e6e6e6",
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "15px",
-                    width: "100%",
-                  }}
+                  className="favorite-button"
                 >
                   {favorite ? (
-                    <BsStarFill size="100%" color="C58753" />
+                    <AiFillHeart size="100%" color="C58753" />
                   ) : (
-                    <BsStar size="100%" color="C58753" />
+                    <AiOutlineHeart size="100%" color="C58753" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button
-                  style={{
-                    border: "none",
-                    position: "relative",
-                    top: "10px",
-                    background: "none",
-                    borderBottom: "2px solid #e6e6e6",
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "15px",
-                    width: "100%",
-                  }}
+                  className="img-btn"
                   onClick={togglePics}
                 >
                   <IoImageOutline size="100%" color="C58753" />
@@ -253,16 +242,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Modal.Body style={{ height: "700px" }}>
                     <div>
                       <CloseButton
-                        style={{
-                          position: "absolute",
-                          right: "25px",
-                          top: "25px",
-                          width: "25px",
-                          height: "25px",
-                          zIndex: "999",
-                          backgroundColor: "white",
-                          boxShadow: "none",
-                        }}
+                        className="modal-close"
                         onClick={togglePics}
                       />
                     </div>
@@ -289,17 +269,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
               <div>
                 <button
                   onClick={toggleVids}
-                  style={{
-                    border: "none",
-                    position: "relative",
-                    top: "10px",
-                    background: "none",
-                    borderBottom: "2px px solid #e6e6e6",
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "15px",
-                    width: "100%",
-                  }}
+                  className="vid-btn"
                 >
                   <RiVideoLine size="100%" color="C58753" />
                 </button>
@@ -308,16 +278,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   <Modal.Body style={{ height: "700px" }}>
                     <div>
                       <CloseButton
-                        style={{
-                          position: "absolute",
-                          right: "25px",
-                          top: "25px",
-                          width: "25px",
-                          height: "25px",
-                          zIndex: "999",
-                          backgroundColor: "white",
-                          boxShadow: "none",
-                        }}
+                        className="modal-close"
                         onClick={toggleVids}
                       />
                     </div>
@@ -325,45 +286,28 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                       style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
                     >
-                      {property.property.videos.map((item, index) => (
-                        <Wrap key={index}>
-                          {/* <a> */}
-                          <video
-                            style={{
-                              display: "relative",
-                              justifyContent: "center",
-                              margin: "auto",
-
-                              width: "100%",
-                              borderRadius: "0",
-                              position: "relative",
-                              // height: "3000px!important",
-                              cursor: "pointer",
-                            }}
-                            controls
-                          >
-                            <source src={item.url} type="video/webm" />
-                          </video>
-                          {/* </a> */}
-                        </Wrap>
-                      ))}
+                      {property.property.videos.length > 0 ? (
+                        property.property.videos.map((item, index) => (
+                          <Wrap key={index}>
+                            <video
+                              className="vid-display"
+                              controls
+                            >
+                              <source src={item.url} type="video/webm" />
+                            </video>
+                          </Wrap>
+                        ))) : (
+                        <div>
+                          <h1>No videos available</h1>
+                        </div>
+                      )}
                     </Carousel>
                   </Modal.Body>
                 </Modal>
               </div>
               <div>
                 <button
-                  style={{
-                    border: "none",
-                    position: "relative",
-                    top: "10px",
-                    background: "none",
-                    borderBottom: "2px  solid #e6e6e6",
-                    display: "flex",
-                    justifyContent: "center",
-                    padding: "15px",
-                    width: "100%",
-                  }}
+                  className="live-btn"
                   onClick={toggleLive}
                 >
                   <Md360 size="100%" color="C58753" />
@@ -374,16 +318,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                 <div>
                   <button
                     onClick={toggleMap}
-                    style={{
-                      border: "none",
-                      position: "relative",
-                      top: "10px",
-                      background: "none",
-                      display: "flex",
-                      justifyContent: "center",
-                      padding: "15px",
-                      width: "100%",
-                    }}
+                    className="map-btn"
                   >
                     <IoLocationOutline size="50px" color="C58753" />
                   </button>
@@ -391,16 +326,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                     <Modal.Body style={{ height: "700px" }}>
                       <div>
                         <CloseButton
-                          style={{
-                            position: "absolute",
-                            right: "25px",
-                            top: "25px",
-                            width: "25px",
-                            height: "25px",
-                            zIndex: "999",
-                            backgroundColor: "white",
-                            boxShadow: "none",
-                          }}
+                          className="modal-close"
                           onClick={toggleMap}
                         />
                       </div>
@@ -514,9 +440,9 @@ function DisplayCar({ colorChange, toogleChange, property }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div
                   style={{
                     display: "grid",
@@ -702,7 +628,7 @@ function DisplayCar({ colorChange, toogleChange, property }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{

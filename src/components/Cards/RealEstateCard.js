@@ -23,7 +23,6 @@ const CardComp = ({
   reserveMet,
 }) => {
   const user = useSelector((state) => state.user);
-  console.log(data);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -239,7 +238,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",
