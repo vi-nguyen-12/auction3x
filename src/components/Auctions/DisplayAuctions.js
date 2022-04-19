@@ -12,10 +12,18 @@ function DisplayAuctions({ toogleChange }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    setLoader(true);
     authService.getAuction(id).then((res) => {
-      setAuction(res.data);
+      if (res.data.error) {
+        setLoader(false);
+        alert(res.data.error);
+      } else {
+        setLoader(false);
+        setAuction(res.data);
+      }
     });
     // let serverUrl = process.env.REACT_APP_API_URL;
     let serverUrl =
@@ -65,6 +73,11 @@ function DisplayAuctions({ toogleChange }) {
 
   return (
     <>
+      {loader ? (
+        <div className="loader">
+          <div className="spinning" />
+        </div>
+      ) : null}
       {auction && (
         <h5 className="realHeader">
           {auction.property.type === "car" ? (
