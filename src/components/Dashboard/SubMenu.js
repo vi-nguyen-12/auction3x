@@ -1,7 +1,7 @@
-import React, { useState, useEffect, NavLink } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import '../../styles/sideBarStyle.css';
+import React, { useState, useEffect, NavLink } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import "../../styles/sideBarStyle.css";
 
 const SidebarLink = styled(Link)`
   display: flex;
@@ -28,12 +28,12 @@ const SidebarLabel = styled.button`
     border-left: 4px solid #b77b50;
     color: #b77b50;
     cursor: pointer;
-    }
+  }
   &:focus {
-      border-left: 4px solid #b77b50;
-      color: #b77b50;
-      cursor: pointer;
-      font-weight: 900;
+    border-left: 4px solid #b77b50;
+    color: #b77b50;
+    cursor: pointer;
+    font-weight: 900;
   }
 `;
 
@@ -70,43 +70,50 @@ const DropdownLink = styled(Link)`
   font-weight: 400;
 `;
 
-
 const SubMenu = ({ item, path }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
-  const [color, setColor] = useState('#b77b50');
+  const [color, setColor] = useState("#b77b50");
   const handleOnclick = () => {
     item.subNav && showSubnav();
-  }
+  };
   return (
     <>
       <SidebarLink to={item.path} onClick={handleOnclick}>
-
-        < SidebarLabel style={{ color: item.path === path ? color : "none", borderLeft: item.path === path ? "4px solid #b77b50" : "" }} >
-
-          {item.icon} < span style={{ padding: "15px" }} /> {item.name}
-
+        <SidebarLabel
+          style={{
+            color: item.path === path ? color : "none",
+            borderLeft: item.path === path ? "4px solid #b77b50" : "",
+          }}
+        >
+          {item.icon} <span style={{ padding: "15px" }} /> {item.name}
         </SidebarLabel>
         <div>
           {item.subNav && subnav
             ? item.iconOpened
             : item.subNav
-              ? item.iconClosed
-              : null}
+            ? item.iconClosed
+            : null}
         </div>
       </SidebarLink>
-      {
-        subnav &&
+      {subnav &&
         item.subNav.map((item, index) => {
           return (
             <DropdownLink to={item.path} key={index}>
-              <SidebarLabel style={{ border: "none", fontSize: "16px", color: item.path === path ? color : "" }}>{item.name}</SidebarLabel>
+              <SidebarLabel
+                style={{
+                  border: "none",
+                  fontSize: "16px",
+                  color: item.path === path ? color : "",
+                }}
+              >
+                {item.name}
+              </SidebarLabel>
             </DropdownLink>
           );
-        })
-      }
+        })}
     </>
-  )
-}
+  );
+};
 
 export default SubMenu;

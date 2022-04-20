@@ -205,12 +205,15 @@ function DisplayCar({ toogleChange, property }) {
                   UPCOMING AUCTION | STARTS IN{" "}
                   {new Date(property.auctionStartDate).toLocaleString()}
                 </div>
-              ) : new Date().toISOString() > property.auctionStartDate ? (
+              ) : new Date().toISOString() > property.auctionStartDate &&
+                new Date().toISOString() < property.auctionEndDate ? (
                 <div className="mini-header-text">
                   AUCTION IN PROGRESS | ENDS IN{" "}
                   {new Date(property.auctionEndDate).toLocaleString()}
                 </div>
-              ) : null}
+              ) : (
+                <div className="mini-header-text">AUCTION ENDED</div>
+              )}
             </div>
             {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>

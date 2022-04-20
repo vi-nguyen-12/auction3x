@@ -5,7 +5,6 @@ import SidebarMenu from "../Dashboard/SidebarMenu";
 import SubMenu from "./SubMenu";
 
 const Sidebar = ({ path }) => {
-  const user = useSelector((state) => state.user);
   return (
     <div className="sideBar">
       {/* <h1>

@@ -81,49 +81,13 @@ function DisplayAuctions({ toogleChange }) {
       {auction && (
         <h5 className="realHeader">
           {auction.property.type === "car" ? (
-            <p
-              style={{
-                fontSize: "4rem",
-                color: "#fcbe91",
-                margin: "0",
-                alignItems: "center",
-              }}
-            >
-              CAR
-            </p>
+            <p>CAR</p>
           ) : auction.property.type === "jet" ? (
-            <p
-              style={{
-                fontSize: "4rem",
-                color: "#fcbe91",
-                margin: "0",
-                alignItems: "center",
-              }}
-            >
-              JET
-            </p>
+            <p>JET</p>
           ) : auction.property.type === "yacht" ? (
-            <p
-              style={{
-                fontSize: "4rem",
-                color: "#fcbe91",
-                margin: "0",
-                alignItems: "center",
-              }}
-            >
-              YACHT
-            </p>
+            <p>YACHT</p>
           ) : (
-            <p
-              style={{
-                fontSize: "4rem",
-                color: "#fcbe91",
-                margin: "0",
-                alignItems: "center",
-              }}
-            >
-              REAL ESTATE
-            </p>
+            <p>REAL ESTATE</p>
           )}
         </h5>
       )}

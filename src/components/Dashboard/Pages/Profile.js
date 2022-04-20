@@ -8,9 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
-import authService from "../../../services/authServices";
 import { Modal } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import EditProfile from "../EditProfile";
 
 const Carousel = styled(Slider)`

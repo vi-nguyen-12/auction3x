@@ -31,7 +31,7 @@ const Work = (props) => {
             </Card>
           </Col>
 
-          <Col xs={1}>
+          <Col className="arrDiv" xs={1}>
             <img
               src="images/downArr.png"
               alt="arrow"
@@ -55,7 +55,7 @@ const Work = (props) => {
             </Card>
           </Col>
 
-          <Col xs={1}>
+          <Col className="arrDiv" xs={1}>
             <img
               src="images/upArr.png"
               alt="arrow"

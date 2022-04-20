@@ -44,49 +44,49 @@ function Dashboard({ toogleChange, toogleShow, colorChange }) {
         >
           <DashHeader location={location.pathname.split("/")[1]} />
           <Switch>
-            <Route exact path="/dashboard" component={Dash} />
-            <Route exact path="/dashboard/Messaging" component={Messaging} />
+            <Route exact path="/Dashboard" component={Dash} />
+            <Route exact path="/Dashboard/Messaging" component={Messaging} />
             <Route
               exact
-              path="/dashboard/Auctions/BidAuctions"
+              path="/Dashboard/Auctions/BidAuctions"
               component={BidAuctions}
             />
             <Route
               exact
-              path="/dashboard/Auctions/PendingAuctions"
+              path="/Dashboard/Auctions/PendingAuctions"
               component={PendingAuctions}
             />
             <Route
               exact
-              path="/dashboard/Auctions/SavedAuctions"
+              path="/Dashboard/Auctions/SavedAuctions"
               component={SavedAuctions}
             />
             <Route
               exact
-              path="/dashboard/Auctions/WinAuctions"
+              path="/Dashboard/Auctions/WinAuctions"
               component={WinAuctions}
             />
             <Route
               exact
-              path="/dashboard/Listings/AuctionListings"
+              path="/Dashboard/Listings/AuctionListings"
               component={LiveListings}
             />
             <Route
               exact
-              path="/dashboard/Listings/PendingApproval"
+              path="/Dashboard/Listings/PendingApproval"
               component={PendingListings}
             />
             <Route
               exact
-              path="/dashboard/Listings/SoldListings"
+              path="/Dashboard/Listings/SoldListings"
               component={SoldListings}
             />
             <Route
               exact
-              path="/dashboard/Listings/IncompleteListing"
+              path="/Dashboard/Listings/IncompleteListing"
               component={IncompleteListing}
             />
-            <Route exact path="/dashboard/Profile" component={Profile} />
+            <Route exact path="/Dashboard/Profile" component={Profile} />
           </Switch>
         </div>
       </Router>

@@ -54,6 +54,7 @@ const Header = ({ change, color }) => {
   const handleLogout = async () => {
     document.cookie = "auth_token=; path=/";
     dispatch(logout());
+    history.push("/");
     window.location.reload();
   };
 

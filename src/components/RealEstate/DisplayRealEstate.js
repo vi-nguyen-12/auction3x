@@ -223,12 +223,15 @@ function DisplayRealEstate({ property, toogleChange }) {
                   UPCOMING AUCTION | STARTS IN{" "}
                   {new Date(property.auctionStartDate).toLocaleString()}
                 </div>
-              ) : new Date().toISOString() > property.auctionStartDate ? (
+              ) : new Date().toISOString() > property.auctionStartDate &&
+                new Date().toISOString() < property.auctionEndDate ? (
                 <div className="mini-header-text">
                   AUCTION IN PROGRESS | ENDS IN{" "}
                   {new Date(property.auctionEndDate).toLocaleString()}
                 </div>
-              ) : null}
+              ) : (
+                <div className="mini-header-text">AUCTION ENDED</div>
+              )}
             </div>
             {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
@@ -392,25 +395,8 @@ function DisplayRealEstate({ property, toogleChange }) {
 
             <Col>
               {!user._id && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toogleSignIn}
-                  >
+                <div className="registBtn">
+                  <button className="registsBtn" onClick={toogleSignIn}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -435,25 +421,8 @@ function DisplayRealEstate({ property, toogleChange }) {
               property.isNotRegisteredToBuy &&
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toogleRegister}
-                  >
+                <div className="registBtn">
+                  <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -477,23 +446,9 @@ function DisplayRealEstate({ property, toogleChange }) {
                 property.isNotRegisteredToBuy &&
                 property.isOwner &&
                 new Date().toISOString() > property.registerEndDate && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
+                  <div className="registBtn">
                     <button
-                      style={{
-                        backgroundColor: "#e8a676",
-                        borderRadius: "10px",
-                        border: "0",
-                        width: "200px",
-                        height: "50px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
+                      className="registsBtn"
                       onClick={toogleRegister}
                       disabled
                     >
@@ -519,23 +474,9 @@ function DisplayRealEstate({ property, toogleChange }) {
               )}
 
               {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
+                <div className="registBtn">
                   <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
+                    className="registsBtn"
                     onClick={tooglePlaceBid}
                     disabled={property.highestBidders ? false : true}
                   >

@@ -39,7 +39,6 @@ function App() {
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
-        console.log(response);
         if (response.data.message === "User Logged In") {
           localStorage.setItem("userId", response.data.user._id);
           dispatch(login(response.data.user));
