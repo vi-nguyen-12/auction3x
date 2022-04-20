@@ -11,11 +11,11 @@ import ForgotPass from "../Users/ForgotPass";
 import ChangePass from "../Users/ChangePass";
 import SignUp from "../Users/SignUp";
 import NumberFormat from "react-number-format";
-import RegistrationTimer from "./RegistrationTimer";
-import Timer from "./Timer";
+import RegistrationTimer from "../Auctions/RegistrationTimer";
+import Timer from "../Auctions/Timer";
 import authService from "../../services/authServices";
 
-const UpcomingCard = ({
+const UpcomingRealEstateCard = ({
   url,
   data,
   id,
@@ -75,8 +75,8 @@ const UpcomingCard = ({
 
   const handleDisplay = () => {
     if (
-      history.location.pathname === "/dashboard" ||
-      history.location.pathname === "/dashboard/Auctions/SavedAuctions"
+      history.location.pathname === "/Dashboard" ||
+      history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
     ) {
       window.open(`/DisplayAuctions/${id}`);
     } else {
@@ -413,4 +413,4 @@ const UpcomingCard = ({
   );
 };
 
-export { UpcomingCard };
+export { UpcomingRealEstateCard };

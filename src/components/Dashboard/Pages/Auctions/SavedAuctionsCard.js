@@ -56,8 +56,8 @@ function SavedAuctionsCard({
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
   const handleBid = () => {
-    console.log("test");
-    history.push(`/DisplayAuctions/${id}`);
+    // history.push(`/DisplayAuctions/${id}`);
+    window.open(`/DisplayAuctions/${id}`);
   };
 
   return (

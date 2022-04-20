@@ -19,8 +19,9 @@ import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
 
-function Dashboard({ toogleChange, toogleShow }) {
+function Dashboard({ toogleChange, toogleShow, colorChange }) {
   useEffect(() => {
+    colorChange("#282828");
     toogleChange();
     toogleShow();
   }, []);

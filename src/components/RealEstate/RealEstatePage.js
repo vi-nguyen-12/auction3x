@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCard } from "../Auctions/UpcomingCard";
+import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 import authService from "../../services/authServices";
@@ -166,7 +166,7 @@ function RealEstatePage({ toogleChange }) {
           <Row>
             {upcomingAuctions.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                <UpcomingCard
+                <UpcomingRealEstateCard
                   url={item.property.images[0].url}
                   data={item.property.details}
                   id={item._id}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCard } from "./UpcomingCard";
+import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
@@ -32,7 +32,7 @@ const Upcoming = (props) => {
               style={{ marginBottom: "30px", marginTop: "20px" }}
             >
               {item.property.type === "real-estate" ? (
-                <UpcomingCard
+                <UpcomingRealEstateCard
                   url={item.property.images[0].url}
                   data={item.property.details}
                   id={item._id}

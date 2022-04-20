@@ -73,8 +73,8 @@ const CardComp = ({
       alert("Auction has ended");
     } else if (!auctionEnded) {
       if (
-        history.location.pathname === "/dashboard" ||
-        history.location.pathname === "/dashboard/Auctions/SavedAuctions"
+        history.location.pathname === "/Dashboard" ||
+        history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
       ) {
         window.open(`/DisplayAuctions/${id}`);
       } else {
@@ -238,7 +238,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

@@ -6,7 +6,7 @@ import { CarCard } from "../../../Cards/CarCard";
 import { JetCard } from "../../../Cards/JetCard";
 import { YachtCard } from "../../../Cards/YachtCard";
 import { CardComp } from "../../../Cards/RealEstateCard";
-import { UpcomingCard } from "../../../Auctions/UpcomingCard";
+import { UpcomingRealEtateCard } from "../../../Cards/UpcomingRealEtateCard";
 import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
