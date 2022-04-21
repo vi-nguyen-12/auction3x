@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
-  // overflow: hidden;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -83,7 +83,7 @@ function BidAuctionsComp({bidAuctions}) {
         infinite: true,
         speed: 500,
         autoplay: true,
-        slidesToShow: bidAuctions.length > 3 ? 3 : bidAuctions.length,
+        slidesToShow: bidAuctions.length > 2 ? 2 : bidAuctions.length,
       };
   return (
     <>

@@ -166,6 +166,7 @@ function DisplayCar({ toogleChange, property }) {
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     toogleChange();
 
     //set location for map
@@ -479,51 +480,133 @@ function DisplayCar({ toogleChange, property }) {
                     </button>
                   </div>
                 </div>
-              ) : (
-                user._id &&
+              ) : user._id &&
                 property.isNotRegisteredToBuy &&
-                property.isOwner &&
-                new Date().toISOString() > property.registerEndDate && (
-                  <div
+                !property.isOwner &&
+                new Date().toISOString() > property.registerEndDate ? (
+                <div
+                  style={{
+                    display: "grid",
+                    justifyContent: "right",
+                    width: "100%",
+                  }}
+                >
+                  <button
                     style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
+                      backgroundColor: "#e8a676",
+                      borderRadius: "10px",
+                      border: "0",
+                      width: "200px",
+                      height: "50px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
                     }}
+                    onClick={toogleRegister}
+                    disabled
                   >
+                    Register to Bid
+                  </button>
+                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
                     <button
                       style={{
-                        backgroundColor: "#e8a676",
-                        borderRadius: "10px",
+                        fontWeight: "500",
                         border: "0",
-                        width: "200px",
-                        height: "50px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
+                        borderBottom: "1px solid #919191",
+                        backgroundColor: "transparent",
+                        width: "fit-content",
+                        pointer: "cursor",
                       }}
-                      onClick={toogleRegister}
-                      disabled
+                      onClick={executeScroll}
                     >
-                      Register to Bid
+                      View Documents
                     </button>
-                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                      <button
-                        style={{
-                          fontWeight: "500",
-                          border: "0",
-                          borderBottom: "1px solid #919191",
-                          backgroundColor: "transparent",
-                          width: "fit-content",
-                          pointer: "cursor",
-                        }}
-                        onClick={executeScroll}
-                      >
-                        View Documents
-                      </button>
-                    </div>
                   </div>
-                )
-              )}
+                </div>
+              ) : user._id &&
+                property.isNotRegisteredToBuy &&
+                property.isOwner &&
+                new Date().toISOString() > property.registerEndDate ? (
+                <div
+                  style={{
+                    display: "grid",
+                    justifyContent: "right",
+                    width: "100%",
+                  }}
+                >
+                  <button
+                    style={{
+                      backgroundColor: "#e8a676",
+                      borderRadius: "10px",
+                      border: "0",
+                      width: "200px",
+                      height: "50px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                    onClick={toogleRegister}
+                    disabled
+                  >
+                    Register to Bid
+                  </button>
+                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                    <button
+                      style={{
+                        fontWeight: "500",
+                        border: "0",
+                        borderBottom: "1px solid #919191",
+                        backgroundColor: "transparent",
+                        width: "fit-content",
+                        pointer: "cursor",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Documents
+                    </button>
+                  </div>
+                </div>
+              ) : user._id &&
+                property.isNotRegisteredToBuy &&
+                property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
+                <div
+                  style={{
+                    display: "grid",
+                    justifyContent: "right",
+                    width: "100%",
+                  }}
+                >
+                  <button
+                    style={{
+                      backgroundColor: "#e8a676",
+                      borderRadius: "10px",
+                      border: "0",
+                      width: "200px",
+                      height: "50px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                    onClick={toogleRegister}
+                    disabled
+                  >
+                    Register to Bid
+                  </button>
+                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                    <button
+                      style={{
+                        fontWeight: "500",
+                        border: "0",
+                        borderBottom: "1px solid #919191",
+                        backgroundColor: "transparent",
+                        width: "fit-content",
+                        pointer: "cursor",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Documents
+                    </button>
+                  </div>
+                </div>
+              ) : null}
 
               {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
                 <div

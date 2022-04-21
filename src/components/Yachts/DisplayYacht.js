@@ -185,6 +185,7 @@ function DisplayYacht({ toogleChange, property }) {
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     toogleChange();
 
     //set location for map

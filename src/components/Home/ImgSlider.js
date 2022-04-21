@@ -28,14 +28,15 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -22vh;
-      font-size: 10px;
-      color: white;
+      top: -3vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
     }
   }
 
   li.slick-active button:before {
-    color: white;
+    color: #e9af84;
   }
 
   .slick-list {
@@ -43,15 +44,23 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 19vw;
+    width: 12vw;
     height: 100%;
   }
 
+  .slick-prev:before {
+    color: #e9af84;
+    font-size: 50px;
+  }
+
   .slick-next {
-    right: -75px;
-    width: 19vw;
-    height: 100vh;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-next:before {
+    color: #e9af84;
+    font-size: 50px;
   }
 `;
 

@@ -145,6 +145,7 @@ function RealEstatePage({ toogleChange }) {
       <div className="mt-5">
         <Col md={12} className="m-auto pt-2">
           <Row>
+            <h1 style={{ marginBottom:"80px" }}>ONGOING AUCTIONS</h1>
             <Carousel {...settings}>
               {onGoingAuctions.map((item, index) => (
                 <Wrap key={index}>
@@ -164,6 +165,7 @@ function RealEstatePage({ toogleChange }) {
             </Carousel>
           </Row>
           <Row>
+            <h1 style={{ margin:"80px 0" }}>UPCOMING AUCTIONS</h1>
             {upcomingAuctions.map((item, index) => (
               <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                 <UpcomingRealEstateCard

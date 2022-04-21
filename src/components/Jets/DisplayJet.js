@@ -193,6 +193,7 @@ function DisplayJet({ toogleChange, property }) {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     toogleChange();
 
     //set location for map

@@ -198,6 +198,7 @@ function DisplayRealEstate({ property, toogleChange }) {
   }, [property]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (user._id) {
       if (savedProperty.length > 0) {
         const saved = savedProperty.filter(

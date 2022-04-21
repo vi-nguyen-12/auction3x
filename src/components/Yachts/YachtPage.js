@@ -143,37 +143,51 @@ function YachtPage({ toogleChange }) {
       <div className="mt-5">
         <Col md={12} className="m-auto pt-2">
           <Row>
-            <Carousel {...settings}>
-              {onGoingAuctions.map((item, index) => (
-                <Wrap key={index}>
-                  <Col md={12} style={{ marginBottom: "30px" }}>
-                    <YachtCard
-                      url={item.property.images[0].url}
-                      data={item.property.details}
-                      id={item._id}
-                      auctionStartDate={item.auctionStartDate}
-                      auctionEndDate={item.auctionEndDate}
-                      startingBid={item.startingBid}
-                      auctionId={item._id}
-                    />
-                  </Col>
-                </Wrap>
-              ))}
-            </Carousel>
+            <h1 style={{ marginBottom: "80px", fontWeight: "bold" }}>
+              ONGOING AUCTIONS
+            </h1>
+            {onGoingAuctions.length > 0 ? (
+              <Carousel {...settings}>
+                {onGoingAuctions.map((item, index) => (
+                  <Wrap key={index}>
+                    <Col md={12} style={{ marginBottom: "30px" }}>
+                      <YachtCard
+                        url={item.property.images[0].url}
+                        data={item.property.details}
+                        id={item._id}
+                        auctionStartDate={item.auctionStartDate}
+                        auctionEndDate={item.auctionEndDate}
+                        startingBid={item.startingBid}
+                        auctionId={item._id}
+                      />
+                    </Col>
+                  </Wrap>
+                ))}
+              </Carousel>
+            ) : (
+              <h1>No ongoing auctions</h1>
+            )}
           </Row>
           <Row>
-            {upcomingAuctions.map((item, index) => (
-              <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                <UpcomingYachtCard
-                  url={item.property.images[0].url}
-                  data={item.property.details}
-                  id={item._id}
-                  startRegister={item.registerStartDate}
-                  endRegister={item.registerEndDate}
-                  startingBid={item.startingBid}
-                />
-              </Col>
-            ))}
+            <h1 style={{ margin: "80px 0", fontWeight: "bold" }}>
+              UPCOMING AUCTIONS
+            </h1>
+            {upcomingAuctions.length > 0 ? (
+              upcomingAuctions.map((item, index) => (
+                <Col key={index} md={4} style={{ marginBottom: "30px" }}>
+                  <UpcomingYachtCard
+                    url={item.property.images[0].url}
+                    data={item.property.details}
+                    id={item._id}
+                    startRegister={item.registerStartDate}
+                    endRegister={item.registerEndDate}
+                    startingBid={item.startingBid}
+                  />
+                </Col>
+              ))
+            ) : (
+              <h1>No upcoming auctions</h1>
+            )}
           </Row>
         </Col>
       </div>
