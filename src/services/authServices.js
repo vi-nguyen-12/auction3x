@@ -191,7 +191,7 @@ const authService = {
   getSellingDocuSign(data) {
     return axios.get(
       apiUrl +
-      `/api/docusign/signature/selling_agreement/uiviews?envelopeId=${data}`,
+        `/api/docusign/signature/selling_agreement/uiviews?envelopeId=${data}`,
       {
         headers: {
           Authorization:
@@ -204,7 +204,7 @@ const authService = {
   getBuyingDocuSign(data) {
     return axios.get(
       apiUrl +
-      `/api/docusign/signature/buying_agreement/uiviews?envelopeId=${data}`,
+        `/api/docusign/signature/buying_agreement/uiviews?envelopeId=${data}`,
       {
         headers: {
           Authorization:
@@ -296,21 +296,21 @@ const authService = {
   sellerPendingAuctions(id) {
     return axios.get(
       apiUrl +
-      `/api/users/${id}/seller/properties?status=pending&inAuction=false&completed=true`,
+        `/api/users/${id}/seller/properties?status=pending&inAuction=false&completed=true`
     );
   },
 
   sellerApprovedListings(id) {
     return axios.get(
       apiUrl +
-      `/api/users/${id}/seller/properties?status=success&inAuction=false`
+        `/api/users/${id}/seller/properties?status=success&inAuction=false`
     );
   },
 
   sellerPropInAuctions(id) {
     return axios.get(
       apiUrl +
-      `/api/users/${id}/seller/properties?status=success&inAuction=true`
+        `/api/users/${id}/seller/properties?status=success&inAuction=true`
     );
   },
 
@@ -376,6 +376,10 @@ const authService = {
           "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
       },
     });
+  },
+
+  auctionResult(id) {
+    return axios.get(apiUrl + `/api/auctions/${id}/result`);
   },
 };
 

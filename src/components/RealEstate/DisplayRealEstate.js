@@ -571,7 +571,10 @@ function DisplayRealEstate({ property, toogleChange }) {
                         padding: "20px",
                       }}
                     >
-                      <AuctionTimer time={property.auctionEndDate} />
+                      <AuctionTimer
+                        time={property.auctionEndDate}
+                        id={property._id}
+                      />
                       <div
                         style={{
                           display: "flex",

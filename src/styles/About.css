@@ -123,7 +123,7 @@
     #edb48b 100%
   );
   border: none;
-  border-radius: 3px;
+  border-radius: 5px;
   width: 250px;
   padding: 10px;
   color: white;
@@ -148,8 +148,9 @@
     #edb48b 100%
   );
   border: none;
-  border-radius: 3px;
+  border-radius: 12px;
   font-weight: bold;
+  font-size: 22px;
   height: 74px;
 }
 .content-right input {
@@ -157,7 +158,8 @@
   height: 74px;
   background-color: transparent;
   border: 2px solid #d58f5c;
-  border-radius: 3px;
+  border-radius: 12px;
+  padding-left: 20px;
 }
 
 .banner-top-left-2 p {
@@ -200,6 +202,7 @@
 .banner-left h2 {
   color: #b77b50;
   font-size: 45px;
+  font-weight: 600;
   font-family: "Josefin Slab", serif;
   padding-top: 20px;
   padding-bottom: 20px;

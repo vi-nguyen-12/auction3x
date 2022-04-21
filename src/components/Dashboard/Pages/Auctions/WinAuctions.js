@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Table, Button, Modal, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import SavedAuctionsCard from "./SavedAuctionsCard";
+import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 
 function WinAuctions() {
   const user = useSelector((state) => state.user);
   const [winAuctions, setWinAuctions] = useState([]);
+  const [images, setImages] = useState([]);
+  const [showPic, setShowPic] = useState(false);
+  const toogleShowPic = () => setShowPic(!showPic);
 
   useEffect(() => {
     const fetchWinAuctions = async () => {
@@ -19,29 +22,124 @@ function WinAuctions() {
   }, []);
 
   return (
-    <Container>
-      {winAuctions.length > 0 ? (
-        <Row>
-          {winAuctions.map((auction) => (
-            <Col key={auction._id}>
-              <SavedAuctionsCard
-                data={auction.property.details}
-                url={auction.property.images[0].url}
-                id={auction._id}
-                auctionStartDate={auction.auctionStartDate}
-                auctionEndDate={auction.auctionEndDate}
-                startingBid={
-                  auction.highestBid ? auction.highestBid : auction.startingBid
-                }
-                auctionId={auction._id}
-              />
-            </Col>
+    <>
+      <Table striped borderless hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Auction ID</th>
+            <th>Property Type</th>
+            <th>Property Address</th>
+            <th>Bid Amount</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        {winAuctions.length > 0 &&
+          winAuctions.map((auction, index) => (
+            <tbody key={index}>
+              <tr>
+                <td>{index + 1}</td>
+                <td>
+                  {auction._id}
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img
+                      width="100px"
+                      height="50px"
+                      onClick={() => {
+                        setImages(auction.property[0].images);
+                        toogleShowPic();
+                      }}
+                      src={
+                        auction.property[0].images.length > 0
+                          ? auction.property[0].images[0].url
+                          : ""
+                      }
+                    />
+                  </div>
+                </td>
+                <td>
+                  {auction.property[0].type === "real-estate"
+                    ? "Real Estate"
+                    : auction.property[0].type === "car"
+                    ? "Car"
+                    : auction.property[0].type === "jet"
+                    ? "Jet"
+                    : auction.property[0].type === "yacht"
+                    ? "Yacht"
+                    : ""}
+                </td>
+                <td>{auction.property[0].details.address}</td>
+                <td>
+                  <NumberFormat
+                    value={auction.amount}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </td>
+                <td>
+                  <Button
+                    onClick={() => {
+                      window.open(`/DisplayAuctions/${auction._id}`);
+                    }}
+                    variant="primary"
+                  >
+                    View
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
           ))}
-        </Row>
-      ) : (
-        <h1>No Win Auctions</h1>
-      )}
-    </Container>
+      </Table>
+      <Modal show={showPic} onHide={toogleShowPic} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Images</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Table striped borderless hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image Name</th>
+                <th>Image Status</th>
+                <th>View Image</th>
+              </tr>
+            </thead>
+            {images.length > 0 &&
+              images.map((image, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{image.name}</td>
+                    <td>
+                      {image.isVerified === "success"
+                        ? "Approved"
+                        : image.isVerified === "pending"
+                        ? "Pending"
+                        : "Rejected"}
+                    </td>
+                    <td>
+                      <Button
+                        onClick={() => window.open(image.url)}
+                        variant="primary"
+                      >
+                        View
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </Table>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 

@@ -18,6 +18,8 @@ function BidAuctions() {
     fetchBidAuctions();
   }, []);
 
+  console.log(bidAuctions);
+
   return (
     <Table striped borderless hover>
       <thead>
