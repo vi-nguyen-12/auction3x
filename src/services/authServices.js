@@ -269,7 +269,12 @@ const authService = {
   },
 
   getUserBidAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+      },
+    });
   },
 
   getBuyerPendingAuctions(id) {

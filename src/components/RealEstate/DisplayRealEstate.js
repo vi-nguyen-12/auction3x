@@ -127,6 +127,7 @@ const Wrap = styled.div`
 `;
 
 function DisplayRealEstate({ property, toogleChange }) {
+  console.log("property", property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -152,7 +153,6 @@ function DisplayRealEstate({ property, toogleChange }) {
       authService.removeProperty(data);
       setFavorite(!favorite);
     }
-    console.log(data);
   };
 
   const [bid, setBid] = useState(false);
@@ -234,9 +234,11 @@ function DisplayRealEstate({ property, toogleChange }) {
                 <div className="mini-header-text">AUCTION ENDED</div>
               )}
             </div>
-            {property.isReservedMet === true && (
-              <span className="badge">Reserved Met!</span>
-            )}
+            {user._id &&
+              property.highestBidders &&
+              property.isReservedMet === true && (
+                <span className="badge">Reserved Met!</span>
+              )}
             <img
               src={property.property.images[0].url}
               alt="Snow"

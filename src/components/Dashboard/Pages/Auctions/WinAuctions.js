@@ -98,7 +98,7 @@ function WinAuctions() {
             </tbody>
           ))}
       </Table>
-      <Modal show={showPic} onHide={toogleShowPic} centered>
+      <Modal size="lg" show={showPic} onHide={toogleShowPic} centered>
         <Modal.Header closeButton>
           <Modal.Title>Images</Modal.Title>
         </Modal.Header>
