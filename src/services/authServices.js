@@ -4,13 +4,12 @@ const apiUrl =
   process.env.REACT_APP_NODE_ENV === "production"
     ? process.env.REACT_APP_API_URL
     : "http://localhost:5000";
-const auth_token = document.cookie.split("=")[1];
+const auth_token = localStorage.getItem("token");
 
 const authService = {
   register(user) {
     return axios.post(apiUrl + "/api/users/register", user);
   },
-
   getUsers(data) {
     return axios.post(apiUrl + "/api/users/checkJWT", { authToken: data });
   },
@@ -33,7 +32,7 @@ const authService = {
     return axios.post(apiUrl + "/api/properties/real-estates/", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -42,7 +41,7 @@ const authService = {
     return axios.post(apiUrl + "/api/properties", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -51,7 +50,7 @@ const authService = {
     return axios.post(apiUrl + "/api/aws/images/upload", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
         "content-type": "multipart/form-data",
       },
     });
@@ -61,7 +60,7 @@ const authService = {
     return axios.post(apiUrl + "/api/aws/videos/upload", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
         "content-type": "multipart/form-data",
       },
     });
@@ -75,7 +74,7 @@ const authService = {
     return axios.get(apiUrl + "/api/kyc/verifyKyc", {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -84,7 +83,7 @@ const authService = {
     return axios.post(apiUrl + "/api/aws/documents/upload", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
         "content-type": "multipart/form-data",
       },
     });
@@ -98,7 +97,7 @@ const authService = {
     return axios.post(apiUrl + "/api/buyers", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -107,7 +106,7 @@ const authService = {
     return axios.get(apiUrl + "/api/questions", {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -123,7 +122,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -151,7 +150,7 @@ const authService = {
     return axios.get(apiUrl + `/api/auctions/${id}`, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -160,7 +159,7 @@ const authService = {
     return axios.get(apiUrl + "/api/auctions/status?buyer=true", {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -196,7 +195,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -209,7 +208,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -229,7 +228,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -243,7 +242,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -259,7 +258,7 @@ const authService = {
     return axios.get(apiUrl + `/api/users/${id}/likes`, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -275,7 +274,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -322,7 +321,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -332,7 +331,7 @@ const authService = {
     return axios.post(apiUrl + "/api/properties", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -341,7 +340,7 @@ const authService = {
     return axios.post(apiUrl + "/api/properties/real-estate", data, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -354,7 +353,7 @@ const authService = {
         headers: {
           Authorization:
             "Bearer " +
-            (auth_token ? auth_token : document.cookie.split("=")[1]),
+            (auth_token ? auth_token : localStorage.getItem("token")),
         },
       }
     );
@@ -364,7 +363,7 @@ const authService = {
     return axios.put(apiUrl + `/api/properties/${data.id}`, data.details, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },
@@ -373,7 +372,7 @@ const authService = {
     return axios.delete(apiUrl + `/api/properties/${id}`, {
       headers: {
         Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
       },
     });
   },

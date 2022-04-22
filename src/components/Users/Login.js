@@ -42,8 +42,7 @@ const Login = ({
           toogleConfirmModal();
         } else {
           dispatch(login(response.data.data));
-
-          document.cookie = `auth_token=${response.data.data.token};path=/`;
+          localStorage.setItem("token", response.data.data.token);
           toogleButton();
           toogleSignIn();
           history.push(location.pathname);
@@ -85,7 +84,10 @@ const Login = ({
         }}
       >
         <div className="form-group mb-4 mt-3">
-          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputEmail1">
+          <label
+            style={{ fontSize: "35px", color: "black" }}
+            htmlFor="exampleInputEmail1"
+          >
             Username or Email
           </label>
           <input
@@ -100,7 +102,10 @@ const Login = ({
           />
         </div>
         <div className="form-group mt-3">
-          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputPassword1">
+          <label
+            style={{ fontSize: "35px", color: "black" }}
+            htmlFor="exampleInputPassword1"
+          >
             Password
           </label>
           <input

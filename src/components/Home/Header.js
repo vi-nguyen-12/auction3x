@@ -52,7 +52,7 @@ const Header = ({ change, color }) => {
   const [showWallet, setShowWallet] = useState(false);
 
   const handleLogout = async () => {
-    document.cookie = "auth_token=; path=/";
+    localStorage.removeItem("token");
     dispatch(logout());
     history.push("/");
     window.location.reload();
