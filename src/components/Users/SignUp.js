@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
-import { Modal, Table } from "react-bootstrap";
+import { Modal, Table, Row, Col } from "react-bootstrap";
 import "../../styles/modalStyle.css";
 
 require("react-bootstrap/ModalHeader");
@@ -70,7 +70,157 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           }
         }}
       >
-        <Table borderless style={{ marginBottom: "13px" }}>
+        <Row style={{ margin: "30px 0" }}>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="firstName">First Name</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="firstName"
+                placeholder="Enter First Name"
+                name="firstName"
+                {...register("firstName")}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="lastName">Last Name</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="lastName"
+                placeholder="Enter Last Name"
+                name="lastName"
+                {...register("lastName")}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row style={{ margin: "30px 0" }}>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="userName">User Name</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="userName"
+                placeholder="Enter User Name"
+                name="userName"
+                {...register("userName")}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="email"
+                placeholder="Enter Email"
+                name="email"
+                {...register("email")}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row style={{ margin: "30px 0" }}>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="password"
+                placeholder="Enter Password"
+                name="password"
+                {...register("password")}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                {...register("confirmPassword")}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row style={{ margin: "30px 0" }}>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="phone">Phone</label>
+              <input
+                type="number"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="phone"
+                placeholder="Enter Phone"
+                name="phone"
+                {...register("phone")}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row style={{ margin: "30px 0" }}>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="country">Country</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="country"
+                placeholder="Enter Country"
+                name="country"
+                {...register("country")}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="state">State</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="state"
+                placeholder="Enter State"
+                name="state"
+                {...register("state")}
+              />
+            </div>
+          </Col>
+          <Col>
+            <div className="form-group">
+              <label htmlFor="city">City</label>
+              <input
+                type="text"
+                style={{ height: "47px", borderRadius: "8px" }}
+                className="form-control"
+                id="city"
+                placeholder="Enter City"
+                name="city"
+                {...register("city")}
+              />
+            </div>
+          </Col>
+        </Row>
+        {/* <Table borderless style={{ marginBottom: "13px" }}>
           <tbody>
             <tr>
               <td style={{ width: "50%", paddingRight: "20px" }}>
@@ -218,7 +368,23 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 />
               </td>
 
-              <td style={{}}>
+              <td>
+                <label style={{ fontSize: "20px" }}>State*</label>
+                <input
+                  type="text"
+                  className="form-control color-black"
+                  placeholder="State"
+                  {...register("state", { maxLength: 20 })}
+                  required
+                  style={{
+                    height: "50px",
+                    fontSize: "15px",
+                    borderRadius: "8px",
+                  }}
+                />
+              </td>
+
+              <td>
                 <label style={{ fontSize: "20px" }}>City*</label>
                 <input
                   type="text"
@@ -235,21 +401,16 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
               </td>
             </tr>
           </tbody>
-        </Table>
-        <label style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}>
+        </Table> */}
+        <label
+          style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}
+        >
           By signing up you will agree to our Privacy Policy and Terms &
           Conditions
         </label>
         <button
           type="submit"
-          className="registerBtn"
-          style={{
-            width: "100%",
-            color: "white",
-            fontWeight: "bold",
-            fontSize: "35px",
-            borderRadius: "10px",
-          }}
+          className="signUpBtn"
         >
           REGISTER
         </button>

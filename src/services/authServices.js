@@ -133,6 +133,10 @@ const authService = {
   //   return axios.get(apiUrl + "/api/auctions/propertyId/" + id);
   // },
 
+  getFeaturedAuctions() {
+    return axios.get(apiUrl + "/api/auctions?isFeatured=true");
+  },
+
   getUpcomingAuctions() {
     return axios.get(apiUrl + "/api/auctions/upcoming");
   },

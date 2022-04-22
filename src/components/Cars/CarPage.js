@@ -165,7 +165,7 @@ function CarPage({ toogleChange }) {
                 ))}
               </Carousel>
             ) : (
-              <h1>No ongoing auctions</h1>
+              <h1>No Ongoing Auctions</h1>
             )}
           </Row>
           <Row>
@@ -186,7 +186,7 @@ function CarPage({ toogleChange }) {
                 </Col>
               ))
             ) : (
-              <h1>No upcoming auctions</h1>
+              <h1>No Upcoming Auctions</h1>
             )}
           </Row>
         </Col>

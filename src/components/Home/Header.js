@@ -328,6 +328,7 @@ const Header = ({ change, color }) => {
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showSignUp}
+              style={{ borderRadius: "30px" }}
               onHide={toogleSignUp}
               contentclassname="custom-modal-style"
             >

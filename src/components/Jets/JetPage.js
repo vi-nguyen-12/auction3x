@@ -165,7 +165,7 @@ function JetPage({ toogleChange }) {
                 ))}
               </Carousel>
             ) : (
-              <h1>No On Going Auctions</h1>
+              <h1>No Ongoing Auctions</h1>
             )}
           </Row>
           <Row>

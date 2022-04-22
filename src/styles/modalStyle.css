@@ -2,7 +2,10 @@
   display: list-item;
   width: 100%;
   height: 570px;
-  border-radius: 20px;
+}
+
+.custom-modal-style .modal-content {
+  border-radius: 30px !important;
 }
 
 .custom-modal-title {
@@ -299,3 +302,36 @@
   color: red !important;
   opacity: 1 !important;
 } */
+
+.signUpBtn {
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 35px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 30px;
+}
+
+.loginBtn {
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  font-size: 35px;
+  border: none;
+  border-radius: 8px;
+}

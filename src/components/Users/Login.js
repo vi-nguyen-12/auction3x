@@ -6,7 +6,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../slice/userSlice";
 import { useHistory, useLocation } from "react-router-dom";
-
+import "../../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
 const Login = ({
@@ -85,7 +85,10 @@ const Login = ({
         }}
       >
         <div className="form-group mb-4 mt-3">
-          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputEmail1">
+          <label
+            style={{ fontSize: "35px", color: "black" }}
+            htmlFor="exampleInputEmail1"
+          >
             Username or Email
           </label>
           <input
@@ -100,7 +103,10 @@ const Login = ({
           />
         </div>
         <div className="form-group mt-3">
-          <label style={{ fontSize: "35px", color: "black" }} htmlFor="exampleInputPassword1">
+          <label
+            style={{ fontSize: "35px", color: "black" }}
+            htmlFor="exampleInputPassword1"
+          >
             Password
           </label>
           <input
@@ -132,13 +138,7 @@ const Login = ({
           <div className="col text-center mb-2">
             <button
               type="submit"
-              className="submitBtn mb-3"
-              style={{
-                width: "100%",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: "35px",
-              }}
+              className="loginBtn mb-3"
             >
               LOGIN
             </button>

@@ -109,9 +109,13 @@ const ImgSlider = () => {
     slidesToScroll: 1,
     autoplay: true,
   };
+  const [featureAuctions, setFeatureAuctions] = useState([]);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
+    authService.getFeaturedAuctions().then((res) => {
+      setFeatureAuctions(res.data);
+    });
     authService.getUpcomingAuctions().then((res) => {
       setUpcomingAuctions(res.data);
     });
@@ -121,8 +125,41 @@ const ImgSlider = () => {
   }, []);
 
   return (
-    <div>
-      {onGoingAuctions.length > 0 ? (
+    <>
+      {featureAuctions.length > 0 ? (
+        <Carousel {...settings}>
+          {featureAuctions.map((auction) => (
+            <Wrap key={auction._id}>
+              <a href={`/DisplayAuctions/${auction._id}`}>
+                <img src={auction.property.images[0].url} alt="auction" />
+              </a>
+              <HomeBottom>
+                <h2>
+                  <NumberFormat
+                    style={{ fontSize: "50px", color: "white" }}
+                    value={
+                      auction.startingBid
+                        ? auction.startingBid
+                        : auction.property.details.market_assessments.length > 0
+                        ? auction.property.details.market_assessments[0]
+                            .total_value
+                        : 0
+                    }
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </h2>
+                <span style={{ color: "white", fontSize: "20px" }}>
+                  HOUSE IN {auction.property.details.property_address.city},
+                  {auction.property.details.property_address.state} UNITED
+                  STATES
+                </span>
+              </HomeBottom>
+            </Wrap>
+          ))}
+        </Carousel>
+      ) : onGoingAuctions.length > 0 ? (
         <>
           <Carousel {...settings}>
             {onGoingAuctions.slice(0, 5).map((item, index) => (
@@ -205,7 +242,7 @@ const ImgSlider = () => {
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 };
 
