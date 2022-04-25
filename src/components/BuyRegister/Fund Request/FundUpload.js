@@ -107,13 +107,6 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
     return { ...item, officialName: "line_of_credit_doc", isSelf: true };
   });
 
-  const document = [...bankStatment, ...broker, ...lineCredit].map((item) => {
-    delete item.onHover1;
-    delete item.onHover2;
-    delete item.onHover3;
-    return item;
-  });
-
   const handleDelete = (url) => () => {
     setDocument1(document1.filter((document) => document.url !== url));
     setDocument2(document2.filter((document) => document.url !== url));
@@ -217,25 +210,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                             <button
                               className="delete-btn"
                               onClick={handleDelete(document.url)}
-                              onMouseEnter={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover1 = true;
-                                setDocument1([...tempArr]);
-                              }}
-                              onMouseLeave={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover1 = false;
-                                let newArr = tempArr.splice(index, 0);
-                                setDocument1([...tempArr, ...newArr]);
-                              }}
                             >
-                              {!document.onHover1 ? (
-                                <FaCheck fontSize="1.5em" color="blue" />
-                              ) : (
-                                <MdClose fontSize="1.5em" color="red" />
-                              )}
+                              <MdClose fontSize="1.5em" color="red" />
                             </button>
                           </span>
                         </div>
@@ -284,25 +260,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                             <button
                               className="delete-btn"
                               onClick={handleDelete(document.url)}
-                              onMouseEnter={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover2 = true;
-                                setDocument2([...tempArr]);
-                              }}
-                              onMouseLeave={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover2 = false;
-                                let newArr = tempArr.splice(index, 0);
-                                setDocument2([...tempArr, ...newArr]);
-                              }}
                             >
-                              {!document.onHover2 ? (
-                                <FaCheck fontSize="1.5em" color="blue" />
-                              ) : (
-                                <MdClose fontSize="1.5em" color="red" />
-                              )}
+                              <MdClose fontSize="1.5em" color="red" />
                             </button>
                           </span>
                         </div>
@@ -311,74 +270,6 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                 </div>
               </Col>
             </Row>
-
-            {/* <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Crypto account statement (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn3"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("document3", { onChange: onChange3 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn3">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn3"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {document3
-                  ? document3.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = true;
-                              setDocument3([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument3([...tempArr, ...newArr]);
-                            }}
-                          >
-                            {!document.onHover3 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
-                          </button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row> */}
 
             <Row style={{ borderBottom: "#333 solid 1px" }}>
               <Col className="input-form-3">
@@ -420,25 +311,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                             <button
                               className="delete-btn"
                               onClick={handleDelete(document.url)}
-                              onMouseEnter={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover3 = true;
-                                setDocument3([...tempArr]);
-                              }}
-                              onMouseLeave={() => {
-                                var tempArr = arr;
-                                var temp = document;
-                                temp.onHover3 = false;
-                                let newArr = tempArr.splice(index, 0);
-                                setDocument3([...tempArr, ...newArr]);
-                              }}
                             >
-                              {!document.onHover3 ? (
-                                <FaCheck fontSize="1.5em" color="blue" />
-                              ) : (
-                                <MdClose fontSize="1.5em" color="red" />
-                              )}
+                              <MdClose fontSize="1.5em" color="red" />
                             </button>
                           </span>
                         </div>

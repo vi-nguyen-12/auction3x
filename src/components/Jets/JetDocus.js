@@ -455,108 +455,43 @@ function JetDocus({
   };
 
   const ownership_document = doc1.map((document) => {
-    if (document.onHover1) {
-      delete document.onHover1;
-      return { ...document, officialName: "ownership_document" };
-    } else {
-      return { ...document, officialName: "ownership_document" };
-    }
+    return { ...document, officialName: "ownership_document" };
   });
   const registration_document = doc2.map((document) => {
-    if (document.onHover2) {
-      delete document.onHover2;
-      return { ...document, officialName: "registration_document" };
-    } else {
-      return { ...document, officialName: "registration_document" };
-    }
+    return { ...document, officialName: "registration_document" };
   });
   const title_certificate = doc3.map((document) => {
-    if (document.onHover3) {
-      delete document.onHover3;
-      return { ...document, officialName: "title_certificate" };
-    } else {
-      return { ...document, officialName: "title_certificate" };
-    }
+    return { ...document, officialName: "title_certificate" };
   });
   const detail_specification = doc4.map((document) => {
-    if (document.onHover4) {
-      delete document.onHover4;
-      return { ...document, officialName: "detail_specification" };
-    } else {
-      return { ...document, officialName: "detail_specification" };
-    }
+    return { ...document, officialName: "detail_specification" };
   });
   const insurance_document = doc5.map((document) => {
-    if (document.onHover5) {
-      delete document.onHover5;
-      return { ...document, officialName: "insurance_document" };
-    } else {
-      return { ...document, officialName: "insurance_document" };
-    }
+    return { ...document, officialName: "insurance_document" };
   });
   const loan_document = doc6.map((document) => {
-    if (document.onHover6) {
-      delete document.onHover6;
-      return { ...document, officialName: "loan_document" };
-    } else {
-      return { ...document, officialName: "loan_document" };
-    }
+    return { ...document, officialName: "loan_document" };
   });
   const jet_detail_history = doc7.map((document) => {
-    if (document.onHover7) {
-      delete document.onHover7;
-      return { ...document, officialName: "jet_detail_history" };
-    } else {
-      return { ...document, officialName: "jet_detail_history" };
-    }
+    return { ...document, officialName: "jet_detail_history" };
   });
   const fitness_report = doc8.map((document) => {
-    if (document.onHover8) {
-      delete document.onHover8;
-      return { ...document, officialName: "fitness_report" };
-    } else {
-      return { ...document, officialName: "fitness_report" };
-    }
+    return { ...document, officialName: "fitness_report" };
   });
   const electric_work_details = doc9.map((document) => {
-    if (document.onHover9) {
-      delete document.onHover9;
-      return { ...document, officialName: "electric_work_details" };
-    } else {
-      return { ...document, officialName: "electric_work_details" };
-    }
+    return { ...document, officialName: "electric_work_details" };
   });
   const engine_details = doc10.map((document) => {
-    if (document.onHover10) {
-      delete document.onHover10;
-      return { ...document, officialName: "engine_details" };
-    } else {
-      return { ...document, officialName: "engine_details" };
-    }
+    return { ...document, officialName: "engine_details" };
   });
   const inspection_report = doc11.map((document) => {
-    if (document.onHover11) {
-      delete document.onHover11;
-      return { ...document, officialName: "inspection_report" };
-    } else {
-      return { ...document, officialName: "inspection_report" };
-    }
+    return { ...document, officialName: "inspection_report" };
   });
   const valuation_report = doc12.map((document) => {
-    if (document.onHover12) {
-      delete document.onHover12;
-      return { ...document, officialName: "valuation_report" };
-    } else {
-      return { ...document, officialName: "valuation_report" };
-    }
+    return { ...document, officialName: "valuation_report" };
   });
   const others = doc13.map((document) => {
-    if (document.onHover13) {
-      delete document.onHover13;
-      return { ...document, officialName: "others" };
-    } else {
-      return { ...document, officialName: "others" };
-    }
+    return { ...document, officialName: "others" };
   });
 
   const documents = [
@@ -741,25 +676,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = true;
-                              setDocument1([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument1([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover1 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -810,25 +728,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = true;
-                              setDocument2([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument2([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover2 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -878,25 +779,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = true;
-                              setDocument3([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument3([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover3 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -948,25 +832,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = true;
-                              setDocument4([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument4([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover4 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1016,25 +883,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = true;
-                              setDocument5([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument5([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover5 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1082,25 +932,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = true;
-                              setDocument6([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument6([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover6 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1152,25 +985,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = true;
-                              setDocument7([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument7([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover7 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1220,25 +1036,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = true;
-                              setDocument8([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument8([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover8 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1289,25 +1088,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover9 = true;
-                              setDocument9([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover9 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument9([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover9 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1358,25 +1140,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover10 = true;
-                              setDocument10([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover10 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument10([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover10 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1427,25 +1192,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover11 = true;
-                              setDocument11([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover11 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument11([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover11 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1496,25 +1244,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover12 = true;
-                              setDocument12([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover12 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument12([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover12 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1562,25 +1293,8 @@ function JetDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover13 = true;
-                              setDocument13([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover13 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument13([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover13 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
