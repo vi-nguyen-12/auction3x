@@ -42,8 +42,7 @@ const Login = ({
           toogleConfirmModal();
         } else {
           dispatch(login(response.data.data));
-
-          document.cookie = `auth_token=${response.data.data.token};path=/`;
+          localStorage.setItem("token", response.data.data.token);
           toogleButton();
           toogleSignIn();
           history.push(location.pathname);

@@ -35,7 +35,7 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
-    const authToken = document.cookie.split("=")[1];
+    const authToken = localStorage.getItem("token");
     if (authToken) {
       const getUser = async () => {
         const response = await authService.getUsers(authToken);
