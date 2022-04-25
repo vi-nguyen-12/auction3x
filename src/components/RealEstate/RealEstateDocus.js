@@ -436,14 +436,14 @@ function RealEstateDocus({
 
   const onSubmit = async (data) => {
     if (params.id) {
-      if (documents.length >= 7) {
+      if (documents.length >= 6) {
         toogleDocuments(documents);
         toogleStep(step + 1);
       } else {
         alert("Please upload all required documents");
       }
     } else {
-      if (documents.length >= 7) {
+      if (documents.length >= 6) {
         toogleDocuments(documents);
         toogleStep(step + 1);
       } else {
@@ -752,7 +752,6 @@ function RealEstateDocus({
                 // {...register("demographics", {
                 //   onChange: onChange("demographics"),
                 // })}
-                required
               />
               <div className="upload-cover">
                 <details>
