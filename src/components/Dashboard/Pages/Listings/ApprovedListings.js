@@ -6,7 +6,7 @@ import { CarCard } from "../../../Cards/CarCard";
 import { JetCard } from "../../../Cards/JetCard";
 import { YachtCard } from "../../../Cards/YachtCard";
 import { CardComp } from "../../../Cards/RealEstateCard";
-import {UpcomingRealEtateCard } from "../../../Cards/UpcomingRealEtateCard";
+import { UpcomingRealEtateCard } from "../../../Cards/UpcomingRealEtateCard";
 import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
@@ -106,29 +106,34 @@ function ApprovedListings({ auctions }) {
 
   return (
     <Container>
-      {approvedLists.length > 0 ? (
-        <Row>
-          <Carousel {...settings}>
-            {approvedLists.map((property, index) => (
-              <Wrap key={index}>
-                <Col>
-                  <SavedAuctionsCard
-                    url={property.images[0].url}
-                    type={property.type}
-                    data={property.details}
-                    id={property.auctionDetails._id}
-                    auctionStartDate={property.auctionDetails.auctionStartDate}
-                    auctionEndDate={property.auctionDetails.auctionEndDate}
-                    startRegister={property.auctionDetails.registerStartDate}
-                    endRegister={property.auctionDetails.registerEndDate}
-                    startingBid={property.auctionDetails.startingBid}
-                  />
-                </Col>
-              </Wrap>
-            ))}
-          </Carousel>
-        </Row>
-      ) : null}
+      {approvedLists.length > 0 && (
+        <>
+          <h1>Approved Listings</h1>
+          <Row>
+            <Carousel {...settings}>
+              {approvedLists.map((property, index) => (
+                <Wrap key={index}>
+                  <Col>
+                    <SavedAuctionsCard
+                      url={property.images[0].url}
+                      type={property.type}
+                      data={property.details}
+                      id={property.auctionDetails._id}
+                      auctionStartDate={
+                        property.auctionDetails.auctionStartDate
+                      }
+                      auctionEndDate={property.auctionDetails.auctionEndDate}
+                      startRegister={property.auctionDetails.registerStartDate}
+                      endRegister={property.auctionDetails.registerEndDate}
+                      startingBid={property.auctionDetails.startingBid}
+                    />
+                  </Col>
+                </Wrap>
+              ))}
+            </Carousel>
+          </Row>
+        </>
+      )}
     </Container>
   );
 }

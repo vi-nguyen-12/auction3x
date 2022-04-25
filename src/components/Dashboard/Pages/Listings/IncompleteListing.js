@@ -9,6 +9,7 @@ import { BsFillHouseFill } from "react-icons/bs";
 
 function IncompleteListing() {
   const user = useSelector((state) => state.user);
+  const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function IncompleteListing() {
       });
     };
     fetchIncompleteListings();
-  }, []);
+  }, [incompProperty]);
 
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
@@ -32,23 +33,33 @@ function IncompleteListing() {
   };
   return (
     <div>
-      {IncompleteListings.length > 0 ? (
-        <>
-          <h1>Incomplete Listing</h1>
-          <Table borderless hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Property ID</th>
-                <th>Property Type</th>
-                <th>Status</th>
-                <th>Last Updated</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {IncompleteListings.map((listing, index) => (
-                <tr key={index}>
+      <>
+        <h1>Incomplete Listing</h1>
+        <Table
+          borderless
+          hover
+          style={{
+            overflow: "hidden",
+            borderRadius: "5px",
+            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            marginTop: "50px",
+            width: "70vw",
+          }}
+        >
+          <thead style={{ background: "black", color: "white" }}>
+            <tr>
+              <th>#</th>
+              <th>Property ID</th>
+              <th>Property Type</th>
+              <th>Status</th>
+              <th>Last Updated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          {IncompleteListings.length > 0 &&
+            IncompleteListings.map((listing, index) => (
+              <tbody key={index}>
+                <tr>
                   <td>{index + 1}</td>
                   <td>{listing._id}</td>
                   <td>{listing.type}</td>
@@ -80,13 +91,10 @@ function IncompleteListing() {
                     </button>
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </>
-      ) : (
-        <h1>No Incomplete Listing</h1>
-      )}
+              </tbody>
+            ))}
+        </Table>
+      </>
     </div>
   );
 }

@@ -127,7 +127,7 @@ const Wrap = styled.div`
 `;
 
 function DisplayRealEstate({ property, toogleChange }) {
-  console.log("property", property);
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -201,9 +201,7 @@ function DisplayRealEstate({ property, toogleChange }) {
     window.scrollTo(0, 0);
     if (user._id) {
       if (savedProperty.length > 0) {
-        const saved = savedProperty.filter(
-          (property) => property._id === property._id
-        );
+        const saved = savedProperty.filter((item) => item._id === property._id);
         if (saved.length > 0) {
           setFavorite(true);
         } else {
@@ -382,8 +380,8 @@ function DisplayRealEstate({ property, toogleChange }) {
             </div>
           </div>
 
-          <Row style={{ padding: "0 25px" }}>
-            <Col>
+          <Row style={{ padding: "0", padding: "35px 35px" }}>
+            <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
                 {
@@ -396,7 +394,7 @@ function DisplayRealEstate({ property, toogleChange }) {
               </h5>
             </Col>
 
-            <Col>
+            <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleSignIn}>
@@ -421,7 +419,7 @@ function DisplayRealEstate({ property, toogleChange }) {
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy &&
+              property.isNotRegisteredToBuy === true &&
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
@@ -444,10 +442,36 @@ function DisplayRealEstate({ property, toogleChange }) {
                     </button>
                   </div>
                 </div>
+              ) : user._id &&
+                property.isNotRegisteredToBuy === true &&
+                property.isOwner ? (
+                <div className="registBtn">
+                  <button
+                    className="registsBtn"
+                    onClick={toogleRegister}
+                    disabled
+                  >
+                    Register to Bid
+                  </button>
+                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                    <button
+                      style={{
+                        fontWeight: "500",
+                        border: "0",
+                        borderBottom: "1px solid #919191",
+                        backgroundColor: "transparent",
+                        width: "fit-content",
+                        pointer: "cursor",
+                      }}
+                      onClick={executeScroll}
+                    >
+                      View Documents
+                    </button>
+                  </div>
+                </div>
               ) : (
                 user._id &&
-                property.isNotRegisteredToBuy &&
-                property.isOwner &&
+                property.isNotRegisteredToBuy === true &&
                 new Date().toISOString() > property.registerEndDate && (
                   <div className="registBtn">
                     <button
@@ -505,11 +529,11 @@ function DisplayRealEstate({ property, toogleChange }) {
             </Col>
           </Row>
 
-          <Row style={{ padding: "35px" }}>
-            <Col style={{ display: "grid" }}>
-              <Row xs="auto" style={{ width: "100vw" }}>
+          <Row style={{ padding: "0 35px" }}>
+            <Col style={{ display: "grid", padding: "0" }}>
+              <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
                 {registEnded === false ? (
-                  <Col>
+                  <Col style={{ padding: "0" }}>
                     <div
                       style={{
                         display: "grid",
@@ -517,7 +541,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         borderRadius: "10px",
-                        padding: "20px",
+                        padding: "29px",
                       }}
                     >
                       <RegistrationTimer
@@ -537,7 +561,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col>
+                  <Col style={{ padding: "0" }}>
                     <div
                       style={{
                         display: "grid",
@@ -545,7 +569,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         borderRadius: "10px",
-                        padding: "53px",
+                        padding: "60px",
                       }}
                     >
                       <div
@@ -572,6 +596,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "20px",
+                        marginLeft: "18px",
                       }}
                     >
                       <AuctionTimer
@@ -601,6 +626,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                         borderRadius: "10px",
                         padding: "20px",
                         color: "black",
+                        marginLeft: "18px",
                       }}
                     >
                       <AuctionTimer time={property.auctionStartDate} />
@@ -627,6 +653,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                           width: "100%",
                           borderRadius: "10px",
                           padding: "53px",
+                          marginLeft: "18px",
                         }}
                       >
                         <div
@@ -656,7 +683,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                           width: "100%",
                           marginLeft: "18px",
                           borderRadius: "10px",
-                          padding: "33px",
+                          padding: "39px",
                         }}
                       >
                         <h4 style={{ padding: "8px" }}>
@@ -693,7 +720,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                           width: "100%",
                           marginLeft: "18px",
                           borderRadius: "10px",
-                          padding: "33px",
+                          padding: "39px",
                         }}
                       >
                         <h4 style={{ padding: "8px" }}>
@@ -734,7 +761,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                       width: "100%",
                       marginLeft: "35px",
                       borderRadius: "10px",
-                      padding: "33px",
+                      padding: "39px",
                     }}
                   >
                     <h4
@@ -762,171 +789,169 @@ function DisplayRealEstate({ property, toogleChange }) {
                 </Col>
               </Row>
 
-              <Row>
-                <div style={{ marginTop: "30px", alignItems: "center" }}>
+              <Row style={{ padding: "0", paddingRight: "35px" }}>
+                <div
+                  style={{
+                    marginTop: "30px",
+                    alignItems: "center",
+                    marginBottom: "30px",
+                    marginLeft: "-15px",
+                  }}
+                >
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
                   <span
                     style={{
-                      fontWeight: "400",
+                      fontWeight: "600",
                       fontSize: "30px",
-                      marginLeft: "20px",
+                      marginLeft: "10px",
                       color: "black",
                     }}
                   >
                     Property Info
                   </span>
                 </div>
-                <Col>
-                  <Col>
-                    <Table responsive>
-                      <tbody className="propInfo">
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Sale Type</td>
-                          <td>Auction</td>
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Sale Condition</td>
-                          <td>Auction Sale</td>
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Property Type</td>
-                          {property.property.details.parcel
-                            .county_land_use_description ? (
-                            <td>
-                              {
-                                property.property.details.parcel
-                                  .county_land_use_description
-                              }
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Building Size</td>
-                          {property.property.details.structure
-                            .total_area_sq_ft ? (
-                            <td>
-                              {
-                                property.property.details.structure
-                                  .total_area_sq_ft
-                              }{" "}
-                              sqft
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Building Class</td>
-                          {property.property.details.structure.quality ? (
-                            <td>
-                              {property.property.details.structure.quality}
-                            </td>
-                          ) : property.property.details.structure.condition ? (
-                            <td>
-                              {property.property.details.structure.condition}
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>
-                            Year Built/Renovated
+                <Col style={{ padding: "0", paddingRight: "35px" }}>
+                  <Table striped hover responsive>
+                    <tbody className="propInfo">
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Sale Type</td>
+                        <td>Auction</td>
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
+                        <td>Auction Sale</td>
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Property Type</td>
+                        {property.property.details.parcel
+                          .county_land_use_description ? (
+                          <td>
+                            {
+                              property.property.details.parcel
+                                .county_land_use_description
+                            }
                           </td>
-                          {property.property.details.structure.year_built ? (
-                            <td>
-                              {property.property.details.structure.year_built}
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Percent Leased</td>
+                        ) : (
                           <td>N/A</td>
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Tenancy</td>
-                          {property.property.details.parcel
-                            .standardized_land_use_type ? (
-                            <td>
-                              {
-                                property.property.details.parcel
-                                  .standardized_land_use_type
-                              }
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Building Height</td>
-                          {property.property.details.structure.stories ? (
-                            <td>
-                              {property.property.details.structure.stories}{" "}
-                              story
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Building FAR</td>
-                          {property.property.details.parcel.area_acres ? (
-                            <td>
-                              {property.property.details.parcel.area_acres}{" "}
-                              acres
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Zoning</td>
-                          {property.property.details.parcel.zoning ? (
-                            <td>{property.property.details.parcel.zoning}</td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Parking</td>
-                          {property.property.details.structure
-                            .parking_spaces_count ? (
-                            <td>
-                              {
-                                property.property.details.structure
-                                  .parking_spaces_count
-                              }{" "}
-                              spaces (
-                              {property.property.details.structure.parking_type}
-                              )
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>Frontage</td>
-                          {property.property.details.parcel.frontage_ft ? (
-                            <td>
-                              {property.property.details.parcel.frontage_ft} ft
-                            </td>
-                          ) : (
-                            <td>N/A</td>
-                          )}
-                        </tr>
-                        <tr>
-                          <td style={{ fontWeight: "700" }}>
-                            Opportunity Zone
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Building Size</td>
+                        {property.property.details.structure
+                          .total_area_sq_ft ? (
+                          <td>
+                            {
+                              property.property.details.structure
+                                .total_area_sq_ft
+                            }{" "}
+                            sqft
                           </td>
-                          <td>No</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Col>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Building Class</td>
+                        {property.property.details.structure.quality ? (
+                          <td>{property.property.details.structure.quality}</td>
+                        ) : property.property.details.structure.condition ? (
+                          <td>
+                            {property.property.details.structure.condition}
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>
+                          Year Built/Renovated
+                        </td>
+                        {property.property.details.structure.year_built ? (
+                          <td>
+                            {property.property.details.structure.year_built}
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Percent Leased</td>
+                        <td>N/A</td>
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Tenancy</td>
+                        {property.property.details.parcel
+                          .standardized_land_use_type ? (
+                          <td>
+                            {
+                              property.property.details.parcel
+                                .standardized_land_use_type
+                            }
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Building Height</td>
+                        {property.property.details.structure.stories ? (
+                          <td>
+                            {property.property.details.structure.stories} story
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Building FAR</td>
+                        {property.property.details.parcel.area_acres ? (
+                          <td>
+                            {property.property.details.parcel.area_acres} acres
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Zoning</td>
+                        {property.property.details.parcel.zoning ? (
+                          <td>{property.property.details.parcel.zoning}</td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Parking</td>
+                        {property.property.details.structure
+                          .parking_spaces_count ? (
+                          <td>
+                            {
+                              property.property.details.structure
+                                .parking_spaces_count
+                            }{" "}
+                            spaces (
+                            {property.property.details.structure.parking_type})
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Frontage</td>
+                        {property.property.details.parcel.frontage_ft ? (
+                          <td>
+                            {property.property.details.parcel.frontage_ft} ft
+                          </td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Opportunity Zone</td>
+                        <td>No</td>
+                      </tr>
+                    </tbody>
+                  </Table>
                 </Col>
                 {user._id && user.KYC && property.highestBidders && (
                   <Col>
@@ -975,7 +1000,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                             ))
                         ) : (
                           <tr>
-                            <td>No bids yet</td>
+                            <td colSpan={4}>No bids yet</td>
                           </tr>
                         )}
                       </tbody>

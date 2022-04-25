@@ -184,9 +184,7 @@ function DisplayCar({ toogleChange, property }) {
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
-        const saved = savedProperty.filter(
-          (property) => property._id === property._id
-        );
+        const saved = savedProperty.filter((item) => item._id === property._id);
         if (saved.length > 0) {
           setFavorite(true);
         } else {
@@ -346,8 +344,8 @@ function DisplayCar({ toogleChange, property }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0 25px" }}>
-            <Col>
+          <Row style={{ padding: "0", padding: "35px 35px" }}>
+            <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.year} {""}
                 {property.property.details.make} {""}
@@ -358,7 +356,7 @@ function DisplayCar({ toogleChange, property }) {
               </h5>
             </Col>
 
-            <Col>
+            <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div
                   style={{
@@ -440,28 +438,11 @@ function DisplayCar({ toogleChange, property }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy &&
+              property.isNotRegisteredToBuy === true &&
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toogleRegister}
-                  >
+                <div className="registBtn">
+                  <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -481,26 +462,11 @@ function DisplayCar({ toogleChange, property }) {
                   </div>
                 </div>
               ) : user._id &&
-                property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                new Date().toISOString() > property.registerEndDate ? (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
+                property.isNotRegisteredToBuy === true &&
+                property.isOwner ? (
+                <div className="registBtn">
                   <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
+                    className="registsBtn"
                     onClick={toogleRegister}
                     disabled
                   >
@@ -522,91 +488,36 @@ function DisplayCar({ toogleChange, property }) {
                     </button>
                   </div>
                 </div>
-              ) : user._id &&
-                property.isNotRegisteredToBuy &&
-                property.isOwner &&
-                new Date().toISOString() > property.registerEndDate ? (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toogleRegister}
-                    disabled
-                  >
-                    Register to Bid
-                  </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+              ) : (
+                user._id &&
+                property.isNotRegisteredToBuy === true &&
+                new Date().toISOString() > property.registerEndDate && (
+                  <div className="registBtn">
                     <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
+                      className="registsBtn"
+                      onClick={toogleRegister}
+                      disabled
                     >
-                      View Documents
+                      Register to Bid
                     </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ) : user._id &&
-                property.isNotRegisteredToBuy &&
-                property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toogleRegister}
-                    disabled
-                  >
-                    Register to Bid
-                  </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
-                      View Documents
-                    </button>
-                  </div>
-                </div>
-              ) : null}
+                )
+              )}
 
               {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
                 <div
@@ -652,11 +563,11 @@ function DisplayCar({ toogleChange, property }) {
           </Row>
 
           {/* second row */}
-          <Row style={{ padding: "35px" }}>
-            <Col sm={8} style={{ display: "grid" }}>
-              <Row xs="auto" style={{ width: "100vw" }}>
+          <Row style={{ padding: "0 35px" }}>
+            <Col sm={8} style={{ display: "grid", padding: "0" }}>
+              <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
                 {registEnded === false ? (
-                  <Col>
+                  <Col style={{ padding: "0" }}>
                     <div
                       style={{
                         display: "grid",
@@ -684,7 +595,7 @@ function DisplayCar({ toogleChange, property }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col>
+                  <Col style={{ padding: "0" }}>
                     <div
                       style={{
                         display: "grid",
@@ -883,14 +794,21 @@ function DisplayCar({ toogleChange, property }) {
                 </Col>
               </Row>
 
-              <Row>
-                <div style={{ marginTop: "30px", alignItems: "center" }}>
+              <Row style={{ padding: "0", paddingRight: "35px" }}>
+                <div
+                  style={{
+                    marginTop: "30px",
+                    alignItems: "center",
+                    marginBottom: "30px",
+                    marginLeft: "-15px",
+                  }}
+                >
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
                   <span
                     style={{
-                      fontWeight: "400",
+                      fontWeight: "600",
                       fontSize: "30px",
-                      marginLeft: "20px",
+                      marginLeft: "10px",
                       color: "black",
                     }}
                   >
@@ -898,8 +816,8 @@ function DisplayCar({ toogleChange, property }) {
                   </span>
                 </div>
 
-                <Col>
-                  <Table responsive>
+                <Col style={{ padding: "0", paddingRight: "35px" }}>
+                  <Table striped hover responsive>
                     <tbody className="propInfo">
                       <tr>
                         <td style={{ fontWeight: "700" }}>Sale Type</td>

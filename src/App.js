@@ -71,6 +71,7 @@ function App() {
   }
 
   const [color, setColor] = useState("");
+  const [bodyColor, setBodyColor] = useState("");
   const [show, setShow] = useState(true);
   const toogleShow = (value) => {
     setShow(value);
@@ -78,6 +79,10 @@ function App() {
 
   const colorChange = (color) => {
     setColor(color);
+  };
+
+  const bodyColorChange = (color) => {
+    setBodyColor(color);
   };
 
   const [change, setChange] = useState(false);
@@ -90,7 +95,7 @@ function App() {
   // }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: bodyColor }}>
       <ButtontoTop />
       <Router>
         <Header color={color} change={change} />
@@ -102,6 +107,7 @@ function App() {
                 <MultiSellForm
                   colorChange={colorChange}
                   toogleShow={toogleShow}
+                  bodyColorChange={bodyColorChange}
                 />
               </div>
             </Route>
@@ -112,6 +118,7 @@ function App() {
               <MultiSellForm
                 colorChange={colorChange}
                 toogleShow={toogleShow}
+                bodyColorChange={bodyColorChange}
               />
             </div>
           </Route>
@@ -156,6 +163,7 @@ function App() {
                 toogleShow={toogleShow}
                 colorChange={colorChange}
                 toogleChange={toogleChange}
+                bodyColorChange={bodyColorChange}
               />
             </Route>
           )}

@@ -29,20 +29,32 @@ function PendingListings() {
 
   return (
     <>
-      {pendingListings.length > 0 ? (
-        <Table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Owner Name</th>
-              <th>Property Type</th>
-              <th>Status</th>
-              <th>Images</th>
-              <th>Documents</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          {pendingListings.map((auction, index) => (
+      <h1>Pending Approval</h1>
+      <Table
+        striped
+        borderless
+        hover
+        style={{
+          overflow: "hidden",
+          borderRadius: "5px",
+          boxShadow: "#d7c4c4 0px 0px 20px 16px",
+          marginTop: "50px",
+          width: "70vw",
+        }}
+      >
+        <thead style={{ background: "black", color: "white" }}>
+          <tr>
+            <th>#</th>
+            <th>Owner Name</th>
+            <th>Property Type</th>
+            <th>Status</th>
+            <th>Images</th>
+            <th>Documents</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        {pendingListings.length > 0 &&
+          pendingListings.map((auction, index) => (
             <tbody key={index}>
               <tr>
                 <td>{index}</td>
@@ -99,10 +111,7 @@ function PendingListings() {
               </tr>
             </tbody>
           ))}
-        </Table>
-      ) : (
-        <h1>No Property is Pending for Approval</h1>
-      )}
+      </Table>
       <Modal size="lg" show={show} onHide={toogleShow} centered>
         <Modal.Header closeButton>
           <Modal.Title>Documents</Modal.Title>
@@ -147,7 +156,6 @@ function PendingListings() {
           </Table>
         </Modal.Body>
       </Modal>
-
       <Modal size="lg" show={showImages} onHide={toogleShowImages} centered>
         <Modal.Header closeButton>
           <Modal.Title>Images</Modal.Title>

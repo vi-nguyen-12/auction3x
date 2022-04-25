@@ -322,6 +322,10 @@ const authService = {
     );
   },
 
+  getSellerSoldListings(id) {
+    return axios.get(apiUrl + `/api/users/${id}/seller/properties?sold=true`);
+  },
+
   editUserInfo(data) {
     return axios.put(
       apiUrl + `/api/users/${data.id}`,

@@ -88,6 +88,7 @@
 .banner-container {
   height: 100%;
   display: flex;
+  background: #f8f8f8;
 }
 .banner-top-left {
   border: none;

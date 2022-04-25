@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 const FindInCountries = (props) => {
   return (
-    <div className="mt-5 pt-5">
+    <div className="mt-5 pt-5" style={{ background: "#f8f8f8", height:"95rem" }}>
       <Row>
         <Col md={10} className="m-auto pt-5 text-center">
           <img

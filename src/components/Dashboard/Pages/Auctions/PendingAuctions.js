@@ -15,27 +15,30 @@ function PendingAuctions() {
   }, []);
 
   return (
-    <Container>
+    <Container style={{ width: "70vw" }}>
       {PendingAuctions > 0 ? (
-        <Row>
-          {PendingAuctions.map((property) => (
-            <Col key={property._id}>
-              <SavedAuctionsCard
-                data={property.property.details}
-                url={property.property.images[0].url}
-                id={property._id}
-                auctionStartDate={property.auctionStartDate}
-                auctionEndDate={property.auctionEndDate}
-                startingBid={
-                  property.highestBid
-                    ? property.highestBid
-                    : property.startingBid
-                }
-                auctionId={property._id}
-              />
-            </Col>
-          ))}
-        </Row>
+        <>
+          <h1>Pending Auctions</h1>
+          <Row>
+            {PendingAuctions.map((property) => (
+              <Col key={property._id}>
+                <SavedAuctionsCard
+                  data={property.property.details}
+                  url={property.property.images[0].url}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={
+                    property.highestBid
+                      ? property.highestBid
+                      : property.startingBid
+                  }
+                  auctionId={property._id}
+                />
+              </Col>
+            ))}
+          </Row>
+        </>
       ) : (
         <h1>No Pending Auctions</h1>
       )}

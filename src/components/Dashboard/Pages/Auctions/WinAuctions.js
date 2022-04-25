@@ -23,14 +23,26 @@ function WinAuctions() {
 
   return (
     <>
-      <Table striped borderless hover>
-        <thead>
+      <h1>Won Auctions</h1>
+      <Table
+        striped
+        borderless
+        hover
+        style={{
+          overflow: "hidden",
+          borderRadius: "5px",
+          boxShadow: "#d7c4c4 0px 0px 20px 16px",
+          marginTop: "50px",
+          width: "70vw",
+        }}
+      >
+        <thead style={{ background: "black", color: "white" }}>
           <tr>
             <th>#</th>
             <th>Auction ID</th>
-            <th>Property Type</th>
-            <th>Property Address</th>
-            <th>Bid Amount</th>
+            <th colSpan={2}>Property Type</th>
+            <th colSpan={2}>Property Address</th>
+            <th colSpan={2}>Bid Amount</th>
             <th>View</th>
           </tr>
         </thead>
@@ -53,32 +65,32 @@ function WinAuctions() {
                       width="100px"
                       height="50px"
                       onClick={() => {
-                        setImages(auction.property[0].images);
+                        setImages(auction.property.images);
                         toogleShowPic();
                       }}
                       src={
-                        auction.property[0].images.length > 0
-                          ? auction.property[0].images[0].url
+                        auction.property.images.length > 0
+                          ? auction.property.images[0].url
                           : ""
                       }
                     />
                   </div>
                 </td>
-                <td>
-                  {auction.property[0].type === "real-estate"
+                <td colSpan={2}>
+                  {auction.property.type === "real-estate"
                     ? "Real Estate"
-                    : auction.property[0].type === "car"
+                    : auction.property.type === "car"
                     ? "Car"
-                    : auction.property[0].type === "jet"
+                    : auction.property.type === "jet"
                     ? "Jet"
-                    : auction.property[0].type === "yacht"
+                    : auction.property.type === "yacht"
                     ? "Yacht"
                     : ""}
                 </td>
-                <td>{auction.property[0].details.address}</td>
-                <td>
+                <td colSpan={2}>{auction.property.details.address}</td>
+                <td colSpan={2}>
                   <NumberFormat
-                    value={auction.amount}
+                    value={auction.winner.amount}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
