@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Container } from "react-bootstrap";
 import "../../styles/work.css";
 
 const Work = (props) => {
@@ -15,7 +15,7 @@ const Work = (props) => {
       </Row>
       <div className="card-content">
         <Row className="row-custom">
-          <Col>
+          <Col xs>
             <Card style={{ width: "22rem" }} className="card-work">
               <div className="card-number">
                 <h2>1</h2>
@@ -39,7 +39,7 @@ const Work = (props) => {
             />
           </Col>
 
-          <Col>
+          <Col xs>
             <Card style={{ width: "22rem" }} className="card-work">
               <div className="card-number">
                 <h2>2</h2>
@@ -63,7 +63,7 @@ const Work = (props) => {
             />
           </Col>
 
-          <Col>
+          <Col xs>
             <Card style={{ width: "22rem" }} className="card-work">
               <div className="card-number">
                 <h2>3</h2>
