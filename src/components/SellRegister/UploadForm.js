@@ -71,22 +71,14 @@ const UploadForm = ({
   };
 
   const saveInfo = async () => {
-    let savedImages = images.map((image) => {
-      delete image.onHover;
-      return image;
-    });
-    let savedVideos = videos.map((video) => {
-      delete video.onHover0;
-      return video;
-    });
     if (propertyType === "real-estate") {
       if (propId || params.id) {
         if (sellStep === 2 || parseInt(params.step) === 2) {
           const datas = {
             id: propId ? propId : params.id,
             details: {
-              images: savedImages,
-              videos: savedVideos,
+              images: images,
+              videos: videos,
               step: 3,
             },
           };
@@ -237,17 +229,9 @@ const UploadForm = ({
   };
 
   const onSubmit = () => {
-    let savedImages = images.map((image) => {
-      delete image.onHover;
-      return image;
-    });
-    let savedVideos = videos.map((video) => {
-      delete video.onHover;
-      return video;
-    });
     if (images.length !== 0) {
-      toogleImages(savedImages);
-      toogleVideos(savedVideos);
+      toogleImages(images);
+      toogleVideos(videos);
       toogleStep(step + 1);
     } else {
       alert("Please upload at least one image!");
@@ -373,25 +357,8 @@ const UploadForm = ({
                       <Button
                         className="delete-btn"
                         onClick={handleDelete(image.url)}
-                        onMouseEnter={() => {
-                          var tempArr = arr;
-                          var temp = image;
-                          temp.onHover = true;
-                          setImages([...tempArr]);
-                        }}
-                        onMouseLeave={() => {
-                          var tempArr = arr;
-                          var temp = image;
-                          temp.onHover = false;
-                          let newArr = tempArr.splice(index, 0);
-                          setImages([...tempArr, ...newArr]);
-                        }}
                       >
-                        {!image.onHover ? (
-                          <FaCheck fontSize="1.5em" color="blue" />
-                        ) : (
-                          <MdClose fontSize="1.5em" color="red" />
-                        )}
+                        <MdClose fontSize="1.5em" color="red" />
                       </Button>
                     </span>
                   </div>
@@ -444,25 +411,8 @@ const UploadForm = ({
                       <Button
                         className="delete-btn"
                         onClick={handleDeleteVideo(video.url)}
-                        onMouseEnter={() => {
-                          var tempArr = arr;
-                          var temp = video;
-                          temp.onHover0 = true;
-                          setVideos([...tempArr]);
-                        }}
-                        onMouseLeave={() => {
-                          var tempArr = arr;
-                          var temp = video;
-                          temp.onHover0 = false;
-                          let newArr = tempArr.splice(index, 0);
-                          setVideos([...tempArr, ...newArr]);
-                        }}
                       >
-                        {!video.onHover0 ? (
-                          <FaCheck fontSize="1.5em" color="blue" />
-                        ) : (
-                          <MdClose fontSize="1.5em" color="red" />
-                        )}
+                        <MdClose fontSize="1.5em" color="red" />
                       </Button>
                     </span>
                   </div>

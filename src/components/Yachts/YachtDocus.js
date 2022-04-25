@@ -351,18 +351,6 @@ function YachtDocus({
   ];
 
   const saveInfo = async (data) => {
-    documents = documents.map((item) => {
-      delete item.onHover1;
-      delete item.onHover2;
-      delete item.onHover3;
-      delete item.onHover4;
-      delete item.onHover5;
-      delete item.onHover6;
-      delete item.onHover7;
-      delete item.onHover8;
-      delete item.onHover9;
-      return item;
-    });
     if (propId || params.id) {
       if (parseInt(steps) === 1) {
         const datas = {
@@ -510,25 +498,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = true;
-                              setDocument1([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover1 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument1([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover1 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -579,25 +550,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = true;
-                              setDocument2([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover2 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument2([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover2 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -647,25 +601,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = true;
-                              setDocument3([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover3 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument3([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover3 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -717,25 +654,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = true;
-                              setDocument4([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover4 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument4([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover4 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -785,25 +705,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = true;
-                              setDocument5([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover5 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument5([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover5 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -852,25 +755,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = true;
-                              setDocument6([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover6 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument6([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover6 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -922,25 +808,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = true;
-                              setDocument7([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover7 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument7([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover7 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -990,25 +859,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = true;
-                              setDocument8([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover8 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument8([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover8 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
@@ -1056,25 +908,8 @@ function YachtDocus({
                           <button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
-                            onMouseEnter={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover9 = true;
-                              setDocument9([...tempArr]);
-                            }}
-                            onMouseLeave={() => {
-                              var tempArr = arr;
-                              var temp = document;
-                              temp.onHover9 = false;
-                              let newArr = tempArr.splice(index, 0);
-                              setDocument9([...tempArr, ...newArr]);
-                            }}
                           >
-                            {!document.onHover9 ? (
-                              <FaCheck fontSize="1.5em" color="blue" />
-                            ) : (
-                              <MdClose fontSize="1.5em" color="red" />
-                            )}
+                            <MdClose fontSize="1.5em" color="red" />
                           </button>
                         </span>
                       </div>
