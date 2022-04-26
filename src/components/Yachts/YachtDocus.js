@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
@@ -295,7 +294,7 @@ function YachtDocus({
       setDocument8(document ? (document[7] ? [document[7]] : []) : []);
       setDocument9(document ? (document[8] ? [document[8]] : []) : []);
     }
-  }, [incompProperty]);
+  }, [incompProperty, document, params.id]);
 
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
