@@ -829,6 +829,7 @@ function CarDocus({
                 multiple
                 hidden
                 {...register("valuation_report", { onChange: onChange8 })}
+                required
               />
               <div className="upload-cover">
                 <details>

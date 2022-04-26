@@ -233,9 +233,105 @@ function YachtDetails({
 
   const saveInfo = () => {
     if (propId || params.id) {
-      const datas = {
-        id: propId ? propId : params.id,
-        details: {
+      if (otherDetails) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            reservedAmount: parseInt(reservedAmount),
+            discussedAmount: parseInt(discussedAmount),
+            vessel_registration_number: property.vessel_registration_number
+              ? property.vessel_registration_number
+              : vessel_registration_number,
+            vessel_manufacturing_date: property.vessel_manufacturing_date
+              ? property.vessel_manufacturing_date
+              : vessel_manufacturing_date,
+            manufacture_mark: property.manufacture_mark
+              ? property.manufacture_mark
+              : manufacture_mark,
+            manufacturer_name: property.manufacturer_name
+              ? property.manufacturer_name
+              : manufacturer_name,
+            engine_type: property.engine_type
+              ? property.engine_type
+              : engine_type,
+            engine_manufacture_name: property.engine_manufacture_name
+              ? property.engine_manufacture_name
+              : engine_manufacture_name,
+            engine_deck_type: property.engine_deck_type
+              ? property.engine_deck_type
+              : engine_deck_type,
+            running_cost: property.running_cost
+              ? property.running_cost
+              : running_cost,
+            no_of_crew_required: property.no_of_crew_required
+              ? property.no_of_crew_required
+              : no_of_crew_required,
+            property_address: property.property_address
+              ? property.property_address
+              : property_address,
+            others: property.detain ? property.detain : otherDetails,
+            step: parseInt(2),
+          },
+        };
+        authService.saveInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toogleSellStep(2);
+            alert("Saved Successfully!");
+          }
+        });
+      } else {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            reservedAmount: parseInt(reservedAmount),
+            discussedAmount: parseInt(discussedAmount),
+            vessel_registration_number: property.vessel_registration_number
+              ? property.vessel_registration_number
+              : vessel_registration_number,
+            vessel_manufacturing_date: property.vessel_manufacturing_date
+              ? property.vessel_manufacturing_date
+              : vessel_manufacturing_date,
+            manufacture_mark: property.manufacture_mark
+              ? property.manufacture_mark
+              : manufacture_mark,
+            manufacturer_name: property.manufacturer_name
+              ? property.manufacturer_name
+              : manufacturer_name,
+            engine_type: property.engine_type
+              ? property.engine_type
+              : engine_type,
+            engine_manufacture_name: property.engine_manufacture_name
+              ? property.engine_manufacture_name
+              : engine_manufacture_name,
+            engine_deck_type: property.engine_deck_type
+              ? property.engine_deck_type
+              : engine_deck_type,
+            running_cost: property.running_cost
+              ? property.running_cost
+              : running_cost,
+            no_of_crew_required: property.no_of_crew_required
+              ? property.no_of_crew_required
+              : no_of_crew_required,
+            property_address: property.property_address
+              ? property.property_address
+              : property_address,
+            step: parseInt(2),
+          },
+        };
+        authService.saveInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toogleSellStep(2);
+            alert("Saved Successfully!");
+          }
+        });
+      }
+    } else {
+      if (otherDetails) {
+        const datas = {
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
           vessel_registration_number: property.vessel_registration_number
@@ -269,62 +365,66 @@ function YachtDetails({
             ? property.property_address
             : property_address,
           others: property.detain ? property.detain : otherDetails,
+          ...ownership,
           step: parseInt(2),
-        },
-      };
-      authService.saveInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toogleSellStep(2);
-          alert("Saved Successfully!");
-        }
-      });
-    } else {
-      const datas = {
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        vessel_registration_number: property.vessel_registration_number
-          ? property.vessel_registration_number
-          : vessel_registration_number,
-        vessel_manufacturing_date: property.vessel_manufacturing_date
-          ? property.vessel_manufacturing_date
-          : vessel_manufacturing_date,
-        manufacture_mark: property.manufacture_mark
-          ? property.manufacture_mark
-          : manufacture_mark,
-        manufacturer_name: property.manufacturer_name
-          ? property.manufacturer_name
-          : manufacturer_name,
-        engine_type: property.engine_type ? property.engine_type : engine_type,
-        engine_manufacture_name: property.engine_manufacture_name
-          ? property.engine_manufacture_name
-          : engine_manufacture_name,
-        engine_deck_type: property.engine_deck_type
-          ? property.engine_deck_type
-          : engine_deck_type,
-        running_cost: property.running_cost
-          ? property.running_cost
-          : running_cost,
-        no_of_crew_required: property.no_of_crew_required
-          ? property.no_of_crew_required
-          : no_of_crew_required,
-        property_address: property.property_address
-          ? property.property_address
-          : property_address,
-        others: property.detain ? property.detain : otherDetails,
-        ...ownership,
-        step: parseInt(2),
-      };
-      authService.savePropInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toogleSellStep(2);
-          getPropId(res.data._id);
-          alert("Saved Successfully!");
-        }
-      });
+        };
+        authService.savePropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toogleSellStep(2);
+            getPropId(res.data._id);
+            alert("Saved Successfully!");
+          }
+        });
+      } else {
+        const datas = {
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          vessel_registration_number: property.vessel_registration_number
+            ? property.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: property.vessel_manufacturing_date
+            ? property.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: property.manufacture_mark
+            ? property.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: property.manufacturer_name
+            ? property.manufacturer_name
+            : manufacturer_name,
+          engine_type: property.engine_type
+            ? property.engine_type
+            : engine_type,
+          engine_manufacture_name: property.engine_manufacture_name
+            ? property.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: property.engine_deck_type
+            ? property.engine_deck_type
+            : engine_deck_type,
+          running_cost: property.running_cost
+            ? property.running_cost
+            : running_cost,
+          no_of_crew_required: property.no_of_crew_required
+            ? property.no_of_crew_required
+            : no_of_crew_required,
+          property_address: property.property_address
+            ? property.property_address
+            : property_address,
+          others: property.detain ? property.detain : otherDetails,
+          ...ownership,
+          step: parseInt(2),
+        };
+        authService.savePropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toogleSellStep(2);
+            getPropId(res.data._id);
+            alert("Saved Successfully!");
+          }
+        });
+      }
     }
   };
 
@@ -332,43 +432,86 @@ function YachtDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      const submitedData = {
-        reservedAmount: data.reservedAmount
-          ? parseInt(data.reservedAmount)
-          : parseInt(reservedAmount),
-        discussedAmount: data.discussedAmount
-          ? parseInt(data.discussedAmount)
-          : parseInt(discussedAmount),
-        vessel_registration_number: data.vessel_registration_number
-          ? data.vessel_registration_number
-          : vessel_registration_number,
-        vessel_manufacturing_date: data.vessel_manufacturing_date
-          ? data.vessel_manufacturing_date
-          : vessel_manufacturing_date,
-        manufacture_mark: data.manufacture_mark
-          ? data.manufacture_mark
-          : manufacture_mark,
-        manufacturer_name: data.manufacturer_name
-          ? data.manufacturer_name
-          : manufacturer_name,
-        engine_type: data.engine_type ? data.engine_type : engine_type,
-        engine_manufacture_name: data.engine_manufacture_name
-          ? data.engine_manufacture_name
-          : engine_manufacture_name,
-        engine_deck_type: data.engine_deck_type
-          ? data.engine_deck_type
-          : engine_deck_type,
-        running_cost: data.running_cost ? data.running_cost : running_cost,
-        no_of_crew_required: data.no_of_crew_required
-          ? data.no_of_crew_required
-          : no_of_crew_required,
-        property_address: data.property_address
-          ? data.property_address
-          : property_address,
-        others: data.detain ? data.detain : otherDetails,
-      };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      if (otherDetails) {
+        const submitedData = {
+          reservedAmount: data.reservedAmount
+            ? parseInt(data.reservedAmount)
+            : parseInt(reservedAmount),
+          discussedAmount: data.discussedAmount
+            ? parseInt(data.discussedAmount)
+            : parseInt(discussedAmount),
+          vessel_registration_number: data.vessel_registration_number
+            ? data.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: data.vessel_manufacturing_date
+            ? data.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: data.manufacture_mark
+            ? data.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: data.manufacturer_name
+            ? data.manufacturer_name
+            : manufacturer_name,
+          engine_type: data.engine_type ? data.engine_type : engine_type,
+          engine_manufacture_name: data.engine_manufacture_name
+            ? data.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: data.engine_deck_type
+            ? data.engine_deck_type
+            : engine_deck_type,
+          running_cost: data.running_cost ? data.running_cost : running_cost,
+          no_of_crew_required: data.no_of_crew_required
+            ? data.no_of_crew_required
+            : no_of_crew_required,
+          property_address: data.property_address
+            ? data.property_address
+            : property_address,
+          others: data.detain
+            ? data.detain
+            : otherDetails
+            ? otherDetails
+            : null,
+        };
+        tooglePropertyData(submitedData);
+        toogleStep(step + 1);
+      } else {
+        const submitedData = {
+          reservedAmount: data.reservedAmount
+            ? parseInt(data.reservedAmount)
+            : parseInt(reservedAmount),
+          discussedAmount: data.discussedAmount
+            ? parseInt(data.discussedAmount)
+            : parseInt(discussedAmount),
+          vessel_registration_number: data.vessel_registration_number
+            ? data.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: data.vessel_manufacturing_date
+            ? data.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: data.manufacture_mark
+            ? data.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: data.manufacturer_name
+            ? data.manufacturer_name
+            : manufacturer_name,
+          engine_type: data.engine_type ? data.engine_type : engine_type,
+          engine_manufacture_name: data.engine_manufacture_name
+            ? data.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: data.engine_deck_type
+            ? data.engine_deck_type
+            : engine_deck_type,
+          running_cost: data.running_cost ? data.running_cost : running_cost,
+          no_of_crew_required: data.no_of_crew_required
+            ? data.no_of_crew_required
+            : no_of_crew_required,
+          property_address: data.property_address
+            ? data.property_address
+            : property_address,
+        };
+        tooglePropertyData(submitedData);
+        toogleStep(step + 1);
+      }
     }
   };
   return (

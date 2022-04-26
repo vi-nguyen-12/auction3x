@@ -87,12 +87,12 @@ const Featured = () => {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auction.length > 3 ? 2 : auction.length,
+    slidesToShow: auction.length > 2 ? 2 : auction.length,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: auction.length,
+          slidesToShow: 2,
           slidesToScroll: 0,
           infinite: true,
           dots: false,
@@ -101,7 +101,7 @@ const Featured = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: auction.length,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
         },
@@ -126,7 +126,7 @@ const Featured = () => {
                 src="/images/f_name.png"
                 alt=""
                 style={{
-                  marginBottom: "0px",
+                  marginBottom: "40px",
                   maxWidth: "250px",
                   maxHeight: "150px",
                 }}

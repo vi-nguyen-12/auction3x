@@ -832,6 +832,7 @@ function YachtDocus({
                 {...register("vessel_valuation_report", {
                   onChange: onChange8,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>

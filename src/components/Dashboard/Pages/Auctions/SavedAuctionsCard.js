@@ -139,11 +139,24 @@ function SavedAuctionsCard({
               ) : null}
             </Row>
             <Row>
-              <Col md={5} style={{ width: "50%", color: "black" }}>
-                <p style={{ fontSize: "15px", width: "100px", color: "black" }}>
-                  Online Auction
-                </p>
-              </Col>
+              {new Date().toISOString() < auctionStartDate &&
+              new Date().toISOString() < endRegister ? (
+                <Col md={5} style={{ width: "50%", color: "black" }}>
+                  <p
+                    style={{ fontSize: "15px", width: "100px", color: "black" }}
+                  >
+                    Registration
+                  </p>
+                </Col>
+              ) : (
+                <Col md={5} style={{ width: "50%", color: "black" }}>
+                  <p
+                    style={{ fontSize: "15px", width: "100px", color: "black" }}
+                  >
+                    Online Auction
+                  </p>
+                </Col>
+              )}
 
               <Col md={6} style={{ width: "50%", color: "black" }}>
                 <p
@@ -158,7 +171,7 @@ function SavedAuctionsCard({
               </Col>
             </Row>
             <Row>
-              {auctionEndDate < new Date().toISOString() ? (
+              {new Date().toISOString() > auctionEndDate ? (
                 <Col md={1} style={{ width: "50%" }}>
                   <p
                     style={{
@@ -169,6 +182,33 @@ function SavedAuctionsCard({
                   >
                     Auction Ended
                   </p>
+                </Col>
+              ) : new Date().toISOString() < auctionStartDate &&
+                new Date().toISOString() < endRegister ? (
+                <Col md={1} style={{ width: "50%" }}>
+                  <div style={{ fontSize: "12px", width: "200px" }}>
+                    <AuctionTimer time={endRegister} />
+                  </div>
+                </Col>
+              ) : new Date().toISOString() < auctionStartDate &&
+                new Date().toISOString() > endRegister ? (
+                <Col md={1} style={{ width: "50%" }}>
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      width: "200px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Registration Ended
+                  </p>
+                </Col>
+              ) : new Date().toISOString() > auctionStartDate &&
+                new Date().toISOString() < auctionEndDate ? (
+                <Col md={1} style={{ width: "50%" }}>
+                  <div style={{ fontSize: "12px", width: "200px" }}>
+                    <AuctionTimer time={auctionEndDate} />
+                  </div>
                 </Col>
               ) : (
                 <Col md={1} style={{ width: "50%" }}>

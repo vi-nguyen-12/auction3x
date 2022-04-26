@@ -1009,6 +1009,7 @@ function JetDocus({
                 {...register("fitness_report", {
                   onChange: onChange8,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>
@@ -1061,6 +1062,7 @@ function JetDocus({
                 {...register("electric_work_details", {
                   onChange: onChange9,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>
@@ -1113,6 +1115,7 @@ function JetDocus({
                 {...register("engine_details", {
                   onChange: onChange10,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>
@@ -1165,6 +1168,7 @@ function JetDocus({
                 {...register("inspection_report", {
                   onChange: onChange11,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>
@@ -1217,6 +1221,7 @@ function JetDocus({
                 {...register("valuation_report", {
                   onChange: onChange12,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>

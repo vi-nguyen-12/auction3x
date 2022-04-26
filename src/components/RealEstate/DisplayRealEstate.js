@@ -127,7 +127,6 @@ const Wrap = styled.div`
 `;
 
 function DisplayRealEstate({ property, toogleChange }) {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -135,6 +134,7 @@ function DisplayRealEstate({ property, toogleChange }) {
   const [showPics, setShowPics] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [downloadFiles, setDownloadFiles] = useState([]);
   const [showLives, setShowLives] = useState(false);
   const toggleLive = () => setShowLives(!showLives);
   const toggleMap = () => setShowMap(!showMap);
@@ -181,6 +181,54 @@ function DisplayRealEstate({ property, toogleChange }) {
   // if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+
+  const titles = property.property.documents.filter(
+    (doc) =>
+      doc.officialName === "title_report" ||
+      doc.officialName === "insurance_copy"
+  );
+
+  const purchaseAgreement = property.property.documents.filter(
+    (doc) => doc.officialName === "purchase_agreement"
+  );
+  const thirdParty = property.property.documents.filter(
+    (doc) => doc.officialName === "third-party_report"
+  );
+
+  const market = property.property.documents.filter(
+    (doc) => doc.officialName === "market_and_valuations"
+  );
+
+  const financial = property.property.documents.filter(
+    (doc) => doc.officialName === "financial_document"
+  );
+
+  const download = (files) => (e) => {
+    if (e.target.checked) {
+      setDownloadFiles([...downloadFiles, ...files]);
+    } else {
+      for (let i = 0; i < files.length; i++) {
+        const index = downloadFiles.indexOf(files[i]);
+        if (index > -1) {
+          downloadFiles.splice(index, 1);
+        }
+      }
+      setDownloadFiles([...downloadFiles]);
+    }
+  };
+
+  const viewSelected = () => {
+    if (downloadFiles.length > 0) {
+      for (let i = 0; i < downloadFiles.length; i++) {
+        window.open(downloadFiles[i]);
+      }
+    }
+  };
+
+  const viewAll = () => {
+    const documents = property.property.documents.map((doc) => doc.url);
+    console.log(documents);
+  };
 
   useEffect(() => {
     toogleChange();
@@ -541,7 +589,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         borderRadius: "10px",
-                        padding: "29px",
+                        padding: "20px",
                       }}
                     >
                       <RegistrationTimer
@@ -586,7 +634,8 @@ function DisplayRealEstate({ property, toogleChange }) {
                     </div>
                   </Col>
                 )}
-                {new Date().toISOString() < property.auctionEndDate ? (
+                {new Date().toISOString() < property.auctionEndDate &&
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -1183,27 +1232,50 @@ function DisplayRealEstate({ property, toogleChange }) {
                   <tbody className="tabDocs" style={{ padding: "20px" }}>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Broker Offering Memorandum (1)
+                        <input type="checkbox" /> Broker Offering Memorandum (0)
                       </td>
                       <td>
-                        <input type="checkbox" /> Purchase Agreement (3)
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input type="checkbox" /> Market and Valuations (4)
-                      </td>
-                      <td>
-                        <input type="checkbox" />
-                        Third Party Reports (2)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            purchaseAgreement.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Purchase Agreement ({purchaseAgreement.length})
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Operating and Financial (10)
+                        <input
+                          type="checkbox"
+                          onChange={download(market.map((item) => item.url))}
+                        />{" "}
+                        Market and Valuations ({market.length})
                       </td>
                       <td>
-                        <input type="checkbox" /> Title and Insurance (1)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            thirdParty.map((item) => item.url)
+                          )}
+                        />
+                        Third Party Reports ({thirdParty.length})
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                          type="checkbox"
+                          onChange={download(financial.map((item) => item.url))}
+                        />{" "}
+                        Operating and Financial ({financial.length})
+                      </td>
+                      <td>
+                        <input
+                          type="checkbox"
+                          onChange={download(titles.map((item) => item.url))}
+                        />{" "}
+                        Title and Insurance ({titles.length})
                       </td>
                     </tr>
                     <tr>
@@ -1226,6 +1298,9 @@ function DisplayRealEstate({ property, toogleChange }) {
                     >
                       <td>
                         <button
+                          onClick={() => {
+                            viewSelected();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",
@@ -1242,6 +1317,9 @@ function DisplayRealEstate({ property, toogleChange }) {
                       </td>
                       <td>
                         <button
+                          onClick={() => {
+                            viewAll();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",

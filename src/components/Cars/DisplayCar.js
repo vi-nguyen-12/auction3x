@@ -564,7 +564,7 @@ function DisplayCar({ toogleChange, property }) {
 
           {/* second row */}
           <Row style={{ padding: "0 35px" }}>
-            <Col sm={8} style={{ display: "grid", padding: "0" }}>
+            <Col style={{ display: "grid", padding: "0" }}>
               <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
                 {registEnded === false ? (
                   <Col style={{ padding: "0" }}>
@@ -579,8 +579,8 @@ function DisplayCar({ toogleChange, property }) {
                       }}
                     >
                       <RegistrationTimer
-                        toogleRegistEnded={toogleRegistEnded}
                         time={property.registerEndDate}
+                        toogleRegistEnded={toogleRegistEnded}
                       />
                       <div
                         style={{
@@ -603,7 +603,7 @@ function DisplayCar({ toogleChange, property }) {
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         borderRadius: "10px",
-                        padding: "53px",
+                        padding: "60px",
                       }}
                     >
                       <div
@@ -631,6 +631,7 @@ function DisplayCar({ toogleChange, property }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "20px",
+                        marginLeft: "18px",
                       }}
                     >
                       <AuctionTimer
@@ -649,7 +650,7 @@ function DisplayCar({ toogleChange, property }) {
                       </div>
                     </div>
                   </Col>
-                ) : (
+                ) : new Date().toISOString() < property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -660,6 +661,7 @@ function DisplayCar({ toogleChange, property }) {
                         borderRadius: "10px",
                         padding: "20px",
                         color: "black",
+                        marginLeft: "18px",
                       }}
                     >
                       <AuctionTimer time={property.auctionStartDate} />
@@ -675,6 +677,34 @@ function DisplayCar({ toogleChange, property }) {
                       </div>
                     </div>
                   </Col>
+                ) : (
+                  new Date().toISOString() > property.auctionEndDate && (
+                    <Col>
+                      <div
+                        style={{
+                          display: "grid",
+                          justifyContent: "center",
+                          backgroundColor: "#e8e8e8",
+                          width: "100%",
+                          borderRadius: "10px",
+                          padding: "53px",
+                          marginLeft: "18px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "left",
+                            marginLeft: "10px",
+                            color: "Black",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          <p>Auction Ended</p>
+                        </div>
+                      </div>
+                    </Col>
+                  )
                 )}
 
                 {property.highestBidders && (

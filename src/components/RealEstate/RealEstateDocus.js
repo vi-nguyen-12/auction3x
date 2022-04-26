@@ -319,11 +319,11 @@ function RealEstateDocus({
   const thirdpartyReport = doc5.map((document) => {
     return { ...document, officialName: "third-party_report" };
   });
-  const demographics = doc6.map((document) => {
-    return { ...document, officialName: "demographics" };
-  });
-  const marketandValuations = doc7.map((document) => {
+  const marketandValuations = doc6.map((document) => {
     return { ...document, officialName: "market_and_valuations" };
+  });
+  const demographics = doc7.map((document) => {
+    return { ...document, officialName: "demographics" };
   });
   const otherDocuments = doc8.map((document) => {
     return { ...document, officialName: "others" };
@@ -335,8 +335,8 @@ function RealEstateDocus({
     ...financialDocuments,
     ...purchaseAgreement,
     ...thirdpartyReport,
-    ...demographics,
     ...marketandValuations,
+    ...demographics,
     ...otherDocuments,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
@@ -435,20 +435,11 @@ function RealEstateDocus({
   };
 
   const onSubmit = async (data) => {
-    if (params.id) {
-      if (documents.length >= 6) {
-        toogleDocuments(documents);
-        toogleStep(step + 1);
-      } else {
-        alert("Please upload all required documents");
-      }
+    if (documents.length >= 6) {
+      toogleDocuments(documents);
+      toogleStep(step + 1);
     } else {
-      if (documents.length >= 6) {
-        toogleDocuments(documents);
-        toogleStep(step + 1);
-      } else {
-        alert("Please upload all required documents");
-      }
+      alert("Please upload all required documents");
     }
   };
   return (
@@ -740,7 +731,8 @@ function RealEstateDocus({
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Demographics (.pdf) <span style={{ color: "#ff0000" }}>*</span>
+              Market and Valuations (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn6"
                 accept=".pdf"
@@ -748,7 +740,8 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("demographics", { onChange: onChange6 })}
+                {...register("marketValuations", { onChange: onChange6 })}
+                required
                 // {...register("demographics", {
                 //   onChange: onChange("demographics"),
                 // })}
@@ -792,8 +785,7 @@ function RealEstateDocus({
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Market and Valuations (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Demographics (.pdf) <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn7"
                 accept=".pdf"
@@ -801,7 +793,7 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("marketValuations", { onChange: onChange7 })}
+                {...register("demographics", { onChange: onChange7 })}
                 // {...register("marketandValuations", {
                 //   onChange: onChange("market_and_evaluations"),
                 // })}

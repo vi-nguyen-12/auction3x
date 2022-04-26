@@ -19,9 +19,9 @@ function SavedAuctions() {
       <Row>
         {savedProperty.length > 0 ? (
           <>
-            <h1 style={{marginBottom:"40px"}}>Saved Auctions</h1>
+            <h1 style={{ marginBottom: "40px" }}>Saved Auctions</h1>
             {savedProperty.map((property, index) => (
-              <Col key={index}>
+              <Col style={{ marginBottom: "50px" }} key={index}>
                 {property.property.type === "real-estate" ? (
                   auction.filter((item) => item._id === property._id) ? (
                     <CardComp
