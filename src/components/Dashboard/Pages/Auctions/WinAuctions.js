@@ -65,32 +65,32 @@ function WinAuctions() {
                       width="100px"
                       height="50px"
                       onClick={() => {
-                        setImages(auction.property.images);
+                        setImages(auction.property[0].images);
                         toogleShowPic();
                       }}
                       src={
-                        auction.property.images.length > 0
-                          ? auction.property.images[0].url
+                        auction.property[0].images.length > 0
+                          ? auction.property[0].images[0].url
                           : ""
                       }
                     />
                   </div>
                 </td>
                 <td colSpan={2}>
-                  {auction.property.type === "real-estate"
+                  {auction.property[0].type === "real-estate"
                     ? "Real Estate"
-                    : auction.property.type === "car"
+                    : auction.property[0].type === "car"
                     ? "Car"
-                    : auction.property.type === "jet"
+                    : auction.property[0].type === "jet"
                     ? "Jet"
-                    : auction.property.type === "yacht"
+                    : auction.property[0].type === "yacht"
                     ? "Yacht"
                     : ""}
                 </td>
-                <td colSpan={2}>{auction.property.details.address}</td>
+                <td colSpan={2}>{auction.property[0].details.address}</td>
                 <td colSpan={2}>
                   <NumberFormat
-                    value={auction.winner.amount}
+                    value={auction.amount}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}

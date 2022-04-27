@@ -117,10 +117,7 @@ const Header = ({ change, color }) => {
         <div className="navbar-brand mt-2" style={{ paddingBottom: "1rem" }}>
           <Logo href="/">
             <div>
-              <img src="/images/logo.png" alt="" />
-            </div>
-            <div style={{ marginLeft: 15 }}>
-              <img src="/images/name.png" alt="" />
+              <img src="/images/newName.png" width={200} height={50} alt="" />
             </div>
           </Logo>
         </div>
@@ -385,6 +382,9 @@ const Header = ({ change, color }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
+                            if (user._id) {
+                              history.push("/Dashboard/Auctions/BidAuctions");
+                            }
                           }}
                         >
                           MANAGED BID
@@ -544,54 +544,7 @@ const Header = ({ change, color }) => {
                             toogleOpen();
                           }}
                         >
-                          JEWEL
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
                           ABOUT US
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          JOURNOUL
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {" "}
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          OTHERS
                         </button>
                       </td>
                     </tr>

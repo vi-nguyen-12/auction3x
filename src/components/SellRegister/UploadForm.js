@@ -197,17 +197,21 @@ const UploadForm = ({
           );
           if (property.length > 0) {
             setImages(
-              property[0].images.length > 0
-                ? property[0].images
-                : image
-                ? image
+              property[0].images
+                ? property[0].images.length > 0
+                  ? property[0].images
+                  : image
+                  ? image
+                  : []
                 : []
             );
             setVideos(
-              property[0].videos.length > 0
-                ? property[0].videos
-                : video
-                ? video
+              property[0].videos
+                ? property[0].videos.length > 0
+                  ? property[0].videos
+                  : video
+                  ? video
+                  : []
                 : []
             );
           }

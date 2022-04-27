@@ -62,7 +62,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
 
   useEffect(() => {
-    colorChange("#282828");
+    colorChange("black");
     bodyColorChange("#ffefe3");
     toogleShow();
     if (params.step) {
