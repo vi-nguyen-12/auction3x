@@ -110,7 +110,6 @@ const Wrap = styled.div`
 `;
 
 function DisplayCar({ toogleChange, property }) {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -184,8 +183,9 @@ function DisplayCar({ toogleChange, property }) {
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
-        const saved = savedProperty.filter((item) => item._id === property._id);
-        if (saved.length > 0) {
+        const saved = savedProperty.find((item) => item._id === property._id);
+        console.log(saved);
+        if (saved) {
           setFavorite(true);
         } else {
           setFavorite(false);
