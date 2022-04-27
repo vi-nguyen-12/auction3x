@@ -56,11 +56,11 @@ const ChangePass = ({ colorChange, toogleShow }) => {
         <div className="form-group mb-2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
+          // onKeyDown={(e) => {
+          //   if (e.key === "Enter") {
+          //     e.preventDefault();
+          //   }
+          // }}
           >
             <div className="form-group">
               <p style={{ justifyContent: "left", margin: "0" }}>

@@ -206,7 +206,7 @@ function DisplayJet({ toogleChange, property }) {
         ? property.property.details.property_address.longitude
         : null,
     });
-  }, [property]);
+  }, []);
 
   useEffect(() => {
     if (user._id) {
@@ -465,9 +465,9 @@ function DisplayJet({ toogleChange, property }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid

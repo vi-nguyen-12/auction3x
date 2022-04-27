@@ -419,9 +419,9 @@ function DisplayRealEstate({ property, toogleChange }) {
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid

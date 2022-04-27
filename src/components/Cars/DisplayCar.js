@@ -229,11 +229,14 @@ function DisplayCar({ toogleChange, property }) {
                   // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
                   className="favorite-button"
                 >
-                  {favorite ? (
+                  {favorite && user._id ? (
                     <AiFillHeart size="100%" color="C58753" />
-                  ) : (
-                    <AiOutlineHeart size="100%" color="C58753" />
-                  )}
+                  ) :
+                    user._id !== undefined ? (
+                      <AiFillHeart size="100%" color="C58753" />
+                    ) : (
+                      <AiOutlineHeart size="100%" color="C58753" />
+                    )}
                 </button>
               </div>
 
@@ -438,9 +441,9 @@ function DisplayCar({ toogleChange, property }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -621,7 +624,7 @@ function DisplayCar({ toogleChange, property }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
