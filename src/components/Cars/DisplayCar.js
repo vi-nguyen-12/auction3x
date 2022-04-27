@@ -138,7 +138,6 @@ function DisplayCar({ toogleChange, property }) {
       authService.removeProperty(data);
       setFavorite(!favorite);
     }
-    console.log(data);
   };
 
   const [placeBid, setPlaceBid] = useState(false);
@@ -152,6 +151,7 @@ function DisplayCar({ toogleChange, property }) {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
+  const [downloadFiles, setDownloadFiles] = useState([]);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
   const toogleButton = () => popButton(!showButton);
@@ -184,7 +184,6 @@ function DisplayCar({ toogleChange, property }) {
     if (user._id) {
       if (savedProperty.length > 0) {
         const saved = savedProperty.find((item) => item._id === property._id);
-        console.log(saved);
         if (saved) {
           setFavorite(true);
         } else {
@@ -193,6 +192,58 @@ function DisplayCar({ toogleChange, property }) {
       }
     }
   }, [savedProperty]);
+
+  const ownershipDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "ownership_document"
+  );
+
+  const registrationDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "registration_document"
+  );
+
+  const loanDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "loan_document"
+  );
+
+  const inspectionDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "inspection_report"
+  );
+
+  const engineDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "engine_details"
+  );
+
+  const valuationDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "valuation_report"
+  );
+
+  const download = (files) => (e) => {
+    if (e.target.checked) {
+      setDownloadFiles([...downloadFiles, ...files]);
+    } else {
+      for (let i = 0; i < files.length; i++) {
+        const index = downloadFiles.indexOf(files[i]);
+        if (index > -1) {
+          downloadFiles.splice(index, 1);
+        }
+      }
+      setDownloadFiles([...downloadFiles]);
+    }
+  };
+
+  const viewSelected = () => {
+    if (downloadFiles.length > 0) {
+      for (let i = 0; i < downloadFiles.length; i++) {
+        window.open(downloadFiles[i]);
+      }
+    }
+  };
+
+  const viewAll = () => {
+    for (let i = 0; i < property.property.documents.length; i++) {
+      window.open(property.property.documents[i].url);
+    }
+  };
   return (
     <>
       {location && property && (
@@ -1192,27 +1243,58 @@ function DisplayCar({ toogleChange, property }) {
                   <tbody className="tabDocs" style={{ padding: "20px" }}>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Broker Offering Memorandum (1)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            ownershipDoc.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Ownership Documents ({ownershipDoc.length})
                       </td>
                       <td>
-                        <input type="checkbox" /> Purchase Agreement (3)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            registrationDoc.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Registration Documents ({registrationDoc.length})
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Market and Valuations (4)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            valuationDoc.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Valuation Report ({valuationDoc.length})
                       </td>
                       <td>
-                        <input type="checkbox" />
-                        Third Party Reports (2)
+                        <input
+                          type="checkbox"
+                          onChange={download(loanDoc.map((item) => item.url))}
+                        />{" "}
+                        Loan Documents ({loanDoc.length})
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Operating and Financial (10)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            inspectionDoc.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Inspection Report ({inspectionDoc.length})
                       </td>
                       <td>
-                        <input type="checkbox" /> Title and Insurance (1)
+                        <input
+                          type="checkbox"
+                          onChange={download(engineDoc.map((item) => item.url))}
+                        />{" "}
+                        Engine Details ({engineDoc.length})
                       </td>
                     </tr>
                     <tr>
@@ -1235,6 +1317,9 @@ function DisplayCar({ toogleChange, property }) {
                     >
                       <td>
                         <button
+                          onClick={() => {
+                            viewSelected();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",
@@ -1251,6 +1336,9 @@ function DisplayCar({ toogleChange, property }) {
                       </td>
                       <td>
                         <button
+                          onClick={() => {
+                            viewAll();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",

@@ -156,12 +156,12 @@ function DisplayYacht({ toogleChange, property }) {
       authService.removeProperty(data);
       setFavorite(!favorite);
     }
-    console.log(data);
   };
 
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [downloadFiles, setDownloadFiles] = useState([]);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
 
@@ -212,6 +212,58 @@ function DisplayYacht({ toogleChange, property }) {
       }
     }
   }, [savedProperty]);
+
+  const vesselRegist = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_registration"
+  );
+
+  const vesselMaintenance = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_maintenance_report"
+  );
+
+  const vesselPerformance = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_performance_report"
+  );
+
+  const deckDetails = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_deck_details"
+  );
+
+  const marineReport = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_marine_surveyor_report"
+  );
+
+  const valuationDoc = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_valuation_report"
+  );
+
+  const download = (files) => (e) => {
+    if (e.target.checked) {
+      setDownloadFiles([...downloadFiles, ...files]);
+    } else {
+      for (let i = 0; i < files.length; i++) {
+        const index = downloadFiles.indexOf(files[i]);
+        if (index > -1) {
+          downloadFiles.splice(index, 1);
+        }
+      }
+      setDownloadFiles([...downloadFiles]);
+    }
+  };
+
+  const viewSelected = () => {
+    if (downloadFiles.length > 0) {
+      for (let i = 0; i < downloadFiles.length; i++) {
+        window.open(downloadFiles[i]);
+      }
+    }
+  };
+
+  const viewAll = () => {
+    for (let i = 0; i < property.property.documents.length; i++) {
+      window.open(property.property.documents[i].url);
+    }
+  };
 
   return (
     <>
@@ -1203,27 +1255,62 @@ function DisplayYacht({ toogleChange, property }) {
                   <tbody className="tabDocs" style={{ padding: "20px" }}>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Broker Offering Memorandum (1)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            vesselRegist.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Vessel Registration ({vesselRegist.length})
                       </td>
                       <td>
-                        <input type="checkbox" /> Purchase Agreement (3)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            vesselMaintenance.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Vessel Maintenance Report ({vesselMaintenance.length})
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Market and Valuations (4)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            valuationDoc.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Valuation Report ({valuationDoc.length})
                       </td>
                       <td>
-                        <input type="checkbox" />
-                        Third Party Reports (2)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            vesselPerformance.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Vessel Performance Report ({vesselPerformance.length})
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input type="checkbox" /> Operating and Financial (10)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            deckDetails.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Vessel Deck Details ({deckDetails.length})
                       </td>
                       <td>
-                        <input type="checkbox" /> Title and Insurance (1)
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            marineReport.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Vessel Marine Surveyor Report ({marineReport.length})
                       </td>
                     </tr>
                     <tr>
@@ -1246,6 +1333,9 @@ function DisplayYacht({ toogleChange, property }) {
                     >
                       <td>
                         <button
+                          onClick={() => {
+                            viewSelected();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",
@@ -1262,6 +1352,9 @@ function DisplayYacht({ toogleChange, property }) {
                       </td>
                       <td>
                         <button
+                          onClick={() => {
+                            viewAll();
+                          }}
                           style={{
                             backgroundColor: "white",
                             border: "none",
