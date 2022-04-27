@@ -206,101 +206,183 @@ function CarDocus({
               }
             });
             setDocument1(
-              documents[0]
-                ? [documents[0]]
-                : document
-                ? document[0]
-                  ? [document[0]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "ownership_document"
+                  )
                 : []
             );
             setDocument2(
-              documents[1]
-                ? [documents[1]]
-                : document
-                ? document[1]
-                  ? [document[1]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "registration_document"
+                  )
                 : []
             );
             setDocument3(
-              documents[2]
-                ? [documents[2]]
-                : document
-                ? document[2]
-                  ? [document[2]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "title_certificate"
+                  )
                 : []
             );
             setDocument4(
-              documents[3]
-                ? [documents[3]]
-                : document
-                ? document[3]
-                  ? [document[3]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "loan_document"
+                  )
                 : []
             );
             setDocument5(
-              documents[4]
-                ? [documents[4]]
-                : document
-                ? document[4]
-                  ? [document[4]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "inspection_report"
+                  )
                 : []
             );
             setDocument6(
-              documents[5]
-                ? [documents[5]]
-                : document
-                ? document[5]
-                  ? [document[5]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "engine_details"
+                  )
                 : []
             );
             setDocument7(
-              documents[6]
-                ? [documents[6]]
-                : document
-                ? document[6]
-                  ? [document[6]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "insurance_document"
+                  )
                 : []
             );
             setDocument8(
-              documents[7]
-                ? [documents[7]]
-                : document
-                ? document[7]
-                  ? [document[7]]
-                  : []
+              documents
+                ? documents.filter(
+                    (item) => item.officialName === "valuation_report"
+                  )
                 : []
             );
-            if (documents.length > 8 || document.length > 8) {
-              setDocument9(
-                documents[8]
-                  ? [documents[8]]
-                  : document
-                  ? document[8]
-                    ? [document[8]]
-                    : []
-                  : []
-              );
-            }
+            setDocument9(
+              documents
+                ? documents.filter((item) => item.officialName === "others")
+                : []
+            );
+          } else {
+            setDocument1(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "ownership_document"
+                  )
+                : []
+            );
+            setDocument2(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "registration_document"
+                  )
+                : []
+            );
+            setDocument3(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "title_certificate"
+                  )
+                : []
+            );
+            setDocument4(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "loan_document"
+                  )
+                : []
+            );
+            setDocument5(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "inspection_report"
+                  )
+                : []
+            );
+            setDocument6(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "engine_details"
+                  )
+                : []
+            );
+            setDocument7(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "insurance_document"
+                  )
+                : []
+            );
+            setDocument8(
+              document
+                ? document.filter(
+                    (item) => item.officialName === "valuation_report"
+                  )
+                : []
+            );
+            setDocument9(
+              document
+                ? document.filter((item) => item.officialName === "others")
+                : []
+            );
           }
         }
       });
     } else {
-      setDocument1(document ? (document[0] ? [document[0]] : []) : []);
-      setDocument2(document ? (document[1] ? [document[1]] : []) : []);
-      setDocument3(document ? (document[2] ? [document[2]] : []) : []);
-      setDocument4(document ? (document[3] ? [document[3]] : []) : []);
-      setDocument5(document ? (document[4] ? [document[4]] : []) : []);
-      setDocument6(document ? (document[5] ? [document[5]] : []) : []);
-      setDocument7(document ? (document[6] ? [document[6]] : []) : []);
-      setDocument8(document ? (document[7] ? [document[7]] : []) : []);
-      setDocument9(document ? (document[8] ? [document[8]] : []) : []);
+      setDocument1(
+        document
+          ? document.filter(
+              (item) => item.officialName === "ownership_document"
+            )
+          : []
+      );
+      setDocument2(
+        document
+          ? document.filter(
+              (item) => item.officialName === "registration_document"
+            )
+          : []
+      );
+      setDocument3(
+        document
+          ? document.filter((item) => item.officialName === "title_certificate")
+          : []
+      );
+      setDocument4(
+        document
+          ? document.filter((item) => item.officialName === "loan_document")
+          : []
+      );
+      setDocument5(
+        document
+          ? document.filter((item) => item.officialName === "inspection_report")
+          : []
+      );
+      setDocument6(
+        document
+          ? document.filter((item) => item.officialName === "engine_details")
+          : []
+      );
+      setDocument7(
+        document
+          ? document.filter(
+              (item) => item.officialName === "insurance_document"
+            )
+          : []
+      );
+      setDocument8(
+        document
+          ? document.filter((item) => item.officialName === "valuation_report")
+          : []
+      );
+      setDocument9(
+        document
+          ? document.filter((item) => item.officialName === "others")
+          : []
+      );
     }
   }, []);
 
@@ -435,7 +517,16 @@ function CarDocus({
   };
 
   const onSubmit = async (data) => {
-    if (documents.length >= 8) {
+    if (
+      doc1.length !== 0 &&
+      doc2.length !== 0 &&
+      doc3.length !== 0 &&
+      doc4.length !== 0 &&
+      doc5.length !== 0 &&
+      doc6.length !== 0 &&
+      doc7.length !== 0 &&
+      doc8.length !== 0
+    ) {
       toogleDocuments(documents);
       toogleStep(step + 1);
     } else {
@@ -829,6 +920,7 @@ function CarDocus({
                 multiple
                 hidden
                 {...register("valuation_report", { onChange: onChange8 })}
+                required
               />
               <div className="upload-cover">
                 <details>

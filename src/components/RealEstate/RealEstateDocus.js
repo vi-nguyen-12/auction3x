@@ -206,76 +206,123 @@ function RealEstateDocus({
           const property = response.data.filter(
             (property) => property._id === params.id
           );
-          if (property[0].documents.length > 1) {
-            const documents = property[0].documents.map((document) => {
-              if (document.isVerified && document._id) {
-                delete document.isVerified;
-                delete document._id;
-                return document;
-              }
-            });
-            setDocument1(
-              documents[0]
-                ? [documents[0]]
-                : document
-                ? document[0]
-                  ? [document[0]]
+          if (property[0].documents) {
+            if (property[0].documents.length > 1) {
+              const documents = property[0].documents.map((document) => {
+                if (document.isVerified && document._id) {
+                  delete document.isVerified;
+                  delete document._id;
+                  return document;
+                }
+              });
+              console.log(documents);
+              setDocument1(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "title_report"
+                    )
                   : []
-                : []
-            );
-            setDocument2(
-              documents[1]
-                ? [documents[1]]
-                : document
-                ? document[1]
-                  ? [document[1]]
+              );
+              setDocument2(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "insurance_copy"
+                    )
                   : []
-                : []
-            );
-            setDocument3(
-              documents[2]
-                ? [documents[2]]
-                : document
-                ? document[2]
-                  ? [document[2]]
+              );
+              setDocument3(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "financial_document"
+                    )
                   : []
-                : []
-            );
-            setDocument4(
-              documents[3]
-                ? [documents[3]]
-                : document
-                ? document[3]
-                  ? [document[3]]
+              );
+              setDocument4(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "purchase_agreement"
+                    )
                   : []
-                : []
-            );
-            setDocument5(
-              documents[4]
-                ? [documents[4]]
-                : document
-                ? document[4]
-                  ? [document[4]]
+              );
+              setDocument5(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "third-party_report"
+                    )
                   : []
-                : []
-            );
-            setDocument6(
-              documents[5]
-                ? [documents[5]]
-                : document
-                ? document[5]
-                  ? [document[5]]
+              );
+              setDocument6(
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "market_and_valuations"
+                    )
                   : []
-                : []
-            );
-            if (documents.length > 7 || document.length < 7) {
+              );
               setDocument7(
-                documents[6]
-                  ? [documents[6]]
-                  : document
-                  ? document[6]
-                    ? [document[6]]
-                    : []
+                documents
+                  ? documents.filter(
+                      (item) => item.officialName === "demographics"
+                    )
+                  : []
+              );
+              setDocument8(
+                documents
+                  ? documents.filter((item) => item.officialName === "others")
+                  : []
+              );
+            } else {
+              setDocument1(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "title_report"
+                    )
+                  : []
+              );
+              setDocument2(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "insurance_copy"
+                    )
+                  : []
+              );
+              setDocument3(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "financial_document"
+                    )
+                  : []
+              );
+              setDocument4(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "purchase_agreement"
+                    )
+                  : []
+              );
+              setDocument5(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "third-party_report"
+                    )
+                  : []
+              );
+              setDocument6(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "market_and_valuations"
+                    )
+                  : []
+              );
+              setDocument7(
+                document
+                  ? document.filter(
+                      (item) => item.officialName === "demographics"
+                    )
+                  : []
+              );
+              setDocument8(
+                document
+                  ? document.filter((item) => item.officialName === "others")
                   : []
               );
             }
@@ -283,13 +330,54 @@ function RealEstateDocus({
         }
       });
     } else {
-      setDocument1(document ? (document[0] ? [document[0]] : []) : []);
-      setDocument2(document ? (document[1] ? [document[1]] : []) : []);
-      setDocument3(document ? (document[2] ? [document[2]] : []) : []);
-      setDocument4(document ? (document[3] ? [document[3]] : []) : []);
-      setDocument5(document ? (document[4] ? [document[4]] : []) : []);
-      setDocument6(document ? (document[5] ? [document[5]] : []) : []);
-      setDocument7(document ? (document[6] ? [document[6]] : []) : []);
+      setDocument1(
+        document
+          ? document.filter((item) => item.officialName === "title_report")
+          : []
+      );
+      setDocument2(
+        document
+          ? document.filter((item) => item.officialName === "insurance_copy")
+          : []
+      );
+      setDocument3(
+        document
+          ? document.filter(
+              (item) => item.officialName === "financial_document"
+            )
+          : []
+      );
+      setDocument4(
+        document
+          ? document.filter(
+              (item) => item.officialName === "purchase_agreement"
+            )
+          : []
+      );
+      setDocument5(
+        document
+          ? document.filter(
+              (item) => item.officialName === "third-party_report"
+            )
+          : []
+      );
+      setDocument6(
+        document
+          ? document.filter(
+              (item) => item.officialName === "market_and_valuations"
+            )
+          : []
+      );
+      setDocument7(
+        document
+          ? document.filter((item) => item.officialName === "demographics")
+          : []
+      );
+      setDocument8(
+        document
+          ? document.filter((item) => item.officialName === "others")
+          : []
+      );
     }
   }, []);
 
@@ -319,11 +407,11 @@ function RealEstateDocus({
   const thirdpartyReport = doc5.map((document) => {
     return { ...document, officialName: "third-party_report" };
   });
-  const demographics = doc6.map((document) => {
-    return { ...document, officialName: "demographics" };
-  });
-  const marketandValuations = doc7.map((document) => {
+  const marketandValuations = doc6.map((document) => {
     return { ...document, officialName: "market_and_valuations" };
+  });
+  const demographics = doc7.map((document) => {
+    return { ...document, officialName: "demographics" };
   });
   const otherDocuments = doc8.map((document) => {
     return { ...document, officialName: "others" };
@@ -335,8 +423,8 @@ function RealEstateDocus({
     ...financialDocuments,
     ...purchaseAgreement,
     ...thirdpartyReport,
-    ...demographics,
     ...marketandValuations,
+    ...demographics,
     ...otherDocuments,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
@@ -435,20 +523,18 @@ function RealEstateDocus({
   };
 
   const onSubmit = async (data) => {
-    if (params.id) {
-      if (documents.length >= 6) {
-        toogleDocuments(documents);
-        toogleStep(step + 1);
-      } else {
-        alert("Please upload all required documents");
-      }
+    if (
+      doc1.length !== 0 &&
+      doc2.length !== 0 &&
+      doc3.length !== 0 &&
+      doc4.length !== 0 &&
+      doc5.length !== 0 &&
+      doc6.length !== 0
+    ) {
+      toogleDocuments(documents);
+      toogleStep(step + 1);
     } else {
-      if (documents.length >= 6) {
-        toogleDocuments(documents);
-        toogleStep(step + 1);
-      } else {
-        alert("Please upload all required documents");
-      }
+      alert("Please upload all required documents");
     }
   };
   return (
@@ -740,7 +826,8 @@ function RealEstateDocus({
           </Row>
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Demographics (.pdf) <span style={{ color: "#ff0000" }}>*</span>
+              Market and Valuations (.pdf){" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="documents-btn6"
                 accept=".pdf"
@@ -748,7 +835,8 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("demographics", { onChange: onChange6 })}
+                {...register("marketValuations", { onChange: onChange6 })}
+                required
                 // {...register("demographics", {
                 //   onChange: onChange("demographics"),
                 // })}
@@ -792,8 +880,7 @@ function RealEstateDocus({
 
           <Row style={{ borderBottom: "#333 solid 1px" }}>
             <Col className="input-form-3">
-              Market and Valuations (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Demographics (.pdf)
               <input
                 id="documents-btn7"
                 accept=".pdf"
@@ -801,11 +888,10 @@ function RealEstateDocus({
                 name="documents"
                 multiple
                 hidden
-                {...register("marketValuations", { onChange: onChange7 })}
+                {...register("demographics", { onChange: onChange7 })}
                 // {...register("marketandValuations", {
                 //   onChange: onChange("market_and_evaluations"),
                 // })}
-                required
               />
               <div className="upload-cover">
                 <details>

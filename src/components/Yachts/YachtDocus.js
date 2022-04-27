@@ -200,99 +200,189 @@ function YachtDocus({
           }
         });
         setDocument1(
-          documents[0]
-            ? [documents[0]]
-            : document
-            ? document[0]
-              ? [document[0]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_registration"
+              )
             : []
         );
         setDocument2(
-          documents[1]
-            ? [documents[1]]
-            : document
-            ? document[1]
-              ? [document[1]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_maintenance_report"
+              )
             : []
         );
         setDocument3(
-          documents[2]
-            ? [documents[2]]
-            : document
-            ? document[2]
-              ? [document[2]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_engine_type"
+              )
             : []
         );
         setDocument4(
-          documents[3]
-            ? [documents[3]]
-            : document
-            ? document[3]
-              ? [document[3]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_performance_report"
+              )
             : []
         );
         setDocument5(
-          documents[4]
-            ? [documents[4]]
-            : document
-            ? document[4]
-              ? [document[4]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_deck_details"
+              )
             : []
         );
         setDocument6(
-          documents[5]
-            ? [documents[5]]
-            : document
-            ? document[5]
-              ? [document[5]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_insurance"
+              )
             : []
         );
         setDocument7(
-          documents[6]
-            ? [documents[6]]
-            : document
-            ? document[6]
-              ? [document[6]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_marine_surveyor_report"
+              )
             : []
         );
         setDocument8(
-          documents[7]
-            ? [documents[7]]
-            : document
-            ? document[7]
-              ? [document[7]]
-              : []
+          documents
+            ? documents.filter(
+                (item) => item.officialName === "vessel_valuation_report"
+              )
             : []
         );
-        if (documents.length > 9 || document.length > 9) {
-          setDocument9(
-            documents[8]
-              ? [documents[8]]
-              : document
-              ? document[8]
-                ? [document[8]]
-                : []
-              : []
-          );
-        }
+        setDocument9(
+          documents
+            ? documents.filter((item) => item.officialName === "others")
+            : []
+        );
+      } else {
+        setDocument1(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_registration"
+              )
+            : []
+        );
+        setDocument2(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_maintenance_report"
+              )
+            : []
+        );
+        setDocument3(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_engine_type"
+              )
+            : []
+        );
+        setDocument4(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_performance_report"
+              )
+            : []
+        );
+        setDocument5(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_deck_details"
+              )
+            : []
+        );
+        setDocument6(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_insurance"
+              )
+            : []
+        );
+        setDocument7(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_marine_surveyor_report"
+              )
+            : []
+        );
+        setDocument8(
+          document
+            ? document.filter(
+                (item) => item.officialName === "vessel_valuation_report"
+              )
+            : []
+        );
+        setDocument9(
+          document
+            ? document.filter((item) => item.officialName === "others")
+            : []
+        );
       }
     } else {
-      setDocument1(document ? (document[0] ? [document[0]] : []) : []);
-      setDocument2(document ? (document[1] ? [document[1]] : []) : []);
-      setDocument3(document ? (document[2] ? [document[2]] : []) : []);
-      setDocument4(document ? (document[3] ? [document[3]] : []) : []);
-      setDocument5(document ? (document[4] ? [document[4]] : []) : []);
-      setDocument6(document ? (document[5] ? [document[5]] : []) : []);
-      setDocument7(document ? (document[6] ? [document[6]] : []) : []);
-      setDocument8(document ? (document[7] ? [document[7]] : []) : []);
-      setDocument9(document ? (document[8] ? [document[8]] : []) : []);
+      setDocument1(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_registration"
+            )
+          : []
+      );
+      setDocument2(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_maintenance_report"
+            )
+          : []
+      );
+      setDocument3(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_engine_type"
+            )
+          : []
+      );
+      setDocument4(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_performance_report"
+            )
+          : []
+      );
+      setDocument5(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_deck_details"
+            )
+          : []
+      );
+      setDocument6(
+        document
+          ? document.filter((item) => item.officialName === "vessel_insurance")
+          : []
+      );
+      setDocument7(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_marine_surveyor_report"
+            )
+          : []
+      );
+      setDocument8(
+        document
+          ? document.filter(
+              (item) => item.officialName === "vessel_valuation_report"
+            )
+          : []
+      );
+      setDocument9(
+        document
+          ? document.filter((item) => item.officialName === "others")
+          : []
+      );
     }
   }, [incompProperty, document, params.id]);
 
@@ -427,7 +517,16 @@ function YachtDocus({
   };
 
   const onSubmit = async (data) => {
-    if (documents.length >= 8) {
+    if (
+      doc1.length !== 0 &&
+      doc2.length !== 0 &&
+      doc3.length !== 0 &&
+      doc4.length !== 0 &&
+      doc5.length !== 0 &&
+      doc6.length !== 0 &&
+      doc7.length !== 0 &&
+      doc8.length !== 0
+    ) {
       toogleDocuments(documents);
       toogleStep(step + 1);
     } else {
@@ -831,6 +930,7 @@ function YachtDocus({
                 {...register("vessel_valuation_report", {
                   onChange: onChange8,
                 })}
+                required
               />
               <div className="upload-cover">
                 <details>

@@ -62,7 +62,7 @@ function Dash() {
     //   <div className="DashBody">
     <Container className="container2">
       <Row lg={3}>
-        <Col>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Live Auctions</span>
@@ -73,7 +73,7 @@ function Dash() {
             </div>
           </div>
         </Col>
-        <Col>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Upcoming Auctions</span>
@@ -95,7 +95,7 @@ function Dash() {
             </div>
           </div>
         </Col> */}
-        <Col>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Your Purchased</span>

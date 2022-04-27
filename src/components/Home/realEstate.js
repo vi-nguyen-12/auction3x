@@ -1,16 +1,50 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import "../../styles/real-estate.css";
 
 const RealEstate = (props) => {
+  const history = useHistory();
   return (
     <section className="real-estate-wrap">
       <div className="real-estate">
         <div className="btn-group">
-          <Button className="btn-custom"> Real Estate</Button>
-          <Button className="btn-custom"> Cars</Button>
-          <Button className="btn-custom"> Yachts</Button>
-          <Button className="btn-custom"> Jets</Button>
+          <Button
+            onClick={() => {
+              history.push("/realEstates");
+            }}
+            className="btn-custom"
+          >
+            {" "}
+            Real Estate
+          </Button>
+          <Button
+            onClick={() => {
+              history.push("/cars");
+            }}
+            className="btn-custom"
+          >
+            {" "}
+            Car
+          </Button>
+          <Button
+            onClick={() => {
+              history.push("/yachts");
+            }}
+            className="btn-custom"
+          >
+            {" "}
+            Yacht
+          </Button>
+          <Button
+            onClick={() => {
+              history.push("/jets");
+            }}
+            className="btn-custom"
+          >
+            {" "}
+            Jet
+          </Button>
           {/* <Button className='btn-custom'> Jewels</Button> */}
         </div>
         <div className="sell-real-estate">

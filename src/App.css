@@ -148,8 +148,8 @@
 }
 
 .background {
-  background: linear-gradient(180deg, black 50%, white 50%);
-  height: 560px;
+  background: linear-gradient(180deg, #282828 50%, white 50%);
+  height: 750px;
   padding: 30px 50px 50px 50px;
 }
 

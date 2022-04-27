@@ -79,22 +79,38 @@ position: relative;
 `;
 
 function SavedAuctionsComp({ savedProp }) {
+  console.log(savedProp);
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: 1,
+    slidesToShow: 2,
   };
 
   return (
     <>
       <Carousel {...settings}>
-        <Wrap>
-          <Col>
-            <SavedAuctions />
-          </Col>
-        </Wrap>
+        {savedProp.map((property, index) => (
+          <Wrap key={index}>
+            <Col md={12}>
+              <SavedAuctionsCard
+                url={property.property.images[0].url}
+                data={property.property.details}
+                id={property._id}
+                auctionStartDate={property.auctionStartDate}
+                auctionEndDate={property.auctionEndDate}
+                startingBid={
+                  property.highestBid
+                    ? property.highestBid.amount
+                    : property.startingBid
+                }
+                auctionId={property._id}
+                type={property.property.type}
+              />
+            </Col>
+          </Wrap>
+        ))}
       </Carousel>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Table, Tab } from "react-bootstrap";
+import { Row, Col, Container, Table, Tab, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import SavedAuctionsCard from "../Auctions/SavedAuctionsCard";
 import authService from "../../../../services/authServices";
@@ -14,11 +14,12 @@ function LiveListings() {
       const id = user._id;
       await authService.sellerApprovedListings(id).then((res) => {
         setUpcomingListings(res.data);
-        console.log(res.data);
       });
     };
     fetchApprovedProperty();
   }, []);
+
+  console.log(upcomingListings);
 
   return (
     <Container>
@@ -41,11 +42,10 @@ function LiveListings() {
               <th>#</th>
               <th>Property ID</th>
               <th>Property Address</th>
-              <th colSpan={2}>Auction Status</th>
-              <th colSpan={2}>Auction Highest Bid</th>
-              <th colSpan={2}>Your Highest Bid</th>
+              <th colSpan={2}>Property Status</th>
+              <th colSpan={2}>Property Documents</th>
               <th>Property Type</th>
-              <th>Bid</th>
+              <th>Email</th>
             </tr>
           </thead>
           {upcomingListings.length > 0 &&
@@ -54,12 +54,71 @@ function LiveListings() {
                 <tr>
                   <td>{index + 1}</td>
                   <td>{listing._id}</td>
-                  <td>{listing.address}</td>
-                  <td>{listing.auctionStatus}</td>
-                  <td>{listing.highestBid}</td>
-                  <td>{listing.yourHighestBid}</td>
-                  <td>{listing.propertyType}</td>
-                  <td>{listing.bid}</td>
+                  <td>
+                    {listing.type === "real-estate"
+                      ? listing.details.property_address
+                          .formatted_street_address
+                      : listing.details.property_address}
+                    <div
+                      style={{
+                        width: "100%",
+                        alignItems: "right",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
+                        src={
+                          listing.images.length > 0 ? listing.images[0].url : ""
+                        }
+                      />
+                    </div>
+                  </td>
+                  {listing.isApproved === "success" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "green",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Approved
+                      </span>
+                    </td>
+                  ) : (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "red",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  )}
+                  <td colSpan={2}>
+                    <Button variant="primary">View</Button>
+                  </td>
+                  <td>
+                    {listing.type === "real-estate"
+                      ? "Real Estate"
+                      : listing.type === "car"
+                      ? "Car"
+                      : listing.type === "jet"
+                      ? "Jet"
+                      : listing.type === "yacht"
+                      ? "Yacht"
+                      : ""}
+                  </td>
+                  <td>
+                    <Button variant="primary">Email</Button>
+                  </td>
                 </tr>
               </tbody>
             ))}

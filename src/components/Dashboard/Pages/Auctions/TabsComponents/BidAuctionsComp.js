@@ -77,14 +77,14 @@ position: relative;
 }
 `;
 
-function BidAuctionsComp({bidAuctions}) {
-    let settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        slidesToShow: bidAuctions.length > 2 ? 2 : bidAuctions.length,
-      };
+function BidAuctionsComp({ bidAuctions }) {
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: bidAuctions.length > 2 ? 2 : bidAuctions.length,
+  };
   return (
     <>
       <Carousel {...settings}>
@@ -99,7 +99,7 @@ function BidAuctionsComp({bidAuctions}) {
                 auctionEndDate={property.auctionEndDate}
                 startingBid={
                   property.highestBid
-                    ? property.highestBid
+                    ? property.highestBid.amount
                     : property.startingBid
                 }
                 auctionId={property._id}

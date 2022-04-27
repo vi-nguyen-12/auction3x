@@ -31,10 +31,7 @@ const Login = ({
     const getUser = async () => {
       try {
         const response = await authServices.login(data);
-        if (
-          response.data.error === "Invalid email or password" ||
-          response.data.error === "Email is not found"
-        ) {
+        if (response.data.error) {
           alert(response.data.error);
         } else if (response.data.error === "User has not been verified") {
           alert(response.data.error);
@@ -135,10 +132,7 @@ const Login = ({
         </div>
         <Modal.Footer>
           <div className="col text-center mb-2">
-            <button
-              type="submit"
-              className="loginBtn mb-3"
-            >
+            <button type="submit" className="loginBtn mb-3">
               LOGIN
             </button>
             <div
@@ -160,7 +154,6 @@ const Login = ({
           </div>
         </Modal.Footer>
       </form>
-      {/* </div> */}
     </>
   );
 };

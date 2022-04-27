@@ -21,7 +21,7 @@ import IncompleteListing from "./Pages/Listings/IncompleteListing";
 
 function Dashboard({ toogleChange, toogleShow, colorChange, bodyColorChange }) {
   useEffect(() => {
-    colorChange("#282828");
+    colorChange("black");
     bodyColorChange("#ffefe3");
     toogleChange();
     toogleShow();
