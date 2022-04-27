@@ -226,8 +226,9 @@ function DisplayRealEstate({ property, toogleChange }) {
   };
 
   const viewAll = () => {
-    const documents = property.property.documents.map((doc) => doc.url);
-    console.log(documents);
+    for (let i = 0; i < property.property.documents.length; i++) {
+      window.open(property.property.documents[i].url);
+    }
   };
 
   useEffect(() => {

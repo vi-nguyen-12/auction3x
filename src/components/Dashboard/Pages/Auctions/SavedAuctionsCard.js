@@ -27,6 +27,7 @@ function SavedAuctionsCard({
 }) {
   let history = useHistory();
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
   const [showConfirm, popupConfirm] = useState(false);
@@ -59,6 +60,17 @@ function SavedAuctionsCard({
     // history.push(`/DisplayAuctions/${id}`);
     window.open(`/DisplayAuctions/${id}`);
   };
+
+  useEffect(() => {
+    if (user._id) {
+      const saved = savedProperty.find((item) => item._id === id);
+      if (saved) {
+        setFavorite(true);
+      } else {
+        setFavorite(false);
+      }
+    }
+  }, [savedProperty]);
 
   return (
     <div style={{ margin: "30px" }}>

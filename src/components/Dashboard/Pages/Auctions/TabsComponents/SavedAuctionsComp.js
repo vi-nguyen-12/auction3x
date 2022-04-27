@@ -79,13 +79,12 @@ position: relative;
 `;
 
 function SavedAuctionsComp({ savedProp }) {
-  console.log(savedProp);
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: 2,
+    slidesToShow: savedProp.length > 2 ? 2 : savedProp.length,
   };
 
   return (

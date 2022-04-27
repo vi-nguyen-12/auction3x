@@ -86,7 +86,7 @@ const JetCard = ({
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
-        const saved = savedProperty.filter((property) => property._id === id);
+        const saved = savedProperty.find((property) => property._id === id);
         if (saved) {
           setFavorite(true);
         } else {

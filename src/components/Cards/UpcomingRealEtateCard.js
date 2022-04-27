@@ -88,10 +88,14 @@ const UpcomingRealEstateCard = ({
     const startDate = new Date(startRegister).toLocaleString().split(",")[0];
     const endDate = new Date(endRegister).toLocaleString().split(",")[0];
     const auctionData = property.find((item) => item._id === id);
+
     if (user._id) {
       if (savedProperty.length > 0) {
-        if (savedProperty.find((item) => item._id === id)) {
+        const saved = savedProperty.find((property) => property._id === id);
+        if (saved) {
           setFavorite(true);
+        } else {
+          setFavorite(false);
         }
       }
     }
