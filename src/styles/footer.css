@@ -15,7 +15,7 @@
 
 .auction-img {
   height: 6rem;
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 
 .auction-content {
@@ -33,7 +33,6 @@
   margin-top: 2rem;
   text-align: left;
   padding-left: 6rem;
-
 }
 
 li {

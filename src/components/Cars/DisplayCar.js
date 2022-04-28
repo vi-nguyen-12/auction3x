@@ -282,12 +282,11 @@ function DisplayCar({ toogleChange, property }) {
                 >
                   {favorite && user._id ? (
                     <AiFillHeart size="100%" color="C58753" />
-                  ) :
-                    user._id !== undefined ? (
-                      <AiFillHeart size="100%" color="C58753" />
-                    ) : (
-                      <AiOutlineHeart size="100%" color="C58753" />
-                    )}
+                  ) : user._id !== undefined ? (
+                    <AiFillHeart size="100%" color="C58753" />
+                  ) : (
+                    <AiOutlineHeart size="100%" color="C58753" />
+                  )}
                 </button>
               </div>
 
@@ -573,7 +572,10 @@ function DisplayCar({ toogleChange, property }) {
                 )
               )}
 
-              {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
+              {user._id &&
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -592,7 +594,6 @@ function DisplayCar({ toogleChange, property }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={property.highestBidders ? false : true}
                   >
                     Bid Now!
                   </button>
@@ -612,6 +613,49 @@ function DisplayCar({ toogleChange, property }) {
                     </button>
                   </div>
                 </div>
+              ) : (
+                user._id &&
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner && (
+                  <div
+                    style={{
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
+                        border: "0",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      onClick={tooglePlaceBid}
+                      disabled
+                    >
+                      Under Review
+                    </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
+                  </div>
+                )
               )}
             </Col>
           </Row>
@@ -1061,7 +1105,7 @@ function DisplayCar({ toogleChange, property }) {
                             ))
                         ) : (
                           <tr>
-                            <td>No bids yet</td>
+                            <td colSpan={4}>No bids yet</td>
                           </tr>
                         )}
                       </tbody>
@@ -1390,7 +1434,7 @@ function DisplayCar({ toogleChange, property }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
+              <BuyConfirm property={property} />
             </Modal.Body>
           </Modal>
           <Modal

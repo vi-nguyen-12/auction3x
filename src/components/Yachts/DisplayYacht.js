@@ -502,9 +502,9 @@ function DisplayYacht({ toogleChange, property }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -583,7 +583,10 @@ function DisplayYacht({ toogleChange, property }) {
                 )
               )}
 
-              {user._id && !property.isNotRegisteredToBuy && !property.isOwner && (
+              {user._id &&
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -602,7 +605,6 @@ function DisplayYacht({ toogleChange, property }) {
                       fontSize: "20px",
                     }}
                     onClick={tooglePlaceBid}
-                    disabled={property.highestBidders ? false : true}
                   >
                     Bid Now!
                   </button>
@@ -622,6 +624,49 @@ function DisplayYacht({ toogleChange, property }) {
                     </button>
                   </div>
                 </div>
+              ) : (
+                user._id &&
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner && (
+                  <div
+                    style={{
+                      display: "grid",
+                      justifyContent: "right",
+                      width: "100%",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#e8a676",
+                        borderRadius: "10px",
+                        border: "0",
+                        width: "200px",
+                        height: "50px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                      onClick={tooglePlaceBid}
+                      disabled
+                    >
+                      Under Review
+                    </button>
+                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
+                      <button
+                        style={{
+                          fontWeight: "500",
+                          border: "0",
+                          borderBottom: "1px solid #919191",
+                          backgroundColor: "transparent",
+                          width: "fit-content",
+                          pointer: "cursor",
+                        }}
+                        onClick={executeScroll}
+                      >
+                        View Documents
+                      </button>
+                    </div>
+                  </div>
+                )
               )}
             </Col>
           </Row>
@@ -685,7 +730,7 @@ function DisplayYacht({ toogleChange, property }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -1070,7 +1115,7 @@ function DisplayYacht({ toogleChange, property }) {
                             ))
                         ) : (
                           <tr>
-                            <td>No bids yet</td>
+                            <td colSpan={4}>No bids yet</td>
                           </tr>
                         )}
                       </tbody>
@@ -1403,7 +1448,7 @@ function DisplayYacht({ toogleChange, property }) {
             centered
           >
             <Modal.Body>
-              <BuyConfirm tooglePlaceBid={tooglePlaceBid} />
+              <BuyConfirm property={property} />
             </Modal.Body>
           </Modal>
           <Modal
