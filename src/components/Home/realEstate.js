@@ -29,15 +29,6 @@ const RealEstate = (props) => {
           </Button>
           <Button
             onClick={() => {
-              history.push("/yachts");
-            }}
-            className="btn-custom"
-          >
-            {" "}
-            Yacht
-          </Button>
-          <Button
-            onClick={() => {
               history.push("/jets");
             }}
             className="btn-custom"
@@ -45,12 +36,22 @@ const RealEstate = (props) => {
             {" "}
             Jet
           </Button>
+          <Button
+            onClick={() => {
+              history.push("/yachts");
+            }}
+            className="btn-custom"
+          >
+            {" "}
+            Yacht
+          </Button>
+
           {/* <Button className='btn-custom'> Jewels</Button> */}
         </div>
         <div className="sell-real-estate">
           <div className="content">
             <h1 style={{ marginLeft: "60px", fontFamily: "Josefinslab" }}>
-              Sell Real Estate <br /> on Auction 10X
+              Sell Real Estate <br /> on Auction 3
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of

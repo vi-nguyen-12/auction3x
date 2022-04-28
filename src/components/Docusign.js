@@ -17,7 +17,7 @@ const Docusign = () => {
     const postStatusDocusign = async () => {
       await axios
         .get(
-          `https://auction10x-be.azurewebsites.net/api/docusign/callback/${envelopeId}?state=${state}&event=${event}`
+          `https://auction3x-be.azurewebsites.net/api/docusign/callback/${envelopeId}?state=${state}&event=${event}`
         )
         .then((response) => {
           if (
