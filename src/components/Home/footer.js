@@ -10,11 +10,11 @@ const Footer = (props) => {
           <Row className="row-1">
             <Col>
               <div className="img-flex">
-                <img src="/Vector.png" alt="" />
-                <img src="/Auction10X.png" className="auction-img" alt="" />
+                {/* <img src="/Vector.png" alt="" /> */}
+                <img src="/images/newName.png" className="auction-img" alt="" />
               </div>
               <p className="auction-content">
-                AUCTION 10X is an innovative online bidding platform that
+                AUCTION 3 is an innovative online bidding platform that
                 specialized in the expediting sale of real estate through
                 auction and brings the exciting real estate opportunities to
                 both buyers and sellers with true value for money.
@@ -86,7 +86,7 @@ const Footer = (props) => {
             </Col>
           </Row>
           <div className="auction-reserved">
-            © 2021 AUCTION 10X. All Rights Reserved
+            © 2021 AUCTION 3. All Rights Reserved
           </div>
         </Card>
       </div>

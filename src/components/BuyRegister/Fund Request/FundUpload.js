@@ -81,9 +81,21 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
 
   useEffect(() => {
     if (docu !== undefined) {
-      setDocument1(docu[0] ? [docu[0]] : []);
-      setDocument2(docu[1] ? [docu[1]] : []);
-      setDocument3(docu[2] ? [docu[2]] : []);
+      setDocument1(
+        docu ? docu.filter((doc) => doc.officialName === "bank_statement") : []
+      );
+      setDocument2(
+        docu
+          ? docu.filter(
+              (doc) => doc.officialName === "brokerage_account_statement"
+            )
+          : []
+      );
+      setDocument3(
+        docu
+          ? docu.filter((doc) => doc.officialName === "line_of_credit_doc")
+          : []
+      );
     }
   }, []);
 
@@ -113,10 +125,11 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
     setDocument3(document3.filter((document) => document.url !== url));
     // setDocument4(document4.filter((document) => document.url !== url));
   };
+  const documents = [...bankStatment, ...broker, ...lineCredit];
 
   const handleUpload = () => {
-    if (document.length >= 1) {
-      toogleDocument(document);
+    if (documents.length >= 1) {
+      toogleDocument(documents);
       toogleStep(step + 1);
     } else {
       alert("Please upload atleast one document");

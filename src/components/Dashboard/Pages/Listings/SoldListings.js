@@ -12,7 +12,6 @@ function SoldListings() {
 
   useEffect(() => {
     authService.getSellerSoldListings(user._id).then((res) => {
-      console.log(res);
       setSoldListings(res.data);
     });
   }, []);
@@ -65,21 +64,19 @@ function SoldListings() {
                         toogleShowPic();
                       }}
                       src={
-                        auction.property.images.length > 0
-                          ? auction.property.images[0]
-                          : ""
+                        auction.images.length > 0 ? auction.images[0].url : ""
                       }
                     />
                   </div>
                 </td>
-                <td>{auction.property.type}</td>
-                <td>{auction.property.address}</td>
+                <td>{auction.type}</td>
+                <td>{auction.details.address}</td>
                 <td>{auction.bidAmount}</td>
                 <td>
                   <button
                     className="btn btn-primary"
                     onClick={() => {
-                      setImages(auction.property.images);
+                      setImages(auction.images);
                       toogleShowPic();
                     }}
                   >
