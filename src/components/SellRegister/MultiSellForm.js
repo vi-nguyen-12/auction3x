@@ -79,7 +79,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   if (step === 0) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
         <SellWelcome
           tooglePropertyType={tooglePropertyType}
           toogleStep={toogleStep}
@@ -90,7 +90,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 1) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
         <Ownership
           toogleStep={toogleStep}
           step={step}
@@ -106,7 +106,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 2) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
 
         <ListingDetails
           properties={properties}
@@ -120,7 +120,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 3) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
 
         <PropertyDetails
           tooglePropertyData={tooglePropertyData}
@@ -139,7 +139,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 4) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
         <UploadForm
           toogleImages={toogleImages}
           toogleVideos={toogleVideos}
@@ -160,7 +160,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 5) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
         <DocumentsUpload
           toogleStep={(data) => toogleStep(data)}
           step={step}
@@ -181,7 +181,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
     // } else if (step === 5) {
     //   return (
     //     <div className="sell-register-container">
-    //       <h1>Sell On Auction10X</h1>
+    //       <h1>Sell On Auction3</h1>
 
     //       <ListingFees toogleStep={toogleStep} step={step} test="test" />
     //     </div>
@@ -189,7 +189,7 @@ const MultiSellForm = ({ toogleShow, colorChange, bodyColorChange }) => {
   } else if (step === 6) {
     return (
       <div className="sell-register-container">
-        <h1>Sell On Auction10X</h1>
+        <h1>Sell On Auction3</h1>
 
         <AgreementForm
           propertyData={propertyData}
