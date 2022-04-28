@@ -30,6 +30,29 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import { useHistory } from "react-router-dom";
 import ButtontoTop from "./components/ButtontoTop";
 
+// const FindInCountries = lazy(() => import("./components/Home/FindInCountries"));
+// const ImgSlider = lazy(() => import("./components/Home/ImgSlider"));
+// const Upcoming = lazy(() => import("./components/Auctions/Upcoming"));
+// const Work = lazy(() => import("./components/Home/work"));
+// const RealEstate = lazy(() => import("./components/Home/realEstate"));
+// const MultiSellForm = lazy(() =>
+//   import("./components/SellRegister/MultiSellForm")
+// );
+// const Footer = lazy(() => import("./components/Home/footer"));
+// const Featured = lazy(() => import("./components/Home/Featured"));
+// const Header = lazy(() => import("./components/Home/Header"));
+// const PropertyPages = lazy(() => import("./components/Home/PropertyPages"));
+// const About = lazy(() => import("./components/Home/About"));
+// const ChangePass = lazy(() => import("./components/Users/ChangePass"));
+// const EmailConfirm = lazy(() => import("./components/Users/EmailConfirm"));
+// const ScrollTop = lazy(() => import("./components/ScrollTop"));
+// const Docusign = lazy(() => import("./components/Docusign"));
+// const DisplayAuctions = lazy(() =>
+//   import("./components/Auctions/DisplayAuctions")
+// );
+// const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
+// const ButtontoTop = lazy(() => import("./components/ButtontoTop"));
+
 function App() {
   const history = useHistory();
   const user = useSelector((state) => state.user);
@@ -90,16 +113,13 @@ function App() {
     setChange(change);
   };
 
-  // useEffect(() => {
-  //   colorChange();
-  // }, []);
-
   return (
     <div className="App" style={{ background: bodyColor }}>
-      <ButtontoTop />
+      <ButtontoTop />{" "}
       <Router>
         <Header color={color} change={change} />
         <ScrollTop />
+
         <Switch>
           {user._id && (
             <Route exact path="/MultiSellForm">
@@ -129,10 +149,7 @@ function App() {
               toogleChange={toogleChange}
             />
           </Route>
-          {/* 
-          <Route exact path="/dashboard/Auctions/SavedAuctions">
-            <SavedAuctions colorChange={colorChange} />
-          </Route> */}
+
           <Route exact path="/realEstates">
             <PropertyPages
               colorChange={colorChange}
