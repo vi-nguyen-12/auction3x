@@ -187,7 +187,7 @@
 
 .circularCard img {
   border-radius: 10px;
-  width: -webkit-fill-available;
+  width: 100%;
   cursor: pointer;
 }
 
