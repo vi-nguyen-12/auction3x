@@ -165,7 +165,9 @@ function YachtPage({ toogleChange }) {
                 ))}
               </Carousel>
             ) : (
-              <h1>No Ongoing Auctions</h1>
+              <h3 style={{ display: "flex", justifyContent: "center" }} >
+                No Ongoing Auctions
+              </h3>
             )}
           </Row>
           <Row>
@@ -186,7 +188,9 @@ function YachtPage({ toogleChange }) {
                 </Col>
               ))
             ) : (
-              <h1>No Upcoming Auctions</h1>
+              <h3 style={{ display: "flex", justifyContent: "center" }} >
+                No Ongoing Auctions
+              </h3>
             )}
           </Row>
         </Col>

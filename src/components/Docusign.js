@@ -10,14 +10,11 @@ const Docusign = () => {
   const event = new URLSearchParams(search).get("event");
 
   const { envelopeId } = useParams();
-  const handleOnClick = () => {
-    window.close();
-  };
   useEffect(() => {
     const postStatusDocusign = async () => {
       await axios
         .get(
-          `https://auction3x-be.azurewebsites.net/api/docusign/callback/${envelopeId}?state=${state}&event=${event}`
+          `${process.env.REACT_APP_API_URL}/api/docusign/callback/${envelopeId}?state=${state}&event=${event}`
         )
         .then((response) => {
           if (
