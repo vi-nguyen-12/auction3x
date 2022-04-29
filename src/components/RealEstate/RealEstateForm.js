@@ -114,31 +114,35 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
   }, [params.id]);
 
   const onSubmit = (data) => {
-    const addres = address1 ? address + ", " + address1 : address;
-    const datas = {
-      street_address: addres,
-      city: city ? city : data.city,
-      state: state ? state : data.state,
-      country: country ? country : data.country,
-      zip_code: zip ? zip : data.zipCode,
-    };
+    if (data.zipCode.length === 5) {
+      const addres = address1 ? address + ", " + address1 : address;
+      const datas = {
+        street_address: addres,
+        city: data.city ? data.city : city,
+        state: data.state ? data.state : state,
+        country: country ? country : data.country,
+        zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
+      };
 
-    authService.realEstate(datas).then((res) => {
-      if (res.data.length !== 0) {
-        properties(
-          res.data.name !== "Error"
-            ? res.data
-            : res.data.name === "Error"
-            ? datas
-            : ""
-        );
-        toogleStep(step + 1);
-      } else if (res.data.length === 0) {
-        alert(
-          "Could not find property information! Please fill out the property details."
-        );
-      }
-    });
+      authService.realEstate(datas).then((res) => {
+        if (res.data.length !== 0) {
+          properties(
+            res.data.name !== "Error"
+              ? res.data
+              : res.data.name === "Error"
+              ? datas
+              : ""
+          );
+          toogleStep(step + 1);
+        } else if (res.data.length === 0) {
+          alert(
+            "Could not find property information! Please fill out the property details."
+          );
+        }
+      });
+    } else {
+      alert("Please enter a valid zip code");
+    }
   };
   return (
     <div className="list-sell-bottom">

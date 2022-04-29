@@ -202,11 +202,6 @@ const Header = ({ change, color }) => {
               contentclassname="forgotPass"
             >
               <Modal.Body
-                size="md"
-                backdrop="static"
-                keyboard={false}
-                show={forgotPass}
-                onHide={toogleForgotPass}
                 contentclassname="forgotPass"
                 className="forgot-modal"
               >
@@ -269,13 +264,7 @@ const Header = ({ change, color }) => {
               onHide={toogleSignIn}
               contentclassname="login"
             >
-              <Modal.Body
-                show={showSignIn}
-                onHide={toogleSignIn}
-                backdrop="static"
-                keyboard={false}
-                className="sign-In"
-              ></Modal.Body>
+              <Modal.Body className="sign-In"></Modal.Body>
             </Modal>
 
             <Modal
@@ -309,13 +298,7 @@ const Header = ({ change, color }) => {
               onHide={toogleSignUp}
               contentclassname="custom-modal-style"
             >
-              <Modal.Body
-                backdrop="static"
-                keyboard={false}
-                show={showSignUp}
-                onHide={toogleSignUp}
-                className="sign-Up"
-              ></Modal.Body>
+              <Modal.Body className="sign-Up"></Modal.Body>
             </Modal>
 
             <Modal
@@ -669,7 +652,6 @@ const Header = ({ change, color }) => {
                     }}
                     id="dropdown-basic-button"
                     title={<IoWallet size={30} />}
-                    show={showWallet}
                     onMouseEnter={() => setShowWallet(true)}
                     onMouseLeave={() => setShowWallet(false)}
                   >
@@ -837,7 +819,6 @@ const Header = ({ change, color }) => {
                   }}
                   id="dropdown-basic-button"
                   title={<IoWallet size={30} />}
-                  show={showWallet}
                   onMouseEnter={() => setShowWallet(true)}
                   onMouseLeave={() => setShowWallet(false)}
                 >

@@ -1545,11 +1545,6 @@ function DisplayJet({ toogleChange, property }) {
             contentclassname="login"
           >
             <Modal.Body
-              centered
-              show={showSignIn}
-              onHide={toogleSignIn}
-              backdrop="static"
-              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               className="sign-In"
             ></Modal.Body>
@@ -1585,12 +1580,7 @@ function DisplayJet({ toogleChange, property }) {
             contentclassname="custom-modal-style"
           >
             <Modal.Body
-              backdrop="static"
-              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignUp}
-              onHide={toogleSignUp}
               className="sign-Up"
             ></Modal.Body>
           </Modal>

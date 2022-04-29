@@ -369,11 +369,6 @@ const CardComp = ({
             contentclassname="login"
           >
             <Modal.Body
-              centered
-              show={showSignIn}
-              onHide={toogleSignIn}
-              backdrop="static"
-              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               className="sign-In"
             ></Modal.Body>
@@ -408,12 +403,7 @@ const CardComp = ({
             contentclassname="custom-modal-style"
           >
             <Modal.Body
-              backdrop="static"
-              keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignUp}
-              onHide={toogleSignUp}
               className="sign-Up"
             ></Modal.Body>
           </Modal>
