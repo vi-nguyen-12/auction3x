@@ -19,8 +19,6 @@ function LiveListings() {
     fetchApprovedProperty();
   }, []);
 
-  console.log(upcomingListings);
-
   return (
     <Container>
       <h1>Upcoming Listings</h1>

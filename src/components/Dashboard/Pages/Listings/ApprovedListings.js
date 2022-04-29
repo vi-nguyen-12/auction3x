@@ -87,13 +87,6 @@ position: relative;
 `;
 
 function ApprovedListings({ auctions }) {
-  let settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    autoplay: false,
-    slidesToShow: 2,
-  };
   const user = useSelector((state) => state.user);
   const [approvedLists, setApprovedLists] = useState([]);
 
@@ -103,6 +96,14 @@ function ApprovedListings({ auctions }) {
       console.log(res.data);
     });
   }, []);
+
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow: approvedLists.length > 2 ? 2 : approvedLists.length,
+  };
 
   return (
     <Container>
