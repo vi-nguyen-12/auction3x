@@ -165,7 +165,7 @@ function CarPage({ toogleChange }) {
                 ))}
               </Carousel>
             ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }} >
+              <h3 style={{ display: "flex", justifyContent: "center" }}>
                 No Ongoing Auctions
               </h3>
             )}
@@ -181,6 +181,8 @@ function CarPage({ toogleChange }) {
                     url={item.property.images[0].url}
                     data={item.property.details}
                     id={item._id}
+                    auctionStartDate={item.auctionStartDate}
+                    auctionEndDate={item.auctionEndDate}
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
@@ -188,7 +190,7 @@ function CarPage({ toogleChange }) {
                 </Col>
               ))
             ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }} >
+              <h3 style={{ display: "flex", justifyContent: "center" }}>
                 No Ongoing Auctions
               </h3>
             )}

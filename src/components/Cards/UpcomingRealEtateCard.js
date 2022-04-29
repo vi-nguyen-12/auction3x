@@ -21,10 +21,11 @@ const UpcomingRealEstateCard = ({
   id,
   startRegister,
   endRegister,
+  auctionEndDate,
+  auctionStartDate,
   startingBid,
 }) => {
   const user = useSelector((state) => state.user);
-  const property = useSelector((state) => state.property);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
@@ -53,9 +54,6 @@ const UpcomingRealEstateCard = ({
   const toogleSignIn = () => popSignIn(!showSignIn);
   const toogleSignUp = () => popUpSignUp(!showSignUp);
   const toogleConfirmModal = () => popupConfirm(!showConfirm);
-  const [startRegisterDate, setStartRegisterDate] = useState();
-  const [endRegisterDate, setEndRegisterDate] = useState();
-  const [RegistrationEndDate, setRegistrationEndDate] = useState();
   const [registEnded, setRegistEnded] = useState(false);
   const [startAuction, setStartAuction] = useState();
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
@@ -85,10 +83,6 @@ const UpcomingRealEstateCard = ({
   };
 
   useEffect(() => {
-    const startDate = new Date(startRegister).toLocaleString().split(",")[0];
-    const endDate = new Date(endRegister).toLocaleString().split(",")[0];
-    const auctionData = property.find((item) => item._id === id);
-
     if (user._id) {
       if (savedProperty.length > 0) {
         const saved = savedProperty.find((property) => property._id === id);
@@ -99,16 +93,11 @@ const UpcomingRealEstateCard = ({
         }
       }
     }
-
-    setRegistrationEndDate(auctionData.registerEndDate);
-    setStartRegisterDate(startDate);
-    setEndRegisterDate(endDate);
-    setStartAuction(auctionData.auctionStartDate);
   }, []);
 
   return (
     <>
-      {startRegisterDate && endRegisterDate && startAuction && (
+      {auctionEndDate && (
         <div>
           <Card
             className="cards text-left m-auto"
@@ -212,7 +201,7 @@ const UpcomingRealEstateCard = ({
                         <Col md={1} style={{ width: "50%" }}>
                           <div style={{ fontSize: "12px", width: "200px" }}>
                             <RegistrationTimer
-                              time={RegistrationEndDate}
+                              time={endRegister}
                               toogleRegistEnded={toogleRegistEnded}
                             />
                           </div>

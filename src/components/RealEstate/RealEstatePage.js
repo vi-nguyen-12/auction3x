@@ -140,6 +140,8 @@ function RealEstatePage({ toogleChange }) {
       },
     ],
   };
+
+  console.log(upcomingAuctions);
   return (
     <>
       <div className="mt-5">
@@ -180,6 +182,8 @@ function RealEstatePage({ toogleChange }) {
                     data={item.property.details}
                     id={item._id}
                     startRegister={item.registerStartDate}
+                    auctionEndDate={item.auctionEndDate}
+                    auctionStartDate={item.auctionStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
                   />
