@@ -115,6 +115,7 @@ const ListingFees = ({ toogleStep, step }) => (
                   colorPlaceholder: "#6d6d6d",
                 }}
                 type="number"
+                min="0"
                 name="CVV"
                 placeholder=" 323"
               />
@@ -130,6 +131,7 @@ const ListingFees = ({ toogleStep, step }) => (
 
           <input
             type="number"
+            min="0"
             name="Card Number"
             style={{
               border: "1px solid #b9b9b9",

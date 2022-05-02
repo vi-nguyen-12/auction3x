@@ -297,6 +297,7 @@ function JetForm({ toogleStep, step, properties, property }) {
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={number_of_engines}
               {...register("number_of_engines")}
@@ -361,6 +362,7 @@ function JetForm({ toogleStep, step, properties, property }) {
             </span>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={number_of_aircraft}
               {...register("number_of_aircraft")}

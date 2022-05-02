@@ -31,99 +31,99 @@ function CarForm({ toogleStep, step, properties, property }) {
         properti[0].details.make
           ? properti[0].details.make
           : property.make
-          ? property.make
-          : ""
+            ? property.make
+            : ""
       );
       setModel(
         properti[0].details.model
           ? properti[0].details.model
           : property.model
-          ? property.model
-          : ""
+            ? property.model
+            : ""
       );
       setYear(
         properti[0].details.year
           ? properti[0].details.year
           : property.year
-          ? property.year
-          : ""
+            ? property.year
+            : ""
       );
       setMileage(
         properti[0].details.mileage
           ? properti[0].details.mileage
           : property.mileage
-          ? property.mileage
-          : ""
+            ? property.mileage
+            : ""
       );
       setTransmission(
         properti[0].details.transmission
           ? properti[0].details.transmission
           : property.transmission
-          ? property.transmission
-          : ""
+            ? property.transmission
+            : ""
       );
       setCarType(
         properti[0].details.car_type
           ? properti[0].details.car_type
           : property.car_type
-          ? property.car_type
-          : ""
+            ? property.car_type
+            : ""
       );
       setPower(
         properti[0].details.power
           ? properti[0].details.power
           : property.power
-          ? property.power
-          : ""
+            ? property.power
+            : ""
       );
       setColor(
         properti[0].details.color
           ? properti[0].details.color
           : property.color
-          ? property.color
-          : ""
+            ? property.color
+            : ""
       );
       setVin(
         properti[0].details.VIN
           ? properti[0].details.VIN
           : property.VIN
-          ? property.VIN
-          : ""
+            ? property.VIN
+            : ""
       );
       setEngine(
         properti[0].details.engine
           ? properti[0].details.engine
           : property.engine
-          ? property.engine
-          : ""
+            ? property.engine
+            : ""
       );
       setFuelType(
         properti[0].details.fuel_type
           ? properti[0].details.fuel_type
           : property.fuel_type
-          ? property.fuel_type
-          : ""
+            ? property.fuel_type
+            : ""
       );
       setCondition(
         properti[0].details.condition
           ? properti[0].details.condition
           : property.condition
-          ? property.condition
-          : ""
+            ? property.condition
+            : ""
       );
       setPrice(
         properti[0].details.price
           ? properti[0].details.price
           : property.price
-          ? property.price
-          : ""
+            ? property.price
+            : ""
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : property.property_address
-          ? property.property_address
-          : ""
+            ? property.property_address
+            : ""
       );
     } else {
       setMake(property.make ? property.make : "");
@@ -192,6 +192,7 @@ function CarForm({ toogleStep, step, properties, property }) {
             <label>Year</label>
             <input
               type="number"
+              min="0"
               name="year"
               className="form-control"
               defaultValue={year}
@@ -244,6 +245,7 @@ function CarForm({ toogleStep, step, properties, property }) {
             <label>Mileage</label>
             <input
               type="number"
+              min="0"
               name="mileage"
               className="form-control"
               defaultValue={mileage}
@@ -282,6 +284,7 @@ function CarForm({ toogleStep, step, properties, property }) {
             <label>Power</label>
             <input
               type="number"
+              min="0"
               name="power"
               className="form-control"
               defaultValue={power}
@@ -344,6 +347,7 @@ function CarForm({ toogleStep, step, properties, property }) {
             <label>Approximate Market Price</label>
             <input
               type="number"
+              min="0"
               name="price"
               className="form-control"
               defaultValue={price}

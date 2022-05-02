@@ -159,8 +159,7 @@ const CarCard = ({
                     <Col md={6} style={{ width: "50%", color: "black" }}>
                       <p
                         style={{
-                          fontSize: "12px",
-
+                          fontSize: "15px",
                           width: "250px",
                         }}
                       >
@@ -228,7 +227,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",

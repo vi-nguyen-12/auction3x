@@ -3,6 +3,10 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/bootstrap.css'
+
 
 function Ownership({
   toogleStep,
@@ -14,6 +18,7 @@ function Ownership({
   propId,
   ownership,
 }) {
+  console.log(ownership);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -163,47 +168,41 @@ function Ownership({
     }
   }, [params.step]);
 
+  console.log(phone);
+
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else if (data.brokerName !== "") {
-      if (phone.length !== 10) {
-        alert("Please enter valid phone number");
-      } else {
+      const datas = {
+        type: propertyType,
+        details: {
+          owner_name: ownerName,
+          broker_name: brokerName ? brokerName : null,
+          broker_id: brokerId ? brokerId : null,
+          phone: phone,
+          email: email,
+          address: address,
+        },
+        documents: listing_agreement ? listing_agreement : null,
+        step: parseInt(1),
+      };
+      getOwnerShip(datas);
+      toogleStep(step + 1);
+    } else {
+      if (data.brokerName === "") {
         const datas = {
           type: propertyType,
           details: {
             owner_name: ownerName,
-            broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
             phone: phone,
             email: email,
             address: address,
           },
-          documents: listing_agreement ? listing_agreement : null,
           step: parseInt(1),
         };
         getOwnerShip(datas);
         toogleStep(step + 1);
-      }
-    } else {
-      if (data.brokerName === "") {
-        if (phone.length !== 10) {
-          alert("Please enter valid phone number");
-        } else {
-          const datas = {
-            type: propertyType,
-            details: {
-              owner_name: ownerName,
-              phone: phone,
-              email: email,
-              address: address,
-            },
-            step: parseInt(1),
-          };
-          getOwnerShip(datas);
-          toogleStep(step + 1);
-        }
       }
     }
   };
@@ -302,8 +301,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                        ? ownership.details.owner_name
-                        : ""
+                          ? ownership.details.owner_name
+                          : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                     required
@@ -322,8 +321,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                        ? ownership.details.address
-                        : ""
+                          ? ownership.details.address
+                          : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -334,14 +333,15 @@ function Ownership({
               </Row>
               <Row style={{ marginTop: "10px" }}>
                 <Col>
-                  <input
-                    type="number"
-                    className="form-control"
-                    defaultValue={
-                      phone ? phone : ownership ? ownership.details.phone : null
-                    }
-                    onChange={(e) => setPhone(e.target.value)}
-                    maxLength="10"
+                  <PhoneInput
+                    countryCodeEditable={false}
+                    disableDropdown={true}
+                    country={'us'}
+                    value={
+                      phone ? phone : ownership ? ownership.details.phone : null}
+                    inputStyle={{ width: '100%' }}
+                    buttonStyle={{ border: "2px solid #d58f5c", borderRight: "none" }}
+                    onChange={setPhone}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Phone <span style={{ color: "#ff0000" }}>*</span>
@@ -416,8 +416,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                        ? ownership.details.owner_name
-                        : ""
+                          ? ownership.details.owner_name
+                          : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
@@ -433,8 +433,8 @@ function Ownership({
                       brokerName
                         ? brokerName
                         : ownership
-                        ? ownership.details.broker_name
-                        : ""
+                          ? ownership.details.broker_name
+                          : ""
                     }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
@@ -451,8 +451,8 @@ function Ownership({
                       brokerId
                         ? brokerId
                         : ownership
-                        ? ownership.details.broker_id
-                        : ""
+                          ? ownership.details.broker_id
+                          : ""
                     }
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
@@ -485,8 +485,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                        ? ownership.details.address
-                        : ""
+                          ? ownership.details.address
+                          : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -497,16 +497,18 @@ function Ownership({
               </Row>
               <Row style={{ marginTop: "10px" }}>
                 <Col>
-                  <input
-                    type="phone"
-                    className="form-control"
-                    defaultValue={
-                      phone ? phone : ownership ? ownership.details.phone : null
-                    }
-                    onChange={(e) => setPhone(e.target.value)}
+                  <PhoneInput
+                    countryCodeEditable={false}
+                    disableDropdown={true}
+                    country={'us'}
+                    value={
+                      phone ? phone : ownership ? ownership.details.phone : null}
+                    inputStyle={{ width: '100%' }}
+                    buttonStyle={{ border: "2px solid #d58f5c", borderRight: "none" }}
+                    onChange={setPhone}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone *
+                    Phone <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                 </Col>
                 <Col>

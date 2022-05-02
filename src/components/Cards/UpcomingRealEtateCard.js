@@ -169,7 +169,7 @@ const UpcomingRealEstateCard = ({
                       ) : (
                         <Col md={5} style={{ width: "50%", color: "black" }}>
                           <p style={{ fontSize: "15px", width: "100px" }}>
-                            Registration:
+                            Registration
                           </p>
                         </Col>
                       )}
@@ -177,7 +177,7 @@ const UpcomingRealEstateCard = ({
                       <Col md={6} style={{ width: "50%" }}>
                         <p
                           style={{
-                            fontSize: "12px",
+                            fontSize: "15px",
                             width: "250px",
                           }}
                         >

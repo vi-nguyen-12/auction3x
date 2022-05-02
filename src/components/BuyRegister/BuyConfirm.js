@@ -158,6 +158,7 @@ const BuyConfirm = ({ property }) => {
             <input
               className="has-prefix"
               type="number"
+              min="0"
               placeholder="Enter Amount"
               name="bid"
               value={bid}
