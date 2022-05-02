@@ -60,6 +60,7 @@ const Seller = ({ RegistermodalClose, ConfirmmodalOpen }) => {
           <td style={{ position: "absolute", right: "15px", width: "220px" }}>
             <input
               type="number"
+              min="0"
               className="form-control"
               placeholder="Phone Number"
               {...register("phone", {

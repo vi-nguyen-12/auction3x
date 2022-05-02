@@ -44,177 +44,177 @@ function CarDetails({
         properti[0].details.make
           ? properti[0].details.make
           : propertyData.make
-          ? propertyData.make
-          : property.make
-          ? property.make
-          : ""
+            ? propertyData.make
+            : property.make
+              ? property.make
+              : ""
       );
       setModel(
         properti[0].details.model
           ? properti[0].details.model
           : propertyData.model
-          ? propertyData.model
-          : property.model
-          ? property.model
-          : ""
+            ? propertyData.model
+            : property.model
+              ? property.model
+              : ""
       );
       setYear(
         properti[0].details.year
           ? properti[0].details.year
           : propertyData.year
-          ? propertyData.year
-          : property.year
-          ? property.year
-          : ""
+            ? propertyData.year
+            : property.year
+              ? property.year
+              : ""
       );
       setMileage(
         properti[0].details.mileage
           ? properti[0].details.mileage
           : propertyData.mileage
-          ? propertyData.mileage
-          : property.mileage
-          ? property.mileage
-          : ""
+            ? propertyData.mileage
+            : property.mileage
+              ? property.mileage
+              : ""
       );
       setTransmission(
         properti[0].details.transmission
           ? properti[0].details.transmission
           : propertyData.transmission
-          ? propertyData.transmission
-          : property.transmission
-          ? property.transmission
-          : ""
+            ? propertyData.transmission
+            : property.transmission
+              ? property.transmission
+              : ""
       );
       setCarType(
         properti[0].details.car_type
           ? properti[0].details.car_type
           : propertyData.car_type
-          ? propertyData.car_type
-          : property.car_type
-          ? property.car_type
-          : ""
+            ? propertyData.car_type
+            : property.car_type
+              ? property.car_type
+              : ""
       );
       setPower(
         properti[0].details.power
           ? properti[0].details.power
           : propertyData.power
-          ? propertyData.power
-          : property.power
-          ? property.power
-          : ""
+            ? propertyData.power
+            : property.power
+              ? property.power
+              : ""
       );
       setColor(
         properti[0].details.color
           ? properti[0].details.color
           : propertyData.color
-          ? propertyData.color
-          : property.color
-          ? property.color
-          : ""
+            ? propertyData.color
+            : property.color
+              ? property.color
+              : ""
       );
       setVin(
         properti[0].details.VIN
           ? properti[0].details.VIN
           : propertyData.VIN
-          ? propertyData.VIN
-          : property.VIN
-          ? property.VIN
-          : ""
+            ? propertyData.VIN
+            : property.VIN
+              ? property.VIN
+              : ""
       );
       setEngine(
         properti[0].details.engine
           ? properti[0].details.engine
           : propertyData.engine
-          ? propertyData.engine
-          : property.engine
-          ? property.engine
-          : ""
+            ? propertyData.engine
+            : property.engine
+              ? property.engine
+              : ""
       );
       setFuelType(
         properti[0].details.fuel_type
           ? properti[0].details.fuel_type
           : propertyData.fuel_type
-          ? propertyData.fuel_type
-          : property.fuel_type
-          ? property.fuel_type
-          : ""
+            ? propertyData.fuel_type
+            : property.fuel_type
+              ? property.fuel_type
+              : ""
       );
       setCondition(
         properti[0].details.condition
           ? properti[0].details.condition
           : propertyData.condition
-          ? propertyData.condition
-          : property.condition
-          ? property.condition
-          : ""
+            ? propertyData.condition
+            : property.condition
+              ? property.condition
+              : ""
       );
       setPrice(
         properti[0].details.price
           ? properti[0].details.price
           : propertyData.price
-          ? propertyData.price
-          : property.price
-          ? property.price
-          : ""
+            ? propertyData.price
+            : property.price
+              ? property.price
+              : ""
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : propertyData.property_address
-          ? propertyData.property_address
-          : property.property_address
-          ? property.property_address
-          : ""
+            ? propertyData.property_address
+            : property.property_address
+              ? property.property_address
+              : ""
       );
       setReservedAmount(
         properti[0].reservedAmount
           ? properti[0].reservedAmount
           : propertyData.reservedAmount
-          ? propertyData.reservedAmount
-          : ""
+            ? propertyData.reservedAmount
+            : ""
       );
       setDiscussedAmount(
         properti[0].discussedAmount
           ? properti[0].discussedAmount
           : propertyData.discussedAmount
-          ? propertyData.discussedAmount
-          : ""
+            ? propertyData.discussedAmount
+            : ""
       );
     } else {
       setAddress(
         propertyData.property_address
           ? propertyData.property_address
           : property.property_address
-          ? property.property_address
-          : ""
+            ? property.property_address
+            : ""
       );
       setPrice(
         propertyData.price
           ? propertyData.price
           : property.price
-          ? property.price
-          : ""
+            ? property.price
+            : ""
       );
       setCondition(
         propertyData.condition
           ? propertyData.condition
           : property.condition
-          ? property.condition
-          : ""
+            ? property.condition
+            : ""
       );
       setFuelType(
         propertyData.fuel_type
           ? propertyData.fuel_type
           : property.fuel_type
-          ? property.fuel_type
-          : ""
+            ? property.fuel_type
+            : ""
       );
       setEngine(
         propertyData.engine
           ? propertyData.engine
           : property.engine
-          ? property.engine
-          : ""
+            ? property.engine
+            : ""
       );
       setVin(
         propertyData.VIN ? propertyData.VIN : property.VIN ? property.VIN : ""
@@ -223,57 +223,57 @@ function CarDetails({
         propertyData.color
           ? propertyData.color
           : property.color
-          ? property.color
-          : ""
+            ? property.color
+            : ""
       );
       setPower(
         propertyData.power
           ? propertyData.power
           : property.power
-          ? property.power
-          : ""
+            ? property.power
+            : ""
       );
       setCarType(
         propertyData.car_type
           ? propertyData.car_type
           : property.car_type
-          ? property.car_type
-          : ""
+            ? property.car_type
+            : ""
       );
       setTransmission(
         propertyData.transmission
           ? propertyData.transmission
           : property.transmission
-          ? property.transmission
-          : ""
+            ? property.transmission
+            : ""
       );
       setMileage(
         propertyData.mileage
           ? propertyData.mileage
           : property.mileage
-          ? property.mileage
-          : ""
+            ? property.mileage
+            : ""
       );
       setYear(
         propertyData.year
           ? propertyData.year
           : property.year
-          ? property.year
-          : ""
+            ? property.year
+            : ""
       );
       setModel(
         propertyData.model
           ? propertyData.model
           : property.model
-          ? property.model
-          : ""
+            ? property.model
+            : ""
       );
       setMake(
         propertyData.make
           ? propertyData.make
           : property.make
-          ? property.make
-          : ""
+            ? property.make
+            : ""
       );
       setReservedAmount(propertyData ? propertyData.reservedAmount : "");
       setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
@@ -557,6 +557,7 @@ function CarDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={reservedAmount}
               {...register("reservedAmount")}
@@ -568,6 +569,7 @@ function CarDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={discussedAmount}
               {...register("discussedAmount")}

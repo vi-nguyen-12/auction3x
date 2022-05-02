@@ -111,123 +111,123 @@ function EmptyRealEstateDetails({
             properti[0].details.owner
               ? properti[0].details.owner.name
               : propertyData.owner_name
-              ? propertyData.owner_name
-              : property.owner_name
-              ? property.owner_name
-              : ""
+                ? propertyData.owner_name
+                : property.owner_name
+                  ? property.owner_name
+                  : ""
           );
           setRooms(
             properti[0].details.structure
               ? properti[0].details.structure.rooms_count
               : propertyData.rooms_count
-              ? propertyData.rooms_count
-              : property.rooms_count
-              ? property.rooms_count
-              : ""
+                ? propertyData.rooms_count
+                : property.rooms_count
+                  ? property.rooms_count
+                  : ""
           );
           setBathrooms(
             properti[0].details.structure
               ? properti[0].details.structure.baths
               : propertyData.baths_count
-              ? propertyData.baths_count
-              : property.baths_count
-              ? property.baths_count
-              : ""
+                ? propertyData.baths_count
+                : property.baths_count
+                  ? property.baths_count
+                  : ""
           );
           setBedrooms(
             properti[0].details.structure
               ? properti[0].details.structure.beds_count
               : propertyData.beds_count
-              ? propertyData.beds_count
-              : property.beds_count
-              ? property.beds_count
-              : ""
+                ? propertyData.beds_count
+                : property.beds_count
+                  ? property.beds_count
+                  : ""
           );
           setPropType(
             properti[0].details.parcel
               ? properti[0].details.parcel.standardized_land_use_type
               : propertyData.standardized_land_use_type
-              ? propertyData.standardized_land_use_type
-              : property.standardized_land_use_type
-              ? property.standardized_land_use_type
-              : ""
+                ? propertyData.standardized_land_use_type
+                : property.standardized_land_use_type
+                  ? property.standardized_land_use_type
+                  : ""
           );
           setSqft(
             properti[0].details.parcel
               ? properti[0].details.parcel.area_sq_ft
               : propertyData.area_sq_ft
-              ? propertyData.area_sq_ft
-              : property.area_sq_ft
-              ? property.area_sq_ft
-              : ""
+                ? propertyData.area_sq_ft
+                : property.area_sq_ft
+                  ? property.area_sq_ft
+                  : ""
           );
           setTotalValue(
             properti[0].details.market_assessments
               ? properti[0].details.market_assessments[0].total_value
               : propertyData.total_value
-              ? propertyData.total_value
-              : property.total_value
-              ? property.total_value
-              : ""
+                ? propertyData.total_value
+                : property.total_value
+                  ? property.total_value
+                  : ""
           );
           setReservedAmount(
             properti[0].reservedAmount
               ? properti[0].reservedAmount
               : propertyData.reservedAmount
-              ? propertyData.reservedAmount
-              : ""
+                ? propertyData.reservedAmount
+                : ""
           );
           setDiscussedAmount(
             properti[0].discussedAmount
               ? properti[0].discussedAmount
               : propertyData.discussedAmount
-              ? propertyData.discussedAmount
-              : ""
+                ? propertyData.discussedAmount
+                : ""
           );
           setAddress(
             properti[0].details.property_address
               ? properti[0].details.property_address.formatted_street_address
               : propertyData.street_address
-              ? propertyData.street_address
-              : property.street_address
-              ? property.street_address
-              : ""
+                ? propertyData.street_address
+                : property.street_address
+                  ? property.street_address
+                  : ""
           );
           setCity(
             properti[0].details.property_address
               ? properti[0].details.property_address.city
               : propertyData.city
-              ? propertyData.city
-              : property.city
-              ? property.city
-              : ""
+                ? propertyData.city
+                : property.city
+                  ? property.city
+                  : ""
           );
           setState(
             properti[0].details.property_address
               ? properti[0].details.property_address.state
               : propertyData.state
-              ? propertyData.state
-              : property.state
-              ? property.state
-              : ""
+                ? propertyData.state
+                : property.state
+                  ? property.state
+                  : ""
           );
           setCountry(
             properti[0].details.property_address
               ? properti[0].details.property_address.country
               : propertyData.country
-              ? propertyData.country
-              : property.country
-              ? property.country
-              : ""
+                ? propertyData.country
+                : property.country
+                  ? property.country
+                  : ""
           );
           setZip(
             properti[0].details.property_address
               ? properti[0].details.property_address.zip_code
               : propertyData.zip_code
-              ? propertyData.zip_code
-              : property.zip_code
-              ? property.zip_code
-              : ""
+                ? propertyData.zip_code
+                : property.zip_code
+                  ? property.zip_code
+                  : ""
           );
         }
       });
@@ -247,50 +247,50 @@ function EmptyRealEstateDetails({
         propertyData.owner_name
           ? propertyData.owner_name
           : property
-          ? property.owner_name
-          : ""
+            ? property.owner_name
+            : ""
       );
       setRooms(
         propertyData.rooms_count
           ? propertyData.rooms_count
           : property
-          ? property.rooms_count
-          : ""
+            ? property.rooms_count
+            : ""
       );
       setBathrooms(
         propertyData.baths_count
           ? propertyData.baths_count
           : property
-          ? property.baths_count
-          : ""
+            ? property.baths_count
+            : ""
       );
       setBedrooms(
         propertyData.beds_count
           ? propertyData.beds_count
           : property
-          ? property.beds_count
-          : ""
+            ? property.beds_count
+            : ""
       );
       setPropType(
         propertyData.standardized_land_use_type
           ? propertyData.standardized_land_use_type
           : property
-          ? property.standardized_land_use_type
-          : ""
+            ? property.standardized_land_use_type
+            : ""
       );
       setSqft(
         propertyData.area_sq_ft
           ? propertyData.area_sq_ft
           : property
-          ? property.area_sq_ft
-          : ""
+            ? property.area_sq_ft
+            : ""
       );
       setTotalValue(
         propertyData.total_value
           ? propertyData.total_value
           : property
-          ? property.total_value
-          : ""
+            ? property.total_value
+            : ""
       );
       setReservedAmount(
         propertyData.reservedAmount ? parseInt(propertyData.reservedAmount) : ""
@@ -402,6 +402,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               name="zipCode"
               defaultValue={zip}
@@ -434,6 +435,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={rooms}
               {...register("rooms_count", { required: false })}
@@ -448,6 +450,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={bedrooms}
               {...register("bedrooms", { required: false })}
@@ -478,6 +481,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={bathrooms}
               {...register("bathrooms", { required: false })}
@@ -492,6 +496,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               placeholder="$"
               defaultValue={totalValue}
@@ -509,6 +514,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={sqft}
               {...register("sqft", { required: false })}
@@ -525,6 +531,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={reservedAmount}
               {...register("reservedAmount", { required: false })}
@@ -539,6 +546,7 @@ function EmptyRealEstateDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={discussedAmount}
               {...register("discussedAmount", { required: false })}

@@ -172,33 +172,18 @@ const UpcomingJetCard = ({
                           Auction Start:
                         </p>
                       </Col>
-                    ) : !registEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
-                          <RegistrationTimer
-                            time={endRegister}
-                            toogleRegistEnded={toogleRegistEnded}
-                          />
-                        </div>
-                      </Col>
                     ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div
-                          style={{
-                            fontSize: "18px",
-                            width: "200px",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Registration Ended
-                        </div>
+                      <Col md={5} style={{ width: "50%", color: "black" }}>
+                        <p style={{ fontSize: "15px", width: "100px" }}>
+                          Registration
+                        </p>
                       </Col>
                     )}
 
                     <Col md={6} style={{ width: "50%" }}>
                       <p
                         style={{
-                          fontSize: "12px",
+                          fontSize: "15px",
                           width: "250px",
                         }}
                       >
@@ -218,13 +203,25 @@ const UpcomingJetCard = ({
                           <Timer auctionStartDate={startAuction} />
                         </div>
                       </Col>
-                    ) : (
+                    ) : !registEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <RegistrationTimer
                             time={endRegister}
                             toogleRegistEnded={toogleRegistEnded}
                           />
+                        </div>
+                      </Col>
+                    ) : (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div
+                          style={{
+                            fontSize: "18px",
+                            width: "200px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Registration Ended
                         </div>
                       </Col>
                     )}

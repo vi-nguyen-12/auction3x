@@ -75,6 +75,7 @@ function AddFund() {
               <label style={{ color: "black" }}>Fund Amount</label>
               <input
                 type="number"
+                min="0"
                 name="fund"
                 className="form-control"
                 placeholder="Amount"

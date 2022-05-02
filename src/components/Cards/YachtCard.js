@@ -175,8 +175,7 @@ const YachtCard = ({
                     <Col md={6} style={{ width: "50%", color: "black" }}>
                       <p
                         style={{
-                          fontSize: "12px",
-
+                          fontSize: "15px",
                           width: "250px",
                         }}
                       >

@@ -166,6 +166,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
               <label htmlFor="phone">Phone</label>
               <input
                 type="number"
+                min="0"
                 style={{ height: "47px", borderRadius: "8px" }}
                 className="form-control"
                 id="phone"

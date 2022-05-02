@@ -121,7 +121,7 @@
   border: 2px solid #d58f5c !important;
   outline: none !important;
   background-color: transparent !important;
-  padding: 6px !important;
+  /* padding: 6px !important; */
   color: rgb(0, 0, 0) !important;
   font-size: 12px;
 }

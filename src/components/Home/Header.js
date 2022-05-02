@@ -357,7 +357,7 @@ const Header = ({ change, color }) => {
                         </button>
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -371,10 +371,10 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           MANAGED BID
-                        </button>
+                        </button> */}
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -385,7 +385,7 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           BROKER
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                     <tr>
@@ -420,7 +420,7 @@ const Header = ({ change, color }) => {
                         </button>
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -431,7 +431,7 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           BUYER
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                     <tr>
@@ -470,7 +470,7 @@ const Header = ({ change, color }) => {
                         </button>
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -481,7 +481,7 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           SELLER
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                     <tr>
@@ -501,7 +501,7 @@ const Header = ({ change, color }) => {
                         </button>
                       </td>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -512,12 +512,12 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           CAREER
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <button
+                        {/* <button
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -528,7 +528,7 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           ABOUT US
-                        </button>
+                        </button> */}
                       </td>
                     </tr>
                   </tbody>
