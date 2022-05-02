@@ -80,7 +80,8 @@ position: relative;
 }
 `;
 
-const Featured = () => {
+const Featured = ({query}) => {
+  console.log(query);
   const auction = useSelector((state) => state.auction);
   let settings = {
     dots: false,

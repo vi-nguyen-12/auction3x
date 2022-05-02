@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "../../styles/Search.css";
+import { ImSearch } from "react-icons/im";
 
 // let autoComplete;
 
@@ -39,7 +40,7 @@ import "../../styles/Search.css";
 //   updateQuery(query);
 // }
 
-function SearchBar() {
+function SearchBar({ getQuery }) {
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
 
@@ -50,16 +51,37 @@ function SearchBar() {
   //   );
   // }, []);
 
+  const onSubmit = () => {
+    getQuery(query);
+  };
+
   return (
-    <div className="search-location-input">
-      <input
-      style={{color:"white"}}
-        ref={autoCompleteRef}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Enter a City"
-        value={query}
-      />
-    </div>
+    <>
+      <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
+        <div className="search-location-input">
+          <input
+            style={{ color: "white" }}
+            ref={autoCompleteRef}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Enter a City"
+            value={query}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                onSubmit();
+              }
+            }}
+          />
+        </div>
+        <button
+          onClick={() => {
+            onSubmit();
+          }}
+          type="submit"
+        >
+          <ImSearch />
+        </button>
+      </div>
+    </>
   );
 }
 

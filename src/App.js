@@ -95,6 +95,7 @@ function App() {
 
   const [color, setColor] = useState("");
   const [bodyColor, setBodyColor] = useState("");
+  const [query, setQuery] = useState("");
   const [show, setShow] = useState(true);
   const toogleShow = (value) => {
     setShow(value);
@@ -106,6 +107,10 @@ function App() {
 
   const bodyColorChange = (color) => {
     setBodyColor(color);
+  };
+
+  const getQuery = (value) => {
+    setQuery(value);
   };
 
   const [change, setChange] = useState(false);
@@ -195,10 +200,10 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            <ImgSlider />
-            <Featured />
+            <ImgSlider getQuery={getQuery} />
+            <Featured query={query} />
             <FindInCountries />
-            <Upcoming />
+            <Upcoming query={query} />
             <Work />
             <RealEstate />
             <About />

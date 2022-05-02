@@ -502,9 +502,9 @@ function DisplayYacht({ toogleChange, property }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -584,9 +584,9 @@ function DisplayYacht({ toogleChange, property }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -730,7 +730,7 @@ function DisplayYacht({ toogleChange, property }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -1089,6 +1089,7 @@ function DisplayYacht({ toogleChange, property }) {
                         <tr>
                           <th>#</th>
                           <th>Bidder ID</th>
+                          <th>Bidder Name</th>
                           <th>Bid Amount</th>
                           <th>Date/Time</th>
                         </tr>
@@ -1099,9 +1100,22 @@ function DisplayYacht({ toogleChange, property }) {
                             .slice()
                             .reverse()
                             .map((bid, index) => (
-                              <tr key={index}>
+                              <tr
+                                style={{
+                                  backgroundColor:
+                                    bid.userId === user._id ? "#6de8b1" : "",
+                                }}
+                                key={index}
+                              >
                                 <td>{index + 1}</td>
                                 <td>{bid.userId}</td>
+                                {bid.userId === user._id ? (
+                                  <td>
+                                    {user.firstName + " " + user.lastName}
+                                  </td>
+                                ) : (
+                                  <td>XXXXX</td>
+                                )}
                                 <td>
                                   <NumberFormat
                                     value={bid.amount}

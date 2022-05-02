@@ -100,7 +100,7 @@ const HomeBottom = styled.div`
   }
 `;
 
-const ImgSlider = () => {
+const ImgSlider = ({ getQuery }) => {
   let settings = {
     dots: true,
     infinite: true,
@@ -163,13 +163,8 @@ const ImgSlider = () => {
           </Carousel>
           <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
-              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
-                <div className="form-group">
-                  <SearchBar />
-                </div>
-                <button type="submit">
-                  <ImSearch />
-                </button>
+              <div className="form-group">
+                <SearchBar getQuery={getQuery} />
               </div>
             </div>
           </div>
