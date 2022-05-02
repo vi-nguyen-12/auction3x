@@ -8,6 +8,12 @@ import ApprovedListings from "./ApprovedListings";
 function LiveListings() {
   const user = useSelector((state) => state.user);
   const [upcomingListings, setUpcomingListings] = useState([]);
+  const [images, setImages] = useState([]);
+  const [documents, setDocuments] = useState([]);
+  const [showImages, setShowImages] = useState(false);
+  const [showDocuments, setShowDocuments] = useState(false);
+  const toogleDocuments = () => setShowDocuments(!showDocuments);
+  const toogleImages = () => setShowImages(!showImages);
 
   useEffect(() => {
     const fetchApprovedProperty = async () => {
@@ -67,6 +73,10 @@ function LiveListings() {
                       <img
                         width="100px"
                         height="50px"
+                        onClick={() => {
+                          setImages(listing.images);
+                          toogleImages();
+                        }}
                         src={
                           listing.images.length > 0 ? listing.images[0].url : ""
                         }
@@ -86,7 +96,20 @@ function LiveListings() {
                         Approved
                       </span>
                     </td>
-                  ) : (
+                  ) : listing.isApproved === "pending" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "orange",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  ) : listing.isApproved === "fail" ? (
                     <td colSpan={2}>
                       <span
                         style={{
@@ -99,9 +122,17 @@ function LiveListings() {
                         Pending
                       </span>
                     </td>
-                  )}
+                  ) : null}
                   <td colSpan={2}>
-                    <Button variant="primary">View</Button>
+                    <Button
+                      onClick={() => {
+                        setDocuments(listing.documents);
+                        toogleDocuments();
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
                   </td>
                   <td>
                     {listing.type === "real-estate"

@@ -98,319 +98,331 @@ const UpcomingJetCard = ({
 
   return (
     <>
-      {auctionEndDate && (
-        <div>
-          <Card
-            // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
-            //move to next page
-            className="cards text-left m-auto"
+      <div>
+        <Card
+          // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
+          //move to next page
+          className="cards text-left m-auto"
+          style={{
+            // width: "18rem",
+            background: "white",
+            padding: "5px",
+            width: "450px",
+            borderRadius: "10px",
+            border: "1px solid lightgrey",
+            boxShadow:
+              "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
+            transition: "all ease 200ms",
+            color: "black",
+          }}
+        >
+          {showKYC && (
+            <Toast type="warning" message="Please complete your KYC" />
+          )}
+          {/* <Link to={`/Display/${id}`}> */}
+          <Card.Img
+            onClick={handleDisplay}
+            variant="top"
+            src={url}
+            className="img-fluid"
             style={{
-              // width: "18rem",
-              background: "white",
-              padding: "5px",
-              width: "450px",
+              width: "100%",
+              height: "300px",
               borderRadius: "10px",
-              border: "1px solid lightgrey",
-              boxShadow:
-                "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
-              transition: "all ease 200ms",
-              color: "black",
+              cursor: "pointer",
+            }}
+          />
+          {/* </Link> */}
+          <button
+            onClick={toggleImage}
+            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
+            style={{
+              border: "none",
+              position: "absolute",
+              display: "flex",
+              marginLeft: "90%",
+              top: "10px",
+              background: "none",
             }}
           >
-            {showKYC && (
-              <Toast type="warning" message="Please complete your KYC" />
+            {favorite ? (
+              <img src="/images/hearted.png" alt="" />
+            ) : (
+              <img src="/images/heart.png" alt="" />
             )}
-            {/* <Link to={`/Display/${id}`}> */}
-            <Card.Img
-              onClick={handleDisplay}
-              variant="top"
-              src={url}
-              className="img-fluid"
-              style={{
-                width: "100%",
-                height: "300px",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            />
-            {/* </Link> */}
-            <button
-              onClick={toggleImage}
-              // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-              style={{
-                border: "none",
-                position: "absolute",
-                display: "flex",
-                marginLeft: "90%",
-                top: "10px",
-                background: "none",
-              }}
-            >
-              {favorite ? (
-                <img src="/images/hearted.png" alt="" />
-              ) : (
-                <img src="/images/heart.png" alt="" />
-              )}
-            </button>
-            <Card.Body style={{ paddingLeft: "13px" }}>
+          </button>
+          <Card.Body style={{ paddingLeft: "13px" }}>
+            <div>
               <div>
-                <div>
-                  <span className="golden-text">{data.property_address}</span>
-                  <h4 style={{ marginTop: "5px", color: "black" }}>
-                    {data.aircraft_builder_name}{" "}
-                    {data.aircraft_model_designation}
-                  </h4>
-                </div>
-                <div
-                  style={{
-                    display: "inline-flex",
-                  }}
-                >
-                  <div>
-                    <Row>
-                      {registEnded && startAuction ? (
-                        <Col md={5} style={{ width: "50%", color: "black" }}>
-                          <p style={{ fontSize: "15px", width: "100px" }}>
-                            Auction Start:
-                          </p>
-                        </Col>
-                      ) : (
-                        <Col md={5} style={{ width: "50%", color: "black" }}>
-                          <p style={{ fontSize: "15px", width: "100px" }}>
-                            Registration:
-                          </p>
-                        </Col>
-                      )}
-
-                      <Col md={6} style={{ width: "50%" }}>
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            width: "250px",
-                          }}
-                        >
-                          Additional Info
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      {registEnded && startAuction ? (
-                        <Col md={1} style={{ width: "50%" }}>
-                          <div
-                            style={{
-                              fontSize: "12px",
-                              width: "200px",
-                            }}
-                          >
-                            <Timer auctionStartDate={startAuction} />
-                          </div>
-                        </Col>
-                      ) : (
-                        <Col md={1} style={{ width: "50%" }}>
-                          <div style={{ fontSize: "12px", width: "200px" }}>
-                            <RegistrationTimer
-                              time={endRegister}
-                              toogleRegistEnded={toogleRegistEnded}
-                            />
-                          </div>
-                        </Col>
-                      )}
-
-                      <Col md={6} style={{ width: "50%", color: "black" }}>
-                        <p
-                          style={{
-                            fontSize: "12px",
-                            color: "black",
-                            width: "250px",
-                          }}
-                        >
-                          {data.number_of_engines
-                            ? data.number_of_engines + " Engines"
-                            : "N/A"}
-                          |{" "}
-                          {data.number_of_aircraft
-                            ? data.number_of_aircraft + " Aircraft"
-                            : "N/A"}
-                          |{" "}
-                          {data.registration_mark
-                            ? data.registration_mark
-                            : "N/A"}
-                        </p>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
+                <span className="golden-text">{data.property_address}</span>
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  {data.aircraft_builder_name} {data.aircraft_model_designation}
+                </h4>
               </div>
-
-              <hr />
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
+                  display: "inline-flex",
                 }}
               >
                 <div>
-                  <p className="grey-small">Starting Bid</p>
-                  <p className="black-bold">
-                    <NumberFormat
-                      value={startingBid}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                  </p>
+                  <Row>
+                    {registEnded && startAuction ? (
+                      <Col md={5} style={{ width: "50%", color: "black" }}>
+                        <p style={{ fontSize: "15px", width: "100px" }}>
+                          Auction Start:
+                        </p>
+                      </Col>
+                    ) : !registEnded ? (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div style={{ fontSize: "12px", width: "200px" }}>
+                          <RegistrationTimer
+                            time={endRegister}
+                            toogleRegistEnded={toogleRegistEnded}
+                          />
+                        </div>
+                      </Col>
+                    ) : (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div
+                          style={{
+                            fontSize: "18px",
+                            width: "200px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Registration Ended
+                        </div>
+                      </Col>
+                    )}
+
+                    <Col md={6} style={{ width: "50%" }}>
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          width: "250px",
+                        }}
+                      >
+                        Additional Info
+                      </p>
+                    </Col>
+                  </Row>
+                  <Row>
+                    {registEnded && startAuction ? (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div
+                          style={{
+                            fontSize: "12px",
+                            width: "200px",
+                          }}
+                        >
+                          <Timer auctionStartDate={startAuction} />
+                        </div>
+                      </Col>
+                    ) : (
+                      <Col md={1} style={{ width: "50%" }}>
+                        <div style={{ fontSize: "12px", width: "200px" }}>
+                          <RegistrationTimer
+                            time={endRegister}
+                            toogleRegistEnded={toogleRegistEnded}
+                          />
+                        </div>
+                      </Col>
+                    )}
+
+                    <Col md={6} style={{ width: "50%", color: "black" }}>
+                      <p
+                        style={{
+                          fontSize: "12px",
+                          color: "black",
+                          width: "250px",
+                        }}
+                      >
+                        {data.number_of_engines
+                          ? data.number_of_engines + " Engines"
+                          : "N/A"}
+                        |{" "}
+                        {data.number_of_aircraft
+                          ? data.number_of_aircraft + " Aircraft"
+                          : "N/A"}
+                        |{" "}
+                        {data.registration_mark
+                          ? data.registration_mark
+                          : "N/A"}
+                      </p>
+                    </Col>
+                  </Row>
                 </div>
-                {registEnded ? (
-                  <div
-                    style={{
-                      alignItems: "flex-end",
-                      display: "flex",
-                      marginRight: "6px",
-                    }}
-                  >
-                    <Button
-                      onClick={handleBid}
-                      className="black-button text-white"
-                      variant="dark"
-                      disabled
-                    >
-                      Registeration Ended
-                    </Button>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      alignItems: "flex-end",
-                      display: "flex",
-                      marginRight: "6px",
-                    }}
-                  >
-                    <Button
-                      onClick={handleBid}
-                      className="black-button text-white"
-                      variant="dark"
-                    >
-                      Register to Bid
-                    </Button>
-                  </div>
-                )}
               </div>
-            </Card.Body>
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showConfirm}
-              onHide={toogleConfirmModal}
-              contentclassname="confirm"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{ color: "#D58F5C" }}
-                >
-                  Confirm Email
-                </Modal.Title>
-                <Modal.Title
-                  className="pt-4"
-                  style={{
-                    fontSize: "12px",
-                    color: "#D58F5C",
-                    position: "absolute",
-                    marginright: "10px",
-                    marginTop: "8px",
-                  }}
-                ></Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Confirm
-                  toogleConfirmModal={toogleConfirmModal}
-                  toogleSignIn={toogleSignIn}
-                />
-              </Modal.Body>
-            </Modal>
+            </div>
 
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={forgotPass}
-              onHide={toogleForgotPass}
-              contentclassname="forgotPass"
+            <hr />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-end",
+              }}
             >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
+              <div>
+                <p className="grey-small">Starting Bid</p>
+                <p className="black-bold">
+                  <NumberFormat
+                    value={startingBid}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                  />
+                </p>
+              </div>
+              {registEnded ? (
+                <div
                   style={{
-                    color: "#D58F5C",
-                    fontSize: "30px",
-                    fontWeight: "bold",
+                    alignItems: "flex-end",
+                    display: "flex",
+                    marginRight: "6px",
                   }}
                 >
-                  Forgot Password
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <ForgotPass
-                  toogleForgotPass={toogleForgotPass}
-                  toogleChangePass={toogleChangePass}
-                />
-              </Modal.Body>
-            </Modal>
+                  <Button
+                    onClick={handleBid}
+                    className="black-button text-white"
+                    variant="dark"
+                    disabled
+                  >
+                    Registeration Ended
+                  </Button>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    alignItems: "flex-end",
+                    display: "flex",
+                    marginRight: "6px",
+                  }}
+                >
+                  <Button
+                    onClick={handleBid}
+                    className="black-button text-white"
+                    variant="dark"
+                  >
+                    Register to Bid
+                  </Button>
+                </div>
+              )}
+            </div>
+          </Card.Body>
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showConfirm}
+            onHide={toogleConfirmModal}
+            contentclassname="confirm"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{ color: "#D58F5C" }}
+              >
+                Confirm Email
+              </Modal.Title>
+              <Modal.Title
+                className="pt-4"
+                style={{
+                  fontSize: "12px",
+                  color: "#D58F5C",
+                  position: "absolute",
+                  marginright: "10px",
+                  marginTop: "8px",
+                }}
+              ></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Confirm
+                toogleConfirmModal={toogleConfirmModal}
+                toogleSignIn={toogleSignIn}
+              />
+            </Modal.Body>
+          </Modal>
 
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={changePass}
-              onHide={toogleChangePass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Body>
-                <ChangePass toogleChangePass={toogleChangePass} />
-              </Modal.Body>
-            </Modal>
-            <Modal
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignIn}
-              onHide={toogleSignIn}
-              contentclassname="login"
-            >
-              <Modal.Body>
-                <Login
-                  toogleSignUp={toogleSignUp}
-                  toogleSignIn={toogleSignIn}
-                  toogleButton={toogleButton}
-                  toogleForgotPass={toogleForgotPass}
-                />
-              </Modal.Body>
-            </Modal>
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toogleForgotPass}
+            contentclassname="forgotPass"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ForgotPass
+                toogleForgotPass={toogleForgotPass}
+                toogleChangePass={toogleChangePass}
+              />
+            </Modal.Body>
+          </Modal>
 
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignUp}
-              onHide={toogleSignUp}
-              contentclassname="custom-modal-style"
-            >
-              <Modal.Body>
-                <SignUp
-                  toogleSignUp={toogleSignUp}
-                  toogleConfirmModal={toogleConfirmModal}
-                  toogleSignIn={toogleSignIn}
-                />
-              </Modal.Body>
-            </Modal>
-          </Card>
-        </div>
-      )}
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={changePass}
+            onHide={toogleChangePass}
+            contentclassname="forgotPass"
+          >
+            <Modal.Body>
+              <ChangePass toogleChangePass={toogleChangePass} />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toogleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body>
+              <Login
+                toogleSignUp={toogleSignUp}
+                toogleSignIn={toogleSignIn}
+                toogleButton={toogleButton}
+                toogleForgotPass={toogleForgotPass}
+              />
+            </Modal.Body>
+          </Modal>
+
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            onHide={toogleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body>
+              <SignUp
+                toogleSignUp={toogleSignUp}
+                toogleConfirmModal={toogleConfirmModal}
+                toogleSignIn={toogleSignIn}
+              />
+            </Modal.Body>
+          </Modal>
+        </Card>
+      </div>
     </>
   );
 };

@@ -12,12 +12,8 @@ import RealEstates from "../../RealEstate/RealEstates";
 import About from "./About";
 import ChangePass from "../components/ChangePass";
 import EmailConfirm from "../Users/EmailConfirm";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 
 const Home = (props) => {
-  // const property = useSelector(state => state.property);
-
   return (
     <>
       <Router>

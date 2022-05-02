@@ -18,8 +18,6 @@ function BidAuctions() {
     fetchBidAuctions();
   }, []);
 
-  console.log(bidAuctions);
-
   return (
     <>
       <h1>Bid Auctions</h1>

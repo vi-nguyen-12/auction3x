@@ -127,38 +127,53 @@ const ImgSlider = () => {
   return (
     <>
       {featureAuctions.length > 0 ? (
-        <Carousel {...settings}>
-          {featureAuctions.map((auction) => (
-            <Wrap key={auction._id}>
-              <a href={`/DisplayAuctions/${auction._id}`}>
-                <img src={auction.property.images[0].url} alt="auction" />
-              </a>
-              <HomeBottom>
-                <h2>
-                  <NumberFormat
-                    style={{ fontSize: "50px", color: "white" }}
-                    value={
-                      auction.startingBid
-                        ? auction.startingBid
-                        : auction.property.details.market_assessments.length > 0
-                        ? auction.property.details.market_assessments[0]
-                            .total_value
-                        : 0
-                    }
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </h2>
-                <span style={{ color: "white", fontSize: "20px" }}>
-                  HOUSE IN {auction.property.details.property_address.city},
-                  {auction.property.details.property_address.state} UNITED
-                  STATES
-                </span>
-              </HomeBottom>
-            </Wrap>
-          ))}
-        </Carousel>
+        <>
+          <Carousel {...settings}>
+            {featureAuctions.map((auction) => (
+              <Wrap key={auction._id}>
+                <a href={`/DisplayAuctions/${auction._id}`}>
+                  <img src={auction.property.images[0].url} alt="auction" />
+                </a>
+                <HomeBottom>
+                  <h2>
+                    <NumberFormat
+                      style={{ fontSize: "50px", color: "white" }}
+                      value={
+                        auction.startingBid
+                          ? auction.startingBid
+                          : auction.property.details.market_assessments.length >
+                            0
+                          ? auction.property.details.market_assessments[0]
+                              .total_value
+                          : 0
+                      }
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </h2>
+                  <span style={{ color: "white", fontSize: "20px" }}>
+                    HOUSE IN {auction.property.details.property_address.city},
+                    {auction.property.details.property_address.state} UNITED
+                    STATES
+                  </span>
+                </HomeBottom>
+              </Wrap>
+            ))}
+          </Carousel>
+          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+            <div className="row px-lg-5">
+              <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
+                <div className="form-group">
+                  <SearchBar />
+                </div>
+                <button type="submit">
+                  <ImSearch />
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       ) : onGoingAuctions.length > 0 ? (
         <>
           <Carousel {...settings}>
