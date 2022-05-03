@@ -150,8 +150,8 @@ const PropertyPages = ({ toogleChange }) => {
             <Col >
               <select className=" RealButton ">
                 <option>Auction Type</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">Ongoing</option>
+                <option href="#">Upcoming</option>
               </select>
             </Col>
             <Col >

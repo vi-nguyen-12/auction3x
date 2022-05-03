@@ -68,7 +68,7 @@ const Footer = (props) => {
               <h5 className="footer-title">Others</h5>
               <ul>
                 <li className="list-unstyled">
-                  <a href="#!">List with us</a>
+                  {/* <a href="#!">List with us</a> */}
                 </li>
                 <li className="list-unstyled">
                   <a href="#!">Broker</a>
