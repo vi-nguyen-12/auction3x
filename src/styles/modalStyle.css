@@ -93,24 +93,14 @@
 
 .signIn-btn {
   background-color: transparent;
+  border-radius: 0!important;
   border: 0;
-  cursor: none;
+  cursor: pointer;
 }
 
 .signUp-btn {
   background-color: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
-.signIn-btn:hover {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
-.signUp-btn:hover {
-  background-color: transparent;
+  border-radius: 0!important;
   border: 0;
   cursor: pointer;
 }

@@ -21,8 +21,6 @@ const Upcoming = ({ query }) => {
     }
   }, [property]);
 
-  console.log(upcoming);
-
   return (
     <>
       {upcoming ? (

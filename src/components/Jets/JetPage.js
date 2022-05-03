@@ -170,7 +170,7 @@ function JetPage({ toogleChange }) {
               </h3>
             )}
           </Row>
-          <Row>
+          <Row style={{ marginBottom: "100px" }}>
             <h1 style={{ margin: "80px 0", fontWeight: "bold" }}>
               UPCOMING AUCTIONS
             </h1>
