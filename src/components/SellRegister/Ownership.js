@@ -335,8 +335,11 @@ function Ownership({
                 <Col>
                   <PhoneInput
                     countryCodeEditable={false}
-                    disableDropdown={true}
+
+                    onlyCountries={['ca', 'us', 'gb', 'au']}
+                    disableDropdown={false}
                     country={'us'}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null}
                     inputStyle={{ width: '100%' }}
@@ -499,8 +502,10 @@ function Ownership({
                 <Col>
                   <PhoneInput
                     countryCodeEditable={false}
-                    disableDropdown={true}
+                    onlyCountries={['ca', 'us', 'gb', 'au']}
+                    disableDropdown={false}
                     country={'us'}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null}
                     inputStyle={{ width: '100%' }}

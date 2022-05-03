@@ -135,58 +135,76 @@ const PropertyPages = ({ toogleChange }) => {
           </p>
         )}
       </h5>
-      <div className="realEstateFilter">
-        <div className="searchBar">
-          <SearchBar />
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>Auction Type</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>Property Type</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>Price</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>Bldg Siize</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>More Filter</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="dropdown">
-          <select className=" RealButton ">
-            <option>Sort</option>
-            <option href="#">Profile</option>
-            <option href="#">My Ads</option>
-          </select>
-        </div>
-        <div className="filterResult">
-          <div>About 9,620 results</div>
-          <button className="mapButton">Map</button>
-          <button className="galleryButton">Gallery</button>
-        </div>
-      </div>
+      <Row className="realEstateFilter">
+        <Col md={9} >
+          <Row>
+            {/* <div className="searchBar"> */}
+            <Col md={3} >
+              <div className=" RealButton ">
+                <input type="text" placeholder="Enter your Location" className="searchBar" />
+              </div>
+            </Col>
+
+            {/* </div> */}
+
+            <Col >
+              <select className=" RealButton ">
+                <option>Auction Type</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+            <Col >
+              <select className=" RealButton ">
+                <option>Property Type</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+            <Col >
+              <select className=" RealButton ">
+                <option>Price</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+            <Col >
+              <select className=" RealButton ">
+                <option>Bldg Siize</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+            <Col >
+              <select className=" RealButton ">
+                <option>More Filter</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+            <Col >
+              <select className=" RealButton ">
+                <option>Sort</option>
+                <option href="#">Profile</option>
+                <option href="#">My Ads</option>
+              </select>
+            </Col>
+          </Row>
+        </Col>
+        <Col md={3} className="filterResult">
+          <Row>
+            <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+              About 151051 results
+            </Col>
+            <Col md={2}>
+              <button className="mapButton">Map</button>
+            </Col>
+            <Col md={2}>
+              <button className="galleryButton">Gallery</button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
       {path === "/realEstates" ? (
         <RealEstatePage toogleChange={toogleChange} />
       ) : path === "/cars" ? (
