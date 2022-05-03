@@ -97,6 +97,7 @@ function App() {
   const [bodyColor, setBodyColor] = useState("");
   const [query, setQuery] = useState("");
   const [show, setShow] = useState(true);
+  const [headerWidth, setHeaderWidth] = useState("");
   const toogleShow = (value) => {
     setShow(value);
   };
@@ -122,7 +123,7 @@ function App() {
     <div className="App" style={{ background: bodyColor }}>
       <ButtontoTop />{" "}
       <Router>
-        <Header color={color} change={change} />
+        <Header color={color} change={change} headerWidth={headerWidth} />
         <ScrollTop />
 
         <Switch>
@@ -133,6 +134,7 @@ function App() {
                   colorChange={colorChange}
                   toogleShow={toogleShow}
                   bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
                 />
               </div>
             </Route>
@@ -144,6 +146,7 @@ function App() {
                 colorChange={colorChange}
                 toogleShow={toogleShow}
                 bodyColorChange={bodyColorChange}
+                setHeaderWidth={setHeaderWidth}
               />
             </div>
           </Route>
@@ -186,17 +189,28 @@ function App() {
                 colorChange={colorChange}
                 toogleChange={toogleChange}
                 bodyColorChange={bodyColorChange}
+                setHeaderWidth={setHeaderWidth}
               />
             </Route>
           )}
           <Route path="/reset_password">
-            <ChangePass colorChange={colorChange} toogleShow={toogleShow} />
+            <ChangePass
+              colorChange={colorChange}
+              toogleShow={toogleShow}
+              setHeaderWidth={setHeaderWidth}
+            />
           </Route>
           <Route path="/confirm_email">
-            <EmailConfirm colorChange={colorChange} />
+            <EmailConfirm
+              colorChange={colorChange}
+              setHeaderWidth={setHeaderWidth}
+            />
           </Route>
           <Route path="/docusign/callback/:envelopeId">
-            <Docusign colorChange={colorChange} />
+            <Docusign
+              colorChange={colorChange}
+              setHeaderWidth={setHeaderWidth}
+            />
           </Route>
 
           <Route exact path="/">
