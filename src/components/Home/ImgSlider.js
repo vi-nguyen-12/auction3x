@@ -11,11 +11,11 @@ import { Link } from "react-router-dom";
 import authService from "../../services/authServices.js";
 
 const Carousel = styled(Slider)`
-  height: 99vh;
+  height: 100vh;
   overflow: hidden;
 
   & > button {
-    opacity: 0;
+    opacity: 1;
     height: 100%;
     width: 5vw;
     z-index: 1;
@@ -28,10 +28,11 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
-      font-size: 20px;
+      top: -15vh;
+      font-size: 30px;
       color: gray;
-      left: -35px;
+      // left: -35px;
+      margn-right: 200px;
     }
   }
 
@@ -84,7 +85,7 @@ const Wrap = styled.div`
 
 const HomeBottom = styled.div`
   position: absolute;
-  bottom: 20vh;
+  bottom: 10vh;
   z-index: 1;
   left: 5vw;
   a {
@@ -102,7 +103,7 @@ const HomeBottom = styled.div`
 
 const ImgSlider = ({ getQuery }) => {
   let settings = {
-    dots: true,
+    fade: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -124,6 +125,8 @@ const ImgSlider = ({ getQuery }) => {
     });
   }, []);
 
+  console.log(featureAuctions);
+
   return (
     <>
       {featureAuctions.length > 0 ? (
@@ -135,22 +138,10 @@ const ImgSlider = ({ getQuery }) => {
                   <img src={auction.property.images[0].url} alt="auction" />
                 </a>
                 <HomeBottom>
-                  <h2>
-                    <NumberFormat
-                      style={{ fontSize: "50px", color: "white" }}
-                      value={
-                        auction.startingBid
-                          ? auction.startingBid
-                          : auction.property.details.market_assessments.length >
-                            0
-                          ? auction.property.details.market_assessments[0]
-                              .total_value
-                          : 0
-                      }
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
+                  <h2 style={{ fontSize: "50px", color: "white" }}>
+                    The Best
+                    <br />
+                    Luxury Market
                   </h2>
                   <span style={{ color: "white", fontSize: "20px" }}>
                     HOUSE IN {auction.property.details.property_address.city},
@@ -161,13 +152,13 @@ const ImgSlider = ({ getQuery }) => {
               </Wrap>
             ))}
           </Carousel>
-          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+          {/* <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
               <div className="form-group">
                 <SearchBar getQuery={getQuery} />
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       ) : onGoingAuctions.length > 0 ? (
         <>
@@ -197,7 +188,7 @@ const ImgSlider = ({ getQuery }) => {
               // </Link>
             ))}
           </Carousel>
-          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+          {/* <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
               <div className="search-box col-12 col-sm-6 col-md-4 mt-3">
                 <div className="form-group">
@@ -208,7 +199,7 @@ const ImgSlider = ({ getQuery }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       ) : upcomingAuctions.length > 0 ? (
         <>
@@ -238,7 +229,7 @@ const ImgSlider = ({ getQuery }) => {
               // </Link>
             ))}
           </Carousel>
-          <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
+          {/* <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
               <div className="search-box col-12 col-sm-6 col-md-4 mt-3 p-0">
                 <div className="form-group">
@@ -249,7 +240,7 @@ const ImgSlider = ({ getQuery }) => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       ) : null}
     </>

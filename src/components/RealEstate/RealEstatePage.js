@@ -167,12 +167,12 @@ function RealEstatePage({ toogleChange }) {
                 ))}
               </Carousel>
             ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }} >
+              <h3 style={{ display: "flex", justifyContent: "center" }}>
                 No Ongoing Auctions
               </h3>
             )}
           </Row>
-          <Row>
+          <Row style={{ marginBottom: "100px" }}>
             <h1 style={{ margin: "80px 0" }}>UPCOMING AUCTIONS</h1>
             {upcomingAuctions.length > 0 ? (
               upcomingAuctions.map((item, index) => (
@@ -190,7 +190,7 @@ function RealEstatePage({ toogleChange }) {
                 </Col>
               ))
             ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }} >
+              <h3 style={{ display: "flex", justifyContent: "center" }}>
                 No Ongoing Auctions
               </h3>
             )}

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FaBars, FaGlobeAmericas } from "react-icons/fa";
+import { VscGlobe } from "react-icons/vsc";
 import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import Login from "../Users/Login";
@@ -41,6 +42,12 @@ const Header = ({ change, color }) => {
   const [colors, setColors] = useState("");
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [open, setOpen] = useState(false);
+  const [textColor, setTextColor] = useState("white");
+  const [boxShadow, setBoxShadow] = useState("");
+  const [transition, setTransition] = useState("");
+  const [width, setWidth] = useState("90vw");
+  const [left, setLeft] = useState("0");
+  const [paddingRight, setPaddingRight] = useState("0");
   const toogleOpen = () => setOpen(!open);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
@@ -92,10 +99,24 @@ const Header = ({ change, color }) => {
 
     if (window.onscroll !== undefined) {
       window.onscroll = function () {
-        if (window.scrollY > 500) {
-          setColors("rgba(0, 0, 0, 50%)");
+        if (window.scrollY > 1) {
+          setColors("white");
+          setTextColor("black");
+          setBoxShadow("0 0 5px rgb(0 0 0 / 20%)");
+          setTransition(
+            "transform 120ms ease, background-color 250ms ease, color 250ms ease"
+          );
+          setWidth("100%");
+          setLeft("20%");
+          setPaddingRight("3rem");
         } else {
           setColors("");
+          setTextColor("white");
+          setBoxShadow("");
+          setTransition("");
+          setWidth("90vw");
+          setLeft("0");
+          setPaddingRight("0");
         }
       };
     }
@@ -109,16 +130,33 @@ const Header = ({ change, color }) => {
   }, [handleWindowResize]);
 
   return (
-    <Nav style={{ position: "fixed", top: 0, zIndex: 100 }}>
+    <Nav
+      style={{
+        position: "fixed",
+        top: 0,
+        zIndex: 100,
+        boxShadow: boxShadow,
+        transition: transition,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "60px",
+      }}
+    >
       <nav
-        className="navbar navbar-expand-lg p-0 pe-5"
-        style={{ backgroundColor: colors ? colors : color }}
+        className="navbar navbar-expand-lg"
+        style={{
+          padding: "0",
+          backgroundColor: colors ? colors : color,
+          width: width,
+          borderBottom: "1px solid rgba(255,255,255,0.3)",
+          paddingRight: paddingRight,
+          height: "100%",
+        }}
       >
-        <div className="navbar-brand mt-2" style={{ paddingBottom: "1rem" }}>
-          <Logo href="/">
-            <div>
-              <img src="/images/newName.png" width={200} height={50} alt="" />
-            </div>
+        <div className="navbar-brand">
+          <Logo style={{ left: left }} href="/">
+            <img src="/images/newName.png" width={200} height={50} alt="" />
           </Logo>
         </div>
 
@@ -127,23 +165,36 @@ const Header = ({ change, color }) => {
             <div className="nav-item px-4">
               <button
                 className="headerNav"
+                style={{ color: textColor }}
                 onClick={handleOnClick("realEstates")}
               >
                 Real Estate
               </button>
             </div>
             <div className="nav-item px-4">
-              <button className="headerNav" onClick={handleOnClick("cars")}>
+              <button
+                style={{ color: textColor }}
+                className="headerNav"
+                onClick={handleOnClick("cars")}
+              >
                 Car
               </button>
             </div>
             <div className="nav-item px-4">
-              <button className="headerNav" onClick={handleOnClick("jets")}>
+              <button
+                style={{ color: textColor }}
+                className="headerNav"
+                onClick={handleOnClick("jets")}
+              >
                 Jet
               </button>
             </div>
             <div className="nav-item px-4">
-              <button className="headerNav" onClick={handleOnClick("yachts")}>
+              <button
+                style={{ color: textColor }}
+                className="headerNav"
+                onClick={handleOnClick("yachts")}
+              >
                 Yacht
               </button>
             </div>
@@ -346,7 +397,7 @@ const Header = ({ change, color }) => {
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
-                            color: "white",
+                            color: textColor,
                           }}
                           onClick={() => {
                             toogleOpen();
@@ -354,6 +405,22 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           REAL ESTATE
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="headerNav"
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: textColor,
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                            handleSell();
+                          }}
+                        >
+                          SELL
                         </button>
                       </td>
                       <td>
@@ -394,7 +461,7 @@ const Header = ({ change, color }) => {
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
-                            color: "white",
+                            color: textColor,
                           }}
                           onClick={() => {
                             toogleOpen();
@@ -413,10 +480,14 @@ const Header = ({ change, color }) => {
                           }}
                           onClick={() => {
                             toogleOpen();
-                            handleSell();
+                            if (user._id) {
+                              history.push("/dashboard");
+                            } else {
+                              toogleSignIn();
+                            }
                           }}
                         >
-                          SELL
+                          DASHBOARD
                         </button>
                       </td>
                       <td>
@@ -448,25 +519,6 @@ const Header = ({ change, color }) => {
                           }}
                         >
                           YACHT
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            if (user._id) {
-                              history.push("/dashboard");
-                            } else {
-                              toogleSignIn();
-                            }
-                          }}
-                        >
-                          DASHBOARD
                         </button>
                       </td>
                       <td>
@@ -573,16 +625,18 @@ const Header = ({ change, color }) => {
             </Modal> */}
             <div className="d-flex flex-row ">
               {user._id ? (
-                <button onClick={handleSell} className="sellBtn">
+                <button className="headerNav" onClick={handleSell}>
                   Sell
                 </button>
               ) : (
                 <button
+                  className="headerNav"
                   onClick={toogleSignIn}
-                  className="customButton"
                   style={{
+                    backgroundColor: "transparent",
+                    color: textColor,
                     marginRight: "30px",
-                    fontSize: "16px",
+                    fontSize: "20px",
                     fontWeight: "bold",
                     padding: "0 20px",
                   }}
@@ -611,11 +665,11 @@ const Header = ({ change, color }) => {
                 <>
                   <div className="dropdown">
                     <button
-                      className="customButton border-0 mt-0"
+                      className="headerNav border-0 mt-0"
                       style={{
                         fontSize: "16px",
                         backgroundImage: "none",
-                        backgroundColor: "#fcba7d",
+                        backgroundColor: "transparent",
                         marginRight: "15px",
                         padding: "8px 20px",
                       }}
@@ -643,7 +697,7 @@ const Header = ({ change, color }) => {
                   <Button
                     style={{
                       marginRight: "15px",
-                      backgroundColor: "#fcba7d",
+                      backgroundColor: "transparent",
                       color: "black",
                       borderColor: "transparent",
                       display: "flex",
@@ -672,7 +726,7 @@ const Header = ({ change, color }) => {
                   </Button>
                   <Button
                     style={{
-                      backgroundColor: "#fcba7d",
+                      backgroundColor: "transparent",
                       color: "black",
                       borderColor: "transparent",
                       marginRight: "10px",
@@ -686,32 +740,37 @@ const Header = ({ change, color }) => {
 
                   <Button
                     style={{
-                      backgroundColor: "#fcba7d",
+                      backgroundColor: "transparent",
                       color: "black",
                       borderColor: "transparent",
                     }}
                   >
-                    <FaGlobeAmericas size={25} />
+                    <VscGlobe size={25} />
                   </Button>
                 </>
               ) : (
                 <>
                   <div
-                    className="bg-light customButton border-0 mt-0"
+                    className="mt-0"
                     style={{
                       marginRight: "50px",
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: "20px",
                     }}
                   >
                     <Button
                       className="signIn-btn"
+                      style={{ color: textColor }}
                       variant="success"
                       onClick={toogleSignIn}
                     >
                       Sign In
                     </Button>
-                    <label style={{ color: "black" }}>|</label>
+                    <label style={{ color: textColor }}>|</label>
                     <Button
                       className="signUp-btn"
+                      style={{ color: textColor }}
                       variant="success"
                       onClick={toogleSignUp}
                     >
@@ -719,29 +778,33 @@ const Header = ({ change, color }) => {
                     </Button>
                   </div>
                   <Button
-                    className="customButton border-0 mt-0"
+                    className="headerNav mt-0"
                     style={{
-                      // backgroundColor: "#fcba7d",
-                      color: "black",
+                      color: textColor,
+                      backgroundColor: "transparent",
                       borderColor: "transparent",
                       marginRight: "10px",
+                      borderRadius: "0",
                     }}
                     onClick={() => {
                       toogleOpen();
                     }}
                   >
-                    <FaBars size={20} />
+                    <FaBars size={23} />
                   </Button>
 
                   <Button
-                    className="customButton border-0 mt-0"
+                    className="headerNav mt-0"
                     style={{
-                      // backgroundColor: "#fcba7d",
-                      color: "black",
-                      borderColor: "transparent",
+                      height: "60px",
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
                     }}
                   >
-                    <FaGlobeAmericas size={25} />
+                    <VscGlobe size={29} />
                   </Button>
                 </>
               )}
@@ -838,10 +901,11 @@ const Header = ({ change, color }) => {
                   {/* </Dropdown.Item> */}
                 </Button>
                 <Button
+                  className="headerNav mt-0"
                   style={{
-                    backgroundColor: "#fcba7d",
+                    backgroundColor: "transparent",
                     color: "black",
-                    borderColor: "transparent",
+                    borderRadius: "0",
                     marginRight: "10px",
                   }}
                   onClick={() => {
@@ -852,13 +916,14 @@ const Header = ({ change, color }) => {
                 </Button>
 
                 <Button
+                  className="headerNav mt-0"
                   style={{
-                    backgroundColor: "#fcba7d",
+                    backgroundColor: "transparent",
                     color: "black",
-                    borderColor: "transparent",
+                    borderRadius: "0",
                   }}
                 >
-                  <FaGlobeAmericas size={25} />
+                  <VscGlobe size={25} />
                 </Button>
               </>
             ) : (
@@ -874,7 +939,7 @@ const Header = ({ change, color }) => {
                     className="signIn-btn"
                     style={{
                       fontSize: 18,
-                      color: "white",
+                      color: textColor,
                       fontWeight: "bold",
                       backgroundColor: "transparent",
                       border: "0",
@@ -884,12 +949,12 @@ const Header = ({ change, color }) => {
                   >
                     Login
                   </Button>
-                  <label style={{ color: "white" }}>|</label>
+                  <label style={{ color: textColor }}>|</label>
                   <Button
                     className="signUp-btn"
                     style={{
                       fontSize: 18,
-                      color: "white",
+                      color: textColor,
                       fontWeight: "bold",
                       backgroundColor: "transparent",
                       border: "0",
@@ -901,10 +966,11 @@ const Header = ({ change, color }) => {
                   </Button>
                 </div>
                 <Button
+                  className="headerNav mt-0"
                   style={{
-                    backgroundColor: "#fcba7d",
-                    color: "black",
-                    borderColor: "transparent",
+                    backgroundColor: "transparent",
+                    color: textColor,
+                    borderRadius: "0",
                     marginRight: "10px",
                   }}
                   onClick={() => {
@@ -915,13 +981,14 @@ const Header = ({ change, color }) => {
                 </Button>
 
                 <Button
+                  className="headerNav mt-0"
                   style={{
-                    backgroundColor: "#fcba7d",
-                    color: "black",
-                    borderColor: "transparent",
+                    backgroundColor: "transparent",
+                    color: textColor,
+                    borderRadius: "0",
                   }}
                 >
-                  <FaGlobeAmericas size={25} />
+                  <VscGlobe size={25} />
                 </Button>
               </>
             )}
@@ -938,7 +1005,7 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 5%);
+  background-color: transparent;
   z-index: 3;
 `;
 
@@ -960,7 +1027,6 @@ const Logo = styled.a`
   flex: 1;
   display: flex;
   position: relative;
-  left: 30%;
 
   @media (max-width: 768px) {
     text-align: center;
