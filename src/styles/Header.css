@@ -17,18 +17,16 @@
 }
 
 .headerNav {
+  background-color: transparent;
   border: none;
+  font-size: 20px;
   height: 60px;
   font-weight: 400 !important;
 }
 
-#headerBtn {
-  border-bottom: white solid 1px !important;
-}
-
 .headerNav:hover {
   color: #fcba7d;
-  border-bottom: white solid 1px !important;
+  border-bottom: white solid 1px ;
 }
 
 .headerNav:focus {

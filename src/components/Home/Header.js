@@ -21,7 +21,7 @@ import NumberFormat from "react-number-format";
 // import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
 // import CloseButton from "react-bootstrap/CloseButton";
 
-const Header = ({ change, color }) => {
+const Header = ({ change, color, headerWidth }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -48,6 +48,7 @@ const Header = ({ change, color }) => {
   const [width, setWidth] = useState("90vw");
   const [left, setLeft] = useState("0");
   const [paddingRight, setPaddingRight] = useState("0");
+  const [borderBottom, setBorderBottom] = useState("");
   const toogleOpen = () => setOpen(!open);
   const toogleChangePass = () => popChangePass(!changePass);
   const toogleForgotPass = () => popForgotPass(!forgotPass);
@@ -148,7 +149,7 @@ const Header = ({ change, color }) => {
         style={{
           padding: "0",
           backgroundColor: colors ? colors : color,
-          width: width,
+          width: headerWidth ? headerWidth : width,
           borderBottom: "1px solid rgba(255,255,255,0.3)",
           paddingRight: paddingRight,
           height: "100%",
@@ -165,7 +166,7 @@ const Header = ({ change, color }) => {
             <div className="nav-item px-4">
               <button
                 className="headerNav"
-                style={{ color: textColor }}
+                style={{ color: textColor, borderBottom: borderBottom }}
                 onClick={handleOnClick("realEstates")}
               >
                 Real Estate
@@ -397,7 +398,7 @@ const Header = ({ change, color }) => {
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
-                            color: textColor,
+                            color: "white",
                           }}
                           onClick={() => {
                             toogleOpen();
@@ -413,7 +414,7 @@ const Header = ({ change, color }) => {
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
-                            color: textColor,
+                            color: "white",
                           }}
                           onClick={() => {
                             toogleOpen();
@@ -625,7 +626,11 @@ const Header = ({ change, color }) => {
             </Modal> */}
             <div className="d-flex flex-row ">
               {user._id ? (
-                <button className="headerNav" onClick={handleSell}>
+                <button
+                  style={{ color: textColor }}
+                  className="headerNav"
+                  onClick={handleSell}
+                >
                   Sell
                 </button>
               ) : (
@@ -665,13 +670,13 @@ const Header = ({ change, color }) => {
                 <>
                   <div className="dropdown">
                     <button
-                      className="headerNav border-0 mt-0"
+                      className="headerNav mt-0"
                       style={{
-                        fontSize: "16px",
                         backgroundImage: "none",
                         backgroundColor: "transparent",
                         marginRight: "15px",
                         padding: "8px 20px",
+                        color: textColor,
                       }}
                     >
                       Hello, {user.firstName}
@@ -695,11 +700,12 @@ const Header = ({ change, color }) => {
                     </div>
                   </div>
                   <Button
+                    className="headerNav"
                     style={{
                       marginRight: "15px",
                       backgroundColor: "transparent",
-                      color: "black",
-                      borderColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -725,10 +731,11 @@ const Header = ({ change, color }) => {
                     {/* </Dropdown.Item> */}
                   </Button>
                   <Button
+                    className="headerNav"
                     style={{
                       backgroundColor: "transparent",
-                      color: "black",
-                      borderColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
                       marginRight: "10px",
                     }}
                     onClick={() => {
@@ -739,10 +746,11 @@ const Header = ({ change, color }) => {
                   </Button>
 
                   <Button
+                    className="headerNav"
                     style={{
                       backgroundColor: "transparent",
-                      color: "black",
-                      borderColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
                     }}
                   >
                     <VscGlobe size={25} />
