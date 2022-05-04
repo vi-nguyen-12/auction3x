@@ -118,17 +118,7 @@ const CarCard = ({
           {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
-          <button
-            onClick={toggleImage}
-            style={{
-              border: "none",
-              position: "absolute",
-              display: "flex",
-              marginLeft: "90%",
-              top: "10px",
-              background: "none",
-            }}
-          >
+          <button onClick={toggleImage} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (
@@ -227,7 +217,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",
@@ -391,9 +381,7 @@ const CarCard = ({
             onHide={toogleSignUp}
             contentclassname="custom-modal-style"
           >
-            <Modal.Body
-              className="sign-Up"
-            ></Modal.Body>
+            <Modal.Body className="sign-Up"></Modal.Body>
           </Modal>
           <Modal
             size="lg"

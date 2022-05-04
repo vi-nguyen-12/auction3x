@@ -21,7 +21,7 @@ import NumberFormat from "react-number-format";
 // import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
 // import CloseButton from "react-bootstrap/CloseButton";
 
-const Header = ({ change, color, headerWidth }) => {
+const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -151,12 +151,12 @@ const Header = ({ change, color, headerWidth }) => {
           backgroundColor: colors ? colors : color,
           width: headerWidth ? headerWidth : width,
           borderBottom: "1px solid rgba(255,255,255,0.3)",
-          paddingRight: paddingRight,
+          paddingRight: padRight ? padRight : paddingRight,
           height: "100%",
         }}
       >
         <div className="navbar-brand">
-          <Logo style={{ left: left }} href="/">
+          <Logo style={{ left: positionLeft ? positionLeft : left }} href="/">
             <img src="/images/newName.png" width={200} height={50} alt="" />
           </Logo>
         </div>
@@ -168,33 +168,37 @@ const Header = ({ change, color, headerWidth }) => {
                 className="headerNav"
                 style={{ color: textColor, borderBottom: borderBottom }}
                 onClick={handleOnClick("realEstates")}
+                id={colors === "white" ? "hover" : ""}
               >
                 Real Estate
               </button>
             </div>
             <div className="nav-item px-4">
               <button
-                style={{ color: textColor }}
+                style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
                 onClick={handleOnClick("cars")}
+                id={colors === "white" ? "hover" : ""}
               >
                 Car
               </button>
             </div>
             <div className="nav-item px-4">
               <button
-                style={{ color: textColor }}
+                style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
                 onClick={handleOnClick("jets")}
+                id={colors === "white" ? "hover" : ""}
               >
                 Jet
               </button>
             </div>
             <div className="nav-item px-4">
               <button
-                style={{ color: textColor }}
+                style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
                 onClick={handleOnClick("yachts")}
+                id={colors === "white" ? "hover" : ""}
               >
                 Yacht
               </button>
@@ -205,390 +209,6 @@ const Header = ({ change, color, headerWidth }) => {
               </button>
             </div> */}
           </div>
-          <form
-            className="form-inline my-2 my-lg-0"
-            style={{ display: "flex", paddingTop: 5 }}
-          >
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showConfirm}
-              onHide={toogleConfirmModal}
-              contentclassname="confirm"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{ color: "#D58F5C" }}
-                >
-                  Confirm Email
-                </Modal.Title>
-                <Modal.Title
-                  className="pt-4"
-                  style={{
-                    fontSize: "12px",
-                    color: "#D58F5C",
-                    position: "absolute",
-                    marginright: "10px",
-                    marginTop: "8px",
-                  }}
-                ></Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <ReconfirmEmail
-                  toogleConfirmModal={toogleConfirmModal}
-                  toogleSignIn={toogleSignIn}
-                />
-              </Modal.Body>
-            </Modal>
-            <Modal
-              size="md"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={forgotPass}
-              onHide={toogleForgotPass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Body
-                contentclassname="forgotPass"
-                className="forgot-modal"
-              >
-                <ForgotPass
-                  toogleForgotPass={toogleForgotPass}
-                  toogleChangePass={toogleChangePass}
-                />
-              </Modal.Body>
-            </Modal>
-            <Modal
-              size="md"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={forgotPass}
-              onHide={toogleForgotPass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Header closeButton>
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{
-                    color: "#D58F5C",
-                    fontSize: "30px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Forgot Password
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <ForgotPass
-                  toogleForgotPass={toogleForgotPass}
-                  toogleChangePass={toogleChangePass}
-                />
-              </Modal.Body>
-            </Modal>
-
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={changePass}
-              onHide={toogleChangePass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Body>
-                <ChangePass toogleChangePass={toogleChangePass} />
-              </Modal.Body>
-            </Modal>
-            <Modal
-              size="lg"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignIn}
-              onHide={toogleSignIn}
-              contentclassname="login"
-            >
-              <Modal.Body className="sign-In"></Modal.Body>
-            </Modal>
-
-            <Modal
-              size="lg"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignIn}
-              onHide={toogleSignIn}
-              contentclassname="login"
-            >
-              <Modal.Body>
-                <Login
-                  toogleSignUp={toogleSignUp}
-                  toogleSignIn={toogleSignIn}
-                  toogleButton={toogleButton}
-                  toogleForgotPass={toogleForgotPass}
-                  toogleConfirmModal={toogleConfirmModal}
-                />
-              </Modal.Body>
-            </Modal>
-
-            <Modal
-              size="lg"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignUp}
-              onHide={toogleSignUp}
-              contentclassname="custom-modal-style"
-            >
-              <Modal.Body className="sign-Up"></Modal.Body>
-            </Modal>
-
-            <Modal
-              size="lg"
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={showSignUp}
-              style={{ borderRadius: "30px" }}
-              onHide={toogleSignUp}
-              contentclassname="custom-modal-style"
-            >
-              <Modal.Body>
-                <SignUp
-                  toogleSignUp={toogleSignUp}
-                  toogleConfirmModal={toogleConfirmModal}
-                  toogleSignIn={toogleSignIn}
-                />
-              </Modal.Body>
-            </Modal>
-
-            <Modal show={open} onHide={toogleOpen} fullscreen>
-              <Button
-                className="close-button"
-                onClick={() => {
-                  toogleOpen();
-                }}
-              >
-                X
-              </Button>
-              <Modal.Body
-                style={{ backgroundColor: "#282828", padding: "150px" }}
-              >
-                <Table
-                  style={{ color: "white", fontSize: "30px" }}
-                  responsive
-                  borderless
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        {" "}
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            history.push("/realEstates");
-                          }}
-                        >
-                          REAL ESTATE
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="headerNav"
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            handleSell();
-                          }}
-                        >
-                          SELL
-                        </button>
-                      </td>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            if (user._id) {
-                              history.push("/Dashboard/Auctions/BidAuctions");
-                            }
-                          }}
-                        >
-                          MANAGED BID
-                        </button> */}
-                      </td>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          BROKER
-                        </button> */}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: textColor,
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            history.push("/cars");
-                          }}
-                        >
-                          CAR
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            if (user._id) {
-                              history.push("/dashboard");
-                            } else {
-                              toogleSignIn();
-                            }
-                          }}
-                        >
-                          DASHBOARD
-                        </button>
-                      </td>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          BUYER
-                        </button> */}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            history.push("/yachts");
-                          }}
-                        >
-                          YACHT
-                        </button>
-                      </td>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          SELLER
-                        </button> */}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            history.push("/jets");
-                          }}
-                        >
-                          JET
-                        </button>
-                      </td>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          CAREER
-                        </button> */}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          ABOUT US
-                        </button> */}
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Modal.Body>
-            </Modal>
-          </form>
         </Menu>
         {change === false ? (
           <>
@@ -627,6 +247,7 @@ const Header = ({ change, color, headerWidth }) => {
             <div className="d-flex flex-row ">
               {user._id ? (
                 <button
+                  id={colors === "white" ? "hover" : ""}
                   style={{ color: textColor }}
                   className="headerNav"
                   onClick={handleSell}
@@ -645,6 +266,7 @@ const Header = ({ change, color, headerWidth }) => {
                     fontWeight: "bold",
                     padding: "0 20px",
                   }}
+                  id={colors === "white" ? "hover" : ""}
                 >
                   Sell
                 </button>
@@ -676,8 +298,10 @@ const Header = ({ change, color, headerWidth }) => {
                         backgroundColor: "transparent",
                         marginRight: "15px",
                         padding: "8px 20px",
+                        fontWeight: "bold",
                         color: textColor,
                       }}
+                      id={colors === "white" ? "hover" : ""}
                     >
                       Hello, {user.firstName}
                     </button>
@@ -710,7 +334,8 @@ const Header = ({ change, color, headerWidth }) => {
                       alignItems: "center",
                       justifyContent: "center",
                     }}
-                    id="dropdown-basic-button"
+                    id={colors === "white" ? "hover" : ""}
+                    // id="dropdown-basic-button"
                     title={<IoWallet size={30} />}
                     onMouseEnter={() => setShowWallet(true)}
                     onMouseLeave={() => setShowWallet(false)}
@@ -738,6 +363,7 @@ const Header = ({ change, color, headerWidth }) => {
                       borderRadius: "0",
                       marginRight: "10px",
                     }}
+                    id={colors === "white" ? "hover" : ""}
                     onClick={() => {
                       toogleOpen();
                     }}
@@ -747,10 +373,12 @@ const Header = ({ change, color, headerWidth }) => {
 
                   <Button
                     className="headerNav"
+                    id={colors === "white" ? "hover" : ""}
                     style={{
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
+                      // paddingTop: "13px",
                     }}
                   >
                     <VscGlobe size={25} />
@@ -766,8 +394,10 @@ const Header = ({ change, color, headerWidth }) => {
                       alignItems: "center",
                       fontSize: "20px",
                     }}
+                    id={colors === "white" ? "hover" : ""}
                   >
                     <Button
+                      id={colors === "white" ? "hover" : ""}
                       className="signIn-btn"
                       style={{ color: textColor }}
                       variant="success"
@@ -777,6 +407,7 @@ const Header = ({ change, color, headerWidth }) => {
                     </Button>
                     <label style={{ color: textColor }}>|</label>
                     <Button
+                      id={colors === "white" ? "hover" : ""}
                       className="signUp-btn"
                       style={{ color: textColor }}
                       variant="success"
@@ -786,6 +417,7 @@ const Header = ({ change, color, headerWidth }) => {
                     </Button>
                   </div>
                   <Button
+                    id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
                     style={{
                       color: textColor,
@@ -802,6 +434,7 @@ const Header = ({ change, color, headerWidth }) => {
                   </Button>
 
                   <Button
+                    id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
                     style={{
                       height: "60px",
@@ -810,6 +443,7 @@ const Header = ({ change, color, headerWidth }) => {
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
+                      // paddingTop: "13px",
                     }}
                   >
                     <VscGlobe size={29} />
@@ -839,26 +473,28 @@ const Header = ({ change, color, headerWidth }) => {
             {user._id ? (
               <>
                 <Button
-                  className="sell_btn bg-transparent border-0 outline-none"
-                  onClick={handleSell}
+                  id={colors === "white" ? "hover" : ""}
+                  className="headerNav bg-transparent outline-none"
                   style={{
-                    color: "white",
-                    fontSize: "20px",
-                    fontWeight: "bold",
+                    borderRadius: "0",
+                    color: textColor,
                   }}
+                  onClick={handleSell}
                 >
                   Sell
                 </Button>
                 <div className="dropdown">
                   <button
-                    className="customButton border-0 mt-0"
+                    className="headerNav mt-0"
                     style={{
-                      fontSize: "16px",
+                      fontSize: "20px",
                       backgroundImage: "none",
-                      backgroundColor: "#fcba7d",
+                      backgroundColor: "transparent",
                       marginRight: "50px",
                       padding: "8px 20px",
+                      color: textColor,
                     }}
+                    id={colors === "white" ? "hover" : ""}
                   >
                     Hello, {user.firstName}
                   </button>
@@ -881,14 +517,16 @@ const Header = ({ change, color, headerWidth }) => {
                   </div>
                 </div>
                 <Button
+                  className="headerNav"
                   style={{
                     marginRight: "15px",
-                    backgroundColor: "#fcba7d",
-                    color: "black",
-                    borderColor: "transparent",
+                    backgroundColor: "transparent",
+                    color: textColor,
                     padding: "8px 20px",
+                    borderRadius: "0",
                   }}
-                  id="dropdown-basic-button"
+                  id={colors === "white" ? "hover" : ""}
+                  // id="dropdown-basic-button"
                   title={<IoWallet size={30} />}
                   onMouseEnter={() => setShowWallet(true)}
                   onMouseLeave={() => setShowWallet(false)}
@@ -909,10 +547,11 @@ const Header = ({ change, color, headerWidth }) => {
                   {/* </Dropdown.Item> */}
                 </Button>
                 <Button
+                  id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
                     backgroundColor: "transparent",
-                    color: "black",
+                    color: textColor,
                     borderRadius: "0",
                     marginRight: "10px",
                   }}
@@ -924,11 +563,13 @@ const Header = ({ change, color, headerWidth }) => {
                 </Button>
 
                 <Button
+                  id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
                     backgroundColor: "transparent",
-                    color: "black",
+                    color: textColor,
                     borderRadius: "0",
+                    // paddingTop: "13px",
                   }}
                 >
                   <VscGlobe size={25} />
@@ -942,8 +583,10 @@ const Header = ({ change, color, headerWidth }) => {
                     backgroundColor: "transparent",
                     marginRight: "50px",
                   }}
+                  id={colors === "white" ? "hover" : ""}
                 >
                   <Button
+                    id={colors === "white" ? "hover" : ""}
                     className="signIn-btn"
                     style={{
                       fontSize: 18,
@@ -959,6 +602,7 @@ const Header = ({ change, color, headerWidth }) => {
                   </Button>
                   <label style={{ color: textColor }}>|</label>
                   <Button
+                    id={colors === "white" ? "hover" : ""}
                     className="signUp-btn"
                     style={{
                       fontSize: 18,
@@ -974,6 +618,7 @@ const Header = ({ change, color, headerWidth }) => {
                   </Button>
                 </div>
                 <Button
+                  id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
                     backgroundColor: "transparent",
@@ -989,11 +634,13 @@ const Header = ({ change, color, headerWidth }) => {
                 </Button>
 
                 <Button
+                  id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
+                    // paddingTop: "13px",
                   }}
                 >
                   <VscGlobe size={25} />
@@ -1002,6 +649,381 @@ const Header = ({ change, color, headerWidth }) => {
             )}
           </div>
         )}
+
+        {/* All Modals */}
+        <Modal
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showConfirm}
+          onHide={toogleConfirmModal}
+          contentclassname="confirm"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              style={{ color: "#D58F5C" }}
+            >
+              Confirm Email
+            </Modal.Title>
+            <Modal.Title
+              className="pt-4"
+              style={{
+                fontSize: "12px",
+                color: "#D58F5C",
+                position: "absolute",
+                marginright: "10px",
+                marginTop: "8px",
+              }}
+            ></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ReconfirmEmail
+              toogleConfirmModal={toogleConfirmModal}
+              toogleSignIn={toogleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="md"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={forgotPass}
+          onHide={toogleForgotPass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Body contentclassname="forgotPass" className="forgot-modal">
+            <ForgotPass
+              toogleForgotPass={toogleForgotPass}
+              toogleChangePass={toogleChangePass}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="md"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={forgotPass}
+          onHide={toogleForgotPass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              style={{
+                color: "#D58F5C",
+                fontSize: "30px",
+                fontWeight: "bold",
+              }}
+            >
+              Forgot Password
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ForgotPass
+              toogleForgotPass={toogleForgotPass}
+              toogleChangePass={toogleChangePass}
+            />
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={changePass}
+          onHide={toogleChangePass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Body>
+            <ChangePass toogleChangePass={toogleChangePass} />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignIn}
+          onHide={toogleSignIn}
+          contentclassname="login"
+        >
+          <Modal.Body className="sign-In"></Modal.Body>
+        </Modal>
+
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignIn}
+          onHide={toogleSignIn}
+          contentclassname="login"
+        >
+          <Modal.Body>
+            <Login
+              toogleSignUp={toogleSignUp}
+              toogleSignIn={toogleSignIn}
+              toogleButton={toogleButton}
+              toogleForgotPass={toogleForgotPass}
+              toogleConfirmModal={toogleConfirmModal}
+            />
+          </Modal.Body>
+        </Modal>
+
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignUp}
+          onHide={toogleSignUp}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body className="sign-Up"></Modal.Body>
+        </Modal>
+
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignUp}
+          style={{ borderRadius: "30px" }}
+          onHide={toogleSignUp}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body>
+            <SignUp
+              toogleSignUp={toogleSignUp}
+              toogleConfirmModal={toogleConfirmModal}
+              toogleSignIn={toogleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+
+        <Modal show={open} onHide={toogleOpen} fullscreen>
+          <Button
+            className="close-button"
+            onClick={() => {
+              toogleOpen();
+            }}
+          >
+            X
+          </Button>
+          <Modal.Body style={{ backgroundColor: "#282828", padding: "150px" }}>
+            <Table
+              style={{ color: "white", fontSize: "30px" }}
+              responsive
+              borderless
+            >
+              <tbody>
+                <tr>
+                  <td>
+                    {" "}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        history.push("/realEstates");
+                      }}
+                    >
+                      REAL ESTATE
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        handleSell();
+                      }}
+                    >
+                      SELL
+                    </button>
+                  </td>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                            if (user._id) {
+                              history.push("/Dashboard/Auctions/BidAuctions");
+                            }
+                          }}
+                        >
+                          MANAGED BID
+                        </button> */}
+                  </td>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          BROKER
+                        </button> */}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        history.push("/cars");
+                      }}
+                    >
+                      CAR
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        if (user._id) {
+                          history.push("/dashboard");
+                        } else {
+                          toogleSignIn();
+                        }
+                      }}
+                    >
+                      DASHBOARD
+                    </button>
+                  </td>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          BUYER
+                        </button> */}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        history.push("/yachts");
+                      }}
+                    >
+                      YACHT
+                    </button>
+                  </td>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          SELLER
+                        </button> */}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        history.push("/jets");
+                      }}
+                    >
+                      JET
+                    </button>
+                  </td>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          CAREER
+                        </button> */}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {/* <button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "white",
+                          }}
+                          onClick={() => {
+                            toogleOpen();
+                          }}
+                        >
+                          ABOUT US
+                        </button> */}
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </Modal.Body>
+        </Modal>
       </nav>
     </Nav>
   );

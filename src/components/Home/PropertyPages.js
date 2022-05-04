@@ -84,7 +84,19 @@ position: relative;
 }
 `;
 
-const PropertyPages = ({ toogleChange }) => {
+const PropertyPages = ({
+  toogleChange,
+  setHeaderWidth,
+  setPositionLeft,
+  setPadRight,
+  toogleShow,
+}) => {
+  useEffect(() => {
+    toogleShow(true);
+    setHeaderWidth("100vw");
+    setPositionLeft("20%");
+    setPadRight("3rem");
+  }, []);
   const path = window.location.pathname;
   return (
     <>

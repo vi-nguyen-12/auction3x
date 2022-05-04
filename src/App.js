@@ -98,6 +98,8 @@ function App() {
   const [query, setQuery] = useState("");
   const [show, setShow] = useState(true);
   const [headerWidth, setHeaderWidth] = useState("");
+  const [positionLeft, setPositionLeft] = useState("");
+  const [padRight, setPadRight] = useState("");
   const toogleShow = (value) => {
     setShow(value);
   };
@@ -123,7 +125,13 @@ function App() {
     <div className="App" style={{ background: bodyColor }}>
       <ButtontoTop />{" "}
       <Router>
-        <Header color={color} change={change} headerWidth={headerWidth} />
+        <Header
+          color={color}
+          change={change}
+          headerWidth={headerWidth}
+          positionLeft={positionLeft}
+          padRight={padRight}
+        />
         <ScrollTop />
 
         <Switch>
@@ -135,6 +143,8 @@ function App() {
                   toogleShow={toogleShow}
                   bodyColorChange={bodyColorChange}
                   setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
                 />
               </div>
             </Route>
@@ -147,6 +157,8 @@ function App() {
                 toogleShow={toogleShow}
                 bodyColorChange={bodyColorChange}
                 setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
               />
             </div>
           </Route>
@@ -155,6 +167,10 @@ function App() {
             <DisplayAuctions
               colorChange={colorChange}
               toogleChange={toogleChange}
+              setHeaderWidth={setHeaderWidth}
+              setPositionLeft={setPositionLeft}
+              setPadRight={setPadRight}
+              toogleShow={toogleShow}
             />
           </Route>
 
@@ -162,24 +178,40 @@ function App() {
             <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
+              setHeaderWidth={setHeaderWidth}
+              setPositionLeft={setPositionLeft}
+              setPadRight={setPadRight}
+              toogleShow={toogleShow}
             />
           </Route>
           <Route exact path="/Cars">
             <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
+              setHeaderWidth={setHeaderWidth}
+              setPositionLeft={setPositionLeft}
+              setPadRight={setPadRight}
+              toogleShow={toogleShow}
             />
           </Route>
           <Route exact path="/Jets">
             <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
+              setHeaderWidth={setHeaderWidth}
+              setPositionLeft={setPositionLeft}
+              setPadRight={setPadRight}
+              toogleShow={toogleShow}
             />
           </Route>
           <Route exact path="/Yachts">
             <PropertyPages
               colorChange={colorChange}
               toogleChange={toogleChange}
+              setHeaderWidth={setHeaderWidth}
+              setPositionLeft={setPositionLeft}
+              setPadRight={setPadRight}
+              toogleShow={toogleShow}
             />
           </Route>
           {user._id && (
@@ -190,6 +222,8 @@ function App() {
                 toogleChange={toogleChange}
                 bodyColorChange={bodyColorChange}
                 setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
               />
             </Route>
           )}

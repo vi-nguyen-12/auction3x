@@ -105,17 +105,7 @@ function SavedAuctionsCard({
               cursor: "pointer",
             }}
           />
-          <button
-            onClick={toggleImage}
-            style={{
-              border: "none",
-              position: "absolute",
-              display: "flex",
-              marginLeft: "90%",
-              top: "10px",
-              background: "none",
-            }}
-          >
+          <button onClick={toggleImage} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (
@@ -152,7 +142,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-                new Date().toISOString() < endRegister ? (
+              new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}

@@ -119,7 +119,6 @@ const UpcomingJetCard = ({
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          {/* <Link to={`/Display/${id}`}> */}
           <Card.Img
             onClick={handleDisplay}
             variant="top"
@@ -132,19 +131,7 @@ const UpcomingJetCard = ({
               cursor: "pointer",
             }}
           />
-          {/* </Link> */}
-          <button
-            onClick={toggleImage}
-            // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
-            style={{
-              border: "none",
-              position: "absolute",
-              display: "flex",
-              marginLeft: "90%",
-              top: "10px",
-              background: "none",
-            }}
-          >
+          <button onClick={toggleImage} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (

@@ -16,6 +16,14 @@
   background-color: #fcba7d;
 }
 
+#hover:hover {
+  border-bottom: 1px solid black;
+}
+
+#hover:focus {
+  border-bottom: 2px solid black;
+}
+
 .headerNav {
   background-color: transparent;
   border: none;
@@ -26,7 +34,7 @@
 
 .headerNav:hover {
   color: #fcba7d;
-  border-bottom: white solid 1px ;
+  border-bottom: white solid 1px;
 }
 
 .headerNav:focus {

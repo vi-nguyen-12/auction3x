@@ -8,13 +8,23 @@ import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
 import io from "socket.io-client";
 
-function DisplayAuctions({ toogleChange }) {
+function DisplayAuctions({
+  toogleChange,
+  setHeaderWidth,
+  setPositionLeft,
+  setPadRight,
+  toogleShow,
+}) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    toogleShow(true);
+    setHeaderWidth("100vw");
+    setPositionLeft("20%");
+    setPadRight("3rem");
     setLoader(true);
     authService.getAuction(id).then((res) => {
       if (res.data.error) {

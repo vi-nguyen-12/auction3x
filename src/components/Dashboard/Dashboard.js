@@ -19,9 +19,19 @@ import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
 
-function Dashboard({ toogleChange, toogleShow, colorChange, bodyColorChange, setHeaderWidth }) {
+function Dashboard({
+  toogleChange,
+  toogleShow,
+  colorChange,
+  bodyColorChange,
+  setHeaderWidth,
+  setPositionLeft,
+  setPadRight,
+}) {
   useEffect(() => {
     setHeaderWidth("100vw");
+    setPositionLeft("20%");
+    setPadRight("3rem");
     colorChange("black");
     bodyColorChange("#ffefe3");
     toogleChange();
