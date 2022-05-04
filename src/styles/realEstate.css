@@ -143,6 +143,7 @@
   border-radius: 5px;
   border: white solid 1px;
   padding: 10px;
+  margin: 10px;
 }
 
 .galleryButton {
@@ -150,6 +151,7 @@
   border-radius: 5px;
   border: black solid 1px;
   padding: 10px;
+  margin: 10px;
   color: white;
 }
 .searchBar {
