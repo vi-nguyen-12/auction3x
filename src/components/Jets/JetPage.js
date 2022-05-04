@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function JetPage({ toogleChange }) {
+function JetPage({ toogleChange, setImgJet, toggleImgJet }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -105,6 +105,17 @@ function JetPage({ toogleChange }) {
         alert(err);
       });
   }, []);
+  useEffect(() => {
+    if (onGoingAuctions && upcomingAuctions) {
+      const Arr = [...onGoingAuctions, ...upcomingAuctions];
+      const imageUrl = Arr.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImgJet(imageUrl);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
   let settings = {
     dots: false,
     infinite: true,

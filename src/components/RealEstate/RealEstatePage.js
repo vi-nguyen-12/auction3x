@@ -8,13 +8,7 @@ import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 import authService from "../../services/authServices";
-import CloseButton from "react-bootstrap/CloseButton";
-import { GoogleMap, Marker } from "@react-google-maps/api";
 
-const mapStyles = {
-  height: "90%",
-  width: "100%",
-};
 const Carousel = styled(Slider)`
   //height: 30vh;
   // overflow: hidden;
@@ -87,13 +81,10 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toogleChange }) {
+function RealEstatePage({ toogleChange, toogleImage, setImg }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
-  const [showMap, setShowMap] = useState(false);
-  const [location, setLocation] = useState([]);
-  const toggleMap = () => setShowMap(!showMap);
-  const Arr = [...onGoingAuctions, ...upcomingAuctions];
+
   useEffect(() => {
     toogleChange();
     authService
@@ -113,6 +104,18 @@ function RealEstatePage({ toogleChange }) {
         alert(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (onGoingAuctions && upcomingAuctions) {
+      const Arr = [...onGoingAuctions, ...upcomingAuctions];
+      const imageUrl = Arr.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImg(imageUrl);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
 
   let settings = {
     dots: false,
@@ -150,77 +153,9 @@ function RealEstatePage({ toogleChange }) {
 
   return (
     <>
-      <Row className="realEstateFilter">
-        <Col md={9} >
-          <Row>
-            {/* <div className="searchBar"> */}
-            <Col md={3} >
-              <div className=" RealButton ">
-                <input type="text" placeholder="Enter your Location" className="searchBar" />
-              </div>
-            </Col>
-
-            {/* </div> */}
-
-            <Col >
-              <select className=" RealButton ">
-                <option>Auction Type</option>
-                <option href="#">Ongoing</option>
-                <option href="#">Upcoming</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Property Type</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Price</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Bldg Siize</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>More Filter</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Sort</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-          </Row>
-        </Col>
-        <Col md={3} className="filterResult">
-          <Row>
-            <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
-              About 151051 results
-            </Col>
-            <Col md={2}>
-              <button className="mapButton" onClick={toggleMap} >Map</button>
-            </Col>
-            <Col md={2}>
-              <button className="galleryButton">Gallery</button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
       <div className="mt-5">
+
+
         <Col md={12} className="m-auto pt-2">
           <Row>
             <h1 style={{ marginBottom: "80px" }}>ONGOING AUCTIONS</h1>
@@ -273,37 +208,6 @@ function RealEstatePage({ toogleChange }) {
           </Row>
         </Col>
       </div>
-      {/* Map Button */}
-      <Modal
-        backdrop="static"
-        keyboard={false}
-        size="xl"
-        show={showMap}
-        onHide={toggleMap}
-        centered
-      >
-        <Modal.Body style={{ height: "700px" }}>
-          <div>
-            <CloseButton
-              className="modal-close"
-              onClick={toggleMap}
-            />
-          </div>
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            zoom={18}
-            center={location}
-          >
-            <Marker position={location} />
-          </GoogleMap>
-          <p>
-            {/* {
-              property.property.details.property_address
-                .formatted_street_address
-            } */}
-          </p>
-        </Modal.Body>
-      </Modal>
     </>
   );
 }
