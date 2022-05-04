@@ -5,6 +5,7 @@ import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";
 import { useParams } from "react-router-dom";
+import SellHeader from "./SellHeader";
 
 const Agree = ({
   toogleStep,
@@ -295,40 +296,10 @@ const Agree = ({
       }}
       className="agree-content"
     >
-      <div className="sell-top">
-        <div className="circle-1">
-          <p className="text">01</p>
-          <span className="spnn">Select Catagory</span>
-        </div>
-        <div className="line-1"></div>
-        <div className="circle-2">
-          <p className="text">02</p>
-          <span className="spnn">Listing Details</span>
-        </div>
-        <div className="line-2"></div>
-        <div className="circle-3">
-          <p className="text">03</p>
-          <span className="spnn">Property Details</span>
-        </div>
-        <div className="line-2"></div>
-        <div className="circle-3">
-          <p className="text">04</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line-3"></div>
-        <div className="circle-4">
-          <p className="text">05</p>
-          <span className="spnn">Agreement</span>
-        </div>
-        {/* <div class="line-4"></div>
-        <div class="circle-5">
-          <p class="text">06</p>
-          <span className="spnn">Agreement</span>
-        </div> */}
-      </div>
+      <SellHeader step={step} />
       <div className="agree-sell-bottom">
         <div className="header">
-          <h2 style={{ color: "black", fontWeight: "bold" }}>
+          <h2 style={{ color: "black", fontWeight: "bold", marginTop:"20px" }}>
             SELLER AGREEMENT
           </h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}

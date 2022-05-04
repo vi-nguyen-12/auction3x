@@ -73,13 +73,13 @@ const DropdownLink = styled(Link)`
 const SubMenu = ({ item, path }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
-  const [color, setColor] = useState("#b77b50");
+  const [color] = useState("#b77b50");
   const handleOnclick = () => {
     item.subNav && showSubnav();
   };
   return (
     <>
-      <SidebarLink to={item.path} onClick={handleOnclick}>
+      <SidebarLink to={item.path} href={item.path} onClick={handleOnclick}>
         <SidebarLabel
           style={{
             color: item.path === path ? color : "none",

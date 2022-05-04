@@ -189,7 +189,7 @@ function SavedAuctionsCard({
                 new Date().toISOString() < endRegister ? (
                 <Col md={1} style={{ width: "50%" }}>
                   <div style={{ fontSize: "12px", width: "200px" }}>
-                    <AuctionTimer time={endRegister} />
+                    <AuctionTimer time={endRegister} id={id} />
                   </div>
                 </Col>
               ) : new Date().toISOString() < auctionStartDate &&
@@ -209,13 +209,13 @@ function SavedAuctionsCard({
                 new Date().toISOString() < auctionEndDate ? (
                 <Col md={1} style={{ width: "50%" }}>
                   <div style={{ fontSize: "12px", width: "200px" }}>
-                    <AuctionTimer time={auctionEndDate} />
+                    <AuctionTimer time={auctionEndDate} id={id} />
                   </div>
                 </Col>
               ) : (
                 <Col md={1} style={{ width: "50%" }}>
                   <div style={{ fontSize: "12px", width: "200px" }}>
-                    <AuctionTimer time={auctionEndDate} />
+                    <AuctionTimer time={auctionEndDate} id={id} />
                   </div>
                 </Col>
               )}

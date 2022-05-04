@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, Row, Col } from "react-bootstrap";
 import { BsFillHouseFill } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
+import SellHeader from "./SellHeader";
 import "../../styles/SellRegister.css";
 // create step bar
 
@@ -32,32 +33,7 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
       }}
       className="box-content"
     >
-      <div className="sell-top">
-        <div className="circle-1">
-          <p className="text">01</p>
-          <span className="spnn">Select Catagory</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">02</p>
-          <span className="spnn">Listing Details</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">03</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">04</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">05</p>
-          <span className="spnn">Agreement</span>
-        </div>
-      </div>
+      <SellHeader />
       <div className="sell-bottom">
         <Table borderless responsive="lg" style={{ display: "grid" }}>
           <thead>

@@ -52,7 +52,9 @@ function Dashboard({
         >
           <DashHeader location={location.pathname.split("/")[1]} />
           <Switch>
-            <Route exact path="/Dashboard" component={Dash} />
+            <Route exact path="/Dashboard">
+              <Dash />
+            </Route>
             <Route exact path="/Dashboard/Messaging" component={Messaging} />
             <Route
               exact

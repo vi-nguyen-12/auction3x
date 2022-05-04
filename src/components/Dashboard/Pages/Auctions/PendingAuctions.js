@@ -15,12 +15,13 @@ function PendingAuctions() {
   const toogleDocuments = () => setShowDocuments(!showDocuments);
 
   useEffect(() => {
-    authService.getBuyerPendingAuctions(user._id).then((res) => {
-      setPendingAuctions(res.data);
-    });
+    const getBuyerPendingAuctions = async () => {
+      authService.getBuyerPendingAuctions(user._id).then((res) => {
+        setPendingAuctions(res.data);
+      });
+    };
+    getBuyerPendingAuctions();
   }, []);
-
-  console.log(PendingAuctions);
 
   return (
     <>

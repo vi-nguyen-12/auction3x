@@ -4,7 +4,8 @@ import { Table } from "react-bootstrap";
 import authService from "../../services/authServices";
 import "../../styles/Timers.css";
 
-const AuctionTimer = ({ time, id }) => {
+const AuctionTimer = ({ time, id, toogleAuction }) => {
+  console.log(id);
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -24,6 +25,7 @@ const AuctionTimer = ({ time, id }) => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       if (distance < 0) {
+        toogleAuction();
         authService.auctionResult(id).then((res) => {
           console.log(res);
         });

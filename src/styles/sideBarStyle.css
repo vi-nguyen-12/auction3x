@@ -31,3 +31,8 @@ a:after {
   color: #b77b50;
   border-bottom: 4px solid #b77b50;
 }
+
+#activeSideBar {
+  color: #b77b50;
+  border-left: 4px solid #b77b50;
+}

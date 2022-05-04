@@ -22,6 +22,7 @@ const CarCard = ({
   auctionEndDate,
   reserveMet,
 }) => {
+  console.log(id);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
@@ -174,6 +175,7 @@ const CarCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
+                            id={id}
                             time={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />
