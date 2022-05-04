@@ -190,6 +190,7 @@ const YachtCard = ({
                       <Col md={1} style={{ width: "50%" }}>
                         <div style={{ fontSize: "12px", width: "200px" }}>
                           <AuctionTimer
+                            id={id}
                             time={auctionEndDate}
                             toogleAuction={toogleAuction}
                           />

@@ -8,6 +8,8 @@ import { MdClose } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import SellHeader from "./SellHeader";
+import Sell from "./SellWelcome";
 
 const UploadForm = ({
   toogleStep,
@@ -252,37 +254,7 @@ const UploadForm = ({
       }}
       className="upload-box"
     >
-      <div className="sell-top">
-        <div className="circle-1">
-          <p className="text">01</p>
-          <span className="spnn">Select Catagory</span>
-        </div>
-        <div className="line-1"></div>
-        <div className="circle-2">
-          <p className="text">02</p>
-          <span className="spnn">Listing Details</span>
-        </div>
-        <div className="line-2"></div>
-        <div className="circle-3">
-          <p className="text">03</p>
-          <span className="spnn">Property Details</span>
-        </div>
-        <div className="line-3"></div>
-        <div className="circle-4">
-          <p className="text">04</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">05</p>
-          <span className="spnn">Agreement</span>
-        </div>
-        {/* <div class="line"></div>
-        <div class="circle">
-          <p class="text">06</p>
-          <span className="spnn">Agreement</span>
-        </div> */}
-      </div>
+      <SellHeader step={step} />
       <div className="sell-bottom">
         <div className="listDetails-title">
           <h2 style={{ color: "black", fontWeight: "bold" }}>

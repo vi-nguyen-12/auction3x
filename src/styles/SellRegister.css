@@ -24,7 +24,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   height: 600px;
-  width: 1000px;
+  width: 75vw;
   top: 50px;
 }
 .pre-btn {
@@ -84,7 +84,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   height: 600px;
-  width: 1000px;
+  width: 75vw;
   top: 50px;
 }
 
@@ -99,7 +99,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   height: 1800px;
-  width: 1000px;
+  width: 75vw;
   top: 50px;
 }
 
@@ -115,7 +115,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
   height: 580px;
-  width: 1000px;
+  width: 75vw;
   top: 50px;
 }
 /*Fee Form*/
@@ -143,9 +143,9 @@
   border: 1px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 10px 20px;
   height: 1000px;
-  width: 850px;
+  width: 75vw;
   top: 50px;
 }
 
@@ -155,12 +155,13 @@
 
 .sell-top {
   width: 100%;
-  height: 100px;
   border: 0;
-  border-bottom: 1px solid #efd3bf;
+  border-bottom: 2px solid #efd3bf;
   position: absolute;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 20px 0 !important;
 }
 
 .sell-bottom {
@@ -359,23 +360,44 @@ ul.dashed > li:before {
 
 /* sell top */
 
+.sell-top-col {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.sell-top-col-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .circle {
   display: flex;
   width: 50px;
   height: 50px;
-  background-color: rgb(238, 238, 238);
   border-radius: 50%;
+  border: 2px solid rgba(109, 109, 109, 0.1);
+  background: #ffffff;
   margin: auto;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 .circle-1 {
   background-color: #b77b50;
-  display: flex;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  z-index: 1;
 }
-.circle-2 {
+/* .circle-2 {
   background-color: #b77b50;
   display: flex;
   width: 50px;
@@ -406,25 +428,26 @@ ul.dashed > li:before {
   height: 50px;
   border-radius: 50%;
   margin: auto;
-}
+} */
 
 .line {
-  width: 8%;
-  height: 4px;
-  background-color: #f1f1f1;
-  margin-top: 48px !important;
-  display: flex;
-  align-items: center;
+  position: absolute;
+  width: 280px;
+  height: 5px;
+  background: #6d6d6d;
+  margin-top: -15px;
+  opacity: 0.1;
+  z-index: 0;
 }
 .line-1 {
-  width: 8%;
-  height: 2px;
+  position: absolute;
+  width: 280px;
+  height: 5px;
+  margin-top: -15px;
   background-color: #b77b50;
-  margin-top: 48px !important;
-  display: flex;
-  align-items: center;
+  z-index: 0;
 }
-.line-2 {
+/* .line-2 {
   width: 8%;
   height: 2px;
   background-color: #b77b50;
@@ -439,15 +462,12 @@ ul.dashed > li:before {
   margin-top: 48px !important;
   display: flex;
   align-items: center;
-}
+} */
 
 .spnn {
-  margin-left: 2px;
+  text-align: center;
   font-size: 12px;
   font-weight: bold;
-  position: absolute;
-  bottom: 5px;
-  align-content: center;
   color: #6d6d6d;
 }
 #status p {

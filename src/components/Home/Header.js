@@ -918,7 +918,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       onClick={() => {
                         toogleOpen();
                         if (user._id) {
-                          history.push("/dashboard");
+                          history.push("/Dashboard");
                         } else {
                           toogleSignIn();
                         }

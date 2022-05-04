@@ -3,10 +3,10 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-import 'react-phone-input-2/lib/bootstrap.css'
-
+import PhoneInput from "react-phone-input-2";
+import SellHeader from "./SellHeader";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 function Ownership({
   toogleStep,
@@ -18,7 +18,6 @@ function Ownership({
   propId,
   ownership,
 }) {
-  console.log(ownership);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -168,8 +167,6 @@ function Ownership({
     }
   }, [params.step]);
 
-  console.log(phone);
-
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
@@ -208,37 +205,7 @@ function Ownership({
   };
   return (
     <div className="upload-box">
-      <div className="sell-top">
-        <div className="circle-1">
-          <p className="text">01</p>
-          <span className="spnn">Select Catagory</span>
-        </div>
-        <div className="line-1"></div>
-        <div className="circle-2">
-          <p className="text">02</p>
-          <span className="spnn">Listing Details</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">03</p>
-          <span className="spnn">Property Details</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">04</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">05</p>
-          <span className="spnn">Agreement</span>
-        </div>
-        {/* <div class="line"></div>
-      <div class="circle">
-        <p class="text">06</p>
-        <span className="spnn">Agreement</span>
-      </div> */}
-      </div>
+      <SellHeader step={step} />
       <div className="sell-bottom">
         <Container>
           <div
@@ -341,9 +308,13 @@ function Ownership({
                     country={'us'}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
-                      phone ? phone : ownership ? ownership.details.phone : null}
-                    inputStyle={{ width: '100%' }}
-                    buttonStyle={{ border: "2px solid #d58f5c", borderRight: "none" }}
+                      phone ? phone : ownership ? ownership.details.phone : null
+                    }
+                    inputStyle={{ width: "100%" }}
+                    buttonStyle={{
+                      border: "2px solid #d58f5c",
+                      borderRight: "none",
+                    }}
                     onChange={setPhone}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -507,9 +478,13 @@ function Ownership({
                     country={'us'}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
-                      phone ? phone : ownership ? ownership.details.phone : null}
-                    inputStyle={{ width: '100%' }}
-                    buttonStyle={{ border: "2px solid #d58f5c", borderRight: "none" }}
+                      phone ? phone : ownership ? ownership.details.phone : null
+                    }
+                    inputStyle={{ width: "100%" }}
+                    buttonStyle={{
+                      border: "2px solid #d58f5c",
+                      borderRight: "none",
+                    }}
                     onChange={setPhone}
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>

@@ -5,6 +5,7 @@ import RealEstateDocus from "../RealEstate/RealEstateDocus";
 import CarDocus from "../Cars/CarDocus";
 import YachtDocus from "../Yachts/YachtDocus";
 import JetDocus from "../Jets/JetDocus";
+import SellHeader from "./SellHeader";
 
 const DocumentsUpload = ({
   toogleStep,
@@ -23,37 +24,7 @@ const DocumentsUpload = ({
 }) => {
   return (
     <Container className="upload-box-docu">
-      <Row className="sell-top">
-        <div className="circle-1">
-          <p className="text">01</p>
-          <span className="spnn">Select Catagory</span>
-        </div>
-        <div className="line-1"></div>
-        <div className="circle-2">
-          <p className="text">02</p>
-          <span className="spnn">Listing Details</span>
-        </div>
-        <div className="line-2"></div>
-        <div className="circle-3">
-          <p className="text">03</p>
-          <span className="spnn">Property Details</span>
-        </div>
-        <div className="line-3"></div>
-        <div className="circle-4">
-          <p className="text">04</p>
-          <span className="spnn">Upload Documents</span>
-        </div>
-        <div className="line"></div>
-        <div className="circle">
-          <p className="text">05</p>
-          <span className="spnn">Agreement</span>
-        </div>
-        {/* <div class="line"></div>
-        <div class="circle">
-          <p class="text">06</p>
-          <span className="spnn">Agreement</span>
-        </div> */}
-      </Row>
+      <SellHeader step={step} />
       {propertyType === "real-estate" ? (
         <RealEstateDocus
           toogleStep={toogleStep}

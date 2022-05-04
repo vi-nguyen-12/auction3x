@@ -67,7 +67,6 @@ const MultiSellForm = ({
 
   const [sellStep, setSellStep] = useState(0);
   const toogleSellStep = (sellStep) => setSellStep(sellStep);
-  console.log(ownership);
   useEffect(() => {
     setHeaderWidth("100vw");
     setPositionLeft("20%");
