@@ -132,17 +132,7 @@ const YachtCard = ({
           {reserveMet === true && user._id && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
-          <button
-            onClick={toggleImage}
-            style={{
-              border: "none",
-              position: "absolute",
-              display: "flex",
-              marginLeft: "90%",
-              top: "10px",
-              background: "none",
-            }}
-          >
+          <button onClick={toggleImage} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (

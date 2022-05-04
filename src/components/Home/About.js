@@ -1,10 +1,32 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Modal } from "react-bootstrap";
+import Login from "../Users/Login";
+import ForgotPass from "../Users/ForgotPass";
+import ChangePass from "../Users/ChangePass";
+import ReconfirmEmail from "../Users/ReconfirmEmail";
+import SignUp from "../Users/SignUp";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../../styles/About.css";
 
 const About = () => {
+  const user = useSelector((state) => state.user);
+  const [forgotPass, popForgotPass] = useState(false);
+  const [changePass, popChangePass] = useState(false);
+  const [showButton, popButton] = useState(false);
+  const [showConfirm, popupConfirm] = useState(false);
+  const [showSignIn, popSignIn] = useState(false);
+  const [showSignUp, popUpSignUp] = useState(false);
+  const toogleChangePass = () => popChangePass(!changePass);
+  const toogleButton = () => popButton(!showButton);
+  const toogleForgotPass = () => popForgotPass(!forgotPass);
+  const toogleSignIn = () => popSignIn(!showSignIn);
+  const toogleSignUp = () => popUpSignUp(!showSignUp);
+  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
+  const history = useHistory();
+
   return (
-    // <div className="banner-section">
     <>
       <Row className="banner-container">
         <Col
@@ -28,9 +50,21 @@ const About = () => {
           </p>
 
           <div className="button-container">
-            <button>BUY</button>
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "auto" });
+              }}
+            >
+              BUY
+            </button>
             <div className="side-button">
-              <button>SELL</button>
+              <button
+                onClick={() => {
+                  user._id ? history.push("/MultiSellForm") : toogleSignIn();
+                }}
+              >
+                SELL
+              </button>
             </div>
           </div>
         </Col>
@@ -81,8 +115,168 @@ const About = () => {
           </div>
         </Col>
       </Row>
+
+      <Modal
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showConfirm}
+        onHide={toogleConfirmModal}
+        contentclassname="confirm"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{ color: "#D58F5C" }}
+          >
+            Confirm Email
+          </Modal.Title>
+          <Modal.Title
+            className="pt-4"
+            style={{
+              fontSize: "12px",
+              color: "#D58F5C",
+              position: "absolute",
+              marginright: "10px",
+              marginTop: "8px",
+            }}
+          ></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ReconfirmEmail
+            toogleConfirmModal={toogleConfirmModal}
+            toogleSignIn={toogleSignIn}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="md"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={forgotPass}
+        onHide={toogleForgotPass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Body contentclassname="forgotPass" className="forgot-modal">
+          <ForgotPass
+            toogleForgotPass={toogleForgotPass}
+            toogleChangePass={toogleChangePass}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="md"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={forgotPass}
+        onHide={toogleForgotPass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{
+              color: "#D58F5C",
+              fontSize: "30px",
+              fontWeight: "bold",
+            }}
+          >
+            Forgot Password
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ForgotPass
+            toogleForgotPass={toogleForgotPass}
+            toogleChangePass={toogleChangePass}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={changePass}
+        onHide={toogleChangePass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Body>
+          <ChangePass toogleChangePass={toogleChangePass} />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignIn}
+        onHide={toogleSignIn}
+        contentclassname="login"
+      >
+        <Modal.Body className="sign-In"></Modal.Body>
+      </Modal>
+
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignIn}
+        onHide={toogleSignIn}
+        contentclassname="login"
+      >
+        <Modal.Body>
+          <Login
+            toogleSignUp={toogleSignUp}
+            toogleSignIn={toogleSignIn}
+            toogleButton={toogleButton}
+            toogleForgotPass={toogleForgotPass}
+            toogleConfirmModal={toogleConfirmModal}
+          />
+        </Modal.Body>
+      </Modal>
+
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignUp}
+        onHide={toogleSignUp}
+        contentclassname="custom-modal-style"
+      >
+        <Modal.Body className="sign-Up"></Modal.Body>
+      </Modal>
+
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignUp}
+        style={{ borderRadius: "30px" }}
+        onHide={toogleSignUp}
+        contentclassname="custom-modal-style"
+      >
+        <Modal.Body>
+          <SignUp
+            toogleSignUp={toogleSignUp}
+            toogleConfirmModal={toogleConfirmModal}
+            toogleSignIn={toogleSignIn}
+          />
+        </Modal.Body>
+      </Modal>
     </>
-    // </div>
   );
 };
 
