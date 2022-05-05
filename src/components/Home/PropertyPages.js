@@ -422,22 +422,34 @@ const PropertyPages = ({
             <Col >
               <select className=" RealButton ">
                 <option>Property Type</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">Villa</option>
+                <option href="#">Penthouse</option>
+                <option href="#">Apartment</option>
+                <option href="#">House</option>
+                <option href="#">Studio</option>
+
               </select>
             </Col>
             <Col >
               <select className=" RealButton ">
                 <option>Price</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">$52,586 - $2,103,467
+                </option>
+                <option href="#">$2,103,467 - $5,258,668
+                </option>
+                <option href="#">$15,776,005 +
+                </option>
               </select>
             </Col>
             <Col >
               <select className=" RealButton ">
                 <option>Bldg Size</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">52,586 sqft - 2,103, 467sqft
+                </option>
+                <option href="#">2,103, 467sqft - 5,258, 668sqft
+                </option>
+                <option href="#">15,776 ,005sqft +
+                </option>
               </select>
             </Col>
             <Col >
