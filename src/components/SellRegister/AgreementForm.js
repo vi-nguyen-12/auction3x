@@ -299,7 +299,7 @@ const Agree = ({
       <SellHeader step={step} />
       <div className="agree-sell-bottom">
         <div className="header">
-          <h2 style={{ color: "black", fontWeight: "bold", marginTop:"20px" }}>
+          <h2 style={{ color: "#6d6d6d", fontWeight: "bold", marginTop:"20px" }}>
             SELLER AGREEMENT
           </h2>
           {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}

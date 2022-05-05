@@ -810,12 +810,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -862,12 +862,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -913,12 +913,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -966,12 +966,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1017,12 +1017,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1066,12 +1066,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1119,12 +1119,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1171,12 +1171,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1224,12 +1224,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1277,12 +1277,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1330,12 +1330,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1383,12 +1383,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1432,12 +1432,12 @@ function JetDocus({
                       <div key={index} className="upload-list-item">
                         <span>
                           {document.name}
-                          <button
+                          <Button
                             className="delete-btn"
                             onClick={handleDelete(document.url)}
                           >
                             <MdClose fontSize="1.5em" color="red" />
-                          </button>
+                          </Button>
                         </span>
                       </div>
                     ))
@@ -1447,15 +1447,7 @@ function JetDocus({
           </Row>
         </Row>
       </Container>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        }}
-        className="bottom-btn"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="bottom-btn">
         <div className="bottom-btn">
           <div
             style={{
@@ -1465,9 +1457,9 @@ function JetDocus({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
-          </button>
+          </Button>
           <button className="nxt-btn" type="submit">
             Next
           </button>

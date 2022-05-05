@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -377,14 +377,14 @@ function JetForm({ toogleStep, step, properties, property }) {
         className="bottom-btn"
         style={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
-        <button
+        <Button
           className="pre-btn"
           onClick={() => {
             toogleStep(step - 1);
           }}
         >
           Previous
-        </button>
+        </Button>
         <button className="nxt-btn" type="submit">
           Next
         </button>

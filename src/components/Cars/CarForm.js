@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Row, Col, Container } from "react-bootstrap";
+import { Table, Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -31,99 +31,99 @@ function CarForm({ toogleStep, step, properties, property }) {
         properti[0].details.make
           ? properti[0].details.make
           : property.make
-            ? property.make
-            : ""
+          ? property.make
+          : ""
       );
       setModel(
         properti[0].details.model
           ? properti[0].details.model
           : property.model
-            ? property.model
-            : ""
+          ? property.model
+          : ""
       );
       setYear(
         properti[0].details.year
           ? properti[0].details.year
           : property.year
-            ? property.year
-            : ""
+          ? property.year
+          : ""
       );
       setMileage(
         properti[0].details.mileage
           ? properti[0].details.mileage
           : property.mileage
-            ? property.mileage
-            : ""
+          ? property.mileage
+          : ""
       );
       setTransmission(
         properti[0].details.transmission
           ? properti[0].details.transmission
           : property.transmission
-            ? property.transmission
-            : ""
+          ? property.transmission
+          : ""
       );
       setCarType(
         properti[0].details.car_type
           ? properti[0].details.car_type
           : property.car_type
-            ? property.car_type
-            : ""
+          ? property.car_type
+          : ""
       );
       setPower(
         properti[0].details.power
           ? properti[0].details.power
           : property.power
-            ? property.power
-            : ""
+          ? property.power
+          : ""
       );
       setColor(
         properti[0].details.color
           ? properti[0].details.color
           : property.color
-            ? property.color
-            : ""
+          ? property.color
+          : ""
       );
       setVin(
         properti[0].details.VIN
           ? properti[0].details.VIN
           : property.VIN
-            ? property.VIN
-            : ""
+          ? property.VIN
+          : ""
       );
       setEngine(
         properti[0].details.engine
           ? properti[0].details.engine
           : property.engine
-            ? property.engine
-            : ""
+          ? property.engine
+          : ""
       );
       setFuelType(
         properti[0].details.fuel_type
           ? properti[0].details.fuel_type
           : property.fuel_type
-            ? property.fuel_type
-            : ""
+          ? property.fuel_type
+          : ""
       );
       setCondition(
         properti[0].details.condition
           ? properti[0].details.condition
           : property.condition
-            ? property.condition
-            : ""
+          ? property.condition
+          : ""
       );
       setPrice(
         properti[0].details.price
           ? properti[0].details.price
           : property.price
-            ? property.price
-            : ""
+          ? property.price
+          : ""
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : property.property_address
-            ? property.property_address
-            : ""
+          ? property.property_address
+          : ""
       );
     } else {
       setMake(property.make ? property.make : "");
@@ -145,20 +145,20 @@ function CarForm({ toogleStep, step, properties, property }) {
 
   const onSubmit = (data) => {
     const datas = {
-      make: make,
-      model: model,
-      year: year,
-      mileage: mileage,
-      transmission: transmission,
-      car_type: carType,
-      power: power,
-      color: color,
-      VIN: vin,
-      engine: engine,
-      fuel_type: fuelType,
-      condition: condition,
-      price: price,
-      property_address: address,
+      make: make ? make : data.make,
+      model: model ? model : data.model,
+      year: year ? year : data.year,
+      mileage: mileage ? mileage : data.mileage,
+      transmission: transmission ? transmission : data.transmission,
+      car_type: carType ? carType : data.carType,
+      power: power ? power : data.power,
+      color: color ? color : data.color,
+      VIN: vin ? vin : data.vin,
+      engine: engine ? engine : data.engine,
+      fuel_type: fuelType ? fuelType : data.fuelType,
+      condition: condition ? condition : data.condition,
+      price: price ? price : data.price,
+      property_address: address ? address : data.address,
     };
     properties(datas);
     toogleStep(step + 1);
@@ -542,14 +542,14 @@ function CarForm({ toogleStep, step, properties, property }) {
           marginTop: "50px",
         }}
       >
-        <button
+        <Button
           className="pre-btn"
           onClick={() => {
             toogleStep(step - 1);
           }}
         >
           Previous
-        </button>
+        </Button>
         <button className="nxt-btn" type="submit">
           Next
         </button>

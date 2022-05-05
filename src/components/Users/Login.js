@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Toast from "../Toast";
 import authServices from "../../services/authServices";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../slice/userSlice";
 import { useHistory, useLocation } from "react-router-dom";
@@ -72,14 +72,7 @@ const Login = ({
           LOGIN NOW
         </Modal.Title>
       </Modal.Header>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            onSubmit();
-          }
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group mb-4 mt-3">
           <label
             style={{ fontSize: "35px", color: "black" }}
@@ -119,7 +112,7 @@ const Login = ({
           />
         </div>
         <div className="form-group">
-          <button
+          <Button
             onClick={() => {
               toogleForgotPass();
               toogleSignIn();
@@ -128,7 +121,7 @@ const Login = ({
             className="nav-link-signup"
           >
             Forgot Password?
-          </button>
+          </Button>
         </div>
         <Modal.Footer>
           <div className="col text-center mb-2">
@@ -140,7 +133,7 @@ const Login = ({
               style={{ position: "relative", fontSize: "15px", color: "black" }}
             >
               Not registered?
-              <button
+              <Button
                 onClick={() => {
                   toogleSignUp();
                   toogleSignIn();
@@ -149,7 +142,7 @@ const Login = ({
                 style={{ fontSize: "15px" }}
               >
                 Click Here to Sign Up!
-              </button>
+              </Button>
             </div>
           </div>
         </Modal.Footer>

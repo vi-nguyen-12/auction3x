@@ -291,18 +291,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
               {user._id ? (
                 <>
                   <div className="dropdown">
-                    <button
-                      className="headerNav mt-0"
-                      style={{
-                        backgroundImage: "none",
-                        backgroundColor: "transparent",
-                        marginRight: "15px",
-                        padding: "8px 20px",
-                        fontWeight: "bold",
-                        color: textColor,
-                      }}
-                      id={colors === "white" ? "hover" : ""}
-                    >
+                    <button className="user mt-0">
                       Hello, {user.firstName}
                     </button>
                     <div className="dropdown-content">
@@ -484,20 +473,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                   Sell
                 </Button>
                 <div className="dropdown">
-                  <button
-                    className="headerNav mt-0"
-                    style={{
-                      fontSize: "20px",
-                      backgroundImage: "none",
-                      backgroundColor: "transparent",
-                      marginRight: "50px",
-                      padding: "8px 20px",
-                      color: textColor,
-                    }}
-                    id={colors === "white" ? "hover" : ""}
-                  >
-                    Hello, {user.firstName}
-                  </button>
+                  <button className="user mt-0">Hello, {user.firstName}</button>
                   <div className="dropdown-content ">
                     <button
                       className="fw-bold p-3"
@@ -553,7 +529,6 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
-                    marginRight: "10px",
                   }}
                   onClick={() => {
                     toogleOpen();
@@ -624,7 +599,6 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
-                    marginRight: "10px",
                   }}
                   onClick={() => {
                     toogleOpen();

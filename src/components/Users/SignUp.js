@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
-import { Modal, Table, Row, Col } from "react-bootstrap";
+import { Modal, Row, Col, Button } from "react-bootstrap";
 import "../../styles/modalStyle.css";
 
 require("react-bootstrap/ModalHeader");
@@ -49,7 +49,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         >
           REGISTER ON AUCTION3
           <div>
-            <button
+            <Button
               style={{ marginTop: "35px" }}
               className="signup-link"
               onClick={() => {
@@ -58,18 +58,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
               }}
             >
               Already Registered? Sign In
-            </button>
+            </Button>
           </div>
         </Modal.Title>
       </Modal.Header>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Row style={{ margin: "30px 0" }}>
           <Col>
             <div className="form-group">

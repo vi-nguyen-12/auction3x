@@ -1009,15 +1009,7 @@ function CarDocus({
           </Row>
         </Row>
       </Container>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        }}
-        className="bottom-btn"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="bottom-btn">
         <div className="bottom-btn">
           <div
             style={{
@@ -1027,9 +1019,9 @@ function CarDocus({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
             Previous
-          </button>
+          </Button>
           <button className="nxt-btn" type="submit">
             Next
           </button>

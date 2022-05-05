@@ -111,127 +111,127 @@ function RealEstateDetails({
             properti[0].details.owner
               ? properti[0].details.owner.name
               : propertyData.owner_name
-                ? propertyData.owner_name
-                : property.owner.name
-                  ? property.owner.name
-                  : ""
+              ? propertyData.owner_name
+              : property.owner.name
+              ? property.owner.name
+              : ""
           );
           setRooms(
             properti[0].details.structure
               ? properti[0].details.structure.rooms_count
               : propertyData.rooms_count
-                ? propertyData.rooms_count
-                : property.structure.rooms_count
-                  ? property.structure.rooms_count
-                  : ""
+              ? propertyData.rooms_count
+              : property.structure.rooms_count
+              ? property.structure.rooms_count
+              : ""
           );
           setBathrooms(
             properti[0].details.structure
               ? properti[0].details.structure.baths
               : propertyData.baths_count
-                ? propertyData.baths_count
-                : property.structure.baths
-                  ? property.structure.baths
-                  : ""
+              ? propertyData.baths_count
+              : property.structure.baths
+              ? property.structure.baths
+              : ""
           );
           setBedrooms(
             properti[0].details.structure
               ? properti[0].details.structure.beds_count
               : propertyData.beds_count
-                ? propertyData.beds_count
-                : property.structure.beds_count
-                  ? property.structure.beds_count
-                  : ""
+              ? propertyData.beds_count
+              : property.structure.beds_count
+              ? property.structure.beds_count
+              : ""
           );
           setPropType(
             properti[0].details.parcel
               ? properti[0].details.parcel.standardized_land_use_type
               : propertyData.standardized_land_use_type
-                ? propertyData.standardized_land_use_type
-                : property.parcel.standardized_land_use_type
-                  ? property.parcel.standardized_land_use_type
-                  : ""
+              ? propertyData.standardized_land_use_type
+              : property.parcel.standardized_land_use_type
+              ? property.parcel.standardized_land_use_type
+              : ""
           );
           setSqft(
             properti[0].details.parcel
               ? properti[0].details.parcel.area_sq_ft
               : propertyData.area_sq_ft
-                ? propertyData.area_sq_ft
-                : property.structure.total_area_sq_ft
-                  ? property.structure.total_area_sq_ft
-                  : ""
+              ? propertyData.area_sq_ft
+              : property.structure.total_area_sq_ft
+              ? property.structure.total_area_sq_ft
+              : ""
           );
           setTotalValue(
             properti[0].details.market_assessments
               ? properti[0].details.market_assessments[0].total_value
               : propertyData.total_value
-                ? propertyData.total_value
-                : property.market_assessments.length > 0
-                  ? property.market_assessments[0].total_value
-                  : property.assessments.length > 0
-                    ? property.assessments[0].total_value
-                    : ""
+              ? propertyData.total_value
+              : property.market_assessments.length > 0
+              ? property.market_assessments[0].total_value
+              : property.assessments.length > 0
+              ? property.assessments[0].total_value
+              : ""
           );
           setReservedAmount(
             properti[0].reservedAmount
               ? properti[0].reservedAmount
               : propertyData.reservedAmount
-                ? propertyData.reservedAmount
-                : ""
+              ? propertyData.reservedAmount
+              : ""
           );
           setDiscussedAmount(
             properti[0].discussedAmount
               ? properti[0].discussedAmount
               : propertyData.discussedAmount
-                ? propertyData.discussedAmount
-                : ""
+              ? propertyData.discussedAmount
+              : ""
           );
           setAddress(
             properti[0].details.property_address
               ? properti[0].details.property_address.formatted_street_address
               : propertyData.street_address
-                ? propertyData.street_address
-                : property.address.formatted_street_address
-                  ? property.address.formatted_street_address
-                  : ""
+              ? propertyData.street_address
+              : property.address.formatted_street_address
+              ? property.address.formatted_street_address
+              : ""
           );
           setCity(
             properti[0].details.property_address
               ? properti[0].details.property_address.city
               : propertyData.city
-                ? propertyData.city
-                : property.address.city
-                  ? property.address.city
-                  : ""
+              ? propertyData.city
+              : property.address.city
+              ? property.address.city
+              : ""
           );
           setState(
             properti[0].details.property_address
               ? properti[0].details.property_address.state
               : propertyData.state
-                ? propertyData.state
-                : property.state
-                  ? property.state
-                  : ""
+              ? propertyData.state
+              : property.state
+              ? property.state
+              : ""
           );
           setCountry(
             properti[0].details.property_address
               ? properti[0].details.property_address.country
               : propertyData.country
-                ? propertyData.country
-                : property.address.country
-                  ? property.address.country
-                  : property.country
-                    ? property.country
-                    : "USA"
+              ? propertyData.country
+              : property.address.country
+              ? property.address.country
+              : property.country
+              ? property.country
+              : "USA"
           );
           setZip(
             properti[0].details.property_address
               ? properti[0].details.property_address.zip_code
               : propertyData.zip_code
-                ? propertyData.zip_code
-                : property.address.zip_code
-                  ? property.address.zip_code
-                  : ""
+              ? propertyData.zip_code
+              : property.address.zip_code
+              ? property.address.zip_code
+              : ""
           );
         }
       });
@@ -249,8 +249,8 @@ function RealEstateDetails({
         propertyData.country
           ? propertyData.country
           : property.address.country
-            ? property.address.country
-            : "USA"
+          ? property.address.country
+          : "USA"
       );
       setZip(
         propertyData.zip_code
@@ -261,52 +261,52 @@ function RealEstateDetails({
         propertyData.owner_name
           ? propertyData.owner_name
           : property.owner.name
-            ? property.owner.name
-            : ""
+          ? property.owner.name
+          : ""
       );
       setRooms(
         propertyData.rooms_count
           ? propertyData.rooms_count
           : property.structure.rooms_count
-            ? property.structure.rooms_count
-            : ""
+          ? property.structure.rooms_count
+          : ""
       );
       setBathrooms(
         propertyData.baths_count
           ? propertyData.baths_count
           : property.structure.baths
-            ? property.structure.baths
-            : ""
+          ? property.structure.baths
+          : ""
       );
       setBedrooms(
         propertyData.beds_count
           ? propertyData.beds_count
           : property.structure.beds_count
-            ? property.structure.beds_count
-            : ""
+          ? property.structure.beds_count
+          : ""
       );
       setPropType(
         propertyData.standardized_land_use_type
           ? propertyData.standardized_land_use_type
           : property.parcel.standardized_land_use_type
-            ? property.parcel.standardized_land_use_type
-            : ""
+          ? property.parcel.standardized_land_use_type
+          : ""
       );
       setSqft(
         propertyData.area_sq_ft
           ? propertyData.area_sq_ft
           : property.structure.total_area_sq_ft
-            ? property.structure.total_area_sq_ft
-            : ""
+          ? property.structure.total_area_sq_ft
+          : ""
       );
       setTotalValue(
         propertyData.total_value
           ? propertyData.total_value
           : property.market_assessments.length > 0
-            ? property.market_assessments[0].total_value
-            : property.assessments.length > 0
-              ? property.assessments[0].total_value
-              : ""
+          ? property.market_assessments[0].total_value
+          : property.assessments.length > 0
+          ? property.assessments[0].total_value
+          : ""
       );
       setReservedAmount(
         propertyData.reservedAmount ? parseInt(propertyData.reservedAmount) : ""
@@ -344,15 +344,7 @@ function RealEstateDetails({
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          toogleStep(step + 1);
-        }
-      }}
-      className="list-form1"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="list-form1">
       <Container style={{ marginTop: "20px" }}>
         <Row>
           <Col>
@@ -617,9 +609,9 @@ function RealEstateDetails({
         >
           <Button onClick={saveInfo}>Save</Button>
         </div>
-        <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
           Previous
-        </button>
+        </Button>
         <button className="nxt-btn" type="submit">
           Next
         </button>

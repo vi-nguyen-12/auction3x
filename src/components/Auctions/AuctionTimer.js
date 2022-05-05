@@ -5,7 +5,6 @@ import authService from "../../services/authServices";
 import "../../styles/Timers.css";
 
 const AuctionTimer = ({ time, id, toogleAuction }) => {
-  console.log(id);
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();

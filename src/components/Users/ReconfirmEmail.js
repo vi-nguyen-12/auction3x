@@ -21,14 +21,7 @@ function ReconfirmEmail({ toogleConfirmModal, toogleSignIn }) {
     <>
       <div>
         <div className="form-group mb-2">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
-          >
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <p style={{ justifyContent: "left" }}>
                 Please enter the account email

@@ -257,7 +257,7 @@ const UploadForm = ({
       <SellHeader step={step} />
       <div className="sell-bottom">
         <div className="listDetails-title">
-          <h2 style={{ color: "black", fontWeight: "bold" }}>
+          <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
             UPLOAD PICTURES AND VIDEOS
           </h2>
         </div>

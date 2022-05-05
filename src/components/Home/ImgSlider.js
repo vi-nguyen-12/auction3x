@@ -125,8 +125,6 @@ const ImgSlider = ({ getQuery }) => {
     });
   }, []);
 
-  console.log(featureAuctions);
-
   return (
     <>
       {featureAuctions.length > 0 ? (

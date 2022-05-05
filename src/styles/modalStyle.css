@@ -56,11 +56,11 @@
 }
 
 .nav-link-signup {
-  color: #d58f5c;
+  color: #d58f5c!important;
   font-size: 12px;
   cursor: pointer !important;
-  border: 0;
-  background-color: transparent;
+  border: none !important;
+  background-color: transparent!important;
 }
 
 .nav-link-login {

@@ -75,8 +75,8 @@ function JetDetails({
           imported_aircraft: property.imported_aircraft
             ? property.imported_aircraft
             : isImport === "Yes"
-              ? true
-              : false,
+            ? true
+            : false,
           property_address: address ? address : property.property_address,
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
@@ -150,201 +150,201 @@ function JetDetails({
         properti[0].details.registration_mark
           ? properti[0].details.registration_mark
           : propertyData.registration_mark
-            ? propertyData.registration_mark
-            : property.registration_mark
-              ? property.registration_mark
-              : ""
+          ? propertyData.registration_mark
+          : property.registration_mark
+          ? property.registration_mark
+          : ""
       );
       setAircraft_builder_name(
         properti[0].details.aircraft_builder_name
           ? properti[0].details.aircraft_builder_name
           : propertyData.aircraft_builder_name
-            ? propertyData.aircraft_builder_name
-            : property.aircraft_builder_name
-              ? property.aircraft_builder_name
-              : ""
+          ? propertyData.aircraft_builder_name
+          : property.aircraft_builder_name
+          ? property.aircraft_builder_name
+          : ""
       );
       setAircraft_model_designation(
         properti[0].details.aircraft_model_designation
           ? properti[0].details.aircraft_model_designation
           : propertyData.aircraft_model_designation
-            ? propertyData.aircraft_model_designation
-            : property.aircraft_model_designation
-              ? property.aircraft_model_designation
-              : ""
+          ? propertyData.aircraft_model_designation
+          : property.aircraft_model_designation
+          ? property.aircraft_model_designation
+          : ""
       );
       setAircraft_serial_no(
         properti[0].details.aircraft_serial_no
           ? properti[0].details.aircraft_serial_no
           : propertyData.aircraft_serial_no
-            ? propertyData.aircraft_serial_no
-            : property.aircraft_serial_no
-              ? property.aircraft_serial_no
-              : ""
+          ? propertyData.aircraft_serial_no
+          : property.aircraft_serial_no
+          ? property.aircraft_serial_no
+          : ""
       );
       setEngine_builder_name(
         properti[0].details.engine_builder_name
           ? properti[0].details.engine_builder_name
           : propertyData.engine_builder_name
-            ? propertyData.engine_builder_name
-            : property.engine_builder_name
-              ? property.engine_builder_name
-              : ""
+          ? propertyData.engine_builder_name
+          : property.engine_builder_name
+          ? property.engine_builder_name
+          : ""
       );
       setEngine_model_designation(
         properti[0].details.engine_model_designation
           ? properti[0].details.engine_model_designation
           : propertyData.engine_model_designation
-            ? propertyData.engine_model_designation
-            : property.engine_model_designation
-              ? property.engine_model_designation
-              : ""
+          ? propertyData.engine_model_designation
+          : property.engine_model_designation
+          ? property.engine_model_designation
+          : ""
       );
       setNumber_of_engines(
         properti[0].details.number_of_engines
           ? properti[0].details.number_of_engines
           : propertyData.number_of_engines
-            ? propertyData.number_of_engines
-            : property.number_of_engines
-              ? property.number_of_engines
-              : ""
+          ? propertyData.number_of_engines
+          : property.number_of_engines
+          ? property.number_of_engines
+          : ""
       );
       setPropeller_builder_name(
         properti[0].details.propeller_builder_name
           ? properti[0].details.propeller_builder_name
           : propertyData.propeller_builder_name
-            ? propertyData.propeller_builder_name
-            : property.propeller_builder_name
-              ? property.propeller_builder_name
-              : ""
+          ? propertyData.propeller_builder_name
+          : property.propeller_builder_name
+          ? property.propeller_builder_name
+          : ""
       );
       setPropeller_model_designation(
         properti[0].details.propeller_model_designation
           ? properti[0].details.propeller_model_designation
           : propertyData.propeller_model_designation
-            ? propertyData.propeller_model_designation
-            : property.propeller_model_designation
-              ? property.propeller_model_designation
-              : ""
+          ? propertyData.propeller_model_designation
+          : property.propeller_model_designation
+          ? property.propeller_model_designation
+          : ""
       );
       setNumber_of_aircraft(
         properti[0].details.number_of_aircraft
           ? properti[0].details.number_of_aircraft
           : propertyData.number_of_aircraft
-            ? propertyData.number_of_aircraft
-            : property.number_of_aircraft
-              ? property.number_of_aircraft
-              : ""
+          ? propertyData.number_of_aircraft
+          : property.number_of_aircraft
+          ? property.number_of_aircraft
+          : ""
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : propertyData.property_address
-            ? propertyData.property_address
-            : property.property_address
-              ? property.property_address
-              : ""
+          ? propertyData.property_address
+          : property.property_address
+          ? property.property_address
+          : ""
       );
       setReservedAmount(
         properti[0].reservedAmount
           ? properti[0].reservedAmount
           : propertyData.reservedAmount
-            ? propertyData.reservedAmount
-            : ""
+          ? propertyData.reservedAmount
+          : ""
       );
       setDiscussedAmount(
         properti[0].discussedAmount
           ? properti[0].discussedAmount
           : propertyData.discussedAmount
-            ? propertyData.discussedAmount
-            : ""
+          ? propertyData.discussedAmount
+          : ""
       );
       setIsImport(
         properti[0].details.imported_aircraft
           ? properti[0].details.imported_aircraft
           : propertyData.imported_aircraft
-            ? propertyData.imported_aircraft
-            : property.imported_aircraft
-              ? property.imported_aircraft
-              : ""
+          ? propertyData.imported_aircraft
+          : property.imported_aircraft
+          ? property.imported_aircraft
+          : ""
       );
     } else {
       setRegistration_mark(
         propertyData.registration_mark
           ? propertyData.registration_mark
           : property.registration_mark
-            ? property.registration_mark
-            : ""
+          ? property.registration_mark
+          : ""
       );
       setAircraft_builder_name(
         propertyData.aircraft_builder_name
           ? propertyData.aircraft_builder_name
           : property.aircraft_builder_name
-            ? property.aircraft_builder_name
-            : ""
+          ? property.aircraft_builder_name
+          : ""
       );
       setAircraft_model_designation(
         propertyData.aircraft_model_designation
           ? propertyData.aircraft_model_designation
           : property.aircraft_model_designation
-            ? property.aircraft_model_designation
-            : ""
+          ? property.aircraft_model_designation
+          : ""
       );
       setAircraft_serial_no(
         propertyData.aircraft_serial_no
           ? propertyData.aircraft_serial_no
           : property.aircraft_serial_no
-            ? property.aircraft_serial_no
-            : ""
+          ? property.aircraft_serial_no
+          : ""
       );
       setEngine_builder_name(
         propertyData.engine_builder_name
           ? propertyData.engine_builder_name
           : property.engine_builder_name
-            ? property.engine_builder_name
-            : ""
+          ? property.engine_builder_name
+          : ""
       );
       setEngine_model_designation(
         propertyData.engine_model_designation
           ? propertyData.engine_model_designation
           : property.engine_model_designation
-            ? property.engine_model_designation
-            : ""
+          ? property.engine_model_designation
+          : ""
       );
       setNumber_of_engines(
         propertyData.number_of_engines
           ? propertyData.number_of_engines
           : property.number_of_engines
-            ? property.number_of_engines
-            : ""
+          ? property.number_of_engines
+          : ""
       );
       setPropeller_builder_name(
         propertyData.propeller_builder_name
           ? propertyData.propeller_builder_name
           : property.propeller_builder_name
-            ? property.propeller_builder_name
-            : ""
+          ? property.propeller_builder_name
+          : ""
       );
       setPropeller_model_designation(
         propertyData.propeller_model_designation
           ? propertyData.propeller_model_designation
           : property.propeller_model_designation
-            ? property.propeller_model_designation
-            : ""
+          ? property.propeller_model_designation
+          : ""
       );
       setNumber_of_aircraft(
         propertyData.number_of_aircraft
           ? propertyData.number_of_aircraft
           : property.number_of_aircraft
-            ? property.number_of_aircraft
-            : ""
+          ? property.number_of_aircraft
+          : ""
       );
       setAddress(
         propertyData.property_address
           ? propertyData.property_address
           : property.property_address
-            ? property.property_address
-            : ""
+          ? property.property_address
+          : ""
       );
       setReservedAmount(propertyData ? propertyData.reservedAmount : "");
       setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
@@ -352,8 +352,8 @@ function JetDetails({
         propertyData.imported_aircraft
           ? propertyData.imported_aircraft
           : property.imported_aircraft
-            ? property.imported_aircraft
-            : ""
+          ? property.imported_aircraft
+          : ""
       );
     }
   }, []);
@@ -651,14 +651,14 @@ function JetDetails({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <button
+          <Button
             className="pre-btn"
             onClick={() => {
               toogleStep(step - 1);
             }}
           >
             Previous
-          </button>
+          </Button>
           <button className="nxt-btn" type="submit">
             Next
           </button>
