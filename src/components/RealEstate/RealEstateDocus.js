@@ -215,54 +215,53 @@ function RealEstateDocus({
                   return document;
                 }
               });
-              console.log(documents);
               setDocument1(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "title_report"
-                    )
+                    (item) => item.officialName === "title_report"
+                  )
                   : []
               );
               setDocument2(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "insurance_copy"
-                    )
+                    (item) => item.officialName === "insurance_copy"
+                  )
                   : []
               );
               setDocument3(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "financial_document"
-                    )
+                    (item) => item.officialName === "financial_document"
+                  )
                   : []
               );
               setDocument4(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "purchase_agreement"
-                    )
+                    (item) => item.officialName === "purchase_agreement"
+                  )
                   : []
               );
               setDocument5(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "third-party_report"
-                    )
+                    (item) => item.officialName === "third-party_report"
+                  )
                   : []
               );
               setDocument6(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "market_and_valuations"
-                    )
+                    (item) => item.officialName === "market_and_valuations"
+                  )
                   : []
               );
               setDocument7(
                 documents
                   ? documents.filter(
-                      (item) => item.officialName === "demographics"
-                    )
+                    (item) => item.officialName === "demographics"
+                  )
                   : []
               );
               setDocument8(
@@ -274,50 +273,50 @@ function RealEstateDocus({
               setDocument1(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "title_report"
-                    )
+                    (item) => item.officialName === "title_report"
+                  )
                   : []
               );
               setDocument2(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "insurance_copy"
-                    )
+                    (item) => item.officialName === "insurance_copy"
+                  )
                   : []
               );
               setDocument3(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "financial_document"
-                    )
+                    (item) => item.officialName === "financial_document"
+                  )
                   : []
               );
               setDocument4(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "purchase_agreement"
-                    )
+                    (item) => item.officialName === "purchase_agreement"
+                  )
                   : []
               );
               setDocument5(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "third-party_report"
-                    )
+                    (item) => item.officialName === "third-party_report"
+                  )
                   : []
               );
               setDocument6(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "market_and_valuations"
-                    )
+                    (item) => item.officialName === "market_and_valuations"
+                  )
                   : []
               );
               setDocument7(
                 document
                   ? document.filter(
-                      (item) => item.officialName === "demographics"
-                    )
+                    (item) => item.officialName === "demographics"
+                  )
                   : []
               );
               setDocument8(
@@ -343,29 +342,29 @@ function RealEstateDocus({
       setDocument3(
         document
           ? document.filter(
-              (item) => item.officialName === "financial_document"
-            )
+            (item) => item.officialName === "financial_document"
+          )
           : []
       );
       setDocument4(
         document
           ? document.filter(
-              (item) => item.officialName === "purchase_agreement"
-            )
+            (item) => item.officialName === "purchase_agreement"
+          )
           : []
       );
       setDocument5(
         document
           ? document.filter(
-              (item) => item.officialName === "third-party_report"
-            )
+            (item) => item.officialName === "third-party_report"
+          )
           : []
       );
       setDocument6(
         document
           ? document.filter(
-              (item) => item.officialName === "market_and_valuations"
-            )
+            (item) => item.officialName === "market_and_valuations"
+          )
           : []
       );
       setDocument7(
@@ -594,18 +593,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc1
                   ? doc1.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -646,18 +645,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc2
                   ? doc2.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -700,18 +699,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc3
                   ? doc3.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -754,18 +753,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc4
                   ? doc4.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -808,18 +807,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc5
                   ? doc5.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -837,9 +836,9 @@ function RealEstateDocus({
                 hidden
                 {...register("marketValuations", { onChange: onChange6 })}
                 required
-                // {...register("demographics", {
-                //   onChange: onChange("demographics"),
-                // })}
+              // {...register("demographics", {
+              //   onChange: onChange("demographics"),
+              // })}
               />
               <div className="upload-cover">
                 <details>
@@ -861,18 +860,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc6
                   ? doc6.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -889,9 +888,9 @@ function RealEstateDocus({
                 multiple
                 hidden
                 {...register("demographics", { onChange: onChange7 })}
-                // {...register("marketandValuations", {
-                //   onChange: onChange("market_and_evaluations"),
-                // })}
+              // {...register("marketandValuations", {
+              //   onChange: onChange("market_and_evaluations"),
+              // })}
               />
               <div className="upload-cover">
                 <details>
@@ -913,18 +912,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc7
                   ? doc7.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>
@@ -961,18 +960,18 @@ function RealEstateDocus({
               <div className="upload-list">
                 {doc8
                   ? doc8.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
+                    <div key={index} className="upload-list-item">
+                      <span>
+                        {document.name}
+                        <Button
+                          className="delete-btn"
+                          onClick={handleDelete(document.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    </div>
+                  ))
                   : null}
               </div>
             </Col>

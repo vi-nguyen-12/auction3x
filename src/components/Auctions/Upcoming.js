@@ -14,7 +14,6 @@ const Upcoming = ({ query }) => {
     if (query) {
       // look for any property that matches the query
       const search = property.filter((prop) => Object.values(prop).includes(query));
-      console.log(search);
       setUpcoming(search);
     } else {
       setUpcoming(property);

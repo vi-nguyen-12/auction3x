@@ -93,7 +93,6 @@ function ApprovedListings({ auctions }) {
   useEffect(() => {
     authService.sellerPropInAuctions(user._id).then((res) => {
       setApprovedLists(res.data);
-      console.log(res.data);
     });
   }, []);
 

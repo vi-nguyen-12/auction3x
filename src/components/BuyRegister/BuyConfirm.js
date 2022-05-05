@@ -6,7 +6,6 @@ import { useState } from "react";
 import NumberFormat from "react-number-format";
 
 const BuyConfirm = ({ property }) => {
-  console.log(property);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount
