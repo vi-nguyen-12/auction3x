@@ -111,3 +111,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
+
+.tab-content {
+  padding-left: calc(var(--bs-gutter-x) * 0.1);
+  padding-right: calc(var(--bs-gutter-x) * 0.1);
+}

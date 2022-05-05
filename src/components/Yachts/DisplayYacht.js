@@ -1223,7 +1223,7 @@ function DisplayYacht({ toogleChange, property }) {
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
+                  borderRadius: "0",
                   padding: "20px",
                 }}
               >

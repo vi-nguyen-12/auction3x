@@ -21,6 +21,7 @@ function Dash() {
   const [showBidAuctions, setShowBidAuctions] = useState(false);
   const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
   const [liveAuctions, setLiveAuctions] = useState();
+  const [listing, setListing] = useState();
   const [upcomingAuctions, setUpcomingAuctions] = useState();
   const toogleShowSavedProp = (state) => setShowSavedProp(state);
   const toogleShowBidAuctions = (state) => setShowBidAuctions(state);
@@ -33,11 +34,17 @@ function Dash() {
   const toogleFundReq = () => popFundReq(!showFundReq);
 
   useEffect(() => {
+    const getUserListings = async () => {
+      authServices.sellerPropInAuctions(user._id).then((res) => {
+        setListing(res.data.length);
+      });
+    };
     setUpcomingAuctions(property.length);
     setLiveAuctions(auctions.length);
     if (user._id) {
       setSavedProp(savedProperties);
     }
+    getUserListings();
   }, [property, auctions, savedProperties, user]);
 
   const getSavedProperty = () => {
@@ -98,8 +105,8 @@ function Dash() {
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <div className="liveAuc">
             <div className="names">
-              <span>Your Purchased</span>
-              <h3>75</h3>
+              <span>Your Listings</span>
+              <h3>{listing}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={35} strokeWidth={20} stroke="red" />
