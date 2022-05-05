@@ -268,8 +268,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                        ? ownership.details.owner_name
-                        : ""
+                          ? ownership.details.owner_name
+                          : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                     required
@@ -288,8 +288,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                        ? ownership.details.address
-                        : ""
+                          ? ownership.details.address
+                          : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -302,8 +302,11 @@ function Ownership({
                 <Col>
                   <PhoneInput
                     countryCodeEditable={false}
-                    disableDropdown={true}
-                    country={"us"}
+
+                    onlyCountries={['ca', 'us', 'gb', 'au']}
+                    disableDropdown={false}
+                    country={'us'}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null
                     }
@@ -387,8 +390,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                        ? ownership.details.owner_name
-                        : ""
+                          ? ownership.details.owner_name
+                          : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
@@ -404,8 +407,8 @@ function Ownership({
                       brokerName
                         ? brokerName
                         : ownership
-                        ? ownership.details.broker_name
-                        : ""
+                          ? ownership.details.broker_name
+                          : ""
                     }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
@@ -422,8 +425,8 @@ function Ownership({
                       brokerId
                         ? brokerId
                         : ownership
-                        ? ownership.details.broker_id
-                        : ""
+                          ? ownership.details.broker_id
+                          : ""
                     }
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
@@ -456,8 +459,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                        ? ownership.details.address
-                        : ""
+                          ? ownership.details.address
+                          : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -470,8 +473,10 @@ function Ownership({
                 <Col>
                   <PhoneInput
                     countryCodeEditable={false}
-                    disableDropdown={true}
-                    country={"us"}
+                    onlyCountries={['ca', 'us', 'gb', 'au']}
+                    disableDropdown={false}
+                    country={'us'}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null
                     }

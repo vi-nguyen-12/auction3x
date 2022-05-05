@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function CarPage({ toogleChange }) {
+function CarPage({ toogleChange, setImgCar, toggleImgCar }) {
   useEffect(() => {
     toogleChange();
   }, []);
@@ -105,6 +105,17 @@ function CarPage({ toogleChange }) {
         alert(err);
       });
   }, []);
+  useEffect(() => {
+    if (onGoingAuctions && upcomingAuctions) {
+      const Arr = [...onGoingAuctions, ...upcomingAuctions];
+      const imageUrl = Arr.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImgCar(imageUrl);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
   let settings = {
     dots: false,
     infinite: true,
@@ -170,7 +181,7 @@ function CarPage({ toogleChange }) {
               </h3>
             )}
           </Row>
-          <Row style={{marginBottom:"100px"}}>
+          <Row style={{ marginBottom: "100px" }}>
             <h1 style={{ margin: "80px 0", fontWeight: "bold" }}>
               UPCOMING AUCTIONS
             </h1>

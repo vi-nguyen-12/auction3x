@@ -245,7 +245,8 @@ function DisplayRealEstate({ property, toogleChange }) {
         : null,
     });
   }, [property]);
-
+  console.log(property);
+  console.log(location);
   useEffect(() => {
     window.scrollTo(0, 0);
     if (user._id) {
@@ -468,9 +469,9 @@ function DisplayRealEstate({ property, toogleChange }) {
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -550,9 +551,9 @@ function DisplayRealEstate({ property, toogleChange }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -695,7 +696,7 @@ function DisplayRealEstate({ property, toogleChange }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{

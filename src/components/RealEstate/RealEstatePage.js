@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Modal } from "react-bootstrap";
 import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
@@ -81,10 +81,12 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toogleChange }) {
+function RealEstatePage({ toogleChange, toogleImage, setImg }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+
   useEffect(() => {
+    toogleChange();
     authService
       .getOngoingAuctionsByType("real-estate")
       .then((res) => {
@@ -104,8 +106,16 @@ function RealEstatePage({ toogleChange }) {
   }, []);
 
   useEffect(() => {
-    toogleChange();
-  }, []);
+    if (onGoingAuctions && upcomingAuctions) {
+      const Arr = [...onGoingAuctions, ...upcomingAuctions];
+      const imageUrl = Arr.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImg(imageUrl);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
 
   let settings = {
     dots: false,
@@ -141,10 +151,11 @@ function RealEstatePage({ toogleChange }) {
     ],
   };
 
-  console.log(upcomingAuctions);
   return (
     <>
       <div className="mt-5">
+
+
         <Col md={12} className="m-auto pt-2">
           <Row>
             <h1 style={{ marginBottom: "80px" }}>ONGOING AUCTIONS</h1>

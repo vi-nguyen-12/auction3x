@@ -26,7 +26,6 @@
 }
 
 .footer-title {
-  color: #fff;
   font-family: "Josefin Slab";
   font-size: 1.7rem;
   font-weight: bold;
@@ -34,6 +33,7 @@
   text-align: left;
   padding-left: 6rem;
   margin-bottom: 20px;
+  color: #d58f5c;
 }
 
 li {
@@ -45,7 +45,7 @@ li {
 }
 
 ul {
-  padding-left: 6rem !important;
+  padding-left: 6rem;
 }
 
 a {
