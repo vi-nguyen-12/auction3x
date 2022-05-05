@@ -301,11 +301,10 @@ function Ownership({
               <Row style={{ marginTop: "10px" }}>
                 <Col>
                   <PhoneInput
-                    countryCodeEditable={false}
-
+                    disableCountryCode={true}
                     onlyCountries={['ca', 'us', 'gb', 'au']}
                     disableDropdown={false}
-                    country={'us'}
+                    country={['ca', 'us', 'gb', 'au', 'us']}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null
@@ -472,10 +471,10 @@ function Ownership({
               <Row style={{ marginTop: "10px" }}>
                 <Col>
                   <PhoneInput
-                    countryCodeEditable={false}
+                    disableCountryCode={true}
                     onlyCountries={['ca', 'us', 'gb', 'au']}
                     disableDropdown={false}
-                    country={'us'}
+                    country={['ca', 'us', 'gb', 'au', 'us']}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     value={
                       phone ? phone : ownership ? ownership.details.phone : null
