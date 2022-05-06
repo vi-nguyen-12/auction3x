@@ -29,6 +29,12 @@ import DisplayAuctions from "./components/Auctions/DisplayAuctions";
 import Dashboard from "./components/Dashboard/Dashboard";
 import { useHistory } from "react-router-dom";
 import ButtontoTop from "./components/ButtontoTop";
+import AboutUs from "./components/Company/AboutUs";
+import ContactUs from "./components/Company/ContactUs";
+import Privacy from "./components/Company/Privacy";
+import TermsCondition from "./components/Company/TermsCondition";
+import FAQ from "./components/Company/FAQ";
+import PartnerWithUs from "./components/Company/PartnerWithUs";
 
 // const FindInCountries = lazy(() => import("./components/Home/FindInCountries"));
 // const ImgSlider = lazy(() => import("./components/Home/ImgSlider"));
@@ -227,6 +233,31 @@ function App() {
               />
             </Route>
           )}
+
+          <Route path="/ContantUs">
+            <ContactUs />
+          </Route>
+
+          <Route path="/AboutUs">
+            <AboutUs />
+          </Route>
+
+          <Route path="/FAQ">
+            <FAQ />
+          </Route>
+
+          <Route path="/PrivacyPolicy">
+            <Privacy />
+          </Route>
+
+          <Route path="/TermsOfUse">
+            <TermsCondition />
+          </Route>
+
+          <Route path="/Partner">
+            <PartnerWithUs />
+          </Route>
+
           <Route path="/reset_password">
             <ChangePass
               colorChange={colorChange}

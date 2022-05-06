@@ -30,16 +30,16 @@ const Footer = (props) => {
                   <a href="/MultiSellForm">Sell</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">About Us</a>
+                  <a href="/AboutUs">About Us</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Team</a>
+                  <a href="/AboutUs">Team</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">FAQ</a>
+                  <a href="/FAQ">FAQ</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Contact Us</a>
+                  <a href="/ContantUs">Contact Us</a>
                 </li>
               </ul>
             </Col>
@@ -77,16 +77,16 @@ const Footer = (props) => {
                   <a href="#!">Partner</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Privacy Policy</a>
+                  <a href="/PrivacyPolicy">Privacy Policy</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Terms &amp; Conditions</a>
+                  <a href="/TermsOfUse">Terms &amp; Conditions</a>
                 </li>
               </ul>
             </Col>
           </Row>
           <div className="auction-reserved">
-            © 2021 AUCTION 3. All Rights Reserved
+            © 2022 AUCTION3. All Rights Reserved
           </div>
         </Card>
       </div>

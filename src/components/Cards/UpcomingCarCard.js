@@ -93,7 +93,7 @@ const UpcomingCarCard = ({
         }
       }
     }
-  }, []);
+  }, [savedProperty]);
 
   return (
     <>

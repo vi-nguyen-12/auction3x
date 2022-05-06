@@ -94,7 +94,7 @@ const UpcomingYachtCard = ({
         }
       }
     }
-  }, []);
+  }, [savedProperty]);
 
   return (
     <>

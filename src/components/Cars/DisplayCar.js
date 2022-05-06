@@ -280,9 +280,7 @@ function DisplayCar({ toogleChange, property }) {
                   // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
                   className="favorite-button"
                 >
-                  {favorite && user._id ? (
-                    <AiFillHeart size="100%" color="C58753" />
-                  ) : user._id !== undefined ? (
+                  {favorite ? (
                     <AiFillHeart size="100%" color="C58753" />
                   ) : (
                     <AiOutlineHeart size="100%" color="C58753" />
