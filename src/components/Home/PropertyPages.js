@@ -543,15 +543,13 @@ const PropertyPages = ({
               />
             </div>
             <Row >
-              {imgCar.map((imgCar, index) => (
-                <Col key={index}>
-                  <Col md="auto" className="p-2" style={{ width: "100%", height: "100%" }} >
-                    <Image
-                      src={imgCar}
-                      alt="gallery"
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  </Col>
+              {imgCar.map((imgCars, index) => (
+                <Col md={imgCar.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
+                  <Image
+                    src={imgCars}
+                    alt="gallery"
+                    style={{ width: "100%", height: "100%" }}
+                  />
                 </Col>
               ))}
             </Row>
@@ -575,7 +573,7 @@ const PropertyPages = ({
             </div>
             <Row >
               {imgJet.map((imgJets, index) => (
-                <Col md={imgJet.length === 1 ? "auto" : 6} key={index} className="p-2" style={{ width: "100%" }}>
+                <Col md={imgJet.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
                     src={imgJets}
                     alt="gallery"
@@ -604,7 +602,7 @@ const PropertyPages = ({
             </div>
             <Row >
               {imgYacht.map((imgYacht, index) => (
-                <Col md={6} key={index} className="p-2" >
+                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
                     src={imgYacht}
                     alt="gallery"
@@ -633,7 +631,7 @@ const PropertyPages = ({
             </div>
             <Row >
               {img.map((imgs, index) => (
-                <Col md={img.length <= 1 ? "auto" : 6} key={index} className="p-2">
+                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
                     src={imgs}
                     alt="gallery"

@@ -128,7 +128,7 @@
   width: 250px;
   padding: 10px;
   color: white;
-  font-family: "Josefin Slab", serif;
+  /* font-family: "Josefin Slab", serif; */
 }
 .side-button {
   display: inline;
@@ -204,7 +204,7 @@
   color: #b77b50;
   font-size: 45px;
   font-weight: 600;
-  font-family: "Josefin Slab", serif;
+  /* font-family: "Josefin Slab", serif; */
   padding-top: 20px;
   padding-bottom: 20px;
 }
