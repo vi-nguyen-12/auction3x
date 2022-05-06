@@ -35,6 +35,7 @@ import Privacy from "./components/Company/Privacy";
 import TermsCondition from "./components/Company/TermsCondition";
 import FAQ from "./components/Company/FAQ";
 import PartnerWithUs from "./components/Company/PartnerWithUs";
+import Broker from "./components/Users/Broker";
 
 // const FindInCountries = lazy(() => import("./components/Home/FindInCountries"));
 // const ImgSlider = lazy(() => import("./components/Home/ImgSlider"));
@@ -256,6 +257,10 @@ function App() {
 
           <Route path="/Partner">
             <PartnerWithUs />
+          </Route>
+
+          <Route path="/Broker">
+            <Broker />
           </Route>
 
           <Route path="/reset_password">

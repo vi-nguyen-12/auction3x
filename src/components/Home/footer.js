@@ -71,10 +71,10 @@ const Footer = (props) => {
                   {/* <a href="#!">List with us</a> */}
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Broker</a>
+                  <a href="/Broker">Broker</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="#!">Partner</a>
+                  <a href="/Partner">Partner</a>
                 </li>
                 <li className="list-unstyled">
                   <a href="/PrivacyPolicy">Privacy Policy</a>

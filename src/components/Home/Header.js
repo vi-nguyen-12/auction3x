@@ -849,12 +849,10 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
-                        if (user._id) {
-                          history.push("/Dashboard/Auctions/BidAuctions");
-                        }
+                        history.push("/Partner");
                       }}
                     >
-                      BROKER
+                      PARTNER
                     </button>
                   </td>
                 </tr>
@@ -897,14 +895,10 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
-                        if (user._id) {
-                          history.push("/Dashboard");
-                        } else {
-                          toogleSignIn();
-                        }
+                        history.push("/PrivacyPolicy");
                       }}
                     >
-                      PARTNER
+                      PRIVACY POLICY
                     </button>
                   </td>
                 </tr>
@@ -933,6 +927,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
+                        history.push("/MultiSellForm");
                       }}
                     >
                       SELLER
@@ -947,9 +942,10 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
+                        history.push("/TermsOfUse");
                       }}
                     >
-                      PRIVACY POLICY
+                      TERMS & CONDITIONS
                     </button>
                   </td>
                 </tr>
@@ -978,23 +974,10 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
+                        history.push("/FAQ");
                       }}
                     >
                       FAQ
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "none",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        toogleOpen();
-                      }}
-                    >
-                      TERMS & CONDITIONS
                     </button>
                   </td>
                 </tr>
@@ -1008,6 +991,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
+                        history.push("/AboutUs");
                       }}
                     >
                       ABOUT US
@@ -1022,11 +1006,27 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       }}
                       onClick={() => {
                         toogleOpen();
+                        history.push("/Broker");
+                      }}
+                    >
+                      BROKER
+                    </button>
+                  </td>
+                  {/* <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        history.push("/AboutUs");
                       }}
                     >
                       TEAM
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
                 <td>
                   <button
@@ -1037,6 +1037,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     }}
                     onClick={() => {
                       toogleOpen();
+                      history.push("/AboutUs");
                     }}
                   >
                     TEAM

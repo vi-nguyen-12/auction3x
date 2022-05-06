@@ -5,17 +5,19 @@ function CompanyHeader({ location }) {
   return (
     <h5 className="realHeader">
       {location === "AboutUs" ? (
-        <p>About Us</p>
+        <p>ABOUT US</p>
       ) : location === "ContantUs" ? (
-        <p>Contact Us</p>
+        <p>CONTACT US</p>
       ) : location === "PrivacyPolicy" ? (
-        <p>Privacy Policy</p>
+        <p>PRIVACY POLICY</p>
       ) : location === "FAQ" ? (
         <p>FAQ</p>
       ) : location === "TermsOfUse" ? (
         <p>TERMS OF USE</p>
       ) : location === "Partner" ? (
-        <p>Partner With Us</p>
+        <p>PARTNER WITH US</p>
+      ) : location === "Broker" ? (
+        <p>BROKER</p>
       ) : null}
     </h5>
   );
