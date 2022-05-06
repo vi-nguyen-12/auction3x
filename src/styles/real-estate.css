@@ -47,8 +47,8 @@
 
 .btn-custom {
   /* font family: Josefin Slab semi bold*/
-  font-family: "Josefin Slab", serif;
-  height: 3rem;
+  /* font-family: "Josefin Slab", serif; */
+  /* height: 3rem; */
   width: 10rem;
   margin-right: 3rem;
   border-radius: 0.7rem !important;

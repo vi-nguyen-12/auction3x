@@ -68,41 +68,40 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
   useEffect(() => {
     if (params.id && prop.length > 0) {
       const properti = prop.filter((prop) => prop._id === params.id);
-      console.log(properti);
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address.formatted_street_address
           : property.street_address
-          ? property.street_address
-          : ""
+            ? property.street_address
+            : ""
       );
       setCity(
         properti[0].details.property_address
           ? properti[0].details.property_address.city
           : property.city
-          ? property.city
-          : ""
+            ? property.city
+            : ""
       );
       setState(
         properti[0].details.property_address
           ? properti[0].details.property_address.state
           : property.state
-          ? property.state
-          : ""
+            ? property.state
+            : ""
       );
       setCountry(
         properti[0].details.property_address
           ? properti[0].details.property_address.country
           : property.country
-          ? property.country
-          : ""
+            ? property.country
+            : ""
       );
       setZip(
         properti[0].details.property_address
           ? properti[0].details.property_address.zip_code
           : property.zip_code
-          ? property.zip_code
-          : ""
+            ? property.zip_code
+            : ""
       );
     } else {
       setAddress(property.street_address ? property.street_address : "");
@@ -130,8 +129,8 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
             res.data.name !== "Error"
               ? res.data
               : res.data.name === "Error"
-              ? datas
-              : ""
+                ? datas
+                : ""
           );
           toogleStep(step + 1);
         } else if (res.data.length === 0) {
@@ -204,15 +203,15 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
                         // inline style for demonstration purpose
                         const style = suggestion.active
                           ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
                           : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
                         return (
                           <div
                             key={index}

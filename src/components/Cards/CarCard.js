@@ -22,7 +22,6 @@ const CarCard = ({
   auctionEndDate,
   reserveMet,
 }) => {
-  console.log(id);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showSignIn, popSignIn] = useState(false);
@@ -219,7 +218,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",

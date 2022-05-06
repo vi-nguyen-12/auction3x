@@ -804,7 +804,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
           <Modal.Body style={{ backgroundColor: "#282828", padding: "150px" }}>
             <Table
               style={{ color: "white", fontSize: "30px" }}
-              responsive
+              responsive="lg"
               borderless
             >
               <tbody>
@@ -841,35 +841,21 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     </button>
                   </td>
                   <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                            if (user._id) {
-                              history.push("/Dashboard/Auctions/BidAuctions");
-                            }
-                          }}
-                        >
-                          MANAGED BID
-                        </button> */}
-                  </td>
-                  <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          BROKER
-                        </button> */}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                        if (user._id) {
+                          history.push("/Dashboard/Auctions/BidAuctions");
+                        }
+                      }}
+                    >
+                      BROKER
+                    </button>
                   </td>
                 </tr>
                 <tr>
@@ -885,7 +871,21 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                         history.push("/cars");
                       }}
                     >
-                      CAR
+                      CARS
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      BUY
                     </button>
                   </td>
                   <td>
@@ -904,22 +904,8 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                         }
                       }}
                     >
-                      DASHBOARD
+                      PARTNER
                     </button>
-                  </td>
-                  <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          BUYER
-                        </button> */}
                   </td>
                 </tr>
                 <tr>
@@ -935,22 +921,36 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                         history.push("/yachts");
                       }}
                     >
-                      YACHT
+                      YACHTS
                     </button>
                   </td>
                   <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          SELLER
-                        </button> */}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      SELLER
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      PRIVACY POLICY
+                    </button>
                   </td>
                 </tr>
                 <tr>
@@ -966,40 +966,82 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                         history.push("/jets");
                       }}
                     >
-                      JET
+                      JETS
                     </button>
                   </td>
                   <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          CAREER
-                        </button> */}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      FAQ
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      TERMS & CONDITIONS
+                    </button>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    {/* <button
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "white",
-                          }}
-                          onClick={() => {
-                            toogleOpen();
-                          }}
-                        >
-                          ABOUT US
-                        </button> */}
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      ABOUT US
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toogleOpen();
+                      }}
+                    >
+                      TEAM
+                    </button>
                   </td>
                 </tr>
+                <td>
+                  <button
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "white",
+                    }}
+                    onClick={() => {
+                      toogleOpen();
+                    }}
+                  >
+                    TEAM
+                  </button>
+                </td>
               </tbody>
             </Table>
           </Modal.Body>

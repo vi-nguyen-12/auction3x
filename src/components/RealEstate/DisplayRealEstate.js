@@ -245,8 +245,6 @@ function DisplayRealEstate({ property, toogleChange }) {
         : null,
     });
   }, [property]);
-  console.log(property);
-  console.log(location);
   useEffect(() => {
     window.scrollTo(0, 0);
     if (user._id) {

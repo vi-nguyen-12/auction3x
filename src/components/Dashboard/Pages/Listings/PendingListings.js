@@ -57,18 +57,18 @@ function PendingListings() {
           pendingListings.map((auction, index) => (
             <tbody key={index}>
               <tr>
-                <td>{index}</td>
+                <td>{index + 1}</td>
                 <td>{auction.details.owner_name}</td>
                 <td>
                   {auction.type === "real-estate"
                     ? "Real Estate"
                     : auction.type === "car"
-                    ? "Car"
-                    : auction.type === "jet"
-                    ? "Jet"
-                    : auction.type === "yacht"
-                    ? "Yacht"
-                    : ""}
+                      ? "Car"
+                      : auction.type === "jet"
+                        ? "Jet"
+                        : auction.type === "yacht"
+                          ? "Yacht"
+                          : ""}
                 </td>
                 {auction.isApproved === "pending" ? (
                   <td>Pending</td>

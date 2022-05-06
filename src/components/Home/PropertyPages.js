@@ -47,8 +47,6 @@ const PropertyPages = ({
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
-  console.log(imgCar);
-  console.log(img);
   return (
     <>
       <h5 className="realHeader">
@@ -109,6 +107,36 @@ const PropertyPages = ({
               </Col>
               <Col >
                 <select className=" RealButton ">
+                  <option>Brand</option>
+                  <option href="#">Mercedes-Benz</option>
+                  <option href="#">Porsche</option>
+                  <option href="#">Chevrolet</option>
+                  <option href="#">Ford</option>
+                  <option href="#">Ferrari</option>
+                  <option href="#">Rolls-Royce</option>
+                  <option href="#">Land Rover</option>
+                  <option href="#">Bentley</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Years</option>
+                  <option href="#">2015-2022</option>
+                  <option href="#">2010-2014</option>
+                  <option href="#">2000-2009</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Countries</option>
+                  <option href="#">United States</option>
+                  <option href="#">Canada</option>
+                  <option href="#">Australia</option>
+                  <option href="#">United Kingdom</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
@@ -117,36 +145,37 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Property Type</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">Cabriolet</option>
+                  <option href="#">SUV</option>
+                  <option href="#">Coupe</option>
+                  <option href="#">Other</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
-                </select>
-              </Col>
-              {/* <Col >
-                <select className=" RealButton ">
-                  <option>Bldg Siize</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
-                </select>
-              </Col> */}
-              <Col >
-                <select className=" RealButton ">
-                  <option>More Filter</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">$0 - $10,517</option>
+                  <option href="#">$10,517 - $21,034</option>
+                  <option href="#">$21,034 - $31,062</option>
+                  <option href="#">$31,062 - $51,089</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
-                  <option>Sort</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option>Mileage</option>
+                  <option href="#">0 mi - 1000 mi</option>
+                  <option href="#">10000 mi - 20000 mi</option>
+                  <option href="#">20000 mi - 40000 mi</option>
+                  <option href="#">40000 mi - 60000 mi</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Sort by:</option>
+                  <option href="#">Premium</option>
+                  <option href="#">Popular</option>
+                  <option href="#">Price Lowest First</option>
+                  <option href="#">Price Highest First</option>
                 </select>
               </Col>
             </Row>
@@ -157,7 +186,7 @@ const PropertyPages = ({
                 About 151051 results
               </Col>
               <Col md={2}>
-                <button className="mapButton" onClick={toggleMap} >Map</button>
+                <button className="mapButton" onClick={toggleMap}>Map</button>
               </Col>
               <Col md={2}>
                 <button className="galleryButton" onClick={toggleImgCar}>Gallery</button>
@@ -176,6 +205,36 @@ const PropertyPages = ({
               </Col>
               <Col >
                 <select className=" RealButton ">
+                  <option>Brand</option>
+                  <option href="#">Bombardier</option>
+                  <option href="#">Cessna</option>
+                  <option href="#">Gulfstream</option>
+                  <option href="#">Dassault</option>
+                  <option href="#">Embraer</option>
+                  <option href="#">Beechcraft</option>
+                  <option href="#">Pilatus</option>
+                  <option href="#">Piper</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Years</option>
+                  <option href="#">2015-2022</option>
+                  <option href="#">2010-2014</option>
+                  <option href="#">2000-2009</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Countries</option>
+                  <option href="#">United States</option>
+                  <option href="#">Canada</option>
+                  <option href="#">Australia</option>
+                  <option href="#">United Kingdom</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
@@ -184,36 +243,43 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Property Type</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">Heavy Jet</option>
+                  <option href="#">Light Jet</option>
+                  <option href="#">Super Midsize Jet</option>
+                  <option href="#">Large Cabin</option>
+                  <option href="#">Turbo Prop</option>
+                  <option href="#">Midsize Jet</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">$52,586 - $2,103,467
+                  </option>
+                  <option href="#">$2,103,467 - $5,258,668
+                  </option>
+                  <option href="#">$15,776,005 +
+                  </option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
-                  <option>Bldg Siize</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option>TTAF</option>
+                  <option href="#">0 h - 500 h
+                  </option>
+                  <option href="#">500 h - 1000 h
+                  </option>
+                  <option href="#">1000 h - 2000 h</option>
+                  <option href="#">2000 h - 3000 h</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
-                  <option>More Filter</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
-                </select>
-              </Col>
-              <Col >
-                <select className=" RealButton ">
-                  <option>Sort</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option>Sort by:</option>
+                  <option href="#">Premium</option>
+                  <option href="#">Popular</option>
+                  <option href="#">Price Lowest First</option>
+                  <option href="#">Price Highest First</option>
                 </select>
               </Col>
             </Row>
@@ -243,6 +309,36 @@ const PropertyPages = ({
               </Col>
               <Col >
                 <select className=" RealButton ">
+                  <option>Brand</option>
+                  <option href="#">Mercedes-Benz</option>
+                  <option href="#">Porsche</option>
+                  <option href="#">Chevrolet</option>
+                  <option href="#">Ford</option>
+                  <option href="#">Ferrari</option>
+                  <option href="#">Rolls-Royce</option>
+                  <option href="#">Land Rover</option>
+                  <option href="#">Bentley</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Years</option>
+                  <option href="#">2015-2022</option>
+                  <option href="#">2010-2014</option>
+                  <option href="#">2000-2009</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
+                  <option>Countries</option>
+                  <option href="#">United States</option>
+                  <option href="#">Canada</option>
+                  <option href="#">Australia</option>
+                  <option href="#">United Kingdom</option>
+                </select>
+              </Col>
+              <Col >
+                <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
@@ -251,36 +347,45 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Property Type</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">Motor Yacht</option>
+                  <option href="#">Cruiser</option>
+                  <option href="#">Sport Fisherman</option>
+                  <option href="#">Classic</option>
+                  <option href="#">Flybridge</option>
+                  <option href="#">Cantamaran</option>
+                  <option href="#">Yacht</option>
+                  <option href="#">Mega Yacht</option>
+                  <option href="#">Other</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option href="#">$31.552 - $105,517</option>
+                  <option href="#"> $105,517 - $155,517</option>
+                  <option href="#">$ $157,517 - $262,517</option>
+                  <option href="#">$262,517 - $305,517</option>
+                  <option href="#">$305,517 - $405,517</option>
+                  <option href="#">$405,517 - $505,517</option>
+                  <option href="#">$505,517 - $1,605,517</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
-                  <option>Bldg Siize</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option>Length</option>
+                  <option href="#">0 ft - 30 ft</option>
+                  <option href="#">30 ft - 50 ft</option>
+                  <option href="#">50 ft - 60 ft</option>
+                  <option href="#">65 ft - 100 ft</option>
                 </select>
               </Col>
               <Col >
                 <select className=" RealButton ">
-                  <option>More Filter</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
-                </select>
-              </Col>
-              <Col >
-                <select className=" RealButton ">
-                  <option>Sort</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
+                  <option>Sort by:</option>
+                  <option href="#">Premium</option>
+                  <option href="#">Popular</option>
+                  <option href="#">Price Lowest First</option>
+                  <option href="#">Price Highest First</option>
                 </select>
               </Col>
             </Row>
@@ -317,22 +422,34 @@ const PropertyPages = ({
             <Col >
               <select className=" RealButton ">
                 <option>Property Type</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">Villa</option>
+                <option href="#">Penthouse</option>
+                <option href="#">Apartment</option>
+                <option href="#">House</option>
+                <option href="#">Studio</option>
+
               </select>
             </Col>
             <Col >
               <select className=" RealButton ">
                 <option>Price</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">$52,586 - $2,103,467
+                </option>
+                <option href="#">$2,103,467 - $5,258,668
+                </option>
+                <option href="#">$15,776,005 +
+                </option>
               </select>
             </Col>
             <Col >
               <select className=" RealButton ">
-                <option>Bldg Siize</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option>Bldg Size</option>
+                <option href="#">52,586 sqft - 2,103, 467sqft
+                </option>
+                <option href="#">2,103, 467sqft - 5,258, 668sqft
+                </option>
+                <option href="#">15,776 ,005sqft +
+                </option>
               </select>
             </Col>
             <Col >
@@ -345,8 +462,10 @@ const PropertyPages = ({
             <Col >
               <select className=" RealButton ">
                 <option>Sort</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
+                <option href="#">Premium</option>
+                <option href="#">Popular</option>
+                <option href="#">Price Lowest First</option>
+                <option href="#">Price Highest First</option>
               </select>
             </Col>
           </Row>
@@ -424,10 +543,10 @@ const PropertyPages = ({
               />
             </div>
             <Row >
-              {imgCar.map((imgCar, index) => (
-                <Col md={6} key={index} className="p-2" >
+              {imgCar.map((imgCars, index) => (
+                <Col md={imgCar.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
-                    src={imgCar}
+                    src={imgCars}
                     alt="gallery"
                     style={{ width: "100%", height: "100%" }}
                   />
@@ -453,10 +572,10 @@ const PropertyPages = ({
               />
             </div>
             <Row >
-              {imgJet.map((imgJet, index) => (
-                <Col md={6} key={index} className="p-2" >
+              {imgJet.map((imgJets, index) => (
+                <Col md={imgJet.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
-                    src={imgJet}
+                    src={imgJets}
                     alt="gallery"
                     style={{ width: "100%", height: "100%" }}
                   />
@@ -483,7 +602,7 @@ const PropertyPages = ({
             </div>
             <Row >
               {imgYacht.map((imgYacht, index) => (
-                <Col md={6} key={index} className="p-2" >
+                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
                     src={imgYacht}
                     alt="gallery"
@@ -511,10 +630,10 @@ const PropertyPages = ({
               />
             </div>
             <Row >
-              {img.map((img, index) => (
-                <Col md={6} key={index} className="p-2" >
+              {img.map((imgs, index) => (
+                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
                   <Image
-                    src={img}
+                    src={imgs}
                     alt="gallery"
                     style={{ width: "100%", height: "100%" }}
                   />
