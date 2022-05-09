@@ -20,6 +20,9 @@ function JetForm({ toogleStep, step, properties, property }) {
     useState();
   const [number_of_aircraft, setNumber_of_aircraft] = useState();
   const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [country, setCountry] = useState();
 
   const prop = useSelector((state) => state.incompProperty);
   const params = useParams();
@@ -124,7 +127,34 @@ function JetForm({ toogleStep, step, properties, property }) {
       setNumber_of_aircraft(
         property.number_of_aircraft ? property.number_of_aircraft : ""
       );
-      setAddress(property.property_address ? property.property_address : "");
+      setAddress(
+        property.property_address
+          ? property.property_address.formatted_address
+            ? property.property_address.formatted_address
+            : ""
+          : ""
+      );
+      setCountry(
+        property.property_address
+          ? property.property_address.country
+            ? property.property_address.country
+            : ""
+          : ""
+      );
+      setState(
+        property.property_address
+          ? property.property_address.state
+            ? property.property_address.state
+            : ""
+          : ""
+      );
+      setCity(
+        property.property_address
+          ? property.property_address.city
+            ? property.property_address.city
+            : ""
+          : ""
+      );
       setIsImport(property.imported_aircraft ? property.imported_aircraft : "");
     }
   }, []);
@@ -162,7 +192,12 @@ function JetForm({ toogleStep, step, properties, property }) {
         ? data.number_of_aircraft
         : number_of_aircraft,
       imported_aircraft: isImport,
-      property_address: data.property_address ? data.property_address : address,
+      property_address: {
+        formatted_address: data.address ? data.address : address ? address : "",
+        city: data.city ? data.city : city ? city : "",
+        state: data.state ? data.state : state ? state : "",
+        country: data.country ? data.country : country ? country : "",
+      },
     };
     properties(datas);
     toogleStep(step + 1);
@@ -199,6 +234,45 @@ function JetForm({ toogleStep, step, properties, property }) {
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>

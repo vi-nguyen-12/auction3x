@@ -20,6 +20,9 @@ function CarForm({ toogleStep, step, properties, property }) {
   const [condition, setCondition] = useState();
   const [price, setPrice] = useState();
   const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [country, setCountry] = useState();
 
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
@@ -139,26 +142,60 @@ function CarForm({ toogleStep, step, properties, property }) {
       setFuelType(property.fuel_type ? property.fuel_type : "");
       setCondition(property.condition ? property.condition : "");
       setPrice(property.price ? property.price : "");
-      setAddress(property.property_address ? property.property_address : "");
+      setAddress(
+        property.property_address
+          ? property.property_address.formatted_address
+          : ""
+      );
+      setCountry(
+        property.property_address
+          ? property.property_address.country
+            ? property.property_address.country
+            : ""
+          : ""
+      );
+      setState(
+        property.property_address
+          ? property.property_address.state
+            ? property.property_address.state
+            : ""
+          : ""
+      );
+      setCity(
+        property.property_address
+          ? property.property_address.city
+            ? property.property_address.city
+            : ""
+          : ""
+      );
     }
   }, [prop]);
 
   const onSubmit = (data) => {
     const datas = {
-      make: make ? make : data.make,
-      model: model ? model : data.model,
-      year: year ? year : data.year,
-      mileage: mileage ? mileage : data.mileage,
-      transmission: transmission ? transmission : data.transmission,
-      car_type: carType ? carType : data.carType,
-      power: power ? power : data.power,
-      color: color ? color : data.color,
-      VIN: vin ? vin : data.vin,
-      engine: engine ? engine : data.engine,
-      fuel_type: fuelType ? fuelType : data.fuelType,
-      condition: condition ? condition : data.condition,
-      price: price ? price : data.price,
-      property_address: address ? address : data.address,
+      make: data.make ? data.make : make ? make : "",
+      model: data.model ? data.model : model ? model : "",
+      year: data.year ? data.year : year ? year : "",
+      mileage: data.mileage ? data.mileage : mileage ? mileage : "",
+      transmission: data.transmission
+        ? data.transmission
+        : transmission
+        ? transmission
+        : "",
+      car_type: data.car_type ? data.car_type : carType ? carType : "",
+      power: data.power ? data.power : power ? power : "",
+      color: data.color ? data.color : color ? color : "",
+      VIN: data.vin ? data.vin : vin ? vin : "",
+      engine: data.engine ? data.engine : engine ? engine : "",
+      fuel_type: data.fuelType ? data.fuelType : fuelType ? fuelType : "",
+      condition: data.condition ? data.condition : condition ? condition : "",
+      price: data.price ? data.price : price ? price : "",
+      property_address: {
+        formatted_address: data.address ? data.address : address ? address : "",
+        city: data.city ? data.city : city ? city : "",
+        state: data.state ? data.state : state ? state : "",
+        country: data.country ? data.country : country ? country : "",
+      },
     };
     properties(datas);
     toogleStep(step + 1);
@@ -197,6 +234,7 @@ function CarForm({ toogleStep, step, properties, property }) {
               className="form-control"
               defaultValue={year}
               {...register("year", { required: false })}
+              maxLength={4}
               onChange={(e) => setYear(e.target.value)}
               required
             />
@@ -367,6 +405,42 @@ function CarForm({ toogleStep, step, properties, property }) {
               defaultValue={address}
               {...register("address", { required: false })}
               onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+          </Col>
+          <Col>
+            <label>Country</label>
+            <input
+              type="text"
+              name="country"
+              className="form-control"
+              defaultValue={country}
+              {...register("country", { required: false })}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+          </Col>
+          <Col>
+            <label>State</label>
+            <input
+              type="text"
+              name="state"
+              className="form-control"
+              defaultValue={state}
+              {...register("state", { required: false })}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+          </Col>
+          <Col>
+            <label>City</label>
+            <input
+              type="text"
+              name="city"
+              className="form-control"
+              defaultValue={city}
+              {...register("city", { required: false })}
+              onChange={(e) => setCity(e.target.value)}
               required
             />
           </Col>

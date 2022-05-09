@@ -31,6 +31,9 @@ function JetDetails({
     useState();
   const [number_of_aircraft, setNumber_of_aircraft] = useState();
   const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [country, setCountry] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
@@ -341,11 +344,33 @@ function JetDetails({
       );
       setAddress(
         propertyData.property_address
-          ? propertyData.property_address
+          ? propertyData.property_address.formatted_address
           : property.property_address
-          ? property.property_address
+          ? property.property_address.formatted_address
           : ""
       );
+      setCountry(
+        propertyData.property_address
+          ? propertyData.property_address.country
+          : property.property_address
+          ? property.property_address.country
+          : ""
+      );
+      setState(
+        propertyData.property_address
+          ? propertyData.property_address.state
+          : property.property_address
+          ? property.property_address.state
+          : ""
+      );
+      setCity(
+        propertyData.property_address
+          ? propertyData.property_address.city
+          : property.property_address
+          ? property.property_address.city
+          : ""
+      );
+
       setReservedAmount(propertyData ? propertyData.reservedAmount : "");
       setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
       setIsImport(
@@ -396,7 +421,16 @@ function JetDetails({
         imported_aircraft: property.imported_aircraft
           ? property.imported_aircraft
           : isImport,
-        property_address: address ? address : property.property_address,
+        property_address: {
+          formatted_address: data.address
+            ? data.address
+            : address
+            ? address
+            : "",
+          country: data.country ? data.country : country ? country : "",
+          state: data.state ? data.state : state ? state : "",
+          city: data.city ? data.city : city ? city : "",
+        },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
@@ -436,6 +470,45 @@ function JetDetails({
               />
               <span style={{ fontWeight: "600", color: "black" }}>
                 Property Address <span style={{ color: "#ff0000" }}>*</span>
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={country}
+                {...register("country")}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Country <span style={{ color: "#ff0000" }}>*</span>
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={state}
+                {...register("state")}
+                onChange={(e) => setState(e.target.value)}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                State <span style={{ color: "#ff0000" }}>*</span>
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={city}
+                {...register("city")}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                City <span style={{ color: "#ff0000" }}>*</span>
               </span>
             </Col>
           </Row>

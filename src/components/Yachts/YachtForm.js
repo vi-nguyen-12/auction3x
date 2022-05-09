@@ -17,6 +17,9 @@ function YachtForm({ toogleStep, step, properties, property }) {
   const [running_cost, setRunning_cost] = useState();
   const [no_of_crew_required, setNo_of_crew_required] = useState();
   const [property_address, setProperty_address] = useState();
+  const [country, setCountry] = useState();
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
   const [otherDetails, setOtherDetails] = useState();
 
   const params = useParams();
@@ -131,7 +134,32 @@ function YachtForm({ toogleStep, step, properties, property }) {
         property.no_of_crew_required ? property.no_of_crew_required : ""
       );
       setProperty_address(
-        property.property_address ? property.property_address : ""
+        property.property_address
+          ? property.property_address.formatted_address
+            ? property.property_address.formatted_address
+            : ""
+          : ""
+      );
+      setCountry(
+        property.property_address
+          ? property.property_address.country
+            ? property.property_address.country
+            : ""
+          : ""
+      );
+      setState(
+        property.property_address
+          ? property.property_address.state
+            ? property.property_address.state
+            : ""
+          : ""
+      );
+      setCity(
+        property.property_address
+          ? property.property_address.city
+            ? property.property_address.city
+            : ""
+          : ""
       );
       setOtherDetails(property.detain ? property.detain : "");
     }
@@ -149,7 +177,16 @@ function YachtForm({ toogleStep, step, properties, property }) {
       running_cost: data.running_cost,
       no_of_crew_required: data.no_of_crew_required,
       detain: data.detain,
-      property_address: data.property_address,
+      property_address: {
+        formatted_address: data.property_address
+          ? data.property_address
+          : property_address
+          ? property_address
+          : "",
+        country: data.country ? data.country : country ? country : "",
+        state: data.state ? data.state : state ? state : "",
+        city: data.city ? data.city : city ? city : "",
+      },
     };
     properties(datas);
     toogleStep(step + 1);
@@ -235,6 +272,60 @@ function YachtForm({ toogleStep, step, properties, property }) {
               }}
             >
               Property Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              City <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>

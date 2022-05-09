@@ -31,6 +31,9 @@ function CarDetails({
   const [condition, setCondition] = useState();
   const [price, setPrice] = useState();
   const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [country, setCountry] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
@@ -44,177 +47,198 @@ function CarDetails({
         properti[0].details.make
           ? properti[0].details.make
           : propertyData.make
-            ? propertyData.make
-            : property.make
-              ? property.make
-              : ""
+          ? propertyData.make
+          : property.make
+          ? property.make
+          : ""
       );
       setModel(
         properti[0].details.model
           ? properti[0].details.model
           : propertyData.model
-            ? propertyData.model
-            : property.model
-              ? property.model
-              : ""
+          ? propertyData.model
+          : property.model
+          ? property.model
+          : ""
       );
       setYear(
         properti[0].details.year
           ? properti[0].details.year
           : propertyData.year
-            ? propertyData.year
-            : property.year
-              ? property.year
-              : ""
+          ? propertyData.year
+          : property.year
+          ? property.year
+          : ""
       );
       setMileage(
         properti[0].details.mileage
           ? properti[0].details.mileage
           : propertyData.mileage
-            ? propertyData.mileage
-            : property.mileage
-              ? property.mileage
-              : ""
+          ? propertyData.mileage
+          : property.mileage
+          ? property.mileage
+          : ""
       );
       setTransmission(
         properti[0].details.transmission
           ? properti[0].details.transmission
           : propertyData.transmission
-            ? propertyData.transmission
-            : property.transmission
-              ? property.transmission
-              : ""
+          ? propertyData.transmission
+          : property.transmission
+          ? property.transmission
+          : ""
       );
       setCarType(
         properti[0].details.car_type
           ? properti[0].details.car_type
           : propertyData.car_type
-            ? propertyData.car_type
-            : property.car_type
-              ? property.car_type
-              : ""
+          ? propertyData.car_type
+          : property.car_type
+          ? property.car_type
+          : ""
       );
       setPower(
         properti[0].details.power
           ? properti[0].details.power
           : propertyData.power
-            ? propertyData.power
-            : property.power
-              ? property.power
-              : ""
+          ? propertyData.power
+          : property.power
+          ? property.power
+          : ""
       );
       setColor(
         properti[0].details.color
           ? properti[0].details.color
           : propertyData.color
-            ? propertyData.color
-            : property.color
-              ? property.color
-              : ""
+          ? propertyData.color
+          : property.color
+          ? property.color
+          : ""
       );
       setVin(
         properti[0].details.VIN
           ? properti[0].details.VIN
           : propertyData.VIN
-            ? propertyData.VIN
-            : property.VIN
-              ? property.VIN
-              : ""
+          ? propertyData.VIN
+          : property.VIN
+          ? property.VIN
+          : ""
       );
       setEngine(
         properti[0].details.engine
           ? properti[0].details.engine
           : propertyData.engine
-            ? propertyData.engine
-            : property.engine
-              ? property.engine
-              : ""
+          ? propertyData.engine
+          : property.engine
+          ? property.engine
+          : ""
       );
       setFuelType(
         properti[0].details.fuel_type
           ? properti[0].details.fuel_type
           : propertyData.fuel_type
-            ? propertyData.fuel_type
-            : property.fuel_type
-              ? property.fuel_type
-              : ""
+          ? propertyData.fuel_type
+          : property.fuel_type
+          ? property.fuel_type
+          : ""
       );
       setCondition(
         properti[0].details.condition
           ? properti[0].details.condition
           : propertyData.condition
-            ? propertyData.condition
-            : property.condition
-              ? property.condition
-              : ""
+          ? propertyData.condition
+          : property.condition
+          ? property.condition
+          : ""
       );
       setPrice(
         properti[0].details.price
           ? properti[0].details.price
           : propertyData.price
-            ? propertyData.price
-            : property.price
-              ? property.price
-              : ""
+          ? propertyData.price
+          : property.price
+          ? property.price
+          : ""
       );
       setAddress(
         properti[0].details.property_address
           ? properti[0].details.property_address
           : propertyData.property_address
-            ? propertyData.property_address
-            : property.property_address
-              ? property.property_address
-              : ""
+          ? propertyData.property_address
+          : property.property_address
+          ? property.property_address
+          : ""
       );
       setReservedAmount(
         properti[0].reservedAmount
           ? properti[0].reservedAmount
           : propertyData.reservedAmount
-            ? propertyData.reservedAmount
-            : ""
+          ? propertyData.reservedAmount
+          : ""
       );
       setDiscussedAmount(
         properti[0].discussedAmount
           ? properti[0].discussedAmount
           : propertyData.discussedAmount
-            ? propertyData.discussedAmount
-            : ""
+          ? propertyData.discussedAmount
+          : ""
       );
     } else {
       setAddress(
         propertyData.property_address
-          ? propertyData.property_address
-          : property.property_address
-            ? property.property_address
-            : ""
+          ? propertyData.property_address.formatted_address
+          : property.property_address.formatted_address
+          ? property.property_address.formatted_address
+          : ""
+      );
+      setCountry(
+        propertyData.property_address
+          ? propertyData.property_address.country
+          : property.property_address.country
+          ? property.property_address.country
+          : ""
+      );
+      setState(
+        propertyData.property_address
+          ? propertyData.property_address.state
+          : property.property_address.state
+          ? property.property_address.state
+          : ""
+      );
+      setCity(
+        propertyData.property_address
+          ? propertyData.property_address.city
+          : property.property_address.city
+          ? property.property_address.city
+          : ""
       );
       setPrice(
         propertyData.price
           ? propertyData.price
           : property.price
-            ? property.price
-            : ""
+          ? property.price
+          : ""
       );
       setCondition(
         propertyData.condition
           ? propertyData.condition
           : property.condition
-            ? property.condition
-            : ""
+          ? property.condition
+          : ""
       );
       setFuelType(
         propertyData.fuel_type
           ? propertyData.fuel_type
           : property.fuel_type
-            ? property.fuel_type
-            : ""
+          ? property.fuel_type
+          : ""
       );
       setEngine(
         propertyData.engine
           ? propertyData.engine
           : property.engine
-            ? property.engine
-            : ""
+          ? property.engine
+          : ""
       );
       setVin(
         propertyData.VIN ? propertyData.VIN : property.VIN ? property.VIN : ""
@@ -223,57 +247,57 @@ function CarDetails({
         propertyData.color
           ? propertyData.color
           : property.color
-            ? property.color
-            : ""
+          ? property.color
+          : ""
       );
       setPower(
         propertyData.power
           ? propertyData.power
           : property.power
-            ? property.power
-            : ""
+          ? property.power
+          : ""
       );
       setCarType(
         propertyData.car_type
           ? propertyData.car_type
           : property.car_type
-            ? property.car_type
-            : ""
+          ? property.car_type
+          : ""
       );
       setTransmission(
         propertyData.transmission
           ? propertyData.transmission
           : property.transmission
-            ? property.transmission
-            : ""
+          ? property.transmission
+          : ""
       );
       setMileage(
         propertyData.mileage
           ? propertyData.mileage
           : property.mileage
-            ? property.mileage
-            : ""
+          ? property.mileage
+          : ""
       );
       setYear(
         propertyData.year
           ? propertyData.year
           : property.year
-            ? property.year
-            : ""
+          ? property.year
+          : ""
       );
       setModel(
         propertyData.model
           ? propertyData.model
           : property.model
-            ? property.model
-            : ""
+          ? property.model
+          : ""
       );
       setMake(
         propertyData.make
           ? propertyData.make
           : property.make
-            ? property.make
-            : ""
+          ? property.make
+          : ""
       );
       setReservedAmount(propertyData ? propertyData.reservedAmount : "");
       setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
@@ -298,7 +322,14 @@ function CarDetails({
           fuel_type: fuelType ? fuelType : property.fuel_type,
           condition: condition ? condition : property.condition,
           price: price ? price : property.price,
-          property_address: address ? address : property.property_address,
+          property_address: {
+            formatted_address: address
+              ? address
+              : property.property_address.formatted_address,
+            country: country ? country : property.property_address.country,
+            state: state ? state : property.property_address.state,
+            city: city ? city : property.property_address.city,
+          },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
           step: parseInt(2),
@@ -327,7 +358,14 @@ function CarDetails({
         fuel_type: fuelType ? fuelType : property.fuel_type,
         condition: condition ? condition : property.condition,
         price: price ? price : property.price,
-        property_address: address ? address : property.property_address,
+        property_address: {
+          formatted_address: address
+            ? address
+            : property.property_address.formatted_address,
+          country: country ? country : property.property_address.country,
+          state: state ? state : property.property_address.state,
+          city: city ? city : property.property_address.city,
+        },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         ...ownership,
@@ -350,20 +388,33 @@ function CarDetails({
       alert("Reserved amount should be greater than discussed amount");
     } else {
       const submitedData = {
-        make: make,
-        model: model,
-        year: year,
-        mileage: mileage,
-        transmission: transmission,
-        car_type: carType,
-        power: power,
-        color: color,
-        VIN: vin,
-        engine: engine,
-        fuel_type: fuelType,
-        condition: condition,
-        price: price,
-        property_address: address ? address : data.address,
+        make: data.make ? data.make : make ? make : "",
+        model: data.model ? data.model : model ? model : "",
+        year: data.year ? data.year : year ? year : "",
+        mileage: data.mileage ? data.mileage : mileage ? mileage : "",
+        transmission: data.transmission
+          ? data.transmission
+          : transmission
+          ? transmission
+          : "",
+        car_type: data.carType ? data.carType : carType ? carType : "",
+        power: data.power ? data.power : power ? power : "",
+        color: data.color ? data.color : color ? color : "",
+        VIN: data.vin ? data.vin : vin ? vin : "",
+        engine: data.engine ? data.engine : engine ? engine : "",
+        fuel_type: data.fuelType ? data.fuelType : fuelType ? fuelType : "",
+        condition: data.condition ? data.condition : condition ? condition : "",
+        price: data.price ? data.price : price ? price : "",
+        property_address: {
+          formatted_address: data.address
+            ? data.address
+            : address
+            ? address
+            : "",
+          country: data.country ? data.country : country ? country : "",
+          state: data.state ? data.state : state ? state : "",
+          city: data.city ? data.city : city ? city : "",
+        },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
@@ -400,6 +451,17 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
+              defaultValue={year}
+              {...register("year", { maxLength: 100 })}
+              onChange={(e) => setYear(e.target.value)}
+              required
+            />
+            <span style={{ color: "black" }}>Year</span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
               defaultValue={make}
               {...register("make", { maxLength: 100 })}
               onChange={(e) => setMake(e.target.value)}
@@ -424,12 +486,12 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={year}
-              {...register("year", { maxLength: 100 })}
-              onChange={(e) => setYear(e.target.value)}
+              defaultValue={transmission}
+              {...register("transmission", { maxLength: 100 })}
+              onChange={(e) => setTransmission(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Year</span>
+            <span style={{ color: "black" }}>Transmission</span>
           </Col>
           <Col>
             <input
@@ -448,12 +510,12 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={transmission}
-              {...register("transmission", { maxLength: 100 })}
-              onChange={(e) => setTransmission(e.target.value)}
+              defaultValue={power}
+              {...register("power", { maxLength: 100 })}
+              onChange={(e) => setPower(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Transmission</span>
+            <span style={{ color: "black" }}>Power</span>
           </Col>
           <Col>
             <input
@@ -472,12 +534,12 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={power}
-              {...register("power", { maxLength: 100 })}
-              onChange={(e) => setPower(e.target.value)}
+              defaultValue={vin}
+              {...register("vin", { maxLength: 100 })}
+              onChange={(e) => setVin(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Power</span>
+            <span style={{ color: "black" }}>VIN</span>
           </Col>
           <Col>
             <input
@@ -496,12 +558,12 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={vin}
-              {...register("vin", { maxLength: 100 })}
-              onChange={(e) => setVin(e.target.value)}
+              defaultValue={fuelType}
+              {...register("fuelType", { maxLength: 100 })}
+              onChange={(e) => setFuelType(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>VIN</span>
+            <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
           <Col>
             <input
@@ -520,12 +582,12 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={fuelType}
-              {...register("fuelType", { maxLength: 100 })}
-              onChange={(e) => setFuelType(e.target.value)}
+              defaultValue={price}
+              {...register("price", { maxLength: 100 })}
+              onChange={(e) => setPrice(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Fuel Type</span>
+            <span style={{ color: "black" }}>Approximate Market Price</span>
           </Col>
           <Col>
             <input
@@ -544,23 +606,45 @@ function CarDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={price}
-              {...register("price", { maxLength: 100 })}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-            <span style={{ color: "black" }}>Approximate Market Price</span>
-          </Col>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
               defaultValue={address}
               {...register("address", { maxLength: 100 })}
               onChange={(e) => setAddress(e.target.value)}
               required
             />
             <span style={{ color: "black" }}>Address</span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={country}
+              {...register("country", { maxLength: 100 })}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span style={{ color: "black" }}>Country</span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={state}
+              {...register("state", { maxLength: 100 })}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span style={{ color: "black" }}>State</span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={city}
+              {...register("city", { maxLength: 100 })}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span style={{ color: "black" }}>City</span>
           </Col>
         </Row>
         <Row style={{ marginTop: "20px" }}>

@@ -198,7 +198,7 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
         </Table>
 
         <div className="bottom-btn">
-          <button className="pre-btn">Previous</button>
+          <button className="pre-btn" style={{opacity:"0.6"}} disabled>Previous</button>
           <span> </span>
           <button type="submit" className="nxt-btn" id="next">
             Next

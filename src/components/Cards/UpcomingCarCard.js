@@ -4,12 +4,6 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Toast from "../Toast";
-import Login from "../Users/Login";
-import Modal from "react-bootstrap/Modal";
-import Confirm from "../Users/EmailConfirm";
-import ForgotPass from "../Users/ForgotPass";
-import ChangePass from "../Users/ChangePass";
-import SignUp from "../Users/SignUp";
 import NumberFormat from "react-number-format";
 import RegistrationTimer from "../Auctions/RegistrationTimer";
 import Timer from "../Auctions/Timer";
@@ -21,18 +15,12 @@ const UpcomingCarCard = ({
   id,
   startRegister,
   endRegister,
-  auctionEndDate,
   auctionStartDate,
   startingBid,
+  toogleSignIn,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
-  const [showSignIn, popSignIn] = useState(false);
-  const [showSignUp, popUpSignUp] = useState(false);
-  const [showConfirm, popupConfirm] = useState(false);
-  const [showButton, popButton] = useState(false);
-  const [forgotPass, popForgotPass] = useState(false);
-  const [changePass, popChangePass] = useState(false);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const toggleImage = () => {
@@ -48,14 +36,8 @@ const UpcomingCarCard = ({
       setFavorite(!favorite);
     }
   };
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
   const [registEnded, setRegistEnded] = useState(false);
-  const [startAuction, setStartAuction] = useState();
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
 
   const history = useHistory();
@@ -152,7 +134,7 @@ const UpcomingCarCard = ({
               >
                 <div>
                   <Row>
-                    {registEnded && startAuction ? (
+                    {registEnded ? (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
                         <p style={{ fontSize: "15px", width: "100px" }}>
                           Auction Start:
@@ -178,7 +160,7 @@ const UpcomingCarCard = ({
                     </Col>
                   </Row>
                   <Row>
-                    {registEnded && startAuction ? (
+                    {registEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
                         <div
                           style={{
@@ -186,7 +168,7 @@ const UpcomingCarCard = ({
                             width: "200px",
                           }}
                         >
-                          <Timer auctionStartDate={startAuction} />
+                          <Timer auctionStartDate={auctionStartDate} />
                         </div>
                       </Col>
                     ) : !registEnded ? (
@@ -285,117 +267,6 @@ const UpcomingCarCard = ({
               )}
             </div>
           </Card.Body>
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showConfirm}
-            onHide={toogleConfirmModal}
-            contentclassname="confirm"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{ color: "#D58F5C" }}
-              >
-                Confirm Email
-              </Modal.Title>
-              <Modal.Title
-                className="pt-4"
-                style={{
-                  fontSize: "12px",
-                  color: "#D58F5C",
-                  position: "absolute",
-                  marginright: "10px",
-                  marginTop: "8px",
-                }}
-              ></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Confirm
-                toogleConfirmModal={toogleConfirmModal}
-                toogleSignIn={toogleSignIn}
-              />
-            </Modal.Body>
-          </Modal>
-
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={forgotPass}
-            onHide={toogleForgotPass}
-            contentclassname="forgotPass"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{
-                  color: "#D58F5C",
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                }}
-              >
-                Forgot Password
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ForgotPass
-                toogleForgotPass={toogleForgotPass}
-                toogleChangePass={toogleChangePass}
-              />
-            </Modal.Body>
-          </Modal>
-
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={changePass}
-            onHide={toogleChangePass}
-            contentclassname="forgotPass"
-          >
-            <Modal.Body>
-              <ChangePass toogleChangePass={toogleChangePass} />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignIn}
-            onHide={toogleSignIn}
-            contentclassname="login"
-          >
-            <Modal.Body>
-              <Login
-                toogleSignUp={toogleSignUp}
-                toogleSignIn={toogleSignIn}
-                toogleButton={toogleButton}
-                toogleForgotPass={toogleForgotPass}
-              />
-            </Modal.Body>
-          </Modal>
-
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignUp}
-            onHide={toogleSignUp}
-            contentclassname="custom-modal-style"
-          >
-            <Modal.Body>
-              <SignUp
-                toogleSignUp={toogleSignUp}
-                toogleConfirmModal={toogleConfirmModal}
-                toogleSignIn={toogleSignIn}
-              />
-            </Modal.Body>
-          </Modal>
         </Card>
       </div>
     </>

@@ -80,7 +80,7 @@ position: relative;
 }
 `;
 
-const Featured = ({ query }) => {
+const Featured = ({ query, toogleSignIn }) => {
   const auction = useSelector((state) => state.auction);
   let settings = {
     dots: false,
@@ -149,6 +149,7 @@ const Featured = ({ query }) => {
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                           reserveMet={item.isReservedMet}
+                          toogleSignIn={toogleSignIn}
                         />
                       ) : item.property.type === "car" ? (
                         <CarCard
@@ -159,6 +160,7 @@ const Featured = ({ query }) => {
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                           reserveMet={item.isReservedMet}
+                          toogleSignIn={toogleSignIn}
                         />
                       ) : item.property.type === "jet" ? (
                         <JetCard
@@ -169,6 +171,7 @@ const Featured = ({ query }) => {
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                           reserveMet={item.isReservedMet}
+                          toogleSignIn={toogleSignIn}
                         />
                       ) : item.property.type === "yacht" ? (
                         <YachtCard
@@ -179,6 +182,7 @@ const Featured = ({ query }) => {
                           auctionEndDate={item.auctionEndDate}
                           startingBid={item.startingBid}
                           reserveMet={item.isReservedMet}
+                          toogleSignIn={toogleSignIn}
                         />
                       ) : null}
                     </Col>

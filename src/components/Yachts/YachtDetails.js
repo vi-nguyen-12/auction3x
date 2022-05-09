@@ -30,6 +30,9 @@ function YachtDetails({
   const [running_cost, setRunning_cost] = useState();
   const [no_of_crew_required, setNo_of_crew_required] = useState();
   const [property_address, setProperty_address] = useState();
+  const [country, setCountry] = useState();
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
   const [otherDetails, setOtherDetails] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
@@ -216,9 +219,30 @@ function YachtDetails({
       );
       setProperty_address(
         propertyData.property_address
-          ? propertyData.property_address
+          ? propertyData.property_address.formatted_address
           : property.property_address
-          ? property.property_address
+          ? property.property_address.formatted_address
+          : ""
+      );
+      setCountry(
+        propertyData.property_address
+          ? propertyData.property_address.country
+          : property.property_address
+          ? property.property_address.country
+          : ""
+      );
+      setState(
+        propertyData.property_address
+          ? propertyData.property_address.state
+          : property.property_address
+          ? property.property_address.state
+          : ""
+      );
+      setCity(
+        propertyData.property_address
+          ? propertyData.property_address.city
+          : property.property_address
+          ? property.property_address.city
           : ""
       );
       setOtherDetails(
@@ -226,6 +250,20 @@ function YachtDetails({
           ? propertyData.others
           : property.detain
           ? property.detain
+          : ""
+      );
+      setReservedAmount(
+        propertyData
+          ? propertyData.reservedAmount
+            ? propertyData.reservedAmount
+            : ""
+          : ""
+      );
+      setDiscussedAmount(
+        propertyData
+          ? propertyData.discussedAmount
+            ? propertyData.discussedAmount
+            : ""
           : ""
       );
     }
@@ -266,9 +304,20 @@ function YachtDetails({
             no_of_crew_required: property.no_of_crew_required
               ? property.no_of_crew_required
               : no_of_crew_required,
-            property_address: property.property_address
-              ? property.property_address
-              : property_address,
+            property_address: {
+              formatted_address: property.property_address
+                ? property.property_address.formatted_address
+                : property_address,
+              country: property.property_address
+                ? property.property_address.country
+                : country,
+              state: property.property_address
+                ? property.property_address.state
+                : state,
+              city: property.property_address
+                ? property.property_address.city
+                : city,
+            },
             others: property.detain ? property.detain : otherDetails,
             step: parseInt(2),
           },
@@ -314,9 +363,20 @@ function YachtDetails({
             no_of_crew_required: property.no_of_crew_required
               ? property.no_of_crew_required
               : no_of_crew_required,
-            property_address: property.property_address
-              ? property.property_address
-              : property_address,
+            property_address: {
+              formatted_address: property.property_address
+                ? property.property_address.formatted_address
+                : property_address,
+              country: property.property_address
+                ? property.property_address.country
+                : country,
+              state: property.property_address
+                ? property.property_address.state
+                : state,
+              city: property.property_address
+                ? property.property_address.city
+                : city,
+            },
             step: parseInt(2),
           },
         };
@@ -361,9 +421,20 @@ function YachtDetails({
           no_of_crew_required: property.no_of_crew_required
             ? property.no_of_crew_required
             : no_of_crew_required,
-          property_address: property.property_address
-            ? property.property_address
-            : property_address,
+          property_address: {
+            formatted_address: property.property_address
+              ? property.property_address.formatted_address
+              : property_address,
+            country: property.property_address
+              ? property.property_address.country
+              : country,
+            state: property.property_address
+              ? property.property_address.state
+              : state,
+            city: property.property_address
+              ? property.property_address.city
+              : city,
+          },
           others: property.detain ? property.detain : otherDetails,
           ...ownership,
           step: parseInt(2),
@@ -408,9 +479,20 @@ function YachtDetails({
           no_of_crew_required: property.no_of_crew_required
             ? property.no_of_crew_required
             : no_of_crew_required,
-          property_address: property.property_address
-            ? property.property_address
-            : property_address,
+          property_address: {
+            formatted_address: property.property_address
+              ? property.property_address.formatted_address
+              : property_address,
+            country: property.property_address
+              ? property.property_address.country
+              : country,
+            state: property.property_address
+              ? property.property_address.state
+              : state,
+            city: property.property_address
+              ? property.property_address.city
+              : city,
+          },
           others: property.detain ? property.detain : otherDetails,
           ...ownership,
           step: parseInt(2),
@@ -463,9 +545,14 @@ function YachtDetails({
           no_of_crew_required: data.no_of_crew_required
             ? data.no_of_crew_required
             : no_of_crew_required,
-          property_address: data.property_address
-            ? data.property_address
-            : property_address,
+          property_address: {
+            formatted_address: data.property_address
+              ? data.property_address
+              : property_address,
+            country: data.country ? data.country : country,
+            state: data.state ? data.state : state,
+            city: data.city ? data.city : city,
+          },
           others: data.detain
             ? data.detain
             : otherDetails
@@ -505,9 +592,14 @@ function YachtDetails({
           no_of_crew_required: data.no_of_crew_required
             ? data.no_of_crew_required
             : no_of_crew_required,
-          property_address: data.property_address
-            ? data.property_address
-            : property_address,
+          property_address: {
+            formatted_address: data.property_address
+              ? data.property_address
+              : property_address,
+            country: data.country ? data.country : country,
+            state: data.state ? data.state : state,
+            city: data.city ? data.city : city,
+          },
         };
         tooglePropertyData(submitedData);
         toogleStep(step + 1);
@@ -594,6 +686,60 @@ function YachtDetails({
               }}
             >
               Property Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              City <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>

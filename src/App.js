@@ -4,6 +4,7 @@ import { Upcoming } from "./components/Auctions/Upcoming";
 import Work from "./components/Home/work";
 import RealEstate from "./components/Home/realEstate";
 import "./App.css";
+import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -21,7 +22,6 @@ import Header from "./components/Home/Header";
 import PropertyPages from "./components/Home/PropertyPages";
 import About from "./components/Home/About";
 import { addRegistProp } from "./slice/registPropertySlice";
-import ChangePass from "./components/Users/ChangePass";
 import EmailConfirm from "./components/Users/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
@@ -36,6 +36,11 @@ import TermsCondition from "./components/Company/TermsCondition";
 import FAQ from "./components/Company/FAQ";
 import PartnerWithUs from "./components/Company/PartnerWithUs";
 import Broker from "./components/Users/Broker";
+import ReconfirmEmail from "./components/Users/ReconfirmEmail";
+import SignUp from "./components/Users/SignUp";
+import ForgotPass from "./components/Users/ForgotPass";
+import ChangePass from "./components/Users/ChangePass";
+import Login from "./components/Users/Login";
 
 // const FindInCountries = lazy(() => import("./components/Home/FindInCountries"));
 // const ImgSlider = lazy(() => import("./components/Home/ImgSlider"));
@@ -128,8 +133,178 @@ function App() {
     setChange(change);
   };
 
+  const [showSignIn, popSignIn] = useState(false);
+  const [showSignUp, popUpSignUp] = useState(false);
+  const [showConfirm, popupConfirm] = useState(false);
+  const [showButton, popButton] = useState(false);
+  const [forgotPass, popForgotPass] = useState(false);
+  const [changePass, popChangePass] = useState(false);
+  const toogleChangePass = () => popChangePass(!changePass);
+  const toogleForgotPass = () => popForgotPass(!forgotPass);
+  const toogleButton = () => popButton(!showButton);
+  const toogleSignIn = () => popSignIn(!showSignIn);
+  const toogleSignUp = () => popUpSignUp(!showSignUp);
+  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
   return (
     <div className="App" style={{ background: bodyColor }}>
+      {/* All Modals */}
+      <Modal
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showConfirm}
+        onHide={toogleConfirmModal}
+        contentclassname="confirm"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{ color: "#D58F5C" }}
+          >
+            Confirm Email
+          </Modal.Title>
+          <Modal.Title
+            className="pt-4"
+            style={{
+              fontSize: "12px",
+              color: "#D58F5C",
+              position: "absolute",
+              marginright: "10px",
+              marginTop: "8px",
+            }}
+          ></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ReconfirmEmail
+            toogleConfirmModal={toogleConfirmModal}
+            toogleSignIn={toogleSignIn}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="md"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={forgotPass}
+        onHide={toogleForgotPass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Body contentclassname="forgotPass" className="forgot-modal">
+          <ForgotPass
+            toogleForgotPass={toogleForgotPass}
+            toogleChangePass={toogleChangePass}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="md"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={forgotPass}
+        onHide={toogleForgotPass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{
+              color: "#D58F5C",
+              fontSize: "30px",
+              fontWeight: "bold",
+            }}
+          >
+            Forgot Password
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ForgotPass
+            toogleForgotPass={toogleForgotPass}
+            toogleChangePass={toogleChangePass}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={changePass}
+        onHide={toogleChangePass}
+        contentclassname="forgotPass"
+      >
+        <Modal.Body>
+          <ChangePass toogleChangePass={toogleChangePass} />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignIn}
+        onHide={toogleSignIn}
+        contentclassname="login"
+      >
+        <Modal.Body className="sign-In"></Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignIn}
+        onHide={toogleSignIn}
+        contentclassname="login"
+      >
+        <Modal.Body>
+          <Login
+            toogleSignUp={toogleSignUp}
+            toogleSignIn={toogleSignIn}
+            toogleButton={toogleButton}
+            toogleForgotPass={toogleForgotPass}
+            toogleConfirmModal={toogleConfirmModal}
+          />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignUp}
+        onHide={toogleSignUp}
+        contentclassname="custom-modal-style"
+      >
+        <Modal.Body className="sign-Up"></Modal.Body>
+      </Modal>
+      <Modal
+        size="lg"
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showSignUp}
+        style={{ borderRadius: "30px" }}
+        onHide={toogleSignUp}
+        contentclassname="custom-modal-style"
+      >
+        <Modal.Body>
+          <SignUp
+            toogleSignUp={toogleSignUp}
+            toogleConfirmModal={toogleConfirmModal}
+            toogleSignIn={toogleSignIn}
+          />
+        </Modal.Body>
+      </Modal>
       <ButtontoTop />{" "}
       <Router>
         <Header
@@ -138,6 +313,8 @@ function App() {
           headerWidth={headerWidth}
           positionLeft={positionLeft}
           padRight={padRight}
+          toogleSignIn={toogleSignIn}
+          toogleSignUp={toogleSignUp}
         />
         <ScrollTop />
 
@@ -178,6 +355,7 @@ function App() {
               setPositionLeft={setPositionLeft}
               setPadRight={setPadRight}
               toogleShow={toogleShow}
+              toogleSignIn={toogleSignIn}
             />
           </Route>
 
@@ -285,7 +463,15 @@ function App() {
 
           <Route exact path="/">
             <ImgSlider getQuery={getQuery} />
-            <Featured query={query} />
+            <Featured
+              toogleButton={toogleButton}
+              toogleChangePass={toogleChangePass}
+              toogleConfirmModal={toogleConfirmModal}
+              toogleForgotPass={toogleForgotPass}
+              toogleSignIn={toogleSignIn}
+              toogleSignUp={toogleSignUp}
+              query={query}
+            />
             <FindInCountries />
             <Upcoming query={query} />
             <Work />
@@ -294,7 +480,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      {show ? <Footer /> : null}
+      {show ? <Footer toogleSignIn={toogleSignIn} /> : null}
     </div>
   );
 }

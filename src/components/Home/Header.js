@@ -4,24 +4,27 @@ import { FaBars, FaGlobeAmericas } from "react-icons/fa";
 import { VscGlobe } from "react-icons/vsc";
 import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
-import Login from "../Users/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Table } from "react-bootstrap";
 import "../../styles/modalStyle.css";
 import "../../styles/Header.css";
-import ReconfirmEmail from "../Users/ReconfirmEmail";
-import SignUp from "../Users/SignUp";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
-import ForgotPass from "../Users/ForgotPass";
-import ChangePass from "../Users/ChangePass";
 import { logout } from "../../slice/userSlice";
 import NumberFormat from "react-number-format";
 // import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
 // import CloseButton from "react-bootstrap/CloseButton";
 
-const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
+const Header = ({
+  change,
+  color,
+  headerWidth,
+  positionLeft,
+  padRight,
+  toogleSignIn,
+  toogleSignUp,
+}) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -29,15 +32,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
   // const properties = useSelector((state) => state.auction);
   // const propId = properties.find((item) => item._id === id);
   // console.log(propId);
-
   const history = useHistory();
-  const [showSignIn, popSignIn] = useState(false);
-  const [showSignUp, popUpSignUp] = useState(false);
-  // const [showFundReq, popFundReq] = useState(false);
-  const [showConfirm, popupConfirm] = useState(false);
-  const [showButton, popButton] = useState(false);
-  const [forgotPass, popForgotPass] = useState(false);
-  const [changePass, popChangePass] = useState(false);
   const [kycUrl, setKycUrl] = useState("");
   const [colors, setColors] = useState("");
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -50,12 +45,6 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
   const [paddingRight, setPaddingRight] = useState("0");
   const [borderBottom, setBorderBottom] = useState("");
   const toogleOpen = () => setOpen(!open);
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
   // const toogleFundReq = () => popFundReq(!showFundReq);
   const [showWallet, setShowWallet] = useState(false);
 
@@ -162,7 +151,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
         </div>
 
         <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <div className="navbar-nav m-auto">
+          <div className="navbar-nav m-auto h-100">
             <div className="nav-item px-4">
               <button
                 className="headerNav"
@@ -265,6 +254,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     fontSize: "20px",
                     fontWeight: "bold",
                     padding: "0 20px",
+                    height: "60px",
                   }}
                   id={colors === "white" ? "hover" : ""}
                 >
@@ -384,14 +374,14 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                    id={colors === "white" ? "hover" : ""}
+                    // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
-                      id={colors === "white" ? "hover" : ""}
                       className="signIn-btn"
                       style={{ color: textColor }}
                       variant="success"
                       onClick={toogleSignIn}
+                      id={colors === "white" ? "hover" : ""}
                     >
                       Sign In
                     </Button>
@@ -413,8 +403,9 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                       color: textColor,
                       backgroundColor: "transparent",
                       borderColor: "transparent",
-                      marginRight: "10px",
                       borderRadius: "0",
+                      height: "47px",
+                      borderBottom: borderBottom,
                     }}
                     onClick={() => {
                       toogleOpen();
@@ -556,11 +547,24 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
               </>
             ) : (
               <>
+                <Button
+                  id={colors === "white" ? "hover" : ""}
+                  className="headerNav bg-transparent outline-none"
+                  style={{
+                    borderRadius: "0",
+                    color: textColor,
+                    marginRight: "15px",
+                    height: "47px",
+                  }}
+                  onClick={handleSell}
+                >
+                  Sell
+                </Button>
                 <div
                   className="border-0 mt-0"
                   style={{
                     backgroundColor: "transparent",
-                    marginRight: "50px",
+                    marginRight: "15px",
                   }}
                   id={colors === "white" ? "hover" : ""}
                 >
@@ -570,14 +574,14 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     style={{
                       fontSize: 18,
                       color: textColor,
-                      fontWeight: "bold",
+                      fontWeight: "normal",
                       backgroundColor: "transparent",
                       border: "0",
                     }}
                     variant="success"
                     onClick={toogleSignIn}
                   >
-                    Login
+                    Sign In
                   </Button>
                   <label style={{ color: textColor }}>|</label>
                   <Button
@@ -586,7 +590,7 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
                     style={{
                       fontSize: 18,
                       color: textColor,
-                      fontWeight: "bold",
+                      fontWeight: "normal",
                       backgroundColor: "transparent",
                       border: "0",
                     }}
@@ -629,168 +633,6 @@ const Header = ({ change, color, headerWidth, positionLeft, padRight }) => {
             )}
           </div>
         )}
-
-        {/* All Modals */}
-        <Modal
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showConfirm}
-          onHide={toogleConfirmModal}
-          contentclassname="confirm"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{ color: "#D58F5C" }}
-            >
-              Confirm Email
-            </Modal.Title>
-            <Modal.Title
-              className="pt-4"
-              style={{
-                fontSize: "12px",
-                color: "#D58F5C",
-                position: "absolute",
-                marginright: "10px",
-                marginTop: "8px",
-              }}
-            ></Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ReconfirmEmail
-              toogleConfirmModal={toogleConfirmModal}
-              toogleSignIn={toogleSignIn}
-            />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          size="md"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={forgotPass}
-          onHide={toogleForgotPass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-            <ForgotPass
-              toogleForgotPass={toogleForgotPass}
-              toogleChangePass={toogleChangePass}
-            />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          size="md"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={forgotPass}
-          onHide={toogleForgotPass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{
-                color: "#D58F5C",
-                fontSize: "30px",
-                fontWeight: "bold",
-              }}
-            >
-              Forgot Password
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ForgotPass
-              toogleForgotPass={toogleForgotPass}
-              toogleChangePass={toogleChangePass}
-            />
-          </Modal.Body>
-        </Modal>
-
-        <Modal
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={changePass}
-          onHide={toogleChangePass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Body>
-            <ChangePass toogleChangePass={toogleChangePass} />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignIn}
-          onHide={toogleSignIn}
-          contentclassname="login"
-        >
-          <Modal.Body className="sign-In"></Modal.Body>
-        </Modal>
-
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignIn}
-          onHide={toogleSignIn}
-          contentclassname="login"
-        >
-          <Modal.Body>
-            <Login
-              toogleSignUp={toogleSignUp}
-              toogleSignIn={toogleSignIn}
-              toogleButton={toogleButton}
-              toogleForgotPass={toogleForgotPass}
-              toogleConfirmModal={toogleConfirmModal}
-            />
-          </Modal.Body>
-        </Modal>
-
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignUp}
-          onHide={toogleSignUp}
-          contentclassname="custom-modal-style"
-        >
-          <Modal.Body className="sign-Up"></Modal.Body>
-        </Modal>
-
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignUp}
-          style={{ borderRadius: "30px" }}
-          onHide={toogleSignUp}
-          contentclassname="custom-modal-style"
-        >
-          <Modal.Body>
-            <SignUp
-              toogleSignUp={toogleSignUp}
-              toogleConfirmModal={toogleConfirmModal}
-              toogleSignIn={toogleSignIn}
-            />
-          </Modal.Body>
-        </Modal>
 
         <Modal show={open} onHide={toogleOpen} fullscreen>
           <Button

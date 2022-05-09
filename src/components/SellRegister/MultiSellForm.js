@@ -84,6 +84,7 @@ const MultiSellForm = ({
       });
     }
   }, [params.step]);
+  console.log(propertyData);
 
   if (step === 0) {
     return (

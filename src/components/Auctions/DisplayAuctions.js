@@ -14,6 +14,7 @@ function DisplayAuctions({
   setPositionLeft,
   setPadRight,
   toogleShow,
+  toogleSignIn,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -107,13 +108,26 @@ function DisplayAuctions({
             socket={socket}
             property={auction}
             toogleChange={toogleChange}
+            toogleSignIn={toogleSignIn}
           />
         ) : auction.property.type === "car" ? (
-          <DisplayCar property={auction} toogleChange={toogleChange} />
+          <DisplayCar
+            property={auction}
+            toogleChange={toogleChange}
+            toogleSignIn={toogleSignIn}
+          />
         ) : auction.property.type === "jet" ? (
-          <DisplayJet property={auction} toogleChange={toogleChange} />
+          <DisplayJet
+            property={auction}
+            toogleChange={toogleChange}
+            toogleSignIn={toogleSignIn}
+          />
         ) : auction.property.type === "yacht" ? (
-          <DisplayYacht property={auction} toogleChange={toogleChange} />
+          <DisplayYacht
+            property={auction}
+            toogleChange={toogleChange}
+            toogleSignIn={toogleSignIn}
+          />
         ) : null
       ) : (
         <div

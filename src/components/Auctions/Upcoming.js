@@ -6,14 +6,16 @@ import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 import { useSelector } from "react-redux";
 
-const Upcoming = ({ query }) => {
+const Upcoming = ({ query, toogleSignIn }) => {
   const property = useSelector((state) => state.property);
   const [upcoming, setUpcoming] = useState([]);
 
   useEffect(() => {
     if (query) {
       // look for any property that matches the query
-      const search = property.filter((prop) => Object.values(prop).includes(query));
+      const search = property.filter((prop) =>
+        Object.values(prop).includes(query)
+      );
       setUpcoming(search);
     } else {
       setUpcoming(property);
@@ -52,8 +54,10 @@ const Upcoming = ({ query }) => {
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
+                        auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
+                        toogleSignIn={toogleSignIn}
                       />
                     ) : item.property.type === "car" ? (
                       <UpcomingCarCard
@@ -61,8 +65,10 @@ const Upcoming = ({ query }) => {
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
+                        auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
+                        toogleSignIn={toogleSignIn}
                       />
                     ) : item.property.type === "jet" ? (
                       <UpcomingJetCard
@@ -70,8 +76,10 @@ const Upcoming = ({ query }) => {
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
+                        auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
+                        toogleSignIn={toogleSignIn}
                       />
                     ) : item.property.type === "yacht" ? (
                       <UpcomingYachtCard
@@ -79,8 +87,10 @@ const Upcoming = ({ query }) => {
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
+                        auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
+                        toogleSignIn={toogleSignIn}
                       />
                     ) : null}
                   </Col>
@@ -98,9 +108,7 @@ const Upcoming = ({ query }) => {
                     padding: "20px",
                   }}
                 >
-                  <h1 style={{ margin: "0" }}>
-                    Auctions not found!
-                  </h1>
+                  <h1 style={{ margin: "0" }}>Auctions not found!</h1>
                 </div>
               )}
             </Row>

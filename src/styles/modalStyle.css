@@ -77,7 +77,8 @@
   color: #d58f5c !important;
   font-size: 13px !important;
   border: none;
-  background-color: transparent;
+  background-color: transparent!important;
+  border: none !important;
 }
 
 .signup-div {

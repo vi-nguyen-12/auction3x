@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../../styles/footer.css";
 
-const Footer = (props) => {
+const Footer = ({ toogleSignIn }) => {
+  const user = useSelector((state) => state.user);
+  const history = useHistory();
   return (
     <footer>
       <div className="footer-wrap">
@@ -27,7 +31,18 @@ const Footer = (props) => {
                   <a href="#!">Buy</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="/MultiSellForm">Sell</a>
+                  <a
+                    onClick={() => {
+                      if (user._id) {
+                        history.push("/MultiSellForm");
+                        window.location.reload();
+                      } else {
+                        toogleSignIn();
+                      }
+                    }}
+                  >
+                    Sell
+                  </a>
                 </li>
                 <li className="list-unstyled">
                   <a href="/AboutUs">About Us</a>
