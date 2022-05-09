@@ -55,7 +55,7 @@ function Ownership({
             owner_name: ownerName,
             broker_name: brokerName ? brokerName : null,
             broker_id: brokerId ? brokerId : null,
-            phone: phone,
+            phone: phone.slice(1),
             email: email,
             address: address,
           },
