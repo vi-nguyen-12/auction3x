@@ -40,7 +40,7 @@ const Header = ({
   const [textColor, setTextColor] = useState("white");
   const [boxShadow, setBoxShadow] = useState("");
   const [transition, setTransition] = useState("");
-  const [width, setWidth] = useState("90vw");
+  const [width, setWidth] = useState("100vw");
   const [left, setLeft] = useState("0");
   const [paddingRight, setPaddingRight] = useState("0");
   const [borderBottom, setBorderBottom] = useState("");
@@ -97,14 +97,14 @@ const Header = ({
             "transform 120ms ease, background-color 250ms ease, color 250ms ease"
           );
           setWidth("100%");
-          setLeft("20%");
-          setPaddingRight("3rem");
+          // setLeft("20%"); // just for display
+          setPaddingRight("0");
         } else {
           setColors("");
           setTextColor("white");
           setBoxShadow("");
           setTransition("");
-          setWidth("90vw");
+          // setWidth("90vw"); // just for display
           setLeft("0");
           setPaddingRight("0");
         }
@@ -374,10 +374,10 @@ const Header = ({
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                    // id={colors === "white" ? "hover" : ""}
+                  // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
-                      className="signIn-btn"
+                      className="signIn-btn mt-0"
                       style={{ color: textColor }}
                       variant="success"
                       onClick={toogleSignIn}
@@ -388,7 +388,7 @@ const Header = ({
                     <label style={{ color: textColor }}>|</label>
                     <Button
                       id={colors === "white" ? "hover" : ""}
-                      className="signUp-btn"
+                      className="signUp-btn mt-0"
                       style={{ color: textColor }}
                       variant="success"
                       onClick={toogleSignUp}
@@ -400,12 +400,12 @@ const Header = ({
                     id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
                     style={{
-                      color: textColor,
-                      backgroundColor: "transparent",
-                      borderColor: "transparent",
-                      borderRadius: "0",
                       height: "47px",
-                      borderBottom: borderBottom,
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
                     }}
                     onClick={() => {
                       toogleOpen();

@@ -55,13 +55,14 @@
 }
 
 .signIn-btn {
-  font-size: 20px;
+  background-color: transparent;
+  font-size: 18px;
   color: black;
   font-weight: 400;
-  background-color: transparent;
-  border: 0;
+  border: none;
   height: 60px;
   font-family: inter, Arial, sans-serif;
+  white-space: nowrap;
 }
 
 .signIn-btn:hover {
@@ -77,7 +78,7 @@
 }
 
 .signUp-btn {
-  font-size: 20px;
+  font-size: 18px;
   color: black;
   font-weight: 400;
   background-color: transparent;

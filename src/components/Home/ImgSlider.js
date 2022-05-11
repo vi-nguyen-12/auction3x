@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar.js";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
 import "../../styles/Search.css";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import authService from "../../services/authServices.js";
 
@@ -19,30 +20,32 @@ const Carousel = styled(Slider)`
     height: 100%;
     width: 5vw;
     z-index: 1;
-
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
     }
   }
 
-  ul li button {
-    &:before {
-      top: -15vh;
-      font-size: 30px;
-      color: gray;
-      // left: -35px;
-      margn-right: 200px;
-    }
-  }
+  // ul li button {
+  //   &:before {
+  //     top: -15vh;
+  //     font-size: 30px;
+  //     color: gray;
+  //     // left: -35px;
+  //     margin-right: 200px;
+  //   }
+  // }
 
-  li.slick-active button:before {
-    color: #e9af84;
-  }
+  // li.slick-active button:before  {
+  //   color: white;
+  //   //  content dash 
+  //   content: "_";
+  // }
 
-  .slick-list {
-    overflow: initial;
-  }
+
+  // .slick-list {
+  //   overflow: initial;
+  // }
 
   .slick-prev {
     width: 12vw;
@@ -50,7 +53,8 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev:before {
-    color: #e9af84;
+    color: white;
+    content: "<";
     font-size: 50px;
   }
 
@@ -60,7 +64,8 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next:before {
-    color: #e9af84;
+    color: white;
+    content: ">";
     font-size: 50px;
   }
 `;
@@ -100,15 +105,42 @@ const HomeBottom = styled.div`
     font-weight: bolder;
   }
 `;
+const Bar = styled.button`
+background-color: transparent;
+width: 100px;
+height: 150px;
+border: none;
+margin: 10px;
+display: flex;
+Justify-content: center;
+align-items: center;
+height: 1px;
+outline: none;
+&:hover {
+  transition: background-color 0.2s ease 0s;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+&:focus {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+`;
+const BarGroup = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 100;
+  `;
 
 const ImgSlider = ({ getQuery }) => {
-  let settings = {
-    infinite: true,
-    speed: 800,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-  };
+
+  const slider = useRef();
+  const [list, setList] = useState([]);
+  const [Index, setIndex] = useState(0);
   const [featureAuctions, setFeatureAuctions] = useState([]);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -123,32 +155,70 @@ const ImgSlider = ({ getQuery }) => {
       setOnGoingAuctions(res.data);
     });
   }, []);
+  const handleClick = (index) => () => {
+    setIndex(index);
+    slider.current.slickGoTo(index);
+  }
+  useEffect(() => {
+    if (!slider) {
+      slider.current.slickGoTo(Index);
+    }
 
+  }, [Index]);
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    beforeChange: (current, next) => {
+      setIndex(next);
+    }
+  };
   return (
     <>
       {featureAuctions.length > 0 ? (
         <>
-          <Carousel {...settings}>
-            {featureAuctions.map((auction) => (
-              <Wrap key={auction._id}>
-                <a href={`/DisplayAuctions/${auction._id}`}>
-                  <img src={auction.property.images[0].url} alt="auction" />
-                </a>
-                <HomeBottom>
-                  <h2 style={{ fontSize: "50px", color: "white" }}>
-                    The Best
-                    <br />
-                    Luxury Market
-                  </h2>
-                  <span style={{ color: "white", fontSize: "20px" }}>
-                    HOUSE IN {auction.property.details.property_address.city},
-                    {auction.property.details.property_address.state} UNITED
-                    STATES
-                  </span>
-                </HomeBottom>
-              </Wrap>
+          <BarGroup className="Bar-group">
+            {featureAuctions.length > 0 && featureAuctions.map((images, index) => (
+              <Bar key={index}
+                onClick={
+                  handleClick(index)
+                }
+              >
+                <hr style={{
+                  color: "white", width: "100%",
+                  height: "5px", opacity: "1",
+                }} />
+
+              </Bar>
             ))}
-          </Carousel>
+          </BarGroup>
+          {featureAuctions.length > 0 && (
+            <Carousel ref={slider} {...settings}>
+              {featureAuctions.map((auction, index) => (
+                <Wrap key={index} setIndex={setIndex}>
+                  <a href={`/DisplayAuctions/${auction._id}`}>
+                    <img src={auction.property.images[0].url} alt="auction" />
+                  </a>
+                  <HomeBottom>
+                    <h2 style={{ fontSize: "50px", color: "white" }}>
+                      The Best
+                      <br />
+                      Luxury Market
+                    </h2>
+                    <span style={{ color: "white", fontSize: "20px" }}>
+                      HOUSE IN {auction.property.details.property_address.city},
+                      {auction.property.details.property_address.state} UNITED
+                      STATES
+                    </span>
+                  </HomeBottom>
+                </Wrap>
+              ))}
+            </Carousel>
+          )}
+
           {/* <div className="col-12 filterContainer px-lg-5 d-none d-lg-block">
             <div className="row px-lg-5">
               <div className="form-group">
