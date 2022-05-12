@@ -33,6 +33,7 @@ function SavedAuctions() {
                 {auction.property.type === "real-estate" ? (
                   <UpcomingRealEstateCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     startRegister={auction.registerStartDate}
@@ -42,6 +43,7 @@ function SavedAuctions() {
                 ) : auction.property.type === "car" ? (
                   <UpcomingCarCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     startRegister={auction.registerStartDate}
@@ -51,6 +53,7 @@ function SavedAuctions() {
                 ) : auction.property.type === "jet" ? (
                   <UpcomingJetCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     startRegister={auction.registerStartDate}
@@ -60,6 +63,7 @@ function SavedAuctions() {
                 ) : (
                   <UpcomingYachtCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     startRegister={auction.registerStartDate}
@@ -74,6 +78,7 @@ function SavedAuctions() {
                 {auction.property.type === "real-estate" ? (
                   <CardComp
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     auctionStartDate={auction.auctionStartDate}
@@ -83,6 +88,7 @@ function SavedAuctions() {
                 ) : auction.property.type === "car" ? (
                   <CarCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     auctionStartDate={auction.auctionStartDate}
@@ -92,6 +98,7 @@ function SavedAuctions() {
                 ) : auction.property.type === "jet" ? (
                   <JetCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     auctionStartDate={auction.auctionStartDate}
@@ -101,6 +108,7 @@ function SavedAuctions() {
                 ) : (
                   <YachtCard
                     url={auction.property.images[0].url}
+                    urls={auction.property.images}
                     data={auction.property.details}
                     id={auction._id}
                     auctionStartDate={auction.auctionStartDate}
