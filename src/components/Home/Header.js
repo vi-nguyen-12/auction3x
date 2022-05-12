@@ -27,11 +27,6 @@ const Header = ({
 }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  // const { id } = useParams();
-  // const properties = useSelector((state) => state.auction);
-  // const propId = properties.find((item) => item._id === id);
-  // console.log(propId);
   const history = useHistory();
   const [kycUrl, setKycUrl] = useState("");
   const [colors, setColors] = useState("");
@@ -374,7 +369,7 @@ const Header = ({
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                  // id={colors === "white" ? "hover" : ""}
+                    // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
                       className="signIn-btn mt-0"

@@ -20,32 +20,45 @@ function Dash() {
   const [showSavedProp, setShowSavedProp] = useState(true);
   const [showBidAuctions, setShowBidAuctions] = useState(false);
   const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
-  const [liveAuctions, setLiveAuctions] = useState();
+  const [numOfLiveAuctions, setNumOfLiveAuctions] = useState(0);
   const [listing, setListing] = useState();
-  const [upcomingAuctions, setUpcomingAuctions] = useState();
+  const [numOfUpcomingAuctions, setNumOfUpcomingAuctions] = useState(0);
   const toogleShowSavedProp = (state) => setShowSavedProp(state);
   const toogleShowBidAuctions = (state) => setShowBidAuctions(state);
   const toogleShowApprovedAuctions = (state) => setShowApprovedAuctions(state);
   const user = useSelector((state) => state.user);
-  const auctions = useSelector((state) => state.auction);
-  const property = useSelector((state) => state.property);
+  // const auctions = useSelector((state) => state.auction);
+  // const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
   const [showFundReq, popFundReq] = useState(false);
   const toogleFundReq = () => popFundReq(!showFundReq);
 
   useEffect(() => {
+    const getOngoingAuctions = async () => {
+      authServices.getOngoingAuctions().then((res) => {
+        setNumOfLiveAuctions(res.data.length);
+      });
+    };
+    const getUpcomingAuctions = async () => {
+      authServices.getUpcomingAuctions().then((res) => {
+        setNumOfUpcomingAuctions(res.data.length);
+      });
+    };
+
     const getUserListings = async () => {
       authServices.sellerPropInAuctions(user._id).then((res) => {
         setListing(res.data.length);
       });
     };
-    setUpcomingAuctions(property.length);
-    setLiveAuctions(auctions.length);
+    // setUpcomingAuctions(property.length);
+    // setLiveAuctions(auctions.length);
     if (user._id) {
       setSavedProp(savedProperties);
     }
+    getOngoingAuctions();
+    getUpcomingAuctions();
     getUserListings();
-  }, [property, auctions, savedProperties, user]);
+  }, [savedProperties, user]);
 
   const getSavedProperty = () => {
     if (user._id) {
@@ -73,7 +86,7 @@ function Dash() {
           <div className="liveAuc">
             <div className="names">
               <span>Live Auctions</span>
-              <h3>{liveAuctions}</h3>
+              <h3>{numOfLiveAuctions}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={70} strokeWidth={20} />
@@ -84,7 +97,7 @@ function Dash() {
           <div className="liveAuc">
             <div className="names">
               <span>Upcoming Auctions</span>
-              <h3>{upcomingAuctions}</h3>
+              <h3>{numOfUpcomingAuctions}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={20} strokeWidth={20} stroke="red" />

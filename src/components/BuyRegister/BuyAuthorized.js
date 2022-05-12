@@ -6,19 +6,18 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
-import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SiDocusign } from "react-icons/si";
 
-const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
+const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
-  const properties = useSelector((state) => state.property);
-  const auction = useSelector((state) => state.auction);
-  const onGoingAuction = auction.find((item) => item._id === id);
-  const auctionId = properties.find((item) => item._id === id);
+  // const properties = useSelector((state) => state.property);
+  // const auction = useSelector((state) => state.auction);
+  // const onGoingAuction = auction.find((item) => item._id === id);
+  // const auctionId = properties.find((item) => item._id === id);
 
   const [ip, setIp] = useState();
 
@@ -81,7 +80,8 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
         } else {
           authService
             .buyerRegister({
-              auctionId: auctionId ? auctionId._id : onGoingAuction._id,
+              // auctionId: auctionId ? auctionId._id : onGoingAuction._id,
+              auctionId: id,
               TC: { time: agree, IPAddress: ip },
               answers: answers,
               docusignId: res.data._id,
@@ -191,4 +191,4 @@ const BuyAuthoried = ({ toogleStep, step, answer, questionID, document }) => {
   );
 };
 
-export default BuyAuthoried;
+export default BuyAuthorized;

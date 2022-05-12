@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toogleChange, toogleImage, setImg }) {
+function RealEstatePage({ toogleChange, setImg }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
@@ -106,8 +106,9 @@ function RealEstatePage({ toogleChange, toogleImage, setImg }) {
   }, []);
 
   useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      const Arr = [...onGoingAuctions, ...upcomingAuctions];
+    const Arr = [...onGoingAuctions, ...upcomingAuctions];
+    console.log(Arr);
+    if (Arr.length > 0) {
       const imageUrl = Arr.map((image) => {
         for (let i = 0; i < image.property.images.length; i++) {
           return image.property.images[i].url;
@@ -154,8 +155,6 @@ function RealEstatePage({ toogleChange, toogleImage, setImg }) {
   return (
     <>
       <div className="mt-5">
-
-
         <Col md={12} className="m-auto pt-2">
           <Row>
             <h1 style={{ marginBottom: "80px" }}>ONGOING AUCTIONS</h1>
@@ -190,6 +189,7 @@ function RealEstatePage({ toogleChange, toogleImage, setImg }) {
                 <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                   <UpcomingRealEstateCard
                     url={item.property.images[0].url}
+                    urls={item.property.images}
                     data={item.property.details}
                     id={item._id}
                     startRegister={item.registerStartDate}

@@ -12,10 +12,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { ImImages } from "react-icons/im";
-
 const Carousel = styled(Slider)`
-height: 100%;
+  height: 100%;
   overflow: hidden;
   border-radius: 0;
 
@@ -41,18 +39,16 @@ height: 100%;
     height: 100% !important;
     z-index: 1;
   }
-  .slick-next:before{
+  .slick-next:before {
     font-size: 50px;
     top: 50%;
-
   }
-  .slick-prev:before{
+  .slick-prev:before {
     font-size: 50px;
     top: 50%;
   }
 `;
 const UpcomingRealEstateCard = ({
-  url,
   urls,
   data,
   id,
