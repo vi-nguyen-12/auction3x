@@ -27,17 +27,16 @@ const About = () => {
   const history = useHistory();
 
   return (
-    <>
+    <section className="real-estate-wrap">
       <Row className="banner-container">
         <Col
-          xs={12}
-          md={6}
+
           style={{ padding: "0", margin: "0" }}
           className="banner-top-left"
         >
           <img src="./images/investors.PNG" style={{ width: "100%" }} alt="" />
         </Col>
-        <Col xs={12} md={6} className="banner-top-right">
+        <Col className="banner-top-right">
           <h2>INVESTORS / BUYERS</h2>
           <p>
             AUCTION 3 positioned itself as the leading marketplace for
@@ -68,7 +67,9 @@ const About = () => {
         </Col>
       </Row>
       <Row className="banner-container">
-        <Col xs={12} md={6} className="banner-top-left-2">
+        <Col
+          style={{ padding: "0", margin: "0" }}
+          className="banner-top-left-2">
           <h2>BROKER</h2>
           <p>
             AUCTION 3 positioned itself as the leading marketplace for
@@ -88,15 +89,13 @@ const About = () => {
           </div>
         </Col>
         <Col
-          xs={12}
-          md={6}
           style={{ padding: "0", margin: "0" }}
           className="banner-top-left"
         >
           <img src="./images/broker.PNG" style={{ width: "100%" }} alt="" />
         </Col>
       </Row>
-      <Row className="bottom-container" style={{ padding: "50px" }}>
+      {/* <Row className="bottom-container" style={{ padding: "50px" }}>
         <Col className="banner-left">
           <h2>Stay updated with Auction 3</h2>
           <p>
@@ -112,7 +111,7 @@ const About = () => {
             </div>
           </div>
         </Col>
-      </Row>
+      </Row> */}
 
       <Modal
         backdrop="static"
@@ -274,7 +273,7 @@ const About = () => {
           />
         </Modal.Body>
       </Modal>
-    </>
+    </section>
   );
 };
 

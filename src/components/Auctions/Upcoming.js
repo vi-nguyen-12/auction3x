@@ -10,21 +10,22 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
     <>
       {upcomingAuctions ? (
         <>
-          <div className="mt-5">
+          <div className="mt-5" style={{ height: "100vh" }}>
             <Row style={{ padding: "0 50px" }}>
               <Col md={10} className="pt-5">
-                <img
-                  src="/images/Upcoming Auctions.png"
-                  alt=""
-                  style={{
-                    marginBottom: "20px",
-                    maxWidth: "250px",
-                    maxHeight: "150px",
-                  }}
-                />
+                <h2 style={{ color: "black", fontSize: "22px" }}>
+                  Upcoming Auctions
+                </h2>
               </Col>
             </Row>
-            <Row style={{ padding: "0 50px" }}>
+            <Row
+              style={{
+                padding: "0 50px",
+                display: "flex",
+                alignContent: "center",
+                alignItems: "center",
+              }}
+            >
               {upcomingAuctions.length > 0 ? (
                 upcomingAuctions.slice(0, 6).map((item) => (
                   <Col

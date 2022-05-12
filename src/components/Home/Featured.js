@@ -10,7 +10,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
-  height: 30vh;
+  height: 70vh;
   // overflow: hidden;
 
   & > button {
@@ -49,7 +49,8 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev:before {
-    color: #e9af84;
+    color: white;
+    content: "<";
     font-size: 50px;
   }
 
@@ -60,7 +61,8 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next:before {
-    color: #e9af84;
+    color: white;
+    content: ">";
     font-size: 50px;
   }
 `;
@@ -69,7 +71,7 @@ const Wrap = styled.div`
 border-radius: 4px;
 cursor: pointer;
 position: relative;
-
+margin-top:150px;  // Just for display
 
   &:hover {
     padding: 0;
@@ -115,20 +117,14 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
   };
 
   return (
-    <div className="background">
+    <div className="background" style={{ height: "100vh" }}>
       {auctions.length > 0 ? (
         <>
           <Row>
             <Col md={12} className="m-auto">
-              <img
-                src="/images/f_name.png"
-                alt=""
-                style={{
-                  marginBottom: "40px",
-                  maxWidth: "250px",
-                  maxHeight: "150px",
-                }}
-              />
+              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
+                Featured Listings
+              </h2>
             </Col>
           </Row>
 
