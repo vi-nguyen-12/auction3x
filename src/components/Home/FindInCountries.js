@@ -8,7 +8,7 @@ const FindInCountries = (props) => {
         fluid
         style={{
           background: "#f8f8f8",
-          height: "95rem",
+          height: "100vh",
           margin: "0",
           padding: "0",
           padding: "0 50px",
@@ -16,22 +16,15 @@ const FindInCountries = (props) => {
       >
         <Row>
           <Col md={10} className="m-auto pt-5 text-center">
-            <img
-              src="/images/Find Properties in These Countries.png"
-              alt=""
-              className="pt-5 mt-5"
-              style={{
-                marginBottom: "20px",
-                maxWidth: "450px",
-                maxHeight: "150px",
-              }}
-            />
+            <h2 style={{ color: "black", fontSize: "22px" }}>
+              Find Properties In These Countries
+            </h2>
           </Col>
         </Row>
         <Row>
           <Col className="circularCard" md={4}>
             <img
-              height={528}
+              height={350}
               src="/images/historic-featured.jpg"
               alt=""
               className="mt-5"
@@ -43,7 +36,7 @@ const FindInCountries = (props) => {
           </Col>
           <Col className="circularCard" md={8}>
             <img
-              height={528}
+              height={350}
               src="/images/australia.jpg"
               alt=""
               className="mt-5"
@@ -56,14 +49,14 @@ const FindInCountries = (props) => {
         </Row>
         <Row>
           <Col className="circularCard" md={8}>
-            <img height={528} src="/images/canada.webp" alt="" />
+            <img height={350} src="/images/canada.webp" alt="" />
             <span>
               <h2>CANADA</h2>
               <p>18 Properties</p>
             </span>
           </Col>
           <Col className="circularCard" md={4}>
-            <img height={528} src="/images/london-england.jpg" alt="" />
+            <img height={350} src="/images/london-england.jpg" alt="" />
             <span>
               <h2>ENGLAND</h2>
               <p>33 Properties</p>

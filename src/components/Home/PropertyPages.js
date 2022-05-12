@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
-import { Row, Col, Modal, Image } from "react-bootstrap";
+import { Row, Col, Modal, Image, Button } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";
@@ -178,6 +178,11 @@ const PropertyPages = ({
                   <option href="#">Price Highest First</option>
                 </select>
               </Col>
+              <Col >
+                <Button>
+                  Search
+                </Button>
+              </Col>
             </Row>
           </Col>
           <Col md={3} className="filterResult">
@@ -281,6 +286,11 @@ const PropertyPages = ({
                   <option href="#">Price Lowest First</option>
                   <option href="#">Price Highest First</option>
                 </select>
+              </Col>
+              <Col >
+                <Button>
+                  Search
+                </Button>
               </Col>
             </Row>
           </Col>
@@ -388,6 +398,11 @@ const PropertyPages = ({
                   <option href="#">Price Highest First</option>
                 </select>
               </Col>
+              <Col >
+                <Button>
+                  Search
+                </Button>
+              </Col>
             </Row>
           </Col>
           <Col md={3} className="filterResult">
@@ -467,6 +482,11 @@ const PropertyPages = ({
                 <option href="#">Price Lowest First</option>
                 <option href="#">Price Highest First</option>
               </select>
+            </Col>
+            <Col >
+              <Button>
+                Search
+              </Button>
             </Col>
           </Row>
         </Col>
