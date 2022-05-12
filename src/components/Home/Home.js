@@ -1,51 +1,48 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { Featured } from "./Featured";
-import { FindInCountries } from "../FindInCountries";
-import Header from "./Header";
-import ImgSlider from "../ImgSlider";
+import FindInCountries from "./FindInCountries";
+import ImgSlider from "./ImgSlider";
 import Work from "./work";
 import RealEstate from "./realEstate";
-import Footer from "./footer";
-import { Upcoming } from "./Upcoming";
-import MultiSellForm from "../../SellRegister/MultiSellForm";
-import RealEstates from "../../RealEstate/RealEstates";
-import About from "./About";
-import ChangePass from "../components/ChangePass";
-import EmailConfirm from "../Users/EmailConfirm";
+import authService from "../../services/authServices.js";
 
-const Home = (props) => {
+import { Upcoming } from "../Auctions/Upcoming";
+
+import About from "./About";
+
+const Home = ({ toogleSignIn }) => {
+  const [featureAuctions, setFeatureAuctions] = useState([]);
+  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
+  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+
+  useEffect(() => {
+    authService.getFeaturedAuctions().then((res) => {
+      setFeatureAuctions(res.data);
+    });
+    authService.getUpcomingAuctions().then((res) => {
+      setUpcomingAuctions(res.data);
+    });
+    authService.getOngoingAuctions().then((res) => {
+      setOnGoingAuctions(res.data);
+    });
+  }, []);
+
   return (
     <>
-      <Router>
-        <Switch>
-          <Header color={color} />
-          <Route exact path="/">
-            <ImgSlider />
-            <Featured />
-            <FindInCountries />
-            <Upcoming />
-            <Work />
-            <RealEstate />
-            <About />
-          </Route>
-          <Route exact path="/MultiSellForm">
-            <div className="sell-register-container">
-              <MultiSellForm />
-            </div>
-          </Route>
-
-          <Route exact path="/RealEstates">
-            <RealEstates />
-          </Route>
-          <Route path="/reset_password">
-            <ChangePass />
-          </Route>
-          <Route path="/confirm_email">
-            <EmailConfirm />
-          </Route>
-        </Switch>
-      </Router>
-      <Footer />
+      <ImgSlider
+        featureAuctions={featureAuctions}
+        onGoingAuctions={onGoingAuctions}
+        upcomingAuctions={upcomingAuctions}
+      />
+      <Featured toogleSignIn={toogleSignIn} featureAuctions={featureAuctions} />
+      <FindInCountries />
+      <Upcoming
+        toogleSignIn={toogleSignIn}
+        upcomingAuctions={upcomingAuctions}
+      />
+      <Work />
+      <RealEstate />
+      <About />
     </>
   );
 };

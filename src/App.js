@@ -1,10 +1,5 @@
-import ImgSlider from "./components/Home/ImgSlider";
-import { FindInCountries } from "./components/Home/FindInCountries";
-import { Upcoming } from "./components/Auctions/Upcoming";
-import Work from "./components/Home/work";
-import RealEstate from "./components/Home/realEstate";
 import "./App.css";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./components/SellRegister/MultiSellForm";
 import Footer from "./components/Home/footer";
-import { Featured } from "./components/Home/Featured";
 import { addProperty } from "./slice/propertySlice";
 import { addAuction } from "./slice/auctionSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
@@ -20,8 +14,6 @@ import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
 import Header from "./components/Home/Header";
 import PropertyPages from "./components/Home/PropertyPages";
-import About from "./components/Home/About";
-import { addRegistProp } from "./slice/registPropertySlice";
 import EmailConfirm from "./components/Users/EmailConfirm";
 import ScrollTop from "./components/ScrollTop";
 import Docusign from "./components/Docusign";
@@ -41,6 +33,7 @@ import SignUp from "./components/Users/SignUp";
 import ForgotPass from "./components/Users/ForgotPass";
 import ChangePass from "./components/Users/ChangePass";
 import Login from "./components/Users/Login";
+import Home from "./components/Home/Home";
 
 // const FindInCountries = lazy(() => import("./components/Home/FindInCountries"));
 // const ImgSlider = lazy(() => import("./components/Home/ImgSlider"));
@@ -94,9 +87,6 @@ function App() {
   });
 
   if (user._id) {
-    authService.getRegistStatus().then((res) => {
-      dispatch(addRegistProp(res.data));
-    });
     authService.getSavedProperties(user._id).then((res) => {
       dispatch(addSavedProperty(res.data));
     });
@@ -107,7 +97,6 @@ function App() {
 
   const [color, setColor] = useState("");
   const [bodyColor, setBodyColor] = useState("");
-  const [query, setQuery] = useState("");
   const [show, setShow] = useState(true);
   const [headerWidth, setHeaderWidth] = useState("");
   const [positionLeft, setPositionLeft] = useState("");
@@ -122,10 +111,6 @@ function App() {
 
   const bodyColorChange = (color) => {
     setBodyColor(color);
-  };
-
-  const getQuery = (value) => {
-    setQuery(value);
   };
 
   const [change, setChange] = useState(false);
@@ -462,21 +447,7 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            <ImgSlider getQuery={getQuery} />
-            <Featured
-              toogleButton={toogleButton}
-              toogleChangePass={toogleChangePass}
-              toogleConfirmModal={toogleConfirmModal}
-              toogleForgotPass={toogleForgotPass}
-              toogleSignIn={toogleSignIn}
-              toogleSignUp={toogleSignUp}
-              query={query}
-            />
-            <FindInCountries />
-            <Upcoming query={query} />
-            <Work />
-            <RealEstate />
-            <About />
+            <Home />
           </Route>
         </Switch>
       </Router>
