@@ -116,6 +116,7 @@ function ApprovedListings({ auctions }) {
                   <Col>
                     <SavedAuctionsCard
                       url={property.images[0].url}
+                      urls={property.images}
                       type={property.type}
                       data={property.details}
                       id={property.auctionDetails._id}

@@ -61,7 +61,7 @@ function LiveListings() {
                   <td>
                     {listing.type === "real-estate"
                       ? listing.details.property_address
-                          .formatted_street_address
+                        .formatted_street_address
                       : listing.details.property_address}
                     <div
                       style={{
@@ -138,12 +138,12 @@ function LiveListings() {
                     {listing.type === "real-estate"
                       ? "Real Estate"
                       : listing.type === "car"
-                      ? "Car"
-                      : listing.type === "jet"
-                      ? "Jet"
-                      : listing.type === "yacht"
-                      ? "Yacht"
-                      : ""}
+                        ? "Car"
+                        : listing.type === "jet"
+                          ? "Jet"
+                          : listing.type === "yacht"
+                            ? "Yacht"
+                            : ""}
                   </td>
                   <td>
                     <Button variant="primary">Email</Button>

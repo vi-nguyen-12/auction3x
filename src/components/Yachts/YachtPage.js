@@ -164,6 +164,7 @@ function YachtPage({ toogleChange, setImgYacht, toggleImgYacht }) {
                     <Col md={12} style={{ marginBottom: "30px" }}>
                       <YachtCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         auctionStartDate={item.auctionStartDate}
@@ -190,6 +191,7 @@ function YachtPage({ toogleChange, setImgYacht, toggleImgYacht }) {
                 <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                   <UpcomingYachtCard
                     url={item.property.images[0].url}
+                    urls={item.property.images}
                     data={item.property.details}
                     id={item._id}
                     auctionStartDate={item.auctionStartDate}

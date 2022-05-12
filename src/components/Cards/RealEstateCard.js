@@ -7,10 +7,50 @@ import Toast from "../Toast";
 import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
 import authService from "../../services/authServices";
+import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import "../../styles/Card.css";
 
+const Carousel = styled(Slider)`
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0;
+
+  & > button {
+    opacity: 1;
+    height: 100%;
+    z-index: 1;
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+  .slick-prev {
+    left: 0;
+    width: 5vw;
+    height: 100% !important;
+    z-index: 1;
+  }
+  .slick-next {
+    right: 0;
+    width: 5vw;
+    height: 100% !important;
+    z-index: 1;
+  }
+  .slick-next:before{
+    font-size: 50px;
+    top: 50%;
+
+  }
+  .slick-prev:before{
+    font-size: 50px;
+    top: 50%;
+  }
+`;
 const CardComp = ({
-  url,
+  urls,
   data,
   id,
   auctionEndDate,
@@ -22,6 +62,13 @@ const CardComp = ({
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   const toggleImage = () => {
     const userId = user._id;
     const data = {
@@ -87,18 +134,22 @@ const CardComp = ({
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          <Card.Img
-            onClick={handleDisplay}
-            variant="top"
-            src={url}
-            className="img-fluid"
-            style={{
-              width: "100%",
-              height: "300px",
-              borderRadius: "10px",
-              cursor: "pointer",
-            }}
-          />
+          <Carousel {...settings}>
+            {urls.map((items) => (
+              <Card.Img
+                onClick={handleDisplay}
+                variant="top"
+                src={items.url}
+                className=" img-card img-fluid"
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              />
+            ))}
+          </Carousel>
           {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
@@ -212,7 +263,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",

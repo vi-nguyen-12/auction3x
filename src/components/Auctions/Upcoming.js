@@ -48,6 +48,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                     ) : item.property.type === "car" ? (
                       <UpcomingCarCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
@@ -59,6 +60,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                     ) : item.property.type === "jet" ? (
                       <UpcomingJetCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
@@ -70,6 +72,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                     ) : item.property.type === "yacht" ? (
                       <UpcomingYachtCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
