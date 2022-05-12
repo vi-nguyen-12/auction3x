@@ -88,7 +88,7 @@
 .banner-container {
   /* height: 100%; */
   display: flex;
-  background: #f8f8f8;
+  background: white;
   height: 50vh;
 }
 .banner-top-left {
@@ -96,6 +96,12 @@
   background-size: cover;
   width: 50%;
   height: 50%;
+  padding: 0;
+}
+.banner-top-left img {
+  padding: 0;
+  border-radius: 25px;
+  width: 100%;
 }
 .banner-top-right {
   width: 50%;
@@ -117,7 +123,7 @@
   padding-right: none !important;
 }
 .button-container button {
-  font-size: 30px;
+  font-size: 20px;
   background: linear-gradient(
     90deg,
     #d58f5c 0%,
@@ -166,28 +172,28 @@
 }
 
 .banner-top-left-2 p {
-  font-size: 35px;
+  font-size: 18px;
   font-family: "Montserrat", sans-serif;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 .banner-top-left-2 h2 {
   color: #b77b50;
-  font-size: 65px;
+  font-size: 35px;
   font-family: "Josefin Slab", serif;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .banner-top-right p {
-  font-size: 35px;
+  font-size: 18px;
   font-family: "Montserrat", sans-serif;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 .banner-top-right h2 {
   color: #b77b50;
-  font-size: 65px;
+  font-size: 35px;
   font-family: "Josefin Slab", serif;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -204,7 +210,7 @@
 
 .banner-left h2 {
   color: #b77b50;
-  font-size: 45px;
+  font-size: 35px;
   font-weight: 600;
   /* font-family: "Josefin Slab", serif; */
   padding-top: 20px;
@@ -212,7 +218,7 @@
 }
 
 .banner-left p {
-  font-size: 35px;
+  font-size: 18px;
   font-family: "Montserrat", sans-serif;
   padding-top: 20px;
   padding-bottom: 20px;

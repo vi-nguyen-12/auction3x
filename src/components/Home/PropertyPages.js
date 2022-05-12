@@ -154,10 +154,10 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">$0 - $10,517</option>
-                  <option href="#">$10,517 - $21,034</option>
-                  <option href="#">$21,034 - $31,062</option>
-                  <option href="#">$31,062 - $51,089</option>
+                  <option href="#">$0 - $10,000</option>
+                  <option href="#">$10,000 - $21,000</option>
+                  <option href="#">$21,000 - $31,000</option>
+                  <option href="#">$31,000 - $51,000</option>
                 </select>
               </Col>
               <Col >
@@ -179,9 +179,9 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col >
-                <Button>
+                <button className="galleryButton">
                   Search
-                </Button>
+                </button >
               </Col>
             </Row>
           </Col>
@@ -259,11 +259,11 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">$52,586 - $2,103,467
+                  <option href="#">$0 - $2,000,000
                   </option>
-                  <option href="#">$2,103,467 - $5,258,668
+                  <option href="#">$2,000,000 - $5,000,000
                   </option>
-                  <option href="#">$15,776,005 +
+                  <option href="#">$15,000,000 - $30,000,000
                   </option>
                 </select>
               </Col>
@@ -288,9 +288,9 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col >
-                <Button>
+                <button className="galleryButton">
                   Search
-                </Button>
+                </button>
               </Col>
             </Row>
           </Col>
@@ -371,13 +371,13 @@ const PropertyPages = ({
               <Col >
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">$31.552 - $105,517</option>
-                  <option href="#"> $105,517 - $155,517</option>
-                  <option href="#">$ $157,517 - $262,517</option>
-                  <option href="#">$262,517 - $305,517</option>
-                  <option href="#">$305,517 - $405,517</option>
-                  <option href="#">$405,517 - $505,517</option>
-                  <option href="#">$505,517 - $1,605,517</option>
+                  <option href="#">$0 - $100,000</option>
+                  <option href="#"> $100,000 - $150,000</option>
+                  <option href="#">$ $150,000 - $250,000</option>
+                  <option href="#">$250,000 - $300,000</option>
+                  <option href="#">$300,000 - $400,000</option>
+                  <option href="#">$400,000 - $500,000</option>
+                  <option href="#">$500,000 - $1,500,000</option>
                 </select>
               </Col>
               <Col >
@@ -399,9 +399,9 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col >
-                <Button>
+                <button className="galleryButton">
                   Search
-                </Button>
+                </button>
               </Col>
             </Row>
           </Col>
@@ -448,22 +448,23 @@ const PropertyPages = ({
             <Col >
               <select className=" RealButton ">
                 <option>Price</option>
-                <option href="#">$52,586 - $2,103,467
+                <option href="#">$0 - $50,000</option>
+                <option href="#">$50,000 - $2,000,000
                 </option>
-                <option href="#">$2,103,467 - $5,258,668
+                <option href="#">$2,000,000 - $5,000,000
                 </option>
-                <option href="#">$15,776,005 +
+                <option href="#">$5,000,000 - $10,000,000
                 </option>
               </select>
             </Col>
             <Col >
               <select className=" RealButton ">
                 <option>Bldg Size</option>
-                <option href="#">52,586 sqft - 2,103, 467sqft
+                <option href="#">5,000 sqft - 2,000,000 sqft
                 </option>
-                <option href="#">2,103, 467sqft - 5,258, 668sqft
+                <option href="#">2,000,000 sqft - 5,000,000 sqft
                 </option>
-                <option href="#">15,776 ,005sqft +
+                <option href="#">5,000,000 sqft - 10,000,000 sqft
                 </option>
               </select>
             </Col>
@@ -484,9 +485,9 @@ const PropertyPages = ({
               </select>
             </Col>
             <Col >
-              <Button>
+              <button className="galleryButton">
                 Search
-              </Button>
+              </button>
             </Col>
           </Row>
         </Col>

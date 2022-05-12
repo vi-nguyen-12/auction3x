@@ -45,6 +45,10 @@
   padding: 100px 50px;
   height: 100vh;
 }
+.about-wrap {
+  padding: 100px 50px;
+  height: 150vh;
+}
 
 .btn-custom {
   /* font family: Josefin Slab semi bold*/

@@ -27,14 +27,12 @@ const About = () => {
   const history = useHistory();
 
   return (
-    <section className="real-estate-wrap">
+    <section className="about-wrap">
       <Row className="banner-container">
-        <Col
-
-          style={{ padding: "0", margin: "0" }}
+        <Col md={4}
           className="banner-top-left"
         >
-          <img src="./images/investors.PNG" style={{ width: "100%" }} alt="" />
+          <img src="./images/investors.PNG" height={450} alt="" />
         </Col>
         <Col className="banner-top-right">
           <h2>INVESTORS / BUYERS</h2>
@@ -89,13 +87,12 @@ const About = () => {
           </div>
         </Col>
         <Col
-          style={{ padding: "0", margin: "0" }}
           className="banner-top-left"
         >
-          <img src="./images/broker.PNG" style={{ width: "100%" }} alt="" />
+          <img src="./images/broker.PNG" height={450} alt="" />
         </Col>
       </Row>
-      {/* <Row className="bottom-container" style={{ padding: "50px" }}>
+      <Row className="banner-container" style={{ padding: "50px" }}>
         <Col className="banner-left">
           <h2>Stay updated with Auction 3</h2>
           <p>
@@ -111,7 +108,7 @@ const About = () => {
             </div>
           </div>
         </Col>
-      </Row> */}
+      </Row>
 
       <Modal
         backdrop="static"

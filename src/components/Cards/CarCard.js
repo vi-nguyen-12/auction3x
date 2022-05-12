@@ -79,7 +79,6 @@ const CarCard = ({
       }
     }
   }, [savedProperty]);
-
   return (
     <div>
       {auctionEndDate && (
@@ -202,7 +201,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              {}
+              { }
               <div
                 style={{
                   alignItems: "flex-end",

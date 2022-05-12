@@ -22,6 +22,8 @@ const Upcoming = ({ query, toogleSignIn }) => {
     }
   }, [property]);
 
+  // console.log([upcoming[0].property.images[0].url]);
+
   return (
     <>
       {upcoming ? (
@@ -45,6 +47,7 @@ const Upcoming = ({ query, toogleSignIn }) => {
                     {item.property.type === "real-estate" ? (
                       <UpcomingRealEstateCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         startRegister={item.registerStartDate}
