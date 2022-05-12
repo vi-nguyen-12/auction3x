@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
-import { useSelector } from "react-redux";
 
-const Upcoming = ({ query, toogleSignIn }) => {
-  const property = useSelector((state) => state.property);
-  const [upcoming, setUpcoming] = useState([]);
-
-  useEffect(() => {
-    if (query) {
-      // look for any property that matches the query
-      const search = property.filter((prop) =>
-        Object.values(prop).includes(query)
-      );
-      setUpcoming(search);
-    } else {
-      setUpcoming(property);
-    }
-  }, [property]);
-
+const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
   return (
     <>
-      {upcoming ? (
+      {upcomingAuctions ? (
         <>
           <div className="mt-5">
             <Row style={{ padding: "0 50px" }}>
@@ -41,8 +25,8 @@ const Upcoming = ({ query, toogleSignIn }) => {
               </Col>
             </Row>
             <Row style={{ padding: "0 50px" }}>
-              {upcoming.length > 0 ? (
-                upcoming.slice(0, 6).map((item) => (
+              {upcomingAuctions.length > 0 ? (
+                upcomingAuctions.slice(0, 6).map((item) => (
                   <Col
                     key={item._id}
                     md={4}

@@ -4,7 +4,6 @@ import { CardComp } from "../Cards/RealEstateCard";
 import { JetCard } from "../Cards/JetCard";
 import { YachtCard } from "../Cards/YachtCard";
 import { CarCard } from "../Cards/CarCard";
-import { useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -80,14 +79,13 @@ position: relative;
 }
 `;
 
-const Featured = ({ query, toogleSignIn }) => {
-  const auction = useSelector((state) => state.auction);
+const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auction.length > 2 ? 2 : auction.length,
+    slidesToShow: auctions.length > 2 ? 2 : auctions.length,
     responsive: [
       {
         breakpoint: 1024,
@@ -118,7 +116,7 @@ const Featured = ({ query, toogleSignIn }) => {
 
   return (
     <div className="background">
-      {auction.length > 0 ? (
+      {auctions.length > 0 ? (
         <>
           <Row>
             <Col md={12} className="m-auto">
@@ -137,7 +135,7 @@ const Featured = ({ query, toogleSignIn }) => {
           <Col md={12} className="m-auto">
             <Row>
               <Carousel {...settings}>
-                {auction.map((item, index) => (
+                {auctions.map((item, index) => (
                   <Wrap key={index}>
                     <Col md={12}>
                       {item.property.type === "real-estate" ? (

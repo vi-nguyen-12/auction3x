@@ -38,10 +38,9 @@ const Carousel = styled(Slider)`
 
   // li.slick-active button:before  {
   //   color: white;
-  //   //  content dash 
+  //   //  content dash
   //   content: "_";
   // }
-
 
   // .slick-list {
   //   overflow: initial;
@@ -106,27 +105,27 @@ const HomeBottom = styled.div`
   }
 `;
 const Bar = styled.button`
-background-color: transparent;
-width: 100px;
-height: 150px;
-border: none;
-margin: 10px;
-display: flex;
-Justify-content: center;
-align-items: center;
-height: 1px;
-outline: none;
-&:hover {
-  transition: background-color 0.2s ease 0s;
   background-color: transparent;
+  width: 100px;
+  height: 150px;
   border: none;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1px;
   outline: none;
-}
-&:focus {
-  outline: none;
-  background-color: transparent;
-  border: none;
-}
+  &:hover {
+    transition: background-color 0.2s ease 0s;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+    background-color: transparent;
+    border: none;
+  }
 `;
 const BarGroup = styled.div`
   display: flex;
@@ -134,36 +133,20 @@ const BarGroup = styled.div`
   bottom: 10px;
   left: 50%;
   z-index: 100;
-  `;
+`;
 
-const ImgSlider = ({ getQuery }) => {
-
+const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
   const slider = useRef();
-  const [list, setList] = useState([]);
   const [Index, setIndex] = useState(0);
-  const [featureAuctions, setFeatureAuctions] = useState([]);
-  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
-  useEffect(() => {
-    authService.getFeaturedAuctions().then((res) => {
-      setFeatureAuctions(res.data);
-    });
-    authService.getUpcomingAuctions().then((res) => {
-      setUpcomingAuctions(res.data);
-    });
-    authService.getOngoingAuctions().then((res) => {
-      setOnGoingAuctions(res.data);
-    });
-  }, []);
+
   const handleClick = (index) => () => {
     setIndex(index);
     slider.current.slickGoTo(index);
-  }
+  };
   useEffect(() => {
     if (!slider) {
       slider.current.slickGoTo(Index);
     }
-
   }, [Index]);
   let settings = {
     dots: false,
@@ -174,26 +157,26 @@ const ImgSlider = ({ getQuery }) => {
     autoplay: true,
     beforeChange: (current, next) => {
       setIndex(next);
-    }
+    },
   };
   return (
     <>
       {featureAuctions.length > 0 ? (
         <>
           <BarGroup className="Bar-group">
-            {featureAuctions.length > 0 && featureAuctions.map((images, index) => (
-              <Bar key={index}
-                onClick={
-                  handleClick(index)
-                }
-              >
-                <hr style={{
-                  color: "white", width: "100%",
-                  height: "5px", opacity: "1",
-                }} />
-
-              </Bar>
-            ))}
+            {featureAuctions.length > 0 &&
+              featureAuctions.map((images, index) => (
+                <Bar key={index} onClick={handleClick(index)}>
+                  <hr
+                    style={{
+                      color: "white",
+                      width: "100%",
+                      height: "5px",
+                      opacity: "1",
+                    }}
+                  />
+                </Bar>
+              ))}
           </BarGroup>
           {featureAuctions.length > 0 && (
             <Carousel ref={slider} {...settings}>

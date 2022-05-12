@@ -126,4 +126,4 @@ const FindInCountries = (props) => {
   );
 };
 
-export { FindInCountries };
+export default FindInCountries;
