@@ -77,14 +77,14 @@ position: relative;
 }
 `;
 
-function ApprovedAuctionsComp({approvedAuctions}) {
-    let settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        slidesToShow: approvedAuctions.length > 3 ? 3 : approvedAuctions.length,
-      };
+function ApprovedAuctionsComp({ approvedAuctions }) {
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: approvedAuctions.length > 3 ? 3 : approvedAuctions.length,
+  };
   return (
     <>
       <Carousel {...settings}>
@@ -93,6 +93,7 @@ function ApprovedAuctionsComp({approvedAuctions}) {
             <Col md={12}>
               <SavedAuctionsCard
                 url={property.property.images[0].url}
+                urls={property.property.images}
                 data={property.property.details}
                 id={property._id}
                 auctionStartDate={property.auctionStartDate}

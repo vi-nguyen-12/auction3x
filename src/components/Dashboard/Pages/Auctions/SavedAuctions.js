@@ -26,6 +26,7 @@ function SavedAuctions() {
                   auction.filter((item) => item._id === property._id) ? (
                     <CardComp
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       auctionStartDate={property.auctionStartDate}
@@ -35,6 +36,7 @@ function SavedAuctions() {
                   ) : (
                     <UpcomingRealEstateCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       startRegister={property.registerStartDate}
@@ -46,6 +48,7 @@ function SavedAuctions() {
                   auction.filter((item) => item._id === property._id) ? (
                     <CarCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       auctionStartDate={property.auctionStartDate}
@@ -55,6 +58,7 @@ function SavedAuctions() {
                   ) : (
                     <UpcomingCarCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       startRegister={property.registerStartDate}
@@ -66,6 +70,7 @@ function SavedAuctions() {
                   auction.filter((item) => item._id === property._id) ? (
                     <JetCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       auctionStartDate={property.auctionStartDate}
@@ -75,6 +80,7 @@ function SavedAuctions() {
                   ) : (
                     <UpcomingJetCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       startRegister={property.registerStartDate}
@@ -86,6 +92,7 @@ function SavedAuctions() {
                   auction.filter((item) => item._id === property._id) ? (
                     <YachtCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       auctionStartDate={property.auctionStartDate}
@@ -95,6 +102,7 @@ function SavedAuctions() {
                   ) : (
                     <UpcomingYachtCard
                       url={property.property.images[0].url}
+                      urls={property.property.images}
                       data={property.property.details}
                       id={property._id}
                       startRegister={property.registerStartDate}

@@ -95,6 +95,7 @@ function SavedAuctionsComp({ savedProp }) {
             <Col md={12}>
               <SavedAuctionsCard
                 url={property.property.images[0].url}
+                urls={property.property.images}
                 data={property.property.details}
                 id={property._id}
                 auctionStartDate={property.auctionStartDate}

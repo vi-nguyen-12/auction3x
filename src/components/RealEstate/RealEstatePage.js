@@ -166,6 +166,7 @@ function RealEstatePage({ toogleChange, toogleImage, setImg }) {
                     <Col md={12} style={{ marginBottom: "30px" }}>
                       <CardComp
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         auctionStartDate={item.auctionStartDate}
@@ -190,6 +191,7 @@ function RealEstatePage({ toogleChange, toogleImage, setImg }) {
                 <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                   <UpcomingRealEstateCard
                     url={item.property.images[0].url}
+                    urls={item.property.images}
                     data={item.property.details}
                     id={item._id}
                     startRegister={item.registerStartDate}

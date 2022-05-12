@@ -137,6 +137,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                       {item.property.type === "real-estate" ? (
                         <CardComp
                           url={item.property.images[0].url}
+                          urls={item.property.images}
                           data={item.property.details}
                           id={item._id}
                           auctionStartDate={item.auctionStartDate}
@@ -148,6 +149,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                       ) : item.property.type === "car" ? (
                         <CarCard
                           url={item.property.images[0].url}
+                          urls={item.property.images}
                           data={item.property.details}
                           id={item._id}
                           auctionStartDate={item.auctionStartDate}
@@ -159,6 +161,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                       ) : item.property.type === "jet" ? (
                         <JetCard
                           url={item.property.images[0].url}
+                          urls={item.property.images}
                           data={item.property.details}
                           id={item._id}
                           auctionStartDate={item.auctionStartDate}
@@ -170,6 +173,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                       ) : item.property.type === "yacht" ? (
                         <YachtCard
                           url={item.property.images[0].url}
+                          urls={item.property.images}
                           data={item.property.details}
                           id={item._id}
                           auctionStartDate={item.auctionStartDate}

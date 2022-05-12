@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { Card, Button, Row, Col, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -13,16 +13,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ImImages } from "react-icons/im";
+import "../../styles/Card.css";
 
 const Carousel = styled(Slider)`
-height: 100%;
+  height: 100%;
   overflow: hidden;
   border-radius: 0;
 
   & > button {
     opacity: 1;
-    height: 100 %;
-    width: 15vw;
+    height: 100%;
     z-index: 1;
     &:hover {
       opacity: 1;
@@ -31,13 +31,13 @@ height: 100%;
   }
   .slick-prev {
     left: 0;
-    width: 12vw;
+    width: 5vw;
     height: 100% !important;
     z-index: 1;
   }
   .slick-next {
     right: 0;
-    width: 12vw;
+    width: 5vw;
     height: 100% !important;
     z-index: 1;
   }
@@ -52,7 +52,6 @@ height: 100%;
   }
 `;
 const UpcomingRealEstateCard = ({
-  url,
   urls,
   data,
   id,
@@ -146,14 +145,14 @@ const UpcomingRealEstateCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((item) => (
+            {urls.map((items) => (
               <Card.Img
                 onClick={handleDisplay}
                 variant="top"
-                src={item.url}
-                className="img-fluid"
+                src={items.url}
+                className="img-card img-fluid"
                 style={{
-                  // width: "100%",
+                  width: "100%",
                   height: "300px",
                   borderRadius: "10px",
                   cursor: "pointer",
