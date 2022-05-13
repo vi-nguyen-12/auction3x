@@ -29,12 +29,12 @@ const Carousel = styled(Slider)`
     }
   }
   .slick-prev {
-    height: 100px;
+    height: 100px!important;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
   }
   .slick-next {
-    height: 100px;
+    height: 100px!important;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
