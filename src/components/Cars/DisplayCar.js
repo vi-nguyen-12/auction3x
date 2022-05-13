@@ -43,49 +43,37 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
+height: 100vh;
+overflow: hidden;
+
+& > button {
+  opacity: 1;
   height: 100%;
-  overflow: hidden;
-
-  & > button {
-    opacity: 0;
-    height: 100%;
-    width: 5vw;
-    z-index: 1;
-
-    &:hover {
-      opacity: 1;
-      transition: opacity 0.2s ease 0s;
-    }
+  width: 5vw;
+  z-index: 1;
+  &:hover {
+    opacity: 1;
+    transition: opacity 0.2s ease 0s;
   }
+}
 
-  ul li button {
-    &:before {
-      top: -4vh;
-      font-size: 20px;
-      color: gray;
-      left: -35px;
-    }
-  }
+.slick-prev {
+  background: url("./images/arrow_back.png") center center no-repeat !important;
+  font-size: 50px;
+}
 
-  li.slick-active button:before {
-    color: #e9af84;
-  }
+.slick-prev:before {
+  display: none;
+}
 
-  .slick-list {
-    overflow: initial;
-  }
+.slick-next {
+  background: url("./images/arrow_next.png") center center no-repeat !important;
+  font-size: 50px;
+}
 
-  .slick-prev {
-    left: -50px;
-    width: 12vw;
-    height: 100%;
-  }
-
-  .slick-next {
-    right: -50px;
-    width: 12vw;
-    height: 100%;
-  }
+.slick-next:before {
+  display: none;
+}
 `;
 
 const Wrap = styled.div`
@@ -472,9 +460,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -554,9 +542,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -700,7 +688,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{

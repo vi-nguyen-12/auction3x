@@ -23,31 +23,28 @@ const Carousel = styled(Slider)`
     opacity: 1;
     height: 100%;
     z-index: 1;
+    width: 5vw;
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
     }
   }
   .slick-prev {
-    left: 0;
-    width: 5vw;
-    height: 100% !important;
-    z-index: 1;
+    height: 100px;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
   .slick-next {
-    right: 0;
-    width: 5vw;
-    height: 100% !important;
-    z-index: 1;
+    height: 100px;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
   .slick-next:before{
-    font-size: 50px;
-    top: 50%;
+   display: none;
 
   }
   .slick-prev:before{
-    font-size: 50px;
-    top: 50%;
+   display: none;
   }
 `;
 const UpcomingJetCard = ({
@@ -70,19 +67,6 @@ const UpcomingJetCard = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  };
-  const toggleImage = () => {
-    const data = {
-      userId: user._id,
-      auctionId: id,
-    };
-    if (favorite === false) {
-      authService.saveProperty(data);
-      setFavorite(!favorite);
-    } else if (favorite === true) {
-      authService.removeProperty(data);
-      setFavorite(!favorite);
-    }
   };
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
@@ -110,7 +94,23 @@ const UpcomingJetCard = ({
       history.push(`/DisplayAuctions/${id}`);
     }
   };
-
+  const handleLike = () => {
+    if (user.id) {
+      const data = {
+        userId: user.id,
+        auctionId: id,
+      };
+      if (favorite === false) {
+        authService.saveProperty(data);
+        setFavorite(!favorite);
+      } else if (favorite === true) {
+        authService.removeProperty(data);
+        setFavorite(!favorite);
+      }
+    } else {
+      return toogleSignIn();
+    }
+  }
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -163,7 +163,7 @@ const UpcomingJetCard = ({
               />
             ))}
           </Carousel>
-          <button onClick={toggleImage} className="favBtn">
+          <button onClick={handleLike} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (

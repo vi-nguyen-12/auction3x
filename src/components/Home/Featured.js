@@ -46,24 +46,24 @@ const Carousel = styled(Slider)`
     left: -75px;
     width: 12vw;
     height: 100%;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-prev:before {
-    color: white;
-    content: "<";
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
     right: -75px;
     width: 12vw;
     height: 100%;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-next:before {
-    color: white;
-    content: ">";
-    font-size: 50px;
+    display: none;
   }
 `;
 
@@ -191,19 +191,20 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
           </Col>
         </>
       ) : (
-        <Row>
-          <Col md={12} className="m-auto">
-            <img
-              src="/images/f_name.png"
-              alt=""
-              style={{
-                marginBottom: "0px",
-                maxWidth: "250px",
-                maxHeight: "150px",
-              }}
-            />
-          </Col>
-        </Row>
+        null
+        // <Row>
+        //   <Col md={12} className="m-auto">
+        //     <img
+        //       src="/images/f_name.png"
+        //       alt=""
+        //       style={{
+        //         marginBottom: "0px",
+        //         maxWidth: "250px",
+        //         maxHeight: "150px",
+        //       }}
+        //     />
+        //   </Col>
+        // </Row>
       )}
     </div>
   );

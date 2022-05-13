@@ -24,6 +24,7 @@ const PropertyPages = ({
   setPositionLeft,
   setPadRight,
   toogleShow,
+  toogleSignIn
 }) => {
   useEffect(() => {
     toogleShow(true);
@@ -507,13 +508,13 @@ const PropertyPages = ({
       </Row>
       }
       {path === "/realEstates" ? (
-        <RealEstatePage toogleChange={toogleChange} toogleImage={toogleImage} setImg={setImg} />
+        <RealEstatePage toogleChange={toogleChange} toogleImage={toogleImage} setImg={setImg} toogleSignIn={toogleSignIn} />
       ) : path === "/cars" ? (
-        <CarPage toogleChange={toogleChange} toggleImgCar={toggleImgCar} setImgCar={setImgCar} />
+        <CarPage toogleChange={toogleChange} toggleImgCar={toggleImgCar} setImgCar={setImgCar} toogleSignIn={toogleSignIn} />
       ) : path === "/jets" ? (
-        <JetPage toogleChange={toogleChange} setShowImgJet={setShowImgJet} setImgJet={setImgJet} />
+        <JetPage toogleChange={toogleChange} setShowImgJet={setShowImgJet} setImgJet={setImgJet} toogleSignIn={toogleSignIn} />
       ) : path === "/yachts" ? (
-        <YachtPage toogleChange={toogleChange} setShowImgYacht={setShowImgYacht} setImgYacht={setImgYacht} />
+        <YachtPage toogleChange={toogleChange} setShowImgYacht={setShowImgYacht} setImgYacht={setImgYacht} toogleSignIn={toogleSignIn} />
       ) : null}
       {/* Map Button */}
       <Modal

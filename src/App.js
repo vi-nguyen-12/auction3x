@@ -352,6 +352,7 @@ function App() {
               setPositionLeft={setPositionLeft}
               setPadRight={setPadRight}
               toogleShow={toogleShow}
+              toogleSignIn={toogleSignIn}
             />
           </Route>
           <Route exact path="/Cars">
@@ -362,6 +363,7 @@ function App() {
               setPositionLeft={setPositionLeft}
               setPadRight={setPadRight}
               toogleShow={toogleShow}
+              toogleSignIn={toogleSignIn}
             />
           </Route>
           <Route exact path="/Jets">
@@ -372,6 +374,7 @@ function App() {
               setPositionLeft={setPositionLeft}
               setPadRight={setPadRight}
               toogleShow={toogleShow}
+              toogleSignIn={toogleSignIn}
             />
           </Route>
           <Route exact path="/Yachts">
@@ -382,6 +385,7 @@ function App() {
               setPositionLeft={setPositionLeft}
               setPadRight={setPadRight}
               toogleShow={toogleShow}
+              toogleSignIn={toogleSignIn}
             />
           </Route>
           {user._id && (
@@ -447,7 +451,7 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            <Home />
+            <Home toogleSignIn={toogleSignIn} />
           </Route>
         </Switch>
       </Router>

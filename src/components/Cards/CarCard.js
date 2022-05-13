@@ -22,31 +22,27 @@ const Carousel = styled(Slider)`
     opacity: 1;
     height: 100%;
     z-index: 1;
+    width: 5vw;
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
     }
   }
   .slick-prev {
-    left: 0;
-    width: 5vw;
-    height: 100% !important;
-    z-index: 1;
+    height: 100px;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
   .slick-next {
-    right: 0;
-    width: 5vw;
-    height: 100% !important;
-    z-index: 1;
-  }
-  .slick-next:before{
+    height: 100px;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    top: 50%;
-
   }
-  .slick-prev:before{
-    font-size: 50px;
-    top: 50%;
+  .slick-next:before {
+    display: none;
+  }
+  .slick-prev:before {
+    display: none;
   }
 `;
 const CarCard = ({
@@ -69,20 +65,20 @@ const CarCard = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const toggleImage = () => {
-    const userId = user._id;
-    const data = {
-      userId: userId,
-      auctionId: id,
-    };
-    if (favorite === false) {
-      authService.saveProperty(data);
-      setFavorite(!favorite);
-    } else if (favorite === true) {
-      authService.removeProperty(data);
-      setFavorite(!favorite);
-    }
-  };
+  // const toggleImage = () => {
+  //   const userId = user._id;
+  //   const data = {
+  //     userId: userId,
+  //     auctionId: id,
+  //   };
+  //   if (favorite === false) {
+  //     authService.saveProperty(data);
+  //     setFavorite(!favorite);
+  //   } else if (favorite === true) {
+  //     authService.removeProperty(data);
+  //     setFavorite(!favorite);
+  //   }
+  // };
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
@@ -113,7 +109,23 @@ const CarCard = ({
       }
     }
   };
-
+  const handleLike = () => {
+    if (user.id) {
+      const data = {
+        userId: user.id,
+        auctionId: id,
+      };
+      if (favorite === false) {
+        authService.saveProperty(data);
+        setFavorite(!favorite);
+      } else if (favorite === true) {
+        authService.removeProperty(data);
+        setFavorite(!favorite);
+      }
+    } else {
+      return toogleSignIn();
+    }
+  }
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -152,7 +164,7 @@ const CarCard = ({
           {user._id && reserveMet === true && (
             <div className="badge-label" aria-label="Reserved Met !" />
           )}
-          <button onClick={toggleImage} className="favBtn">
+          <button onClick={handleLike} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
             ) : (

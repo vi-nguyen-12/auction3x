@@ -43,27 +43,21 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100%;
-    padding-left: 4%;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-prev:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100%;
-    padding-right: 4%;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-next:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 `;
 
@@ -81,7 +75,7 @@ position: relative;
 }
 `;
 
-function CarPage({ toogleChange, setImgCar, toggleImgCar }) {
+function CarPage({ toogleChange, setImgCar, toggleImgCar, toogleSignIn }) {
   useEffect(() => {
     toogleChange();
   }, []);
@@ -171,6 +165,7 @@ function CarPage({ toogleChange, setImgCar, toggleImgCar }) {
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
+                        toogleSignIn={toogleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -199,12 +194,13 @@ function CarPage({ toogleChange, setImgCar, toggleImgCar }) {
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
+                    toogleSignIn={toogleSignIn}
                   />
                 </Col>
               ))
             ) : (
               <h3 style={{ display: "flex", justifyContent: "center" }}>
-                No Ongoing Auctions
+                No Upcoming Auctions
               </h3>
             )}
           </Row>

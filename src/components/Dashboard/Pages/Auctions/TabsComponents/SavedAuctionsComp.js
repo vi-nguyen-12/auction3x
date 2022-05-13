@@ -9,7 +9,6 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
-  height: 100%;
   overflow: hidden;
 
   & > button {
@@ -44,23 +43,25 @@ const Carousel = styled(Slider)`
   .slick-prev {
     left: -75px;
     width: 12vw;
-    height: 100%;
+    height: 100px;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-prev:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
     right: -75px;
     width: 12vw;
-    height: 100%;
+    height: 100px;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-next:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 `;
 

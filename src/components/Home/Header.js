@@ -303,9 +303,6 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
                       height: "47px",
                     }}
                     id={colors === "white" ? "hover" : ""}
@@ -314,8 +311,7 @@ const Header = ({
                     onMouseEnter={() => setShowWallet(true)}
                     onMouseLeave={() => setShowWallet(false)}
                   >
-                    {/* <Dropdown.Item href="#"> */}
-                    <IoWallet size={30} />
+                    <IoWallet size={20} />
                     <NumberFormat
                       style={{
                         fontSize: "16px",
@@ -369,7 +365,7 @@ const Header = ({
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                    // id={colors === "white" ? "hover" : ""}
+                  // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
                       className="signIn-btn mt-0"
@@ -485,7 +481,6 @@ const Header = ({
                   style={{
                     backgroundColor: "transparent",
                     color: textColor,
-                    padding: "8px 20px",
                     borderRadius: "0",
                     height: "43px",
                   }}
@@ -496,7 +491,7 @@ const Header = ({
                   onMouseLeave={() => setShowWallet(false)}
                 >
                   {/* <Dropdown.Item href="#"> */}
-                  <IoWallet size={30} />
+                  <IoWallet size={20} />
                   <NumberFormat
                     style={{
                       fontSize: "16px",

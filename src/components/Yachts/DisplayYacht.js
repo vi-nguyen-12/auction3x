@@ -79,15 +79,27 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -50px;
-    width: 12vw;
+    left: -75px;
+    width: 10vw;
     height: 100%;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
+  }
+
+  .slick-prev:before {
+    display: none;
   }
 
   .slick-next {
-    right: -50px;
-    width: 12vw;
+    right: -75px;
+    width: 10vw;
     height: 100%;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
+  }
+
+  .slick-next:before {
+    display: none;
   }
 `;
 
@@ -482,9 +494,9 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -564,9 +576,9 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -710,7 +722,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{

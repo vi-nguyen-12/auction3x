@@ -36,6 +36,7 @@
   font-weight: normal !important;
   box-sizing: content-box;
   white-space: nowrap;
+  z-index: 100;
 }
 
 .headerNav:hover {

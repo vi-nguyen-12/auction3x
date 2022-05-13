@@ -26,46 +26,22 @@ const Carousel = styled(Slider)`
     }
   }
 
-  // ul li button {
-  //   &:before {
-  //     top: -15vh;
-  //     font-size: 30px;
-  //     color: gray;
-  //     // left: -35px;
-  //     margin-right: 200px;
-  //   }
-  // }
-
-  // li.slick-active button:before  {
-  //   color: white;
-  //   //  content dash
-  //   content: "_";
-  // }
-
-  // .slick-list {
-  //   overflow: initial;
-  // }
-
   .slick-prev {
-    width: 12vw;
-    height: 100%;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-prev:before {
-    color: white;
-    content: "<";
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
-    width: 12vw;
-    height: 100%;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-next:before {
-    color: white;
-    content: ">";
-    font-size: 50px;
+    display: none;
   }
 `;
 
@@ -105,19 +81,21 @@ const HomeBottom = styled.div`
   }
 `;
 const Bar = styled.button`
-  background-color: transparent;
   width: 100px;
   height: 150px;
   border: none;
-  margin: 10px;
+  margin: 15px;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 1px;
   outline: none;
+  background-color: transparent;
+  border-radius: 15px;
+  box-shadow:${props => props.size} ${props => props.color};
   &:hover {
     transition: background-color 0.2s ease 0s;
-    background-color: transparent;
     border: none;
     outline: none;
   }
@@ -131,8 +109,11 @@ const BarGroup = styled.div`
   display: flex;
   position: absolute;
   bottom: 10px;
-  left: 50%;
-  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  z-index: 10;
 `;
 
 const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
@@ -166,9 +147,13 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
           <BarGroup className="Bar-group">
             {featureAuctions.length > 0 &&
               featureAuctions.map((images, index) => (
-                <Bar key={index} onClick={handleClick(index)}>
+                <Bar key={index}
+                  color={index === Index ? "white" : "transparent"}
+                  size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
+                  onClick={handleClick(index)}>
                   <hr
                     style={{
+                      borderRadius: "10px",
                       color: "white",
                       width: "100%",
                       height: "5px",

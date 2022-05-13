@@ -42,24 +42,26 @@ const Carousel = styled(Slider)`
 
   .slick-prev {
     left: -75px;
-    width: 12vw;
+    width: 10vw;
     height: 100%;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-prev:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
     right: -75px;
-    width: 12vw;
+    width: 10vw;
     height: 100%;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
   }
 
   .slick-next:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 `;
 
