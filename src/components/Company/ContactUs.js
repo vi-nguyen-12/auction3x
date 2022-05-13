@@ -34,21 +34,21 @@ function ContactUs() {
     {
       title: "First Name",
       name: "firstName",
-      placeholder: "Enter First Name",
+      placeholder: "Enter first name",
     },
     {
       title: "Last Name",
       name: "lastName",
-      placeholder: "Enter Last Name",
+      placeholder: "Enter last name",
     },
     {
       title: "Location",
       name: "location",
-      placeholder: "Enter Location",
+      placeholder: "Enter location",
     },
-    { title: "Email", name: "email", placeholder: "Enter Email" },
-    { title: "Phone No", name: "phone", placeholder: "Enter Phone No." },
-    { title: "Message", name: "message", placeholder: "Message" },
+    { title: "Email", name: "email", placeholder: "Enter email" },
+    { title: "Phone No", name: "phone", placeholder: "Enter phone no." },
+    { title: "Message", name: "message", placeholder: "Enter message" },
   ];
   return (
     <>
@@ -91,7 +91,6 @@ function ContactUs() {
                           : "text"
                       }
                       className="form-control"
-                      style={{ color: "black", fontWeight: "bold" }}
                       placeholder={item.placeholder}
                       {...register(`${item.name}`, {
                         required: `Please enter your ${item.title}`,
