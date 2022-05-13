@@ -402,7 +402,7 @@ function App() {
             </Route>
           )}
 
-          <Route path="/ContantUs">
+          <Route path="/contact">
             <ContactUs />
           </Route>
 

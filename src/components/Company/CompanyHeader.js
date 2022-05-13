@@ -6,7 +6,7 @@ function CompanyHeader({ location }) {
     <h5 className="realHeader">
       {location === "AboutUs" ? (
         <p>ABOUT US</p>
-      ) : location === "ContantUs" ? (
+      ) : location === "contact" ? (
         <p>CONTACT US</p>
       ) : location === "PrivacyPolicy" ? (
         <p>PRIVACY POLICY</p>
