@@ -97,7 +97,6 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
   const toogleRegistEnded = () => setRegistEnded(!registEnded);
-
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -108,29 +107,12 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
-  const toggleImage = () => {
-    const userId = user._id;
-    const data = {
-      userId: userId,
-      auctionId: property._id,
-    };
-    if (favorite === false) {
-      authService.saveProperty(data);
-      setFavorite(!favorite);
-    } else if (favorite === true) {
-      authService.removeProperty(data);
-      setFavorite(!favorite);
-    }
-  };
-
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
-
   const [downloadFiles, setDownloadFiles] = useState([]);
   const [realTab, setRealTab] = useState("Investment Opportunity");
-
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
@@ -215,6 +197,25 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
       window.open(property.property.documents[i].url);
     }
   };
+
+  const toggleImage = () => {
+    if (user._id) {
+      const data = {
+        userId: user._id,
+        auctionId: property._id,
+      };
+      if (favorite === false) {
+        authService.saveProperty(data);
+        setFavorite(!favorite);
+      } else if (favorite === true) {
+        authService.removeProperty(data);
+        setFavorite(!favorite);
+      }
+    } else {
+      return toogleSignIn();
+    }
+  };
+
   return (
     <>
       {location && property && (

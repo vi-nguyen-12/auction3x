@@ -94,7 +94,7 @@ const UpcomingRealEstateCard = ({
     }
   };
   const handleLike = () => {
-    if (user.id) {
+    if (user._id) {
       const data = {
         userId: user.id,
         auctionId: id,
