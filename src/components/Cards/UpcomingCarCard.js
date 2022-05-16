@@ -98,7 +98,7 @@ const UpcomingCarCard = ({
   const handleLike = () => {
     if (user._id) {
       const data = {
-        userId: user.id,
+        userId: user._id,
         auctionId: id,
       };
       if (favorite === false) {
