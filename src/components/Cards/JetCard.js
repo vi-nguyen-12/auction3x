@@ -13,7 +13,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../../styles/Card.css";
 
-
 const Carousel = styled(Slider)`
   height: 100%;
   overflow: hidden;
@@ -39,11 +38,10 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
+  .slick-next:before {
     display: none;
-
   }
-  .slick-prev:before{
+  .slick-prev:before {
     display: none;
   }
 `;
@@ -113,7 +111,7 @@ const JetCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -135,8 +133,9 @@ const JetCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
+            {urls.map((items, index) => (
               <Card.Img
+                key={index}
                 onClick={handleDisplay}
                 variant="top"
                 src={items.url}
@@ -264,7 +263,7 @@ const JetCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

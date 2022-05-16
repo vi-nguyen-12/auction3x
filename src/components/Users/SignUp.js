@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 import { Modal, Row, Col, Button } from "react-bootstrap";
@@ -7,11 +7,32 @@ import "../../styles/modalStyle.css";
 require("react-bootstrap/ModalHeader");
 
 const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
+  const [showTerms, setShowTerms] = useState(false);
+  const [terms, setTerms] = useState();
+  const [privacy, setPrivacy] = useState();
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const toogleTerms = () => setShowTerms(!showTerms);
+  const tooglePrivacy = () => setShowPrivacy(!showPrivacy);
   const {
     register,
     handleSubmit,
     //formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    authServices.getDocuments().then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        res.data.filter((doc) => {
+          if (doc.officialName === "TC_user") {
+            setTerms(doc.url);
+          }
+        });
+      }
+    });
+  }, []);
+
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
@@ -39,9 +60,14 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
       });
     }
   };
+
   return (
     <>
-      <Modal.Header contentclassname="modal-head-signup" closeButton>
+      <Modal.Header
+        style={{ paddingTop: "50px" }}
+        contentclassname="modal-head-signup"
+        closeButton
+      >
         <Modal.Title
           id="contained-modal-title-vcenter"
           style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
@@ -399,13 +425,32 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         <label
           style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}
         >
-          By signing up you will agree to our Privacy Policy and Terms &
-          Conditions
+          By signing up you will agree to our
+          <span style={{ color: "#00a8ff", cursor: "pointer" }}>
+            {" "}
+            Privacy Policy
+          </span>{" "}
+          and
+          <span
+            onClick={() => toogleTerms()}
+            style={{ color: "#00a8ff", cursor: "pointer" }}
+          >
+            {" "}
+            Terms & Conditions
+          </span>
         </label>
         <button type="submit" className="signUpBtn">
           REGISTER
         </button>
       </form>
+      <Modal size="lg" show={showTerms} onHide={toogleTerms} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Terms & Conditions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ height: "70vh" }}>
+          <embed src={terms} width="100%" height="100%" />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

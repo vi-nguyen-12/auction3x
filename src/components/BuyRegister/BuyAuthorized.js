@@ -14,6 +14,9 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
+  const [terms, setTerms] = useState();
+  const [show, setShow] = useState(false);
+  const toogleTerms = () => setShow(!show);
   // const properties = useSelector((state) => state.property);
   // const auction = useSelector((state) => state.auction);
   // const onGoingAuction = auction.find((item) => item._id === id);
@@ -38,6 +41,17 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
 
   useEffect(() => {
     getIp();
+    authService.getDocuments().then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        res.data.filter((item) => {
+          if (item.officialName === "TC_buying") {
+            setTerms(item.url);
+          }
+        });
+      }
+    });
   }, []);
 
   const [agree, setAgree] = useState(false);
@@ -172,7 +186,14 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
               style={{ marginRight: "10px", marginBottom: "30px" }}
               onChange={hangleTerms}
             />
-            Terms & Conditions
+            Agree to{" "}
+            <span
+              onClick={() => toogleTerms()}
+              style={{ color: "#00a8ff", cursor: "pointer" }}
+            >
+              {" "}
+              Terms & Conditions
+            </span>
           </div>
           <div
             style={{ position: "sticky", padding: "auto" }}
@@ -187,6 +208,20 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
           </div>
         </form>
       </Modal.Body>
+      <Modal size="lg" show={show} onHide={toogleTerms} centered>
+        <Modal.Header closeButton>
+          <Modal.Title
+            id="contained-modal-title-vcenter"
+            style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
+            contentclassname="custom-modal-title"
+          >
+            Terms & Conditions
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ height: "70vh" }}>
+          <embed src={terms} width="100%" height="100%" />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

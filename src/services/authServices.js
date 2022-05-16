@@ -393,6 +393,10 @@ const authService = {
   auctionResult(id) {
     return axios.get(apiUrl + `/api/auctions/${id}/result`);
   },
+
+  getDocuments() {
+    return axios.get(apiUrl + "/api/documents");
+  },
 };
 
 export default authService;

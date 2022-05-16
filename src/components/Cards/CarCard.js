@@ -125,7 +125,7 @@ const CarCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -146,8 +146,9 @@ const CarCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
+            {urls.map((items, index) => (
               <Card.Img
+                key={index}
                 onClick={handleDisplay}
                 variant="top"
                 src={items.url}
@@ -264,7 +265,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",

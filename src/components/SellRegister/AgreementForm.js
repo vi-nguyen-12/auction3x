@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Modal } from "react-bootstrap";
 import "../../styles/SellRegister.css";
 import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
@@ -23,6 +24,9 @@ const Agree = ({
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [loader, setLoader] = useState(false);
+  const [terms, setTerms] = useState();
+  const [show, setShow] = useState(false);
+  const toogleTerms = () => setShow(!show);
   const toggle = () => {
     setAgree(!agree);
   };
@@ -31,6 +35,20 @@ const Agree = ({
   const history = useHistory();
 
   const steps = sellStep ? sellStep : params.step ? params.step : 0;
+
+  useEffect(() => {
+    authService.getDocuments().then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        res.data.filter((doc) => {
+          if (doc.officialName === "TC_selling") {
+            setTerms(doc.url);
+          }
+        });
+      }
+    });
+  }, []);
 
   const handleSignDocusign = async () => {
     setLoader(true);
@@ -287,62 +305,87 @@ const Agree = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-        }
-      }}
-      className="agree-content"
-    >
-      <SellHeader step={step} />
-      <div className="agree-sell-bottom">
-        <div className="header">
-          <h2 style={{ color: "#6d6d6d", fontWeight: "bold", marginTop:"20px" }}>
-            SELLER AGREEMENT
-          </h2>
-          {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
-        </div>
-        {loader ? (
-          <div className="loader">
-            <div className="spinning" />
+    <>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
+        className="agree-content"
+      >
+        <SellHeader step={step} />
+        <div className="agree-sell-bottom">
+          <div className="header">
+            <h2
+              style={{
+                color: "#6d6d6d",
+                fontWeight: "bold",
+                marginTop: "20px",
+              }}
+            >
+              SELLER AGREEMENT
+            </h2>
+            {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
           </div>
-        ) : null}
-        <div style={{ marginTop: "200px" }}>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleSignDocusign}
+          {loader ? (
+            <div className="loader">
+              <div className="spinning" />
+            </div>
+          ) : null}
+          <div style={{ marginTop: "200px" }}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={handleSignDocusign}
+            >
+              Sign DocuSign <SiDocusign />
+            </button>
+          </div>
+          <div
+            style={{
+              height: "fit-content",
+              position: "absolute",
+              bottom: "200px",
+              color: "black",
+            }}
           >
-            Sign DocuSign <SiDocusign />
-          </button>
+            <input
+              style={{ marginRight: "10px" }}
+              type="checkbox"
+              onChange={toggle}
+            />
+            <label>
+              I agree to the
+              <span
+                onClick={() => toogleTerms()}
+                style={{ color: "#00a8ff", cursor: "pointer" }}
+              >
+                {" "}
+                Terms and Conditions
+              </span>
+            </label>
+          </div>
+          <div className="agree-bottom-btn">
+            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+              Previous
+            </button>
+            <button className="nxt-btn" type="submit">
+              Submit
+            </button>
+          </div>
         </div>
-        <div
-          style={{
-            height: "fit-content",
-            position: "absolute",
-            bottom: "200px",
-            color: "black",
-          }}
-        >
-          <input
-            style={{ marginRight: "10px" }}
-            type="checkbox"
-            onChange={toggle}
-          />
-          <label>I agree to the terms and conditions</label>
-        </div>
-        <div className="agree-bottom-btn">
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
-            Previous
-          </button>
-          <button className="nxt-btn" type="submit">
-            Submit
-          </button>
-        </div>
-      </div>
-    </form>
+      </form>
+      <Modal size="lg" show={show} onHide={toogleTerms} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Terms and Conditions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ height: "70vh" }}>
+          <embed src={terms} width="100%" height="100%" />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 

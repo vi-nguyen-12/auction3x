@@ -31,18 +31,17 @@ const Carousel = styled(Slider)`
   .slick-prev {
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-      font-size: 50px;
+    font-size: 50px;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
-      font-size: 50px;
+    font-size: 50px;
   }
-  .slick-next:before{
+  .slick-next:before {
     display: none;
-
   }
-  .slick-prev:before{
+  .slick-prev:before {
     display: none;
   }
 `;
@@ -112,7 +111,7 @@ const CardComp = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -134,8 +133,9 @@ const CardComp = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
+            {urls.map((items, index) => (
               <Card.Img
+                key={index}
                 onClick={handleDisplay}
                 variant="top"
                 src={items.url}
@@ -262,7 +262,7 @@ const CardComp = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",
