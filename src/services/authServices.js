@@ -393,6 +393,10 @@ const authService = {
   auctionResult(id) {
     return axios.get(apiUrl + `/api/auctions/${id}/result`);
   },
+
+  submitContact(data) {
+    return axios.post(apiUrl + "/api/contacts", data);
+  },
 };
 
 export default authService;
