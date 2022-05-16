@@ -24,7 +24,7 @@ const PropertyPages = ({
   setPositionLeft,
   setPadRight,
   toogleShow,
-  toogleSignIn
+  toogleSignIn,
 }) => {
   useEffect(() => {
     toogleShow(true);
@@ -99,14 +99,18 @@ const PropertyPages = ({
       </h5>
       {path === "/cars" ? (
         <Row className="realEstateFilter">
-          <Col md={9} >
+          <Col md={9}>
             <Row>
-              <Col md={3} >
+              <Col md={3}>
                 <div className=" RealButton ">
-                  <input type="text" placeholder="Enter your Location" className="searchBar" />
+                  <input
+                    type="text"
+                    placeholder="Enter your Location"
+                    className="searchBar"
+                  />
                 </div>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Brand</option>
                   <option href="#">Mercedes-Benz</option>
@@ -119,7 +123,7 @@ const PropertyPages = ({
                   <option href="#">Bentley</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Years</option>
                   <option href="#">2015-2022</option>
@@ -127,7 +131,7 @@ const PropertyPages = ({
                   <option href="#">2000-2009</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Countries</option>
                   <option href="#">United States</option>
@@ -136,14 +140,14 @@ const PropertyPages = ({
                   <option href="#">United Kingdom</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Property Type</option>
                   <option href="#">Cabriolet</option>
@@ -152,7 +156,7 @@ const PropertyPages = ({
                   <option href="#">Other</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Price</option>
                   <option href="#">$0 - $10,000</option>
@@ -161,7 +165,7 @@ const PropertyPages = ({
                   <option href="#">$31,000 - $51,000</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Mileage</option>
                   <option href="#">0 mi - 1000 mi</option>
@@ -170,7 +174,7 @@ const PropertyPages = ({
                   <option href="#">40000 mi - 60000 mi</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Sort by:</option>
                   <option href="#">Premium</option>
@@ -179,37 +183,50 @@ const PropertyPages = ({
                   <option href="#">Price Highest First</option>
                 </select>
               </Col>
-              <Col >
-                <button className="galleryButton">
-                  Search
-                </button >
+              <Col>
+                <button className="galleryButton">Search</button>
               </Col>
             </Row>
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+              <Col
+                md={7}
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                }}
+              >
                 About 151051 results
               </Col>
               <Col md={2}>
-                <button className="mapButton" onClick={toggleMap}>Map</button>
+                <button className="mapButton" onClick={toggleMap}>
+                  Map
+                </button>
               </Col>
               <Col md={2}>
-                <button className="galleryButton" onClick={toggleImgCar}>Gallery</button>
+                <button className="galleryButton" onClick={toggleImgCar}>
+                  Gallery
+                </button>
               </Col>
             </Row>
           </Col>
         </Row>
       ) : path === "/jets" ? (
         <Row className="realEstateFilter">
-          <Col md={9} >
+          <Col md={9}>
             <Row>
-              <Col md={3} >
+              <Col md={3}>
                 <div className=" RealButton ">
-                  <input type="text" placeholder="Enter your Location" className="searchBar" />
+                  <input
+                    type="text"
+                    placeholder="Enter your Location"
+                    className="searchBar"
+                  />
                 </div>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Brand</option>
                   <option href="#">Bombardier</option>
@@ -222,7 +239,7 @@ const PropertyPages = ({
                   <option href="#">Piper</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Years</option>
                   <option href="#">2015-2022</option>
@@ -230,7 +247,7 @@ const PropertyPages = ({
                   <option href="#">2000-2009</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Countries</option>
                   <option href="#">United States</option>
@@ -239,14 +256,14 @@ const PropertyPages = ({
                   <option href="#">United Kingdom</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Property Type</option>
                   <option href="#">Heavy Jet</option>
@@ -257,29 +274,24 @@ const PropertyPages = ({
                   <option href="#">Midsize Jet</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Price</option>
-                  <option href="#">$0 - $2,000,000
-                  </option>
-                  <option href="#">$2,000,000 - $5,000,000
-                  </option>
-                  <option href="#">$15,000,000 - $30,000,000
-                  </option>
+                  <option href="#">$0 - $2,000,000</option>
+                  <option href="#">$2,000,000 - $5,000,000</option>
+                  <option href="#">$15,000,000 - $30,000,000</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>TTAF</option>
-                  <option href="#">0 h - 500 h
-                  </option>
-                  <option href="#">500 h - 1000 h
-                  </option>
+                  <option href="#">0 h - 500 h</option>
+                  <option href="#">500 h - 1000 h</option>
                   <option href="#">1000 h - 2000 h</option>
                   <option href="#">2000 h - 3000 h</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Sort by:</option>
                   <option href="#">Premium</option>
@@ -288,37 +300,50 @@ const PropertyPages = ({
                   <option href="#">Price Highest First</option>
                 </select>
               </Col>
-              <Col >
-                <button className="galleryButton">
-                  Search
-                </button>
+              <Col>
+                <button className="galleryButton">Search</button>
               </Col>
             </Row>
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+              <Col
+                md={7}
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                }}
+              >
                 About 151051 results
               </Col>
               <Col md={2}>
-                <button className="mapButton" onClick={toggleMap} >Map</button>
+                <button className="mapButton" onClick={toggleMap}>
+                  Map
+                </button>
               </Col>
               <Col md={2}>
-                <button className="galleryButton" onClick={toggleImgJet}>Gallery</button>
+                <button className="galleryButton" onClick={toggleImgJet}>
+                  Gallery
+                </button>
               </Col>
             </Row>
           </Col>
         </Row>
       ) : path === "/yachts" ? (
         <Row className="realEstateFilter">
-          <Col md={9} >
+          <Col md={9}>
             <Row>
-              <Col md={3} >
+              <Col md={3}>
                 <div className=" RealButton ">
-                  <input type="text" placeholder="Enter your Location" className="searchBar" />
+                  <input
+                    type="text"
+                    placeholder="Enter your Location"
+                    className="searchBar"
+                  />
                 </div>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Brand</option>
                   <option href="#">Mercedes-Benz</option>
@@ -331,7 +356,7 @@ const PropertyPages = ({
                   <option href="#">Bentley</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Years</option>
                   <option href="#">2015-2022</option>
@@ -339,7 +364,7 @@ const PropertyPages = ({
                   <option href="#">2000-2009</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Countries</option>
                   <option href="#">United States</option>
@@ -348,14 +373,14 @@ const PropertyPages = ({
                   <option href="#">United Kingdom</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
                   <option href="#">Ongoing</option>
                   <option href="#">Upcoming</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Property Type</option>
                   <option href="#">Motor Yacht</option>
@@ -369,7 +394,7 @@ const PropertyPages = ({
                   <option href="#">Other</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Price</option>
                   <option href="#">$0 - $100,000</option>
@@ -381,7 +406,7 @@ const PropertyPages = ({
                   <option href="#">$500,000 - $1,500,000</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Length</option>
                   <option href="#">0 ft - 30 ft</option>
@@ -390,7 +415,7 @@ const PropertyPages = ({
                   <option href="#">65 ft - 100 ft</option>
                 </select>
               </Col>
-              <Col >
+              <Col>
                 <select className=" RealButton ">
                   <option>Sort by:</option>
                   <option href="#">Premium</option>
@@ -399,122 +424,159 @@ const PropertyPages = ({
                   <option href="#">Price Highest First</option>
                 </select>
               </Col>
-              <Col >
-                <button className="galleryButton">
-                  Search
-                </button>
+              <Col>
+                <button className="galleryButton">Search</button>
               </Col>
             </Row>
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
+              <Col
+                md={7}
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                }}
+              >
                 About 151051 results
               </Col>
               <Col md={2}>
-                <button className="mapButton" onClick={toggleMap} >Map</button>
+                <button className="mapButton" onClick={toggleMap}>
+                  Map
+                </button>
               </Col>
               <Col md={2}>
-                <button className="galleryButton" onClick={toggleImgYacht}>Gallery</button>
+                <button className="galleryButton" onClick={toggleImgYacht}>
+                  Gallery
+                </button>
               </Col>
             </Row>
           </Col>
         </Row>
-      ) : <Row className="realEstateFilter">
-        <Col md={9} >
-          <Row>
-            <Col md={3} >
-              <div className=" RealButton ">
-                <input type="text" placeholder="Enter your Location" className="searchBar" />
-              </div>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Auction Type</option>
-                <option href="#">Ongoing</option>
-                <option href="#">Upcoming</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Property Type</option>
-                <option href="#">Villa</option>
-                <option href="#">Penthouse</option>
-                <option href="#">Apartment</option>
-                <option href="#">House</option>
-                <option href="#">Studio</option>
-
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Price</option>
-                <option href="#">$0 - $50,000</option>
-                <option href="#">$50,000 - $2,000,000
-                </option>
-                <option href="#">$2,000,000 - $5,000,000
-                </option>
-                <option href="#">$5,000,000 - $10,000,000
-                </option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Bldg Size</option>
-                <option href="#">5,000 sqft - 2,000,000 sqft
-                </option>
-                <option href="#">2,000,000 sqft - 5,000,000 sqft
-                </option>
-                <option href="#">5,000,000 sqft - 10,000,000 sqft
-                </option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>More Filter</option>
-                <option href="#">Profile</option>
-                <option href="#">My Ads</option>
-              </select>
-            </Col>
-            <Col >
-              <select className=" RealButton ">
-                <option>Sort</option>
-                <option href="#">Premium</option>
-                <option href="#">Popular</option>
-                <option href="#">Price Lowest First</option>
-                <option href="#">Price Highest First</option>
-              </select>
-            </Col>
-            <Col >
-              <button className="galleryButton">
-                Search
-              </button>
-            </Col>
-          </Row>
-        </Col>
-        <Col md={3} className="filterResult">
-          <Row>
-            <Col md={7} style={{ display: "flex", justifyContent: "right", alignItems: "center" }}>
-              About 151051 results
-            </Col>
-            <Col md={2}>
-              <button className="mapButton" onClick={toggleMap} >Map</button>
-            </Col>
-            <Col md={2}>
-              <button className="galleryButton" onClick={toogleImage}>Gallery</button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      }
+      ) : (
+        <Row className="realEstateFilter">
+          <Col md={9}>
+            <Row>
+              <Col md={3}>
+                <div className=" RealButton ">
+                  <input
+                    type="text"
+                    placeholder="Enter your Location"
+                    className="searchBar"
+                  />
+                </div>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>Auction Type</option>
+                  <option href="#">Ongoing</option>
+                  <option href="#">Upcoming</option>
+                </select>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>Property Type</option>
+                  <option href="#">Villa</option>
+                  <option href="#">Penthouse</option>
+                  <option href="#">Apartment</option>
+                  <option href="#">House</option>
+                  <option href="#">Studio</option>
+                </select>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>Price</option>
+                  <option href="#">$0 - $50,000</option>
+                  <option href="#">$50,000 - $2,000,000</option>
+                  <option href="#">$2,000,000 - $5,000,000</option>
+                  <option href="#">$5,000,000 - $10,000,000</option>
+                </select>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>Bldg Size</option>
+                  <option href="#">5,000 sqft - 2,000,000 sqft</option>
+                  <option href="#">2,000,000 sqft - 5,000,000 sqft</option>
+                  <option href="#">5,000,000 sqft - 10,000,000 sqft</option>
+                </select>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>More Filter</option>
+                  <option href="#">Profile</option>
+                  <option href="#">My Ads</option>
+                </select>
+              </Col>
+              <Col>
+                <select className=" RealButton ">
+                  <option>Sort</option>
+                  <option href="#">Premium</option>
+                  <option href="#">Popular</option>
+                  <option href="#">Price Lowest First</option>
+                  <option href="#">Price Highest First</option>
+                </select>
+              </Col>
+              <Col>
+                <button className="galleryButton">Search</button>
+              </Col>
+            </Row>
+          </Col>
+          <Col md={3} className="filterResult">
+            <Row>
+              <Col
+                md={7}
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  alignItems: "center",
+                }}
+              >
+                About 151051 results
+              </Col>
+              <Col md={2}>
+                <button className="mapButton" onClick={toggleMap}>
+                  Map
+                </button>
+              </Col>
+              <Col md={2}>
+                <button className="galleryButton" onClick={toogleImage}>
+                  Gallery
+                </button>
+              </Col>
+            </Row>
+            rp
+          </Col>
+        </Row>
+      )}
       {path === "/realEstates" ? (
-        <RealEstatePage toogleChange={toogleChange} toogleImage={toogleImage} setImg={setImg} toogleSignIn={toogleSignIn} />
+        <RealEstatePage
+          toogleChange={toogleChange}
+          toogleImage={toogleImage}
+          setImg={setImg}
+          toogleSignIn={toogleSignIn}
+        />
       ) : path === "/cars" ? (
-        <CarPage toogleChange={toogleChange} toggleImgCar={toggleImgCar} setImgCar={setImgCar} toogleSignIn={toogleSignIn} />
+        <CarPage
+          toogleChange={toogleChange}
+          toggleImgCar={toggleImgCar}
+          setImgCar={setImgCar}
+          toogleSignIn={toogleSignIn}
+        />
       ) : path === "/jets" ? (
-        <JetPage toogleChange={toogleChange} setShowImgJet={setShowImgJet} setImgJet={setImgJet} toogleSignIn={toogleSignIn} />
+        <JetPage
+          toogleChange={toogleChange}
+          setShowImgJet={setShowImgJet}
+          setImgJet={setImgJet}
+          toogleSignIn={toogleSignIn}
+        />
       ) : path === "/yachts" ? (
-        <YachtPage toogleChange={toogleChange} setShowImgYacht={setShowImgYacht} setImgYacht={setImgYacht} toogleSignIn={toogleSignIn} />
+        <YachtPage
+          toogleChange={toogleChange}
+          setShowImgYacht={setShowImgYacht}
+          setImgYacht={setImgYacht}
+          toogleSignIn={toogleSignIn}
+        />
       ) : null}
       {/* Map Button */}
       <Modal
@@ -527,16 +589,9 @@ const PropertyPages = ({
       >
         <Modal.Body style={{ height: "700px" }}>
           <div>
-            <CloseButton
-              className="modal-close"
-              onClick={toggleMap}
-            />
+            <CloseButton className="modal-close" onClick={toggleMap} />
           </div>
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            zoom={18}
-            center={location}
-          >
+          <GoogleMap mapContainerStyle={mapStyles} zoom={18} center={location}>
             <Marker position={location} />
           </GoogleMap>
           <p>
@@ -557,16 +612,17 @@ const PropertyPages = ({
           onHide={toggleImgCar}
           centered
         >
-          <Modal.Body >
+          <Modal.Body>
             <div>
-              <CloseButton
-                className="modal-close"
-                onClick={toggleImgCar}
-              />
+              <CloseButton className="modal-close" onClick={toggleImgCar} />
             </div>
-            <Row >
+            <Row>
               {imgCar.map((imgCars, index) => (
-                <Col md={imgCar.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
+                <Col
+                  md={imgCar.length <= 1 ? "fit-content" : 6}
+                  key={index}
+                  className="p-2"
+                >
                   <Image
                     src={imgCars}
                     alt="gallery"
@@ -586,16 +642,17 @@ const PropertyPages = ({
           onHide={toggleImgJet}
           centered
         >
-          <Modal.Body >
+          <Modal.Body>
             <div>
-              <CloseButton
-                className="modal-close"
-                onClick={toggleImgJet}
-              />
+              <CloseButton className="modal-close" onClick={toggleImgJet} />
             </div>
-            <Row >
+            <Row>
               {imgJet.map((imgJets, index) => (
-                <Col md={imgJet.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
+                <Col
+                  md={imgJet.length <= 1 ? "fit-content" : 6}
+                  key={index}
+                  className="p-2"
+                >
                   <Image
                     src={imgJets}
                     alt="gallery"
@@ -615,16 +672,17 @@ const PropertyPages = ({
           onHide={toggleImgYacht}
           centered
         >
-          <Modal.Body >
+          <Modal.Body>
             <div>
-              <CloseButton
-                className="modal-close"
-                onClick={toggleImgYacht}
-              />
+              <CloseButton className="modal-close" onClick={toggleImgYacht} />
             </div>
-            <Row >
+            <Row>
               {imgYacht.map((imgYacht, index) => (
-                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
+                <Col
+                  md={img.length <= 1 ? "fit-content" : 6}
+                  key={index}
+                  className="p-2"
+                >
                   <Image
                     src={imgYacht}
                     alt="gallery"
@@ -635,7 +693,7 @@ const PropertyPages = ({
             </Row>
           </Modal.Body>
         </Modal>
-      ) :
+      ) : (
         <Modal
           backdrop="static"
           keyboard={true}
@@ -644,16 +702,17 @@ const PropertyPages = ({
           onHide={toogleImage}
           centered
         >
-          <Modal.Body >
+          <Modal.Body>
             <div>
-              <CloseButton
-                className="modal-close"
-                onClick={toogleImage}
-              />
+              <CloseButton className="modal-close" onClick={toogleImage} />
             </div>
-            <Row >
+            <Row>
               {img.map((imgs, index) => (
-                <Col md={img.length <= 1 ? "fit-content" : 6} key={index} className="p-2">
+                <Col
+                  md={img.length <= 1 ? "fit-content" : 6}
+                  key={index}
+                  className="p-2"
+                >
                   <Image
                     src={imgs}
                     alt="gallery"
@@ -664,7 +723,7 @@ const PropertyPages = ({
             </Row>
           </Modal.Body>
         </Modal>
-      }
+      )}
     </>
   );
 };
