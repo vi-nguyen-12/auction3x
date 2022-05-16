@@ -397,6 +397,10 @@ const authService = {
   getDocuments() {
     return axios.get(apiUrl + "/api/documents");
   },
+
+  submitContact(data) {
+    return axios.post(apiUrl + "/api/contacts", data);
+  },
 };
 
 export default authService;

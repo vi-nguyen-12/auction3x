@@ -4,6 +4,7 @@ import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import authService from "../../services/authServices";
 
 function ContactUs() {
   const location = useLocation();
@@ -22,12 +23,16 @@ function ContactUs() {
       message: "",
     },
   });
-  const onSubmit = (data) => {
-    console.log(data);
-    alert(
-      "Your message has been sent successfully. We will get back to you soon."
-    );
-    reset();
+  const onSubmit = async (data) => {
+    const submitContact = await authService.submitContact(data);
+    if (submitContact.data.error) {
+      alert(submitContact.data.error);
+    } else {
+      alert(
+        "Your message has been sent successfully. We will get back to you soon."
+      );
+      reset();
+    }
   };
 
   const data = [

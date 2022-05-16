@@ -136,17 +136,20 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
   const toggleImage = () => {
-    const userId = user._id;
-    const data = {
-      userId: userId,
-      auctionId: property._id,
-    };
-    if (favorite === false) {
-      authService.saveProperty(data);
-      setFavorite(!favorite);
-    } else if (favorite === true) {
-      authService.removeProperty(data);
-      setFavorite(!favorite);
+    if (user._id) {
+      const data = {
+        userId: user._id,
+        auctionId: property._id,
+      };
+      if (favorite === false) {
+        authService.saveProperty(data);
+        setFavorite(!favorite);
+      } else if (favorite === true) {
+        authService.removeProperty(data);
+        setFavorite(!favorite);
+      }
+    } else {
+      return toogleSignIn();
     }
   };
 
