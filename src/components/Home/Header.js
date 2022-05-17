@@ -869,7 +869,7 @@ const Header = ({
                     }}
                     onClick={() => {
                       toogleOpen();
-                      history.push("/AboutUs");
+                      history.push("/Team");
                     }}
                   >
                     TEAM

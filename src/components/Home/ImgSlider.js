@@ -153,7 +153,7 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                   onClick={handleClick(index)}>
                   <hr
                     style={{
-                      borderRadius: "10px",
+                      borderRadius: "15px",
                       color: "white",
                       width: "100%",
                       height: "5px",

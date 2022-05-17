@@ -161,7 +161,6 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const toogleBid = () => setBid(!bid);
-  const [realTab, setRealTab] = useState("Investment Opportunity");
 
   // if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -452,9 +451,9 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
               )}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -534,9 +533,9 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -679,7 +678,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -745,7 +744,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                           backgroundColor: "#e8e8e8",
                           width: "100%",
                           borderRadius: "10px",
-                          padding: "53px",
+                          padding: "60px",
                           marginLeft: "18px",
                         }}
                       >
@@ -1189,8 +1188,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
             style={{ padding: "0", marginTop: "50px", padding: "35px" }}
           >
             <Tabs
-              activeKey={realTab}
-              onSelect={() => setRealTab()}
+              defaultActiveKey="Investment Opportunity"
               className="RealEstate-Tab"
             >
               <Tab

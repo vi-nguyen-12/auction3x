@@ -401,6 +401,10 @@ const authService = {
   submitContact(data) {
     return axios.post(apiUrl + "/api/contacts", data);
   },
+
+  getFAQs() {
+    return axios.get(apiUrl + "/api/faqs");
+  },
 };
 
 export default authService;

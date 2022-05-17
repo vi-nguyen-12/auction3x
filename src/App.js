@@ -26,6 +26,7 @@ import ContactUs from "./components/Company/ContactUs";
 import Privacy from "./components/Company/Privacy";
 import TermsCondition from "./components/Company/TermsCondition";
 import FAQ from "./components/Company/FAQ";
+import Team from "./components/Company/Team";
 import PartnerWithUs from "./components/Company/PartnerWithUs";
 import Broker from "./components/Users/Broker";
 import ReconfirmEmail from "./components/Users/ReconfirmEmail";
@@ -412,6 +413,10 @@ function App() {
 
           <Route path="/FAQ">
             <FAQ />
+          </Route>
+
+          <Route path="/Team">
+            <Team />
           </Route>
 
           <Route path="/PrivacyPolicy">

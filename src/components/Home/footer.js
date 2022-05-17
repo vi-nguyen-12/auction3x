@@ -48,7 +48,7 @@ const Footer = ({ toogleSignIn }) => {
                   <a href="/AboutUs">About Us</a>
                 </li>
                 <li className="list-unstyled">
-                  <a href="/AboutUs">Team</a>
+                  <a href="/Team">Team</a>
                 </li>
                 <li className="list-unstyled">
                   <a href="/FAQ">FAQ</a>

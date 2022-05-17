@@ -43,37 +43,37 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
-height: 100vh;
-overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 
-& > button {
-  opacity: 1;
-  height: 100%;
-  width: 5vw;
-  z-index: 1;
-  &:hover {
+  & > button {
     opacity: 1;
-    transition: opacity 0.2s ease 0s;
+    height: 100%;
+    width: 5vw;
+    z-index: 1;
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
   }
-}
 
-.slick-prev {
-  background: url("./images/arrow_back.png") center center no-repeat !important;
-  font-size: 50px;
-}
+  .slick-prev {
+    background: url("./images/arrow_back.png") center center no-repeat !important;
+    font-size: 50px;
+  }
 
-.slick-prev:before {
-  display: none;
-}
+  .slick-prev:before {
+    display: none;
+  }
 
-.slick-next {
-  background: url("./images/arrow_next.png") center center no-repeat !important;
-  font-size: 50px;
-}
+  .slick-next {
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
+  }
 
-.slick-next:before {
-  display: none;
-}
+  .slick-next:before {
+    display: none;
+  }
 `;
 
 const Wrap = styled.div`
@@ -112,7 +112,6 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
   const toogleRegister = () => setShowRegister(!showRegister);
   const tooglePlaceBid = () => setPlaceBid(!placeBid);
   const [downloadFiles, setDownloadFiles] = useState([]);
-  const [realTab, setRealTab] = useState("Investment Opportunity");
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
@@ -461,9 +460,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -543,9 +542,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -689,7 +688,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -755,7 +754,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                           backgroundColor: "#e8e8e8",
                           width: "100%",
                           borderRadius: "10px",
-                          padding: "53px",
+                          padding: "60px",
                           marginLeft: "18px",
                         }}
                       >
@@ -864,7 +863,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                       width: "100%",
                       marginLeft: "35px",
                       borderRadius: "10px",
-                      padding: "33px",
+                      padding: "39px",
                     }}
                   >
                     <h4
@@ -1170,8 +1169,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
             {/* ref={myRef}
               style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
-              activeKey={realTab}
-              onSelect={() => setRealTab()}
+              defaultActiveKey="Investment Opportunity"
               className="RealEstate-Tab"
             >
               <Tab

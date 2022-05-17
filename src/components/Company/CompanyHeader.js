@@ -18,6 +18,8 @@ function CompanyHeader({ location }) {
         <p>PARTNER WITH US</p>
       ) : location === "Broker" ? (
         <p>BROKER</p>
+      ) : location === "Team" ? (
+        <p>TEAM</p>
       ) : null}
     </h5>
   );
