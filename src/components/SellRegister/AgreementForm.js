@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const Agree = ({
   toogleStep,
@@ -378,10 +379,10 @@ const Agree = ({
         </div>
       </form>
       <Modal size="lg" show={show} onHide={toogleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Terms and Conditions</Modal.Title>
-        </Modal.Header>
         <Modal.Body style={{ height: "70vh" }}>
+          <div>
+            <CloseButton className="modal-close" onClick={toogleTerms} />
+          </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>
       </Modal>

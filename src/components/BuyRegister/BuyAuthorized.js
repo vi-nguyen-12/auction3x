@@ -6,7 +6,7 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axious from "axios";
-import { useSelector } from "react-redux";
+import CloseButton from "react-bootstrap/CloseButton";
 import { SiDocusign } from "react-icons/si";
 
 const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
@@ -209,16 +209,10 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
         </form>
       </Modal.Body>
       <Modal size="lg" show={show} onHide={toogleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title
-            id="contained-modal-title-vcenter"
-            style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-            contentclassname="custom-modal-title"
-          >
-            Terms & Conditions
-          </Modal.Title>
-        </Modal.Header>
         <Modal.Body style={{ height: "70vh" }}>
+          <div>
+            <CloseButton className="modal-close" onClick={toogleTerms} />
+          </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>
       </Modal>
