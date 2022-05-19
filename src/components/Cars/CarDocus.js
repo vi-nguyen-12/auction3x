@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import Loading from "../../components/Loading";
 
 function CarDocus({
   toogleStep,
@@ -542,11 +543,7 @@ function CarDocus({
           </h2>
           <p style={{ color: "black" }}>We only accept PDF Files</p>
 
-          {loader ? (
-            <div className="loader">
-              <div className="spinning" />
-            </div>
-          ) : null}
+          {loader ? <Loading /> : null}
         </Row>
         <Row
           style={{

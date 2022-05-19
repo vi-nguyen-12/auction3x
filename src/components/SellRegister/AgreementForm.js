@@ -8,6 +8,7 @@ import { SiDocusign } from "react-icons/si";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
 import CloseButton from "react-bootstrap/CloseButton";
+import Loading from "../../components/Loading";
 
 const Agree = ({
   toogleStep,
@@ -330,11 +331,7 @@ const Agree = ({
             </h2>
             {/* <p>sdfjshd dsjfhasldj sdfhljdhf sdhlf</p> */}
           </div>
-          {loader ? (
-            <div className="loader">
-              <div className="spinning" />
-            </div>
-          ) : null}
+          {loader ? <Loading /> : null}
           <div style={{ marginTop: "200px" }}>
             <button
               type="button"

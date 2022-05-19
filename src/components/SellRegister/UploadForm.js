@@ -10,6 +10,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
 import Sell from "./SellWelcome";
+import Loading from "../../components/Loading";
 
 const UploadForm = ({
   toogleStep,
@@ -261,16 +262,8 @@ const UploadForm = ({
             UPLOAD PICTURES AND VIDEOS
           </h2>
         </div>
-        {loader ? (
-          <div className="loader">
-            <div className="spinning" />
-          </div>
-        ) : null}
-        {videoLoader ? (
-          <div className="loader">
-            <div className="spinning" />
-          </div>
-        ) : null}
+        {loader ? <Loading /> : null}
+        {videoLoader ? <Loading /> : null}
         <div className="input-form-1">
           Choose the Image Files<span style={{ color: "#ff0000" }}>*</span>
           <input

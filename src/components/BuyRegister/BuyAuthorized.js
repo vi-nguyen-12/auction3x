@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import axious from "axios";
 import CloseButton from "react-bootstrap/CloseButton";
 import { SiDocusign } from "react-icons/si";
+import Loading from "../../components/Loading";
 
 const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
   const { register, handleSubmit } = useForm();
@@ -125,11 +126,7 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
-        {loader ? (
-          <div className="loader">
-            <div className="spinning" />
-          </div>
-        ) : null}
+        {loader ? <Loading /> : null}
         <form
           onSubmit={handleSubmit(onSubmit)}
           onKeyDown={(e) => {

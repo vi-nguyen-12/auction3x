@@ -6,6 +6,7 @@ import DisplayRealEstate from "../RealEstate/DisplayRealEstate";
 import DisplayCar from "../Cars/DisplayCar";
 import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
+import Loading from "../../components/Loading";
 import io from "socket.io-client";
 
 function DisplayAuctions({
@@ -84,11 +85,7 @@ function DisplayAuctions({
 
   return (
     <>
-      {loader ? (
-        <div className="loader">
-          <div className="spinning" />
-        </div>
-      ) : null}
+      {loader ? <Loading /> : null}
       {auction && (
         <h5 className="realHeader">
           {auction.property.type === "car" ? (
