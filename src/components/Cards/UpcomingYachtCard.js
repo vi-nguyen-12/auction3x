@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import authService from "../../services/authServices";
-import "../../styles/Card.css";
+import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -39,11 +39,10 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
+  .slick-next:before {
     display: none;
-
   }
-  .slick-prev:before{
+  .slick-prev:before {
     display: none;
   }
 `;
@@ -111,7 +110,7 @@ const UpcomingYachtCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {

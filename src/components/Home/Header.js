@@ -6,8 +6,8 @@ import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Table } from "react-bootstrap";
-import "../../styles/modalStyle.css";
-import "../../styles/Header.css";
+import "../../styles/modal.css";
+import "../../styles/header.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
@@ -365,7 +365,7 @@ const Header = ({
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                  // id={colors === "white" ? "hover" : ""}
+                    // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
                       className="signIn-btn mt-0"

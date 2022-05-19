@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";

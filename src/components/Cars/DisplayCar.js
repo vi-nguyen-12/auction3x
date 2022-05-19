@@ -20,7 +20,7 @@ import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
-import "../../styles/PropDisplay.css";
+import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 
 const mapStyles = {

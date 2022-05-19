@@ -1,6 +1,5 @@
 import React from "react";
-import "../../styles/sideBarStyle.css";
-import { useSelector } from "react-redux";
+import "../../styles/sidebar.css";
 import SidebarMenu from "../Dashboard/SidebarMenu";
 import SubMenu from "./SubMenu";
 

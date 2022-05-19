@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 import { Modal, Row, Col, Button } from "react-bootstrap";
-import "../../styles/modalStyle.css";
+import "../../styles/modal.css";
 import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");

@@ -12,7 +12,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import "../../styles/Card.css";
+import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -39,12 +39,11 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
-   display: none;
-
+  .slick-next:before {
+    display: none;
   }
-  .slick-prev:before{
-   display: none;
+  .slick-prev:before {
+    display: none;
   }
 `;
 const UpcomingJetCard = ({
@@ -110,7 +109,7 @@ const UpcomingJetCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
