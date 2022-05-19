@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import SearchBar from "./SearchBar.js";
 import NumberFormat from "react-number-format";
 import { ImSearch } from "react-icons/im";
-import "../../styles/Search.css";
+import "../../styles/search.css";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import authService from "../../services/authServices.js";
@@ -93,7 +93,7 @@ const Bar = styled.button`
   outline: none;
   background-color: transparent;
   border-radius: 15px;
-  box-shadow:${props => props.size} ${props => props.color};
+  box-shadow: ${(props) => props.size} ${(props) => props.color};
   &:hover {
     transition: background-color 0.2s ease 0s;
     border: none;
@@ -147,10 +147,12 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
           <BarGroup className="Bar-group">
             {featureAuctions.length > 0 &&
               featureAuctions.map((images, index) => (
-                <Bar key={index}
+                <Bar
+                  key={index}
                   color={index === Index ? "white" : "transparent"}
                   size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
-                  onClick={handleClick(index)}>
+                  onClick={handleClick(index)}
+                >
                   <hr
                     style={{
                       borderRadius: "15px",

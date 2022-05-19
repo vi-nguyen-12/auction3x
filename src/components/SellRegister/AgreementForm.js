@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Modal } from "react-bootstrap";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";

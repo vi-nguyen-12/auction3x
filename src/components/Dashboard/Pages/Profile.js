@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Button, Form } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
-import "../../../styles/DashBoardStyle.css";
+import "../../../styles/dashboard.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -211,23 +211,23 @@ function Profile({ id }) {
             <Carousel {...settings}>
               {savedProperty.length > 0
                 ? savedProperty.map((property, index) => (
-                  <Wrap key={index}>
-                    <div className="listItem">
-                      <img
-                        src={property.property.images[0].url}
-                        alt="property"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "15px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </div>
-                  </Wrap>
-                ))
+                    <Wrap key={index}>
+                      <div className="listItem">
+                        <img
+                          src={property.property.images[0].url}
+                          alt="property"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "15px",
+                            cursor: "pointer",
+                          }}
+                        />
+                      </div>
+                    </Wrap>
+                  ))
                 : null}
             </Carousel>
           </Row>

@@ -16,7 +16,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import "../../../../styles/Card.css";
+import "../../../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -42,12 +42,11 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
-       display: none;
-
+  .slick-next:before {
+    display: none;
   }
-  .slick-prev:before{
-       display: none;
+  .slick-prev:before {
+    display: none;
   }
 `;
 function SavedAuctionsCard({
@@ -189,7 +188,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-                new Date().toISOString() < endRegister ? (
+              new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Container } from "react-bootstrap";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 import RealEstateDocus from "../RealEstate/RealEstateDocus";
 import CarDocus from "../Cars/CarDocus";
 import YachtDocus from "../Yachts/YachtDocus";

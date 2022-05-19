@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
-import "../../../../styles/DashBoardStyle.css";
+import "../../../../styles/dashboard.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { BsFillHouseFill } from "react-icons/bs";
 
 function IncompleteListing() {
   const user = useSelector((state) => state.user);

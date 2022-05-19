@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 import { Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
@@ -17,10 +17,6 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
   const [terms, setTerms] = useState();
   const [show, setShow] = useState(false);
   const toogleTerms = () => setShow(!show);
-  // const properties = useSelector((state) => state.property);
-  // const auction = useSelector((state) => state.auction);
-  // const onGoingAuction = auction.find((item) => item._id === id);
-  // const auctionId = properties.find((item) => item._id === id);
 
   const [ip, setIp] = useState();
 

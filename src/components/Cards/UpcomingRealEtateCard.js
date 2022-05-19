@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ImImages } from "react-icons/im";
-import "../../styles/Card.css";
+import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -109,7 +109,7 @@ const UpcomingRealEstateCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {

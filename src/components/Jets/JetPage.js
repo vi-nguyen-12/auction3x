@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function JetPage({ toogleChange, setImgJet, toggleImgJet, toogleSignIn }) {
+function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {

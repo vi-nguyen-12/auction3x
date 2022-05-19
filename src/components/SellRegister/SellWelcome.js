@@ -6,7 +6,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
 import SellHeader from "./SellHeader";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 // create step bar
 
 const Sell = ({ toogleStep, step, tooglePropertyType }) => {
@@ -198,7 +198,9 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
         </Table>
 
         <div className="bottom-btn">
-          <button className="pre-btn" style={{opacity:"0.6"}} disabled>Previous</button>
+          <button className="pre-btn" style={{ opacity: "0.6" }} disabled>
+            Previous
+          </button>
           <span> </span>
           <button type="submit" className="nxt-btn" id="next">
             Next

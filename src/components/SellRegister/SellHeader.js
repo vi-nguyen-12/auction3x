@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 
 function SellHeader({ step }) {
   return (

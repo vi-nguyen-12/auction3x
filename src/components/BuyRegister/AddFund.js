@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useForm } from "react-hook-form";
-import "../../styles/Buyer.css";
+import "../../styles/buyer.css";
 
 function AddFund() {
   const { register, handleSubmit } = useForm();
