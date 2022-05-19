@@ -39,12 +39,11 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
-   display: none;
-
+  .slick-next:before {
+    display: none;
   }
-  .slick-prev:before{
-   display: none;
+  .slick-prev:before {
+    display: none;
   }
 `;
 const UpcomingJetCard = ({
@@ -57,6 +56,7 @@ const UpcomingJetCard = ({
   startingBid,
   toogleSignIn,
 }) => {
+  console.log(urls);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -110,7 +110,7 @@ const UpcomingJetCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {
@@ -148,20 +148,22 @@ const UpcomingJetCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
-              <Card.Img
-                onClick={handleDisplay}
-                variant="top"
-                src={items.url}
-                className="img-card img-fluid"
-                style={{
-                  width: "100%",
-                  height: "300px",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                }}
-              />
-            ))}
+            {urls &&
+              urls.map((items, index) => (
+                <Card.Img
+                  onClick={handleDisplay}
+                  variant="top"
+                  key={index}
+                  src={items.url}
+                  className="img-card img-fluid"
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                  }}
+                />
+              ))}
           </Carousel>
           <button onClick={handleLike} className="favBtn">
             {favorite ? (

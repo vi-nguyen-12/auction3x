@@ -92,8 +92,8 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 0,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
           dots: false,
         },
@@ -111,6 +111,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          overflow: "unset",
         },
       },
     ],
@@ -190,22 +191,21 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
             </Row>
           </Col>
         </>
-      ) : (
-        null
-        // <Row>
-        //   <Col md={12} className="m-auto">
-        //     <img
-        //       src="/images/f_name.png"
-        //       alt=""
-        //       style={{
-        //         marginBottom: "0px",
-        //         maxWidth: "250px",
-        //         maxHeight: "150px",
-        //       }}
-        //     />
-        //   </Col>
-        // </Row>
-      )}
+      ) : null
+      // <Row>
+      //   <Col md={12} className="m-auto">
+      //     <img
+      //       src="/images/f_name.png"
+      //       alt=""
+      //       style={{
+      //         marginBottom: "0px",
+      //         maxWidth: "250px",
+      //         maxHeight: "150px",
+      //       }}
+      //     />
+      //   </Col>
+      // </Row>
+      }
     </div>
   );
 };
