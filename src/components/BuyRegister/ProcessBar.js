@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import "../../styles/buyer.css";
+import "../../styles/Buyer.css";
 
 const BuyAgreement = () => {
   return (
