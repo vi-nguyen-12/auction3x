@@ -7,7 +7,7 @@ import ReconfirmEmail from "../Users/ReconfirmEmail";
 import SignUp from "../Users/SignUp";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import "../../styles/About.css";
+import "../../styles/about.css";
 
 const About = () => {
   const user = useSelector((state) => state.user);
