@@ -5,7 +5,7 @@ import "../../styles/work.css";
 const Work = (props) => {
   return (
     <section
-      style={{ padding: "0 50px", background: "#f8f8f8", height: "759px", marginTop: "50px" }}
+      style={{ padding: "0 50px", marginTop: "50px" }}
     >
       <Row>
         <Col className="work-title">
@@ -18,8 +18,8 @@ const Work = (props) => {
           </div>
         </Col>
       </Row>
-      <Row style={{ marginTop: "100px" }}>
-        <Col md={3} className="arrDiv">
+      <Row style={{ marginTop: "100px", display: "flex" }}>
+        <Col md={2} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">1</div>
             <div className="card-content">
@@ -35,10 +35,10 @@ const Work = (props) => {
           <img
             src="images/downArr.png"
             alt="arrow"
-            style={{ width: "150px", height: "20px" }}
+
           />
         </Col>
-        <Col md={3} className="arrDiv">
+        <Col md={2} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">2</div>
             <div className="card-content">
@@ -54,10 +54,9 @@ const Work = (props) => {
           <img
             src="images/upArr.png"
             alt="arrow"
-            style={{ width: "150px", height: "20px" }}
           />
         </Col>
-        <Col md={3} className="arrDiv">
+        <Col md={2} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">3</div>
             <div className="card-content">

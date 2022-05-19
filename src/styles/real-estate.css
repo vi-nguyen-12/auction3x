@@ -1,5 +1,4 @@
 .real-estate {
-  height: 100%;
   /* margin: 0 auto; */
   /* width: 85%; */
   background-image: url("/src/realstate.png");
@@ -21,16 +20,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
   border-radius: inherit;
 }
 .btn-group {
   display: flex !important;
-  justify-content: center;
-  align-items: center;
-  margin: 6rem 3rem;
-  padding: 10px 250px;
+  justify-content: space-between !important;
+  margin: 6rem;
   position: relative;
   top: 7em;
 }
@@ -45,6 +41,26 @@
   padding: 100px 50px;
   height: 100vh;
 }
+/* responsive width and height */
+
+@media (max-height: 830px) {
+  .real-estate-wrap {
+    padding: 100px 50px;
+    height: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .real-estate-wrap {
+    height: 100%;
+  }
+}
+@media (max-width: 680px) {
+  .btn-group {
+    display: grid !important;
+    padding: auto;
+  }
+}
+
 .about-wrap {
   padding: 100px 50px;
   height: 150vh;

@@ -8,9 +8,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import "../../App.css";
 
 const Carousel = styled(Slider)`
-  height: 70vh;
+  height: 100%;
   // overflow: hidden;
 
   & > button {
@@ -43,11 +44,9 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100%;
+    left: 2vw;
+    z-index: 1;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
   }
 
   .slick-prev:before {
@@ -55,11 +54,9 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100%;
+    right: 2vw;
+    z-index: 1;
     background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
   }
 
   .slick-next:before {
@@ -71,7 +68,11 @@ const Wrap = styled.div`
 border-radius: 4px;
 cursor: pointer;
 position: relative;
-margin-top:150px;  // Just for display
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: center;
+// margin-top: auto;  // Just for display
 
   &:hover {
     padding: 0;
@@ -92,8 +93,8 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 0,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
           dots: false,
         },
@@ -111,25 +112,23 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
     ],
   };
 
   return (
-    <div className="background" style={{ height: "100vh" }}>
+    <div className="background">
       {auctions.length > 0 ? (
         <>
-          <Row>
-            <Col md={12} className="m-auto">
-              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
-                Featured Listings
-              </h2>
-            </Col>
-          </Row>
-
-          <Col md={12} className="m-auto">
+          <Col>
             <Row>
+              <Col md={12} >
+                <h2 style={{ color: "white", fontSize: "22px", padding: " 50px 0 0 50px " }}>
+                  Featured Listings
+                </h2>
+              </Col>
               <Carousel {...settings}>
                 {auctions.map((item, index) => (
                   <Wrap key={index}>
@@ -205,8 +204,9 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
         //     />
         //   </Col>
         // </Row>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
