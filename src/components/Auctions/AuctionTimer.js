@@ -25,9 +25,6 @@ const AuctionTimer = ({ time, id, toogleAuction }) => {
 
       if (distance < 0) {
         toogleAuction();
-        authService.auctionResult(id).then((res) => {
-          console.log(res);
-        });
         clearInterval(interval.current);
       } else {
         setDays(days);

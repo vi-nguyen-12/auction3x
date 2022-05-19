@@ -55,6 +55,7 @@ const UpcomingJetCard = ({
   endRegister,
   startingBid,
   toogleSignIn,
+  item,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -147,20 +148,21 @@ const UpcomingJetCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
-              <Card.Img
-                onClick={handleDisplay}
-                variant="top"
-                src={items.url}
-                className="img-card img-fluid"
-                style={{
-                  width: "100%",
-                  height: "300px",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                }}
-              />
-            ))}
+            {urls.length > 0 &&
+              urls.map((items) => (
+                <Card.Img
+                  onClick={handleDisplay}
+                  variant="top"
+                  src={items.url}
+                  className="img-card img-fluid"
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                  }}
+                />
+              ))}
           </Carousel>
           <button onClick={handleLike} className="favBtn">
             {favorite ? (

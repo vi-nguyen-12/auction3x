@@ -17,10 +17,6 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
   const [terms, setTerms] = useState();
   const [show, setShow] = useState(false);
   const toogleTerms = () => setShow(!show);
-  // const properties = useSelector((state) => state.property);
-  // const auction = useSelector((state) => state.auction);
-  // const onGoingAuction = auction.find((item) => item._id === id);
-  // const auctionId = properties.find((item) => item._id === id);
 
   const [ip, setIp] = useState();
 

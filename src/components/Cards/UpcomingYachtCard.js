@@ -57,7 +57,6 @@ const UpcomingYachtCard = ({
   toogleSignIn,
 }) => {
   const user = useSelector((state) => state.user);
-  const property = useSelector((state) => state.property);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
   const [favorite, setFavorite] = useState(false);

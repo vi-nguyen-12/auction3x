@@ -81,7 +81,7 @@ position: relative;
 }
 `;
 
-function JetPage({ toogleChange, setImgJet, toggleImgJet, toogleSignIn }) {
+function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -191,6 +191,7 @@ function JetPage({ toogleChange, setImgJet, toggleImgJet, toogleSignIn }) {
                 <Col key={index} md={4} style={{ marginBottom: "30px" }}>
                   <UpcomingJetCard
                     url={item.property.images[0].url}
+                    urls={item.property.images}
                     data={item.property.details}
                     id={item._id}
                     auctionStartDate={item.auctionStartDate}
