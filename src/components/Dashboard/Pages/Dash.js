@@ -27,8 +27,6 @@ function Dash() {
   const toogleShowBidAuctions = (state) => setShowBidAuctions(state);
   const toogleShowApprovedAuctions = (state) => setShowApprovedAuctions(state);
   const user = useSelector((state) => state.user);
-  // const auctions = useSelector((state) => state.auction);
-  // const property = useSelector((state) => state.property);
   const savedProperties = useSelector((state) => state.savedProperty);
   const [showFundReq, popFundReq] = useState(false);
   const toogleFundReq = () => popFundReq(!showFundReq);

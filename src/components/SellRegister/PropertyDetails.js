@@ -5,7 +5,7 @@ import CarDetails from "../Cars/CarDetails";
 import JetDetails from "../Jets/JetDetails";
 import YachtDetails from "../Yachts/YachtDetails";
 import SellHeader from "./SellHeader";
-import "../../styles/SellRegister.css";
+import "../../styles/sell-register.css";
 
 const PropertyDetails = ({
   toogleStep,

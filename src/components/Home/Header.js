@@ -6,7 +6,7 @@ import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Table } from "react-bootstrap";
-import "../../styles/modalStyle.css";
+import "../../styles/modal.css";
 import "../../styles/Header.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -114,6 +114,8 @@ const Header = ({
     };
   }, [handleWindowResize]);
 
+  console.log(windowSize);
+
   return (
     <Nav
       style={{
@@ -131,17 +133,23 @@ const Header = ({
       <nav
         className="navbar navbar-expand-lg"
         style={{
-          padding: "0",
           backgroundColor: colors ? colors : color,
           width: headerWidth ? headerWidth : width,
           borderBottom: "1px solid rgba(255,255,255,0.3)",
-          paddingRight: padRight ? padRight : paddingRight,
+          // paddingRight: padRight ? padRight : paddingRight,
+          display: "flex",
+          alignContent: "center",
           height: "100%",
         }}
       >
         <div className="navbar-brand">
           <Logo style={{ left: positionLeft ? positionLeft : left }} href="/">
-            <img src="/images/newName.png" width={200} height={50} alt="" />
+            <img
+              src="/images/newName.png"
+              width={windowSize > 800 ? 200 : 150}
+              height={windowSize > 800 ? 50 : 40}
+              alt=""
+            />
           </Logo>
         </div>
 
@@ -228,34 +236,39 @@ const Header = ({
                 <MultiFundForm />
               </Modal.Body>
             </Modal> */}
-            <div className="d-flex flex-row ">
-              {user._id ? (
-                <button
-                  id={colors === "white" ? "hover" : ""}
-                  style={{ color: textColor }}
-                  className="headerNav"
-                  onClick={handleSell}
-                >
-                  Sell
-                </button>
-              ) : (
-                <button
-                  className="headerNav"
-                  onClick={toogleSignIn}
-                  style={{
-                    backgroundColor: "transparent",
-                    color: textColor,
-                    marginRight: "30px",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    padding: "0 20px",
-                    height: "60px",
-                  }}
-                  id={colors === "white" ? "hover" : ""}
-                >
-                  Sell
-                </button>
-              )}
+            <div
+              className="d-flex flex-row"
+              style={{ alignItems: "center", height: "100%" }}
+            >
+              {windowSize > 800 ? (
+                user._id ? (
+                  <button
+                    id={colors === "white" ? "hover" : ""}
+                    style={{ color: textColor }}
+                    className="headerNav"
+                    onClick={handleSell}
+                  >
+                    Sell
+                  </button>
+                ) : (
+                  <button
+                    className="headerNav"
+                    onClick={toogleSignIn}
+                    style={{
+                      backgroundColor: "transparent",
+                      color: textColor,
+                      marginRight: "30px",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      padding: "0 20px",
+                      height: "60px",
+                    }}
+                    id={colors === "white" ? "hover" : ""}
+                  >
+                    Sell
+                  </button>
+                )
+              ) : null}
 
               {user._id && !user.KYC && (
                 <>
@@ -273,12 +286,20 @@ const Header = ({
                   </div>
                 </>
               )}
+
               {user._id ? (
                 <>
                   <div className="dropdown">
-                    <button className="user mt-0">
-                      Hello, {user.firstName}
-                    </button>
+                    {windowSize > 800 ? (
+                      <button className="user mt-0">
+                        Hello, {user.firstName}
+                      </button>
+                    ) : (
+                      <button className="user mt-0">
+                        {String(user.firstName[0]).toUpperCase()}
+                        {String(user.lastName[0]).toUpperCase()}
+                      </button>
+                    )}
                     <div className="dropdown-content">
                       <button
                         className="fw-bold p-3"
@@ -297,34 +318,71 @@ const Header = ({
                       </button>
                     </div>
                   </div>
-                  <Button
-                    className="headerNav"
-                    style={{
-                      backgroundColor: "transparent",
-                      color: textColor,
-                      borderRadius: "0",
-                      height: "47px",
-                    }}
-                    id={colors === "white" ? "hover" : ""}
-                    // id="dropdown-basic-button"
-                    title={<IoWallet size={30} />}
-                    onMouseEnter={() => setShowWallet(true)}
-                    onMouseLeave={() => setShowWallet(false)}
-                  >
-                    <IoWallet size={20} />
-                    <NumberFormat
+                  {windowSize > 800 ? (
+                    <Button
+                      className="headerNav"
                       style={{
-                        fontSize: "16px",
-                        marginLeft: "10px",
-                        fontWeight: "bold",
+                        backgroundColor: "transparent",
+                        color: textColor,
+                        borderRadius: "0",
+                        height: "47px",
                       }}
-                      value={user.wallet}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                    {/* </Dropdown.Item> */}
-                  </Button>
+                      id={colors === "white" ? "hover" : ""}
+                      // id="dropdown-basic-button"
+                      title={<IoWallet size={30} />}
+                      onMouseEnter={() => setShowWallet(true)}
+                      onMouseLeave={() => setShowWallet(false)}
+                    >
+                      <IoWallet size={20} />
+                      <NumberFormat
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "10px",
+                          fontWeight: "bold",
+                        }}
+                        value={user.wallet}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                      {/* </Dropdown.Item> */}
+                    </Button>
+                  ) : (
+                    <div className="dropdown">
+                      <Button
+                        className="headerNav"
+                        style={{
+                          backgroundColor: "transparent",
+                          color: textColor,
+                          borderRadius: "0",
+                          height: "47px",
+                        }}
+                        id={colors === "white" ? "hover" : ""}
+                        // id="dropdown-basic-button"
+                        title={<IoWallet size={30} />}
+                        onMouseEnter={() => setShowWallet(true)}
+                        onMouseLeave={() => setShowWallet(false)}
+                      >
+                        <IoWallet size={20} />
+                      </Button>
+                      <div className="dropdown-content">
+                        <button className="fw-bold">
+                          <NumberFormat
+                            style={{
+                              fontSize: "16px",
+                              marginLeft: "10px",
+                              fontWeight: "bold",
+                            }}
+                            value={user.wallet}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                   <Button
                     className="headerNav"
                     style={{
@@ -349,7 +407,6 @@ const Header = ({
                       color: textColor,
                       borderRadius: "0",
                       height: "47px",
-                      // paddingTop: "13px",
                     }}
                   >
                     <VscGlobe size={25} />
@@ -360,12 +417,11 @@ const Header = ({
                   <div
                     className="mt-0"
                     style={{
-                      marginRight: "50px",
+                      marginRight: windowSize > 800 ? "50px" : "10px",
                       display: "flex",
                       alignItems: "center",
                       fontSize: "20px",
                     }}
-                  // id={colors === "white" ? "hover" : ""}
                   >
                     <Button
                       className="signIn-btn mt-0"
@@ -415,7 +471,6 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
-                      // paddingTop: "13px",
                     }}
                   >
                     <VscGlobe size={29} />
@@ -444,20 +499,31 @@ const Header = ({
             )}
             {user._id ? (
               <>
-                <Button
-                  id={colors === "white" ? "hover" : ""}
-                  className="headerNav bg-transparent outline-none"
-                  style={{
-                    borderRadius: "0",
-                    color: textColor,
-                    height: "47px",
-                  }}
-                  onClick={handleSell}
-                >
-                  Sell
-                </Button>
+                {windowSize > 800 ? (
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav bg-transparent outline-none"
+                    style={{
+                      borderRadius: "0",
+                      color: textColor,
+                      height: "47px",
+                    }}
+                    onClick={handleSell}
+                  >
+                    Sell
+                  </Button>
+                ) : null}
                 <div className="dropdown">
-                  <button className="user mt-0">Hello, {user.firstName}</button>
+                  {windowSize > 800 ? (
+                    <button className="user mt-0">
+                      Hello, {user.firstName}
+                    </button>
+                  ) : (
+                    <button className="user mt-0">
+                      {String(user.firstName[0]).toUpperCase()}
+                      {String(user.lastName[0]).toUpperCase()}
+                    </button>
+                  )}
                   <div className="dropdown-content ">
                     <button
                       className="fw-bold p-3"
@@ -465,46 +531,73 @@ const Header = ({
                     >
                       Dashboard
                     </button>
-                    {/* <button
-                      className="fw-bold p-3"
-                      onClick={handleOnClick("ads")}
-                    >
-                      My Ads
-                    </button> */}
                     <button className="fw-bold p-3" onClick={handleLogout}>
                       Log Out
                     </button>
                   </div>
                 </div>
-                <Button
-                  className="headerNav"
-                  style={{
-                    backgroundColor: "transparent",
-                    color: textColor,
-                    borderRadius: "0",
-                    height: "43px",
-                  }}
-                  id={colors === "white" ? "hover" : ""}
-                  // id="dropdown-basic-button"
-                  title={<IoWallet size={30} />}
-                  onMouseEnter={() => setShowWallet(true)}
-                  onMouseLeave={() => setShowWallet(false)}
-                >
-                  {/* <Dropdown.Item href="#"> */}
-                  <IoWallet size={20} />
-                  <NumberFormat
+                {windowSize > 800 ? (
+                  <Button
+                    className="headerNav"
                     style={{
-                      fontSize: "16px",
-                      marginLeft: "10px",
-                      fontWeight: "bold",
+                      backgroundColor: "transparent",
+                      color: textColor,
+                      borderRadius: "0",
+                      height: "43px",
                     }}
-                    value={user.wallet}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                  {/* </Dropdown.Item> */}
-                </Button>
+                    id={colors === "white" ? "hover" : ""}
+                    title={<IoWallet size={30} />}
+                    onMouseEnter={() => setShowWallet(true)}
+                    onMouseLeave={() => setShowWallet(false)}
+                  >
+                    <IoWallet size={20} />
+                    <NumberFormat
+                      style={{
+                        fontSize: "16px",
+                        marginLeft: "10px",
+                        fontWeight: "bold",
+                      }}
+                      value={user.wallet}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </Button>
+                ) : (
+                  <div className="dropdown">
+                    <Button
+                      className="headerNav"
+                      style={{
+                        backgroundColor: "transparent",
+                        color: textColor,
+                        borderRadius: "0",
+                        height: "47px",
+                      }}
+                      id={colors === "white" ? "hover" : ""}
+                      // id="dropdown-basic-button"
+                      title={<IoWallet size={30} />}
+                      onMouseEnter={() => setShowWallet(true)}
+                      onMouseLeave={() => setShowWallet(false)}
+                    >
+                      <IoWallet size={20} />
+                    </Button>
+                    <div className="dropdown-content">
+                      <button className="fw-bold">
+                        <NumberFormat
+                          style={{
+                            fontSize: "16px",
+                            marginLeft: "10px",
+                            fontWeight: "bold",
+                          }}
+                          value={user.wallet}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                )}
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
@@ -529,7 +622,6 @@ const Header = ({
                     color: textColor,
                     borderRadius: "0",
                     height: "47px",
-                    // paddingTop: "13px",
                   }}
                 >
                   <VscGlobe size={25} />
@@ -537,24 +629,26 @@ const Header = ({
               </>
             ) : (
               <>
-                <Button
-                  id={colors === "white" ? "hover" : ""}
-                  className="headerNav bg-transparent outline-none"
-                  style={{
-                    borderRadius: "0",
-                    color: textColor,
-                    marginRight: "15px",
-                    height: "47px",
-                  }}
-                  onClick={handleSell}
-                >
-                  Sell
-                </Button>
+                {windowSize > 800 ? (
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav bg-transparent outline-none"
+                    style={{
+                      borderRadius: "0",
+                      color: textColor,
+                      marginRight: "15px",
+                      height: "47px",
+                    }}
+                    onClick={handleSell}
+                  >
+                    Sell
+                  </Button>
+                ) : null}
                 <div
                   className="border-0 mt-0"
                   style={{
                     backgroundColor: "transparent",
-                    marginRight: "15px",
+                    marginRight: "0",
                   }}
                   id={colors === "white" ? "hover" : ""}
                 >
@@ -633,9 +727,17 @@ const Header = ({
           >
             X
           </Button>
-          <Modal.Body style={{ backgroundColor: "#282828", padding: "150px" }}>
+          <Modal.Body
+            style={{
+              backgroundColor: "#282828",
+              padding: windowSize > 900 ? "100px" : "100px 10px",
+            }}
+          >
             <Table
-              style={{ color: "white", fontSize: "30px" }}
+              style={{
+                color: "white",
+                fontSize: windowSize > 900 ? "30px" : "14px",
+              }}
               responsive="lg"
               borderless
             >

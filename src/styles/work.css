@@ -66,8 +66,14 @@ h2 {
   align-items: center;
 }
 
+.arrDivs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .work-title {
-  display: table;
+  display: grid;
   justify-content: center;
   width: 100%;
   place-items: center;
@@ -76,6 +82,7 @@ h2 {
 
 .work-box {
   width: 100%;
+  height: 287px;
   background: white;
   border: 1px solid #b5b5b5;
   border-radius: 26px !important;
@@ -108,6 +115,7 @@ h2 {
   justify-content: center;
   align-items: center;
   text-align: left;
+  /* overflow: auto; */
 }
 
 .card-content span {
@@ -121,4 +129,44 @@ h2 {
   font-size: 15px;
   font-weight: 400;
   color: #868686;
+  padding-bottom: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .card-content span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .card-content p {
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #868686;
+  }
+}
+
+@media screen and (max-width: 1068px) {
+  .card-content {
+    display: grid;
+    align-items: center;
+    text-align: left;
+    margin: 0;
+    margin: 0 10px;
+  }
+  .card-content span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .card-content p {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #868686;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .arrDivs {
+    display: none;
+  }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 import authService from "../../services/authServices";
-import "../../styles/Timers.css";
+import "../../styles/timer.css";
 
 const AuctionTimer = ({ time, id, toogleAuction }) => {
   const [days, setDays] = useState();
@@ -25,9 +25,6 @@ const AuctionTimer = ({ time, id, toogleAuction }) => {
 
       if (distance < 0) {
         toogleAuction();
-        authService.auctionResult(id).then((res) => {
-          console.log(res);
-        });
         clearInterval(interval.current);
       } else {
         setDays(days);

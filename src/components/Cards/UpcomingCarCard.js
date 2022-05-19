@@ -39,12 +39,11 @@ const Carousel = styled(Slider)`
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
   }
-  .slick-next:before{
-   display: none;
-
+  .slick-next:before {
+    display: none;
   }
-  .slick-prev:before{
-   display: none;
+  .slick-prev:before {
+    display: none;
   }
 `;
 const UpcomingCarCard = ({
@@ -111,7 +110,7 @@ const UpcomingCarCard = ({
     } else {
       return toogleSignIn();
     }
-  }
+  };
   useEffect(() => {
     if (user._id) {
       if (savedProperty.length > 0) {

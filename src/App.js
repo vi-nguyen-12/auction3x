@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
 import MultiSellForm from "./components/SellRegister/MultiSellForm";
 import Footer from "./components/Home/footer";
-import { addProperty } from "./slice/propertySlice";
-import { addAuction } from "./slice/auctionSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
 import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
@@ -78,14 +76,6 @@ function App() {
       getUser();
     }
   }, [dispatch]);
-
-  authService.getUpcomingAuctions().then((res) => {
-    dispatch(addProperty(res.data));
-  });
-
-  authService.getOngoingAuctions().then((res) => {
-    dispatch(addAuction(res.data));
-  });
 
   if (user._id) {
     authService.getSavedProperties(user._id).then((res) => {

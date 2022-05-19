@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 import { Modal, Row, Col, Button } from "react-bootstrap";
-import "../../styles/modalStyle.css";
+import "../../styles/modal.css";
+import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");
 
@@ -92,7 +93,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         <Row style={{ margin: "30px 0" }}>
           <Col>
             <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="firstName">
+                First Name <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="text"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -101,12 +104,16 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Enter First Name"
                 name="firstName"
                 {...register("firstName")}
+                required
               />
             </div>
           </Col>
           <Col>
             <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
+              <label htmlFor="lastName">
+                Last Name
+                <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="text"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -115,6 +122,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Enter Last Name"
                 name="lastName"
                 {...register("lastName")}
+                required
               />
             </div>
           </Col>
@@ -122,7 +130,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         <Row style={{ margin: "30px 0" }}>
           <Col>
             <div className="form-group">
-              <label htmlFor="userName">User Name</label>
+              <label htmlFor="userName">
+                User Name <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="text"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -131,12 +141,15 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Enter User Name"
                 name="userName"
                 {...register("userName")}
+                required
               />
             </div>
           </Col>
           <Col>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">
+                Email <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="email"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -145,6 +158,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Enter Email"
                 name="email"
                 {...register("email")}
+                required
               />
             </div>
           </Col>
@@ -152,7 +166,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         <Row style={{ margin: "30px 0" }}>
           <Col>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                Password <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="password"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -161,12 +177,15 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Enter Password"
                 name="password"
                 {...register("password")}
+                required
               />
             </div>
           </Col>
           <Col>
             <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="confirmPassword">
+                Confirm Password <span style={{ color: "red" }}> *</span>
+              </label>
               <input
                 type="password"
                 style={{ height: "47px", borderRadius: "8px" }}
@@ -175,6 +194,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 {...register("confirmPassword")}
+                required
               />
             </div>
           </Col>
@@ -443,11 +463,11 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           REGISTER
         </button>
       </form>
-      <Modal size="lg" show={showTerms} onHide={toogleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Terms & Conditions</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ height: "70vh" }}>
+      <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
+        <Modal.Body style={{ height: "90vh" }}>
+          <div>
+            <CloseButton className="modal-close" onClick={toogleTerms} />
+          </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>
       </Modal>

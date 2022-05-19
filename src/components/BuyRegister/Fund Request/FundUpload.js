@@ -87,8 +87,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
       setDocument2(
         docu
           ? docu.filter(
-              (doc) => doc.officialName === "brokerage_account_statement"
-            )
+            (doc) => doc.officialName === "brokerage_account_statement"
+          )
           : []
       );
       setDocument3(
@@ -217,18 +217,18 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                 <div className="upload-list">
                   {document1
                     ? document1.map((document, index, arr) => (
-                        <div key={index} className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              <MdClose fontSize="1.5em" color="red" />
-                            </button>
-                          </span>
-                        </div>
-                      ))
+                      <div key={index} className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            <MdClose fontSize="1.5em" color="red" />
+                          </button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </Col>
@@ -267,18 +267,18 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                 <div className="upload-list">
                   {document2
                     ? document2.map((document, index, arr) => (
-                        <div key={index} className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              <MdClose fontSize="1.5em" color="red" />
-                            </button>
-                          </span>
-                        </div>
-                      ))
+                      <div key={index} className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            <MdClose fontSize="1.5em" color="red" />
+                          </button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </Col>
@@ -318,18 +318,18 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
                 <div className="upload-list">
                   {document3
                     ? document3.map((document, index, arr) => (
-                        <div key={index} className="upload-list-item">
-                          <span>
-                            {document.name}
-                            <button
-                              className="delete-btn"
-                              onClick={handleDelete(document.url)}
-                            >
-                              <MdClose fontSize="1.5em" color="red" />
-                            </button>
-                          </span>
-                        </div>
-                      ))
+                      <div key={index} className="upload-list-item">
+                        <span>
+                          {document.name}
+                          <button
+                            className="delete-btn"
+                            onClick={handleDelete(document.url)}
+                          >
+                            <MdClose fontSize="1.5em" color="red" />
+                          </button>
+                        </span>
+                      </div>
+                    ))
                     : null}
                 </div>
               </Col>

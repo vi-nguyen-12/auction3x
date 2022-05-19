@@ -6,7 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../slice/userSlice";
 import { useHistory, useLocation } from "react-router-dom";
-import "../../styles/modalStyle.css";
+import "../../styles/modal.css";
 require("react-bootstrap/ModalHeader");
 
 const Login = ({

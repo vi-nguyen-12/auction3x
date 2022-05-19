@@ -1,7 +1,7 @@
-import React, { useState, useEffect, NavLink } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import "../../styles/sideBarStyle.css";
+import "../../styles/sidebar.css";
 
 const SidebarLink = styled(Link)`
   display: flex;
