@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  overflow: auto;
   background-color: white;
   color: black;
   font-family: Avenir-Roman, sans-serif;

@@ -149,6 +149,7 @@ function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
       },
     ],
   };
+  console.log(upcomingAuctions);
   return (
     <>
       <div className="mt-5">

@@ -37,7 +37,7 @@ export const SidebarMenu = [
         path: "/Dashboard/Auctions/BidAuctions",
       },
       {
-        name: "Win Auctions",
+        name: "Won Auctions",
         path: "/Dashboard/Auctions/WinAuctions",
       },
     ],

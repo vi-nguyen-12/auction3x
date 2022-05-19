@@ -1,8 +1,7 @@
 import React from "react";
 import { Modal, Col, Row, Container } from "react-bootstrap";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import authService from "../../../services/authServices";

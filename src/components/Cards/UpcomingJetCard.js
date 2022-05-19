@@ -57,6 +57,7 @@ const UpcomingJetCard = ({
   toogleSignIn,
   item,
 }) => {
+  console.log(urls);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -148,11 +149,12 @@ const UpcomingJetCard = ({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.length > 0 &&
-              urls.map((items) => (
+            {urls &&
+              urls.map((items, index) => (
                 <Card.Img
                   onClick={handleDisplay}
                   variant="top"
+                  key={index}
                   src={items.url}
                   className="img-card img-fluid"
                   style={{
