@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import authService from "../../services/authServices";
-import "../../styles/Card.css";
+import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;

@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
+import Loading from "../../components/Loading";
 
 function EditProfile({ getProfilePic, getDescription }) {
   const user = useSelector((state) => state.user);
@@ -162,11 +163,7 @@ function EditProfile({ getProfilePic, getDescription }) {
         </Row>
         <Row style={{ marginTop: "20px" }}>
           <Col>
-            {loader ? (
-              <div className="loader">
-                <div className="spinning" />
-              </div>
-            ) : null}
+            {loader ? <Loading /> : null}
             <span style={{ fontSize: "20px", fontWeight: "700" }}>
               Profile Picture
             </span>

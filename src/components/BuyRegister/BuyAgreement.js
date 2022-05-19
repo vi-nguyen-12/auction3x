@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useState } from "react";
-import "../../styles/Buyer.css";
+import "../../styles/buyer.css";
 
 const BuyAgreement = ({ toogleStep, step }) => {
   const [agreement, setAgreement] = useState(false);

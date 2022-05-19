@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 function JetDocus({
   toogleStep,
@@ -759,11 +760,7 @@ function JetDocus({
           </h2>
           <p style={{ color: "black" }}>We only accept PDF Files</p>
 
-          {loader ? (
-            <div className="loader">
-              <div className="spinning" />
-            </div>
-          ) : null}
+          {loader ? <Loading /> : null}
         </Row>
         <Row
           style={{

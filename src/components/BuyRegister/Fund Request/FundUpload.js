@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal, Col, Row, Container } from "react-bootstrap";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import authService from "../../../services/authServices";
-import "../../../styles/Buyer.css";
+import "../../../styles/buyer.css";
+import Loading from "../../../components/Loading";
 
 const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
   const { register, handleSubmit } = useForm();
@@ -171,11 +171,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
         style={{ display: "inline", justifyContent: "center" }}
       >
         <Container>
-          {loader ? (
-            <div className="loader">
-              <div className="spinning" />
-            </div>
-          ) : null}
+          {loader ? <Loading /> : null}
           <Row
             style={{
               overflowX: "hidden",
