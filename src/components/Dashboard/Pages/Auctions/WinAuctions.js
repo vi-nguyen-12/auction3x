@@ -23,7 +23,7 @@ function WinAuctions() {
 
   return (
     <>
-      <h1>Won Auctions</h1>
+      <h1>Win Auctions</h1>
       <Table
         striped
         borderless
