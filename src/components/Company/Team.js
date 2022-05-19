@@ -25,8 +25,20 @@ function Team() {
             </p>
           </Col>
         </Row>
-        <Row style={{ padding: "10px 330px" }}>
-          <Col style={{ display: "flex", justifyContent: "right" }}>
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignContent: "center",
+          }}
+        >
+          <Col
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignContent: "center",
+            }}
+          >
             <Button
               style={{
                 fontSize: "20px",
@@ -39,8 +51,6 @@ function Team() {
             >
               All
             </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -53,8 +63,6 @@ function Team() {
             >
               Founder
             </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -67,8 +75,6 @@ function Team() {
             >
               Operation
             </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -81,8 +87,6 @@ function Team() {
             >
               Marketing
             </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -95,8 +99,6 @@ function Team() {
             >
               Research
             </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
             <Button
               style={{
                 fontSize: "20px",
