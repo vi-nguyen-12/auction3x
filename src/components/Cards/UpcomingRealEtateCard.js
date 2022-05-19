@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { ImImages } from "react-icons/im";
-import "../../styles/card.css";
+import "../../styles/Card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;

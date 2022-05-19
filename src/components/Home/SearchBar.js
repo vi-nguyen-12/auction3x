@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../../styles/search.css";
+import "../../styles/Search.css";
 import { ImSearch } from "react-icons/im";
 
 // let autoComplete;

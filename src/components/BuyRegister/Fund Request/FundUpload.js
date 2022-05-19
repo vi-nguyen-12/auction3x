@@ -6,7 +6,7 @@ import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import authService from "../../../services/authServices";
-import "../../../styles/buyer.css";
+import "../../../styles/Buyer.css";
 
 const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
   const { register, handleSubmit } = useForm();
