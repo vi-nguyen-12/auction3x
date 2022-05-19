@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, Table } from "react-bootstrap";
 import "../../styles/modal.css";
-import "../../styles/Header.css";
+import "../../styles/header.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
