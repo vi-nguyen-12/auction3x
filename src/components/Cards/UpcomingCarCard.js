@@ -187,13 +187,13 @@ const UpcomingCarCard = ({
                   <Row>
                     {registEnded ? (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Auction Start:
                         </p>
                       </Col>
                     ) : (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Registration
                         </p>
                       </Col>
@@ -203,7 +203,7 @@ const UpcomingCarCard = ({
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         Additional Info
@@ -216,7 +216,7 @@ const UpcomingCarCard = ({
                         <div
                           style={{
                             fontSize: "12px",
-                            width: "200px",
+                            width: "100%",
                           }}
                         >
                           <Timer auctionStartDate={auctionStartDate} />
@@ -224,7 +224,7 @@ const UpcomingCarCard = ({
                       </Col>
                     ) : !registEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <RegistrationTimer
                             time={endRegister}
                             toogleRegistEnded={toogleRegistEnded}
@@ -250,7 +250,7 @@ const UpcomingCarCard = ({
                         style={{
                           fontSize: "12px",
                           color: "black",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         {data.car_type ? data.car_type : "N/A"}|{" "}

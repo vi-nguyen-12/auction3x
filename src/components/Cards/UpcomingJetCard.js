@@ -57,7 +57,7 @@ const UpcomingJetCard = ({
   toogleSignIn,
   item,
 }) => {
-  console.log(urls);
+  console.log(data);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -190,13 +190,13 @@ const UpcomingJetCard = ({
                   <Row>
                     {registEnded ? (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Auction Start:
                         </p>
                       </Col>
                     ) : (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Registration
                         </p>
                       </Col>
@@ -206,7 +206,7 @@ const UpcomingJetCard = ({
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         Additional Info
@@ -219,7 +219,7 @@ const UpcomingJetCard = ({
                         <div
                           style={{
                             fontSize: "12px",
-                            width: "200px",
+                            width: "100%",
                           }}
                         >
                           <Timer auctionStartDate={auctionStartDate} />
@@ -227,7 +227,7 @@ const UpcomingJetCard = ({
                       </Col>
                     ) : !registEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <RegistrationTimer
                             time={endRegister}
                             toogleRegistEnded={toogleRegistEnded}
@@ -239,7 +239,7 @@ const UpcomingJetCard = ({
                         <div
                           style={{
                             fontSize: "18px",
-                            width: "200px",
+                            width: "100%",
                             fontWeight: "bold",
                           }}
                         >
@@ -253,7 +253,9 @@ const UpcomingJetCard = ({
                         style={{
                           fontSize: "12px",
                           color: "black",
-                          width: "250px",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "flex-start",
                         }}
                       >
                         {data.number_of_engines

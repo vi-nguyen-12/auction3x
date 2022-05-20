@@ -92,21 +92,6 @@
   top: 10em;
 }
 
-h1 {
-  font-family: Josefin Slab;
-  width: fit-content;
-  font-size: 4rem;
-  color: #d58f5c;
-  font-weight: 700;
-  color: linear-gradient(
-    90deg,
-    #d58f5c 0%,
-    #ffc195 31.25%,
-    #dd9c6d 62.5%,
-    #edb48b 100%
-  );
-}
-
 .paragraph {
   margin-left: 4rem;
   width: 28%;

@@ -545,7 +545,6 @@ const PropertyPages = ({
                 </button>
               </Col>
             </Row>
-            rp
           </Col>
         </Row>
       )}

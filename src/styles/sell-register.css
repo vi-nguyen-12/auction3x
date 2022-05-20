@@ -516,8 +516,6 @@ input[type="radio"]:checked:after {
 }
 /*title*/
 h1 {
-  font-size: 1.5em;
-  color: #333;
   margin: auto;
   display: flex;
   justify-content: center;
