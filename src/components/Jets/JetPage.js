@@ -155,7 +155,14 @@ function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
       <div className="mt-5">
         <Col md={12} className="m-auto pt-2">
           <Row>
-            <h1 style={{ marginBottom: "80px", fontWeight: "bold" }}>
+            <h1
+              style={{
+                marginBottom: "80px",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               ONGOING AUCTIONS
             </h1>
             {onGoingAuctions.length > 0 ? (
@@ -184,7 +191,14 @@ function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
             )}
           </Row>
           <Row style={{ marginBottom: "100px" }}>
-            <h1 style={{ margin: "80px 0", fontWeight: "bold" }}>
+            <h1
+              style={{
+                margin: "80px 0",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               UPCOMING AUCTIONS
             </h1>
             {upcomingAuctions.length > 0 ? (

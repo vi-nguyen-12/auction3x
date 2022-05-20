@@ -68,6 +68,7 @@
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
+  cursor: pointer;
 }
 @media (max-width: 768px) {
   .cards {

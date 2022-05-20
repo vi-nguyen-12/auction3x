@@ -153,9 +153,9 @@ const Header = ({
           </Logo>
         </div>
 
-        <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <Menu className="collapse navbar-collapse" id="navbarTogglerDemo03" style={{paddingLeft:"8rem"}}>
           <div className="navbar-nav m-auto h-100">
-            <div className="nav-item px-4">
+            <div className="nav-item px-5">
               <button
                 className="headerNav"
                 style={{ color: textColor, borderBottom: borderBottom }}
@@ -165,7 +165,7 @@ const Header = ({
                 Real Estate
               </button>
             </div>
-            <div className="nav-item px-4">
+            <div className="nav-item px-5">
               <button
                 style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
@@ -175,7 +175,7 @@ const Header = ({
                 Car
               </button>
             </div>
-            <div className="nav-item px-4">
+            <div className="nav-item px-5">
               <button
                 style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
@@ -185,7 +185,7 @@ const Header = ({
                 Jet
               </button>
             </div>
-            <div className="nav-item px-4">
+            <div className="nav-item px-5">
               <button
                 style={{ color: textColor, borderBottom: borderBottom }}
                 className="headerNav"
@@ -605,7 +605,7 @@ const Header = ({
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
-                    height: "47px",
+                    height: "57px",
                   }}
                   onClick={() => {
                     toogleOpen();

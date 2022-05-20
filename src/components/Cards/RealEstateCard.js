@@ -161,15 +161,16 @@ const CardComp = ({
               <img src="/images/heart.png" alt="" />
             )}
           </button>
-          <Card.Body style={{ paddingLeft: "13px" }}>
+          <Card.Body>
             <div>
               <div>
-                <span className="golden-text">
+                {/* <span className="golden-text">
                   {data.property_address.formatted_street_address},{" "}
                   {data.property_address.state}
-                </span>
+                </span> */}
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.property_address.formatted_street_address},{" "}
+                  {data.property_address.state}
                 </h4>
               </div>
               <div
@@ -179,17 +180,17 @@ const CardComp = ({
               >
                 <div>
                   <Row>
-                    <Col md={5} style={{ width: "50%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100px" }}>
+                    <Col md={5} style={{ width: "60%", color: "black" }}>
+                      <p style={{ fontSize: "15px", width: "100%" }}>
                         Online Auction
                       </p>
                     </Col>
 
-                    <Col md={6} style={{ width: "50%", color: "black" }}>
+                    <Col md={6} style={{ width: "40%", color: "black" }}>
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         Additional Info
@@ -198,11 +199,11 @@ const CardComp = ({
                   </Row>
                   <Row>
                     {auctionEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
+                      <Col md={1} style={{ width: "60%" }}>
                         <p
                           style={{
                             fontSize: "15px",
-                            width: "200px",
+                            width: "100%",
                             fontWeight: "bold",
                           }}
                         >
@@ -210,8 +211,8 @@ const CardComp = ({
                         </p>
                       </Col>
                     ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                      <Col md={1} style={{ width: "60%" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <AuctionTimer
                             id={id}
                             time={auctionEndDate}
@@ -221,11 +222,11 @@ const CardComp = ({
                       </Col>
                     )}
 
-                    <Col md={6} style={{ width: "50%" }}>
+                    <Col md={6} style={{ width: "40%" }}>
                       <p
                         style={{
                           fontSize: "12px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         {data.structure.beds_count

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Toast from "../Toast";
 import authServices from "../../services/authServices";
+import Loading from "../Loading";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../slice/userSlice";
@@ -20,6 +21,7 @@ const Login = ({
   const history = useHistory();
   const location = useLocation();
   const [showWarning, setShowWarning] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   //const [invPass, setInvPass] = useState(false);
 
   const {
@@ -30,6 +32,7 @@ const Login = ({
   const onSubmit = (data) => {
     const getUser = async () => {
       try {
+        setShowLoading(true);
         const response = await authServices.login(data);
         if (response.data.error) {
           alert(response.data.error);
@@ -47,6 +50,7 @@ const Login = ({
           window.setTimeout(() => {
             window.scrollTo(0, 0);
           }, 0);
+          setShowLoading(false);
         }
       } catch (error) {
         console.log(error);
@@ -56,6 +60,7 @@ const Login = ({
   };
   return (
     <>
+      {showLoading && <Loading />}
       {showWarning && (
         <Toast
           style={{ marginTop: "10px" }}

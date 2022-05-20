@@ -178,17 +178,19 @@ const JetCard = ({
               >
                 <div>
                   <Row>
-                    <Col md={5} style={{ width: "50%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100px" }}>
+                    <Col md={5} style={{ width: "60%", color: "black" }}>
+                      <p style={{ fontSize: "15px", width: "100%" }}>
                         Online Auction
                       </p>
                     </Col>
 
-                    <Col md={6} style={{ width: "50%", color: "black" }}>
+                    <Col md={6} style={{ width: "40%", color: "black" }}>
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "flex-start",
                         }}
                       >
                         Additional Info
@@ -197,11 +199,11 @@ const JetCard = ({
                   </Row>
                   <Row>
                     {auctionEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
+                      <Col md={1} style={{ width: "60%" }}>
                         <p
                           style={{
                             fontSize: "15px",
-                            width: "200px",
+                            width: "100%",
                             fontWeight: "bold",
                           }}
                         >
@@ -209,8 +211,8 @@ const JetCard = ({
                         </p>
                       </Col>
                     ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                      <Col md={1} style={{ width: "60%" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <AuctionTimer
                             id={id}
                             time={auctionEndDate}
@@ -220,12 +222,13 @@ const JetCard = ({
                       </Col>
                     )}
 
-                    <Col md={6} style={{ width: "50%" }}>
+                    <Col md={6} style={{ width: "40%" }}>
                       <p
                         style={{
                           fontSize: "12px",
-
-                          width: "250px",
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "flex-start",
                         }}
                       >
                         {data.number_of_engines
