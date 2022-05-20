@@ -17,7 +17,7 @@ const Carousel = styled(Slider)`
   & > button {
     opacity: 1;
     height: 100%;
-    width: 15vw;
+    width: 10%;
     z-index: 1;
 
     &:hover {
@@ -44,9 +44,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
+    height: 150px;
     left: 2vw;
     z-index: 1;
     background: url("./images/arrow_back.png") center center no-repeat !important;
+    margin: -50px;
   }
 
   .slick-prev:before {
@@ -54,9 +56,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next {
+    height: 150px;
     right: 2vw;
     z-index: 1;
     background: url("./images/arrow_next.png") center center no-repeat !important;
+    margin: -50px;
   }
 
   .slick-next:before {
@@ -191,19 +195,6 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
         </>
       ) : (
         null
-        // <Row>
-        //   <Col md={12} className="m-auto">
-        //     <img
-        //       src="/images/f_name.png"
-        //       alt=""
-        //       style={{
-        //         marginBottom: "0px",
-        //         maxWidth: "250px",
-        //         maxHeight: "150px",
-        //       }}
-        //     />
-        //   </Col>
-        // </Row>
       )
       }
     </div >

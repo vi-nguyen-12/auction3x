@@ -50,21 +50,21 @@ const About = () => {
             >
               BUY
             </button>
-            <div className="side-button">
-              <button
-                onClick={() => {
-                  user._id ? history.push("/MultiSellForm") : toogleSignIn();
-                }}
-              >
-                SELL
-              </button>
-            </div>
+            {/* <div className="side-button"> */}
+            <button
+              onClick={() => {
+                user._id ? history.push("/MultiSellForm") : toogleSignIn();
+              }}
+              style={{ marginLeft: "10px" }}
+            >
+              SELL
+            </button>
+            {/* </div> */}
           </div>
         </Col>
       </Row>
       <Row className="banner-container">
         <Col
-          style={{ padding: "0", margin: "0" }}
           className="banner-top-left-2"
         >
           <h2>BROKER</h2>
@@ -89,7 +89,7 @@ const About = () => {
           <img src="./images/broker.PNG" height={450} alt="" />
         </Col>
       </Row>
-      <Row className="banner-container" style={{ padding: "50px" }}>
+      <Row className="banner-container-1" >
         <Col className="banner-left">
           <h2>Stay updated with Auction 3</h2>
           <p>

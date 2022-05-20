@@ -7,10 +7,12 @@ const FindInCountries = (props) => {
       <Container
         fluid>
         <Row style={{
-          background: "#f8f8f8",
           margin: "0",
           padding: "0",
-          padding: "0 50px",
+          padding: "0 10px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}>
           <Row>
             <Col md={10} className="m-auto pt-5 text-center">

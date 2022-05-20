@@ -9,7 +9,6 @@ const Work = (props) => {
       style={{
         padding: "0 50px",
         background: "#f8f8f8",
-        height: "759px",
         marginTop: "50px",
       }}
     >
@@ -24,8 +23,8 @@ const Work = (props) => {
           </div>
         </Col>
       </Row>
-      <Row style={{ marginTop: "100px", display: "flex" }}>
-        <Col md={2} className="arrDiv">
+      <Row style={{ marginTop: "100px" }}>
+        <Col md={3} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">1</div>
             <div className="card-content">
@@ -44,7 +43,7 @@ const Work = (props) => {
             style={{ width: "100%", height: "20px" }}
           />
         </Col>
-        <Col md={2} className="arrDiv">
+        <Col md={3} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">2</div>
             <div className="card-content">
@@ -63,7 +62,7 @@ const Work = (props) => {
             style={{ width: "100%", height: "20px" }}
           />
         </Col>
-        <Col md={2} className="arrDiv">
+        <Col md={3} className="arrDiv">
           <Card className="work-box">
             <div className="numberBtn">3</div>
             <div className="card-content">

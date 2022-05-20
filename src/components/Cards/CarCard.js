@@ -32,11 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px!important;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px!important;
   }
   .slick-next:before {
     display: none;
