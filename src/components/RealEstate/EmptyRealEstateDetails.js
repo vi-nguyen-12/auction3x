@@ -7,12 +7,12 @@ import { useParams } from "react-router-dom";
 function EmptyRealEstateDetails({
   property,
   propertyData,
-  toogleStep,
+  toggleStep,
   step,
-  tooglePropertyData,
+  togglePropertyData,
   propId,
   ownership,
-  toogleSellStep,
+  toggleSellStep,
   getPropId,
 }) {
   const {
@@ -64,7 +64,7 @@ function EmptyRealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           alert("Saved Successfully!");
         }
       });
@@ -92,7 +92,7 @@ function EmptyRealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           getPropId(res.data._id);
           alert("Saved Successfully!");
         }
@@ -323,15 +323,12 @@ function EmptyRealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      togglePropertyData(submitedData);
+      toggleStep(step + 1);
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-form"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="list-form">
       <h3
         style={{
           fontWeight: "bolder",
@@ -586,7 +583,7 @@ function EmptyRealEstateDetails({
         >
           <Button onClick={saveInfo}>Save</Button>
         </div>
-        <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
           Previous
         </Button>
         <button className="nxt-btn" type="submit">

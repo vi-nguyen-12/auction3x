@@ -75,9 +75,9 @@ position: relative;
 }
 `;
 
-function CarPage({ toogleChange, setImgCar, toggleImgCar, toogleSignIn }) {
+function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn }) {
   useEffect(() => {
-    toogleChange();
+    toggleChange();
   }, []);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -172,7 +172,7 @@ function CarPage({ toogleChange, setImgCar, toggleImgCar, toogleSignIn }) {
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -208,7 +208,7 @@ function CarPage({ toogleChange, setImgCar, toggleImgCar, toogleSignIn }) {
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))

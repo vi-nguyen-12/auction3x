@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Tab } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
@@ -9,7 +9,7 @@ function WinAuctions() {
   const [winAuctions, setWinAuctions] = useState([]);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
-  const toogleShowPic = () => setShowPic(!showPic);
+  const toggleShowPic = () => setShowPic(!showPic);
 
   useEffect(() => {
     const fetchWinAuctions = async () => {
@@ -66,13 +66,14 @@ function WinAuctions() {
                       height="50px"
                       onClick={() => {
                         setImages(auction.property[0].images);
-                        toogleShowPic();
+                        toggleShowPic();
                       }}
                       src={
                         auction.property[0].images.length > 0
                           ? auction.property[0].images[0].url
                           : ""
                       }
+                      alt="property"
                     />
                   </div>
                 </td>
@@ -110,7 +111,7 @@ function WinAuctions() {
             </tbody>
           ))}
       </Table>
-      <Modal size="lg" show={showPic} onHide={toogleShowPic} centered>
+      <Modal size="lg" show={showPic} onHide={toggleShowPic} centered>
         <Modal.Header closeButton>
           <Modal.Title>Images</Modal.Title>
         </Modal.Header>

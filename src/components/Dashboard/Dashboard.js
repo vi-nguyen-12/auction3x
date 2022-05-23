@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -20,8 +20,8 @@ import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
 
 function Dashboard({
-  toogleChange,
-  toogleShow,
+  toggleChange,
+  toggleShow,
   colorChange,
   bodyColorChange,
   setHeaderWidth,
@@ -34,8 +34,8 @@ function Dashboard({
     setPadRight("3rem");
     colorChange("black");
     bodyColorChange("#ffefe3");
-    toogleChange();
-    toogleShow();
+    toggleChange();
+    toggleShow();
   }, []);
   const location = useLocation();
   const path = window.location.pathname;

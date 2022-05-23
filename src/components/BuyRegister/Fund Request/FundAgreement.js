@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-function FundAgreement({ toogleStep, step }) {
+function FundAgreement({ toggleStep, step }) {
   const [agree, setAgree] = useState(false);
-  const toogleAgree = () => {
+  const toggleAgree = () => {
     setAgree(!agree);
   };
 
   const handleNext = () => {
     if (agree === true) {
-      toogleStep(step + 1);
+      toggleStep(step + 1);
     } else {
       alert("Please Read the agreement and check the box to continue");
     }
@@ -56,7 +56,7 @@ function FundAgreement({ toogleStep, step }) {
         <input
           style={{ marginRight: "10px" }}
           type="checkbox"
-          onChange={toogleAgree}
+          onChange={toggleAgree}
         />
         <label style={{ color: "black" }}>
           I agree to the terms and conditions
@@ -66,7 +66,7 @@ function FundAgreement({ toogleStep, step }) {
         style={{ position: "sticky", marginTop: "40px" }}
         className="bottom-btn"
       >
-        <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
           Previous
         </button>
         <button className="nxt-btn" onClick={() => handleNext()}>

@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { MdAssignmentTurnedIn } from "react-icons/md";
-import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 
 const Docusign = () => {

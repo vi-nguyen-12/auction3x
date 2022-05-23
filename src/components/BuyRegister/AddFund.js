@@ -9,8 +9,8 @@ function AddFund() {
   const [loader, setLoader] = useState(false);
   const [other, setOther] = useState(false);
   const [self, setSelf] = useState(false);
-  const toogleSelf = () => setSelf(!self);
-  const toogleOther = () => setOther(!other);
+  const toggleSelf = () => setSelf(!self);
+  const toggleOther = () => setOther(!other);
 
   const [document, setDocument] = useState([]);
 
@@ -38,7 +38,7 @@ function AddFund() {
           <Button
             onClick={() => {
               setOther(false);
-              toogleSelf();
+              toggleSelf();
             }}
             variant="primary"
           >
@@ -49,7 +49,7 @@ function AddFund() {
           <Button
             onClick={() => {
               setSelf(false);
-              toogleOther();
+              toggleOther();
             }}
             variant="primary"
           >

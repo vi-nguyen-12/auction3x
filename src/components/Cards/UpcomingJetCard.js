@@ -54,7 +54,7 @@ const UpcomingJetCard = ({
   auctionStartDate,
   endRegister,
   startingBid,
-  toogleSignIn,
+  toggleSignIn,
   item,
 }) => {
   const user = useSelector((state) => state.user);
@@ -75,7 +75,7 @@ const UpcomingJetCard = ({
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -108,7 +108,7 @@ const UpcomingJetCard = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {
@@ -293,7 +293,7 @@ const UpcomingJetCard = ({
                         <div style={{ fontSize: "12px", width: "100%" }}>
                           <RegistrationTimer
                             time={endRegister}
-                            toogleRegistEnded={toogleRegistEnded}
+                            toggleRegistEnded={toggleRegistEnded}
                           />
                         </div>
                       </Col>

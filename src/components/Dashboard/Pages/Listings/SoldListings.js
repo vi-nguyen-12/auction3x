@@ -7,7 +7,7 @@ function SoldListings() {
   const user = useSelector((state) => state.user);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
-  const toogleShowPic = () => setShowPic(!showPic);
+  const toggleShowPic = () => setShowPic(!showPic);
   const [soldListings, setSoldListings] = useState([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function SoldListings() {
                       height="50px"
                       onClick={() => {
                         setImages(auction.property.images);
-                        toogleShowPic();
+                        toggleShowPic();
                       }}
                       src={
                         auction.images.length > 0 ? auction.images[0].url : ""
@@ -77,7 +77,7 @@ function SoldListings() {
                     className="btn btn-primary"
                     onClick={() => {
                       setImages(auction.images);
-                      toogleShowPic();
+                      toggleShowPic();
                     }}
                   >
                     View

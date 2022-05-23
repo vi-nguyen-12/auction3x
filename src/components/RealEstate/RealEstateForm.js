@@ -8,7 +8,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function RealEstateForm({ toogleStep, step, properties, property }) {
+function RealEstateForm({ toggleStep, step, properties, property }) {
   const prop = useSelector((state) => state.incompProperty);
   const {
     register,
@@ -72,36 +72,36 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
         properti[0].details.property_address
           ? properti[0].details.property_address.formatted_street_address
           : property.street_address
-            ? property.street_address
-            : ""
+          ? property.street_address
+          : ""
       );
       setCity(
         properti[0].details.property_address
           ? properti[0].details.property_address.city
           : property.city
-            ? property.city
-            : ""
+          ? property.city
+          : ""
       );
       setState(
         properti[0].details.property_address
           ? properti[0].details.property_address.state
           : property.state
-            ? property.state
-            : ""
+          ? property.state
+          : ""
       );
       setCountry(
         properti[0].details.property_address
           ? properti[0].details.property_address.country
           : property.country
-            ? property.country
-            : ""
+          ? property.country
+          : ""
       );
       setZip(
         properti[0].details.property_address
           ? properti[0].details.property_address.zip_code
           : property.zip_code
-            ? property.zip_code
-            : ""
+          ? property.zip_code
+          : ""
       );
     } else {
       setAddress(property.street_address ? property.street_address : "");
@@ -129,16 +129,16 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
             res.data.name !== "Error"
               ? res.data
               : res.data.name === "Error"
-                ? datas
-                : ""
+              ? datas
+              : ""
           );
-          toogleStep(step + 1);
+          toggleStep(step + 1);
         } else if (res.data.length === 0) {
           alert(
             "Could not find property information! Please fill out the property details."
           );
           properties(datas);
-          toogleStep(step + 1);
+          toggleStep(step + 1);
         }
       });
     } else {
@@ -203,15 +203,15 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
                         // inline style for demonstration purpose
                         const style = suggestion.active
                           ? {
-                            backgroundColor: "#fafafa",
-                            cursor: "pointer",
-                            color: "black",
-                          }
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
                           : {
-                            backgroundColor: "#ffffff",
-                            cursor: "pointer",
-                            color: "black",
-                          };
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
                         return (
                           <div
                             key={index}
@@ -316,7 +316,7 @@ function RealEstateForm({ toogleStep, step, properties, property }) {
           <button
             className="pre-btn"
             onClick={() => {
-              toogleStep(step - 1);
+              toggleStep(step - 1);
             }}
           >
             Previous

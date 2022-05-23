@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function CarForm({ toogleStep, step, properties, property }) {
+function CarForm({ toggleStep, step, properties, property }) {
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState();
   const [model, setModel] = useState();
@@ -198,7 +198,7 @@ function CarForm({ toogleStep, step, properties, property }) {
       },
     };
     properties(datas);
-    toogleStep(step + 1);
+    toggleStep(step + 1);
   };
 
   return (
@@ -619,7 +619,7 @@ function CarForm({ toogleStep, step, properties, property }) {
         <Button
           className="pre-btn"
           onClick={() => {
-            toogleStep(step - 1);
+            toggleStep(step - 1);
           }}
         >
           Previous

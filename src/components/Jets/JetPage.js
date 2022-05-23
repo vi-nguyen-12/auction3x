@@ -81,11 +81,11 @@ position: relative;
 }
 `;
 
-function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
+function JetPage({ toggleChange, setImgJet, toggleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
-    toogleChange();
+    toggleChange();
   }, []);
   useEffect(() => {
     authService
@@ -179,7 +179,7 @@ function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -215,7 +215,7 @@ function JetPage({ toogleChange, setImgJet, toogleSignIn }) {
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))

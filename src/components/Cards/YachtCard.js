@@ -19,7 +19,7 @@ const Carousel = styled(Slider)`
   border-radius: 0;
 
   & > button {
-    opacity: 1;
+    opacity: 0;
     height: 100%;
     z-index: 1;
     width: 5vw;
@@ -32,11 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px !important;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next {
     height: 100px !important;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next:before {
     display: none;
@@ -52,7 +54,7 @@ const YachtCard = ({
   reserveMet,
   auctionEndDate,
   startingBid,
-  toogleSignIn,
+  toggleSignIn,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -72,7 +74,7 @@ const YachtCard = ({
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -110,7 +112,7 @@ const YachtCard = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {

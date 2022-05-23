@@ -81,15 +81,7 @@ position: relative;
 }
 `;
 
-function YachtPage({
-  toogleChange,
-  setImgYacht,
-  toggleImgYacht,
-  toogleSignIn,
-}) {
-  useEffect(() => {
-    toogleChange();
-  }, []);
+function YachtPage({ toggleChange, setImgYacht, toggleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -120,7 +112,10 @@ function YachtPage({
       });
       setImgYacht(imageUrl);
     }
-  }, [onGoingAuctions, upcomingAuctions]);
+  }, [onGoingAuctions, upcomingAuctions, setImgYacht]);
+  useEffect(() => {
+    toggleChange();
+  }, [toggleChange]);
   let settings = {
     dots: false,
     infinite: true,
@@ -183,7 +178,7 @@ function YachtPage({
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -219,7 +214,7 @@ function YachtPage({
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))

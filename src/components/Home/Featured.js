@@ -8,15 +8,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import "../../App.css";
 
 const Carousel = styled(Slider)`
-  height: 70vh;
+  height: 100%;
   // overflow: hidden;
 
   & > button {
     opacity: 1;
     height: 100%;
-    width: 15vw;
+    width: 10%;
     z-index: 1;
 
     &:hover {
@@ -43,11 +44,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100%;
+    height: 150px;
+    left: 2vw;
+    z-index: 1;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
+    margin: -50px;
   }
 
   .slick-prev:before {
@@ -55,11 +56,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100%;
+    height: 150px;
+    right: 2vw;
+    z-index: 1;
     background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
+    margin: -50px;
   }
 
   .slick-next:before {
@@ -71,7 +72,11 @@ const Wrap = styled.div`
 border-radius: 4px;
 cursor: pointer;
 position: relative;
-margin-top:150px;  // Just for display
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: center;
+// margin-top: auto;  // Just for display
 
   &:hover {
     padding: 0;
@@ -81,7 +86,7 @@ margin-top:150px;  // Just for display
 }
 `;
 
-const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
+const Featured = ({ toggleSignIn, featureAuctions: auctions }) => {
   let settings = {
     dots: false,
     infinite: true,
@@ -111,7 +116,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          overflow: "unset",
+          initialSlide: 1,
         },
       },
     ],
@@ -148,7 +153,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                             auctionEndDate={item.auctionEndDate}
                             startingBid={item.startingBid}
                             reserveMet={item.isReservedMet}
-                            toogleSignIn={toogleSignIn}
+                            toggleSignIn={toggleSignIn}
                           />
                         ) : item.property.type === "car" ? (
                           <CarCard
@@ -160,7 +165,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                             auctionEndDate={item.auctionEndDate}
                             startingBid={item.startingBid}
                             reserveMet={item.isReservedMet}
-                            toogleSignIn={toogleSignIn}
+                            toggleSignIn={toggleSignIn}
                           />
                         ) : item.property.type === "jet" ? (
                           <JetCard
@@ -172,7 +177,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                             auctionEndDate={item.auctionEndDate}
                             startingBid={item.startingBid}
                             reserveMet={item.isReservedMet}
-                            toogleSignIn={toogleSignIn}
+                            toggleSignIn={toggleSignIn}
                           />
                         ) : item.property.type === "yacht" ? (
                           <YachtCard
@@ -184,7 +189,7 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
                             auctionEndDate={item.auctionEndDate}
                             startingBid={item.startingBid}
                             reserveMet={item.isReservedMet}
-                            toogleSignIn={toogleSignIn}
+                            toggleSignIn={toggleSignIn}
                           />
                         ) : null}
                       </Col>

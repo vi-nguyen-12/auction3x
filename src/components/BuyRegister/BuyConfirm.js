@@ -14,7 +14,7 @@ const BuyConfirm = ({ property }) => {
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
   const [auctionEnded, setAuctionEnded] = useState(false);
-  const toogleAuction = () => setAuctionEnded(!auctionEnded);
+  const toggleAuction = () => setAuctionEnded(!auctionEnded);
 
   const onSubmit = async (data) => {
     if (bid === undefined) {

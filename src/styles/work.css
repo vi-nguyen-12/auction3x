@@ -110,11 +110,11 @@ h2 {
 }
 
 .card-content {
-  margin: 0 30px;
   display: grid;
   justify-content: center;
   align-items: center;
   text-align: left;
+  margin: 0 30px;
   /* overflow: auto; */
 }
 
@@ -168,5 +168,9 @@ h2 {
 @media screen and (max-width: 768px) {
   .arrDivs {
     display: none;
+  }
+  .work-box {
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 }

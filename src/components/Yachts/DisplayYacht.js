@@ -108,13 +108,6 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  // a {
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  //   display: block;
-  //   position: relative;
-  //   padding: 0;
-
   img {
     width: 100%;
     height: 100%;
@@ -124,20 +117,13 @@ const Wrap = styled.div`
     position: relative;
     padding: 0;
   }
-
-  // &:hover {
-  //   padding: 0;
-  //   // border: 4px solid rgba(249, 249, 249, 0.8);
-  //   transition-duration: 300ms;
-  // }
-  // }
 `;
 
-function DisplayYacht({ toogleChange, property, toogleSignIn }) {
+function DisplayYacht({ toggleChange, property, toggleSignIn }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -163,15 +149,15 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
 
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [downloadFiles, setDownloadFiles] = useState([]);
-  const toogleRegister = () => setShowRegister(!showRegister);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
+  const toggleRegister = () => setShowRegister(!showRegister);
+  const togglePlaceBid = () => setPlaceBid(!placeBid);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -179,7 +165,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    toogleChange();
+    toggleChange();
 
     //set location for map
     setLocation({
@@ -295,16 +281,16 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                   className="favorite-button"
                 >
                   {favorite ? (
-                    <AiFillHeart size="100%" color="C58753" />
+                    <AiFillHeart size="50px" color="C58753" />
                   ) : (
-                    <AiOutlineHeart size="100%" color="C58753" />
+                    <AiOutlineHeart size="50px" color="C58753" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline size="100%" color="C58753" />
+                  <IoImageOutline size="50px" color="C58753" />
                 </button>
                 <Modal
                   size="xl"
@@ -340,7 +326,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine size="100%" color="C58753" />
+                  <RiVideoLine size="50px" color="C58753" />
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
@@ -370,7 +356,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               </div>
               <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 size="100%" color="C58753" />
+                  <Md360 size="50px" color="C58753" />
                 </button>
               </div>
 
@@ -403,7 +389,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0", padding: "35px 35px" }}>
+          <Row style={{ padding: "35px 35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.manufacturer_name}
@@ -432,7 +418,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                   >
                     Register to Bid
                   </button>
@@ -495,11 +481,11 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleRegister}>
+                  <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -524,7 +510,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                 <div className="registBtn">
                   <button
                     className="registsBtn"
-                    onClick={toogleRegister}
+                    onClick={toggleRegister}
                     disabled
                   >
                     Register to Bid
@@ -552,7 +538,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                   <div className="registBtn">
                     <button
                       className="registsBtn"
-                      onClick={toogleRegister}
+                      onClick={toggleRegister}
                       disabled
                     >
                       Register to Bid
@@ -577,9 +563,9 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -597,7 +583,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    onClick={togglePlaceBid}
                   >
                     Bid Now!
                   </button>
@@ -638,7 +624,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
-                      onClick={tooglePlaceBid}
+                      onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
@@ -682,7 +668,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                     >
                       <RegistrationTimer
                         time={property.registerEndDate}
-                        toogleRegistEnded={toogleRegistEnded}
+                        toggleRegistEnded={toggleRegistEnded}
                       />
                       <div
                         style={{
@@ -723,7 +709,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -1432,7 +1418,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
             backdrop="static"
             keyboard={false}
             show={showRegister}
-            onHide={toogleRegister}
+            onHide={toggleRegister}
             centered
           >
             <Modal.Body>
@@ -1445,7 +1431,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={tooglePlaceBid}
+            onHide={togglePlaceBid}
             centered
           >
             <Modal.Body>

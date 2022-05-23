@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Toast from "../Toast";
 import authServices from "../../services/authServices";
 import Loading from "../Loading";
 import { Modal, Button } from "react-bootstrap";
@@ -11,24 +10,19 @@ import "../../styles/modal.css";
 require("react-bootstrap/ModalHeader");
 
 const Login = ({
-  toogleSignUp,
-  toogleSignIn,
-  toogleButton,
-  toogleForgotPass,
-  toogleConfirmModal,
+  toggleSignUp,
+  toggleSignIn,
+  toggleButton,
+  toggleForgotPass,
+  toggleConfirmModal,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const [showWarning, setShowWarning] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
-  //const [invPass, setInvPass] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const [showLoading, setShowLoading] = useState(false);
+
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const getUser = async () => {
       try {
@@ -38,13 +32,13 @@ const Login = ({
           alert(response.data.error);
         } else if (response.data.error === "User has not been verified") {
           alert(response.data.error);
-          toogleSignIn();
-          toogleConfirmModal();
+          toggleSignIn();
+          toggleConfirmModal();
         } else {
           dispatch(login(response.data.data));
           localStorage.setItem("token", response.data.data.token);
-          toogleButton();
-          toogleSignIn();
+          toggleButton();
+          toggleSignIn();
           history.push(location.pathname);
           window.location.reload();
           window.setTimeout(() => {
@@ -61,13 +55,7 @@ const Login = ({
   return (
     <>
       {showLoading && <Loading />}
-      {showWarning && (
-        <Toast
-          style={{ marginTop: "10px" }}
-          type="warning"
-          message="Warning! Your email verification process has not been done. We have sent the link"
-        />
-      )}
+
       <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
@@ -119,8 +107,8 @@ const Login = ({
         <div className="form-group">
           <Button
             onClick={() => {
-              toogleForgotPass();
-              toogleSignIn();
+              toggleForgotPass();
+              toggleSignIn();
             }}
             style={{ marginTop: "5px", marginBottom: "30px", fontSize: "20px" }}
             className="nav-link-signup"
@@ -140,8 +128,8 @@ const Login = ({
               Not registered?
               <Button
                 onClick={() => {
-                  toogleSignUp();
-                  toogleSignIn();
+                  toggleSignUp();
+                  toggleSignIn();
                 }}
                 className="nav-link-signup"
                 style={{ fontSize: "15px" }}

@@ -3,14 +3,14 @@ import { Modal } from "react-bootstrap";
 import { useState } from "react";
 import "../../styles/buyer.css";
 
-const BuyAgreement = ({ toogleStep, step }) => {
+const BuyAgreement = ({ toggleStep, step }) => {
   const [agreement, setAgreement] = useState(false);
-  const toogleAgree = () => {
+  const toggleAgree = () => {
     setAgreement(!agreement);
   };
   const handleNext = () => {
     if (agreement === true) {
-      toogleStep(step + 1);
+      toggleStep(step + 1);
     } else {
       alert("Please Read the agreement and check the box to continue");
     }
@@ -73,7 +73,7 @@ const BuyAgreement = ({ toogleStep, step }) => {
           <input
             style={{ marginRight: "10px" }}
             type="checkbox"
-            onChange={toogleAgree}
+            onChange={toggleAgree}
           />
           <label style={{ color: "black" }}>
             I agree to the terms and conditions
@@ -84,7 +84,7 @@ const BuyAgreement = ({ toogleStep, step }) => {
         style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
       >
         <div style={{ position: "sticky" }} className="bottom-btn">
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </button>
           <button className="nxt-btn" onClick={() => handleNext()}>

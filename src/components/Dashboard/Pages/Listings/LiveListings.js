@@ -12,8 +12,8 @@ function LiveListings() {
   const [documents, setDocuments] = useState([]);
   const [showImages, setShowImages] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
-  const toogleDocuments = () => setShowDocuments(!showDocuments);
-  const toogleImages = () => setShowImages(!showImages);
+  const toggleDocuments = () => setShowDocuments(!showDocuments);
+  const toggleImages = () => setShowImages(!showImages);
 
   useEffect(() => {
     const fetchApprovedProperty = async () => {
@@ -61,7 +61,7 @@ function LiveListings() {
                   <td>
                     {listing.type === "real-estate"
                       ? listing.details.property_address
-                        .formatted_street_address
+                          .formatted_street_address
                       : listing.details.property_address}
                     <div
                       style={{
@@ -75,7 +75,7 @@ function LiveListings() {
                         height="50px"
                         onClick={() => {
                           setImages(listing.images);
-                          toogleImages();
+                          toggleImages();
                         }}
                         src={
                           listing.images.length > 0 ? listing.images[0].url : ""
@@ -127,7 +127,7 @@ function LiveListings() {
                     <Button
                       onClick={() => {
                         setDocuments(listing.documents);
-                        toogleDocuments();
+                        toggleDocuments();
                       }}
                       variant="primary"
                     >
@@ -138,12 +138,12 @@ function LiveListings() {
                     {listing.type === "real-estate"
                       ? "Real Estate"
                       : listing.type === "car"
-                        ? "Car"
-                        : listing.type === "jet"
-                          ? "Jet"
-                          : listing.type === "yacht"
-                            ? "Yacht"
-                            : ""}
+                      ? "Car"
+                      : listing.type === "jet"
+                      ? "Jet"
+                      : listing.type === "yacht"
+                      ? "Yacht"
+                      : ""}
                   </td>
                   <td>
                     <Button variant="primary">Email</Button>

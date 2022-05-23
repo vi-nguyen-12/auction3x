@@ -32,11 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next:before {
     display: none;
@@ -52,7 +54,7 @@ const JetCard = ({
   startingBid,
   auctionEndDate,
   reserveMet,
-  toogleSignIn,
+  toggleSignIn,
 }) => {
   console.log(urls);
   const user = useSelector((state) => state.user);
@@ -73,7 +75,7 @@ const JetCard = ({
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -110,7 +112,7 @@ const JetCard = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {

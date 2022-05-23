@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function JetForm({ toogleStep, step, properties, property }) {
+function JetForm({ toggleStep, step, properties, property }) {
   const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState();
   const [registration_mark, setRegistration_mark] = useState();
@@ -200,7 +200,7 @@ function JetForm({ toogleStep, step, properties, property }) {
       },
     };
     properties(datas);
-    toogleStep(step + 1);
+    toggleStep(step + 1);
   };
 
   return (
@@ -454,7 +454,7 @@ function JetForm({ toogleStep, step, properties, property }) {
         <Button
           className="pre-btn"
           onClick={() => {
-            toogleStep(step - 1);
+            toggleStep(step - 1);
           }}
         >
           Previous

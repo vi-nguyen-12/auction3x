@@ -32,11 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next:before {
     display: none;
@@ -52,8 +54,7 @@ const CardComp = ({
   auctionEndDate,
   startingBid,
   reserveMet,
-  toogleSignIn,
-  width,
+  toggleSignIn,
 }) => {
   console.log(startingBid);
   const user = useSelector((state) => state.user);
@@ -74,7 +75,7 @@ const CardComp = ({
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -111,7 +112,7 @@ const CardComp = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {
@@ -130,7 +131,7 @@ const CardComp = ({
   return (
     <div>
       {auctionEndDate && (
-        <Card style={{ width: width }} className="cards text-left m-auto">
+        <Card className="cards text-left m-auto">
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}

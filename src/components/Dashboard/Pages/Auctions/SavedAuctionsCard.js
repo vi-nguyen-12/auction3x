@@ -92,12 +92,12 @@ function SavedAuctionsCard({
       setFavorite(!favorite);
     }
   };
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+  const toggleChangePass = () => popChangePass(!changePass);
+  const toggleForgotPass = () => popForgotPass(!forgotPass);
+  const toggleButton = () => popButton(!showButton);
+  const toggleSignIn = () => popSignIn(!showSignIn);
+  const toggleSignUp = () => popUpSignUp(!showSignUp);
+  const toggleConfirmModal = () => popupConfirm(!showConfirm);
   const handleBid = () => {
     // history.push(`/DisplayAuctions/${id}`);
     window.open(`/DisplayAuctions/${id}`);
@@ -188,7 +188,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-              new Date().toISOString() < endRegister ? (
+                new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}
@@ -358,7 +358,7 @@ function SavedAuctionsCard({
             keyboard={false}
             aria-labelledby="contained-modal-title-vcenter"
             show={showConfirm}
-            onHide={toogleConfirmModal}
+            onHide={toggleConfirmModal}
             centered
             contentclassname="confirm"
           >
@@ -382,8 +382,8 @@ function SavedAuctionsCard({
             </Modal.Header>
             <Modal.Body>
               <Confirm
-                toogleConfirmModal={toogleConfirmModal}
-                toogleSignIn={toogleSignIn}
+                toggleConfirmModal={toggleConfirmModal}
+                toggleSignIn={toggleSignIn}
               />
             </Modal.Body>
           </Modal>
@@ -394,7 +394,7 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={forgotPass}
-            onHide={toogleForgotPass}
+            onHide={toggleForgotPass}
             contentclassname="forgotPass"
           >
             <Modal.Header closeButton>
@@ -411,8 +411,8 @@ function SavedAuctionsCard({
             </Modal.Header>
             <Modal.Body>
               <ForgotPass
-                toogleForgotPass={toogleForgotPass}
-                toogleChangePass={toogleChangePass}
+                toggleForgotPass={toggleForgotPass}
+                toggleChangePass={toggleChangePass}
               />
             </Modal.Body>
           </Modal>
@@ -423,7 +423,7 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={forgotPass}
-            onHide={toogleForgotPass}
+            onHide={toggleForgotPass}
           >
             <Modal.Body className="forgot-modal"></Modal.Body>
           </Modal>
@@ -433,7 +433,7 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={forgotPass}
-            onHide={toogleForgotPass}
+            onHide={toggleForgotPass}
             contentclassname="forgotPass"
           >
             <Modal.Header closeButton>
@@ -450,8 +450,8 @@ function SavedAuctionsCard({
             </Modal.Header>
             <Modal.Body>
               <ForgotPass
-                toogleForgotPass={toogleForgotPass}
-                toogleChangePass={toogleChangePass}
+                toggleForgotPass={toggleForgotPass}
+                toggleChangePass={toggleChangePass}
               />
             </Modal.Body>
           </Modal>
@@ -462,7 +462,7 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignIn}
-            onHide={toogleSignIn}
+            onHide={toggleSignIn}
             contentclassname="login"
           >
             <Modal.Body
@@ -475,17 +475,17 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignIn}
-            onHide={toogleSignIn}
+            onHide={toggleSignIn}
             contentclassname="login"
             backdrop="static"
             keyboard={false}
           >
             <Modal.Body>
               <Login
-                toogleSignUp={toogleSignUp}
-                toogleSignIn={toogleSignIn}
-                toogleButton={toogleButton}
-                toogleForgotPass={toogleForgotPass}
+                toggleSignUp={toggleSignUp}
+                toggleSignIn={toggleSignIn}
+                toggleButton={toggleButton}
+                toggleForgotPass={toggleForgotPass}
               />
             </Modal.Body>
           </Modal>
@@ -496,7 +496,7 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignUp}
-            onHide={toogleSignUp}
+            onHide={toggleSignUp}
             contentclassname="custom-modal-style"
           >
             <Modal.Body
@@ -511,14 +511,14 @@ function SavedAuctionsCard({
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={showSignUp}
-            onHide={toogleSignUp}
+            onHide={toggleSignUp}
             contentclassname="custom-modal-style"
           >
             <Modal.Body>
               <SignUp
-                toogleSignUp={toogleSignUp}
-                toogleConfirmModal={toogleConfirmModal}
-                toogleSignIn={toogleSignIn}
+                toggleSignUp={toggleSignUp}
+                toggleConfirmModal={toggleConfirmModal}
+                toggleSignIn={toggleSignIn}
               />
             </Modal.Body>
           </Modal>

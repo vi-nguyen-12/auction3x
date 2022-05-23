@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 
-const BuyVerify = ({ toogleStep, step }) => {
+const BuyVerify = ({ toggleStep, step }) => {
   return (
     <>
       <Modal.Header>
@@ -21,10 +21,10 @@ const BuyVerify = ({ toogleStep, step }) => {
         </p>
 
         <div style={{ position: "sticky" }} className="bottom-btn">
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </button>
-          <button className="nxt-btn" onClick={() => toogleStep(step + 1)}>
+          <button className="nxt-btn" onClick={() => toggleStep(step + 1)}>
             Next
           </button>
         </div>

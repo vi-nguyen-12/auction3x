@@ -10,14 +10,14 @@ import CloseButton from "react-bootstrap/CloseButton";
 import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
 
-const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
+const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
   const { register, handleSubmit } = useForm();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [terms, setTerms] = useState();
   const [show, setShow] = useState(false);
-  const toogleTerms = () => setShow(!show);
+  const toggleTerms = () => setShow(!show);
 
   const [ip, setIp] = useState();
 
@@ -91,7 +91,6 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
         } else {
           authService
             .buyerRegister({
-              // auctionId: auctionId ? auctionId._id : onGoingAuction._id,
               auctionId: id,
               TC: { time: agree, IPAddress: ip },
               answers: answers,
@@ -143,13 +142,7 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
               marginTop: "70px",
             }}
           >
-            <Button
-              className="btn btn-primary"
-              // onClick={() => {
-              //   window.open(url);
-              // }}
-              onClick={handleSignDocusign}
-            >
+            <Button className="btn btn-primary" onClick={handleSignDocusign}>
               <SiDocusign />
               <span style={{ marginLeft: "10px" }}>
                 <span style={{ fontSize: "20px" }}>
@@ -181,7 +174,7 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
             />
             Agree to{" "}
             <span
-              onClick={() => toogleTerms()}
+              onClick={() => toggleTerms()}
               style={{ color: "#00a8ff", cursor: "pointer" }}
             >
               {" "}
@@ -192,7 +185,7 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
             style={{ position: "sticky", padding: "auto" }}
             className="bottom-btn"
           >
-            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+            <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </button>
             <button className="nxt-btn" type="submit">
@@ -201,10 +194,10 @@ const BuyAuthorized = ({ toogleStep, step, answer, questionID, document }) => {
           </div>
         </form>
       </Modal.Body>
-      <Modal size="lg" show={show} onHide={toogleTerms} centered>
+      <Modal size="lg" show={show} onHide={toggleTerms} centered>
         <Modal.Body style={{ height: "70vh" }}>
           <div>
-            <CloseButton className="modal-close" onClick={toogleTerms} />
+            <CloseButton className="modal-close" onClick={toggleTerms} />
           </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>

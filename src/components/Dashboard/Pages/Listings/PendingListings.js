@@ -9,9 +9,9 @@ function PendingListings() {
   const [documents, setDocuments] = useState([]);
   const [images, setImages] = useState([]);
   const [show, setShow] = useState(false);
-  const toogleShow = () => setShow(!show);
+  const toggleShow = () => setShow(!show);
   const [showImages, setShowImages] = useState(false);
-  const toogleShowImages = () => setShowImages(!showImages);
+  const toggleShowImages = () => setShowImages(!showImages);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -63,12 +63,12 @@ function PendingListings() {
                   {auction.type === "real-estate"
                     ? "Real Estate"
                     : auction.type === "car"
-                      ? "Car"
-                      : auction.type === "jet"
-                        ? "Jet"
-                        : auction.type === "yacht"
-                          ? "Yacht"
-                          : ""}
+                    ? "Car"
+                    : auction.type === "jet"
+                    ? "Jet"
+                    : auction.type === "yacht"
+                    ? "Yacht"
+                    : ""}
                 </td>
                 {auction.isApproved === "pending" ? (
                   <td>Pending</td>
@@ -90,7 +90,7 @@ function PendingListings() {
                       height="50px"
                       onClick={() => {
                         setImages(auction.images);
-                        toogleShowImages();
+                        toggleShowImages();
                       }}
                       src={auction.images[0].url}
                     />
@@ -100,7 +100,7 @@ function PendingListings() {
                   <Button
                     onClick={() => {
                       setDocuments(auction.documents);
-                      toogleShow();
+                      toggleShow();
                     }}
                     variant="primary"
                   >
@@ -112,7 +112,7 @@ function PendingListings() {
             </tbody>
           ))}
       </Table>
-      <Modal size="lg" show={show} onHide={toogleShow} centered>
+      <Modal size="lg" show={show} onHide={toggleShow} centered>
         <Modal.Header closeButton>
           <Modal.Title>Documents</Modal.Title>
         </Modal.Header>
@@ -156,7 +156,7 @@ function PendingListings() {
           </Table>
         </Modal.Body>
       </Modal>
-      <Modal size="lg" show={showImages} onHide={toogleShowImages} centered>
+      <Modal size="lg" show={showImages} onHide={toggleShowImages} centered>
         <Modal.Header closeButton>
           <Modal.Title>Images</Modal.Title>
         </Modal.Header>

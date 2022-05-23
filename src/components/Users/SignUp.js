@@ -7,7 +7,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");
 
-const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
+const User = ({ toggleSignUp, toggleSignIn }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -66,9 +66,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          toogleSignUp();
+          toggleSignUp();
           alert("Please check your email to verify your account");
-          // toogleConfirmModal();
+          // toggleConfirmModal();
         }
       });
     }
@@ -97,8 +97,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
             <Button
               className="signup-link"
               onClick={() => {
-                toogleSignIn();
-                toogleSignUp();
+                toggleSignIn();
+                toggleSignUp();
               }}
             >
               Already Registered? Sign In
@@ -485,12 +485,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           <div>
             <CloseButton className="modal-close" onClick={toogleTerms} />
           </div>
-          <iframe
-            title="terms"
-            src={terms}
-            width="100%"
-            height="90%"
-          />
+          <iframe title="terms" src={terms} width="100%" height="90%" />
         </Modal.Body>
       </Modal>
     </>

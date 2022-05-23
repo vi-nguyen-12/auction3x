@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Card, Container } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import "../../styles/work.css";
 
 const Work = () => {
@@ -8,7 +8,6 @@ const Work = () => {
       style={{
         padding: "0 50px",
         background: "#f8f8f8",
-        height: "759px",
         marginTop: "50px",
       }}
     >

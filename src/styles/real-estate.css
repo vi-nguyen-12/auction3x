@@ -1,5 +1,4 @@
 .real-estate {
-  height: 100%;
   /* margin: 0 auto; */
   /* width: 85%; */
   background-image: url("/src/realstate.png");
@@ -13,7 +12,6 @@
   background-size: 100% 100%;
   /* background-blend-mode: darken; */
   padding-bottom: 15rem;
-  margin: auto;
 }
 .img-float {
   position: absolute;
@@ -21,16 +19,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
   border-radius: inherit;
 }
 .btn-group {
   display: flex !important;
-  justify-content: center;
-  align-items: center;
-  margin: 6rem 3rem;
-  padding: 10px 250px;
+  justify-content: space-between !important;
+  margin: 6rem;
   position: relative;
   top: 7em;
 }
@@ -45,9 +39,33 @@
   padding: 100px 50px;
   height: 100vh;
 }
+/* responsive width and height */
+
+@media (max-height: 830px) {
+  .real-estate-wrap {
+    padding: 100px 50px;
+    height: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .real-estate-wrap {
+    height: 100%;
+  }
+}
+@media (max-width: 680px) {
+  .btn-group {
+    display: grid !important;
+    padding: auto;
+  }
+}
+@media (max-width: 600px) {
+  .real-estate-wrap {
+    display: none;
+  }
+}
+
 .about-wrap {
-  padding: 100px 50px;
-  height: 150vh;
+  padding: 0 50px;
 }
 
 .btn-custom {
@@ -94,7 +112,6 @@
 
 .paragraph {
   margin-left: 4rem;
-  width: 28%;
   font-weight: 400;
   /* font family : Montserrat */
   font-family: "Montserrat", sans-serif;

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaBars, FaGlobeAmericas } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { VscGlobe } from "react-icons/vsc";
 import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
@@ -13,16 +13,14 @@ import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import { logout } from "../../slice/userSlice";
 import NumberFormat from "react-number-format";
-// import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
-// import CloseButton from "react-bootstrap/CloseButton";
 
 const Header = ({
   change,
   color,
   headerWidth,
   positionLeft,
-  toogleSignIn,
-  toogleSignUp,
+  toggleSignIn,
+  toggleSignUp,
 }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -38,8 +36,7 @@ const Header = ({
   const [left, setLeft] = useState("0");
   const [paddingRight, setPaddingRight] = useState("0");
   const [borderBottom, setBorderBottom] = useState("");
-  const toogleOpen = () => setOpen(!open);
-  // const toogleFundReq = () => popFundReq(!showFundReq);
+  const toggleOpen = () => setOpen(!open);
   const [showWallet, setShowWallet] = useState(false);
 
   const handleLogout = async () => {
@@ -55,7 +52,7 @@ const Header = ({
 
   const handleSell = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     } else {
       if (!user.KYC) {
         alert("Please complete your Kyc");
@@ -91,14 +88,12 @@ const Header = ({
             "transform 120ms ease, background-color 250ms ease, color 250ms ease"
           );
           setWidth("100%");
-          // setLeft("20%"); // just for display
           setPaddingRight("0");
         } else {
           setColors("");
           setTextColor("white");
           setBoxShadow("");
           setTransition("");
-          // setWidth("90vw"); // just for display
           setLeft("0");
           setPaddingRight("0");
         }
@@ -133,7 +128,6 @@ const Header = ({
           backgroundColor: colors ? colors : color,
           width: headerWidth ? headerWidth : width,
           borderBottom: "1px solid rgba(255,255,255,0.3)",
-          // paddingRight: padRight ? padRight : paddingRight,
           display: "flex",
           alignContent: "center",
           height: "100%",
@@ -206,7 +200,7 @@ const Header = ({
         {change === false ? (
           <>
             {/* {user._id ? (
-              <Button onClick={toogleFundReq} className="fund-btn">
+              <Button onClick={toggleFundReq} className="fund-btn">
                 Request Fund
               </Button>
             ) : null}
@@ -215,7 +209,7 @@ const Header = ({
               keyboard={false}
               size="lg"
               show={showFundReq}
-              onHide={toogleFundReq}
+              onHide={toggleFundReq}
               centered
             >
               <div>
@@ -230,7 +224,7 @@ const Header = ({
                     backgroundColor: "white",
                     boxShadow: "none",
                   }}
-                  onClick={toogleFundReq}
+                  onClick={toggleFundReq}
                 />
               </div>
               <Modal.Body className="fund-modal">
@@ -254,7 +248,7 @@ const Header = ({
                 ) : (
                   <button
                     className="headerNav"
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                     style={{
                       backgroundColor: "transparent",
                       color: textColor,
@@ -394,7 +388,7 @@ const Header = ({
                     }}
                     id={colors === "white" ? "hover" : ""}
                     onClick={() => {
-                      toogleOpen();
+                      toggleOpen();
                     }}
                   >
                     <FaBars size={20} />
@@ -429,7 +423,7 @@ const Header = ({
                         className="signIn-btn mt-0"
                         style={{ color: textColor }}
                         variant="success"
-                        onClick={toogleSignIn}
+                        onClick={toggleSignIn}
                         id={colors === "white" ? "hover" : ""}
                       >
                         Sign In
@@ -440,7 +434,7 @@ const Header = ({
                         className="signUp-btn mt-0"
                         style={{ color: textColor }}
                         variant="success"
-                        onClick={toogleSignUp}
+                        onClick={toggleSignUp}
                       >
                         Sign Up
                       </Button>
@@ -450,7 +444,7 @@ const Header = ({
                       id={colors === "white" ? "hover" : ""}
                       style={{ color: textColor }}
                       className="signIn-btn mt-0"
-                      onClick={toogleSignIn}
+                      onClick={toggleSignIn}
                     >
                       Sign In
                     </Button>
@@ -467,7 +461,7 @@ const Header = ({
                       borderRadius: "0",
                     }}
                     onClick={() => {
-                      toogleOpen();
+                      toggleOpen();
                     }}
                   >
                     <FaBars size={23} />
@@ -620,7 +614,7 @@ const Header = ({
                     height: "57px",
                   }}
                   onClick={() => {
-                    toogleOpen();
+                    toggleOpen();
                   }}
                 >
                   <FaBars size={20} />
@@ -676,7 +670,7 @@ const Header = ({
                         border: "0",
                       }}
                       variant="success"
-                      onClick={toogleSignIn}
+                      onClick={toggleSignIn}
                     >
                       Sign In
                     </Button>
@@ -692,7 +686,7 @@ const Header = ({
                         border: "0",
                       }}
                       variant="success"
-                      onClick={toogleSignUp}
+                      onClick={toggleSignUp}
                     >
                       Signup
                     </Button>
@@ -702,7 +696,7 @@ const Header = ({
                     id={colors === "white" ? "hover" : ""}
                     style={{ color: textColor }}
                     className="signIn-btn mt-0"
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                   >
                     Sign In
                   </Button>
@@ -717,7 +711,7 @@ const Header = ({
                     height: "47px",
                   }}
                   onClick={() => {
-                    toogleOpen();
+                    toggleOpen();
                   }}
                 >
                   <FaBars size={20} />
@@ -741,11 +735,11 @@ const Header = ({
           </div>
         )}
 
-        <Modal show={open} onHide={toogleOpen} fullscreen>
+        <Modal show={open} onHide={toggleOpen} fullscreen>
           <Button
             className="close-button"
             onClick={() => {
-              toogleOpen();
+              toggleOpen();
             }}
           >
             X
@@ -775,7 +769,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/realEstates");
                       }}
                     >
@@ -790,7 +784,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         handleSell();
                       }}
                     >
@@ -805,7 +799,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/Partner");
                       }}
                     >
@@ -822,7 +816,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/cars");
                       }}
                     >
@@ -837,7 +831,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                       }}
                     >
                       BUY
@@ -851,7 +845,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/PrivacyPolicy");
                       }}
                     >
@@ -868,7 +862,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/yachts");
                       }}
                     >
@@ -883,7 +877,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/MultiSellForm");
                       }}
                     >
@@ -898,7 +892,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/TermsOfUse");
                       }}
                     >
@@ -915,7 +909,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/jets");
                       }}
                     >
@@ -930,7 +924,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/FAQ");
                       }}
                     >
@@ -947,7 +941,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/AboutUs");
                       }}
                     >
@@ -962,7 +956,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/Broker");
                       }}
                     >
@@ -977,7 +971,7 @@ const Header = ({
                         color: "white",
                       }}
                       onClick={() => {
-                        toogleOpen();
+                        toggleOpen();
                         history.push("/AboutUs");
                       }}
                     >
@@ -993,7 +987,7 @@ const Header = ({
                       color: "white",
                     }}
                     onClick={() => {
-                      toogleOpen();
+                      toggleOpen();
                       history.push("/Team");
                     }}
                   >

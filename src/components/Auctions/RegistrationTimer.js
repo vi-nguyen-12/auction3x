@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 
-const RegistrationTimer = ({ time, toogleRegistEnded }) => {
+const RegistrationTimer = ({ time, toggleRegistEnded }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -23,7 +23,7 @@ const RegistrationTimer = ({ time, toogleRegistEnded }) => {
 
       if (distance < 0) {
         clearInterval(interval.current);
-        toogleRegistEnded();
+        toggleRegistEnded();
       } else {
         setDays(days);
         setHours(hours);
