@@ -173,78 +173,60 @@ const CarCard = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            <div>
-              <div>
-                <span className="golden-text">{data.property_address}</span>
+            <Row>
+              <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.year} {data.make} {data.model}
                 </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    <Col md={5} style={{ width: "60%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100%" }}>
-                        Online Auction
-                      </p>
-                    </Col>
-
-                    <Col md={6} style={{ width: "40%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "100%",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {auctionEnded ? (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <p
-                          style={{
-                            fontSize: "15px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Auction Ended
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <AuctionTimer
-                            id={id}
-                            time={auctionEndDate}
-                            toogleAuction={toogleAuction}
-                          />
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "40%" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          width: "100%",
-                        }}
-                      >
-                        {data.car_type ? data.car_type : "N/A"}|{" "}
-                        {data.engine ? data.engine : "N/A"}|{" "}
-                        {data.fuel_type ? data.fuel_type : "N/A"}
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Online Auction
+                </p>
+              </Col>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Additional Info
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {auctionEnded ? (
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Auction Ended
+                  </p>
+                ) : (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <AuctionTimer
+                      id={id}
+                      time={auctionEndDate}
+                      toogleAuction={toogleAuction}
+                    />
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    width: "100%",
+                  }}
+                >
+                  {data.car_type ? data.car_type : "N/A"}|{" "}
+                  {data.engine ? data.engine : "N/A"}|{" "}
+                  {data.fuel_type ? data.fuel_type : "N/A"}
+                </p>
+              </Col>
+            </Row>
 
             <hr />
             <div

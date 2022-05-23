@@ -119,92 +119,95 @@ const Featured = ({ toogleSignIn, featureAuctions: auctions }) => {
 
   return (
     <div className="background" style={{ height: "100vh" }}>
-      {auctions.length > 0 ? (
-        <>
-          <Row>
-            <Col md={12} className="m-auto">
-              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
-                Featured Listings
-              </h2>
-            </Col>
-          </Row>
-
-          <Col md={12} className="m-auto">
+      {
+        auctions.length > 0 ? (
+          <>
             <Row>
-              <Carousel {...settings}>
-                {auctions.map((item, index) => (
-                  <Wrap key={index}>
-                    <Col md={12}>
-                      {item.property.type === "real-estate" ? (
-                        <CardComp
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toogleSignIn={toogleSignIn}
-                        />
-                      ) : item.property.type === "car" ? (
-                        <CarCard
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toogleSignIn={toogleSignIn}
-                        />
-                      ) : item.property.type === "jet" ? (
-                        <JetCard
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toogleSignIn={toogleSignIn}
-                        />
-                      ) : item.property.type === "yacht" ? (
-                        <YachtCard
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toogleSignIn={toogleSignIn}
-                        />
-                      ) : null}
-                    </Col>
-                  </Wrap>
-                ))}
-              </Carousel>
+              <Col md={12} className="m-auto">
+                <h2
+                  style={{ color: "white", fontSize: "22px", padding: "20px" }}
+                >
+                  Featured Listings
+                </h2>
+              </Col>
             </Row>
-          </Col>
-        </>
-      ) : null
-      // <Row>
-      //   <Col md={12} className="m-auto">
-      //     <img
-      //       src="/images/f_name.png"
-      //       alt=""
-      //       style={{
-      //         marginBottom: "0px",
-      //         maxWidth: "250px",
-      //         maxHeight: "150px",
-      //       }}
-      //     />
-      //   </Col>
-      // </Row>
+
+            <Col md={12} className="m-auto">
+              <Row>
+                <Carousel {...settings}>
+                  {auctions.map((item, index) => (
+                    <Wrap key={index}>
+                      <Col md={12}>
+                        {item.property.type === "real-estate" ? (
+                          <CardComp
+                            url={item.property.images[0].url}
+                            urls={item.property.images}
+                            data={item.property.details}
+                            id={item._id}
+                            auctionStartDate={item.auctionStartDate}
+                            auctionEndDate={item.auctionEndDate}
+                            startingBid={item.startingBid}
+                            reserveMet={item.isReservedMet}
+                            toogleSignIn={toogleSignIn}
+                          />
+                        ) : item.property.type === "car" ? (
+                          <CarCard
+                            url={item.property.images[0].url}
+                            urls={item.property.images}
+                            data={item.property.details}
+                            id={item._id}
+                            auctionStartDate={item.auctionStartDate}
+                            auctionEndDate={item.auctionEndDate}
+                            startingBid={item.startingBid}
+                            reserveMet={item.isReservedMet}
+                            toogleSignIn={toogleSignIn}
+                          />
+                        ) : item.property.type === "jet" ? (
+                          <JetCard
+                            url={item.property.images[0].url}
+                            urls={item.property.images}
+                            data={item.property.details}
+                            id={item._id}
+                            auctionStartDate={item.auctionStartDate}
+                            auctionEndDate={item.auctionEndDate}
+                            startingBid={item.startingBid}
+                            reserveMet={item.isReservedMet}
+                            toogleSignIn={toogleSignIn}
+                          />
+                        ) : item.property.type === "yacht" ? (
+                          <YachtCard
+                            url={item.property.images[0].url}
+                            urls={item.property.images}
+                            data={item.property.details}
+                            id={item._id}
+                            auctionStartDate={item.auctionStartDate}
+                            auctionEndDate={item.auctionEndDate}
+                            startingBid={item.startingBid}
+                            reserveMet={item.isReservedMet}
+                            toogleSignIn={toogleSignIn}
+                          />
+                        ) : null}
+                      </Col>
+                    </Wrap>
+                  ))}
+                </Carousel>
+              </Row>
+            </Col>
+          </>
+        ) : null
+        // <Row>
+        //   <Col md={12} className="m-auto">
+        //     <img
+        //       src="/images/f_name.png"
+        //       alt=""
+        //       style={{
+        //         marginBottom: "0px",
+        //         maxWidth: "250px",
+        //         maxHeight: "150px",
+        //       }}
+        //     />
+        //   </Col>
+        // </Row>
       }
     </div>
   );

@@ -54,6 +54,7 @@ const JetCard = ({
   reserveMet,
   toogleSignIn,
 }) => {
+  console.log(urls);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -128,7 +129,10 @@ const JetCard = ({
   return (
     <div>
       {auctionEndDate && (
-        <Card className="cards text-left m-auto">
+        <Card
+          className="cards text-left m-auto"
+          style={{ width: window.innerWidth < 800 && "350px" }}
+        >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
@@ -159,93 +163,66 @@ const JetCard = ({
               <img src="/images/heart.png" alt="" />
             )}
           </button>
-          <Card.Body style={{ paddingLeft: "13px" }}>
-            <div>
-              <div>
-                <span className="golden-text">
-                  {data.address.formatted_street_address}, {data.address.state}
-                </span>
+          <Card.Body>
+            <Row>
+              <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.aircraft_builder_name} {data.aircraft_model_designation}
                 </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    <Col md={5} style={{ width: "60%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100%" }}>
-                        Online Auction
-                      </p>
-                    </Col>
-
-                    <Col md={6} style={{ width: "40%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {auctionEnded ? (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <p
-                          style={{
-                            fontSize: "15px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Auction Ended
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <AuctionTimer
-                            id={id}
-                            time={auctionEndDate}
-                            toogleAuction={toogleAuction}
-                          />
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "40%" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        {data.number_of_engines
-                          ? data.number_of_engines + " Engines"
-                          : "N/A"}
-                        |{" "}
-                        {data.number_of_aircraft
-                          ? data.number_of_aircraft + " Aircraft"
-                          : "N/A"}
-                        |{" "}
-                        {data.registration_mark
-                          ? data.registration_mark
-                          : "N/A"}
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Online Auction
+                </p>
+              </Col>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Additional Info
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {auctionEnded ? (
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Auction Ended
+                  </p>
+                ) : (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <AuctionTimer
+                      id={id}
+                      time={auctionEndDate}
+                      toogleAuction={toogleAuction}
+                    />
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    width: "100%",
+                  }}
+                >
+                  {data.number_of_engines
+                    ? data.number_of_engines + " Engines"
+                    : "N/A"}
+                  |{" "}
+                  {data.number_of_aircraft
+                    ? data.number_of_aircraft + " Aircraft"
+                    : "N/A"}
+                  | {data.registration_mark ? data.registration_mark : "N/A"}
+                </p>
+              </Col>
+            </Row>
 
             <hr />
             <div

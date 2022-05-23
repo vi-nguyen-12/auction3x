@@ -54,6 +54,10 @@ const Wrap = styled.div`
     img {
       width: 100%;
       height: 100vh;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      object-fit: cover;
     }
   }
 `;

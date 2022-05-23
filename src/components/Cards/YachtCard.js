@@ -160,81 +160,57 @@ const YachtCard = ({
               <img src="/images/heart.png" alt="" />
             )}
           </button>
-          <Card.Body style={{ paddingLeft: "13px" }}>
-            <div>
-              <div>
-                <span className="golden-text">
-                  {data.address.formatted_street_address}, {data.address.state}
-                </span>
+          <Card.Body>
+            <Row>
+              <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.manufacturer_name} {data.engine_type}
                 </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    <Col md={5} style={{ width: "60%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100%" }}>
-                        Online Auction
-                      </p>
-                    </Col>
-
-                    <Col md={6} style={{ width: "40%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "250px",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {auctionEnded ? (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <p
-                          style={{
-                            fontSize: "15px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Auction Ended
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <AuctionTimer
-                            id={id}
-                            time={auctionEndDate}
-                            toogleAuction={toogleAuction}
-                          />
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "40%" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          width: "100%",
-                        }}
-                      >
-                        {data.engine_type ? data.engine_type : "N/A"}|{" "}
-                        {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
-                        {data.running_cost ? data.running_cost : "N/A"}
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
+            <Row style={{ fontSize: "15px" }}>
+              <Col>
+                <p>Online Auction</p>
+              </Col>
+              <Col>
+                <p>Additional Info</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {auctionEnded ? (
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Auction Ended
+                  </p>
+                ) : (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <AuctionTimer
+                      id={id}
+                      time={auctionEndDate}
+                      toogleAuction={toogleAuction}
+                    />
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    width: "100%",
+                  }}
+                >
+                  {data.engine_type ? data.engine_type : "N/A"}|{" "}
+                  {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
+                  {data.running_cost ? data.running_cost : "N/A"}
+                </p>
+              </Col>
+            </Row>
 
             <hr />
             <div
