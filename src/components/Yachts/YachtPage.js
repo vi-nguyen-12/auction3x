@@ -81,15 +81,7 @@ position: relative;
 }
 `;
 
-function YachtPage({
-  toggleChange,
-  setImgYacht,
-  toggleImgYacht,
-  toggleSignIn,
-}) {
-  useEffect(() => {
-    toggleChange();
-  }, []);
+function YachtPage({ toggleChange, setImgYacht, toggleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -120,7 +112,10 @@ function YachtPage({
       });
       setImgYacht(imageUrl);
     }
-  }, [onGoingAuctions, upcomingAuctions]);
+  }, [onGoingAuctions, upcomingAuctions, setImgYacht]);
+  useEffect(() => {
+    toggleChange();
+  }, [toggleChange]);
   let settings = {
     dots: false,
     infinite: true,

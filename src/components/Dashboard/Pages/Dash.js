@@ -10,7 +10,6 @@ import SavedAuctionsComp from "./Auctions/TabsComponents/SavedAuctionsComp";
 import BidAuctionsComp from "./Auctions/TabsComponents/BidAuctionsComp";
 import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp";
 import CloseButton from "react-bootstrap/CloseButton";
-import MultiFundForm from "../../BuyRegister/Fund Request/MultiFundForm";
 import AddFund from "../../BuyRegister/AddFund";
 
 function Dash() {

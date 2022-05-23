@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import Toast from "../Toast";
-import authServices from "../../services/authServices";
-import Loading from "../Loading";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
 import "../../styles/modal.css";
 require("react-bootstrap/ModalHeader");
 

@@ -16,7 +16,7 @@ function JetDetails({
   toggleSellStep,
   propId,
 }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState();
   const [registration_mark, setRegistration_mark] = useState();
   const [aircraft_builder_name, setAircraft_builder_name] = useState();

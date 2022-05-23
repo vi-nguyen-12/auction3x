@@ -19,7 +19,6 @@ import ButtontoTop from "./components/ButtontoTop";
 import Footer from "./components/Home/footer";
 import Loading from "./components/Loading";
 import { IdleTimer } from "./services/idleTimer";
-import { set } from "react-hook-form";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")

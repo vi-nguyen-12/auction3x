@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { SiDocusign } from "react-icons/si";
 import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 
 function FundDocuSign({ step, toggleStep, document }) {
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const [term, setTerm] = useState(false);
   const toggleTerms = () => setTerm(!term);
   const documents = [];

@@ -7,18 +7,11 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");
 
-const User = ({ toggleSignUp, toggleSignIn, toggleConfirmModal }) => {
+const User = ({ toggleSignUp, toggleSignIn }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
-  const [privacy, setPrivacy] = useState();
-  const [showPrivacy, setShowPrivacy] = useState(false);
   const toggleTerms = () => setShowTerms(!showTerms);
-  const togglePrivacy = () => setShowPrivacy(!showPrivacy);
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     authServices.getDocuments().then((res) => {

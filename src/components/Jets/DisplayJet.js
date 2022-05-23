@@ -405,7 +405,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0", padding: "35px 35px" }}>
+          <Row style={{ padding: "35px 35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.aircraft_builder_name}{" "}
@@ -456,46 +456,6 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                   </div>
                 </div>
               )}
-
-              {/* {user._id && !user.KYC && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={handleKYC}
-                  >
-                    Register to Bid
-                  </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
-                      View Documents
-                    </button>
-                  </div>
-                </div>
-              )} */}
 
               {user._id &&
               property.isNotRegisteredToBuy === true &&

@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "../../styles/sell-register.css";
 import RealEstateDocus from "../RealEstate/RealEstateDocus";
 import CarDocus from "../Cars/CarDocus";

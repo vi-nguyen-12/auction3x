@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaBars, FaGlobeAmericas } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { VscGlobe } from "react-icons/vsc";
 import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
@@ -13,8 +13,6 @@ import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import { logout } from "../../slice/userSlice";
 import NumberFormat from "react-number-format";
-// import MultiFundForm from "../BuyRegister/Fund Request/MultiFundForm";
-// import CloseButton from "react-bootstrap/CloseButton";
 
 const Header = ({
   change,
@@ -39,7 +37,6 @@ const Header = ({
   const [paddingRight, setPaddingRight] = useState("0");
   const [borderBottom, setBorderBottom] = useState("");
   const toggleOpen = () => setOpen(!open);
-  // const toggleFundReq = () => popFundReq(!showFundReq);
   const [showWallet, setShowWallet] = useState(false);
 
   const handleLogout = async () => {
@@ -91,14 +88,12 @@ const Header = ({
             "transform 120ms ease, background-color 250ms ease, color 250ms ease"
           );
           setWidth("100%");
-          // setLeft("20%"); // just for display
           setPaddingRight("0");
         } else {
           setColors("");
           setTextColor("white");
           setBoxShadow("");
           setTransition("");
-          // setWidth("90vw"); // just for display
           setLeft("0");
           setPaddingRight("0");
         }
@@ -133,7 +128,6 @@ const Header = ({
           backgroundColor: colors ? colors : color,
           width: headerWidth ? headerWidth : width,
           borderBottom: "1px solid rgba(255,255,255,0.3)",
-          // paddingRight: padRight ? padRight : paddingRight,
           display: "flex",
           alignContent: "center",
           height: "100%",

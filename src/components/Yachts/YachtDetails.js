@@ -16,7 +16,7 @@ function YachtDetails({
   propId,
   ownership,
 }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const prop = useSelector((state) => state.incompProperty);
   const params = useParams();
   const [vessel_registration_number, setVessel_registration_number] =

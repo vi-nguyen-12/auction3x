@@ -91,7 +91,6 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
         } else {
           authService
             .buyerRegister({
-              // auctionId: auctionId ? auctionId._id : onGoingAuction._id,
               auctionId: id,
               TC: { time: agree, IPAddress: ip },
               answers: answers,
@@ -143,13 +142,7 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
               marginTop: "70px",
             }}
           >
-            <Button
-              className="btn btn-primary"
-              // onClick={() => {
-              //   window.open(url);
-              // }}
-              onClick={handleSignDocusign}
-            >
+            <Button className="btn btn-primary" onClick={handleSignDocusign}>
               <SiDocusign />
               <span style={{ marginLeft: "10px" }}>
                 <span style={{ fontSize: "20px" }}>

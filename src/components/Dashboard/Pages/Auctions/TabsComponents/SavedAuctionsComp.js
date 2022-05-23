@@ -2,7 +2,6 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import "react-circular-progressbar/dist/styles.css";
 import SavedAuctionsCard from "../../Auctions/SavedAuctionsCard";
-import SavedAuctions from "../SavedAuctions";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";

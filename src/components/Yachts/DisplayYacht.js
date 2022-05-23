@@ -108,13 +108,6 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  // a {
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  //   display: block;
-  //   position: relative;
-  //   padding: 0;
-
   img {
     width: 100%;
     height: 100%;
@@ -124,13 +117,6 @@ const Wrap = styled.div`
     position: relative;
     padding: 0;
   }
-
-  // &:hover {
-  //   padding: 0;
-  //   // border: 4px solid rgba(249, 249, 249, 0.8);
-  //   transition-duration: 300ms;
-  // }
-  // }
 `;
 
 function DisplayYacht({ toggleChange, property, toggleSignIn }) {
@@ -403,7 +389,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0", padding: "35px 35px" }}>
+          <Row style={{ padding: "35px 35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.manufacturer_name}

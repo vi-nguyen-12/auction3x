@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import SearchBar from "./SearchBar";
-import { useSelector } from "react-redux";
-import { Row, Col, Modal, Image, Button } from "react-bootstrap";
+
+import { Row, Col, Modal, Image } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";

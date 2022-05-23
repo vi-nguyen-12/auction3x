@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../styles/realEstate.css";
 import { Modal, Table, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Tab } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
@@ -73,6 +73,7 @@ function WinAuctions() {
                           ? auction.property[0].images[0].url
                           : ""
                       }
+                      alt="property"
                     />
                   </div>
                 </td>

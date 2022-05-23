@@ -3,13 +3,11 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../../services/authServices";
 import "../../styles/sell-register.css";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
-import Sell from "./SellWelcome";
 import Loading from "../../components/Loading";
 
 const UploadForm = ({
