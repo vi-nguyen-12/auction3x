@@ -9,7 +9,7 @@ import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 // create step bar
 
-const Sell = ({ toogleStep, step, tooglePropertyType }) => {
+const Sell = ({ toggleStep, step, togglePropertyType }) => {
   const { handleSubmit } = useForm();
 
   const [propertyType, setPropertyType] = useState();
@@ -18,8 +18,8 @@ const Sell = ({ toogleStep, step, tooglePropertyType }) => {
     if (propertyType === undefined) {
       alert("Please select property to sell");
     } else {
-      tooglePropertyType(propertyType);
-      toogleStep(step + 1);
+      togglePropertyType(propertyType);
+      toggleStep(step + 1);
     }
   };
 

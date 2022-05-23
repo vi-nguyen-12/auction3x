@@ -5,7 +5,7 @@ import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 
-const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
+const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
   return (
     <>
       {upcomingAuctions ? (
@@ -43,7 +43,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                         auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     ) : item.property.type === "car" ? (
                       <UpcomingCarCard
@@ -55,7 +55,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                         auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     ) : item.property.type === "jet" ? (
                       <UpcomingJetCard
@@ -67,7 +67,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                         auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     ) : item.property.type === "yacht" ? (
                       <UpcomingYachtCard
@@ -79,7 +79,7 @@ const Upcoming = ({ toogleSignIn, upcomingAuctions }) => {
                         auctionStartDate={item.auctionStartDate}
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     ) : null}
                   </Col>

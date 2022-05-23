@@ -10,12 +10,12 @@ import Loading from "../../components/Loading";
 import io from "socket.io-client";
 
 function DisplayAuctions({
-  toogleChange,
+  toggleChange,
   setHeaderWidth,
   setPositionLeft,
   setPadRight,
-  toogleShow,
-  toogleSignIn,
+  toggleShow,
+  toggleSignIn,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -23,7 +23,7 @@ function DisplayAuctions({
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    toogleShow(true);
+    toggleShow(true);
     setHeaderWidth("100vw");
     setPositionLeft("20%");
     setPadRight("3rem");
@@ -104,26 +104,26 @@ function DisplayAuctions({
           <DisplayRealEstate
             socket={socket}
             property={auction}
-            toogleChange={toogleChange}
-            toogleSignIn={toogleSignIn}
+            toggleChange={toggleChange}
+            toggleSignIn={toggleSignIn}
           />
         ) : auction.property.type === "car" ? (
           <DisplayCar
             property={auction}
-            toogleChange={toogleChange}
-            toogleSignIn={toogleSignIn}
+            toggleChange={toggleChange}
+            toggleSignIn={toggleSignIn}
           />
         ) : auction.property.type === "jet" ? (
           <DisplayJet
             property={auction}
-            toogleChange={toogleChange}
-            toogleSignIn={toogleSignIn}
+            toggleChange={toggleChange}
+            toggleSignIn={toggleSignIn}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
             property={auction}
-            toogleChange={toogleChange}
-            toogleSignIn={toogleSignIn}
+            toggleChange={toggleChange}
+            toggleSignIn={toggleSignIn}
           />
         ) : null
       ) : (

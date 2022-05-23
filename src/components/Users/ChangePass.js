@@ -4,7 +4,7 @@ import authServices from "../../services/authServices";
 import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
-const ChangePass = ({ colorChange, toogleShow }) => {
+const ChangePass = ({ colorChange, toggleShow }) => {
   const {
     register,
     handleSubmit,
@@ -33,7 +33,7 @@ const ChangePass = ({ colorChange, toogleShow }) => {
 
   useEffect(() => {
     colorChange("black");
-    toogleShow(false);
+    toggleShow(false);
   }, []);
 
   return (
@@ -56,11 +56,11 @@ const ChangePass = ({ colorChange, toogleShow }) => {
         <div className="form-group mb-2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-          // onKeyDown={(e) => {
-          //   if (e.key === "Enter") {
-          //     e.preventDefault();
-          //   }
-          // }}
+            // onKeyDown={(e) => {
+            //   if (e.key === "Enter") {
+            //     e.preventDefault();
+            //   }
+            // }}
           >
             <div className="form-group">
               <p style={{ justifyContent: "left", margin: "0" }}>

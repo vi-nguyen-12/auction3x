@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function YachtForm({ toogleStep, step, properties, property }) {
+function YachtForm({ toggleStep, step, properties, property }) {
   const { register, handleSubmit } = useForm();
   const [vessel_registration_number, setVessel_registration_number] =
     useState();
@@ -189,7 +189,7 @@ function YachtForm({ toogleStep, step, properties, property }) {
       },
     };
     properties(datas);
-    toogleStep(step + 1);
+    toggleStep(step + 1);
   };
 
   return (
@@ -487,7 +487,7 @@ function YachtForm({ toogleStep, step, properties, property }) {
         <Button
           className="pre-btn"
           onClick={() => {
-            toogleStep(step - 1);
+            toggleStep(step - 1);
           }}
         >
           Previous

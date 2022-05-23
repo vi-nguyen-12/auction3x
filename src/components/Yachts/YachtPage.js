@@ -82,13 +82,13 @@ position: relative;
 `;
 
 function YachtPage({
-  toogleChange,
+  toggleChange,
   setImgYacht,
   toggleImgYacht,
-  toogleSignIn,
+  toggleSignIn,
 }) {
   useEffect(() => {
-    toogleChange();
+    toggleChange();
   }, []);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -183,7 +183,7 @@ function YachtPage({
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -219,7 +219,7 @@ function YachtPage({
                     startRegister={item.registerStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))

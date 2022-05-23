@@ -3,10 +3,10 @@ import { SiDocusign } from "react-icons/si";
 import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 
-function FundDocuSign({ step, toogleStep, document }) {
+function FundDocuSign({ step, toggleStep, document }) {
   const { register, handleSubmit } = useForm();
   const [term, setTerm] = useState(false);
-  const toogleTerms = () => setTerm(!term);
+  const toggleTerms = () => setTerm(!term);
   const documents = [];
 
   //push document to array if it is not empty
@@ -74,7 +74,7 @@ function FundDocuSign({ step, toogleStep, document }) {
           multiple
           // {...register("images", { required: false })}
           style={{ marginRight: "10px", marginBottom: "30px" }}
-          onChange={toogleTerms}
+          onChange={toggleTerms}
         />
         Terms & Conditions
       </div>
@@ -82,7 +82,7 @@ function FundDocuSign({ step, toogleStep, document }) {
         style={{ position: "sticky", padding: "auto" }}
         className="bottom-btn"
       >
-        <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
           Previous
         </button>
         <button className="nxt-btn" type="submit">

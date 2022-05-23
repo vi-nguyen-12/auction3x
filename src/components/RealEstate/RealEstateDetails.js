@@ -6,12 +6,12 @@ import { useParams } from "react-router-dom";
 
 function RealEstateDetails({
   property,
-  toogleStep,
+  toggleStep,
   step,
-  tooglePropertyData,
+  togglePropertyData,
   propId,
   ownership,
-  toogleSellStep,
+  toggleSellStep,
   getPropId,
   propertyData,
 }) {
@@ -64,7 +64,7 @@ function RealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           alert("Saved Successfully!");
         }
       });
@@ -92,7 +92,7 @@ function RealEstateDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           getPropId(res.data._id);
           alert("Saved Successfully!");
         }
@@ -339,8 +339,8 @@ function RealEstateDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      togglePropertyData(submitedData);
+      toggleStep(step + 1);
     }
   };
   return (
@@ -609,7 +609,7 @@ function RealEstateDetails({
         >
           <Button onClick={saveInfo}>Save</Button>
         </div>
-        <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
           Previous
         </Button>
         <button className="nxt-btn" type="submit">

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ListingFees = ({ toogleStep, step }) => (
+const ListingFees = ({ toggleStep, step }) => (
   <form className="listingfee-content">
     <div className="sell-top">
       <div className="circle-1">
@@ -206,13 +206,13 @@ const ListingFees = ({ toogleStep, step }) => (
         Pay Now
       </button>
       <div className="bottom-btn-listfee">
-        <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+        <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
           Previous
         </button>
         <button
           className="nxt-btn"
           onClick={() => {
-            toogleStep(step + 1);
+            toggleStep(step + 1);
           }}
         >
           Next

@@ -52,7 +52,7 @@ const YachtCard = ({
   reserveMet,
   auctionEndDate,
   startingBid,
-  toogleSignIn,
+  toggleSignIn,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -66,13 +66,13 @@ const YachtCard = ({
     slidesToScroll: 1,
   };
   const [auctionEnded, setAuctionEnded] = useState(false);
-  const toogleAuction = () => setAuctionEnded(!auctionEnded);
+  const toggleAuction = () => setAuctionEnded(!auctionEnded);
 
   const history = useHistory();
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -110,7 +110,7 @@ const YachtCard = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {
@@ -213,7 +213,7 @@ const YachtCard = ({
                           <AuctionTimer
                             id={id}
                             time={auctionEndDate}
-                            toogleAuction={toogleAuction}
+                            toggleAuction={toggleAuction}
                           />
                         </div>
                       </Col>

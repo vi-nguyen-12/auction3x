@@ -11,7 +11,7 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 
 const MultiSellForm = ({
-  toogleShow,
+  toggleShow,
   colorChange,
   bodyColorChange,
   setHeaderWidth,
@@ -19,14 +19,14 @@ const MultiSellForm = ({
   setPadRight,
 }) => {
   const [step, setStep] = useState(0);
-  const toogleStep = (step) => {
+  const toggleStep = (step) => {
     setStep(step);
   };
 
   const params = useParams();
 
   const [propertyData, setPropertyData] = useState({});
-  const tooglePropertyData = (propertyData) => {
+  const togglePropertyData = (propertyData) => {
     setPropertyData(propertyData);
   };
 
@@ -36,22 +36,22 @@ const MultiSellForm = ({
   };
 
   const [documents, setDocuments] = useState([]);
-  const toogleDocuments = (documents) => {
+  const toggleDocuments = (documents) => {
     setDocuments(documents);
   };
 
   const [images, setImages] = useState([]);
-  const toogleImages = (images) => {
+  const toggleImages = (images) => {
     setImages(images);
   };
 
   const [videos, setVideos] = useState([]);
-  const toogleVideos = (videos) => {
+  const toggleVideos = (videos) => {
     setVideos(videos);
   };
 
   const [propertyType, setPropertyType] = useState();
-  const tooglePropertyType = (prop) => {
+  const togglePropertyType = (prop) => {
     setPropertyType(prop);
   };
 
@@ -66,14 +66,14 @@ const MultiSellForm = ({
   };
 
   const [sellStep, setSellStep] = useState(0);
-  const toogleSellStep = (sellStep) => setSellStep(sellStep);
+  const toggleSellStep = (sellStep) => setSellStep(sellStep);
   useEffect(() => {
     setHeaderWidth("100vw");
     setPositionLeft("20%");
     setPadRight("3rem");
     colorChange("black");
     bodyColorChange("#ffefe3");
-    toogleShow();
+    toggleShow();
     if (params.step) {
       setStep(parseInt(params.step) + 1);
     }
@@ -91,8 +91,8 @@ const MultiSellForm = ({
       <div className="sell-register-container">
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <SellWelcome
-          tooglePropertyType={tooglePropertyType}
-          toogleStep={toogleStep}
+          togglePropertyType={togglePropertyType}
+          toggleStep={toggleStep}
           step={step}
         />
       </div>
@@ -102,12 +102,12 @@ const MultiSellForm = ({
       <div className="sell-register-container">
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <Ownership
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           getOwnerShip={getOwnerShip}
           propertyType={propertyType}
           getPropId={getPropId}
-          toogleSellStep={toogleSellStep}
+          toggleSellStep={toggleSellStep}
           ownership={ownership}
           propId={propId}
         />
@@ -119,7 +119,7 @@ const MultiSellForm = ({
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <ListingDetails
           properties={properties}
-          toogleStep={(data) => toogleStep(data)}
+          toggleStep={(data) => toggleStep(data)}
           step={step}
           propertyType={propertyType}
           property={property}
@@ -131,15 +131,15 @@ const MultiSellForm = ({
       <div className="sell-register-container">
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <PropertyDetails
-          tooglePropertyData={tooglePropertyData}
+          togglePropertyData={togglePropertyData}
           property={property}
-          toogleStep={(data) => toogleStep(data)}
+          toggleStep={(data) => toggleStep(data)}
           step={step}
           propertyType={propertyType}
           propId={propId}
           ownership={ownership}
           getPropId={getPropId}
-          toogleSellStep={toogleSellStep}
+          toggleSellStep={toggleSellStep}
           propertyData={propertyData}
         />
       </div>
@@ -149,11 +149,11 @@ const MultiSellForm = ({
       <div className="sell-register-container">
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <UploadForm
-          toogleImages={toogleImages}
-          toogleVideos={toogleVideos}
-          toogleStep={(data) => toogleStep(data)}
+          toggleImages={toggleImages}
+          toggleVideos={toggleVideos}
+          toggleStep={(data) => toggleStep(data)}
           step={step}
-          toogleSellStep={toogleSellStep}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}
@@ -170,11 +170,11 @@ const MultiSellForm = ({
       <div className="sell-register-container">
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <DocumentsUpload
-          toogleStep={(data) => toogleStep(data)}
+          toggleStep={(data) => toggleStep(data)}
           step={step}
-          toogleDocuments={toogleDocuments}
+          toggleDocuments={toggleDocuments}
           propertyType={propertyType}
-          toogleSellStep={toogleSellStep}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}
@@ -191,7 +191,7 @@ const MultiSellForm = ({
     //     <div className="sell-register-container">
     //       <h1>Sell On Auction3</h1>
 
-    //       <ListingFees toogleStep={toogleStep} step={step} test="test" />
+    //       <ListingFees toggleStep={toggleStep} step={step} test="test" />
     //     </div>
     //   );
   } else if (step === 6) {
@@ -200,7 +200,7 @@ const MultiSellForm = ({
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <AgreementForm
           propertyData={propertyData}
-          toogleStep={(data) => toogleStep(data)}
+          toggleStep={(data) => toggleStep(data)}
           step={step}
           images={images}
           videos={videos}

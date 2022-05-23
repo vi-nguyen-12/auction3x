@@ -7,44 +7,44 @@ import FundUpload from "./Fund Request/FundUpload";
 const MultiBuyForm = () => {
   const [step, setStep] = useState(0);
 
-  const toogleStep = (step) => {
+  const toggleStep = (step) => {
     setStep(step);
   };
 
   const [document, setDocument] = useState();
-  const toogleDocument = (document) => {
+  const toggleDocument = (document) => {
     setDocument(document);
   };
 
   useEffect(() => {
-    toogleDocument(document);
+    toggleDocument(document);
   }, [document]);
 
   const [questionID, setQuestionID] = useState();
 
-  const toogleQuestionID = (questionID) => {
+  const toggleQuestionID = (questionID) => {
     setQuestionID(questionID);
   };
   const [answer, setAnswer] = useState();
 
-  const toogleAnswer = (answer) => {
+  const toggleAnswer = (answer) => {
     setAnswer(answer);
   };
 
   if (step === 0) {
     return (
       <div className="buy-register-container">
-        <BuyAgreement toogleStep={toogleStep} step={step} />
+        <BuyAgreement toggleStep={toggleStep} step={step} />
       </div>
     );
   } else if (step === 1) {
     return (
       <div className="buy-register-container">
         <FundUpload
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocument={toogleDocument}
-          docu = {document}
+          toggleDocument={toggleDocument}
+          docu={document}
         />
       </div>
     );
@@ -52,10 +52,10 @@ const MultiBuyForm = () => {
     return (
       <div className="buy-register-container">
         <BuyQuestionair
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleAnswer={toogleAnswer}
-          toogleQuestionID={toogleQuestionID}
+          toggleAnswer={toggleAnswer}
+          toggleQuestionID={toggleQuestionID}
         />
       </div>
     );
@@ -63,7 +63,7 @@ const MultiBuyForm = () => {
     return (
       <div className="buy-register-container">
         <BuyAuthorized
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           answer={answer}
           questionID={questionID}

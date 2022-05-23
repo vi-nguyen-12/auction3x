@@ -23,13 +23,13 @@ function Dash() {
   const [numOfLiveAuctions, setNumOfLiveAuctions] = useState(0);
   const [listing, setListing] = useState();
   const [numOfUpcomingAuctions, setNumOfUpcomingAuctions] = useState(0);
-  const toogleShowSavedProp = (state) => setShowSavedProp(state);
-  const toogleShowBidAuctions = (state) => setShowBidAuctions(state);
-  const toogleShowApprovedAuctions = (state) => setShowApprovedAuctions(state);
+  const toggleShowSavedProp = (state) => setShowSavedProp(state);
+  const toggleShowBidAuctions = (state) => setShowBidAuctions(state);
+  const toggleShowApprovedAuctions = (state) => setShowApprovedAuctions(state);
   const user = useSelector((state) => state.user);
   const savedProperties = useSelector((state) => state.savedProperty);
   const [showFundReq, popFundReq] = useState(false);
-  const toogleFundReq = () => popFundReq(!showFundReq);
+  const toggleFundReq = () => popFundReq(!showFundReq);
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
@@ -132,10 +132,10 @@ function Dash() {
             {showSavedProp === true ? (
               <Button
                 onClick={() => {
-                  toogleShowApprovedAuctions(false);
-                  toogleShowBidAuctions(false);
+                  toggleShowApprovedAuctions(false);
+                  toggleShowBidAuctions(false);
                   getSavedProperty();
-                  toogleShowSavedProp(true);
+                  toggleShowSavedProp(true);
                 }}
                 id={window.location.pathname === "/Dashboard" ? "active" : ""}
                 // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
@@ -146,10 +146,10 @@ function Dash() {
             ) : (
               <Button
                 onClick={() => {
-                  toogleShowApprovedAuctions(false);
-                  toogleShowBidAuctions(false);
+                  toggleShowApprovedAuctions(false);
+                  toggleShowBidAuctions(false);
                   getSavedProperty();
-                  toogleShowSavedProp(true);
+                  toggleShowSavedProp(true);
                 }}
                 // style={{ borderBottom: color, color: textColor }}
                 className="tabs"
@@ -160,10 +160,10 @@ function Dash() {
             {showBidAuctions === true ? (
               <Button
                 onClick={() => {
-                  toogleShowApprovedAuctions(false);
-                  toogleShowSavedProp(false);
+                  toggleShowApprovedAuctions(false);
+                  toggleShowSavedProp(false);
                   getBidAuctions();
-                  toogleShowBidAuctions(true);
+                  toggleShowBidAuctions(true);
                 }}
                 className="tabs"
                 id={window.location.pathname === "/Dashboard" ? "active" : ""}
@@ -173,10 +173,10 @@ function Dash() {
             ) : (
               <Button
                 onClick={() => {
-                  toogleShowApprovedAuctions(false);
-                  toogleShowSavedProp(false);
+                  toggleShowApprovedAuctions(false);
+                  toggleShowSavedProp(false);
                   getBidAuctions();
-                  toogleShowBidAuctions(true);
+                  toggleShowBidAuctions(true);
                 }}
                 className="tabs"
               >
@@ -186,10 +186,10 @@ function Dash() {
             {showApprovedAuctions === true ? (
               <Button
                 onClick={() => {
-                  toogleShowBidAuctions(false);
-                  toogleShowSavedProp(false);
+                  toggleShowBidAuctions(false);
+                  toggleShowSavedProp(false);
                   getApprovedAuctions();
-                  toogleShowApprovedAuctions(true);
+                  toggleShowApprovedAuctions(true);
                 }}
                 className="tabs"
                 id={window.location.pathname === "/Dashboard" ? "active" : ""}
@@ -199,10 +199,10 @@ function Dash() {
             ) : (
               <Button
                 onClick={() => {
-                  toogleShowBidAuctions(false);
-                  toogleShowSavedProp(false);
+                  toggleShowBidAuctions(false);
+                  toggleShowSavedProp(false);
                   getApprovedAuctions();
-                  toogleShowApprovedAuctions(true);
+                  toggleShowApprovedAuctions(true);
                 }}
                 className="tabs"
               >
@@ -222,7 +222,7 @@ function Dash() {
             </div>
             <div className="refresh">
               <GoPlus color="white" size={28} />
-              <button onClick={toogleFundReq} className="resetBtn">
+              <button onClick={toggleFundReq} className="resetBtn">
                 <span>Add Fund</span>
               </button>
             </div>
@@ -272,7 +272,7 @@ function Dash() {
         keyboard={false}
         size="lg"
         show={showFundReq}
-        onHide={toogleFundReq}
+        onHide={toggleFundReq}
         centered
       >
         <div>
@@ -287,7 +287,7 @@ function Dash() {
               backgroundColor: "white",
               boxShadow: "none",
             }}
-            onClick={toogleFundReq}
+            onClick={toggleFundReq}
           />
         </div>
         <Modal.Body>

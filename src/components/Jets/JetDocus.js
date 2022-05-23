@@ -9,15 +9,15 @@ import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 
 function JetDocus({
-  toogleStep,
+  toggleStep,
   step,
-  toogleDocuments,
+  toggleDocuments,
   ownership,
   propId,
   images,
   videos,
   propertyData,
-  toogleSellStep,
+  toggleSellStep,
   sellStep,
   getPropId,
   document,
@@ -653,7 +653,7 @@ function JetDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(4);
+            toggleSellStep(4);
             alert("Saved Successfully!");
           }
         });
@@ -671,7 +671,7 @@ function JetDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(5);
+            toggleSellStep(5);
             alert("Saved Successfully!");
           }
         });
@@ -687,7 +687,7 @@ function JetDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(6);
+            toggleSellStep(6);
             alert("Saved Successfully!");
           }
         });
@@ -703,7 +703,7 @@ function JetDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(6);
+            toggleSellStep(6);
             alert("Saved Successfully!");
           }
         });
@@ -721,7 +721,7 @@ function JetDocus({
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          toogleSellStep(4);
+          toggleSellStep(4);
           getPropId(response.data._id);
           alert("Saved Successfully!");
         }
@@ -744,8 +744,8 @@ function JetDocus({
       doc11.length !== 0 &&
       doc12.length !== 0
     ) {
-      toogleDocuments(documents);
-      toogleStep(step + 1);
+      toggleDocuments(documents);
+      toggleStep(step + 1);
     } else {
       alert("Please upload the required documents");
     }
@@ -1454,7 +1454,7 @@ function JetDocus({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </Button>
           <button className="nxt-btn" type="submit">

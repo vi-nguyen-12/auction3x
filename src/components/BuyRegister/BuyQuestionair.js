@@ -4,18 +4,18 @@ import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
 
 const BuyQuestionair = ({
-  toogleStep,
+  toggleStep,
   step,
-  toogleAnswer,
-  // toogleAnswer2,
-  // toogleAnswer3,
-  // toogleAnswer4,
-  // toogleAnswer5,
-  toogleQuestionID,
-  // toogleQuestion2ID,
-  // toogleQuestion3ID,
-  // toogleQuestion4ID,
-  // toogleQuestion5ID,
+  toggleAnswer,
+  // toggleAnswer2,
+  // toggleAnswer3,
+  // toggleAnswer4,
+  // toggleAnswer5,
+  toggleQuestionID,
+  // toggleQuestion2ID,
+  // toggleQuestion3ID,
+  // toggleQuestion4ID,
+  // toggleQuestion5ID,
 }) => {
   const [question1, setQuestion1] = useState();
   const [question2, setQuestion2] = useState();
@@ -65,16 +65,16 @@ const BuyQuestionair = ({
   }, []);
 
   // const onSubmit = () => {
-  //   toogleAnswer2(answer2);
-  //   toogleAnswer3(answer3);
-  //   toogleAnswer4(answer4);
-  //   toogleAnswer5(answer5);
-  //   toogleQuestion1ID(question1ID);
-  //   toogleQuestion2ID(question2ID);
-  //   toogleQuestion3ID(question3ID);
-  //   toogleQuestion4ID(question4ID);
-  //   toogleQuestion5ID(question5ID);
-  //   toogleStep(step + 1);
+  //   toggleAnswer2(answer2);
+  //   toggleAnswer3(answer3);
+  //   toggleAnswer4(answer4);
+  //   toggleAnswer5(answer5);
+  //   toggleQuestion1ID(question1ID);
+  //   toggleQuestion2ID(question2ID);
+  //   toggleQuestion3ID(question3ID);
+  //   toggleQuestion4ID(question4ID);
+  //   toggleQuestion5ID(question5ID);
+  //   toggleStep(step + 1);
   // };
   return (
     <>
@@ -95,7 +95,9 @@ const BuyQuestionair = ({
       <Modal.Body>
         <form>
           <div style={{ marginBottom: "15px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>Q.1: {question1}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>
+              Q.1: {question1}
+            </p>
             <input
               type="radio"
               name="answer1"
@@ -136,7 +138,9 @@ const BuyQuestionair = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>Q.2: {question2}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>
+              Q.2: {question2}
+            </p>
             <input
               type="radio"
               name="answer2"
@@ -176,7 +180,9 @@ const BuyQuestionair = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>Q3: {question3}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>
+              Q3: {question3}
+            </p>
             <input
               type="radio"
               name="answer3"
@@ -216,7 +222,9 @@ const BuyQuestionair = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>Q4: {question4}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>
+              Q4: {question4}
+            </p>
             <input
               type="radio"
               name="answer4"
@@ -256,7 +264,9 @@ const BuyQuestionair = ({
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>Q5: {question5}</p>
+            <p style={{ fontWeight: "bold", color: "black" }}>
+              Q5: {question5}
+            </p>
             <input
               type="radio"
               name="answer5"
@@ -300,24 +310,24 @@ const BuyQuestionair = ({
         style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
       >
         <div style={{ display: "flex" }}>
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </button>
           <button
             className="nxt-btn"
             type="submit"
             onClick={() => {
-              toogleAnswer(answer);
-              // toogleAnswer2(answer2);
-              // toogleAnswer3(answer3);
-              // toogleAnswer4(answer4);
-              // toogleAnswer5(answer5);
-              toogleQuestionID(questionID);
-              // toogleQuestion2ID(question2ID);
-              // toogleQuestion3ID(question3ID);
-              // toogleQuestion4ID(question4ID);
-              // toogleQuestion5ID(question5ID);
-              toogleStep(step + 1);
+              toggleAnswer(answer);
+              // toggleAnswer2(answer2);
+              // toggleAnswer3(answer3);
+              // toggleAnswer4(answer4);
+              // toggleAnswer5(answer5);
+              toggleQuestionID(questionID);
+              // toggleQuestion2ID(question2ID);
+              // toggleQuestion3ID(question3ID);
+              // toggleQuestion4ID(question4ID);
+              // toggleQuestion5ID(question5ID);
+              toggleStep(step + 1);
             }}
           >
             Next

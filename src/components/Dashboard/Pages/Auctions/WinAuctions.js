@@ -9,7 +9,7 @@ function WinAuctions() {
   const [winAuctions, setWinAuctions] = useState([]);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
-  const toogleShowPic = () => setShowPic(!showPic);
+  const toggleShowPic = () => setShowPic(!showPic);
 
   useEffect(() => {
     const fetchWinAuctions = async () => {
@@ -66,7 +66,7 @@ function WinAuctions() {
                       height="50px"
                       onClick={() => {
                         setImages(auction.property[0].images);
-                        toogleShowPic();
+                        toggleShowPic();
                       }}
                       src={
                         auction.property[0].images.length > 0
@@ -110,7 +110,7 @@ function WinAuctions() {
             </tbody>
           ))}
       </Table>
-      <Modal size="lg" show={showPic} onHide={toogleShowPic} centered>
+      <Modal size="lg" show={showPic} onHide={toggleShowPic} centered>
         <Modal.Header closeButton>
           <Modal.Title>Images</Modal.Title>
         </Modal.Header>

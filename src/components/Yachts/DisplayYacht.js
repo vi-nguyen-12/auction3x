@@ -133,11 +133,11 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayYacht({ toogleChange, property, toogleSignIn }) {
+function DisplayYacht({ toggleChange, property, toggleSignIn }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -163,15 +163,15 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
 
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [downloadFiles, setDownloadFiles] = useState([]);
-  const toogleRegister = () => setShowRegister(!showRegister);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
+  const toggleRegister = () => setShowRegister(!showRegister);
+  const togglePlaceBid = () => setPlaceBid(!placeBid);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -179,7 +179,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    toogleChange();
+    toggleChange();
 
     //set location for map
     setLocation({
@@ -432,7 +432,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                   >
                     Register to Bid
                   </button>
@@ -499,7 +499,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleRegister}>
+                  <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -524,7 +524,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                 <div className="registBtn">
                   <button
                     className="registsBtn"
-                    onClick={toogleRegister}
+                    onClick={toggleRegister}
                     disabled
                   >
                     Register to Bid
@@ -552,7 +552,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                   <div className="registBtn">
                     <button
                       className="registsBtn"
-                      onClick={toogleRegister}
+                      onClick={toggleRegister}
                       disabled
                     >
                       Register to Bid
@@ -597,7 +597,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    onClick={togglePlaceBid}
                   >
                     Bid Now!
                   </button>
@@ -638,7 +638,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
-                      onClick={tooglePlaceBid}
+                      onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
@@ -682,7 +682,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
                     >
                       <RegistrationTimer
                         time={property.registerEndDate}
-                        toogleRegistEnded={toogleRegistEnded}
+                        toggleRegistEnded={toggleRegistEnded}
                       />
                       <div
                         style={{
@@ -1432,7 +1432,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
             backdrop="static"
             keyboard={false}
             show={showRegister}
-            onHide={toogleRegister}
+            onHide={toggleRegister}
             centered
           >
             <Modal.Body>
@@ -1445,7 +1445,7 @@ function DisplayYacht({ toogleChange, property, toogleSignIn }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={tooglePlaceBid}
+            onHide={togglePlaceBid}
             centered
           >
             <Modal.Body>

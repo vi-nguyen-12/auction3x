@@ -6,7 +6,7 @@ import YachtForm from "../Yachts/YachtForm";
 import SellHeader from "./SellHeader";
 
 const ListingDetails = ({
-  toogleStep,
+  toggleStep,
   step,
   properties,
   propertyType,
@@ -17,28 +17,28 @@ const ListingDetails = ({
       <SellHeader step={step} />
       {propertyType === "real-estate" ? (
         <RealEstateForm
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           properties={properties}
           property={property}
         />
       ) : propertyType === "car" ? (
         <CarForm
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           properties={properties}
           property={property}
         />
       ) : propertyType === "jet" ? (
         <JetForm
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           properties={properties}
           property={property}
         />
       ) : propertyType === "yacht" ? (
         <YachtForm
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
           properties={properties}
           property={property}

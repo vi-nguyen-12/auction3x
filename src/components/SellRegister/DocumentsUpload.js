@@ -8,16 +8,16 @@ import JetDocus from "../Jets/JetDocus";
 import SellHeader from "./SellHeader";
 
 const DocumentsUpload = ({
-  toogleStep,
+  toggleStep,
   step,
   propertyType,
-  toogleDocuments,
+  toggleDocuments,
   ownership,
   propId,
   images,
   videos,
   propertyData,
-  toogleSellStep,
+  toggleSellStep,
   sellStep,
   getPropId,
   document,
@@ -27,10 +27,10 @@ const DocumentsUpload = ({
       <SellHeader step={step} />
       {propertyType === "real-estate" ? (
         <RealEstateDocus
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocuments={toogleDocuments}
-          toogleSellStep={toogleSellStep}
+          toggleDocuments={toggleDocuments}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}
@@ -42,10 +42,10 @@ const DocumentsUpload = ({
         />
       ) : propertyType === "car" ? (
         <CarDocus
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocuments={toogleDocuments}
-          toogleSellStep={toogleSellStep}
+          toggleDocuments={toggleDocuments}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}
@@ -57,10 +57,10 @@ const DocumentsUpload = ({
         />
       ) : propertyType === "jet" ? (
         <JetDocus
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocuments={toogleDocuments}
-          toogleSellStep={toogleSellStep}
+          toggleDocuments={toggleDocuments}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}
@@ -72,10 +72,10 @@ const DocumentsUpload = ({
         />
       ) : propertyType === "yacht" ? (
         <YachtDocus
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocuments={toogleDocuments}
-          toogleSellStep={toogleSellStep}
+          toggleDocuments={toggleDocuments}
+          toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
           propId={propId}

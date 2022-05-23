@@ -18,11 +18,11 @@ class IdleTimer {
       if (Date.now() > expiredTime) {
         console.log("Timeout");
         this.handleLogout();
+        clearInterval(this.internal);
       }
     }, 1000);
   };
   clearTracker = () => {
-    clearInterval(this.internal);
     window.removeEventListener("mousemove", this.updateExpiredTime);
     window.removeEventListener("scroll", this.updateExpiredTime);
     window.removeEventListener("keydown", this.updateExpiredTime);

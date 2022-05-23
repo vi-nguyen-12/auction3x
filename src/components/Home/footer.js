@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../styles/footer.css";
 
-const Footer = ({ toogleSignIn }) => {
+const Footer = ({ toggleSignIn }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   return (
@@ -37,7 +37,7 @@ const Footer = ({ toogleSignIn }) => {
                         history.push("/MultiSellForm");
                         window.location.reload();
                       } else {
-                        toogleSignIn();
+                        toggleSignIn();
                       }
                     }}
                   >

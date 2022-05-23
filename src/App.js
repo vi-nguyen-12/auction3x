@@ -9,7 +9,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "./slice/userSlice";
+import { login, logout } from "./slice/userSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
 import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
@@ -19,6 +19,7 @@ import ButtontoTop from "./components/ButtontoTop";
 import Footer from "./components/Home/footer";
 import Loading from "./components/Loading";
 import { IdleTimer } from "./services/idleTimer";
+import { set } from "react-hook-form";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -50,6 +51,9 @@ const SignUp = React.lazy(() => import("./components/Users/SignUp"));
 const ForgotPass = React.lazy(() => import("./components/Users/ForgotPass"));
 const ChangePass = React.lazy(() => import("./components/Users/ChangePass"));
 const Login = React.lazy(() => import("./components/Users/Login"));
+const SessionExpired = React.lazy(() =>
+  import("./components/Users/SessionExpired")
+);
 const Home = React.lazy(() => import("./components/Home/Home"));
 const MultiSellForm = React.lazy(() =>
   import("./components/SellRegister/MultiSellForm")
@@ -72,16 +76,19 @@ function App() {
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
-  const [isTimeOut, setTimeOut] = useState(false);
+  const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
 
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+  const toggleChangePass = () => popChangePass(!changePass);
+  const toggleForgotPass = () => popForgotPass(!forgotPass);
+  const toggleButton = () => popButton(!showButton);
+  const toggleSignIn = () => popSignIn(!showSignIn);
+  const toggleSignUp = () => popUpSignUp(!showSignUp);
+  const toggleConfirmModal = () => popupConfirm(!showConfirm);
+  const toggleSessionTimedOut = () => {
+    setShowSessionTimedOut(!showSessionTimedOut);
+  };
 
-  const toogleShow = (value) => {
+  const toggleShow = (value) => {
     setShow(value);
   };
 
@@ -94,7 +101,7 @@ function App() {
   };
 
   const [change, setChange] = useState(false);
-  const toogleChange = (change) => {
+  const toggleChange = (change) => {
     setChange(change);
   };
 
@@ -123,12 +130,14 @@ function App() {
     });
   }
   useEffect(() => {
-    const func = () => {
-      console.log("heyyy log out");
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      dispatch(logout());
+      setShowSessionTimedOut(true);
     };
     let timer;
     if (user._id) {
-      timer = new IdleTimer({ timeout: 2, handleLogout: func });
+      timer = new IdleTimer({ timeout: 2, handleLogout });
       timer.setTracker();
       timer.logoutTimer();
     }
@@ -149,7 +158,7 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showConfirm}
-          onHide={toogleConfirmModal}
+          onHide={toggleConfirmModal}
           contentclassname="confirm"
         >
           <Modal.Header closeButton>
@@ -172,8 +181,8 @@ function App() {
           </Modal.Header>
           <Modal.Body>
             <ReconfirmEmail
-              toogleConfirmModal={toogleConfirmModal}
-              toogleSignIn={toogleSignIn}
+              toggleConfirmModal={toggleConfirmModal}
+              toggleSignIn={toggleSignIn}
             />
           </Modal.Body>
         </Modal>
@@ -184,13 +193,13 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={forgotPass}
-          onHide={toogleForgotPass}
+          onHide={toggleForgotPass}
           contentclassname="forgotPass"
         >
           <Modal.Body contentclassname="forgotPass" className="forgot-modal">
             <ForgotPass
-              toogleForgotPass={toogleForgotPass}
-              toogleChangePass={toogleChangePass}
+              toggleForgotPass={toggleForgotPass}
+              toggleChangePass={toggleChangePass}
             />
           </Modal.Body>
         </Modal>
@@ -201,7 +210,7 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={forgotPass}
-          onHide={toogleForgotPass}
+          onHide={toggleForgotPass}
           contentclassname="forgotPass"
         >
           <Modal.Header closeButton>
@@ -218,8 +227,8 @@ function App() {
           </Modal.Header>
           <Modal.Body>
             <ForgotPass
-              toogleForgotPass={toogleForgotPass}
-              toogleChangePass={toogleChangePass}
+              toggleForgotPass={toggleForgotPass}
+              toggleChangePass={toggleChangePass}
             />
           </Modal.Body>
         </Modal>
@@ -229,11 +238,11 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={changePass}
-          onHide={toogleChangePass}
+          onHide={toggleChangePass}
           contentclassname="forgotPass"
         >
           <Modal.Body>
-            <ChangePass toogleChangePass={toogleChangePass} />
+            <ChangePass toggleChangePass={toggleChangePass} />
           </Modal.Body>
         </Modal>
         <Modal
@@ -243,7 +252,7 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showSignIn}
-          onHide={toogleSignIn}
+          onHide={toggleSignIn}
           contentclassname="login"
         >
           <Modal.Body className="sign-In"></Modal.Body>
@@ -255,16 +264,16 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showSignIn}
-          onHide={toogleSignIn}
+          onHide={toggleSignIn}
           contentclassname="login"
         >
           <Modal.Body>
             <Login
-              toogleSignUp={toogleSignUp}
-              toogleSignIn={toogleSignIn}
-              toogleButton={toogleButton}
-              toogleForgotPass={toogleForgotPass}
-              toogleConfirmModal={toogleConfirmModal}
+              toggleSignUp={toggleSignUp}
+              toggleSignIn={toggleSignIn}
+              toggleButton={toggleButton}
+              toggleForgotPass={toggleForgotPass}
+              toggleConfirmModal={toggleConfirmModal}
             />
           </Modal.Body>
         </Modal>
@@ -275,7 +284,7 @@ function App() {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showSignUp}
-          onHide={toogleSignUp}
+          onHide={toggleSignUp}
           contentclassname="custom-modal-style"
         >
           <Modal.Body className="sign-Up"></Modal.Body>
@@ -288,14 +297,32 @@ function App() {
           centered
           show={showSignUp}
           style={{ borderRadius: "30px" }}
-          onHide={toogleSignUp}
+          onHide={toggleSignUp}
           contentclassname="custom-modal-style"
         >
           <Modal.Body>
             <SignUp
-              toogleSignUp={toogleSignUp}
-              toogleConfirmModal={toogleConfirmModal}
-              toogleSignIn={toogleSignIn}
+              toggleSignUp={toggleSignUp}
+              toggleConfirmModal={toggleConfirmModal}
+              toggleSignIn={toggleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSessionTimedOut}
+          style={{ borderRadius: "30px" }}
+          onHide={toggleSessionTimedOut}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body>
+            <SessionExpired
+              toggleSessionTimedOut={toggleSessionTimedOut}
+              toggleSignIn={toggleSignIn}
             />
           </Modal.Body>
         </Modal>
@@ -307,8 +334,8 @@ function App() {
             headerWidth={headerWidth}
             positionLeft={positionLeft}
             padRight={padRight}
-            toogleSignIn={toogleSignIn}
-            toogleSignUp={toogleSignUp}
+            toggleSignIn={toggleSignIn}
+            toggleSignUp={toggleSignUp}
           />
           <ScrollTop />
 
@@ -318,7 +345,7 @@ function App() {
                 <div className="sell-register-container">
                   <MultiSellForm
                     colorChange={colorChange}
-                    toogleShow={toogleShow}
+                    toggleShow={toggleShow}
                     bodyColorChange={bodyColorChange}
                     setHeaderWidth={setHeaderWidth}
                     setPositionLeft={setPositionLeft}
@@ -332,7 +359,7 @@ function App() {
               <div className="sell-register-container">
                 <MultiSellForm
                   colorChange={colorChange}
-                  toogleShow={toogleShow}
+                  toggleShow={toggleShow}
                   bodyColorChange={bodyColorChange}
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
@@ -344,65 +371,65 @@ function App() {
             <Route path="/DisplayAuctions/:id">
               <DisplayAuctions
                 colorChange={colorChange}
-                toogleChange={toogleChange}
+                toggleChange={toggleChange}
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
-                toogleShow={toogleShow}
-                toogleSignIn={toogleSignIn}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
               />
             </Route>
 
             <Route exact path="/realEstates">
               <PropertyPages
                 colorChange={colorChange}
-                toogleChange={toogleChange}
+                toggleChange={toggleChange}
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
-                toogleShow={toogleShow}
-                toogleSignIn={toogleSignIn}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
               />
             </Route>
             <Route exact path="/Cars">
               <PropertyPages
                 colorChange={colorChange}
-                toogleChange={toogleChange}
+                toggleChange={toggleChange}
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
-                toogleShow={toogleShow}
-                toogleSignIn={toogleSignIn}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
               />
             </Route>
             <Route exact path="/Jets">
               <PropertyPages
                 colorChange={colorChange}
-                toogleChange={toogleChange}
+                toggleChange={toggleChange}
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
-                toogleShow={toogleShow}
-                toogleSignIn={toogleSignIn}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
               />
             </Route>
             <Route exact path="/Yachts">
               <PropertyPages
                 colorChange={colorChange}
-                toogleChange={toogleChange}
+                toggleChange={toggleChange}
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
-                toogleShow={toogleShow}
-                toogleSignIn={toogleSignIn}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
               />
             </Route>
             {user._id && (
               <Route path="/Dashboard">
                 <Dashboard
-                  toogleShow={toogleShow}
+                  toggleShow={toggleShow}
                   colorChange={colorChange}
-                  toogleChange={toogleChange}
+                  toggleChange={toggleChange}
                   bodyColorChange={bodyColorChange}
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
@@ -446,7 +473,7 @@ function App() {
             <Route path="/reset_password">
               <ChangePass
                 colorChange={colorChange}
-                toogleShow={toogleShow}
+                toggleShow={toggleShow}
                 setHeaderWidth={setHeaderWidth}
               />
             </Route>
@@ -464,11 +491,11 @@ function App() {
             </Route>
 
             <Route exact path="/">
-              <Home toogleSignIn={toogleSignIn} />
+              <Home toggleSignIn={toggleSignIn} />
             </Route>
           </Switch>
         </Router>
-        {show ? <Footer toogleSignIn={toogleSignIn} /> : null}
+        {show ? <Footer toggleSignIn={toggleSignIn} /> : null}
       </div>
     </Suspense>
   );

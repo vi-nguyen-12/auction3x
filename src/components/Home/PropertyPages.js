@@ -19,15 +19,15 @@ const mapStyles = {
   width: "100%",
 };
 const PropertyPages = ({
-  toogleChange,
+  toggleChange,
   setHeaderWidth,
   setPositionLeft,
   setPadRight,
-  toogleShow,
-  toogleSignIn,
+  toggleShow,
+  toggleSignIn,
 }) => {
   useEffect(() => {
-    toogleShow(true);
+    toggleShow(true);
     setHeaderWidth("100vw");
     setPositionLeft("20%");
     setPadRight("3rem");
@@ -44,7 +44,7 @@ const PropertyPages = ({
   const [imgJet, setImgJet] = useState([]);
   const [imgYacht, setImgYacht] = useState([]);
   const toggleMap = () => setShowMap(!showMap);
-  const toogleImage = () => setShowImg(!showImg);
+  const toggleImage = () => setShowImg(!showImg);
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
@@ -540,7 +540,7 @@ const PropertyPages = ({
                 </button>
               </Col>
               <Col md={2}>
-                <button className="galleryButton" onClick={toogleImage}>
+                <button className="galleryButton" onClick={toggleImage}>
                   Gallery
                 </button>
               </Col>
@@ -550,31 +550,31 @@ const PropertyPages = ({
       )}
       {path === "/realEstates" ? (
         <RealEstatePage
-          toogleChange={toogleChange}
-          toogleImage={toogleImage}
+          toggleChange={toggleChange}
+          toggleImage={toggleImage}
           setImg={setImg}
-          toogleSignIn={toogleSignIn}
+          toggleSignIn={toggleSignIn}
         />
       ) : path === "/cars" ? (
         <CarPage
-          toogleChange={toogleChange}
+          toggleChange={toggleChange}
           toggleImgCar={toggleImgCar}
           setImgCar={setImgCar}
-          toogleSignIn={toogleSignIn}
+          toggleSignIn={toggleSignIn}
         />
       ) : path === "/jets" ? (
         <JetPage
-          toogleChange={toogleChange}
+          toggleChange={toggleChange}
           setShowImgJet={setShowImgJet}
           setImgJet={setImgJet}
-          toogleSignIn={toogleSignIn}
+          toggleSignIn={toggleSignIn}
         />
       ) : path === "/yachts" ? (
         <YachtPage
-          toogleChange={toogleChange}
+          toggleChange={toggleChange}
           setShowImgYacht={setShowImgYacht}
           setImgYacht={setImgYacht}
-          toogleSignIn={toogleSignIn}
+          toggleSignIn={toggleSignIn}
         />
       ) : null}
       {/* Map Button */}
@@ -698,12 +698,12 @@ const PropertyPages = ({
           keyboard={true}
           size="xl"
           show={showImg}
-          onHide={toogleImage}
+          onHide={toggleImage}
           centered
         >
           <Modal.Body>
             <div>
-              <CloseButton className="modal-close" onClick={toogleImage} />
+              <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             <Row>
               {img.map((imgs, index) => (

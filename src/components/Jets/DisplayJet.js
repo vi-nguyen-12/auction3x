@@ -121,11 +121,11 @@ const Wrap = styled.div`
   // }
 `;
 
-function DisplayJet({ toogleChange, property, toogleSignIn }) {
+function DisplayJet({ toggleChange, property, toggleSignIn }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
 
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
@@ -152,16 +152,16 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
 
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const toogleRegister = () => setShowRegister(!showRegister);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
-  const toogleBid = () => setBid(!bid);
+  const toggleRegister = () => setShowRegister(!showRegister);
+  const togglePlaceBid = () => setPlaceBid(!placeBid);
+  const toggleBid = () => setBid(!bid);
 
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -175,7 +175,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    toogleChange();
+    toggleChange();
 
     //set location for map
     setLocation({
@@ -435,7 +435,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                   >
                     Register to Bid
                   </button>
@@ -502,7 +502,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleRegister}>
+                  <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -527,7 +527,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                 <div className="registBtn">
                   <button
                     className="registsBtn"
-                    onClick={toogleRegister}
+                    onClick={toggleRegister}
                     disabled
                   >
                     Register to Bid
@@ -555,7 +555,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                   <div className="registBtn">
                     <button
                       className="registsBtn"
-                      onClick={toogleRegister}
+                      onClick={toggleRegister}
                       disabled
                     >
                       Register to Bid
@@ -600,7 +600,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    onClick={togglePlaceBid}
                   >
                     Bid Now!
                   </button>
@@ -641,7 +641,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
-                      onClick={tooglePlaceBid}
+                      onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
@@ -685,7 +685,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
                     >
                       <RegistrationTimer
                         time={property.registerEndDate}
-                        toogleRegistEnded={toogleRegistEnded}
+                        toggleRegistEnded={toggleRegistEnded}
                       />
                       <div
                         style={{
@@ -1458,7 +1458,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
               </Tab>
             </Tabs>
           </Row>
-          <Modal size="lg" show={bid} onHide={toogleBid} centered>
+          <Modal size="lg" show={bid} onHide={toggleBid} centered>
             <Modal.Body>
               <MultiBuyForm />
             </Modal.Body>
@@ -1469,7 +1469,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
             backdrop="static"
             keyboard={false}
             show={showRegister}
-            onHide={toogleRegister}
+            onHide={toggleRegister}
             centered
           >
             <Modal.Body>
@@ -1482,7 +1482,7 @@ function DisplayJet({ toogleChange, property, toogleSignIn }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={tooglePlaceBid}
+            onHide={togglePlaceBid}
             centered
           >
             <Modal.Body>

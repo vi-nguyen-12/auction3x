@@ -75,12 +75,12 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
+function RealEstatePage({ toggleChange, setImg, toggleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
   useEffect(() => {
-    toogleChange();
+    toggleChange();
     authService
       .getOngoingAuctionsByType("real-estate")
       .then((res) => {
@@ -175,7 +175,7 @@ function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -211,7 +211,7 @@ function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
                     auctionStartDate={item.auctionStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))
