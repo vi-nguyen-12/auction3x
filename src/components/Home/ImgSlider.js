@@ -3,13 +3,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import SearchBar from "./SearchBar.js";
 import NumberFormat from "react-number-format";
-import { ImSearch } from "react-icons/im";
 import "../../styles/search.css";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import authService from "../../services/authServices.js";
 
 const Carousel = styled(Slider)`
   height: 100vh;

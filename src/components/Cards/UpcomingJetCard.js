@@ -57,7 +57,6 @@ const UpcomingJetCard = ({
   toogleSignIn,
   item,
 }) => {
-  console.log(data);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);

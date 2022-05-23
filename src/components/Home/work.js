@@ -2,8 +2,7 @@ import React from "react";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import "../../styles/work.css";
 
-const Work = (props) => {
-  console.log(window.innerWidth);
+const Work = () => {
   return (
     <section
       style={{

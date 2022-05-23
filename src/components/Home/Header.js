@@ -21,7 +21,6 @@ const Header = ({
   color,
   headerWidth,
   positionLeft,
-  padRight,
   toogleSignIn,
   toogleSignUp,
 }) => {
@@ -113,8 +112,6 @@ const Header = ({
       window.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
-
-  console.log(windowSize);
 
   return (
     <Nav
