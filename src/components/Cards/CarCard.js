@@ -187,17 +187,17 @@ const CarCard = ({
               >
                 <div>
                   <Row>
-                    <Col md={5} style={{ width: "50%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100px" }}>
+                    <Col md={5} style={{ width: "60%", color: "black" }}>
+                      <p style={{ fontSize: "15px", width: "100%" }}>
                         Online Auction
                       </p>
                     </Col>
 
-                    <Col md={6} style={{ width: "50%", color: "black" }}>
+                    <Col md={6} style={{ width: "40%", color: "black" }}>
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         Additional Info
@@ -206,11 +206,11 @@ const CarCard = ({
                   </Row>
                   <Row>
                     {auctionEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
+                      <Col md={1} style={{ width: "60%" }}>
                         <p
                           style={{
                             fontSize: "15px",
-                            width: "200px",
+                            width: "100%",
                             fontWeight: "bold",
                           }}
                         >
@@ -218,8 +218,8 @@ const CarCard = ({
                         </p>
                       </Col>
                     ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                      <Col md={1} style={{ width: "60%" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <AuctionTimer
                             id={id}
                             time={auctionEndDate}
@@ -229,11 +229,11 @@ const CarCard = ({
                       </Col>
                     )}
 
-                    <Col md={6} style={{ width: "50%" }}>
+                    <Col md={6} style={{ width: "40%" }}>
                       <p
                         style={{
                           fontSize: "12px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         {data.car_type ? data.car_type : "N/A"}|{" "}

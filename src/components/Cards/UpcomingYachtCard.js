@@ -186,13 +186,13 @@ const UpcomingYachtCard = ({
                   <Row>
                     {registEnded ? (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Auction Start:
                         </p>
                       </Col>
                     ) : (
                       <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100px" }}>
+                        <p style={{ fontSize: "15px", width: "100%" }}>
                           Registration
                         </p>
                       </Col>
@@ -202,7 +202,7 @@ const UpcomingYachtCard = ({
                       <p
                         style={{
                           fontSize: "15px",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         Additional Info
@@ -215,7 +215,7 @@ const UpcomingYachtCard = ({
                         <div
                           style={{
                             fontSize: "12px",
-                            width: "200px",
+                            width: "100%",
                           }}
                         >
                           <Timer auctionStartDate={auctionStartDate} />
@@ -223,7 +223,7 @@ const UpcomingYachtCard = ({
                       </Col>
                     ) : !registEnded ? (
                       <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "200px" }}>
+                        <div style={{ fontSize: "12px", width: "100%" }}>
                           <RegistrationTimer
                             time={endRegister}
                             toogleRegistEnded={toogleRegistEnded}
@@ -235,7 +235,7 @@ const UpcomingYachtCard = ({
                         <div
                           style={{
                             fontSize: "18px",
-                            width: "200px",
+                            width: "100%",
                             fontWeight: "bold",
                           }}
                         >
@@ -249,7 +249,7 @@ const UpcomingYachtCard = ({
                         style={{
                           fontSize: "12px",
                           color: "black",
-                          width: "250px",
+                          width: "100%",
                         }}
                       >
                         {data.engine_type ? data.engine_type : "N/A"}|{" "}

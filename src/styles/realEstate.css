@@ -58,6 +58,64 @@
   background-clip: text;
 }
 
+
+/* company css */
+.companyHeader {
+  font-family: Josefin Slab;
+  display: grid;
+  background-color: black;
+  object-fit: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 100%;
+  height: 60vh;
+  justify-content: center;
+  font-size: 50px;
+  padding: 50px;
+  margin-bottom: 0;
+}
+
+.companyHeader p {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 45px;
+  display: grid;
+  align-content: center;
+  text-transform: uppercase;
+  text-align: center;
+
+  background: linear-gradient(
+    90deg,
+    #d58f5c 0%,
+    #ffc195 31.25%,
+    #dd9c6d 62.5%,
+    #edb48b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.companyHeader p span {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #e2e2e2;
+  background: #ffffff;
+  text-transform: none;
+  background-clip: text;
+}
+
+.formTitle{
+  font-size: 30px;
+}
+
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
   background-color: #b77b50 !important;
