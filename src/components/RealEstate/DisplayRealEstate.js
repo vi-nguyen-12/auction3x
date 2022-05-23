@@ -26,10 +26,6 @@ const mapStyles = {
   height: "90%",
   width: "100%",
 };
-// const StreetviewStyles = {
-//   height: "50vh",
-//   width: "100%",
-// };
 
 let settings = {
   dots: true,
@@ -96,13 +92,6 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  // a {
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  //   display: block;
-  //   position: relative;
-  //   padding: 0;
-
   img {
     width: 100%;
     height: 100%;
@@ -112,16 +101,9 @@ const Wrap = styled.div`
     position: relative;
     padding: 0;
   }
-
-  // &:hover {
-  //   padding: 0;
-  //   // border: 4px solid rgba(249, 249, 249, 0.8);
-  //   transition-duration: 300ms;
-  // }
-  // }
 `;
 
-function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
+function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -149,7 +131,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
 
@@ -157,10 +139,10 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
-  const toogleRegister = () => setShowRegister(!showRegister);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
-  const toogleBid = () => setBid(!bid);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegister = () => setShowRegister(!showRegister);
+  const togglePlaceBid = () => setPlaceBid(!placeBid);
+  const toggleBid = () => setBid(!bid);
 
   // if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -216,7 +198,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
   };
 
   useEffect(() => {
-    toogleChange();
+    toggleChange();
 
     //set location for map
     setLocation({
@@ -412,7 +394,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
             </div>
           </div>
 
-          <Row style={{ padding: "0", padding: "35px 35px" }}>
+          <Row style={{ padding: "35px 35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
@@ -429,7 +411,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
             <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleSignIn}>
+                  <button className="registsBtn" onClick={toggleSignIn}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -455,7 +437,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                 !property.isOwner &&
                 new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleRegister}>
+                  <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -480,7 +462,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                 <div className="registBtn">
                   <button
                     className="registsBtn"
-                    onClick={toogleRegister}
+                    onClick={toggleRegister}
                     disabled
                   >
                     Register to Bid
@@ -508,7 +490,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                   <div className="registBtn">
                     <button
                       className="registsBtn"
-                      onClick={toogleRegister}
+                      onClick={toggleRegister}
                       disabled
                     >
                       Register to Bid
@@ -553,7 +535,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    onClick={togglePlaceBid}
                   >
                     Bid Now!
                   </button>
@@ -594,7 +576,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
-                      onClick={tooglePlaceBid}
+                      onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
@@ -637,7 +619,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
                     >
                       <RegistrationTimer
                         time={property.registerEndDate}
-                        toogleRegistEnded={toogleRegistEnded}
+                        toggleRegistEnded={toggleRegistEnded}
                       />
                       <div
                         style={{
@@ -1399,7 +1381,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
               </Tab>
             </Tabs>
           </Row>
-          <Modal size="lg" show={bid} onHide={toogleBid} centered>
+          <Modal size="lg" show={bid} onHide={toggleBid} centered>
             <Modal.Body>
               <MultiBuyForm />
             </Modal.Body>
@@ -1410,7 +1392,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
             backdrop="static"
             keyboard={false}
             show={showRegister}
-            onHide={toogleRegister}
+            onHide={toggleRegister}
             centered
           >
             <Modal.Body>
@@ -1423,7 +1405,7 @@ function DisplayRealEstate({ property, toogleChange, toogleSignIn }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={tooglePlaceBid}
+            onHide={togglePlaceBid}
             centered
           >
             <Modal.Body>

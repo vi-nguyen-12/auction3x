@@ -8,15 +8,15 @@ import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 
 const PropertyDetails = ({
-  toogleStep,
+  toggleStep,
   step,
   property,
-  tooglePropertyData,
+  togglePropertyData,
   propertyType,
   propId,
   ownership,
   getPropId,
-  toogleSellStep,
+  toggleSellStep,
   propertyData,
 }) => {
   return (
@@ -28,64 +28,64 @@ const PropertyDetails = ({
           property.structure &&
           property.market_assessments ? (
             <RealEstateDetails
-              toogleStep={toogleStep}
+              toggleStep={toggleStep}
               step={step}
               property={property}
               propertyData={propertyData}
-              tooglePropertyData={tooglePropertyData}
+              togglePropertyData={togglePropertyData}
               propId={propId}
               ownership={ownership}
               getPropId={getPropId}
-              toogleSellStep={toogleSellStep}
+              toggleSellStep={toggleSellStep}
             />
           ) : (
             <EmptyRealEstateDetails
-              toogleStep={toogleStep}
+              toggleStep={toggleStep}
               step={step}
               property={property}
               propertyData={propertyData}
-              tooglePropertyData={tooglePropertyData}
+              togglePropertyData={togglePropertyData}
               propId={propId}
               ownership={ownership}
               getPropId={getPropId}
-              toogleSellStep={toogleSellStep}
+              toggleSellStep={toggleSellStep}
             />
           )
         ) : propertyType === "car" ? (
           <CarDetails
-            toogleStep={toogleStep}
+            toggleStep={toggleStep}
             step={step}
             property={property}
             propertyData={propertyData}
-            tooglePropertyData={tooglePropertyData}
+            togglePropertyData={togglePropertyData}
             propId={propId}
             ownership={ownership}
             getPropId={getPropId}
-            toogleSellStep={toogleSellStep}
+            toggleSellStep={toggleSellStep}
           />
         ) : propertyType === "jet" ? (
           <JetDetails
-            toogleStep={toogleStep}
+            toggleStep={toggleStep}
             step={step}
             property={property}
             propertyData={propertyData}
-            tooglePropertyData={tooglePropertyData}
+            togglePropertyData={togglePropertyData}
             propId={propId}
             ownership={ownership}
             getPropId={getPropId}
-            toogleSellStep={toogleSellStep}
+            toggleSellStep={toggleSellStep}
           />
         ) : propertyType === "yacht" ? (
           <YachtDetails
-            toogleStep={toogleStep}
+            toggleStep={toggleStep}
             step={step}
             property={property}
             propertyData={propertyData}
-            tooglePropertyData={tooglePropertyData}
+            togglePropertyData={togglePropertyData}
             propId={propId}
             ownership={ownership}
             getPropId={getPropId}
-            toogleSellStep={toogleSellStep}
+            toggleSellStep={toggleSellStep}
           />
         ) : null}
       </div>

@@ -11,7 +11,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../components/Loading";
 
 const Agree = ({
-  toogleStep,
+  toggleStep,
   step,
   propertyData,
   images,
@@ -28,7 +28,7 @@ const Agree = ({
   const [loader, setLoader] = useState(false);
   const [terms, setTerms] = useState();
   const [show, setShow] = useState(false);
-  const toogleTerms = () => setShow(!show);
+  const toggleTerms = () => setShow(!show);
   const toggle = () => {
     setAgree(!agree);
   };
@@ -357,7 +357,7 @@ const Agree = ({
             <label>
               I agree to the
               <span
-                onClick={() => toogleTerms()}
+                onClick={() => toggleTerms()}
                 style={{ color: "#00a8ff", cursor: "pointer" }}
               >
                 {" "}
@@ -366,7 +366,7 @@ const Agree = ({
             </label>
           </div>
           <div className="agree-bottom-btn">
-            <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+            <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </button>
             <button className="nxt-btn" type="submit">
@@ -375,10 +375,10 @@ const Agree = ({
           </div>
         </div>
       </form>
-      <Modal size="lg" show={show} onHide={toogleTerms} centered>
+      <Modal size="lg" show={show} onHide={toggleTerms} centered>
         <Modal.Body style={{ height: "70vh" }}>
           <div>
-            <CloseButton className="modal-close" onClick={toogleTerms} />
+            <CloseButton className="modal-close" onClick={toggleTerms} />
           </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>

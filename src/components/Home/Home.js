@@ -10,7 +10,7 @@ import { Upcoming } from "../Auctions/Upcoming";
 
 import About from "./About";
 
-const Home = ({ toogleSignIn }) => {
+const Home = ({ toggleSignIn }) => {
   const [featureAuctions, setFeatureAuctions] = useState([]);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -34,10 +34,10 @@ const Home = ({ toogleSignIn }) => {
         onGoingAuctions={onGoingAuctions}
         upcomingAuctions={upcomingAuctions}
       />
-      <Featured toogleSignIn={toogleSignIn} featureAuctions={featureAuctions} />
+      <Featured toggleSignIn={toggleSignIn} featureAuctions={featureAuctions} />
       <FindInCountries />
       <Upcoming
-        toogleSignIn={toogleSignIn}
+        toggleSignIn={toggleSignIn}
         upcomingAuctions={upcomingAuctions}
       />
       <Work />

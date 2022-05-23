@@ -5,38 +5,38 @@ import FundUpload from "./FundUpload";
 
 function MultiFundForm() {
   const [step, setStep] = useState(0);
-  const toogleStep = (step) => {
+  const toggleStep = (step) => {
     setStep(step);
   };
   const [document, setDocument] = useState();
-  const toogleDocument = (document) => {
+  const toggleDocument = (document) => {
     setDocument(document);
   };
 
   useEffect(() => {
-    toogleDocument(document);
+    toggleDocument(document);
   }, [document]);
 
   if (step === 0) {
     return (
       <div className="buy-register-container">
-        <FundAgreement toogleStep={toogleStep} step={step} />
+        <FundAgreement toggleStep={toggleStep} step={step} />
       </div>
     );
   } else if (step === 1) {
     return (
       <div className="buy-register-container">
         <FundUpload
-          toogleStep={toogleStep}
+          toggleStep={toggleStep}
           step={step}
-          toogleDocument={toogleDocument}
+          toggleDocument={toggleDocument}
         />
       </div>
     );
   } else if (step === 2) {
     return (
       <div className="buy-register-container">
-        <FundDocuSign toogleStep={toogleStep} step={step} document={document} />
+        <FundDocuSign toggleStep={toggleStep} step={step} document={document} />
       </div>
     );
   }

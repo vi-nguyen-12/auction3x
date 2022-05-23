@@ -3,16 +3,13 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Row, Col, Modal } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import "../../styles/realEstate.css";
 import { CardComp } from "../Cards/RealEstateCard";
 import authService from "../../services/authServices";
 
 const Carousel = styled(Slider)`
-  //height: 30vh;
-  // overflow: hidden;
-
   & > button {
     opacity: 1;
     height: 100%;
@@ -75,12 +72,12 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
+function RealEstatePage({ toggleChange, setImg, toggleSignIn }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
   useEffect(() => {
-    toogleChange();
+    toggleChange();
     authService
       .getOngoingAuctionsByType("real-estate")
       .then((res) => {
@@ -175,7 +172,7 @@ function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
                         auctionEndDate={item.auctionEndDate}
                         startingBid={item.startingBid}
                         auctionId={item._id}
-                        toogleSignIn={toogleSignIn}
+                        toggleSignIn={toggleSignIn}
                       />
                     </Col>
                   </Wrap>
@@ -211,7 +208,7 @@ function RealEstatePage({ toogleChange, setImg, toogleSignIn }) {
                     auctionStartDate={item.auctionStartDate}
                     endRegister={item.registerEndDate}
                     startingBid={item.startingBid}
-                    toogleSignIn={toogleSignIn}
+                    toggleSignIn={toggleSignIn}
                   />
                 </Col>
               ))

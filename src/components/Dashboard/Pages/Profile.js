@@ -95,7 +95,7 @@ function Profile({ id }) {
   };
   // const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
-  const toogleEdit = () => setShowEdit(!showEdit);
+  const toggleEdit = () => setShowEdit(!showEdit);
   const [description, setDescription] = useState("");
   const getDescription = (descript) => setDescription(descript);
 
@@ -105,7 +105,7 @@ function Profile({ id }) {
       <div className="edit-btn">
         <Button
           onClick={() => {
-            toogleEdit();
+            toggleEdit();
           }}
         >
           <FiEdit size={20} />
@@ -115,7 +115,7 @@ function Profile({ id }) {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showEdit}
-          onHide={toogleEdit}
+          onHide={toggleEdit}
           backdrop="static"
           keyboard={false}
         >

@@ -9,15 +9,15 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import Loading from "../../components/Loading";
 
 function CarDocus({
-  toogleStep,
+  toggleStep,
   step,
-  toogleDocuments,
+  toggleDocuments,
   ownership,
   propId,
   images,
   videos,
   propertyData,
-  toogleSellStep,
+  toggleSellStep,
   sellStep,
   getPropId,
   document,
@@ -457,7 +457,7 @@ function CarDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(4);
+            toggleSellStep(4);
             alert("Saved Successfully!");
           }
         });
@@ -475,7 +475,7 @@ function CarDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(4);
+            toggleSellStep(4);
             alert("Saved Successfully!");
           }
         });
@@ -491,7 +491,7 @@ function CarDocus({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(4);
+            toggleSellStep(4);
             alert("Saved Successfully!");
           }
         });
@@ -509,7 +509,7 @@ function CarDocus({
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          toogleSellStep(4);
+          toggleSellStep(4);
           getPropId(response.data._id);
           alert("Saved Successfully!");
         }
@@ -528,8 +528,8 @@ function CarDocus({
       doc7.length !== 0 &&
       doc8.length !== 0
     ) {
-      toogleDocuments(documents);
-      toogleStep(step + 1);
+      toggleDocuments(documents);
+      toggleStep(step + 1);
     } else {
       alert("Please upload the required documents");
     }
@@ -1016,7 +1016,7 @@ function CarDocus({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <Button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </Button>
           <button className="nxt-btn" type="submit">

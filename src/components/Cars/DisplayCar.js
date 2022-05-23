@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../styles/realEstate.css";
 import { Modal, Table, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -92,11 +91,11 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayCar({ toogleChange, property, toogleSignIn }) {
+function DisplayCar({ toggleChange, property, toggleSignIn }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -109,8 +108,8 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
   const togglePics = () => setShowPics(!showPics);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-  const toogleRegister = () => setShowRegister(!showRegister);
-  const tooglePlaceBid = () => setPlaceBid(!placeBid);
+  const toggleRegister = () => setShowRegister(!showRegister);
+  const togglePlaceBid = () => setPlaceBid(!placeBid);
   const [downloadFiles, setDownloadFiles] = useState([]);
   //if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -118,7 +117,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    toogleChange();
+    toggleChange();
 
     //set location for map
     setLocation({
@@ -211,7 +210,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
 
@@ -397,7 +396,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toogleSignIn}
+                    onClick={toggleSignIn}
                   >
                     Register to Bid
                   </button>
@@ -464,7 +463,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                 !property.isOwner &&
                 new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toogleRegister}>
+                  <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -489,7 +488,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                 <div className="registBtn">
                   <button
                     className="registsBtn"
-                    onClick={toogleRegister}
+                    onClick={toggleRegister}
                     disabled
                   >
                     Register to Bid
@@ -517,7 +516,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                   <div className="registBtn">
                     <button
                       className="registsBtn"
-                      onClick={toogleRegister}
+                      onClick={toggleRegister}
                       disabled
                     >
                       Register to Bid
@@ -562,7 +561,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={tooglePlaceBid}
+                    onClick={togglePlaceBid}
                   >
                     Bid Now!
                   </button>
@@ -603,7 +602,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                         fontWeight: "bold",
                         fontSize: "20px",
                       }}
-                      onClick={tooglePlaceBid}
+                      onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
@@ -647,7 +646,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                     >
                       <RegistrationTimer
                         time={property.registerEndDate}
-                        toogleRegistEnded={toogleRegistEnded}
+                        toggleRegistEnded={toggleRegistEnded}
                       />
                       <div
                         style={{
@@ -1393,7 +1392,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
             backdrop="static"
             keyboard={false}
             show={showRegister}
-            onHide={toogleRegister}
+            onHide={toggleRegister}
             centered
           >
             <Modal.Body>
@@ -1406,7 +1405,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={tooglePlaceBid}
+            onHide={togglePlaceBid}
             centered
           >
             <Modal.Body>

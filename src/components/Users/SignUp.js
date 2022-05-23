@@ -7,18 +7,11 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");
 
-const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
+const User = ({ toggleSignUp, toggleSignIn }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
-  const [privacy, setPrivacy] = useState();
-  const [showPrivacy, setShowPrivacy] = useState(false);
-  const toogleTerms = () => setShowTerms(!showTerms);
-  const tooglePrivacy = () => setShowPrivacy(!showPrivacy);
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const toggleTerms = () => setShowTerms(!showTerms);
+  const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     authServices.getDocuments().then((res) => {
@@ -54,9 +47,9 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          toogleSignUp();
+          toggleSignUp();
           alert("Please check your email to verify your account");
-          // toogleConfirmModal();
+          // toggleConfirmModal();
         }
       });
     }
@@ -80,8 +73,8 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
               style={{ marginTop: "35px" }}
               className="signup-link"
               onClick={() => {
-                toogleSignIn();
-                toogleSignUp();
+                toggleSignIn();
+                toggleSignUp();
               }}
             >
               Already Registered? Sign In
@@ -452,7 +445,7 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           </span>{" "}
           and
           <span
-            onClick={() => toogleTerms()}
+            onClick={() => toggleTerms()}
             style={{ color: "#00a8ff", cursor: "pointer" }}
           >
             {" "}
@@ -463,10 +456,10 @@ const User = ({ toogleSignUp, toogleSignIn, toogleConfirmModal }) => {
           REGISTER
         </button>
       </form>
-      <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
+      <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
         <Modal.Body style={{ height: "90vh" }}>
           <div>
-            <CloseButton className="modal-close" onClick={toogleTerms} />
+            <CloseButton className="modal-close" onClick={toggleTerms} />
           </div>
           <embed src={terms} width="100%" height="100%" />
         </Modal.Body>

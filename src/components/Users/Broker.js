@@ -5,11 +5,7 @@ import CompanyHeader from "../../components/Company/CompanyHeader";
 require("react-bootstrap/ModalHeader");
 
 const Broker = ({ RegistermodalClose, ConfirmmodalOpen }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     authServices.register(data);
     RegistermodalClose();

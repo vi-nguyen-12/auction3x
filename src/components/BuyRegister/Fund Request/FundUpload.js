@@ -8,7 +8,7 @@ import authService from "../../../services/authServices";
 import "../../../styles/buyer.css";
 import Loading from "../../../components/Loading";
 
-const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
+const FundUpload = ({ toggleStep, step, toggleDocument, docu }) => {
   const { register, handleSubmit } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
@@ -129,8 +129,8 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
 
   const handleUpload = () => {
     if (documents.length >= 1) {
-      toogleDocument(documents);
-      toogleStep(step + 1);
+      toggleDocument(documents);
+      toggleStep(step + 1);
     } else {
       alert("Please upload atleast one document");
     }
@@ -340,7 +340,7 @@ const FundUpload = ({ toogleStep, step, toogleDocument, docu }) => {
           <button
             className="pre-btn"
             onClick={() => {
-              toogleStep(step - 1);
+              toggleStep(step - 1);
             }}
           >
             Previous

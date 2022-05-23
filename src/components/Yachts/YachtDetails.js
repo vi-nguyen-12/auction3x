@@ -8,15 +8,15 @@ import authService from "../../services/authServices";
 function YachtDetails({
   property,
   propertyData,
-  toogleStep,
+  toggleStep,
   step,
-  tooglePropertyData,
-  toogleSellStep,
+  togglePropertyData,
+  toggleSellStep,
   getPropId,
   propId,
   ownership,
 }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const prop = useSelector((state) => state.incompProperty);
   const params = useParams();
   const [vessel_registration_number, setVessel_registration_number] =
@@ -326,7 +326,7 @@ function YachtDetails({
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            toogleSellStep(2);
+            toggleSellStep(2);
             alert("Saved Successfully!");
           }
         });
@@ -384,7 +384,7 @@ function YachtDetails({
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            toogleSellStep(2);
+            toggleSellStep(2);
             alert("Saved Successfully!");
           }
         });
@@ -443,7 +443,7 @@ function YachtDetails({
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            toogleSellStep(2);
+            toggleSellStep(2);
             getPropId(res.data._id);
             alert("Saved Successfully!");
           }
@@ -501,7 +501,7 @@ function YachtDetails({
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            toogleSellStep(2);
+            toggleSellStep(2);
             getPropId(res.data._id);
             alert("Saved Successfully!");
           }
@@ -559,8 +559,8 @@ function YachtDetails({
             ? otherDetails
             : null,
         };
-        tooglePropertyData(submitedData);
-        toogleStep(step + 1);
+        togglePropertyData(submitedData);
+        toggleStep(step + 1);
       } else {
         const submitedData = {
           reservedAmount: data.reservedAmount
@@ -601,8 +601,8 @@ function YachtDetails({
             city: data.city ? data.city : city,
           },
         };
-        tooglePropertyData(submitedData);
-        toogleStep(step + 1);
+        togglePropertyData(submitedData);
+        toggleStep(step + 1);
       }
     }
   };
@@ -942,7 +942,7 @@ function YachtDetails({
         <Button
           className="pre-btn"
           onClick={() => {
-            toogleStep(step - 1);
+            toggleStep(step - 1);
           }}
         >
           Previous

@@ -17,12 +17,12 @@ const About = () => {
   const [showConfirm, popupConfirm] = useState(false);
   const [showSignIn, popSignIn] = useState(false);
   const [showSignUp, popUpSignUp] = useState(false);
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+  const toggleChangePass = () => popChangePass(!changePass);
+  const toggleButton = () => popButton(!showButton);
+  const toggleForgotPass = () => popForgotPass(!forgotPass);
+  const toggleSignIn = () => popSignIn(!showSignIn);
+  const toggleSignUp = () => popUpSignUp(!showSignUp);
+  const toggleConfirmModal = () => popupConfirm(!showConfirm);
 
   const history = useHistory();
 
@@ -50,16 +50,15 @@ const About = () => {
             >
               BUY
             </button>
-            {/* <div className="side-button"> */}
-            <button
-              onClick={() => {
-                user._id ? history.push("/MultiSellForm") : toogleSignIn();
-              }}
-              style={{ marginLeft: "10px" }}
-            >
-              SELL
-            </button>
-            {/* </div> */}
+            <div className="side-button">
+              <button
+                onClick={() => {
+                  user._id ? history.push("/MultiSellForm") : toggleSignIn();
+                }}
+              >
+                SELL
+              </button>
+            </div>
           </div>
         </Col>
       </Row>
@@ -113,7 +112,7 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={showConfirm}
-        onHide={toogleConfirmModal}
+        onHide={toggleConfirmModal}
         contentclassname="confirm"
       >
         <Modal.Header closeButton>
@@ -136,8 +135,8 @@ const About = () => {
         </Modal.Header>
         <Modal.Body>
           <ReconfirmEmail
-            toogleConfirmModal={toogleConfirmModal}
-            toogleSignIn={toogleSignIn}
+            toggleConfirmModal={toggleConfirmModal}
+            toggleSignIn={toggleSignIn}
           />
         </Modal.Body>
       </Modal>
@@ -148,13 +147,13 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={forgotPass}
-        onHide={toogleForgotPass}
+        onHide={toggleForgotPass}
         contentclassname="forgotPass"
       >
         <Modal.Body contentclassname="forgotPass" className="forgot-modal">
           <ForgotPass
-            toogleForgotPass={toogleForgotPass}
-            toogleChangePass={toogleChangePass}
+            toggleForgotPass={toggleForgotPass}
+            toggleChangePass={toggleChangePass}
           />
         </Modal.Body>
       </Modal>
@@ -165,7 +164,7 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={forgotPass}
-        onHide={toogleForgotPass}
+        onHide={toggleForgotPass}
         contentclassname="forgotPass"
       >
         <Modal.Header closeButton>
@@ -182,8 +181,8 @@ const About = () => {
         </Modal.Header>
         <Modal.Body>
           <ForgotPass
-            toogleForgotPass={toogleForgotPass}
-            toogleChangePass={toogleChangePass}
+            toggleForgotPass={toggleForgotPass}
+            toggleChangePass={toggleChangePass}
           />
         </Modal.Body>
       </Modal>
@@ -194,11 +193,11 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={changePass}
-        onHide={toogleChangePass}
+        onHide={toggleChangePass}
         contentclassname="forgotPass"
       >
         <Modal.Body>
-          <ChangePass toogleChangePass={toogleChangePass} />
+          <ChangePass toggleChangePass={toggleChangePass} />
         </Modal.Body>
       </Modal>
       <Modal
@@ -208,7 +207,7 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={showSignIn}
-        onHide={toogleSignIn}
+        onHide={toggleSignIn}
         contentclassname="login"
       >
         <Modal.Body className="sign-In"></Modal.Body>
@@ -221,16 +220,16 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={showSignIn}
-        onHide={toogleSignIn}
+        onHide={toggleSignIn}
         contentclassname="login"
       >
         <Modal.Body>
           <Login
-            toogleSignUp={toogleSignUp}
-            toogleSignIn={toogleSignIn}
-            toogleButton={toogleButton}
-            toogleForgotPass={toogleForgotPass}
-            toogleConfirmModal={toogleConfirmModal}
+            toggleSignUp={toggleSignUp}
+            toggleSignIn={toggleSignIn}
+            toggleButton={toggleButton}
+            toggleForgotPass={toggleForgotPass}
+            toggleConfirmModal={toggleConfirmModal}
           />
         </Modal.Body>
       </Modal>
@@ -242,7 +241,7 @@ const About = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={showSignUp}
-        onHide={toogleSignUp}
+        onHide={toggleSignUp}
         contentclassname="custom-modal-style"
       >
         <Modal.Body className="sign-Up"></Modal.Body>
@@ -256,14 +255,14 @@ const About = () => {
         centered
         show={showSignUp}
         style={{ borderRadius: "30px" }}
-        onHide={toogleSignUp}
+        onHide={toggleSignUp}
         contentclassname="custom-modal-style"
       >
         <Modal.Body>
           <SignUp
-            toogleSignUp={toogleSignUp}
-            toogleConfirmModal={toogleConfirmModal}
-            toogleSignIn={toogleSignIn}
+            toggleSignUp={toggleSignUp}
+            toggleConfirmModal={toggleConfirmModal}
+            toggleSignIn={toggleSignIn}
           />
         </Modal.Body>
       </Modal>

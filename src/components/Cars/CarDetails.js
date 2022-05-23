@@ -7,10 +7,10 @@ import { useSelector } from "react-redux";
 
 function CarDetails({
   property,
-  toogleStep,
+  toggleStep,
   step,
-  tooglePropertyData,
-  toogleSellStep,
+  togglePropertyData,
+  toggleSellStep,
   getPropId,
   propId,
   ownership,
@@ -339,7 +339,7 @@ function CarDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           alert("Saved Successfully!");
         }
       });
@@ -375,7 +375,7 @@ function CarDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           getPropId(res.data._id);
           alert("Saved Successfully!");
         }
@@ -418,8 +418,8 @@ function CarDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      togglePropertyData(submitedData);
+      toggleStep(step + 1);
     }
   };
 
@@ -687,7 +687,7 @@ function CarDetails({
         <Button
           className="pre-btn"
           onClick={() => {
-            toogleStep(step - 1);
+            toggleStep(step - 1);
           }}
         >
           Previous

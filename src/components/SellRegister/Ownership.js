@@ -9,12 +9,12 @@ import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
 function Ownership({
-  toogleStep,
+  toggleStep,
   step,
   getOwnerShip,
   propertyType,
   getPropId,
-  toogleSellStep,
+  toggleSellStep,
   propId,
   ownership,
 }) {
@@ -67,7 +67,7 @@ function Ownership({
             alert(res.data.error);
           } else {
             alert("Successfully updated");
-            toogleSellStep(1);
+            toggleSellStep(1);
           }
         });
       } else {
@@ -90,7 +90,7 @@ function Ownership({
           } else {
             getPropId(res.data._id);
             alert("Successfully updated");
-            toogleSellStep(1);
+            toggleSellStep(1);
           }
         });
       }
@@ -113,7 +113,7 @@ function Ownership({
           alert(res.data.error);
         } else {
           getPropId(res.data._id);
-          toogleSellStep(1);
+          toggleSellStep(1);
           alert("Successfully saved");
         }
       });
@@ -185,7 +185,7 @@ function Ownership({
         step: parseInt(1),
       };
       getOwnerShip(datas);
-      toogleStep(step + 1);
+      toggleStep(step + 1);
     } else {
       if (data.brokerName === "") {
         const datas = {
@@ -199,11 +199,11 @@ function Ownership({
           step: parseInt(1),
         };
         getOwnerShip(datas);
-        toogleStep(step + 1);
+        toggleStep(step + 1);
       }
     }
   };
-  console.log(phone)
+  console.log(phone);
   return (
     <div className="upload-box">
       <SellHeader step={step} />
@@ -269,8 +269,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                          ? ownership.details.owner_name
-                          : ""
+                        ? ownership.details.owner_name
+                        : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                     required
@@ -289,8 +289,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                          ? ownership.details.address
-                          : ""
+                        ? ownership.details.address
+                        : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -348,7 +348,7 @@ function Ownership({
                 </div>
                 <button
                   className="pre-btn"
-                  onClick={() => toogleStep(step - 1)}
+                  onClick={() => toggleStep(step - 1)}
                 >
                   Previous
                 </button>
@@ -390,8 +390,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                          ? ownership.details.owner_name
-                          : ""
+                        ? ownership.details.owner_name
+                        : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
@@ -407,8 +407,8 @@ function Ownership({
                       brokerName
                         ? brokerName
                         : ownership
-                          ? ownership.details.broker_name
-                          : ""
+                        ? ownership.details.broker_name
+                        : ""
                     }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
@@ -425,8 +425,8 @@ function Ownership({
                       brokerId
                         ? brokerId
                         : ownership
-                          ? ownership.details.broker_id
-                          : ""
+                        ? ownership.details.broker_id
+                        : ""
                     }
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
@@ -459,8 +459,8 @@ function Ownership({
                       address
                         ? address
                         : ownership
-                          ? ownership.details.address
-                          : ""
+                        ? ownership.details.address
+                        : ""
                     }
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -518,7 +518,7 @@ function Ownership({
                 </div>
                 <button
                   className="pre-btn"
-                  onClick={() => toogleStep(step - 1)}
+                  onClick={() => toggleStep(step - 1)}
                 >
                   Previous
                 </button>

@@ -11,8 +11,8 @@ function PendingAuctions() {
   const [documents, setDocuments] = useState([]);
   const [showQuestionair, setShowQuestionair] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
-  const toogleQuestionair = () => setShowQuestionair(!showQuestionair);
-  const toogleDocuments = () => setShowDocuments(!showDocuments);
+  const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
+  const toggleDocuments = () => setShowDocuments(!showDocuments);
 
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
@@ -137,7 +137,7 @@ function PendingAuctions() {
                       <Button
                         onClick={() => {
                           setQuestionair(auction.answers);
-                          toogleQuestionair();
+                          toggleQuestionair();
                         }}
                         variant="primary"
                       >
@@ -148,7 +148,7 @@ function PendingAuctions() {
                       <Button
                         onClick={() => {
                           setDocuments(auction.documents);
-                          toogleDocuments();
+                          toggleDocuments();
                         }}
                         variant="primary"
                       >
@@ -183,7 +183,7 @@ function PendingAuctions() {
       <Modal
         size="lg"
         show={showQuestionair}
-        onHide={toogleQuestionair}
+        onHide={toggleQuestionair}
         centered
       >
         <Modal.Header closeButton>
@@ -211,7 +211,7 @@ function PendingAuctions() {
           </Table>
         </Modal.Body>
       </Modal>
-      <Modal size="lg" show={showDocuments} onHide={toogleDocuments} centered>
+      <Modal size="lg" show={showDocuments} onHide={toggleDocuments} centered>
         <Modal.Header closeButton>
           <Modal.Title>Documents</Modal.Title>
         </Modal.Header>

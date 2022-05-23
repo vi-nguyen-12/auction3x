@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Toast from "../Toast";
 import authServices from "../../services/authServices";
 import Loading from "../Loading";
 import { Modal, Button } from "react-bootstrap";
@@ -20,15 +19,10 @@ const Login = ({
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const [showWarning, setShowWarning] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
-  //const [invPass, setInvPass] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const [showLoading, setShowLoading] = useState(false);
+
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     const getUser = async () => {
       try {
@@ -61,13 +55,7 @@ const Login = ({
   return (
     <>
       {showLoading && <Loading />}
-      {showWarning && (
-        <Toast
-          style={{ marginTop: "10px" }}
-          type="warning"
-          message="Warning! Your email verification process has not been done. We have sent the link"
-        />
-      )}
+
       <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"

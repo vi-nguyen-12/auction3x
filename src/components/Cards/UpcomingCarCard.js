@@ -54,7 +54,7 @@ const UpcomingCarCard = ({
   endRegister,
   auctionStartDate,
   startingBid,
-  toogleSignIn,
+  toggleSignIn,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -69,13 +69,13 @@ const UpcomingCarCard = ({
   };
 
   const [registEnded, setRegistEnded] = useState(false);
-  const toogleRegistEnded = () => setRegistEnded(!registEnded);
+  const toggleRegistEnded = () => setRegistEnded(!registEnded);
 
   const history = useHistory();
 
   const handleBid = () => {
     if (!user._id) {
-      return toogleSignIn();
+      return toggleSignIn();
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
@@ -108,7 +108,7 @@ const UpcomingCarCard = ({
         setFavorite(!favorite);
       }
     } else {
-      return toogleSignIn();
+      return toggleSignIn();
     }
   };
   useEffect(() => {
@@ -227,7 +227,7 @@ const UpcomingCarCard = ({
                         <div style={{ fontSize: "12px", width: "100%" }}>
                           <RegistrationTimer
                             time={endRegister}
-                            toogleRegistEnded={toogleRegistEnded}
+                            toggleRegistEnded={toggleRegistEnded}
                           />
                         </div>
                       </Col>

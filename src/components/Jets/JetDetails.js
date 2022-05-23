@@ -7,16 +7,16 @@ import authService from "../../services/authServices";
 
 function JetDetails({
   property,
-  toogleStep,
+  toggleStep,
   step,
-  tooglePropertyData,
+  togglePropertyData,
   propertyData,
   ownership,
   getPropId,
-  toogleSellStep,
+  toggleSellStep,
   propId,
 }) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState();
   const [registration_mark, setRegistration_mark] = useState();
   const [aircraft_builder_name, setAircraft_builder_name] = useState();
@@ -90,7 +90,7 @@ function JetDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           alert("Saved Successfully!");
         }
       });
@@ -138,7 +138,7 @@ function JetDetails({
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          toogleSellStep(2);
+          toggleSellStep(2);
           getPropId(res.data._id);
           alert("Saved Successfully!");
         }
@@ -434,8 +434,8 @@ function JetDetails({
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
       };
-      tooglePropertyData(submitedData);
-      toogleStep(step + 1);
+      togglePropertyData(submitedData);
+      toggleStep(step + 1);
     }
   };
   return (
@@ -727,7 +727,7 @@ function JetDetails({
           <Button
             className="pre-btn"
             onClick={() => {
-              toogleStep(step - 1);
+              toggleStep(step - 1);
             }}
           >
             Previous

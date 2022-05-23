@@ -3,21 +3,19 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import authService from "../../services/authServices";
 import "../../styles/sell-register.css";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
-import Sell from "./SellWelcome";
 import Loading from "../../components/Loading";
 
 const UploadForm = ({
-  toogleStep,
+  toggleStep,
   step,
-  toogleImages,
-  toogleVideos,
-  toogleSellStep,
+  toggleImages,
+  toggleVideos,
+  toggleSellStep,
   sellStep,
   propertyData,
   propId,
@@ -33,7 +31,7 @@ const UploadForm = ({
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
-  const toogleExtra = () => setExtra(!extra);
+  const toggleExtra = () => setExtra(!extra);
 
   const params = useParams();
 
@@ -89,7 +87,7 @@ const UploadForm = ({
             if (response.data.error) {
               alert(response.data.error);
             } else {
-              toogleSellStep(3);
+              toggleSellStep(3);
               alert("Saved Successfully!");
             }
           });
@@ -107,7 +105,7 @@ const UploadForm = ({
             if (response.data.error) {
               alert(response.data.error);
             } else {
-              toogleSellStep(3);
+              toggleSellStep(3);
               alert("Saved Successfully!");
             }
           });
@@ -124,7 +122,7 @@ const UploadForm = ({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(3);
+            toggleSellStep(3);
             getPropId(response.data._id);
             alert("Saved Successfully!");
           }
@@ -145,7 +143,7 @@ const UploadForm = ({
             if (response.data.error) {
               alert(response.data.error);
             } else {
-              toogleSellStep(3);
+              toggleSellStep(3);
               alert("Saved Successfully!");
             }
           });
@@ -163,7 +161,7 @@ const UploadForm = ({
             if (response.data.error) {
               alert(response.data.error);
             } else {
-              toogleSellStep(3);
+              toggleSellStep(3);
               alert("Saved Successfully!");
             }
           });
@@ -180,7 +178,7 @@ const UploadForm = ({
           if (response.data.error) {
             alert(response.data.error);
           } else {
-            toogleSellStep(3);
+            toggleSellStep(3);
             getPropId(response.data._id);
             alert("Saved Successfully!");
           }
@@ -237,9 +235,9 @@ const UploadForm = ({
 
   const onSubmit = () => {
     if (images.length !== 0) {
-      toogleImages(images);
-      toogleVideos(videos);
-      toogleStep(step + 1);
+      toggleImages(images);
+      toggleVideos(videos);
+      toggleStep(step + 1);
     } else {
       alert("Please upload at least one image!");
     }
@@ -277,7 +275,7 @@ const UploadForm = ({
           <div className="upload-cover">
             <details>
               <summary>
-                <label onClick={toogleExtra} htmlFor="images-btn">
+                <label onClick={toggleExtra} htmlFor="images-btn">
                   + Images
                 </label>
               </summary>
@@ -293,12 +291,12 @@ const UploadForm = ({
             )} */}
 
               {/* {extra ? (
-              <button className="upload-btn" onClick={toogleExtra}>
+              <button className="upload-btn" onClick={toggleExtra}>
                 <AiOutlinePlus size="5%" />
               </button>
             ) : (
               <>
-                <button className="upload-btn" onClick={toogleExtra}>
+                <button className="upload-btn" onClick={toggleExtra}>
                   <AiOutlineMinus size="5%" />
                 </button>
                 <label htmlFor="images-btn">
@@ -351,7 +349,7 @@ const UploadForm = ({
           <div className="upload-cover">
             <details>
               <summary>
-                <label onClick={toogleExtra} htmlFor="videos-btn">
+                <label onClick={toggleExtra} htmlFor="videos-btn">
                   + Videos
                 </label>
               </summary>
@@ -399,7 +397,7 @@ const UploadForm = ({
           >
             <Button onClick={saveInfo}>Save</Button>
           </div>
-          <button className="pre-btn" onClick={() => toogleStep(step - 1)}>
+          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
           </button>
           <button className="nxt-btn" id="next" type="submit">
