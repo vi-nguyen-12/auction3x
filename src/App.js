@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import "./App.css";
 import { Modal } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,7 +8,6 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./slice/userSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
@@ -19,6 +18,7 @@ import ScrollTop from "./components/ScrollTop";
 import ButtontoTop from "./components/ButtontoTop";
 import Footer from "./components/Home/footer";
 import Loading from "./components/Loading";
+import { IdleTimer } from "./services/idleTimer";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -59,6 +59,45 @@ function App() {
   const history = useHistory();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [color, setColor] = useState("");
+  const [bodyColor, setBodyColor] = useState("");
+  const [show, setShow] = useState(true);
+  const [headerWidth, setHeaderWidth] = useState("");
+  const [positionLeft, setPositionLeft] = useState("");
+  const [padRight, setPadRight] = useState("");
+  const [showSignIn, popSignIn] = useState(false);
+  const [showSignUp, popUpSignUp] = useState(false);
+  const [showConfirm, popupConfirm] = useState(false);
+  const [showButton, popButton] = useState(false);
+  const [forgotPass, popForgotPass] = useState(false);
+  const [changePass, popChangePass] = useState(false);
+  const [isTimeOut, setTimeOut] = useState(false);
+
+  const toogleChangePass = () => popChangePass(!changePass);
+  const toogleForgotPass = () => popForgotPass(!forgotPass);
+  const toogleButton = () => popButton(!showButton);
+  const toogleSignIn = () => popSignIn(!showSignIn);
+  const toogleSignUp = () => popUpSignUp(!showSignUp);
+  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+
+  const toogleShow = (value) => {
+    setShow(value);
+  };
+
+  const colorChange = (color) => {
+    setColor(color);
+  };
+
+  const bodyColorChange = (color) => {
+    setBodyColor(color);
+  };
+
+  const [change, setChange] = useState(false);
+  const toogleChange = (change) => {
+    setChange(change);
+  };
+
   useEffect(() => {
     const authToken = localStorage.getItem("token");
     if (authToken) {
@@ -83,42 +122,22 @@ function App() {
       dispatch(addIncompProperty(res.data));
     });
   }
-
-  const [color, setColor] = useState("");
-  const [bodyColor, setBodyColor] = useState("");
-  const [show, setShow] = useState(true);
-  const [headerWidth, setHeaderWidth] = useState("");
-  const [positionLeft, setPositionLeft] = useState("");
-  const [padRight, setPadRight] = useState("");
-  const toogleShow = (value) => {
-    setShow(value);
-  };
-
-  const colorChange = (color) => {
-    setColor(color);
-  };
-
-  const bodyColorChange = (color) => {
-    setBodyColor(color);
-  };
-
-  const [change, setChange] = useState(false);
-  const toogleChange = (change) => {
-    setChange(change);
-  };
-
-  const [showSignIn, popSignIn] = useState(false);
-  const [showSignUp, popUpSignUp] = useState(false);
-  const [showConfirm, popupConfirm] = useState(false);
-  const [showButton, popButton] = useState(false);
-  const [forgotPass, popForgotPass] = useState(false);
-  const [changePass, popChangePass] = useState(false);
-  const toogleChangePass = () => popChangePass(!changePass);
-  const toogleForgotPass = () => popForgotPass(!forgotPass);
-  const toogleButton = () => popButton(!showButton);
-  const toogleSignIn = () => popSignIn(!showSignIn);
-  const toogleSignUp = () => popUpSignUp(!showSignUp);
-  const toogleConfirmModal = () => popupConfirm(!showConfirm);
+  useEffect(() => {
+    const func = () => {
+      console.log("heyyy log out");
+    };
+    let timer;
+    if (user._id) {
+      timer = new IdleTimer({ timeout: 2, handleLogout: func });
+      timer.setTracker();
+      timer.logoutTimer();
+    }
+    return () => {
+      if (timer) {
+        timer.clearTracker();
+      }
+    };
+  }, [user]);
 
   return (
     <Suspense fallback={<Loading />}>
