@@ -252,16 +252,16 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                   className="favorite-button"
                 >
                   {favorite ? (
-                    <AiFillHeart size="100%" color="C58753" />
+                    <AiFillHeart size="50px" color="C58753" />
                   ) : (
-                    <AiOutlineHeart size="100%" color="C58753" />
+                    <AiOutlineHeart size="50px" color="C58753" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline size="100%" color="C58753" />
+                  <IoImageOutline size="50px" color="C58753" />
                 </button>
                 <Modal
                   size="xl"
@@ -299,7 +299,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine size="100%" color="C58753" />
+                  <RiVideoLine size="50px" color="C58753" />
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
@@ -333,7 +333,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               </div>
               <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 size="100%" color="C58753" />
+                  <Md360 size="50px" color="C58753" />
                 </button>
               </div>
 
@@ -460,9 +460,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toogleRegister}>
                     Register to Bid
@@ -542,9 +542,9 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -688,7 +688,7 @@ function DisplayCar({ toogleChange, property, toogleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
