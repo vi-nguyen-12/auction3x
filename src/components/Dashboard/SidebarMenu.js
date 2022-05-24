@@ -1,6 +1,5 @@
 import React from "react";
 import * as AI from "react-icons/ai";
-import * as MD from "react-icons/md";
 import * as RI from "react-icons/ri";
 import { RiAuctionFill } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Table, Tab, Button } from "react-bootstrap";
+import { Row, Container, Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import SavedAuctionsCard from "../Auctions/SavedAuctionsCard";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
 
 function LiveListings() {
   const user = useSelector((state) => state.user);
   const [upcomingListings, setUpcomingListings] = useState([]);
-  const [images, setImages] = useState([]);
-  const [documents, setDocuments] = useState([]);
   const [showImages, setShowImages] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
@@ -74,7 +71,6 @@ function LiveListings() {
                         width="100px"
                         height="50px"
                         onClick={() => {
-                          setImages(listing.images);
                           toggleImages();
                         }}
                         src={
@@ -126,7 +122,6 @@ function LiveListings() {
                   <td colSpan={2}>
                     <Button
                       onClick={() => {
-                        setDocuments(listing.documents);
                         toggleDocuments();
                       }}
                       variant="primary"

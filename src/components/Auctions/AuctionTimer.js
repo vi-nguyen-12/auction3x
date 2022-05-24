@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
-import authService from "../../services/authServices";
 import "../../styles/timer.css";
 
-const AuctionTimer = ({ time, id, toogleAuction }) => {
+const AuctionTimer = ({ time, toogleAuction }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
