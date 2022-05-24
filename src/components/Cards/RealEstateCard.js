@@ -51,12 +51,12 @@ const CardComp = ({
   urls,
   data,
   id,
+  windowSize,
   auctionEndDate,
   startingBid,
   reserveMet,
   toggleSignIn,
 }) => {
-  console.log(startingBid);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -128,10 +128,15 @@ const CardComp = ({
     }
   }, [savedProperty]);
 
+  console.log(windowSize);
+
   return (
     <div>
       {auctionEndDate && (
-        <Card className="cards text-left m-auto">
+        <Card
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
+          className="cards text-left m-auto"
+        >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
@@ -140,15 +145,13 @@ const CardComp = ({
               <Card.Img
                 key={index}
                 onClick={handleDisplay}
-                variant="top"
-                src={items.url}
-                className=" img-card img-fluid"
                 style={{
                   width: "100%",
-                  height: "300px",
                   borderRadius: "10px",
                   cursor: "pointer",
                 }}
+                src={items.url}
+                className=" img-card img-fluid"
               />
             ))}
           </Carousel>

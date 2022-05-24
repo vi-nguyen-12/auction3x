@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CardComp } from "../Cards/RealEstateCard";
 import { JetCard } from "../Cards/JetCard";
@@ -87,6 +87,18 @@ align-content: center;
 `;
 
 const Featured = ({ toggleSignIn, featureAuctions: auctions }) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const handleWindowResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
+
   let settings = {
     dots: false,
     infinite: true,
@@ -124,96 +136,83 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions }) => {
 
   return (
     <div className="background" style={{ height: "100vh" }}>
-      {
-        auctions.length > 0 ? (
-          <>
-            <Row>
-              <Col md={12} className="m-auto">
-                <h2
-                  style={{ color: "white", fontSize: "22px", padding: "20px" }}
-                >
-                  Featured Listings
-                </h2>
-              </Col>
-            </Row>
-
+      {auctions.length > 0 ? (
+        <>
+          <Row>
             <Col md={12} className="m-auto">
-              <Row>
-                <Carousel {...settings}>
-                  {auctions.map((item, index) => (
-                    <Wrap key={index}>
-                      <Col md={12}>
-                        {item.property.type === "real-estate" ? (
-                          <CardComp
-                            url={item.property.images[0].url}
-                            urls={item.property.images}
-                            data={item.property.details}
-                            id={item._id}
-                            auctionStartDate={item.auctionStartDate}
-                            auctionEndDate={item.auctionEndDate}
-                            startingBid={item.startingBid}
-                            reserveMet={item.isReservedMet}
-                            toggleSignIn={toggleSignIn}
-                          />
-                        ) : item.property.type === "car" ? (
-                          <CarCard
-                            url={item.property.images[0].url}
-                            urls={item.property.images}
-                            data={item.property.details}
-                            id={item._id}
-                            auctionStartDate={item.auctionStartDate}
-                            auctionEndDate={item.auctionEndDate}
-                            startingBid={item.startingBid}
-                            reserveMet={item.isReservedMet}
-                            toggleSignIn={toggleSignIn}
-                          />
-                        ) : item.property.type === "jet" ? (
-                          <JetCard
-                            url={item.property.images[0].url}
-                            urls={item.property.images}
-                            data={item.property.details}
-                            id={item._id}
-                            auctionStartDate={item.auctionStartDate}
-                            auctionEndDate={item.auctionEndDate}
-                            startingBid={item.startingBid}
-                            reserveMet={item.isReservedMet}
-                            toggleSignIn={toggleSignIn}
-                          />
-                        ) : item.property.type === "yacht" ? (
-                          <YachtCard
-                            url={item.property.images[0].url}
-                            urls={item.property.images}
-                            data={item.property.details}
-                            id={item._id}
-                            auctionStartDate={item.auctionStartDate}
-                            auctionEndDate={item.auctionEndDate}
-                            startingBid={item.startingBid}
-                            reserveMet={item.isReservedMet}
-                            toggleSignIn={toggleSignIn}
-                          />
-                        ) : null}
-                      </Col>
-                    </Wrap>
-                  ))}
-                </Carousel>
-              </Row>
+              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
+                Featured Listings
+              </h2>
             </Col>
-          </>
-        ) : null
-        // <Row>
-        //   <Col md={12} className="m-auto">
-        //     <img
-        //       src="/images/f_name.png"
-        //       alt=""
-        //       style={{
-        //         marginBottom: "0px",
-        //         maxWidth: "250px",
-        //         maxHeight: "150px",
-        //       }}
-        //     />
-        //   </Col>
-        // </Row>
-      }
+          </Row>
+
+          <Col md={12} className="m-auto">
+            <Row>
+              <Carousel {...settings}>
+                {auctions.map((item, index) => (
+                  <Wrap key={index}>
+                    <Col md={12}>
+                      {item.property.type === "real-estate" ? (
+                        <CardComp
+                          url={item.property.images[0].url}
+                          urls={item.property.images}
+                          data={item.property.details}
+                          id={item._id}
+                          windowSize={windowSize}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
+                          toggleSignIn={toggleSignIn}
+                        />
+                      ) : item.property.type === "car" ? (
+                        <CarCard
+                          windowSize={windowSize}
+                          url={item.property.images[0].url}
+                          urls={item.property.images}
+                          data={item.property.details}
+                          id={item._id}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
+                          toggleSignIn={toggleSignIn}
+                        />
+                      ) : item.property.type === "jet" ? (
+                        <JetCard
+                          windowSize={windowSize}
+                          url={item.property.images[0].url}
+                          urls={item.property.images}
+                          data={item.property.details}
+                          id={item._id}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
+                          toggleSignIn={toggleSignIn}
+                        />
+                      ) : item.property.type === "yacht" ? (
+                        <YachtCard
+                          windowSize={windowSize}
+                          url={item.property.images[0].url}
+                          urls={item.property.images}
+                          data={item.property.details}
+                          id={item._id}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.startingBid}
+                          reserveMet={item.isReservedMet}
+                          toggleSignIn={toggleSignIn}
+                        />
+                      ) : null}
+                    </Col>
+                  </Wrap>
+                ))}
+              </Carousel>
+            </Row>
+          </Col>
+        </>
+      ) : null}
     </div>
   );
 };

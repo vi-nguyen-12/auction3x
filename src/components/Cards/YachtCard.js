@@ -55,6 +55,7 @@ const YachtCard = ({
   auctionEndDate,
   startingBid,
   toggleSignIn,
+  windowSize,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -131,7 +132,10 @@ const YachtCard = ({
   return (
     <div>
       {auctionEndDate && (
-        <Card className="cards text-left m-auto">
+        <Card
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
+          className="cards text-left m-auto"
+        >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}

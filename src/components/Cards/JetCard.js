@@ -55,6 +55,7 @@ const JetCard = ({
   auctionEndDate,
   reserveMet,
   toggleSignIn,
+  windowSize,
 }) => {
   console.log(urls);
   const user = useSelector((state) => state.user);
@@ -133,7 +134,7 @@ const JetCard = ({
       {auctionEndDate && (
         <Card
           className="cards text-left m-auto"
-          style={{ width: window.innerWidth < 800 && "350px" }}
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
         >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
