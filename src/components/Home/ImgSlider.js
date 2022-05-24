@@ -24,6 +24,7 @@ const Carousel = styled(Slider)`
   .slick-prev {
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin-left: 50px;
   }
 
   .slick-prev:before {
@@ -33,6 +34,7 @@ const Carousel = styled(Slider)`
   .slick-next {
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin-right: 50px;
   }
 
   .slick-next:before {
@@ -50,11 +52,12 @@ const Wrap = styled.div`
     display: block;
     position: relative;
     padding: 0;
+  }
 
-    img {
-      width: 100%;
-      height: 100vh;
-    }
+  img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
   }
 `;
 

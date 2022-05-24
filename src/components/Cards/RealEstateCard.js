@@ -15,7 +15,7 @@ import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
   border-radius: 0;
 
   & > button {
@@ -32,11 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: -5px !important;
   }
   .slick-next:before {
     display: none;
@@ -54,6 +56,7 @@ const CardComp = ({
   reserveMet,
   toggleSignIn,
 }) => {
+  console.log(startingBid);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -66,7 +69,7 @@ const CardComp = ({
     slidesToScroll: 1,
   };
   const [auctionEnded, setAuctionEnded] = useState(false);
-  const toggleAuction = () => setAuctionEnded(!auctionEnded);
+  const toogleAuction = () => setAuctionEnded(!auctionEnded);
 
   const history = useHistory();
 
@@ -160,89 +163,64 @@ const CardComp = ({
             )}
           </button>
           <Card.Body>
-            <div>
-              <div>
-                {/* <span className="golden-text">
-                  {data.property_address.formatted_street_address},{" "}
-                  {data.property_address.state}
-                </span> */}
+            <Row>
+              <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.property_address.formatted_street_address},{" "}
                   {data.property_address.state}
                 </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    <Col md={5} style={{ width: "60%", color: "black" }}>
-                      <p style={{ fontSize: "15px", width: "100%" }}>
-                        Online Auction
-                      </p>
-                    </Col>
-
-                    <Col md={6} style={{ width: "40%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "100%",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {auctionEnded ? (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <p
-                          style={{
-                            fontSize: "15px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Auction Ended
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "60%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <AuctionTimer
-                            id={id}
-                            time={auctionEndDate}
-                            toggleAuction={toggleAuction}
-                          />
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "40%" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          width: "100%",
-                        }}
-                      >
-                        {data.structure.beds_count
-                          ? data.structure.beds_count
-                          : "N/A-"}
-                        BD |{" "}
-                        {data.structure.baths ? data.structure.baths : "N/A-"}BA
-                        |{" "}
-                        {data.parcel.area_sq_ft
-                          ? data.parcel.area_sq_ft
-                          : "N/A-"}{" "}
-                        sq.ft
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Online Auction
+                </p>
+              </Col>
+              <Col>
+                <p style={{ fontSize: "15px", width: "100%" }}>
+                  Additional Info
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {auctionEnded ? (
+                  <p
+                    style={{
+                      fontSize: "15px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Auction Ended
+                  </p>
+                ) : (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <AuctionTimer
+                      id={id}
+                      time={auctionEndDate}
+                      toogleAuction={toogleAuction}
+                    />
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    width: "100%",
+                  }}
+                >
+                  {data.structure.beds_count
+                    ? data.structure.beds_count
+                    : "N/A-"}
+                  BD | {data.structure.baths ? data.structure.baths : "N/A-"}BA
+                  | {data.parcel.area_sq_ft ? data.parcel.area_sq_ft : "N/A-"}{" "}
+                  sq.ft
+                </p>
+              </Col>
+            </Row>
 
             <hr />
             <div

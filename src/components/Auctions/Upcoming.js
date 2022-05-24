@@ -10,7 +10,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
     <>
       {upcomingAuctions ? (
         <>
-          <div className="mt-5" style={{ height: "100vh" }}>
+          <div className="mt-5" >
             <Row style={{ padding: "0 50px" }}>
               <Col md={10} className="pt-5">
                 <h2 style={{ color: "black", fontSize: "22px" }}>
@@ -27,6 +27,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
               }}
             >
               {upcomingAuctions.length > 0 ? (
+
                 upcomingAuctions.slice(0, 6).map((item) => (
                   <Col
                     key={item._id}

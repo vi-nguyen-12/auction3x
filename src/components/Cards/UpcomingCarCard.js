@@ -69,7 +69,7 @@ const UpcomingCarCard = ({
   };
 
   const [registEnded, setRegistEnded] = useState(false);
-  const toggleRegistEnded = () => setRegistEnded(!registEnded);
+  const toogleRegistEnded = () => setRegistEnded(!registEnded);
 
   const history = useHistory();
 
@@ -170,8 +170,67 @@ const UpcomingCarCard = ({
               <img src="/images/heart.png" alt="" />
             )}
           </button>
-          <Card.Body style={{ paddingLeft: "13px" }}>
-            <div>
+          <Card.Body>
+            <Row>
+              <Col>
+                <h4 style={{ marginTop: "5px", color: "black" }}>
+                  {data.year} {data.make} {data.model}
+                </h4>
+              </Col>
+            </Row>
+            <Row style={{ fontSize: "15px" }}>
+              <Col>
+                {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
+              </Col>
+              <Col>
+                <p>Additional Info</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {registEnded ? (
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      width: "100%",
+                    }}
+                  >
+                    <Timer auctionStartDate={auctionStartDate} />
+                  </div>
+                ) : !registEnded ? (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <RegistrationTimer
+                      time={endRegister}
+                      toogleRegistEnded={toogleRegistEnded}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Registration Ended
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "black",
+                    width: "100%",
+                  }}
+                >
+                  {data.car_type ? data.car_type : "N/A"}|{" "}
+                  {data.engine ? data.engine : "N/A"}|{" "}
+                  {data.fuel_type ? data.fuel_type : "N/A"}
+                </p>
+              </Col>
+            </Row>
+            {/* <div>
               <div>
                 <span className="golden-text">{data.property_address}</span>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
@@ -261,7 +320,7 @@ const UpcomingCarCard = ({
                   </Row>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <hr />
             <div

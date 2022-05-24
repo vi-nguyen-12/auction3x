@@ -5,63 +5,62 @@ const FindInCountries = (props) => {
   return (
     <>
       <Container
-        fluid
-        style={{
-          background: "#f8f8f8",
-          height: "100vh",
+        fluid>
+        <Row style={{
           margin: "0",
           padding: "0",
-          padding: "0 50px",
-        }}
-      >
-        <Row>
-          <Col md={10} className="m-auto pt-5 text-center">
-            <h2 style={{ color: "black", fontSize: "22px" }}>
-              Find Properties In These Countries
-            </h2>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="circularCard" md={4}>
-            <img
-              height={350}
-              src="/images/historic-featured.jpg"
-              alt=""
-              className="mt-5"
-            />
-            <span>
-              <h2>U.S.A</h2>
-              <p>12 Properties</p>
-            </span>
-          </Col>
-          <Col className="circularCard" md={8}>
-            <img
-              height={350}
-              src="/images/australia.jpg"
-              alt=""
-              className="mt-5"
-            />
-            <span>
-              <h2>AUSTRALIA</h2>
-              <p>23 Properties</p>
-            </span>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="circularCard" md={8}>
-            <img height={350} src="/images/canada.webp" alt="" />
-            <span>
-              <h2>CANADA</h2>
-              <p>18 Properties</p>
-            </span>
-          </Col>
-          <Col className="circularCard" md={4}>
-            <img height={350} src="/images/london-england.jpg" alt="" />
-            <span>
-              <h2>ENGLAND</h2>
-              <p>33 Properties</p>
-            </span>
-          </Col>
+          padding: "0 10px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+          <Row>
+            <Col md={10} className="m-auto pt-5 text-center">
+              <h2 style={{ color: "black", fontSize: "22px" }}>
+                Find Properties In These Countries
+              </h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="circularCard" md={4}>
+              <img
+                height={350}
+                src="/images/historic-featured.jpg"
+                alt=""
+              />
+              <span>
+                <h2>U.S.A</h2>
+                <p>12 Properties</p>
+              </span>
+            </Col>
+            <Col className="circularCard" md={8}>
+              <img
+                height={350}
+                src="/images/australia.jpg"
+                alt=""
+              />
+              <span>
+                <h2>AUSTRALIA</h2>
+                <p>23 Properties</p>
+              </span>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="circularCard" md={8}>
+              <img height={350} src="/images/canada.webp" alt="" />
+              <span>
+                <h2>CANADA</h2>
+                <p>18 Properties</p>
+              </span>
+            </Col>
+            <Col className="circularCard" md={4}>
+              <img height={350} src="/images/london-england.jpg" alt="" />
+              <span>
+                <h2>ENGLAND</h2>
+                <p>33 Properties</p>
+              </span>
+            </Col>
+          </Row>
         </Row>
       </Container>
 

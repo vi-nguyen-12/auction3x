@@ -10,8 +10,27 @@ require("react-bootstrap/ModalHeader");
 const User = ({ toggleSignUp, toggleSignIn }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
-  const toggleTerms = () => setShowTerms(!showTerms);
-  const { register, handleSubmit } = useForm();
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [privacy, setPrivacy] = useState();
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const toogleTerms = () => setShowTerms(!showTerms);
+  const tooglePrivacy = () => setShowPrivacy(!showPrivacy);
+  const {
+    register,
+    handleSubmit,
+    //formState: { errors },
+  } = useForm();
+
+  const handleWindowResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
 
   useEffect(() => {
     authServices.getDocuments().then((res) => {
@@ -64,13 +83,18 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
       >
         <Modal.Title
           id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
+          style={{
+            color: "#D58F5C",
+            fontSize: windowSize > 800 ? "35px" : "23px",
+            fontWeight: "bold",
+            padding: "0",
+            lineHeight: "1",
+          }}
           contentclassname="custom-modal-title"
         >
           REGISTER ON AUCTION3
           <div>
             <Button
-              style={{ marginTop: "35px" }}
               className="signup-link"
               onClick={() => {
                 toggleSignIn();
@@ -83,7 +107,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: "20px 0" }}>
           <Col>
             <div className="form-group">
               <label htmlFor="firstName">
@@ -120,7 +144,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: "20px 0" }}>
           <Col>
             <div className="form-group">
               <label htmlFor="userName">
@@ -156,7 +180,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: "20px 0" }}>
           <Col>
             <div className="form-group">
               <label htmlFor="password">
@@ -192,7 +216,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: "20px 0" }}>
           <Col>
             <div className="form-group">
               <label htmlFor="phone">Phone</label>
@@ -209,7 +233,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "30px 0" }}>
+        <Row style={{ margin: "20px 0" }}>
           <Col>
             <div className="form-group">
               <label htmlFor="country">Country</label>
@@ -445,7 +469,7 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
           </span>{" "}
           and
           <span
-            onClick={() => toggleTerms()}
+            onClick={() => toogleTerms()}
             style={{ color: "#00a8ff", cursor: "pointer" }}
           >
             {" "}
@@ -456,12 +480,12 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
           REGISTER
         </button>
       </form>
-      <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
+      <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
         <Modal.Body style={{ height: "90vh" }}>
           <div>
-            <CloseButton className="modal-close" onClick={toggleTerms} />
+            <CloseButton className="modal-close" onClick={toogleTerms} />
           </div>
-          <embed src={terms} width="100%" height="100%" />
+          <iframe title="terms" src={terms} width="100%" height="90%" />
         </Modal.Body>
       </Modal>
     </>

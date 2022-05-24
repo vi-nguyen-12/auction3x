@@ -68,7 +68,7 @@ const UpcomingRealEstateCard = ({
     slidesToScroll: 1,
   };
   const [registEnded, setRegistEnded] = useState(false);
-  const toggleRegistEnded = () => setRegistEnded(!registEnded);
+  const toogleRegistEnded = () => setRegistEnded(!registEnded);
 
   const history = useHistory();
 
@@ -167,104 +167,72 @@ const UpcomingRealEstateCard = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            <div>
-              <div>
-                <span className="golden-text">{data.address}</span>
+            <Row>
+              <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.property_address.formatted_street_address},{" "}
+                  {data.property_address.state}
                 </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    {registEnded ? (
-                      <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100%" }}>
-                          Auction Start:
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100%" }}>
-                          Registration
-                        </p>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "50%" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "100%",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {registEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div
-                          style={{
-                            fontSize: "12px",
-                            width: "100%",
-                          }}
-                        >
-                          <Timer auctionStartDate={auctionStartDate} />
-                        </div>
-                      </Col>
-                    ) : !registEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <RegistrationTimer
-                            time={endRegister}
-                            toggleRegistEnded={toggleRegistEnded}
-                          />
-                        </div>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div
-                          style={{
-                            fontSize: "18px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Registration Ended
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "50%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          color: "black",
-                          width: "100%",
-                        }}
-                      >
-                        {data.structure.beds_count
-                          ? data.structure.beds_count
-                          : "N/A-"}
-                        BD |{" "}
-                        {data.structure.baths ? data.structure.baths : "N/A-"}
-                        BA |{" "}
-                        {data.structure.total_area_sq_ft
-                          ? data.structure.total_area_sq_ft
-                          : "N/A-"}{" "}
-                        sq.ft
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div>
+              </Col>
+            </Row>
+            <Row style={{ fontSize: "15px" }}>
+              <Col>
+                {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
+              </Col>
+              <Col>
+                <p>Additional Info</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                {registEnded ? (
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      width: "100%",
+                    }}
+                  >
+                    <Timer auctionStartDate={auctionStartDate} />
+                  </div>
+                ) : !registEnded ? (
+                  <div style={{ fontSize: "12px", width: "100%" }}>
+                    <RegistrationTimer
+                      time={endRegister}
+                      toogleRegistEnded={toogleRegistEnded}
+                    />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      width: "100%",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Registration Ended
+                  </div>
+                )}
+              </Col>
+              <Col>
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "black",
+                    width: "100%",
+                  }}
+                >
+                  {data.structure.beds_count
+                    ? data.structure.beds_count
+                    : "N/A-"}
+                  BD | {data.structure.baths ? data.structure.baths : "N/A-"}
+                  BA |{" "}
+                  {data.structure.total_area_sq_ft
+                    ? data.structure.total_area_sq_ft
+                    : "N/A-"}{" "}
+                  sq.ft
+                </p>
+              </Col>
+            </Row>
 
             <hr />
             <div

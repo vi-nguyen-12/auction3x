@@ -172,6 +172,7 @@ function JetPage({ toggleChange, setImgJet, toggleSignIn }) {
                     <Col md={12} style={{ marginBottom: "30px" }}>
                       <JetCard
                         url={item.property.images[0].url}
+                        urls={item.property.images}
                         data={item.property.details}
                         id={item._id}
                         auctionStartDate={item.auctionStartDate}

@@ -1,7 +1,9 @@
 .timerHead th:nth-child(n + 1) {
   font-size: large;
   margin: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 13px;
+  padding: 0 !important;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0;
 }

@@ -49,47 +49,19 @@ const PropertyPages = ({
     <>
       <h5 className="realHeader">
         {path === "/cars" ? (
-          <p
-            style={{
-              fontSize: "4rem",
-              color: "#fcbe91",
-              margin: "0",
-              alignItems: "center",
-            }}
-          >
+          <p>
             CAR
           </p>
         ) : path === "/jets" ? (
-          <p
-            style={{
-              fontSize: "4rem",
-              color: "#fcbe91",
-              margin: "0",
-              alignItems: "center",
-            }}
-          >
+          <p>
             JET
           </p>
         ) : path === "/yachts" ? (
-          <p
-            style={{
-              fontSize: "4rem",
-              color: "#fcbe91",
-              margin: "0",
-              alignItems: "center",
-            }}
-          >
+          <p>
             YACHT
           </p>
         ) : (
-          <p
-            style={{
-              fontSize: "4rem",
-              color: "#fcbe91",
-              margin: "0",
-              alignItems: "center",
-            }}
-          >
+          <p>
             REAL ESTATE
           </p>
         )}

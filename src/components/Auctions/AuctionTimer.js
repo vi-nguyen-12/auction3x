@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import authService from "../../services/authServices";
 import "../../styles/timer.css";
 
-const AuctionTimer = ({ time, id, toggleAuction }) => {
+const AuctionTimer = ({ time, id, toogleAuction }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -24,7 +24,7 @@ const AuctionTimer = ({ time, id, toggleAuction }) => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       if (distance < 0) {
-        toggleAuction();
+        toogleAuction();
         clearInterval(interval.current);
       } else {
         setDays(days);
@@ -41,7 +41,7 @@ const AuctionTimer = ({ time, id, toggleAuction }) => {
   }, []);
 
   return (
-    <Table style={{ margin: "auto" }} borderless>
+    <Table borderless>
       <thead>
         <tr className="timerHead">
           <th>{days}</th>

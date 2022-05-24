@@ -409,35 +409,46 @@ const Header = ({
                 </>
               ) : (
                 <>
-                  <div
-                    className="mt-0"
-                    style={{
-                      marginRight: windowSize > 800 ? "50px" : "10px",
-                      display: "flex",
-                      alignItems: "center",
-                      fontSize: "20px",
-                    }}
-                  >
+                  {windowSize > 800 ? (
+                    <div
+                      className="mt-0"
+                      style={{
+                        marginRight: windowSize > 800 ? "50px" : "10px",
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: "20px",
+                      }}
+                    >
+                      <Button
+                        className="signIn-btn mt-0"
+                        style={{ color: textColor }}
+                        variant="success"
+                        onClick={toggleSignIn}
+                        id={colors === "white" ? "hover" : ""}
+                      >
+                        Sign In
+                      </Button>
+                      <label style={{ color: textColor }}>|</label>
+                      <Button
+                        id={colors === "white" ? "hover" : ""}
+                        className="signUp-btn mt-0"
+                        style={{ color: textColor }}
+                        variant="success"
+                        onClick={toggleSignUp}
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  ) : (
                     <Button
-                      className="signIn-btn mt-0"
-                      style={{ color: textColor }}
-                      variant="success"
-                      onClick={toggleSignIn}
                       id={colors === "white" ? "hover" : ""}
+                      style={{ color: textColor }}
+                      className="signIn-btn mt-0"
+                      onClick={toggleSignIn}
                     >
                       Sign In
                     </Button>
-                    <label style={{ color: textColor }}>|</label>
-                    <Button
-                      id={colors === "white" ? "hover" : ""}
-                      className="signUp-btn mt-0"
-                      style={{ color: textColor }}
-                      variant="success"
-                      onClick={toggleSignUp}
-                    >
-                      Sign Up
-                    </Button>
-                  </div>
+                  )}
                   <Button
                     id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
@@ -639,46 +650,57 @@ const Header = ({
                     Sell
                   </Button>
                 ) : null}
-                <div
-                  className="border-0 mt-0"
-                  style={{
-                    backgroundColor: "transparent",
-                    marginRight: "0",
-                  }}
-                  id={colors === "white" ? "hover" : ""}
-                >
+                {windowSize > 800 ? (
+                  <div
+                    className="border-0 mt-0"
+                    style={{
+                      backgroundColor: "transparent",
+                      marginRight: "0",
+                    }}
+                    id={colors === "white" ? "hover" : ""}
+                  >
+                    <Button
+                      id={colors === "white" ? "hover" : ""}
+                      className="signIn-btn"
+                      style={{
+                        fontSize: 18,
+                        color: textColor,
+                        fontWeight: "normal",
+                        backgroundColor: "transparent",
+                        border: "0",
+                      }}
+                      variant="success"
+                      onClick={toggleSignIn}
+                    >
+                      Sign In
+                    </Button>
+                    <label style={{ color: textColor }}>|</label>
+                    <Button
+                      id={colors === "white" ? "hover" : ""}
+                      className="signUp-btn"
+                      style={{
+                        fontSize: 18,
+                        color: textColor,
+                        fontWeight: "normal",
+                        backgroundColor: "transparent",
+                        border: "0",
+                      }}
+                      variant="success"
+                      onClick={toggleSignUp}
+                    >
+                      Signup
+                    </Button>
+                  </div>
+                ) : (
                   <Button
                     id={colors === "white" ? "hover" : ""}
-                    className="signIn-btn"
-                    style={{
-                      fontSize: 18,
-                      color: textColor,
-                      fontWeight: "normal",
-                      backgroundColor: "transparent",
-                      border: "0",
-                    }}
-                    variant="success"
+                    style={{ color: textColor }}
+                    className="signIn-btn mt-0"
                     onClick={toggleSignIn}
                   >
                     Sign In
                   </Button>
-                  <label style={{ color: textColor }}>|</label>
-                  <Button
-                    id={colors === "white" ? "hover" : ""}
-                    className="signUp-btn"
-                    style={{
-                      fontSize: 18,
-                      color: textColor,
-                      fontWeight: "normal",
-                      backgroundColor: "transparent",
-                      border: "0",
-                    }}
-                    variant="success"
-                    onClick={toggleSignUp}
-                  >
-                    Signup
-                  </Button>
-                </div>
+                )}
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"

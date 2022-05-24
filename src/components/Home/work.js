@@ -8,7 +8,6 @@ const Work = () => {
       style={{
         padding: "0 50px",
         background: "#f8f8f8",
-        height: "759px",
         marginTop: "50px",
       }}
     >

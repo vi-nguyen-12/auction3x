@@ -188,7 +188,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-              new Date().toISOString() < endRegister ? (
+                new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}
