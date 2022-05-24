@@ -1,15 +1,18 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import "../../styles/modal.css";
 require("react-bootstrap/ModalHeader");
 
 const SessionExpired = ({ toggleSignIn, toggleSessionTimedOut }) => {
+  const history = useHistory();
   const handleSignIn = () => {
     toggleSessionTimedOut();
     toggleSignIn();
   };
   const handleCancel = () => {
     toggleSessionTimedOut();
+    history.push("/");
   };
   return (
     <>

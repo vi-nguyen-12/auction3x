@@ -11,7 +11,7 @@ import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
 
 const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -168,7 +168,6 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
               type="checkbox"
               name="terms"
               multiple
-              // {...register("images", { required: false })}
               style={{ marginRight: "10px", marginBottom: "30px" }}
               onChange={hangleTerms}
             />

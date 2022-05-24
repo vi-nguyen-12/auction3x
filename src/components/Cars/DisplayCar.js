@@ -365,7 +365,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "0", padding: "35px 35px" }}>
+          <Row style={{ padding: "35px 35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.year} {""}
@@ -459,9 +459,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -541,9 +541,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -687,7 +687,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
