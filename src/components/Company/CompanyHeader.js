@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/realEstate.css";
 import partner from "../../../src/images/partner.png";
 import contact from "../../../src/images/contact.png";
@@ -7,8 +7,10 @@ import privacy from "../../../src/images/privacy.png";
 import terms from "../../../src/images/terms.png";
 import broker from "../../../src/images/broker.png";
 import team from "../../../src/images/team.png";
+import { Button } from "react-bootstrap";
+import { set } from "react-hook-form";
 
-function CompanyHeader({ location }) {
+function CompanyHeader({ location, setQuery, faqs }) {
   return (
     <>
       {location === "AboutUs" ? (
@@ -81,18 +83,41 @@ function CompanyHeader({ location }) {
             <span>{"Home > FAQ"}</span>
           </p>
           <div
-            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+            style={{ width: "100%", display: "grid", justifyContent: "center" }}
           >
             <span
               style={{
                 fontSize: "35px",
+                fontWeight: "bold",
                 width: "100%",
                 color: "white",
                 textAlign: "center",
+                height: "fit-content",
+                marginBottom: "-80px",
               }}
             >
-              {"Look Here"}
+              {"Search Here"}
             </span>
+            <div className="faqSearch">
+              <input
+                onChange={(e) => {
+                  if (e.target.value !== "") {
+                    setQuery(
+                      faqs.filter((faq) =>
+                        faq.question
+                          .toLowerCase()
+                          .includes(e.target.value.toLowerCase())
+                      )
+                    );
+                  } else {
+                    setQuery([]);
+                  }
+                }}
+                type="text"
+                placeholder="Enter Your Question"
+              />
+              <Button>Search</Button>
+            </div>
           </div>
         </div>
       ) : location === "TermsOfUse" ? (

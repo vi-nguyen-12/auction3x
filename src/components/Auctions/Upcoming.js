@@ -1,9 +1,10 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { UpcomingRealEstateCard } from "../Cards/UpcomingRealEtateCard";
 import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
+import error from "../../../src/images/error.png";
 
 const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
   return (
@@ -89,20 +90,72 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                   </Col>
                 ))
               ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    textAlign: "center",
-                    marginTop: "30px",
-                    backgroundColor: "#e8e8e8",
-                    boxShadow: "0px 0px 10px #00000029",
-                    borderRadius: "10px",
-                    padding: "20px",
-                  }}
-                >
-                  <h1 style={{ margin: "0" }}>Auctions not found!</h1>
-                </div>
+                <Row style={{ margin: "0", padding: "0", marginTop: "20px" }}>
+                  <Col
+                    style={{
+                      backgroundColor: "#282828",
+                      borderRadius: "10px",
+                      margin: "0",
+                      padding: "0",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignContent: "center",
+                      alignItems: "center",
+                    }}
+                    md={12}
+                  >
+                    <img
+                      src={error}
+                      alt="error"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "10px",
+                        objectFit: "cover",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                      }}
+                    />
+                    <div
+                      style={{
+                        display: "grid",
+                        justifyContent: "center",
+                        fontSize: "10rem",
+                        alignContent: "center",
+                        width: "100%",
+                        height: "fit-content",
+                        position: "absolute",
+                        color: "white",
+                        zIndex: "100",
+                      }}
+                    >
+                      <span>404</span>
+                      <p
+                        style={{
+                          fontSize: "25px",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        No Auctions Found!
+                      </p>
+                      <Button
+                        style={{
+                          background: "white",
+                          color: "#B77B50",
+                          fontWeight: "bold",
+                          border: "none",
+                          padding: "10px",
+                        }}
+                        onClick={() => {
+                          window.scrollTo(0, 0);
+                        }}
+                      >
+                        Take Me Home
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
               )}
             </Row>
           </div>
