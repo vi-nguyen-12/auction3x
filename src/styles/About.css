@@ -1,92 +1,4 @@
-/* .about {
-  padding-top: 100px;
-  padding-bottom: 100px;
-  width: 50%;
-}
-.about h2 {
-  font-size: 2.5em;
-  color: #edb48b;
-  text-align: center;
-}
-.about p {
-  font-size: 1.5em;
-  color: black;
-  text-align: left;
-}
-.side-button {
-  display: inline;
-  padding-left: 20px;
-}
-.button-container button {
-  background: linear-gradient(
-    90deg,
-    #d58f5c 0%,
-    #ffc195 31.25%,
-    #dd9c6d 62.5%,
-    #edb48b 100%
-  );
-  width: 25%;
-  border: none;
-  border-radius: 3px;
-  width: 150px;
-}
-
-.content-left {
-  padding: 100px;
-}
-.content-left h2 {
-  font-size: 2.5em;
-  color: #edb48b;
-  text-align: center;
-}
-.content-left p {
-  font-size: 1.5em;
-  color: black;
-  text-align: left;
-}
-.content-right {
-  padding: 150px;
-}
-.content-right button {
-  display: block;
-  width: 90%;
-  background: linear-gradient(
-    90deg,
-    #d58f5c 0%,
-    #ffc195 31.25%,
-    #dd9c6d 62.5%,
-    #edb48b 100%
-  );
-  border: none;
-  border-radius: 3px;
-  font-weight: bold;
-}
-.content-right input {
-  width: 90%;
-  background-color: transparent;
-  border: 2px solid #d58f5c;
-  border-radius: 3px;
-}
 .banner-container {
-  background-color: white;
-  width: 100% !important;
-  height: 100vh;
-}
-
-.investor {
-  width: 100%;
-  padding-left: none !important;
-}
-
-.bottom-container {
-  background-color: #f8f8f8;
-  width: 100%;
-  padding-left: -200 !important;
-  padding-right: none !important;
-} */
-
-.banner-container {
-  /* height: 100%; */
   display: flex;
   background: white;
 }
@@ -146,7 +58,6 @@
   width: 250px;
   padding: 10px;
   color: white;
-  /* font-family: "Josefin Slab", serif; */
 }
 .side-button {
   display: inline;
