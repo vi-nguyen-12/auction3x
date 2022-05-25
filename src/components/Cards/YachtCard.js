@@ -79,7 +79,6 @@ const YachtCard = ({
     }
     if (user.KYC) {
       history.push(`/DisplayAuctions/${id}`);
-      // window.location.reload();
     } else {
       setShowKYC(true);
     }

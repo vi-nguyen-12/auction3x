@@ -160,7 +160,7 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   padding: 20px 0 !important;
 }
 
@@ -362,15 +362,14 @@ ul.dashed > li:before {
 /* sell top */
 
 .sell-top-col {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .sell-top-col-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-self: center;
 }
 
 .circle {
@@ -391,8 +390,8 @@ ul.dashed > li:before {
   color: #6d6d6d;
   text-align: center;
 }
-.circle-1 {
-  background-color: #b77b50;
+.circle-active {
+  background-color: #b77b50; /* different */
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -400,87 +399,33 @@ ul.dashed > li:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: white; /* different */
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  z-index: 1;
+  z-index: 1; /* different */
 }
-/* .circle-2 {
-  background-color: #b77b50;
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: auto;
-}
-.circle-3 {
-  background-color: #b77b50;
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: auto;
-}
-.circle-4 {
-  background-color: #b77b50;
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: auto;
-}
-.circle-5 {
-  background-color: #b77b50;
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin: auto;
-} */
 
 .line {
-  position: absolute;
   width: 100%;
-  max-width: 250px;
   height: 5px;
   background: #6d6d6d;
-  margin-top: -15px;
   opacity: 0.1;
   z-index: 0;
 }
 .line-1 {
-  position: absolute;
   width: 100%;
-  max-width: 250px;
   height: 5px;
-  margin-top: -15px;
   background-color: #b77b50;
   z-index: 0;
 }
-/* .line-2 {
-  width: 8%;
-  height: 2px;
-  background-color: #b77b50;
-  margin-top: 48px !important;
-  display: flex;
-  align-items: center;
-}
-.line-3 {
-  width: 8%;
-  height: 2px;
-  background-color: #b77b50;
-  margin-top: 48px !important;
-  display: flex;
-  align-items: center;
-} */
-
 .spnn {
   text-align: center;
   font-size: 12px;
   font-weight: bold;
   color: #6d6d6d;
+  margin-top: 5px;
 }
 #status p {
   font-size: 10px;

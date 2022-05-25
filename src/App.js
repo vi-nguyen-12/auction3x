@@ -352,7 +352,181 @@ function App() {
             windowSize={windowSize}
           />
           <ScrollTop />
-
+          {/* All Modals */}
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showConfirm}
+            onHide={toggleConfirmModal}
+            contentclassname="confirm"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{ color: "#D58F5C" }}
+              >
+                Confirm Email
+              </Modal.Title>
+              <Modal.Title
+                className="pt-4"
+                style={{
+                  fontSize: "12px",
+                  color: "#D58F5C",
+                  position: "absolute",
+                  marginright: "10px",
+                  marginTop: "8px",
+                }}
+              ></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ReconfirmEmail
+                toggleConfirmModal={toggleConfirmModal}
+                toggleSignIn={toggleSignIn}
+              />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="md"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toggleForgotPass}
+            contentclassname="forgotPass"
+          >
+            <Modal.Body contentclassname="forgotPass" className="forgot-modal">
+              <ForgotPass
+                toggleForgotPass={toggleForgotPass}
+                toggleChangePass={toggleChangePass}
+              />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="md"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={forgotPass}
+            onHide={toggleForgotPass}
+            contentclassname="forgotPass"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <ForgotPass
+                toggleForgotPass={toggleForgotPass}
+                toggleChangePass={toggleChangePass}
+              />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={changePass}
+            onHide={toggleChangePass}
+            contentclassname="forgotPass"
+          >
+            <Modal.Body>
+              <ChangePass toggleChangePass={toggleChangePass} />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toggleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body className="sign-In"></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignIn}
+            onHide={toggleSignIn}
+            contentclassname="login"
+          >
+            <Modal.Body>
+              <Login
+                toggleSignUp={toggleSignUp}
+                toggleSignIn={toggleSignIn}
+                toggleButton={toggleButton}
+                toggleForgotPass={toggleForgotPass}
+                toggleConfirmModal={toggleConfirmModal}
+              />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            onHide={toggleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body className="sign-Up"></Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSignUp}
+            style={{ borderRadius: "30px" }}
+            onHide={toggleSignUp}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body>
+              <SignUp
+                toggleSignUp={toggleSignUp}
+                toggleConfirmModal={toggleConfirmModal}
+                toggleSignIn={toggleSignIn}
+              />
+            </Modal.Body>
+          </Modal>
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={showSessionTimedOut}
+            style={{ borderRadius: "30px" }}
+            onHide={toggleSessionTimedOut}
+            contentclassname="custom-modal-style"
+          >
+            <Modal.Body>
+              <SessionExpired
+                toggleSessionTimedOut={toggleSessionTimedOut}
+                toggleSignIn={toggleSignIn}
+              />
+            </Modal.Body>
+          </Modal>
           <Switch>
             {user._id && (
               <Route exact path="/MultiSellForm">
@@ -439,7 +613,7 @@ function App() {
               />
             </Route>
             {user._id && (
-              <Route path="/Dashboard">
+              <Route exact path="/Dashboard">
                 <Dashboard
                   toggleShow={toggleShow}
                   colorChange={colorChange}
@@ -484,14 +658,14 @@ function App() {
               <Broker windowSize={windowSize} />
             </Route>
 
-            <Route path="/reset_password">
+            <Route exact path="/reset_password">
               <ChangePass
                 colorChange={colorChange}
                 toggleShow={toggleShow}
                 setHeaderWidth={setHeaderWidth}
               />
             </Route>
-            <Route path="/confirm_email">
+            <Route exact path="/confirm_email">
               <EmailConfirm
                 colorChange={colorChange}
                 setHeaderWidth={setHeaderWidth}
