@@ -58,7 +58,6 @@
   background-clip: text;
 }
 
-
 /* company css */
 .companyHeader {
   font-family: Josefin Slab;
@@ -112,7 +111,7 @@
   background-clip: text;
 }
 
-.formTitle{
+.formTitle {
   font-size: 30px;
 }
 
@@ -129,6 +128,7 @@
 .RealEstate-Tab .nav-link {
   color: black;
   background-color: #f3f3f3;
+  font-size: calc(0.5rem + 0.5vw);
 }
 
 .DocVault {

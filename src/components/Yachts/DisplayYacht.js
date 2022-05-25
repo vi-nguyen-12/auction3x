@@ -124,7 +124,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
   const toggleRegistEnded = () => setRegistEnded(!registEnded);
-
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -281,16 +281,16 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   className="favorite-button"
                 >
                   {favorite ? (
-                    <AiFillHeart size="50px" color="C58753" />
+                    <AiFillHeart className="logo" />
                   ) : (
-                    <AiOutlineHeart size="50px" color="C58753" />
+                    <AiOutlineHeart className="logo" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline size="50px" color="C58753" />
+                  <IoImageOutline className="logo" />
                 </button>
                 <Modal
                   size="xl"
@@ -326,7 +326,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine size="50px" color="C58753" />
+                  <RiVideoLine className="logo" />
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
@@ -356,14 +356,14 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               </div>
               <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 size="50px" color="C58753" />
+                  <Md360 className="logo" />
                 </button>
               </div>
 
               {property && (
                 <div>
                   <button onClick={toggleMap} className="map-btn">
-                    <IoLocationOutline size="50px" color="C58753" />
+                    <IoLocationOutline className="logo" />
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
                     <Modal.Body style={{ height: "700px" }}>
@@ -651,11 +651,13 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
           </Row>
 
           {/* second row */}
-          <Row style={{ padding: "0 35px" }}>
-            <Col style={{ display: "grid", padding: "0" }}>
-              <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
+          <Row
+            style={{ padding: "0 35px" }}
+          >
+            <Col>
+              <Row>
                 {registEnded === false ? (
-                  <Col style={{ padding: "0" }}>
+                  <Col>
                     <div
                       style={{
                         display: "grid",
@@ -683,7 +685,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col style={{ padding: "0" }}>
+                  <Col style={{ marginBottom: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -692,6 +694,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "60px",
+                        height: "100%",
                       }}
                     >
                       <div
@@ -767,16 +770,17 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col>
+                    <Col style={{ marginBottom: "10px" }}>
                       <div
                         style={{
                           display: "grid",
                           justifyContent: "center",
                           backgroundColor: "#e8e8e8",
                           width: "100%",
+                          height: "100%",
                           borderRadius: "10px",
                           padding: "60px",
-                          marginLeft: "18px",
+                          // marginLeft: "18px",
                         }}
                       >
                         <div
@@ -875,14 +879,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
 
-                <Col>
+                <Col style={{ marginBottom: "10px" }}>
                   <div
                     style={{
                       display: "grid",
                       justifyContent: "center",
                       backgroundColor: "#e8e8e8",
                       width: "100%",
-                      marginLeft: "35px",
+                      height: "100%",
+                      // marginLeft: "35px",
                       borderRadius: "10px",
                       padding: "39px",
                     }}
@@ -1125,14 +1130,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                 marginTop: "30px",
                 alignItems: "center",
                 marginBottom: "20px",
+                marginLeft: "-15px",
               }}
             >
               <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
               <span
                 style={{
-                  fontWeight: "400",
-                  fontSize: "25px",
-                  marginLeft: "20px",
+                  fontWeight: "600",
+                  fontSize: "30px",
+                  marginLeft: "10px",
                   color: "black",
                 }}
               >
@@ -1140,7 +1146,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               </span>
             </div>
             <Col
-              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+              style={{ fontSize: "20px", paddingRight: "35px", color: "black", padding: "0" }}
             >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
