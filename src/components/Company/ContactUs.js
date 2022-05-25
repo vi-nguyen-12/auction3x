@@ -1,13 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import contact from "../../../src/contactImg.png";
+import contact from "../../../src/images/contactImg.png";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import authService from "../../services/authServices";
 
-function ContactUs() {
+function ContactUs({windowSize}) {
   const location = useLocation();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
@@ -56,7 +55,7 @@ function ContactUs() {
               </Col>
             </Row>
           </Col>
-          <Col md={8} style={{ padding: "150px 100px" }}>
+          <Col md={8} style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}>
             <Row>
               <Col style={{ display: "flex", justifyContent: "center" }}>
                 <h1 className="formTitle">Get In Touch</h1>

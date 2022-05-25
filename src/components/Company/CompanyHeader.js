@@ -1,12 +1,12 @@
 import React from "react";
 import "../../styles/realEstate.css";
-import partner from "../../../src/partner.png";
-import contact from "../../../src/contact.png";
-import about from "../../../src/about.png";
-import privacy from "../../../src/privacy.png";
-import terms from "../../../src/terms.png";
-import broker from "../../../src/broker.png";
-import team from "../../../src/team.png";
+import partner from "../../../src/images/partner.png";
+import contact from "../../../src/images/contact.png";
+import about2 from "../../../src/images/about2.png";
+import privacy from "../../../src/images/privacy.png";
+import terms from "../../../src/images/terms.png";
+import broker from "../../../src/images/broker.png";
+import team from "../../../src/images/team.png";
 
 function CompanyHeader({ location }) {
   return (
@@ -15,11 +15,7 @@ function CompanyHeader({ location }) {
         <div
           className="companyHeader"
           style={{
-            backgroundImage: `url(${about})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
+            backgroundImage: `url(${about2})`,
           }}
         >
           <p>
@@ -29,14 +25,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -48,10 +37,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${contact})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -61,14 +46,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -80,10 +58,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${privacy})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -93,14 +67,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -133,10 +100,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${terms})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -146,14 +109,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -165,10 +121,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${partner})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -178,14 +130,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -197,10 +142,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${broker})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -210,14 +151,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
@@ -229,10 +163,6 @@ function CompanyHeader({ location }) {
           className="companyHeader"
           style={{
             backgroundImage: `url(${team})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            objectFit: "cover",
           }}
         >
           <p>
@@ -242,14 +172,7 @@ function CompanyHeader({ location }) {
           <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            <span
-              style={{
-                fontSize: "35px",
-                width: "50%",
-                color: "white",
-                textAlign: "center",
-              }}
-            >
+            <span className="descript">
               {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }

@@ -6,7 +6,8 @@ const Work = () => {
   return (
     <section
       style={{
-        padding: "0 50px",
+        padding: "50px 50px",
+        paddingBottom: "150px",
         background: "#f8f8f8",
         marginTop: "50px",
       }}

@@ -394,7 +394,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             </div>
           </div>
 
-          <Row style={{ padding: "35px 35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
               <h5 style={{ color: "#919191", fontWeight: "400" }}>
@@ -433,9 +433,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               )}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -515,9 +515,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -602,9 +602,12 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             </Col>
           </Row>
 
-          <Row style={{ padding: "0 35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "0 35px" }}>
             <Col style={{ display: "grid", padding: "0" }}>
-              <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
+              <Row
+                xs="auto"
+                style={{ width: "100%", padding: "0", margin: "0" }}
+              >
                 {registEnded === false ? (
                   <Col style={{ padding: "0" }}>
                     <div
@@ -660,7 +663,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -863,13 +866,13 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                 </Col>
               </Row>
 
-              <Row style={{ padding: "0", paddingRight: "35px" }}>
+              <Row style={{ padding: "0", margin: "0" }}>
                 <div
                   style={{
                     marginTop: "30px",
                     alignItems: "center",
                     marginBottom: "30px",
-                    marginLeft: "-15px",
+                    padding: "0",
                   }}
                 >
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
@@ -884,7 +887,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                     Property Info
                   </span>
                 </div>
-                <Col style={{ padding: "0", paddingRight: "35px" }}>
+                <Col style={{ padding: "0" }}>
                   <Table striped hover responsive>
                     <tbody className="propInfo">
                       <tr>
@@ -1099,12 +1102,13 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             </Col>
           </Row>
 
-          <Row style={{ padding: "35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
             <div
               style={{
                 marginTop: "30px",
                 alignItems: "center",
                 marginBottom: "20px",
+                padding: "0",
               }}
             >
               <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
@@ -1112,7 +1116,6 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                 style={{
                   fontWeight: "400",
                   fontSize: "25px",
-                  marginLeft: "20px",
                   color: "black",
                 }}
               >
@@ -1120,7 +1123,11 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               </span>
             </div>
             <Col
-              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+              style={{
+                fontSize: "20px",
+                color: "black",
+                padding: "20px 20px 20px 0",
+              }}
             >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
@@ -1142,7 +1149,11 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             </Col>
 
             <Col
-              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+              style={{
+                fontSize: "20px",
+                padding: "20px 20px 20px 0",
+                color: "black",
+              }}
             >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city

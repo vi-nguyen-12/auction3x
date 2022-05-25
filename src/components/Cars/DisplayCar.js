@@ -365,7 +365,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
           </div>
 
           {/* first row */}
-          <Row style={{ padding: "35px 35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
             <Col style={{ padding: "0" }}>
               <h2 style={{ color: "#b77b50" }}>
                 {property.property.details.year} {""}
@@ -629,9 +629,12 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
           </Row>
 
           {/* second row */}
-          <Row style={{ padding: "0 35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "0 35px" }}>
             <Col style={{ display: "grid", padding: "0" }}>
-              <Row xs="auto" style={{ width: "100vw", padding: "0" }}>
+              <Row
+                xs="auto"
+                style={{ width: "100%", padding: "0", margin: "0" }}
+              >
                 {registEnded === false ? (
                   <Col style={{ padding: "0" }}>
                     <div
@@ -890,13 +893,13 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                 </Col>
               </Row>
 
-              <Row style={{ padding: "0", paddingRight: "35px" }}>
+              <Row style={{ padding: "0", margin: "0" }}>
                 <div
                   style={{
                     marginTop: "30px",
                     alignItems: "center",
                     marginBottom: "30px",
-                    marginLeft: "-15px",
+                    padding: "0",
                   }}
                 >
                   <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
@@ -904,7 +907,6 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                     style={{
                       fontWeight: "600",
                       fontSize: "30px",
-                      marginLeft: "10px",
                       color: "black",
                     }}
                   >
@@ -912,7 +914,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   </span>
                 </div>
 
-                <Col style={{ padding: "0", paddingRight: "35px" }}>
+                <Col style={{ padding: "0" }}>
                   <Table striped hover responsive>
                     <tbody className="propInfo">
                       <tr>
@@ -1098,12 +1100,13 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
             </Col>
           </Row>
 
-          <Row style={{ padding: "35px" }}>
+          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
             <div
               style={{
                 marginTop: "30px",
                 alignItems: "center",
                 marginBottom: "20px",
+                padding: "0",
               }}
             >
               <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
@@ -1111,7 +1114,6 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                 style={{
                   fontWeight: "400",
                   fontSize: "25px",
-                  marginLeft: "20px",
                   color: "black",
                 }}
               >
@@ -1119,7 +1121,11 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               </span>
             </div>
             <Col
-              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+              style={{
+                fontSize: "20px",
+                padding: "20px 20px 20px 0",
+                color: "black",
+              }}
             >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
@@ -1141,7 +1147,11 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
             </Col>
 
             <Col
-              style={{ fontSize: "20px", paddingRight: "40px", color: "black" }}
+              style={{
+                fontSize: "20px",
+                padding: "20px 20px 20px 0",
+                color: "black",
+              }}
             >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city

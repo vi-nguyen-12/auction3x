@@ -4,21 +4,9 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../styles/footer.css";
 
-const Footer = ({ toggleSignIn }) => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+const Footer = ({ toggleSignIn, windowSize }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
-
-  const handleWindowResize = () => {
-    setWindowSize(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
   return (
     <footer>
       <div className="footer-wrap">
@@ -40,7 +28,7 @@ const Footer = ({ toggleSignIn }) => {
                   display: "grid",
                   justifyContent: "center",
                   padding: "0 50px",
-                  marginTop:"1rem"
+                  marginTop: "1rem",
                 }}
                 className="auction-content"
               >

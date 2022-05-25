@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
-import contact from "../../../src/contactImg.png";
+import contact from "../../../src/images/contactImg.png";
 
-function PartnerWithUs() {
+function PartnerWithUs({ windowSize }) {
   const location = useLocation();
   return (
     <>
@@ -41,7 +41,10 @@ function PartnerWithUs() {
               </Col>
             </Row>
           </Col>
-          <Col md={8} style={{ padding: "150px 100px" }}>
+          <Col
+            md={8}
+            style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}
+          >
             <Row>
               <Col
                 style={{
@@ -97,7 +100,7 @@ function PartnerWithUs() {
                 />
               </Col>
             </Row>
-            <Row style={{marginTop:"50px"}}>
+            <Row style={{ marginTop: "50px" }}>
               <Col>
                 <button className="loginBtn">Send</button>
               </Col>

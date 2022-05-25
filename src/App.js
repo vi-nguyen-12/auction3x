@@ -128,6 +128,19 @@ function App() {
       dispatch(addIncompProperty(res.data));
     });
   }
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const handleWindowResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
+
   useEffect(() => {
     const handleLogout = () => {
       localStorage.removeItem("token");
@@ -304,6 +317,7 @@ function App() {
               toggleSignUp={toggleSignUp}
               toggleConfirmModal={toggleConfirmModal}
               toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
             />
           </Modal.Body>
         </Modal>
@@ -335,6 +349,7 @@ function App() {
             padRight={padRight}
             toggleSignIn={toggleSignIn}
             toggleSignUp={toggleSignUp}
+            windowSize={windowSize}
           />
           <ScrollTop />
 
@@ -438,35 +453,35 @@ function App() {
             )}
 
             <Route path="/contact">
-              <ContactUs />
+              <ContactUs windowSize={windowSize} />
             </Route>
 
             <Route path="/AboutUs">
-              <AboutUs />
+              <AboutUs windowSize={windowSize} />
             </Route>
 
             <Route path="/FAQ">
-              <FAQ />
+              <FAQ windowSize={windowSize} />
             </Route>
 
             <Route path="/Team">
-              <Team />
+              <Team windowSize={windowSize} />
             </Route>
 
             <Route path="/PrivacyPolicy">
-              <Privacy />
+              <Privacy windowSize={windowSize} />
             </Route>
 
             <Route path="/TermsOfUse">
-              <TermsCondition />
+              <TermsCondition windowSize={windowSize} />
             </Route>
 
             <Route path="/Partner">
-              <PartnerWithUs />
+              <PartnerWithUs windowSize={windowSize} />
             </Route>
 
             <Route path="/Broker">
-              <Broker />
+              <Broker windowSize={windowSize} />
             </Route>
 
             <Route path="/reset_password">
@@ -490,11 +505,13 @@ function App() {
             </Route>
 
             <Route exact path="/">
-              <Home toggleSignIn={toggleSignIn} />
+              <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
             </Route>
           </Switch>
         </Router>
-        {show ? <Footer toggleSignIn={toggleSignIn} /> : null}
+        {show ? (
+          <Footer toggleSignIn={toggleSignIn} windowSize={windowSize} />
+        ) : null}
       </div>
     </Suspense>
   );

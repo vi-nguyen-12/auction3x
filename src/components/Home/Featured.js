@@ -86,18 +86,7 @@ align-content: center;
 }
 `;
 
-const Featured = ({ toggleSignIn, featureAuctions: auctions }) => {
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
-  const handleWindowResize = () => {
-    setWindowSize(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
+const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
 
   let settings = {
     dots: false,

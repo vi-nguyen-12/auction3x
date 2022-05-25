@@ -128,8 +128,6 @@ const CardComp = ({
     }
   }, [savedProperty]);
 
-  console.log(windowSize);
-
   return (
     <div>
       {auctionEndDate && (
