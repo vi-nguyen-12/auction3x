@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
-import contact from "../../../src/contactImg.png";
+import contact from "../../../src/images/contactImg.png";
 
-function PartnerWithUs() {
+function PartnerWithUs({ windowSize }) {
   const location = useLocation();
   return (
     <>
@@ -17,7 +17,8 @@ function PartnerWithUs() {
               backgroundColor: "#282828",
               backgroundImage: `url(${contact})`,
               objectFit: "cover",
-              height: "70vh",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               display: "grid",
               alignContent: "center",
@@ -41,13 +42,19 @@ function PartnerWithUs() {
             </Row>
           </Col>
           <Col
-            style={{
-              display: "grid",
-              justifyContent: "center",
-              padding: "50px 20px",
-            }}
+            md={8}
+            style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}
           >
-            <h1 className="formTitle">Partner With Us</h1>
+            <Row>
+              <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <h1 className="formTitle">Partner With Us</h1>
+              </Col>
+            </Row>
             <Row>
               <Col>
                 <span>First Name</span>
@@ -91,6 +98,11 @@ function PartnerWithUs() {
                   placeholder="Enter Message"
                   className="form-control"
                 />
+              </Col>
+            </Row>
+            <Row style={{ marginTop: "50px" }}>
+              <Col>
+                <button className="loginBtn">Send</button>
               </Col>
             </Row>
           </Col>

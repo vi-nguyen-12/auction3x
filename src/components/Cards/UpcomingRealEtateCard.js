@@ -55,6 +55,7 @@ const UpcomingRealEstateCard = ({
   auctionStartDate,
   startingBid,
   toggleSignIn,
+  windowSize,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -128,17 +129,7 @@ const UpcomingRealEstateCard = ({
       <div>
         <Card
           className="cards text-left m-auto"
-          style={{
-            background: "white",
-            padding: "5px",
-            width: "450px",
-            borderRadius: "10px",
-            border: "1px solid lightgrey",
-            boxShadow:
-              "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
-            transition: "all ease 200ms",
-            color: "black",
-          }}
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
         >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />

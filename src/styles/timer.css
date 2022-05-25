@@ -1,9 +1,21 @@
 .timerHead th:nth-child(n + 1) {
   font-size: large;
-  margin: 0;
-  padding: 0 !important;
+  /* margin: 0;
+  padding: 0 !important; */
 }
 
-.table > :not(caption) > * > * {
+/* .table > :not(caption) > * > * {
   padding: 0;
+} */
+
+@media screen and (max-width: 600px) {
+  .timerHead th:nth-child(n + 1) {
+    font-size: medium;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  /* .table > :not(caption) > * > * {
+    padding: 0;
+  } */
 }

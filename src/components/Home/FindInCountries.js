@@ -4,16 +4,16 @@ import { Row, Col, Container } from "react-bootstrap";
 const FindInCountries = (props) => {
   return (
     <>
-      <Container
-        fluid>
-        <Row style={{
-          margin: "0",
-          padding: "0",
-          padding: "0 10px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
+      <Container fluid>
+        <Row
+          style={{
+            margin: "0",
+            padding: "0 10px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Row>
             <Col md={10} className="m-auto pt-5 text-center">
               <h2 style={{ color: "black", fontSize: "22px" }}>
@@ -23,22 +23,14 @@ const FindInCountries = (props) => {
           </Row>
           <Row>
             <Col className="circularCard" md={4}>
-              <img
-                height={350}
-                src="/images/historic-featured.jpg"
-                alt=""
-              />
+              <img height={350} src="/images/historic-featured.jpg" alt="" />
               <span>
                 <h2>U.S.A</h2>
                 <p>12 Properties</p>
               </span>
             </Col>
             <Col className="circularCard" md={8}>
-              <img
-                height={350}
-                src="/images/australia.jpg"
-                alt=""
-              />
+              <img height={350} src="/images/australia.jpg" alt="" />
               <span>
                 <h2>AUSTRALIA</h2>
                 <p>23 Properties</p>

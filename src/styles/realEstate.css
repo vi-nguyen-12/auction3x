@@ -111,8 +111,37 @@
   background-clip: text;
 }
 
+.companyHeader .descript {
+  font-size: 35px;
+  width: 50%;
+  color: white;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .companyHeader {
+    padding: 80px 10px;
+  }
+
+  .companyHeader p {
+    font-size: 40px;
+  }
+
+  .companyHeader p span {
+    font-size: 16px;
+  }
+
+  .companyHeader .descript {
+    font-size: 25px;
+    width: 100%;
+    padding: 10px;
+  }
+}
+
 .formTitle {
-  font-size: 30px;
+  font-size: 50px;
+  height: fit-content;
+  border-bottom: 2px solid #edb48b;
 }
 
 .nav-tabs .nav-item.show .nav-link,

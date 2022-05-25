@@ -40,7 +40,6 @@ const Login = ({
           toggleButton();
           toggleSignIn();
           history.push(location.pathname);
-          window.location.reload();
           window.setTimeout(() => {
             window.scrollTo(0, 0);
           }, 0);

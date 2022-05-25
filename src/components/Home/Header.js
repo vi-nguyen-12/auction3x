@@ -21,13 +21,13 @@ const Header = ({
   positionLeft,
   toggleSignIn,
   toggleSignUp,
+  windowSize,
 }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const [kycUrl, setKycUrl] = useState("");
   const [colors, setColors] = useState("");
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [open, setOpen] = useState(false);
   const [textColor, setTextColor] = useState("white");
   const [boxShadow, setBoxShadow] = useState("");
@@ -60,10 +60,6 @@ const Header = ({
         history.push("/MultiSellForm");
       }
     }
-  };
-
-  const handleWindowResize = () => {
-    setWindowSize(window.innerWidth);
   };
 
   useEffect(() => {
@@ -100,13 +96,6 @@ const Header = ({
       };
     }
   }, [user]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
 
   return (
     <Nav

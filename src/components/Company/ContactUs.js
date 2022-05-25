@@ -1,28 +1,14 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import contact from "../../../src/images/contactImg.png";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
 import authService from "../../services/authServices";
 
-function ContactUs() {
+function ContactUs({windowSize}) {
   const location = useLocation();
-  const {
-    register,
-    reset,
-    formState: { errors },
-    handleSubmit,
-  } = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      location: "",
-      email: "",
-      phone: "",
-      message: "",
-    },
-  });
+  const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     const submitContact = await authService.submitContact(data);
     if (submitContact.data.error) {
@@ -31,101 +17,105 @@ function ContactUs() {
       alert(
         "Your message has been sent successfully. We will get back to you soon."
       );
-      reset();
     }
   };
 
-  const data = [
-    {
-      title: "First Name",
-      name: "firstName",
-      placeholder: "Enter first name",
-    },
-    {
-      title: "Last Name",
-      name: "lastName",
-      placeholder: "Enter last name",
-    },
-    {
-      title: "Location",
-      name: "location",
-      placeholder: "Enter location",
-    },
-    { title: "Email", name: "email", placeholder: "Enter email" },
-    { title: "Phone No", name: "phone", placeholder: "Enter phone no." },
-    { title: "Message", name: "message", placeholder: "Enter message" },
-  ];
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
-      <Container style={{ padding: "50px 0" }}>
+      <Container fluid>
         <Row>
-          <Col md={4}>
-            <h1
-              style={{
-                justifyContent: "start",
-                marginLeft: "0",
-                fontSize: "30px",
-                marginBottom: "20px",
-              }}
-            >
-              USA Office
-            </h1>
-            <p style={{ justifyContent: "start" }}>2150 Town Square Place</p>
-            <p style={{ justifyContent: "start" }}>Suite 200 </p>
-            <p style={{ justifyContent: "start" }}>Sugar Land, Texas</p>
-            <p style={{ justifyContent: "start" }}>77479 USA</p>
-            <p style={{ justifyContent: "start" }}>auction3x@gmail.com</p>
-            <p style={{ justifyContent: "start" }}>www.auction3x.com</p>
+          <Col
+            md={4}
+            style={{
+              backgroundColor: "#282828",
+              backgroundImage: `url(${contact})`,
+              objectFit: "cover",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              display: "grid",
+              alignContent: "center",
+              color: "white",
+              paddingLeft: "5vw",
+            }}
+          >
+            <Row>
+              <Col style={{ margin: "20px 0" }}>
+                <h1 style={{ fontSize: "30px" }}>Contact Us</h1>
+                <p>+1-234-567-8910</p>
+                <p>+1-854-967-2310</p>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h1 style={{ fontSize: "30px" }}>Email</h1>
+                <p>info@auction3x.com</p>
+                <p>support@auction3x.com</p>
+              </Col>
+            </Row>
           </Col>
-          <Col md={8}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {data.map((item) => (
-                <>
-                  <Col md={10} style={{ marginTop: "30px" }}>
-                    {" "}
-                    {item.title} <span style={{ color: "red" }}>*</span>
-                  </Col>
-                  <Col md={10} style={{ marginTop: "10px" }}>
-                    <input
-                      type={
-                        item.name === "email"
-                          ? "email"
-                          : item.name === "phone"
-                          ? "number"
-                          : "text"
-                      }
-                      className="form-control"
-                      placeholder={item.placeholder}
-                      {...register(`${item.name}`, {
-                        required: `Please enter your ${item.title}`,
-                      })}
-                    />
-
-                    <ErrorMessage
-                      errors={errors}
-                      name={item.name}
-                      render={({ message }) => (
-                        <p style={{ color: "red", justifyContent: "start" }}>
-                          {message}
-                        </p>
-                      )}
-                    />
-                  </Col>
-                </>
-              ))}
-
-              <input
-                type="submit"
-                style={{
-                  marginTop: "30px",
-                  background: "#d58f5c",
-                  border: "none",
-                  padding: "5px",
-                  borderRadius: "5px",
-                }}
-              />
-            </form>
+          <Col md={8} style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}>
+            <Row>
+              <Col style={{ display: "flex", justifyContent: "center" }}>
+                <h1 className="formTitle">Get In Touch</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <span>First Name</span>
+                <input
+                  placeholder="Enter First Name"
+                  type="text"
+                  className="form-control"
+                  name="firstName"
+                />
+              </Col>
+              <Col>
+                <span>Last Name</span>
+                <input
+                  placeholder="Enter Last Name"
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <span>Email</span>
+                <input
+                  placeholder="Enter Email"
+                  type="email"
+                  className="form-control"
+                  name="email"
+                />
+              </Col>
+              <Col>
+                <span>Phone</span>
+                <input
+                  placeholder="Enter Phone Number"
+                  type="text"
+                  className="form-control"
+                  name="phone"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <span>Message</span>
+                <textarea
+                  placeholder="Enter Message"
+                  className="form-control"
+                  name="message"
+                />
+              </Col>
+            </Row>
+            <Row style={{ marginTop: "50px" }}>
+              <Col>
+                <button className="loginBtn">Send</button>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

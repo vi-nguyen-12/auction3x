@@ -5,11 +5,7 @@ import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
 const ChangePass = ({ colorChange, toggleShow }) => {
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
 

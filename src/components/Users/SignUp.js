@@ -7,10 +7,9 @@ import CloseButton from "react-bootstrap/CloseButton";
 
 require("react-bootstrap/ModalHeader");
 
-const User = ({ toggleSignUp, toggleSignIn }) => {
+const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [privacy, setPrivacy] = useState();
   const [showPrivacy, setShowPrivacy] = useState(false);
   const toogleTerms = () => setShowTerms(!showTerms);
@@ -20,17 +19,6 @@ const User = ({ toggleSignUp, toggleSignIn }) => {
     handleSubmit,
     //formState: { errors },
   } = useForm();
-
-  const handleWindowResize = () => {
-    setWindowSize(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [handleWindowResize]);
 
   useEffect(() => {
     authServices.getDocuments().then((res) => {

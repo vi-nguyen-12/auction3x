@@ -50,12 +50,12 @@ const UpcomingJetCard = ({
   urls,
   data,
   id,
-  startRegister,
   auctionStartDate,
   endRegister,
   startingBid,
   toggleSignIn,
   item,
+  windowSize,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -128,21 +128,8 @@ const UpcomingJetCard = ({
     <>
       <div>
         <Card
-          // onClick={async () => {const estateData = await authService.sendProperty(id); console.log(estateData)}}
-          //move to next page
           className="cards text-left m-auto"
-          style={{
-            // width: "18rem",
-            background: "white",
-            padding: "5px",
-            width: "450px",
-            borderRadius: "10px",
-            border: "1px solid lightgrey",
-            boxShadow:
-              "0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25), 0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03)",
-            transition: "all ease 200ms",
-            color: "black",
-          }}
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
         >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
@@ -237,108 +224,6 @@ const UpcomingJetCard = ({
                 </p>
               </Col>
             </Row>
-            {/* <div>
-              <div>
-                <span className="golden-text">{data.property_address}</span>
-                <h4 style={{ marginTop: "5px", color: "black" }}>
-                  {data.aircraft_builder_name} {data.aircraft_model_designation}
-                </h4>
-              </div>
-              <div
-                style={{
-                  display: "inline-flex",
-                }}
-              >
-                <div>
-                  <Row>
-                    {registEnded ? (
-                      <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100%" }}>
-                          Auction Start:
-                        </p>
-                      </Col>
-                    ) : (
-                      <Col md={5} style={{ width: "50%", color: "black" }}>
-                        <p style={{ fontSize: "15px", width: "100%" }}>
-                          Registration
-                        </p>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "50%" }}>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          width: "100%",
-                        }}
-                      >
-                        Additional Info
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {registEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div
-                          style={{
-                            fontSize: "12px",
-                            width: "100%",
-                          }}
-                        >
-                          <Timer auctionStartDate={auctionStartDate} />
-                        </div>
-                      </Col>
-                    ) : !registEnded ? (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div style={{ fontSize: "12px", width: "100%" }}>
-                          <RegistrationTimer
-                            time={endRegister}
-                            toggleRegistEnded={toggleRegistEnded}
-                          />
-                        </div>
-                      </Col>
-                    ) : (
-                      <Col md={1} style={{ width: "50%" }}>
-                        <div
-                          style={{
-                            fontSize: "18px",
-                            width: "100%",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          Registration Ended
-                        </div>
-                      </Col>
-                    )}
-
-                    <Col md={6} style={{ width: "50%", color: "black" }}>
-                      <p
-                        style={{
-                          fontSize: "12px",
-                          color: "black",
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                        }}
-                      >
-                        {data.number_of_engines
-                          ? data.number_of_engines + " Engines"
-                          : "N/A"}
-                        |{" "}
-                        {data.number_of_aircraft
-                          ? data.number_of_aircraft + " Aircraft"
-                          : "N/A"}
-                        |{" "}
-                        {data.registration_mark
-                          ? data.registration_mark
-                          : "N/A"}
-                      </p>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </div> */}
-
             <hr />
             <div
               style={{

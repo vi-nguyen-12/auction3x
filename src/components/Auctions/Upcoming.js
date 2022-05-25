@@ -5,12 +5,12 @@ import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../Cards/UpcomingYachtCard";
 
-const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
+const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
   return (
     <>
       {upcomingAuctions ? (
         <>
-          <div className="mt-5" >
+          <div className="mt-5">
             <Row style={{ padding: "0 50px" }}>
               <Col md={10} className="pt-5">
                 <h2 style={{ color: "black", fontSize: "22px" }}>
@@ -27,7 +27,6 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
               }}
             >
               {upcomingAuctions.length > 0 ? (
-
                 upcomingAuctions.slice(0, 6).map((item) => (
                   <Col
                     key={item._id}
@@ -45,6 +44,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
                         toggleSignIn={toggleSignIn}
+                        windowSize={windowSize}
                       />
                     ) : item.property.type === "car" ? (
                       <UpcomingCarCard
@@ -57,6 +57,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
                         toggleSignIn={toggleSignIn}
+                        windowSize={windowSize}
                       />
                     ) : item.property.type === "jet" ? (
                       <UpcomingJetCard
@@ -69,6 +70,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
                         toggleSignIn={toggleSignIn}
+                        windowSize={windowSize}
                       />
                     ) : item.property.type === "yacht" ? (
                       <UpcomingYachtCard
@@ -81,6 +83,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions }) => {
                         endRegister={item.registerEndDate}
                         startingBid={item.startingBid}
                         toggleSignIn={toggleSignIn}
+                        windowSize={windowSize}
                       />
                     ) : null}
                   </Col>
