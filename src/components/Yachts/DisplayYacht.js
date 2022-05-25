@@ -686,7 +686,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col style={{ marginBottom: "10px" }}>
+                  <Col style={{ paddingLeft: "0", marginBottom: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -695,7 +695,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                         width: "100%",
                         borderRadius: "10px",
                         padding: "60px",
-                        height: "100%",
+                        // height: "100%",
                       }}
                     >
                       <div
@@ -771,7 +771,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col style={{ marginBottom: "10px" }}>
+                    <Col style={{ paddingLeft: "0", marginBottom: "10px" }}>
                       <div
                         style={{
                           display: "grid",
@@ -880,7 +880,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
 
-                <Col style={{ marginBottom: "10px" }}>
+                <Col style={{ paddingLeft: "0", marginBottom: "10px" }}>
                   <div
                     style={{
                       display: "grid",
