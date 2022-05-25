@@ -58,7 +58,6 @@
   background-clip: text;
 }
 
-
 /* company css */
 .companyHeader {
   font-family: Josefin Slab;
@@ -112,8 +111,10 @@
   background-clip: text;
 }
 
-.formTitle{
-  font-size: 30px;
+.formTitle {
+  font-size: 50px;
+  height: fit-content;
+  border-bottom: 2px solid #EDB48B;
 }
 
 .nav-tabs .nav-item.show .nav-link,

@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../styles/footer.css";
 
 const Footer = ({ toggleSignIn }) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const user = useSelector((state) => state.user);
   const history = useHistory();
+
+  const handleWindowResize = () => {
+    setWindowSize(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [handleWindowResize]);
   return (
     <footer>
       <div className="footer-wrap">
         <Card className="card-footer">
           <Row className="row-1">
-            <Col>
+            <Col
+              style={{
+                display: "grid",
+                justifyContent: "center",
+                padding: "0 50px",
+              }}
+            >
               <div className="img-flex">
                 {/* <img src="/Vector.png" alt="" /> */}
                 <img src="/images/newName.png" className="auction-img" alt="" />
               </div>
-              <p className="auction-content">
+              <p
+                style={{
+                  display: "grid",
+                  justifyContent: "center",
+                  padding: "0 50px",
+                  marginTop:"1rem"
+                }}
+                className="auction-content"
+              >
                 AUCTION 3 is an innovative online bidding platform that
                 specialized in the expediting sale of real estate through
                 auction and brings the exciting real estate opportunities to
@@ -25,8 +51,13 @@ const Footer = ({ toggleSignIn }) => {
               </p>
             </Col>
             <Col>
-              <h5 className="footer-title">Quick Links</h5>
-              <ul>
+              <h5
+                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                className="footer-title"
+              >
+                Quick Links
+              </h5>
+              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
                 <li className="list-unstyled">
                   <a href="#!">Buy</a>
                 </li>
@@ -60,8 +91,13 @@ const Footer = ({ toggleSignIn }) => {
             </Col>
 
             <Col>
-              <h5 className="footer-title">Categories</h5>
-              <ul>
+              <h5
+                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                className="footer-title"
+              >
+                Categories
+              </h5>
+              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
                 <li className="list-unstyled">
                   <a href="/realEstates">Real Estate</a>
                 </li>
@@ -80,8 +116,13 @@ const Footer = ({ toggleSignIn }) => {
               </ul>
             </Col>
             <Col>
-              <h5 className="footer-title">Others</h5>
-              <ul>
+              <h5
+                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                className="footer-title"
+              >
+                Others
+              </h5>
+              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
                 <li className="list-unstyled">
                   {/* <a href="#!">List with us</a> */}
                 </li>

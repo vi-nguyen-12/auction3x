@@ -32,13 +32,13 @@ const Carousel = styled(Slider)`
     height: 100px;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px!important;
+    margin: -5px !important;
   }
   .slick-next {
     height: 100px;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px!important;
+    margin: -5px !important;
   }
   .slick-next:before {
     display: none;
@@ -55,6 +55,7 @@ const CarCard = ({
   auctionEndDate,
   reserveMet,
   toggleSignIn,
+  windowSize,
 }) => {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -143,7 +144,10 @@ const CarCard = ({
   return (
     <div>
       {auctionEndDate && (
-        <Card className="cards text-left m-auto">
+        <Card
+          style={{ width: windowSize > 500 ? "450px" : "320px" }}
+          className="cards text-left m-auto"
+        >
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
@@ -249,7 +253,7 @@ const CarCard = ({
                   />
                 </p>
               </div>
-              { }
+              {}
               <div
                 style={{
                   alignItems: "flex-end",
