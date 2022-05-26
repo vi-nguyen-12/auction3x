@@ -79,7 +79,7 @@ function Dash() {
     //   <div className="DashBody">
     <Container className="container2">
       <Row lg={3}>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
+        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Live Auctions</span>
@@ -90,7 +90,7 @@ function Dash() {
             </div>
           </div>
         </Col>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
+        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Upcoming Auctions</span>
@@ -112,7 +112,7 @@ function Dash() {
             </div>
           </div>
         </Col> */}
-        <Col style={{ display: "flex", justifyContent: "center" }}>
+        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
           <div className="liveAuc">
             <div className="names">
               <span>Your Listings</span>
@@ -228,44 +228,47 @@ function Dash() {
           </div>
         </Col>
       </Row>
-      {showSavedProp && savedProp.length > 0 ? (
-        <Row>
-          <SavedAuctionsComp savedProp={savedProp} />
-        </Row>
-      ) : (
-        // savedProp.length === 0 &&
-        showSavedProp && (
+      <Row style={{ border: "1px solid red" }}>
+        {showSavedProp && savedProp.length > 0 ? (
           <div>
-            <h1>No Saved Auction</h1>
+            <SavedAuctionsComp savedProp={savedProp} />
           </div>
-        )
-      )}
+        ) : (
+          // savedProp.length === 0 &&
+          showSavedProp && (
+            <div>
+              <h1>No Saved Auction</h1>
+            </div>
+          )
+        )}
 
-      {showBidAuctions && bidAuctions.length > 0 ? (
-        <Row>
-          <BidAuctionsComp bidAuctions={bidAuctions} />
-        </Row>
-      ) : (
-        // bidAuctions.length === 0 &&
-        showBidAuctions && (
-          <div>
-            <h1>No Bid Auction</h1>
-          </div>
-        )
-      )}
+        {showBidAuctions && bidAuctions.length > 0 ? (
+          <Row>
+            <BidAuctionsComp bidAuctions={bidAuctions} />
+          </Row>
+        ) : (
+          // bidAuctions.length === 0 &&
+          showBidAuctions && (
+            <div>
+              <h1>No Bid Auction</h1>
+            </div>
+          )
+        )}
 
-      {showApprovedAuctions && approvedAuctions.length > 0 ? (
-        <Row>
-          <ApprovedAuctionsComp approvedAuctions={approvedAuctions} />
-        </Row>
-      ) : (
-        // approvedAuctions.length === 0 &&
-        showApprovedAuctions && (
-          <div>
-            <h1>No Approved Auction</h1>
-          </div>
-        )
-      )}
+        {showApprovedAuctions && approvedAuctions.length > 0 ? (
+          <Row>
+            <ApprovedAuctionsComp approvedAuctions={approvedAuctions} />
+          </Row>
+        ) : (
+          // approvedAuctions.length === 0 &&
+          showApprovedAuctions && (
+            <div>
+              <h1>No Approved Auction</h1>
+            </div>
+          )
+        )}
+
+      </Row>
       <Modal
         backdrop="static"
         keyboard={false}

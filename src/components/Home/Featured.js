@@ -11,13 +11,13 @@ import styled from "styled-components";
 import "../../App.css";
 
 const Carousel = styled(Slider)`
-  height: 100%;
-  // overflow: hidden;
+  // height: 100%;
+ overflow: hidden;
 
   & > button {
     opacity: 1;
     height: 100%;
-    width: 10%;
+    width: 15vw;
     z-index: 1;
 
     &:hover {

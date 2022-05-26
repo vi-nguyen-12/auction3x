@@ -1136,8 +1136,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
               <span
                 style={{
-                  fontWeight: "400",
-                  fontSize: "25px",
+                  fontWeight: "600",
+                  fontSize: "30px",
                   color: "black",
                 }}
               >

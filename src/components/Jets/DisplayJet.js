@@ -458,9 +458,9 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -540,9 +540,9 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -689,7 +689,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
@@ -1143,8 +1143,8 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
               <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
               <span
                 style={{
-                  fontWeight: "400",
-                  fontSize: "25px",
+                  fontWeight: "600",
+                  fontSize: "30px",
                   color: "black",
                 }}
               >

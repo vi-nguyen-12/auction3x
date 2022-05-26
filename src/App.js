@@ -149,7 +149,7 @@ function App() {
     };
     let timer;
     if (user._id) {
-      timer = new IdleTimer({ timeout: 2, handleLogout });
+      timer = new IdleTimer({ timeout: 200, handleLogout });
       timer.setTracker();
       timer.logoutTimer();
     }

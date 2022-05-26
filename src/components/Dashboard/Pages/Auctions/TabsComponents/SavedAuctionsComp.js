@@ -1,5 +1,5 @@
 import React from "react";
-import { Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import "react-circular-progressbar/dist/styles.css";
 import SavedAuctionsCard from "../../Auctions/SavedAuctionsCard";
 import "slick-carousel/slick/slick.css";
@@ -68,7 +68,10 @@ const Wrap = styled.div`
 border-radius: 4px;
 cursor: pointer;
 position: relative;
-
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: center;
 
   &:hover {
     padding: 0;
@@ -85,33 +88,48 @@ function SavedAuctionsComp({ savedProp }) {
     speed: 500,
     autoplay: false,
     slidesToShow: savedProp.length > 2 ? 2 : savedProp.length,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+
+    ],
   };
 
   return (
     <>
-      <Carousel {...settings}>
-        {savedProp.map((property, index) => (
-          <Wrap key={index}>
-            <Col md={12}>
-              <SavedAuctionsCard
-                url={property.property.images[0].url}
-                urls={property.property.images}
-                data={property.property.details}
-                id={property._id}
-                auctionStartDate={property.auctionStartDate}
-                auctionEndDate={property.auctionEndDate}
-                startingBid={
-                  property.highestBid
-                    ? property.highestBid.amount
-                    : property.startingBid
-                }
-                auctionId={property._id}
-                type={property.property.type}
-              />
-            </Col>
-          </Wrap>
-        ))}
-      </Carousel>
+      <Row className="m-auto" style={{ border: "1px solid blue" }}>
+        <Carousel {...settings}>
+          {savedProp.map((property, index) => (
+            <Wrap key={index}>
+              <Col md={12}>
+                <SavedAuctionsCard
+                  url={property.property.images[0].url}
+                  urls={property.property.images}
+                  data={property.property.details}
+                  id={property._id}
+                  auctionStartDate={property.auctionStartDate}
+                  auctionEndDate={property.auctionEndDate}
+                  startingBid={
+                    property.highestBid
+                      ? property.highestBid.amount
+                      : property.startingBid
+                  }
+                  auctionId={property._id}
+                  type={property.property.type}
+                />
+              </Col>
+            </Wrap>
+          ))}
+        </Carousel>
+      </Row>
+
     </>
   );
 }

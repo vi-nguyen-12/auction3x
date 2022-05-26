@@ -115,15 +115,15 @@ function SavedAuctionsCard({
   }, [savedProperty]);
 
   return (
-    <div style={{ margin: "30px" }}>
+    <div style={{ margin: "30px", border: "1px solid yellow" }}>
       {data && (
         <Card
-          className="savedCard text-left m-auto"
+          className="savedCard text-left "
           style={{
             position: "relative",
             background: "white",
             padding: "5px",
-            width: "450px",
+            // width: "450px",
             borderRadius: "10px",
             border: "1px solid lightgrey",
             boxShadow:
