@@ -203,7 +203,7 @@ function Ownership({
       }
     }
   };
-  console.log(phone);
+  
   return (
     <div className="upload-box">
       <SellHeader step={step} />

@@ -166,14 +166,21 @@ const YachtCard = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.manufacturer_name} {data.engine_type}
                 </h4>
               </Col>
             </Row>
-            <Row style={{ fontSize: "15px" }}>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
                 <p>Online Auction</p>
               </Col>
@@ -181,20 +188,25 @@ const YachtCard = ({
                 <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {auctionEnded ? (
                   <p
                     style={{
-                      fontSize: "15px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
                     Auction Ended
                   </p>
                 ) : (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px" }}>
                     <AuctionTimer
                       id={id}
                       time={auctionEndDate}
@@ -204,12 +216,7 @@ const YachtCard = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.engine_type ? data.engine_type : "N/A"}|{" "}
                   {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
                   {data.running_cost ? data.running_cost : "N/A"}

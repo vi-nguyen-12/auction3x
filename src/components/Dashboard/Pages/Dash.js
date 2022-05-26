@@ -12,7 +12,7 @@ import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp
 import CloseButton from "react-bootstrap/CloseButton";
 import AddFund from "../../BuyRegister/AddFund";
 
-function Dash() {
+function Dash({ windowSize }) {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
@@ -231,7 +231,7 @@ function Dash() {
       <Row style={{ border: "1px solid red" }}>
         {showSavedProp && savedProp.length > 0 ? (
           <div>
-            <SavedAuctionsComp savedProp={savedProp} />
+            <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
           </div>
         ) : (
           // savedProp.length === 0 &&

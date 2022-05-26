@@ -57,7 +57,6 @@ const JetCard = ({
   toggleSignIn,
   windowSize,
 }) => {
-  console.log(urls);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [showKYC, setShowKYC] = useState(false);
@@ -167,39 +166,49 @@ const JetCard = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.aircraft_builder_name} {data.aircraft_model_designation}
                 </h4>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
-                <p style={{ fontSize: "15px", width: "100%" }}>
-                  Online Auction
-                </p>
+                <p>Online Auction</p>
               </Col>
               <Col>
-                <p style={{ fontSize: "15px", width: "100%" }}>
-                  Additional Info
-                </p>
+                <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                display: "flex",
+                alignContent: "center",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {auctionEnded ? (
                   <p
                     style={{
-                      fontSize: "15px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
                     Auction Ended
                   </p>
                 ) : (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px" }}>
                     <AuctionTimer
                       id={id}
                       time={auctionEndDate}
@@ -209,18 +218,13 @@ const JetCard = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.number_of_engines
-                    ? data.number_of_engines + " Engines"
+                    ? data.number_of_engines + " Engines "
                     : "N/A"}
                   |{" "}
                   {data.number_of_aircraft
-                    ? data.number_of_aircraft + " Aircraft"
+                    ? data.number_of_aircraft + " Aircraft "
                     : "N/A"}
                   | {data.registration_mark ? data.registration_mark : "N/A"}
                 </p>

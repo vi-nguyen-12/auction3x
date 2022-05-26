@@ -8,6 +8,7 @@ import { UpcomingJetCard } from "../Cards/UpcomingJetCard";
 import "../../styles/realEstate.css";
 import { JetCard } from "../Cards/JetCard";
 import authService from "../../services/authServices";
+import ErrorPage from "../Error/404page";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -81,7 +82,7 @@ position: relative;
 }
 `;
 
-function JetPage({ toggleChange, setImgJet, toggleSignIn }) {
+function JetPage({ toggleChange, setImgJet, toggleSignIn, windowSize }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   useEffect(() => {
@@ -149,84 +150,90 @@ function JetPage({ toggleChange, setImgJet, toggleSignIn }) {
       },
     ],
   };
-  console.log(upcomingAuctions);
+
   return (
     <>
-      <div className="mt-5">
-        <Col md={12} className="m-auto pt-2">
-          <Row>
-            <h1
-              style={{
-                marginBottom: "80px",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              ONGOING AUCTIONS
-            </h1>
-            {onGoingAuctions.length > 0 ? (
-              <Carousel {...settings}>
-                {onGoingAuctions.map((item, index) => (
-                  <Wrap key={index}>
-                    <Col md={12} style={{ marginBottom: "30px" }}>
-                      <JetCard
-                        url={item.property.images[0].url}
-                        urls={item.property.images}
-                        data={item.property.details}
-                        id={item._id}
-                        auctionStartDate={item.auctionStartDate}
-                        auctionEndDate={item.auctionEndDate}
-                        startingBid={item.startingBid}
-                        auctionId={item._id}
-                        toggleSignIn={toggleSignIn}
-                      />
-                    </Col>
-                  </Wrap>
-                ))}
-              </Carousel>
-            ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }}>
-                No Ongoing Auctions
-              </h3>
-            )}
-          </Row>
-          <Row style={{ marginBottom: "100px" }}>
-            <h1
-              style={{
-                margin: "80px 0",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              UPCOMING AUCTIONS
-            </h1>
-            {upcomingAuctions.length > 0 ? (
-              upcomingAuctions.map((item, index) => (
-                <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                  <UpcomingJetCard
-                    url={item.property.images[0].url}
-                    urls={item.property.images}
-                    data={item.property.details}
-                    id={item._id}
-                    auctionStartDate={item.auctionStartDate}
-                    auctionEndDate={item.auctionEndDate}
-                    startRegister={item.registerStartDate}
-                    endRegister={item.registerEndDate}
-                    startingBid={item.startingBid}
-                    toggleSignIn={toggleSignIn}
-                  />
-                </Col>
-              ))
-            ) : (
-              <h3 style={{ display: "flex", justifyContent: "center" }}>
-                No Upcoming Auctions
-              </h3>
-            )}
-          </Row>
-        </Col>
-      </div>
+      {onGoingAuctions.length > 0 || upcomingAuctions.length > 0 ? (
+        <div className="mt-5">
+          <Col md={12} className="m-auto pt-2">
+            <Row>
+              <h1
+                style={{
+                  marginBottom: "80px",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                ONGOING AUCTIONS
+              </h1>
+              {onGoingAuctions.length > 0 ? (
+                <Carousel {...settings}>
+                  {onGoingAuctions.map((item, index) => (
+                    <Wrap key={index}>
+                      <Col md={12} style={{ marginBottom: "30px" }}>
+                        <JetCard
+                          url={item.property.images[0].url}
+                          urls={item.property.images}
+                          data={item.property.details}
+                          id={item._id}
+                          auctionStartDate={item.auctionStartDate}
+                          auctionEndDate={item.auctionEndDate}
+                          startingBid={item.startingBid}
+                          auctionId={item._id}
+                          toggleSignIn={toggleSignIn}
+                          windowSize={windowSize}
+                        />
+                      </Col>
+                    </Wrap>
+                  ))}
+                </Carousel>
+              ) : (
+                <h3 style={{ display: "flex", justifyContent: "center" }}>
+                  No Ongoing Auctions
+                </h3>
+              )}
+            </Row>
+            <Row style={{ marginBottom: "100px" }}>
+              <h1
+                style={{
+                  margin: "80px 0",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                UPCOMING AUCTIONS
+              </h1>
+              {upcomingAuctions.length > 0 ? (
+                upcomingAuctions.map((item, index) => (
+                  <Col key={index} md={4} style={{ marginBottom: "30px" }}>
+                    <UpcomingJetCard
+                      url={item.property.images[0].url}
+                      urls={item.property.images}
+                      data={item.property.details}
+                      id={item._id}
+                      auctionStartDate={item.auctionStartDate}
+                      auctionEndDate={item.auctionEndDate}
+                      startRegister={item.registerStartDate}
+                      endRegister={item.registerEndDate}
+                      startingBid={item.startingBid}
+                      toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
+                    />
+                  </Col>
+                ))
+              ) : (
+                <h3 style={{ display: "flex", justifyContent: "center" }}>
+                  No Upcoming Auctions
+                </h3>
+              )}
+            </Row>
+          </Col>
+        </div>
+      ) : (
+        <ErrorPage />
+      )}
     </>
   );
 }

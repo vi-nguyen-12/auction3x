@@ -11,7 +11,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
     <footer>
       <div className="footer-wrap">
         <Card className="card-footer">
-          <Row className="row-1">
+          <Row className="row-1" style={{padding:windowSize < 600 && "4rem 1rem" }}>
             <Col
               style={{
                 display: "grid",
@@ -21,13 +21,18 @@ const Footer = ({ toggleSignIn, windowSize }) => {
             >
               <div className="img-flex">
                 {/* <img src="/Vector.png" alt="" /> */}
-                <img src="/images/newName.png" className="auction-img" alt="" />
+                <img
+                  src="/images/newName.png"
+                  style={{ height: windowSize < 800 && "4rem" }}
+                  className="auction-img"
+                  alt=""
+                />
               </div>
               <p
                 style={{
                   display: "grid",
                   justifyContent: "center",
-                  padding: "0 50px",
+                  padding: windowSize > 500 ? "0 50px" : "0 3px",
                   marginTop: "1rem",
                 }}
                 className="auction-content"
@@ -40,12 +45,12 @@ const Footer = ({ toggleSignIn, windowSize }) => {
             </Col>
             <Col>
               <h5
-                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                style={{ paddingLeft: windowSize < 800 && "2rem" }}
                 className="footer-title"
               >
                 Quick Links
               </h5>
-              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
+              <ul style={{ paddingLeft: windowSize < 800 && "2rem" }}>
                 <li className="list-unstyled">
                   <a href="#!">Buy</a>
                 </li>
@@ -80,12 +85,12 @@ const Footer = ({ toggleSignIn, windowSize }) => {
 
             <Col>
               <h5
-                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                style={{ paddingLeft: windowSize < 800 && "1rem" }}
                 className="footer-title"
               >
                 Categories
               </h5>
-              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
+              <ul style={{ paddingLeft: windowSize < 800 && "1rem" }}>
                 <li className="list-unstyled">
                   <a href="/realEstates">Real Estate</a>
                 </li>
@@ -105,12 +110,12 @@ const Footer = ({ toggleSignIn, windowSize }) => {
             </Col>
             <Col>
               <h5
-                style={{ paddingLeft: windowSize < 800 && "4rem" }}
+                style={{ paddingLeft: windowSize < 800 && "2rem" }}
                 className="footer-title"
               >
                 Others
               </h5>
-              <ul style={{ paddingLeft: windowSize < 800 && "4.5rem" }}>
+              <ul style={{ paddingLeft: windowSize < 800 && "2rem" }}>
                 <li className="list-unstyled">
                   {/* <a href="#!">List with us</a> */}
                 </li>

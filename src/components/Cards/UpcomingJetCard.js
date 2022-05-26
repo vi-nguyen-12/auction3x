@@ -160,14 +160,21 @@ const UpcomingJetCard = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.aircraft_builder_name} {data.aircraft_model_designation}
                 </h4>
               </Col>
             </Row>
-            <Row style={{ fontSize: "15px" }}>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
                 {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
               </Col>
@@ -175,19 +182,26 @@ const UpcomingJetCard = ({
                 <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {registEnded ? (
                   <div
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   >
                     <Timer auctionStartDate={auctionStartDate} />
                   </div>
                 ) : !registEnded ? (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px", width: "100%" }}>
                     <RegistrationTimer
                       time={endRegister}
                       toogleRegistEnded={toogleRegistEnded}
@@ -196,8 +210,6 @@ const UpcomingJetCard = ({
                 ) : (
                   <div
                     style={{
-                      fontSize: "18px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
@@ -206,19 +218,13 @@ const UpcomingJetCard = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "black",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.number_of_engines
-                    ? data.number_of_engines + " Engines"
+                    ? data.number_of_engines + " Engines "
                     : "N/A"}
                   |{" "}
                   {data.number_of_aircraft
-                    ? data.number_of_aircraft + " Aircraft"
+                    ? data.number_of_aircraft + " Aircraft "
                     : "N/A"}
                   | {data.registration_mark ? data.registration_mark : "N/A"}
                 </p>

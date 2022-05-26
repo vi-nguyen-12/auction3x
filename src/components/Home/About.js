@@ -50,22 +50,18 @@ const About = () => {
             >
               BUY
             </button>
-            <div className="side-button">
-              <button
-                onClick={() => {
-                  user._id ? history.push("/MultiSellForm") : toggleSignIn();
-                }}
-              >
-                SELL
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                user._id ? history.push("/MultiSellForm") : toggleSignIn();
+              }}
+            >
+              SELL
+            </button>
           </div>
         </Col>
       </Row>
       <Row className="banner-container">
-        <Col
-          className="banner-top-left-2"
-        >
+        <Col className="banner-top-left-2">
           <h2>BROKER</h2>
           <p>
             AUCTION 3 positioned itself as the leading marketplace for
@@ -88,7 +84,7 @@ const About = () => {
           <img src="./images/broker.PNG" height={450} alt="" />
         </Col>
       </Row>
-      <Row className="banner-container-1" >
+      <Row className="banner-container-1">
         <Col className="banner-left">
           <h2>Stay updated with Auction 3</h2>
           <p>

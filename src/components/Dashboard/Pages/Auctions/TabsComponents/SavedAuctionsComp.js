@@ -81,7 +81,7 @@ align-content: center;
 }
 `;
 
-function SavedAuctionsComp({ savedProp }) {
+function SavedAuctionsComp({ savedProp, windowSize }) {
   let settings = {
     dots: false,
     infinite: true,
@@ -104,32 +104,30 @@ function SavedAuctionsComp({ savedProp }) {
 
   return (
     <>
-      <Row className="m-auto" style={{ border: "1px solid blue" }}>
-        <Carousel {...settings}>
-          {savedProp.map((property, index) => (
-            <Wrap key={index}>
-              <Col md={12}>
-                <SavedAuctionsCard
-                  url={property.property.images[0].url}
-                  urls={property.property.images}
-                  data={property.property.details}
-                  id={property._id}
-                  auctionStartDate={property.auctionStartDate}
-                  auctionEndDate={property.auctionEndDate}
-                  startingBid={
-                    property.highestBid
-                      ? property.highestBid.amount
-                      : property.startingBid
-                  }
-                  auctionId={property._id}
-                  type={property.property.type}
-                />
-              </Col>
-            </Wrap>
-          ))}
-        </Carousel>
-      </Row>
-
+      <Carousel {...settings}>
+        {savedProp.map((property, index) => (
+          <Wrap key={index}>
+            <Col md={12}>
+              <SavedAuctionsCard
+                url={property.property.images[0].url}
+                urls={property.property.images}
+                data={property.property.details}
+                id={property._id}
+                auctionStartDate={property.auctionStartDate}
+                auctionEndDate={property.auctionEndDate}
+                startingBid={
+                  property.highestBid
+                    ? property.highestBid.amount
+                    : property.startingBid
+                }
+                auctionId={property._id}
+                type={property.property.type}
+                windowSize={windowSize}
+              />
+            </Col>
+          </Wrap>
+        ))}
+      </Carousel>
     </>
   );
 }

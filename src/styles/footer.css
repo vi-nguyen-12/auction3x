@@ -1,13 +1,13 @@
 .card-footer {
   background-color: #282828 !important;
-  border-radius: 0!important;
+  border-radius: 0 !important;
   /* margin-top: 10rem; */
 }
 
 .row-1 {
   /* margin-left: 10rem !important;
   margin-right: 10rem !important; */
-  padding: 4rem 3rem !important;
+  padding: 4rem 3rem;
 }
 
 .img-flex {
@@ -28,7 +28,7 @@
 
 .footer-title {
   font-family: "Josefin Slab";
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-top: 2rem;
   text-align: left;
@@ -38,8 +38,7 @@
 }
 
 li {
-  padding: 0.1rem;
-  font-size: 1rem;
+  /* padding: 0.1rem; */
   font-size: 1.8rem;
   font-weight: 350;
   text-align: left;
@@ -47,7 +46,7 @@ li {
 }
 
 ul {
-  padding-left: 6rem;
+  padding-left: 6.5rem;
 }
 
 a {

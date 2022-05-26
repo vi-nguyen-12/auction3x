@@ -22,6 +22,7 @@ const PropertyPages = ({
   setPadRight,
   toggleShow,
   toggleSignIn,
+  windowSize,
 }) => {
   useEffect(() => {
     toggleShow(true);
@@ -49,21 +50,13 @@ const PropertyPages = ({
     <>
       <h5 className="realHeader">
         {path === "/cars" ? (
-          <p>
-            CAR
-          </p>
+          <p>CAR</p>
         ) : path === "/jets" ? (
-          <p>
-            JET
-          </p>
+          <p>JET</p>
         ) : path === "/yachts" ? (
-          <p>
-            YACHT
-          </p>
+          <p>YACHT</p>
         ) : (
-          <p>
-            REAL ESTATE
-          </p>
+          <p>REAL ESTATE</p>
         )}
       </h5>
       {path === "/cars" ? (
@@ -523,6 +516,7 @@ const PropertyPages = ({
           toggleImage={toggleImage}
           setImg={setImg}
           toggleSignIn={toggleSignIn}
+          windowSize={windowSize}
         />
       ) : path === "/cars" ? (
         <CarPage
@@ -530,6 +524,7 @@ const PropertyPages = ({
           toggleImgCar={toggleImgCar}
           setImgCar={setImgCar}
           toggleSignIn={toggleSignIn}
+          windowSize={windowSize}
         />
       ) : path === "/jets" ? (
         <JetPage
@@ -537,6 +532,7 @@ const PropertyPages = ({
           setShowImgJet={setShowImgJet}
           setImgJet={setImgJet}
           toggleSignIn={toggleSignIn}
+          windowSize={windowSize}
         />
       ) : path === "/yachts" ? (
         <YachtPage
@@ -544,6 +540,7 @@ const PropertyPages = ({
           setShowImgYacht={setShowImgYacht}
           setImgYacht={setImgYacht}
           toggleSignIn={toggleSignIn}
+          windowSize={windowSize}
         />
       ) : null}
       {/* Map Button */}
