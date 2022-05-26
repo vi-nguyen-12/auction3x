@@ -27,6 +27,7 @@ function Dashboard({
   setHeaderWidth,
   setPositionLeft,
   setPadRight,
+  windowSize,
 }) {
   useEffect(() => {
     setHeaderWidth("100vw");
@@ -53,7 +54,7 @@ function Dashboard({
           <DashHeader location={location.pathname.split("/")[1]} />
           <Switch>
             <Route exact path="/Dashboard">
-              <Dash />
+              <Dash windowSize={windowSize} />
             </Route>
             <Route exact path="/Dashboard/Messaging" component={Messaging} />
             <Route
@@ -66,11 +67,9 @@ function Dashboard({
               path="/Dashboard/Auctions/PendingAuctions"
               component={PendingAuctions}
             />
-            <Route
-              exact
-              path="/Dashboard/Auctions/SavedAuctions"
-              component={SavedAuctions}
-            />
+            <Route exact path="/Dashboard/Auctions/SavedAuctions">
+              <SavedAuctions windowSize={windowSize} />
+            </Route>
             <Route
               exact
               path="/Dashboard/Auctions/WinAuctions"

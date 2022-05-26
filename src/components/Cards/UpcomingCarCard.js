@@ -158,14 +158,21 @@ const UpcomingCarCard = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.year} {data.make} {data.model}
                 </h4>
               </Col>
             </Row>
-            <Row style={{ fontSize: "15px" }}>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
                 {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
               </Col>
@@ -173,19 +180,25 @@ const UpcomingCarCard = ({
                 <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {registEnded ? (
                   <div
                     style={{
-                      fontSize: "12px",
-                      width: "100%",
+                      fontSize: "13px",
                     }}
                   >
                     <Timer auctionStartDate={auctionStartDate} />
                   </div>
                 ) : !registEnded ? (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px" }}>
                     <RegistrationTimer
                       time={endRegister}
                       toogleRegistEnded={toogleRegistEnded}
@@ -194,8 +207,6 @@ const UpcomingCarCard = ({
                 ) : (
                   <div
                     style={{
-                      fontSize: "18px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >

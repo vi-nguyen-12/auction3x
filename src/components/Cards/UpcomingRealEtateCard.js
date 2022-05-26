@@ -158,7 +158,7 @@ const UpcomingRealEstateCard = ({
             )}
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.property_address.formatted_street_address},{" "}
@@ -166,7 +166,14 @@ const UpcomingRealEstateCard = ({
                 </h4>
               </Col>
             </Row>
-            <Row style={{ fontSize: "15px" }}>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
                 {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
               </Col>
@@ -174,19 +181,19 @@ const UpcomingRealEstateCard = ({
                 <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 {registEnded ? (
                   <div
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   >
                     <Timer auctionStartDate={auctionStartDate} />
                   </div>
                 ) : !registEnded ? (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px", width: "100%" }}>
                     <RegistrationTimer
                       time={endRegister}
                       toogleRegistEnded={toogleRegistEnded}
@@ -195,8 +202,6 @@ const UpcomingRealEstateCard = ({
                 ) : (
                   <div
                     style={{
-                      fontSize: "18px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
@@ -205,13 +210,7 @@ const UpcomingRealEstateCard = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "black",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.structure.beds_count
                     ? data.structure.beds_count
                     : "N/A-"}

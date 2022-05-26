@@ -157,14 +157,21 @@ const UpcomingYachtCard = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.manufacturer_name} {data.engine_type}
                 </h4>
               </Col>
             </Row>
-            <Row style={{ fontSize: "15px" }}>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
                 {registEnded ? <p>Auction Start:</p> : <p>Registration</p>}
               </Col>
@@ -172,19 +179,26 @@ const UpcomingYachtCard = ({
                 <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {registEnded ? (
                   <div
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       width: "100%",
                     }}
                   >
                     <Timer auctionStartDate={auctionStartDate} />
                   </div>
                 ) : !registEnded ? (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px", width: "100%" }}>
                     <RegistrationTimer
                       time={endRegister}
                       toogleRegistEnded={toogleRegistEnded}
@@ -193,8 +207,6 @@ const UpcomingYachtCard = ({
                 ) : (
                   <div
                     style={{
-                      fontSize: "18px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
@@ -203,13 +215,7 @@ const UpcomingYachtCard = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "black",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.engine_type ? data.engine_type : "N/A"}|{" "}
                   {data.engine_deck_type ? data.engine_deck_type : "N/A"}|{" "}
                   {data.running_cost ? data.running_cost : "N/A"}

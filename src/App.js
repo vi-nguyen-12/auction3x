@@ -19,6 +19,7 @@ import ButtontoTop from "./components/ButtontoTop";
 import Footer from "./components/Home/footer";
 import Loading from "./components/Loading";
 import { IdleTimer } from "./services/idleTimer";
+import NotFound from "./components/Error/NotFound";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -577,6 +578,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
               />
             </Route>
             <Route exact path="/Cars">
@@ -588,6 +590,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
               />
             </Route>
             <Route exact path="/Jets">
@@ -599,6 +602,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
               />
             </Route>
             <Route exact path="/Yachts">
@@ -610,6 +614,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
               />
             </Route>
             {user._id && (
@@ -622,6 +627,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  windowSize={windowSize}
                 />
               </Route>
             )}
@@ -680,6 +686,10 @@ function App() {
 
             <Route exact path="/">
               <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
+            </Route>
+
+            <Route path="">
+              <NotFound windowSize={windowSize} />
             </Route>
           </Switch>
         </Router>

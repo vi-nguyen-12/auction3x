@@ -10,7 +10,7 @@ import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
 import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
 import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
 
-function SavedAuctions() {
+function SavedAuctions({ windowSize }) {
   let now = new Date();
   let upcomingSavedAuctions = [];
   let notUpcomingSavedAuctions = [];
@@ -39,6 +39,7 @@ function SavedAuctions() {
                     startRegister={auction.registerStartDate}
                     endRegister={auction.registerEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : auction.property.type === "car" ? (
                   <UpcomingCarCard
@@ -49,6 +50,7 @@ function SavedAuctions() {
                     startRegister={auction.registerStartDate}
                     endRegister={auction.registerEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : auction.property.type === "jet" ? (
                   <UpcomingJetCard
@@ -59,6 +61,7 @@ function SavedAuctions() {
                     startRegister={auction.registerStartDate}
                     endRegister={auction.registerEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : (
                   <UpcomingYachtCard
@@ -69,6 +72,7 @@ function SavedAuctions() {
                     startRegister={auction.registerStartDate}
                     endRegister={auction.registerEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 )}
               </Col>
@@ -84,6 +88,7 @@ function SavedAuctions() {
                     auctionStartDate={auction.auctionStartDate}
                     auctionEndDate={auction.auctionEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : auction.property.type === "car" ? (
                   <CarCard
@@ -94,6 +99,7 @@ function SavedAuctions() {
                     auctionStartDate={auction.auctionStartDate}
                     auctionEndDate={auction.auctionEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : auction.property.type === "jet" ? (
                   <JetCard
@@ -104,6 +110,7 @@ function SavedAuctions() {
                     auctionStartDate={auction.auctionStartDate}
                     auctionEndDate={auction.auctionEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 ) : (
                   <YachtCard
@@ -114,6 +121,7 @@ function SavedAuctions() {
                     auctionStartDate={auction.auctionStartDate}
                     auctionEndDate={auction.auctionEndDate}
                     startingBid={auction.startingBid}
+                    windowSize={windowSize}
                   />
                 )}
               </Col>

@@ -164,7 +164,7 @@ const CardComp = ({
             )}
           </button>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0", margin: "0", width: "100%" }}>
               <Col>
                 <h4 style={{ marginTop: "5px", color: "black" }}>
                   {data.property_address.formatted_street_address},{" "}
@@ -172,32 +172,40 @@ const CardComp = ({
                 </h4>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "20px" : "15px",
+              }}
+            >
               <Col>
-                <p style={{ fontSize: "15px", width: "100%" }}>
-                  Online Auction
-                </p>
+                <p>Online Auction</p>
               </Col>
               <Col>
-                <p style={{ fontSize: "15px", width: "100%" }}>
-                  Additional Info
-                </p>
+                <p>Additional Info</p>
               </Col>
             </Row>
-            <Row>
+            <Row
+              style={{
+                padding: "0",
+                margin: "0",
+                width: "100%",
+                fontSize: windowSize > 500 ? "14px" : "12px",
+              }}
+            >
               <Col>
                 {auctionEnded ? (
                   <p
                     style={{
-                      fontSize: "15px",
-                      width: "100%",
                       fontWeight: "bold",
                     }}
                   >
                     Auction Ended
                   </p>
                 ) : (
-                  <div style={{ fontSize: "12px", width: "100%" }}>
+                  <div style={{ fontSize: "13px" }}>
                     <AuctionTimer
                       id={id}
                       time={auctionEndDate}
@@ -207,12 +215,7 @@ const CardComp = ({
                 )}
               </Col>
               <Col>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    width: "100%",
-                  }}
-                >
+                <p>
                   {data.structure.beds_count
                     ? data.structure.beds_count
                     : "N/A-"}

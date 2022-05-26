@@ -78,7 +78,7 @@ position: relative;
 }
 `;
 
-function SavedAuctionsComp({ savedProp }) {
+function SavedAuctionsComp({ savedProp, windowSize }) {
   let settings = {
     dots: false,
     infinite: true,
@@ -107,6 +107,7 @@ function SavedAuctionsComp({ savedProp }) {
                 }
                 auctionId={property._id}
                 type={property.property.type}
+                windowSize={windowSize}
               />
             </Col>
           </Wrap>
