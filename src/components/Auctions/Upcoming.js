@@ -101,6 +101,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                       justifyContent: "center",
                       alignContent: "center",
                       alignItems: "center",
+                      height: windowSize < 500 && "30vh",
                     }}
                     md={12}
                   >
@@ -120,7 +121,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        fontSize: "10rem",
+                        fontSize: windowSize > 500 ? "10rem" : "3rem",
                         alignContent: "center",
                         width: "100%",
                         height: "fit-content",
@@ -129,10 +130,14 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                         zIndex: "100",
                       }}
                     >
-                      <span>404</span>
+                      <span
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        404
+                      </span>
                       <p
                         style={{
-                          fontSize: "25px",
+                          fontSize: windowSize > 500 ? "25px" : "18px",
                           display: "flex",
                           justifyContent: "center",
                         }}

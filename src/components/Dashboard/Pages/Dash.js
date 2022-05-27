@@ -79,7 +79,9 @@ function Dash({ windowSize }) {
     //   <div className="DashBody">
     <Container className="container2">
       <Row lg={3}>
-        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+        <Col
+          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+        >
           <div className="liveAuc">
             <div className="names">
               <span>Live Auctions</span>
@@ -90,7 +92,9 @@ function Dash({ windowSize }) {
             </div>
           </div>
         </Col>
-        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+        <Col
+          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+        >
           <div className="liveAuc">
             <div className="names">
               <span>Upcoming Auctions</span>
@@ -112,7 +116,9 @@ function Dash({ windowSize }) {
             </div>
           </div>
         </Col> */}
-        <Col style={{ display: "flex", justifyContent: "center", padding: "20px" }}>
+        <Col
+          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+        >
           <div className="liveAuc">
             <div className="names">
               <span>Your Listings</span>
@@ -228,11 +234,9 @@ function Dash({ windowSize }) {
           </div>
         </Col>
       </Row>
-      <Row style={{ border: "1px solid red" }}>
+      <Row>
         {showSavedProp && savedProp.length > 0 ? (
-          <div>
-            <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
-          </div>
+          <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
         ) : (
           // savedProp.length === 0 &&
           showSavedProp && (
@@ -267,7 +271,6 @@ function Dash({ windowSize }) {
             </div>
           )
         )}
-
       </Row>
       <Modal
         backdrop="static"

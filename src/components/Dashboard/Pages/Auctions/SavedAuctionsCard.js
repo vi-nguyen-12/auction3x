@@ -116,7 +116,7 @@ function SavedAuctionsCard({
   }, [savedProperty]);
 
   return (
-    <div style={{ margin: "30px", border: "1px solid yellow" }}>
+    <div>
       {data && (
         <Card
           className="cards text-left m-auto"
@@ -126,15 +126,14 @@ function SavedAuctionsCard({
             <Toast type="warning" message="Please complete your KYC" />
           )}
           <Carousel {...settings}>
-            {urls.map((items) => (
+            {urls.map((items, index) => (
               <Card.Img
                 onClick={handleBid}
-                variant="top"
+                key={index}
                 src={items.url}
                 className="img-card img-fluid"
                 style={{
                   width: "100%",
-                  height: "250px",
                   borderRadius: "10px",
                   cursor: "pointer",
                 }}
@@ -150,17 +149,11 @@ function SavedAuctionsCard({
           </button>
           <Card.Body style={{ paddingLeft: "13px" }}>
             <Row>
-              {type === "real-estate" ? (
-                <span className="golden-text">
-                  {data.property_address.formatted_street_address},{" "}
-                  {data.property_address.state}
-                </span>
-              ) : (
-                <span className="golden-text">{data.address}</span>
-              )}
+              <span className="golden-text">{data.address}</span>
               {type === "real-estate" ? (
                 <h4 style={{ marginTop: "5px", color: "black" }}>
-                  Property Address
+                  {data.property_address.formatted_street_address},{" "}
+                  {data.property_address.state}
                 </h4>
               ) : type === "car" ? (
                 <h4 style={{ marginTop: "5px", color: "black" }}>
@@ -178,7 +171,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-                new Date().toISOString() < endRegister ? (
+              new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}

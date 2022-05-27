@@ -80,7 +80,7 @@ position: relative;
 }
 `;
 
-function ApprovedListings({ auctions }) {
+function ApprovedListings({ auctions, windowSize }) {
   const user = useSelector((state) => state.user);
   const [approvedLists, setApprovedLists] = useState([]);
 
@@ -121,6 +121,7 @@ function ApprovedListings({ auctions }) {
                       startRegister={property.auctionDetails.registerStartDate}
                       endRegister={property.auctionDetails.registerEndDate}
                       startingBid={property.auctionDetails.startingBid}
+                      windowSize={windowSize}
                     />
                   </Col>
                 </Wrap>

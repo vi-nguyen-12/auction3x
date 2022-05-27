@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
+  // height: 100%;
   overflow: hidden;
 
   & > button {
@@ -40,11 +41,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100px;
+    height: 150px;
+    left: 2vw;
+    z-index: 1;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
+    margin: -50px;
   }
 
   .slick-prev:before {
@@ -52,11 +53,11 @@ const Carousel = styled(Slider)`
   }
 
   .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100px;
+    height: 150px;
+    right: 2vw;
+    z-index: 1;
     background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
+    margin: -50px;
   }
 
   .slick-next:before {
@@ -72,6 +73,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 align-content: center;
+// margin-top: auto;  // Just for display
 
   &:hover {
     padding: 0;
@@ -98,7 +100,22 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
           dots: false,
         },
       },
-
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
     ],
   };
 
@@ -107,24 +124,22 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
       <Carousel {...settings}>
         {savedProp.map((property, index) => (
           <Wrap key={index}>
-            <Col md={12}>
-              <SavedAuctionsCard
-                url={property.property.images[0].url}
-                urls={property.property.images}
-                data={property.property.details}
-                id={property._id}
-                auctionStartDate={property.auctionStartDate}
-                auctionEndDate={property.auctionEndDate}
-                startingBid={
-                  property.highestBid
-                    ? property.highestBid.amount
-                    : property.startingBid
-                }
-                auctionId={property._id}
-                type={property.property.type}
-                windowSize={windowSize}
-              />
-            </Col>
+            <SavedAuctionsCard
+              url={property.property.images[0].url}
+              urls={property.property.images}
+              data={property.property.details}
+              id={property._id}
+              auctionStartDate={property.auctionStartDate}
+              auctionEndDate={property.auctionEndDate}
+              startingBid={
+                property.highestBid
+                  ? property.highestBid.amount
+                  : property.startingBid
+              }
+              auctionId={property._id}
+              type={property.property.type}
+              windowSize={windowSize}
+            />
           </Wrap>
         ))}
       </Carousel>

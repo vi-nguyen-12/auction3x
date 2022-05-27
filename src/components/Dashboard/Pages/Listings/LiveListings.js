@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
 
-function LiveListings() {
+function LiveListings({ windowSize }) {
   const user = useSelector((state) => state.user);
   const [upcomingListings, setUpcomingListings] = useState([]);
   const [showImages, setShowImages] = useState(false);
@@ -38,7 +38,7 @@ function LiveListings() {
             width: "70vw",
           }}
         >
-          <thead style={{ background: "black", color: "white" }}>
+          <thead style={{ background: "black", color: "white", padding:"50px" }}>
             <tr>
               <th>#</th>
               <th>Property ID</th>
@@ -148,8 +148,8 @@ function LiveListings() {
             ))}
         </Table>
       </Row>
-      <Row>
-        <ApprovedListings />
+      <Row style={{marginTop:"50px"}}>
+        <ApprovedListings windowSize={windowSize} />
       </Row>
     </Container>
   );
