@@ -458,9 +458,9 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -540,9 +540,9 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -632,18 +632,25 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
             <Col style={{ display: "grid", padding: "0" }}>
               <Row
                 xs="auto"
-                style={{ width: "100%", padding: "0", margin: "0" }}
+                style={{
+                  width: "100%",
+                  height: "150px",
+                  padding: "0",
+                  margin: "0",
+                }}
               >
                 {registEnded === false ? (
-                  <Col style={{ padding: "0" }}>
+                  <Col>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
+                        alignItems: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
+                        height: "100%",
                         borderRadius: "10px",
-                        padding: "20px",
+                        padding: "0 40px",
                       }}
                     >
                       <RegistrationTimer
@@ -663,15 +670,17 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col style={{ padding: "0" }}>
+                  <Col>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
+                        alignItems: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
+                        height: "100%",
                         borderRadius: "10px",
-                        padding: "60px",
+                        padding: "0 40px",
                       }}
                     >
                       <div
@@ -689,17 +698,18 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
+                        height: "100%",
                         borderRadius: "10px",
-                        padding: "11px",
-                        marginLeft: "18px",
+                        padding: "0 40px",
                       }}
                     >
                       <AuctionTimer
@@ -710,7 +720,6 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                         style={{
                           display: "flex",
                           justifyContent: "left",
-                          marginLeft: "10px",
                           color: "#7c7c7c",
                         }}
                       >
@@ -724,12 +733,14 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                       style={{
                         display: "grid",
                         justifyContent: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
+                        height: "100%",
                         borderRadius: "10px",
                         padding: "20px",
                         color: "black",
-                        marginLeft: "18px",
+                        padding: "0 40px",
                       }}
                     >
                       <AuctionTimer time={property.auctionStartDate} />
@@ -752,11 +763,12 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                         style={{
                           display: "grid",
                           justifyContent: "center",
+                          alignItems: "center",
                           backgroundColor: "#e8e8e8",
                           width: "100%",
+                          height: "100%",
                           borderRadius: "10px",
-                          padding: "60px",
-                          marginLeft: "18px",
+                          padding: "0 40px",
                         }}
                       >
                         <div
@@ -782,14 +794,15 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                         style={{
                           display: "grid",
                           justifyContent: "center",
+                          alignContent: "center",
                           backgroundColor: "#e8e8e8",
                           width: "100%",
-                          marginLeft: "18px",
+                          height: "100%",
                           borderRadius: "10px",
-                          padding: "33px",
+                          padding: "0 40px",
                         }}
                       >
-                        <h4 style={{ padding: "8px" }}>
+                        <h4>
                           <NumberFormat
                             value={property.highestBid}
                             displayType={"text"}
@@ -806,8 +819,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                           style={{
                             display: "flex",
                             justifyContent: "left",
-                            marginLeft: "10px",
-                            marginTop: "-10px",
+                            alignContent: "bottom",
                             color: "#7c7c7c",
                           }}
                         >
@@ -819,14 +831,15 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                         style={{
                           display: "grid",
                           justifyContent: "center",
+                          alignContent: "center",
                           backgroundColor: "#e8e8e8",
                           width: "100%",
-                          marginLeft: "18px",
+                          height: "100%",
                           borderRadius: "10px",
-                          padding: "33px",
+                          padding: "0 40px",
                         }}
                       >
-                        <h4 style={{ padding: "8px" }}>
+                        <h4>
                           <NumberFormat
                             value={property.startingBid}
                             displayType={"text"}
@@ -843,8 +856,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                           style={{
                             display: "flex",
                             justifyContent: "left",
-                            marginLeft: "10px",
-                            marginTop: "-10px",
+                            alignContent: "baseLine",
                             color: "#7c7c7c",
                           }}
                         >
@@ -860,16 +872,16 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                     style={{
                       display: "grid",
                       justifyContent: "center",
+                      alignContent: "center",
                       backgroundColor: "#e8e8e8",
                       width: "100%",
-                      marginLeft: "35px",
+                      height: "100%",
                       borderRadius: "10px",
-                      padding: "39px",
+                      padding: "0 40px",
                     }}
                   >
                     <h4
                       style={{
-                        padding: "8px",
                         fontWeight: "700",
                         fontSize: "22px",
                         color: "black",
@@ -881,8 +893,6 @@ function DisplayJet({ toggleChange, property, toggleSignIn }) {
                       style={{
                         display: "flex",
                         justifyContent: "left",
-                        marginLeft: "10px",
-                        marginTop: "-10px",
                         color: "#7c7c7c",
                       }}
                     >

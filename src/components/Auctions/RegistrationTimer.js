@@ -39,7 +39,7 @@ const RegistrationTimer = ({ time, toggleRegistEnded }) => {
   }, []);
 
   return (
-    <Table style={{ margin: "auto" }} borderless>
+    <Table className="timerTable" style={{ margin: "auto" }} borderless>
       <thead>
         <tr className="timerHead">
           <th>{days}</th>

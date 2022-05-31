@@ -75,11 +75,9 @@ function Dashboard({
               path="/Dashboard/Auctions/WinAuctions"
               component={WinAuctions}
             />
-            <Route
-              exact
-              path="/Dashboard/Listings/AuctionListings"
-              component={LiveListings}
-            />
+            <Route exact path="/Dashboard/Listings/AuctionListings">
+              <LiveListings windowSize={windowSize} />
+            </Route>
             <Route
               exact
               path="/Dashboard/Listings/PendingApproval"

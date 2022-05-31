@@ -40,7 +40,7 @@ const AuctionTimer = ({ time, toogleAuction }) => {
   }, []);
 
   return (
-    <Table style={{padding:"0"}} borderless>
+    <Table className="timerTable" style={{ padding: "0" }} borderless>
       <thead>
         <tr className="timerHead">
           <th>{days}</th>

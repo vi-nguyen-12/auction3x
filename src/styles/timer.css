@@ -4,8 +4,8 @@
   padding: 0 !important; */
 }
 
-.table > :not(caption) > * > * {
-  padding: 0;
+.timerTable > :not(caption) > * > * {
+  padding: 0 0.2rem;
   margin: 0;
 }
 
