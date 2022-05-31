@@ -173,3 +173,7 @@
   box-shadow: none !important;
   border-bottom: white solid 2px !important;
 }
+
+.collapse navbar-collapse {
+  border: 2px solid black;
+}

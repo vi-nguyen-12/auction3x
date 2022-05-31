@@ -274,16 +274,22 @@ const Header = ({
               {user._id ? (
                 <>
                   <div className="dropdown">
-                    {windowSize > 800 ? (
+                    {windowSize > 1380 ? (
                       <button className="user mt-0">
                         Hello, {user.firstName}
                       </button>
-                    ) : (
-                      <button className="user mt-0">
-                        {String(user.firstName[0]).toUpperCase()}
-                        {String(user.lastName[0]).toUpperCase()}
-                      </button>
-                    )}
+                    ) :
+                      windowSize > 800 ? (
+                        <button className="user mt-0">
+                          Hello,{String(user.firstName[0]).toUpperCase()}
+                          {String(user.lastName[0]).toUpperCase()}
+                        </button>
+                      ) : (
+                        <button className="user mt-0">
+                          {String(user.firstName[0]).toUpperCase()}
+                          {String(user.lastName[0]).toUpperCase()}
+                        </button>
+                      )}
                     <div className="dropdown-content">
                       <button
                         className="fw-bold p-3"
