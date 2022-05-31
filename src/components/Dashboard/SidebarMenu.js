@@ -61,7 +61,7 @@ export const SidebarMenu = [
         path: "/Dashboard/Listings/SoldListings",
       },
       {
-        name: "Incomplete Listing",
+        name: "Incomplete Listings",
         path: "/Dashboard/Listings/IncompleteListing",
       },
     ],

@@ -42,7 +42,7 @@ h3 {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  margin-right: 60px;
+  /* margin-right: 60px; */
   align-items: center;
 }
 
@@ -449,4 +449,42 @@ h3 {
   padding: 15px 10px;
   text-align: left;
   vertical-align: top;
+}
+
+.headerModal {
+  overflow: hidden;
+}
+
+.dashAccor .accordion-item {
+  border: 0;
+  padding-top: 10px;
+  background: transparent;
+}
+
+.dashAccor .accordion-body {
+  font-size: 1.5rem;
+  background: transparent;
+}
+
+.dashAccor .accordion-button {
+  padding: 0;
+  align-items: none;
+  font-size: 2rem;
+  background: transparent;
+  color: white;
+}
+
+.dashAccor .accordion-button:focus {
+  outline: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  background: none;
+  box-shadow: none;
+}
+
+.dashAccor .accordion-button::after {
+  margin-left: 50px;
+  margin-top: 10px;
+  color: white;
 }

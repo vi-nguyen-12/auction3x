@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -18,6 +18,11 @@ import Dash from "./Pages/Dash";
 import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
+import { FaBars } from "react-icons/fa";
+import { Button, Modal, Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
+import Accordion from "react-bootstrap/Accordion";
 
 function Dashboard({
   toggleChange,
@@ -29,6 +34,9 @@ function Dashboard({
   setPadRight,
   windowSize,
 }) {
+  const [show, setShow] = useState(false);
+  const toggleShowModal = () => setShow(!show);
+  const history = useHistory();
   useEffect(() => {
     setHeaderWidth("100vw");
     setPositionLeft("20%");
@@ -43,7 +51,26 @@ function Dashboard({
   return (
     <div style={{ display: "flex" }}>
       <Router>
-        <Sidebar path={path} />
+        {windowSize > 800 ? (
+          <Sidebar path={path} />
+        ) : (
+          <div
+            style={{
+              position: "absolute",
+              top: "80px",
+              left: "20px",
+              boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+              borderRadius: "10px",
+            }}
+          >
+            <Button
+              onClick={toggleShowModal}
+              style={{ background: "transparent", border: "0", color: "black" }}
+            >
+              <FaBars size={30} />
+            </Button>
+          </div>
+        )}
         <div
           style={{
             display: "-moz-initial",
@@ -51,52 +78,181 @@ function Dashboard({
             marginTop: "105px",
           }}
         >
-          <DashHeader location={location.pathname.split("/")[1]} />
+          <DashHeader
+            location={location.pathname.split("/")[1]}
+            windowSize={windowSize}
+          />
           <Switch>
             <Route exact path="/Dashboard">
               <Dash windowSize={windowSize} />
             </Route>
             <Route exact path="/Dashboard/Messaging" component={Messaging} />
-            <Route
-              exact
-              path="/Dashboard/Auctions/BidAuctions"
-              component={BidAuctions}
-            />
-            <Route
-              exact
-              path="/Dashboard/Auctions/PendingAuctions"
-              component={PendingAuctions}
-            />
+            <Route exact path="/Dashboard/Auctions/BidAuctions">
+              <BidAuctions windowSize={windowSize} />
+            </Route>
+            <Route exact path="/Dashboard/Auctions/PendingAuctions">
+              <PendingAuctions windowSize={windowSize} />
+            </Route>
             <Route exact path="/Dashboard/Auctions/SavedAuctions">
               <SavedAuctions windowSize={windowSize} />
             </Route>
-            <Route
-              exact
-              path="/Dashboard/Auctions/WinAuctions"
-              component={WinAuctions}
-            />
+            <Route exact path="/Dashboard/Auctions/WinAuctions">
+              <WinAuctions windowSize={windowSize} />'
+            </Route>
             <Route exact path="/Dashboard/Listings/AuctionListings">
               <LiveListings windowSize={windowSize} />
             </Route>
-            <Route
-              exact
-              path="/Dashboard/Listings/PendingApproval"
-              component={PendingListings}
-            />
-            <Route
-              exact
-              path="/Dashboard/Listings/SoldListings"
-              component={SoldListings}
-            />
-            <Route
-              exact
-              path="/Dashboard/Listings/IncompleteListing"
-              component={IncompleteListing}
-            />
-            <Route exact path="/Dashboard/Profile" component={Profile} />
+            <Route exact path="/Dashboard/Listings/PendingApproval">
+              <PendingListings windowSize={windowSize} />
+            </Route>
+            <Route exact path="/Dashboard/Listings/SoldListings">
+              <SoldListings windowSize={windowSize} />
+            </Route>
+            <Route exact path="/Dashboard/Listings/IncompleteListing">
+              <IncompleteListing windowSize={windowSize} />
+            </Route>
+            <Route exact path="/Dashboard/Profile">
+              <Profile windowSize={windowSize} />
+            </Route>
           </Switch>
         </div>
       </Router>
+
+      <Modal
+        className="headerModal"
+        show={show}
+        onHide={toggleShowModal}
+        fullscreen
+      >
+        <div className="modal-close">
+          <CloseButton onClick={toggleShowModal} />
+        </div>
+        <Modal.Body
+          style={{
+            padding: "100px 50px",
+            fontSize: "2rem",
+            backgroundColor: "rgb(90, 90, 90)",
+            color: "white",
+          }}
+        >
+          <Row>
+            <Col
+              onClick={() => {
+                history.push("/Dashboard");
+                window.location.reload();
+              }}
+            >
+              Dashboard
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              onClick={() => {
+                history.push("/Dashboard/Messaging");
+                window.location.reload();
+              }}
+            >
+              Messaging
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Accordion className="dashAccor">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Auctions</Accordion.Header>
+                  <Accordion.Body>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Auctions/BidAuctions");
+                        window.location.reload();
+                      }}
+                    >
+                      Bid Auctions
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Auctions/PendingAuctions");
+                        window.location.reload();
+                      }}
+                    >
+                      Pending Auctions
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Auctions/SavedAuctions");
+                        window.location.reload();
+                      }}
+                    >
+                      Saved Auctions
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Auctions/WinAuctions");
+                        window.location.reload();
+                      }}
+                    >
+                      Won Auctions
+                    </p>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Accordion className="dashAccor">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Your Listings</Accordion.Header>
+                  <Accordion.Body>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Listings/PendingApproval");
+                        window.location.reload();
+                      }}
+                    >
+                      Pending Approval
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Listings/AuctionListings");
+                        window.location.reload();
+                      }}
+                    >
+                      Auction Listings
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Listings/SoldListings");
+                        window.location.reload();
+                      }}
+                    >
+                      Sold Listings
+                    </p>
+                    <p
+                      onClick={() => {
+                        history.push("/Dashboard/Listings/IncompleteListing");
+                        window.location.reload();
+                      }}
+                    >
+                      Incomplete Listings
+                    </p>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              onClick={() => {
+                history.push("/Dashboard/Profile");
+                window.location.reload();
+              }}
+            >
+              Profile
+            </Col>
+          </Row>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
