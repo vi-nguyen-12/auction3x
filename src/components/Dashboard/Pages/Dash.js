@@ -75,12 +75,23 @@ function Dash({ windowSize }) {
     setApprovedAuctions(data);
   };
   return (
-    // <div className="DashContainer">
-    //   <div className="DashBody">
-    <Container className="container2">
+    <Container
+      className="container2"
+      style={{
+        width: windowSize < 800 && "100vw",
+        justifyContent: windowSize < 800 && "grid",
+        justifyContent: windowSize < 800 && "center",
+        padding: windowSize < 800 && "0",
+        margin: windowSize < 800 && "0",
+      }}
+    >
       <Row lg={3}>
         <Col
-          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            padding: "20px",
+          }}
         >
           <div className="liveAuc">
             <div className="names">
@@ -131,142 +142,306 @@ function Dash({ windowSize }) {
         </Col>
       </Row>
 
-      <Row>
-        <Col>
-          <div className="tab">
-            {showSavedProp === true ? (
-              <Button
-                onClick={() => {
-                  toggleShowApprovedAuctions(false);
-                  toggleShowBidAuctions(false);
-                  getSavedProperty();
-                  toggleShowSavedProp(true);
-                }}
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
-                // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
-                className="tabs"
-              >
-                <span>Saved Auction</span>
-              </Button>
-            ) : (
-              <Button
-                onClick={() => {
-                  toggleShowApprovedAuctions(false);
-                  toggleShowBidAuctions(false);
-                  getSavedProperty();
-                  toggleShowSavedProp(true);
-                }}
-                // style={{ borderBottom: color, color: textColor }}
-                className="tabs"
-              >
-                <span>Saved Auction</span>
-              </Button>
-            )}
-            {showBidAuctions === true ? (
-              <Button
-                onClick={() => {
-                  toggleShowApprovedAuctions(false);
-                  toggleShowSavedProp(false);
-                  getBidAuctions();
-                  toggleShowBidAuctions(true);
-                }}
-                className="tabs"
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
-              >
-                <span>Bid Auction</span>
-              </Button>
-            ) : (
-              <Button
-                onClick={() => {
-                  toggleShowApprovedAuctions(false);
-                  toggleShowSavedProp(false);
-                  getBidAuctions();
-                  toggleShowBidAuctions(true);
-                }}
-                className="tabs"
-              >
-                <span>Bid Auction</span>
-              </Button>
-            )}
-            {showApprovedAuctions === true ? (
-              <Button
-                onClick={() => {
-                  toggleShowBidAuctions(false);
-                  toggleShowSavedProp(false);
-                  getApprovedAuctions();
-                  toggleShowApprovedAuctions(true);
-                }}
-                className="tabs"
-                id={window.location.pathname === "/Dashboard" ? "active" : ""}
-              >
-                <span>Approved</span>
-              </Button>
-            ) : (
-              <Button
-                onClick={() => {
-                  toggleShowBidAuctions(false);
-                  toggleShowSavedProp(false);
-                  getApprovedAuctions();
-                  toggleShowApprovedAuctions(true);
-                }}
-                className="tabs"
-              >
-                <span>Approved</span>
-              </Button>
-            )}
-          </div>
-        </Col>
+      {windowSize > 800 ? (
+        <Row>
+          <Col>
+            <div className="tab">
+              {showSavedProp === true ? (
+                <Button
+                  onClick={() => {
+                    toggleShowApprovedAuctions(false);
+                    toggleShowBidAuctions(false);
+                    getSavedProperty();
+                    toggleShowSavedProp(true);
+                  }}
+                  id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                  // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
+                  className="tabs"
+                >
+                  <span>Saved Auction</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    toggleShowApprovedAuctions(false);
+                    toggleShowBidAuctions(false);
+                    getSavedProperty();
+                    toggleShowSavedProp(true);
+                  }}
+                  // style={{ borderBottom: color, color: textColor }}
+                  className="tabs"
+                >
+                  <span>Saved Auction</span>
+                </Button>
+              )}
+              {showBidAuctions === true ? (
+                <Button
+                  onClick={() => {
+                    toggleShowApprovedAuctions(false);
+                    toggleShowSavedProp(false);
+                    getBidAuctions();
+                    toggleShowBidAuctions(true);
+                  }}
+                  className="tabs"
+                  id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                >
+                  <span>Bid Auction</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    toggleShowApprovedAuctions(false);
+                    toggleShowSavedProp(false);
+                    getBidAuctions();
+                    toggleShowBidAuctions(true);
+                  }}
+                  className="tabs"
+                >
+                  <span>Bid Auction</span>
+                </Button>
+              )}
+              {showApprovedAuctions === true ? (
+                <Button
+                  onClick={() => {
+                    toggleShowBidAuctions(false);
+                    toggleShowSavedProp(false);
+                    getApprovedAuctions();
+                    toggleShowApprovedAuctions(true);
+                  }}
+                  className="tabs"
+                  id={window.location.pathname === "/Dashboard" ? "active" : ""}
+                >
+                  <span>Approved</span>
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    toggleShowBidAuctions(false);
+                    toggleShowSavedProp(false);
+                    getApprovedAuctions();
+                    toggleShowApprovedAuctions(true);
+                  }}
+                  className="tabs"
+                >
+                  <span>Approved</span>
+                </Button>
+              )}
+            </div>
+          </Col>
 
-        <Col>
-          <div className="filter">
-            <div className="filterIcon">
-              <RiFilter2Fill color="white" size={25} />
-              <button className="filterBtn">
-                <span>Filter</span>
-              </button>
+          <Col>
+            <div className="filter">
+              <div className="filterIcon">
+                <RiFilter2Fill color="white" size={25} />
+                <button className="filterBtn">
+                  <span>Filter</span>
+                </button>
+              </div>
+              <div className="refresh">
+                <GoPlus color="white" size={28} />
+                <button onClick={toggleFundReq} className="resetBtn">
+                  <span>Add Fund</span>
+                </button>
+              </div>
             </div>
-            <div className="refresh">
-              <GoPlus color="white" size={28} />
-              <button onClick={toggleFundReq} className="resetBtn">
-                <span>Add Fund</span>
-              </button>
-            </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      ) : (
+        <>
+          <Row
+            style={{
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              padding: "0",
+              margin: "0",
+            }}
+          >
+            <Col
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div className="filter">
+                <div className="filterIcon">
+                  <RiFilter2Fill color="white" size={25} />
+                  <button className="filterBtn">
+                    <span>Filter</span>
+                  </button>
+                </div>
+                <div className="refresh">
+                  <GoPlus color="white" size={28} />
+                  <button onClick={toggleFundReq} className="resetBtn">
+                    <span>Add Fund</span>
+                  </button>
+                </div>
+              </div>
+            </Col>
+          </Row>
+
+          <Row
+            style={{
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              padding: "0",
+              margin: "0",
+            }}
+          >
+            <Col
+              style={{
+                width: "100vw",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div className="tab">
+                {showSavedProp === true ? (
+                  <Button
+                    onClick={() => {
+                      toggleShowApprovedAuctions(false);
+                      toggleShowBidAuctions(false);
+                      getSavedProperty();
+                      toggleShowSavedProp(true);
+                    }}
+                    id={
+                      window.location.pathname === "/Dashboard" ? "active" : ""
+                    }
+                    // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
+                    className="tabs"
+                  >
+                    <span>Saved Auction</span>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      toggleShowApprovedAuctions(false);
+                      toggleShowBidAuctions(false);
+                      getSavedProperty();
+                      toggleShowSavedProp(true);
+                    }}
+                    // style={{ borderBottom: color, color: textColor }}
+                    className="tabs"
+                  >
+                    <span>Saved Auction</span>
+                  </Button>
+                )}
+                {showBidAuctions === true ? (
+                  <Button
+                    onClick={() => {
+                      toggleShowApprovedAuctions(false);
+                      toggleShowSavedProp(false);
+                      getBidAuctions();
+                      toggleShowBidAuctions(true);
+                    }}
+                    className="tabs"
+                    id={
+                      window.location.pathname === "/Dashboard" ? "active" : ""
+                    }
+                  >
+                    <span>Bid Auction</span>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      toggleShowApprovedAuctions(false);
+                      toggleShowSavedProp(false);
+                      getBidAuctions();
+                      toggleShowBidAuctions(true);
+                    }}
+                    className="tabs"
+                  >
+                    <span>Bid Auction</span>
+                  </Button>
+                )}
+                {showApprovedAuctions === true ? (
+                  <Button
+                    onClick={() => {
+                      toggleShowBidAuctions(false);
+                      toggleShowSavedProp(false);
+                      getApprovedAuctions();
+                      toggleShowApprovedAuctions(true);
+                    }}
+                    className="tabs"
+                    id={
+                      window.location.pathname === "/Dashboard" ? "active" : ""
+                    }
+                  >
+                    <span>Approved</span>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      toggleShowBidAuctions(false);
+                      toggleShowSavedProp(false);
+                      getApprovedAuctions();
+                      toggleShowApprovedAuctions(true);
+                    }}
+                    className="tabs"
+                  >
+                    <span>Approved</span>
+                  </Button>
+                )}
+              </div>
+            </Col>
+          </Row>
+        </>
+      )}
+
       <Row>
         {showSavedProp && savedProp.length > 0 ? (
-          <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
+          <Col>
+            <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
+          </Col>
         ) : (
           // savedProp.length === 0 &&
           showSavedProp && (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
               <h1>No Saved Auction</h1>
             </div>
           )
         )}
 
         {showBidAuctions && bidAuctions.length > 0 ? (
-          <Row>
-            <BidAuctionsComp bidAuctions={bidAuctions} />
-          </Row>
+          <BidAuctionsComp bidAuctions={bidAuctions} windowSize={windowSize} />
         ) : (
           // bidAuctions.length === 0 &&
           showBidAuctions && (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
               <h1>No Bid Auction</h1>
             </div>
           )
         )}
 
         {showApprovedAuctions && approvedAuctions.length > 0 ? (
-          <Row>
-            <ApprovedAuctionsComp approvedAuctions={approvedAuctions} />
-          </Row>
+          <ApprovedAuctionsComp
+            approvedAuctions={approvedAuctions}
+            windowSize={windowSize}
+          />
         ) : (
           // approvedAuctions.length === 0 &&
           showApprovedAuctions && (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
               <h1>No Approved Auction</h1>
             </div>
           )
@@ -279,6 +454,7 @@ function Dash({ windowSize }) {
         show={showFundReq}
         onHide={toggleFundReq}
         centered
+        className="fund-modal"
       >
         <div>
           <CloseButton

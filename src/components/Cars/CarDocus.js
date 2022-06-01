@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FaCheck } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Loading from "../../components/Loading";
 
 function CarDocus({
@@ -33,6 +32,71 @@ function CarDocus({
   const [doc8, setDocument8] = useState([]);
   const [doc9, setDocument9] = useState([]);
   const [loader, setLoader] = useState(false);
+  const datas = [
+    {
+      name: "Ownership Documents",
+      officialName: "ownershipDocuments",
+      number: 1,
+      documents: doc1,
+      required: true,
+    },
+    {
+      name: "Registration Documents",
+      officialName: "registrationDocuments",
+      number: 2,
+      documents: doc2,
+      required: true,
+    },
+    {
+      name: "Title Certificate",
+      officialName: "titleCertificate",
+      number: 3,
+      documents: doc3,
+      required: true,
+    },
+    {
+      name: "Loan Documents",
+      officialName: "loanDocuments",
+      number: 4,
+      documents: doc4,
+      required: true,
+    },
+    {
+      name: "Inspection Report",
+      officialName: "inspectionReport",
+      number: 5,
+      documents: doc5,
+      required: true,
+    },
+    {
+      name: "Engine Details",
+      officialName: "engineDetails",
+      number: 6,
+      documents: doc6,
+      required: true,
+    },
+    {
+      name: "Insurance Documents",
+      officialName: "insuranceDocuments",
+      number: 7,
+      documents: doc7,
+      required: false,
+    },
+    {
+      name: "Valuation Report",
+      officialName: "valuationReport",
+      number: 8,
+      documents: doc8,
+      required: true,
+    },
+    {
+      name: "Other Documents",
+      officialName: "otherDocuments",
+      number: 9,
+      documents: doc9,
+      required: false,
+    },
+  ];
   const listing_agreement = ownership
     ? ownership.documents
       ? ownership.documents.length > 0
@@ -45,144 +109,45 @@ function CarDocus({
 
   const steps = sellStep ? sellStep : params.step ? params.step : 0;
 
-  const onChange1 = async (e) => {
-    setLoader(true);
-    const formData1 = new FormData();
-
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData1.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData1).then((response) => {
-      if (response.status === 200) {
-        setDocument1([...doc1, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange2 = async (e) => {
+  const onChange = (number) => async (e) => {
     setLoader(true);
 
-    const formData2 = new FormData();
+    const formData = new FormData();
     for (let i = 0; i < e.target.files.length; i++) {
-      formData2.append("documents", e.target.files[i]);
+      formData.append("documents", e.target.files[i]);
     }
-    await authService.saveDocuments(formData2).then((response) => {
+    await authService.saveDocuments(formData).then((response) => {
       if (response.status === 200) {
-        setDocument2([...doc2, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange3 = async (e) => {
-    setLoader(true);
-
-    const formData3 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData3.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData3).then((response) => {
-      if (response.status === 200) {
-        setDocument3([...doc3, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange4 = async (e) => {
-    setLoader(true);
-
-    const formData4 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData4.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData4).then((response) => {
-      if (response.status === 200) {
-        setDocument4([...doc4, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange5 = async (e) => {
-    setLoader(true);
-
-    const formData5 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData5.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData5).then((response) => {
-      if (response.status === 200) {
-        setDocument5([...doc5, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange6 = async (e) => {
-    setLoader(true);
-
-    const formData6 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData6.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData6).then((response) => {
-      if (response.status === 200) {
-        setDocument6([...doc6, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange7 = async (e) => {
-    setLoader(true);
-
-    const formData7 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData7.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData7).then((response) => {
-      if (response.status === 200) {
-        setDocument7([...doc7, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange8 = async (e) => {
-    setLoader(true);
-
-    const formData8 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData8.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData8).then((response) => {
-      if (response.status === 200) {
-        setDocument8([...doc8, ...response.data]);
-        setLoader(false);
-      }
-    });
-    e.target.value = null;
-  };
-
-  const onChange9 = async (e) => {
-    setLoader(true);
-
-    const formData9 = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData9.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData9).then((response) => {
-      if (response.status === 200) {
-        setDocument9([...doc9, ...response.data]);
+        switch (number) {
+          case 1:
+            setDocument1([...doc1, ...response.data]);
+            break;
+          case 2:
+            setDocument2([...doc2, ...response.data]);
+            break;
+          case 3:
+            setDocument3([...doc3, ...response.data]);
+            break;
+          case 4:
+            setDocument4([...doc4, ...response.data]);
+            break;
+          case 5:
+            setDocument5([...doc5, ...response.data]);
+            break;
+          case 6:
+            setDocument6([...doc6, ...response.data]);
+            break;
+          case 7:
+            setDocument7([...doc7, ...response.data]);
+            break;
+          case 8:
+            setDocument8([...doc8, ...response.data]);
+            break;
+          case 9:
+            setDocument9([...doc9, ...response.data]);
+            break;
+          default:
+        }
         setLoader(false);
       }
     });
@@ -535,59 +500,58 @@ function CarDocus({
     }
   };
   return (
-    <>
-      <Container className="sell-bottom-docu">
-        <Row className="listDetails-title">
-          <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
-            UPLOAD DOCUMENTS
-          </h2>
-          <p style={{ color: "black" }}>We only accept PDF Files</p>
-
-          {loader ? <Loading /> : null}
-        </Row>
+    <div className="sell-bottom">
+      {loader ? <Loading /> : null}
+      <h3 className="mb-1"> UPLOAD DOCUMENTS</h3>
+      <p className="mb-4">We only accept PDF Files</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Row
           style={{
-            // height: "1300px",
             overflowY: "scroll",
-            margin: "120px 0 0 0",
             color: "black",
           }}
         >
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Ownership Documents (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn1"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("ownership_document", { onChange: onChange1 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn1">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn1"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc1
-                  ? doc1.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
+          {datas.map((item) => (
+            <Row className="mt-3">
+              <Col lg={5}>
+                <h5>
+                  {" "}
+                  {item.name} (.pdf){" "}
+                  {item.required && <span style={{ color: "#ff0000" }}>*</span>}
+                </h5>
+                <input
+                  id={item.officialName}
+                  accept=".pdf"
+                  type="file"
+                  name={item.name}
+                  multiple
+                  hidden
+                  {...register(`${item.officialName}`, {
+                    onChange: onChange(item.number),
+                  })}
+                  style={{ border: "red" }}
+                />
+                <div className="upload-wrapper">
+                  <details>
+                    <summary>
+                      <label htmlFor={item.officialName}>+ Documents</label>
+                    </summary>
+                    <div>
+                      <label
+                        style={{ width: "50%", marginTop: "10px" }}
+                        htmlFor={item.officialName}
+                      >
+                        <AiOutlinePlusCircle />
+                      </label>
+                    </div>
+                  </details>
+                </div>
+              </Col>
+              <Col lg={7} className="pt-lg-5">
+                {item.documents.length > 0 && (
+                  <div className="upload-list">
+                    {item.documents.map((document, index) => (
+                      <div key={index}>
                         <span>
                           {document.name}
                           <Button
@@ -598,433 +562,34 @@ function CarDocus({
                           </Button>
                         </span>
                       </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Registration Documents (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn2"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("registration_document", { onChange: onChange2 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn2">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn2"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
+                    ))}
                   </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc2
-                  ? doc2.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Title Certificate (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn3"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("title_certificate", { onChange: onChange3 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn3">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn3"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc3
-                  ? doc3.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Loan Documents (.pdf) <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn4"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("loan_document", { onChange: onChange4 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn4">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn4"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc4
-                  ? doc4.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Inspection Report (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn5"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("inspection_report", { onChange: onChange5 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn5">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn5"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc5
-                  ? doc5.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Engine Details (.pdf) <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn6"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("engine_details", { onChange: onChange6 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn6">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn6"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc6
-                  ? doc6.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Insurance Documents (.pdf){" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn7"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("insurance_document", { onChange: onChange7 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn7">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn7"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc7
-                  ? doc7.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Valuation Report (.pdf)
-              <span style={{ color: "#ff0000" }}>*</span>
-              <input
-                id="documents-btn8"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("valuation_report", { onChange: onChange8 })}
-                required
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn8">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn8"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc8
-                  ? doc8.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
-
-          <Row style={{ borderBottom: "#333 solid 1px" }}>
-            <Col className="input-form-3">
-              Other Documents (.pdf)
-              <input
-                id="documents-btn9"
-                accept=".pdf"
-                type="file"
-                name="documents"
-                multiple
-                hidden
-                {...register("others", { onChange: onChange9 })}
-              />
-              <div className="upload-cover">
-                <details>
-                  <summary>
-                    <label htmlFor="documents-btn9">+ Documents</label>
-                  </summary>
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="documents-btn9"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details>
-              </div>
-            </Col>
-            <Col>
-              <div className="upload-list">
-                {doc9
-                  ? doc9.map((document, index, arr) => (
-                      <div key={index} className="upload-list-item">
-                        <span>
-                          {document.name}
-                          <Button
-                            className="delete-btn"
-                            onClick={handleDelete(document.url)}
-                          >
-                            <MdClose fontSize="1.5em" color="red" />
-                          </Button>
-                        </span>
-                      </div>
-                    ))
-                  : null}
-              </div>
-            </Col>
-          </Row>
+                )}
+              </Col>
+            </Row>
+          ))}
         </Row>
-      </Container>
-      <form onSubmit={handleSubmit(onSubmit)} className="bottom-btn">
-        <div className="bottom-btn">
-          <div
-            style={{
-              position: "absolute",
-              left: "50px",
-            }}
+        <Row className="mt-5">
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
           >
-            <Button onClick={saveInfo}>Save</Button>
-          </div>
-          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-            Previous
-          </Button>
-          <button className="nxt-btn" type="submit">
-            Next
-          </button>
-        </div>
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
+          </Col>
+          <Col xs={12} md={8} className="d-flex mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button className="nxt-btn" id="next" type="submit">
+              Next
+            </Button>
+          </Col>
+        </Row>
       </form>
-    </>
+    </div>
   );
 }
 

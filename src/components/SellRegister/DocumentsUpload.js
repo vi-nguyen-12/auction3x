@@ -23,7 +23,7 @@ const DocumentsUpload = ({
   document,
 }) => {
   return (
-    <Container className="upload-box-docu">
+    <Container className="wrapper">
       <SellHeader step={step} />
       {propertyType === "real-estate" ? (
         <RealEstateDocus

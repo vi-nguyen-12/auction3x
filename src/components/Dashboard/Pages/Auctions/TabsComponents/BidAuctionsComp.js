@@ -79,13 +79,14 @@ position: relative;
 }
 `;
 
-function BidAuctionsComp({ bidAuctions }) {
+function BidAuctionsComp({ bidAuctions, windowSize }) {
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    autoplay: true,
-    slidesToShow: bidAuctions.length > 2 ? 2 : bidAuctions.length,
+    autoplay: false,
+    slidesToShow:
+      windowSize > 800 ? (bidAuctions.length > 2 ? 2 : bidAuctions.length) : 1,
   };
   return (
     <>
@@ -106,6 +107,7 @@ function BidAuctionsComp({ bidAuctions }) {
                     : property.startingBid
                 }
                 auctionId={property._id}
+                windowSize={windowSize}
               />
             </Col>
           </Wrap>

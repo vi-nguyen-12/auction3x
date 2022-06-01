@@ -4,7 +4,7 @@ import { useState } from "react";
 import authService from "../../services/authServices";
 import "../../styles/sell-register.css";
 import { MdClose } from "react-icons/md";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
@@ -244,168 +244,140 @@ const UploadForm = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-        }
-      }}
-      className="upload-box"
-    >
+    <div className="wrapper">
       <SellHeader step={step} />
       <div className="sell-bottom">
-        <div className="listDetails-title">
-          <h2 style={{ color: "#6d6d6d", fontWeight: "bold" }}>
-            UPLOAD PICTURES AND VIDEOS
-          </h2>
-        </div>
+        <h3>UPLOAD PICTURES AND VIDEOS</h3>
+
         {loader ? <Loading /> : null}
         {videoLoader ? <Loading /> : null}
-        <div className="input-form-1">
-          Choose the Image Files<span style={{ color: "#ff0000" }}>*</span>
-          <input
-            id="images-btn"
-            accept="image/*"
-            type="file"
-            multiple
-            hidden
-            {...register("images", { onChange: onChange })}
-          />
-          <div className="upload-cover">
-            <details>
-              <summary>
-                <label onClick={toggleExtra} htmlFor="images-btn">
-                  + Images
-                </label>
-              </summary>
-              {/* {extra ? (
-              <AiOutlinePlusCircle />
-            ) : (
-              null
-            )} */}
-              {/* {extra === true ? (
-              <AiOutlinePlus size="5%" />
-            ) : (
-              null
-            )} */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
+          className="list-form"
+        >
+          <Row className="justify-content-center">
+            <Col xs={12} md={4} className="px-sm-3">
+              Choose the Image Files <span style={{ color: "#ff0000" }}>*</span>
+              <input
+                id="images-btn"
+                accept="image/*"
+                type="file"
+                multiple
+                hidden
+                {...register("images", { onChange: onChange })}
+              />
+              <div className="upload-wrapper">
+                <details>
+                  <summary>
+                    <label onClick={toggleExtra} htmlFor="images-btn">
+                      + Images
+                    </label>
+                  </summary>
 
-              {/* {extra ? (
-              <button className="upload-btn" onClick={toggleExtra}>
-                <AiOutlinePlus size="5%" />
-              </button>
-            ) : (
-              <>
-                <button className="upload-btn" onClick={toggleExtra}>
-                  <AiOutlineMinus size="5%" />
-                </button>
-                <label htmlFor="images-btn">
-                  
-                </label>
-              </>
-            )} */}
-
-              <div>
-                <label
-                  style={{ width: "50%", marginTop: "10px" }}
-                  htmlFor="images-btn"
-                >
-                  <AiOutlinePlusCircle color="black" />
-                </label>
-              </div>
-            </details>
-          </div>
-          <div className="upload-list">
-            {images
-              ? images.map((image, index, arr) => (
-                  <div key={index} className="upload-list-item">
-                    <span>
-                      {image.name}
-                      <Button
-                        className="delete-btn"
-                        onClick={handleDelete(image.url)}
-                      >
-                        <MdClose fontSize="1.5em" color="red" />
-                      </Button>
-                    </span>
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="images-btn"
+                    >
+                      <AiOutlinePlusCircle color="black" />
+                    </label>
                   </div>
-                ))
-              : null}
-          </div>
-        </div>
-
-        <div className="input-form-2">
-          Choose the Videos/ Live360 Files (optional)
-          <input
-            id="videos-btn"
-            accept="video/*"
-            type="file"
-            name="videos"
-            multiple
-            hidden
-            {...register("videos", { onChange: onChangeVideos })}
-            // required
-          />
-          <div className="upload-cover">
-            <details>
-              <summary>
-                <label onClick={toggleExtra} htmlFor="videos-btn">
-                  + Videos
-                </label>
-              </summary>
-
-              <div>
-                <label
-                  style={{ width: "50%", marginTop: "10px" }}
-                  htmlFor="images-btn"
-                >
-                  <AiOutlinePlusCircle />
-                </label>
+                </details>
               </div>
-            </details>
-          </div>
-          {/* <div>
-                <label htmlFor="videos-btn">
-                  <img src="https://img.icons8.com/material-outlined/24/FFFFFF/plus--v2.png" />{" "}
-                </label>
-              </div> */}
-          <div className="upload-list">
-            {videos
-              ? videos.map((video, index, arr) => (
-                  <div key={index} className="upload-list-item">
-                    <span>
-                      {video.name}
-                      <Button
-                        className="delete-btn"
-                        onClick={handleDeleteVideo(video.url)}
-                      >
-                        <MdClose fontSize="1.5em" color="red" />
-                      </Button>
-                    </span>
-                  </div>
-                ))
-              : null}
-          </div>
-        </div>
+              <div className="upload-list">
+                {images
+                  ? images.map((image, index, arr) => (
+                      <div key={index} className="upload-item">
+                        <span>
+                          {image.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDelete(image.url)}
+                          >
+                            <MdClose fontSize="1.5em" color="red" />
+                          </Button>
+                        </span>
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </Col>
 
-        <div className="bottom-btn">
-          <div
-            style={{
-              position: "absolute",
-              left: "50px",
-            }}
-          >
-            <Button onClick={saveInfo}>Save</Button>
-          </div>
-          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-            Previous
-          </button>
-          <button className="nxt-btn" id="next" type="submit">
-            Next
-          </button>
-        </div>
+            <Col xs={12} md={4} className="px-sm-3">
+              Choose the Videos/ Live360 Files (optional)
+              <input
+                id="videos-btn"
+                accept="video/*"
+                type="file"
+                name="videos"
+                multiple
+                hidden
+                {...register("videos", { onChange: onChangeVideos })}
+              />
+              <div className="upload-wrapper">
+                <details>
+                  <summary>
+                    <label onClick={toggleExtra} htmlFor="videos-btn">
+                      + Videos
+                    </label>
+                  </summary>
+
+                  <div>
+                    <label
+                      style={{ width: "50%", marginTop: "10px" }}
+                      htmlFor="images-btn"
+                    >
+                      <AiOutlinePlusCircle />
+                    </label>
+                  </div>
+                </details>
+              </div>
+              <div className="upload-list">
+                {videos
+                  ? videos.map((video, index, arr) => (
+                      <div key={index} className="upload-item">
+                        <span>
+                          {video.name}
+                          <Button
+                            className="delete-btn"
+                            onClick={handleDeleteVideo(video.url)}
+                          >
+                            <MdClose fontSize="1.5em" color="red" />
+                          </Button>
+                        </span>
+                      </div>
+                    ))
+                  : null}
+              </div>
+            </Col>
+          </Row>
+          <Row className="mt-5">
+            <Col
+              xs={12}
+              md={4}
+              className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+            >
+              <Button className="save-btn" onClick={saveInfo}>
+                Save
+              </Button>
+            </Col>
+            <Col xs={12} md={8} className="d-flex mt-2">
+              <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+                Previous
+              </Button>
+              <Button className="nxt-btn" id="next" type="submit">
+                Next
+              </Button>
+            </Col>
+          </Row>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 

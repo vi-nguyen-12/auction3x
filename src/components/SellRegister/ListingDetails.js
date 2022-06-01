@@ -13,7 +13,7 @@ const ListingDetails = ({
   property,
 }) => {
   return (
-    <div className="listDetail-content">
+    <div className="wrapper">
       <SellHeader step={step} />
       {propertyType === "real-estate" ? (
         <RealEstateForm

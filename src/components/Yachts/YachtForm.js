@@ -193,25 +193,10 @@ function YachtForm({ toggleStep, step, properties, property }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-sell-bottom"
-      style={{ justifyContent: "flex-start", display: "block" }}
-    >
-      <Container style={{ marginTop: "50px" }}>
-        <Row style={{ marginTop: "10px" }}>
-          <Col
-            style={{
-              borderBottom: "2px solid gray",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "black",
-            }}
-          >
-            Yacht Information
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
+    <div className="sell-bottom">
+      <h3>Yacht Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -233,7 +218,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="date"
@@ -255,8 +240,8 @@ function YachtForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -274,7 +259,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -292,7 +277,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -310,7 +295,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -330,8 +315,8 @@ function YachtForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -349,7 +334,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Manufacture Mark <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -368,7 +353,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
 
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -389,7 +374,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -409,8 +394,8 @@ function YachtForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -428,7 +413,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Engine Deck Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -447,7 +432,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Running Cost <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -467,7 +452,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "30px", height: "200px" }}>
+        <Row className="mt-3" style={{ height: "150px" }}>
           <Col>
             <textarea
               className="form-control"
@@ -479,24 +464,17 @@ function YachtForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-      </Container>
-      <div
-        className="bottom-btn"
-        style={{ width: "100%", display: "flex", justifyContent: "center" }}
-      >
-        <Button
-          className="pre-btn"
-          onClick={() => {
-            toggleStep(step - 1);
-          }}
-        >
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+
+        <Row className="mt-5 justify-content-center">
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+            Previous
+          </Button>
+          <Button type="submit" className="nxt-btn" id="next">
+            Next
+          </Button>
+        </Row>
+      </form>
+    </div>
   );
 }
 

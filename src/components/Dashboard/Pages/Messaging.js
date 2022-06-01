@@ -3,20 +3,30 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 import { IoSend } from "react-icons/io5";
 import { AiFillPlusCircle, AiFillSetting } from "react-icons/ai";
 
-function Messaging() {
+function Messaging({ windowSize }) {
   return (
     <Container className="chatContainer">
       <Row className="top-chat">
-        <Col sm={8} style={{ color: "black" }}>
-          <span style={{ fontWeight: "500", fontSize: "23px" }}>
+        <Col style={{ color: "black" }}>
+          <span
+            style={{
+              fontWeight: "500",
+              fontSize: "20px",
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
             {" "}
-            # RM Agent{" "}
+            # RM Agent | Agent Name
           </span>{" "}
-          | Agent Name
         </Col>
         <Col
-          md={4}
-          style={{ color: "black", display: "flex", justifyContent: "end" }}
+          xs={2}
+          style={{
+            color: "black",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
         >
           <AiFillSetting size={30} />
         </Col>
@@ -43,13 +53,17 @@ function Messaging() {
       </Row>
       <Row className="chat-message">
         <Col
+          xs={windowSize > 800 ? 1 : 2}
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <AiFillPlusCircle size={40} color="#b77b50" />
+          <label htmlFor="upload">
+            <AiFillPlusCircle size={40} color="#b77b50" />
+          </label>
+          <input type="file" id="upload" hidden />
         </Col>
         <Col xs={10}>
           <input
@@ -60,14 +74,14 @@ function Messaging() {
         </Col>
         <Col
           style={{
-            display: "flex",
+            display: windowSize > 800 ? "flex" : "none",
             justifyContent: "center",
             alignItems: "center",
           }}
           xs={1}
         >
-          <Button>
-            <IoSend  />
+          <Button style={{ background: "transparent", border: "none" }}>
+            <IoSend size={30} color="blue" />
           </Button>
         </Col>
       </Row>

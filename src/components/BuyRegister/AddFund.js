@@ -31,11 +31,14 @@ function AddFund() {
   };
 
   return (
-    <Container className="fund-container">
+    <Container style={{ padding: "20px" }}>
       <h1>Add Fund</h1>
-      <Row>
+      <Row style={{ margin: "20px", marginTop: "40px" }}>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
+            style={{
+              width: "100%",
+            }}
             onClick={() => {
               setOther(false);
               toggleSelf();
@@ -47,6 +50,9 @@ function AddFund() {
         </Col>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
+            style={{
+              width: "100%",
+            }}
             onClick={() => {
               setSelf(false);
               toggleOther();
@@ -71,6 +77,8 @@ function AddFund() {
                 required
               />
             </Col>
+          </Row>
+          <Row>
             <Col>
               <label style={{ color: "black" }}>Fund Amount</label>
               <input
@@ -128,7 +136,7 @@ function AddFund() {
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row style={{ marginTop: "40px" }}>
             <Col style={{ display: "flex", justifyContent: "center" }}>
               <Button variant="primary" className="btn-block">
                 Submit
@@ -161,11 +169,13 @@ function AddFund() {
               />
             </Col>
           </Row>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
-            <Button variant="primary" className="btn-block">
-              Submit
-            </Button>
-          </Col>
+          <Row style={{ marginTop: "40px" }}>
+            <Col style={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="primary" className="btn-block">
+                Submit
+              </Button>
+            </Col>
+          </Row>
         </Row>
       ) : null}
     </Container>

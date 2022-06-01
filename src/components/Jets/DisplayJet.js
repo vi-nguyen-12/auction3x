@@ -96,13 +96,6 @@ const Wrap = styled.div`
   cursor: pointer;
   position: relative;
 
-  // a {
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  //   display: block;
-  //   position: relative;
-  //   padding: 0;
-
   img {
     width: 100%;
     height: 100%;
@@ -112,13 +105,6 @@ const Wrap = styled.div`
     position: relative;
     padding: 0;
   }
-
-  // &:hover {
-  //   padding: 0;
-  //   // border: 4px solid rgba(249, 249, 249, 0.8);
-  //   transition-duration: 300ms;
-  // }
-  // }
 `;
 
 function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
@@ -155,7 +141,6 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
       return toggleSignIn();
     }
   };
-
   const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal } from "react-bootstrap";
+import { Table, Button, Modal, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import NumberFormat from "react-number-format";
 
-function PendingAuctions() {
+function PendingAuctions({ windowSize }) {
   const user = useSelector((state) => state.user);
   const [PendingAuctions, setPendingAuctions] = useState([]);
   const [questionair, setQuestionair] = useState([]);
@@ -17,44 +17,48 @@ function PendingAuctions() {
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
       authService.getBuyerPendingAuctions(user._id).then((res) => {
-        setPendingAuctions(res.data);
+        setPendingAuctions(
+          res.data.filter(
+            (auction) =>
+              new Date().toISOString() < auction.auctionId.auctionEndDate
+          )
+        );
       });
     };
     getBuyerPendingAuctions();
   }, []);
 
   return (
-    <>
-      <h1>Pending Auctions</h1>
-      <Table
-        striped
-        borderless
-        hover
-        style={{
-          overflow: "hidden",
-          borderRadius: "5px",
-          boxShadow: "#d7c4c4 0px 0px 20px 16px",
-          marginTop: "50px",
-          width: "70vw",
-        }}
-      >
-        <thead style={{ background: "black", color: "white" }}>
-          <tr>
-            <th>#</th>
-            <th>Auction ID</th>
-            <th colSpan={2}>Property Type</th>
-            <th colSpan={2}>Property Address</th>
-            <th colSpan={2}>Status</th>
-            <th colSpan={2}>Questionair</th>
-            <th colSpan={2}>Documents</th>
-            <th colSpan={2}>Approved Fund</th>
-            <th>View Auction</th>
-          </tr>
-        </thead>
-        {PendingAuctions.length > 0 &&
-          PendingAuctions.map(
-            (auction, index) =>
-              new Date().toISOString() < auction.auctionId.auctionEndDate && (
+    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+      <Row>
+        <h1>Pending Auctions</h1>
+        {windowSize > 800 ? (
+          <Table
+            striped
+            borderless
+            hover
+            style={{
+              overflow: "hidden",
+              borderRadius: "5px",
+              boxShadow: "#d7c4c4 0px 0px 20px 16px",
+              marginTop: "50px",
+            }}
+          >
+            <thead style={{ background: "black", color: "white" }}>
+              <tr>
+                <th>#</th>
+                <th>Auction ID</th>
+                <th colSpan={2}>Property Type</th>
+                <th colSpan={2}>Property Address</th>
+                <th colSpan={2}>Status</th>
+                <th colSpan={2}>Questionair</th>
+                <th colSpan={2}>Documents</th>
+                <th colSpan={2}>Approved Fund</th>
+                <th>View Auction</th>
+              </tr>
+            </thead>
+            {PendingAuctions.length > 0 ? (
+              PendingAuctions.map((auction, index) => (
                 <tbody key={index}>
                   <tr>
                     <td>{index + 1}</td>
@@ -177,73 +181,66 @@ function PendingAuctions() {
                     </td>
                   </tr>
                 </tbody>
-              )
-          )}
-      </Table>
-      <Modal
-        size="lg"
-        show={showQuestionair}
-        onHide={toggleQuestionair}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Questionair</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Question ID</th>
-                <th>Answer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {questionair.length > 0 &&
-                questionair.map((question, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{question.questionId}</td>
-                    <td>{question.answer}</td>
-                  </tr>
-                ))}
-            </tbody>
+              ))
+            ) : (
+              <tbody>
+                <tr>
+                  <td colSpan={3}>No Pending Auctions</td>
+                </tr>
+              </tbody>
+            )}
           </Table>
-        </Modal.Body>
-      </Modal>
-      <Modal size="lg" show={showDocuments} onHide={toggleDocuments} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Documents</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Table striped bordered hover>
-            <thead>
+        ) : (
+          <Table
+            striped
+            borderless
+            hover
+            style={{
+              overflow: "hidden",
+              borderRadius: "5px",
+              boxShadow: "#d7c4c4 0px 0px 10px 8px",
+              marginTop: "50px",
+            }}
+          >
+            <thead style={{ background: "black", color: "white" }}>
               <tr>
                 <th>#</th>
-                <th>Document Name</th>
-                <th>Document Status</th>
+                <th>Auction</th>
                 <th>View</th>
               </tr>
             </thead>
-            <tbody>
-              {documents.length > 0 &&
-                documents.map((document, index) => (
-                  <tr key={index}>
+            {PendingAuctions.length > 0 ? (
+              PendingAuctions.map((auction, index) => (
+                <tbody key={index}>
+                  <tr>
                     <td>{index + 1}</td>
-                    <td>{document.officialName}</td>
                     <td>
-                      {document.isVerified === "success"
-                        ? "Approved"
-                        : document.isVerified === "pending"
-                        ? "Pending"
-                        : document.isVerified === "fail"
-                        ? "Rejected"
-                        : ""}
+                      {auction.auctionId.property.details.address}
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          justifyContent: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <img
+                          width="100px"
+                          height="50px"
+                          src={
+                            auction.auctionId.property.images.length > 0
+                              ? auction.auctionId.property.images[0].url
+                              : ""
+                          }
+                        />
+                      </div>
                     </td>
                     <td>
                       <Button
                         onClick={() => {
-                          window.open(document.url);
+                          window.open(
+                            `/DisplayAuctions/${auction.auctionId._id}`
+                          );
                         }}
                         variant="primary"
                       >
@@ -251,12 +248,95 @@ function PendingAuctions() {
                       </Button>
                     </td>
                   </tr>
-                ))}
-            </tbody>
+                </tbody>
+              ))
+            ) : (
+              <tbody>
+                <tr>
+                  <td colSpan={3}>No Pending Auctions</td>
+                </tr>
+              </tbody>
+            )}
           </Table>
-        </Modal.Body>
-      </Modal>
-    </>
+        )}
+        <Modal
+          size="lg"
+          show={showQuestionair}
+          onHide={toggleQuestionair}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Questionair</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Question ID</th>
+                  <th>Answer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {questionair.length > 0 &&
+                  questionair.map((question, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{question.questionId}</td>
+                      <td>{question.answer}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </Modal.Body>
+        </Modal>
+        <Modal size="lg" show={showDocuments} onHide={toggleDocuments} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Documents</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Document Name</th>
+                  <th>Document Status</th>
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody>
+                {documents.length > 0 &&
+                  documents.map((document, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{document.officialName}</td>
+                      <td>
+                        {document.isVerified === "success"
+                          ? "Approved"
+                          : document.isVerified === "pending"
+                          ? "Pending"
+                          : document.isVerified === "fail"
+                          ? "Rejected"
+                          : ""}
+                      </td>
+                      <td>
+                        <Button
+                          onClick={() => {
+                            window.open(document.url);
+                          }}
+                          variant="primary"
+                        >
+                          View
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </Modal.Body>
+        </Modal>
+      </Row>
+    </Container>
   );
 }
 

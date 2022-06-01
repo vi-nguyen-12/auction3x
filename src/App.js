@@ -20,6 +20,16 @@ import Footer from "./components/Home/footer";
 import Loading from "./components/Loading";
 import { IdleTimer } from "./services/idleTimer";
 import NotFound from "./components/Error/NotFound";
+import Messaging from "./components/Dashboard/Pages/Messaging";
+import Profile from "./components/Dashboard/Pages/Profile";
+import BidAuctions from "./components/Dashboard/Pages/Auctions/BidAuctions";
+import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
+import PendingAuctions from "./components/Dashboard/Pages/Auctions/PendingAuctions";
+import WinAuctions from "./components/Dashboard/Pages/Auctions/WinAuctions";
+import LiveListings from "./components/Dashboard/Pages/Listings/LiveListings";
+import PendingListings from "./components/Dashboard/Pages/Listings/PendingListings";
+import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
+import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -340,6 +350,182 @@ function App() {
             />
           </Modal.Body>
         </Modal>
+        <Modal
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showConfirm}
+          onHide={toggleConfirmModal}
+          contentclassname="confirm"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              style={{ color: "#D58F5C" }}
+            >
+              Confirm Email
+            </Modal.Title>
+            <Modal.Title
+              className="pt-4"
+              style={{
+                fontSize: "12px",
+                color: "#D58F5C",
+                position: "absolute",
+                marginright: "10px",
+                marginTop: "8px",
+              }}
+            ></Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ReconfirmEmail
+              toggleConfirmModal={toggleConfirmModal}
+              toggleSignIn={toggleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="md"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={forgotPass}
+          onHide={toggleForgotPass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Body contentclassname="forgotPass" className="forgot-modal">
+            <ForgotPass
+              toggleForgotPass={toggleForgotPass}
+              toggleChangePass={toggleChangePass}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="md"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={forgotPass}
+          onHide={toggleForgotPass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title
+              id="contained-modal-title-vcenter"
+              style={{
+                color: "#D58F5C",
+                fontSize: "30px",
+                fontWeight: "bold",
+              }}
+            >
+              Forgot Password
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ForgotPass
+              toggleForgotPass={toggleForgotPass}
+              toggleChangePass={toggleChangePass}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={changePass}
+          onHide={toggleChangePass}
+          contentclassname="forgotPass"
+        >
+          <Modal.Body>
+            <ChangePass toggleChangePass={toggleChangePass} />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignIn}
+          onHide={toggleSignIn}
+          contentclassname="login"
+        >
+          <Modal.Body className="sign-In"></Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignIn}
+          onHide={toggleSignIn}
+          contentclassname="login"
+        >
+          <Modal.Body>
+            <Login
+              toggleSignUp={toggleSignUp}
+              toggleSignIn={toggleSignIn}
+              toggleButton={toggleButton}
+              toggleForgotPass={toggleForgotPass}
+              toggleConfirmModal={toggleConfirmModal}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignUp}
+          onHide={toggleSignUp}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body className="sign-Up"></Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSignUp}
+          style={{ borderRadius: "30px" }}
+          onHide={toggleSignUp}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body>
+            <SignUp
+              toggleSignUp={toggleSignUp}
+              toggleConfirmModal={toggleConfirmModal}
+              toggleSignIn={toggleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          size="lg"
+          backdrop="static"
+          keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={showSessionTimedOut}
+          style={{ borderRadius: "30px" }}
+          onHide={toggleSessionTimedOut}
+          contentclassname="custom-modal-style"
+        >
+          <Modal.Body>
+            <SessionExpired
+              toggleSessionTimedOut={toggleSessionTimedOut}
+              toggleSignIn={toggleSignIn}
+            />
+          </Modal.Body>
+        </Modal>
+        {/* End of Modal */}
+        
         <ButtontoTop />{" "}
         <Router>
           <Header
@@ -353,181 +539,7 @@ function App() {
             windowSize={windowSize}
           />
           <ScrollTop />
-          {/* All Modals */}
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showConfirm}
-            onHide={toggleConfirmModal}
-            contentclassname="confirm"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{ color: "#D58F5C" }}
-              >
-                Confirm Email
-              </Modal.Title>
-              <Modal.Title
-                className="pt-4"
-                style={{
-                  fontSize: "12px",
-                  color: "#D58F5C",
-                  position: "absolute",
-                  marginright: "10px",
-                  marginTop: "8px",
-                }}
-              ></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ReconfirmEmail
-                toggleConfirmModal={toggleConfirmModal}
-                toggleSignIn={toggleSignIn}
-              />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            size="md"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={forgotPass}
-            onHide={toggleForgotPass}
-            contentclassname="forgotPass"
-          >
-            <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-              <ForgotPass
-                toggleForgotPass={toggleForgotPass}
-                toggleChangePass={toggleChangePass}
-              />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            size="md"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={forgotPass}
-            onHide={toggleForgotPass}
-            contentclassname="forgotPass"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{
-                  color: "#D58F5C",
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                }}
-              >
-                Forgot Password
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ForgotPass
-                toggleForgotPass={toggleForgotPass}
-                toggleChangePass={toggleChangePass}
-              />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={changePass}
-            onHide={toggleChangePass}
-            contentclassname="forgotPass"
-          >
-            <Modal.Body>
-              <ChangePass toggleChangePass={toggleChangePass} />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            size="lg"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignIn}
-            onHide={toggleSignIn}
-            contentclassname="login"
-          >
-            <Modal.Body className="sign-In"></Modal.Body>
-          </Modal>
-          <Modal
-            size="lg"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignIn}
-            onHide={toggleSignIn}
-            contentclassname="login"
-          >
-            <Modal.Body>
-              <Login
-                toggleSignUp={toggleSignUp}
-                toggleSignIn={toggleSignIn}
-                toggleButton={toggleButton}
-                toggleForgotPass={toggleForgotPass}
-                toggleConfirmModal={toggleConfirmModal}
-              />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            size="lg"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignUp}
-            onHide={toggleSignUp}
-            contentclassname="custom-modal-style"
-          >
-            <Modal.Body className="sign-Up"></Modal.Body>
-          </Modal>
-          <Modal
-            size="lg"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSignUp}
-            style={{ borderRadius: "30px" }}
-            onHide={toggleSignUp}
-            contentclassname="custom-modal-style"
-          >
-            <Modal.Body>
-              <SignUp
-                toggleSignUp={toggleSignUp}
-                toggleConfirmModal={toggleConfirmModal}
-                toggleSignIn={toggleSignIn}
-              />
-            </Modal.Body>
-          </Modal>
-          <Modal
-            size="lg"
-            backdrop="static"
-            keyboard={false}
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            show={showSessionTimedOut}
-            style={{ borderRadius: "30px" }}
-            onHide={toggleSessionTimedOut}
-            contentclassname="custom-modal-style"
-          >
-            <Modal.Body>
-              <SessionExpired
-                toggleSessionTimedOut={toggleSessionTimedOut}
-                toggleSignIn={toggleSignIn}
-              />
-            </Modal.Body>
-          </Modal>
+
           <Switch>
             {user._id && (
               <Route exact path="/MultiSellForm">
@@ -541,6 +553,191 @@ function App() {
                     setPadRight={setPadRight}
                   />
                 </div>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                />
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Messaging">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <Messaging />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Auctions/BidAuctions">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <BidAuctions />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Auctions/PendingAuctions">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <PendingAuctions />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Auctions/SavedAuctions">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <SavedAuctions windowSize={windowSize} />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Auctions/WinAuctions">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <WinAuctions />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Listings/AuctionListings">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <LiveListings windowSize={windowSize} />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Listings/PendingApproval">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <PendingListings />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Listings/SoldListings">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <SoldListings />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Listings/IncompleteListing">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <IncompleteListing />
+                </Dashboard>
+              </Route>
+            )}
+
+            {user._id && (
+              <Route exact path="/Dashboard/Profile">
+                <Dashboard
+                  toggleShow={toggleShow}
+                  colorChange={colorChange}
+                  toggleChange={toggleChange}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                >
+                  <Profile />
+                </Dashboard>
               </Route>
             )}
 
@@ -618,20 +815,6 @@ function App() {
                 windowSize={windowSize}
               />
             </Route>
-            {user._id && (
-              <Route exact path="/Dashboard">
-                <Dashboard
-                  toggleShow={toggleShow}
-                  colorChange={colorChange}
-                  toggleChange={toggleChange}
-                  bodyColorChange={bodyColorChange}
-                  setHeaderWidth={setHeaderWidth}
-                  setPositionLeft={setPositionLeft}
-                  setPadRight={setPadRight}
-                  windowSize={windowSize}
-                />
-              </Route>
-            )}
 
             <Route path="/contact">
               <ContactUs windowSize={windowSize} />

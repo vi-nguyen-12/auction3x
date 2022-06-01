@@ -204,26 +204,11 @@ function JetForm({ toggleStep, step, properties, property }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-sell-bottom"
-      style={{ justifyContent: "flex-start", display: "block" }}
-    >
-      <Container style={{ marginTop: "50px" }}>
-        <Row style={{ marginTop: "50px" }}>
-          <Col
-            style={{
-              borderBottom: "2px solid gray",
-              fontSize: "20px",
-              fontWeight: "bold",
-              color: "black",
-            }}
-          >
-            Aircraft Description
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+    <div className="sell-bottom">
+      <h3> Aircraft Description</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -236,7 +221,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -249,7 +234,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -262,7 +247,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -276,7 +261,7 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -291,7 +276,7 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -307,7 +292,7 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -323,7 +308,7 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -338,8 +323,8 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -352,7 +337,8 @@ function JetForm({ toggleStep, step, properties, property }) {
               Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -367,8 +353,8 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="number"
               min="0"
@@ -382,7 +368,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -396,7 +382,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -411,7 +397,7 @@ function JetForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <span style={{ fontWeight: "600", color: "black" }}>
               Is the aircraft an import?{" "}
@@ -445,25 +431,17 @@ function JetForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-      </Container>
 
-      <div
-        className="bottom-btn"
-        style={{ width: "100%", display: "flex", justifyContent: "center" }}
-      >
-        <Button
-          className="pre-btn"
-          onClick={() => {
-            toggleStep(step - 1);
-          }}
-        >
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+        <Row className="mt-5 justify-content-center">
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+            Previous
+          </Button>
+          <Button type="submit" className="nxt-btn" id="next">
+            Next
+          </Button>
+        </Row>
+      </form>
+    </div>
   );
 }
 

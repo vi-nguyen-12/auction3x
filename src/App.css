@@ -44,7 +44,6 @@
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   border: none;
   outline: none;
-  font-size: 12px;
   border-radius: 4px;
   padding: 8px;
   font-weight: 800;
@@ -297,4 +296,26 @@ h1 {
     #dd9c6d 62.5%,
     #edb48b 100%
   );
+}
+
+@media screen and (max-width: 480px) {
+  .submitBtn {
+    font-size: 10px !important;
+
+    padding: 6px;
+    font-weight: 800;
+  }
+  h5 {
+    font-size: 1rem !important;
+  }
+  .modal-close {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    width: 25px;
+    height: 25px;
+    z-index: 999;
+    background-color: transparent;
+    box-shadow: none;
+  }
 }

@@ -20,7 +20,7 @@ function Confirm() {
   return (
     <div>
       <div
-        className="listDetail-content"
+        className="wrapper"
         style={{
           display: "grid",
           justifyContent: "center",

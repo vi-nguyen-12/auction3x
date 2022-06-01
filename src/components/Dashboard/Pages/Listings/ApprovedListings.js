@@ -95,12 +95,17 @@ function ApprovedListings({ auctions, windowSize }) {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: approvedLists.length > 2 ? 2 : approvedLists.length,
+    slidesToShow:
+      windowSize > 800
+        ? approvedLists.length > 2
+          ? 2
+          : approvedLists.length
+        : 1,
   };
 
   return (
     <Container>
-      {approvedLists.length > 0 && (
+      {approvedLists.length > 0 ? (
         <>
           <h1>Approved Listings</h1>
           <Row>
@@ -129,6 +134,8 @@ function ApprovedListings({ auctions, windowSize }) {
             </Carousel>
           </Row>
         </>
+      ) : (
+        <h1>No Approved Listings</h1>
       )}
     </Container>
   );

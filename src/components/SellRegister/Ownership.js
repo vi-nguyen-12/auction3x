@@ -203,9 +203,8 @@ function Ownership({
       }
     }
   };
-  
   return (
-    <div className="upload-box">
+    <div className="wrapper">
       <SellHeader step={step} />
       <div className="sell-bottom">
         <Container>
@@ -248,19 +247,19 @@ function Ownership({
             style={{ display: showOwner }}
           >
             <Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col
+              <Row className="mt-3">
+                <h5
                   style={{
                     borderBottom: "2px solid gray",
                     fontWeight: "bold",
-                    fontSize: "18px",
-                    color: "black",
+                    padding: "10px",
+                    textAlign: "center",
                   }}
                 >
                   Owner Information
-                </Col>
+                </h5>
               </Row>
-              <Row style={{ marginTop: "10px" }}>
+              <Row className="mt-3">
                 <Col>
                   <input
                     type="text"
@@ -275,12 +274,12 @@ function Ownership({
                     onChange={(e) => setOwnerName(e.target.value)}
                     required
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
+                  <span style={{ fontWeight: "600" }}>
                     Owner Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                 </Col>
               </Row>
-              <Row style={{ marginTop: "10px" }}>
+              <Row className="mt-3">
                 <Col>
                   <input
                     type="text"
@@ -299,8 +298,8 @@ function Ownership({
                   </span>
                 </Col>
               </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
+              <Row className="mt-3">
+                <Col xs={12} md={6}>
                   <PhoneInput
                     disableCountryCode={false}
                     onlyCountries={["ca", "us", "gb", "au"]}
@@ -321,7 +320,7 @@ function Ownership({
                     Phone <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                 </Col>
-                <Col>
+                <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <input
                     type="email"
                     className="form-control"
@@ -336,26 +335,27 @@ function Ownership({
                 </Col>
               </Row>
             </Row>
-            <Row>
-              <div className="bottom-btn">
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "50px",
-                  }}
-                >
-                  <Button onClick={saveInfo}>Save</Button>
-                </div>
-                <button
+            <Row className="mt-5">
+              <Col
+                xs={12}
+                md={4}
+                className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+              >
+                <Button className="save-btn" onClick={saveInfo}>
+                  Save
+                </Button>
+              </Col>
+              <Col xs={12} md={8} className="d-flex mt-2">
+                <Button
                   className="pre-btn"
                   onClick={() => toggleStep(step - 1)}
                 >
                   Previous
-                </button>
-                <button className="nxt-btn" id="next" type="submit">
+                </Button>
+                <Button className="nxt-btn" id="next" type="submit">
                   Next
-                </button>
-              </div>
+                </Button>
+              </Col>
             </Row>
           </form>
 
@@ -368,164 +368,164 @@ function Ownership({
               }
             }}
           >
-            <Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col
-                  style={{
-                    borderBottom: "2px solid gray",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                    color: "black",
-                  }}
-                >
-                  Broker Information
-                </Col>
-              </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={
-                      ownerName
-                        ? ownerName
-                        : ownership
-                        ? ownership.details.owner_name
-                        : ""
-                    }
-                    onChange={(e) => setOwnerName(e.target.value)}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Owner Name *
-                  </span>
-                </Col>
-                <Col>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={
-                      brokerName
-                        ? brokerName
-                        : ownership
-                        ? ownership.details.broker_name
-                        : ""
-                    }
-                    {...register("brokerName", { required: false })}
-                    onChange={(e) => setBrokerName(e.target.value)}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Broker Name *
-                  </span>
-                </Col>
-                <Col>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={
-                      brokerId
-                        ? brokerId
-                        : ownership
-                        ? ownership.details.broker_id
-                        : ""
-                    }
-                    {...register("brokerId", { required: false })}
-                    onChange={(e) => setBrokerId(e.target.value)}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Broker License Number *
-                  </span>
-                </Col>
-              </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    className="form-control"
-                    {...register("file", { onChange: getFile })}
-                    multiple
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Listing Agreement(.pdf) *
-                  </span>
-                </Col>
-              </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
-                  <input
-                    type="text"
-                    className="form-control"
-                    defaultValue={
-                      address
-                        ? address
-                        : ownership
-                        ? ownership.details.address
-                        : ""
-                    }
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Address
-                  </span>
-                </Col>
-              </Row>
-              <Row style={{ marginTop: "10px" }}>
-                <Col>
-                  <PhoneInput
-                    disableCountryCode={false}
-                    onlyCountries={["ca", "us", "gb", "au"]}
-                    disableDropdown={false}
-                    country={"us"}
-                    dropdownStyle={{ paddingLeft: "0!important" }}
-                    value={
-                      phone ? phone : ownership ? ownership.details.phone : null
-                    }
-                    inputStyle={{ width: "100%" }}
-                    buttonStyle={{
-                      border: "2px solid #d58f5c",
-                      borderRight: "none",
-                    }}
-                    onChange={setPhone}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
-                </Col>
-                <Col>
-                  <input
-                    type="email"
-                    className="form-control"
-                    defaultValue={
-                      email ? email : ownership ? ownership.details.email : ""
-                    }
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Email *
-                  </span>
-                </Col>
-              </Row>
+            <Row className="mt-3">
+              <Col
+                style={{
+                  borderBottom: "2px solid gray",
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                  color: "black",
+                }}
+              >
+                Broker Information
+              </Col>
             </Row>
-            <Row>
-              <div className="bottom-btn">
-                <div
-                  style={{
-                    position: "absolute",
-                    left: "50px",
+            <Row className="mt-3">
+              <Col xs={12} md={4}>
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={
+                    ownerName
+                      ? ownerName
+                      : ownership
+                      ? ownership.details.owner_name
+                      : ""
+                  }
+                  onChange={(e) => setOwnerName(e.target.value)}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Owner Name *
+                </span>
+              </Col>
+              <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={
+                    brokerName
+                      ? brokerName
+                      : ownership
+                      ? ownership.details.broker_name
+                      : ""
+                  }
+                  {...register("brokerName", { required: false })}
+                  onChange={(e) => setBrokerName(e.target.value)}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Broker Name *
+                </span>
+              </Col>
+              <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={
+                    brokerId
+                      ? brokerId
+                      : ownership
+                      ? ownership.details.broker_id
+                      : ""
+                  }
+                  {...register("brokerId", { required: false })}
+                  onChange={(e) => setBrokerId(e.target.value)}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Broker License Number *
+                </span>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  className="form-control"
+                  {...register("file", { onChange: getFile })}
+                  multiple
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Listing Agreement(.pdf) *
+                </span>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={
+                    address
+                      ? address
+                      : ownership
+                      ? ownership.details.address
+                      : ""
+                  }
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Address
+                </span>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col xs={12} md={6}>
+                <PhoneInput
+                  disableCountryCode={false}
+                  onlyCountries={["ca", "us", "gb", "au"]}
+                  disableDropdown={false}
+                  country={"us"}
+                  dropdownStyle={{ paddingLeft: "0!important" }}
+                  value={
+                    phone ? phone : ownership ? ownership.details.phone : null
+                  }
+                  inputStyle={{ width: "100%" }}
+                  buttonStyle={{
+                    border: "2px solid #d58f5c",
+                    borderRight: "none",
                   }}
-                >
-                  <Button onClick={saveInfo}>Save</Button>
-                </div>
-                <button
+                  onChange={setPhone}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Phone <span style={{ color: "#ff0000" }}>*</span>
+                </span>
+              </Col>
+              <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+                <input
+                  type="email"
+                  className="form-control"
+                  defaultValue={
+                    email ? email : ownership ? ownership.details.email : ""
+                  }
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Email *
+                </span>
+              </Col>
+            </Row>
+
+            <Row className="mt-5">
+              <Col
+                xs={12}
+                md={4}
+                className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+              >
+                <Button className="save-btn" onClick={saveInfo}>
+                  Save
+                </Button>
+              </Col>
+              <Col xs={12} md={8} className="d-flex mt-2">
+                <Button
                   className="pre-btn"
                   onClick={() => toggleStep(step - 1)}
                 >
                   Previous
-                </button>
-                <button className="nxt-btn" id="next" type="submit">
+                </Button>
+                <Button className="nxt-btn" id="next" type="submit">
                   Next
-                </button>
-              </div>
+                </Button>
+              </Col>
             </Row>
           </form>
         </Container>
