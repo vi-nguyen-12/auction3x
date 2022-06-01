@@ -481,10 +481,7 @@ const Header = ({
             </div>
           </>
         ) : (
-          <div
-            className="d-flex flex-row"
-            style={{ height: "100%", alignItems: "center" }}
-          >
+          <div className="d-flex flex-row ">
             {user._id && !user.KYC && (
               <>
                 <div className="dropdown">
@@ -547,7 +544,7 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
-                      height: "47px",
+                      height: "43px",
                     }}
                     id={colors === "white" ? "hover" : ""}
                     title={<IoWallet size={30} />}
@@ -609,7 +606,7 @@ const Header = ({
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
-                    height: "47px",
+                    height: "57px",
                   }}
                   onClick={() => {
                     toggleOpen();

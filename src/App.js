@@ -566,6 +566,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
               />
             </Route>
 

@@ -103,7 +103,7 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
+function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -260,16 +260,16 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               <div>
                 <button onClick={toggleImage} className="favorite-button">
                   {favorite ? (
-                    <AiFillHeart size="50px" color="C58753" />
+                    <AiFillHeart className="logo" />
                   ) : (
-                    <AiOutlineHeart size="50px" color="C58753" />
+                    <AiOutlineHeart className="logo" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline size="50px" color="C58753" />
+                  <IoImageOutline className="logo" />
                 </button>
                 <Modal
                   size="xl"
@@ -280,7 +280,8 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body
+                  >
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -309,7 +310,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine size="50px" color="C58753" />
+                  <RiVideoLine className="logo" />
                 </button>
 
                 <Modal
@@ -320,7 +321,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   onHide={toggleVids}
                   centered
                 >
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body >
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -350,14 +351,14 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               </div>
               <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 size="50px" color="C58753" />
+                  <Md360 className="logo" />
                 </button>
               </div>
 
               {property && (
                 <div>
                   <button onClick={toggleMap} className="map-btn">
-                    <IoLocationOutline size="50px" color="C58753" />
+                    <IoLocationOutline className="logo" />
                   </button>
                   <Modal
                     backdrop="static"
@@ -367,7 +368,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                     onHide={toggleMap}
                     centered
                   >
-                    <Modal.Body style={{ height: "700px" }}>
+                    <Modal.Body >
                       <div>
                         <CloseButton
                           className="modal-close"
@@ -411,7 +412,17 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div className="registBtn">
-                  <button className="registsBtn" onClick={toggleSignIn}>
+                  <button
+                    style={{
+                      backgroundColor: "#e8a676",
+                      borderRadius: "10px",
+                      border: "0",
+                      width: "200px",
+                      height: "50px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                    onClick={toggleSignIn}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -433,9 +444,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -515,9 +526,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -559,13 +570,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                 user._id &&
                 !property.isNotRegisteredToBuy &&
                 !property.isOwner && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
+                  <div className="registBtn">
                     <button
                       style={{
                         backgroundColor: "#e8a676",
@@ -608,9 +613,10 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                 xs="auto"
                 style={{
                   width: "100%",
-                  height: "150px",
                   padding: "0",
-                  margin: "0",
+                  margin: " 0",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 {registEnded === false ? (
@@ -622,6 +628,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
+                        height: "100%",
                         borderRadius: "10px",
                         padding: "0 40px",
                       }}
@@ -643,15 +650,15 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
+                        width: "200px",
+                        height: "150px",
                         borderRadius: "10px",
                         padding: "0 40px",
                       }}
@@ -670,8 +677,8 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
-                  <Col>
+                  new Date().toISOString() > property.auctionStartDate ? (
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -700,7 +707,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : new Date().toISOString() < property.auctionStartDate ? (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -728,15 +735,15 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col>
+                    <Col style={{ margin: "10px" }}>
                       <div
                         style={{
                           display: "grid",
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "100%",
-                          height: "100%",
+                          width: "200px",
+                          height: "150px",
                           borderRadius: "10px",
                           padding: "0 40px",
                         }}
@@ -757,7 +764,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                 )}
 
                 {property.highestBidders && (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     {property.highestBid ? (
                       <div
                         style={{
@@ -807,7 +814,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                           padding: "0 40px",
                         }}
                       >
-                        <h4 style={{ padding: "8px" }}>
+                        <h4>
                           <NumberFormat
                             value={property.startingBid}
                             displayType={"text"}
@@ -834,15 +841,15 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   </Col>
                 )}
 
-                <Col>
+                <Col style={{ margin: "10px" }}>
                   <div
                     style={{
                       display: "grid",
                       justifyContent: "center",
-                      alignContent: "center",
+                      alignItems: "center",
                       backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      height: "100%",
+                      width: "200px",
+                      height: "150px",
                       borderRadius: "10px",
                       padding: "0 40px",
                     }}
@@ -883,7 +890,6 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                     style={{
                       fontWeight: "600",
                       fontSize: "30px",
-                      marginLeft: "10px",
                       color: "black",
                     }}
                   >
@@ -1181,7 +1187,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
 
           <Row
             ref={myRef}
-            style={{ padding: "0", marginTop: "50px", padding: "35px" }}
+            style={{ marginTop: "50px", padding: "35px" }}
           >
             <Tabs
               defaultActiveKey="Investment Opportunity"
@@ -1189,7 +1195,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
             >
               <Tab
                 eventKey="Investment Opportunity"
-                title="Investment Opportunity"
+                title={windowSize > 800 ? "Investment Opportunity" : "IO"}
                 className="RealEstate-Tab-1"
                 style={{
                   backgroundColor: "#B77B50",
@@ -1221,7 +1227,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Location Information"
-                title="Location Information"
+                title={windowSize > 800 ? "Location Information" : "LI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1243,7 +1249,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Market Information"
-                title="Market Information"
+                title={windowSize > 800 ? "Market Information" : "MI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1266,7 +1272,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
 
               <Tab
                 eventKey="Document Vault"
-                title="Document Vault"
+                title={windowSize > 800 ? "Document Vault" : "DV"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1276,20 +1282,24 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                   padding: "20px",
                 }}
               >
-                <Table
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                  }}
-                  borderless
-                >
-                  <tbody className="tabDocs" style={{ padding: "20px" }}>
-                    <tr>
-                      <td>
-                        <input type="checkbox" /> Broker Offering Memorandum (0)
-                      </td>
-                      <td>
+                <Row className="tabDocs">
+                  <Row>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}>
+                      <div>
+                        <input type="checkbox"
+                          onChange={download(
+                            purchaseAgreement.map((item) => item.url)
+                          )}
+                        /> Broker Offering Memorandum (0)
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1297,17 +1307,25 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                           )}
                         />{" "}
                         Purchase Agreement ({purchaseAgreement.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(market.map((item) => item.url))}
                         />{" "}
                         Market and Valuations ({market.length})
-                      </td>
-                      <td>
+                      </div>
+                    </Col>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1315,83 +1333,90 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn }) {
                           )}
                         />
                         Third Party Reports ({thirdParty.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(financial.map((item) => item.url))}
                         />{" "}
                         Operating and Financial ({financial.length})
-                      </td>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(titles.map((item) => item.url))}
                         />{" "}
                         Title and Insurance ({titles.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{ textAlign: "center", fontSize: "15px" }}
-                        colSpan={2}
-                      >
-                        <input type="checkbox" /> Notify me when the Due
-                        Diligence Documents are updated
-                      </td>
-                    </tr>
-                    <tr
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col
                       style={{
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
                         display: "flex",
                         justifyContent: "center",
-                        margin: "auto",
-                        width: "auto",
-                        height: "auto",
                       }}
                     >
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewSelected();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download Selected
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewAll();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download All
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                      <div>
+                        <input type="checkbox" /> Notify me when the Due
+                        Diligence Documents are updated
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "auto",
+                      width: "auto",
+                      height: "auto",
+                    }}
+                  >
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewSelected();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                          margin: "10px 0",
+                        }}
+                      >
+                        Download Selected
+                      </button>
+                    </Col>
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewAll();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                          margin: "10px 0",
+                        }}
+                      >
+                        Download All
+                      </button>
+                    </Col>
+                  </Row>
+                </Row>
               </Tab>
             </Tabs>
           </Row>

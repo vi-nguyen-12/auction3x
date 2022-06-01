@@ -16,6 +16,7 @@ function DisplayAuctions({
   setPadRight,
   toggleShow,
   toggleSignIn,
+  windowSize,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -106,24 +107,28 @@ function DisplayAuctions({
             property={auction}
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
           />
         ) : auction.property.type === "car" ? (
           <DisplayCar
             property={auction}
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
           />
         ) : auction.property.type === "jet" ? (
           <DisplayJet
             property={auction}
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
             property={auction}
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
           />
         ) : null
       ) : (
