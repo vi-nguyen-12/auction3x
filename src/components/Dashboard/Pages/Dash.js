@@ -454,6 +454,7 @@ function Dash({ windowSize }) {
         show={showFundReq}
         onHide={toggleFundReq}
         centered
+        className="fund-modal"
       >
         <div>
           <CloseButton

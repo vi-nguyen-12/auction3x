@@ -102,7 +102,7 @@ function EditProfile({ getProfilePic, getDescription }) {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Container style={{ padding: "40px" }}>
+      <Container style={{ padding: "20px", paddingBottom:"30px" }}>
         <Row>
           <Col>
             <span>First Name</span>

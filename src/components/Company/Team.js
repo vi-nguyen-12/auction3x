@@ -1,13 +1,14 @@
 import React from "react";
 import CompanyHeader from "./CompanyHeader";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import jay from "../../images/jay.jpg";
 
-function Team() {
+function Team({ windowSize }) {
   return (
     <>
       <CompanyHeader location={"Team"} />
-      <Container fluid style={{ padding: "50px 180px" }}>
-        <Row>
+      <Container fluid>
+        <Row style={{ padding: windowSize > 800 ? "50px 180px" : "50px 10px" }}>
           <Col>
             <p>
               Auction3™ is the vision of a motivated team with a wealth of
@@ -25,100 +26,163 @@ function Team() {
             </p>
           </Col>
         </Row>
-        <Row
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "center",
-          }}
-        >
-          <Col
+        {windowSize > 800 ? (
+          <Row
             style={{
               display: "flex",
               justifyContent: "space-evenly",
               alignContent: "center",
             }}
           >
-            <Button
+            <Col
               style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignContent: "center",
               }}
             >
-              All
-            </Button>
-            <Button
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                All
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Founder
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Operation
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Marketing
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Research
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Technology
+              </Button>
+            </Col>
+          </Row>
+        ) : (
+          <Row style={{ padding: "20px 10px" }}>
+            <Col
               style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignContent: "center",
               }}
             >
-              Founder
-            </Button>
-            <Button
-              style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-              }}
-            >
-              Operation
-            </Button>
-            <Button
-              style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-              }}
-            >
-              Marketing
-            </Button>
-            <Button
-              style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-              }}
-            >
-              Research
-            </Button>
-            <Button
-              style={{
-                fontSize: "20px",
-                padding: "5px 20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-              }}
-            >
-              Technology
-            </Button>
-          </Col>
-        </Row>
-        <Row style={{ padding: "10px 200px" }}>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                All
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Founder
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Operation
+              </Button>
+              <Button
+                style={{
+                  fontSize: "20px",
+                  background: "none",
+                  color: "#706666",
+                  fontWeight: "bold",
+                  border: "1px solid #e2e2e2 ",
+                }}
+              >
+                Marketing
+              </Button>
+            </Col>
+          </Row>
+        )}
+        <Row style={{ padding: "10px 200px", marginBottom: "50px" }}>
           <Col style={{ display: "flex", justifyContent: "center" }}>
             <div>
-              <img alt="team" />
-              <p style={{ fontSize: "20px", fontWeight: "bold" }}>Jay Patel</p>
-              <p style={{ fontSize: "15px" }}>Founder</p>
+              <div>
+                <img
+                  src={jay}
+                  alt=""
+                  width={80}
+                  height={80}
+                  style={{ borderRadius: "50%" }}
+                />
+              </div>
+              <div>
+                <p style={{ fontSize: "20px", fontWeight: "bold" }}>
+                  Jay Patel
+                </p>
+                <p style={{ fontSize: "15px" }}>Founder</p>
+              </div>
             </div>
           </Col>
         </Row>

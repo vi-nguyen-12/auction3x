@@ -254,7 +254,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "12px",
-                      width: "250px",
                       color: "black",
                     }}
                   >
@@ -272,7 +271,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "12px",
-                      width: "250px",
                       color: "black",
                     }}
                   >
@@ -284,7 +282,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "12px",
-                      width: "250px",
                       color: "black",
                     }}
                   >
@@ -301,7 +298,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "12px",
-                      width: "250px",
                       color: "black",
                     }}
                   >
