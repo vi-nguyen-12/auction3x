@@ -86,7 +86,9 @@ function Dashboard({
             <Route exact path="/Dashboard">
               <Dash windowSize={windowSize} />
             </Route>
-            <Route exact path="/Dashboard/Messaging" component={Messaging} />
+            <Route exact path="/Dashboard/Messaging">
+              <Messaging windowSize={windowSize} />
+            </Route>
             <Route exact path="/Dashboard/Auctions/BidAuctions">
               <BidAuctions windowSize={windowSize} />
             </Route>

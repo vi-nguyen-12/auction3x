@@ -83,7 +83,7 @@ height: 150px;
 }
 `;
 
-function Profile({ id }) {
+function Profile({ id, windowSize }) {
   const savedProperty = useSelector((state) => state.savedProperty);
   const user = useSelector((state) => state.user);
   let settings = {
@@ -101,7 +101,10 @@ function Profile({ id }) {
 
   const descriptPlaceHolder = "Please Enter Description";
   return (
-    <Container className="profileContainer">
+    <Container
+      className="profileContainer"
+      style={{ padding: windowSize < 800 && "20px" }}
+    >
       <div className="edit-btn">
         <Button
           onClick={() => {
@@ -118,6 +121,7 @@ function Profile({ id }) {
           onHide={toggleEdit}
           backdrop="static"
           keyboard={false}
+          className="edit-modal"
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -130,7 +134,13 @@ function Profile({ id }) {
         </Modal>
       </div>
       <Row>
-        <Col sm={3}>
+        <Col
+          sm={3}
+          style={{
+            display: windowSize < 800 && "flex",
+            justifyContent: windowSize < 800 && "center",
+          }}
+        >
           <div className="profileOutline">
             <div className="profileInline">
               <img
@@ -146,9 +156,26 @@ function Profile({ id }) {
           </div>
         </Col>
         <Col sm={9}>
-          <div className="descript">
-            <h3>Description</h3>
-            <p>{description ? description : descriptPlaceHolder}</p>
+          <div
+            style={{
+              padding: windowSize < 800 && "0",
+              display: windowSize < 800 && "grid",
+              justifyContent: windowSize < 800 && "center",
+              height: windowSize < 800 && "fit-content",
+            }}
+            className="descript"
+          >
+            <h3 style={{ textAlign: windowSize < 800 && "center" }}>
+              Description
+            </h3>
+            <p
+              style={{
+                height: windowSize < 800 && "100%",
+                textAlign: windowSize < 800 && "center",
+              }}
+            >
+              {description ? description : descriptPlaceHolder}
+            </p>
           </div>
         </Col>
       </Row>
@@ -205,8 +232,10 @@ function Profile({ id }) {
             </Button>
           </div>
         </Col>
-        <Col style={{ paddingLeft: "70px" }} sm={9}>
-          <h3>Listed Property</h3>
+        <Col style={{ paddingLeft: windowSize > 800 && "70px" }} sm={9}>
+          <h3 style={{ textAlign: windowSize < 800 && "center" }}>
+            Listed Property
+          </h3>
           <Row>
             <Carousel {...settings}>
               {savedProperty.length > 0
