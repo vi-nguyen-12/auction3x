@@ -77,13 +77,18 @@ position: relative;
 }
 `;
 
-function ApprovedAuctionsComp({ approvedAuctions }) {
+function ApprovedAuctionsComp({ approvedAuctions, windowSize }) {
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: approvedAuctions.length > 3 ? 3 : approvedAuctions.length,
+    slidesToShow:
+      windowSize > 800
+        ? approvedAuctions.length > 3
+          ? 3
+          : approvedAuctions.length
+        : 1,
   };
   return (
     <>

@@ -30,6 +30,7 @@ const Login = ({
         const response = await authServices.login(data);
         if (response.data.error) {
           alert(response.data.error);
+          setShowLoading(false);
         } else if (response.data.error === "User has not been verified") {
           alert(response.data.error);
           toggleSignIn();

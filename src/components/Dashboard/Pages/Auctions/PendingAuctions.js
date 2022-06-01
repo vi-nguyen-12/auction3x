@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import NumberFormat from "react-number-format";
 
-function PendingAuctions() {
+function PendingAuctions({ windowSize }) {
   const user = useSelector((state) => state.user);
   const [PendingAuctions, setPendingAuctions] = useState([]);
   const [questionair, setQuestionair] = useState([]);
@@ -17,169 +17,238 @@ function PendingAuctions() {
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
       authService.getBuyerPendingAuctions(user._id).then((res) => {
-        setPendingAuctions(res.data);
+        setPendingAuctions(
+          res.data.filter(
+            (auction) =>
+              new Date().toISOString() < auction.auctionId.auctionEndDate
+          )
+        );
       });
     };
     getBuyerPendingAuctions();
   }, []);
 
   return (
-    <>
+    <div style={{ height: "100vh", width: "100vw" }}>
       <h1>Pending Auctions</h1>
-      <Table
-        striped
-        borderless
-        hover
-        style={{
-          overflow: "hidden",
-          borderRadius: "5px",
-          boxShadow: "#d7c4c4 0px 0px 20px 16px",
-          marginTop: "50px",
-          width: "70vw",
-        }}
-      >
-        <thead style={{ background: "black", color: "white" }}>
-          <tr>
-            <th>#</th>
-            <th>Auction ID</th>
-            <th colSpan={2}>Property Type</th>
-            <th colSpan={2}>Property Address</th>
-            <th colSpan={2}>Status</th>
-            <th colSpan={2}>Questionair</th>
-            <th colSpan={2}>Documents</th>
-            <th colSpan={2}>Approved Fund</th>
-            <th>View Auction</th>
-          </tr>
-        </thead>
-        {PendingAuctions.length > 0 &&
-          PendingAuctions.map(
-            (auction, index) =>
-              new Date().toISOString() < auction.auctionId.auctionEndDate && (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>
-                      {auction.auctionId._id}
-                      <div
-                        style={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "left",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <img
-                          width="100px"
-                          height="50px"
-                          src={
-                            auction.auctionId.property.images.length > 0
-                              ? auction.auctionId.property.images[0].url
-                              : ""
-                          }
-                        />
-                      </div>
-                    </td>
-                    <td colSpan={2}>
-                      {auction.auctionId.property.type === "real-estate"
-                        ? "Real Estate"
-                        : auction.auctionId.property.type === "car"
-                        ? "Car"
-                        : auction.auctionId.property.type === "jet"
-                        ? "Jet"
-                        : auction.auctionId.property.type === "yacht"
-                        ? "Yacht"
-                        : ""}
-                    </td>
-                    <td colSpan={2}>
-                      {auction.auctionId.property.details.address}
-                    </td>
-                    {auction.isApproved === "success" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "green",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Approved
-                        </span>
-                      </td>
-                    ) : auction.isApproved === "pending" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "orange",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Pending
-                        </span>
-                      </td>
-                    ) : auction.isApproved === "fail" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "red",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Rejected
-                        </span>
-                      </td>
-                    ) : null}
-                    <td colSpan={2}>
-                      <Button
-                        onClick={() => {
-                          setQuestionair(auction.answers);
-                          toggleQuestionair();
-                        }}
-                        variant="primary"
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td colSpan={2}>
-                      <Button
-                        onClick={() => {
-                          setDocuments(auction.documents);
-                          toggleDocuments();
-                        }}
-                        variant="primary"
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td colSpan={2}>
-                      <NumberFormat
-                        value={auction.approvedFund ? auction.approvedFund : 0}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
+      {windowSize > 800 ? (
+        <Table
+          striped
+          borderless
+          hover
+          style={{
+            overflow: "hidden",
+            borderRadius: "5px",
+            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            marginTop: "50px",
+            width: "70vw",
+          }}
+        >
+          <thead style={{ background: "black", color: "white" }}>
+            <tr>
+              <th>#</th>
+              <th>Auction ID</th>
+              <th colSpan={2}>Property Type</th>
+              <th colSpan={2}>Property Address</th>
+              <th colSpan={2}>Status</th>
+              <th colSpan={2}>Questionair</th>
+              <th colSpan={2}>Documents</th>
+              <th colSpan={2}>Approved Fund</th>
+              <th>View Auction</th>
+            </tr>
+          </thead>
+          {PendingAuctions.length > 0 ? (
+            PendingAuctions.map((auction, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>
+                    {auction.auctionId._id}
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "left",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
+                        src={
+                          auction.auctionId.property.images.length > 0
+                            ? auction.auctionId.property.images[0].url
+                            : ""
+                        }
                       />
-                    </td>
-                    <td>
-                      <Button
-                        onClick={() => {
-                          window.open(
-                            `/DisplayAuctions/${auction.auctionId._id}`
-                          );
+                    </div>
+                  </td>
+                  <td colSpan={2}>
+                    {auction.auctionId.property.type === "real-estate"
+                      ? "Real Estate"
+                      : auction.auctionId.property.type === "car"
+                      ? "Car"
+                      : auction.auctionId.property.type === "jet"
+                      ? "Jet"
+                      : auction.auctionId.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}
+                  </td>
+                  <td colSpan={2}>
+                    {auction.auctionId.property.details.address}
+                  </td>
+                  {auction.isApproved === "success" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "green",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
                         }}
-                        variant="primary"
                       >
-                        View
-                      </Button>
+                        Approved
+                      </span>
                     </td>
-                  </tr>
-                </tbody>
-              )
+                  ) : auction.isApproved === "pending" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "orange",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  ) : auction.isApproved === "fail" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "red",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Rejected
+                      </span>
+                    </td>
+                  ) : null}
+                  <td colSpan={2}>
+                    <Button
+                      onClick={() => {
+                        setQuestionair(auction.answers);
+                        toggleQuestionair();
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                  <td colSpan={2}>
+                    <Button
+                      onClick={() => {
+                        setDocuments(auction.documents);
+                        toggleDocuments();
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                  <td colSpan={2}>
+                    <NumberFormat
+                      value={auction.approvedFund ? auction.approvedFund : 0}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
+                  </td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        window.open(
+                          `/DisplayAuctions/${auction.auctionId._id}`
+                        );
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={3}>No Pending Auctions</td>
+              </tr>
+            </tbody>
           )}
-      </Table>
+        </Table>
+      ) : (
+        <Table striped bordered responsive>
+          <thead style={{ background: "black", color: "white" }}>
+            <tr>
+              <th>#</th>
+              <th>Auction</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          {PendingAuctions.length > 0 ? (
+            PendingAuctions.map((auction, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>
+                    {auction.auctionId.property.details.address}
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
+                        src={
+                          auction.auctionId.property.images.length > 0
+                            ? auction.auctionId.property.images[0].url
+                            : ""
+                        }
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        window.open(
+                          `/DisplayAuctions/${auction.auctionId._id}`
+                        );
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={3}>No Pending Auctions</td>
+              </tr>
+            </tbody>
+          )}
+        </Table>
+      )}
       <Modal
         size="lg"
         show={showQuestionair}
@@ -256,7 +325,7 @@ function PendingAuctions() {
           </Table>
         </Modal.Body>
       </Modal>
-    </>
+    </div>
   );
 }
 

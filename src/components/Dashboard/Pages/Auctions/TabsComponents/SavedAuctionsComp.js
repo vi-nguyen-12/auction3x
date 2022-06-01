@@ -89,34 +89,8 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: savedProp.length > 2 ? 2 : savedProp.length,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-    ],
+    slidesToShow:
+      windowSize > 800 ? (savedProp.length > 2 ? 2 : savedProp.length) : 1,
   };
 
   return (
