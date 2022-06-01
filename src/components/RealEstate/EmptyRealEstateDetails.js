@@ -328,7 +328,7 @@ function EmptyRealEstateDetails({
     }
   };
   return (
-    <Container>
+    <>
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <Row className="mt-3">
@@ -572,7 +572,7 @@ function EmptyRealEstateDetails({
           </Col>
         </Row>
       </form>
-    </Container>
+    </>
   );
 }
 
