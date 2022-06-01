@@ -328,21 +328,10 @@ function EmptyRealEstateDetails({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="list-form">
-      <h3
-        style={{
-          fontWeight: "bolder",
-          color: "rgb(109, 109, 109)",
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          top: "-80px",
-        }}
-      >
-        Property Details
-      </h3>
-      <Container>
-        <Row>
+    <Container>
+      <h3>Property Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -358,8 +347,8 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -373,7 +362,7 @@ function EmptyRealEstateDetails({
               City <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -388,8 +377,8 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -403,7 +392,7 @@ function EmptyRealEstateDetails({
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -419,7 +408,7 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -435,8 +424,8 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="number"
               min="0"
@@ -451,7 +440,7 @@ function EmptyRealEstateDetails({
               Rooms Count <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -467,8 +456,8 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -482,7 +471,7 @@ function EmptyRealEstateDetails({
               Property Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -497,7 +486,7 @@ function EmptyRealEstateDetails({
               Bathrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -514,7 +503,7 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="number"
@@ -531,8 +520,8 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="number"
               min="0"
@@ -547,7 +536,7 @@ function EmptyRealEstateDetails({
               Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -563,34 +552,27 @@ function EmptyRealEstateDetails({
             </span>
           </Col>
         </Row>
-        {/* <Row style={{ marginTop: "10px", height: "130px" }}>
-          <Col>
-            <textarea
-              style={{ height: "100%" }}
-              className="form-control"
-              placeholder="Description"
-              {...register("description", { required: false })}
-            />
+        <Row className="mt-5">
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+          >
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
           </Col>
-        </Row> */}
-      </Container>
-      <div className="bottom-btn">
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-          }}
-        >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
-        <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+          <Col xs={12} md={8} className="d-flex mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button className="nxt-btn" id="next" type="submit">
+              Next
+            </Button>
+          </Col>
+        </Row>
+      </form>
+    </Container>
   );
 }
 

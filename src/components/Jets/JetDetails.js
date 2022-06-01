@@ -440,302 +440,280 @@ function JetDetails({
   };
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="list-sell-bottom"
-        style={{ justifyContent: "flex-start", display: "block" }}
-      >
-        <Container style={{ marginTop: "50px" }}>
-          <Row style={{ marginTop: "50px" }}>
-            <Col
-              style={{
-                borderBottom: "2px solid gray",
-                fontSize: "20px",
-                fontWeight: "bold",
-                color: "black",
-              }}
-            >
-              Aircraft Description
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={address}
-                {...register("property_address")}
-                onChange={(e) => setAddress(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Property Address <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={country}
-                {...register("country")}
-                onChange={(e) => setCountry(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Country <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={state}
-                {...register("state")}
-                onChange={(e) => setState(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                State <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={city}
-                {...register("city")}
-                onChange={(e) => setCity(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                City <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={registration_mark}
-                {...register("registration_mark")}
-                onChange={(e) => setRegistration_mark(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Registration Mark <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={aircraft_builder_name}
-                {...register("aircraft_builder_name")}
-                onChange={(e) => setAircraft_builder_name(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Aircraft Builder's Name{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={aircraft_model_designation}
-                {...register("aircraft_model_designation")}
-                onChange={(e) => setAircraft_model_designation(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Aircraft Model Designation{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={aircraft_serial_no}
-                {...register("aircraft_serial_no")}
-                onChange={(e) => setAircraft_serial_no(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={engine_builder_name}
-                {...register("engine_builder_name")}
-                onChange={(e) => setEngine_builder_name(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Engine Builder's Name{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={engine_model_designation}
-                {...register("engine_model_designation")}
-                onChange={(e) => setEngine_model_designation(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Engine Model Designation{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                defaultValue={number_of_engines}
-                {...register("number_of_engines")}
-                onChange={(e) => setNumber_of_engines(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Number of Engines <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={propeller_builder_name}
-                {...register("propeller_builder_name")}
-                onChange={(e) => setPropeller_builder_name(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Propeller Builder's Name{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={propeller_model_designation}
-                {...register("propeller_model_designation")}
-                onChange={(e) => setPropeller_model_designation(e.target.value)}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Propeller Model Designation{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Is the aircraft an import?{" "}
-                <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-              <select
-                className="form-control"
-                value={isImport}
-                onChange={(e) => {
-                  setIsImport(e.target.value);
-                }}
-                required
-              >
-                <option value="">Select</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </Col>
-            <Col>
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Number of Aircraft <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                defaultValue={number_of_aircraft}
-                {...register("number_of_aircraft")}
-                onChange={(e) => setNumber_of_aircraft(e.target.value)}
-                required
-              />
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                defaultValue={reservedAmount}
-                {...register("reservedAmount")}
-                onChange={(e) => setReservedAmount(parseInt(e.target.value))}
-                required
-              />
-            </Col>
-            <Col>
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                defaultValue={discussedAmount}
-                {...register("discussedAmount")}
-                onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
-                required
-              />
-            </Col>
-          </Row>
-        </Container>
+      <h3>Confirm AirCraft Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={address}
+              {...register("property_address")}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Property Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={registration_mark}
+              {...register("registration_mark")}
+              onChange={(e) => setRegistration_mark(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Registration Mark <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={aircraft_builder_name}
+              {...register("aircraft_builder_name")}
+              onChange={(e) => setAircraft_builder_name(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Builder's Name{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
 
-        <div
-          className="bottom-btn"
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              left: "50px",
-            }}
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={aircraft_model_designation}
+              {...register("aircraft_model_designation")}
+              onChange={(e) => setAircraft_model_designation(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Model Designation{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={aircraft_serial_no}
+              {...register("aircraft_serial_no")}
+              onChange={(e) => setAircraft_serial_no(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={engine_builder_name}
+              {...register("engine_builder_name")}
+              onChange={(e) => setEngine_builder_name(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={engine_model_designation}
+              {...register("engine_model_designation")}
+              onChange={(e) => setEngine_model_designation(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Engine Model Designation{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={number_of_engines}
+              {...register("number_of_engines")}
+              onChange={(e) => setNumber_of_engines(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Number of Engines <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={propeller_builder_name}
+              {...register("propeller_builder_name")}
+              onChange={(e) => setPropeller_builder_name(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Builder's Name{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={propeller_model_designation}
+              {...register("propeller_model_designation")}
+              onChange={(e) => setPropeller_model_designation(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Model Designation{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Is the aircraft an import?{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <select
+              className="form-control"
+              value={isImport}
+              onChange={(e) => {
+                setIsImport(e.target.value);
+              }}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Number of Aircraft <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={number_of_aircraft}
+              {...register("number_of_aircraft")}
+              onChange={(e) => setNumber_of_aircraft(e.target.value)}
+              required
+            />
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={reservedAmount}
+              {...register("reservedAmount")}
+              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
+              required
+            />
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={discussedAmount}
+              {...register("discussedAmount")}
+              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
+              required
+            />
+          </Col>
+        </Row>
+
+        <Row className="mt-5">
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
           >
-            <Button onClick={saveInfo}>Save</Button>
-          </div>
-          <Button
-            className="pre-btn"
-            onClick={() => {
-              toggleStep(step - 1);
-            }}
-          >
-            Previous
-          </Button>
-          <button className="nxt-btn" type="submit">
-            Next
-          </button>
-        </div>
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
+          </Col>
+          <Col xs={12} md={8} className="d-flex mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button className="nxt-btn" id="next" type="submit">
+              Next
+            </Button>
+          </Col>
+        </Row>
       </form>
     </>
   );

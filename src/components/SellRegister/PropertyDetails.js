@@ -20,9 +20,9 @@ const PropertyDetails = ({
   propertyData,
 }) => {
   return (
-    <div className="listDetail-content">
+    <div className="wrapper">
       <SellHeader step={step} />
-      <div className="list-sell-bottom">
+      <div className="sell-bottom">
         {propertyType === "real-estate" ? (
           property.address &&
           property.structure &&

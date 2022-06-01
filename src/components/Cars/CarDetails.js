@@ -424,30 +424,11 @@ function CarDetails({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-sell-bottom"
-      style={{
-        justifyContent: "flex-start",
-        display: "block",
-        marginTop: "20px",
-      }}
-    >
-      <Container style={{ marginTop: "40px" }}>
-        <Row style={{ marginTop: "20px" }}>
-          <Col
-            style={{
-              borderBottom: "2px solid gray",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "black",
-            }}
-          >
-            <h3>Confirm Car Details</h3>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+    <>
+      <h3>Confirm Car Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -458,7 +439,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Year</span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -469,7 +450,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Make</span>
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -481,8 +462,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Model</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -493,7 +474,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Transmission</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -505,8 +486,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Mileage</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -517,7 +498,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Power</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -529,8 +510,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Car Type</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -541,7 +522,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>VIN</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -553,8 +534,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Color</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -565,7 +546,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -577,8 +558,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Engine</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -589,7 +570,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Approximate Market Price</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -601,8 +582,8 @@ function CarDetails({
             <span style={{ color: "black" }}>Condition</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={3}>
             <input
               type="text"
               className="form-control"
@@ -613,7 +594,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Address</span>
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -624,7 +605,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Country</span>
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -635,7 +616,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>State</span>
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -647,8 +628,8 @@ function CarDetails({
             <span style={{ color: "black" }}>City</span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="number"
               min="0"
@@ -660,7 +641,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Reserved Amount</span>
           </Col>
-          <Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -673,30 +654,28 @@ function CarDetails({
             <span style={{ color: "black" }}>Discussed Amount</span>
           </Col>
         </Row>
-      </Container>
 
-      <div className="bottom-btn">
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-          }}
-        >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
-        <Button
-          className="pre-btn"
-          onClick={() => {
-            toggleStep(step - 1);
-          }}
-        >
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+        <Row className="mt-5">
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+          >
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
+          </Col>
+          <Col xs={12} md={8} className="d-flex mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button className="nxt-btn" id="next" type="submit">
+              Next
+            </Button>
+          </Col>
+        </Row>
+      </form>
+    </>
   );
 }
 
