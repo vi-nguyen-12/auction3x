@@ -7,7 +7,7 @@ function SellHeader({ step }) {
     <Row className="sell-top">
       <Col xs={1} className="sell-top-col">
         <div className="circle-active">01</div>
-        <div className="spnn">Select Category</div>
+        <div className="step-title">Select Category</div>
       </Col>
       <Col xs={1} className="sell-top-col-line">
         <div className={step >= 2 ? "line-1" : "line"}></div>
@@ -15,7 +15,7 @@ function SellHeader({ step }) {
       <Col xs={1} className="sell-top-col">
         {" "}
         <div className={step >= 2 ? "circle-active" : "circle"}>02</div>
-        <div className="spnn">Listing Details</div>
+        <div className="step-title">Listing Details</div>
       </Col>
       <Col xs={1} className="sell-top-col-line">
         <div className={step >= 3 ? "line-1" : "line"}></div>
@@ -23,7 +23,7 @@ function SellHeader({ step }) {
       <Col xs={1} className="sell-top-col">
         {" "}
         <div className={step >= 3 ? "circle-active" : "circle"}>03</div>
-        <div className="spnn">Property Details</div>
+        <div className="step-title">Property Details</div>
       </Col>
       <Col xs={1} className="sell-top-col-line">
         <div className={step >= 4 ? "line-1" : "line"}></div>
@@ -31,7 +31,7 @@ function SellHeader({ step }) {
       <Col xs={1} className="sell-top-col">
         {" "}
         <div className={step >= 4 ? "circle-active" : "circle"}>04</div>
-        <div className="spnn">Upload Documents</div>
+        <div className="step-title">Upload Documents</div>
       </Col>
       <Col xs={1} className="sell-top-col-line">
         <div className={step >= 6 ? "line-1" : "line"}></div>
@@ -39,7 +39,7 @@ function SellHeader({ step }) {
       <Col xs={1} className="sell-top-col">
         {" "}
         <div className={step >= 6 ? "circle-active" : "circle"}>05</div>
-        <div className="spnn">Agreement</div>
+        <div className="step-title">Agreement</div>
       </Col>
     </Row>
   );

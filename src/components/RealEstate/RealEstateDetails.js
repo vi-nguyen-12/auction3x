@@ -344,7 +344,7 @@ function RealEstateDetails({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="list-form1">
+    <form onSubmit={handleSubmit(onSubmit)} className="list-form">
       <Container style={{ marginTop: "20px" }}>
         <Row>
           <Col>
@@ -600,22 +600,25 @@ function RealEstateDetails({
           </Col>
         </Row>
       </Container>
-      <div className="bottom-btn">
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-          }}
+      <Row className="mt-5">
+        <Col
+          xs={12}
+          md={4}
+          className="d-flex justify-content-sm-center justify-content-md-end mt-2"
         >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
-        <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
+          <Button className="save-btn" onClick={saveInfo}>
+            Save
+          </Button>
+        </Col>
+        <Col xs={12} md={8} className="d-flex mt-2">
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+            Previous
+          </Button>
+          <Button className="nxt-btn" id="next" type="submit">
+            Next
+          </Button>
+        </Col>
+      </Row>
     </form>
   );
 }

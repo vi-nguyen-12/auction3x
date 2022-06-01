@@ -607,25 +607,10 @@ function YachtDetails({
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-sell-bottom"
-      style={{ justifyContent: "flex-start", display: "block" }}
-    >
-      <Container style={{ marginTop: "10px" }}>
-        <Row style={{ marginTop: "10px" }}>
-          <Col
-            style={{
-              borderBottom: "2px solid gray",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "black",
-            }}
-          >
-            Yacht Information
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
+    <>
+      <h3>Confirm Yacht Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -647,7 +632,7 @@ function YachtDetails({
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="date"
@@ -669,8 +654,8 @@ function YachtDetails({
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={3}>
             <input
               type="text"
               className="form-control"
@@ -688,7 +673,7 @@ function YachtDetails({
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={3}>
             <input
               type="text"
               className="form-control"
@@ -706,7 +691,7 @@ function YachtDetails({
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={3}>
             <input
               type="text"
               className="form-control"
@@ -724,7 +709,7 @@ function YachtDetails({
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={3}>
             <input
               type="text"
               className="form-control"
@@ -744,8 +729,8 @@ function YachtDetails({
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -763,7 +748,7 @@ function YachtDetails({
               Manufacture Mark <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -782,7 +767,7 @@ function YachtDetails({
             </span>
           </Col>
 
-          <Col>
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -803,7 +788,7 @@ function YachtDetails({
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "10px" }}>
+        <Row className="mt-3">
           <Col>
             <input
               type="text"
@@ -823,8 +808,8 @@ function YachtDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -842,7 +827,7 @@ function YachtDetails({
               Engine Deck Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -860,7 +845,7 @@ function YachtDetails({
               Running Cost <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={4}>
             <input
               type="text"
               className="form-control"
@@ -891,8 +876,8 @@ function YachtDetails({
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
             <input
               type="number"
               min="0"
@@ -910,7 +895,7 @@ function YachtDetails({
               Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col>
+          <Col xs={12} md={6}>
             <input
               type="number"
               min="0"
@@ -929,29 +914,28 @@ function YachtDetails({
             </span>
           </Col>
         </Row>
-      </Container>
-      <div className="bottom-btn">
-        <div
-          style={{
-            position: "absolute",
-            left: "50px",
-          }}
-        >
-          <Button onClick={saveInfo}>Save</Button>
-        </div>
-        <Button
-          className="pre-btn"
-          onClick={() => {
-            toggleStep(step - 1);
-          }}
-        >
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+
+        <Row className="mt-5">
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+          >
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
+          </Col>
+          <Col xs={12} md={8} className="d-flex mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button className="nxt-btn" id="next" type="submit">
+              Next
+            </Button>
+          </Col>
+        </Row>
+      </form>
+    </>
   );
 }
 

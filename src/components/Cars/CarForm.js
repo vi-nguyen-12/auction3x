@@ -202,30 +202,11 @@ function CarForm({ toggleStep, step, properties, property }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="list-sell-bottom"
-      style={{
-        justifyContent: "flex-start",
-        display: "block",
-        overflowY: "auto",
-      }}
-    >
-      <Container style={{ marginTop: "50px" }}>
-        <Row style={{ marginTop: "20px" }}>
-          <Col
-            style={{
-              borderBottom: "2px solid gray",
-              fontWeight: "bold",
-              fontSize: "20px",
-              color: "black",
-            }}
-          >
-            <h3>Car Details</h3>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+    <div className="sell-bottom">
+      <h3>Car Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <label>Year</label>
             <input
               type="number"
@@ -239,7 +220,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Make</label>
             <input
               type="text"
@@ -251,7 +232,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Model</label>
             <input
               type="text"
@@ -264,7 +245,7 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
+        <Row className="mt-3">
           <Col>
             <label>VIN</label>
             <input
@@ -278,8 +259,8 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <label>Mileage</label>
             <input
               type="number"
@@ -292,7 +273,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Transmission</label>
             <input
               type="text"
@@ -304,7 +285,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Car Type</label>
             <input
               type="text"
@@ -317,8 +298,8 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <label>Power</label>
             <input
               type="number"
@@ -331,7 +312,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Engine</label>
             <input
               type="text"
@@ -343,7 +324,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Fuel Type</label>
             <input
               type="text"
@@ -356,8 +337,8 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
             <label>Color</label>
             <input
               type="text"
@@ -369,7 +350,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Condition</label>
             <input
               type="text"
@@ -381,7 +362,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <label>Approximate Market Price</label>
             <input
               type="number"
@@ -395,8 +376,8 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
+        <Row className="mt-3">
+          <Col xs={12} md={3}>
             <label>Address</label>
             <input
               type="text"
@@ -408,7 +389,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <label>Country</label>
             <input
               type="text"
@@ -420,7 +401,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <label>State</label>
             <input
               type="text"
@@ -432,7 +413,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col>
+          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
             <label>City</label>
             <input
               type="text"
@@ -445,190 +426,16 @@ function CarForm({ toggleStep, step, properties, property }) {
             />
           </Col>
         </Row>
-      </Container>
-
-      {/* <Table bordered striped hover>
-        <tbody>
-          <tr>
-            <td style={{ color: "black" }}>Make</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={make ? make : ""}
-                {...register("make", { required: false })}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Model</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={model ? model : ""}
-                {...register("model", { required: false })}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Year</td>
-            <td>
-              <input
-                type="number"
-                className="form-control"
-                defaultValue={year ? year : ""}
-                {...register("year", { required: false })}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Mileage</td>
-            <td>
-              <input
-                type="number"
-                className="form-control"
-                defaultValue={mileage ? mileage : ""}
-                {...register("mileage", { required: false })}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Transmission</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={transmission ? transmission : ""}
-                {...register("transmission")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Car Type</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={carType ? carType : ""}
-                {...register("carType")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Power</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={power ? power : ""}
-                {...register("power")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Color</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={color ? color : ""}
-                {...register("color")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>VIN</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={vin ? vin : ""}
-                {...register("vin")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Engine</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={engine ? engine : ""}
-                {...register("engine")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Fuel Type</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={fuelType ? fuelType : ""}
-                {...register("fuelType")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Condition</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={condition ? condition : ""}
-                {...register("condition")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Price</td>
-            <td>
-              <input
-                type="number"
-                className="form-control"
-                defaultValue={price ? price : ""}
-                {...register("price")}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td style={{ color: "black" }}>Address</td>
-            <td>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={address ? address : ""}
-                {...register("address")}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </Table> */}
-      <div
-        className="bottom-btn"
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          bottom: "0",
-          marginTop: "50px",
-        }}
-      >
-        <Button
-          className="pre-btn"
-          onClick={() => {
-            toggleStep(step - 1);
-          }}
-        >
-          Previous
-        </Button>
-        <button className="nxt-btn" type="submit">
-          Next
-        </button>
-      </div>
-    </form>
+        <Row className="mt-5 justify-content-center">
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+            Previous
+          </Button>
+          <Button type="submit" className="nxt-btn" id="next">
+            Next
+          </Button>
+        </Row>
+      </form>
+    </div>
   );
 }
 

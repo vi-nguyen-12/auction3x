@@ -4,7 +4,7 @@ import authService from "../../services/authServices";
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -146,7 +146,8 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
     }
   };
   return (
-    <div className="list-sell-bottom">
+    <div className="sell-bottom">
+      <h3>Search Property</h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         onKeyDown={(e) => {
@@ -156,175 +157,152 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
         }}
         className="list-form"
       >
-        <h3
-          style={{
-            fontWeight: "bolder",
-            color: "rgb(109, 109, 109)",
-            display: "flex",
-            justifyContent: "center",
-            position: "relative",
-            top: "-80px",
-          }}
-        >
-          Search Property
-        </h3>
-
-        <Container>
-          <Row>
-            <Col>
-              <PlacesAutocomplete
-                value={address}
-                onChange={handleChange}
-                onSelect={handleSelect}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div>
-                    <input
-                      {...getInputProps({
-                        placeholder: "Search address",
-                        className: "form-control",
-                      })}
-                      required
-                    />
-                    <span style={{ fontWeight: "600", color: "black" }}>
-                      Street Address <span style={{ color: "#ff0000" }}>*</span>
-                    </span>
-                    <div className="autocomplete-dropdown-container">
-                      {loading && <div>Loading...</div>}
-                      {suggestions.map((suggestion, index) => {
-                        const className = suggestion.active
-                          ? "suggestion-item--active"
-                          : "suggestion-item";
-                        // inline style for demonstration purpose
-                        const style = suggestion.active
-                          ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
-                          : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
-                        return (
-                          <div
-                            key={index}
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style,
-                            })}
-                          >
-                            <span>{suggestion.description}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
+        <Row className="mt-3">
+          <Col>
+            <PlacesAutocomplete
+              value={address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search address",
+                      className: "form-control",
+                    })}
+                    required
+                  />
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Street Address <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion, index) => {
+                      const className = suggestion.active
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? {
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
+                        : {
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
+                      return (
+                        <div
+                          key={index}
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                          })}
+                        >
+                          <span>{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
                   </div>
-                )}
-              </PlacesAutocomplete>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                className="form-control"
-                type="text"
-                name="address1"
-                placeholder="Address"
-                onChange={(e) => setAddress1(e.target.value)}
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Address Line 2
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                className="form-control"
-                type="text"
-                name="city"
-                placeholder="City"
-                defaultValue={city}
-                {...register("city", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                City <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                className="form-control"
-                type="text"
-                name="state"
-                placeholder="State"
-                defaultValue={state}
-                {...register("state", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                State <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                className="form-control"
-                type="text"
-                name="country"
-                placeholder="Country"
-                defaultValue={country}
-                {...register("country", {
-                  required: false,
-                  maxLength: 100,
-                })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Country <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-            <Col>
-              <input
-                className="form-control"
-                type="number"
-                min="0"
-                name="zip"
-                placeholder="Zip Code"
-                defaultValue={zip}
-                {...register("zipCode", { required: false, maxLength: 10 })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Zip Code <span style={{ color: "#ff0000" }}>*</span>
-              </span>
-            </Col>
-          </Row>
-        </Container>
-        <div
-          className="bottom-btn"
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
-          <button
-            className="pre-btn"
-            onClick={() => {
-              toggleStep(step - 1);
-            }}
-          >
+                </div>
+              )}
+            </PlacesAutocomplete>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              className="form-control"
+              type="text"
+              name="address1"
+              placeholder="Address"
+              onChange={(e) => setAddress1(e.target.value)}
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Address Line 2
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              className="form-control"
+              type="text"
+              name="city"
+              placeholder="City"
+              defaultValue={city}
+              {...register("city", { required: false })}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              className="form-control"
+              type="text"
+              name="state"
+              placeholder="State"
+              defaultValue={state}
+              {...register("state", { required: false })}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              className="form-control"
+              type="text"
+              name="country"
+              placeholder="Country"
+              defaultValue={country}
+              {...register("country", {
+                required: false,
+                maxLength: 100,
+              })}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              className="form-control"
+              type="number"
+              min="0"
+              name="zip"
+              placeholder="Zip Code"
+              defaultValue={zip}
+              {...register("zipCode", { required: false, maxLength: 10 })}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-5 justify-content-center">
+          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
             Previous
-          </button>
-          <button className="nxt-btn" type="submit">
+          </Button>
+          <Button type="submit" className="nxt-btn" id="next">
             Next
-          </button>
-        </div>
+          </Button>
+        </Row>
       </form>
     </div>
   );
