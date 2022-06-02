@@ -6,7 +6,13 @@ import error from "../../../src/images/error.png";
 function ErrorPage() {
   const history = useHistory();
   return (
-    <Row style={{ margin: "0", padding: "0", height: "100vh" }}>
+    <Row
+      style={{
+        margin: "0",
+        padding: "0",
+        height: "100vh",
+      }}
+    >
       <Col
         style={{
           backgroundColor: "#282828",

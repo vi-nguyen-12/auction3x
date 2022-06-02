@@ -11,9 +11,11 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState();
   const [privacy, setPrivacy] = useState();
+  const [agent, setAgent] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const toogleTerms = () => setShowTerms(!showTerms);
   const tooglePrivacy = () => setShowPrivacy(!showPrivacy);
+  const toggleAgent = () => setAgent(!agent);
   const {
     register,
     handleSubmit,
@@ -265,188 +267,52 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
             </div>
           </Col>
         </Row>
-        {/* <Table borderless style={{ marginBottom: "13px" }}>
-          <tbody>
-            <tr>
-              <td style={{ width: "50%", paddingRight: "20px" }}>
-                <label style={{ fontSize: "20px" }}>First Name*</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  className="form-control"
-                  placeholder="First Name"
-                  {...register("firstName", { required: true })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-              <td style={{ width: "50%" }}>
-                <label style={{ fontSize: "20px" }}>Last Name*</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  className="form-control"
-                  placeholder="Last Name"
-                  {...register("lastName", { required: true })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td style={{ width: "50%", paddingRight: "20px" }}>
-                <label style={{ fontSize: "20px" }}>Email*</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Email"
-                  {...register("email", {
-                    required: true,
-                    pattern: /^\S+@\S+$/i,
-                  })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-              <td style={{}}>
-                <label style={{ fontSize: "20px" }}>Mobile No.*</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Phone Number"
-                  {...register("phone", {
-                    required: true,
-                  })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-            </tr>
 
-            <tr className="form-group mb-2 ">
-              <td colSpan={2}>
-                <label style={{ fontSize: "20px" }}>Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Username"
-                  {...register("userName", { required: false, maxLength: 20 })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td style={{ width: "50%", paddingRight: "20px" }}>
-                <label style={{ fontSize: "20px" }}>Password*</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 12,
-                  })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-              <td style={{}}>
-                <label style={{ fontSize: "20px" }}>Confirm Password*</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Confirm Password"
-                  {...register("confirmPassword", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 12,
-                  })}
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-            </tr>
+        <Row style={{ margin: "20px 0" }}>
+          <Col style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <Button>Individual</Button>
+            <Button onClick={toggleAgent}>Agent</Button>
+          </Col>
+        </Row>
 
-            <tr>
-              <td style={{ width: "50%", paddingRight: "20px" }}>
-                <label style={{ fontSize: "20px" }}>Country*</label>
+        {agent === true && (
+          <Row style={{ margin: "20px 0" }}>
+            <Col>
+              <div className="form-group">
+                <label htmlFor="agentNumber">
+                  Agent License Number <span style={{ color: "red" }}> *</span>
+                </label>
                 <input
                   type="text"
+                  style={{ height: "47px", borderRadius: "8px" }}
                   className="form-control"
-                  placeholder="Country"
-                  {...register("country", { required: true, maxLength: 20 })}
+                  id="agentNumber"
+                  placeholder="Enter Agent License Number"
+                  name="agentNumber"
+                  {...register("agentNumber")}
                   required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
                 />
-              </td>
-
-              <td>
-                <label style={{ fontSize: "20px" }}>State*</label>
+              </div>
+            </Col>
+            <Col>
+              <div className="form-group">
+                <label htmlFor="agentFile">
+                  Agent License File <span style={{ color: "red" }}> *</span>
+                </label>
                 <input
-                  type="text"
-                  className="form-control color-black"
-                  placeholder="State"
-                  {...register("state", { maxLength: 20 })}
+                  type="file"
+                  className="form-control"
+                  id="agentFile"
+                  placeholder="Enter Agent License File"
+                  name="agentFile"
+                  {...register("agentFile")}
                   required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
                 />
-              </td>
+              </div>
+            </Col>
+          </Row>
+        )}
 
-              <td>
-                <label style={{ fontSize: "20px" }}>City*</label>
-                <input
-                  type="text"
-                  className="form-control color-black"
-                  placeholder="City"
-                  {...register("city", { required: true, maxLength: 20 })}
-                  required
-                  style={{
-                    height: "50px",
-                    fontSize: "15px",
-                    borderRadius: "8px",
-                  }}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </Table> */}
         <label
           style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}
         >

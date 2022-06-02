@@ -242,8 +242,6 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       marginRight: "30px",
-                      fontSize: "20px",
-                      fontWeight: "bold",
                       padding: "0 20px",
                       height: "60px",
                     }}
@@ -274,22 +272,16 @@ const Header = ({
               {user._id ? (
                 <>
                   <div className="dropdown">
-                    {windowSize > 1380 ? (
+                    {windowSize > 800 ? (
                       <button className="user mt-0">
                         Hello, {user.firstName}
                       </button>
-                    ) :
-                      windowSize > 800 ? (
-                        <button className="user mt-0">
-                          Hello,{String(user.firstName[0]).toUpperCase()}
-                          {String(user.lastName[0]).toUpperCase()}
-                        </button>
-                      ) : (
-                        <button className="user mt-0">
-                          {String(user.firstName[0]).toUpperCase()}
-                          {String(user.lastName[0]).toUpperCase()}
-                        </button>
-                      )}
+                    ) : (
+                      <button className="user mt-0">
+                        {String(user.firstName[0]).toUpperCase()}
+                        {String(user.lastName[0]).toUpperCase()}
+                      </button>
+                    )}
                     <div className="dropdown-content">
                       <button
                         className="fw-bold p-3"
@@ -326,9 +318,7 @@ const Header = ({
                       <IoWallet size={20} />
                       <NumberFormat
                         style={{
-                          fontSize: "16px",
                           marginLeft: "10px",
-                          fontWeight: "bold",
                         }}
                         value={user.wallet}
                         displayType={"text"}
@@ -359,9 +349,7 @@ const Header = ({
                         <button className="fw-bold">
                           <NumberFormat
                             style={{
-                              fontSize: "16px",
                               marginLeft: "10px",
-                              fontWeight: "bold",
                             }}
                             value={user.wallet}
                             displayType={"text"}
@@ -379,6 +367,7 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
+                      lineHeight: "normal",
                       height: "47px",
                     }}
                     id={colors === "white" ? "hover" : ""}
@@ -396,6 +385,7 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
+                      lineHeight: "normal",
                       height: "47px",
                     }}
                   >
@@ -411,7 +401,6 @@ const Header = ({
                         marginRight: windowSize > 800 ? "50px" : "10px",
                         display: "flex",
                         alignItems: "center",
-                        fontSize: "20px",
                       }}
                     >
                       <Button
@@ -438,7 +427,7 @@ const Header = ({
                     <Button
                       id={colors === "white" ? "hover" : ""}
                       style={{ color: textColor }}
-                      className="signIn-btn mt-0"
+                      className="signIn-btn mt-0 bg-transparent"
                       onClick={toggleSignIn}
                     >
                       Sign In
@@ -453,6 +442,7 @@ const Header = ({
                       alignItems: "center",
                       backgroundColor: "transparent",
                       color: textColor,
+                      lineHeight: "normal",
                       borderRadius: "0",
                     }}
                     onClick={() => {
@@ -470,6 +460,7 @@ const Header = ({
                       display: "flex",
                       alignItems: "center",
                       backgroundColor: "transparent",
+                      lineHeight: "normal",
                       color: textColor,
                       borderRadius: "0",
                     }}
@@ -481,7 +472,10 @@ const Header = ({
             </div>
           </>
         ) : (
-          <div className="d-flex flex-row ">
+          <div
+            className="d-flex flex-row"
+            style={{ height: "100%", alignItems: "center" }}
+          >
             {user._id && !user.KYC && (
               <>
                 <div className="dropdown">
@@ -544,7 +538,7 @@ const Header = ({
                       backgroundColor: "transparent",
                       color: textColor,
                       borderRadius: "0",
-                      height: "43px",
+                      height: "47px",
                     }}
                     id={colors === "white" ? "hover" : ""}
                     title={<IoWallet size={30} />}
@@ -554,9 +548,7 @@ const Header = ({
                     <IoWallet size={20} />
                     <NumberFormat
                       style={{
-                        fontSize: "16px",
                         marginLeft: "10px",
-                        fontWeight: "bold",
                       }}
                       value={user.wallet}
                       displayType={"text"}
@@ -586,9 +578,7 @@ const Header = ({
                       <button className="fw-bold">
                         <NumberFormat
                           style={{
-                            fontSize: "16px",
                             marginLeft: "10px",
-                            fontWeight: "bold",
                           }}
                           value={user.wallet}
                           displayType={"text"}
@@ -606,7 +596,8 @@ const Header = ({
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
-                    height: "57px",
+                    lineHeight: "normal",
+                    height: "47px",
                   }}
                   onClick={() => {
                     toggleOpen();
@@ -622,6 +613,7 @@ const Header = ({
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
+                    lineHeight: "normal",
                     height: "47px",
                   }}
                 >
@@ -658,9 +650,7 @@ const Header = ({
                       id={colors === "white" ? "hover" : ""}
                       className="signIn-btn"
                       style={{
-                        fontSize: 18,
                         color: textColor,
-                        fontWeight: "normal",
                         backgroundColor: "transparent",
                         border: "0",
                       }}
@@ -674,9 +664,7 @@ const Header = ({
                       id={colors === "white" ? "hover" : ""}
                       className="signUp-btn"
                       style={{
-                        fontSize: 18,
                         color: textColor,
-                        fontWeight: "normal",
                         backgroundColor: "transparent",
                         border: "0",
                       }}
@@ -690,7 +678,7 @@ const Header = ({
                   <Button
                     id={colors === "white" ? "hover" : ""}
                     style={{ color: textColor }}
-                    className="signIn-btn mt-0"
+                    className="signIn-btn mt-0 bg-transparent"
                     onClick={toggleSignIn}
                   >
                     Sign In
@@ -703,6 +691,7 @@ const Header = ({
                     backgroundColor: "transparent",
                     color: textColor,
                     borderRadius: "0",
+                    lineHeight: "normal",
                     height: "47px",
                   }}
                   onClick={() => {
@@ -717,6 +706,7 @@ const Header = ({
                   className="headerNav mt-0"
                   style={{
                     backgroundColor: "transparent",
+                    lineHeight: "normal",
                     color: textColor,
                     borderRadius: "0",
                     height: "47px",
@@ -1005,18 +995,10 @@ const Nav = styled.nav`
   top: 0;
   left: 0;
   background-color: transparent;
-  z-index: 3;
 `;
 
 const Menu = styled.div`
   display: flex;
-  button {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    background-color: transparent;
-    border: none;
-  }
 `;
 // const RightMenu = styled.div`
 //   display: flex;

@@ -53,7 +53,7 @@ const Team = React.lazy(() => import("./components/Company/Team"));
 const PartnerWithUs = React.lazy(() =>
   import("./components/Company/PartnerWithUs")
 );
-const Broker = React.lazy(() => import("./components/Users/Broker"));
+const Broker = React.lazy(() => import("./components/Company/Broker"));
 const ReconfirmEmail = React.lazy(() =>
   import("./components/Users/ReconfirmEmail")
 );
