@@ -306,7 +306,7 @@ h1 {
     font-weight: 800;
   }
   h5 {
-    font-size: 1rem !important;
+    font-size: 1rem;
   }
   .modal-close {
     position: absolute;

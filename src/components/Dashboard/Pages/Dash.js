@@ -405,7 +405,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Saved Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Saved Auction
+              </h1>
             </div>
           )
         )}
@@ -422,7 +424,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Bid Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Bid Auction
+              </h1>
             </div>
           )
         )}
@@ -442,7 +446,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Approved Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Approved Auction
+              </h1>
             </div>
           )
         )}
