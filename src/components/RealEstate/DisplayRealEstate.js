@@ -396,19 +396,20 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
           </div>
 
           <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
-            <Col style={{ padding: "0" }}>
-              <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
-              <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                {
-                  property.property.details.property_address
-                    .formatted_street_address
-                }{" "}
-                {","} {property.property.details.property_address.city} {","}{" "}
-                {property.property.details.property_address.state}{" "}
-                {property.property.details.property_address.zip_code}
-              </h5>
+            <Col>
+              <Row >
+                <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
+                <h5 style={{ color: "#919191", fontWeight: "400" }}>
+                  {
+                    property.property.details.property_address
+                      .formatted_street_address
+                  }{" "}
+                  {","} {property.property.details.property_address.city} {","}{" "}
+                  {property.property.details.property_address.state}{" "}
+                  {property.property.details.property_address.zip_code}
+                </h5>
+              </Row>
             </Col>
-
             <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div className="registBtn">

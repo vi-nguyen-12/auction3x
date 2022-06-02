@@ -393,15 +393,16 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
 
           {/* first row */}
           <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
-            <Col style={{ padding: "0" }}>
-              <h2 style={{ color: "#b77b50" }}>
-                {property.property.details.manufacturer_name}
-              </h2>
-              <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                {property.property.details.property_address}
-              </h5>
+            <Col style={{ width: "100%" }}>
+              <Row>
+                <h2 style={{ color: "#b77b50" }}>
+                  {property.property.details.manufacturer_name}
+                </h2>
+                <h5 style={{ color: "#919191", fontWeight: "400" }}>
+                  {property.property.details.property_address}
+                </h5>
+              </Row>
             </Col>
-
             <Col style={{ padding: "0" }}>
               {!user._id && (
                 <div className="registBtn">
@@ -1460,7 +1461,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
             </Modal.Body>
           </Modal>
         </>
-      )}
+      )
+      }
     </>
   );
 }

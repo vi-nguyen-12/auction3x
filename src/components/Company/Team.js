@@ -2,6 +2,7 @@ import React from "react";
 import CompanyHeader from "./CompanyHeader";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import jay from "../../images/jay.jpg";
+import TeamCard from "../Cards/TeamCard";
 
 function Team({ windowSize }) {
   return (
@@ -165,25 +166,14 @@ function Team({ windowSize }) {
             </Col>
           </Row>
         )}
-        <Row style={{ padding: "10px 200px", marginBottom: "50px" }}>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
-            <div>
-              <div>
-                <img
-                  src={jay}
-                  alt=""
-                  width={80}
-                  height={80}
-                  style={{ borderRadius: "50%" }}
-                />
-              </div>
-              <div>
-                <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  Jay Patel
-                </p>
-                <p style={{ fontSize: "15px" }}>Founder</p>
-              </div>
-            </div>
+        <Row >
+          <Col className="ceo-card">
+            <TeamCard
+              name="Jay Patel"
+              location="Sugar Land, Tx, USA"
+              img={jay}
+              linkedln="https://www.linkedin.com/in/wickrema-singhe-66a784/"
+            />
           </Col>
         </Row>
       </Container>
