@@ -91,7 +91,7 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayCar({ toggleChange, property, toggleSignIn }) {
+function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -251,16 +251,16 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   className="favorite-button"
                 >
                   {favorite ? (
-                    <AiFillHeart size="50px" color="C58753" />
+                    <AiFillHeart className="logo" />
                   ) : (
-                    <AiOutlineHeart size="50px" color="C58753" />
+                    <AiOutlineHeart className="logo" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline size="50px" color="C58753" />
+                  <IoImageOutline className="logo" />
                 </button>
                 <Modal
                   size="xl"
@@ -269,7 +269,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body >
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -298,11 +298,11 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine size="50px" color="C58753" />
+                  <RiVideoLine className="logo" />
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body >
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -332,17 +332,17 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               </div>
               <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 size="50px" color="C58753" />
+                  <Md360 className="logo" />
                 </button>
               </div>
 
               {property && (
                 <div>
                   <button onClick={toggleMap} className="map-btn">
-                    <IoLocationOutline size="50px" color="C58753" />
+                    <IoLocationOutline className="logo" />
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
-                    <Modal.Body style={{ height: "700px" }}>
+                    <Modal.Body >
                       <div>
                         <CloseButton
                           className="modal-close"
@@ -379,13 +379,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
 
             <Col style={{ padding: "0" }}>
               {!user._id && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
+                <div className="registBtn">
                   <button
                     style={{
                       backgroundColor: "#e8a676",
@@ -396,8 +390,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toggleSignIn}
-                  >
+                    onClick={toggleSignIn}>
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -459,9 +452,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -541,9 +534,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -585,13 +578,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                 user._id &&
                 !property.isNotRegisteredToBuy &&
                 !property.isOwner && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
+                  <div className="registBtn">
                     <button
                       style={{
                         backgroundColor: "#e8a676",
@@ -635,13 +622,14 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                 xs="auto"
                 style={{
                   width: "100%",
-                  height: "150px",
                   padding: "0",
-                  margin: "0",
+                  margin: " 0",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 {registEnded === false ? (
-                  <Col style={{ padding: "0" }}>
+                  <Col>
                     <div
                       style={{
                         display: "grid",
@@ -670,15 +658,15 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
+                        width: "200px",
+                        height: "150px",
                         borderRadius: "10px",
                         padding: "0 40px",
                       }}
@@ -697,8 +685,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
-                  <Col>
+                  new Date().toISOString() > property.auctionStartDate ? (
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -727,7 +715,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : new Date().toISOString() < property.auctionStartDate ? (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -755,15 +743,15 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col>
+                    <Col style={{ margin: "10px" }}>
                       <div
                         style={{
                           display: "grid",
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "100%",
-                          height: "100%",
+                          width: "200px",
+                          height: "150px",
                           borderRadius: "10px",
                           padding: "0 40px",
                         }}
@@ -784,7 +772,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                 )}
 
                 {property.highestBidders && (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     {property.highestBid ? (
                       <div
                         style={{
@@ -861,15 +849,15 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
 
-                <Col>
+                <Col style={{ margin: "10px" }}>
                   <div
                     style={{
                       display: "grid",
                       justifyContent: "center",
-                      alignContent: "center",
+                      alignItems: "center",
                       backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      height: "100%",
+                      width: "200px",
+                      height: "150px",
                       borderRadius: "10px",
                       padding: "0 40px",
                     }}
@@ -1186,7 +1174,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
             >
               <Tab
                 eventKey="Investment Opportunity"
-                title="Investment Opportunity"
+                title={windowSize > 800 ? "Investment Opportunity" : "IO"}
                 className="RealEstate-Tab-1"
                 style={{
                   backgroundColor: "#B77B50",
@@ -1218,7 +1206,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Location Information"
-                title="Location Information"
+                title={windowSize > 800 ? "Location Information" : "LI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1240,7 +1228,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Market Information"
-                title="Market Information"
+                title={windowSize > 800 ? "Market Information" : "MI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1263,7 +1251,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
 
               <Tab
                 eventKey="Document Vault"
-                title="Document Vault"
+                title={windowSize > 800 ? "Document Vault" : "DV"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1273,17 +1261,17 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                   padding: "20px",
                 }}
               >
-                <Table
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                  }}
-                  borderless
-                >
-                  <tbody className="tabDocs" style={{ padding: "20px" }}>
-                    <tr>
-                      <td>
+                <Row className="tabDocs">
+                  <Row>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1291,8 +1279,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                           )}
                         />{" "}
                         Ownership Documents ({ownershipDoc.length})
-                      </td>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1300,10 +1288,18 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                           )}
                         />{" "}
                         Registration Documents ({registrationDoc.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                      </div>
+                    </Col>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1311,17 +1307,16 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                           )}
                         />{" "}
                         Valuation Report ({valuationDoc.length})
-                      </td>
-                      <td>
+                      </div>
+
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(loanDoc.map((item) => item.url))}
                         />{" "}
                         Loan Documents ({loanDoc.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
@@ -1329,74 +1324,81 @@ function DisplayCar({ toggleChange, property, toggleSignIn }) {
                           )}
                         />{" "}
                         Inspection Report ({inspectionDoc.length})
-                      </td>
-                      <td>
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(engineDoc.map((item) => item.url))}
                         />{" "}
                         Engine Details ({engineDoc.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{ textAlign: "center", fontSize: "15px" }}
-                        colSpan={2}
-                      >
-                        <input type="checkbox" /> Notify me when the Due
-                        Diligence Documents are updated
-                      </td>
-                    </tr>
-                    <tr
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col
                       style={{
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
                         display: "flex",
                         justifyContent: "center",
-                        margin: "auto",
-                        width: "auto",
-                        height: "auto",
                       }}
                     >
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewSelected();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download Selected
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewAll();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download All
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                      <div>
+                        <input type="checkbox" /> Notify me when the Due
+                        Diligence Documents are updated
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "auto",
+                      width: "auto",
+                      height: "auto",
+                    }}
+                  >
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewSelected();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                        }}
+                      >
+                        Download Selected
+                      </button>
+                    </Col>
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewAll();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                        }}
+                      >
+                        Download All
+                      </button>
+                    </Col>
+                  </Row>
+                </Row>
               </Tab>
             </Tabs>
           </Row>

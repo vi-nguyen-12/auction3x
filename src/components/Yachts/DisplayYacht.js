@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../../styles/realEstate.css";
-import { Modal, Table, Row, Col } from "react-bootstrap";
+import { Modal, Table, Row, Col, Container } from "react-bootstrap";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -119,12 +119,11 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayYacht({ toggleChange, property, toggleSignIn }) {
+function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
   const toggleRegistEnded = () => setRegistEnded(!registEnded);
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [location, setLocation] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [showPics, setShowPics] = useState(false);
@@ -299,7 +298,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body >
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -330,7 +329,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
-                  <Modal.Body style={{ height: "700px" }}>
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -341,15 +340,19 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                       style={{ height: "100%", borderRadius: "0" }}
                       {...settings}
                     >
-                      {property.property.videos.map((item, index) => (
-                        <Wrap key={index}>
-                          {/* <a> */}
-                          <video className="vid-display" controls>
-                            <source src={item.url} type="video/webm" />
-                          </video>
-                          {/* </a> */}
-                        </Wrap>
-                      ))}
+                      {property.property.videos.length > 0 ? (
+                        property.property.videos.map((item, index) => (
+                          <Wrap key={index}>
+                            <video className="vid-display" controls>
+                              <source src={item.url} type="video/webm" />
+                            </video>
+                          </Wrap>
+                        ))
+                      ) : (
+                        <div>
+                          <h1>No Videos Available</h1>
+                        </div>
+                      )}
                     </Carousel>
                   </Modal.Body>
                 </Modal>
@@ -366,7 +369,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     <IoLocationOutline className="logo" />
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
-                    <Modal.Body style={{ height: "700px" }}>
+                    <Modal.Body>
                       <div>
                         <CloseButton
                           className="modal-close"
@@ -401,13 +404,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
 
             <Col style={{ padding: "0" }}>
               {!user._id && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
+                <div className="registBtn">
                   <button
                     style={{
                       backgroundColor: "#e8a676",
@@ -481,9 +478,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -563,9 +560,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -607,13 +604,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                 user._id &&
                 !property.isNotRegisteredToBuy &&
                 !property.isOwner && (
-                  <div
-                    style={{
-                      display: "grid",
-                      justifyContent: "right",
-                      width: "100%",
-                    }}
-                  >
+                  <div className="registBtn">
                     <button
                       style={{
                         backgroundColor: "#e8a676",
@@ -657,9 +648,10 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                 xs="auto"
                 style={{
                   width: "100%",
-                  height: "150px",
                   padding: "0",
-                  margin: "0",
+                  margin: " 0",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 {registEnded === false ? (
@@ -684,6 +676,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                         style={{
                           display: "flex",
                           justifyContent: "left",
+                          marginLeft: "10px",
                           color: "#7c7c7c",
                         }}
                       >
@@ -692,15 +685,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
+                        width: "200px",
+                        height: "150px",
                         borderRadius: "10px",
                         padding: "0 40px",
                       }}
@@ -719,8 +712,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
-                  <Col>
+                  new Date().toISOString() > property.auctionStartDate ? (
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -749,7 +742,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     </div>
                   </Col>
                 ) : new Date().toISOString() < property.auctionStartDate ? (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -777,15 +770,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col>
+                    <Col style={{ margin: "10px" }}>
                       <div
                         style={{
                           display: "grid",
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "100%",
-                          height: "100%",
+                          width: "200px",
+                          height: "150px",
                           borderRadius: "10px",
                           padding: "0 40px",
                         }}
@@ -806,7 +799,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                 )}
 
                 {property.highestBidders && (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     {property.highestBid ? (
                       <div
                         style={{
@@ -883,15 +876,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   </Col>
                 )}
 
-                <Col>
+                <Col style={{ margin: "10px" }}>
                   <div
                     style={{
                       display: "grid",
                       justifyContent: "center",
-                      alignContent: "center",
+                      alignItems: "center",
                       backgroundColor: "#e8e8e8",
-                      width: "100%",
-                      height: "100%",
+                      width: "200px",
+                      height: "150px",
                       borderRadius: "10px",
                       padding: "0 40px",
                     }}
@@ -938,7 +931,6 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                     Property Info
                   </span>
                 </div>
-
                 <Col style={{ padding: "0" }}>
                   <Table striped hover responsive>
                     <tbody className="propInfo">
@@ -1207,7 +1199,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
             >
               <Tab
                 eventKey="Investment Opportunity"
-                title="Investment Opportunity"
+                title={windowSize > 800 ? "Investment Opportunity" : "IO"}
                 className="RealEstate-Tab-1"
                 style={{
                   backgroundColor: "#B77B50",
@@ -1239,7 +1231,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Location Information"
-                title="Location Information"
+                title={windowSize > 800 ? "Location Information" : "LI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1261,7 +1253,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
               </Tab>
               <Tab
                 eventKey="Market Information"
-                title="Market Information"
+                title={windowSize > 800 ? "Market Information" : "MI"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1284,7 +1276,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
 
               <Tab
                 eventKey="Document Vault"
-                title="Document Vault"
+                title={windowSize > 800 ? "Document Vault" : "DV"}
                 style={{
                   backgroundColor: "#B77B50",
                   border: "none",
@@ -1294,134 +1286,150 @@ function DisplayYacht({ toggleChange, property, toggleSignIn }) {
                   padding: "20px",
                 }}
               >
-                <Table
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                  }}
-                  borderless
-                >
-                  <tbody className="tabDocs" style={{ padding: "20px" }}>
-                    <tr>
-                      <td>
+                <Row className="tabDocs">
+                  <Row>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
                             vesselRegist.map((item) => item.url)
                           )}
                         />{" "}
-                        Vessel Registration ({vesselRegist.length})
-                      </td>
-                      <td>
+                        Broker Offering Memorandum ({vesselRegist.length})
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
                             vesselMaintenance.map((item) => item.url)
                           )}
                         />{" "}
-                        Vessel Maintenance Report ({vesselMaintenance.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                        Market and Valuations ({vesselMaintenance.length})
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
                             valuationDoc.map((item) => item.url)
                           )}
                         />{" "}
-                        Valuation Report ({valuationDoc.length})
-                      </td>
-                      <td>
-                        <input
-                          type="checkbox"
-                          onChange={download(
-                            vesselPerformance.map((item) => item.url)
-                          )}
-                        />{" "}
-                        Vessel Performance Report ({vesselPerformance.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
+                        Operating and Financial ({valuationDoc.length})
+                      </div>
+                    </Col>
+                    <Col
+                      style={{
+                        display: "grid",
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
                             deckDetails.map((item) => item.url)
                           )}
                         />{" "}
-                        Vessel Deck Details ({deckDetails.length})
-                      </td>
-                      <td>
+                        Purchase Agreement ({deckDetails.length})
+                      </div>
+                      <div>
                         <input
                           type="checkbox"
                           onChange={download(
                             marineReport.map((item) => item.url)
                           )}
                         />{" "}
-                        Vessel Marine Surveyor Report ({marineReport.length})
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style={{ textAlign: "center", fontSize: "15px" }}
-                        colSpan={2}
-                      >
-                        <input type="checkbox" /> Notify me when the Due
-                        Diligence Documents are updated
-                      </td>
-                    </tr>
-                    <tr
+                        Third Party Reports ({marineReport.length})
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            vesselPerformance.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Title and Insurance ({vesselPerformance.length})
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col
                       style={{
+                        margin: "10px",
+                        fontSize: windowSize < 800 ? "10px" : "20px",
+                        color: "white",
                         display: "flex",
                         justifyContent: "center",
-                        margin: "auto",
-                        width: "auto",
-                        height: "auto",
                       }}
                     >
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewSelected();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download Selected
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          onClick={() => {
-                            viewAll();
-                          }}
-                          style={{
-                            backgroundColor: "white",
-                            border: "none",
-                            outline: "none",
-                            color: "#b77b50",
-                            padding: "10px 20px",
-                            borderRadius: "8px",
-                            fontSize: "18px",
-                            width: "200px",
-                          }}
-                        >
-                          Download All
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
+                      <div>
+                        <input type="checkbox" /> Notify me when the Due
+                        Diligence Documents are updated
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      margin: "auto",
+                      width: "auto",
+                      height: "auto",
+                    }}
+                  >
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewSelected();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                          margin: "10px 0",
+                        }}
+                      >
+                        Download Selected
+                      </button>
+                    </Col>
+                    <Col>
+                      <button
+                        onClick={() => {
+                          viewAll();
+                        }}
+                        style={{
+                          backgroundColor: "white",
+                          border: "none",
+                          outline: "none",
+                          color: "#b77b50",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          fontSize: "18px",
+                          width: "200px",
+                          margin: "10px 0",
+                        }}
+                      >
+                        Download All
+                      </button>
+                    </Col>
+                  </Row>
+                </Row>
               </Tab>
             </Tabs>
           </Row>

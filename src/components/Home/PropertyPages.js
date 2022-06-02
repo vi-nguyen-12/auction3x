@@ -63,7 +63,7 @@ const PropertyPages = ({
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
-              <Col md={3}>
+              <Col>
                 <div className=" RealButton ">
                   <input
                     type="text"
@@ -138,7 +138,7 @@ const PropertyPages = ({
               </Col>
               <Col>
                 <select className=" RealButton ">
-                  <option>Sort by:</option>
+                  <option>Sort by</option>
                   <option href="#">Premium</option>
                   <option href="#">Popular</option>
                   <option href="#">Price Lowest First</option>
@@ -152,22 +152,15 @@ const PropertyPages = ({
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col
-                md={7}
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  alignItems: "center",
-                }}
-              >
-                About 151051 results
+              <Col className="resultText">
+                <p className="filterText">About 151051 results</p>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="galleryButton" onClick={toggleImgCar}>
                   Gallery
                 </button>
@@ -179,7 +172,7 @@ const PropertyPages = ({
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
-              <Col md={3}>
+              <Col>
                 <div className=" RealButton ">
                   <input
                     type="text"
@@ -255,7 +248,7 @@ const PropertyPages = ({
               </Col>
               <Col>
                 <select className=" RealButton ">
-                  <option>Sort by:</option>
+                  <option>Sort by</option>
                   <option href="#">Premium</option>
                   <option href="#">Popular</option>
                   <option href="#">Price Lowest First</option>
@@ -269,22 +262,15 @@ const PropertyPages = ({
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col
-                md={7}
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  alignItems: "center",
-                }}
-              >
-                About 151051 results
+              <Col className="resultText">
+                <p className="filterText">About 151051 results</p>
               </Col>
-              <Col md={2}>
+              <Col>
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col md={2}>
+              <Col>
                 <button className="galleryButton" onClick={toggleImgJet}>
                   Gallery
                 </button>
@@ -296,7 +282,7 @@ const PropertyPages = ({
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
-              <Col md={3}>
+              <Col >
                 <div className=" RealButton ">
                   <input
                     type="text"
@@ -379,7 +365,7 @@ const PropertyPages = ({
               </Col>
               <Col>
                 <select className=" RealButton ">
-                  <option>Sort by:</option>
+                  <option>Sort by</option>
                   <option href="#">Premium</option>
                   <option href="#">Popular</option>
                   <option href="#">Price Lowest First</option>
@@ -393,22 +379,15 @@ const PropertyPages = ({
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col
-                md={7}
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  alignItems: "center",
-                }}
-              >
-                About 151051 results
+              <Col className="resultText" >
+                <p className="filterText">About 151051 results</p>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="galleryButton" onClick={toggleImgYacht}>
                   Gallery
                 </button>
@@ -420,7 +399,7 @@ const PropertyPages = ({
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
-              <Col md={3}>
+              <Col>
                 <div className=" RealButton ">
                   <input
                     type="text"
@@ -465,13 +444,6 @@ const PropertyPages = ({
               </Col>
               <Col>
                 <select className=" RealButton ">
-                  <option>More Filter</option>
-                  <option href="#">Profile</option>
-                  <option href="#">My Ads</option>
-                </select>
-              </Col>
-              <Col>
-                <select className=" RealButton ">
                   <option>Sort</option>
                   <option href="#">Premium</option>
                   <option href="#">Popular</option>
@@ -486,22 +458,15 @@ const PropertyPages = ({
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col
-                md={7}
-                style={{
-                  display: "flex",
-                  justifyContent: "right",
-                  alignItems: "center",
-                }}
-              >
-                About 151051 results
+              <Col className="resultText">
+                <p className="filterText">About 151051 results</p>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col md={2}>
+              <Col >
                 <button className="galleryButton" onClick={toggleImage}>
                   Gallery
                 </button>

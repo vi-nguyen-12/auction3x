@@ -9,6 +9,7 @@ import DocumentsUpload from "./DocumentsUpload";
 import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
+import { Container, Row } from "react-bootstrap";
 
 const MultiSellForm = ({
   toggleShow,
@@ -88,18 +89,18 @@ const MultiSellForm = ({
 
   if (step === 0) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <SellWelcome
           togglePropertyType={togglePropertyType}
           toggleStep={toggleStep}
           step={step}
         />
-      </div>
+      </Container>
     );
   } else if (step === 1) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <Ownership
           toggleStep={toggleStep}
@@ -111,11 +112,11 @@ const MultiSellForm = ({
           ownership={ownership}
           propId={propId}
         />
-      </div>
+      </Container>
     );
   } else if (step === 2) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <ListingDetails
           properties={properties}
@@ -124,11 +125,11 @@ const MultiSellForm = ({
           propertyType={propertyType}
           property={property}
         />
-      </div>
+      </Container>
     );
   } else if (step === 3) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <PropertyDetails
           togglePropertyData={togglePropertyData}
@@ -142,11 +143,11 @@ const MultiSellForm = ({
           toggleSellStep={toggleSellStep}
           propertyData={propertyData}
         />
-      </div>
+      </Container>
     );
   } else if (step === 4) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <UploadForm
           toggleImages={toggleImages}
@@ -163,11 +164,11 @@ const MultiSellForm = ({
           image={images}
           video={videos}
         />
-      </div>
+      </Container>
     );
   } else if (step === 5) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <DocumentsUpload
           toggleStep={(data) => toggleStep(data)}
@@ -184,19 +185,19 @@ const MultiSellForm = ({
           getPropId={getPropId}
           document={documents}
         />
-      </div>
+      </Container>
     );
     // } else if (step === 5) {
     //   return (
-    //     <div className="sell-register-container">
+    //     <Container>
     //       <h1>Sell On Auction3</h1>
 
     //       <ListingFees toggleStep={toggleStep} step={step} test="test" />
-    //     </div>
+    //     </Container>
     //   );
   } else if (step === 6) {
     return (
-      <div className="sell-register-container">
+      <Container>
         <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
         <AgreementForm
           propertyData={propertyData}
@@ -210,7 +211,7 @@ const MultiSellForm = ({
           propId={propId}
           propertyType={propertyType}
         />
-      </div>
+      </Container>
     );
   }
 };
