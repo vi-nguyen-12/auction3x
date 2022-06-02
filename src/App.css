@@ -34,12 +34,6 @@
   align-items: center;
 }
 
-.sell-register-container {
-  height: 130vh;
-  width: 100vw;
-  overflow-y: auto;
-}
-
 .submitBtn {
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   border: none;

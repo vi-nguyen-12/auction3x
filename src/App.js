@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import "./App.css";
-import { Modal } from "react-bootstrap";
+import { Modal, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   BrowserRouter as Router,
@@ -525,7 +525,6 @@ function App() {
           </Modal.Body>
         </Modal>
         {/* End of Modal */}
-        
         <ButtontoTop />{" "}
         <Router>
           <Header
@@ -543,7 +542,7 @@ function App() {
           <Switch>
             {user._id && (
               <Route exact path="/MultiSellForm">
-                <div className="sell-register-container">
+                <Container>
                   <MultiSellForm
                     colorChange={colorChange}
                     toggleShow={toggleShow}
@@ -552,7 +551,7 @@ function App() {
                     setPositionLeft={setPositionLeft}
                     setPadRight={setPadRight}
                   />
-                </div>
+                </Container>
               </Route>
             )}
 
@@ -742,7 +741,7 @@ function App() {
             )}
 
             <Route exact path="/MultiSellForm/:userId/:id/:step">
-              <div className="sell-register-container">
+              <Container>
                 <MultiSellForm
                   colorChange={colorChange}
                   toggleShow={toggleShow}
@@ -751,7 +750,7 @@ function App() {
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
                 />
-              </div>
+              </Container>
             </Route>
 
             <Route path="/DisplayAuctions/:id">
