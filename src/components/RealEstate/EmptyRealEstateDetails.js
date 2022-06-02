@@ -330,7 +330,7 @@ function EmptyRealEstateDetails({
   return (
     <>
       <h3>Property Details</h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Row className="mt-3">
           <Col>
             <input
@@ -556,13 +556,17 @@ function EmptyRealEstateDetails({
           <Col
             xs={12}
             md={4}
-            className="d-flex justify-content-sm-center justify-content-md-end mt-2"
+            className="d-flex justify-content-center justify-content-md-end mt-2"
           >
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
           </Col>
-          <Col xs={12} md={8} className="d-flex mt-2">
+          <Col
+            xs={12}
+            md={8}
+            className="d-flex justify-content-center justify-content-md-start mt-2"
+          >
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>

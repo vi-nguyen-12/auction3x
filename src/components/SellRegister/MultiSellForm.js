@@ -5,7 +5,7 @@ import UploadForm from "./UploadForm";
 import "../../styles/sell-register.css";
 import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
-import DocumentsUpload from "./DocumentsUpload";
+
 import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
@@ -85,22 +85,16 @@ const MultiSellForm = ({
       });
     }
   }, [params.step]);
-
-  if (step === 0) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+  return (
+    <Container className="vh-100">
+      <h1>Sell On Auction3</h1>
+      {step === 0 ? (
         <SellWelcome
           togglePropertyType={togglePropertyType}
           toggleStep={toggleStep}
           step={step}
         />
-      </Container>
-    );
-  } else if (step === 1) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+      ) : step === 1 ? (
         <Ownership
           toggleStep={toggleStep}
           step={step}
@@ -111,12 +105,7 @@ const MultiSellForm = ({
           ownership={ownership}
           propId={propId}
         />
-      </Container>
-    );
-  } else if (step === 2) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+      ) : step === 2 ? (
         <ListingDetails
           properties={properties}
           toggleStep={(data) => toggleStep(data)}
@@ -124,12 +113,7 @@ const MultiSellForm = ({
           propertyType={propertyType}
           property={property}
         />
-      </Container>
-    );
-  } else if (step === 3) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+      ) : step === 3 ? (
         <PropertyDetails
           togglePropertyData={togglePropertyData}
           property={property}
@@ -142,12 +126,7 @@ const MultiSellForm = ({
           toggleSellStep={toggleSellStep}
           propertyData={propertyData}
         />
-      </Container>
-    );
-  } else if (step === 4) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+      ) : step === 4 ? (
         <UploadForm
           toggleImages={toggleImages}
           toggleVideos={toggleVideos}
@@ -163,41 +142,10 @@ const MultiSellForm = ({
           image={images}
           video={videos}
         />
-      </Container>
-    );
-  } else if (step === 5) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
-        <DocumentsUpload
-          toggleStep={(data) => toggleStep(data)}
-          step={step}
-          toggleDocuments={toggleDocuments}
-          propertyType={propertyType}
-          toggleSellStep={toggleSellStep}
-          sellStep={sellStep}
-          propertyData={propertyData}
-          propId={propId}
-          ownership={ownership}
-          images={images}
-          videos={videos}
-          getPropId={getPropId}
-          document={documents}
-        />
-      </Container>
-    );
-    // } else if (step === 5) {
-    //   return (
-    //     <Container>
-    //       <h1>Sell On Auction3</h1>
-
-    //       <ListingFees toggleStep={toggleStep} step={step} test="test" />
-    //     </Container>
-    //   );
-  } else if (step === 6) {
-    return (
-      <Container>
-        <h1>Sell On Auction3</h1>
+      ) : step === 5 ? (
+        // <ListingFees toggleStep={toggleStep} step={step} test="test" />
+        <></>
+      ) : (
         <AgreementForm
           propertyData={propertyData}
           toggleStep={(data) => toggleStep(data)}
@@ -210,9 +158,9 @@ const MultiSellForm = ({
           propId={propId}
           propertyType={propertyType}
         />
-      </Container>
-    );
-  }
+      )}
+    </Container>
+  );
 };
 
 export default MultiSellForm;
