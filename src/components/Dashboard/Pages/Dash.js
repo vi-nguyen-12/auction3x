@@ -11,6 +11,7 @@ import BidAuctionsComp from "./Auctions/TabsComponents/BidAuctionsComp";
 import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp";
 import CloseButton from "react-bootstrap/CloseButton";
 import AddFund from "../../BuyRegister/AddFund";
+import { useHistory } from "react-router-dom";
 
 function Dash({ windowSize }) {
   const [savedProp, setSavedProp] = useState([]);
@@ -29,6 +30,8 @@ function Dash({ windowSize }) {
   const savedProperties = useSelector((state) => state.savedProperty);
   const [showFundReq, popFundReq] = useState(false);
   const toggleFundReq = () => popFundReq(!showFundReq);
+
+  const history = useHistory();
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
@@ -93,7 +96,12 @@ function Dash({ windowSize }) {
             padding: "20px",
           }}
         >
-          <div className="liveAuc">
+          <div
+            className="liveAuc"
+            onClick={() => {
+              window.open("/");
+            }}
+          >
             <div className="names">
               <span>Live Auctions</span>
               <h3>{numOfLiveAuctions}</h3>
@@ -106,7 +114,12 @@ function Dash({ windowSize }) {
         <Col
           style={{ display: "flex", justifyContent: "center", padding: "20px" }}
         >
-          <div className="liveAuc">
+          <div
+            className="liveAuc"
+            onClick={() => {
+              window.open("/");
+            }}
+          >
             <div className="names">
               <span>Upcoming Auctions</span>
               <h3>{numOfUpcomingAuctions}</h3>
@@ -130,7 +143,12 @@ function Dash({ windowSize }) {
         <Col
           style={{ display: "flex", justifyContent: "center", padding: "20px" }}
         >
-          <div className="liveAuc">
+          <div
+            className="liveAuc"
+            onClick={() => {
+              history.push("/Dashboard/Listings/AuctionListings");
+            }}
+          >
             <div className="names">
               <span>Your Listings</span>
               <h3>{listing}</h3>
@@ -405,7 +423,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Saved Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Saved Auction
+              </h1>
             </div>
           )
         )}
@@ -422,7 +442,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Bid Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Bid Auction
+              </h1>
             </div>
           )
         )}
@@ -442,7 +464,9 @@ function Dash({ windowSize }) {
                 marginTop: "30px",
               }}
             >
-              <h1>No Approved Auction</h1>
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Approved Auction
+              </h1>
             </div>
           )
         )}

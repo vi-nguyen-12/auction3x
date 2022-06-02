@@ -1,21 +1,10 @@
-/*Steps bar*/
-/* .circle {
-  display: flex;
-  width: 85px;
-  height: 85px;
-  background-color: rgb(238, 238, 238);
-  border-radius: 50%;
-} */
-
 .text {
   margin: auto;
   color: white;
   font-weight: bold;
 }
-/*Sell Welcome*/
-.box-content {
-  margin: auto;
-  /* position: relative; */
+
+.wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,12 +12,9 @@
   border: 1px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 5px 20px;
-  height: 600px;
-  width: 65vw;
-  /* top: 50px; */
+  width: 100%;
+  margin-top: 20px;
 }
-
 .save-btn,
 .pre-btn,
 .nxt-btn {
@@ -56,6 +42,22 @@
   color: #ffffff;
 }
 
+.sell-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 60px 60px 30px 60px;
+}
+
+.sell-bottom h3 {
+  color: #6d6d6d;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/*Sell Welcome*/
 .bottom-btn {
   width: 100%;
   display: flex;
@@ -65,38 +67,7 @@
   border: 1px solid blue;
 }
 
-.sell-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  margin-top: 150px;
-}
-
-.wrapper {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 5px 20px;
-  width: 65vw;
-}
-
 /* Select Category */
-.sell-bottom h3 {
-  color: #6d6d6d;
-  font-weight: bold;
-  margin-bottom: 30px;
-  text-align: center;
-}
-.category-wrapper {
-  display: flex;
-}
-
 .category-btn {
   width: 100px;
   border-radius: 25%;
@@ -119,10 +90,6 @@
 }
 
 /* Upload image form */
-.upload-col {
-  padding: 0 40px;
-}
-
 .upload-wrapper {
   background-color: #f2f6fc;
   padding: 0.5rem;
@@ -162,39 +129,6 @@
   color: black;
 }
 
-/*Upload Form*/
-
-.upload-box-docu {
-  margin: auto;
-  /* position: relative; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  /* height: 1800px; */
-  width: 75vw;
-  /* top: 50px; */
-}
-
-/*Agreement Form*/
-.agreement-wrapper {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  /* height: 580px; */
-  width: 65vw;
-  /* top: 50px; */
-}
 /*Fee Form*/
 .listingfee-content {
   margin: auto;
@@ -213,7 +147,6 @@
 /*Listing details form*/
 .listDetail-content {
   margin: auto;
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -223,8 +156,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 10px 20px;
   height: 1000px;
-  /* width: 70vw; */
-  /* top: 50px; */
 }
 
 .sell-top {
@@ -237,70 +168,14 @@
   padding: 20px 0 !important;
 }
 
-.sell-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 60px 60px 30px 60px;
-}
-
-.sell-bottom-docu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 0;
-  /* position: absolute; */
-  /* flex-wrap: wrap; */
-  width: 100%;
-  /* bottom: 150px; */
-}
-
 .fee-sell-bottom {
   display: flex;
   justify-content: center;
   border: 0;
-  /* position: absolute; */
   height: 580px;
   width: 100%;
-  /* bottom: 0; */
 }
 
-.list-sell-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.agree-sell-bottom {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 0;
-  width: 80%;
-}
-
-.pre-btn-listfee {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nxt-btn-listfee {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1px 19px;
-}
-
-.bottom-btn-listfee {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: 30px;
-}
 .pay-btn {
   display: flex;
   justify-content: center;
@@ -325,18 +200,6 @@
   height: auto;
   position: absolute;
   top: 120px;
-}
-
-.list-form {
-  width: 100%;
-  border: none;
-}
-
-.list-input {
-  width: 370px;
-  border-radius: 1px;
-  border: 1px solid #cecaca;
-  padding-left: 10px;
 }
 
 label {
@@ -366,11 +229,6 @@ ul.dashed > li:before {
   color: #fcba7d;
   padding-right: 20px;
   font-size: 30px;
-}
-
-.agree-bottom-btn {
-  display: flex;
-  justify-content: center;
 }
 
 /* sell top */
@@ -460,34 +318,10 @@ input[type="radio"]:checked:after {
   margin-right: 20px;
 }
 
-/*sell-welcome*/
-.sell-1 {
-  font-size: 25px;
-}
-.sell-2 {
-  font-size: 25px;
-}
-.sell-3 {
-  font-size: 25px;
-}
-.choice {
-  margin-left: 20px;
-}
 /*title*/
 h1 {
   margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
-}
-
-.sell-amount {
-  outline: none !important;
-  background-color: transparent !important;
-  padding: 6px !important;
-  color: rgb(0, 0, 0) !important;
-  font-size: 12px !important;
+  padding-top: 100px;
 }
 
 /* loader */
@@ -522,26 +356,8 @@ h1 {
   outline: none;
 }
 
-.listDetails-body {
-  display: inline;
-  margin: auto;
-}
-
-.upload-btn {
-  background-color: transparent;
-  border: none;
-  display: flex;
-}
-
 col {
   width: 50%;
-}
-
-.image-item span {
-  display: inline-block;
-  width: 100%;
-  justify-content: center;
-  font-size: 16px;
 }
 
 summary {
@@ -588,7 +404,10 @@ details[open] summary::after {
     height: 30px;
   }
 }
-
+svg {
+  height: 2rem;
+  width: 2rem;
+}
 @media screen and (max-width: 480px) {
   .sell-bottom {
     padding: 20px 10px 20px 10px;

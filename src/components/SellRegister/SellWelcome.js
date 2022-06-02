@@ -37,39 +37,39 @@ const Sell = ({ toggleStep, step, togglePropertyType }) => {
       <div className="sell-bottom">
         <h3>PLEASE SELECT PROPERTY TO SELL</h3>
         <Row className="justify-content-center">
-          <Col md={3} xs={5}>
+          <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               className="category-btn"
               onClick={() => setPropertyType("real-estate")}
             >
-              <BsFillHouseFill size={40} />
+              <BsFillHouseFill />
               <label>Real Estate</label>
             </Button>
           </Col>
-          <Col md={3} xs={5}>
+          <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               onClick={() => setPropertyType("car")}
               className="category-btn"
             >
-              <IoCarSportSharp size={40} />
+              <IoCarSportSharp />
               <label>Cars</label>
             </Button>
           </Col>
-          <Col md={3} xs={5}>
+          <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               onClick={() => setPropertyType("jet")}
               className="category-btn"
             >
-              <IoAirplaneSharp size={40} />
+              <IoAirplaneSharp />
               <label>Jet</label>
             </Button>
           </Col>
-          <Col md={3} xs={5}>
+          <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               onClick={() => setPropertyType("yacht")}
               className="category-btn"
             >
-              <IoIosBoat size={40} />
+              <IoIosBoat />
               <label>Yachts</label>
             </Button>
           </Col>

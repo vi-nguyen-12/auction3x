@@ -243,11 +243,11 @@
 }
 
 @media (max-width: 1100px) {
-  .row > * {
+  /* .row > * {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
   .RealButton {
     display: flex;
     align-items: center;

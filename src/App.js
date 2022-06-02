@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import "./App.css";
-import { Modal } from "react-bootstrap";
+import { Modal, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   BrowserRouter as Router,
@@ -53,7 +53,7 @@ const Team = React.lazy(() => import("./components/Company/Team"));
 const PartnerWithUs = React.lazy(() =>
   import("./components/Company/PartnerWithUs")
 );
-const Broker = React.lazy(() => import("./components/Users/Broker"));
+const Broker = React.lazy(() => import("./components/Company/Broker"));
 const ReconfirmEmail = React.lazy(() =>
   import("./components/Users/ReconfirmEmail")
 );
@@ -525,7 +525,6 @@ function App() {
           </Modal.Body>
         </Modal>
         {/* End of Modal */}
-        
         <ButtontoTop />{" "}
         <Router>
           <Header
@@ -543,16 +542,14 @@ function App() {
           <Switch>
             {user._id && (
               <Route exact path="/MultiSellForm">
-                <div className="sell-register-container">
-                  <MultiSellForm
-                    colorChange={colorChange}
-                    toggleShow={toggleShow}
-                    bodyColorChange={bodyColorChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                  />
-                </div>
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toggleShow={toggleShow}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                />
               </Route>
             )}
 
@@ -742,16 +739,14 @@ function App() {
             )}
 
             <Route exact path="/MultiSellForm/:userId/:id/:step">
-              <div className="sell-register-container">
-                <MultiSellForm
-                  colorChange={colorChange}
-                  toggleShow={toggleShow}
-                  bodyColorChange={bodyColorChange}
-                  setHeaderWidth={setHeaderWidth}
-                  setPositionLeft={setPositionLeft}
-                  setPadRight={setPadRight}
-                />
-              </div>
+              <MultiSellForm
+                colorChange={colorChange}
+                toggleShow={toggleShow}
+                bodyColorChange={bodyColorChange}
+                setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
+              />
             </Route>
 
             <Route path="/DisplayAuctions/:id">
