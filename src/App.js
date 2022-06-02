@@ -542,16 +542,14 @@ function App() {
           <Switch>
             {user._id && (
               <Route exact path="/MultiSellForm">
-                <Container>
-                  <MultiSellForm
-                    colorChange={colorChange}
-                    toggleShow={toggleShow}
-                    bodyColorChange={bodyColorChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                  />
-                </Container>
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toggleShow={toggleShow}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                />
               </Route>
             )}
 
@@ -741,16 +739,14 @@ function App() {
             )}
 
             <Route exact path="/MultiSellForm/:userId/:id/:step">
-              <Container>
-                <MultiSellForm
-                  colorChange={colorChange}
-                  toggleShow={toggleShow}
-                  bodyColorChange={bodyColorChange}
-                  setHeaderWidth={setHeaderWidth}
-                  setPositionLeft={setPositionLeft}
-                  setPadRight={setPadRight}
-                />
-              </Container>
+              <MultiSellForm
+                colorChange={colorChange}
+                toggleShow={toggleShow}
+                bodyColorChange={bodyColorChange}
+                setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
+              />
             </Route>
 
             <Route path="/DisplayAuctions/:id">

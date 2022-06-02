@@ -5,7 +5,6 @@
 }
 
 .wrapper {
-  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,8 +12,8 @@
   border: 1px solid #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 5px 20px;
-  width: 65vw;
+  width: 100%;
+  margin-top: 20px;
 }
 .save-btn,
 .pre-btn,
@@ -322,10 +321,7 @@ input[type="radio"]:checked:after {
 /*title*/
 h1 {
   margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
+  padding-top: 100px;
 }
 
 /* loader */
