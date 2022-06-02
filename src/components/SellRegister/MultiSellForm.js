@@ -85,12 +85,11 @@ const MultiSellForm = ({
       });
     }
   }, [params.step]);
-  console.log(propertyData);
 
   if (step === 0) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <SellWelcome
           togglePropertyType={togglePropertyType}
           toggleStep={toggleStep}
@@ -101,7 +100,7 @@ const MultiSellForm = ({
   } else if (step === 1) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <Ownership
           toggleStep={toggleStep}
           step={step}
@@ -117,7 +116,7 @@ const MultiSellForm = ({
   } else if (step === 2) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <ListingDetails
           properties={properties}
           toggleStep={(data) => toggleStep(data)}
@@ -130,7 +129,7 @@ const MultiSellForm = ({
   } else if (step === 3) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <PropertyDetails
           togglePropertyData={togglePropertyData}
           property={property}
@@ -148,7 +147,7 @@ const MultiSellForm = ({
   } else if (step === 4) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <UploadForm
           toggleImages={toggleImages}
           toggleVideos={toggleVideos}
@@ -169,7 +168,7 @@ const MultiSellForm = ({
   } else if (step === 5) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <DocumentsUpload
           toggleStep={(data) => toggleStep(data)}
           step={step}
@@ -198,7 +197,7 @@ const MultiSellForm = ({
   } else if (step === 6) {
     return (
       <Container>
-        <h1 style={{ width: "100%" }}>Sell On Auction3</h1>
+        <h1>Sell On Auction3</h1>
         <AgreementForm
           propertyData={propertyData}
           toggleStep={(data) => toggleStep(data)}
