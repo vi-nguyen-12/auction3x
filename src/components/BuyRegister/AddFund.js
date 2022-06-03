@@ -32,7 +32,7 @@ function AddFund() {
 
   return (
     <Container style={{ padding: "20px" }}>
-      <h1>Add Fund</h1>
+      <h1 style={{ paddingTop: "30px" }}>Add Fund</h1>
       <Row style={{ margin: "20px", marginTop: "40px" }}>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
@@ -158,7 +158,7 @@ function AddFund() {
                 placeholder="Form"
               />
             </Col>
-            <Col>
+            <Col style={{ padding: "0" }}>
               <label style={{ color: "black" }}>Validity Date</label>
               <input
                 type="date"
