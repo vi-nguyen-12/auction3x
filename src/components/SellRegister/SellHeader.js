@@ -31,6 +31,14 @@ function SellHeader({ step }) {
       <Col xs={1} className="sell-top-col">
         {" "}
         <div className={step >= 4 ? "circle-active" : "circle"}>04</div>
+        <div className="step-title">Upload Images</div>
+      </Col>
+      <Col xs={1} className="sell-top-col-line">
+        <div className={step >= 5 ? "line-1" : "line"}></div>
+      </Col>
+      <Col xs={1} className="sell-top-col">
+        {" "}
+        <div className={step >= 5 ? "circle-active" : "circle"}>05</div>
         <div className="step-title">Upload Documents</div>
       </Col>
       <Col xs={1} className="sell-top-col-line">

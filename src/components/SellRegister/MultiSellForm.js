@@ -10,6 +10,7 @@ import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
+import DocumentsUpload from "./DocumentsUpload";
 
 const MultiSellForm = ({
   toggleShow,
@@ -143,9 +144,22 @@ const MultiSellForm = ({
           video={videos}
         />
       ) : step === 5 ? (
-        // <ListingFees toggleStep={toggleStep} step={step} test="test" />
-        <></>
-      ) : (
+        <DocumentsUpload
+          toggleStep={(data) => toggleStep(data)}
+          step={step}
+          propertyType={propertyType}
+          toggleDocuments={toggleDocuments}
+          ownership={ownership}
+          propId={propId}
+          images={images}
+          videos={videos}
+          propertyData={propertyData}
+          toggleSellStep={toggleSellStep}
+          sellStep={sellStep}
+          getPropId={getPropId}
+          documents={documents}
+        />
+      ) : step === 6 ? (
         <AgreementForm
           propertyData={propertyData}
           toggleStep={(data) => toggleStep(data)}
@@ -158,7 +172,7 @@ const MultiSellForm = ({
           propId={propId}
           propertyType={propertyType}
         />
-      )}
+      ) : null}
     </Container>
   );
 };
