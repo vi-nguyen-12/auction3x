@@ -269,7 +269,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body >
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -302,7 +302,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
-                  <Modal.Body >
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -342,7 +342,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                     <IoLocationOutline className="logo" />
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
-                    <Modal.Body >
+                    <Modal.Body>
                       <div>
                         <CloseButton
                           className="modal-close"
@@ -391,7 +391,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toggleSignIn}>
+                    onClick={toggleSignIn}
+                  >
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -453,9 +454,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -535,9 +536,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -686,7 +687,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
@@ -1271,7 +1272,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         fontSize: windowSize < 800 ? "10px" : "20px",
                         color: "white",
                         justifyContent: "center",
-                      }}>
+                      }}
+                    >
                       <div>
                         <input
                           type="checkbox"
@@ -1360,7 +1362,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       height: "auto",
                     }}
                   >
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewSelected();
@@ -1379,7 +1381,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         Download Selected
                       </button>
                     </Col>
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewAll();

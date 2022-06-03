@@ -298,7 +298,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body >
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -479,9 +479,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -561,9 +561,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -713,7 +713,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
@@ -1389,7 +1389,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       height: "auto",
                     }}
                   >
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewSelected();
@@ -1409,7 +1409,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                         Download Selected
                       </button>
                     </Col>
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewAll();
@@ -1461,8 +1461,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
             </Modal.Body>
           </Modal>
         </>
-      )
-      }
+      )}
     </>
   );
 }

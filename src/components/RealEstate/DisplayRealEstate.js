@@ -103,7 +103,12 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize }) {
+function DisplayRealEstate({
+  property,
+  toggleChange,
+  toggleSignIn,
+  windowSize,
+}) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -280,8 +285,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                   onHide={togglePics}
                   centered
                 >
-                  <Modal.Body
-                  >
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -321,7 +325,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                   onHide={toggleVids}
                   centered
                 >
-                  <Modal.Body >
+                  <Modal.Body>
                     <div>
                       <CloseButton
                         className="modal-close"
@@ -368,7 +372,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                     onHide={toggleMap}
                     centered
                   >
-                    <Modal.Body >
+                    <Modal.Body>
                       <div>
                         <CloseButton
                           className="modal-close"
@@ -397,7 +401,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
 
           <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
             <Col>
-              <Row >
+              <Row>
                 <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
                 <h5 style={{ color: "#919191", fontWeight: "400" }}>
                   {
@@ -423,7 +427,8 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                       fontWeight: "bold",
                       fontSize: "20px",
                     }}
-                    onClick={toggleSignIn}>
+                    onClick={toggleSignIn}
+                  >
                     Register to Bid
                   </button>
                   <div style={{ marginLeft: "35px", marginTop: "10px" }}>
@@ -445,9 +450,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
               )}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -527,9 +532,9 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -678,7 +683,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
@@ -1186,10 +1191,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
             </Col>
           </Row>
 
-          <Row
-            ref={myRef}
-            style={{ marginTop: "50px", padding: "35px" }}
-          >
+          <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
             <Tabs
               defaultActiveKey="Investment Opportunity"
               className="RealEstate-Tab"
@@ -1292,13 +1294,16 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                         fontSize: windowSize < 800 ? "10px" : "20px",
                         color: "white",
                         justifyContent: "center",
-                      }}>
+                      }}
+                    >
                       <div>
-                        <input type="checkbox"
+                        <input
+                          type="checkbox"
                           onChange={download(
                             purchaseAgreement.map((item) => item.url)
                           )}
-                        /> Broker Offering Memorandum (0)
+                        />{" "}
+                        Broker Offering Memorandum (0)
                       </div>
                       <div>
                         <input
@@ -1376,7 +1381,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                       height: "auto",
                     }}
                   >
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewSelected();
@@ -1396,7 +1401,7 @@ function DisplayRealEstate({ property, toggleChange, toggleSignIn, windowSize })
                         Download Selected
                       </button>
                     </Col>
-                    <Col>
+                    <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button
                         onClick={() => {
                           viewAll();
