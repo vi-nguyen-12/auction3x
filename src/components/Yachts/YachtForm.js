@@ -20,6 +20,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
   const [country, setCountry] = useState();
   const [state, setState] = useState();
   const [city, setCity] = useState();
+  const [zip, setZip] = useState();
   const [otherDetails, setOtherDetails] = useState();
 
   const params = useParams();
@@ -93,9 +94,37 @@ function YachtForm({ toggleStep, step, properties, property }) {
       );
       setProperty_address(
         properti[0].details.property_address
-          ? properti[0].details.property_address
-          : property.property_address
-          ? property.property_address
+          ? properti[0].details.property_address.formatted_street_address
+          : property.property_address.formatted_street_address
+          ? property.property_address.formatted_street_address
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+          : property.property_address.country
+          ? property.property_address.country
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+          : property.property_address.state
+          ? property.property_address.state
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+          : property.property_address.city
+          ? property.property_address.city
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip
+          : property.property_address.zip
+          ? property.property_address.zip
           : ""
       );
       setOtherDetails(
@@ -161,6 +190,13 @@ function YachtForm({ toggleStep, step, properties, property }) {
             : ""
           : ""
       );
+      setZip(
+        property.property_address
+          ? property.property_address.zip_code
+            ? property.property_address.zip_code
+            : ""
+          : ""
+      );
       setOtherDetails(property.detain ? property.detain : "");
     }
   }, [prop]);
@@ -178,7 +214,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
       no_of_crew_required: data.no_of_crew_required,
       detain: data.detain,
       property_address: {
-        formatted_address: data.property_address
+        formatted_street_address: data.property_address
           ? data.property_address
           : property_address
           ? property_address
@@ -186,6 +222,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
         country: data.country ? data.country : country ? country : "",
         state: data.state ? data.state : state ? state : "",
         city: data.city ? data.city : city ? city : "",
+        zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
       },
     };
     properties(datas);
@@ -241,7 +278,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
         </Row>
 
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -259,7 +296,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -277,7 +314,10 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+        </Row>
+
+        <Row className="mt-3">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -295,7 +335,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -313,10 +353,23 @@ function YachtForm({ toggleStep, step, properties, property }) {
               City <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
+          <Col className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
         </Row>
 
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -334,7 +387,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Manufacture Mark <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -353,7 +406,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
             </span>
           </Col>
 
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -395,7 +448,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -413,7 +466,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Engine Deck Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"
@@ -432,7 +485,7 @@ function YachtForm({ toggleStep, step, properties, property }) {
               Running Cost <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="number"
               min="0"

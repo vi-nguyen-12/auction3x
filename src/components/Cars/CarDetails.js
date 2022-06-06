@@ -34,6 +34,7 @@ function CarDetails({
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
@@ -186,9 +187,9 @@ function CarDetails({
     } else {
       setAddress(
         propertyData.property_address
-          ? propertyData.property_address.formatted_address
-          : property.property_address.formatted_address
-          ? property.property_address.formatted_address
+          ? propertyData.property_address.formatted_street_address
+          : property.property_address.formatted_street_address
+          ? property.property_address.formatted_street_address
           : ""
       );
       setCountry(
@@ -210,6 +211,13 @@ function CarDetails({
           ? propertyData.property_address.city
           : property.property_address.city
           ? property.property_address.city
+          : ""
+      );
+      setZip(
+        propertyData.property_address
+          ? propertyData.property_address.zip_code
+          : property.property_address.zip_code
+          ? property.property_address.zip_code
           : ""
       );
       setPrice(
@@ -323,9 +331,9 @@ function CarDetails({
           condition: condition ? condition : property.condition,
           price: price ? price : property.price,
           property_address: {
-            formatted_address: address
+            formatted_street_address: address
               ? address
-              : property.property_address.formatted_address,
+              : property.property_address.formatted_street_address,
             country: country ? country : property.property_address.country,
             state: state ? state : property.property_address.state,
             city: city ? city : property.property_address.city,
@@ -359,12 +367,13 @@ function CarDetails({
         condition: condition ? condition : property.condition,
         price: price ? price : property.price,
         property_address: {
-          formatted_address: address
+          formatted_street_address: address
             ? address
-            : property.property_address.formatted_address,
+            : property.property_address.formatted_street_address,
           country: country ? country : property.property_address.country,
           state: state ? state : property.property_address.state,
           city: city ? city : property.property_address.city,
+          zip_code: zip ? zip : property.property_address.zip_code,
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
@@ -406,7 +415,7 @@ function CarDetails({
         condition: data.condition ? data.condition : condition ? condition : "",
         price: data.price ? data.price : price ? price : "",
         property_address: {
-          formatted_address: data.address
+          formatted_street_address: data.address
             ? data.address
             : address
             ? address
@@ -414,6 +423,7 @@ function CarDetails({
           country: data.country ? data.country : country ? country : "",
           state: data.state ? data.state : state ? state : "",
           city: data.city ? data.city : city ? city : "",
+          zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
@@ -583,7 +593,7 @@ function CarDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={3}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -594,7 +604,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Address</span>
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -605,7 +615,9 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>Country</span>
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -616,7 +628,7 @@ function CarDetails({
             />
             <span style={{ color: "black" }}>State</span>
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -626,6 +638,17 @@ function CarDetails({
               required
             />
             <span style={{ color: "black" }}>City</span>
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode", { maxLength: 100 })}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ color: "black" }}>Zip Code</span>
           </Col>
         </Row>
         <Row className="mt-3">

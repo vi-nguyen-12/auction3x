@@ -239,11 +239,6 @@ function Ownership({
           </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
             style={{ display: showOwner }}
           >
             <Row>
@@ -252,8 +247,8 @@ function Ownership({
                   style={{
                     borderBottom: "2px solid gray",
                     fontWeight: "bold",
-                    padding: "10px",
-                    textAlign: "center",
+                    fontSize: "18px",
+                    color: "black",
                   }}
                 >
                   Owner Information
@@ -366,11 +361,6 @@ function Ownership({
           <form
             style={{ display: showBroker }}
             onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
           >
             <Row className="mt-3">
               <Col

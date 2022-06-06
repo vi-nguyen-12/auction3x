@@ -23,6 +23,7 @@ function CarForm({ toggleStep, step, properties, property }) {
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
 
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
@@ -123,9 +124,47 @@ function CarForm({ toggleStep, step, properties, property }) {
       );
       setAddress(
         properti[0].details.property_address
-          ? properti[0].details.property_address
-          : property.property_address
-          ? property.property_address
+          ? properti[0].details.property_address.formatted_street_address
+            ? properti[0].details.property_address.formatted_street_address
+            : property.property_address.formatted_street_address
+            ? property.property_address.formatted_street_address
+            : ""
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+            ? properti[0].details.property_address.city
+            : property.property_address.city
+            ? property.property_address.city
+            : ""
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+            ? properti[0].details.property_address.state
+            : property.property_address.state
+            ? property.property_address.state
+            : ""
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+            ? properti[0].details.property_address.country
+            : property.property_address.country
+            ? property.property_address.country
+            : ""
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip
+            ? properti[0].details.property_address.zip
+            : property.property_address.zip
+            ? property.property_address.zip
+            : ""
           : ""
       );
     } else {
@@ -144,7 +183,7 @@ function CarForm({ toggleStep, step, properties, property }) {
       setPrice(property.price ? property.price : "");
       setAddress(
         property.property_address
-          ? property.property_address.formatted_address
+          ? property.property_address.formatted_street_address
           : ""
       );
       setCountry(
@@ -165,6 +204,13 @@ function CarForm({ toggleStep, step, properties, property }) {
         property.property_address
           ? property.property_address.city
             ? property.property_address.city
+            : ""
+          : ""
+      );
+      setZip(
+        property.property_address
+          ? property.property_address.zip_code
+            ? property.property_address.zip_code
             : ""
           : ""
       );
@@ -191,10 +237,15 @@ function CarForm({ toggleStep, step, properties, property }) {
       condition: data.condition ? data.condition : condition ? condition : "",
       price: data.price ? data.price : price ? price : "",
       property_address: {
-        formatted_address: data.address ? data.address : address ? address : "",
+        formatted_street_address: data.address
+          ? data.address
+          : address
+          ? address
+          : "",
         city: data.city ? data.city : city ? city : "",
         state: data.state ? data.state : state ? state : "",
         country: data.country ? data.country : country ? country : "",
+        zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
       },
     };
     properties(datas);
@@ -214,8 +265,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               name="year"
               className="form-control"
               defaultValue={year}
-              {...register("year", { required: false })}
-              maxLength={4}
+              {...register("year", { required: false, maxLength: 4 })}
               onChange={(e) => setYear(e.target.value)}
               required
             />
@@ -377,7 +427,7 @@ function CarForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={3}>
+          <Col>
             <label>Address</label>
             <input
               type="text"
@@ -389,7 +439,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <label>Country</label>
             <input
               type="text"
@@ -401,7 +451,9 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-sm-3 mt-md-0">
             <label>State</label>
             <input
               type="text"
@@ -413,7 +465,7 @@ function CarForm({ toggleStep, step, properties, property }) {
               required
             />
           </Col>
-          <Col xs={12} md={3} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <label>City</label>
             <input
               type="text"
@@ -422,6 +474,18 @@ function CarForm({ toggleStep, step, properties, property }) {
               defaultValue={city}
               {...register("city", { required: false })}
               onChange={(e) => setCity(e.target.value)}
+              required
+            />
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
+            <label>Zip Code</label>
+            <input
+              type="text"
+              name="zipCode"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode", { required: false })}
+              onChange={(e) => setZip(e.target.value)}
               required
             />
           </Col>

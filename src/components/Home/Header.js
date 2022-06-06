@@ -308,6 +308,9 @@ const Header = ({
                         color: textColor,
                         borderRadius: "0",
                         height: "47px",
+                        display: "flex",
+                        alignItems: "center",
+                        fontSize: "1.1rem",
                       }}
                       id={colors === "white" ? "hover" : ""}
                       // id="dropdown-basic-button"
@@ -336,6 +339,8 @@ const Header = ({
                           color: textColor,
                           borderRadius: "0",
                           height: "47px",
+                          display: "flex",
+                          alignItems: "center",
                         }}
                         id={colors === "white" ? "hover" : ""}
                         // id="dropdown-basic-button"
@@ -369,6 +374,8 @@ const Header = ({
                       borderRadius: "0",
                       lineHeight: "normal",
                       height: "47px",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                     id={colors === "white" ? "hover" : ""}
                     onClick={() => {
@@ -449,7 +456,7 @@ const Header = ({
                       toggleOpen();
                     }}
                   >
-                    <FaBars size={23} />
+                    <FaBars size={20} />
                   </Button>
 
                   <Button
@@ -465,7 +472,7 @@ const Header = ({
                       borderRadius: "0",
                     }}
                   >
-                    <VscGlobe size={29} />
+                    <VscGlobe size={25} />
                   </Button>
                 </>
               )}
@@ -539,6 +546,8 @@ const Header = ({
                       color: textColor,
                       borderRadius: "0",
                       height: "47px",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                     id={colors === "white" ? "hover" : ""}
                     title={<IoWallet size={30} />}
@@ -565,6 +574,8 @@ const Header = ({
                         color: textColor,
                         borderRadius: "0",
                         height: "47px",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                       id={colors === "white" ? "hover" : ""}
                       // id="dropdown-basic-button"
@@ -589,6 +600,7 @@ const Header = ({
                     </div>
                   </div>
                 )}
+
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
@@ -598,6 +610,8 @@ const Header = ({
                     borderRadius: "0",
                     lineHeight: "normal",
                     height: "47px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                   onClick={() => {
                     toggleOpen();
@@ -693,6 +707,8 @@ const Header = ({
                     borderRadius: "0",
                     lineHeight: "normal",
                     height: "47px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                   onClick={() => {
                     toggleOpen();
@@ -914,6 +930,21 @@ const Header = ({
                       }}
                     >
                       FAQ
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toggleOpen();
+                        history.push("/contact");
+                      }}
+                    >
+                      CONTACT US
                     </button>
                   </td>
                 </tr>

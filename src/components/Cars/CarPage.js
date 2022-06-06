@@ -76,7 +76,7 @@ position: relative;
 }
 `;
 
-function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn }) {
+function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn, windowSize }) {
   useEffect(() => {
     toggleChange();
   }, []);
@@ -175,6 +175,7 @@ function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn }) {
                           startingBid={item.startingBid}
                           auctionId={item._id}
                           toggleSignIn={toggleSignIn}
+                          windowSize={windowSize}
                         />
                       </Col>
                     </Wrap>
@@ -211,6 +212,7 @@ function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn }) {
                       endRegister={item.registerEndDate}
                       startingBid={item.startingBid}
                       toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
                     />
                   </Col>
                 ))

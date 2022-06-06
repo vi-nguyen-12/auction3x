@@ -34,6 +34,7 @@ function JetDetails({
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
@@ -80,7 +81,15 @@ function JetDetails({
             : isImport === "Yes"
             ? true
             : false,
-          property_address: address ? address : property.property_address,
+          property_address: {
+            formatted_street_address: address
+              ? address
+              : property.property_address.formatted_street_address,
+            city: city ? city : property.property_address.city,
+            state: state ? state : property.property_address.state,
+            country: country ? country : property.property_address.country,
+            zip_code: zip ? zip : property.property_address.zip_code,
+          },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
           step: parseInt(2),
@@ -127,7 +136,15 @@ function JetDetails({
           ? number_of_aircraft
           : property.number_of_aircraft,
         imported_aircraft: isImport ? isImport : property.imported_aircraft,
-        property_address: address ? address : property.property_address,
+        property_address: {
+          formatted_street_address: address
+            ? address
+            : property.property_address.formatted_street_address,
+          city: city ? city : property.property_address.city,
+          state: state ? state : property.property_address.state,
+          country: country ? country : property.property_address.country,
+          zip_code: zip ? zip : property.property_address.zip_code,
+        },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         ...ownership,
@@ -241,11 +258,57 @@ function JetDetails({
       );
       setAddress(
         properti[0].details.property_address
-          ? properti[0].details.property_address
-          : propertyData.property_address
-          ? propertyData.property_address
-          : property.property_address
-          ? property.property_address
+          ? properti[0].details.property_address.formatted_street_address
+            ? properti[0].details.property_address.formatted_street_address
+            : propertyData.property_address
+            ? propertyData.property_address.formatted_street_address
+            : property.property_address
+            ? property.property_address.formatted_street_address
+            : ""
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+            ? properti[0].details.property_address.city
+            : propertyData.property_address
+            ? propertyData.property_address.city
+            : property.property_address
+            ? property.property_address.city
+            : ""
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+            ? properti[0].details.property_address.state
+            : propertyData.property_address
+            ? propertyData.property_address.state
+            : property.property_address
+            ? property.property_address.state
+            : ""
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+            ? properti[0].details.property_address.country
+            : propertyData.property_address
+            ? propertyData.property_address.country
+            : property.property_address
+            ? property.property_address.country
+            : ""
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip_code
+            ? properti[0].details.property_address.zip_code
+            : propertyData.property_address
+            ? propertyData.property_address.zip_code
+            : property.property_address
+            ? property.property_address.zip_code
+            : ""
           : ""
       );
       setReservedAmount(
@@ -344,9 +407,9 @@ function JetDetails({
       );
       setAddress(
         propertyData.property_address
-          ? propertyData.property_address.formatted_address
+          ? propertyData.property_address.formatted_street_address
           : property.property_address
-          ? property.property_address.formatted_address
+          ? property.property_address.formatted_street_address
           : ""
       );
       setCountry(
@@ -368,6 +431,13 @@ function JetDetails({
           ? propertyData.property_address.city
           : property.property_address
           ? property.property_address.city
+          : ""
+      );
+      setZip(
+        propertyData.property_address
+          ? propertyData.property_address.zip_code
+          : property.property_address
+          ? property.property_address.zip_code
           : ""
       );
 
@@ -430,6 +500,7 @@ function JetDetails({
           country: data.country ? data.country : country ? country : "",
           state: data.state ? data.state : state ? state : "",
           city: data.city ? data.city : city ? city : "",
+          zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
@@ -443,7 +514,7 @@ function JetDetails({
       <h3>Confirm AirCraft Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -456,7 +527,7 @@ function JetDetails({
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -469,7 +540,9 @@ function JetDetails({
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -482,7 +555,7 @@ function JetDetails({
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -493,6 +566,19 @@ function JetDetails({
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -587,7 +673,7 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="number"
               min="0"
@@ -601,7 +687,7 @@ function JetDetails({
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -615,7 +701,7 @@ function JetDetails({
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"

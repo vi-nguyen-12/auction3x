@@ -33,6 +33,7 @@ function YachtDetails({
   const [country, setCountry] = useState();
   const [state, setState] = useState();
   const [city, setCity] = useState();
+  const [zip, setZip] = useState();
   const [otherDetails, setOtherDetails] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
@@ -123,11 +124,47 @@ function YachtDetails({
       );
       setProperty_address(
         properti[0].details.property_address
-          ? properti[0].details.property_address
+          ? properti[0].details.property_address.formatted_street_address
           : propertyData.property_address
-          ? propertyData.property_address
+          ? propertyData.property_address.formatted_street_address
           : property.property_address
-          ? property.property_address
+          ? property.property_address.formatted_street_address
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+          : propertyData.property_address
+          ? propertyData.property_address.country
+          : property.property_address
+          ? property.property_address.country
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+          : propertyData.property_address
+          ? propertyData.property_address.state
+          : property.property_address
+          ? property.property_address.state
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+          : propertyData.property_address
+          ? propertyData.property_address.city
+          : property.property_address
+          ? property.property_address.city
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip_code
+          : propertyData.property_address
+          ? propertyData.property_address.zip_code
+          : property.property_address
+          ? property.property_address.zip_code
           : ""
       );
       setOtherDetails(
@@ -219,9 +256,9 @@ function YachtDetails({
       );
       setProperty_address(
         propertyData.property_address
-          ? propertyData.property_address.formatted_address
+          ? propertyData.property_address.formatted_street_address
           : property.property_address
-          ? property.property_address.formatted_address
+          ? property.property_address.formatted_street_address
           : ""
       );
       setCountry(
@@ -243,6 +280,13 @@ function YachtDetails({
           ? propertyData.property_address.city
           : property.property_address
           ? property.property_address.city
+          : ""
+      );
+      setZip(
+        propertyData.property_address
+          ? propertyData.property_address.zip_code
+          : property.property_address
+          ? property.property_address.zip_code
           : ""
       );
       setOtherDetails(
@@ -305,18 +349,22 @@ function YachtDetails({
               ? property.no_of_crew_required
               : no_of_crew_required,
             property_address: {
-              formatted_address: property.property_address
-                ? property.property_address.formatted_address
+              formatted_street_address: property.property_address
+                .formatted_street_address
+                ? property.property_address.formatted_street_address
                 : property_address,
-              country: property.property_address
+              country: property.property_address.country
                 ? property.property_address.country
                 : country,
-              state: property.property_address
+              state: property.property_address.state
                 ? property.property_address.state
                 : state,
-              city: property.property_address
+              city: property.property_address.city
                 ? property.property_address.city
                 : city,
+              zip_code: property.property_address.zip_code
+                ? property.property_address.zip_code
+                : zip,
             },
             others: property.detain ? property.detain : otherDetails,
             step: parseInt(2),
@@ -364,18 +412,22 @@ function YachtDetails({
               ? property.no_of_crew_required
               : no_of_crew_required,
             property_address: {
-              formatted_address: property.property_address
-                ? property.property_address.formatted_address
+              formatted_street_address: property.property_address
+                .formatted_street_address
+                ? property.property_address.formatted_street_address
                 : property_address,
-              country: property.property_address
+              country: property.property_address.country
                 ? property.property_address.country
                 : country,
-              state: property.property_address
+              state: property.property_address.state
                 ? property.property_address.state
                 : state,
-              city: property.property_address
+              city: property.property_address.city
                 ? property.property_address.city
                 : city,
+              zip_code: property.property_address.zip_code
+                ? property.property_address.zip_code
+                : zip,
             },
             step: parseInt(2),
           },
@@ -422,18 +474,22 @@ function YachtDetails({
             ? property.no_of_crew_required
             : no_of_crew_required,
           property_address: {
-            formatted_address: property.property_address
-              ? property.property_address.formatted_address
+            formatted_street_address: property.property_address
+              .formatted_street_address
+              ? property.property_address.formatted_street_address
               : property_address,
-            country: property.property_address
+            country: property.property_address.country
               ? property.property_address.country
               : country,
-            state: property.property_address
+            state: property.property_address.state
               ? property.property_address.state
               : state,
-            city: property.property_address
+            city: property.property_address.city
               ? property.property_address.city
               : city,
+            zip_code: property.property_address.zip_code
+              ? property.property_address.zip_code
+              : zip,
           },
           others: property.detain ? property.detain : otherDetails,
           ...ownership,
@@ -480,18 +536,22 @@ function YachtDetails({
             ? property.no_of_crew_required
             : no_of_crew_required,
           property_address: {
-            formatted_address: property.property_address
-              ? property.property_address.formatted_address
+            formatted_street_address: property.property_address
+              .formatted_street_address
+              ? property.property_address.formatted_street_address
               : property_address,
-            country: property.property_address
+            country: property.property_address.country
               ? property.property_address.country
               : country,
-            state: property.property_address
+            state: property.property_address.state
               ? property.property_address.state
               : state,
-            city: property.property_address
+            city: property.property_address.city
               ? property.property_address.city
               : city,
+            zip_code: property.property_address.zip_code
+              ? property.property_address.zip_code
+              : zip,
           },
           others: property.detain ? property.detain : otherDetails,
           ...ownership,
@@ -546,12 +606,13 @@ function YachtDetails({
             ? data.no_of_crew_required
             : no_of_crew_required,
           property_address: {
-            formatted_address: data.property_address
+            formatted_street_address: data.property_address
               ? data.property_address
               : property_address,
             country: data.country ? data.country : country,
             state: data.state ? data.state : state,
             city: data.city ? data.city : city,
+            zip_code: data.zipCode ? data.zipCode : zip,
           },
           others: data.detain
             ? data.detain
@@ -593,12 +654,13 @@ function YachtDetails({
             ? data.no_of_crew_required
             : no_of_crew_required,
           property_address: {
-            formatted_address: data.property_address
+            formatted_street_address: data.property_address
               ? data.property_address
               : property_address,
             country: data.country ? data.country : country,
             state: data.state ? data.state : state,
             city: data.city ? data.city : city,
+            zip_code: data.zipCode ? data.zipCode : zip,
           },
         };
         togglePropertyData(submitedData);
@@ -655,7 +717,7 @@ function YachtDetails({
         </Row>
 
         <Row className="mt-3">
-          <Col xs={12} md={3}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -673,7 +735,7 @@ function YachtDetails({
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={3}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -691,7 +753,10 @@ function YachtDetails({
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={3}>
+        </Row>
+
+        <Row className="mt-3">
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -709,7 +774,7 @@ function YachtDetails({
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={3}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -725,6 +790,19 @@ function YachtDetails({
               }}
             >
               City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>

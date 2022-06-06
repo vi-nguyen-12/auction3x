@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 
-function ContactUs({windowSize}) {
+function ContactUs({ windowSize }) {
   const location = useLocation();
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
@@ -23,7 +23,7 @@ function ContactUs({windowSize}) {
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
-      <Container fluid>
+      <Container style={{ margin: "0", padding: "0" }} fluid>
         <Row>
           <Col
             md={4}
@@ -55,67 +55,79 @@ function ContactUs({windowSize}) {
               </Col>
             </Row>
           </Col>
-          <Col md={8} style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}>
+          <Col
+            md={8}
+            style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}
+          >
             <Row>
               <Col style={{ display: "flex", justifyContent: "center" }}>
                 <h1 className="formTitle">Get In Touch</h1>
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <span>First Name</span>
-                <input
-                  placeholder="Enter First Name"
-                  type="text"
-                  className="form-control"
-                  name="firstName"
-                />
-              </Col>
-              <Col>
-                <span>Last Name</span>
-                <input
-                  placeholder="Enter Last Name"
-                  type="text"
-                  className="form-control"
-                  name="lastName"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <span>Email</span>
-                <input
-                  placeholder="Enter Email"
-                  type="email"
-                  className="form-control"
-                  name="email"
-                />
-              </Col>
-              <Col>
-                <span>Phone</span>
-                <input
-                  placeholder="Enter Phone Number"
-                  type="text"
-                  className="form-control"
-                  name="phone"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <span>Message</span>
-                <textarea
-                  placeholder="Enter Message"
-                  className="form-control"
-                  name="message"
-                />
-              </Col>
-            </Row>
-            <Row style={{ marginTop: "50px" }}>
-              <Col>
-                <button className="loginBtn">Send</button>
-              </Col>
-            </Row>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Row>
+                <Col>
+                  <span>First Name</span>
+                  <input
+                    placeholder="Enter First Name"
+                    type="text"
+                    className="form-control"
+                    name="firstName"
+                    {...register("firstName", { required: true })}
+                  />
+                </Col>
+                <Col>
+                  <span>Last Name</span>
+                  <input
+                    placeholder="Enter Last Name"
+                    type="text"
+                    className="form-control"
+                    name="lastName"
+                    {...register("lastName", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <span>Email</span>
+                  <input
+                    placeholder="Enter Email"
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    {...register("email", { required: true })}
+                  />
+                </Col>
+                <Col>
+                  <span>Phone</span>
+                  <input
+                    placeholder="Enter Phone Number"
+                    type="text"
+                    className="form-control"
+                    name="phone"
+                    {...register("phone", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <span>Message</span>
+                  <textarea
+                    placeholder="Enter Message"
+                    className="form-control"
+                    name="message"
+                    {...register("message", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row style={{ marginTop: "50px" }}>
+                <Col>
+                  <button type="submit" className="loginBtn">
+                    Send
+                  </button>
+                </Col>
+              </Row>
+            </form>
           </Col>
         </Row>
       </Container>

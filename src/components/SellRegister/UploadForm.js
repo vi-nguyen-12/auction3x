@@ -260,7 +260,7 @@ const UploadForm = ({
           }}
           className="list-form"
         >
-          <Row className="justify-content-center">
+          <Row style={{display:"flex", justifyContent:"space-between"}}>
             <Col xs={12} md={4} className="px-sm-3">
               Choose the Image Files <span style={{ color: "#ff0000" }}>*</span>
               <input

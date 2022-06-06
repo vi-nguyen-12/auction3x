@@ -73,7 +73,7 @@ position: relative;
 }
 `;
 
-function RealEstatePage({ toggleChange, setImg, toggleSignIn }) {
+function RealEstatePage({ toggleChange, setImg, toggleSignIn, windowSize }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
@@ -174,6 +174,7 @@ function RealEstatePage({ toggleChange, setImg, toggleSignIn }) {
                           startingBid={item.startingBid}
                           auctionId={item._id}
                           toggleSignIn={toggleSignIn}
+                          windowSize={windowSize}
                         />
                       </Col>
                     </Wrap>
@@ -210,6 +211,7 @@ function RealEstatePage({ toggleChange, setImg, toggleSignIn }) {
                       endRegister={item.registerEndDate}
                       startingBid={item.startingBid}
                       toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
                     />
                   </Col>
                 ))

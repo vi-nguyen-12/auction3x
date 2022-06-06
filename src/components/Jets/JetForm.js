@@ -23,6 +23,7 @@ function JetForm({ toggleStep, step, properties, property }) {
   const [city, setCity] = useState();
   const [state, setState] = useState();
   const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
 
   const prop = useSelector((state) => state.incompProperty);
   const params = useParams();
@@ -82,7 +83,37 @@ function JetForm({ toggleStep, step, properties, property }) {
       );
       setAddress(
         properti[0].details.property_address
-          ? properti[0].details.property_address
+          ? properti[0].details.property_address.formatted_street_address
+            ? properti[0].details.property_address.formatted_street_address
+            : ""
+          : ""
+      );
+      setCity(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.city
+            ? properti[0].details.property_address.city
+            : ""
+          : ""
+      );
+      setState(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.state
+            ? properti[0].details.property_address.state
+            : ""
+          : ""
+      );
+      setCountry(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.country
+            ? properti[0].details.property_address.country
+            : ""
+          : ""
+      );
+      setZip(
+        properti[0].details.property_address
+          ? properti[0].details.property_address.zip_code
+            ? properti[0].details.property_address.zip_code
+            : ""
           : ""
       );
       setIsImport(
@@ -155,6 +186,13 @@ function JetForm({ toggleStep, step, properties, property }) {
             : ""
           : ""
       );
+      setZip(
+        property.property_address
+          ? property.property_address.zip_code
+            ? property.property_address.zip_code
+            : ""
+          : ""
+      );
       setIsImport(property.imported_aircraft ? property.imported_aircraft : "");
     }
   }, []);
@@ -193,10 +231,15 @@ function JetForm({ toggleStep, step, properties, property }) {
         : number_of_aircraft,
       imported_aircraft: isImport,
       property_address: {
-        formatted_address: data.address ? data.address : address ? address : "",
+        formatted_street_address: data.address
+          ? data.address
+          : address
+          ? address
+          : "",
         city: data.city ? data.city : city ? city : "",
         state: data.state ? data.state : state ? state : "",
         country: data.country ? data.country : country ? country : "",
+        zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
       },
     };
     properties(datas);
@@ -208,7 +251,7 @@ function JetForm({ toggleStep, step, properties, property }) {
       <h3> Aircraft Description</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="text"
               className="form-control"
@@ -221,7 +264,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               Property Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -234,7 +277,9 @@ function JetForm({ toggleStep, step, properties, property }) {
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -258,6 +303,19 @@ function JetForm({ toggleStep, step, properties, property }) {
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -354,7 +412,7 @@ function JetForm({ toggleStep, step, properties, property }) {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col>
             <input
               type="number"
               min="0"
@@ -368,7 +426,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -382,7 +440,7 @@ function JetForm({ toggleStep, step, properties, property }) {
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"

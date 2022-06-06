@@ -157,7 +157,7 @@ const MultiSellForm = ({
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           getPropId={getPropId}
-          documents={documents}
+          document={documents}
         />
       ) : step === 6 ? (
         <AgreementForm

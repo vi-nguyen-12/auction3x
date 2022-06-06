@@ -34,9 +34,8 @@ function SoldListings() {
           <thead style={{ background: "black", color: "white" }}>
             <tr>
               <th>#</th>
-              <th>Auction ID</th>
-              <th>Property Type</th>
-              <th>Property Address</th>
+              <th>Auction</th>
+              <th>Property</th>
               <th>Bid Amount</th>
               <th>View</th>
             </tr>
@@ -47,7 +46,10 @@ function SoldListings() {
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction._id}
+                    {auction.auctionStartDate} - {auction.auctionEndDate}
+                  </td>
+                  <td>
+                    {auction.property.details.address}
                     <div
                       style={{
                         width: "100%",
@@ -69,15 +71,12 @@ function SoldListings() {
                       />
                     </div>
                   </td>
-                  <td>{auction.type}</td>
-                  <td>{auction.details.address}</td>
                   <td>{auction.bidAmount}</td>
                   <td>
                     <button
                       className="btn btn-primary"
                       onClick={() => {
-                        setImages(auction.images);
-                        toggleShowPic();
+                        window.open(`/DisplayAuctions/${auction._id}`);
                       }}
                     >
                       View
