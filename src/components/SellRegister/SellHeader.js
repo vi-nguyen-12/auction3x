@@ -46,7 +46,7 @@ function SellHeader({ step }) {
       </Col>
       <Col xs={1} className="sell-top-col">
         {" "}
-        <div className={step >= 6 ? "circle-active" : "circle"}>05</div>
+        <div className={step >= 6 ? "circle-active" : "circle"}>06</div>
         <div className="step-title">Agreement</div>
       </Col>
     </Row>

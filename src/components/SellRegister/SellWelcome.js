@@ -9,7 +9,7 @@ import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 // create step bar
 
-const Sell = ({ toggleStep, step, togglePropertyType }) => {
+const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
   const { handleSubmit } = useForm();
 
   const [propertyType, setPropertyType] = useState();
@@ -39,37 +39,41 @@ const Sell = ({ toggleStep, step, togglePropertyType }) => {
         <Row className="justify-content-center">
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
+              style={{ padding: windowSize < 800 && "10px" }}
               className="category-btn"
               onClick={() => setPropertyType("real-estate")}
             >
-              <BsFillHouseFill />
+              <BsFillHouseFill size={windowSize > 800 ? 40 : 25} />
               <label>Real Estate</label>
             </Button>
           </Col>
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
+              style={{ padding: windowSize < 800 && "10px" }}
               onClick={() => setPropertyType("car")}
               className="category-btn"
             >
-              <IoCarSportSharp />
+              <IoCarSportSharp size={windowSize > 800 ? 40 : 25} />
               <label>Cars</label>
             </Button>
           </Col>
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
+              style={{ padding: windowSize < 800 && "10px" }}
               onClick={() => setPropertyType("jet")}
               className="category-btn"
             >
-              <IoAirplaneSharp />
+              <IoAirplaneSharp size={windowSize > 800 ? 40 : 25} />
               <label>Jet</label>
             </Button>
           </Col>
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
+              style={{ padding: windowSize < 800 && "10px" }}
               onClick={() => setPropertyType("yacht")}
               className="category-btn"
             >
-              <IoIosBoat />
+              <IoIosBoat size={windowSize > 800 ? 40 : 25} />
               <label>Yachts</label>
             </Button>
           </Col>

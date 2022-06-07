@@ -17,6 +17,7 @@ function ContactUs({ windowSize }) {
       alert(
         "Your message has been sent successfully. We will get back to you soon."
       );
+      window.location.reload();
     }
   };
 

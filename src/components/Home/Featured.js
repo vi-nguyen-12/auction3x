@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CardComp } from "../Cards/RealEstateCard";
 import { JetCard } from "../Cards/JetCard";
@@ -8,11 +8,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 import "../../App.css";
 
 const Carousel = styled(Slider)`
   // height: 100%;
- overflow: hidden;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -87,7 +88,6 @@ align-content: center;
 `;
 
 const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
-
   let settings = {
     dots: false,
     infinite: true,
@@ -125,16 +125,16 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
 
   return (
     <div className="background" style={{ height: "100vh" }}>
+      <Row>
+        <Col md={12} className="m-auto">
+          <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
+            Featured Listings
+          </h2>
+        </Col>
+      </Row>
+
       {auctions.length > 0 ? (
         <>
-          <Row>
-            <Col md={12} className="m-auto">
-              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
-                Featured Listings
-              </h2>
-            </Col>
-          </Row>
-
           <Col md={12} className="m-auto">
             <Row>
               <Carousel {...settings}>

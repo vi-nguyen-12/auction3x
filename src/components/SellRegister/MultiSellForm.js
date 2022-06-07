@@ -19,6 +19,7 @@ const MultiSellForm = ({
   setHeaderWidth,
   setPositionLeft,
   setPadRight,
+  windowSize,
 }) => {
   const [step, setStep] = useState(0);
   const toggleStep = (step) => {
@@ -93,6 +94,7 @@ const MultiSellForm = ({
         <SellWelcome
           togglePropertyType={togglePropertyType}
           toggleStep={toggleStep}
+          windowSize={windowSize}
           step={step}
         />
       ) : step === 1 ? (

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Featured } from "./Featured";
 import FindInCountries from "./FindInCountries";
 import ImgSlider from "./ImgSlider";
 import Work from "./work";
 import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
-
+import { useParams } from "react-router-dom";
 import { Upcoming } from "../Auctions/Upcoming";
 
 import About from "./About";
@@ -25,6 +25,16 @@ const Home = ({ toggleSignIn, windowSize }) => {
     authService.getOngoingAuctions().then((res) => {
       setOnGoingAuctions(res.data);
     });
+  }, []);
+
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.sectionId === "feature") {
+      window.scrollTo(0, 600);
+    } else if (params.sectionId === "upcoming") {
+      window.scrollTo(0, 2600);
+    }
   }, []);
 
   return (
