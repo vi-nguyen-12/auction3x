@@ -3,8 +3,9 @@ import { Table, Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { IoInformationCircleSharp } from "react-icons/io5";
 
-function CarForm({ toggleStep, step, properties, property }) {
+function CarForm({ toggleStep, step, properties, property, windowSize }) {
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState();
   const [model, setModel] = useState();
@@ -254,8 +255,23 @@ function CarForm({ toggleStep, step, properties, property }) {
 
   return (
     <div className="sell-bottom">
-      <h3>Car Details</h3>
+      <h3 style={{ fontSize: windowSize < 800 && "2rem" }}>Car Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <div
+          className="dropdown-icon"
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <IoInformationCircleSharp
+            style={{ cursor: "pointer" }}
+            color="blue"
+            size={30}
+          />
+          <div className="dropdown-info">
+            <p>
+              We will be using these details to match you with the right buyer.
+            </p>
+          </div>
+        </div>
         <Row className="mt-3">
           <Col xs={12} md={4}>
             <label>Year</label>

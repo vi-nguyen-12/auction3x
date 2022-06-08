@@ -88,7 +88,6 @@ const UploadForm = ({
               alert(response.data.error);
             } else {
               toggleSellStep(3);
-              alert("Saved Successfully!");
             }
           });
         } else if (sellStep === 1 || parseInt(params.step) === 1) {
@@ -106,7 +105,6 @@ const UploadForm = ({
               alert(response.data.error);
             } else {
               toggleSellStep(3);
-              alert("Saved Successfully!");
             }
           });
         }
@@ -260,7 +258,7 @@ const UploadForm = ({
           }}
           className="list-form"
         >
-          <Row style={{display:"flex", justifyContent:"space-between"}}>
+          <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <Col xs={12} md={4} className="px-sm-3">
               Choose the Image Files <span style={{ color: "#ff0000" }}>*</span>
               <input
@@ -357,7 +355,7 @@ const UploadForm = ({
             </Col>
           </Row>
           <Row className="mt-5">
-            <Col
+            {/* <Col
               xs={12}
               md={4}
               className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -365,16 +363,17 @@ const UploadForm = ({
               <Button className="save-btn" onClick={saveInfo}>
                 Save
               </Button>
-            </Col>
-            <Col
-              xs={12}
-              md={8}
-              className="d-flex justify-content-center justify-content-md-start mt-2"
-            >
+            </Col> */}
+            <Col className="d-flex justify-content-center mt-2">
               <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
                 Previous
               </Button>
-              <Button className="nxt-btn" id="next" type="submit">
+              <Button
+                onClick={saveInfo}
+                className="nxt-btn"
+                id="next"
+                type="submit"
+              >
                 Next
               </Button>
             </Col>

@@ -549,6 +549,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  windowSize={windowSize}
                 />
               </Route>
             )}
@@ -746,6 +747,7 @@ function App() {
                 setHeaderWidth={setHeaderWidth}
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
+                windowSize={windowSize}
               />
             </Route>
 
@@ -864,6 +866,10 @@ function App() {
             </Route>
 
             <Route exact path="/">
+              <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
+            </Route>
+
+            <Route exact path="/:sectionId">
               <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
             </Route>
 

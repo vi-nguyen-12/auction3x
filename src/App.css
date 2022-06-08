@@ -313,3 +313,35 @@ h1 {
     box-shadow: none;
   }
 }
+
+.bigButton {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.dropdown-info {
+  display: none;
+  position: absolute;
+  text-align: center;
+  width: 10rem;
+  margin-right: 28px;
+  margin-top: 28px;
+  background-color: #ffffff;
+  min-width: 10rem;
+  max-width: 20rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px 0 10px 10px;
+  border: 1px solid #dbdbdb;
+  z-index: 1;
+}
+
+.dropdown-info p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-icon:hover .dropdown-info {
+  display: block;
+}

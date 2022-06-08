@@ -13,7 +13,7 @@ import CloseButton from "react-bootstrap/CloseButton";
 import AddFund from "../../BuyRegister/AddFund";
 import { useHistory } from "react-router-dom";
 
-function Dash({ windowSize }) {
+function Dash({ windowSize, featureLength }) {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
@@ -35,7 +35,7 @@ function Dash({ windowSize }) {
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
-      authServices.getOngoingAuctions().then((res) => {
+      authServices.getFeaturedAuctions().then((res) => {
         setNumOfLiveAuctions(res.data.length);
       });
     };
@@ -99,11 +99,11 @@ function Dash({ windowSize }) {
           <div
             className="liveAuc"
             onClick={() => {
-              window.open("/");
+              window.open(`/${"feature"}`);
             }}
           >
             <div className="names">
-              <span>Live Auctions</span>
+              <span>Featured Listings</span>
               <h3>{numOfLiveAuctions}</h3>
             </div>
             <div className="progress">
@@ -117,7 +117,7 @@ function Dash({ windowSize }) {
           <div
             className="liveAuc"
             onClick={() => {
-              window.open("/");
+              window.open(`/${"upcoming"}`);
             }}
           >
             <div className="names">
@@ -249,12 +249,12 @@ function Dash({ windowSize }) {
 
           <Col>
             <div className="filter">
-              <div className="filterIcon">
+              {/* <div className="filterIcon">
                 <RiFilter2Fill color="white" size={25} />
                 <button className="filterBtn">
                   <span>Filter</span>
                 </button>
-              </div>
+              </div> */}
               <div className="refresh">
                 <GoPlus color="white" size={28} />
                 <button onClick={toggleFundReq} className="resetBtn">

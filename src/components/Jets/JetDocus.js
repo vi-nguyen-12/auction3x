@@ -571,7 +571,6 @@ function JetDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 2) {
@@ -589,7 +588,6 @@ function JetDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(5);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 3) {
@@ -605,7 +603,6 @@ function JetDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(6);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 4) {
@@ -621,7 +618,6 @@ function JetDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(6);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -640,7 +636,6 @@ function JetDocus({
         } else {
           toggleSellStep(4);
           getPropId(response.data._id);
-          alert("Saved Successfully!");
         }
       });
     }
@@ -740,7 +735,7 @@ function JetDocus({
           ))}
         </Row>
         <Row className="mt-5">
-          <Col
+          {/* <Col
             xs={12}
             md={4}
             className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -748,16 +743,17 @@ function JetDocus({
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center justify-content-md-start mt-2"
-          >
+          </Col> */}
+          <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button className="nxt-btn" id="next" type="submit">
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
               Next
             </Button>
           </Col>

@@ -80,7 +80,7 @@ function CarDocus({
       officialName: "insuranceDocuments",
       number: 7,
       documents: doc7,
-      required: false,
+      required: true,
     },
     {
       name: "Valuation Report",
@@ -423,7 +423,6 @@ function CarDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 2) {
@@ -441,7 +440,6 @@ function CarDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 3) {
@@ -457,7 +455,6 @@ function CarDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -476,7 +473,6 @@ function CarDocus({
         } else {
           toggleSellStep(4);
           getPropId(response.data._id);
-          alert("Saved Successfully!");
         }
       });
     }
@@ -570,7 +566,7 @@ function CarDocus({
           ))}
         </Row>
         <Row className="mt-5">
-          <Col
+          {/* <Col
             xs={12}
             md={4}
             className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -578,16 +574,17 @@ function CarDocus({
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center justify-content-md-start mt-2"
-          >
+          </Col> */}
+          <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button className="nxt-btn" id="next" type="submit">
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
               Next
             </Button>
           </Col>

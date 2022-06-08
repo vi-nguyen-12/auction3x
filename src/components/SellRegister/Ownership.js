@@ -66,7 +66,6 @@ function Ownership({
           if (res.data.error) {
             alert(res.data.error);
           } else {
-            alert("Successfully updated");
             toggleSellStep(1);
           }
         });
@@ -89,7 +88,6 @@ function Ownership({
             alert(res.data.error);
           } else {
             getPropId(res.data._id);
-            alert("Successfully updated");
             toggleSellStep(1);
           }
         });
@@ -114,7 +112,6 @@ function Ownership({
         } else {
           getPropId(res.data._id);
           toggleSellStep(1);
-          alert("Successfully saved");
         }
       });
     }
@@ -331,7 +328,7 @@ function Ownership({
               </Row>
             </Row>
             <Row className="mt-5">
-              <Col
+              {/* <Col
                 xs={12}
                 md={4}
                 className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -339,19 +336,20 @@ function Ownership({
                 <Button className="save-btn" onClick={saveInfo}>
                   Save
                 </Button>
-              </Col>
-              <Col
-                xs={12}
-                md={8}
-                className="d-flex justify-content-center justify-content-md-start mt-2"
-              >
+              </Col> */}
+              <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
                   onClick={() => toggleStep(step - 1)}
                 >
                   Previous
                 </Button>
-                <Button className="nxt-btn" id="next" type="submit">
+                <Button
+                  onClick={saveInfo}
+                  className="nxt-btn"
+                  id="next"
+                  type="submit"
+                >
                   Next
                 </Button>
               </Col>
@@ -500,7 +498,7 @@ function Ownership({
             </Row>
 
             <Row className="mt-5">
-              <Col
+              {/* <Col
                 xs={12}
                 md={4}
                 className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -508,19 +506,20 @@ function Ownership({
                 <Button className="save-btn" onClick={saveInfo}>
                   Save
                 </Button>
-              </Col>
-              <Col
-                xs={12}
-                md={8}
-                className="d-flex justify-content-center justify-content-md-start mt-2"
-              >
+              </Col> */}
+              <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
                   onClick={() => toggleStep(step - 1)}
                 >
                   Previous
                 </Button>
-                <Button className="nxt-btn" id="next" type="submit">
+                <Button
+                  onClick={saveInfo}
+                  className="nxt-btn"
+                  id="next"
+                  type="submit"
+                >
                   Next
                 </Button>
               </Col>
