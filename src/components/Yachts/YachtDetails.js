@@ -4,6 +4,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
+import { IoInformationCircleSharp } from "react-icons/io5";
 
 function YachtDetails({
   property,
@@ -375,7 +376,6 @@ function YachtDetails({
             alert(res.data.error);
           } else {
             toggleSellStep(2);
-            alert("Saved Successfully!");
           }
         });
       } else {
@@ -437,7 +437,6 @@ function YachtDetails({
             alert(res.data.error);
           } else {
             toggleSellStep(2);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -501,7 +500,6 @@ function YachtDetails({
           } else {
             toggleSellStep(2);
             getPropId(res.data._id);
-            alert("Saved Successfully!");
           }
         });
       } else {
@@ -563,7 +561,6 @@ function YachtDetails({
           } else {
             toggleSellStep(2);
             getPropId(res.data._id);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -670,8 +667,23 @@ function YachtDetails({
   };
   return (
     <>
-      <h3>Confirm Yacht Details</h3>
+      <h3>Yacht Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <div
+          className="dropdown-icon"
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <IoInformationCircleSharp
+            style={{ cursor: "pointer" }}
+            color="blue"
+            size={30}
+          />
+          <div className="dropdown-info">
+            <p>
+              We will be using these details to match you with the right buyer.
+            </p>
+          </div>
+        </div>
         <Row className="mt-3">
           <Col>
             <input
@@ -794,7 +806,7 @@ function YachtDetails({
           </Col>
           <Col>
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={zip}
               {...register("zipCode")}
@@ -994,7 +1006,7 @@ function YachtDetails({
         </Row>
 
         <Row className="mt-5">
-          <Col
+          {/* <Col
             xs={12}
             md={4}
             className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -1002,16 +1014,17 @@ function YachtDetails({
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center justify-content-md-start mt-2"
-          >
+          </Col> */}
+          <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button className="nxt-btn" id="next" type="submit">
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
               Next
             </Button>
           </Col>

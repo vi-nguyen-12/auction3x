@@ -11,6 +11,7 @@ const ListingDetails = ({
   properties,
   propertyType,
   property,
+  windowSize,
 }) => {
   return (
     <div className="wrapper">
@@ -21,6 +22,7 @@ const ListingDetails = ({
           step={step}
           properties={properties}
           property={property}
+          windowSize={windowSize}
         />
       ) : propertyType === "car" ? (
         <CarForm
@@ -28,6 +30,7 @@ const ListingDetails = ({
           step={step}
           properties={properties}
           property={property}
+          windowSize={windowSize}
         />
       ) : propertyType === "jet" ? (
         <JetForm
@@ -35,6 +38,7 @@ const ListingDetails = ({
           step={step}
           properties={properties}
           property={property}
+          windowSize={windowSize}
         />
       ) : propertyType === "yacht" ? (
         <YachtForm
@@ -42,6 +46,7 @@ const ListingDetails = ({
           step={step}
           properties={properties}
           property={property}
+          windowSize={windowSize}
         />
       ) : null}
     </div>

@@ -109,13 +109,18 @@ const MultiSellForm = ({
           propId={propId}
         />
       ) : step === 2 ? (
-        <ListingDetails
-          properties={properties}
-          toggleStep={(data) => toggleStep(data)}
-          step={step}
-          propertyType={propertyType}
-          property={property}
-        />
+        propertyType === "real-estate" ? (
+          <ListingDetails
+            properties={properties}
+            toggleStep={(data) => toggleStep(data)}
+            step={step}
+            propertyType={propertyType}
+            property={property}
+            windowSize={windowSize}
+          />
+        ) : (
+          toggleStep(step + 1)
+        )
       ) : step === 3 ? (
         <PropertyDetails
           togglePropertyData={togglePropertyData}

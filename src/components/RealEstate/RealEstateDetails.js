@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
+import { IoInformationCircleSharp } from "react-icons/io5";
 
 function RealEstateDetails({
   property,
@@ -65,7 +66,6 @@ function RealEstateDetails({
           alert(res.data.error);
         } else {
           toggleSellStep(2);
-          alert("Saved Successfully!");
         }
       });
     } else {
@@ -94,7 +94,6 @@ function RealEstateDetails({
         } else {
           toggleSellStep(2);
           getPropId(res.data._id);
-          alert("Saved Successfully!");
         }
       });
     }
@@ -344,286 +343,307 @@ function RealEstateDetails({
     }
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="list-form">
-      <Container style={{ marginTop: "20px" }}>
-        <Row>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              name="street_address"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
-              {...register("street_address", { required: false })}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Street Address *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              name="city"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={city}
-              onChange={(e) => {
-                setCity(e.target.value);
-              }}
-              {...register("city", { required: false })}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>City *</span>
-          </Col>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              name="state"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={
-                property.address.state ? property.address.state : ""
-              }
-              onChange={(e) => {
-                setState(e.target.value);
-              }}
-              {...register("state", { required: false })}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>State *</span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              name="country"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={country}
-              onChange={(e) => {
-                setCountry(e.target.value);
-              }}
-              {...register("country", { required: false })}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>Country *</span>
-          </Col>
-          <Col>
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              name="zipCode"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={zip}
-              {...register("zipCode", { required: false })}
-              onChange={(e) => {
-                setZip(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Zip Code *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={ownerName}
-              {...register("ownerName", { required: false })}
-              onChange={(e) => {
-                setOwnerName(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Owner Name *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={rooms}
-              {...register("rooms_count", { required: false })}
-              onChange={(e) => {
-                setRooms(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Rooms Count *
-            </span>
-          </Col>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={bedrooms}
-              {...register("bedrooms", { required: false })}
-              onChange={(e) => {
-                setBedrooms(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Bedrooms *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={propType}
-              {...register("propertyType", { required: false })}
-              onChange={(e) => {
-                setPropType(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Property Type *
-            </span>
-          </Col>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={bathrooms}
-              style={{ color: "black", fontWeight: "bold" }}
-              {...register("bathrooms", { required: false })}
-              onChange={(e) => {
-                setBathrooms(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Bathrooms *
-            </span>
-          </Col>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={totalValue}
-              placeholder="$"
-              {...register("total_value", { required: false })}
-              onChange={(e) => {
-                setTotalValue(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Total Value *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="text"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={sqft}
-              {...register("sqft", { required: false })}
-              onChange={(e) => {
-                setSqft(e.target.value);
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px" }}>
-          <Col>
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={reservedAmount}
-              {...register("reservedAmount", { required: false })}
-              onChange={(e) => {
-                setReservedAmount(parseInt(e.target.value));
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Reserved Amount *
-            </span>
-          </Col>
-          <Col>
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              style={{ color: "black", fontWeight: "bold" }}
-              defaultValue={discussedAmount}
-              {...register("discussedAmount", { required: false })}
-              onChange={(e) => {
-                setDiscussedAmount(parseInt(e.target.value));
-              }}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Discussed Amount *
-            </span>
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "10px", height: "130px" }}>
-          <Col>
-            <textarea
-              style={{ height: "100%", color: "black" }}
-              className="form-control"
-              placeholder="Description"
-              {...register("description", { required: false })}
-            />
-          </Col>
-        </Row>
-      </Container>
-      <Row className="mt-5">
-        <Col
-          xs={12}
-          md={4}
-          className="d-flex justify-content-center justify-content-md-end mt-2"
+    <>
+      <h3>Property Details</h3>
+      <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <div
+          className="dropdown-icon"
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <Button className="save-btn" onClick={saveInfo}>
-            Save
-          </Button>
-        </Col>
-        <Col
-          xs={12}
-          md={8}
-          className="d-flex justify-content-center justify-content-md-start mt-2"
-        >
-          <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-            Previous
-          </Button>
-          <Button className="nxt-btn" id="next" type="submit">
-            Next
-          </Button>
-        </Col>
-      </Row>
-    </form>
+          <IoInformationCircleSharp
+            style={{ cursor: "pointer" }}
+            color="blue"
+            size={30}
+          />
+          <div className="dropdown-info">
+            <p>
+              We will be using these details to match you with the right buyer.
+            </p>
+          </div>
+        </div>
+        <Container style={{ marginTop: "20px" }}>
+          <Row>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                name="street_address"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={address}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+                {...register("street_address", { required: false })}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Street Address *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                name="city"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+                {...register("city", { required: false })}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>City *</span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                name="state"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={
+                  property.address.state ? property.address.state : ""
+                }
+                onChange={(e) => {
+                  setState(e.target.value);
+                }}
+                {...register("state", { required: false })}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>State *</span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                name="country"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={country}
+                onChange={(e) => {
+                  setCountry(e.target.value);
+                }}
+                {...register("country", { required: false })}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Country *
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="number"
+                min="0"
+                className="form-control"
+                name="zipCode"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={zip}
+                {...register("zipCode", { required: false })}
+                onChange={(e) => {
+                  setZip(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Zip Code *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={ownerName}
+                {...register("ownerName", { required: false })}
+                onChange={(e) => {
+                  setOwnerName(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Owner Name *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={rooms}
+                {...register("rooms_count", { required: false })}
+                onChange={(e) => {
+                  setRooms(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Rooms Count *
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={bedrooms}
+                {...register("bedrooms", { required: false })}
+                onChange={(e) => {
+                  setBedrooms(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Bedrooms *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={propType}
+                {...register("propertyType", { required: false })}
+                onChange={(e) => {
+                  setPropType(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Property Type *
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={bathrooms}
+                style={{ color: "black", fontWeight: "bold" }}
+                {...register("bathrooms", { required: false })}
+                onChange={(e) => {
+                  setBathrooms(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Bathrooms *
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={totalValue}
+                placeholder="$"
+                {...register("total_value", { required: false })}
+                onChange={(e) => {
+                  setTotalValue(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Total Value *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="text"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={sqft}
+                {...register("sqft", { required: false })}
+                onChange={(e) => {
+                  setSqft(e.target.value);
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px" }}>
+            <Col>
+              <input
+                type="number"
+                min="0"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={reservedAmount}
+                {...register("reservedAmount", { required: false })}
+                onChange={(e) => {
+                  setReservedAmount(parseInt(e.target.value));
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Reserved Amount *
+              </span>
+            </Col>
+            <Col>
+              <input
+                type="number"
+                min="0"
+                className="form-control"
+                style={{ color: "black", fontWeight: "bold" }}
+                defaultValue={discussedAmount}
+                {...register("discussedAmount", { required: false })}
+                onChange={(e) => {
+                  setDiscussedAmount(parseInt(e.target.value));
+                }}
+                required
+              />
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Discussed Amount *
+              </span>
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "10px", height: "130px" }}>
+            <Col>
+              <textarea
+                style={{ height: "100%", color: "black" }}
+                className="form-control"
+                placeholder="Description"
+                {...register("description", { required: false })}
+              />
+            </Col>
+          </Row>
+        </Container>
+        <Row className="mt-5">
+          {/* <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-center justify-content-md-end mt-2"
+          >
+            <Button className="save-btn" onClick={saveInfo}>
+              Save
+            </Button>
+          </Col> */}
+          <Col className="d-flex justify-content-center mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+              Previous
+            </Button>
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
+              Next
+            </Button>
+          </Col>
+        </Row>
+      </form>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { IoInformationCircleSharp } from "react-icons/io5";
 
 function CarDetails({
   property,
@@ -188,35 +189,35 @@ function CarDetails({
       setAddress(
         propertyData.property_address
           ? propertyData.property_address.formatted_street_address
-          : property.property_address.formatted_street_address
+          : property.property_address
           ? property.property_address.formatted_street_address
           : ""
       );
       setCountry(
         propertyData.property_address
           ? propertyData.property_address.country
-          : property.property_address.country
+          : property.property_address
           ? property.property_address.country
           : ""
       );
       setState(
         propertyData.property_address
           ? propertyData.property_address.state
-          : property.property_address.state
+          : property.property_address
           ? property.property_address.state
           : ""
       );
       setCity(
         propertyData.property_address
           ? propertyData.property_address.city
-          : property.property_address.city
+          : property.property_address
           ? property.property_address.city
           : ""
       );
       setZip(
         propertyData.property_address
           ? propertyData.property_address.zip_code
-          : property.property_address.zip_code
+          : property.property_address
           ? property.property_address.zip_code
           : ""
       );
@@ -317,26 +318,27 @@ function CarDetails({
       const datas = {
         id: propId ? propId : params.id,
         details: {
-          make: make ? make : property.make,
-          model: model ? model : property.model,
-          year: year ? year : property.year,
-          mileage: mileage ? mileage : property.mileage,
-          transmission: transmission ? transmission : property.transmission,
-          car_type: carType ? carType : property.car_type,
-          power: power ? power : property.power,
-          color: color ? color : property.color,
-          VIN: vin ? vin : property.VIN,
-          engine: engine ? engine : property.engine,
-          fuel_type: fuelType ? fuelType : property.fuel_type,
-          condition: condition ? condition : property.condition,
-          price: price ? price : property.price,
+          make: make ? make : propertyData.make,
+          model: model ? model : propertyData.model,
+          year: year ? year : propertyData.year,
+          mileage: mileage ? mileage : propertyData.mileage,
+          transmission: transmission ? transmission : propertyData.transmission,
+          car_type: carType ? carType : propertyData.car_type,
+          power: power ? power : propertyData.power,
+          color: color ? color : propertyData.color,
+          VIN: vin ? vin : propertyData.VIN,
+          engine: engine ? engine : propertyData.engine,
+          fuel_type: fuelType ? fuelType : propertyData.fuel_type,
+          condition: condition ? condition : propertyData.condition,
+          price: price ? price : propertyData.price,
           property_address: {
             formatted_street_address: address
               ? address
-              : property.property_address.formatted_street_address,
-            country: country ? country : property.property_address.country,
-            state: state ? state : property.property_address.state,
-            city: city ? city : property.property_address.city,
+              : propertyData.property_address.formatted_street_address,
+            country: country ? country : propertyData.property_address.country,
+            state: state ? state : propertyData.property_address.state,
+            city: city ? city : propertyData.property_address.city,
+            zip_code: zip ? zip : propertyData.property_address.zip_code,
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
@@ -348,32 +350,31 @@ function CarDetails({
           alert(res.data.error);
         } else {
           toggleSellStep(2);
-          alert("Saved Successfully!");
         }
       });
     } else {
       const datas = {
-        make: make ? make : property.make,
-        model: model ? model : property.model,
-        year: year ? year : property.year,
-        mileage: mileage ? mileage : property.mileage,
-        transmission: transmission ? transmission : property.transmission,
-        car_type: carType ? carType : property.car_type,
-        power: power ? power : property.power,
-        color: color ? color : property.color,
-        VIN: vin ? vin : property.VIN,
-        engine: engine ? engine : property.engine,
-        fuel_type: fuelType ? fuelType : property.fuel_type,
-        condition: condition ? condition : property.condition,
-        price: price ? price : property.price,
+        make: make ? make : propertyData.make,
+        model: model ? model : propertyData.model,
+        year: year ? year : propertyData.year,
+        mileage: mileage ? mileage : propertyData.mileage,
+        transmission: transmission ? transmission : propertyData.transmission,
+        car_type: carType ? carType : propertyData.car_type,
+        power: power ? power : propertyData.power,
+        color: color ? color : propertyData.color,
+        VIN: vin ? vin : propertyData.VIN,
+        engine: engine ? engine : propertyData.engine,
+        fuel_type: fuelType ? fuelType : propertyData.fuel_type,
+        condition: condition ? condition : propertyData.condition,
+        price: price ? price : propertyData.price,
         property_address: {
           formatted_street_address: address
             ? address
-            : property.property_address.formatted_street_address,
-          country: country ? country : property.property_address.country,
-          state: state ? state : property.property_address.state,
-          city: city ? city : property.property_address.city,
-          zip_code: zip ? zip : property.property_address.zip_code,
+            : propertyData.property_address.formatted_street_address,
+          country: country ? country : propertyData.property_address.country,
+          state: state ? state : propertyData.property_address.state,
+          city: city ? city : propertyData.property_address.city,
+          zip_code: zip ? zip : propertyData.property_address.zip_code,
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
@@ -386,7 +387,6 @@ function CarDetails({
         } else {
           toggleSellStep(2);
           getPropId(res.data._id);
-          alert("Saved Successfully!");
         }
       });
     }
@@ -435,15 +435,30 @@ function CarDetails({
 
   return (
     <>
-      <h3>Confirm Car Details</h3>
+      <h3>Car Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
+        <div
+          className="dropdown-icon"
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <IoInformationCircleSharp
+            style={{ cursor: "pointer" }}
+            color="blue"
+            size={30}
+          />
+          <div className="dropdown-info">
+            <p>
+              We will be using these details to match you with the right buyer.
+            </p>
+          </div>
+        </div>
         <Row className="mt-3">
           <Col xs={12} md={4}>
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={year}
-              {...register("year", { maxLength: 100 })}
+              {...register("year", { maxLength: 4 })}
               onChange={(e) => setYear(e.target.value)}
               required
             />
@@ -641,7 +656,7 @@ function CarDetails({
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={zip}
               {...register("zipCode", { maxLength: 100 })}
@@ -679,7 +694,7 @@ function CarDetails({
         </Row>
 
         <Row className="mt-5">
-          <Col
+          {/* <Col
             xs={12}
             md={4}
             className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -687,16 +702,17 @@ function CarDetails({
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center justify-content-md-start mt-2"
-          >
-            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+          </Col> */}
+          <Col className="d-flex justify-content-center mt-2">
+            <Button className="pre-btn" onClick={() => toggleStep(step - 2)}>
               Previous
             </Button>
-            <Button className="nxt-btn" id="next" type="submit">
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
               Next
             </Button>
           </Col>
