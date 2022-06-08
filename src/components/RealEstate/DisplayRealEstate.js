@@ -450,9 +450,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -532,9 +532,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -626,17 +626,17 @@ function DisplayRealEstate({
                 }}
               >
                 {registEnded === false ? (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 40px",
+                        padding: "0 30px",
                       }}
                     >
                       <RegistrationTimer
@@ -647,7 +647,6 @@ function DisplayRealEstate({
                         style={{
                           display: "flex",
                           justifyContent: "left",
-                          marginLeft: "10px",
                           color: "#7c7c7c",
                         }}
                       >
@@ -666,7 +665,6 @@ function DisplayRealEstate({
                         width: "200px",
                         height: "150px",
                         borderRadius: "10px",
-                        padding: "0 40px",
                       }}
                     >
                       <div
@@ -683,18 +681,18 @@ function DisplayRealEstate({
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 40px",
+                        padding: "0 30px",
                       }}
                     >
                       <AuctionTimer
@@ -718,12 +716,12 @@ function DisplayRealEstate({
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 40px",
+                        padding: "0 30px",
                         color: "black",
                       }}
                     >
@@ -781,10 +779,10 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "0 40px",
+                          padding: "30px",
                         }}
                       >
-                        <h4 style={{ padding: "8px" }}>
+                        <h4 >
                           <NumberFormat
                             value={property.highestBid}
                             displayType={"text"}
@@ -817,7 +815,7 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "0 40px",
+                          padding: "30px",
                         }}
                       >
                         <h4>
@@ -857,7 +855,7 @@ function DisplayRealEstate({
                       width: "200px",
                       height: "150px",
                       borderRadius: "10px",
-                      padding: "0 40px",
+                      padding: "40px",
                     }}
                   >
                     <h4

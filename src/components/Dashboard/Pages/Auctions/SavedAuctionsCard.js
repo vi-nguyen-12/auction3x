@@ -33,14 +33,16 @@ const Carousel = styled(Slider)`
     }
   }
   .slick-prev {
-    height: 100px;
+    left: 5vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
+    margin: 0 -50px!important;
   }
   .slick-next {
-    height: 100px;
+    right: 5vw;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
+    margin: 0 -50px!important;
   }
   .slick-next:before {
     display: none;
@@ -171,7 +173,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-              new Date().toISOString() < endRegister ? (
+                new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p
                     style={{ fontSize: "15px", width: "100px", color: "black" }}

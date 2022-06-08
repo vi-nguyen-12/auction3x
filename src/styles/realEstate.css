@@ -363,9 +363,14 @@
     #edb48b 100%
   );
   border-radius: 5px;
-  padding: 15px;
+  padding: 15px 0;
   font-weight: bold;
   color: black;
+}
+@media (max-width: 550px) {
+  .mini-header-text {
+    font-size: 10px;
+  }
 }
 
 .registBtn {

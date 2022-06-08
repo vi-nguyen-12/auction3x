@@ -479,9 +479,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
               )} */}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -561,9 +561,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -666,7 +666,6 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 40px",
                       }}
                     >
                       <RegistrationTimer
@@ -696,7 +695,6 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                         width: "200px",
                         height: "150px",
                         borderRadius: "10px",
-                        padding: "0 40px",
                       }}
                     >
                       <div
@@ -713,18 +711,18 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 40px",
+                        padding: "0 30px",
                       }}
                     >
                       <AuctionTimer
@@ -748,13 +746,14 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       style={{
                         display: "grid",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignContent: "center",
                         backgroundColor: "#e8e8e8",
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
                         padding: "0 40px",
                         color: "black",
+                        padding: "0 30px",
                       }}
                     >
                       <AuctionTimer time={property.auctionStartDate} />
@@ -811,7 +810,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "0 40px",
+                          padding: "30px",
                         }}
                       >
                         <h4>
@@ -847,7 +846,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "0 40px",
+                          padding: "30px",
                         }}
                       >
                         <h4>
@@ -887,7 +886,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       width: "200px",
                       height: "150px",
                       borderRadius: "10px",
-                      padding: "0 40px",
+                      padding: "40px",
                     }}
                   >
                     <h4

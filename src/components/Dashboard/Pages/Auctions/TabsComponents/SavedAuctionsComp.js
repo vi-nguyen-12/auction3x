@@ -42,9 +42,8 @@ const Carousel = styled(Slider)`
 
   .slick-prev {
     height: 150px;
-    left: 2vw;
+    // left: 2vw;
     z-index: 1;
-    background: url("./images/arrow_back.png") center center no-repeat !important;
     margin: -50px;
   }
 
@@ -54,9 +53,9 @@ const Carousel = styled(Slider)`
 
   .slick-next {
     height: 150px;
-    right: 2vw;
+    // right: 2vw;
     z-index: 1;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
+    content: ">";
     margin: -50px;
   }
 

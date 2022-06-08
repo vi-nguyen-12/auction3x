@@ -163,6 +163,7 @@ function Team({ windowSize }) {
             </Button>
           </Col>
         </Row>
+
         {/* ) : (
           <Row style={{ padding: "20px 10px" }}>
             <Col
@@ -225,7 +226,7 @@ function Team({ windowSize }) {
           alignContent: "center",
         }} >
           {list.map((member, index) => (
-            <Col className="ceo-card">
+            <Col className="ceo-card" style={{ display: "flex", justifyContent: "center", margin: "20px" }} md={2} >
               <TeamCard
                 name={member.name}
                 location={member.location}
