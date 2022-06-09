@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 import "../../styles/timer.css";
 
-const AuctionTimer = ({ time, toogleAuction }) => {
+const AuctionTimer = ({ time, toogleAuction, windowSize }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -44,14 +44,14 @@ const AuctionTimer = ({ time, toogleAuction }) => {
       <thead>
         <tr className="timerHead">
           <th>{days}</th>
-          <th>{hours}</th>
+          <th style={{display:"flex", justifyContent:"center"}}>{hours}</th>
           <th>{minutes}</th>
           <th>{seconds}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Days</td>
+          <td style={{ padding: "0" }}>Days</td>
           <td>Hours</td>
           <td>Minutes</td>
           <td>Seconds</td>

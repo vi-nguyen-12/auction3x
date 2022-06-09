@@ -37,6 +37,7 @@ const PropertyPages = React.lazy(() =>
 const EmailConfirm = React.lazy(() =>
   import("./components/Users/EmailConfirm")
 );
+const Auctions = React.lazy(() => import("./components/Home/Auctions"));
 const Docusign = React.lazy(() => import("./components/Docusign"));
 const DisplayAuctions = React.lazy(() =>
   import("./components/Auctions/DisplayAuctions")
@@ -811,6 +812,14 @@ function App() {
                 toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
               />
+            </Route>
+
+            <Route exact path="/Auctions">
+              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
+            </Route>
+
+            <Route exact path="/Auctions/:filter">
+              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
             </Route>
 
             <Route path="/contact">

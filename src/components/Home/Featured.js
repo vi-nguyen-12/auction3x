@@ -4,6 +4,7 @@ import { CardComp } from "../Cards/RealEstateCard";
 import { JetCard } from "../Cards/JetCard";
 import { YachtCard } from "../Cards/YachtCard";
 import { CarCard } from "../Cards/CarCard";
+import Cards from "../Cards/Cards";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -140,61 +141,12 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
               <Carousel {...settings}>
                 {auctions.map((item, index) => (
                   <Wrap key={index}>
-                    <Col md={12}>
-                      {item.property.type === "real-estate" ? (
-                        <CardComp
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          windowSize={windowSize}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toggleSignIn={toggleSignIn}
-                        />
-                      ) : item.property.type === "car" ? (
-                        <CarCard
-                          windowSize={windowSize}
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toggleSignIn={toggleSignIn}
-                        />
-                      ) : item.property.type === "jet" ? (
-                        <JetCard
-                          windowSize={windowSize}
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toggleSignIn={toggleSignIn}
-                        />
-                      ) : item.property.type === "yacht" ? (
-                        <YachtCard
-                          windowSize={windowSize}
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          reserveMet={item.isReservedMet}
-                          toggleSignIn={toggleSignIn}
-                        />
-                      ) : null}
-                    </Col>
+                    <Cards
+                      toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
+                      data={item}
+                      type={item.property.type}
+                    />
                   </Wrap>
                 ))}
               </Carousel>

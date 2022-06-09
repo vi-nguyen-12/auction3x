@@ -45,7 +45,7 @@ const About = () => {
           <div className="button-container">
             <button
               onClick={() => {
-                window.scrollTo({ top: 0, behavior: "auto" });
+                history.push("/Auctions");
               }}
             >
               BUY

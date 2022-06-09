@@ -31,9 +31,9 @@ const Home = ({ toggleSignIn, windowSize }) => {
 
   useEffect(() => {
     if (params.sectionId === "feature") {
-      window.scrollTo(0, 600);
+      window.scrollTo(0, 800);
     } else if (params.sectionId === "upcoming") {
-      window.scrollTo(0, 2600);
+      window.scrollTo(0, windowSize > 800 ? 2800 : 3500);
     }
   }, []);
 
