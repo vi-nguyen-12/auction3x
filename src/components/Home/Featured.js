@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Row, Col } from "react-bootstrap";
-import { CardComp } from "../Cards/RealEstateCard";
-import { JetCard } from "../Cards/JetCard";
-import { YachtCard } from "../Cards/YachtCard";
-import { CarCard } from "../Cards/CarCard";
 import Cards from "../Cards/Cards";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

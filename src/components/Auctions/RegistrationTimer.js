@@ -49,11 +49,11 @@ const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td style={{ padding: windowSize < 800 && "0" }}>Days</td>
+        <tr className="timerName">
+          <td>Days</td>
           <td>Hours</td>
-          <td>Minutes</td>
-          <td>Seconds</td>
+          <td>{windowSize > 800 ? "Minutes" : "Min"}</td>
+          <td>{windowSize > 800 ? "Seconds" : "Sec"}</td>
         </tr>
       </tbody>
     </Table>

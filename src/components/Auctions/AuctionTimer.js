@@ -44,17 +44,17 @@ const AuctionTimer = ({ time, toogleAuction, windowSize }) => {
       <thead>
         <tr className="timerHead">
           <th>{days}</th>
-          <th style={{display:"flex", justifyContent:"center"}}>{hours}</th>
+          <th>{hours}</th>
           <th>{minutes}</th>
           <th>{seconds}</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td style={{ padding: "0" }}>Days</td>
+        <tr className="timerName">
+          <td>Days</td>
           <td>Hours</td>
-          <td>Minutes</td>
-          <td>Seconds</td>
+          <td>{windowSize > 800 ? "Minutes" : "Min"}</td>
+          <td>{windowSize > 800 ? "Seconds" : "Sec"}</td>
         </tr>
       </tbody>
     </Table>

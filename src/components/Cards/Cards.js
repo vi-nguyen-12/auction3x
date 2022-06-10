@@ -204,12 +204,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 <p>Online Auction</p>
               </Col>
             )}
-            <Col
-              style={{
-                display: windowSize < 800 && "flex",
-                justifyContent: windowSize < 800 && "center",
-              }}
-            >
+            <Col>
               <p>Additional Info</p>
             </Col>
           </Row>
@@ -222,11 +217,10 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
             }}
           >
             {new Date().toISOString() > data.auctionEndDate ? (
-              <Col md={1} style={{ width: "50%" }}>
+              <Col>
                 <p
                   style={{
                     fontSize: "15px",
-                    width: "200px",
                     fontWeight: "bold",
                   }}
                 >
@@ -237,7 +231,11 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
               new Date().toISOString() < data.registerEndDate ? (
               <Col style={{ padding: "0" }}>
                 <div style={{ fontSize: "12px" }}>
-                  <AuctionTimer time={data.registerEndDate} id={data._id} />
+                  <AuctionTimer
+                    time={data.registerEndDate}
+                    id={data._id}
+                    windowSize={windowSize}
+                  />
                 </div>
               </Col>
             ) : new Date().toISOString() < data.auctionStartDate &&
@@ -257,13 +255,21 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
               new Date().toISOString() < data.auctionEndDate ? (
               <Col style={{ padding: "0" }}>
                 <div style={{ fontSize: "12px" }}>
-                  <AuctionTimer time={data.auctionEndDate} id={data._id} />
+                  <AuctionTimer
+                    time={data.auctionEndDate}
+                    id={data._id}
+                    windowSize={windowSize}
+                  />
                 </div>
               </Col>
             ) : (
               <Col style={{ padding: "0" }}>
                 <div style={{ fontSize: "12px" }}>
-                  <AuctionTimer time={data.auctionEndDate} id={data._id} />
+                  <AuctionTimer
+                    time={data.auctionEndDate}
+                    id={data._id}
+                    windowSize={windowSize}
+                  />
                 </div>
               </Col>
             )}
@@ -304,7 +310,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 </p>
               )} */}
             {/* </Col> */}
-            <Col>
+            <Col style={{ paddingRight: "0" }}>
               {type === "yacht" ? (
                 <p>
                   {data.property.details.engine_type
