@@ -155,12 +155,12 @@ const PropertyPages = ({
               <Col className="resultText">
                 <p className="filterText">About 151051 results</p>
               </Col>
-              <Col >
+              <Col>
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col >
+              <Col>
                 <button className="galleryButton" onClick={toggleImgCar}>
                   Gallery
                 </button>
@@ -282,7 +282,7 @@ const PropertyPages = ({
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
-              <Col >
+              <Col>
                 <div className=" RealButton ">
                   <input
                     type="text"
@@ -379,15 +379,15 @@ const PropertyPages = ({
           </Col>
           <Col md={3} className="filterResult">
             <Row>
-              <Col className="resultText" >
+              <Col className="resultText">
                 <p className="filterText">About 151051 results</p>
               </Col>
-              <Col >
+              <Col>
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col >
+              <Col>
                 <button className="galleryButton" onClick={toggleImgYacht}>
                   Gallery
                 </button>
@@ -461,12 +461,12 @@ const PropertyPages = ({
               <Col className="resultText">
                 <p className="filterText">About 151051 results</p>
               </Col>
-              <Col >
+              <Col>
                 <button className="mapButton" onClick={toggleMap}>
                   Map
                 </button>
               </Col>
-              <Col >
+              <Col>
                 <button className="galleryButton" onClick={toggleImage}>
                   Gallery
                 </button>
@@ -518,7 +518,14 @@ const PropertyPages = ({
         centered
       >
         <Modal.Body style={{ height: "700px" }}>
-          <div>
+          <div
+            style={{
+              position: "absolute",
+              top: "25px",
+              right: "25px",
+              zIndex: "999",
+            }}
+          >
             <CloseButton className="modal-close" onClick={toggleMap} />
           </div>
           <GoogleMap mapContainerStyle={mapStyles} zoom={18} center={location}>
@@ -543,7 +550,14 @@ const PropertyPages = ({
           centered
         >
           <Modal.Body>
-            <div>
+            <div
+              style={{
+                position: "absolute",
+                top: "25px",
+                right: "25px",
+                zIndex: "999",
+              }}
+            >
               <CloseButton className="modal-close" onClick={toggleImgCar} />
             </div>
             <Row>
@@ -573,7 +587,14 @@ const PropertyPages = ({
           centered
         >
           <Modal.Body>
-            <div>
+            <div
+              style={{
+                position: "absolute",
+                top: "25px",
+                right: "25px",
+                zIndex: "999",
+              }}
+            >
               <CloseButton className="modal-close" onClick={toggleImgJet} />
             </div>
             <Row>
@@ -603,7 +624,14 @@ const PropertyPages = ({
           centered
         >
           <Modal.Body>
-            <div>
+            <div
+              style={{
+                position: "absolute",
+                top: "25px",
+                right: "25px",
+                zIndex: "999",
+              }}
+            >
               <CloseButton className="modal-close" onClick={toggleImgYacht} />
             </div>
             <Row>
@@ -633,7 +661,14 @@ const PropertyPages = ({
           centered
         >
           <Modal.Body>
-            <div>
+            <div
+              style={{
+                position: "absolute",
+                top: "25px",
+                right: "25px",
+                zIndex: "999",
+              }}
+            >
               <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             <Row>

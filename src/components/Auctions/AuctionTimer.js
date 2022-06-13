@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 import "../../styles/timer.css";
 
 const AuctionTimer = ({ time, toogleAuction, windowSize }) => {
+  // console.log(windowSize);
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();

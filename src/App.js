@@ -319,26 +319,6 @@ function App() {
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
           centered
-          show={showSignUp}
-          style={{ borderRadius: "30px" }}
-          onHide={toggleSignUp}
-          contentclassname="custom-modal-style"
-        >
-          <Modal.Body>
-            <SignUp
-              toggleSignUp={toggleSignUp}
-              toggleConfirmModal={toggleConfirmModal}
-              toggleSignIn={toggleSignIn}
-              windowSize={windowSize}
-            />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
           show={showSessionTimedOut}
           style={{ borderRadius: "30px" }}
           onHide={toggleSessionTimedOut}
