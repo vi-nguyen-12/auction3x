@@ -81,6 +81,7 @@ function CarPage({
   toggleImgCar,
   toggleSignIn,
   windowSize,
+  filter,
 }) {
   useEffect(() => {
     toggleChange();
@@ -125,6 +126,16 @@ function CarPage({
       setAuctions([...onGoingAuctions, ...upcomingAuctions]);
     }
   }, [onGoingAuctions, upcomingAuctions]);
+
+  useEffect(() => {
+    if (filter) {
+      if (filter === "ongoing") {
+        setAuctions(onGoingAuctions);
+      } else if (filter === "upcoming") {
+        setAuctions(upcomingAuctions);
+      }
+    }
+  }, [filter, auctions]);
 
   let settings = {
     dots: false,

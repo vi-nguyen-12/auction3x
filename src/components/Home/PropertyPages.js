@@ -48,7 +48,6 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
 
-  console.log(filter);
   return (
     <>
       <h5 className="realHeader">
@@ -106,12 +105,13 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col>
-                <select className=" RealButton ">
-                  <option>Auction Type</option>
-                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
-                  <option onClick={() => setFilter("upcoming")}>
-                    Upcoming
-                  </option>
+                <select
+                  onChange={(e) => setFilter(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Auction Type</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
                 </select>
               </Col>
               <Col>
@@ -217,12 +217,13 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col>
-                <select className=" RealButton ">
-                  <option>Auction Type</option>
-                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
-                  <option onClick={() => setFilter("upcoming")}>
-                    Upcoming
-                  </option>
+                <select
+                  onChange={(e) => setFilter(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Auction Type</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
                 </select>
               </Col>
               <Col>
@@ -329,12 +330,13 @@ const PropertyPages = ({
                 </select>
               </Col>
               <Col>
-                <select className=" RealButton ">
-                  <option>Auction Type</option>
-                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
-                  <option onClick={() => setFilter("upcoming")}>
-                    Upcoming
-                  </option>
+                <select
+                  onChange={(e) => setFilter(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Auction Type</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
                 </select>
               </Col>
               <Col>
@@ -418,12 +420,13 @@ const PropertyPages = ({
                 </div>
               </Col>
               <Col>
-                <select className=" RealButton ">
-                  <option>Auction Type</option>
-                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
-                  <option onClick={() => setFilter("upcoming")}>
-                    Upcoming
-                  </option>
+                <select
+                  onChange={(e) => setFilter(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Auction Type</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
                 </select>
               </Col>
               <Col>
@@ -493,6 +496,7 @@ const PropertyPages = ({
           setImg={setImg}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
+          filter={filter}
         />
       ) : path === "/cars" ? (
         <CarPage
@@ -501,6 +505,7 @@ const PropertyPages = ({
           setImgCar={setImgCar}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
+          filter={filter}
         />
       ) : path === "/jets" ? (
         <JetPage
@@ -509,6 +514,7 @@ const PropertyPages = ({
           setImgJet={setImgJet}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
+          filter={filter}
         />
       ) : path === "/yachts" ? (
         <YachtPage
@@ -517,6 +523,7 @@ const PropertyPages = ({
           setImgYacht={setImgYacht}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
+          filter={filter}
         />
       ) : null}
       {/* Map Button */}

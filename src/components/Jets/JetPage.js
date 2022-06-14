@@ -81,7 +81,13 @@ position: relative;
 }
 `;
 
-function JetPage({ toggleChange, setImgJet, toggleSignIn, windowSize }) {
+function JetPage({
+  toggleChange,
+  setImgJet,
+  toggleSignIn,
+  windowSize,
+  filter,
+}) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [auctions, setAuctions] = useState([]);
@@ -125,6 +131,16 @@ function JetPage({ toggleChange, setImgJet, toggleSignIn, windowSize }) {
       setAuctions([...onGoingAuctions, ...upcomingAuctions]);
     }
   }, [onGoingAuctions, upcomingAuctions]);
+
+  useEffect(() => {
+    if (filter) {
+      if (filter === "ongoing") {
+        setAuctions(onGoingAuctions);
+      } else if (filter === "upcoming") {
+        setAuctions(upcomingAuctions);
+      }
+    }
+  }, [filter, auctions]);
 
   let settings = {
     dots: false,
