@@ -1,16 +1,16 @@
 import React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Row, Button, Container, Form } from "react-bootstrap";
 import { useState } from "react";
 import "../../styles/buyer.css";
 
-const BuyAgreement = ({ toggleStep, step }) => {
+const BuyAgreement = ({ setStep, step }) => {
   const [agreement, setAgreement] = useState(false);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
   const handleNext = () => {
     if (agreement === true) {
-      toggleStep(step + 1);
+      setStep(step + 1);
     } else {
       alert("Please Read the agreement and check the box to continue");
     }
@@ -19,78 +19,68 @@ const BuyAgreement = ({ toggleStep, step }) => {
     <>
       <Modal.Header closeButton>
         <Modal.Title
-          id="contained-modal-title-vcenter"
+          className="fw-bold fs-1 "
           style={{
             color: "#D58F5C",
-            fontSize: "40px",
-            fontWeight: "bold",
-            marginTop: "-20px",
           }}
-          contentclassname="custom-modal-title"
         >
           Buyer Agreement
         </Modal.Title>
       </Modal.Header>
-      <form>
-        <div className="term">
-          <ul>
-            <h3 style={{ fontWeight: "bold", color: "black" }}>
-              1. Terms and Conditions
-            </h3>
-            <li className="buyer-agree">
-              {" "}
-              1.1. The following terms and conditions apply to the use of the
-              Auction 3 platform and the services provided by the Auction 3
-              team.
-            </li>
-            <li className="buyer-agree">
-              1.2. The Auction 3 platform is a platform for the sale of
-              properties.
-            </li>
-            <li className="buyer-agree">
-              1.3. The Auction 3 team is a team of professional real estate
-              investors and brokers.
-            </li>
-            <li className="buyer-agree">
-              1.4. The Auction 3 team is not a real estate broker.
-            </li>
-            <li className="buyer-agree">
-              1.5. The Auction 3 team is not a real estate investor.
-            </li>
-            <li className="buyer-agree">
-              1.6. The Auction 3 team is not a real estate agent.
-            </li>
-            <li className="buyer-agree">
-              1.7. The Auction 3 team is not a real estate developer.
-            </li>
-            <li className="buyer-agree">
-              1.8. The Auction 3 team is not a real estate developer.
-            </li>
-            <li className="buyer-agree">
-              1.9. The Auction 3 team is not a real estate developer.
-            </li>
-          </ul>
-          <input
-            style={{ marginRight: "10px" }}
-            type="checkbox"
-            onChange={toggleAgree}
-          />
-          <label style={{ color: "black" }}>
-            I agree to the terms and conditions
-          </label>
-        </div>
-      </form>
-      <Modal.Footer
-        style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
-      >
-        <div style={{ position: "sticky" }} className="bottom-btn">
-          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+      <Modal.Body className="px-md-5">
+        <h3 className="fs-2 text-center my-3">Terms and Conditions</h3>
+        <Container className="fs-5">
+          <Row className="mb-2">
+            1.1. The following terms and conditions apply to the use of the
+            Auction 3 platform and the services provided by the Auction 3 team.
+          </Row>
+          <Row className=" mb-2">
+            1.2. The Auction 3 platform is a platform for the sale of
+            properties.
+          </Row>
+          <Row className=" mb-2">
+            1.3. The Auction 3 team is a team of professional real estate
+            investors and brokers.
+          </Row>
+          <Row className="mb-2">
+            1.4. The Auction 3 team is not a real estate broker.
+          </Row>
+          <Row className=" mb-2">
+            1.5. The Auction 3 team is not a real estate investor.
+          </Row>
+          <Row className="mb-2">
+            1.6. The Auction 3 team is not a real estate agent.
+          </Row>
+          <Row className=" mb-2">
+            1.7. The Auction 3 team is not a real estate developer.
+          </Row>
+          <Row className="mb-2">
+            1.8. The Auction 3 team is not a real estate developer.
+          </Row>
+          <Row className="mb-2">
+            1.9. The Auction 3 team is not a real estate developer.
+          </Row>
+          <Form.Check className="mt-4">
+            <Form.Check.Input
+              className="me-3"
+              type="checkbox"
+              onChange={toggleAgree}
+            />
+            <Form.Check.Label>
+              I agree to the terms and conditions
+            </Form.Check.Label>
+          </Form.Check>
+        </Container>
+      </Modal.Body>
+      <Modal.Footer>
+        <Row className="mt-3">
+          <Button className="pre-btn" style={{ opacity: "0.4" }} disabled>
             Previous
-          </button>
-          <button className="nxt-btn" onClick={() => handleNext()}>
+          </Button>
+          <Button onClick={handleNext} className="nxt-btn" id="next">
             Next
-          </button>
-        </div>
+          </Button>
+        </Row>
       </Modal.Footer>
     </>
   );

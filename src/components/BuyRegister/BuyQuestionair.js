@@ -1,335 +1,229 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Row, Col, Container } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import Loading from "../../components/Loading";
+import { MdClose } from "react-icons/md";
 
-const BuyQuestionair = ({
-  toggleStep,
-  step,
-  toggleAnswer,
-  // toggleAnswer2,
-  // toggleAnswer3,
-  // toggleAnswer4,
-  // toggleAnswer5,
-  toggleQuestionID,
-  // toggleQuestion2ID,
-  // toggleQuestion3ID,
-  // toggleQuestion4ID,
-  // toggleQuestion5ID,
-}) => {
-  const [question1, setQuestion1] = useState();
-  const [question2, setQuestion2] = useState();
-  const [question3, setQuestion3] = useState();
-  const [question4, setQuestion4] = useState();
-  const [question5, setQuestion5] = useState();
-  const [question1ID, setQuestion1ID] = useState();
-  const [question2ID, setQuestion2ID] = useState();
-  const [question3ID, setQuestion3ID] = useState();
-  const [question4ID, setQuestion4ID] = useState();
-  const [question5ID, setQuestion5ID] = useState();
+const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
+  const [loading, setLoading] = useState(false);
+  const handleChoose = (id) => (e) => {
+    setAnswers((prev) => {
+      return prev.map((item) => {
+        if (item._id === id) {
+          return { ...item, answer: e.target.value };
+        }
+        return item;
+      });
+    });
+  };
+  const handleExplain = (id) => (e) => {
+    setAnswers((prev) => {
+      return prev.map((item) => {
+        if (item._id === id) {
+          return { ...item, explanation: e.target.value };
+        }
+        return item;
+      });
+    });
+  };
+  const handleUpload = (id) => async (e) => {
+    setLoading(true);
+    const formData = new FormData();
 
-  const [answer1, setAnswer1] = useState();
-  const [answer2, setAnswer2] = useState();
-  const [answer3, setAnswer3] = useState();
-  const [answer4, setAnswer4] = useState();
-  const [answer5, setAnswer5] = useState();
-
-  const [explain1, setExplain1] = useState();
-
-  const answer = [answer1, answer2, answer3, answer4, answer5];
-  const questionID = [
-    question1ID,
-    question2ID,
-    question3ID,
-    question4ID,
-    question5ID,
-  ];
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData).then((response) => {
+      if (response.status === 200) {
+        setAnswers((prev) => {
+          return prev.map((item) => {
+            if (item._id === id) {
+              return {
+                ...item,
+                files: [...(item.files ? item.files : []), ...response.data],
+              };
+            }
+            return item;
+          });
+        });
+        setLoading(false);
+      }
+    });
+    e.target.value = null;
+  };
+  const handleDelete = (id, url) => () => {
+    setAnswers((prev) => {
+      return prev.map((item) => {
+        if (item._id === id) {
+          let files = item.files.filter((file) => file.url !== url);
+          return { ...item, files };
+        }
+        return item;
+      });
+    });
+  };
+  const handleNext = () => {
+    let isAllAnswered = true;
+    let isExplainedIfAnswerIsTrue = true;
+    for (let item of answers) {
+      if (!(item.answer === "yes" || item.answer === "no")) {
+        isAllAnswered = false;
+        break;
+      }
+      if (
+        item.answer === "yes" &&
+        (item.explanation === undefined ||
+          item.explanation === "" ||
+          item.files === undefined ||
+          item.files?.length < 1)
+      ) {
+        isExplainedIfAnswerIsTrue = false;
+        break;
+      }
+    }
+    if (!isAllAnswered) {
+      return alert("Please answer all questions");
+    }
+    if (!isExplainedIfAnswerIsTrue) {
+      return alert(
+        'Please explain reason and upload supported document for question with answer is "yes"'
+      );
+    }
+    setStep(step + 1);
+  };
 
   useEffect(() => {
     const getQuestion = async () => {
       await authService.getBuyerQuestions().then((res) => {
-        setQuestion1(res.data[0].questionText);
-        setQuestion2(res.data[1].questionText);
-        setQuestion3(res.data[2].questionText);
-        setQuestion4(res.data[3].questionText);
-        setQuestion5(res.data[4].questionText);
-
-        setQuestion1ID(res.data[0]._id);
-        setQuestion2ID(res.data[1]._id);
-        setQuestion3ID(res.data[2]._id);
-        setQuestion4ID(res.data[3]._id);
-        setQuestion5ID(res.data[4]._id);
+        console.log(res.data);
+        setAnswers(res.data);
       });
     };
-    getQuestion();
+    if (!answers) {
+      getQuestion();
+    }
   }, []);
 
-  // const onSubmit = () => {
-  //   toggleAnswer2(answer2);
-  //   toggleAnswer3(answer3);
-  //   toggleAnswer4(answer4);
-  //   toggleAnswer5(answer5);
-  //   toggleQuestion1ID(question1ID);
-  //   toggleQuestion2ID(question2ID);
-  //   toggleQuestion3ID(question3ID);
-  //   toggleQuestion4ID(question4ID);
-  //   toggleQuestion5ID(question5ID);
-  //   toggleStep(step + 1);
-  // };
   return (
     <>
+      {loading && <Loading />}
       <Modal.Header closeButton>
         <Modal.Title
-          id="contained-modal-title-vcenter"
+          className="fw-bold fs-1 "
           style={{
             color: "#D58F5C",
-            fontSize: "40px",
-            fontWeight: "bold",
-            marginTop: "-20px",
           }}
-          contentclassname="custom-modal-title"
         >
           Questionaire
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>
-          <div style={{ marginBottom: "15px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>
-              Q.1: {question1}
-            </p>
-            <input
-              type="radio"
-              name="answer1"
-              value="yes"
-              onChange={(e) => setAnswer1(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
-            <input
-              style={{ marginLeft: "30px" }}
-              type="radio"
-              name="answer1"
-              value="no"
-              onChange={(e) => setAnswer1(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
-            {answer1 === "yes" && (
-              <div style={{ display: "grid" }}>
-                <textarea
-                  style={{ width: "40%" }}
-                  placeholder="Please Explain"
-                  onChange={(e) => setExplain1(e.target.value)}
+          {answers?.length > 0 &&
+            answers.map((item, idx) => (
+              <div className="mb-3" key={idx}>
+                <p className="fw-bold">
+                  Q{idx + 1}: {item.questionText}
+                </p>
+                <input
+                  type="radio"
+                  name={item._id}
+                  value={"yes"}
+                  checked={item.answer === "yes"}
+                  onChange={handleChoose(item._id)}
                 />
-                <span style={{ marginTop: "10px" }}>
-                  <input type="file" />
-                </span>
-                <div
-                  style={{
-                    width: "40%",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button>Upload</button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>
-              Q.2: {question2}
-            </p>
-            <input
-              type="radio"
-              name="answer2"
-              value="yes"
-              onChange={(e) => setAnswer2(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
-            <input
-              style={{ marginLeft: "30px" }}
-              type="radio"
-              name="answer2"
-              value="no"
-              onChange={(e) => setAnswer2(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
-            {answer2 === "yes" && (
-              <div style={{ display: "grid" }}>
-                <textarea
-                  style={{ width: "40%" }}
-                  placeholder="Please Explain"
+                <label className="ms-2">Yes</label>
+                <input
+                  className="ms-4"
+                  type="radio"
+                  name={item._id}
+                  value="no"
+                  checked={item.answer === "no"}
+                  onChange={handleChoose(item._id)}
                 />
-                <span style={{ marginTop: "10px" }}>
-                  <input type="file" />
-                </span>
-                <div
-                  style={{
-                    width: "40%",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button>Upload</button>
-                </div>
+                <label className="ms-2">No</label>
+                {item.answer === "yes" && (
+                  <>
+                    <Row className="mt-3">
+                      <Col xs={12} md={6}>
+                        <textarea
+                          className="w-100"
+                          placeholder="Please Explain"
+                          onChange={handleExplain(item._id)}
+                        />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <p className="justify-content-start">
+                        {" "}
+                        Please upload file for explanation{" "}
+                        <span style={{ color: "#ff0000" }}>*</span>
+                      </p>
+                    </Row>
+                    <Row>
+                      <Col xs={12} md={6}>
+                        <input
+                          id="documents"
+                          accept=".pdf"
+                          type="file"
+                          name="documents"
+                          multiple
+                          hidden
+                          // {...register("document1", { onChange: onChange1 })}
+                          onChange={handleUpload(item._id)}
+                          // required
+                        />
+                        <label
+                          htmlFor="documents"
+                          style={{
+                            width: "130px",
+                            padding: "0.5rem",
+                            borderRadius: "0.3rem",
+                            cursor: "pointer",
+                            textAlign: "center",
+                          }}
+                        >
+                          <AiOutlinePlusCircle /> Upload file
+                        </label>
+                      </Col>
+                      <Col xs={12} md={6}>
+                        <div className="upload-list">
+                          {item.files?.length > 0 &&
+                            item.files.map((document, index) => (
+                              <div key={index} className="upload-list-item">
+                                <span>
+                                  {document.name}
+                                  <Button
+                                    className="delete-btn"
+                                    onClick={handleDelete(
+                                      item._id,
+                                      document.url
+                                    )}
+                                  >
+                                    <MdClose fontSize="1.5em" color="red" />
+                                  </Button>
+                                </span>
+                              </div>
+                            ))}
+                        </div>
+                      </Col>
+                    </Row>
+                  </>
+                )}
               </div>
-            )}
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>
-              Q3: {question3}
-            </p>
-            <input
-              type="radio"
-              name="answer3"
-              value="yes"
-              onChange={(e) => setAnswer3(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
-            <input
-              style={{ marginLeft: "30px" }}
-              type="radio"
-              name="answer3"
-              value="no"
-              onChange={(e) => setAnswer3(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
-            {answer3 === "yes" && (
-              <div style={{ display: "grid" }}>
-                <textarea
-                  style={{ width: "40%" }}
-                  placeholder="Please Explain"
-                />
-                <span style={{ marginTop: "10px" }}>
-                  <input type="file" />
-                </span>
-                <div
-                  style={{
-                    width: "40%",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button>Upload</button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>
-              Q4: {question4}
-            </p>
-            <input
-              type="radio"
-              name="answer4"
-              value="yes"
-              onChange={(e) => setAnswer4(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
-            <input
-              style={{ marginLeft: "30px" }}
-              type="radio"
-              name="answer4"
-              value="no"
-              onChange={(e) => setAnswer4(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
-            {answer4 === "yes" && (
-              <div style={{ display: "grid" }}>
-                <textarea
-                  style={{ width: "40%" }}
-                  placeholder="Please Explain"
-                />
-                <span style={{ marginTop: "10px" }}>
-                  <input type="file" />
-                </span>
-                <div
-                  style={{
-                    width: "40%",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button>Upload</button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div style={{ marginBottom: "10px" }}>
-            <p style={{ fontWeight: "bold", color: "black" }}>
-              Q5: {question5}
-            </p>
-            <input
-              type="radio"
-              name="answer5"
-              value="yes"
-              onChange={(e) => setAnswer5(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>Yes</label>
-            <input
-              style={{ marginLeft: "30px" }}
-              type="radio"
-              name="answer5"
-              value="no"
-              onChange={(e) => setAnswer5(e.target.value)}
-            />
-            <label style={{ marginLeft: "5px", color: "black" }}>No</label>
-            {answer5 === "yes" && (
-              <div style={{ display: "grid" }}>
-                <textarea
-                  style={{ width: "40%" }}
-                  placeholder="Please Explain"
-                />
-                <span style={{ marginTop: "10px" }}>
-                  <input type="file" />
-                </span>
-                <div
-                  style={{
-                    width: "40%",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  <button>Upload</button>
-                </div>
-              </div>
-            )}
-          </div>
+            ))}
         </form>
       </Modal.Body>
       <Modal.Footer
         style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
       >
         <div style={{ display: "flex" }}>
-          <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+          <button className="pre-btn" onClick={() => setStep(step - 1)}>
             Previous
           </button>
-          <button
-            className="nxt-btn"
-            type="submit"
-            onClick={() => {
-              toggleAnswer(answer);
-              // toggleAnswer2(answer2);
-              // toggleAnswer3(answer3);
-              // toggleAnswer4(answer4);
-              // toggleAnswer5(answer5);
-              toggleQuestionID(questionID);
-              // toggleQuestion2ID(question2ID);
-              // toggleQuestion3ID(question3ID);
-              // toggleQuestion4ID(question4ID);
-              // toggleQuestion5ID(question5ID);
-              toggleStep(step + 1);
-            }}
-          >
+          <button className="nxt-btn" onClick={handleNext}>
             Next
           </button>
         </div>

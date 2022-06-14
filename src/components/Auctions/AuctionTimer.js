@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 import "../../styles/timer.css";
 
-const AuctionTimer = ({ time, toogleAuction }) => {
+const AuctionTimer = ({ time, toogleAuction, windowSize }) => {
+  // console.log(windowSize);
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -50,11 +51,11 @@ const AuctionTimer = ({ time, toogleAuction }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr className="timerName">
           <td>Days</td>
           <td>Hours</td>
-          <td>Minutes</td>
-          <td>Seconds</td>
+          <td>{windowSize > 800 ? "Minutes" : "Min"}</td>
+          <td>{windowSize > 800 ? "Seconds" : "Sec"}</td>
         </tr>
       </tbody>
     </Table>

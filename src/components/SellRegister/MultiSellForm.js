@@ -89,7 +89,7 @@ const MultiSellForm = ({
   }, [params.step]);
   return (
     <Container className="vh-100">
-      <h1>Sell On Auction3</h1>
+      <h1 className="fs-1">Sell On Auction3</h1>
       {step === 0 ? (
         <SellWelcome
           togglePropertyType={togglePropertyType}

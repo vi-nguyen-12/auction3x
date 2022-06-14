@@ -13,10 +13,14 @@
   padding: 0;
 } */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .timerHead th:nth-child(n + 1) {
     font-size: medium;
     margin: 0;
+    padding: 0 !important;
+  }
+
+  .timerName td:nth-child(n + 1) {
     padding: 0 !important;
   }
 

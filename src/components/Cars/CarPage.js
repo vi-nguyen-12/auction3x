@@ -4,15 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
-import { UpcomingCarCard } from "../Cards/UpcomingCarCard";
 import "../../styles/realEstate.css";
-import { CarCard } from "../Cards/CarCard";
+import Cards from "../Cards/Cards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
-  // overflow: hidden;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -76,7 +75,13 @@ position: relative;
 }
 `;
 
-function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn, windowSize }) {
+function CarPage({
+  toggleChange,
+  setImgCar,
+  toggleImgCar,
+  toggleSignIn,
+  windowSize,
+}) {
   useEffect(() => {
     toggleChange();
   }, []);
@@ -116,33 +121,12 @@ function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn, windowSi
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: onGoingAuctions.length > 3 ? 3 : onGoingAuctions.length,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    slidesToShow:
+      windowSize > 800
+        ? onGoingAuctions.length > 3
+          ? 3
+          : onGoingAuctions.length
+        : 1,
   };
   return (
     <>
@@ -164,17 +148,11 @@ function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn, windowSi
                 <Carousel {...settings}>
                   {onGoingAuctions.map((item, index) => (
                     <Wrap key={index}>
-                      <Col md={12} style={{ marginBottom: "30px" }}>
-                        <CarCard
-                          url={item.property.images[0].url}
-                          urls={item.property.images}
-                          data={item.property.details}
-                          id={item._id}
-                          auctionStartDate={item.auctionStartDate}
-                          auctionEndDate={item.auctionEndDate}
-                          startingBid={item.startingBid}
-                          auctionId={item._id}
+                      <Col style={{ marginBottom: "30px" }}>
+                        <Cards
+                          data={item}
                           toggleSignIn={toggleSignIn}
+                          type={item.property.type}
                           windowSize={windowSize}
                         />
                       </Col>
@@ -200,18 +178,11 @@ function CarPage({ toggleChange, setImgCar, toggleImgCar, toggleSignIn, windowSi
               </h1>
               {upcomingAuctions.length > 0 ? (
                 upcomingAuctions.map((item, index) => (
-                  <Col key={index} md={4} style={{ marginBottom: "30px" }}>
-                    <UpcomingCarCard
-                      url={item.property.images[0].url}
-                      urls={item.property.images}
-                      data={item.property.details}
-                      id={item._id}
-                      auctionStartDate={item.auctionStartDate}
-                      auctionEndDate={item.auctionEndDate}
-                      startRegister={item.registerStartDate}
-                      endRegister={item.registerEndDate}
-                      startingBid={item.startingBid}
+                  <Col key={index} style={{ marginBottom: "30px" }}>
+                    <Cards
+                      data={item}
                       toggleSignIn={toggleSignIn}
+                      type={item.property.type}
                       windowSize={windowSize}
                     />
                   </Col>

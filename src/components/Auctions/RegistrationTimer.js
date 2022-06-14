@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { Table } from "react-bootstrap";
 
-const RegistrationTimer = ({ time, toggleRegistEnded }) => {
+const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -49,11 +49,11 @@ const RegistrationTimer = ({ time, toggleRegistEnded }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr className="timerName">
           <td>Days</td>
           <td>Hours</td>
-          <td>Minutes</td>
-          <td>Seconds</td>
+          <td>{windowSize > 800 ? "Minutes" : "Min"}</td>
+          <td>{windowSize > 800 ? "Seconds" : "Sec"}</td>
         </tr>
       </tbody>
     </Table>

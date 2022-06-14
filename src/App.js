@@ -37,6 +37,7 @@ const PropertyPages = React.lazy(() =>
 const EmailConfirm = React.lazy(() =>
   import("./components/Users/EmailConfirm")
 );
+const Auctions = React.lazy(() => import("./components/Home/Auctions"));
 const Docusign = React.lazy(() => import("./components/Docusign"));
 const DisplayAuctions = React.lazy(() =>
   import("./components/Auctions/DisplayAuctions")
@@ -311,26 +312,6 @@ function App() {
           contentclassname="custom-modal-style"
         >
           <Modal.Body className="sign-Up"></Modal.Body>
-        </Modal>
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignUp}
-          style={{ borderRadius: "30px" }}
-          onHide={toggleSignUp}
-          contentclassname="custom-modal-style"
-        >
-          <Modal.Body>
-            <SignUp
-              toggleSignUp={toggleSignUp}
-              toggleConfirmModal={toggleConfirmModal}
-              toggleSignIn={toggleSignIn}
-              windowSize={windowSize}
-            />
-          </Modal.Body>
         </Modal>
         <Modal
           size="lg"
@@ -825,6 +806,14 @@ function App() {
                 toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
               />
+            </Route>
+
+            <Route exact path="/Auctions">
+              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
+            </Route>
+
+            <Route exact path="/Auctions/:filter">
+              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
             </Route>
 
             <Route path="/contact">

@@ -119,7 +119,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
     <>
       {loader ? <Loading /> : null}
       <Modal.Header
-        style={{ paddingTop: "50px" }}
+        style={{ paddingTop: "20px" }}
         contentclassname="modal-head-signup"
         closeButton
       >
@@ -409,7 +409,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
       </form>
       <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
         <Modal.Body style={{ height: "90vh" }}>
-          <div>
+          <div style={{display:"flex", justifyContent:"flex-end", marginBottom:"10px"}}>
             <CloseButton className="modal-close" onClick={toogleTerms} />
           </div>
           <iframe title="terms" src={terms} width="100%" height="90%" />
