@@ -358,7 +358,13 @@ const Agree = ({
 
       <Modal size="lg" show={show} onHide={toggleTerms} centered>
         <Modal.Body style={{ height: "70vh" }}>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: "10px",
+            }}
+          >
             <CloseButton className="modal-close" onClick={toggleTerms} />
           </div>
           <embed src={terms} width="100%" height="100%" />

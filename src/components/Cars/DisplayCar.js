@@ -270,7 +270,14 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   centered
                 >
                   <Modal.Body>
-                    <div>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "25px",
+                        right: "25px",
+                        zIndex: "999",
+                      }}
+                    >
                       <CloseButton
                         className="modal-close"
                         onClick={togglePics}
@@ -303,7 +310,14 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
                   <Modal.Body>
-                    <div>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "25px",
+                        right: "25px",
+                        zIndex: "999",
+                      }}
+                    >
                       <CloseButton
                         className="modal-close"
                         onClick={toggleVids}
@@ -343,7 +357,14 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
                     <Modal.Body>
-                      <div>
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "25px",
+                          right: "25px",
+                          zIndex: "999",
+                        }}
+                      >
                         <CloseButton
                           className="modal-close"
                           onClick={toggleMap}
@@ -454,9 +475,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
               )} */}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div className="registBtn">
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
@@ -536,9 +557,9 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -647,6 +668,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       <RegistrationTimer
                         time={property.registerEndDate}
                         toggleRegistEnded={toggleRegistEnded}
+                        windowSize={windowSize}
                       />
                       <div
                         style={{
@@ -686,7 +708,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
@@ -703,6 +725,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       <AuctionTimer
                         time={property.auctionEndDate}
                         id={property._id}
+                        windowSize={windowSize}
                       />
                       <div
                         style={{
@@ -730,7 +753,10 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer time={property.auctionStartDate} />
+                      <AuctionTimer
+                        time={property.auctionStartDate}
+                        windowSize={windowSize}
+                      />
                       <div
                         style={{
                           display: "flex",
