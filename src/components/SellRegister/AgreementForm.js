@@ -289,7 +289,7 @@ const Agree = ({
                 step: 5,
                 docusignId: res.data._id,
               };
-              authService.savePropInfo(datas).then((res) => {
+              authService.postPropInfo(datas).then((res) => {
                 if (res.data.error) {
                   setLoader(false);
                   alert(res.data.error);

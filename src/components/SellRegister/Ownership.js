@@ -18,6 +18,7 @@ function Ownership({
   propId,
   ownership,
 }) {
+  console.log(propId);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -49,18 +50,20 @@ function Ownership({
     if (propertyType === "real-estate") {
       if (propId || params.id) {
         const datas = {
-          type: propertyType,
           id: propId ? propId : params.id,
-          details: {
-            owner_name: ownerName,
-            broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
-            phone: phone,
-            email: email,
-            address: address,
+          changes: {
+            type: propertyType,
+            details: {
+              owner_name: ownerName,
+              broker_name: brokerName ? brokerName : null,
+              broker_id: brokerId ? brokerId : null,
+              phone: phone,
+              email: email,
+              address: address,
+            },
+            documents: listing_agreement ? listing_agreement : null,
+            step: parseInt(1),
           },
-          documents: listing_agreement ? listing_agreement : null,
-          step: parseInt(1),
         };
         await authService.putRealEstateInfo(datas).then((res) => {
           if (res.data.error) {
@@ -93,27 +96,53 @@ function Ownership({
         });
       }
     } else {
-      const data = {
-        type: propertyType,
-        details: {
-          owner_name: ownerName,
-          broker_name: brokerName ? brokerName : null,
-          broker_id: brokerId ? brokerId : null,
-          phone: phone,
-          email: email,
-          address: address,
-        },
-        documents: listing_agreement ? listing_agreement : null,
-        step: parseInt(1),
-      };
-      authService.savePropInfo(data).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          getPropId(res.data._id);
-          toggleSellStep(1);
-        }
-      });
+      if (propId || params.id) {
+        const datas = {
+          id: propId ? propId : params.id,
+          changes: {
+            type: propertyType,
+            details: {
+              owner_name: ownerName,
+              broker_name: brokerName ? brokerName : null,
+              broker_id: brokerId ? brokerId : null,
+              phone: phone,
+              email: email,
+              address: address,
+            },
+            documents: listing_agreement ? listing_agreement : null,
+            step: parseInt(1),
+          },
+        };
+        await authService.putPropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(1);
+          }
+        });
+      } else {
+        const data = {
+          type: propertyType,
+          details: {
+            owner_name: ownerName,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
+            phone: phone,
+            email: email,
+            address: address,
+          },
+          documents: listing_agreement ? listing_agreement : null,
+          step: parseInt(1),
+        };
+        authService.postPropInfo(data).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            getPropId(res.data._id);
+            toggleSellStep(1);
+          }
+        });
+      }
     }
   };
 
@@ -510,7 +539,7 @@ function Ownership({
               <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
-                  onClick={() => toggleStep(step - 1)}
+                  onClick={() => window.location.reload()}
                 >
                   Previous
                 </Button>

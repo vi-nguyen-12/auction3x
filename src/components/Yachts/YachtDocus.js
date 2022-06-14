@@ -158,72 +158,65 @@ function YachtDocus({
     if (params.id) {
       const prop = incompProperty.filter((item) => item._id === params.id);
       if (prop[0].documents.length > 1) {
-        const documents = prop[0].documents.map((document) => {
-          if (document.isVerified && document._id) {
-            delete document.isVerified;
-            delete document._id;
-            return document;
-          }
-        });
         setDocument1(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_registration"
               )
             : []
         );
         setDocument2(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_maintenance_report"
               )
             : []
         );
         setDocument3(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_engine_type"
               )
             : []
         );
         setDocument4(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_performance_report"
               )
             : []
         );
         setDocument5(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_deck_details"
               )
             : []
         );
         setDocument6(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_insurance"
               )
             : []
         );
         setDocument7(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_marine_surveyor_report"
               )
             : []
         );
         setDocument8(
-          documents
-            ? documents.filter(
+          prop[0].documents
+            ? prop[0].documents.filter(
                 (item) => item.officialName === "vessel_valuation_report"
               )
             : []
         );
         setDocument9(
-          documents
-            ? documents.filter((item) => item.officialName === "others")
+          prop[0].documents
+            ? prop[0].documents.filter((item) => item.officialName === "others")
             : []
         );
       } else {
@@ -423,7 +416,6 @@ function YachtDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 2) {
@@ -441,7 +433,6 @@ function YachtDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       } else if (parseInt(steps) === 3) {
@@ -457,7 +448,6 @@ function YachtDocus({
             alert(response.data.error);
           } else {
             toggleSellStep(4);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -470,13 +460,12 @@ function YachtDocus({
         documents,
         step: 4,
       };
-      await authService.savePropInfo(datas).then((response) => {
+      await authService.postPropInfo(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
           toggleSellStep(4);
           getPropId(response.data._id);
-          alert("Saved Successfully!");
         }
       });
     }
@@ -570,7 +559,7 @@ function YachtDocus({
           ))}
         </Row>
         <Row className="mt-5">
-          <Col
+          {/* <Col
             xs={12}
             md={4}
             className="d-flex justify-content-center justify-content-md-end mt-2"
@@ -578,16 +567,17 @@ function YachtDocus({
             <Button className="save-btn" onClick={saveInfo}>
               Save
             </Button>
-          </Col>
-          <Col
-            xs={12}
-            md={8}
-            className="d-flex justify-content-center justify-content-md-start mt-2"
-          >
+          </Col> */}
+          <Col className="d-flex justify-content-center">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button className="nxt-btn" id="next" type="submit">
+            <Button
+              onClick={saveInfo}
+              className="nxt-btn"
+              id="next"
+              type="submit"
+            >
               Next
             </Button>
           </Col>

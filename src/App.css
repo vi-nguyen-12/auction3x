@@ -345,3 +345,7 @@ h1 {
 .dropdown-icon:hover .dropdown-info {
   display: block;
 }
+#selected {
+  background-color: #000000!important;
+  color: white;
+}

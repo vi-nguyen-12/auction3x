@@ -37,6 +37,7 @@ const PropertyPages = ({
   const [showImgCar, setShowImgCar] = useState(false);
   const [showImgJet, setShowImgJet] = useState(false);
   const [showImgYacht, setShowImgYacht] = useState(false);
+  const [filter, setFilter] = useState();
   const [img, setImg] = useState([]);
   const [imgCar, setImgCar] = useState([]);
   const [imgJet, setImgJet] = useState([]);
@@ -46,6 +47,8 @@ const PropertyPages = ({
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
+
+  console.log(filter);
   return (
     <>
       <h5 className="realHeader">
@@ -105,8 +108,10 @@ const PropertyPages = ({
               <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
-                  <option href="#">Ongoing</option>
-                  <option href="#">Upcoming</option>
+                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
+                  <option onClick={() => setFilter("upcoming")}>
+                    Upcoming
+                  </option>
                 </select>
               </Col>
               <Col>
@@ -214,8 +219,10 @@ const PropertyPages = ({
               <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
-                  <option href="#">Ongoing</option>
-                  <option href="#">Upcoming</option>
+                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
+                  <option onClick={() => setFilter("upcoming")}>
+                    Upcoming
+                  </option>
                 </select>
               </Col>
               <Col>
@@ -324,8 +331,10 @@ const PropertyPages = ({
               <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
-                  <option href="#">Ongoing</option>
-                  <option href="#">Upcoming</option>
+                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
+                  <option onClick={() => setFilter("upcoming")}>
+                    Upcoming
+                  </option>
                 </select>
               </Col>
               <Col>
@@ -411,8 +420,10 @@ const PropertyPages = ({
               <Col>
                 <select className=" RealButton ">
                   <option>Auction Type</option>
-                  <option href="#">Ongoing</option>
-                  <option href="#">Upcoming</option>
+                  <option onClick={() => setFilter("ongoing")}>Ongoing</option>
+                  <option onClick={() => setFilter("upcoming")}>
+                    Upcoming
+                  </option>
                 </select>
               </Col>
               <Col>

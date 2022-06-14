@@ -373,7 +373,7 @@ function RealEstateDetails({
                 onChange={(e) => {
                   setAddress(e.target.value);
                 }}
-                {...register("street_address", { required: false })}
+                {...register("street_address")}
                 required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
@@ -392,7 +392,7 @@ function RealEstateDetails({
                 onChange={(e) => {
                   setCity(e.target.value);
                 }}
-                {...register("city", { required: false })}
+                {...register("city")}
                 required
               />
               <span style={{ fontWeight: "600", color: "black" }}>City *</span>
@@ -409,7 +409,7 @@ function RealEstateDetails({
                 onChange={(e) => {
                   setState(e.target.value);
                 }}
-                {...register("state", { required: false })}
+                {...register("state")}
                 required
               />
               <span style={{ fontWeight: "600", color: "black" }}>State *</span>
@@ -426,7 +426,7 @@ function RealEstateDetails({
                 onChange={(e) => {
                   setCountry(e.target.value);
                 }}
-                {...register("country", { required: false })}
+                {...register("country")}
                 required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
@@ -435,13 +435,12 @@ function RealEstateDetails({
             </Col>
             <Col>
               <input
-                type="number"
-                min="0"
+                type="text"
                 className="form-control"
                 name="zipCode"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={zip}
-                {...register("zipCode", { required: false })}
+                {...register("zipCode")}
                 onChange={(e) => {
                   setZip(e.target.value);
                 }}
@@ -459,7 +458,7 @@ function RealEstateDetails({
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={ownerName}
-                {...register("ownerName", { required: false })}
+                {...register("ownerName")}
                 onChange={(e) => {
                   setOwnerName(e.target.value);
                 }}
@@ -473,11 +472,12 @@ function RealEstateDetails({
           <Row style={{ marginTop: "10px" }}>
             <Col>
               <input
-                type="text"
+                type="number"
+                min="0"
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={rooms}
-                {...register("rooms_count", { required: false })}
+                {...register("rooms_count")}
                 onChange={(e) => {
                   setRooms(e.target.value);
                 }}
@@ -489,11 +489,12 @@ function RealEstateDetails({
             </Col>
             <Col>
               <input
-                type="text"
+                type="number"
+                min="0"
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={bedrooms}
-                {...register("bedrooms", { required: false })}
+                {...register("bedrooms")}
                 onChange={(e) => {
                   setBedrooms(e.target.value);
                 }}
@@ -511,7 +512,7 @@ function RealEstateDetails({
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={propType}
-                {...register("propertyType", { required: false })}
+                {...register("propertyType")}
                 onChange={(e) => {
                   setPropType(e.target.value);
                 }}
@@ -523,11 +524,12 @@ function RealEstateDetails({
             </Col>
             <Col>
               <input
-                type="text"
+                type="number"
+                min="0"
                 className="form-control"
                 defaultValue={bathrooms}
                 style={{ color: "black", fontWeight: "bold" }}
-                {...register("bathrooms", { required: false })}
+                {...register("bathrooms")}
                 onChange={(e) => {
                   setBathrooms(e.target.value);
                 }}
@@ -539,30 +541,32 @@ function RealEstateDetails({
             </Col>
             <Col>
               <input
-                type="text"
+                type="number"
+                min="0"
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={totalValue}
                 placeholder="$"
-                {...register("total_value", { required: false })}
+                {...register("total_value")}
                 onChange={(e) => {
                   setTotalValue(e.target.value);
                 }}
                 required
               />
               <span style={{ fontWeight: "600", color: "black" }}>
-                Total Value *
+                Total Market Value *
               </span>
             </Col>
           </Row>
           <Row style={{ marginTop: "10px" }}>
             <Col>
               <input
-                type="text"
+                type="number"
+                min="0"
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={sqft}
-                {...register("sqft", { required: false })}
+                {...register("sqft")}
                 onChange={(e) => {
                   setSqft(e.target.value);
                 }}
@@ -579,7 +583,7 @@ function RealEstateDetails({
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={reservedAmount}
-                {...register("reservedAmount", { required: false })}
+                {...register("reservedAmount")}
                 onChange={(e) => {
                   setReservedAmount(parseInt(e.target.value));
                 }}
@@ -596,7 +600,7 @@ function RealEstateDetails({
                 className="form-control"
                 style={{ color: "black", fontWeight: "bold" }}
                 defaultValue={discussedAmount}
-                {...register("discussedAmount", { required: false })}
+                {...register("discussedAmount")}
                 onChange={(e) => {
                   setDiscussedAmount(parseInt(e.target.value));
                 }}
@@ -613,7 +617,7 @@ function RealEstateDetails({
                 style={{ height: "100%", color: "black" }}
                 className="form-control"
                 placeholder="Description"
-                {...register("description", { required: false })}
+                {...register("description")}
               />
             </Col>
           </Row>
