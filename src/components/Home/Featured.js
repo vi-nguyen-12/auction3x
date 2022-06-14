@@ -78,7 +78,6 @@ align-content: center;
 
   &:hover {
     padding: 0;
-    // border: 4px solid rgba(249, 249, 249, 0.8);
     transition-duration: 300ms;
   }
 }
@@ -122,16 +121,15 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
 
   return (
     <div className="background" style={{ height: "100vh" }}>
-      <Row>
-        <Col md={12} className="m-auto">
-          <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
-            Featured Listings
-          </h2>
-        </Col>
-      </Row>
-
       {auctions.length > 0 ? (
         <>
+          <Row>
+            <Col md={12} className="m-auto">
+              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
+                Featured Listings
+              </h2>
+            </Col>
+          </Row>
           <Col md={12} className="m-auto">
             <Row>
               <Carousel {...settings}>

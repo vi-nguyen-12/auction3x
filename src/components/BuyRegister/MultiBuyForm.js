@@ -5,11 +5,7 @@ import BuyQuestionair from "./BuyQuestionair";
 import FundUpload from "./Fund Request/FundUpload";
 
 const MultiBuyForm = () => {
-  const [step, setStep] = useState(0);
-
-  const toggleStep = (step) => {
-    setStep(step);
-  };
+  const [step, setStep] = useState(1);
 
   const [document, setDocument] = useState();
   const toggleDocument = (document) => {
@@ -20,53 +16,43 @@ const MultiBuyForm = () => {
     toggleDocument(document);
   }, [document]);
 
-  const [questionID, setQuestionID] = useState();
+  const [answers, setAnswers] = useState();
 
-  const toggleQuestionID = (questionID) => {
-    setQuestionID(questionID);
-  };
-  const [answer, setAnswer] = useState();
-
-  const toggleAnswer = (answer) => {
-    setAnswer(answer);
-  };
-
-  if (step === 0) {
+  if (step === 1) {
     return (
       <div className="buy-register-container">
-        <BuyAgreement toggleStep={toggleStep} step={step} />
+        <BuyAgreement setStep={setStep} step={step} />
       </div>
     );
-  } else if (step === 1) {
+  } else if (step === 2) {
     return (
       <div className="buy-register-container">
         <FundUpload
-          toggleStep={toggleStep}
+          setStep={setStep}
           step={step}
           toggleDocument={toggleDocument}
           docu={document}
         />
       </div>
     );
-  } else if (step === 2) {
-    return (
-      <div className="buy-register-container">
-        <BuyQuestionair
-          toggleStep={toggleStep}
-          step={step}
-          toggleAnswer={toggleAnswer}
-          toggleQuestionID={toggleQuestionID}
-        />
-      </div>
-    );
   } else if (step === 3) {
     return (
       <div className="buy-register-container">
-        <BuyAuthorized
-          toggleStep={toggleStep}
+        <BuyQuestionair
+          setStep={setStep}
           step={step}
-          answer={answer}
-          questionID={questionID}
+          setAnswers={setAnswers}
+          answers={answers}
+        />
+      </div>
+    );
+  } else if (step === 4) {
+    return (
+      <div className="buy-register-container">
+        <BuyAuthorized
+          setStep={setStep}
+          step={step}
+          answers={answers}
           document={document}
         />
       </div>

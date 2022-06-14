@@ -1,17 +1,14 @@
 import React from "react";
 import "../../styles/sell-register.css";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import axious from "axios";
-import CloseButton from "react-bootstrap/CloseButton";
 import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
 
-const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
-  const { handleSubmit } = useForm();
+const BuyAuthorized = ({ setStep, step, answers, document }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -21,15 +18,10 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
 
   const [ip, setIp] = useState();
 
-  const getIp = async () => {
-    await axious.get("https://api.ipify.org?format=json").then((res) => {
-      setIp(res.data.ip);
-    });
-  };
-
   const documents = [];
 
   //push document to array if it is not empty
+
   document.map((item) => {
     if (item.url) {
       documents.push(item);
@@ -37,6 +29,11 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
   });
 
   useEffect(() => {
+    const getIp = async () => {
+      await axious.get("https://api.ipify.org?format=json").then((res) => {
+        setIp(res.data.ip);
+      });
+    };
     getIp();
     authService.getDocuments().then((res) => {
       if (res.data.error) {
@@ -57,14 +54,6 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
     setAgree(dateTime);
   };
 
-  const answers = [
-    { questionId: questionID[0], answer: answer[0] },
-    { questionId: questionID[1], answer: answer[1] },
-    { questionId: questionID[2], answer: answer[2] },
-    { questionId: questionID[3], answer: answer[3] },
-    { questionId: questionID[4], answer: answer[4] },
-  ];
-
   const handleSignDocusign = async () => {
     setLoader(true);
     await authService.getBuyingDocuSign(envelopeId).then((res) => {
@@ -78,7 +67,7 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
       }
     });
   };
-  const onSubmit = async () => {
+  const handleSubmit = async () => {
     if (agree) {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
@@ -89,6 +78,14 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
           setLoader(false);
           alert("Please sign the docusign before proceeding ");
         } else {
+          answers = answers.map((item) => {
+            return {
+              questionId: item._id,
+              answer: item.answer,
+              explanation: item.explanation,
+              files: item.files,
+            };
+          });
           authService
             .buyerRegister({
               auctionId: id,
@@ -115,92 +112,58 @@ const BuyAuthorized = ({ toggleStep, step, answer, questionID, document }) => {
   };
   return (
     <>
+      {" "}
+      {loader ? <Loading /> : null}
       <Modal.Header closeButton>
         <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "40px", fontWeight: "bold" }}
-          contentclassname="custom-modal-title"
+          className="fw-bold fs-1 "
+          style={{
+            color: "#D58F5C",
+          }}
         >
           Buyer Agreement
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
-        {loader ? <Loading /> : null}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "70px",
-            }}
-          >
-            <Button className="btn btn-primary" onClick={handleSignDocusign}>
-              <SiDocusign />
-              <span style={{ marginLeft: "10px" }}>
-                <span style={{ fontSize: "20px" }}>
-                  <strong>Sign</strong>
-                </span>
-                <span style={{ fontSize: "15px", marginLeft: "10px" }}>
-                  <strong>Document</strong>
-                </span>
-              </span>
-            </Button>
-          </div>
+        <Container className="d-flex flex-column align-items-center justify-content-center h-100">
+          <Button className="btn btn-primary" onClick={handleSignDocusign}>
+            <SiDocusign />
+            <span className="ms-3 fs-5">
+              <strong>Sign</strong>
+            </span>
+            <span className="ms-2 fs-5">
+              <strong>Document</strong>
+            </span>
+          </Button>
 
-          <div
-            style={{
-              fontSize: "14px",
-              width: "100%",
-              marginTop: "70px",
-              textAlign: "center",
-              color: "black",
-            }}
-          >
+          <div className="mt-3">
             <input
               type="checkbox"
               name="terms"
               multiple
-              style={{ marginRight: "10px", marginBottom: "30px" }}
               onChange={hangleTerms}
             />
-            Agree to{" "}
-            <span
-              onClick={() => toggleTerms()}
-              style={{ color: "#00a8ff", cursor: "pointer" }}
-            >
+
+            <label onClick={() => toggleTerms()} className="ms-2">
               {" "}
-              Terms & Conditions
-            </span>
+              Agree to{" "}
+              <span style={{ color: "#00a8ff", cursor: "pointer" }}>
+                Terms & Conditions
+              </span>
+            </label>
           </div>
-          <div
-            style={{ position: "sticky", padding: "auto" }}
-            className="bottom-btn"
-          >
-            <button className="pre-btn" onClick={() => toggleStep(step - 1)}>
-              Previous
-            </button>
-            <button className="nxt-btn" type="submit">
-              Submit
-            </button>
-          </div>
-        </form>
+        </Container>
       </Modal.Body>
-      <Modal size="lg" show={show} onHide={toggleTerms} centered>
-        <Modal.Body style={{ height: "70vh" }}>
-          <div>
-            <CloseButton className="modal-close" onClick={toggleTerms} />
-          </div>
-          <embed src={terms} width="100%" height="100%" />
-        </Modal.Body>
-      </Modal>
+      <Modal.Footer>
+        <Row className="mt-3">
+          <Button className="pre-btn" onClick={() => setStep(step - 1)}>
+            Previous
+          </Button>
+          <Button onClick={handleSubmit} className="nxt-btn" id="next">
+            Submit
+          </Button>
+        </Row>
+      </Modal.Footer>
     </>
   );
 };
