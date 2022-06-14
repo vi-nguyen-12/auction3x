@@ -395,10 +395,10 @@ function App() {
           contentclassname="forgotPass"
         >
           <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-            <ForgotPass
+            {/* <ForgotPass
               toggleForgotPass={toggleForgotPass}
               toggleChangePass={toggleChangePass}
-            />
+            /> */}
           </Modal.Body>
         </Modal>
         <Modal
@@ -412,16 +412,30 @@ function App() {
           contentclassname="forgotPass"
         >
           <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{
-                color: "#D58F5C",
-                fontSize: "30px",
-                fontWeight: "bold",
-              }}
-            >
-              Forgot Password
-            </Modal.Title>
+            {windowSize > 330 ? (
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            )
+              : (
+                <Modal.Title
+                  id="contained-modal-title-vcenter"
+                  style={{
+                    color: "#D58F5C",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Forgot Password
+                </Modal.Title>
+              )}
           </Modal.Header>
           <Modal.Body>
             <ForgotPass
