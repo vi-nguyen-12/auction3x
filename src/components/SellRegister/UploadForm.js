@@ -77,7 +77,7 @@ const UploadForm = ({
         if (sellStep === 2 || parseInt(params.step) === 2) {
           const datas = {
             id: propId ? propId : params.id,
-            details: {
+            changes: {
               images: images,
               videos: videos,
               step: 3,
@@ -93,7 +93,7 @@ const UploadForm = ({
         } else if (sellStep === 1 || parseInt(params.step) === 1) {
           const datas = {
             id: propId ? propId : params.id,
-            details: {
+            changes: {
               ...propertyData,
               images,
               videos,

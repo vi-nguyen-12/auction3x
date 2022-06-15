@@ -90,7 +90,7 @@ const Agree = ({
               if (parseInt(steps) === 1) {
                 const datas = {
                   id: params.id ? params.id : propId,
-                  details: {
+                  changes: {
                     ...propertyData,
                     images,
                     videos,
@@ -112,7 +112,7 @@ const Agree = ({
               } else if (parseInt(steps) === 2) {
                 const datas = {
                   id: params.id ? params.id : propId,
-                  details: {
+                  changes: {
                     images,
                     videos,
                     documents,
@@ -134,7 +134,7 @@ const Agree = ({
               } else if (parseInt(steps) === 3) {
                 const datas = {
                   id: params.id ? params.id : propId,
-                  details: {
+                  changes: {
                     documents,
                     step: 5,
                     docusignId: res.data._id,
@@ -154,7 +154,7 @@ const Agree = ({
               } else if (parseInt(steps) === 4) {
                 const datas = {
                   id: params.id ? params.id : propId,
-                  details: {
+                  changes: {
                     step: 5,
                     docusignId: res.data._id,
                   },

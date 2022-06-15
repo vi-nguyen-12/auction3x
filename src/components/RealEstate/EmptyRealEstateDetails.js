@@ -43,7 +43,7 @@ function EmptyRealEstateDetails({
     if (propId || params.id) {
       const datas = {
         id: propId ? propId : params.id,
-        details: {
+        changes: {
           street_address: address ? address : property.street_address,
           city: city ? city : property.city,
           state: state ? state : property.state,

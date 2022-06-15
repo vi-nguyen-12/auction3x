@@ -31,143 +31,103 @@ function PendingListings({ windowSize }) {
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
         <h1>Pending Approval</h1>
-        {windowSize > 800 ? (
-          <Table
-            striped
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 20px 16px",
-              marginTop: "50px",
-            }}
-          >
-            <thead style={{ background: "black", color: "white" }}>
-              <tr>
-                <th>#</th>
-                <th>Owner Name</th>
-                <th>Property Type</th>
-                <th>Status</th>
-                <th>Images</th>
-                <th>Documents</th>
-                <th>Last Updated</th>
-              </tr>
-            </thead>
-            {pendingListings.length > 0 &&
-              pendingListings.map((auction, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{auction.details.owner_name}</td>
-                    <td>
-                      {auction.type === "real-estate"
-                        ? "Real Estate"
-                        : auction.type === "car"
-                        ? "Car"
-                        : auction.type === "jet"
-                        ? "Jet"
-                        : auction.type === "yacht"
-                        ? "Yacht"
-                        : ""}
-                    </td>
-                    {auction.isApproved === "pending" ? (
-                      <td>Pending</td>
-                    ) : auction.isApproved === "success" ? (
-                      <td>Approved</td>
-                    ) : auction.isApproved === "fail" ? (
-                      <td>Rejected</td>
-                    ) : null}
-                    <td>
-                      <div
-                        style={{
-                          width: "100%",
-                          alignItems: "right",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <img
-                          width="100px"
-                          height="50px"
-                          onClick={() => {
-                            setImages(auction.images);
-                            toggleShowImages();
-                          }}
-                          src={auction.images[0].url}
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <Button
+        <Table
+          striped
+          borderless
+          hover
+          style={{
+            overflow: windowSize < 800 ? "auto" : "hidden",
+            display: windowSize < 800 && "block",
+            tableLayout: windowSize < 800 && "auto",
+            padding: "0",
+            borderRadius: "5px",
+            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            marginTop: "50px",
+          }}
+        >
+          <thead style={{ background: "black", color: "white" }}>
+            <tr>
+              <th>#</th>
+              <th>Owner Name</th>
+              <th>Property Type</th>
+              <th>Status</th>
+              <th>Images</th>
+              <th>Documents</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          {pendingListings.length > 0 &&
+            pendingListings.map((auction, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{auction.details.owner_name}</td>
+                  <td>
+                    {auction.type === "real-estate"
+                      ? "Real Estate"
+                      : auction.type === "car"
+                      ? "Car"
+                      : auction.type === "jet"
+                      ? "Jet"
+                      : auction.type === "yacht"
+                      ? "Yacht"
+                      : ""}
+                  </td>
+                  {auction.isApproved === "pending" ? (
+                    <td>Pending</td>
+                  ) : auction.isApproved === "success" ? (
+                    <td>Approved</td>
+                  ) : auction.isApproved === "fail" ? (
+                    <td>Rejected</td>
+                  ) : null}
+                  <td>
+                    <div
+                      style={{
+                        width: "100%",
+                        alignItems: "right",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
                         onClick={() => {
-                          setDocuments(auction.documents);
-                          toggleShow();
+                          setImages(auction.images);
+                          toggleShowImages();
                         }}
-                        variant="primary"
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td>{new Date(auction.updatedAt).toLocaleString()}</td>
-                  </tr>
-                </tbody>
-              ))}
-          </Table>
-        ) : (
-          <Table
-            striped
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 10px 8px",
-              marginTop: "50px",
-            }}
-          >
-            <thead style={{ background: "black", color: "white" }}>
-              <tr>
-                <th>#</th>
-                <th>Owner Name</th>
-                <th>Property</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            {pendingListings.length > 0 &&
-              pendingListings.map((auction, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{auction.details.owner_name}</td>
-                    <td>
-                      {auction.type === "real-estate"
-                        ? "Real Estate"
-                        : auction.type === "car"
-                        ? "Car"
-                        : auction.type === "jet"
-                        ? "Jet"
-                        : auction.type === "yacht"
-                        ? "Yacht"
-                        : ""}
-                    </td>
-                    {auction.isApproved === "pending" ? (
-                      <td>Pending</td>
-                    ) : auction.isApproved === "success" ? (
-                      <td>Approved</td>
-                    ) : auction.isApproved === "fail" ? (
-                      <td>Rejected</td>
-                    ) : null}
-                  </tr>
-                </tbody>
-              ))}
-          </Table>
-        )}
+                        src={auction.images[0].url}
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <Button
+                      onClick={() => {
+                        setDocuments(auction.documents);
+                        toggleShow();
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                  <td>{new Date(auction.updatedAt).toLocaleString()}</td>
+                </tr>
+              </tbody>
+            ))}
+        </Table>
         <Modal size="lg" show={show} onHide={toggleShow} centered>
           <Modal.Header closeButton>
             <Modal.Title>Documents</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Table>
+            <Table
+              style={{
+                overflow: windowSize < 800 ? "auto" : "hidden",
+                display: windowSize < 800 && "block",
+                tableLayout: windowSize < 800 && "auto",
+                padding: "0",
+              }}
+            >
               <thead>
                 <tr>
                   <th>#</th>

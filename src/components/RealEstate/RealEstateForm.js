@@ -113,37 +113,33 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
   }, [params.id]);
 
   const onSubmit = (data) => {
-    if (data.zipCode.length === 5) {
-      const addres = address1 ? address + ", " + address1 : address;
-      const datas = {
-        street_address: addres,
-        city: data.city ? data.city : city,
-        state: data.state ? data.state : state,
-        country: country ? country : data.country,
-        zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
-      };
+    const addres = address1 ? address + ", " + address1 : address;
+    const datas = {
+      street_address: addres,
+      city: data.city ? data.city : city,
+      state: data.state ? data.state : state,
+      country: country ? country : data.country,
+      zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
+    };
 
-      authService.realEstate(datas).then((res) => {
-        if (res.data.length !== 0) {
-          properties(
-            res.data.name !== "Error"
-              ? res.data
-              : res.data.name === "Error"
-              ? datas
-              : ""
-          );
-          toggleStep(step + 1);
-        } else if (res.data.length === 0) {
-          alert(
-            "Could not find property information! Please fill out the property details."
-          );
-          properties(datas);
-          toggleStep(step + 1);
-        }
-      });
-    } else {
-      alert("Please enter a valid zip code");
-    }
+    authService.realEstate(datas).then((res) => {
+      if (res.data.length !== 0) {
+        properties(
+          res.data.name !== "Error"
+            ? res.data
+            : res.data.name === "Error"
+            ? datas
+            : ""
+        );
+        toggleStep(step + 1);
+      } else if (res.data.length === 0) {
+        alert(
+          "Could not find property information! Please fill out the property details."
+        );
+        properties(datas);
+        toggleStep(step + 1);
+      }
+    });
   };
   return (
     <div className="sell-bottom">
@@ -181,37 +177,39 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Street Address <span style={{ color: "#ff0000" }}>*</span>
                   </span>
-                  <div className="autocomplete-dropdown-container">
-                    {loading && <div>Loading...</div>}
-                    {suggestions.map((suggestion, index) => {
-                      const className = suggestion.active
-                        ? "suggestion-item--active"
-                        : "suggestion-item";
-                      // inline style for demonstration purpose
-                      const style = suggestion.active
-                        ? {
-                            backgroundColor: "#fafafa",
-                            cursor: "pointer",
-                            color: "black",
-                          }
-                        : {
-                            backgroundColor: "#ffffff",
-                            cursor: "pointer",
-                            color: "black",
-                          };
-                      return (
-                        <div
-                          key={index}
-                          {...getSuggestionItemProps(suggestion, {
-                            className,
-                            style,
-                          })}
-                        >
-                          <span>{suggestion.description}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  {suggestions && suggestions.length > 0 && (
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </PlacesAutocomplete>
@@ -239,7 +237,7 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
               name="city"
               placeholder="City"
               defaultValue={city}
-              {...register("city", { required: false })}
+              {...register("city")}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -253,7 +251,7 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
               name="state"
               placeholder="State"
               defaultValue={state}
-              {...register("state", { required: false })}
+              {...register("state")}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -282,12 +280,11 @@ function RealEstateForm({ toggleStep, step, properties, property }) {
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
               className="form-control"
-              type="number"
-              min="0"
+              type="text"
               name="zip"
               placeholder="Zip Code"
               defaultValue={zip}
-              {...register("zipCode", { required: false, maxLength: 10 })}
+              {...register("zipCode")}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>

@@ -374,7 +374,7 @@ function RealEstateDocus({
       if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             ...propertyData,
             images,
             videos,
@@ -392,7 +392,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             images,
             videos,
             documents,
@@ -409,7 +409,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             documents,
             step: 4,
           },
@@ -424,7 +424,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 4) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             documents,
             step: 4,
           },

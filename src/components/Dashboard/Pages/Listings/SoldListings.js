@@ -3,7 +3,7 @@ import { Table, Row, Container } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 
-function SoldListings() {
+function SoldListings({ windowSize }) {
   const user = useSelector((state) => state.user);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
