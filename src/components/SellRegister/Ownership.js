@@ -5,8 +5,12 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import SellHeader from "./SellHeader";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import { Autocomplete } from "@react-google-maps/api";
 
 function Ownership({
   toggleStep,
@@ -18,6 +22,7 @@ function Ownership({
   propId,
   ownership,
 }) {
+  console.log(propId);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -27,6 +32,10 @@ function Ownership({
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [country, setCountry] = useState("");
   const [listAgree, setListAgree] = useState([]);
 
   const params = useParams();
@@ -49,18 +58,20 @@ function Ownership({
     if (propertyType === "real-estate") {
       if (propId || params.id) {
         const datas = {
-          type: propertyType,
           id: propId ? propId : params.id,
-          details: {
-            owner_name: ownerName,
-            broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
-            phone: phone,
-            email: email,
-            address: address,
+          changes: {
+            type: propertyType,
+            details: {
+              owner_name: ownerName,
+              broker_name: brokerName ? brokerName : null,
+              broker_id: brokerId ? brokerId : null,
+              phone: phone,
+              email: email,
+              address: address,
+            },
+            documents: listing_agreement ? listing_agreement : null,
+            step: parseInt(1),
           },
-          documents: listing_agreement ? listing_agreement : null,
-          step: parseInt(1),
         };
         await authService.putRealEstateInfo(datas).then((res) => {
           if (res.data.error) {
@@ -93,27 +104,53 @@ function Ownership({
         });
       }
     } else {
-      const data = {
-        type: propertyType,
-        details: {
-          owner_name: ownerName,
-          broker_name: brokerName ? brokerName : null,
-          broker_id: brokerId ? brokerId : null,
-          phone: phone,
-          email: email,
-          address: address,
-        },
-        documents: listing_agreement ? listing_agreement : null,
-        step: parseInt(1),
-      };
-      authService.savePropInfo(data).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          getPropId(res.data._id);
-          toggleSellStep(1);
-        }
-      });
+      if (propId || params.id) {
+        const datas = {
+          id: propId ? propId : params.id,
+          changes: {
+            type: propertyType,
+            details: {
+              owner_name: ownerName,
+              broker_name: brokerName ? brokerName : null,
+              broker_id: brokerId ? brokerId : null,
+              phone: phone,
+              email: email,
+              address: address,
+            },
+            documents: listing_agreement ? listing_agreement : null,
+            step: parseInt(1),
+          },
+        };
+        await authService.putPropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(1);
+          }
+        });
+      } else {
+        const data = {
+          type: propertyType,
+          details: {
+            owner_name: ownerName,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
+            phone: phone,
+            email: email,
+            address: address,
+          },
+          documents: listing_agreement ? listing_agreement : null,
+          step: parseInt(1),
+        };
+        authService.postPropInfo(data).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            getPropId(res.data._id);
+            toggleSellStep(1);
+          }
+        });
+      }
     }
   };
 
@@ -200,6 +237,47 @@ function Ownership({
       }
     }
   };
+
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      setAddress(results[0].formatted_address);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(
+        states[0].long_name ? states[0].long_name : states[0].short_name
+      );
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(
+        countries[0].long_name
+          ? countries[0].long_name
+          : countries[0].short_name
+      );
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(
+        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
+      );
+    });
+  };
+
   return (
     <div className="wrapper">
       <SellHeader step={step} />
@@ -251,7 +329,7 @@ function Ownership({
                   Owner Information
                 </h5>
               </Row>
-              <Row className="mt-3">
+              <Row className="mt-3 d-flex justify-content-center">
                 <Col>
                   <input
                     type="text"
@@ -273,7 +351,66 @@ function Ownership({
               </Row>
               <Row className="mt-3">
                 <Col>
-                  <input
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div>
+                        <input
+                          {...getInputProps({
+                            placeholder: "Search address",
+                            className: "form-control",
+                          })}
+                          required
+                        />
+                        <span style={{ fontWeight: "600", color: "black" }}>
+                          Street Address{" "}
+                          <span style={{ color: "#ff0000" }}>*</span>
+                        </span>
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
+                  {/* <input
                     type="text"
                     className="form-control"
                     defaultValue={
@@ -287,7 +424,7 @@ function Ownership({
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Address <span style={{ color: "#ff0000" }}>*</span>{" "}
-                  </span>
+                  </span> */}
                 </Col>
               </Row>
               <Row className="mt-3">
@@ -510,7 +647,7 @@ function Ownership({
               <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
-                  onClick={() => toggleStep(step - 1)}
+                  onClick={() => window.location.reload()}
                 >
                   Previous
                 </Button>

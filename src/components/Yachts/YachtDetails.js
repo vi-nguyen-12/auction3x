@@ -317,264 +317,256 @@ function YachtDetails({
 
   const saveInfo = () => {
     if (propId || params.id) {
-      if (zip.length === 5) {
-        if (otherDetails) {
-          const datas = {
-            id: propId ? propId : params.id,
-            details: {
-              reservedAmount: parseInt(reservedAmount),
-              discussedAmount: parseInt(discussedAmount),
-              vessel_registration_number: property.vessel_registration_number
-                ? property.vessel_registration_number
-                : vessel_registration_number,
-              vessel_manufacturing_date: property.vessel_manufacturing_date
-                ? property.vessel_manufacturing_date
-                : vessel_manufacturing_date,
-              manufacture_mark: property.manufacture_mark
-                ? property.manufacture_mark
-                : manufacture_mark,
-              manufacturer_name: property.manufacturer_name
-                ? property.manufacturer_name
-                : manufacturer_name,
-              engine_type: property.engine_type
-                ? property.engine_type
-                : engine_type,
-              engine_manufacture_name: property.engine_manufacture_name
-                ? property.engine_manufacture_name
-                : engine_manufacture_name,
-              engine_deck_type: property.engine_deck_type
-                ? property.engine_deck_type
-                : engine_deck_type,
-              running_cost: property.running_cost
-                ? property.running_cost
-                : running_cost,
-              no_of_crew_required: property.no_of_crew_required
-                ? property.no_of_crew_required
-                : no_of_crew_required,
-              property_address: {
-                formatted_street_address: property.property_address
-                  .formatted_street_address
-                  ? property.property_address.formatted_street_address
-                  : property_address,
-                country: property.property_address.country
-                  ? property.property_address.country
-                  : country,
-                state: property.property_address.state
-                  ? property.property_address.state
-                  : state,
-                city: property.property_address.city
-                  ? property.property_address.city
-                  : city,
-                zip_code: property.property_address.zip_code
-                  ? property.property_address.zip_code
-                  : zip,
-              },
-              others: property.detain ? property.detain : otherDetails,
-              step: parseInt(2),
+      if (otherDetails) {
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            reservedAmount: parseInt(reservedAmount),
+            discussedAmount: parseInt(discussedAmount),
+            vessel_registration_number: property.vessel_registration_number
+              ? property.vessel_registration_number
+              : vessel_registration_number,
+            vessel_manufacturing_date: property.vessel_manufacturing_date
+              ? property.vessel_manufacturing_date
+              : vessel_manufacturing_date,
+            manufacture_mark: property.manufacture_mark
+              ? property.manufacture_mark
+              : manufacture_mark,
+            manufacturer_name: property.manufacturer_name
+              ? property.manufacturer_name
+              : manufacturer_name,
+            engine_type: property.engine_type
+              ? property.engine_type
+              : engine_type,
+            engine_manufacture_name: property.engine_manufacture_name
+              ? property.engine_manufacture_name
+              : engine_manufacture_name,
+            engine_deck_type: property.engine_deck_type
+              ? property.engine_deck_type
+              : engine_deck_type,
+            running_cost: property.running_cost
+              ? property.running_cost
+              : running_cost,
+            no_of_crew_required: property.no_of_crew_required
+              ? property.no_of_crew_required
+              : no_of_crew_required,
+            property_address: {
+              formatted_street_address: property.property_address
+                .formatted_street_address
+                ? property.property_address.formatted_street_address
+                : property_address,
+              country: property.property_address.country
+                ? property.property_address.country
+                : country,
+              state: property.property_address.state
+                ? property.property_address.state
+                : state,
+              city: property.property_address.city
+                ? property.property_address.city
+                : city,
+              zip_code: property.property_address.zip_code
+                ? property.property_address.zip_code
+                : zip,
             },
-          };
-          authService.saveInfo(datas).then((res) => {
-            if (res.data.error) {
-              alert(res.data.error);
-            } else {
-              toggleSellStep(2);
-              setSuccess(true);
-            }
-          });
-        } else {
-          const datas = {
-            id: propId ? propId : params.id,
-            details: {
-              reservedAmount: parseInt(reservedAmount),
-              discussedAmount: parseInt(discussedAmount),
-              vessel_registration_number: property.vessel_registration_number
-                ? property.vessel_registration_number
-                : vessel_registration_number,
-              vessel_manufacturing_date: property.vessel_manufacturing_date
-                ? property.vessel_manufacturing_date
-                : vessel_manufacturing_date,
-              manufacture_mark: property.manufacture_mark
-                ? property.manufacture_mark
-                : manufacture_mark,
-              manufacturer_name: property.manufacturer_name
-                ? property.manufacturer_name
-                : manufacturer_name,
-              engine_type: property.engine_type
-                ? property.engine_type
-                : engine_type,
-              engine_manufacture_name: property.engine_manufacture_name
-                ? property.engine_manufacture_name
-                : engine_manufacture_name,
-              engine_deck_type: property.engine_deck_type
-                ? property.engine_deck_type
-                : engine_deck_type,
-              running_cost: property.running_cost
-                ? property.running_cost
-                : running_cost,
-              no_of_crew_required: property.no_of_crew_required
-                ? property.no_of_crew_required
-                : no_of_crew_required,
-              property_address: {
-                formatted_street_address: property.property_address
-                  ? property.property_address.formatted_street_address
-                  : property_address,
-                country: property.property_address
-                  ? property.property_address.country
-                  : country,
-                state: property.property_address
-                  ? property.property_address.state
-                  : state,
-                city: property.property_address
-                  ? property.property_address.city
-                  : city,
-                zip_code: property.property_address
-                  ? property.property_address.zip_code
-                  : zip,
-              },
-              step: parseInt(2),
-            },
-          };
-          authService.saveInfo(datas).then((res) => {
-            if (res.data.error) {
-              alert(res.data.error);
-            } else {
-              toggleSellStep(2);
-              setSuccess(true);
-            }
-          });
-        }
+            others: property.detain ? property.detain : otherDetails,
+            step: parseInt(2),
+          },
+        };
+        authService.saveInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(2);
+            setSuccess(true);
+          }
+        });
       } else {
-        alert("Please enter valid zip code");
+        const datas = {
+          id: propId ? propId : params.id,
+          details: {
+            reservedAmount: parseInt(reservedAmount),
+            discussedAmount: parseInt(discussedAmount),
+            vessel_registration_number: property.vessel_registration_number
+              ? property.vessel_registration_number
+              : vessel_registration_number,
+            vessel_manufacturing_date: property.vessel_manufacturing_date
+              ? property.vessel_manufacturing_date
+              : vessel_manufacturing_date,
+            manufacture_mark: property.manufacture_mark
+              ? property.manufacture_mark
+              : manufacture_mark,
+            manufacturer_name: property.manufacturer_name
+              ? property.manufacturer_name
+              : manufacturer_name,
+            engine_type: property.engine_type
+              ? property.engine_type
+              : engine_type,
+            engine_manufacture_name: property.engine_manufacture_name
+              ? property.engine_manufacture_name
+              : engine_manufacture_name,
+            engine_deck_type: property.engine_deck_type
+              ? property.engine_deck_type
+              : engine_deck_type,
+            running_cost: property.running_cost
+              ? property.running_cost
+              : running_cost,
+            no_of_crew_required: property.no_of_crew_required
+              ? property.no_of_crew_required
+              : no_of_crew_required,
+            property_address: {
+              formatted_street_address: property.property_address
+                ? property.property_address.formatted_street_address
+                : property_address,
+              country: property.property_address
+                ? property.property_address.country
+                : country,
+              state: property.property_address
+                ? property.property_address.state
+                : state,
+              city: property.property_address
+                ? property.property_address.city
+                : city,
+              zip_code: property.property_address
+                ? property.property_address.zip_code
+                : zip,
+            },
+            step: parseInt(2),
+          },
+        };
+        authService.saveInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(2);
+            setSuccess(true);
+          }
+        });
       }
     } else {
-      if (zip.length === 5) {
-        if (otherDetails) {
-          const datas = {
-            reservedAmount: parseInt(reservedAmount),
-            discussedAmount: parseInt(discussedAmount),
-            vessel_registration_number: property.vessel_registration_number
-              ? property.vessel_registration_number
-              : vessel_registration_number,
-            vessel_manufacturing_date: property.vessel_manufacturing_date
-              ? property.vessel_manufacturing_date
-              : vessel_manufacturing_date,
-            manufacture_mark: property.manufacture_mark
-              ? property.manufacture_mark
-              : manufacture_mark,
-            manufacturer_name: property.manufacturer_name
-              ? property.manufacturer_name
-              : manufacturer_name,
-            engine_type: property.engine_type
-              ? property.engine_type
-              : engine_type,
-            engine_manufacture_name: property.engine_manufacture_name
-              ? property.engine_manufacture_name
-              : engine_manufacture_name,
-            engine_deck_type: property.engine_deck_type
-              ? property.engine_deck_type
-              : engine_deck_type,
-            running_cost: property.running_cost
-              ? property.running_cost
-              : running_cost,
-            no_of_crew_required: property.no_of_crew_required
-              ? property.no_of_crew_required
-              : no_of_crew_required,
-            property_address: {
-              formatted_street_address: property.property_address
-                .formatted_street_address
-                ? property.property_address.formatted_street_address
-                : property_address,
-              country: property.property_address.country
-                ? property.property_address.country
-                : country,
-              state: property.property_address.state
-                ? property.property_address.state
-                : state,
-              city: property.property_address.city
-                ? property.property_address.city
-                : city,
-              zip_code: property.property_address.zip_code
-                ? property.property_address.zip_code
-                : zip,
-            },
-            others: property.detain ? property.detain : otherDetails,
-            ...ownership,
-            step: parseInt(2),
-          };
-          authService.savePropInfo(datas).then((res) => {
-            if (res.data.error) {
-              alert(res.data.error);
-            } else {
-              toggleSellStep(2);
-              getPropId(res.data._id);
-              setSuccess(true);
-            }
-          });
-        } else {
-          const datas = {
-            reservedAmount: parseInt(reservedAmount),
-            discussedAmount: parseInt(discussedAmount),
-            vessel_registration_number: property.vessel_registration_number
-              ? property.vessel_registration_number
-              : vessel_registration_number,
-            vessel_manufacturing_date: property.vessel_manufacturing_date
-              ? property.vessel_manufacturing_date
-              : vessel_manufacturing_date,
-            manufacture_mark: property.manufacture_mark
-              ? property.manufacture_mark
-              : manufacture_mark,
-            manufacturer_name: property.manufacturer_name
-              ? property.manufacturer_name
-              : manufacturer_name,
-            engine_type: property.engine_type
-              ? property.engine_type
-              : engine_type,
-            engine_manufacture_name: property.engine_manufacture_name
-              ? property.engine_manufacture_name
-              : engine_manufacture_name,
-            engine_deck_type: property.engine_deck_type
-              ? property.engine_deck_type
-              : engine_deck_type,
-            running_cost: property.running_cost
-              ? property.running_cost
-              : running_cost,
-            no_of_crew_required: property.no_of_crew_required
-              ? property.no_of_crew_required
-              : no_of_crew_required,
-            property_address: {
-              formatted_street_address: property.property_address
-                .formatted_street_address
-                ? property.property_address.formatted_street_address
-                : property_address,
-              country: property.property_address.country
-                ? property.property_address.country
-                : country,
-              state: property.property_address.state
-                ? property.property_address.state
-                : state,
-              city: property.property_address.city
-                ? property.property_address.city
-                : city,
-              zip_code: property.property_address.zip_code
-                ? property.property_address.zip_code
-                : zip,
-            },
-            others: property.detain ? property.detain : otherDetails,
-            ...ownership,
-            step: parseInt(2),
-          };
-          authService.savePropInfo(datas).then((res) => {
-            if (res.data.error) {
-              alert(res.data.error);
-            } else {
-              toggleSellStep(2);
-              getPropId(res.data._id);
-              setSuccess(true);
-            }
-          });
-        }
+      if (otherDetails) {
+        const datas = {
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          vessel_registration_number: property.vessel_registration_number
+            ? property.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: property.vessel_manufacturing_date
+            ? property.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: property.manufacture_mark
+            ? property.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: property.manufacturer_name
+            ? property.manufacturer_name
+            : manufacturer_name,
+          engine_type: property.engine_type
+            ? property.engine_type
+            : engine_type,
+          engine_manufacture_name: property.engine_manufacture_name
+            ? property.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: property.engine_deck_type
+            ? property.engine_deck_type
+            : engine_deck_type,
+          running_cost: property.running_cost
+            ? property.running_cost
+            : running_cost,
+          no_of_crew_required: property.no_of_crew_required
+            ? property.no_of_crew_required
+            : no_of_crew_required,
+          property_address: {
+            formatted_street_address: property.property_address
+              .formatted_street_address
+              ? property.property_address.formatted_street_address
+              : property_address,
+            country: property.property_address.country
+              ? property.property_address.country
+              : country,
+            state: property.property_address.state
+              ? property.property_address.state
+              : state,
+            city: property.property_address.city
+              ? property.property_address.city
+              : city,
+            zip_code: property.property_address.zip_code
+              ? property.property_address.zip_code
+              : zip,
+          },
+          others: property.detain ? property.detain : otherDetails,
+          ...ownership,
+          step: parseInt(2),
+        };
+        authService.postPropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(2);
+            getPropId(res.data._id);
+            setSuccess(true);
+          }
+        });
       } else {
-        alert("Please enter valid zip code");
+        const datas = {
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          vessel_registration_number: property.vessel_registration_number
+            ? property.vessel_registration_number
+            : vessel_registration_number,
+          vessel_manufacturing_date: property.vessel_manufacturing_date
+            ? property.vessel_manufacturing_date
+            : vessel_manufacturing_date,
+          manufacture_mark: property.manufacture_mark
+            ? property.manufacture_mark
+            : manufacture_mark,
+          manufacturer_name: property.manufacturer_name
+            ? property.manufacturer_name
+            : manufacturer_name,
+          engine_type: property.engine_type
+            ? property.engine_type
+            : engine_type,
+          engine_manufacture_name: property.engine_manufacture_name
+            ? property.engine_manufacture_name
+            : engine_manufacture_name,
+          engine_deck_type: property.engine_deck_type
+            ? property.engine_deck_type
+            : engine_deck_type,
+          running_cost: property.running_cost
+            ? property.running_cost
+            : running_cost,
+          no_of_crew_required: property.no_of_crew_required
+            ? property.no_of_crew_required
+            : no_of_crew_required,
+          property_address: {
+            formatted_street_address: property.property_address
+              .formatted_street_address
+              ? property.property_address.formatted_street_address
+              : property_address,
+            country: property.property_address.country
+              ? property.property_address.country
+              : country,
+            state: property.property_address.state
+              ? property.property_address.state
+              : state,
+            city: property.property_address.city
+              ? property.property_address.city
+              : city,
+            zip_code: property.property_address.zip_code
+              ? property.property_address.zip_code
+              : zip,
+          },
+          others: property.detain ? property.detain : otherDetails,
+          ...ownership,
+          step: parseInt(2),
+        };
+        authService.postPropInfo(datas).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            toggleSellStep(2);
+            getPropId(res.data._id);
+            setSuccess(true);
+          }
+        });
       }
     }
   };
@@ -583,7 +575,7 @@ function YachtDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      if (success) {
+      if (success === true) {
         if (otherDetails) {
           const submitedData = {
             reservedAmount: data.reservedAmount
@@ -822,7 +814,7 @@ function YachtDetails({
           </Col>
           <Col>
             <input
-              type="number"
+              type="text"
               className="form-control"
               defaultValue={zip}
               {...register("zipCode")}
@@ -937,6 +929,7 @@ function YachtDetails({
           <Col xs={12} md={4}>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={running_cost}
               {...register("running_cost")}
@@ -955,6 +948,7 @@ function YachtDetails({
           <Col xs={12} md={4}>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={no_of_crew_required}
               {...register("no_of_crew_required")}

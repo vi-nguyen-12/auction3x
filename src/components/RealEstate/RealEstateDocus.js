@@ -154,65 +154,60 @@ function RealEstateDocus({
           );
           if (property[0].documents) {
             if (property[0].documents.length > 1) {
-              const documents = property[0].documents.map((document) => {
-                if (document.isVerified && document._id) {
-                  delete document.isVerified;
-                  delete document._id;
-                  return document;
-                }
-              });
               setDocument1(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "title_report"
                     )
                   : []
               );
               setDocument2(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "insurance_copy"
                     )
                   : []
               );
               setDocument3(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "financial_document"
                     )
                   : []
               );
               setDocument4(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "purchase_agreement"
                     )
                   : []
               );
               setDocument5(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "third-party_report"
                     )
                   : []
               );
               setDocument6(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "market_and_valuations"
                     )
                   : []
               );
               setDocument7(
-                documents
-                  ? documents.filter(
+                property[0].documents
+                  ? property[0].documents.filter(
                       (item) => item.officialName === "demographics"
                     )
                   : []
               );
               setDocument8(
-                documents
-                  ? documents.filter((item) => item.officialName === "others")
+                property[0].documents
+                  ? property[0].documents.filter(
+                      (item) => item.officialName === "others"
+                    )
                   : []
               );
             } else {
@@ -379,7 +374,7 @@ function RealEstateDocus({
       if (parseInt(steps) === 1) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             ...propertyData,
             images,
             videos,
@@ -397,7 +392,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 2) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             images,
             videos,
             documents,
@@ -414,7 +409,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 3) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             documents,
             step: 4,
           },
@@ -429,7 +424,7 @@ function RealEstateDocus({
       } else if (parseInt(steps) === 4) {
         const datas = {
           id: propId ? propId : params.id,
-          details: {
+          changes: {
             documents,
             step: 4,
           },

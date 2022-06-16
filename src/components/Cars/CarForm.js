@@ -293,7 +293,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="make"
               className="form-control"
               defaultValue={make}
-              {...register("make", { required: false })}
+              {...register("make")}
               onChange={(e) => setMake(e.target.value)}
               required
             />
@@ -305,7 +305,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="model"
               className="form-control"
               defaultValue={model}
-              {...register("model", { required: false })}
+              {...register("model")}
               onChange={(e) => setModel(e.target.value)}
               required
             />
@@ -319,7 +319,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="vin"
               className="form-control"
               defaultValue={vin}
-              {...register("vin", { required: false })}
+              {...register("vin")}
               onChange={(e) => setVin(e.target.value)}
               required
             />
@@ -334,7 +334,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="mileage"
               className="form-control"
               defaultValue={mileage}
-              {...register("mileage", { required: false })}
+              {...register("mileage")}
               onChange={(e) => setMileage(e.target.value)}
               required
             />
@@ -346,7 +346,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="transmission"
               className="form-control"
               defaultValue={transmission}
-              {...register("transmission", { required: false })}
+              {...register("transmission")}
               onChange={(e) => setTransmission(e.target.value)}
               required
             />
@@ -358,7 +358,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="carType"
               className="form-control"
               defaultValue={carType}
-              {...register("carType", { required: false })}
+              {...register("carType")}
               onChange={(e) => setCarType(e.target.value)}
               required
             />
@@ -373,7 +373,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="power"
               className="form-control"
               defaultValue={power}
-              {...register("power", { required: false })}
+              {...register("power")}
               onChange={(e) => setPower(e.target.value)}
               required
             />
@@ -385,7 +385,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="engine"
               className="form-control"
               defaultValue={engine}
-              {...register("engine", { required: false })}
+              {...register("engine")}
               onChange={(e) => setEngine(e.target.value)}
               required
             />
@@ -397,7 +397,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="fuelType"
               className="form-control"
               defaultValue={fuelType}
-              {...register("fuelType", { required: false })}
+              {...register("fuelType")}
               onChange={(e) => setFuelType(e.target.value)}
               required
             />
@@ -411,7 +411,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="color"
               className="form-control"
               defaultValue={color}
-              {...register("color", { required: false })}
+              {...register("color")}
               onChange={(e) => setColor(e.target.value)}
               required
             />
@@ -423,7 +423,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="condition"
               className="form-control"
               defaultValue={condition}
-              {...register("condition", { required: false })}
+              {...register("condition")}
               onChange={(e) => setCondition(e.target.value)}
               required
             />
@@ -436,7 +436,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="price"
               className="form-control"
               defaultValue={price}
-              {...register("price", { required: false })}
+              {...register("price")}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
@@ -450,7 +450,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="address"
               className="form-control"
               defaultValue={address}
-              {...register("address", { required: false })}
+              {...register("address")}
               onChange={(e) => setAddress(e.target.value)}
               required
             />
@@ -462,7 +462,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="country"
               className="form-control"
               defaultValue={country}
-              {...register("country", { required: false })}
+              {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
               required
             />
@@ -476,7 +476,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="state"
               className="form-control"
               defaultValue={state}
-              {...register("state", { required: false })}
+              {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
             />
@@ -488,7 +488,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="city"
               className="form-control"
               defaultValue={city}
-              {...register("city", { required: false })}
+              {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
             />
@@ -500,7 +500,7 @@ function CarForm({ toggleStep, step, properties, property, windowSize }) {
               name="zipCode"
               className="form-control"
               defaultValue={zip}
-              {...register("zipCode", { required: false })}
+              {...register("zipCode")}
               onChange={(e) => setZip(e.target.value)}
               required
             />

@@ -210,100 +210,95 @@ function JetDocus({
             (property) => property._id === params.id
           );
           if (property[0].documents.length > 1) {
-            const documents = property[0].documents.map((document) => {
-              if (document.isVerified && document._id) {
-                delete document.isVerified;
-                delete document._id;
-                return document;
-              }
-            });
             setDocument1(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "ownership_document"
                   )
                 : []
             );
             setDocument2(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "registration_document"
                   )
                 : []
             );
             setDocument3(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "title_certificate"
                   )
                 : []
             );
             setDocument4(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "detail_specification"
                   )
                 : []
             );
             setDocument5(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "insurance_document"
                   )
                 : []
             );
             setDocument6(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "loan_document"
                   )
                 : []
             );
             setDocument7(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "jet_detail_history"
                   )
                 : []
             );
             setDocument8(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "fitness_report"
                   )
                 : []
             );
             setDocument9(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "electric_work_details"
                   )
                 : []
             );
             setDocument10(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "engine_details"
                   )
                 : []
             );
             setDocument11(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "inspection_report"
                   )
                 : []
             );
             setDocument12(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "valuation_report"
                   )
                 : []
             );
             setDocument13(
-              documents
-                ? documents.filter((item) => item.officialName === "others")
+              property[0].documents
+                ? property[0].documents.filter(
+                    (item) => item.officialName === "others"
+                  )
                 : []
             );
           } else {
@@ -630,7 +625,7 @@ function JetDocus({
         documents,
         step: 4,
       };
-      await authService.savePropInfo(datas).then((response) => {
+      await authService.postPropInfo(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {

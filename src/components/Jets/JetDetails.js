@@ -151,7 +151,7 @@ function JetDetails({
         step: parseInt(2),
       };
       // delete datas.documents;
-      authService.savePropInfo(datas).then((res) => {
+      authService.postPropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -584,7 +584,7 @@ function JetDetails({
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
-              type="number"
+              type="text"
               className="form-control"
               defaultValue={zip}
               {...register("zipCode")}

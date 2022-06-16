@@ -31,141 +31,83 @@ function IncompleteListing({ windowSize }) {
     });
   };
   return (
-    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+    <Container
+      style={{
+        width: "100vw",
+        height: "100vh",
+        marginTop: "50px",
+      }}
+    >
       <Row>
         <h1>Incomplete Listing</h1>
-        {windowSize > 800 ? (
-          <Table
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 20px 16px",
-              marginTop: "50px",
-            }}
-          >
-            <thead style={{ background: "black", color: "white" }}>
-              <tr>
-                <th>#</th>
-                <th>Property ID</th>
-                <th>Property Type</th>
-                <th>Status</th>
-                <th>Last Updated</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            {IncompleteListings.length > 0 ? (
-              IncompleteListings.map((listing, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{listing._id}</td>
-                    <td>{listing.type}</td>
-                    <td className="progress-1">
-                      <CircularProgressbar
-                        value={listing.step}
-                        text={`${(listing.step / 5) * 100}%`}
-                        maxValue={5}
-                        strokeWidth={20}
-                      />
-                    </td>
-                    <td>{new Date(listing.updatedAt).toLocaleString()}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          window.open(
-                            `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
-                          );
-                        }}
-                        className="resume-btn"
-                      >
-                        Resume
-                      </button>{" "}
-                      <button
-                        onClick={() => handleDelete(listing._id)}
-                        className="del-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))
-            ) : (
-              <tbody>
+        <Table
+          borderless
+          hover
+          style={{
+            overflow: windowSize < 800 ? "auto" : "hidden",
+            display: windowSize < 800 && "block",
+            tableLayout: windowSize < 800 && "auto",
+            padding: "0",
+            borderRadius: "5px",
+            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            marginTop: "50px",
+          }}
+        >
+          <thead style={{ background: "black", color: "white" }}>
+            <tr>
+              <th>#</th>
+              <th>Property ID</th>
+              <th>Property Type</th>
+              <th>Status</th>
+              <th>Last Updated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          {IncompleteListings.length > 0 ? (
+            IncompleteListings.map((listing, index) => (
+              <tbody key={index}>
                 <tr>
-                  <td colSpan="6">No Incomplete Listings</td>
+                  <td>{index + 1}</td>
+                  <td>{listing._id}</td>
+                  <td>{listing.type}</td>
+                  <td className="progress-1">
+                    <CircularProgressbar
+                      value={listing.step}
+                      text={`${(listing.step / 5) * 100}%`}
+                      maxValue={5}
+                      strokeWidth={20}
+                    />
+                  </td>
+                  <td>{new Date(listing.updatedAt).toLocaleString()}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        window.open(
+                          `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
+                        );
+                      }}
+                      className="resume-btn"
+                    >
+                      Resume
+                    </button>{" "}
+                    <button
+                      onClick={() => handleDelete(listing._id)}
+                      className="del-btn"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
-            )}
-          </Table>
-        ) : (
-          <Table
-            striped
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 10px 8px",
-              marginTop: "50px",
-            }}
-          >
-            <thead style={{ background: "black", color: "white" }}>
+            ))
+          ) : (
+            <tbody>
               <tr>
-                <th>#</th>
-                <th>Property</th>
-                {/* <th>Status</th> */}
-                <th>Last Updated</th>
-                <th>Actions</th>
+                <td colSpan="6">No Incomplete Listings</td>
               </tr>
-            </thead>
-            {IncompleteListings.length > 0 ? (
-              IncompleteListings.map((listing, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{listing._id}</td>
-                    {/* <td className="progress-1">
-                      <CircularProgressbar
-                        value={listing.step}
-                        text={`${(listing.step / 5) * 100}%`}
-                        maxValue={5}
-                        strokeWidth={20}
-                      />
-                    </td> */}
-                    <td>{new Date(listing.updatedAt).toLocaleString()}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          window.open(
-                            `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
-                          );
-                        }}
-                        className="resume-btn"
-                      >
-                        Resume
-                      </button>{" "}
-                      <button
-                        onClick={() => handleDelete(listing._id)}
-                        className="del-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))
-            ) : (
-              <tbody>
-                <tr>
-                  <td colSpan="5">No Incomplete Listings</td>
-                </tr>
-              </tbody>
-            )}
-          </Table>
-        )}
+            </tbody>
+          )}
+        </Table>
       </Row>
     </Container>
   );

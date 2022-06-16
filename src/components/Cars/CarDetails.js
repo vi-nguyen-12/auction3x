@@ -45,6 +45,7 @@ function CarDetails({
   useEffect(() => {
     if (params.id && prop.length > 0) {
       const properti = prop.filter((prop) => prop._id === params.id);
+      console.log(properti);
       setMake(
         properti[0].details.make
           ? properti[0].details.make
@@ -313,6 +314,8 @@ function CarDetails({
     }
   }, [prop]);
 
+  console.log(make);
+
   const saveInfo = () => {
     if (propId || params.id) {
       const datas = {
@@ -334,11 +337,29 @@ function CarDetails({
           property_address: {
             formatted_street_address: address
               ? address
-              : propertyData.property_address.formatted_street_address,
-            country: country ? country : propertyData.property_address.country,
-            state: state ? state : propertyData.property_address.state,
-            city: city ? city : propertyData.property_address.city,
-            zip_code: zip ? zip : propertyData.property_address.zip_code,
+              : propertyData.property_address
+              ? propertyData.property_address.formatted_street_address
+              : "",
+            country: country
+              ? country
+              : propertyData.property_address
+              ? propertyData.property_address.country
+              : "",
+            state: state
+              ? state
+              : propertyData.property_address
+              ? propertyData.property_address.state
+              : "",
+            city: city
+              ? city
+              : propertyData.property_address
+              ? propertyData.property_address.city
+              : "",
+            zip_code: zip
+              ? zip
+              : propertyData.property_address
+              ? propertyData.property_address.zip_code
+              : "",
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
@@ -381,7 +402,7 @@ function CarDetails({
         ...ownership,
         step: parseInt(2),
       };
-      authService.savePropInfo(datas).then((res) => {
+      authService.postPropInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
@@ -432,6 +453,8 @@ function CarDetails({
       toggleStep(step + 1);
     }
   };
+
+  console.log(year);
 
   return (
     <>
@@ -501,10 +524,10 @@ function CarDetails({
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={mileage}
-              {...register("mileage", { maxLength: 100 })}
+              {...register("mileage")}
               onChange={(e) => setMileage(e.target.value)}
               required
             />
@@ -517,7 +540,7 @@ function CarDetails({
               type="text"
               className="form-control"
               defaultValue={power}
-              {...register("power", { maxLength: 100 })}
+              {...register("power")}
               onChange={(e) => setPower(e.target.value)}
               required
             />
@@ -541,7 +564,7 @@ function CarDetails({
               type="text"
               className="form-control"
               defaultValue={vin}
-              {...register("vin", { maxLength: 100 })}
+              {...register("vin")}
               onChange={(e) => setVin(e.target.value)}
               required
             />
@@ -586,10 +609,10 @@ function CarDetails({
         <Row className="mt-3">
           <Col xs={12} md={6}>
             <input
-              type="text"
+              type="number"
               className="form-control"
               defaultValue={price}
-              {...register("price", { maxLength: 100 })}
+              {...register("price")}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
@@ -656,10 +679,10 @@ function CarDetails({
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
-              type="number"
+              type="text"
               className="form-control"
               defaultValue={zip}
-              {...register("zipCode", { maxLength: 100 })}
+              {...register("zipCode")}
               onChange={(e) => setZip(e.target.value)}
               required
             />

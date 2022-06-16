@@ -36,13 +36,13 @@ const Carousel = styled(Slider)`
     left: 5vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
-    margin: 0 -50px!important;
+    margin: 0 -50px !important;
   }
   .slick-next {
     right: 5vw;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    margin: 0 -50px!important;
+    margin: 0 -50px !important;
   }
   .slick-next:before {
     display: none;
@@ -173,19 +173,15 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-                new Date().toISOString() < endRegister ? (
+              new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
-                  <p
-                    style={{ fontSize: "15px", width: "100px", color: "black" }}
-                  >
+                  <p style={{ fontSize: "15px", color: "black" }}>
                     Registration
                   </p>
                 </Col>
               ) : (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
-                  <p
-                    style={{ fontSize: "15px", width: "100px", color: "black" }}
-                  >
+                  <p style={{ fontSize: "15px", color: "black" }}>
                     Online Auction
                   </p>
                 </Col>
@@ -195,7 +191,6 @@ function SavedAuctionsCard({
                 <p
                   style={{
                     fontSize: "15px",
-                    width: "250px",
                     color: "black",
                   }}
                 >
@@ -209,7 +204,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "15px",
-                      width: "200px",
                       fontWeight: "bold",
                     }}
                   >
@@ -219,7 +213,7 @@ function SavedAuctionsCard({
               ) : new Date().toISOString() < auctionStartDate &&
                 new Date().toISOString() < endRegister ? (
                 <Col md={1} style={{ width: "50%" }}>
-                  <div style={{ fontSize: "12px", width: "200px" }}>
+                  <div style={{ fontSize: "12px" }}>
                     <AuctionTimer time={endRegister} id={id} />
                   </div>
                 </Col>
@@ -229,7 +223,6 @@ function SavedAuctionsCard({
                   <p
                     style={{
                       fontSize: "15px",
-                      width: "200px",
                       fontWeight: "bold",
                     }}
                   >
@@ -239,13 +232,13 @@ function SavedAuctionsCard({
               ) : new Date().toISOString() > auctionStartDate &&
                 new Date().toISOString() < auctionEndDate ? (
                 <Col md={1} style={{ width: "50%" }}>
-                  <div style={{ fontSize: "12px", width: "200px" }}>
+                  <div style={{ fontSize: "12px" }}>
                     <AuctionTimer time={auctionEndDate} id={id} />
                   </div>
                 </Col>
               ) : (
                 <Col md={1} style={{ width: "50%" }}>
-                  <div style={{ fontSize: "12px", width: "200px" }}>
+                  <div style={{ fontSize: "12px" }}>
                     <AuctionTimer time={auctionEndDate} id={id} />
                   </div>
                 </Col>

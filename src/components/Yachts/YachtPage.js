@@ -83,9 +83,17 @@ position: relative;
 }
 `;
 
-function YachtPage({ toggleChange, setImgYacht, toggleSignIn, windowSize }) {
+function YachtPage({
+  toggleChange,
+  setImgYacht,
+  toggleSignIn,
+  windowSize,
+  filter,
+}) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  const [auctions, setAuctions] = useState([]);
+
   useEffect(() => {
     authService
       .getOngoingAuctionsByType("yacht")
@@ -104,6 +112,7 @@ function YachtPage({ toggleChange, setImgYacht, toggleSignIn, windowSize }) {
         alert(err);
       });
   }, []);
+
   useEffect(() => {
     if (onGoingAuctions && upcomingAuctions) {
       const Arr = [...onGoingAuctions, ...upcomingAuctions];
@@ -115,89 +124,70 @@ function YachtPage({ toggleChange, setImgYacht, toggleSignIn, windowSize }) {
       setImgYacht(imageUrl);
     }
   }, [onGoingAuctions, upcomingAuctions, setImgYacht]);
+
   useEffect(() => {
     toggleChange();
   }, [toggleChange]);
+
+  useEffect(() => {
+    if (onGoingAuctions && upcomingAuctions) {
+      setAuctions([...onGoingAuctions, ...upcomingAuctions]);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
+
+  useEffect(() => {
+    if (filter) {
+      if (filter === "ongoing") {
+        setAuctions(onGoingAuctions);
+      } else if (filter === "upcoming") {
+        setAuctions(upcomingAuctions);
+      }
+    }
+  }, [filter, auctions]);
+
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
     slidesToShow:
-      windowSize > 800
-        ? onGoingAuctions.length > 3
-          ? 3
-          : onGoingAuctions.length
-        : 1,
+      windowSize > 800 ? (auctions.length > 3 ? 3 : auctions.length) : 1,
   };
-  
+
   return (
     <>
-      {onGoingAuctions.length > 0 || upcomingAuctions.length > 0 ? (
-        <div className="mt-5">
-          <Col md={12} className="m-auto pt-2">
-            <Row>
-              <h1
-                style={{
-                  marginBottom: "80px",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                ONGOING AUCTIONS
-              </h1>
-              {onGoingAuctions.length > 0 ? (
-                <Carousel {...settings}>
-                  {onGoingAuctions.map((item, index) => (
-                    <Wrap key={index}>
-                      <Col style={{ marginBottom: "30px" }}>
-                        <Cards
-                          data={item}
-                          toggleSignIn={toggleSignIn}
-                          type={item.property.type}
-                          windowSize={windowSize}
-                        />
-                      </Col>
-                    </Wrap>
-                  ))}
-                </Carousel>
-              ) : (
-                <h3 style={{ display: "flex", justifyContent: "center" }}>
-                  No Ongoing Auctions
-                </h3>
-              )}
-            </Row>
-            <Row style={{ marginBottom: "100px" }}>
-              <h1
-                style={{
-                  margin: "80px 0",
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                UPCOMING AUCTIONS
-              </h1>
-              {upcomingAuctions.length > 0 ? (
-                upcomingAuctions.map((item, index) => (
-                  <Col key={index} style={{ marginBottom: "30px" }}>
+      {auctions.length > 0 ? (
+        <Row className="mt-5 mb-5">
+          {windowSize > 800 ? (
+            auctions.map((auction, index) => {
+              return (
+                <Col key={index}>
+                  <Wrap>
                     <Cards
-                      data={item}
+                      data={auction}
                       toggleSignIn={toggleSignIn}
-                      type={item.property.type}
+                      type={auction.property.type}
                       windowSize={windowSize}
                     />
-                  </Col>
-                ))
-              ) : (
-                <h3 style={{ display: "flex", justifyContent: "center" }}>
-                  No Upcoming Auctions
-                </h3>
-              )}
-            </Row>
-          </Col>
-        </div>
+                  </Wrap>
+                </Col>
+              );
+            })
+          ) : (
+            <Carousel {...settings}>
+              {auctions.map((item, index) => (
+                <Wrap key={index}>
+                  <Cards
+                    data={item}
+                    toggleSignIn={toggleSignIn}
+                    type={item.property.type}
+                    windowSize={windowSize}
+                  />
+                </Wrap>
+              ))}
+            </Carousel>
+          )}
+        </Row>
       ) : (
         <ErrorPage />
       )}

@@ -26,221 +26,138 @@ function LiveListings({ windowSize }) {
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
         <h1>Upcoming Listings</h1>
-        {windowSize > 800 ? (
-          <Table
-            striped
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 20px 16px",
-              marginTop: "50px",
-            }}
+        <Table
+          striped
+          borderless
+          hover
+          style={{
+            overflow: windowSize < 800 ? "auto" : "hidden",
+            display: windowSize < 800 && "block",
+            tableLayout: windowSize < 800 && "auto",
+            padding: "0",
+            borderRadius: "5px",
+            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            marginTop: "50px",
+          }}
+        >
+          <thead
+            style={{ background: "black", color: "white", padding: "50px" }}
           >
-            <thead
-              style={{ background: "black", color: "white", padding: "50px" }}
-            >
-              <tr>
-                <th>#</th>
-                <th>Property ID</th>
-                <th>Property Address</th>
-                <th colSpan={2}>Property Status</th>
-                <th colSpan={2}>Property Documents</th>
-                <th>Property Type</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            {upcomingListings.length > 0 ? (
-              upcomingListings.map((listing, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{listing._id}</td>
-                    <td>
-                      {listing.type === "real-estate"
-                        ? listing.details.property_address
-                            .formatted_street_address
-                        : listing.details.property_address}
-                      <div
-                        style={{
-                          width: "100%",
-                          alignItems: "right",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <img
-                          width="100px"
-                          height="50px"
-                          onClick={() => {
-                            toggleImages();
-                          }}
-                          src={
-                            listing.images.length > 0
-                              ? listing.images[0].url
-                              : ""
-                          }
-                        />
-                      </div>
-                    </td>
-                    {listing.isApproved === "success" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "green",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Approved
-                        </span>
-                      </td>
-                    ) : listing.isApproved === "pending" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "orange",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Pending
-                        </span>
-                      </td>
-                    ) : listing.isApproved === "fail" ? (
-                      <td colSpan={2}>
-                        <span
-                          style={{
-                            background: "red",
-                            color: "white",
-                            padding: "5px",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Pending
-                        </span>
-                      </td>
-                    ) : null}
-                    <td colSpan={2}>
-                      <Button
+            <tr>
+              <th>#</th>
+              <th>Property ID</th>
+              <th>Property Address</th>
+              <th colSpan={2}>Property Status</th>
+              <th colSpan={2}>Property Documents</th>
+              <th>Property Type</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          {upcomingListings.length > 0 ? (
+            upcomingListings.map((listing, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{listing._id}</td>
+                  <td>
+                    {listing.type === "real-estate"
+                      ? listing.details.property_address
+                          .formatted_street_address
+                      : listing.details.property_address}
+                    <div
+                      style={{
+                        width: "100%",
+                        alignItems: "right",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
                         onClick={() => {
-                          toggleDocuments();
+                          toggleImages();
                         }}
-                        variant="primary"
-                      >
-                        View
-                      </Button>
-                    </td>
-                    <td>
-                      {listing.type === "real-estate"
-                        ? "Real Estate"
-                        : listing.type === "car"
-                        ? "Car"
-                        : listing.type === "jet"
-                        ? "Jet"
-                        : listing.type === "yacht"
-                        ? "Yacht"
-                        : ""}
-                    </td>
-                    <td>
-                      <Button variant="primary">Email</Button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))
-            ) : (
-              <tbody>
-                <tr>
-                  <td colSpan={10}>No Upcoming Listings</td>
-                </tr>
-              </tbody>
-            )}
-          </Table>
-        ) : (
-          <Table
-            striped
-            borderless
-            hover
-            style={{
-              overflow: "hidden",
-              borderRadius: "5px",
-              boxShadow: "#d7c4c4 0px 0px 10px 8px",
-              marginTop: "50px",
-            }}
-          >
-            <thead
-              style={{ background: "black", color: "white", padding: "50px" }}
-            >
-              <tr>
-                <th>#</th>
-                <th>Property ID</th>
-                <th>Property</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            {upcomingListings.length > 0 ? (
-              upcomingListings.map((listing, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{listing._id}</td>
-                    <td>
-                      {listing.type === "real-estate"
-                        ? listing.details.property_address
-                            .formatted_street_address
-                        : listing.details.property_address}
-                      <div
+                        src={
+                          listing.images.length > 0 ? listing.images[0].url : ""
+                        }
+                      />
+                    </div>
+                  </td>
+                  {listing.isApproved === "success" ? (
+                    <td colSpan={2}>
+                      <span
                         style={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "center",
-                          cursor: "pointer",
+                          background: "green",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
                         }}
                       >
-                        <img
-                          width="100px"
-                          height="50px"
-                          src={
-                            listing.images.length > 0
-                              ? listing.images[0].url
-                              : ""
-                          }
-                        />
-                      </div>
+                        Approved
+                      </span>
                     </td>
-                    {listing.isApproved === "success" ? (
-                      <td>
-                        <span style={{ background: "green", color: "white" }}>
-                          Approved
-                        </span>
-                      </td>
-                    ) : listing.isApproved === "pending" ? (
-                      <td>
-                        <span style={{ background: "orange", color: "white" }}>
-                          Pending
-                        </span>
-                      </td>
-                    ) : listing.isApproved === "fail" ? (
-                      <td>
-                        <span style={{ background: "red", color: "white" }}>
-                          Pending
-                        </span>
-                      </td>
-                    ) : null}
-                  </tr>
-                </tbody>
-              ))
-            ) : (
-              <tbody>
-                <tr>
-                  <td colSpan={10}>No Upcoming Listings</td>
+                  ) : listing.isApproved === "pending" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "orange",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  ) : listing.isApproved === "fail" ? (
+                    <td colSpan={2}>
+                      <span
+                        style={{
+                          background: "red",
+                          color: "white",
+                          padding: "5px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  ) : null}
+                  <td colSpan={2}>
+                    <Button
+                      onClick={() => {
+                        toggleDocuments();
+                      }}
+                      variant="primary"
+                    >
+                      View
+                    </Button>
+                  </td>
+                  <td>
+                    {listing.type === "real-estate"
+                      ? "Real Estate"
+                      : listing.type === "car"
+                      ? "Car"
+                      : listing.type === "jet"
+                      ? "Jet"
+                      : listing.type === "yacht"
+                      ? "Yacht"
+                      : ""}
+                  </td>
+                  <td>
+                    <Button variant="primary">Email</Button>
+                  </td>
                 </tr>
               </tbody>
-            )}
-          </Table>
-        )}
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={10}>No Upcoming Listings</td>
+              </tr>
+            </tbody>
+          )}
+        </Table>
       </Row>
       <Row style={{ marginTop: "50px" }}>
         <ApprovedListings windowSize={windowSize} />

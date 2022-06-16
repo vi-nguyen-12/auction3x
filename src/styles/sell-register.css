@@ -82,6 +82,11 @@
   margin: 5px;
 }
 
+/* .category-btn:focus {
+  outline: none;
+  background-color: none;
+} */
+
 .category-btn label {
   font-size: 14px;
   font-weight: bold;
