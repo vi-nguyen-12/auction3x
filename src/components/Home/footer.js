@@ -19,7 +19,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               style={{
                 display: "grid",
                 justifyContent: "center",
-                padding: "0 50px",
+                // padding: "0 50px",
               }}
             >
               <div className="img-flex">

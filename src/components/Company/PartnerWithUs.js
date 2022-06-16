@@ -3,6 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import contact from "../../../src/images/contactImg.png";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 function PartnerWithUs({ windowSize }) {
   const location = useLocation();
@@ -84,10 +87,18 @@ function PartnerWithUs({ windowSize }) {
               </Col>
               <Col>
                 <span>Phone</span>
-                <input
-                  placeholder="Enter Phone Number"
-                  type="text"
-                  className="form-control"
+                <PhoneInput
+                  disableCountryCode={false}
+                  onlyCountries={["ca", "us", "gb", "au"]}
+                  disableDropdown={false}
+                  country={"us"}
+                  dropdownStyle={{ paddingLeft: "0!important" }}
+                  inputStyle={{ width: "100%" }}
+                  buttonStyle={{
+                    border: "2px solid #d58f5c",
+                    borderRight: "none",
+                  }}
+                  {...register("phone", { required: true })}
                 />
               </Col>
             </Row>

@@ -5,6 +5,9 @@ import { Modal, Row, Col, Button } from "react-bootstrap";
 import "../../styles/modal.css";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../components/Loading";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 require("react-bootstrap/ModalHeader");
 
@@ -264,16 +267,18 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               <label htmlFor="phone">
                 Phone <span style={{ color: "red" }}> *</span>
               </label>
-              <input
-                type="number"
-                min="0"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
-                id="phone"
-                placeholder="Enter Phone"
-                name="phone"
-                {...register("phone")}
-                required
+              <PhoneInput
+                disableCountryCode={false}
+                onlyCountries={["ca", "us", "gb", "au"]}
+                disableDropdown={false}
+                country={"us"}
+                dropdownStyle={{ paddingLeft: "0!important" }}
+                inputStyle={{ width: "100%" }}
+                buttonStyle={{
+                  border: "2px solid #d58f5c",
+                  borderRight: "none",
+                }}
+                {...register("phone", { required: true })}
               />
             </div>
           </Col>
@@ -409,7 +414,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
       </form>
       <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
         <Modal.Body style={{ height: "90vh" }}>
-          <div style={{display:"flex", justifyContent:"flex-end", marginBottom:"10px"}}>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}>
             <CloseButton className="modal-close" onClick={toogleTerms} />
           </div>
           <iframe title="terms" src={terms} width="100%" height="90%" />
