@@ -531,6 +531,28 @@ function CarDetails({
               onChange={(e) => setMileage(e.target.value)}
               required
             />
+            {/* <div
+              style={{
+                fontSize: "12px",
+                display: "grid",
+                position: "absolute",
+                marginLeft: "18rem",
+                marginTop: "-2.4rem",
+                borderLeft: "1px solid #e6e6e6",
+                padding: "0 0.5rem",
+                backgroundColor: "#fafafa",
+              }}
+            >
+              <span
+                style={{ color: "black"}}
+              >
+                KM
+              </span>
+              <br />
+              <span style={{ color: "black" }}>M</span>
+            </div> */}
+            <input type="radio" name="mileage" value="km" /> km
+            <input type="radio" name="mileage" value="m" /> m
             <span style={{ color: "black" }}>Mileage</span>
           </Col>
         </Row>
@@ -610,6 +632,7 @@ function CarDetails({
           <Col xs={12} md={6}>
             <input
               type="number"
+              placeholder="$"
               className="form-control"
               defaultValue={price}
               {...register("price")}

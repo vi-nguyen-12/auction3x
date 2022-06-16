@@ -575,7 +575,7 @@ function YachtDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      if (success === true) {
+      // if (success === true) {
         if (otherDetails) {
           const submitedData = {
             reservedAmount: data.reservedAmount
@@ -668,9 +668,9 @@ function YachtDetails({
           togglePropertyData(submitedData);
           toggleStep(step + 1);
         }
-      } else {
-        alert("Please fill all the details");
-      }
+      // } else {
+      //   alert("Please fill all the details");
+      // }
     }
   };
   return (

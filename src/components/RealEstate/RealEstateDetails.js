@@ -36,6 +36,10 @@ function RealEstateDetails({
   const [propType, setPropType] = useState("");
   const [totalValue, setTotalValue] = useState("");
   const [sqft, setSqft] = useState("");
+  const [year, setYear] = useState();
+  const [lotSize, setLotSize] = useState();
+  const [garage, setGarage] = useState();
+  const [story, setStory] = useState();
   const [reservedAmount, setReservedAmount] = useState("");
   const [discussedAmount, setDiscussedAmount] = useState("");
 
@@ -50,7 +54,10 @@ function RealEstateDetails({
           country: country ? country : property.country,
           zip_code: zip ? zip : property.zip_code,
           owner_name: ownerName,
-          rooms_count: rooms,
+          year_built: year,
+          lot_size: lotSize,
+          garage: garage,
+          story: story,
           baths_count: bathrooms,
           beds_count: bedrooms,
           standardized_land_use_type: propType,
@@ -76,7 +83,10 @@ function RealEstateDetails({
         country: country ? country : property.country,
         zip_code: zip ? zip : property.zip_code,
         owner_name: ownerName,
-        rooms_count: rooms,
+        year_built: year,
+        lot_size: lotSize,
+        garage: garage,
+        story: story,
         baths_count: bathrooms,
         beds_count: bedrooms,
         standardized_land_use_type: propType,
@@ -115,13 +125,40 @@ function RealEstateDetails({
               ? property.owner.name
               : ""
           );
-          setRooms(
+          setYear(
             properti[0].details.structure
-              ? properti[0].details.structure.rooms_count
-              : propertyData.rooms_count
-              ? propertyData.rooms_count
-              : property.structure.rooms_count
-              ? property.structure.rooms_count
+              ? properti[0].details.structure.year_built
+              : propertyData.year_built
+              ? propertyData.year_built
+              : property.structure.year_built
+              ? property.structure.year_built
+              : ""
+          );
+          setLotSize(
+            properti[0].details.structure
+              ? properti[0].details.structure.lot_size
+              : propertyData.lot_size
+              ? propertyData.lot_size
+              : property.structure.lot_size
+              ? property.structure.lot_size
+              : ""
+          );
+          setGarage(
+            properti[0].details.structure
+              ? properti[0].details.structure.garage
+              : propertyData.garage
+              ? propertyData.garage
+              : property.structure.garage
+              ? property.structure.garage
+              : ""
+          );
+          setStory(
+            properti[0].details.structure
+              ? properti[0].details.structure.story
+              : propertyData.story
+              ? propertyData.story
+              : property.structure.story
+              ? property.structure.story
               : ""
           );
           setBathrooms(
@@ -263,11 +300,32 @@ function RealEstateDetails({
           ? property.owner.name
           : ""
       );
-      setRooms(
-        propertyData.rooms_count
-          ? propertyData.rooms_count
-          : property.structure.rooms_count
-          ? property.structure.rooms_count
+      setYear(
+        propertyData.year_built
+          ? propertyData.year_built
+          : property.structure.year_built
+          ? property.structure.year_built
+          : ""
+      );
+      setLotSize(
+        propertyData.lot_size
+          ? propertyData.lot_size
+          : property.structure.lot_size
+          ? property.structure.lot_size
+          : ""
+      );
+      setGarage(
+        propertyData.garage
+          ? propertyData.garage
+          : property.structure.garage
+          ? property.structure.garage
+          : ""
+      );
+      setStory(
+        propertyData.story
+          ? propertyData.story
+          : property.structure.story
+          ? property.structure.story
           : ""
       );
       setBathrooms(
@@ -361,267 +419,269 @@ function RealEstateDetails({
             </p>
           </div>
         </div>
-        <Container style={{ marginTop: "20px" }}>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="street_address"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-                {...register("street_address")}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Street Address *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="city"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-                {...register("city")}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>City *</span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="state"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={
-                  property.address.state ? property.address.state : ""
-                }
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-                {...register("state")}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>State *</span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="country"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={country}
-                onChange={(e) => {
-                  setCountry(e.target.value);
-                }}
-                {...register("country")}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Country *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="zipCode"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={zip}
-                {...register("zipCode")}
-                onChange={(e) => {
-                  setZip(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Zip Code *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={ownerName}
-                {...register("ownerName")}
-                onChange={(e) => {
-                  setOwnerName(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Owner Name *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={rooms}
-                {...register("rooms_count")}
-                onChange={(e) => {
-                  setRooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Rooms Count *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={bedrooms}
-                {...register("bedrooms")}
-                onChange={(e) => {
-                  setBedrooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Bedrooms *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={propType}
-                {...register("propertyType")}
-                onChange={(e) => {
-                  setPropType(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Property Type *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                defaultValue={bathrooms}
-                style={{ color: "black", fontWeight: "bold" }}
-                {...register("bathrooms")}
-                onChange={(e) => {
-                  setBathrooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Bathrooms *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={totalValue}
-                placeholder="$"
-                {...register("total_value")}
-                onChange={(e) => {
-                  setTotalValue(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Total Market Value *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={sqft}
-                {...register("sqft")}
-                onChange={(e) => {
-                  setSqft(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={reservedAmount}
-                {...register("reservedAmount")}
-                onChange={(e) => {
-                  setReservedAmount(parseInt(e.target.value));
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Reserved Amount *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={discussedAmount}
-                {...register("discussedAmount")}
-                onChange={(e) => {
-                  setDiscussedAmount(parseInt(e.target.value));
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Discussed Amount *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px", height: "130px" }}>
-            <Col>
-              <textarea
-                style={{ height: "100%", color: "black" }}
-                className="form-control"
-                placeholder="Description"
-                {...register("description")}
-              />
-            </Col>
-          </Row>
-        </Container>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              name="street_address"
+              defaultValue={address}
+              {...register("street_address")}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Street Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              name="city"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              name="state"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              name="country"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              name="zipCode"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={ownerName}
+              {...register("ownerName")}
+              name="ownerName"
+              onChange={(e) => setOwnerName(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Owner Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={propType}
+              {...register("propertyType")}
+              onChange={(e) => setPropType(e.target.value)}
+              name="propertyType"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Property Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={year}
+              {...register("year", { maxLength: 4, minLength: 4 })}
+              onChange={(e) => setYear(e.target.value)}
+              name="year"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={lotSize}
+              {...register("lotSize")}
+              onChange={(e) => setLotSize(e.target.value)}
+              name="lotSize"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Lot Size <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={garage}
+              {...register("garage")}
+              onChange={(e) => setGarage(e.target.value)}
+              name="garage"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Garage(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={story}
+              {...register("story")}
+              onChange={(e) => setStory(e.target.value)}
+              name="story"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              story(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={bedrooms}
+              {...register("bedrooms")}
+              onChange={(e) => setBedrooms(e.target.value)}
+              name="bedrooms"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={bathrooms}
+              {...register("bathrooms")}
+              onChange={(e) => setBathrooms(e.target.value)}
+              name="bathrooms"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bathrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              placeholder="$"
+              defaultValue={totalValue}
+              {...register("total_value")}
+              onChange={(e) => setTotalValue(e.target.value)}
+              name="total_value"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={sqft}
+              {...register("sqft")}
+              onChange={(e) => setSqft(e.target.value)}
+              name="sqft"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Sqft <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={reservedAmount}
+              {...register("reservedAmount")}
+              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
+              name="reservedAmount"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={discussedAmount}
+              {...register("discussedAmount")}
+              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
+              name="discussedAmount"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
         <Row className="mt-5">
           {/* <Col
             xs={12}

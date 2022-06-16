@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
 import { IoInformationCircleSharp } from "react-icons/io5";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
 
 function JetDetails({
   property,
@@ -161,6 +164,8 @@ function JetDetails({
       });
     }
   };
+
+  console.log(propertyData);
 
   useEffect(() => {
     if (params.id) {
@@ -406,9 +411,9 @@ function JetDetails({
       );
       setAddress(
         propertyData.property_address
-          ? propertyData.property_address.formatted_street_address
+          ? propertyData.property_address.formatted_address
           : property.property_address
-          ? property.property_address.formatted_street_address
+          ? property.property_address.formatted_address
           : ""
       );
       setCountry(
@@ -451,6 +456,8 @@ function JetDetails({
       );
     }
   }, []);
+
+  console.log(isImport);
 
   const onSubmit = (data) => {
     if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
@@ -508,6 +515,47 @@ function JetDetails({
       toggleStep(step + 1);
     }
   };
+
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      setAddress(results[0].formatted_address.split(",")[0]);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(
+        states[0].long_name ? states[0].long_name : states[0].short_name
+      );
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(
+        countries[0].long_name
+          ? countries[0].long_name
+          : countries[0].short_name
+      );
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(
+        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
+      );
+    });
+  };
+
   return (
     <>
       <h3>AirCraft Details</h3>
@@ -529,23 +577,70 @@ function JetDetails({
         </div>
         <Row className="mt-3">
           <Col>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={address}
-              {...register("property_address")}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Property Address <span style={{ color: "#ff0000" }}>*</span>
-            </span>
+            <PlacesAutocomplete
+              value={address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search address",
+                      className: "form-control",
+                    })}
+                    required
+                  />
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Street Address <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  {suggestions && suggestions.length > 0 && (
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
-              defaultValue={country}
+              value={country}
               {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
               required
@@ -560,7 +655,7 @@ function JetDetails({
             <input
               type="text"
               className="form-control"
-              defaultValue={state}
+              value={state}
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
@@ -731,12 +826,30 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="d-grid">
             <span style={{ fontWeight: "600", color: "black" }}>
               Is the aircraft an import?{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <select
+            <div className="form-check form-check-inline">
+              <input
+                defaultChecked={isImport === "true" ? true : false}
+                type="radio"
+                name="is_import"
+                value={true}
+                onChange={(e) => setIsImport(e.target.value)}
+              />{" "}
+              Yes &nbsp;
+              <input
+                defaultChecked={isImport === "false" ? true : false}
+                type="radio"
+                name="is_import"
+                value={false}
+                onChange={(e) => setIsImport(e.target.value)}
+              />{" "}
+              No &nbsp;
+            </div>
+            {/* <select
               className="form-control"
               value={isImport}
               onChange={(e) => {
@@ -747,7 +860,7 @@ function JetDetails({
               <option value="">Select</option>
               <option value="true">Yes</option>
               <option value="false">No</option>
-            </select>
+            </select> */}
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>

@@ -22,7 +22,6 @@ function Ownership({
   propId,
   ownership,
 }) {
-  console.log(propId);
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
@@ -317,13 +316,15 @@ function Ownership({
             style={{ display: showOwner }}
           >
             <Row>
-              <Row className="mt-3">
+              <Row className="mt-5">
                 <h5
                   style={{
                     borderBottom: "2px solid gray",
                     fontWeight: "bold",
                     fontSize: "18px",
                     color: "black",
+                    display: "flex",
+                    justifyContent: "center",
                   }}
                 >
                   Owner Information
@@ -497,13 +498,15 @@ function Ownership({
             style={{ display: showBroker }}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <Row className="mt-3">
+            <Row className="mt-5">
               <Col
                 style={{
                   borderBottom: "2px solid gray",
                   fontWeight: "bold",
                   fontSize: "18px",
                   color: "black",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
                 Broker Information

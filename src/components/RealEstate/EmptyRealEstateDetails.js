@@ -24,20 +24,23 @@ function EmptyRealEstateDetails({
 
   const params = useParams();
 
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [rooms, setRooms] = useState("");
-  const [bathrooms, setBathrooms] = useState("");
-  const [bedrooms, setBedrooms] = useState("");
-  const [propType, setPropType] = useState("");
-  const [totalValue, setTotalValue] = useState("");
-  const [sqft, setSqft] = useState("");
-  const [reservedAmount, setReservedAmount] = useState("");
-  const [discussedAmount, setDiscussedAmount] = useState("");
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [country, setCountry] = useState();
+  const [zip, setZip] = useState();
+  const [ownerName, setOwnerName] = useState();
+  const [bathrooms, setBathrooms] = useState();
+  const [bedrooms, setBedrooms] = useState();
+  const [propType, setPropType] = useState();
+  const [totalValue, setTotalValue] = useState();
+  const [sqft, setSqft] = useState();
+  const [year, setYear] = useState();
+  const [lotSize, setLotSize] = useState();
+  const [garage, setGarage] = useState();
+  const [story, setStory] = useState();
+  const [reservedAmount, setReservedAmount] = useState();
+  const [discussedAmount, setDiscussedAmount] = useState();
 
   const saveInfo = () => {
     if (propId || params.id) {
@@ -50,7 +53,10 @@ function EmptyRealEstateDetails({
           country: country ? country : property.country,
           zip_code: zip ? zip : property.zip_code,
           owner_name: ownerName,
-          rooms_count: rooms,
+          year_built: year,
+          lot_size: lotSize,
+          garage: garage,
+          story: story,
           baths_count: bathrooms,
           beds_count: bedrooms,
           standardized_land_use_type: propType,
@@ -76,7 +82,10 @@ function EmptyRealEstateDetails({
         country: country ? country : property.country,
         zip_code: zip ? zip : property.zip_code,
         owner_name: ownerName,
-        rooms_count: rooms,
+        year_built: year,
+        lot_size: lotSize,
+        garage: garage,
+        story: story,
         baths_count: bathrooms,
         beds_count: bedrooms,
         standardized_land_use_type: propType,
@@ -115,13 +124,40 @@ function EmptyRealEstateDetails({
               ? property.owner_name
               : ""
           );
-          setRooms(
+          setYear(
             properti[0].details.structure
-              ? properti[0].details.structure.rooms_count
-              : propertyData.rooms_count
-              ? propertyData.rooms_count
-              : property.rooms_count
-              ? property.rooms_count
+              ? properti[0].details.structure.year_built
+              : propertyData.year_built
+              ? propertyData.year_built
+              : property.year_built
+              ? property.year_built
+              : ""
+          );
+          setLotSize(
+            properti[0].details.structure
+              ? properti[0].details.structure.lot_size
+              : propertyData.lot_size
+              ? propertyData.lot_size
+              : property.lot_size
+              ? property.lot_size
+              : ""
+          );
+          setGarage(
+            properti[0].details.structure
+              ? properti[0].details.structure.garage
+              : propertyData.garage
+              ? propertyData.garage
+              : property.garage
+              ? property.garage
+              : ""
+          );
+          setStory(
+            properti[0].details.structure
+              ? properti[0].details.structure.story
+              : propertyData.story
+              ? propertyData.story
+              : property.story
+              ? property.story
               : ""
           );
           setBathrooms(
@@ -249,12 +285,25 @@ function EmptyRealEstateDetails({
           ? property.owner_name
           : ""
       );
-      setRooms(
-        propertyData.rooms_count
-          ? propertyData.rooms_count
+      setYear(
+        propertyData.year ? propertyData.year : property ? property.year : ""
+      );
+      setLotSize(
+        propertyData.lot_size
+          ? propertyData.lot_size
           : property
-          ? property.rooms_count
+          ? property.lot_size
           : ""
+      );
+      setGarage(
+        propertyData.garage
+          ? propertyData.garage
+          : property
+          ? property.garage
+          : ""
+      );
+      setStory(
+        propertyData.story ? propertyData.story : property ? property.story : ""
       );
       setBathrooms(
         propertyData.baths_count
@@ -313,7 +362,10 @@ function EmptyRealEstateDetails({
         country: country ? country : property.country,
         zip_code: zip ? zip : property.zip_code,
         owner_name: ownerName,
-        rooms_count: rooms,
+        year_built: year,
+        lot_size: lotSize,
+        garage: garage,
+        story: story,
         baths_count: bathrooms,
         beds_count: bedrooms,
         standardized_land_use_type: propType,
@@ -438,38 +490,6 @@ function EmptyRealEstateDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={6}>
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              defaultValue={rooms}
-              {...register("rooms_count")}
-              onChange={(e) => setRooms(e.target.value)}
-              name="rooms"
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Rooms Count <span style={{ color: "#ff0000" }}>*</span>
-            </span>
-          </Col>
-          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              defaultValue={bedrooms}
-              {...register("bedrooms")}
-              onChange={(e) => setBedrooms(e.target.value)}
-              name="bedrooms"
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
-            </span>
-          </Col>
-        </Row>
-        <Row className="mt-3">
           <Col xs={12} md={4}>
             <input
               type="text"
@@ -482,6 +502,81 @@ function EmptyRealEstateDetails({
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={year}
+              {...register("year", { maxLength: 4, minLength: 4 })}
+              onChange={(e) => setYear(e.target.value)}
+              name="year"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={lotSize}
+              {...register("lotSize")}
+              onChange={(e) => setLotSize(e.target.value)}
+              name="lotSize"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Lot Size <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={garage}
+              {...register("garage")}
+              onChange={(e) => setGarage(e.target.value)}
+              name="garage"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Garage(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={story}
+              {...register("story")}
+              onChange={(e) => setStory(e.target.value)}
+              name="story"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              story(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={bedrooms}
+              {...register("bedrooms")}
+              onChange={(e) => setBedrooms(e.target.value)}
+              name="bedrooms"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
