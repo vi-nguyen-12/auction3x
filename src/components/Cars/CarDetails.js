@@ -5,6 +5,10 @@ import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoInformationCircleSharp } from "react-icons/io5";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
+import NumberFormat from "react-number-format";
 
 function CarDetails({
   property,
@@ -30,7 +34,7 @@ function CarDetails({
   const [carType, setCarType] = useState();
   const [fuelType, setFuelType] = useState();
   const [condition, setCondition] = useState();
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(parseInt().toLocaleString());
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
   const [state, setState] = useState();
@@ -314,8 +318,6 @@ function CarDetails({
     }
   }, [prop]);
 
-  console.log(make);
-
   const saveInfo = () => {
     if (propId || params.id) {
       const datas = {
@@ -454,35 +456,84 @@ function CarDetails({
     }
   };
 
-  console.log(year);
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      setAddress(results[0].formatted_address.split(",")[0]);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(
+        states[0].long_name ? states[0].long_name : states[0].short_name
+      );
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(
+        countries[0].long_name
+          ? countries[0].long_name
+          : countries[0].short_name
+      );
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(
+        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
+      );
+    });
+  };
 
   return (
     <>
       <h3>Car Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
-          className="dropdown-icon"
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <IoInformationCircleSharp
-            style={{ cursor: "pointer" }}
-            color="blue"
-            size={30}
-          />
-          <div className="dropdown-info">
-            <p>
-              We will be using these details to match you with the right buyer.
-            </p>
+          <div
+            className="dropdown-icon"
+            style={{
+              width: "fit-content",
+            }}
+          >
+            <IoInformationCircleSharp
+              style={{ cursor: "pointer" }}
+              color="blue"
+              size={30}
+            />
+            <div className="dropdown-info">
+              <p>
+                We will be using these details to match you with the right
+                buyer.
+              </p>
+            </div>
           </div>
         </div>
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <input
-              type="number"
+            <NumberFormat
+              format="####"
               className="form-control"
+              placeholder="YYYY"
               defaultValue={year}
-              {...register("year", { maxLength: 4 })}
-              onChange={(e) => setYear(e.target.value)}
+              onValueChange={(values) => {
+                const { value } = values;
+                setYear(value);
+              }}
+              name="year"
               required
             />
             <span style={{ color: "black" }}>Year</span>
@@ -512,15 +563,16 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="text"
+            <select
               className="form-control"
-              defaultValue={transmission}
-              {...register("transmission", { maxLength: 100 })}
+              name="gearbox"
               onChange={(e) => setTransmission(e.target.value)}
-              required
-            />
-            <span style={{ color: "black" }}>Transmission</span>
+            >
+              <option value="">Select Gearbox Type</option>
+              <option value="Automatic">Automatic</option>
+              <option value="Manual">Manual</option>
+            </select>
+            <span style={{ color: "black" }}>Gearbox</span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -531,28 +583,6 @@ function CarDetails({
               onChange={(e) => setMileage(e.target.value)}
               required
             />
-            {/* <div
-              style={{
-                fontSize: "12px",
-                display: "grid",
-                position: "absolute",
-                marginLeft: "18rem",
-                marginTop: "-2.4rem",
-                borderLeft: "1px solid #e6e6e6",
-                padding: "0 0.5rem",
-                backgroundColor: "#fafafa",
-              }}
-            >
-              <span
-                style={{ color: "black"}}
-              >
-                KM
-              </span>
-              <br />
-              <span style={{ color: "black" }}>M</span>
-            </div> */}
-            <input type="radio" name="mileage" value="km" /> km
-            <input type="radio" name="mileage" value="m" /> m
             <span style={{ color: "black" }}>Mileage</span>
           </Col>
         </Row>
@@ -606,14 +636,17 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="text"
+            <select
               className="form-control"
-              defaultValue={fuelType}
-              {...register("fuelType", { maxLength: 100 })}
+              name="fuel"
               onChange={(e) => setFuelType(e.target.value)}
-              required
-            />
+            >
+              <option value="">Select Fuel Type</option>
+              <option value="Petrol">Petrol</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
             <span style={{ color: "black" }}>Fuel Type</span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -630,13 +663,15 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="number"
-              placeholder="$"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={price}
               className="form-control"
-              defaultValue={price}
-              {...register("price")}
-              onChange={(e) => setPrice(e.target.value)}
+              onValueChange={(values) => {
+                const { value } = values;
+                setPrice(value);
+              }}
               required
             />
             <span style={{ color: "black" }}>Approximate Market Price</span>
@@ -655,15 +690,64 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={address}
-              {...register("address", { maxLength: 100 })}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-            <span style={{ color: "black" }}>Address</span>
+            <PlacesAutocomplete
+              value={address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search address",
+                      className: "form-control",
+                    })}
+                    required
+                  />
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Location <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  {suggestions && suggestions.length > 0 && (
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
@@ -714,25 +798,29 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={reservedAmount}
               className="form-control"
-              defaultValue={reservedAmount}
-              {...register("reservedAmount")}
-              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
+              onValueChange={(values) => {
+                const { value } = values;
+                setReservedAmount(value);
+              }}
               required
             />
             <span style={{ color: "black" }}>Reserved Amount</span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={discussedAmount}
               className="form-control"
-              defaultValue={discussedAmount}
-              {...register("discussedAmount")}
-              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
+              onValueChange={(values) => {
+                const { value } = values;
+                setDiscussedAmount(value);
+              }}
               required
             />
             <span style={{ color: "black" }}>Discussed Amount</span>

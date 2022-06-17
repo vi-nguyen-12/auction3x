@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
@@ -36,6 +36,7 @@ function Ownership({
   const [zip, setZip] = useState("");
   const [country, setCountry] = useState("");
   const [listAgree, setListAgree] = useState([]);
+  const [select, setSelect] = useState("");
 
   const params = useParams();
 
@@ -287,10 +288,16 @@ function Ownership({
           >
             <Button
               className="submitBtn"
-              style={{ border: "none", color: "black", fontWeight: "bold" }}
+              style={{
+                border: "none",
+                color: select === "1" ? "white" : "black",
+                fontWeight: "bold",
+                background: select === "1" && "rgb(233 184 135)",
+              }}
               onClick={() => {
                 setShowBroker("none");
                 setShowOwner("block");
+                setSelect("1");
               }}
             >
               Owner
@@ -300,12 +307,14 @@ function Ownership({
               style={{
                 margin: "0px 10px",
                 border: "none",
-                color: "black",
+                color: select === "2" ? "white" : "black",
                 fontWeight: "bold",
+                background: select === "2" && "rgb(233 184 135)",
               }}
               onClick={() => {
                 setShowOwner("none");
                 setShowBroker("block");
+                setSelect("2");
               }}
             >
               Broker
@@ -346,7 +355,8 @@ function Ownership({
                     required
                   />
                   <span style={{ fontWeight: "600" }}>
-                    Owner Name <span style={{ color: "#ff0000" }}>*</span>
+                    Owner/Entity Name{" "}
+                    <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                 </Col>
               </Row>
@@ -372,8 +382,7 @@ function Ownership({
                           required
                         />
                         <span style={{ fontWeight: "600", color: "black" }}>
-                          Street Address{" "}
-                          <span style={{ color: "#ff0000" }}>*</span>
+                          Address <span style={{ color: "#ff0000" }}>*</span>
                         </span>
                         {suggestions && suggestions.length > 0 && (
                           <div className="autocomplete-dropdown-container">
@@ -527,7 +536,7 @@ function Ownership({
                   onChange={(e) => setOwnerName(e.target.value)}
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>
-                  Owner Name *
+                  Owner/Entity Name <span style={{ color: "#ff0000" }}>*</span>
                 </span>
               </Col>
               <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
@@ -545,7 +554,7 @@ function Ownership({
                   onChange={(e) => setBrokerName(e.target.value)}
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>
-                  Broker Name *
+                  Broker Name <span style={{ color: "#ff0000" }}>*</span>
                 </span>
               </Col>
               <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
@@ -563,7 +572,8 @@ function Ownership({
                   onChange={(e) => setBrokerId(e.target.value)}
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>
-                  Broker License Number *
+                  Broker License Number{" "}
+                  <span style={{ color: "#ff0000" }}>*</span>
                 </span>
               </Col>
             </Row>
@@ -577,27 +587,71 @@ function Ownership({
                   multiple
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>
-                  Listing Agreement(.pdf) *
+                  Listing Agreement(.pdf){" "}
+                  <span style={{ color: "#ff0000" }}>*</span>
                 </span>
               </Col>
             </Row>
             <Row className="mt-3">
               <Col>
-                <input
-                  type="text"
-                  className="form-control"
-                  defaultValue={
-                    address
-                      ? address
-                      : ownership
-                      ? ownership.details.address
-                      : ""
-                  }
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-                <span style={{ fontWeight: "600", color: "black" }}>
-                  Address
-                </span>
+                <PlacesAutocomplete
+                  value={address}
+                  onChange={handleChange}
+                  onSelect={handleSelect}
+                >
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <div>
+                      <input
+                        {...getInputProps({
+                          placeholder: "Search address",
+                          className: "form-control",
+                        })}
+                        required
+                      />
+                      <span style={{ fontWeight: "600", color: "black" }}>
+                        Address <span style={{ color: "#ff0000" }}>*</span>
+                      </span>
+                      {suggestions && suggestions.length > 0 && (
+                        <div className="autocomplete-dropdown-container">
+                          {loading && <div>Loading...</div>}
+                          {suggestions.map((suggestion, index) => {
+                            const className = suggestion.active
+                              ? "suggestion-item--active"
+                              : "suggestion-item";
+                            // inline style for demonstration purpose
+                            const style = suggestion.active
+                              ? {
+                                  backgroundColor: "#fafafa",
+                                  cursor: "pointer",
+                                  color: "black",
+                                }
+                              : {
+                                  backgroundColor: "#ffffff",
+                                  cursor: "pointer",
+                                  color: "black",
+                                };
+                            return (
+                              <div
+                                key={index}
+                                {...getSuggestionItemProps(suggestion, {
+                                  className,
+                                  style,
+                                })}
+                              >
+                                <span>{suggestion.description}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </PlacesAutocomplete>
               </Col>
             </Row>
             <Row className="mt-3">
@@ -632,7 +686,7 @@ function Ownership({
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>
-                  Email *
+                  Email <span style={{ color: "#ff0000" }}>*</span>
                 </span>
               </Col>
             </Row>

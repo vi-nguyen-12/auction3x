@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { IoInformationCircleSharp } from "react-icons/io5";
+import NumberFormat from "react-number-format";
 
 function RealEstateDetails({
   property,
@@ -405,18 +406,25 @@ function RealEstateDetails({
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
-          className="dropdown-icon"
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <IoInformationCircleSharp
-            style={{ cursor: "pointer" }}
-            color="blue"
-            size={30}
-          />
-          <div className="dropdown-info">
-            <p>
-              We will be using these details to match you with the right buyer.
-            </p>
+          <div
+            className="dropdown-icon"
+            style={{
+              width: "fit-content",
+            }}
+          >
+            <IoInformationCircleSharp
+              style={{ cursor: "pointer" }}
+              color="blue"
+              size={30}
+            />
+            <div className="dropdown-info">
+              <p>
+                We will be using these details to match you with the right
+                buyer.
+              </p>
+            </div>
           </div>
         </div>
         <Row className="mt-3">
@@ -431,7 +439,7 @@ function RealEstateDetails({
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
-              Street Address <span style={{ color: "#ff0000" }}>*</span>
+              Address <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -507,7 +515,7 @@ function RealEstateDetails({
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
-              Owner Name <span style={{ color: "#ff0000" }}>*</span>
+              Owner/Entity Name <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -527,12 +535,15 @@ function RealEstateDetails({
             </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-            <input
-              type="number"
+            <NumberFormat
+              format="####"
               className="form-control"
+              placeholder="YYYY"
               defaultValue={year}
-              {...register("year", { maxLength: 4, minLength: 4 })}
-              onChange={(e) => setYear(e.target.value)}
+              onValueChange={(values) => {
+                const { value } = values;
+                setYear(value);
+              }}
               name="year"
               required
             />
@@ -551,7 +562,7 @@ function RealEstateDetails({
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
-              Lot Size <span style={{ color: "#ff0000" }}>*</span>
+              Lot Size (Acre(s)) <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -617,16 +628,16 @@ function RealEstateDetails({
             </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={totalValue}
+              allowNegative={false}
               className="form-control"
-              placeholder="$"
-              defaultValue={totalValue}
-              {...register("total_value")}
-              onChange={(e) => setTotalValue(e.target.value)}
-              name="total_value"
-              required
+              onValueChange={(values) => {
+                const { value } = values;
+                setTotalValue(value);
+              }}
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
@@ -652,14 +663,16 @@ function RealEstateDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={reservedAmount}
+              allowNegative={false}
               className="form-control"
-              defaultValue={reservedAmount}
-              {...register("reservedAmount")}
-              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
-              name="reservedAmount"
+              onValueChange={(values) => {
+                const { value } = values;
+                setReservedAmount(value);
+              }}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -667,14 +680,16 @@ function RealEstateDetails({
             </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={discussedAmount}
+              allowNegative={false}
               className="form-control"
-              defaultValue={discussedAmount}
-              {...register("discussedAmount")}
-              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
-              name="discussedAmount"
+              onValueChange={(values) => {
+                const { value } = values;
+                setDiscussedAmount(value);
+              }}
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -683,15 +698,6 @@ function RealEstateDetails({
           </Col>
         </Row>
         <Row className="mt-5">
-          {/* <Col
-            xs={12}
-            md={4}
-            className="d-flex justify-content-center justify-content-md-end mt-2"
-          >
-            <Button className="save-btn" onClick={saveInfo}>
-              Save
-            </Button>
-          </Col> */}
           <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous

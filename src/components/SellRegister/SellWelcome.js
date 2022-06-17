@@ -12,8 +12,7 @@ import { getByTestId } from "@testing-library/react";
 
 const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
   const { handleSubmit } = useForm();
-  const [color, setColor] = useState();
-
+  const [select, setSelect] = useState("");
   const [propertyType, setPropertyType] = useState();
 
   const onSubmit = () => {
@@ -25,53 +24,31 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
     }
   };
 
-  const getId = (id) => {
-    if (id === "real-estate") {
-      setColor("black");
-    }
-  };
-
   const properties = [
     {
       icon: <BsFillHouseFill size={windowSize > 800 ? 40 : 25} />,
       name: "Real Estate",
       propType: "real-estate",
-      selected: false,
-      id: "real-estate",
     },
     {
       icon: <IoCarSportSharp size={windowSize > 800 ? 40 : 25} />,
       name: "Car",
       propType: "car",
-      selected: false,
-      id: "car",
     },
     {
       icon: <IoIosBoat size={windowSize > 800 ? 40 : 25} />,
       name: "Yacht",
       propType: "yacht",
-      selected: false,
-      id: "yacht",
     },
     {
       icon: <IoAirplaneSharp size={windowSize > 800 ? 40 : 25} />,
       name: "Jet",
       propType: "jet",
-      selected: false,
-      id: "jet",
     },
   ];
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-        }
-      }}
-      className="wrapper"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="wrapper">
       <SellHeader />
       <div className="sell-bottom">
         <h3>PLEASE SELECT PROPERTY TO SELL</h3>
@@ -86,15 +63,13 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
               <Button
                 style={{
                   padding: windowSize < 800 && "10px",
-                  backgroundColor: property.selected === true && color,
+                  background: select === index ? "rgb(233 184 135)" : "",
                 }}
                 className="category-btn"
                 onClick={(e) => {
                   setPropertyType(property.propType);
-                  property.selected = true;
-                  getId(property.id);
+                  setSelect(index);
                 }}
-                id="active"
               >
                 {property.icon}
                 <label>{property.name}</label>

@@ -1,14 +1,7 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { CarCard } from "../../../Cards/CarCard";
-import { JetCard } from "../../../Cards/JetCard";
-import { YachtCard } from "../../../Cards/YachtCard";
-import { CardComp } from "../../../Cards/RealEstateCard";
-import { UpcomingRealEstateCard } from "../../../Cards/UpcomingRealEtateCard";
-import { UpcomingCarCard } from "../../../Cards/UpcomingCarCard";
-import { UpcomingJetCard } from "../../../Cards/UpcomingJetCard";
-import { UpcomingYachtCard } from "../../../Cards/UpcomingYachtCard";
+import ErrorPage from "../../../Error/404page";
 import SavedAuctionsCard from "./SavedAuctionsCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -131,7 +124,7 @@ function SavedAuctions({ windowSize }) {
             ))}
           </Carousel>
         ) : (
-          <h1>No Saved Auctions</h1>
+          <ErrorPage />
         )}
       </Row>
     </Container>

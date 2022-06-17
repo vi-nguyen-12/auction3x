@@ -53,28 +53,28 @@ function YachtDocus({
       officialName: "vesselEngineType",
       number: 3,
       documents: doc3,
-      required: true,
+      required: false,
     },
     {
       name: "Vessel Performance Report",
       officialName: "vesselPerformanceReport",
       number: 4,
       documents: doc4,
-      required: true,
+      required: false,
     },
     {
       name: "Vessel Deck Details",
       officialName: "vesselDeckDetails",
       number: 5,
       documents: doc5,
-      required: true,
+      required: false,
     },
     {
       name: "Vessel Latest Insurance",
       officialName: "vesselLatestInsurance",
       number: 6,
       documents: doc6,
-      required: true,
+      required: false,
     },
     {
       name: "Vessel Marine Surveyor Report(approved)",
@@ -88,7 +88,7 @@ function YachtDocus({
       officialName: "vesselvaluationReport",
       number: 8,
       documents: doc8,
-      required: true,
+      required: false,
     },
     {
       name: "Other Documents",
@@ -472,16 +472,7 @@ function YachtDocus({
   };
 
   const onSubmit = async (data) => {
-    if (
-      doc1.length !== 0 &&
-      doc2.length !== 0 &&
-      doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0 &&
-      doc7.length !== 0 &&
-      doc8.length !== 0
-    ) {
+    if (doc1.length !== 0 && doc2.length !== 0) {
       toggleDocuments(documents);
       toggleStep(step + 1);
     } else {
@@ -538,7 +529,7 @@ function YachtDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>

@@ -324,8 +324,7 @@ h1 {
   position: absolute;
   text-align: center;
   width: 10rem;
-  margin-right: 28px;
-  margin-top: 28px;
+  margin-left: -160px;
   background-color: #ffffff;
   min-width: 10rem;
   max-width: 20rem;

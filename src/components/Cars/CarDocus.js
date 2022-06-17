@@ -34,31 +34,10 @@ function CarDocus({
   const [loader, setLoader] = useState(false);
   const datas = [
     {
-      name: "Ownership Documents",
-      officialName: "ownershipDocuments",
-      number: 1,
-      documents: doc1,
-      required: true,
-    },
-    {
-      name: "Registration Documents",
-      officialName: "registrationDocuments",
-      number: 2,
-      documents: doc2,
-      required: true,
-    },
-    {
       name: "Title Certificate",
       officialName: "titleCertificate",
       number: 3,
       documents: doc3,
-      required: true,
-    },
-    {
-      name: "Loan Documents",
-      officialName: "loanDocuments",
-      number: 4,
-      documents: doc4,
       required: true,
     },
     {
@@ -69,25 +48,47 @@ function CarDocus({
       required: true,
     },
     {
+      name: "Registration Documents",
+      officialName: "registrationDocuments",
+      number: 2,
+      documents: doc2,
+      required: true,
+    },
+    {
+      name: "Ownership Documents",
+      officialName: "ownershipDocuments",
+      number: 1,
+      documents: doc1,
+      required: false,
+    },
+    {
+      name: "Loan Documents",
+      officialName: "loanDocuments",
+      number: 4,
+      documents: doc4,
+      required: false,
+    },
+
+    {
       name: "Engine Details",
       officialName: "engineDetails",
       number: 6,
       documents: doc6,
-      required: true,
+      required: false,
     },
     {
       name: "Insurance Documents",
       officialName: "insuranceDocuments",
       number: 7,
       documents: doc7,
-      required: true,
+      required: false,
     },
     {
       name: "Valuation Report",
       officialName: "valuationReport",
       number: 8,
       documents: doc8,
-      required: true,
+      required: false,
     },
     {
       name: "Other Documents",
@@ -474,16 +475,7 @@ function CarDocus({
   };
 
   const onSubmit = async (data) => {
-    if (
-      doc1.length !== 0 &&
-      doc2.length !== 0 &&
-      doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0 &&
-      doc7.length !== 0 &&
-      doc8.length !== 0
-    ) {
+    if (doc2.length !== 0 && doc3.length !== 0 && doc5.length !== 0) {
       toggleDocuments(documents);
       toggleStep(step + 1);
     } else {
@@ -540,7 +532,7 @@ function CarDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>
@@ -561,15 +553,6 @@ function CarDocus({
           ))}
         </Row>
         <Row className="mt-5">
-          {/* <Col
-            xs={12}
-            md={4}
-            className="d-flex justify-content-center justify-content-md-end mt-2"
-          >
-            <Button className="save-btn" onClick={saveInfo}>
-              Save
-            </Button>
-          </Col> */}
           <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous

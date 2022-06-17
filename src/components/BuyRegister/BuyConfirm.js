@@ -154,7 +154,7 @@ const BuyConfirm = ({ property }) => {
             }}
           >
             <span className="prefix">$</span>
-            <input
+            {/* <input
               className="has-prefix"
               type="number"
               min="0"
@@ -162,6 +162,17 @@ const BuyConfirm = ({ property }) => {
               name="bid"
               value={bid}
               onChange={(e) => setBid(e.target.value)}
+            /> */}
+            <NumberFormat
+              thousandSeparator={true}
+              value={bid}
+              allowNegative={false}
+              className="has-prefix"
+              onValueChange={(values) => {
+                const { value } = values;
+                setBid(value);
+              }}
+              required
             />
             <button
               style={{

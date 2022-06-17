@@ -64,42 +64,44 @@ function IncompleteListing({ windowSize }) {
             </tr>
           </thead>
           {IncompleteListings.length > 0 ? (
-            IncompleteListings.map((listing, index) => (
-              <tbody key={index}>
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{listing._id}</td>
-                  <td>{listing.type}</td>
-                  <td className="progress-1">
-                    <CircularProgressbar
-                      value={listing.step}
-                      text={`${(listing.step / 5) * 100}%`}
-                      maxValue={5}
-                      strokeWidth={20}
-                    />
-                  </td>
-                  <td>{new Date(listing.updatedAt).toLocaleString()}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        window.open(
-                          `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
-                        );
-                      }}
-                      className="resume-btn"
-                    >
-                      Resume
-                    </button>{" "}
-                    <button
-                      onClick={() => handleDelete(listing._id)}
-                      className="del-btn"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            ))
+            IncompleteListings.slice()
+              .reverse()
+              .map((listing, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{listing._id}</td>
+                    <td>{listing.type}</td>
+                    <td className="progress-1">
+                      <CircularProgressbar
+                        value={listing.step}
+                        text={`${(listing.step / 5) * 100}%`}
+                        maxValue={5}
+                        strokeWidth={20}
+                      />
+                    </td>
+                    <td>{new Date(listing.updatedAt).toLocaleString()}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          window.open(
+                            `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
+                          );
+                        }}
+                        className="resume-btn"
+                      >
+                        Resume
+                      </button>{" "}
+                      <button
+                        onClick={() => handleDelete(listing._id)}
+                        className="del-btn"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))
           ) : (
             <tbody>
               <tr>

@@ -38,10 +38,10 @@ function JetDocus({
   const [loader, setLoader] = useState(false);
   const datas = [
     {
-      name: "Ownership Document",
-      officialName: "ownershipDocument",
-      number: 1,
-      documents: doc1,
+      name: "Title Certificate",
+      officialName: "titleCertificate",
+      number: 3,
+      documents: doc3,
       required: true,
     },
     {
@@ -52,53 +52,10 @@ function JetDocus({
       required: true,
     },
     {
-      name: "Title Certificate",
-      officialName: "titleCertificate",
-      number: 3,
-      documents: doc3,
-      required: true,
-    },
-    {
-      name: "Detail Specification",
-      officialName: "detailSpecification",
-      number: 4,
-      documents: doc4,
-      required: true,
-    },
-    {
-      name: "Insurance Document",
-      officialName: "insuranceDocument",
-      number: 5,
-      documents: doc5,
-      required: true,
-    },
-    {
-      name: "Loan Document",
-      officialName: "loanDocument",
-      number: 6,
-      documents: doc6,
-      required: true,
-    },
-
-    {
-      name: "Jet Detail History",
-      officialName: "jetDetailHistory",
-      number: 7,
-      documents: doc7,
-      required: true,
-    },
-    {
       name: "Fitness Report",
       officialName: "fitnessReport",
       number: 8,
       documents: doc8,
-      required: true,
-    },
-    {
-      name: "Electric Work Details",
-      officialName: "electricWorkDetails",
-      number: 9,
-      documents: doc9,
       required: true,
     },
     {
@@ -116,11 +73,53 @@ function JetDocus({
       required: true,
     },
     {
+      name: "Jet Detail History",
+      officialName: "jetDetailHistory",
+      number: 7,
+      documents: doc7,
+      required: true,
+    },
+    {
+      name: "Detail Specification",
+      officialName: "detailSpecification",
+      number: 4,
+      documents: doc4,
+      required: false,
+    },
+    {
+      name: "Insurance Document",
+      officialName: "insuranceDocument",
+      number: 5,
+      documents: doc5,
+      required: false,
+    },
+    {
+      name: "Loan Document",
+      officialName: "loanDocument",
+      number: 6,
+      documents: doc6,
+      required: false,
+    },
+    {
+      name: "Electric Work Details",
+      officialName: "electricWorkDetails",
+      number: 9,
+      documents: doc9,
+      required: false,
+    },
+    {
+      name: "Ownership Document",
+      officialName: "ownershipDocument",
+      number: 1,
+      documents: doc1,
+      required: false,
+    },
+    {
       name: "Valuation Report",
       officialName: "valuationReport",
       number: 12,
       documents: doc12,
-      required: true,
+      required: false,
     },
     {
       name: "Other Documents",
@@ -638,18 +637,12 @@ function JetDocus({
 
   const onSubmit = async (data) => {
     if (
-      doc1.length !== 0 &&
       doc2.length !== 0 &&
       doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0 &&
       doc7.length !== 0 &&
       doc8.length !== 0 &&
-      doc9.length !== 0 &&
       doc10.length !== 0 &&
-      doc11.length !== 0 &&
-      doc12.length !== 0
+      doc11.length !== 0
     ) {
       toggleDocuments(documents);
       toggleStep(step + 1);
@@ -709,7 +702,7 @@ function JetDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>

@@ -40,20 +40,6 @@ function RealEstateDocus({
       required: true,
     },
     {
-      name: "Insurance Copy",
-      officialName: "insuranceCopy",
-      number: 2,
-      documents: doc2,
-      required: true,
-    },
-    {
-      name: "Financial Documents",
-      officialName: "financialDocuments",
-      number: 3,
-      documents: doc3,
-      required: true,
-    },
-    {
       name: "Purchase Agreement",
       officialName: "purchaseAgreement",
       number: 4,
@@ -61,18 +47,32 @@ function RealEstateDocus({
       required: true,
     },
     {
+      name: "Insurance Copy",
+      officialName: "insuranceCopy",
+      number: 2,
+      documents: doc2,
+      required: false,
+    },
+    {
+      name: "Financial Documents",
+      officialName: "financialDocuments",
+      number: 3,
+      documents: doc3,
+      required: false,
+    },
+    {
       name: "Third-party Report",
       officialName: "thirdPartyReport",
       number: 5,
       documents: doc5,
-      required: true,
+      required: false,
     },
     {
       name: "Market and Valuations",
       officialName: "marketValuations",
       number: 6,
       documents: doc6,
-      required: true,
+      required: false,
     },
     {
       name: "Demographics",
@@ -460,14 +460,7 @@ function RealEstateDocus({
   const onSubmit = async (data) => {
     console.log("test");
     console.log(data);
-    if (
-      doc1.length !== 0 &&
-      doc2.length !== 0 &&
-      doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0
-    ) {
+    if (doc1.length !== 0 && doc4.length !== 0) {
       toggleDocuments(documents);
       toggleStep(step + 1);
     } else {
@@ -525,7 +518,7 @@ function RealEstateDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>
