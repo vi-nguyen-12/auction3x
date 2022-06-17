@@ -78,6 +78,14 @@ function PartnerWithUs({ windowSize }) {
                   className="form-control"
                 />
               </Col>
+              <Col>
+                <span>Company Name</span>
+                <input
+                  placeholder="Enter Company Name"
+                  type="text"
+                  className="form-control"
+                />
+              </Col>
             </Row>
             <Row>
               <Col>

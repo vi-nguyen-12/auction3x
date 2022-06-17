@@ -4,6 +4,7 @@ import "../../styles/realEstate.css";
 import { Row, Col } from "react-bootstrap";
 import Cards from "../Cards/Cards";
 import { useParams } from "react-router-dom";
+import ErrorPage from "../../components/Error/404page";
 
 function Auctions({ toggleSignIn, windowSize }) {
   const params = useParams();
@@ -26,52 +27,56 @@ function Auctions({ toggleSignIn, windowSize }) {
     }
   }, [onGoingAuctions, upcomingAuctions]);
 
-//   useEffect(() => {
-//     if (params.filter === "USA") {
-//         console.log(allAuctions);
-//       console.log(allAuctions.filter((auction) => auction.property.details.property_address.country === "USA"));
-//     }
-//     if (params.filter === "England") {
-//       setAllAuctions(
-//         allAuctions.filter(
-//           (auction) =>
-//             auction.property.details.property_address.country === "England"
-//         )
-//       );
-//     }
-//     if (params.filter === "Canada") {
-//       setAllAuctions(
-//         allAuctions.filter(
-//           (auction) =>
-//             auction.property.details.property_address.country === "Canada"
-//         )
-//       );
-//     }
-//   }, [params.filter]);
+  //   useEffect(() => {
+  //     if (params.filter === "USA") {
+  //         console.log(allAuctions);
+  //       console.log(allAuctions.filter((auction) => auction.property.details.property_address.country === "USA"));
+  //     }
+  //     if (params.filter === "England") {
+  //       setAllAuctions(
+  //         allAuctions.filter(
+  //           (auction) =>
+  //             auction.property.details.property_address.country === "England"
+  //         )
+  //       );
+  //     }
+  //     if (params.filter === "Canada") {
+  //       setAllAuctions(
+  //         allAuctions.filter(
+  //           (auction) =>
+  //             auction.property.details.property_address.country === "Canada"
+  //         )
+  //       );
+  //     }
+  //   }, [params.filter]);
 
   return (
     <>
       <h5 className="realHeader">
         <p>Auctions</p>
       </h5>
-      <Row
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "100px 20px",
-        }}
-      >
-        {allAuctions.map((auction, index) => (
-          <Col style={{ marginBottom: "40px" }} key={index}>
-            <Cards
-              toggleSignIn={toggleSignIn}
-              windowSize={windowSize}
-              data={auction}
-              type={auction.property.type}
-            />
-          </Col>
-        ))}
-      </Row>
+      {allAuctions.length > 0 ? (
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "100px 20px",
+          }}
+        >
+          {allAuctions.map((auction, index) => (
+            <Col style={{ marginBottom: "40px" }} key={index}>
+              <Cards
+                toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                data={auction}
+                type={auction.property.type}
+              />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <ErrorPage />
+      )}
     </>
   );
 }
