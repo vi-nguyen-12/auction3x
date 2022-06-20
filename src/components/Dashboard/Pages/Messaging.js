@@ -7,7 +7,7 @@ function Messaging({ windowSize }) {
   return (
     <>
       <h1 style={{ margin: "50px" }}>Message</h1>
-      <Container className="chatContainer" style={{ width: "90vw" }}>
+      <Container className="chatContainer" style={{ width: "90vw", margin:"30px auto" }}>
         <Row
           className="d-flex justify-content-center mt-3"
           style={{ alignItems: "center" }}

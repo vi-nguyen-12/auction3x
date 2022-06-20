@@ -562,7 +562,7 @@ function RealEstateDetails({
               required
             />
             <span style={{ fontWeight: "600", color: "black" }}>
-              Lot Size (Acre(s)) <span style={{ color: "#ff0000" }}>*</span>
+              Lot Size (Acre) <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>

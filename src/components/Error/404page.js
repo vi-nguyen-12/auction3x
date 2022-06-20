@@ -10,7 +10,7 @@ function ErrorPage() {
       style={{
         margin: "0",
         padding: "0",
-        height: "100%",
+        height: "100vh",
       }}
     >
       <Col

@@ -224,9 +224,7 @@
 .styl {
   background-color: white;
 }
-.filterText {
-  margin: 10px 0;
-}
+
 .modal-head-map {
   width: 100% !important;
 }
@@ -239,7 +237,7 @@
   margin: 10px 0;
   border: none;
   width: 100%;
-  /* padding: 10px; */
+  padding: 10px;
 }
 
 @media (max-width: 1100px) {
@@ -260,10 +258,10 @@
   }
 }
 .realEstateFilter {
-  display: space-between;
+  display: flex;
   background-color: #fcba7d;
   width: 100% !important;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   /* space around */
   margin: 0;

@@ -110,11 +110,11 @@
 }
 
 .form-control {
-  border: 2px solid #d58f5c !important;
+  border: 2px solid #d58f5c;
   outline: none !important;
   background-color: transparent !important;
   /* padding: 6px !important; */
-  color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0);
   font-size: 12px;
 }
 .form-control::placeholder {
@@ -183,12 +183,6 @@
   border-radius: 4px;
 }
 
-.circularCard{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 .circularCard img {
   border-radius: 10px;
   width: 100%;
@@ -198,11 +192,13 @@
   cursor: pointer;
   transition: 0.5s all ease-in-out;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-  overflow: hidden;
 }
 
 .circularCard img:hover {
-  transform: scale(1.5);
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
 }
 
 .circularCard span {
