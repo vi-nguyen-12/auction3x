@@ -240,6 +240,48 @@
   padding: 10px;
 }
 
+.RealButtonPrice {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  height: 50px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.RealButtonPrice:hover {
+  background: white;
+  border: 1px solid grey;
+}
+.RealButtonPrice:focus {
+  background: white;
+  border: 1px solid grey;
+}
+
+.priceDrop {
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  background: white;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 0.25rem;
+  margin-left: -50px;
+  margin-top: -4px;
+}
+
+.priceDrop input {
+  height: fit-content;
+}
+
+/* .RealButtonPrice:hover .priceDrop{
+  display: block;
+} */
+
 @media (max-width: 1100px) {
   /* .row > * {
     display: flex;

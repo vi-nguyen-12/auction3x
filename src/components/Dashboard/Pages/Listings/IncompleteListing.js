@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Row, Container } from "react-bootstrap";
+import { Table, Row, Col, Container, Pagination } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 import "../../../../styles/dashboard.css";
@@ -8,8 +8,28 @@ import "react-circular-progressbar/dist/styles.css";
 
 function IncompleteListing({ windowSize }) {
   const user = useSelector((state) => state.user);
+  const pageSize = 5;
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
+  const [pageContent, setPageContent] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageCount = IncompleteListings
+    ? Math.ceil(IncompleteListings.length / pageSize)
+    : 0;
+
+  // if(pageCount === 1) return null;
+
+  let active = 5;
+  let items = [];
+
+  for (let number = 1; number <= pageCount; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>
+    );
+  }
 
   useEffect(() => {
     const fetchIncompleteListings = async () => {
@@ -19,6 +39,8 @@ function IncompleteListing({ windowSize }) {
     };
     fetchIncompleteListings();
   }, [incompProperty]);
+
+  const getPage = (page) => {};
 
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
@@ -110,6 +132,19 @@ function IncompleteListing({ windowSize }) {
             </tbody>
           )}
         </Table>
+      </Row>
+      <Row>
+        {items.map((item, index) => (
+          <Col style={{ display: "flex", flex: "0", padding: "0" }} key={index}>
+            <Pagination
+              onClick={() => {
+                console.log(item.key);
+              }}
+            >
+              {item}
+            </Pagination>
+          </Col>
+        ))}
       </Row>
     </Container>
   );

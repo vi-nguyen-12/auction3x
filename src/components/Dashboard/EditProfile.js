@@ -164,7 +164,6 @@ function EditProfile({ getProfilePic, getDescription }) {
               dropdownStyle={{ paddingLeft: "0!important" }}
               inputStyle={{ width: "100%" }}
               buttonStyle={{
-                border: "2px solid #d58f5c",
                 borderRight: "none",
               }}
               {...register("phone", { required: true })}

@@ -38,7 +38,7 @@ const FindInCountries = (props) => {
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/USA")}
-                  height={350}
+                  height="400px"
                   src={Austin}
                   alt="Austin"
                 />
@@ -52,7 +52,7 @@ const FindInCountries = (props) => {
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/Australia")}
-                  height={350}
+                  height="400px"
                   src={Houston}
                   alt=""
                 />
@@ -68,7 +68,7 @@ const FindInCountries = (props) => {
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/Canada")}
-                  height={350}
+                  height="400px"
                   src={Dallas}
                   alt=""
                 />
@@ -82,7 +82,7 @@ const FindInCountries = (props) => {
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/England")}
-                  height={350}
+                  height="400px"
                   src={SanAntonio}
                   alt=""
                 />

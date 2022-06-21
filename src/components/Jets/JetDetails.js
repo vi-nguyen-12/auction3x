@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -41,9 +41,25 @@ function JetDetails({
   const [zip, setZip] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
-
+  const [other, setOther] = useState(false);
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
+
+  const builder = [
+    "AIRBUS",
+    "BOEING",
+    "EMBRAER",
+    "BEECHCRAFT",
+    "BOMBARDIER",
+    "DASSAULT AVIATION",
+    "BOMBURDIER",
+    "CESSNA",
+    "DASSAULT",
+    "GULFSTREAM",
+    "PIAGGIO",
+    "PILATUS",
+    "Other",
+  ];
 
   const saveInfo = () => {
     if (propId || params.id) {
@@ -579,7 +595,7 @@ function JetDetails({
                     required
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Street Address <span style={{ color: "#ff0000" }}>*</span>
+                    Location <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   {suggestions && suggestions.length > 0 && (
                     <div className="autocomplete-dropdown-container">
@@ -690,14 +706,32 @@ function JetDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={aircraft_builder_name}
-              {...register("aircraft_builder_name")}
-              onChange={(e) => setAircraft_builder_name(e.target.value)}
-              required
-            />
+            {other ? (
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={aircraft_builder_name}
+                {...register("aircraft_builder_name")}
+                onChange={(e) => setAircraft_builder_name(e.target.value)}
+                required
+              />
+            ) : (
+              <Form.Select
+                value={aircraft_builder_name}
+                {...register("aircraft_builder_name", { maxLength: 100 })}
+                onChange={(e) => {
+                  setAircraft_builder_name(e.target.value);
+                  e.target.value === "Other" ? setOther(true) : setOther(false);
+                }}
+              >
+                <option value="">Manufacturer</option>
+                {builder.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Form.Select>
+            )}
             <span style={{ fontWeight: "600", color: "black" }}>
               Aircraft Builder's Name{" "}
               <span style={{ color: "#ff0000" }}>*</span>

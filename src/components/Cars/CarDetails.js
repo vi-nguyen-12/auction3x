@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -40,11 +40,30 @@ function CarDetails({
   const [state, setState] = useState();
   const [country, setCountry] = useState();
   const [zip, setZip] = useState();
+  const [other, setOther] = useState(false);
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
 
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
+
+  const carMake = [
+    "FERRARI",
+    "ASTON MARTIN",
+    "ROLLS ROYCE",
+    "BUGATTI",
+    "PAGANI",
+    "KOENIG",
+    "LAMBORGHINI",
+    "W MOTORS",
+    "MERCEDES",
+    "McLAREN",
+    "ZENVO",
+    "BENTLEY",
+    "CZINGER",
+    "MAZZANTI",
+    "Other",
+  ];
 
   useEffect(() => {
     if (params.id && prop.length > 0) {
@@ -496,6 +515,8 @@ function CarDetails({
     });
   };
 
+  console.log(make);
+
   return (
     <>
       <h3>Car Details</h3>
@@ -528,7 +549,7 @@ function CarDetails({
               format="####"
               className="form-control"
               placeholder="YYYY"
-              defaultValue={year}
+              value={year}
               onValueChange={(values) => {
                 const { value } = values;
                 setYear(value);
@@ -536,18 +557,40 @@ function CarDetails({
               name="year"
               required
             />
-            <span style={{ color: "black" }}>Year</span>
+            <span style={{ color: "black" }}>
+              Year<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={make}
-              {...register("make", { maxLength: 100 })}
-              onChange={(e) => setMake(e.target.value)}
-              required
-            />
-            <span style={{ color: "black" }}>Make</span>
+            {other ? (
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={make}
+                {...register("make", { maxLength: 100 })}
+                onChange={(e) => setMake(e.target.value)}
+                required
+              />
+            ) : (
+              <Form.Select
+                value={make}
+                {...register("make", { maxLength: 100 })}
+                onChange={(e) => {
+                  setMake(e.target.value);
+                  e.target.value === "Other" ? setOther(true) : setOther(false);
+                }}
+              >
+                <option value="">Make</option>
+                {carMake.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Form.Select>
+            )}
+            <span style={{ color: "black" }}>
+              Make<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
@@ -558,21 +601,27 @@ function CarDetails({
               onChange={(e) => setModel(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Model</span>
+            <span style={{ color: "black" }}>
+              Model<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <select
+            <Form.Select
               className="form-control"
               name="gearbox"
+              value={transmission}
+              {...register("transmission", { maxLength: 100 })}
               onChange={(e) => setTransmission(e.target.value)}
             >
               <option value="">Select Gearbox Type</option>
               <option value="Automatic">Automatic</option>
               <option value="Manual">Manual</option>
-            </select>
-            <span style={{ color: "black" }}>Gearbox</span>
+            </Form.Select>
+            <span style={{ color: "black" }}>
+              Gearbox<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -583,7 +632,9 @@ function CarDetails({
               onChange={(e) => setMileage(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Mileage</span>
+            <span style={{ color: "black" }}>
+              Mileage<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -596,7 +647,9 @@ function CarDetails({
               onChange={(e) => setPower(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Power</span>
+            <span style={{ color: "black" }}>
+              Power<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -607,7 +660,9 @@ function CarDetails({
               onChange={(e) => setCarType(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Car Type</span>
+            <span style={{ color: "black" }}>
+              Car Type<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -620,7 +675,9 @@ function CarDetails({
               onChange={(e) => setVin(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>VIN</span>
+            <span style={{ color: "black" }}>
+              VIN<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -631,14 +688,18 @@ function CarDetails({
               onChange={(e) => setColor(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Color</span>
+            <span style={{ color: "black" }}>
+              Color<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <select
+            <Form.Select
               className="form-control"
               name="fuel"
+              value={fuelType}
+              {...register("fuelType", { maxLength: 100 })}
               onChange={(e) => setFuelType(e.target.value)}
             >
               <option value="">Select Fuel Type</option>
@@ -646,8 +707,10 @@ function CarDetails({
               <option value="Diesel">Diesel</option>
               <option value="Electric">Electric</option>
               <option value="Hybrid">Hybrid</option>
-            </select>
-            <span style={{ color: "black" }}>Fuel Type</span>
+            </Form.Select>
+            <span style={{ color: "black" }}>
+              Fuel Type<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -658,7 +721,9 @@ function CarDetails({
               onChange={(e) => setEngine(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Engine</span>
+            <span style={{ color: "black" }}>
+              Engine<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -674,7 +739,10 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>Approximate Market Price</span>
+            <span style={{ color: "black" }}>
+              Approximate Market Price
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <input
@@ -685,7 +753,9 @@ function CarDetails({
               onChange={(e) => setCondition(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Condition</span>
+            <span style={{ color: "black" }}>
+              Condition<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -758,7 +828,9 @@ function CarDetails({
               onChange={(e) => setCountry(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Country</span>
+            <span style={{ color: "black" }}>
+              Country<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -771,7 +843,9 @@ function CarDetails({
               onChange={(e) => setState(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>State</span>
+            <span style={{ color: "black" }}>
+              State<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
@@ -782,7 +856,9 @@ function CarDetails({
               onChange={(e) => setCity(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>City</span>
+            <span style={{ color: "black" }}>
+              City<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <input
@@ -793,7 +869,9 @@ function CarDetails({
               onChange={(e) => setZip(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>Zip Code</span>
+            <span style={{ color: "black" }}>
+              Zip Code<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -809,7 +887,9 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>Reserved Amount</span>
+            <span style={{ color: "black" }}>
+              Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <NumberFormat
@@ -823,7 +903,9 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>Discussed Amount</span>
+            <span style={{ color: "black" }}>
+              Discussed Amount<span style={{ color: "#ff0000" }}>*</span>
+            </span>
           </Col>
         </Row>
 

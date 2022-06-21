@@ -19,8 +19,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [agent, setAgent] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [loader, setLoader] = useState(false);
-  const toogleTerms = () => setShowTerms(!showTerms);
-  const tooglePrivacy = () => setShowPrivacy(!showPrivacy);
+  const toggleTerms = () => setShowTerms(!showTerms);
+  const togglePrivacy = () => setShowPrivacy(!showPrivacy);
   const toggleAgent = () => setAgent(!agent);
   const {
     register,
@@ -54,6 +54,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         res.data.filter((doc) => {
           if (doc.officialName === "TC_user") {
             setTerms(doc.url);
+          }
+          if (doc.officialName === "privacy_policy") {
+            setPrivacy(doc.url);
           }
         });
       }
@@ -275,7 +278,6 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
                 dropdownStyle={{ paddingLeft: "0!important" }}
                 inputStyle={{ width: "100%" }}
                 buttonStyle={{
-                  border: "2px solid #d58f5c",
                   borderRight: "none",
                 }}
                 {...register("phone", { required: true })}
@@ -395,13 +397,16 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           style={{ fontSize: "15px", marginBottom: "20px", color: "black" }}
         >
           By signing up you will agree to our
-          <span style={{ color: "#00a8ff", cursor: "pointer" }}>
+          <span
+            onClick={() => togglePrivacy()}
+            style={{ color: "#00a8ff", cursor: "pointer" }}
+          >
             {" "}
             Privacy Policy
           </span>{" "}
           and
           <span
-            onClick={() => toogleTerms()}
+            onClick={() => toggleTerms()}
             style={{ color: "#00a8ff", cursor: "pointer" }}
           >
             {" "}
@@ -412,12 +417,33 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           REGISTER
         </button>
       </form>
-      <Modal size="xl" show={showTerms} onHide={toogleTerms} centered>
+      <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
         <Modal.Body style={{ height: "90vh" }}>
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "10px" }}>
-            <CloseButton className="modal-close" onClick={toogleTerms} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: "10px",
+            }}
+          >
+            <CloseButton className="modal-close" onClick={toggleTerms} />
           </div>
           <iframe title="terms" src={terms} width="100%" height="90%" />
+        </Modal.Body>
+      </Modal>
+
+      <Modal size="xl" show={showPrivacy} onHide={togglePrivacy} centered>
+        <Modal.Body style={{ height: "90vh" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: "10px",
+            }}
+          >
+            <CloseButton className="modal-close" onClick={togglePrivacy} />
+          </div>
+          <iframe title="terms" src={privacy} width="100%" height="90%" />
         </Modal.Body>
       </Modal>
     </>

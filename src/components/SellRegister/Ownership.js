@@ -450,7 +450,6 @@ function Ownership({
                     }
                     inputStyle={{ width: "100%" }}
                     buttonStyle={{
-                      border: "2px solid #d58f5c",
                       borderRight: "none",
                     }}
                     onChange={setPhone}
@@ -667,7 +666,6 @@ function Ownership({
                   }
                   inputStyle={{ width: "100%" }}
                   buttonStyle={{
-                    border: "2px solid #d58f5c",
                     borderRight: "none",
                   }}
                   onChange={setPhone}

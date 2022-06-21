@@ -62,6 +62,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                 </li>
                 <li className="list-unstyled">
                   <a
+                    style={{ color: "#fff" }}
                     onClick={() => {
                       if (user._id) {
                         history.push("/MultiSellForm");

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
@@ -40,9 +40,26 @@ function YachtDetails({
   const [city, setCity] = useState();
   const [zip, setZip] = useState();
   const [success, setSuccess] = useState(false);
+  const [other, setOther] = useState(false);
   const [otherDetails, setOtherDetails] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
+
+  const manufacturer = [
+    "AMELS",
+    "BENETTI",
+    "FEADSHIP",
+    "FINCANTIERI YACHTS",
+    "HEESEN YACHTS",
+    "LURSSEN",
+    "NOBISKRUG",
+    "OCEANCO",
+    "PERINI NAVI",
+    "ROYAL HUISMAN",
+    "SUNSEEKER",
+    "MANGUSTA",
+    "Other",
+  ];
 
   useEffect(() => {
     if (params.id) {
@@ -942,14 +959,32 @@ function YachtDetails({
             </span>
           </Col>
           <Col xs={12} md={4}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={manufacturer_name}
-              {...register("manufacturer_name")}
-              onChange={(e) => setManufacturer_name(e.target.value)}
-              required
-            />
+            {other ? (
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={manufacturer_name}
+                {...register("manufacturer_name")}
+                onChange={(e) => setManufacturer_name(e.target.value)}
+                required
+              />
+            ) : (
+              <Form.Select
+                value={manufacturer_name}
+                {...register("manufacturer_name", { maxLength: 100 })}
+                onChange={(e) => {
+                  setManufacturer_name(e.target.value);
+                  e.target.value === "Other" ? setOther(true) : setOther(false);
+                }}
+              >
+                <option value="">Manufacturer</option>
+                {manufacturer.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Form.Select>
+            )}
             <span
               style={{
                 fontWeight: "600",
