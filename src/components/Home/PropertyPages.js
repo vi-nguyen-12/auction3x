@@ -161,21 +161,29 @@ const PropertyPages = ({
             >
               <CloseButton className="modal-close" onClick={toggleImgCar} />
             </div>
-            <Row>
-              {imgCar.map((imgCars, index) => (
-                <Col
-                  md={imgCar.length <= 1 ? "fit-content" : 6}
-                  key={index}
-                  className="p-2"
-                >
-                  <Image
-                    src={imgCars}
-                    alt="gallery"
-                    style={{ width: "100%", height: "100%" }}
-                  />
+            {imgCar.length > 0 ? (
+              <Row>
+                {imgCar.map((imgCars, index) => (
+                  <Col
+                    md={imgCar.length <= 1 ? "fit-content" : 6}
+                    key={index}
+                    className="p-2"
+                  >
+                    <Image
+                      src={imgCars}
+                      alt="gallery"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Row style={{ height: "50vh" }}>
+                <Col className="d-flex justify-content-center align-items-center">
+                  <h1>No Images!</h1>
                 </Col>
-              ))}
-            </Row>
+              </Row>
+            )}
           </Modal.Body>
         </Modal>
       ) : path === "/jets" ? (
@@ -198,21 +206,29 @@ const PropertyPages = ({
             >
               <CloseButton className="modal-close" onClick={toggleImgJet} />
             </div>
-            <Row>
-              {imgJet.map((imgJets, index) => (
-                <Col
-                  md={imgJet.length <= 1 ? "fit-content" : 6}
-                  key={index}
-                  className="p-2"
-                >
-                  <Image
-                    src={imgJets}
-                    alt="gallery"
-                    style={{ width: "100%", height: "100%" }}
-                  />
+            {imgJet.length > 0 ? (
+              <Row>
+                {imgJet.map((imgJets, index) => (
+                  <Col
+                    md={imgJet.length <= 1 ? "fit-content" : 6}
+                    key={index}
+                    className="p-2"
+                  >
+                    <Image
+                      src={imgJets}
+                      alt="gallery"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Row style={{ height: "50vh" }}>
+                <Col className="d-flex justify-content-center align-items-center">
+                  <h1>No Images!</h1>
                 </Col>
-              ))}
-            </Row>
+              </Row>
+            )}
           </Modal.Body>
         </Modal>
       ) : path === "/yachts" ? (
@@ -235,21 +251,29 @@ const PropertyPages = ({
             >
               <CloseButton className="modal-close" onClick={toggleImgYacht} />
             </div>
-            <Row>
-              {imgYacht.map((imgYacht, index) => (
-                <Col
-                  md={img.length <= 1 ? "fit-content" : 6}
-                  key={index}
-                  className="p-2"
-                >
-                  <Image
-                    src={imgYacht}
-                    alt="gallery"
-                    style={{ width: "100%", height: "100%" }}
-                  />
+            {imgYacht.length > 0 ? (
+              <Row>
+                {imgYacht.map((imgYacht, index) => (
+                  <Col
+                    md={img.length <= 1 ? "fit-content" : 6}
+                    key={index}
+                    className="p-2"
+                  >
+                    <Image
+                      src={imgYacht}
+                      alt="gallery"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Row style={{ height: "50vh" }}>
+                <Col className="d-flex justify-content-center align-items-center">
+                  <h1>No Images!</h1>
                 </Col>
-              ))}
-            </Row>
+              </Row>
+            )}
           </Modal.Body>
         </Modal>
       ) : (
@@ -272,21 +296,29 @@ const PropertyPages = ({
             >
               <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
-            <Row>
-              {img.map((imgs, index) => (
-                <Col
-                  md={img.length <= 1 ? "fit-content" : 6}
-                  key={index}
-                  className="p-2"
-                >
-                  <Image
-                    src={imgs}
-                    alt="gallery"
-                    style={{ width: "100%", height: "100%" }}
-                  />
+            {img.length > 0 ? (
+              <Row>
+                {img.map((imgs, index) => (
+                  <Col
+                    md={img.length <= 1 ? "fit-content" : 6}
+                    key={index}
+                    className="p-2"
+                  >
+                    <Image
+                      src={imgs}
+                      alt="gallery"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            ) : (
+              <Row style={{ height: "50vh" }}>
+                <Col className="d-flex justify-content-center align-items-center">
+                  <h1>No Images!</h1>
                 </Col>
-              ))}
-            </Row>
+              </Row>
+            )}
           </Modal.Body>
         </Modal>
       )}
