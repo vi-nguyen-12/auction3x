@@ -75,7 +75,7 @@ function IncompleteListing({ windowSize }) {
                       <button
                         onClick={() => {
                           window.open(
-                            `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
+                            `/multiSellForm/${user._id}/${listing._id}/${listing.step}`
                           );
                         }}
                         className="resume-btn"
@@ -140,7 +140,7 @@ function IncompleteListing({ windowSize }) {
                       <button
                         onClick={() => {
                           window.open(
-                            `/MultiSellForm/${user._id}/${listing._id}/${listing.step}`
+                            `/multiSellForm/${user._id}/${listing._id}/${listing.step}`
                           );
                         }}
                         className="resume-btn"

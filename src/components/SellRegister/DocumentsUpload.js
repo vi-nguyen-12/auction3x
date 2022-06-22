@@ -10,6 +10,7 @@ import SellHeader from "./SellHeader";
 const DocumentsUpload = ({
   toggleStep,
   step,
+  setStep,
   propertyType,
   toggleDocuments,
   ownership,
@@ -21,14 +22,18 @@ const DocumentsUpload = ({
   sellStep,
   getPropId,
   document,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) => {
   return (
     <Container className="wrapper">
       <SellHeader step={step} />
-      {propertyType === "real-estate" ? (
+      {propertyTest.type === "real-estate" ? (
         <RealEstateDocus
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           toggleDocuments={toggleDocuments}
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
@@ -39,11 +44,15 @@ const DocumentsUpload = ({
           videos={videos}
           getPropId={getPropId}
           document={document}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
-      ) : propertyType === "car" ? (
+      ) : propertyTest.type === "car" ? (
         <CarDocus
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           toggleDocuments={toggleDocuments}
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
@@ -54,11 +63,15 @@ const DocumentsUpload = ({
           videos={videos}
           getPropId={getPropId}
           document={document}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
-      ) : propertyType === "jet" ? (
+      ) : propertyTest.type === "jet" ? (
         <JetDocus
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           toggleDocuments={toggleDocuments}
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
@@ -69,11 +82,15 @@ const DocumentsUpload = ({
           videos={videos}
           getPropId={getPropId}
           document={document}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
-      ) : propertyType === "yacht" ? (
+      ) : propertyTest.type === "yacht" ? (
         <YachtDocus
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           toggleDocuments={toggleDocuments}
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
@@ -84,6 +101,9 @@ const DocumentsUpload = ({
           videos={videos}
           getPropId={getPropId}
           document={document}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
       ) : null}
     </Container>

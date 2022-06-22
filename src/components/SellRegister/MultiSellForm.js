@@ -8,9 +8,10 @@ import PropertyDetails from "./PropertyDetails";
 
 import Ownership from "./Ownership";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 import DocumentsUpload from "./DocumentsUpload";
+import RealEstateForm from "../RealEstate/RealEstateForm";
 
 const MultiSellForm = ({
   toggleShow,
@@ -20,6 +21,7 @@ const MultiSellForm = ({
   setPositionLeft,
   setPadRight,
   windowSize,
+  toggleSignIn,
 }) => {
   const [step, setStep] = useState(0);
   const toggleStep = (step) => {
@@ -27,13 +29,13 @@ const MultiSellForm = ({
   };
 
   const params = useParams();
-
+  const history = useHistory();
+  const [propertyTest, setPropertyTest] = useState({});
+  const [property, setProperty] = useState({});
   const [propertyData, setPropertyData] = useState({});
   const togglePropertyData = (propertyData) => {
     setPropertyData(propertyData);
   };
-
-  const [property, setProperty] = useState({});
   const properties = (property) => {
     setProperty(property);
   };
@@ -86,6 +88,18 @@ const MultiSellForm = ({
         setPropertyType(property[0].type);
       });
     }
+    if (params.id) {
+      authService
+        .getProperty(params.id)
+        .then((response) => {
+          console.log(response); //should work on this later
+        })
+        .catch((error) => {
+          if (error.message === "jwt expired") {
+            history.push("/");
+          }
+        });
+    }
   }, [params.step]);
   return (
     <Container className="vh-100">
@@ -96,50 +110,65 @@ const MultiSellForm = ({
           toggleStep={toggleStep}
           windowSize={windowSize}
           step={step}
+          setStep={setStep}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
       ) : step === 1 ? (
         <Ownership
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           getOwnerShip={getOwnerShip}
           propertyType={propertyType}
           getPropId={getPropId}
           toggleSellStep={toggleSellStep}
           ownership={ownership}
           propId={propId}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
+          toggleSignIn={toggleSignIn}
         />
       ) : step === 2 ? (
-        propertyType === "real-estate" ? (
-          <ListingDetails
+        propertyTest.type === "real-estate" ? (
+          <RealEstateForm
             properties={properties}
             toggleStep={(data) => toggleStep(data)}
             step={step}
+            setStep={setStep}
             propertyType={propertyType}
             property={property}
             windowSize={windowSize}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
           />
         ) : (
-          toggleStep(step + 1)
+          <PropertyDetails
+            togglePropertyData={togglePropertyData}
+            property={property}
+            toggleStep={(data) => toggleStep(data)}
+            step={step}
+            setStep={setStep}
+            propertyType={propertyType}
+            propId={propId}
+            ownership={ownership}
+            getPropId={getPropId}
+            toggleSellStep={toggleSellStep}
+            propertyData={propertyData}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
+          />
         )
       ) : step === 3 ? (
-        <PropertyDetails
-          togglePropertyData={togglePropertyData}
-          property={property}
-          toggleStep={(data) => toggleStep(data)}
-          step={step}
-          propertyType={propertyType}
-          propId={propId}
-          ownership={ownership}
-          getPropId={getPropId}
-          toggleSellStep={toggleSellStep}
-          propertyData={propertyData}
-        />
-      ) : step === 4 ? (
         <UploadForm
           toggleImages={toggleImages}
           toggleVideos={toggleVideos}
           toggleStep={(data) => toggleStep(data)}
           step={step}
+          setStep={setStep}
           toggleSellStep={toggleSellStep}
           sellStep={sellStep}
           propertyData={propertyData}
@@ -149,11 +178,15 @@ const MultiSellForm = ({
           propertyType={propertyType}
           image={images}
           video={videos}
+          toggleSignIn={toggleSignIn}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
         />
-      ) : step === 5 ? (
+      ) : step === 4 ? (
         <DocumentsUpload
           toggleStep={(data) => toggleStep(data)}
           step={step}
+          setStep={setStep}
           propertyType={propertyType}
           toggleDocuments={toggleDocuments}
           ownership={ownership}
@@ -165,12 +198,16 @@ const MultiSellForm = ({
           sellStep={sellStep}
           getPropId={getPropId}
           document={documents}
+          toggleSignIn={toggleSignIn}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
         />
-      ) : step === 6 ? (
+      ) : step === 5 ? (
         <AgreementForm
           propertyData={propertyData}
           toggleStep={(data) => toggleStep(data)}
           step={step}
+          setStep={setStep}
           images={images}
           videos={videos}
           documents={documents}
@@ -178,6 +215,9 @@ const MultiSellForm = ({
           sellStep={sellStep}
           propId={propId}
           propertyType={propertyType}
+          toggleSignIn={toggleSignIn}
+          propertyTest={propertyTest}
+          setPropertyTest={setPropertyTest}
         />
       ) : null}
     </Container>

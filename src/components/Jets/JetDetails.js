@@ -10,12 +10,16 @@ function JetDetails({
   property,
   toggleStep,
   step,
+  setStep,
   togglePropertyData,
   propertyData,
   ownership,
   getPropId,
   toggleSellStep,
   propId,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState();
@@ -42,415 +46,415 @@ function JetDetails({
   const params = useParams();
   const prop = useSelector((state) => state.incompProperty);
 
-  const saveInfo = () => {
-    if (propId || params.id) {
-      const datas = {
-        id: propId ? propId : params.id,
-        details: {
-          registration_mark: registration_mark
-            ? registration_mark
-            : property.registration_mark,
-          aircraft_builder_name: aircraft_builder_name
-            ? aircraft_builder_name
-            : property.aircraft_builder_name,
-          aircraft_model_designation: aircraft_model_designation
-            ? aircraft_model_designation
-            : property.aircraft_model_designation,
-          aircraft_serial_no: aircraft_serial_no
-            ? aircraft_serial_no
-            : property.aircraft_serial_no,
-          engine_builder_name: engine_builder_name
-            ? engine_builder_name
-            : property.engine_builder_name,
-          engine_model_designation: engine_model_designation
-            ? engine_model_designation
-            : property.engine_model_designation,
-          number_of_engines: number_of_engines
-            ? number_of_engines
-            : property.number_of_engines,
-          propeller_builder_name: propeller_builder_name
-            ? propeller_builder_name
-            : property.propeller_builder_name,
-          propeller_model_designation: propeller_model_designation
-            ? propeller_model_designation
-            : property.propeller_model_designation,
-          number_of_aircraft: number_of_aircraft
-            ? number_of_aircraft
-            : property.number_of_aircraft,
-          imported_aircraft: property.imported_aircraft
-            ? property.imported_aircraft
-            : isImport === "Yes"
-            ? true
-            : false,
-          property_address: {
-            formatted_street_address: address
-              ? address
-              : property.property_address.formatted_street_address,
-            city: city ? city : property.property_address.city,
-            state: state ? state : property.property_address.state,
-            country: country ? country : property.property_address.country,
-            zip_code: zip ? zip : property.property_address.zip_code,
-          },
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          step: parseInt(2),
-        },
-      };
-      authService.saveInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-        }
-      });
-    } else {
-      const datas = {
-        registration_mark: registration_mark
-          ? registration_mark
-          : property.registration_mark,
-        aircraft_builder_name: aircraft_builder_name
-          ? aircraft_builder_name
-          : property.aircraft_builder_name,
-        aircraft_model_designation: aircraft_model_designation
-          ? aircraft_model_designation
-          : property.aircraft_model_designation,
-        aircraft_serial_no: aircraft_serial_no
-          ? aircraft_serial_no
-          : property.aircraft_serial_no,
-        engine_builder_name: engine_builder_name
-          ? engine_builder_name
-          : property.engine_builder_name,
-        engine_model_designation: engine_model_designation
-          ? engine_model_designation
-          : property.engine_model_designation,
-        number_of_engines: number_of_engines
-          ? number_of_engines
-          : property.number_of_engines,
-        propeller_builder_name: propeller_builder_name
-          ? propeller_builder_name
-          : property.propeller_builder_name,
-        propeller_model_designation: propeller_model_designation
-          ? propeller_model_designation
-          : property.propeller_model_designation,
-        number_of_aircraft: number_of_aircraft
-          ? number_of_aircraft
-          : property.number_of_aircraft,
-        imported_aircraft: isImport ? isImport : property.imported_aircraft,
-        property_address: {
-          formatted_street_address: address
-            ? address
-            : property.property_address.formatted_street_address,
-          city: city ? city : property.property_address.city,
-          state: state ? state : property.property_address.state,
-          country: country ? country : property.property_address.country,
-          zip_code: zip ? zip : property.property_address.zip_code,
-        },
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        ...ownership,
-        step: parseInt(2),
-      };
-      // delete datas.documents;
-      authService.savePropInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-          getPropId(res.data._id);
-        }
-      });
-    }
-  };
+  // const saveInfo = () => {
+  //   if (propId || params.id) {
+  //     const datas = {
+  //       id: propId ? propId : params.id,
+  //       details: {
+  //         registration_mark: registration_mark
+  //           ? registration_mark
+  //           : property.registration_mark,
+  //         aircraft_builder_name: aircraft_builder_name
+  //           ? aircraft_builder_name
+  //           : property.aircraft_builder_name,
+  //         aircraft_model_designation: aircraft_model_designation
+  //           ? aircraft_model_designation
+  //           : property.aircraft_model_designation,
+  //         aircraft_serial_no: aircraft_serial_no
+  //           ? aircraft_serial_no
+  //           : property.aircraft_serial_no,
+  //         engine_builder_name: engine_builder_name
+  //           ? engine_builder_name
+  //           : property.engine_builder_name,
+  //         engine_model_designation: engine_model_designation
+  //           ? engine_model_designation
+  //           : property.engine_model_designation,
+  //         number_of_engines: number_of_engines
+  //           ? number_of_engines
+  //           : property.number_of_engines,
+  //         propeller_builder_name: propeller_builder_name
+  //           ? propeller_builder_name
+  //           : property.propeller_builder_name,
+  //         propeller_model_designation: propeller_model_designation
+  //           ? propeller_model_designation
+  //           : property.propeller_model_designation,
+  //         number_of_aircraft: number_of_aircraft
+  //           ? number_of_aircraft
+  //           : property.number_of_aircraft,
+  //         imported_aircraft: property.imported_aircraft
+  //           ? property.imported_aircraft
+  //           : isImport === "Yes"
+  //           ? true
+  //           : false,
+  //         property_address: {
+  //           formatted_street_address: address
+  //             ? address
+  //             : property.property_address.formatted_street_address,
+  //           city: city ? city : property.property_address.city,
+  //           state: state ? state : property.property_address.state,
+  //           country: country ? country : property.property_address.country,
+  //           zip_code: zip ? zip : property.property_address.zip_code,
+  //         },
+  //         reservedAmount: parseInt(reservedAmount),
+  //         discussedAmount: parseInt(discussedAmount),
+  //         step: parseInt(2),
+  //       },
+  //     };
+  //     authService.saveInfo(datas).then((res) => {
+  //       if (res.data.error) {
+  //         alert(res.data.error);
+  //       } else {
+  //         toggleSellStep(2);
+  //       }
+  //     });
+  //   } else {
+  //     const datas = {
+  //       registration_mark: registration_mark
+  //         ? registration_mark
+  //         : property.registration_mark,
+  //       aircraft_builder_name: aircraft_builder_name
+  //         ? aircraft_builder_name
+  //         : property.aircraft_builder_name,
+  //       aircraft_model_designation: aircraft_model_designation
+  //         ? aircraft_model_designation
+  //         : property.aircraft_model_designation,
+  //       aircraft_serial_no: aircraft_serial_no
+  //         ? aircraft_serial_no
+  //         : property.aircraft_serial_no,
+  //       engine_builder_name: engine_builder_name
+  //         ? engine_builder_name
+  //         : property.engine_builder_name,
+  //       engine_model_designation: engine_model_designation
+  //         ? engine_model_designation
+  //         : property.engine_model_designation,
+  //       number_of_engines: number_of_engines
+  //         ? number_of_engines
+  //         : property.number_of_engines,
+  //       propeller_builder_name: propeller_builder_name
+  //         ? propeller_builder_name
+  //         : property.propeller_builder_name,
+  //       propeller_model_designation: propeller_model_designation
+  //         ? propeller_model_designation
+  //         : property.propeller_model_designation,
+  //       number_of_aircraft: number_of_aircraft
+  //         ? number_of_aircraft
+  //         : property.number_of_aircraft,
+  //       imported_aircraft: isImport ? isImport : property.imported_aircraft,
+  //       property_address: {
+  //         formatted_street_address: address
+  //           ? address
+  //           : property.property_address.formatted_street_address,
+  //         city: city ? city : property.property_address.city,
+  //         state: state ? state : property.property_address.state,
+  //         country: country ? country : property.property_address.country,
+  //         zip_code: zip ? zip : property.property_address.zip_code,
+  //       },
+  //       reservedAmount: parseInt(reservedAmount),
+  //       discussedAmount: parseInt(discussedAmount),
+  //       ...ownership,
+  //       step: parseInt(2),
+  //     };
+  //     // delete datas.documents;
+  //     authService.savePropInfo(datas).then((res) => {
+  //       if (res.data.error) {
+  //         alert(res.data.error);
+  //       } else {
+  //         toggleSellStep(2);
+  //         getPropId(res.data._id);
+  //       }
+  //     });
+  //   }
+  // };
 
-  useEffect(() => {
-    if (params.id) {
-      const properti = prop.filter((prop) => prop._id === params.id);
-      setRegistration_mark(
-        properti[0].details.registration_mark
-          ? properti[0].details.registration_mark
-          : propertyData.registration_mark
-          ? propertyData.registration_mark
-          : property.registration_mark
-          ? property.registration_mark
-          : ""
-      );
-      setAircraft_builder_name(
-        properti[0].details.aircraft_builder_name
-          ? properti[0].details.aircraft_builder_name
-          : propertyData.aircraft_builder_name
-          ? propertyData.aircraft_builder_name
-          : property.aircraft_builder_name
-          ? property.aircraft_builder_name
-          : ""
-      );
-      setAircraft_model_designation(
-        properti[0].details.aircraft_model_designation
-          ? properti[0].details.aircraft_model_designation
-          : propertyData.aircraft_model_designation
-          ? propertyData.aircraft_model_designation
-          : property.aircraft_model_designation
-          ? property.aircraft_model_designation
-          : ""
-      );
-      setAircraft_serial_no(
-        properti[0].details.aircraft_serial_no
-          ? properti[0].details.aircraft_serial_no
-          : propertyData.aircraft_serial_no
-          ? propertyData.aircraft_serial_no
-          : property.aircraft_serial_no
-          ? property.aircraft_serial_no
-          : ""
-      );
-      setEngine_builder_name(
-        properti[0].details.engine_builder_name
-          ? properti[0].details.engine_builder_name
-          : propertyData.engine_builder_name
-          ? propertyData.engine_builder_name
-          : property.engine_builder_name
-          ? property.engine_builder_name
-          : ""
-      );
-      setEngine_model_designation(
-        properti[0].details.engine_model_designation
-          ? properti[0].details.engine_model_designation
-          : propertyData.engine_model_designation
-          ? propertyData.engine_model_designation
-          : property.engine_model_designation
-          ? property.engine_model_designation
-          : ""
-      );
-      setNumber_of_engines(
-        properti[0].details.number_of_engines
-          ? properti[0].details.number_of_engines
-          : propertyData.number_of_engines
-          ? propertyData.number_of_engines
-          : property.number_of_engines
-          ? property.number_of_engines
-          : ""
-      );
-      setPropeller_builder_name(
-        properti[0].details.propeller_builder_name
-          ? properti[0].details.propeller_builder_name
-          : propertyData.propeller_builder_name
-          ? propertyData.propeller_builder_name
-          : property.propeller_builder_name
-          ? property.propeller_builder_name
-          : ""
-      );
-      setPropeller_model_designation(
-        properti[0].details.propeller_model_designation
-          ? properti[0].details.propeller_model_designation
-          : propertyData.propeller_model_designation
-          ? propertyData.propeller_model_designation
-          : property.propeller_model_designation
-          ? property.propeller_model_designation
-          : ""
-      );
-      setNumber_of_aircraft(
-        properti[0].details.number_of_aircraft
-          ? properti[0].details.number_of_aircraft
-          : propertyData.number_of_aircraft
-          ? propertyData.number_of_aircraft
-          : property.number_of_aircraft
-          ? property.number_of_aircraft
-          : ""
-      );
-      setAddress(
-        properti[0].details.property_address
-          ? properti[0].details.property_address.formatted_street_address
-            ? properti[0].details.property_address.formatted_street_address
-            : propertyData.property_address
-            ? propertyData.property_address.formatted_street_address
-            : property.property_address
-            ? property.property_address.formatted_street_address
-            : ""
-          : ""
-      );
-      setCity(
-        properti[0].details.property_address
-          ? properti[0].details.property_address.city
-            ? properti[0].details.property_address.city
-            : propertyData.property_address
-            ? propertyData.property_address.city
-            : property.property_address
-            ? property.property_address.city
-            : ""
-          : ""
-      );
-      setState(
-        properti[0].details.property_address
-          ? properti[0].details.property_address.state
-            ? properti[0].details.property_address.state
-            : propertyData.property_address
-            ? propertyData.property_address.state
-            : property.property_address
-            ? property.property_address.state
-            : ""
-          : ""
-      );
-      setCountry(
-        properti[0].details.property_address
-          ? properti[0].details.property_address.country
-            ? properti[0].details.property_address.country
-            : propertyData.property_address
-            ? propertyData.property_address.country
-            : property.property_address
-            ? property.property_address.country
-            : ""
-          : ""
-      );
-      setZip(
-        properti[0].details.property_address
-          ? properti[0].details.property_address.zip_code
-            ? properti[0].details.property_address.zip_code
-            : propertyData.property_address
-            ? propertyData.property_address.zip_code
-            : property.property_address
-            ? property.property_address.zip_code
-            : ""
-          : ""
-      );
-      setReservedAmount(
-        properti[0].reservedAmount
-          ? properti[0].reservedAmount
-          : propertyData.reservedAmount
-          ? propertyData.reservedAmount
-          : ""
-      );
-      setDiscussedAmount(
-        properti[0].discussedAmount
-          ? properti[0].discussedAmount
-          : propertyData.discussedAmount
-          ? propertyData.discussedAmount
-          : ""
-      );
-      setIsImport(
-        properti[0].details.imported_aircraft
-          ? properti[0].details.imported_aircraft
-          : propertyData.imported_aircraft
-          ? propertyData.imported_aircraft
-          : property.imported_aircraft
-          ? property.imported_aircraft
-          : ""
-      );
-    } else {
-      setRegistration_mark(
-        propertyData.registration_mark
-          ? propertyData.registration_mark
-          : property.registration_mark
-          ? property.registration_mark
-          : ""
-      );
-      setAircraft_builder_name(
-        propertyData.aircraft_builder_name
-          ? propertyData.aircraft_builder_name
-          : property.aircraft_builder_name
-          ? property.aircraft_builder_name
-          : ""
-      );
-      setAircraft_model_designation(
-        propertyData.aircraft_model_designation
-          ? propertyData.aircraft_model_designation
-          : property.aircraft_model_designation
-          ? property.aircraft_model_designation
-          : ""
-      );
-      setAircraft_serial_no(
-        propertyData.aircraft_serial_no
-          ? propertyData.aircraft_serial_no
-          : property.aircraft_serial_no
-          ? property.aircraft_serial_no
-          : ""
-      );
-      setEngine_builder_name(
-        propertyData.engine_builder_name
-          ? propertyData.engine_builder_name
-          : property.engine_builder_name
-          ? property.engine_builder_name
-          : ""
-      );
-      setEngine_model_designation(
-        propertyData.engine_model_designation
-          ? propertyData.engine_model_designation
-          : property.engine_model_designation
-          ? property.engine_model_designation
-          : ""
-      );
-      setNumber_of_engines(
-        propertyData.number_of_engines
-          ? propertyData.number_of_engines
-          : property.number_of_engines
-          ? property.number_of_engines
-          : ""
-      );
-      setPropeller_builder_name(
-        propertyData.propeller_builder_name
-          ? propertyData.propeller_builder_name
-          : property.propeller_builder_name
-          ? property.propeller_builder_name
-          : ""
-      );
-      setPropeller_model_designation(
-        propertyData.propeller_model_designation
-          ? propertyData.propeller_model_designation
-          : property.propeller_model_designation
-          ? property.propeller_model_designation
-          : ""
-      );
-      setNumber_of_aircraft(
-        propertyData.number_of_aircraft
-          ? propertyData.number_of_aircraft
-          : property.number_of_aircraft
-          ? property.number_of_aircraft
-          : ""
-      );
-      setAddress(
-        propertyData.property_address
-          ? propertyData.property_address.formatted_street_address
-          : property.property_address
-          ? property.property_address.formatted_street_address
-          : ""
-      );
-      setCountry(
-        propertyData.property_address
-          ? propertyData.property_address.country
-          : property.property_address
-          ? property.property_address.country
-          : ""
-      );
-      setState(
-        propertyData.property_address
-          ? propertyData.property_address.state
-          : property.property_address
-          ? property.property_address.state
-          : ""
-      );
-      setCity(
-        propertyData.property_address
-          ? propertyData.property_address.city
-          : property.property_address
-          ? property.property_address.city
-          : ""
-      );
-      setZip(
-        propertyData.property_address
-          ? propertyData.property_address.zip_code
-          : property.property_address
-          ? property.property_address.zip_code
-          : ""
-      );
+  // useEffect(() => {
+  //   if (params.id) {
+  //     const properti = prop.filter((prop) => prop._id === params.id);
+  //     setRegistration_mark(
+  //       properti[0].details.registration_mark
+  //         ? properti[0].details.registration_mark
+  //         : propertyData.registration_mark
+  //         ? propertyData.registration_mark
+  //         : property.registration_mark
+  //         ? property.registration_mark
+  //         : ""
+  //     );
+  //     setAircraft_builder_name(
+  //       properti[0].details.aircraft_builder_name
+  //         ? properti[0].details.aircraft_builder_name
+  //         : propertyData.aircraft_builder_name
+  //         ? propertyData.aircraft_builder_name
+  //         : property.aircraft_builder_name
+  //         ? property.aircraft_builder_name
+  //         : ""
+  //     );
+  //     setAircraft_model_designation(
+  //       properti[0].details.aircraft_model_designation
+  //         ? properti[0].details.aircraft_model_designation
+  //         : propertyData.aircraft_model_designation
+  //         ? propertyData.aircraft_model_designation
+  //         : property.aircraft_model_designation
+  //         ? property.aircraft_model_designation
+  //         : ""
+  //     );
+  //     setAircraft_serial_no(
+  //       properti[0].details.aircraft_serial_no
+  //         ? properti[0].details.aircraft_serial_no
+  //         : propertyData.aircraft_serial_no
+  //         ? propertyData.aircraft_serial_no
+  //         : property.aircraft_serial_no
+  //         ? property.aircraft_serial_no
+  //         : ""
+  //     );
+  //     setEngine_builder_name(
+  //       properti[0].details.engine_builder_name
+  //         ? properti[0].details.engine_builder_name
+  //         : propertyData.engine_builder_name
+  //         ? propertyData.engine_builder_name
+  //         : property.engine_builder_name
+  //         ? property.engine_builder_name
+  //         : ""
+  //     );
+  //     setEngine_model_designation(
+  //       properti[0].details.engine_model_designation
+  //         ? properti[0].details.engine_model_designation
+  //         : propertyData.engine_model_designation
+  //         ? propertyData.engine_model_designation
+  //         : property.engine_model_designation
+  //         ? property.engine_model_designation
+  //         : ""
+  //     );
+  //     setNumber_of_engines(
+  //       properti[0].details.number_of_engines
+  //         ? properti[0].details.number_of_engines
+  //         : propertyData.number_of_engines
+  //         ? propertyData.number_of_engines
+  //         : property.number_of_engines
+  //         ? property.number_of_engines
+  //         : ""
+  //     );
+  //     setPropeller_builder_name(
+  //       properti[0].details.propeller_builder_name
+  //         ? properti[0].details.propeller_builder_name
+  //         : propertyData.propeller_builder_name
+  //         ? propertyData.propeller_builder_name
+  //         : property.propeller_builder_name
+  //         ? property.propeller_builder_name
+  //         : ""
+  //     );
+  //     setPropeller_model_designation(
+  //       properti[0].details.propeller_model_designation
+  //         ? properti[0].details.propeller_model_designation
+  //         : propertyData.propeller_model_designation
+  //         ? propertyData.propeller_model_designation
+  //         : property.propeller_model_designation
+  //         ? property.propeller_model_designation
+  //         : ""
+  //     );
+  //     setNumber_of_aircraft(
+  //       properti[0].details.number_of_aircraft
+  //         ? properti[0].details.number_of_aircraft
+  //         : propertyData.number_of_aircraft
+  //         ? propertyData.number_of_aircraft
+  //         : property.number_of_aircraft
+  //         ? property.number_of_aircraft
+  //         : ""
+  //     );
+  //     setAddress(
+  //       properti[0].details.property_address
+  //         ? properti[0].details.property_address.formatted_street_address
+  //           ? properti[0].details.property_address.formatted_street_address
+  //           : propertyData.property_address
+  //           ? propertyData.property_address.formatted_street_address
+  //           : property.property_address
+  //           ? property.property_address.formatted_street_address
+  //           : ""
+  //         : ""
+  //     );
+  //     setCity(
+  //       properti[0].details.property_address
+  //         ? properti[0].details.property_address.city
+  //           ? properti[0].details.property_address.city
+  //           : propertyData.property_address
+  //           ? propertyData.property_address.city
+  //           : property.property_address
+  //           ? property.property_address.city
+  //           : ""
+  //         : ""
+  //     );
+  //     setState(
+  //       properti[0].details.property_address
+  //         ? properti[0].details.property_address.state
+  //           ? properti[0].details.property_address.state
+  //           : propertyData.property_address
+  //           ? propertyData.property_address.state
+  //           : property.property_address
+  //           ? property.property_address.state
+  //           : ""
+  //         : ""
+  //     );
+  //     setCountry(
+  //       properti[0].details.property_address
+  //         ? properti[0].details.property_address.country
+  //           ? properti[0].details.property_address.country
+  //           : propertyData.property_address
+  //           ? propertyData.property_address.country
+  //           : property.property_address
+  //           ? property.property_address.country
+  //           : ""
+  //         : ""
+  //     );
+  //     setZip(
+  //       properti[0].details.property_address
+  //         ? properti[0].details.property_address.zip_code
+  //           ? properti[0].details.property_address.zip_code
+  //           : propertyData.property_address
+  //           ? propertyData.property_address.zip_code
+  //           : property.property_address
+  //           ? property.property_address.zip_code
+  //           : ""
+  //         : ""
+  //     );
+  //     setReservedAmount(
+  //       properti[0].reservedAmount
+  //         ? properti[0].reservedAmount
+  //         : propertyData.reservedAmount
+  //         ? propertyData.reservedAmount
+  //         : ""
+  //     );
+  //     setDiscussedAmount(
+  //       properti[0].discussedAmount
+  //         ? properti[0].discussedAmount
+  //         : propertyData.discussedAmount
+  //         ? propertyData.discussedAmount
+  //         : ""
+  //     );
+  //     setIsImport(
+  //       properti[0].details.imported_aircraft
+  //         ? properti[0].details.imported_aircraft
+  //         : propertyData.imported_aircraft
+  //         ? propertyData.imported_aircraft
+  //         : property.imported_aircraft
+  //         ? property.imported_aircraft
+  //         : ""
+  //     );
+  //   } else {
+  //     setRegistration_mark(
+  //       propertyData.registration_mark
+  //         ? propertyData.registration_mark
+  //         : property.registration_mark
+  //         ? property.registration_mark
+  //         : ""
+  //     );
+  //     setAircraft_builder_name(
+  //       propertyData.aircraft_builder_name
+  //         ? propertyData.aircraft_builder_name
+  //         : property.aircraft_builder_name
+  //         ? property.aircraft_builder_name
+  //         : ""
+  //     );
+  //     setAircraft_model_designation(
+  //       propertyData.aircraft_model_designation
+  //         ? propertyData.aircraft_model_designation
+  //         : property.aircraft_model_designation
+  //         ? property.aircraft_model_designation
+  //         : ""
+  //     );
+  //     setAircraft_serial_no(
+  //       propertyData.aircraft_serial_no
+  //         ? propertyData.aircraft_serial_no
+  //         : property.aircraft_serial_no
+  //         ? property.aircraft_serial_no
+  //         : ""
+  //     );
+  //     setEngine_builder_name(
+  //       propertyData.engine_builder_name
+  //         ? propertyData.engine_builder_name
+  //         : property.engine_builder_name
+  //         ? property.engine_builder_name
+  //         : ""
+  //     );
+  //     setEngine_model_designation(
+  //       propertyData.engine_model_designation
+  //         ? propertyData.engine_model_designation
+  //         : property.engine_model_designation
+  //         ? property.engine_model_designation
+  //         : ""
+  //     );
+  //     setNumber_of_engines(
+  //       propertyData.number_of_engines
+  //         ? propertyData.number_of_engines
+  //         : property.number_of_engines
+  //         ? property.number_of_engines
+  //         : ""
+  //     );
+  //     setPropeller_builder_name(
+  //       propertyData.propeller_builder_name
+  //         ? propertyData.propeller_builder_name
+  //         : property.propeller_builder_name
+  //         ? property.propeller_builder_name
+  //         : ""
+  //     );
+  //     setPropeller_model_designation(
+  //       propertyData.propeller_model_designation
+  //         ? propertyData.propeller_model_designation
+  //         : property.propeller_model_designation
+  //         ? property.propeller_model_designation
+  //         : ""
+  //     );
+  //     setNumber_of_aircraft(
+  //       propertyData.number_of_aircraft
+  //         ? propertyData.number_of_aircraft
+  //         : property.number_of_aircraft
+  //         ? property.number_of_aircraft
+  //         : ""
+  //     );
+  //     setAddress(
+  //       propertyData.property_address
+  //         ? propertyData.property_address.formatted_street_address
+  //         : property.property_address
+  //         ? property.property_address.formatted_street_address
+  //         : ""
+  //     );
+  //     setCountry(
+  //       propertyData.property_address
+  //         ? propertyData.property_address.country
+  //         : property.property_address
+  //         ? property.property_address.country
+  //         : ""
+  //     );
+  //     setState(
+  //       propertyData.property_address
+  //         ? propertyData.property_address.state
+  //         : property.property_address
+  //         ? property.property_address.state
+  //         : ""
+  //     );
+  //     setCity(
+  //       propertyData.property_address
+  //         ? propertyData.property_address.city
+  //         : property.property_address
+  //         ? property.property_address.city
+  //         : ""
+  //     );
+  //     setZip(
+  //       propertyData.property_address
+  //         ? propertyData.property_address.zip_code
+  //         : property.property_address
+  //         ? property.property_address.zip_code
+  //         : ""
+  //     );
 
-      setReservedAmount(propertyData ? propertyData.reservedAmount : "");
-      setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
-      setIsImport(
-        propertyData.imported_aircraft
-          ? propertyData.imported_aircraft
-          : property.imported_aircraft
-          ? property.imported_aircraft
-          : ""
-      );
-    }
-  }, []);
+  //     setReservedAmount(propertyData ? propertyData.reservedAmount : "");
+  //     setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
+  //     setIsImport(
+  //       propertyData.imported_aircraft
+  //         ? propertyData.imported_aircraft
+  //         : property.imported_aircraft
+  //         ? property.imported_aircraft
+  //         : ""
+  //     );
+  //   }
+  // }, []);
 
   const onSubmit = (data) => {
     if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
@@ -491,7 +495,7 @@ function JetDetails({
           ? property.imported_aircraft
           : isImport,
         property_address: {
-          formatted_address: data.address
+          formatted_street_address: data.address
             ? data.address
             : address
             ? address
@@ -503,9 +507,25 @@ function JetDetails({
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
+        step: 2,
       };
-      togglePropertyData(submitedData);
-      toggleStep(step + 1);
+
+      authService
+        .editProperty(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
     }
   };
   return (
@@ -809,12 +829,7 @@ function JetDetails({
             <Button className="pre-btn" onClick={() => toggleStep(step - 2)}>
               Previous
             </Button>
-            <Button
-              onClick={saveInfo}
-              className="nxt-btn"
-              id="next"
-              type="submit"
-            >
+            <Button className="nxt-btn" id="next" type="submit">
               Next
             </Button>
           </Col>

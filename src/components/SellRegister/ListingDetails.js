@@ -8,23 +8,31 @@ import SellHeader from "./SellHeader";
 const ListingDetails = ({
   toggleStep,
   step,
+  setStep,
   properties,
   propertyType,
   property,
   windowSize,
+  propertyTest,
+  setPropertyTest,
 }) => {
   return (
     <div className="wrapper">
       <SellHeader step={step} />
-      {propertyType === "real-estate" ? (
+      <RealEstateForm />
+
+      {/* {propertyTest.type === "real-estate" ? (
         <RealEstateForm
           toggleStep={toggleStep}
           step={step}
+          setStep={setStep}
           properties={properties}
           property={property}
           windowSize={windowSize}
+          propertyTest
+          setPropertyTest
         />
-      ) : propertyType === "car" ? (
+      ) : propertyTest.typetyType === "car" ? (
         <CarForm
           toggleStep={toggleStep}
           step={step}
@@ -32,7 +40,7 @@ const ListingDetails = ({
           property={property}
           windowSize={windowSize}
         />
-      ) : propertyType === "jet" ? (
+      ) : propertyTest.type === "jet" ? (
         <JetForm
           toggleStep={toggleStep}
           step={step}
@@ -40,7 +48,7 @@ const ListingDetails = ({
           property={property}
           windowSize={windowSize}
         />
-      ) : propertyType === "yacht" ? (
+      ) : propertyTest.type === "yacht" ? (
         <YachtForm
           toggleStep={toggleStep}
           step={step}
@@ -48,7 +56,7 @@ const ListingDetails = ({
           property={property}
           windowSize={windowSize}
         />
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

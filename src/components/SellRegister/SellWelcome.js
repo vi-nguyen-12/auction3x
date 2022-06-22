@@ -9,17 +9,26 @@ import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 // create step bar
 
-const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
+const Sell = ({
+  // toggleStep,
+  step,
+  setStep,
+  // togglePropertyType,
+  windowSize,
+  propertyTest,
+  setPropertyTest,
+}) => {
+  const [type, setType] = useState(propertyTest.type); //should check if type has value, then that box is blue
   const { handleSubmit } = useForm();
 
-  const [propertyType, setPropertyType] = useState();
+  // const [propertyType, setPropertyType] = useState();
 
   const onSubmit = () => {
-    if (propertyType === undefined) {
+    if (type === undefined) {
       alert("Please select property to sell");
     } else {
-      togglePropertyType(propertyType);
-      toggleStep(step + 1);
+      setPropertyTest({ ...propertyTest, type });
+      setStep(step + 1);
     }
   };
 
@@ -41,7 +50,8 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
             <Button
               style={{ padding: windowSize < 800 && "10px" }}
               className="category-btn"
-              onClick={() => setPropertyType("real-estate")}
+              // onClick={() => setPropertyType("real-estate")}
+              onClick={() => setType("real-estate")}
             >
               <BsFillHouseFill size={windowSize > 800 ? 40 : 25} />
               <label>Real Estate</label>
@@ -50,7 +60,7 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               style={{ padding: windowSize < 800 && "10px" }}
-              onClick={() => setPropertyType("car")}
+              onClick={() => setType("car")}
               className="category-btn"
             >
               <IoCarSportSharp size={windowSize > 800 ? 40 : 25} />
@@ -60,7 +70,7 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               style={{ padding: windowSize < 800 && "10px" }}
-              onClick={() => setPropertyType("jet")}
+              onClick={() => setType("jet")}
               className="category-btn"
             >
               <IoAirplaneSharp size={windowSize > 800 ? 40 : 25} />
@@ -70,7 +80,7 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
           <Col md={3} xs={5} className="d-flex justify-content-center">
             <Button
               style={{ padding: windowSize < 800 && "10px" }}
-              onClick={() => setPropertyType("yacht")}
+              onClick={() => setType("yacht")}
               className="category-btn"
             >
               <IoIosBoat size={windowSize > 800 ? 40 : 25} />

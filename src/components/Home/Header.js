@@ -57,7 +57,7 @@ const Header = ({
       if (!user.KYC) {
         alert("Please complete your Kyc");
       } else {
-        history.push("/MultiSellForm");
+        history.push("/multiSellForm");
       }
     }
   };
@@ -879,7 +879,7 @@ const Header = ({
                       }}
                       onClick={() => {
                         toggleOpen();
-                        history.push("/MultiSellForm");
+                        history.push("/multiSellForm");
                       }}
                     >
                       SELLER

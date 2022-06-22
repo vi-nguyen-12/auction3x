@@ -52,7 +52,7 @@ const About = () => {
             </button>
             <button
               onClick={() => {
-                user._id ? history.push("/MultiSellForm") : toggleSignIn();
+                user._id ? history.push("/multiSellForm") : toggleSignIn();
               }}
             >
               SELL

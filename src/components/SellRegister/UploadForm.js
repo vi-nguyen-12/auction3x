@@ -13,6 +13,7 @@ import Loading from "../../components/Loading";
 const UploadForm = ({
   toggleStep,
   step,
+  setStep,
   toggleImages,
   toggleVideos,
   toggleSellStep,
@@ -24,6 +25,9 @@ const UploadForm = ({
   propertyType,
   image,
   video,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState([]);
@@ -233,9 +237,137 @@ const UploadForm = ({
 
   const onSubmit = () => {
     if (images.length !== 0) {
-      toggleImages(images);
-      toggleVideos(videos);
-      toggleStep(step + 1);
+      // if (propertyType === "real-estate") {
+      //   if (propId || params.id) {
+      //     if (sellStep === 2 || parseInt(params.step) === 2) {
+      //       const datas = {
+      //         id: propId ? propId : params.id,
+      //         details: {
+      //           images: images,
+      //           videos: videos,
+      //           step: 3,
+      //         },
+      //       };
+      //       await authService.putRealEstateInfo(datas).then((response) => {
+      //         if (response.data.error) {
+      //           alert(response.data.error);
+      //         } else {
+      //           toggleSellStep(3);
+      //         }
+      //       });
+      //     } else if (sellStep === 1 || parseInt(params.step) === 1) {
+      //       const datas = {
+      //         id: propId ? propId : params.id,
+      //         details: {
+      //           ...propertyData,
+      //           images,
+      //           videos,
+      //           step: 3,
+      //         },
+      //       };
+      //       await authService.putRealEstateInfo(datas).then((response) => {
+      //         if (response.data.error) {
+      //           alert(response.data.error);
+      //         } else {
+      //           toggleSellStep(3);
+      //         }
+      //       });
+      //     }
+      //   } else {
+      //     const datas = {
+      //       ...ownership,
+      //       ...propertyData,
+      //       images,
+      //       videos,
+      //       step: 3,
+      //     };
+      //     await authService.postRealEstateInfo(datas).then((response) => {
+      //       if (response.data.error) {
+      //         alert(response.data.error);
+      //       } else {
+      //         toggleSellStep(3);
+      //         getPropId(response.data._id);
+      //         alert("Saved Successfully!");
+      //       }
+      //     });
+      //   }
+      // } else {
+      //   if (propId || params.id) {
+      //     if (sellStep === 2 || parseInt(params.step) === 2) {
+      //       const datas = {
+      //         id: propId ? propId : params.id,
+      //         details: {
+      //           images,
+      //           videos,
+      //           step: 3,
+      //         },
+      //       };
+      //       await authService.saveInfo(datas).then((response) => {
+      //         if (response.data.error) {
+      //           alert(response.data.error);
+      //         } else {
+      //           toggleSellStep(3);
+      //           alert("Saved Successfully!");
+      //         }
+      //       });
+      //     } else if (sellStep === 1 || parseInt(params.step) === 1) {
+      //       const datas = {
+      //         id: propId ? propId : params.id,
+      //         details: {
+      //           ...propertyData,
+      //           images,
+      //           videos,
+      //           step: 3,
+      //         },
+      //       };
+      //       await authService.saveInfo(datas).then((response) => {
+      //         if (response.data.error) {
+      //           alert(response.data.error);
+      //         } else {
+      //           toggleSellStep(3);
+      //           alert("Saved Successfully!");
+      //         }
+      //       });
+      //     }
+      //   } else {
+      //     const datas = {
+      //       ...ownership,
+      //       ...propertyData,
+      //       images,
+      //       videos,
+      //       step: 3,
+      //     };
+      //     await authService.savePropInfo(datas).then((response) => {
+      //       if (response.data.error) {
+      //         alert(response.data.error);
+      //       } else {
+      //         toggleSellStep(3);
+      //         getPropId(response.data._id);
+      //         alert("Saved Successfully!");
+      //       }
+      //     });
+      //   }
+      // }
+      // toggleImages(images);
+      // toggleVideos(videos);
+      const data = { images, videos, step: 3 };
+      console.log(propertyTest);
+      authService
+        .editProperty(propertyTest._id, data)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
     } else {
       alert("Please upload at least one image!");
     }
@@ -368,12 +500,7 @@ const UploadForm = ({
               <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
                 Previous
               </Button>
-              <Button
-                onClick={saveInfo}
-                className="nxt-btn"
-                id="next"
-                type="submit"
-              >
+              <Button className="nxt-btn" id="next" type="submit">
                 Next
               </Button>
             </Col>

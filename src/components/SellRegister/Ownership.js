@@ -7,26 +7,37 @@ import PhoneInput from "react-phone-input-2";
 import SellHeader from "./SellHeader";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import { scryRenderedComponentsWithType } from "react-dom/test-utils";
 
 function Ownership({
   toggleStep,
   step,
+  setStep,
   getOwnerShip,
   propertyType,
   getPropId,
   toggleSellStep,
   propId,
   ownership,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const { register, handleSubmit } = useForm();
   const [showOwner, setShowOwner] = useState("none");
   const [showBroker, setShowBroker] = useState("none");
-  const [ownerName, setOwnerName] = useState("");
-  const [brokerName, setBrokerName] = useState("");
-  const [brokerId, setBrokerId] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+  const [ownerName, setOwnerName] = useState(
+    propertyTest.details?.owner_name || ""
+  );
+  const [brokerName, setBrokerName] = useState(
+    propertyTest.details?.broker_name || ""
+  );
+  const [brokerId, setBrokerId] = useState(
+    propertyTest.details?.broker_id || ""
+  );
+  const [phone, setPhone] = useState(propertyTest.details?.phone || "");
+  const [email, setEmail] = useState(propertyTest.details?.email || "");
+  const [address, setAddress] = useState(propertyTest.details?.address || "");
   const [listAgree, setListAgree] = useState([]);
 
   const params = useParams();
@@ -45,77 +56,78 @@ function Ownership({
     return { ...document, officialName: "listing_agreement" };
   });
 
-  const saveInfo = async () => {
-    if (propertyType === "real-estate") {
-      if (propId || params.id) {
-        const datas = {
-          type: propertyType,
-          id: propId ? propId : params.id,
-          details: {
-            owner_name: ownerName,
-            broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
-            phone: phone,
-            email: email,
-            address: address,
-          },
-          documents: listing_agreement ? listing_agreement : null,
-          step: parseInt(1),
-        };
-        await authService.putRealEstateInfo(datas).then((res) => {
-          if (res.data.error) {
-            alert(res.data.error);
-          } else {
-            toggleSellStep(1);
-          }
-        });
-      } else {
-        const datas = {
-          type: propertyType,
-          details: {
-            owner_name: ownerName,
-            broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
-            phone: phone,
-            email: email,
-            address: address,
-          },
-          documents: listing_agreement ? listing_agreement : null,
-          step: parseInt(1),
-        };
-        await authService.postRealEstateInfo(datas).then((res) => {
-          if (res.data.error) {
-            alert(res.data.error);
-          } else {
-            getPropId(res.data._id);
-            toggleSellStep(1);
-          }
-        });
-      }
-    } else {
-      const data = {
-        type: propertyType,
-        details: {
-          owner_name: ownerName,
-          broker_name: brokerName ? brokerName : null,
-          broker_id: brokerId ? brokerId : null,
-          phone: phone,
-          email: email,
-          address: address,
-        },
-        documents: listing_agreement ? listing_agreement : null,
-        step: parseInt(1),
-      };
-      authService.savePropInfo(data).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          getPropId(res.data._id);
-          toggleSellStep(1);
-        }
-      });
-    }
-  };
+  // const saveInfo = async () => {
+  //   console.log("hahha");
+  //   if (propertyType === "real-estate") {
+  //     if (propId || params.id) {
+  //       const datas = {
+  //         type: propertyType,
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           owner_name: ownerName,
+  //           broker_name: brokerName ? brokerName : null,
+  //           broker_id: brokerId ? brokerId : null,
+  //           phone: phone,
+  //           email: email,
+  //           address: address,
+  //         },
+  //         documents: listing_agreement ? listing_agreement : null,
+  //         step: parseInt(1),
+  //       };
+  //       await authService.putRealEstateInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           toggleSellStep(1);
+  //         }
+  //       });
+  //     } else {
+  //       const datas = {
+  //         type: propertyType,
+  //         details: {
+  //           owner_name: ownerName,
+  //           broker_name: brokerName ? brokerName : null,
+  //           broker_id: brokerId ? brokerId : null,
+  //           phone: phone,
+  //           email: email,
+  //           address: address,
+  //         },
+  //         documents: listing_agreement ? listing_agreement : null,
+  //         step: parseInt(1),
+  //       };
+  //       await authService.postRealEstateInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           getPropId(res.data._id);
+  //           toggleSellStep(1);
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     const data = {
+  //       type: propertyType,
+  //       details: {
+  //         owner_name: ownerName,
+  //         broker_name: brokerName ? brokerName : null,
+  //         broker_id: brokerId ? brokerId : null,
+  //         phone: phone,
+  //         email: email,
+  //         address: address,
+  //       },
+  //       documents: listing_agreement ? listing_agreement : null,
+  //       step: parseInt(1),
+  //     };
+  //     authService.savePropInfo(data).then((res) => {
+  //       if (res.data.error) {
+  //         alert(res.data.error);
+  //       } else {
+  //         getPropId(res.data._id);
+  //         toggleSellStep(1);
+  //       }
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     if (params.step) {
@@ -168,8 +180,21 @@ function Ownership({
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else if (data.brokerName !== "") {
-      const datas = {
-        type: propertyType,
+      // const datas = {
+      //   type: propertyType,
+      //   details: {
+      //     owner_name: ownerName,
+      //     broker_name: brokerName ? brokerName : null,
+      //     broker_id: brokerId ? brokerId : null,
+      //     phone: phone,
+      //     email: email,
+      //     address: address,
+      //   },
+      //   documents: listing_agreement ? listing_agreement : null,
+      //   step: parseInt(1),
+      // };
+      const data = {
+        type: propertyTest.type,
         details: {
           owner_name: ownerName,
           broker_name: brokerName ? brokerName : null,
@@ -177,26 +202,46 @@ function Ownership({
           phone: phone,
           email: email,
           address: address,
+          documents: listing_agreement ? listing_agreement : null,
         },
-        documents: listing_agreement ? listing_agreement : null,
-        step: parseInt(1),
+        step: 1,
       };
-      getOwnerShip(datas);
-      toggleStep(step + 1);
+
+      authService.createProperty(data).then((res) => {
+        console.log(res.data);
+        if (res.data.error) {
+          if (res.data.error === "Invalid Token") {
+            toggleSignIn(true);
+          } else alert(res.data.error);
+        } else {
+          setPropertyTest(res.data);
+        }
+      });
+      setStep(2);
     } else {
       if (data.brokerName === "") {
-        const datas = {
-          type: propertyType,
+        const data = {
+          type: propertyTest.type,
           details: {
             owner_name: ownerName,
             phone: phone,
             email: email,
             address: address,
           },
-          step: parseInt(1),
+          step: 1,
         };
-        getOwnerShip(datas);
-        toggleStep(step + 1);
+        authService.createProperty(data).then((res) => {
+          console.log(res.data);
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        });
       }
     }
   };
@@ -328,15 +373,6 @@ function Ownership({
               </Row>
             </Row>
             <Row className="mt-5">
-              {/* <Col
-                xs={12}
-                md={4}
-                className="d-flex justify-content-center justify-content-md-end mt-2"
-              >
-                <Button className="save-btn" onClick={saveInfo}>
-                  Save
-                </Button>
-              </Col> */}
               <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
@@ -345,7 +381,7 @@ function Ownership({
                   Previous
                 </Button>
                 <Button
-                  onClick={saveInfo}
+                  // onClick={saveInfo}
                   className="nxt-btn"
                   id="next"
                   type="submit"
@@ -498,15 +534,6 @@ function Ownership({
             </Row>
 
             <Row className="mt-5">
-              {/* <Col
-                xs={12}
-                md={4}
-                className="d-flex justify-content-center justify-content-md-end mt-2"
-              >
-                <Button className="save-btn" onClick={saveInfo}>
-                  Save
-                </Button>
-              </Col> */}
               <Col className="d-flex justify-content-center mt-2">
                 <Button
                   className="pre-btn"
@@ -515,7 +542,7 @@ function Ownership({
                   Previous
                 </Button>
                 <Button
-                  onClick={saveInfo}
+                  // onClick={saveInfo}
                   className="nxt-btn"
                   id="next"
                   type="submit"

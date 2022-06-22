@@ -64,7 +64,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                   <a
                     onClick={() => {
                       if (user._id) {
-                        history.push("/MultiSellForm");
+                        history.push("/multiSellForm");
                         window.location.reload();
                       } else {
                         toggleSignIn();

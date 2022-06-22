@@ -120,12 +120,17 @@ function App() {
     const authToken = localStorage.getItem("token");
     if (authToken) {
       const getUser = async () => {
-        const response = await authService.getUsers(authToken);
-        if (response.data.message === "User Logged In") {
-          dispatch(login(response.data.user));
-        } else {
+        try {
+          const response = await authService.getUsers(authToken);
+          if (response.data.message === "User Logged In") {
+            dispatch(login(response.data.user));
+          } else {
+            localStorage.removeItem("token");
+            history.push("/");
+          }
+        } catch (error) {
+          localStorage.removeItem("token");
           history.push("/");
-          window.location.reload();
         }
       };
       getUser();
@@ -404,19 +409,18 @@ function App() {
               >
                 Forgot Password
               </Modal.Title>
-            )
-              : (
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{
-                    color: "#D58F5C",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Forgot Password
-                </Modal.Title>
-              )}
+            ) : (
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            )}
           </Modal.Header>
           <Modal.Body>
             <ForgotPass
@@ -536,7 +540,7 @@ function App() {
 
           <Switch>
             {user._id && (
-              <Route exact path="/MultiSellForm">
+              <Route exact path="/multiSellForm">
                 <MultiSellForm
                   colorChange={colorChange}
                   toggleShow={toggleShow}
@@ -545,6 +549,7 @@ function App() {
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
                   windowSize={windowSize}
+                  toggleSignIn={toggleSignIn}
                 />
               </Route>
             )}
@@ -734,7 +739,7 @@ function App() {
               </Route>
             )}
 
-            <Route exact path="/MultiSellForm/:userId/:id/:step">
+            <Route exact path="/multiSellForm/:userId/:id/:step">
               <MultiSellForm
                 colorChange={colorChange}
                 toggleShow={toggleShow}
@@ -743,6 +748,8 @@ function App() {
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
                 windowSize={windowSize}
+                toggleSignIn={toggleSignIn}
+                toggleSignUp={toggleSignUp}
               />
             </Route>
 
