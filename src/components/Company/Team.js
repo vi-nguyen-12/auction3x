@@ -104,22 +104,6 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Research")}
-            >
-              Research
-            </Button>
-          </Col>
-          <Col style={{ flex: "0" }}>
-            <Button
-              style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
-                margin: windowSize < 800 && "10px 0",
-              }}
               onClick={onClick("Marketing")}
             >
               Marketing
