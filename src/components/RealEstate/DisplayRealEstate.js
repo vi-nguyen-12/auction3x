@@ -949,27 +949,20 @@ function DisplayRealEstate({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Building Size</td>
-                        {property.property.details.structure
-                          .total_area_sq_ft ? (
+                        <td style={{ fontWeight: "700" }}>Lot Size</td>
+                        {property.property.details.structure.lot_size ? (
                           <td>
-                            {
-                              property.property.details.structure
-                                .total_area_sq_ft
-                            }{" "}
-                            sqft
+                            {property.property.details.structure.lot_size} Acre
                           </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Building Class</td>
-                        {property.property.details.structure.quality ? (
-                          <td>{property.property.details.structure.quality}</td>
-                        ) : property.property.details.structure.condition ? (
+                        <td style={{ fontWeight: "700" }}>Year Built</td>
+                        {property.property.details.structure.year_built ? (
                           <td>
-                            {property.property.details.structure.condition}
+                            {property.property.details.structure.year_built}
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -988,80 +981,48 @@ function DisplayRealEstate({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Percent Leased</td>
-                        <td>N/A</td>
+                        <td style={{ fontWeight: "700" }}>Garage(s)</td>
+                        {property.property.details.structure.garage ? (
+                          <td>{property.property.details.structure.garage}</td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Tenancy</td>
-                        {property.property.details.parcel
-                          .standardized_land_use_type ? (
+                        <td style={{ fontWeight: "700" }}>Story(s)</td>
+                        {property.property.details.structure.story ? (
+                          <td>{property.property.details.structure.story}</td>
+                        ) : (
+                          <td>N/A</td>
+                        )}
+                      </tr>
+                      <tr>
+                        <td style={{ fontWeight: "700" }}>Bedrooms</td>
+                        {property.property.details.structure.beds_count ? (
                           <td>
-                            {
-                              property.property.details.parcel
-                                .standardized_land_use_type
-                            }
+                            {property.property.details.structure.beds_count}
                           </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Building Height</td>
-                        {property.property.details.structure.stories ? (
+                        <td style={{ fontWeight: "700" }}>Bathrooms</td>
+                        {property.property.details.parcel.baths_count ? (
                           <td>
-                            {property.property.details.structure.stories} story
+                            {property.property.details.parcel.baths_count} acres
                           </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Building FAR</td>
-                        {property.property.details.parcel.area_acres ? (
-                          <td>
-                            {property.property.details.parcel.area_acres} acres
-                          </td>
+                        <td style={{ fontWeight: "700" }}>Sqft</td>
+                        {property.property.details.structure.area_sq_ft ? (
+                          <td>{property.property.details.parcel.area_sq_ft}</td>
                         ) : (
                           <td>N/A</td>
                         )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Zoning</td>
-                        {property.property.details.parcel.zoning ? (
-                          <td>{property.property.details.parcel.zoning}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Parking</td>
-                        {property.property.details.structure
-                          .parking_spaces_count ? (
-                          <td>
-                            {
-                              property.property.details.structure
-                                .parking_spaces_count
-                            }{" "}
-                            spaces (
-                            {property.property.details.structure.parking_type})
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Frontage</td>
-                        {property.property.details.parcel.frontage_ft ? (
-                          <td>
-                            {property.property.details.parcel.frontage_ft} ft
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Opportunity Zone</td>
-                        <td>No</td>
                       </tr>
                     </tbody>
                   </Table>

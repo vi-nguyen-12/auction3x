@@ -82,6 +82,16 @@
   margin: 5px;
 }
 
+.category-btn:hover {
+  background-color: rgb(233 184 135);
+  box-shadow: none;
+}
+
+/* .category-btn:focus {
+  outline: none;
+  background-color: none;
+} */
+
 .category-btn label {
   font-size: 14px;
   font-weight: bold;

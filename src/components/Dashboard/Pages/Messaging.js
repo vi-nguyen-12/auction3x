@@ -5,87 +5,107 @@ import { AiFillPlusCircle, AiFillSetting } from "react-icons/ai";
 
 function Messaging({ windowSize }) {
   return (
-    <Container className="chatContainer">
-      <Row className="top-chat">
-        <Col style={{ color: "black" }}>
-          <span
+    <>
+      <h1 style={{ margin: "50px" }}>Message</h1>
+      <Container className="chatContainer" style={{ width: "90vw", margin:"30px auto" }}>
+        <Row
+          className="d-flex justify-content-center mt-3"
+          style={{ alignItems: "center" }}
+        >
+          <Col
+            md={2}
+            lg={2}
+            className="d-flex"
             style={{
-              fontWeight: "500",
-              fontSize: "20px",
-              display: "flex",
-              justifyContent: "flex-start",
+              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
             }}
           >
-            {" "}
-            # RM Agent | Agent Name
-          </span>{" "}
-        </Col>
-        <Col
-          xs={2}
-          style={{
-            color: "black",
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
+            To :
+          </Col>
+          <Col md={7} lg={6} className="d-flex">
+            <select className="form-control">
+              <option>Select a user</option>
+              <option>User 1</option>
+              <option>User 2</option>
+              <option>User 3</option>
+            </select>
+          </Col>
+        </Row>
+        <Row
+          className="d-flex justify-content-center mt-3"
+          style={{ alignItems: "center" }}
         >
-          <AiFillSetting size={30} />
-        </Col>
-      </Row>
-      <Row>
-        <div>
-          <div className="client-message">
-            This is my preference
-            <br />
-            {/* <img src="../images/chat-message.png" style={{ size: "50px" }} /> */}
-          </div>
-          <div className="user-message">
-            Yogie Ismanda UI Kit + Minor revisi ini ya pak..
-            <br /> - We would like to have Pageviews, click, conversion and
-            total revenue up in the right corner of the graph. And maybe design
-            them so the look more like buttons that you can turn on/off?
-            <br /> - Latest clicks/conversions. Where you currently have the
-            logo for merchant, we should instead have a logo that represent the
-            referring traffic sources (ex. Google or Facebook). So we’re
-            actually missing a column that should say “Source”. And there should
-            be no icon for the merchants.
-          </div>
-        </div>
-      </Row>
-      <Row className="chat-message">
-        <Col
-          xs={windowSize > 800 ? 1 : 2}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          <Col
+            md={2}
+            lg={2}
+            className="d-flex"
+            style={{
+              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
+            }}
+          >
+            Subject :
+          </Col>
+          <Col md={7} lg={6} className="d-flex">
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Enter a subject"
+            />
+          </Col>
+        </Row>
+        <Row className="d-flex justify-content-center mt-3">
+          <Col
+            md={2}
+            lg={2}
+            className="d-flex"
+            style={{
+              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
+            }}
+          >
+            Message :
+          </Col>
+          <Col md={7} lg={6} className="d-flex">
+            <textarea
+              className="form-control"
+              rows="5"
+              placeholder="Enter a message"
+            ></textarea>
+          </Col>
+        </Row>
+        <Row
+          className="d-flex justify-content-center mt-3"
+          style={{ alignItems: "center" }}
         >
-          <label htmlFor="upload">
-            <AiFillPlusCircle size={40} color="#b77b50" />
-          </label>
-          <input type="file" id="upload" hidden />
-        </Col>
-        <Col xs={10}>
-          <input
-            type="text"
-            className="text-box"
-            placeholder="Type your message here"
-          />
-        </Col>
-        <Col
-          style={{
-            display: windowSize > 800 ? "flex" : "none",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          xs={1}
+          <Col
+            md={2}
+            lg={2}
+            className="d-flex"
+            style={{
+              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
+            }}
+          >
+            Attachment :
+          </Col>
+          <Col md={7} lg={6} className="d-flex">
+            <input className="form-control" type="file" />
+          </Col>
+        </Row>
+        <Row
+          className="d-flex justify-content-center mt-3"
+          style={{ alignItems: "center" }}
         >
-          <Button style={{ background: "transparent", border: "none" }}>
-            <IoSend size={30} color="blue" />
-          </Button>
-        </Col>
-      </Row>
-    </Container>
+          <Col className="d-flex" style={{ justifyContent: "center" }}>
+            <Button
+              variant="primary"
+              style={{ fontWeight: "bold", padding: "10px 20px" }}
+              className="mr-2"
+            >
+              Send
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

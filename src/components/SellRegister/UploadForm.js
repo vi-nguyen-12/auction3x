@@ -81,7 +81,7 @@ const UploadForm = ({
         if (sellStep === 2 || parseInt(params.step) === 2) {
           const datas = {
             id: propId ? propId : params.id,
-            details: {
+            changes: {
               images: images,
               videos: videos,
               step: 3,
@@ -97,7 +97,7 @@ const UploadForm = ({
         } else if (sellStep === 1 || parseInt(params.step) === 1) {
           const datas = {
             id: propId ? propId : params.id,
-            details: {
+            changes: {
               ...propertyData,
               images,
               videos,
@@ -126,7 +126,6 @@ const UploadForm = ({
           } else {
             toggleSellStep(3);
             getPropId(response.data._id);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -146,7 +145,6 @@ const UploadForm = ({
               alert(response.data.error);
             } else {
               toggleSellStep(3);
-              alert("Saved Successfully!");
             }
           });
         } else if (sellStep === 1 || parseInt(params.step) === 1) {
@@ -164,7 +162,6 @@ const UploadForm = ({
               alert(response.data.error);
             } else {
               toggleSellStep(3);
-              alert("Saved Successfully!");
             }
           });
         }
@@ -176,13 +173,12 @@ const UploadForm = ({
           videos,
           step: 3,
         };
-        await authService.savePropInfo(datas).then((response) => {
+        await authService.postPropInfo(datas).then((response) => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
             toggleSellStep(3);
             getPropId(response.data._id);
-            alert("Saved Successfully!");
           }
         });
       }
@@ -381,17 +377,9 @@ const UploadForm = ({
 
         {loader ? <Loading /> : null}
         {videoLoader ? <Loading /> : null}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
-          className="list-form"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <Col xs={12} md={4} className="px-sm-3">
+            <Col xs={12} md={6} className="px-sm-3">
               Choose the Image Files <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="images-btn"
@@ -419,7 +407,7 @@ const UploadForm = ({
                   </div>
                 </details>
               </div>
-              <div className="upload-list">
+              <div className="upload-list" style={{ width: "100%" }}>
                 {images
                   ? images.map((image, index, arr) => (
                       <div key={index} className="upload-item">
@@ -438,7 +426,7 @@ const UploadForm = ({
               </div>
             </Col>
 
-            <Col xs={12} md={4} className="px-sm-3">
+            <Col xs={12} md={6} className="px-sm-3">
               Choose the Videos/ Live360 Files (optional)
               <input
                 id="videos-btn"
@@ -467,7 +455,7 @@ const UploadForm = ({
                   </div>
                 </details>
               </div>
-              <div className="upload-list">
+              <div className="upload-list" style={{ width: "100%" }}>
                 {videos
                   ? videos.map((video, index, arr) => (
                       <div key={index} className="upload-item">

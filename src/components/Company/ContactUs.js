@@ -5,6 +5,9 @@ import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 function ContactUs({ windowSize }) {
   const location = useLocation();
@@ -101,11 +104,16 @@ function ContactUs({ windowSize }) {
                 </Col>
                 <Col>
                   <span>Phone</span>
-                  <input
-                    placeholder="Enter Phone Number"
-                    type="text"
-                    className="form-control"
-                    name="phone"
+                  <PhoneInput
+                    disableCountryCode={false}
+                    onlyCountries={["ca", "us", "gb", "au"]}
+                    disableDropdown={false}
+                    country={"us"}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
+                    inputStyle={{ width: "100%" }}
+                    buttonStyle={{
+                      borderRight: "none",
+                    }}
                     {...register("phone", { required: true })}
                   />
                 </Col>

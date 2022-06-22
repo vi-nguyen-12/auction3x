@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { IoInformationCircleSharp } from "react-icons/io5";
+import NumberFormat from "react-number-format";
 
 function RealEstateDetails({
   property,
@@ -51,9 +52,6 @@ function RealEstateDetails({
   const [ownerName, setOwnerName] = useState(
     propertyTest.details?.owner?.name || ""
   );
-  const [rooms, setRooms] = useState(
-    propertyTest.details?.structure?.rooms_count || ""
-  );
   const [bathrooms, setBathrooms] = useState(
     propertyTest.details?.structure?.baths_count || ""
   );
@@ -66,6 +64,16 @@ function RealEstateDetails({
   const [totalValue, setTotalValue] = useState(
     propertyTest.details?.market_assessments?.slice(-1)[0]["total_value"] || ""
   );
+  const [year, setYear] = useState(propertyTest.details?.year_built || "");
+  const [lotSize, setLotSize] = useState(
+    propertyTest.details?.parcel?.lot_size || ""
+  );
+  const [garage, setGarage] = useState(
+    propertyTest.details?.type_of_garage || ""
+  );
+  const [story, setStory] = useState(
+    propertyTest.details?.number_of_stories || ""
+  );
 
   const [sqft, setSqft] = useState(
     propertyTest.details?.parcel?.area_sq_ft || ""
@@ -76,285 +84,6 @@ function RealEstateDetails({
   const [discussedAmount, setDiscussedAmount] = useState(
     propertyTest.discussedAmount || ""
   );
-
-  const saveInfo = () => {
-    if (propId || params.id) {
-      const datas = {
-        id: propId ? propId : params.id,
-        details: {
-          street_address: address ? address : property.street_address,
-          city: city ? city : property.city,
-          state: state ? state : property.state,
-          country: country ? country : property.country,
-          zip_code: zip ? zip : property.zip_code,
-          owner_name: ownerName,
-          rooms_count: rooms,
-          baths_count: bathrooms,
-          beds_count: bedrooms,
-          standardized_land_use_type: propType,
-          total_value: totalValue,
-          area_sq_ft: sqft,
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          step: parseInt(2),
-        },
-      };
-      authService.putRealEstateInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-        }
-      });
-    } else {
-      const datas = {
-        street_address: address ? address : property.street_address,
-        city: city ? city : property.city,
-        state: state ? state : property.state,
-        country: country ? country : property.country,
-        zip_code: zip ? zip : property.zip_code,
-        owner_name: ownerName,
-        rooms_count: rooms,
-        baths_count: bathrooms,
-        beds_count: bedrooms,
-        standardized_land_use_type: propType,
-        total_value: totalValue,
-        area_sq_ft: sqft,
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        ...ownership,
-        step: parseInt(2),
-      };
-      delete datas.documents;
-      authService.postRealEstateInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-          getPropId(res.data._id);
-        }
-      });
-    }
-  };
-
-  // useEffect(() => {
-  //   if (params.id) {
-  //     authService.getIncompleteProperty(params.userId).then((res) => {
-  //       if (res.data.error) {
-  //         alert(res.data.error);
-  //       } else {
-  //         const properti = res.data.filter((prop) => prop._id === params.id);
-  //         setOwnerName(
-  //           properti[0].details.owner
-  //             ? properti[0].details.owner.name
-  //             : propertyData.owner_name
-  //             ? propertyData.owner_name
-  //             : property.owner.name
-  //             ? property.owner.name
-  //             : ""
-  //         );
-  //         setRooms(
-  //           properti[0].details.structure
-  //             ? properti[0].details.structure.rooms_count
-  //             : propertyData.rooms_count
-  //             ? propertyData.rooms_count
-  //             : property.structure.rooms_count
-  //             ? property.structure.rooms_count
-  //             : ""
-  //         );
-  //         setBathrooms(
-  //           properti[0].details.structure
-  //             ? properti[0].details.structure.baths
-  //             : propertyData.baths_count
-  //             ? propertyData.baths_count
-  //             : property.structure.baths
-  //             ? property.structure.baths
-  //             : ""
-  //         );
-  //         setBedrooms(
-  //           properti[0].details.structure
-  //             ? properti[0].details.structure.beds_count
-  //             : propertyData.beds_count
-  //             ? propertyData.beds_count
-  //             : property.structure.beds_count
-  //             ? property.structure.beds_count
-  //             : ""
-  //         );
-  //         setPropType(
-  //           properti[0].details.parcel
-  //             ? properti[0].details.parcel.standardized_land_use_type
-  //             : propertyData.standardized_land_use_type
-  //             ? propertyData.standardized_land_use_type
-  //             : property.parcel.standardized_land_use_type
-  //             ? property.parcel.standardized_land_use_type
-  //             : ""
-  //         );
-  //         setSqft(
-  //           properti[0].details.parcel
-  //             ? properti[0].details.parcel.area_sq_ft
-  //             : propertyData.area_sq_ft
-  //             ? propertyData.area_sq_ft
-  //             : property.structure.total_area_sq_ft
-  //             ? property.structure.total_area_sq_ft
-  //             : ""
-  //         );
-  //         setTotalValue(
-  //           properti[0].details.market_assessments
-  //             ? properti[0].details.market_assessments[0].total_value
-  //             : propertyData.total_value
-  //             ? propertyData.total_value
-  //             : property.market_assessments.length > 0
-  //             ? property.market_assessments[0].total_value
-  //             : property.assessments.length > 0
-  //             ? property.assessments[0].total_value
-  //             : ""
-  //         );
-  //         setReservedAmount(
-  //           properti[0].reservedAmount
-  //             ? properti[0].reservedAmount
-  //             : propertyData.reservedAmount
-  //             ? propertyData.reservedAmount
-  //             : ""
-  //         );
-  //         setDiscussedAmount(
-  //           properti[0].discussedAmount
-  //             ? properti[0].discussedAmount
-  //             : propertyData.discussedAmount
-  //             ? propertyData.discussedAmount
-  //             : ""
-  //         );
-  //         setAddress(
-  //           properti[0].details.property_address
-  //             ? properti[0].details.property_address.formatted_street_address
-  //             : propertyData.street_address
-  //             ? propertyData.street_address
-  //             : property.address.formatted_street_address
-  //             ? property.address.formatted_street_address
-  //             : ""
-  //         );
-  //         setCity(
-  //           properti[0].details.property_address
-  //             ? properti[0].details.property_address.city
-  //             : propertyData.city
-  //             ? propertyData.city
-  //             : property.address.city
-  //             ? property.address.city
-  //             : ""
-  //         );
-  //         setState(
-  //           properti[0].details.property_address
-  //             ? properti[0].details.property_address.state
-  //             : propertyData.state
-  //             ? propertyData.state
-  //             : property.state
-  //             ? property.state
-  //             : ""
-  //         );
-  //         setCountry(
-  //           properti[0].details.property_address
-  //             ? properti[0].details.property_address.country
-  //             : propertyData.country
-  //             ? propertyData.country
-  //             : property.address.country
-  //             ? property.address.country
-  //             : property.country
-  //             ? property.country
-  //             : "USA"
-  //         );
-  //         setZip(
-  //           properti[0].details.property_address
-  //             ? properti[0].details.property_address.zip_code
-  //             : propertyData.zip_code
-  //             ? propertyData.zip_code
-  //             : property.address.zip_code
-  //             ? property.address.zip_code
-  //             : ""
-  //         );
-  //       }
-  //     });
-  //   } else {
-  //     setAddress(
-  //       propertyData.street_address
-  //         ? propertyData.street_address
-  //         : property.address.formatted_street_address
-  //     );
-  //     setCity(propertyData.city ? propertyData.city : property.address.city);
-  //     setState(
-  //       propertyData.state ? propertyData.state : property.address.state
-  //     );
-  //     setCountry(
-  //       propertyData.country
-  //         ? propertyData.country
-  //         : property.address.country
-  //         ? property.address.country
-  //         : "USA"
-  //     );
-  //     setZip(
-  //       propertyData.zip_code
-  //         ? propertyData.zip_code
-  //         : property.address.zip_code
-  //     );
-  //     setOwnerName(
-  //       propertyData.owner_name
-  //         ? propertyData.owner_name
-  //         : property.owner.name
-  //         ? property.owner.name
-  //         : ""
-  //     );
-  //     setRooms(
-  //       propertyData.rooms_count
-  //         ? propertyData.rooms_count
-  //         : property.structure.rooms_count
-  //         ? property.structure.rooms_count
-  //         : ""
-  //     );
-  //     setBathrooms(
-  //       propertyData.baths_count
-  //         ? propertyData.baths_count
-  //         : property.structure.baths
-  //         ? property.structure.baths
-  //         : ""
-  //     );
-  //     setBedrooms(
-  //       propertyData.beds_count
-  //         ? propertyData.beds_count
-  //         : property.structure.beds_count
-  //         ? property.structure.beds_count
-  //         : ""
-  //     );
-  //     setPropType(
-  //       propertyData.standardized_land_use_type
-  //         ? propertyData.standardized_land_use_type
-  //         : property.parcel.standardized_land_use_type
-  //         ? property.parcel.standardized_land_use_type
-  //         : ""
-  //     );
-  //     setSqft(
-  //       propertyData.area_sq_ft
-  //         ? propertyData.area_sq_ft
-  //         : property.structure.total_area_sq_ft
-  //         ? property.structure.total_area_sq_ft
-  //         : ""
-  //     );
-  //     setTotalValue(
-  //       propertyData.total_value
-  //         ? propertyData.total_value
-  //         : property.market_assessments.length > 0
-  //         ? property.market_assessments[0].total_value
-  //         : property.assessments.length > 0
-  //         ? property.assessments[0].total_value
-  //         : ""
-  //     );
-  //     setReservedAmount(
-  //       propertyData.reservedAmount ? parseInt(propertyData.reservedAmount) : ""
-  //     );
-  //     setDiscussedAmount(
-  //       propertyData.discussedAmount
-  //         ? parseInt(propertyData.discussedAmount)
-  //         : ""
-  //     );
-  //   }
-  // }, []);
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
@@ -367,13 +96,16 @@ function RealEstateDetails({
         country: country,
         zip_code: zip,
         real_estate_type: propType,
+        year_built: year,
         owner_name: ownerName,
-        rooms_count: rooms,
         baths_count: bathrooms,
         beds_count: bedrooms,
         standardized_land_use_type: propType,
         total_value: totalValue,
         area_sq_ft: sqft,
+        lot_size: lotSize,
+        type_of_garage: garage,
+        number_of_stories: story,
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         step: 2,
@@ -395,289 +127,302 @@ function RealEstateDetails({
     }
   };
   return (
-    <>
+    <div className="sell-bottom">
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
-          className="dropdown-icon"
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <IoInformationCircleSharp
-            style={{ cursor: "pointer" }}
-            color="blue"
-            size={30}
-          />
-          <div className="dropdown-info">
-            <p>
-              We will be using these details to match you with the right buyer.
-            </p>
+          <div
+            className="dropdown-icon"
+            style={{
+              width: "fit-content",
+            }}
+          >
+            <IoInformationCircleSharp
+              style={{ cursor: "pointer" }}
+              color="blue"
+              size={30}
+            />
+            <div className="dropdown-info">
+              <p>
+                We will be using these details to match you with the right
+                buyer.
+              </p>
+            </div>
           </div>
         </div>
-        <Container style={{ marginTop: "20px" }}>
-          <Row>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="street_address"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={property_address.address}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                }}
-                {...register("street_address", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Street Address *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="city"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={property_address.city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-                {...register("city", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>City *</span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="state"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={property_address.state}
-                onChange={(e) => {
-                  setState(e.target.value);
-                }}
-                {...register("state", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>State *</span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                name="country"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={property_address.country}
-                onChange={(e) => {
-                  setCountry(e.target.value);
-                }}
-                {...register("country", { required: false })}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Country *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                name="zipCode"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={property_address.zip}
-                {...register("zipCode", { required: false })}
-                onChange={(e) => {
-                  setZip(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Zip Code *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={ownerName}
-                {...register("ownerName", { required: false })}
-                onChange={(e) => {
-                  setOwnerName(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Owner Name *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={rooms}
-                {...register("rooms_count", { required: false })}
-                onChange={(e) => {
-                  setRooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Rooms Count *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={bedrooms}
-                {...register("bedrooms", { required: false })}
-                onChange={(e) => {
-                  setBedrooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Bedrooms *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={propType}
-                {...register("propertyType", { required: false })}
-                onChange={(e) => {
-                  setPropType(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Property Type *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={bathrooms}
-                style={{ color: "black", fontWeight: "bold" }}
-                {...register("bathrooms", { required: false })}
-                onChange={(e) => {
-                  setBathrooms(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Bathrooms *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={totalValue}
-                placeholder="$"
-                {...register("total_value", { required: false })}
-                onChange={(e) => {
-                  setTotalValue(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Total Value *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="text"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={sqft}
-                {...register("sqft", { required: false })}
-                onChange={(e) => {
-                  setSqft(e.target.value);
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>Sqft *</span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px" }}>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={reservedAmount}
-                {...register("reservedAmount", { required: false })}
-                onChange={(e) => {
-                  setReservedAmount(parseInt(e.target.value));
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Reserved Amount *
-              </span>
-            </Col>
-            <Col>
-              <input
-                type="number"
-                min="0"
-                className="form-control"
-                style={{ color: "black", fontWeight: "bold" }}
-                defaultValue={discussedAmount}
-                {...register("discussedAmount", { required: false })}
-                onChange={(e) => {
-                  setDiscussedAmount(parseInt(e.target.value));
-                }}
-                required
-              />
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Discussed Amount *
-              </span>
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "10px", height: "130px" }}>
-            <Col>
-              <textarea
-                style={{ height: "100%", color: "black" }}
-                className="form-control"
-                placeholder="Description"
-                {...register("description", { required: false })}
-              />
-            </Col>
-          </Row>
-        </Container>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              name="street_address"
+              defaultValue={address}
+              {...register("street_address")}
+              onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Address <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              name="city"
+              defaultValue={city}
+              {...register("city")}
+              onChange={(e) => setCity(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              name="state"
+              defaultValue={state}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              name="country"
+              defaultValue={country}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="text"
+              className="form-control"
+              name="zipCode"
+              defaultValue={zip}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={ownerName}
+              {...register("ownerName")}
+              name="ownerName"
+              onChange={(e) => setOwnerName(e.target.value)}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Owner/Entity Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={propType}
+              {...register("propertyType")}
+              onChange={(e) => setPropType(e.target.value)}
+              name="propertyType"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Property Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <NumberFormat
+              format="####"
+              className="form-control"
+              placeholder="YYYY"
+              defaultValue={year}
+              onValueChange={(values) => {
+                const { value } = values;
+                setYear(value);
+              }}
+              name="year"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={lotSize}
+              {...register("lotSize")}
+              onChange={(e) => setLotSize(e.target.value)}
+              name="lotSize"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Lot Size (Acre) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={garage}
+              {...register("garage")}
+              onChange={(e) => setGarage(e.target.value)}
+              name="garage"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Garage(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={story}
+              {...register("story")}
+              onChange={(e) => setStory(e.target.value)}
+              name="story"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              story(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={bedrooms}
+              {...register("bedrooms")}
+              onChange={(e) => setBedrooms(e.target.value)}
+              name="bedrooms"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={bathrooms}
+              {...register("bathrooms")}
+              onChange={(e) => setBathrooms(e.target.value)}
+              name="bathrooms"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bathrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={totalValue}
+              allowNegative={false}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setTotalValue(value);
+              }}
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={sqft}
+              {...register("sqft")}
+              onChange={(e) => setSqft(e.target.value)}
+              name="sqft"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Sqft <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col xs={12} md={6}>
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={reservedAmount}
+              allowNegative={false}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setReservedAmount(value);
+              }}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={discussedAmount}
+              allowNegative={false}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setDiscussedAmount(value);
+              }}
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+        </Row>
         <Row className="mt-5">
-          {/* <Col
-            xs={12}
-            md={4}
-            className="d-flex justify-content-center justify-content-md-end mt-2"
-          >
-            <Button className="save-btn" onClick={saveInfo}>
-              Save
-            </Button>
-          </Col> */}
           <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => setStep(step - 1)}>
               Previous
@@ -693,7 +438,7 @@ function RealEstateDetails({
           </Col>
         </Row>
       </form>
-    </>
+    </div>
   );
 }
 

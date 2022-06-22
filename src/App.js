@@ -275,16 +275,16 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
-          size="lg"
+          size="xl"
           backdrop="static"
           keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
+          // aria-labelledby="contained-modal-title-vcenter"
           centered
           show={showSignIn}
           onHide={toggleSignIn}
-          contentclassname="login"
+        // contentclassname="custom-modal-title"
         >
-          <Modal.Body className="sign-In"></Modal.Body>
+          <div className="sign-In"></div>
         </Modal>
         <Modal
           size="lg"
@@ -295,6 +295,7 @@ function App() {
           show={showSignIn}
           onHide={toggleSignIn}
           contentclassname="login"
+          className="form-group mb-4 mt-3"
         >
           <Modal.Body>
             <Login
@@ -314,7 +315,7 @@ function App() {
           centered
           show={showSignUp}
           onHide={toggleSignUp}
-          contentclassname="custom-modal-style"
+          contentclassname="sign-In"
         >
           <Modal.Body className="sign-Up"></Modal.Body>
         </Modal>
@@ -443,39 +444,7 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignIn}
-          onHide={toggleSignIn}
-          contentclassname="login"
-        >
-          <Modal.Body className="sign-In"></Modal.Body>
-        </Modal>
-        <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignIn}
-          onHide={toggleSignIn}
-          contentclassname="login"
-        >
-          <Modal.Body>
-            <Login
-              toggleSignUp={toggleSignUp}
-              toggleSignIn={toggleSignIn}
-              toggleButton={toggleButton}
-              toggleForgotPass={toggleForgotPass}
-              toggleConfirmModal={toggleConfirmModal}
-            />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          size="lg"
+          size="xl"
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
@@ -484,7 +453,7 @@ function App() {
           onHide={toggleSignUp}
           contentclassname="custom-modal-style"
         >
-          <Modal.Body className="sign-Up"></Modal.Body>
+          <div className="sign-Up"></div>
         </Modal>
         <Modal
           size="lg"

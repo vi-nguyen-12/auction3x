@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Button, Container } from "react-bootstrap";
 import { FiSearch } from "react-icons/fi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 import "../../styles/dashboard.css";
 
 function DashHeader({ location, windowSize }) {
+  const history = useHistory();
+  const [notifi, setNotifi] = useState(false);
   return (
     <Container
       style={{
@@ -24,10 +27,53 @@ function DashHeader({ location, windowSize }) {
           </Col>
           <Col>
             <div className="search">
-              <Button className="bell">
+              <Button
+                onMouseEnter={() => setNotifi(true)}
+                onMouseLeave={() => setNotifi(false)}
+                className="bell"
+              >
                 <BsBellFill color="#737b8b" size={23} />
               </Button>
-              <Button className="message">
+              <div className="notification">3</div>
+              <div
+                onMouseEnter={() => setNotifi(true)}
+                onMouseLeave={() => setNotifi(false)}
+                style={{ display: notifi ? "block" : "none" }}
+                className="notifi-drop-down"
+              >
+                <div className="notifi-drop-down-content">
+                  <header
+                    style={{
+                      width: "100%",
+                      height: "40px",
+                      background: "white",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "10px 0",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Notification
+                  </header>
+                  <div
+                    style={{
+                      width: "100%",
+                      background: "#e8eff2",
+                      height: "260px",
+                      overflowY: "scroll",
+                    }}
+                    className="notifi-drop-down-body"
+                  >
+                    <div className="notifi-dropdown-item">Something here</div>
+                  </div>
+                </div>
+              </div>
+              <Button
+                onClick={() => history.push("/Dashboard/Messaging")}
+                className="message"
+              >
                 <AiFillMessage color="#737b8b" size={23} />
               </Button>
             </div>
@@ -41,7 +87,31 @@ function DashHeader({ location, windowSize }) {
                 <Button className="bell">
                   <BsBellFill color="#737b8b" size={23} />
                 </Button>
-                <Button className="message">
+                <div
+                  className="notification"
+                  style={{
+                    marginBottom: "30px",
+                    marginLeft: "-20px",
+                    marginRight: "0",
+                  }}
+                >
+                  3
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100px",
+                    height: "100px",
+                    background: "white",
+                  }}
+                  className="notifi-drop-down"
+                >
+                  <header>notification</header>
+                </div>
+                <Button
+                  onClick={() => history.push("/Dashboard/Messaging")}
+                  className="message"
+                >
                   <AiFillMessage color="#737b8b" size={23} />
                 </Button>
               </div>

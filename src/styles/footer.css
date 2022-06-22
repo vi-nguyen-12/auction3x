@@ -51,7 +51,7 @@ ul {
 
 a {
   font-size: 1.5rem;
-  color: #fff !important;
+  color: #fff;
   text-decoration: none !important;
   cursor: pointer;
 }
@@ -72,7 +72,7 @@ a:hover {
   li {
     font-size: 1rem;
   }
-  a{
+  a {
     font-size: 1rem;
   }
 }

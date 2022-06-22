@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Form } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
 import { IoInformationCircleSharp } from "react-icons/io5";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
+import NumberFormat from "react-number-format";
 
 function YachtDetails({
   property,
@@ -40,9 +44,26 @@ function YachtDetails({
   const [city, setCity] = useState();
   const [zip, setZip] = useState();
   const [success, setSuccess] = useState(false);
-  const [otherDetails, setOtherDetails] = useState("");
+  const [other, setOther] = useState(false);
+  const [otherDetails, setOtherDetails] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
+
+  const manufacturer = [
+    "AMELS",
+    "BENETTI",
+    "FEADSHIP",
+    "FINCANTIERI YACHTS",
+    "HEESEN YACHTS",
+    "LURSSEN",
+    "NOBISKRUG",
+    "OCEANCO",
+    "PERINI NAVI",
+    "ROYAL HUISMAN",
+    "SUNSEEKER",
+    "MANGUSTA",
+    "Other",
+  ];
 
   // useEffect(() => {
   //   if (params.id) {
@@ -321,264 +342,256 @@ function YachtDetails({
 
   // const saveInfo = () => {
   //   if (propId || params.id) {
-  //     if (zip.length === 5) {
-  //       if (otherDetails) {
-  //         const datas = {
-  //           id: propId ? propId : params.id,
-  //           details: {
-  //             reservedAmount: parseInt(reservedAmount),
-  //             discussedAmount: parseInt(discussedAmount),
-  //             vessel_registration_number: property.vessel_registration_number
-  //               ? property.vessel_registration_number
-  //               : vessel_registration_number,
-  //             vessel_manufacturing_date: property.vessel_manufacturing_date
-  //               ? property.vessel_manufacturing_date
-  //               : vessel_manufacturing_date,
-  //             manufacture_mark: property.manufacture_mark
-  //               ? property.manufacture_mark
-  //               : manufacture_mark,
-  //             manufacturer_name: property.manufacturer_name
-  //               ? property.manufacturer_name
-  //               : manufacturer_name,
-  //             engine_type: property.engine_type
-  //               ? property.engine_type
-  //               : engine_type,
-  //             engine_manufacture_name: property.engine_manufacture_name
-  //               ? property.engine_manufacture_name
-  //               : engine_manufacture_name,
-  //             engine_deck_type: property.engine_deck_type
-  //               ? property.engine_deck_type
-  //               : engine_deck_type,
-  //             running_cost: property.running_cost
-  //               ? property.running_cost
-  //               : running_cost,
-  //             no_of_crew_required: property.no_of_crew_required
-  //               ? property.no_of_crew_required
-  //               : no_of_crew_required,
-  //             property_address: {
-  //               formatted_street_address: property.property_address
-  //                 .formatted_street_address
-  //                 ? property.property_address.formatted_street_address
-  //                 : property_address,
-  //               country: property.property_address.country
-  //                 ? property.property_address.country
-  //                 : country,
-  //               state: property.property_address.state
-  //                 ? property.property_address.state
-  //                 : state,
-  //               city: property.property_address.city
-  //                 ? property.property_address.city
-  //                 : city,
-  //               zip_code: property.property_address.zip_code
-  //                 ? property.property_address.zip_code
-  //                 : zip,
-  //             },
-  //             others: property.detain ? property.detain : otherDetails,
-  //             step: parseInt(2),
+  //     if (otherDetails) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           reservedAmount: parseInt(reservedAmount),
+  //           discussedAmount: parseInt(discussedAmount),
+  //           vessel_registration_number: property.vessel_registration_number
+  //             ? property.vessel_registration_number
+  //             : vessel_registration_number,
+  //           vessel_manufacturing_date: property.vessel_manufacturing_date
+  //             ? property.vessel_manufacturing_date
+  //             : vessel_manufacturing_date,
+  //           manufacture_mark: property.manufacture_mark
+  //             ? property.manufacture_mark
+  //             : manufacture_mark,
+  //           manufacturer_name: property.manufacturer_name
+  //             ? property.manufacturer_name
+  //             : manufacturer_name,
+  //           engine_type: property.engine_type
+  //             ? property.engine_type
+  //             : engine_type,
+  //           engine_manufacture_name: property.engine_manufacture_name
+  //             ? property.engine_manufacture_name
+  //             : engine_manufacture_name,
+  //           engine_deck_type: property.engine_deck_type
+  //             ? property.engine_deck_type
+  //             : engine_deck_type,
+  //           running_cost: property.running_cost
+  //             ? property.running_cost
+  //             : running_cost,
+  //           no_of_crew_required: property.no_of_crew_required
+  //             ? property.no_of_crew_required
+  //             : no_of_crew_required,
+  //           property_address: {
+  //             formatted_street_address: property.property_address
+  //               .formatted_street_address
+  //               ? property.property_address.formatted_street_address
+  //               : property_address,
+  //             country: property.property_address.country
+  //               ? property.property_address.country
+  //               : country,
+  //             state: property.property_address.state
+  //               ? property.property_address.state
+  //               : state,
+  //             city: property.property_address.city
+  //               ? property.property_address.city
+  //               : city,
+  //             zip_code: property.property_address.zip_code
+  //               ? property.property_address.zip_code
+  //               : zip,
   //           },
-  //         };
-  //         authService.saveInfo(datas).then((res) => {
-  //           if (res.data.error) {
-  //             alert(res.data.error);
-  //           } else {
-  //             toggleSellStep(2);
-  //             setSuccess(true);
-  //           }
-  //         });
-  //       } else {
-  //         const datas = {
-  //           id: propId ? propId : params.id,
-  //           details: {
-  //             reservedAmount: parseInt(reservedAmount),
-  //             discussedAmount: parseInt(discussedAmount),
-  //             vessel_registration_number: property.vessel_registration_number
-  //               ? property.vessel_registration_number
-  //               : vessel_registration_number,
-  //             vessel_manufacturing_date: property.vessel_manufacturing_date
-  //               ? property.vessel_manufacturing_date
-  //               : vessel_manufacturing_date,
-  //             manufacture_mark: property.manufacture_mark
-  //               ? property.manufacture_mark
-  //               : manufacture_mark,
-  //             manufacturer_name: property.manufacturer_name
-  //               ? property.manufacturer_name
-  //               : manufacturer_name,
-  //             engine_type: property.engine_type
-  //               ? property.engine_type
-  //               : engine_type,
-  //             engine_manufacture_name: property.engine_manufacture_name
-  //               ? property.engine_manufacture_name
-  //               : engine_manufacture_name,
-  //             engine_deck_type: property.engine_deck_type
-  //               ? property.engine_deck_type
-  //               : engine_deck_type,
-  //             running_cost: property.running_cost
-  //               ? property.running_cost
-  //               : running_cost,
-  //             no_of_crew_required: property.no_of_crew_required
-  //               ? property.no_of_crew_required
-  //               : no_of_crew_required,
-  //             property_address: {
-  //               formatted_street_address: property.property_address
-  //                 ? property.property_address.formatted_street_address
-  //                 : property_address,
-  //               country: property.property_address
-  //                 ? property.property_address.country
-  //                 : country,
-  //               state: property.property_address
-  //                 ? property.property_address.state
-  //                 : state,
-  //               city: property.property_address
-  //                 ? property.property_address.city
-  //                 : city,
-  //               zip_code: property.property_address
-  //                 ? property.property_address.zip_code
-  //                 : zip,
-  //             },
-  //             step: parseInt(2),
-  //           },
-  //         };
-  //         authService.saveInfo(datas).then((res) => {
-  //           if (res.data.error) {
-  //             alert(res.data.error);
-  //           } else {
-  //             toggleSellStep(2);
-  //             setSuccess(true);
-  //           }
-  //         });
-  //       }
+  //           others: property.detain ? property.detain : otherDetails,
+  //           step: parseInt(2),
+  //         },
+  //       };
+  //       authService.saveInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           toggleSellStep(2);
+  //           setSuccess(true);
+  //         }
+  //       });
   //     } else {
-  //       alert("Please enter valid zip code");
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           reservedAmount: parseInt(reservedAmount),
+  //           discussedAmount: parseInt(discussedAmount),
+  //           vessel_registration_number: property.vessel_registration_number
+  //             ? property.vessel_registration_number
+  //             : vessel_registration_number,
+  //           vessel_manufacturing_date: property.vessel_manufacturing_date
+  //             ? property.vessel_manufacturing_date
+  //             : vessel_manufacturing_date,
+  //           manufacture_mark: property.manufacture_mark
+  //             ? property.manufacture_mark
+  //             : manufacture_mark,
+  //           manufacturer_name: property.manufacturer_name
+  //             ? property.manufacturer_name
+  //             : manufacturer_name,
+  //           engine_type: property.engine_type
+  //             ? property.engine_type
+  //             : engine_type,
+  //           engine_manufacture_name: property.engine_manufacture_name
+  //             ? property.engine_manufacture_name
+  //             : engine_manufacture_name,
+  //           engine_deck_type: property.engine_deck_type
+  //             ? property.engine_deck_type
+  //             : engine_deck_type,
+  //           running_cost: property.running_cost
+  //             ? property.running_cost
+  //             : running_cost,
+  //           no_of_crew_required: property.no_of_crew_required
+  //             ? property.no_of_crew_required
+  //             : no_of_crew_required,
+  //           property_address: {
+  //             formatted_street_address: property.property_address
+  //               ? property.property_address.formatted_street_address
+  //               : property_address,
+  //             country: property.property_address
+  //               ? property.property_address.country
+  //               : country,
+  //             state: property.property_address
+  //               ? property.property_address.state
+  //               : state,
+  //             city: property.property_address
+  //               ? property.property_address.city
+  //               : city,
+  //             zip_code: property.property_address
+  //               ? property.property_address.zip_code
+  //               : zip,
+  //           },
+  //           step: parseInt(2),
+  //         },
+  //       };
+  //       authService.saveInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           toggleSellStep(2);
+  //           setSuccess(true);
+  //         }
+  //       });
   //     }
   //   } else {
-  //     if (zip.length === 5) {
-  //       if (otherDetails) {
-  //         const datas = {
-  //           reservedAmount: parseInt(reservedAmount),
-  //           discussedAmount: parseInt(discussedAmount),
-  //           vessel_registration_number: property.vessel_registration_number
-  //             ? property.vessel_registration_number
-  //             : vessel_registration_number,
-  //           vessel_manufacturing_date: property.vessel_manufacturing_date
-  //             ? property.vessel_manufacturing_date
-  //             : vessel_manufacturing_date,
-  //           manufacture_mark: property.manufacture_mark
-  //             ? property.manufacture_mark
-  //             : manufacture_mark,
-  //           manufacturer_name: property.manufacturer_name
-  //             ? property.manufacturer_name
-  //             : manufacturer_name,
-  //           engine_type: property.engine_type
-  //             ? property.engine_type
-  //             : engine_type,
-  //           engine_manufacture_name: property.engine_manufacture_name
-  //             ? property.engine_manufacture_name
-  //             : engine_manufacture_name,
-  //           engine_deck_type: property.engine_deck_type
-  //             ? property.engine_deck_type
-  //             : engine_deck_type,
-  //           running_cost: property.running_cost
-  //             ? property.running_cost
-  //             : running_cost,
-  //           no_of_crew_required: property.no_of_crew_required
-  //             ? property.no_of_crew_required
-  //             : no_of_crew_required,
-  //           property_address: {
-  //             formatted_street_address: property.property_address
-  //               .formatted_street_address
-  //               ? property.property_address.formatted_street_address
-  //               : property_address,
-  //             country: property.property_address.country
-  //               ? property.property_address.country
-  //               : country,
-  //             state: property.property_address.state
-  //               ? property.property_address.state
-  //               : state,
-  //             city: property.property_address.city
-  //               ? property.property_address.city
-  //               : city,
-  //             zip_code: property.property_address.zip_code
-  //               ? property.property_address.zip_code
-  //               : zip,
-  //           },
-  //           others: property.detain ? property.detain : otherDetails,
-  //           ...ownership,
-  //           step: parseInt(2),
-  //         };
-  //         authService.savePropInfo(datas).then((res) => {
-  //           if (res.data.error) {
-  //             alert(res.data.error);
-  //           } else {
-  //             toggleSellStep(2);
-  //             getPropId(res.data._id);
-  //             setSuccess(true);
-  //           }
-  //         });
-  //       } else {
-  //         const datas = {
-  //           reservedAmount: parseInt(reservedAmount),
-  //           discussedAmount: parseInt(discussedAmount),
-  //           vessel_registration_number: property.vessel_registration_number
-  //             ? property.vessel_registration_number
-  //             : vessel_registration_number,
-  //           vessel_manufacturing_date: property.vessel_manufacturing_date
-  //             ? property.vessel_manufacturing_date
-  //             : vessel_manufacturing_date,
-  //           manufacture_mark: property.manufacture_mark
-  //             ? property.manufacture_mark
-  //             : manufacture_mark,
-  //           manufacturer_name: property.manufacturer_name
-  //             ? property.manufacturer_name
-  //             : manufacturer_name,
-  //           engine_type: property.engine_type
-  //             ? property.engine_type
-  //             : engine_type,
-  //           engine_manufacture_name: property.engine_manufacture_name
-  //             ? property.engine_manufacture_name
-  //             : engine_manufacture_name,
-  //           engine_deck_type: property.engine_deck_type
-  //             ? property.engine_deck_type
-  //             : engine_deck_type,
-  //           running_cost: property.running_cost
-  //             ? property.running_cost
-  //             : running_cost,
-  //           no_of_crew_required: property.no_of_crew_required
-  //             ? property.no_of_crew_required
-  //             : no_of_crew_required,
-  //           property_address: {
-  //             formatted_street_address: property.property_address
-  //               .formatted_street_address
-  //               ? property.property_address.formatted_street_address
-  //               : property_address,
-  //             country: property.property_address.country
-  //               ? property.property_address.country
-  //               : country,
-  //             state: property.property_address.state
-  //               ? property.property_address.state
-  //               : state,
-  //             city: property.property_address.city
-  //               ? property.property_address.city
-  //               : city,
-  //             zip_code: property.property_address.zip_code
-  //               ? property.property_address.zip_code
-  //               : zip,
-  //           },
-  //           others: property.detain ? property.detain : otherDetails,
-  //           ...ownership,
-  //           step: parseInt(2),
-  //         };
-  //         authService.savePropInfo(datas).then((res) => {
-  //           if (res.data.error) {
-  //             alert(res.data.error);
-  //           } else {
-  //             toggleSellStep(2);
-  //             getPropId(res.data._id);
-  //             setSuccess(true);
-  //           }
-  //         });
-  //       }
+  //     if (otherDetails) {
+  //       const datas = {
+  //         reservedAmount: parseInt(reservedAmount),
+  //         discussedAmount: parseInt(discussedAmount),
+  //         vessel_registration_number: property.vessel_registration_number
+  //           ? property.vessel_registration_number
+  //           : vessel_registration_number,
+  //         vessel_manufacturing_date: property.vessel_manufacturing_date
+  //           ? property.vessel_manufacturing_date
+  //           : vessel_manufacturing_date,
+  //         manufacture_mark: property.manufacture_mark
+  //           ? property.manufacture_mark
+  //           : manufacture_mark,
+  //         manufacturer_name: property.manufacturer_name
+  //           ? property.manufacturer_name
+  //           : manufacturer_name,
+  //         engine_type: property.engine_type
+  //           ? property.engine_type
+  //           : engine_type,
+  //         engine_manufacture_name: property.engine_manufacture_name
+  //           ? property.engine_manufacture_name
+  //           : engine_manufacture_name,
+  //         engine_deck_type: property.engine_deck_type
+  //           ? property.engine_deck_type
+  //           : engine_deck_type,
+  //         running_cost: property.running_cost
+  //           ? property.running_cost
+  //           : running_cost,
+  //         no_of_crew_required: property.no_of_crew_required
+  //           ? property.no_of_crew_required
+  //           : no_of_crew_required,
+  //         property_address: {
+  //           formatted_street_address: property.property_address
+  //             .formatted_street_address
+  //             ? property.property_address.formatted_street_address
+  //             : property_address,
+  //           country: property.property_address.country
+  //             ? property.property_address.country
+  //             : country,
+  //           state: property.property_address.state
+  //             ? property.property_address.state
+  //             : state,
+  //           city: property.property_address.city
+  //             ? property.property_address.city
+  //             : city,
+  //           zip_code: property.property_address.zip_code
+  //             ? property.property_address.zip_code
+  //             : zip,
+  //         },
+  //         others: property.detain ? property.detain : otherDetails,
+  //         ...ownership,
+  //         step: parseInt(2),
+  //       };
+  //       authService.postPropInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           toggleSellStep(2);
+  //           getPropId(res.data._id);
+  //           setSuccess(true);
+  //         }
+  //       });
   //     } else {
-  //       alert("Please enter valid zip code");
+  //       const datas = {
+  //         reservedAmount: parseInt(reservedAmount),
+  //         discussedAmount: parseInt(discussedAmount),
+  //         vessel_registration_number: property.vessel_registration_number
+  //           ? property.vessel_registration_number
+  //           : vessel_registration_number,
+  //         vessel_manufacturing_date: property.vessel_manufacturing_date
+  //           ? property.vessel_manufacturing_date
+  //           : vessel_manufacturing_date,
+  //         manufacture_mark: property.manufacture_mark
+  //           ? property.manufacture_mark
+  //           : manufacture_mark,
+  //         manufacturer_name: property.manufacturer_name
+  //           ? property.manufacturer_name
+  //           : manufacturer_name,
+  //         engine_type: property.engine_type
+  //           ? property.engine_type
+  //           : engine_type,
+  //         engine_manufacture_name: property.engine_manufacture_name
+  //           ? property.engine_manufacture_name
+  //           : engine_manufacture_name,
+  //         engine_deck_type: property.engine_deck_type
+  //           ? property.engine_deck_type
+  //           : engine_deck_type,
+  //         running_cost: property.running_cost
+  //           ? property.running_cost
+  //           : running_cost,
+  //         no_of_crew_required: property.no_of_crew_required
+  //           ? property.no_of_crew_required
+  //           : no_of_crew_required,
+  //         property_address: {
+  //           formatted_street_address: property.property_address
+  //             .formatted_street_address
+  //             ? property.property_address.formatted_street_address
+  //             : property_address,
+  //           country: property.property_address.country
+  //             ? property.property_address.country
+  //             : country,
+  //           state: property.property_address.state
+  //             ? property.property_address.state
+  //             : state,
+  //           city: property.property_address.city
+  //             ? property.property_address.city
+  //             : city,
+  //           zip_code: property.property_address.zip_code
+  //             ? property.property_address.zip_code
+  //             : zip,
+  //         },
+  //         others: property.detain ? property.detain : otherDetails,
+  //         ...ownership,
+  //         step: parseInt(2),
+  //       };
+  //       authService.postPropInfo(datas).then((res) => {
+  //         if (res.data.error) {
+  //           alert(res.data.error);
+  //         } else {
+  //           toggleSellStep(2);
+  //           getPropId(res.data._id);
+  //           setSuccess(true);
+  //         }
+  //       });
   //     }
   //   }
   // };
@@ -649,23 +662,71 @@ function YachtDetails({
         });
     }
   };
+
+  const handleChange = (address) => {
+    setProperty_address(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      setProperty_address(results[0].formatted_address.split(",")[0]);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(
+        states[0].long_name ? states[0].long_name : states[0].short_name
+      );
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(
+        countries[0].long_name
+          ? countries[0].long_name
+          : countries[0].short_name
+      );
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(
+        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
+      );
+    });
+  };
+
   return (
     <>
       <h3>Yacht Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
-          className="dropdown-icon"
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <IoInformationCircleSharp
-            style={{ cursor: "pointer" }}
-            color="blue"
-            size={30}
-          />
-          <div className="dropdown-info">
-            <p>
-              We will be using these details to match you with the right buyer.
-            </p>
+          <div
+            className="dropdown-icon"
+            style={{
+              width: "fit-content",
+            }}
+          >
+            <IoInformationCircleSharp
+              style={{ cursor: "pointer" }}
+              color="blue"
+              size={30}
+            />
+            <div className="dropdown-info">
+              <p>
+                We will be using these details to match you with the right
+                buyer.
+              </p>
+            </div>
           </div>
         </div>
         <Row className="mt-3">
@@ -714,22 +775,64 @@ function YachtDetails({
 
         <Row className="mt-3">
           <Col>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={property_address}
-              {...register("property_address")}
-              onChange={(e) => setProperty_address(e.target.value)}
-              required
-            />
-            <span
-              style={{
-                fontWeight: "600",
-                color: "black",
-              }}
+            <PlacesAutocomplete
+              value={property_address}
+              onChange={handleChange}
+              onSelect={handleSelect}
             >
-              Property Address <span style={{ color: "#ff0000" }}>*</span>
-            </span>
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search address",
+                      className: "form-control",
+                    })}
+                    required
+                  />
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Location <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  {suggestions && suggestions.length > 0 && (
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
           </Col>
           <Col>
             <input
@@ -790,7 +893,7 @@ function YachtDetails({
           </Col>
           <Col>
             <input
-              type="number"
+              type="text"
               className="form-control"
               defaultValue={zip}
               {...register("zipCode")}
@@ -824,14 +927,32 @@ function YachtDetails({
             </span>
           </Col>
           <Col xs={12} md={4}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={manufacturer_name}
-              {...register("manufacturer_name")}
-              onChange={(e) => setManufacturer_name(e.target.value)}
-              required
-            />
+            {other ? (
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={manufacturer_name}
+                {...register("manufacturer_name")}
+                onChange={(e) => setManufacturer_name(e.target.value)}
+                required
+              />
+            ) : (
+              <Form.Select
+                value={manufacturer_name}
+                {...register("manufacturer_name", { maxLength: 100 })}
+                onChange={(e) => {
+                  setManufacturer_name(e.target.value);
+                  e.target.value === "Other" ? setOther(true) : setOther(false);
+                }}
+              >
+                <option value="">Manufacturer</option>
+                {manufacturer.map((item, index) => (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </Form.Select>
+            )}
             <span
               style={{
                 fontWeight: "600",
@@ -903,13 +1024,15 @@ function YachtDetails({
             </span>
           </Col>
           <Col xs={12} md={4}>
-            <input
-              type="number"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={running_cost}
               className="form-control"
-              defaultValue={running_cost}
-              {...register("running_cost")}
-              onChange={(e) => setRunning_cost(e.target.value)}
-              required
+              onValueChange={(values) => {
+                const { value } = values;
+                setRunning_cost(value);
+              }}
             />
             <span
               style={{
@@ -923,6 +1046,7 @@ function YachtDetails({
           <Col xs={12} md={4}>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={no_of_crew_required}
               {...register("no_of_crew_required")}
@@ -953,13 +1077,15 @@ function YachtDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={reservedAmount}
               className="form-control"
-              defaultValue={reservedAmount}
-              {...register("reservedAmount")}
-              onChange={(e) => setReservedAmount(parseInt(e.target.value))}
+              onValueChange={(values) => {
+                const { value } = values;
+                setReservedAmount(value);
+              }}
             />
             <span
               style={{
@@ -971,13 +1097,15 @@ function YachtDetails({
             </span>
           </Col>
           <Col xs={12} md={6}>
-            <input
-              type="number"
-              min="0"
+            <NumberFormat
+              thousandSeparator={true}
+              prefix="$"
+              value={discussedAmount}
               className="form-control"
-              defaultValue={discussedAmount}
-              {...register("discussedAmount")}
-              onChange={(e) => setDiscussedAmount(parseInt(e.target.value))}
+              onValueChange={(values) => {
+                const { value } = values;
+                setDiscussedAmount(value);
+              }}
             />
             <span
               style={{

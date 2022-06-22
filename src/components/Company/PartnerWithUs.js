@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
 import contact from "../../../src/images/contactImg.png";
+import { useForm } from "react-hook-form";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 function PartnerWithUs({ windowSize }) {
   const location = useLocation();
+  const [phone, setPhone] = useState();
+  const { register, handleSubmit } = useForm();
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
@@ -72,6 +78,14 @@ function PartnerWithUs({ windowSize }) {
                   className="form-control"
                 />
               </Col>
+              <Col>
+                <span>Company Name</span>
+                <input
+                  placeholder="Enter Company Name"
+                  type="text"
+                  className="form-control"
+                />
+              </Col>
             </Row>
             <Row>
               <Col>
@@ -84,10 +98,18 @@ function PartnerWithUs({ windowSize }) {
               </Col>
               <Col>
                 <span>Phone</span>
-                <input
-                  placeholder="Enter Phone Number"
-                  type="text"
-                  className="form-control"
+                <PhoneInput
+                  disableCountryCode={false}
+                  onlyCountries={["ca", "us", "gb", "au"]}
+                  disableDropdown={false}
+                  country={"us"}
+                  dropdownStyle={{ paddingLeft: "0!important" }}
+                  value={phone}
+                  inputStyle={{ width: "100%" }}
+                  buttonStyle={{
+                    borderRight: "none",
+                  }}
+                  onChange={setPhone}
                 />
               </Col>
             </Row>

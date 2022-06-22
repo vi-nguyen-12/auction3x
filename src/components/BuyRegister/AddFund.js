@@ -93,7 +93,7 @@ function AddFund() {
           </Row>
           <Row>
             <Col>
-              <label style={{ color: "black" }}>Provider</label>
+              <label style={{ color: "black" }}>Provider Name</label>
               <input
                 type="text"
                 name="provider"
@@ -115,15 +115,6 @@ function AddFund() {
           </Row>
           <Row>
             <Col>
-              <div>
-                <label style={{ color: "black" }}>Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  className="form-control"
-                  placeholder="Name"
-                />
-              </div>
               <div>
                 <label style={{ color: "black" }}>Proof Of Fund</label>
                 <input

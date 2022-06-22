@@ -38,31 +38,10 @@ function CarDocus({
   const [loader, setLoader] = useState(false);
   const datas = [
     {
-      name: "Ownership Documents",
-      officialName: "ownershipDocuments",
-      number: 1,
-      documents: doc1,
-      required: true,
-    },
-    {
-      name: "Registration Documents",
-      officialName: "registrationDocuments",
-      number: 2,
-      documents: doc2,
-      required: true,
-    },
-    {
       name: "Title Certificate",
       officialName: "titleCertificate",
       number: 3,
       documents: doc3,
-      required: true,
-    },
-    {
-      name: "Loan Documents",
-      officialName: "loanDocuments",
-      number: 4,
-      documents: doc4,
       required: true,
     },
     {
@@ -73,25 +52,47 @@ function CarDocus({
       required: true,
     },
     {
+      name: "Registration Documents",
+      officialName: "registrationDocuments",
+      number: 2,
+      documents: doc2,
+      required: true,
+    },
+    {
+      name: "Ownership Documents",
+      officialName: "ownershipDocuments",
+      number: 1,
+      documents: doc1,
+      required: false,
+    },
+    {
+      name: "Loan Documents",
+      officialName: "loanDocuments",
+      number: 4,
+      documents: doc4,
+      required: false,
+    },
+
+    {
       name: "Engine Details",
       officialName: "engineDetails",
       number: 6,
       documents: doc6,
-      required: true,
+      required: false,
     },
     {
       name: "Insurance Documents",
       officialName: "insuranceDocuments",
       number: 7,
       documents: doc7,
-      required: true,
+      required: false,
     },
     {
       name: "Valuation Report",
       officialName: "valuationReport",
       number: 8,
       documents: doc8,
-      required: true,
+      required: false,
     },
     {
       name: "Other Documents",
@@ -168,72 +169,67 @@ function CarDocus({
             (property) => property._id === params.id
           );
           if (property[0].documents.length > 1) {
-            const documents = property[0].documents.map((document) => {
-              if (document.isVerified && document._id) {
-                delete document.isVerified;
-                delete document._id;
-                return document;
-              }
-            });
             setDocument1(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "ownership_document"
                   )
                 : []
             );
             setDocument2(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "registration_document"
                   )
                 : []
             );
             setDocument3(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "title_certificate"
                   )
                 : []
             );
             setDocument4(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "loan_document"
                   )
                 : []
             );
             setDocument5(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "inspection_report"
                   )
                 : []
             );
             setDocument6(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "engine_details"
                   )
                 : []
             );
             setDocument7(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "insurance_document"
                   )
                 : []
             );
             setDocument8(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "valuation_report"
                   )
                 : []
             );
             setDocument9(
-              documents
-                ? documents.filter((item) => item.officialName === "others")
+              property[0].documents
+                ? property[0].documents.filter(
+                    (item) => item.officialName === "others"
+                  )
                 : []
             );
           } else {
@@ -471,7 +467,7 @@ function CarDocus({
         documents,
         step: 4,
       };
-      await authService.savePropInfo(datas).then((response) => {
+      await authService.postPropInfo(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
@@ -483,16 +479,7 @@ function CarDocus({
   };
 
   const onSubmit = async (data) => {
-    if (
-      doc1.length !== 0 &&
-      doc2.length !== 0 &&
-      doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0 &&
-      doc7.length !== 0 &&
-      doc8.length !== 0
-    ) {
+    if (doc2.length !== 0 && doc3.length !== 0 && doc5.length !== 0) {
       const data = { documents, step: 4 };
       authService.editProperty(propertyTest._id, data).then((res) => {
         if (res.data.error) {
@@ -559,7 +546,7 @@ function CarDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>
@@ -580,15 +567,6 @@ function CarDocus({
           ))}
         </Row>
         <Row className="mt-5">
-          {/* <Col
-            xs={12}
-            md={4}
-            className="d-flex justify-content-center justify-content-md-end mt-2"
-          >
-            <Button className="save-btn" onClick={saveInfo}>
-              Save
-            </Button>
-          </Col> */}
           <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous

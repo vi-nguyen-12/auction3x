@@ -110,11 +110,11 @@
 }
 
 .form-control {
-  border: 2px solid #d58f5c !important;
+  border: 2px solid #d58f5c;
   outline: none !important;
   background-color: transparent !important;
   /* padding: 6px !important; */
-  color: rgb(0, 0, 0) !important;
+  color: rgb(0, 0, 0);
   font-size: 12px;
 }
 .form-control::placeholder {
@@ -190,10 +190,20 @@
   object-fit: cover;
   background-position: center;
   cursor: pointer;
+  transition: 0.5s all ease-in-out;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.circularCard img:hover {
+  transform: scale(0.99);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
 }
 
 .circularCard span {
   font-size: 15px;
+  font-weight: bold;
   color: white;
   display: grid;
   justify-content: center;
@@ -324,8 +334,7 @@ h1 {
   position: absolute;
   text-align: center;
   width: 10rem;
-  margin-right: 28px;
-  margin-top: 28px;
+  margin-left: -160px;
   background-color: #ffffff;
   min-width: 10rem;
   max-width: 20rem;
@@ -344,4 +353,20 @@ h1 {
 
 .dropdown-icon:hover .dropdown-info {
   display: block;
+}
+#selected {
+  background-color: #000000 !important;
+  color: white;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25),
+    0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
+  padding: 10px;
+  border: 1px solid #dbdbdb;
+  border-radius: 0 0 10px 10px;
+  z-index: 999;
+  background-color: white;
+  margin-top: -25px;
 }

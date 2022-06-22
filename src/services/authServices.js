@@ -340,8 +340,17 @@ const authService = {
     );
   },
 
-  savePropInfo(data) {
+  postPropInfo(data) {
     return axios.post(apiUrl + "/api/properties", data, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+      },
+    });
+  },
+
+  putPropInfo(data) {
+    return axios.put(apiUrl + `/api/properties/${data.id}`, data.changes, {
       headers: {
         Authorization:
           "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
@@ -361,7 +370,7 @@ const authService = {
   putRealEstateInfo(data) {
     return axios.put(
       apiUrl + `/api/properties/real-estate/${data.id}`,
-      data.details,
+      data.changes,
       {
         headers: {
           Authorization:

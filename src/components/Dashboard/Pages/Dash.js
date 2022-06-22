@@ -283,12 +283,12 @@ function Dash({ windowSize, featureLength }) {
               }}
             >
               <div className="filter">
-                <div className="filterIcon">
+                {/* <div className="filterIcon">
                   <RiFilter2Fill color="white" size={25} />
                   <button className="filterBtn">
                     <span>Filter</span>
                   </button>
-                </div>
+                </div> */}
                 <div className="refresh">
                   <GoPlus color="white" size={28} />
                   <button onClick={toggleFundReq} className="resetBtn">

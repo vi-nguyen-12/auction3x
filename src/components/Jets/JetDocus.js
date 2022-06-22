@@ -42,10 +42,10 @@ function JetDocus({
   const [loader, setLoader] = useState(false);
   const datas = [
     {
-      name: "Ownership Document",
-      officialName: "ownershipDocument",
-      number: 1,
-      documents: doc1,
+      name: "Title Certificate",
+      officialName: "titleCertificate",
+      number: 3,
+      documents: doc3,
       required: true,
     },
     {
@@ -56,53 +56,10 @@ function JetDocus({
       required: true,
     },
     {
-      name: "Title Certificate",
-      officialName: "titleCertificate",
-      number: 3,
-      documents: doc3,
-      required: true,
-    },
-    {
-      name: "Detail Specification",
-      officialName: "detailSpecification",
-      number: 4,
-      documents: doc4,
-      required: true,
-    },
-    {
-      name: "Insurance Document",
-      officialName: "insuranceDocument",
-      number: 5,
-      documents: doc5,
-      required: true,
-    },
-    {
-      name: "Loan Document",
-      officialName: "loanDocument",
-      number: 6,
-      documents: doc6,
-      required: true,
-    },
-
-    {
-      name: "Jet Detail History",
-      officialName: "jetDetailHistory",
-      number: 7,
-      documents: doc7,
-      required: true,
-    },
-    {
       name: "Fitness Report",
       officialName: "fitnessReport",
       number: 8,
       documents: doc8,
-      required: true,
-    },
-    {
-      name: "Electric Work Details",
-      officialName: "electricWorkDetails",
-      number: 9,
-      documents: doc9,
       required: true,
     },
     {
@@ -120,11 +77,53 @@ function JetDocus({
       required: true,
     },
     {
+      name: "Jet Detail History",
+      officialName: "jetDetailHistory",
+      number: 7,
+      documents: doc7,
+      required: true,
+    },
+    {
+      name: "Detail Specification",
+      officialName: "detailSpecification",
+      number: 4,
+      documents: doc4,
+      required: false,
+    },
+    {
+      name: "Insurance Document",
+      officialName: "insuranceDocument",
+      number: 5,
+      documents: doc5,
+      required: false,
+    },
+    {
+      name: "Loan Document",
+      officialName: "loanDocument",
+      number: 6,
+      documents: doc6,
+      required: false,
+    },
+    {
+      name: "Electric Work Details",
+      officialName: "electricWorkDetails",
+      number: 9,
+      documents: doc9,
+      required: false,
+    },
+    {
+      name: "Ownership Document",
+      officialName: "ownershipDocument",
+      number: 1,
+      documents: doc1,
+      required: false,
+    },
+    {
       name: "Valuation Report",
       officialName: "valuationReport",
       number: 12,
       documents: doc12,
-      required: true,
+      required: false,
     },
     {
       name: "Other Documents",
@@ -214,100 +213,95 @@ function JetDocus({
             (property) => property._id === params.id
           );
           if (property[0].documents.length > 1) {
-            const documents = property[0].documents.map((document) => {
-              if (document.isVerified && document._id) {
-                delete document.isVerified;
-                delete document._id;
-                return document;
-              }
-            });
             setDocument1(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "ownership_document"
                   )
                 : []
             );
             setDocument2(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "registration_document"
                   )
                 : []
             );
             setDocument3(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "title_certificate"
                   )
                 : []
             );
             setDocument4(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "detail_specification"
                   )
                 : []
             );
             setDocument5(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "insurance_document"
                   )
                 : []
             );
             setDocument6(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "loan_document"
                   )
                 : []
             );
             setDocument7(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "jet_detail_history"
                   )
                 : []
             );
             setDocument8(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "fitness_report"
                   )
                 : []
             );
             setDocument9(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "electric_work_details"
                   )
                 : []
             );
             setDocument10(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "engine_details"
                   )
                 : []
             );
             setDocument11(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "inspection_report"
                   )
                 : []
             );
             setDocument12(
-              documents
-                ? documents.filter(
+              property[0].documents
+                ? property[0].documents.filter(
                     (item) => item.officialName === "valuation_report"
                   )
                 : []
             );
             setDocument13(
-              documents
-                ? documents.filter((item) => item.officialName === "others")
+              property[0].documents
+                ? property[0].documents.filter(
+                    (item) => item.officialName === "others"
+                  )
                 : []
             );
           } else {
@@ -634,7 +628,7 @@ function JetDocus({
         documents,
         step: 4,
       };
-      await authService.savePropInfo(datas).then((response) => {
+      await authService.postPropInfo(datas).then((response) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
@@ -647,18 +641,12 @@ function JetDocus({
 
   const onSubmit = async (data) => {
     if (
-      doc1.length !== 0 &&
       doc2.length !== 0 &&
       doc3.length !== 0 &&
-      doc4.length !== 0 &&
-      doc5.length !== 0 &&
-      doc6.length !== 0 &&
       doc7.length !== 0 &&
       doc8.length !== 0 &&
-      doc9.length !== 0 &&
       doc10.length !== 0 &&
-      doc11.length !== 0 &&
-      doc12.length !== 0
+      doc11.length !== 0
     ) {
       const data = { documents, step: 4 };
       authService.editProperty(propertyTest._id, data).then((res) => {
@@ -728,7 +716,7 @@ function JetDocus({
               </Col>
               <Col lg={7} className="pt-lg-5">
                 {item.documents.length > 0 && (
-                  <div className="upload-list">
+                  <div className="upload-list" style={{ width: "100%" }}>
                     {item.documents.map((document, index) => (
                       <div key={index}>
                         <span>

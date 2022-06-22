@@ -135,7 +135,9 @@ function Profile({ id, windowSize }) {
       </div>
       <Row>
         <Col
-          sm={3}
+          lg={3}
+          md={12}
+          xs={12}
           style={{
             display: windowSize < 800 && "flex",
             justifyContent: windowSize < 800 && "center",
@@ -155,7 +157,7 @@ function Profile({ id, windowSize }) {
             </div>
           </div>
         </Col>
-        <Col sm={9}>
+        <Col lg={9} md={12} xs={12}>
           <div
             style={{
               padding: windowSize < 800 && "0",
@@ -181,7 +183,9 @@ function Profile({ id, windowSize }) {
       </Row>
       <Row>
         <Col
-          sm={3}
+          lg={3}
+          md={12}
+          xs={12}
           style={{
             display: "inline-grid",
             justifyContent: "center",
@@ -232,7 +236,12 @@ function Profile({ id, windowSize }) {
             </Button>
           </div>
         </Col>
-        <Col style={{ paddingLeft: windowSize > 800 && "70px" }} sm={9}>
+        <Col
+          style={{ paddingLeft: windowSize > 800 && "70px" }}
+          lg={9}
+          md={12}
+          xs={12}
+        >
           <h3 style={{ textAlign: windowSize < 800 && "center" }}>
             Listed Property
           </h3>

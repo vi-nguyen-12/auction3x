@@ -19,7 +19,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               style={{
                 display: "grid",
                 justifyContent: "center",
-                padding: "0 50px",
+                // padding: "0 50px",
               }}
             >
               <div className="img-flex">
@@ -62,6 +62,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                 </li>
                 <li className="list-unstyled">
                   <a
+                    style={{ color: "#fff" }}
                     onClick={() => {
                       if (user._id) {
                         history.push("/multiSellForm");

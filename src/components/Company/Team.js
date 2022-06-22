@@ -10,11 +10,10 @@ function Team({ windowSize }) {
   const onClick = (title) => () => {
     if (title === "All") {
       setList(team_member);
+    } else {
+      setList(team_member.filter((item) => item.title === title));
     }
-    else {
-      setList(team_member.filter(item => item.title === title));
-    }
-  }
+  };
 
   return (
     <>
@@ -42,17 +41,11 @@ function Team({ windowSize }) {
         <Row
           style={{
             display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "center",
+            justifyContent: "center",
+            // alignContent: "center",
           }}
         >
-          <Col
-            style={{
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignContent: "center",
-            }}
-          >
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -60,11 +53,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("All")}
             >
               All
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -72,11 +69,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Founder")}
             >
               Founder
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -84,11 +85,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Operation")}
             >
               Operation
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -96,11 +101,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Research")}
             >
               Research
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -108,11 +117,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Marketing")}
             >
               Marketing
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -120,11 +133,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Research")}
             >
               Research
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -132,11 +149,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Technology")}
             >
               Technology
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -144,11 +165,15 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Business")}
             >
               Business
             </Button>
+          </Col>
+          <Col style={{ flex: "0" }}>
             <Button
               style={{
                 fontSize: "20px",
@@ -156,6 +181,8 @@ function Team({ windowSize }) {
                 color: "#706666",
                 fontWeight: "bold",
                 border: "1px solid #e2e2e2 ",
+                width: "130px",
+                margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("Legal")}
             >
@@ -220,13 +247,23 @@ function Team({ windowSize }) {
             </Col>
           </Row>
         )} */}
-        <Row style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignContent: "center",
-        }} >
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignContent: "center",
+          }}
+        >
           {list.map((member, index) => (
-            <Col className="ceo-card" style={{ display: "flex", justifyContent: "center", margin: "20px" }} md={2} >
+            <Col
+              className="ceo-card"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "20px",
+              }}
+              md={2}
+            >
               <TeamCard
                 name={member.name}
                 location={member.location}

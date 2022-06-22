@@ -1,6 +1,10 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import Austin from "../../images/Austin.jpg";
+import Houston from "../../images/houstonPark.jpg";
+import Dallas from "../../images/dallass.jpeg";
+import SanAntonio from "../../images/sanAntonio.jpeg";
 
 const FindInCountries = (props) => {
   const history = useHistory();
@@ -18,61 +22,75 @@ const FindInCountries = (props) => {
         >
           <Row>
             <Col md={10} className="m-auto pt-5 text-center">
-              <h2 style={{ color: "black", fontSize: "22px", marginBottom:"50px" }}>
+              <h2
+                style={{
+                  color: "black",
+                  fontSize: "22px",
+                  marginBottom: "50px",
+                }}
+              >
                 Find Properties In These Countries
               </h2>
             </Col>
           </Row>
           <Row>
-            <Col className="circularCard" md={4}>
-              <img
-                onClick={() => history.push("/Auctions/USA")}
-                height={350}
-                src="/images/historic-featured.jpg"
-                alt=""
-              />
-              <span>
-                <h2>U.S.A</h2>
-                <p>12 Properties</p>
-              </span>
+            <Col md={4}>
+              <div className="circularCard">
+                <img
+                  onClick={() => history.push("/Auctions/USA")}
+                  height="400px"
+                  src={Austin}
+                  alt="Austin"
+                />
+                <span>
+                  <h2>Austin</h2>
+                  <p>12 Properties</p>
+                </span>
+              </div>
             </Col>
-            <Col className="circularCard" md={8}>
-              <img
-                onClick={() => history.push("/Auctions/Australia")}
-                height={350}
-                src="/images/australia.jpg"
-                alt=""
-              />
-              <span>
-                <h2>AUSTRALIA</h2>
-                <p>23 Properties</p>
-              </span>
+            <Col md={8}>
+              <div className="circularCard">
+                <img
+                  onClick={() => history.push("/Auctions/Australia")}
+                  height="400px"
+                  src={Houston}
+                  alt=""
+                />
+                <span>
+                  <h2>Houston</h2>
+                  <p>23 Properties</p>
+                </span>
+              </div>
             </Col>
           </Row>
           <Row>
-            <Col className="circularCard" md={8}>
-              <img
-                onClick={() => history.push("/Auctions/Canada")}
-                height={350}
-                src="/images/canada.webp"
-                alt=""
-              />
-              <span>
-                <h2>CANADA</h2>
-                <p>18 Properties</p>
-              </span>
+            <Col md={8}>
+              <div className="circularCard">
+                <img
+                  onClick={() => history.push("/Auctions/Canada")}
+                  height="400px"
+                  src={Dallas}
+                  alt=""
+                />
+                <span>
+                  <h2>Dallas</h2>
+                  <p>18 Properties</p>
+                </span>
+              </div>
             </Col>
-            <Col className="circularCard" md={4}>
-              <img
-                onClick={() => history.push("/Auctions/England")}
-                height={350}
-                src="/images/london-england.jpg"
-                alt=""
-              />
-              <span>
-                <h2>ENGLAND</h2>
-                <p>33 Properties</p>
-              </span>
+            <Col md={4}>
+              <div className="circularCard">
+                <img
+                  onClick={() => history.push("/Auctions/England")}
+                  height="400px"
+                  src={SanAntonio}
+                  alt=""
+                />
+                <span>
+                  <h2>San Antonio</h2>
+                  <p>33 Properties</p>
+                </span>
+              </div>
             </Col>
           </Row>
         </Row>

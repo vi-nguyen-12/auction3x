@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import Loading from "../../components/Loading";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-input-2/lib/bootstrap.css";
 
 function EditProfile({ getProfilePic, getDescription }) {
   const user = useSelector((state) => state.user);
@@ -102,7 +105,7 @@ function EditProfile({ getProfilePic, getDescription }) {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Container style={{ padding: "20px", paddingBottom:"30px" }}>
+      <Container style={{ padding: "20px", paddingBottom: "30px" }}>
         <Row>
           <Col>
             <span>First Name</span>
@@ -153,10 +156,16 @@ function EditProfile({ getProfilePic, getDescription }) {
           </Col>
           <Col>
             <span>Phone</span>
-            <input
-              className="form-control"
-              defaultValue={user.phone}
-              type="phone"
+            <PhoneInput
+              disableCountryCode={false}
+              onlyCountries={["ca", "us", "gb", "au"]}
+              disableDropdown={false}
+              country={"us"}
+              dropdownStyle={{ paddingLeft: "0!important" }}
+              inputStyle={{ width: "100%" }}
+              buttonStyle={{
+                borderRight: "none",
+              }}
               {...register("phone", { required: true })}
             />
           </Col>
