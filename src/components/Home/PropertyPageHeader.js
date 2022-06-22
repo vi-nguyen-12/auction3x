@@ -58,30 +58,47 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Button
+                <Form.Select className=" RealButton ">
+                  <option>Price Range</option>
+                  <option href="#">$0 - $100,000</option>
+                  <option href="#"> $100,000 - $150,000</option>
+                  <option href="#">$150,000 - $250,000</option>
+                  <option href="#">$250,000 - $300,000</option>
+                  <option href="#">$300,000 - $400,000</option>
+                  <option href="#">$400,000 - $500,000</option>
+                  <option href="#">$500,000 - $1,500,000</option>
+                </Form.Select>
+                {/* <Button
                   style={{ color: "black" }}
                   onClick={() => setPrice(!price)}
                   className=" RealButtonPrice "
                 >
-                  Price
+                  Price Range
                 </Button>
                 {price && (
                   <div className="priceDrop">
-                    <input
-                      placeholder="Min Price"
-                      type="number"
-                      min="0"
-                      className="form-control"
-                    />
-                    <span style={{ fontSize: "20px" }}>-</span>
-                    <input
-                      placeholder="Max Price"
-                      type="number"
-                      min="0"
-                      className="form-control"
-                    />
+                    <div className="d-flex">
+                      <input
+                        placeholder="Min Price"
+                        type="number"
+                        min="0"
+                        className="form-control"
+                      />
+                      <span className="d-flex justify-content-center align-items-center px-2">
+                        -
+                      </span>
+                      <input
+                        placeholder="Max Price"
+                        type="number"
+                        min="0"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="d-flex justify-content-center mt-2">
+                      <Button>Done</Button>
+                    </div>
                   </div>
-                )}
+                )} */}
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
@@ -156,30 +173,47 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Button
+                <Form.Select className=" RealButton ">
+                  <option>Price Range</option>
+                  <option href="#">$0 - $100,000</option>
+                  <option href="#"> $100,000 - $150,000</option>
+                  <option href="#">$150,000 - $250,000</option>
+                  <option href="#">$250,000 - $300,000</option>
+                  <option href="#">$300,000 - $400,000</option>
+                  <option href="#">$400,000 - $500,000</option>
+                  <option href="#">$500,000 - $1,500,000</option>
+                </Form.Select>
+                {/* <Button
                   style={{ color: "black" }}
                   onClick={() => setPrice(!price)}
                   className=" RealButtonPrice "
                 >
-                  Price
+                  Price Range
                 </Button>
                 {price && (
                   <div className="priceDrop">
-                    <input
-                      placeholder="Min Price"
-                      type="number"
-                      min="0"
-                      className="form-control"
-                    />
-                    <span style={{ fontSize: "20px" }}>-</span>
-                    <input
-                      placeholder="Max Price"
-                      type="number"
-                      min="0"
-                      className="form-control"
-                    />
+                    <div className="d-flex">
+                      <input
+                        placeholder="Min Price"
+                        type="number"
+                        min="0"
+                        className="form-control"
+                      />
+                      <span className="d-flex justify-content-center align-items-center px-2">
+                        -
+                      </span>
+                      <input
+                        placeholder="Max Price"
+                        type="number"
+                        min="0"
+                        className="form-control"
+                      />
+                    </div>
+                    <div className="d-flex justify-content-center mt-2">
+                      <Button>Done</Button>
+                    </div>
                   </div>
-                )}
+                )} */}
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
@@ -247,10 +281,10 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price</option>
+                  <option>Price Range</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
-                  <option href="#">$ $150,000 - $250,000</option>
+                  <option href="#">$150,000 - $250,000</option>
                   <option href="#">$250,000 - $300,000</option>
                   <option href="#">$300,000 - $400,000</option>
                   <option href="#">$400,000 - $500,000</option>
@@ -332,7 +366,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price</option>
+                  <option>Price Range</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>

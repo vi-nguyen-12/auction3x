@@ -238,6 +238,7 @@
   border: none;
   width: 100%;
   padding: 10px;
+  cursor: pointer;
 }
 
 .RealButtonPrice {
@@ -250,6 +251,7 @@
   border: none;
   width: 100%;
   padding: 10px;
+  cursor: pointer;
 }
 
 .RealButtonPrice:hover {
@@ -263,15 +265,15 @@
 
 .priceDrop {
   width: 300px;
-  height: 100px;
+  height: auto;
   position: absolute;
   background: white;
-  display: flex;
+  display: grid;
   justify-content: center;
   padding: 20px;
   border-radius: 0.25rem;
   margin-left: -50px;
-  margin-top: -4px;
+  margin-top: 65px;
 }
 
 .priceDrop input {

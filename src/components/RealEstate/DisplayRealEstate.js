@@ -109,6 +109,7 @@ function DisplayRealEstate({
   toggleSignIn,
   windowSize,
 }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -235,7 +236,10 @@ function DisplayRealEstate({
       {property && (
         <>
           <div style={{ position: "relative", width: "100%" }}>
-            <div className="mini-header">
+            <div
+              className="mini-header"
+              style={{ padding: windowSize < 500 && "35px 15px" }}
+            >
               {new Date().toISOString() < property.auctionStartDate ? (
                 <div className="mini-header-text">
                   UPCOMING AUCTION | STARTS IN{" "}
@@ -260,6 +264,7 @@ function DisplayRealEstate({
               src={property.property.images[0].url}
               alt="Snow"
               className="display-property"
+              style={{ padding: windowSize < 500 && "5px 15px" }}
             />
             <div className="info-box">
               <div>
@@ -420,9 +425,15 @@ function DisplayRealEstate({
             </div>
           </div>
 
-          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
-            <Col>
-              <Row>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize > 500 ? "35px" : "15px",
+            }}
+          >
+            <Col xs={12} md={6}>
+              <Row style={{ textAlign: windowSize < 500 && "center" }}>
                 <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
                 <h5 style={{ color: "#919191", fontWeight: "400" }}>
                   {
@@ -437,7 +448,10 @@ function DisplayRealEstate({
             </Col>
             <Col style={{ padding: "0" }}>
               {!user._id && (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button
                     style={{
                       backgroundColor: "#e8a676",
@@ -474,7 +488,10 @@ function DisplayRealEstate({
               property.isNotRegisteredToBuy === true &&
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
@@ -497,7 +514,10 @@ function DisplayRealEstate({
               ) : user._id &&
                 property.isNotRegisteredToBuy === true &&
                 property.isOwner ? (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button
                     className="registsBtn"
                     onClick={toggleRegister}
@@ -525,7 +545,10 @@ function DisplayRealEstate({
                 user._id &&
                 property.isNotRegisteredToBuy === true &&
                 new Date().toISOString() > property.registerEndDate && (
-                  <div className="registBtn">
+                  <div
+                    className="registBtn"
+                    style={{ margin: windowSize < 500 && "30px 0" }}
+                  >
                     <button
                       className="registsBtn"
                       onClick={toggleRegister}
@@ -561,6 +584,7 @@ function DisplayRealEstate({
                     display: "grid",
                     justifyContent: "right",
                     width: "100%",
+                    margin: windowSize < 500 && "30px 0",
                   }}
                 >
                   <button
@@ -597,7 +621,10 @@ function DisplayRealEstate({
                 user._id &&
                 !property.isNotRegisteredToBuy &&
                 !property.isOwner && (
-                  <div className="registBtn">
+                  <div
+                    className="registBtn"
+                    style={{ margin: windowSize < 500 && "30px 0" }}
+                  >
                     <button
                       style={{
                         backgroundColor: "#e8a676",
@@ -634,7 +661,13 @@ function DisplayRealEstate({
             </Col>
           </Row>
 
-          <Row style={{ margin: "0", padding: "0", padding: "0 35px" }}>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize > 500 ? "0 35px" : "0 15px",
+            }}
+          >
             <Col style={{ display: "grid", padding: "0" }}>
               <Row
                 xs="auto"
@@ -657,7 +690,7 @@ function DisplayRealEstate({
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 30px",
+                        padding: "30px",
                       }}
                     >
                       <RegistrationTimer
@@ -714,7 +747,7 @@ function DisplayRealEstate({
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 30px",
+                        padding: "30px",
                       }}
                     >
                       <AuctionTimer
@@ -744,7 +777,7 @@ function DisplayRealEstate({
                         width: "100%",
                         height: "100%",
                         borderRadius: "10px",
-                        padding: "0 30px",
+                        padding: "30px",
                         color: "black",
                       }}
                     >
@@ -772,7 +805,7 @@ function DisplayRealEstate({
                           width: "200px",
                           height: "150px",
                           borderRadius: "10px",
-                          padding: "0 40px",
+                          padding: "40px",
                         }}
                       >
                         <div
@@ -875,8 +908,8 @@ function DisplayRealEstate({
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "#e8e8e8",
-                      width: "200px",
-                      height: "150px",
+                      width: "280px",
+                      height: "165px",
                       borderRadius: "10px",
                       padding: "40px",
                     }}
@@ -937,11 +970,11 @@ function DisplayRealEstate({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.details.parcel
-                          .county_land_use_description ? (
+                          .standardized_land_use_type ? (
                           <td>
                             {
                               property.property.details.parcel
-                                .county_land_use_description
+                                .standardized_land_use_type
                             }
                           </td>
                         ) : (
@@ -950,19 +983,9 @@ function DisplayRealEstate({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Lot Size</td>
-                        {property.property.details.structure.lot_size ? (
+                        {property.property.details.parcel.lot_size ? (
                           <td>
-                            {property.property.details.structure.lot_size} Acre
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Year Built</td>
-                        {property.property.details.structure.year_built ? (
-                          <td>
-                            {property.property.details.structure.year_built}
+                            {property.property.details.parcel.lot_size} Acre
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -982,16 +1005,24 @@ function DisplayRealEstate({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Garage(s)</td>
-                        {property.property.details.structure.garage ? (
-                          <td>{property.property.details.structure.garage}</td>
+                        {property.property.details.structure.type_of_garage ? (
+                          <td>
+                            {property.property.details.structure.type_of_garage}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Story(s)</td>
-                        {property.property.details.structure.story ? (
-                          <td>{property.property.details.structure.story}</td>
+                        {property.property.details.structure
+                          .number_of_stories ? (
+                          <td>
+                            {
+                              property.property.details.structure
+                                .number_of_stories
+                            }
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1008,9 +1039,9 @@ function DisplayRealEstate({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Bathrooms</td>
-                        {property.property.details.parcel.baths_count ? (
+                        {property.property.details.structure.baths_count ? (
                           <td>
-                            {property.property.details.parcel.baths_count} acres
+                            {property.property.details.structure.baths_count}
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -1099,7 +1130,13 @@ function DisplayRealEstate({
             </Col>
           </Row>
 
-          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize < 500 ? "25px 15px" : "35px",
+            }}
+          >
             <div
               style={{
                 marginTop: "30px",
@@ -1121,10 +1158,12 @@ function DisplayRealEstate({
             </div>
             <Col
               style={{
-                fontSize: "20px",
+                fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
-                padding: "20px 20px 20px 0",
+                padding: windowSize > 800 && "20px 20px 20px 0",
               }}
+              xs={12}
+              md={6}
             >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
@@ -1147,10 +1186,13 @@ function DisplayRealEstate({
 
             <Col
               style={{
-                fontSize: "20px",
-                padding: "20px 20px 20px 0",
+                fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
+                padding: windowSize > 800 && "20px 20px 20px 0",
+                marginTop: windowSize <= 767 && "20px",
               }}
+              xs={12}
+              md={6}
             >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city
@@ -1173,7 +1215,13 @@ function DisplayRealEstate({
             </Col>
           </Row>
 
-          <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
+          <Row
+            ref={myRef}
+            style={{
+              marginTop: "50px",
+              padding: windowSize < 500 ? "25px 15px" : "35px",
+            }}
+          >
             <Tabs
               defaultActiveKey="Investment Opportunity"
               className="RealEstate-Tab"
@@ -1186,7 +1234,7 @@ function DisplayRealEstate({
                   backgroundColor: "#B77B50",
                   border: "none",
                   outline: "none",
-                  fontSize: "12px",
+                  fontSize: "17px",
                   borderRadius: "0",
                   padding: "20px",
                 }}
@@ -1217,7 +1265,7 @@ function DisplayRealEstate({
                   backgroundColor: "#B77B50",
                   border: "none",
                   outline: "none",
-                  fontSize: "12px",
+                  fontSize: "17px",
                   borderRadius: "4px",
                   padding: "20px",
                 }}
@@ -1239,7 +1287,7 @@ function DisplayRealEstate({
                   backgroundColor: "#B77B50",
                   border: "none",
                   outline: "none",
-                  fontSize: "12px",
+                  fontSize: "17px",
                   borderRadius: "4px",
                   padding: "20px",
                 }}
@@ -1262,7 +1310,7 @@ function DisplayRealEstate({
                   backgroundColor: "#B77B50",
                   border: "none",
                   outline: "none",
-                  fontSize: "12px",
+                  fontSize: "17px",
                   borderRadius: "4px",
                   padding: "20px",
                 }}

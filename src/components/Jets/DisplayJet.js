@@ -244,7 +244,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
       {location && property && (
         <>
           <div style={{ position: "relative", width: "100%" }}>
-            <div className="mini-header">
+            <div
+              className="mini-header"
+              style={{ padding: windowSize < 500 && "35px 15px" }}
+            >
               {new Date().toISOString() < property.auctionStartDate ? (
                 <div className="mini-header-text">
                   UPCOMING AUCTION | STARTS IN{" "}
@@ -267,6 +270,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
               src={property.property.images[0].url}
               alt="Snow"
               className="display-property"
+              style={{ padding: windowSize < 500 && "5px 15px" }}
             />
             <div className="info-box">
               <div>
@@ -411,9 +415,15 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
           </div>
 
           {/* first row */}
-          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
-            <Col>
-              <Row>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize > 500 ? "35px" : "15px",
+            }}
+          >
+            <Col xs={12} md={6}>
+              <Row style={{ textAlign: windowSize < 500 && "center" }}>
                 <h2 style={{ color: "#b77b50" }}>
                   {property.property.details.aircraft_builder_name}{" "}
                   {property.property.details.aircraft_model_designation}
@@ -425,7 +435,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
             </Col>
             <Col style={{ padding: "0" }}>
               {!user._id && (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button
                     style={{
                       backgroundColor: "#e8a676",
@@ -462,7 +475,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
               property.isNotRegisteredToBuy === true &&
               !property.isOwner &&
               new Date().toISOString() < property.registerEndDate ? (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
@@ -485,7 +501,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
               ) : user._id &&
                 property.isNotRegisteredToBuy === true &&
                 property.isOwner ? (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button
                     className="registsBtn"
                     onClick={toggleRegister}
@@ -513,7 +532,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                 user._id &&
                 property.isNotRegisteredToBuy === true &&
                 new Date().toISOString() > property.registerEndDate && (
-                  <div className="registBtn">
+                  <div
+                    className="registBtn"
+                    style={{ margin: windowSize < 500 && "30px 0" }}
+                  >
                     <button
                       className="registsBtn"
                       onClick={toggleRegister}
@@ -549,6 +571,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                     display: "grid",
                     justifyContent: "right",
                     width: "100%",
+                    margin: windowSize < 500 && "30px 0",
                   }}
                 >
                   <button
@@ -585,7 +608,10 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                 user._id &&
                 !property.isNotRegisteredToBuy &&
                 !property.isOwner && (
-                  <div className="registBtn">
+                  <div
+                    className="registBtn"
+                    style={{ margin: windowSize < 500 && "30px 0" }}
+                  >
                     <button
                       style={{
                         backgroundColor: "#e8a676",
@@ -623,7 +649,13 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
           </Row>
 
           {/* second row */}
-          <Row style={{ margin: "0", padding: "0", padding: "0 35px" }}>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize > 500 ? "0 35px" : "0 15px",
+            }}
+          >
             <Col style={{ display: "grid", padding: "0" }}>
               <Row
                 xs="auto"
@@ -1139,7 +1171,13 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
             </Col>
           </Row>
 
-          <Row style={{ margin: "0", padding: "0", padding: "35px" }}>
+          <Row
+            style={{
+              margin: "0",
+              padding: "0",
+              padding: windowSize < 500 ? "25px 15px" : "35px",
+            }}
+          >
             <div
               style={{
                 marginTop: "30px",
@@ -1161,10 +1199,12 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
             </div>
             <Col
               style={{
-                fontSize: "20px",
-                padding: "20px 20px 20px 0",
+                fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
+                padding: windowSize > 800 && "20px 20px 20px 0",
               }}
+              xs={12}
+              md={6}
             >
               The Reid Group & Keller Williams Realty, in partnership with
               Ten-X, is pleased to offer for sale this West Milwaukee Medical
@@ -1187,10 +1227,13 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
 
             <Col
               style={{
-                fontSize: "20px",
-                padding: "20px 20px 20px 0",
+                fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
+                padding: windowSize > 800 && "20px 20px 20px 0",
+                marginTop: windowSize <= 767 && "20px",
               }}
+              xs={12}
+              md={6}
             >
               In recent years, Milwaukee has been undergoing its largest
               construction boom since the 1960s. Major new additions to the city
@@ -1213,7 +1256,13 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
             </Col>
           </Row>
 
-          <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
+          <Row
+            ref={myRef}
+            style={{
+              marginTop: "50px",
+              padding: windowSize < 500 ? "25px 15px" : "35px",
+            }}
+          >
             {/* ref={myRef}
             style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
