@@ -21,6 +21,7 @@ const ChangePass = ({ colorChange, toggleShow }) => {
         if (response.data.error) {
           alert(response.data.error);
         } else {
+          alert("Successfully Change Password!");
           history.push("/");
         }
       });
@@ -35,7 +36,12 @@ const ChangePass = ({ colorChange, toggleShow }) => {
   return (
     <div>
       <h1
-        style={{ margin: "0 auto", marginTop: "100px", marginBottom: "-200px", fontSize: "xxx-large" }}
+        style={{
+          margin: "0 auto",
+          marginTop: "100px",
+          marginBottom: "-200px",
+          fontSize: "xxx-large",
+        }}
       >
         Reset Password
       </h1>
@@ -52,11 +58,11 @@ const ChangePass = ({ colorChange, toggleShow }) => {
         <div className="form-group mb-2">
           <form
             onSubmit={handleSubmit(onSubmit)}
-          // onKeyDown={(e) => {
-          //   if (e.key === "Enter") {
-          //     e.preventDefault();
-          //   }
-          // }}
+            // onKeyDown={(e) => {
+            //   if (e.key === "Enter") {
+            //     e.preventDefault();
+            //   }
+            // }}
           >
             <div className="form-group">
               <p style={{ justifyContent: "left", margin: "0" }}>

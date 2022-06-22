@@ -120,6 +120,7 @@ const Header = ({
           display: "flex",
           alignContent: "center",
           height: "100%",
+          justifyContent:"space-between"
         }}
       >
         <div className="navbar-brand">
@@ -133,59 +134,73 @@ const Header = ({
           </Logo>
         </div>
 
-        <Menu
-          className="collapse navbar-collapse"
-          id="navbarTogglerDemo03"
-          style={{ paddingLeft: "8rem" }}
-        >
-          <div className="navbar-nav m-auto h-100">
-            <div className="nav-item px-5">
-              <button
-                className="headerNav"
-                style={{ color: textColor, borderBottom: borderBottom }}
-                onClick={handleOnClick("realEstates")}
-                id={colors === "white" ? "hover" : ""}
+        {windowSize > 1048 && (
+          <Menu
+            className="collapse navbar-collapse"
+            id="navbarTogglerDemo03"
+            style={{ paddingLeft: windowSize > 1445 && "8rem" }}
+          >
+            <div className="navbar-nav m-auto h-100">
+              <div
+                className="nav-item"
+                style={{ padding: windowSize > 1305 ? "0 3rem" : "0 1rem" }}
               >
-                Real Estate
-              </button>
-            </div>
-            <div className="nav-item px-5">
-              <button
-                style={{ color: textColor, borderBottom: borderBottom }}
-                className="headerNav"
-                onClick={handleOnClick("cars")}
-                id={colors === "white" ? "hover" : ""}
+                <button
+                  className="headerNav"
+                  style={{ color: textColor, borderBottom: borderBottom }}
+                  onClick={handleOnClick("realEstates")}
+                  id={colors === "white" ? "hover" : ""}
+                >
+                  Real Estate
+                </button>
+              </div>
+              <div
+                className="nav-item"
+                style={{ padding: windowSize > 1305 ? "0 3rem" : "0 1rem" }}
               >
-                Car
-              </button>
-            </div>
-            <div className="nav-item px-5">
-              <button
-                style={{ color: textColor, borderBottom: borderBottom }}
-                className="headerNav"
-                onClick={handleOnClick("jets")}
-                id={colors === "white" ? "hover" : ""}
+                <button
+                  style={{ color: textColor, borderBottom: borderBottom }}
+                  className="headerNav"
+                  onClick={handleOnClick("cars")}
+                  id={colors === "white" ? "hover" : ""}
+                >
+                  Car
+                </button>
+              </div>
+              <div
+                className="nav-item"
+                style={{ padding: windowSize > 1305 ? "0 3rem" : "0 1rem" }}
               >
-                Jet
-              </button>
-            </div>
-            <div className="nav-item px-5">
-              <button
-                style={{ color: textColor, borderBottom: borderBottom }}
-                className="headerNav"
-                onClick={handleOnClick("yachts")}
-                id={colors === "white" ? "hover" : ""}
+                <button
+                  style={{ color: textColor, borderBottom: borderBottom }}
+                  className="headerNav"
+                  onClick={handleOnClick("jets")}
+                  id={colors === "white" ? "hover" : ""}
+                >
+                  Jet
+                </button>
+              </div>
+              <div
+                className="nav-item"
+                style={{ padding: windowSize > 1305 ? "0 3rem" : "0 1rem" }}
               >
-                Yacht
-              </button>
-            </div>
-            {/* <div className="nav-item mt-2 px-4 py-2">
+                <button
+                  style={{ color: textColor, borderBottom: borderBottom }}
+                  className="headerNav"
+                  onClick={handleOnClick("yachts")}
+                  id={colors === "white" ? "hover" : ""}
+                >
+                  Yacht
+                </button>
+              </div>
+              {/* <div className="nav-item mt-2 px-4 py-2">
               <button className="headerNav" onClick={handleOnClick("others")}>
                 Others
               </button>
             </div> */}
-          </div>
-        </Menu>
+            </div>
+          </Menu>
+        )}
         {change === false ? (
           <>
             {/* {user._id ? (
@@ -222,7 +237,7 @@ const Header = ({
             </Modal> */}
             <div
               className="d-flex flex-row"
-              style={{ alignItems: "center", height: "100%" }}
+              style={{ alignItems: "center", height: "100%", justifyContent:"flex-end" }}
             >
               {windowSize > 800 ? (
                 user._id ? (
