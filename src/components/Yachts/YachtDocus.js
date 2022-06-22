@@ -11,6 +11,7 @@ import Loading from "../../components/Loading";
 function YachtDocus({
   toggleStep,
   step,
+  setStep,
   toggleDocuments,
   ownership,
   propId,
@@ -21,6 +22,9 @@ function YachtDocus({
   sellStep,
   getPropId,
   document,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -473,8 +477,18 @@ function YachtDocus({
 
   const onSubmit = async (data) => {
     if (doc1.length !== 0 && doc2.length !== 0) {
-      toggleDocuments(documents);
-      toggleStep(step + 1);
+      const data = { documents, step: 4 };
+      authService.editProperty(propertyTest._id, data).then((res) => {
+        if (res.data.error) {
+          if (res.data.error === "Invalid Token") {
+            alert("Your session ended. Please log in! ");
+            toggleSignIn(true);
+          } else alert(res.data.error);
+        } else {
+          setPropertyTest(res.data);
+          setStep(step + 1);
+        }
+      });
     } else {
       alert("Please upload the required documents");
     }

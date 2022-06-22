@@ -10,6 +10,7 @@ import "../../styles/sell-register.css";
 const PropertyDetails = ({
   toggleStep,
   step,
+  setStep,
   property,
   togglePropertyData,
   propertyType,
@@ -18,12 +19,15 @@ const PropertyDetails = ({
   getPropId,
   toggleSellStep,
   propertyData,
+  toggleSignIn,
+  propertyTest,
+  setPropertyTest,
 }) => {
   return (
     <div className="wrapper">
       <SellHeader step={step} />
       <div className="sell-bottom">
-        {propertyType === "real-estate" ? (
+        {propertyTest.type === "real-estate" ? (
           property.address &&
           property.structure &&
           property.market_assessments ? (
@@ -42,6 +46,7 @@ const PropertyDetails = ({
             <EmptyRealEstateDetails
               toggleStep={toggleStep}
               step={step}
+              setStep={setStep}
               property={property}
               propertyData={propertyData}
               togglePropertyData={togglePropertyData}
@@ -49,12 +54,15 @@ const PropertyDetails = ({
               ownership={ownership}
               getPropId={getPropId}
               toggleSellStep={toggleSellStep}
+              propertyTest={propertyTest}
+              setPropertyTest={setPropertyTest}
             />
           )
-        ) : propertyType === "car" ? (
+        ) : propertyTest.type === "car" ? (
           <CarDetails
             toggleStep={toggleStep}
             step={step}
+            setStep={setStep}
             property={property}
             propertyData={propertyData}
             togglePropertyData={togglePropertyData}
@@ -62,11 +70,15 @@ const PropertyDetails = ({
             ownership={ownership}
             getPropId={getPropId}
             toggleSellStep={toggleSellStep}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
           />
-        ) : propertyType === "jet" ? (
+        ) : propertyTest.type === "jet" ? (
           <JetDetails
             toggleStep={toggleStep}
             step={step}
+            setStep={setStep}
             property={property}
             propertyData={propertyData}
             togglePropertyData={togglePropertyData}
@@ -74,11 +86,15 @@ const PropertyDetails = ({
             ownership={ownership}
             getPropId={getPropId}
             toggleSellStep={toggleSellStep}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
           />
-        ) : propertyType === "yacht" ? (
+        ) : propertyTest.type === "yacht" ? (
           <YachtDetails
             toggleStep={toggleStep}
             step={step}
+            setStep={setStep}
             property={property}
             propertyData={propertyData}
             togglePropertyData={togglePropertyData}
@@ -86,6 +102,9 @@ const PropertyDetails = ({
             ownership={ownership}
             getPropId={getPropId}
             toggleSellStep={toggleSellStep}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
           />
         ) : null}
       </div>

@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 function CarDocus({
   toggleStep,
   step,
+  setStep,
   toggleDocuments,
   ownership,
   propId,
@@ -20,6 +21,9 @@ function CarDocus({
   sellStep,
   getPropId,
   document,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -476,8 +480,18 @@ function CarDocus({
 
   const onSubmit = async (data) => {
     if (doc2.length !== 0 && doc3.length !== 0 && doc5.length !== 0) {
-      toggleDocuments(documents);
-      toggleStep(step + 1);
+      const data = { documents, step: 4 };
+      authService.editProperty(propertyTest._id, data).then((res) => {
+        if (res.data.error) {
+          if (res.data.error === "Invalid Token") {
+            alert("Your session ended. Please log in! ");
+            toggleSignIn(true);
+          } else alert(res.data.error);
+        } else {
+          setPropertyTest(res.data);
+          setStep(step + 1);
+        }
+      });
     } else {
       alert("Please upload the required documents");
     }
@@ -557,12 +571,7 @@ function CarDocus({
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button
-              onClick={saveInfo}
-              className="nxt-btn"
-              id="next"
-              type="submit"
-            >
+            <Button className="nxt-btn" id="next" type="submit">
               Next
             </Button>
           </Col>

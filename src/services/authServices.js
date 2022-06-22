@@ -414,6 +414,37 @@ const authService = {
   getFAQs() {
     return axios.get(apiUrl + "/api/faqs");
   },
+  getProperty(id) {
+    return axios.get(apiUrl + `/api/properties/${id}`, {
+      headers: {
+        Authorization:
+          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+      },
+    });
+  },
+  createProperty(data) {
+    return axios.post(apiUrl + "/api/properties", data, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
+  editProperty(id, data) {
+    console.log(data);
+    return axios.put(apiUrl + `/api/properties/${id}`, data, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
+  editRealEstate(id, data) {
+    console.log(data);
+    return axios.put(apiUrl + `/api/properties/real-estate/${id}`, data, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
 };
 
 export default authService;

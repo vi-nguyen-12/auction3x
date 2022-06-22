@@ -120,12 +120,17 @@ function App() {
     const authToken = localStorage.getItem("token");
     if (authToken) {
       const getUser = async () => {
-        const response = await authService.getUsers(authToken);
-        if (response.data.message === "User Logged In") {
-          dispatch(login(response.data.user));
-        } else {
+        try {
+          const response = await authService.getUsers(authToken);
+          if (response.data.message === "User Logged In") {
+            dispatch(login(response.data.user));
+          } else {
+            localStorage.removeItem("token");
+            history.push("/");
+          }
+        } catch (error) {
+          localStorage.removeItem("token");
           history.push("/");
-          window.location.reload();
         }
       };
       getUser();
@@ -277,7 +282,7 @@ function App() {
           centered
           show={showSignIn}
           onHide={toggleSignIn}
-        // contentclassname="custom-modal-title"
+          // contentclassname="custom-modal-title"
         >
           <div className="sign-In"></div>
         </Modal>
@@ -405,19 +410,18 @@ function App() {
               >
                 Forgot Password
               </Modal.Title>
-            )
-              : (
-                <Modal.Title
-                  id="contained-modal-title-vcenter"
-                  style={{
-                    color: "#D58F5C",
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Forgot Password
-                </Modal.Title>
-              )}
+            ) : (
+              <Modal.Title
+                id="contained-modal-title-vcenter"
+                style={{
+                  color: "#D58F5C",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                }}
+              >
+                Forgot Password
+              </Modal.Title>
+            )}
           </Modal.Header>
           <Modal.Body>
             <ForgotPass
@@ -504,20 +508,6 @@ function App() {
           <ScrollTop />
 
           <Switch>
-            {user._id && (
-              <Route exact path="/MultiSellForm">
-                <MultiSellForm
-                  colorChange={colorChange}
-                  toggleShow={toggleShow}
-                  bodyColorChange={bodyColorChange}
-                  setHeaderWidth={setHeaderWidth}
-                  setPositionLeft={setPositionLeft}
-                  setPadRight={setPadRight}
-                  windowSize={windowSize}
-                />
-              </Route>
-            )}
-
             {user._id && (
               <Route exact path="/Dashboard">
                 <Dashboard
@@ -703,7 +693,7 @@ function App() {
               </Route>
             )}
 
-            <Route exact path="/MultiSellForm/:userId/:id/:step">
+            <Route path="/multiSellForm/:id">
               <MultiSellForm
                 colorChange={colorChange}
                 toggleShow={toggleShow}
@@ -712,8 +702,24 @@ function App() {
                 setPositionLeft={setPositionLeft}
                 setPadRight={setPadRight}
                 windowSize={windowSize}
+                toggleSignIn={toggleSignIn}
+                toggleSignUp={toggleSignUp}
               />
             </Route>
+            {user._id && (
+              <Route exact path="/multiSellForm">
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toggleShow={toggleShow}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                  toggleSignIn={toggleSignIn}
+                />
+              </Route>
+            )}
 
             <Route path="/DisplayAuctions/:id">
               <DisplayAuctions

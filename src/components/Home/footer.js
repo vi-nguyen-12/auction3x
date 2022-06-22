@@ -65,7 +65,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                     style={{ color: "#fff" }}
                     onClick={() => {
                       if (user._id) {
-                        history.push("/MultiSellForm");
+                        history.push("/multiSellForm");
                         window.location.reload();
                       } else {
                         toggleSignIn();

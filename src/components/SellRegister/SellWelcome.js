@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Row, Col } from "react-bootstrap";
 import { BsFillHouseFill } from "react-icons/bs";
@@ -7,20 +7,32 @@ import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
 import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
+import { useParams } from "react-router-dom";
 import { getByTestId } from "@testing-library/react";
+import authService from "../../services/authServices";
 // create step bar
 
-const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
+const Sell = ({
+  // toggleStep,
+  step,
+  setStep,
+  // togglePropertyType,
+  windowSize,
+  propertyTest,
+  setPropertyTest,
+}) => {
+  const { id } = useParams();
+  const [type, setType] = useState(propertyTest.type); //should check if type has value, then that box is blue
   const { handleSubmit } = useForm();
   const [select, setSelect] = useState("");
   const [propertyType, setPropertyType] = useState();
 
   const onSubmit = () => {
-    if (propertyType === undefined) {
+    if (type === undefined) {
       alert("Please select property to sell");
     } else {
-      togglePropertyType(propertyType);
-      toggleStep(step + 1);
+      setPropertyTest({ ...propertyTest, type });
+      setStep(step + 1);
     }
   };
 
@@ -63,12 +75,14 @@ const Sell = ({ toggleStep, step, togglePropertyType, windowSize }) => {
               <Button
                 style={{
                   padding: windowSize < 800 && "10px",
-                  background: select === index ? "rgb(233 184 135)" : "",
+                  background:
+                    type === `${property.propType}` ? "rgb(233 184 135)" : "",
                 }}
                 className="category-btn"
                 onClick={(e) => {
-                  setPropertyType(property.propType);
-                  setSelect(index);
+                  setType(property.propType);
+                  // setPropertyType(property.propType);
+                  // setSelect(index);
                 }}
               >
                 {property.icon}

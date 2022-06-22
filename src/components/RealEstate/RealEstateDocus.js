@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 function RealEstateDocus({
   toggleStep,
   step,
+  setStep,
   toggleDocuments,
   ownership,
   propId,
@@ -20,6 +21,9 @@ function RealEstateDocus({
   sellStep,
   getPropId,
   document,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -89,6 +93,7 @@ function RealEstateDocus({
       required: false,
     },
   ];
+
   const listing_agreement = ownership
     ? ownership.documents
       ? ownership.documents.length > 0
@@ -96,10 +101,6 @@ function RealEstateDocus({
         : []
       : []
     : [];
-
-  const params = useParams();
-
-  const steps = sellStep ? sellStep : params.step ? params.step : 0;
 
   const onChange = (number) => async (e) => {
     setLoader(true);
@@ -144,180 +145,47 @@ function RealEstateDocus({
   };
 
   useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          const property = response.data.filter(
-            (property) => property._id === params.id
-          );
-          if (property[0].documents) {
-            if (property[0].documents.length > 1) {
-              setDocument1(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "title_report"
-                    )
-                  : []
-              );
-              setDocument2(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "insurance_copy"
-                    )
-                  : []
-              );
-              setDocument3(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "financial_document"
-                    )
-                  : []
-              );
-              setDocument4(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "purchase_agreement"
-                    )
-                  : []
-              );
-              setDocument5(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "third-party_report"
-                    )
-                  : []
-              );
-              setDocument6(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "market_and_valuations"
-                    )
-                  : []
-              );
-              setDocument7(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "demographics"
-                    )
-                  : []
-              );
-              setDocument8(
-                property[0].documents
-                  ? property[0].documents.filter(
-                      (item) => item.officialName === "others"
-                    )
-                  : []
-              );
-            } else {
-              setDocument1(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "title_report"
-                    )
-                  : []
-              );
-              setDocument2(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "insurance_copy"
-                    )
-                  : []
-              );
-              setDocument3(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "financial_document"
-                    )
-                  : []
-              );
-              setDocument4(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "purchase_agreement"
-                    )
-                  : []
-              );
-              setDocument5(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "third-party_report"
-                    )
-                  : []
-              );
-              setDocument6(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "market_and_valuations"
-                    )
-                  : []
-              );
-              setDocument7(
-                document
-                  ? document.filter(
-                      (item) => item.officialName === "demographics"
-                    )
-                  : []
-              );
-              setDocument8(
-                document
-                  ? document.filter((item) => item.officialName === "others")
-                  : []
-              );
-            }
-          }
-        }
+    if (propertyTest.documents.length > 0) {
+      setDocument1((prev) =>
+        propertyTest.documents.filter(
+          (doc) => doc.officialName === "title_report"
+        )
+      );
+      setDocument2((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "insurance_copy"
+        );
       });
-    } else {
-      setDocument1(
-        document
-          ? document.filter((item) => item.officialName === "title_report")
-          : []
-      );
-      setDocument2(
-        document
-          ? document.filter((item) => item.officialName === "insurance_copy")
-          : []
-      );
-      setDocument3(
-        document
-          ? document.filter(
-              (item) => item.officialName === "financial_document"
-            )
-          : []
-      );
-      setDocument4(
-        document
-          ? document.filter(
-              (item) => item.officialName === "purchase_agreement"
-            )
-          : []
-      );
-      setDocument5(
-        document
-          ? document.filter(
-              (item) => item.officialName === "third-party_report"
-            )
-          : []
-      );
-      setDocument6(
-        document
-          ? document.filter(
-              (item) => item.officialName === "market_and_valuations"
-            )
-          : []
-      );
-      setDocument7(
-        document
-          ? document.filter((item) => item.officialName === "demographics")
-          : []
-      );
-      setDocument8(
-        document
-          ? document.filter((item) => item.officialName === "others")
-          : []
-      );
+      setDocument3((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "financial_document"
+        );
+      });
+      setDocument4((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "purchase_agreement"
+        );
+      });
+      setDocument5((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "third_party_report"
+        );
+      });
+      setDocument6((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "market_and_valuations"
+        );
+      });
+      setDocument7((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "demographics"
+        );
+      });
+      setDocument8((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "others"
+        );
+      });
     }
   }, []);
 
@@ -369,100 +237,108 @@ function RealEstateDocus({
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
-  const saveInfo = async () => {
-    if (propId || params.id) {
-      if (parseInt(steps) === 1) {
-        const datas = {
-          id: propId ? propId : params.id,
-          changes: {
-            ...propertyData,
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.putRealEstateInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      } else if (parseInt(steps) === 2) {
-        const datas = {
-          id: propId ? propId : params.id,
-          changes: {
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.putRealEstateInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(5);
-          }
-        });
-      } else if (parseInt(steps) === 3) {
-        const datas = {
-          id: propId ? propId : params.id,
-          changes: {
-            documents,
-            step: 4,
-          },
-        };
-        await authService.putRealEstateInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(6);
-          }
-        });
-      } else if (parseInt(steps) === 4) {
-        const datas = {
-          id: propId ? propId : params.id,
-          changes: {
-            documents,
-            step: 4,
-          },
-        };
-        await authService.putRealEstateInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(6);
-          }
-        });
-      }
-    } else {
-      const datas = {
-        ...ownership,
-        ...propertyData,
-        images,
-        videos,
-        documents,
-        step: 4,
-      };
-      await authService.postRealEstateInfo(datas).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          toggleSellStep(4);
-          getPropId(response.data._id);
-        }
-      });
-    }
-  };
+  // const saveInfo = async () => {
+  //   if (propId || params.id) {
+  //     if (parseInt(steps) === 1) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         changes: {
+  //           ...propertyData,
+  //           images,
+  //           videos,
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.putRealEstateInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(4);
+  //         }
+  //       });
+  //     } else if (parseInt(steps) === 2) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         changes: {
+  //           images,
+  //           videos,
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.putRealEstateInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(5);
+  //         }
+  //       });
+  //     } else if (parseInt(steps) === 3) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         changes: {
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.putRealEstateInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(6);
+  //         }
+  //       });
+  //     } else if (parseInt(steps) === 4) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         changes: {
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.putRealEstateInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(6);
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     const datas = {
+  //       ...ownership,
+  //       ...propertyData,
+  //       images,
+  //       videos,
+  //       documents,
+  //       step: 4,
+  //     };
+  //     await authService.postRealEstateInfo(datas).then((response) => {
+  //       if (response.data.error) {
+  //         alert(response.data.error);
+  //       } else {
+  //         toggleSellStep(4);
+  //         getPropId(response.data._id);
+  //       }
+  //     });
+  //   }
+  // };
 
   const onSubmit = async (data) => {
-    console.log("test");
-    console.log(data);
     if (doc1.length !== 0 && doc4.length !== 0) {
-      toggleDocuments(documents);
-      toggleStep(step + 1);
+      const data = { documents, step: 4 };
+      authService.editProperty(propertyTest._id, data).then((res) => {
+        if (res.data.error) {
+          if (res.data.error === "Invalid Token") {
+            alert("Your session ended. Please log in! ");
+            toggleSignIn(true);
+          } else alert(res.data.error);
+        } else {
+          setPropertyTest(res.data);
+          setStep(step + 1);
+        }
+      });
     } else {
       alert("Please upload all required documents");
     }
@@ -552,12 +428,7 @@ function RealEstateDocus({
             <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
-            <Button
-              onClick={saveInfo}
-              className="nxt-btn"
-              id="next"
-              type="submit"
-            >
+            <Button className="nxt-btn" id="next" type="submit">
               Next
             </Button>
           </Col>

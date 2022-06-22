@@ -8,14 +8,18 @@ import NumberFormat from "react-number-format";
 
 function RealEstateDetails({
   property,
-  toggleStep,
   step,
+  setStep,
   togglePropertyData,
   propId,
   ownership,
   toggleSellStep,
   getPropId,
   propertyData,
+  property_address,
+  propertyTest,
+  setPropertyTest,
+  toggleSignIn,
 }) {
   const {
     register,
@@ -24,385 +28,106 @@ function RealEstateDetails({
   } = useForm();
 
   const params = useParams();
+  console.log(property_address);
 
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [rooms, setRooms] = useState("");
-  const [bathrooms, setBathrooms] = useState("");
-  const [bedrooms, setBedrooms] = useState("");
-  const [propType, setPropType] = useState("");
-  const [totalValue, setTotalValue] = useState("");
-  const [sqft, setSqft] = useState("");
-  const [year, setYear] = useState();
-  const [lotSize, setLotSize] = useState();
-  const [garage, setGarage] = useState();
-  const [story, setStory] = useState();
-  const [reservedAmount, setReservedAmount] = useState("");
-  const [discussedAmount, setDiscussedAmount] = useState("");
+  const [address, setAddress] = useState(
+    propertyTest.details?.property_address?.formatted_street_address ||
+      property_address.address
+  );
+  const [city, setCity] = useState(
+    propertyTest.details?.property_address?.city || property_address.city
+  );
+  const [state, setState] = useState(
+    propertyTest.details?.property_address?.formatted_street_address?.state ||
+      property_address.state
+  );
+  const [country, setCountry] = useState(
+    propertyTest.details?.property_address?.formatted_street_address?.country ||
+      property_address.country
+  );
+  const [zip, setZip] = useState(
+    propertyTest.details?.property_address?.formatted_street_address
+      ?.zip_code || property_address.zip
+  );
+  const [ownerName, setOwnerName] = useState(
+    propertyTest.details?.owner?.name || ""
+  );
+  const [bathrooms, setBathrooms] = useState(
+    propertyTest.details?.structure?.baths_count || ""
+  );
+  const [bedrooms, setBedrooms] = useState(
+    propertyTest.details?.structure?.beds_count || ""
+  );
+  const [propType, setPropType] = useState(
+    propertyTest.details?.real_estate_type || ""
+  );
+  const [totalValue, setTotalValue] = useState(
+    propertyTest.details?.market_assessments?.slice(-1)[0]["total_value"] || ""
+  );
+  const [year, setYear] = useState(propertyTest.details?.year_built || "");
+  const [lotSize, setLotSize] = useState(
+    propertyTest.details?.parcel?.lot_size || ""
+  );
+  const [garage, setGarage] = useState(
+    propertyTest.details?.type_of_garage || ""
+  );
+  const [story, setStory] = useState(
+    propertyTest.details?.number_of_stories || ""
+  );
 
-  const saveInfo = () => {
-    if (propId || params.id) {
-      const datas = {
-        id: propId ? propId : params.id,
-        changes: {
-          street_address: address ? address : property.street_address,
-          city: city ? city : property.city,
-          state: state ? state : property.state,
-          country: country ? country : property.country,
-          zip_code: zip ? zip : property.zip_code,
-          owner_name: ownerName,
-          year_built: year,
-          lot_size: lotSize,
-          garage: garage,
-          story: story,
-          baths_count: bathrooms,
-          beds_count: bedrooms,
-          standardized_land_use_type: propType,
-          total_value: totalValue,
-          area_sq_ft: sqft,
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          step: parseInt(2),
-        },
-      };
-      authService.putRealEstateInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-        }
-      });
-    } else {
-      const datas = {
-        street_address: address ? address : property.street_address,
-        city: city ? city : property.city,
-        state: state ? state : property.state,
-        country: country ? country : property.country,
-        zip_code: zip ? zip : property.zip_code,
-        owner_name: ownerName,
-        year_built: year,
-        lot_size: lotSize,
-        garage: garage,
-        story: story,
-        baths_count: bathrooms,
-        beds_count: bedrooms,
-        standardized_land_use_type: propType,
-        total_value: totalValue,
-        area_sq_ft: sqft,
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        ...ownership,
-        step: parseInt(2),
-      };
-      delete datas.documents;
-      authService.postRealEstateInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          toggleSellStep(2);
-          getPropId(res.data._id);
-        }
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          const properti = res.data.filter((prop) => prop._id === params.id);
-          setOwnerName(
-            properti[0].details.owner
-              ? properti[0].details.owner.name
-              : propertyData.owner_name
-              ? propertyData.owner_name
-              : property.owner.name
-              ? property.owner.name
-              : ""
-          );
-          setYear(
-            properti[0].details.structure
-              ? properti[0].details.structure.year_built
-              : propertyData.year_built
-              ? propertyData.year_built
-              : property.structure.year_built
-              ? property.structure.year_built
-              : ""
-          );
-          setLotSize(
-            properti[0].details.structure
-              ? properti[0].details.structure.lot_size
-              : propertyData.lot_size
-              ? propertyData.lot_size
-              : property.structure.lot_size
-              ? property.structure.lot_size
-              : ""
-          );
-          setGarage(
-            properti[0].details.structure
-              ? properti[0].details.structure.garage
-              : propertyData.garage
-              ? propertyData.garage
-              : property.structure.garage
-              ? property.structure.garage
-              : ""
-          );
-          setStory(
-            properti[0].details.structure
-              ? properti[0].details.structure.story
-              : propertyData.story
-              ? propertyData.story
-              : property.structure.story
-              ? property.structure.story
-              : ""
-          );
-          setBathrooms(
-            properti[0].details.structure
-              ? properti[0].details.structure.baths
-              : propertyData.baths_count
-              ? propertyData.baths_count
-              : property.structure.baths
-              ? property.structure.baths
-              : ""
-          );
-          setBedrooms(
-            properti[0].details.structure
-              ? properti[0].details.structure.beds_count
-              : propertyData.beds_count
-              ? propertyData.beds_count
-              : property.structure.beds_count
-              ? property.structure.beds_count
-              : ""
-          );
-          setPropType(
-            properti[0].details.parcel
-              ? properti[0].details.parcel.standardized_land_use_type
-              : propertyData.standardized_land_use_type
-              ? propertyData.standardized_land_use_type
-              : property.parcel.standardized_land_use_type
-              ? property.parcel.standardized_land_use_type
-              : ""
-          );
-          setSqft(
-            properti[0].details.parcel
-              ? properti[0].details.parcel.area_sq_ft
-              : propertyData.area_sq_ft
-              ? propertyData.area_sq_ft
-              : property.structure.total_area_sq_ft
-              ? property.structure.total_area_sq_ft
-              : ""
-          );
-          setTotalValue(
-            properti[0].details.market_assessments
-              ? properti[0].details.market_assessments[0].total_value
-              : propertyData.total_value
-              ? propertyData.total_value
-              : property.market_assessments.length > 0
-              ? property.market_assessments[0].total_value
-              : property.assessments.length > 0
-              ? property.assessments[0].total_value
-              : ""
-          );
-          setReservedAmount(
-            properti[0].reservedAmount
-              ? properti[0].reservedAmount
-              : propertyData.reservedAmount
-              ? propertyData.reservedAmount
-              : ""
-          );
-          setDiscussedAmount(
-            properti[0].discussedAmount
-              ? properti[0].discussedAmount
-              : propertyData.discussedAmount
-              ? propertyData.discussedAmount
-              : ""
-          );
-          setAddress(
-            properti[0].details.property_address
-              ? properti[0].details.property_address.formatted_street_address
-              : propertyData.street_address
-              ? propertyData.street_address
-              : property.address.formatted_street_address
-              ? property.address.formatted_street_address
-              : ""
-          );
-          setCity(
-            properti[0].details.property_address
-              ? properti[0].details.property_address.city
-              : propertyData.city
-              ? propertyData.city
-              : property.address.city
-              ? property.address.city
-              : ""
-          );
-          setState(
-            properti[0].details.property_address
-              ? properti[0].details.property_address.state
-              : propertyData.state
-              ? propertyData.state
-              : property.state
-              ? property.state
-              : ""
-          );
-          setCountry(
-            properti[0].details.property_address
-              ? properti[0].details.property_address.country
-              : propertyData.country
-              ? propertyData.country
-              : property.address.country
-              ? property.address.country
-              : property.country
-              ? property.country
-              : "USA"
-          );
-          setZip(
-            properti[0].details.property_address
-              ? properti[0].details.property_address.zip_code
-              : propertyData.zip_code
-              ? propertyData.zip_code
-              : property.address.zip_code
-              ? property.address.zip_code
-              : ""
-          );
-        }
-      });
-    } else {
-      setAddress(
-        propertyData.street_address
-          ? propertyData.street_address
-          : property.address.formatted_street_address
-      );
-      setCity(propertyData.city ? propertyData.city : property.address.city);
-      setState(
-        propertyData.state ? propertyData.state : property.address.state
-      );
-      setCountry(
-        propertyData.country
-          ? propertyData.country
-          : property.address.country
-          ? property.address.country
-          : "USA"
-      );
-      setZip(
-        propertyData.zip_code
-          ? propertyData.zip_code
-          : property.address.zip_code
-      );
-      setOwnerName(
-        propertyData.owner_name
-          ? propertyData.owner_name
-          : property.owner.name
-          ? property.owner.name
-          : ""
-      );
-      setYear(
-        propertyData.year_built
-          ? propertyData.year_built
-          : property.structure.year_built
-          ? property.structure.year_built
-          : ""
-      );
-      setLotSize(
-        propertyData.lot_size
-          ? propertyData.lot_size
-          : property.structure.lot_size
-          ? property.structure.lot_size
-          : ""
-      );
-      setGarage(
-        propertyData.garage
-          ? propertyData.garage
-          : property.structure.garage
-          ? property.structure.garage
-          : ""
-      );
-      setStory(
-        propertyData.story
-          ? propertyData.story
-          : property.structure.story
-          ? property.structure.story
-          : ""
-      );
-      setBathrooms(
-        propertyData.baths_count
-          ? propertyData.baths_count
-          : property.structure.baths
-          ? property.structure.baths
-          : ""
-      );
-      setBedrooms(
-        propertyData.beds_count
-          ? propertyData.beds_count
-          : property.structure.beds_count
-          ? property.structure.beds_count
-          : ""
-      );
-      setPropType(
-        propertyData.standardized_land_use_type
-          ? propertyData.standardized_land_use_type
-          : property.parcel.standardized_land_use_type
-          ? property.parcel.standardized_land_use_type
-          : ""
-      );
-      setSqft(
-        propertyData.area_sq_ft
-          ? propertyData.area_sq_ft
-          : property.structure.total_area_sq_ft
-          ? property.structure.total_area_sq_ft
-          : ""
-      );
-      setTotalValue(
-        propertyData.total_value
-          ? propertyData.total_value
-          : property.market_assessments.length > 0
-          ? property.market_assessments[0].total_value
-          : property.assessments.length > 0
-          ? property.assessments[0].total_value
-          : ""
-      );
-      setReservedAmount(
-        propertyData.reservedAmount ? parseInt(propertyData.reservedAmount) : ""
-      );
-      setDiscussedAmount(
-        propertyData.discussedAmount
-          ? parseInt(propertyData.discussedAmount)
-          : ""
-      );
-    }
-  }, []);
+  const [sqft, setSqft] = useState(
+    propertyTest.details?.parcel?.area_sq_ft || ""
+  );
+  const [reservedAmount, setReservedAmount] = useState(
+    propertyTest.reservedAmount || ""
+  );
+  const [discussedAmount, setDiscussedAmount] = useState(
+    propertyTest.discussedAmount || ""
+  );
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
       const submitedData = {
-        street_address: address ? address : property.street_address,
-        city: city ? city : property.city,
-        state: state ? state : property.state,
-        country: country ? country : property.country,
-        zip_code: zip ? zip : property.zip_code,
+        street_address: address,
+        city: city,
+        state: state,
+        country: country,
+        zip_code: zip,
+        real_estate_type: propType,
+        year_built: year,
         owner_name: ownerName,
-        rooms_count: rooms,
         baths_count: bathrooms,
         beds_count: bedrooms,
         standardized_land_use_type: propType,
         total_value: totalValue,
         area_sq_ft: sqft,
+        lot_size: lotSize,
+        type_of_garage: garage,
+        number_of_stories: story,
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
+        step: 2,
       };
-      togglePropertyData(submitedData);
-      toggleStep(step + 1);
+      authService
+        .editRealEstate(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => alert(error));
     }
   };
   return (
-    <>
+    <div className="sell-bottom">
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
@@ -699,11 +424,11 @@ function RealEstateDetails({
         </Row>
         <Row className="mt-5">
           <Col className="d-flex justify-content-center mt-2">
-            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
+            <Button className="pre-btn" onClick={() => setStep(step - 1)}>
               Previous
             </Button>
             <Button
-              onClick={saveInfo}
+              // onClick={saveInfo}
               className="nxt-btn"
               id="next"
               type="submit"
@@ -713,7 +438,7 @@ function RealEstateDetails({
           </Col>
         </Row>
       </form>
-    </>
+    </div>
   );
 }
 
