@@ -282,7 +282,7 @@ function App() {
           centered
           show={showSignIn}
           onHide={toggleSignIn}
-        // contentclassname="custom-modal-title"
+          // contentclassname="custom-modal-title"
         >
           <div className="sign-In"></div>
         </Modal>
@@ -509,21 +509,6 @@ function App() {
 
           <Switch>
             {user._id && (
-              <Route exact path="/multiSellForm">
-                <MultiSellForm
-                  colorChange={colorChange}
-                  toggleShow={toggleShow}
-                  bodyColorChange={bodyColorChange}
-                  setHeaderWidth={setHeaderWidth}
-                  setPositionLeft={setPositionLeft}
-                  setPadRight={setPadRight}
-                  windowSize={windowSize}
-                  toggleSignIn={toggleSignIn}
-                />
-              </Route>
-            )}
-
-            {user._id && (
               <Route exact path="/Dashboard">
                 <Dashboard
                   toggleShow={toggleShow}
@@ -708,7 +693,7 @@ function App() {
               </Route>
             )}
 
-            <Route exact path="/multiSellForm/:userId/:id/:step">
+            <Route path="/multiSellForm/:id">
               <MultiSellForm
                 colorChange={colorChange}
                 toggleShow={toggleShow}
@@ -721,6 +706,20 @@ function App() {
                 toggleSignUp={toggleSignUp}
               />
             </Route>
+            {user._id && (
+              <Route exact path="/multiSellForm">
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toggleShow={toggleShow}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                  toggleSignIn={toggleSignIn}
+                />
+              </Route>
+            )}
 
             <Route path="/DisplayAuctions/:id">
               <DisplayAuctions

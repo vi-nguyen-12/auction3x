@@ -14,8 +14,6 @@ const UploadForm = ({
   toggleStep,
   step,
   setStep,
-  toggleImages,
-  toggleVideos,
   toggleSellStep,
   sellStep,
   propertyData,
@@ -23,15 +21,15 @@ const UploadForm = ({
   ownership,
   getPropId,
   propertyType,
-  image,
-  video,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
 }) => {
+  console.log(propertyTest);
   const { register, handleSubmit } = useForm();
-  const [images, setImages] = useState([]);
-  const [videos, setVideos] = useState([]);
+  const [images, setImages] = useState(propertyTest.images || []);
+  const [videos, setVideos] = useState(propertyTest.videos || []);
+  console.log(images, videos);
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
@@ -185,42 +183,42 @@ const UploadForm = ({
     }
   };
 
-  useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          const property = response.data.filter(
-            (item) => item._id === params.id
-          );
-          if (property.length > 0) {
-            setImages(
-              property[0].images
-                ? property[0].images.length > 0
-                  ? property[0].images
-                  : image
-                  ? image
-                  : []
-                : []
-            );
-            setVideos(
-              property[0].videos
-                ? property[0].videos.length > 0
-                  ? property[0].videos
-                  : video
-                  ? video
-                  : []
-                : []
-            );
-          }
-        }
-      });
-    } else {
-      setImages(image ? image : []);
-      setVideos(video ? video : []);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (params.id) {
+  //     authService.getIncompleteProperty(params.userId).then((response) => {
+  //       if (response.data.error) {
+  //         alert(response.data.error);
+  //       } else {
+  //         const property = response.data.filter(
+  //           (item) => item._id === params.id
+  //         );
+  //         if (property.length > 0) {
+  //           setImages(
+  //             property[0].images
+  //               ? property[0].images.length > 0
+  //                 ? property[0].images
+  //                 : image
+  //                 ? image
+  //                 : []
+  //               : []
+  //           );
+  //           setVideos(
+  //             property[0].videos
+  //               ? property[0].videos.length > 0
+  //                 ? property[0].videos
+  //                 : video
+  //                 ? video
+  //                 : []
+  //               : []
+  //           );
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     setImages(image ? image : []);
+  //     setVideos(video ? video : []);
+  //   }
+  // }, []);
 
   const handleDelete = (url) => () => {
     setImages(images.filter((image) => image.url !== url));
@@ -347,6 +345,7 @@ const UploadForm = ({
       // toggleImages(images);
       // toggleVideos(videos);
       const data = { images, videos, step: 3 };
+
       console.log(propertyTest);
       authService
         .editProperty(propertyTest._id, data)

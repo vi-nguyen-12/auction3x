@@ -79,20 +79,22 @@ const MultiSellForm = ({
     colorChange("black");
     bodyColorChange("#ffefe3");
     toggleShow();
-    if (params.step) {
-      setStep(parseInt(params.step) + 1);
-    }
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((res) => {
-        const property = res.data.filter((prop) => prop._id === params.id);
-        setPropertyType(property[0].type);
-      });
-    }
+    // if (params.step) {
+    //   setStep(parseInt(params.step) + 1);
+    // }
+    // if (params.id) {
+    //   authService.getIncompleteProperty(params.userId).then((res) => {
+    //     const property = res.data.filter((prop) => prop._id === params.id);
+    //     setPropertyType(property[0].type);
+    //   });
+    // }
     if (params.id) {
       authService
         .getProperty(params.id)
         .then((response) => {
-          console.log(response); //should work on this later
+          //should work on this later
+          setPropertyTest(response.data);
+          setStep(response.data.step);
         })
         .catch((error) => {
           if (error.message === "jwt expired") {
