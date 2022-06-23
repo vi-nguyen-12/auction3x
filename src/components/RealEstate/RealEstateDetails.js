@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
-
 import { IoInformationCircleSharp } from "react-icons/io5";
 import NumberFormat from "react-number-format";
+import SellHeader from "../SellRegister/SellHeader";
 
 function RealEstateDetails({
   step,
@@ -114,6 +114,7 @@ function RealEstateDetails({
   };
   return (
     <div className="sell-bottom">
+      <SellHeader step={step} />
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div

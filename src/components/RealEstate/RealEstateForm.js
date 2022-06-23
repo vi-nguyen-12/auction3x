@@ -4,9 +4,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
 import { Row, Col, Button } from "react-bootstrap";
-
 import RealEstateDetails from "./RealEstateDetails";
-
+import SellHeader from "../SellRegister/SellHeader";
 function RealEstateForm({
   step,
   setStep,
@@ -83,6 +82,7 @@ function RealEstateForm({
   if (subStep === `${step}.1`) {
     return (
       <div className="wrapper">
+        <SellHeader step={step} />
         <div className="sell-bottom">
           <h3>Search Property</h3>
           <form
