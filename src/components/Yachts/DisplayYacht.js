@@ -323,7 +323,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       {property.property.images.map((item, index) => (
                         <Wrap key={index}>
                           <img
-                            style={{ height: "100%" }}
+                            width="100%"
+                            height="100%"
                             src={item.url}
                             alt=""
                           />
@@ -361,7 +362,12 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       {property.property.videos.length > 0 ? (
                         property.property.videos.map((item, index) => (
                           <Wrap key={index}>
-                            <video className="vid-display" controls>
+                            <video
+                              className="vid-display"
+                              width="100%"
+                              height="100%"
+                              controls
+                            >
                               <source src={item.url} type="video/webm" />
                             </video>
                           </Wrap>
@@ -1112,11 +1118,12 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       responsive
                       striped
                       style={{
-                        margin: "auto",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        width: "auto",
-                        height: "auto",
+                        padding: "0",
+                        position: windowSize < 600 && "absolute",
+                        width: windowSize < 600 && "92vw",
+                        overflow: windowSize < 800 ? "auto" : "hidden",
+                        display: windowSize < 800 && "block",
+                        tableLayout: windowSize < 800 && "auto",
                       }}
                     >
                       <thead style={{ backgroundColor: "#d58f5c" }}>
@@ -1183,7 +1190,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
           >
             <div
               style={{
-                marginTop: "30px",
+                marginTop: windowSize < 600 ? "200px" : "30px",
                 alignItems: "center",
                 marginBottom: "20px",
                 padding: "0",

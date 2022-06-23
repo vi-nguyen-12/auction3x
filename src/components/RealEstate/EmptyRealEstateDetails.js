@@ -17,11 +17,7 @@ function EmptyRealEstateDetails({
   toggleSellStep,
   getPropId,
 }) {
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const params = useParams();
 

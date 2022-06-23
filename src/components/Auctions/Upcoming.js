@@ -10,7 +10,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
         <>
           <div className="mt-5">
             <Row style={{ padding: "0 50px" }}>
-              <Col style={{padding:"0"}} className="pt-5">
+              <Col style={{ padding: "0" }} className="pt-5">
                 <h2 style={{ color: "black", fontSize: "22px" }}>
                   Upcoming Auctions
                 </h2>
@@ -18,7 +18,6 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
             </Row>
             <Row
               style={{
-                padding: "0 50px",
                 display: "flex",
                 alignContent: "center",
                 alignItems: "center",
@@ -28,7 +27,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                 upcomingAuctions.slice(0, 6).map((item) => (
                   <Col
                     key={item._id}
-                    style={{ padding:"0", margin:"30px 0" }}
+                    style={{ padding: "0", margin: "30px 0" }}
                   >
                     <Cards
                       data={item}

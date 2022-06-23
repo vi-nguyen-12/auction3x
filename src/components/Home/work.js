@@ -2,11 +2,11 @@ import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
 import "../../styles/work.css";
 
-const Work = () => {
+const Work = ({ windowSize }) => {
   return (
     <section
       style={{
-        padding: "50px 50px",
+        padding: windowSize < 600 ? "50px 20px" : "50px 50px",
         paddingBottom: "150px",
         background: "#f8f8f8",
         marginTop: "50px",

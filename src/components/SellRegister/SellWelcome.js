@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Row, Col } from "react-bootstrap";
 import { BsFillHouseFill } from "react-icons/bs";
@@ -7,25 +7,17 @@ import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
 import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
-import { useParams } from "react-router-dom";
-import { getByTestId } from "@testing-library/react";
-import authService from "../../services/authServices";
-// create step bar
 
 const Sell = ({
-  // toggleStep,
   step,
   setStep,
-  // togglePropertyType,
+
   windowSize,
   propertyTest,
   setPropertyTest,
 }) => {
-  const { id } = useParams();
-  const [type, setType] = useState(propertyTest.type); //should check if type has value, then that box is blue
+  const [type, setType] = useState(propertyTest.type);
   const { handleSubmit } = useForm();
-  const [select, setSelect] = useState("");
-  const [propertyType, setPropertyType] = useState();
 
   const onSubmit = () => {
     if (type === undefined) {
@@ -81,8 +73,6 @@ const Sell = ({
                 className="category-btn"
                 onClick={(e) => {
                   setType(property.propType);
-                  // setPropertyType(property.propType);
-                  // setSelect(index);
                 }}
               >
                 {property.icon}

@@ -109,6 +109,7 @@ const Header = ({
         justifyContent: "center",
         alignItems: "center",
         height: "60px",
+        width: "100vw",
       }}
     >
       <nav
@@ -120,7 +121,7 @@ const Header = ({
           display: "flex",
           alignContent: "center",
           height: "100%",
-          justifyContent:"space-between"
+          justifyContent: "space-between",
         }}
       >
         <div className="navbar-brand">
@@ -237,7 +238,11 @@ const Header = ({
             </Modal> */}
             <div
               className="d-flex flex-row"
-              style={{ alignItems: "center", height: "100%", justifyContent:"flex-end" }}
+              style={{
+                alignItems: "center",
+                height: "100%",
+                justifyContent: "flex-end",
+              }}
             >
               {windowSize > 800 ? (
                 user._id ? (

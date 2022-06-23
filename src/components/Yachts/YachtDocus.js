@@ -12,16 +12,8 @@ function YachtDocus({
   toggleStep,
   step,
   setStep,
-  toggleDocuments,
   ownership,
-  propId,
-  images,
-  videos,
-  propertyData,
-  toggleSellStep,
   sellStep,
-  getPropId,
-  document,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
@@ -40,63 +32,63 @@ function YachtDocus({
   const datas = [
     {
       name: "Vessel Registration Documents",
-      officialName: "vesselRegistrationDocuments",
+      officialName: "vessel_registration",
       number: 1,
       documents: doc1,
       required: true,
     },
     {
       name: "Vessel Maintenance Report",
-      officialName: "vesselMaintenanceReport",
+      officialName: "vessel_maintenance_report",
       number: 2,
       documents: doc2,
       required: true,
     },
     {
       name: "Vessel Engine Type",
-      officialName: "vesselEngineType",
+      officialName: "vessel_engine_type",
       number: 3,
       documents: doc3,
       required: false,
     },
     {
       name: "Vessel Performance Report",
-      officialName: "vesselPerformanceReport",
+      officialName: "vessel_performance_report",
       number: 4,
       documents: doc4,
       required: false,
     },
     {
       name: "Vessel Deck Details",
-      officialName: "vesselDeckDetails",
+      officialName: "vessel_deck_details",
       number: 5,
       documents: doc5,
       required: false,
     },
     {
       name: "Vessel Latest Insurance",
-      officialName: "vesselLatestInsurance",
+      officialName: "vessel_insurance",
       number: 6,
       documents: doc6,
       required: false,
     },
     {
       name: "Vessel Marine Surveyor Report(approved)",
-      officialName: "vesselMarineSurveyorReport",
+      officialName: "vessel_marine_surveyor_report",
       number: 7,
       documents: doc7,
       required: false,
     },
     {
       name: "Vessel Valuation Report",
-      officialName: "vesselvaluationReport",
+      officialName: "vessel_valuation_report",
       number: 8,
       documents: doc8,
       required: false,
     },
     {
       name: "Other Documents",
-      officialName: "otherDocuments",
+      officialName: "other_document",
       number: 9,
       documents: doc9,
       required: false,
@@ -159,196 +151,54 @@ function YachtDocus({
   const incompProperty = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
-    if (params.id) {
-      const prop = incompProperty.filter((item) => item._id === params.id);
-      if (prop[0].documents.length > 1) {
-        setDocument1(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_registration"
-              )
-            : []
-        );
-        setDocument2(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_maintenance_report"
-              )
-            : []
-        );
-        setDocument3(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_engine_type"
-              )
-            : []
-        );
-        setDocument4(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_performance_report"
-              )
-            : []
-        );
-        setDocument5(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_deck_details"
-              )
-            : []
-        );
-        setDocument6(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_insurance"
-              )
-            : []
-        );
-        setDocument7(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_marine_surveyor_report"
-              )
-            : []
-        );
-        setDocument8(
-          prop[0].documents
-            ? prop[0].documents.filter(
-                (item) => item.officialName === "vessel_valuation_report"
-              )
-            : []
-        );
-        setDocument9(
-          prop[0].documents
-            ? prop[0].documents.filter((item) => item.officialName === "others")
-            : []
-        );
-      } else {
-        setDocument1(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_registration"
-              )
-            : []
-        );
-        setDocument2(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_maintenance_report"
-              )
-            : []
-        );
-        setDocument3(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_engine_type"
-              )
-            : []
-        );
-        setDocument4(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_performance_report"
-              )
-            : []
-        );
-        setDocument5(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_deck_details"
-              )
-            : []
-        );
-        setDocument6(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_insurance"
-              )
-            : []
-        );
-        setDocument7(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_marine_surveyor_report"
-              )
-            : []
-        );
-        setDocument8(
-          document
-            ? document.filter(
-                (item) => item.officialName === "vessel_valuation_report"
-              )
-            : []
-        );
-        setDocument9(
-          document
-            ? document.filter((item) => item.officialName === "others")
-            : []
-        );
-      }
-    } else {
-      setDocument1(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_registration"
-            )
-          : []
+    if (propertyTest.documents.length > 0) {
+      setDocument1((prev) =>
+        propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_registration"
+        )
       );
-      setDocument2(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_maintenance_report"
-            )
-          : []
-      );
-      setDocument3(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_engine_type"
-            )
-          : []
-      );
-      setDocument4(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_performance_report"
-            )
-          : []
-      );
-      setDocument5(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_deck_details"
-            )
-          : []
-      );
-      setDocument6(
-        document
-          ? document.filter((item) => item.officialName === "vessel_insurance")
-          : []
-      );
-      setDocument7(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_marine_surveyor_report"
-            )
-          : []
-      );
-      setDocument8(
-        document
-          ? document.filter(
-              (item) => item.officialName === "vessel_valuation_report"
-            )
-          : []
-      );
-      setDocument9(
-        document
-          ? document.filter((item) => item.officialName === "others")
-          : []
-      );
+      setDocument2((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_maintenance_report"
+        );
+      });
+      setDocument3((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_engine_type"
+        );
+      });
+      setDocument4((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_performance_report"
+        );
+      });
+      setDocument5((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_deck_details"
+        );
+      });
+      setDocument6((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_insurance"
+        );
+      });
+      setDocument7((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_marine_surveyor_report"
+        );
+      });
+      setDocument8((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "vessel_valuation_report"
+        );
+      });
+      setDocument9((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "other_document"
+        );
+      });
     }
-  }, [incompProperty, document, params.id]);
-
+  }, []);
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));
@@ -402,78 +252,78 @@ function YachtDocus({
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
 
-  const saveInfo = async (data) => {
-    if (propId || params.id) {
-      if (parseInt(steps) === 1) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            ...propertyData,
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      } else if (parseInt(steps) === 2) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      } else if (parseInt(steps) === 3) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            documents,
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      }
-    } else {
-      const datas = {
-        ...ownership,
-        ...propertyData,
-        images,
-        videos,
-        documents,
-        step: 4,
-      };
-      await authService.postPropInfo(datas).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          toggleSellStep(4);
-          getPropId(response.data._id);
-        }
-      });
-    }
-  };
+  // const saveInfo = async (data) => {
+  //   if (propId || params.id) {
+  //     if (parseInt(steps) === 1) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           ...propertyData,
+  //           images,
+  //           videos,
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.saveInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(4);
+  //         }
+  //       });
+  //     } else if (parseInt(steps) === 2) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           images,
+  //           videos,
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.saveInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(4);
+  //         }
+  //       });
+  //     } else if (parseInt(steps) === 3) {
+  //       const datas = {
+  //         id: propId ? propId : params.id,
+  //         details: {
+  //           documents,
+  //           step: 4,
+  //         },
+  //       };
+  //       await authService.saveInfo(datas).then((response) => {
+  //         if (response.data.error) {
+  //           alert(response.data.error);
+  //         } else {
+  //           toggleSellStep(4);
+  //         }
+  //       });
+  //     }
+  //   } else {
+  //     const datas = {
+  //       ...ownership,
+  //       ...propertyData,
+  //       images,
+  //       videos,
+  //       documents,
+  //       step: 4,
+  //     };
+  //     await authService.postPropInfo(datas).then((response) => {
+  //       if (response.data.error) {
+  //         alert(response.data.error);
+  //       } else {
+  //         toggleSellStep(4);
+  //         getPropId(response.data._id);
+  //       }
+  //     });
+  //   }
+  // };
 
   const onSubmit = async (data) => {
     if (doc1.length !== 0 && doc2.length !== 0) {
@@ -578,7 +428,7 @@ function YachtDocus({
               Previous
             </Button>
             <Button
-              onClick={saveInfo}
+              // onClick={saveInfo}
               className="nxt-btn"
               id="next"
               type="submit"

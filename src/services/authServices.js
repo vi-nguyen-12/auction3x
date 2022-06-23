@@ -197,9 +197,7 @@ const authService = {
         `/api/docusign/signature/selling_agreement/uiviews?envelopeId=${data}`,
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -210,9 +208,7 @@ const authService = {
         `/api/docusign/signature/buying_agreement/uiviews?envelopeId=${data}`,
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -230,9 +226,7 @@ const authService = {
       {},
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -244,9 +238,7 @@ const authService = {
       {},
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -261,8 +253,7 @@ const authService = {
   getSavedProperties(id) {
     return axios.get(apiUrl + `/api/users/${id}/likes`, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -281,9 +272,7 @@ const authService = {
       apiUrl + `/api/users/${id}/buyer/auctions?status=pending`,
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -332,9 +321,7 @@ const authService = {
       { ...data.details },
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );

@@ -27,9 +27,10 @@ const FindInCountries = (props) => {
                   color: "black",
                   fontSize: "22px",
                   marginBottom: "50px",
+                  fontWeight: "bold",
                 }}
               >
-                Find Properties In These Countries
+                Find Properties In These Cities
               </h2>
             </Col>
           </Row>
@@ -37,7 +38,7 @@ const FindInCountries = (props) => {
             <Col md={4}>
               <div className="circularCard">
                 <img
-                  onClick={() => history.push("/Auctions/USA")}
+                  onClick={() => history.push("/Auctions/Austin")}
                   height="400px"
                   src={Austin}
                   alt="Austin"
@@ -51,7 +52,7 @@ const FindInCountries = (props) => {
             <Col md={8}>
               <div className="circularCard">
                 <img
-                  onClick={() => history.push("/Auctions/Australia")}
+                  onClick={() => history.push("/Auctions/Houston")}
                   height="400px"
                   src={Houston}
                   alt=""
@@ -67,7 +68,7 @@ const FindInCountries = (props) => {
             <Col md={8}>
               <div className="circularCard">
                 <img
-                  onClick={() => history.push("/Auctions/Canada")}
+                  onClick={() => history.push("/Auctions/Dallas")}
                   height="400px"
                   src={Dallas}
                   alt=""
@@ -81,7 +82,7 @@ const FindInCountries = (props) => {
             <Col md={4}>
               <div className="circularCard">
                 <img
-                  onClick={() => history.push("/Auctions/England")}
+                  onClick={() => history.push("/Auctions/SanAntonio")}
                   height="400px"
                   src={SanAntonio}
                   alt=""

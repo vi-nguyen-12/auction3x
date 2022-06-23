@@ -1,33 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import authService from "../../services/authServices";
 import PlacesAutocomplete, {
   geocodeByAddress,
 } from "react-places-autocomplete";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Row, Col, Button } from "react-bootstrap";
+
 import RealEstateDetails from "./RealEstateDetails";
 
 function RealEstateForm({
-  toggleStep,
   step,
   setStep,
-  properties,
-  property,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
 }) {
   const [subStep, setSubStep] = useState(`${step}.1`);
-  // const prop = useSelector((state) => state.incompProperty);
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
-
-  const params = useParams();
+  const { register, handleSubmit } = useForm();
 
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address || ""
@@ -88,77 +76,7 @@ function RealEstateForm({
     });
   };
 
-  // useEffect(() => {
-  //   if (params.id && prop.length > 0) {
-  //     const properti = prop.filter((prop) => prop._id === params.id);
-  //     setAddress(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address.formatted_street_address
-  //         : property.street_address
-  //         ? property.street_address
-  //         : ""
-  //     );
-  //     setCity(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address.city
-  //         : property.city
-  //         ? property.city
-  //         : ""
-  //     );
-  //     setState(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address.state
-  //         : property.state
-  //         ? property.state
-  //         : ""
-  //     );
-  //     setCountry(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address.country
-  //         : property.country
-  //         ? property.country
-  //         : ""
-  //     );
-  //     setZip(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address.zip_code
-  //         : property.zip_code
-  //         ? property.zip_code
-  //         : ""
-  //     );
-  //   } else {
-  //     setAddress(property.street_address ? property.street_address : "");
-  //     setCity(property.city ? property.city : "");
-  //     setState(property.state ? property.state : "");
-  //     setCountry(property.country ? property.country : "");
-  //     setZip(property.zip_code ? property.zip_code : "");
-  //   }
-  // }, [params.id]);
-
   const onSubmit = (data) => {
-    // if (data.zipCode.length === 5) {
-    //   const addres = address1 ? address + ", " + address1 : address;
-    //   const datas = {
-    //     street_address: addres,
-    //     city: data.city ? data.city : city,
-    //     state: data.state ? data.state : state,
-    //     country: country ? country : data.country,
-    //     zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
-    //   };
-    //   authService.realEstate(datas).then((res) => {
-    //     console.log(res.data);
-    //     if (res.data.length !== 0) {
-    //       setSubStep(`${step}.2`);
-    //     } else if (res.data.length === 0) {
-    //       alert(
-    //         "Could not find property information! Please fill out the property details."
-    //       );
-    //       setSubStep(`${step}.2`);
-    //     }
-    //   });
-    // } else {
-    //   alert("Please enter a valid zip code");
-    // }
     setSubStep(`${step}.2`);
   };
 
@@ -308,7 +226,7 @@ function RealEstateForm({
                   name="zip"
                   placeholder="Zip Code"
                   defaultValue={zip}
-                  {...register("zipCode", { required: true })}
+                  {...register("zipCode", { required: false })}
                   required
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>

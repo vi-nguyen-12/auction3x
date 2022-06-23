@@ -55,7 +55,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         upcomingAuctions={upcomingAuctions}
         windowSize={windowSize}
       />
-      <Work />
+      <Work windowSize={windowSize} />
       <RealEstate />
       <About />
     </>

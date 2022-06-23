@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
+
 import PhoneInput from "react-phone-input-2";
 import SellHeader from "./SellHeader";
 import PlacesAutocomplete, {
@@ -17,11 +17,7 @@ function Ownership({
   toggleStep,
   step,
   setStep,
-  getOwnerShip,
-  propertyType,
-  getPropId,
-  toggleSellStep,
-  propId,
+
   ownership,
   propertyTest,
   setPropertyTest,
@@ -55,7 +51,6 @@ function Ownership({
   const [listingAgreements, setListingAgreements] = useState(
     propertyTest.details?.broker_documents || []
   );
-  const [select, setSelect] = useState("");
 
   const getFile = async (e) => {
     const formData = new FormData();
@@ -70,37 +65,27 @@ function Ownership({
   };
 
   const onSubmit = (data) => {
+    console.log(propertyTest._id);
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
-    } else if (data.brokerName !== "") {
-      const submitedData = {
-        type: propertyTest.type,
-        details: {
-          owner_name: ownerName,
-          broker_name: brokerName ? brokerName : null,
-          broker_id: brokerId ? brokerId : null,
-          phone: phone,
-          email: email,
-          address: address,
-          broker_documents: listingAgreements,
-        },
-        step: 1,
-      };
-
-      authService.createProperty(submitedData).then((res) => {
-        console.log(res.data);
-        if (res.data.error) {
-          if (res.data.error === "Invalid Token") {
-            toggleSignIn(true);
-          } else alert(res.data.error);
-        } else {
-          setPropertyTest(res.data);
-          setStep(2);
-        }
-      });
     } else {
-      if (data.brokerName === "") {
-        const data = {
+      let submitedData;
+      if (data.brokerName !== "") {
+        submitedData = {
+          type: propertyTest.type,
+          details: {
+            owner_name: ownerName,
+            broker_name: brokerName ? brokerName : null,
+            broker_id: brokerId ? brokerId : null,
+            phone: phone,
+            email: email,
+            address: address,
+            broker_documents: listingAgreements,
+          },
+          step: 1,
+        };
+      } else {
+        submitedData = {
           type: propertyTest.type,
           details: {
             owner_name: ownerName,
@@ -110,16 +95,46 @@ function Ownership({
           },
           step: 1,
         };
-        authService.createProperty(data).then((res) => {
-          console.log(res.data);
+      }
+      if (propertyTest._id) {
+        if (propertyTest.type === "real-estate") {
+          authService
+            .editRealEstate(propertyTest._id, submitedData)
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.error) {
+                if (res.data.error === "Invalid Token") {
+                  toggleSignIn(true);
+                } else alert(res.data.error);
+              } else {
+                setPropertyTest(res.data);
+                setStep(2);
+              }
+            });
+        } else {
+          authService
+            .editProperty(propertyTest._id, submitedData)
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.error) {
+                if (res.data.error === "Invalid Token") {
+                  toggleSignIn(true);
+                } else alert(res.data.error);
+              } else {
+                setPropertyTest(res.data);
+                setStep(2);
+              }
+            });
+        }
+      } else {
+        authService.createProperty(submitedData).then((res) => {
           if (res.data.error) {
             if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
               toggleSignIn(true);
             } else alert(res.data.error);
           } else {
             setPropertyTest(res.data);
-            setStep(step + 1);
+            setStep(2);
           }
         });
       }
@@ -132,6 +147,7 @@ function Ownership({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
+      console.log(results);
       setAddress(results[0].formatted_address);
 
       let cities = results[0].address_components.filter((item) => {

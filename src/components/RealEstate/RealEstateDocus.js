@@ -3,7 +3,7 @@ import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
+
 import { Row, Col, Button } from "react-bootstrap";
 import Loading from "../../components/Loading";
 
@@ -11,16 +11,7 @@ function RealEstateDocus({
   toggleStep,
   step,
   setStep,
-  toggleDocuments,
   ownership,
-  propId,
-  images,
-  videos,
-  propertyData,
-  toggleSellStep,
-  sellStep,
-  getPropId,
-  document,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
@@ -236,94 +227,6 @@ function RealEstateDocus({
     ...otherDocuments,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
-
-  // const saveInfo = async () => {
-  //   if (propId || params.id) {
-  //     if (parseInt(steps) === 1) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         changes: {
-  //           ...propertyData,
-  //           images,
-  //           videos,
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.putRealEstateInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(4);
-  //         }
-  //       });
-  //     } else if (parseInt(steps) === 2) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         changes: {
-  //           images,
-  //           videos,
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.putRealEstateInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(5);
-  //         }
-  //       });
-  //     } else if (parseInt(steps) === 3) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         changes: {
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.putRealEstateInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(6);
-  //         }
-  //       });
-  //     } else if (parseInt(steps) === 4) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         changes: {
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.putRealEstateInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(6);
-  //         }
-  //       });
-  //     }
-  //   } else {
-  //     const datas = {
-  //       ...ownership,
-  //       ...propertyData,
-  //       images,
-  //       videos,
-  //       documents,
-  //       step: 4,
-  //     };
-  //     await authService.postRealEstateInfo(datas).then((response) => {
-  //       if (response.data.error) {
-  //         alert(response.data.error);
-  //       } else {
-  //         toggleSellStep(4);
-  //         getPropId(response.data._id);
-  //       }
-  //     });
-  //   }
-  // };
 
   const onSubmit = async (data) => {
     if (doc1.length !== 0 && doc4.length !== 0) {

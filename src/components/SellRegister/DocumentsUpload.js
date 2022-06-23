@@ -11,7 +11,7 @@ const DocumentsUpload = ({
   toggleStep,
   step,
   setStep,
-  propertyType,
+
   toggleDocuments,
   ownership,
   propId,

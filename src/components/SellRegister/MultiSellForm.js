@@ -3,13 +3,12 @@ import AgreementForm from "./AgreementForm";
 import SellWelcome from "./SellWelcome";
 import UploadForm from "./UploadForm";
 import "../../styles/sell-register.css";
-import ListingDetails from "./ListingDetails";
 import PropertyDetails from "./PropertyDetails";
 
 import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams, useHistory } from "react-router-dom";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import DocumentsUpload from "./DocumentsUpload";
 import RealEstateForm from "../RealEstate/RealEstateForm";
 
@@ -79,20 +78,11 @@ const MultiSellForm = ({
     colorChange("black");
     bodyColorChange("#ffefe3");
     toggleShow();
-    // if (params.step) {
-    //   setStep(parseInt(params.step) + 1);
-    // }
-    // if (params.id) {
-    //   authService.getIncompleteProperty(params.userId).then((res) => {
-    //     const property = res.data.filter((prop) => prop._id === params.id);
-    //     setPropertyType(property[0].type);
-    //   });
-    // }
+
     if (params.id) {
       authService
         .getProperty(params.id)
         .then((response) => {
-          //should work on this later
           setPropertyTest(response.data);
           setStep(response.data.step);
         })

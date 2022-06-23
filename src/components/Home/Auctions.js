@@ -42,8 +42,6 @@ function Auctions({ toggleSignIn, windowSize, toggleChange, filter }) {
     }
   }, [filter, allAuctions]);
 
-  console.log(allAuctions);
-
   //   useEffect(() => {
   //     if (params.filter === "USA") {
   //         console.log(allAuctions);

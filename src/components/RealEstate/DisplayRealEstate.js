@@ -357,7 +357,12 @@ function DisplayRealEstate({
                       {property.property.videos.length > 0 ? (
                         property.property.videos.map((item, index) => (
                           <Wrap key={index}>
-                            <video className="video-display" controls>
+                            <video
+                              className="video-display"
+                              width="100%"
+                              height="100%"
+                              controls
+                            >
                               <source src={item.url} type="video/webm" />
                             </video>
                           </Wrap>
@@ -431,16 +436,28 @@ function DisplayRealEstate({
               padding: windowSize > 500 ? "35px" : "15px",
             }}
           >
-            <Col xs={12} md={6}>
-              <Row style={{ textAlign: windowSize < 500 && "center" }}>
-                <h2 style={{ color: "#b77b50" }}>Marbella Detached Villa</h2>
-                <h5 style={{ color: "#919191", fontWeight: "400" }}>
+            <Col xs={12} md={6} style={{ padding: "0" }}>
+              <Row
+                style={{
+                  textAlign: windowSize < 500 && "center",
+                  padding: "0",
+                }}
+              >
+                <h2 style={{ color: "#b77b50", padding: "0" }}>
                   {
                     property.property.details.property_address
                       .formatted_street_address
-                  }{" "}
-                  {","} {property.property.details.property_address.city} {","}{" "}
-                  {property.property.details.property_address.state}{" "}
+                  }
+                </h2>
+                <h5
+                  style={{ color: "#919191", fontWeight: "400", padding: "0" }}
+                >
+                  {/* {
+                    property.property.details.property_address
+                      .formatted_street_address
+                  }{" "} */}
+                  {property.property.details.property_address.city}
+                  {","} {property.property.details.property_address.state}{" "}
                   {property.property.details.property_address.zip_code}
                 </h5>
               </Row>
@@ -581,7 +598,7 @@ function DisplayRealEstate({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: "right",
+                    justifyContent: windowSize < 600 ? "center" : "right",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
@@ -834,7 +851,7 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px 83px",
+                          padding: "30px 76px",
                         }}
                       >
                         <h4>
@@ -870,7 +887,7 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px 83px",
+                          padding: "30px 76px",
                         }}
                       >
                         <h4>
@@ -1058,16 +1075,31 @@ function DisplayRealEstate({
                   </Table>
                 </Col>
                 {user._id && user.KYC && property.highestBidders && (
-                  <Col>
+                  <Col
+                    style={{ padding: windowSize < 600 && "0" }}
+                    md={6}
+                    xs={12}
+                  >
+                    {/* <Table responsive striped hover>
+                      <thead>
+                        <th>#</th>
+                        <th>Bidder ID</th>
+                        <th>Bidder</th>
+                        <th>Bid Amount</th>
+                        <th>Date/Time</th>
+                      </thead>
+                    </Table> */}
                     <Table
                       responsive
                       striped
+                      hover
                       style={{
-                        margin: "auto",
-                        justifyContent: "center",
-                        textAlign: "center",
-                        width: "auto",
-                        height: "auto",
+                        padding: "0",
+                        position: windowSize < 600 && "absolute",
+                        width: windowSize < 600 && "92vw",
+                        overflow: windowSize < 800 ? "auto" : "hidden",
+                        display: windowSize < 800 && "block",
+                        tableLayout: windowSize < 800 && "auto",
                       }}
                     >
                       <thead
@@ -1092,7 +1124,7 @@ function DisplayRealEstate({
                               <tr
                                 style={{
                                   backgroundColor:
-                                    bid.userId === user._id ? "#6de8b1" : "",
+                                    bid.userId === user._id ? "#e8e8e8" : "",
                                 }}
                                 key={index}
                               >
@@ -1138,7 +1170,7 @@ function DisplayRealEstate({
           >
             <div
               style={{
-                marginTop: "30px",
+                marginTop: windowSize < 600 ? "200px" : "30px",
                 alignItems: "center",
                 marginBottom: "20px",
                 padding: "0",
