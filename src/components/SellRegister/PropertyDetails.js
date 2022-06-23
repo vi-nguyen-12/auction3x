@@ -13,7 +13,6 @@ const PropertyDetails = ({
   setStep,
   property,
   togglePropertyData,
-  propertyType,
   propId,
   ownership,
   getPropId,

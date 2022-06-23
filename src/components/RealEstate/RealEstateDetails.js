@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
+
 import { IoInformationCircleSharp } from "react-icons/io5";
 import NumberFormat from "react-number-format";
 
 function RealEstateDetails({
-  property,
   step,
   setStep,
-  togglePropertyData,
-  propId,
-  ownership,
-  toggleSellStep,
-  getPropId,
-  propertyData,
   property_address,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
 }) {
-  const {
-    register,
-    handleSubmit,
-    //formState: { errors },
-  } = useForm();
-
-  const params = useParams();
-  console.log(property_address);
+  const { register, handleSubmit } = useForm();
 
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address ||

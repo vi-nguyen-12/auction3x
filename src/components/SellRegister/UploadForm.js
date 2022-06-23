@@ -25,7 +25,6 @@ const UploadForm = ({
   setPropertyTest,
   toggleSignIn,
 }) => {
-  console.log(propertyTest);
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState(propertyTest.images || []);
   const [videos, setVideos] = useState(propertyTest.videos || []);
@@ -183,43 +182,6 @@ const UploadForm = ({
     }
   };
 
-  // useEffect(() => {
-  //   if (params.id) {
-  //     authService.getIncompleteProperty(params.userId).then((response) => {
-  //       if (response.data.error) {
-  //         alert(response.data.error);
-  //       } else {
-  //         const property = response.data.filter(
-  //           (item) => item._id === params.id
-  //         );
-  //         if (property.length > 0) {
-  //           setImages(
-  //             property[0].images
-  //               ? property[0].images.length > 0
-  //                 ? property[0].images
-  //                 : image
-  //                 ? image
-  //                 : []
-  //               : []
-  //           );
-  //           setVideos(
-  //             property[0].videos
-  //               ? property[0].videos.length > 0
-  //                 ? property[0].videos
-  //                 : video
-  //                 ? video
-  //                 : []
-  //               : []
-  //           );
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     setImages(image ? image : []);
-  //     setVideos(video ? video : []);
-  //   }
-  // }, []);
-
   const handleDelete = (url) => () => {
     setImages(images.filter((image) => image.url !== url));
     // make button not hit submit
@@ -231,119 +193,6 @@ const UploadForm = ({
 
   const onSubmit = () => {
     if (images.length !== 0) {
-      // if (propertyType === "real-estate") {
-      //   if (propId || params.id) {
-      //     if (sellStep === 2 || parseInt(params.step) === 2) {
-      //       const datas = {
-      //         id: propId ? propId : params.id,
-      //         details: {
-      //           images: images,
-      //           videos: videos,
-      //           step: 3,
-      //         },
-      //       };
-      //       await authService.putRealEstateInfo(datas).then((response) => {
-      //         if (response.data.error) {
-      //           alert(response.data.error);
-      //         } else {
-      //           toggleSellStep(3);
-      //         }
-      //       });
-      //     } else if (sellStep === 1 || parseInt(params.step) === 1) {
-      //       const datas = {
-      //         id: propId ? propId : params.id,
-      //         details: {
-      //           ...propertyData,
-      //           images,
-      //           videos,
-      //           step: 3,
-      //         },
-      //       };
-      //       await authService.putRealEstateInfo(datas).then((response) => {
-      //         if (response.data.error) {
-      //           alert(response.data.error);
-      //         } else {
-      //           toggleSellStep(3);
-      //         }
-      //       });
-      //     }
-      //   } else {
-      //     const datas = {
-      //       ...ownership,
-      //       ...propertyData,
-      //       images,
-      //       videos,
-      //       step: 3,
-      //     };
-      //     await authService.postRealEstateInfo(datas).then((response) => {
-      //       if (response.data.error) {
-      //         alert(response.data.error);
-      //       } else {
-      //         toggleSellStep(3);
-      //         getPropId(response.data._id);
-      //         alert("Saved Successfully!");
-      //       }
-      //     });
-      //   }
-      // } else {
-      //   if (propId || params.id) {
-      //     if (sellStep === 2 || parseInt(params.step) === 2) {
-      //       const datas = {
-      //         id: propId ? propId : params.id,
-      //         details: {
-      //           images,
-      //           videos,
-      //           step: 3,
-      //         },
-      //       };
-      //       await authService.saveInfo(datas).then((response) => {
-      //         if (response.data.error) {
-      //           alert(response.data.error);
-      //         } else {
-      //           toggleSellStep(3);
-      //           alert("Saved Successfully!");
-      //         }
-      //       });
-      //     } else if (sellStep === 1 || parseInt(params.step) === 1) {
-      //       const datas = {
-      //         id: propId ? propId : params.id,
-      //         details: {
-      //           ...propertyData,
-      //           images,
-      //           videos,
-      //           step: 3,
-      //         },
-      //       };
-      //       await authService.saveInfo(datas).then((response) => {
-      //         if (response.data.error) {
-      //           alert(response.data.error);
-      //         } else {
-      //           toggleSellStep(3);
-      //           alert("Saved Successfully!");
-      //         }
-      //       });
-      //     }
-      //   } else {
-      //     const datas = {
-      //       ...ownership,
-      //       ...propertyData,
-      //       images,
-      //       videos,
-      //       step: 3,
-      //     };
-      //     await authService.savePropInfo(datas).then((response) => {
-      //       if (response.data.error) {
-      //         alert(response.data.error);
-      //       } else {
-      //         toggleSellStep(3);
-      //         getPropId(response.data._id);
-      //         alert("Saved Successfully!");
-      //       }
-      //     });
-      //   }
-      // }
-      // toggleImages(images);
-      // toggleVideos(videos);
       const data = { images, videos, step: 3 };
 
       console.log(propertyTest);
@@ -474,15 +323,6 @@ const UploadForm = ({
             </Col>
           </Row>
           <Row className="mt-5">
-            {/* <Col
-              xs={12}
-              md={4}
-              className="d-flex justify-content-center justify-content-md-end mt-2"
-            >
-              <Button className="save-btn" onClick={saveInfo}>
-                Save
-              </Button>
-            </Col> */}
             <Col className="d-flex justify-content-center mt-2">
               <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
                 Previous

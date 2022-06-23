@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Container, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import { IoInformationCircleSharp } from "react-icons/io5";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -11,122 +10,54 @@ import PlacesAutocomplete, {
 import NumberFormat from "react-number-format";
 
 function CarDetails({
-  property,
-  toggleStep,
   step,
   setStep,
-  togglePropertyData,
-  toggleSellStep,
-  getPropId,
-  propId,
-  ownership,
-  propertyData,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
 }) {
+  console.log(propertyTest);
   const { handleSubmit, register } = useForm();
-  const [make, setMake] = useState();
-  const [model, setModel] = useState();
-  const [year, setYear] = useState();
-  const [color, setColor] = useState();
-  const [vin, setVin] = useState();
-  const [mileage, setMileage] = useState();
-  const [engine, setEngine] = useState();
-  const [transmission, setTransmission] = useState();
-  const [power, setPower] = useState();
-  const [carType, setCarType] = useState();
-  const [fuelType, setFuelType] = useState();
-  const [condition, setCondition] = useState();
-  const [price, setPrice] = useState(parseInt().toLocaleString());
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
-  const [country, setCountry] = useState();
-  const [zip, setZip] = useState();
+  const [make, setMake] = useState(propertyTest.details?.make || "");
+  const [model, setModel] = useState(propertyTest.details?.model || "");
+  const [year, setYear] = useState(propertyTest.details?.year || "");
+  const [color, setColor] = useState(propertyTest.details?.color || "");
+  const [vin, setVin] = useState(propertyTest.details?.VIN || "");
+  const [mileage, setMileage] = useState(propertyTest.details?.mileage || "");
+  const [engine, setEngine] = useState(propertyTest.details?.engine || "");
+  const [gearbox, setGearbox] = useState(propertyTest.details?.gearbox || "");
+  const [power, setPower] = useState(propertyTest.details?.power || "");
+  const [carType, setCarType] = useState(propertyTest.details?.car_type || "");
+  const [fuelType, setFuelType] = useState(
+    propertyTest.details?.fuel_type || ""
+  );
+  const [condition, setCondition] = useState(
+    propertyTest.details?.condition || ""
+  );
+  const [price, setPrice] = useState(propertyTest.details?.market_price || "");
+  const [address, setAddress] = useState(
+    propertyTest.details?.property_address?.formatted_street_address || ""
+  );
+  const [city, setCity] = useState(
+    propertyTest.details?.property_address?.city || ""
+  );
+  const [state, setState] = useState(
+    propertyTest.details?.property_address?.state || ""
+  );
+  const [country, setCountry] = useState(
+    propertyTest.details?.property_address?.country || ""
+  );
+  const [zip, setZip] = useState(
+    propertyTest.details?.property_address?.zip_code || ""
+  );
   const [other, setOther] = useState(false);
-  const [reservedAmount, setReservedAmount] = useState();
-  const [discussedAmount, setDiscussedAmount] = useState();
+  const [reservedAmount, setReservedAmount] = useState(
+    propertyTest.reservedAmount || ""
+  );
+  const [discussedAmount, setDiscussedAmount] = useState(
+    propertyTest.discussedAmount || ""
+  );
 
-  const params = useParams();
-  // const prop = useSelector((state) => state.incompProperty);
-
-  // const saveInfo = () => {
-  //   if (propId || params.id) {
-  //     const datas = {
-  //       id: propId ? propId : params.id,
-  //       make: make ? make : propertyData.make,
-  //       model: model ? model : propertyData.model,
-  //       year: year ? year : propertyData.year,
-  //       mileage: mileage ? mileage : propertyData.mileage,
-  //       transmission: transmission ? transmission : propertyData.transmission,
-  //       car_type: carType ? carType : propertyData.car_type,
-  //       power: power ? power : propertyData.power,
-  //       color: color ? color : propertyData.color,
-  //       VIN: vin ? vin : propertyData.VIN,
-  //       engine: engine ? engine : propertyData.engine,
-  //       fuel_type: fuelType ? fuelType : propertyData.fuel_type,
-  //       condition: condition ? condition : propertyData.condition,
-  //       price: price ? price : propertyData.price,
-  //       property_address: {
-  //         formatted_street_address: address
-  //           ? address
-  //           : propertyData.property_address.formatted_street_address,
-  //         country: country ? country : propertyData.property_address.country,
-  //         state: state ? state : propertyData.property_address.state,
-  //         city: city ? city : propertyData.property_address.city,
-  //         zip_code: zip ? zip : propertyData.property_address.zip_code,
-  //       },
-  //       reservedAmount: parseInt(reservedAmount),
-  //       discussedAmount: parseInt(discussedAmount),
-  //       step: parseInt(2),
-  //     };
-  //     authService.saveInfo(datas).then((res) => {
-  //       if (res.data.error) {
-  //         alert(res.data.error);
-  //       } else {
-  //         toggleSellStep(2);
-  //       }
-  //     });
-  //   } else {
-  //     const datas = {
-  //       make: make ? make : propertyData.make,
-  //       model: model ? model : propertyData.model,
-  //       year: year ? year : propertyData.year,
-  //       mileage: mileage ? mileage : propertyData.mileage,
-  //       transmission: transmission ? transmission : propertyData.transmission,
-  //       car_type: carType ? carType : propertyData.car_type,
-  //       power: power ? power : propertyData.power,
-  //       color: color ? color : propertyData.color,
-  //       VIN: vin ? vin : propertyData.VIN,
-  //       engine: engine ? engine : propertyData.engine,
-  //       fuel_type: fuelType ? fuelType : propertyData.fuel_type,
-  //       condition: condition ? condition : propertyData.condition,
-  //       price: price ? price : propertyData.price,
-  //       property_address: {
-  //         formatted_street_address: address
-  //           ? address
-  //           : propertyData.property_address.formatted_street_address,
-  //         country: country ? country : propertyData.property_address.country,
-  //         state: state ? state : propertyData.property_address.state,
-  //         city: city ? city : propertyData.property_address.city,
-  //         zip_code: zip ? zip : propertyData.property_address.zip_code,
-  //       },
-  //       reservedAmount: parseInt(reservedAmount),
-  //       discussedAmount: parseInt(discussedAmount),
-  //       ...ownership,
-  //       step: parseInt(2),
-  //     };
-  //     authService.savePropInfo(datas).then((res) => {
-  //       if (res.data.error) {
-  //         alert(res.data.error);
-  //       } else {
-  //         toggleSellStep(2);
-  //         getPropId(res.data._id);
-  //       }
-  //     });
-  //   }
-  // };
   const carMake = [
     "FERRARI",
     "ASTON MARTIN",
@@ -145,414 +76,36 @@ function CarDetails({
     "Other",
   ];
 
-  // useEffect(() => {
-  //   if (params.id && prop.length > 0) {
-  //     const properti = prop.filter((prop) => prop._id === params.id);
-  //     console.log(properti);
-  //     setMake(
-  //       properti[0].details.make
-  //         ? properti[0].details.make
-  //         : propertyData.make
-  //         ? propertyData.make
-  //         : property.make
-  //         ? property.make
-  //         : ""
-  //     );
-  //     setModel(
-  //       properti[0].details.model
-  //         ? properti[0].details.model
-  //         : propertyData.model
-  //         ? propertyData.model
-  //         : property.model
-  //         ? property.model
-  //         : ""
-  //     );
-  //     setYear(
-  //       properti[0].details.year
-  //         ? properti[0].details.year
-  //         : propertyData.year
-  //         ? propertyData.year
-  //         : property.year
-  //         ? property.year
-  //         : ""
-  //     );
-  //     setMileage(
-  //       properti[0].details.mileage
-  //         ? properti[0].details.mileage
-  //         : propertyData.mileage
-  //         ? propertyData.mileage
-  //         : property.mileage
-  //         ? property.mileage
-  //         : ""
-  //     );
-  //     setTransmission(
-  //       properti[0].details.transmission
-  //         ? properti[0].details.transmission
-  //         : propertyData.transmission
-  //         ? propertyData.transmission
-  //         : property.transmission
-  //         ? property.transmission
-  //         : ""
-  //     );
-  //     setCarType(
-  //       properti[0].details.car_type
-  //         ? properti[0].details.car_type
-  //         : propertyData.car_type
-  //         ? propertyData.car_type
-  //         : property.car_type
-  //         ? property.car_type
-  //         : ""
-  //     );
-  //     setPower(
-  //       properti[0].details.power
-  //         ? properti[0].details.power
-  //         : propertyData.power
-  //         ? propertyData.power
-  //         : property.power
-  //         ? property.power
-  //         : ""
-  //     );
-  //     setColor(
-  //       properti[0].details.color
-  //         ? properti[0].details.color
-  //         : propertyData.color
-  //         ? propertyData.color
-  //         : property.color
-  //         ? property.color
-  //         : ""
-  //     );
-  //     setVin(
-  //       properti[0].details.VIN
-  //         ? properti[0].details.VIN
-  //         : propertyData.VIN
-  //         ? propertyData.VIN
-  //         : property.VIN
-  //         ? property.VIN
-  //         : ""
-  //     );
-  //     setEngine(
-  //       properti[0].details.engine
-  //         ? properti[0].details.engine
-  //         : propertyData.engine
-  //         ? propertyData.engine
-  //         : property.engine
-  //         ? property.engine
-  //         : ""
-  //     );
-  //     setFuelType(
-  //       properti[0].details.fuel_type
-  //         ? properti[0].details.fuel_type
-  //         : propertyData.fuel_type
-  //         ? propertyData.fuel_type
-  //         : property.fuel_type
-  //         ? property.fuel_type
-  //         : ""
-  //     );
-  //     setCondition(
-  //       properti[0].details.condition
-  //         ? properti[0].details.condition
-  //         : propertyData.condition
-  //         ? propertyData.condition
-  //         : property.condition
-  //         ? property.condition
-  //         : ""
-  //     );
-  //     setPrice(
-  //       properti[0].details.price
-  //         ? properti[0].details.price
-  //         : propertyData.price
-  //         ? propertyData.price
-  //         : property.price
-  //         ? property.price
-  //         : ""
-  //     );
-  //     setAddress(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address
-  //         : propertyData.property_address
-  //         ? propertyData.property_address
-  //         : property.property_address
-  //         ? property.property_address
-  //         : ""
-  //     );
-  //     setReservedAmount(
-  //       properti[0].reservedAmount
-  //         ? properti[0].reservedAmount
-  //         : propertyData.reservedAmount
-  //         ? propertyData.reservedAmount
-  //         : ""
-  //     );
-  //     setDiscussedAmount(
-  //       properti[0].discussedAmount
-  //         ? properti[0].discussedAmount
-  //         : propertyData.discussedAmount
-  //         ? propertyData.discussedAmount
-  //         : ""
-  //     );
-  //   } else {
-  //     setAddress(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.formatted_street_address
-  //         : property.property_address
-  //         ? property.property_address.formatted_street_address
-  //         : ""
-  //     );
-  //     setCountry(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.country
-  //         : property.property_address
-  //         ? property.property_address.country
-  //         : ""
-  //     );
-  //     setState(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.state
-  //         : property.property_address
-  //         ? property.property_address.state
-  //         : ""
-  //     );
-  //     setCity(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.city
-  //         : property.property_address
-  //         ? property.property_address.city
-  //         : ""
-  //     );
-  //     setZip(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.zip_code
-  //         : property.property_address
-  //         ? property.property_address.zip_code
-  //         : ""
-  //     );
-  //     setPrice(
-  //       propertyData.price
-  //         ? propertyData.price
-  //         : property.price
-  //         ? property.price
-  //         : ""
-  //     );
-  //     setCondition(
-  //       propertyData.condition
-  //         ? propertyData.condition
-  //         : property.condition
-  //         ? property.condition
-  //         : ""
-  //     );
-  //     setFuelType(
-  //       propertyData.fuel_type
-  //         ? propertyData.fuel_type
-  //         : property.fuel_type
-  //         ? property.fuel_type
-  //         : ""
-  //     );
-  //     setEngine(
-  //       propertyData.engine
-  //         ? propertyData.engine
-  //         : property.engine
-  //         ? property.engine
-  //         : ""
-  //     );
-  //     setVin(
-  //       propertyData.VIN ? propertyData.VIN : property.VIN ? property.VIN : ""
-  //     );
-  //     setColor(
-  //       propertyData.color
-  //         ? propertyData.color
-  //         : property.color
-  //         ? property.color
-  //         : ""
-  //     );
-  //     setPower(
-  //       propertyData.power
-  //         ? propertyData.power
-  //         : property.power
-  //         ? property.power
-  //         : ""
-  //     );
-  //     setCarType(
-  //       propertyData.car_type
-  //         ? propertyData.car_type
-  //         : property.car_type
-  //         ? property.car_type
-  //         : ""
-  //     );
-  //     setTransmission(
-  //       propertyData.transmission
-  //         ? propertyData.transmission
-  //         : property.transmission
-  //         ? property.transmission
-  //         : ""
-  //     );
-  //     setMileage(
-  //       propertyData.mileage
-  //         ? propertyData.mileage
-  //         : property.mileage
-  //         ? property.mileage
-  //         : ""
-  //     );
-  //     setYear(
-  //       propertyData.year
-  //         ? propertyData.year
-  //         : property.year
-  //         ? property.year
-  //         : ""
-  //     );
-  //     setModel(
-  //       propertyData.model
-  //         ? propertyData.model
-  //         : property.model
-  //         ? property.model
-  //         : ""
-  //     );
-  //     setMake(
-  //       propertyData.make
-  //         ? propertyData.make
-  //         : property.make
-  //         ? property.make
-  //         : ""
-  //     );
-  //     setReservedAmount(propertyData ? propertyData.reservedAmount : "");
-  //     setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
-  //   }
-  // }, [prop]);
-
-  // const saveInfo = () => {
-  //   if (propId || params.id) {
-  //     const datas = {
-  //       id: propId ? propId : params.id,
-  //       details: {
-  //         make: make ? make : propertyData.make,
-  //         model: model ? model : propertyData.model,
-  //         year: year ? year : propertyData.year,
-  //         mileage: mileage ? mileage : propertyData.mileage,
-  //         transmission: transmission ? transmission : propertyData.transmission,
-  //         car_type: carType ? carType : propertyData.car_type,
-  //         power: power ? power : propertyData.power,
-  //         color: color ? color : propertyData.color,
-  //         VIN: vin ? vin : propertyData.VIN,
-  //         engine: engine ? engine : propertyData.engine,
-  //         fuel_type: fuelType ? fuelType : propertyData.fuel_type,
-  //         condition: condition ? condition : propertyData.condition,
-  //         price: price ? price : propertyData.price,
-  //         property_address: {
-  //           formatted_street_address: address
-  //             ? address
-  //             : propertyData.property_address
-  //             ? propertyData.property_address.formatted_street_address
-  //             : "",
-  //           country: country
-  //             ? country
-  //             : propertyData.property_address
-  //             ? propertyData.property_address.country
-  //             : "",
-  //           state: state
-  //             ? state
-  //             : propertyData.property_address
-  //             ? propertyData.property_address.state
-  //             : "",
-  //           city: city
-  //             ? city
-  //             : propertyData.property_address
-  //             ? propertyData.property_address.city
-  //             : "",
-  //           zip_code: zip
-  //             ? zip
-  //             : propertyData.property_address
-  //             ? propertyData.property_address.zip_code
-  //             : "",
-  //         },
-  //         reservedAmount: parseInt(reservedAmount),
-  //         discussedAmount: parseInt(discussedAmount),
-  //         step: parseInt(2),
-  //       },
-  //     };
-  //     authService.saveInfo(datas).then((res) => {
-  //       if (res.data.error) {
-  //         alert(res.data.error);
-  //       } else {
-  //         toggleSellStep(2);
-  //       }
-  //     });
-  //   } else {
-  //     const datas = {
-  //       make: make ? make : propertyData.make,
-  //       model: model ? model : propertyData.model,
-  //       year: year ? year : propertyData.year,
-  //       mileage: mileage ? mileage : propertyData.mileage,
-  //       transmission: transmission ? transmission : propertyData.transmission,
-  //       car_type: carType ? carType : propertyData.car_type,
-  //       power: power ? power : propertyData.power,
-  //       color: color ? color : propertyData.color,
-  //       VIN: vin ? vin : propertyData.VIN,
-  //       engine: engine ? engine : propertyData.engine,
-  //       fuel_type: fuelType ? fuelType : propertyData.fuel_type,
-  //       condition: condition ? condition : propertyData.condition,
-  //       price: price ? price : propertyData.price,
-  //       property_address: {
-  //         formatted_street_address: address
-  //           ? address
-  //           : propertyData.property_address.formatted_street_address,
-  //         country: country ? country : propertyData.property_address.country,
-  //         state: state ? state : propertyData.property_address.state,
-  //         city: city ? city : propertyData.property_address.city,
-  //         zip_code: zip ? zip : propertyData.property_address.zip_code,
-  //       },
-  //       reservedAmount: parseInt(reservedAmount),
-  //       discussedAmount: parseInt(discussedAmount),
-  //       ...ownership,
-  //       step: parseInt(2),
-  //     };
-  //     authService.postPropInfo(datas).then((res) => {
-  //       if (res.data.error) {
-  //         alert(res.data.error);
-  //       } else {
-  //         toggleSellStep(2);
-  //         getPropId(res.data._id);
-  //       }
-  //     });
-  //   }
-  // };
-
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
       const submitedData = {
-        make: data.make ? data.make : make ? make : "",
-        model: data.model ? data.model : model ? model : "",
-        year: data.year ? data.year : year ? year : "",
-        mileage: data.mileage ? data.mileage : mileage ? mileage : "",
-        transmission: data.transmission
-          ? data.transmission
-          : transmission
-          ? transmission
-          : "",
-        car_type: data.carType ? data.carType : carType ? carType : "",
-        power: data.power ? data.power : power ? power : "",
-        color: data.color ? data.color : color ? color : "",
-        VIN: data.vin ? data.vin : vin ? vin : "",
-        engine: data.engine ? data.engine : engine ? engine : "",
-        fuel_type: data.fuelType ? data.fuelType : fuelType ? fuelType : "",
-        condition: data.condition ? data.condition : condition ? condition : "",
-        price: data.price ? data.price : price ? price : "",
+        make,
+        model,
+        year,
+        mileage,
+        gearbox,
+        car_type: carType,
+        power,
+        color,
+        VIN: vin,
+        engine,
+        fuel_type: fuelType,
+        condition,
+        market_price: price,
         property_address: {
-          formatted_street_address: data.address
-            ? data.address
-            : address
-            ? address
-            : "",
-          country: data.country ? data.country : country ? country : "",
-          state: data.state ? data.state : state ? state : "",
-          city: data.city ? data.city : city ? city : "",
-          zip_code: data.zipCode ? data.zipCode : zip ? zip : "",
+          formatted_street_address: address,
+          country,
+          state,
+          city,
+          zip_code: zip,
         },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         step: 2,
       };
 
-      console.log(propertyTest);
       authService
         .editProperty(propertyTest._id, submitedData)
         .then((res) => {
@@ -572,276 +125,6 @@ function CarDetails({
     }
   };
 
-  // useEffect(() => {
-  //   if (params.id && prop.length > 0) {
-  //     const properti = prop.filter((prop) => prop._id === params.id);
-  //     setMake(
-  //       properti[0].details.make
-  //         ? properti[0].details.make
-  //         : propertyData.make
-  //         ? propertyData.make
-  //         : property.make
-  //         ? property.make
-  //         : ""
-  //     );
-  //     setModel(
-  //       properti[0].details.model
-  //         ? properti[0].details.model
-  //         : propertyData.model
-  //         ? propertyData.model
-  //         : property.model
-  //         ? property.model
-  //         : ""
-  //     );
-  //     setYear(
-  //       properti[0].details.year
-  //         ? properti[0].details.year
-  //         : propertyData.year
-  //         ? propertyData.year
-  //         : property.year
-  //         ? property.year
-  //         : ""
-  //     );
-  //     setMileage(
-  //       properti[0].details.mileage
-  //         ? properti[0].details.mileage
-  //         : propertyData.mileage
-  //         ? propertyData.mileage
-  //         : property.mileage
-  //         ? property.mileage
-  //         : ""
-  //     );
-  //     setTransmission(
-  //       properti[0].details.transmission
-  //         ? properti[0].details.transmission
-  //         : propertyData.transmission
-  //         ? propertyData.transmission
-  //         : property.transmission
-  //         ? property.transmission
-  //         : ""
-  //     );
-  //     setCarType(
-  //       properti[0].details.car_type
-  //         ? properti[0].details.car_type
-  //         : propertyData.car_type
-  //         ? propertyData.car_type
-  //         : property.car_type
-  //         ? property.car_type
-  //         : ""
-  //     );
-  //     setPower(
-  //       properti[0].details.power
-  //         ? properti[0].details.power
-  //         : propertyData.power
-  //         ? propertyData.power
-  //         : property.power
-  //         ? property.power
-  //         : ""
-  //     );
-  //     setColor(
-  //       properti[0].details.color
-  //         ? properti[0].details.color
-  //         : propertyData.color
-  //         ? propertyData.color
-  //         : property.color
-  //         ? property.color
-  //         : ""
-  //     );
-  //     setVin(
-  //       properti[0].details.VIN
-  //         ? properti[0].details.VIN
-  //         : propertyData.VIN
-  //         ? propertyData.VIN
-  //         : property.VIN
-  //         ? property.VIN
-  //         : ""
-  //     );
-  //     setEngine(
-  //       properti[0].details.engine
-  //         ? properti[0].details.engine
-  //         : propertyData.engine
-  //         ? propertyData.engine
-  //         : property.engine
-  //         ? property.engine
-  //         : ""
-  //     );
-  //     setFuelType(
-  //       properti[0].details.fuel_type
-  //         ? properti[0].details.fuel_type
-  //         : propertyData.fuel_type
-  //         ? propertyData.fuel_type
-  //         : property.fuel_type
-  //         ? property.fuel_type
-  //         : ""
-  //     );
-  //     setCondition(
-  //       properti[0].details.condition
-  //         ? properti[0].details.condition
-  //         : propertyData.condition
-  //         ? propertyData.condition
-  //         : property.condition
-  //         ? property.condition
-  //         : ""
-  //     );
-  //     setPrice(
-  //       properti[0].details.price
-  //         ? properti[0].details.price
-  //         : propertyData.price
-  //         ? propertyData.price
-  //         : property.price
-  //         ? property.price
-  //         : ""
-  //     );
-  //     setAddress(
-  //       properti[0].details.property_address
-  //         ? properti[0].details.property_address
-  //         : propertyData.property_address
-  //         ? propertyData.property_address
-  //         : property.property_address
-  //         ? property.property_address
-  //         : ""
-  //     );
-  //     setReservedAmount(
-  //       properti[0].reservedAmount
-  //         ? properti[0].reservedAmount
-  //         : propertyData.reservedAmount
-  //         ? propertyData.reservedAmount
-  //         : ""
-  //     );
-  //     setDiscussedAmount(
-  //       properti[0].discussedAmount
-  //         ? properti[0].discussedAmount
-  //         : propertyData.discussedAmount
-  //         ? propertyData.discussedAmount
-  //         : ""
-  //     );
-  //   } else {
-  //     setAddress(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.formatted_street_address
-  //         : property.property_address
-  //         ? property.property_address.formatted_street_address
-  //         : ""
-  //     );
-  //     setCountry(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.country
-  //         : property.property_address
-  //         ? property.property_address.country
-  //         : ""
-  //     );
-  //     setState(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.state
-  //         : property.property_address
-  //         ? property.property_address.state
-  //         : ""
-  //     );
-  //     setCity(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.city
-  //         : property.property_address
-  //         ? property.property_address.city
-  //         : ""
-  //     );
-  //     setZip(
-  //       propertyData.property_address
-  //         ? propertyData.property_address.zip_code
-  //         : property.property_address
-  //         ? property.property_address.zip_code
-  //         : ""
-  //     );
-  //     setPrice(
-  //       propertyData.price
-  //         ? propertyData.price
-  //         : property.price
-  //         ? property.price
-  //         : ""
-  //     );
-  //     setCondition(
-  //       propertyData.condition
-  //         ? propertyData.condition
-  //         : property.condition
-  //         ? property.condition
-  //         : ""
-  //     );
-  //     setFuelType(
-  //       propertyData.fuel_type
-  //         ? propertyData.fuel_type
-  //         : property.fuel_type
-  //         ? property.fuel_type
-  //         : ""
-  //     );
-  //     setEngine(
-  //       propertyData.engine
-  //         ? propertyData.engine
-  //         : property.engine
-  //         ? property.engine
-  //         : ""
-  //     );
-  //     setVin(
-  //       propertyData.VIN ? propertyData.VIN : property.VIN ? property.VIN : ""
-  //     );
-  //     setColor(
-  //       propertyData.color
-  //         ? propertyData.color
-  //         : property.color
-  //         ? property.color
-  //         : ""
-  //     );
-  //     setPower(
-  //       propertyData.power
-  //         ? propertyData.power
-  //         : property.power
-  //         ? property.power
-  //         : ""
-  //     );
-  //     setCarType(
-  //       propertyData.car_type
-  //         ? propertyData.car_type
-  //         : property.car_type
-  //         ? property.car_type
-  //         : ""
-  //     );
-  //     setTransmission(
-  //       propertyData.transmission
-  //         ? propertyData.transmission
-  //         : property.transmission
-  //         ? property.transmission
-  //         : ""
-  //     );
-  //     setMileage(
-  //       propertyData.mileage
-  //         ? propertyData.mileage
-  //         : property.mileage
-  //         ? property.mileage
-  //         : ""
-  //     );
-  //     setYear(
-  //       propertyData.year
-  //         ? propertyData.year
-  //         : property.year
-  //         ? property.year
-  //         : ""
-  //     );
-  //     setModel(
-  //       propertyData.model
-  //         ? propertyData.model
-  //         : property.model
-  //         ? property.model
-  //         : ""
-  //     );
-  //     setMake(
-  //       propertyData.make
-  //         ? propertyData.make
-  //         : property.make
-  //         ? property.make
-  //         : ""
-  //     );
-  //     setReservedAmount(propertyData ? propertyData.reservedAmount : "");
-  //     setDiscussedAmount(propertyData ? propertyData.discussedAmount : "");
-  //   }
-  // }, [prop]);
   const handleChange = (address) => {
     setAddress(address);
   };
@@ -881,8 +164,6 @@ function CarDetails({
       );
     });
   };
-
-  console.log(make);
 
   return (
     <>
@@ -978,9 +259,10 @@ function CarDetails({
             <Form.Select
               className="form-control"
               name="gearbox"
-              value={transmission}
-              {...register("transmission", { maxLength: 100 })}
-              onChange={(e) => setTransmission(e.target.value)}
+              defaultValue={gearbox}
+              {...register("gearbox", { maxLength: 100 })}
+              onChange={(e) => setGearbox(e.target.value)}
+              required
             >
               <option value="">Select Gearbox Type</option>
               <option value="Automatic">Automatic</option>
@@ -1277,25 +559,11 @@ function CarDetails({
         </Row>
 
         <Row className="mt-5">
-          {/* <Col
-            xs={12}
-            md={4}
-            className="d-flex justify-content-center justify-content-md-end mt-2"
-          >
-            <Button className="save-btn" onClick={saveInfo}>
-              Save
-            </Button>
-          </Col> */}
           <Col className="d-flex justify-content-center mt-2">
             <Button className="pre-btn" onClick={() => setStep(step - 1)}>
               Previous
             </Button>
-            <Button
-              // onClick={saveInfo}
-              className="nxt-btn"
-              id="next"
-              type="submit"
-            >
+            <Button className="nxt-btn" id="next" type="submit">
               Next
             </Button>
           </Col>

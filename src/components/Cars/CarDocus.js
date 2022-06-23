@@ -11,16 +11,11 @@ function CarDocus({
   toggleStep,
   step,
   setStep,
-  toggleDocuments,
+
   ownership,
-  propId,
-  images,
-  videos,
-  propertyData,
-  toggleSellStep,
+
   sellStep,
-  getPropId,
-  document,
+
   propertyTest,
   setPropertyTest,
   toggleSignIn,
@@ -39,35 +34,35 @@ function CarDocus({
   const datas = [
     {
       name: "Title Certificate",
-      officialName: "titleCertificate",
+      officialName: "title_certificate",
       number: 3,
       documents: doc3,
       required: true,
     },
     {
       name: "Inspection Report",
-      officialName: "inspectionReport",
+      officialName: "inspection_report",
       number: 5,
       documents: doc5,
       required: true,
     },
     {
       name: "Registration Documents",
-      officialName: "registrationDocuments",
+      officialName: "registration_document",
       number: 2,
       documents: doc2,
       required: true,
     },
     {
       name: "Ownership Documents",
-      officialName: "ownershipDocuments",
+      officialName: "ownership_document",
       number: 1,
       documents: doc1,
       required: false,
     },
     {
       name: "Loan Documents",
-      officialName: "loanDocuments",
+      officialName: "loan_document",
       number: 4,
       documents: doc4,
       required: false,
@@ -75,28 +70,28 @@ function CarDocus({
 
     {
       name: "Engine Details",
-      officialName: "engineDetails",
+      officialName: "engine_details",
       number: 6,
       documents: doc6,
       required: false,
     },
     {
       name: "Insurance Documents",
-      officialName: "insuranceDocuments",
+      officialName: "insurance_document",
       number: 7,
       documents: doc7,
       required: false,
     },
     {
       name: "Valuation Report",
-      officialName: "valuationReport",
+      officialName: "valuation_report",
       number: 8,
       documents: doc8,
       required: false,
     },
     {
       name: "Other Documents",
-      officialName: "otherDocuments",
+      officialName: "other_document",
       number: 9,
       documents: doc9,
       required: false,
@@ -160,195 +155,52 @@ function CarDocus({
   };
 
   useEffect(() => {
-    if (params.id) {
-      authService.getIncompleteProperty(params.userId).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          const property = response.data.filter(
-            (property) => property._id === params.id
-          );
-          if (property[0].documents.length > 1) {
-            setDocument1(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "ownership_document"
-                  )
-                : []
-            );
-            setDocument2(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "registration_document"
-                  )
-                : []
-            );
-            setDocument3(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "title_certificate"
-                  )
-                : []
-            );
-            setDocument4(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "loan_document"
-                  )
-                : []
-            );
-            setDocument5(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "inspection_report"
-                  )
-                : []
-            );
-            setDocument6(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "engine_details"
-                  )
-                : []
-            );
-            setDocument7(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "insurance_document"
-                  )
-                : []
-            );
-            setDocument8(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "valuation_report"
-                  )
-                : []
-            );
-            setDocument9(
-              property[0].documents
-                ? property[0].documents.filter(
-                    (item) => item.officialName === "others"
-                  )
-                : []
-            );
-          } else {
-            setDocument1(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "ownership_document"
-                  )
-                : []
-            );
-            setDocument2(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "registration_document"
-                  )
-                : []
-            );
-            setDocument3(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "title_certificate"
-                  )
-                : []
-            );
-            setDocument4(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "loan_document"
-                  )
-                : []
-            );
-            setDocument5(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "inspection_report"
-                  )
-                : []
-            );
-            setDocument6(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "engine_details"
-                  )
-                : []
-            );
-            setDocument7(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "insurance_document"
-                  )
-                : []
-            );
-            setDocument8(
-              document
-                ? document.filter(
-                    (item) => item.officialName === "valuation_report"
-                  )
-                : []
-            );
-            setDocument9(
-              document
-                ? document.filter((item) => item.officialName === "others")
-                : []
-            );
-          }
-        }
+    if (propertyTest.documents.length > 0) {
+      setDocument1((prev) =>
+        propertyTest.documents.filter(
+          (doc) => doc.officialName === "ownership_document"
+        )
+      );
+      setDocument2((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "registration_document"
+        );
       });
-    } else {
-      setDocument1(
-        document
-          ? document.filter(
-              (item) => item.officialName === "ownership_document"
-            )
-          : []
-      );
-      setDocument2(
-        document
-          ? document.filter(
-              (item) => item.officialName === "registration_document"
-            )
-          : []
-      );
-      setDocument3(
-        document
-          ? document.filter((item) => item.officialName === "title_certificate")
-          : []
-      );
-      setDocument4(
-        document
-          ? document.filter((item) => item.officialName === "loan_document")
-          : []
-      );
-      setDocument5(
-        document
-          ? document.filter((item) => item.officialName === "inspection_report")
-          : []
-      );
-      setDocument6(
-        document
-          ? document.filter((item) => item.officialName === "engine_details")
-          : []
-      );
-      setDocument7(
-        document
-          ? document.filter(
-              (item) => item.officialName === "insurance_document"
-            )
-          : []
-      );
-      setDocument8(
-        document
-          ? document.filter((item) => item.officialName === "valuation_report")
-          : []
-      );
-      setDocument9(
-        document
-          ? document.filter((item) => item.officialName === "others")
-          : []
-      );
+      setDocument3((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "title_certificate"
+        );
+      });
+      setDocument4((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "loan_document"
+        );
+      });
+      setDocument5((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "inspection_report"
+        );
+      });
+      setDocument6((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "engine_details"
+        );
+      });
+      setDocument7((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "insurance_document"
+        );
+      });
+      setDocument8((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "valuation_report"
+        );
+      });
+      setDocument9((prev) => {
+        return propertyTest.documents.filter(
+          (doc) => doc.officialName === "other_document"
+        );
+      });
     }
   }, []);
 
@@ -404,79 +256,6 @@ function CarDocus({
     ...others,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
-
-  const saveInfo = async () => {
-    if (propId || params.id) {
-      if (parseInt(steps) === 1) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            ...propertyData,
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      } else if (parseInt(steps) === 2) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            images,
-            videos,
-            documents,
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      } else if (parseInt(steps) === 3) {
-        const datas = {
-          id: propId ? propId : params.id,
-          details: {
-            documents: [...documents],
-            step: 4,
-          },
-        };
-        await authService.saveInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(4);
-          }
-        });
-      }
-    } else {
-      const datas = {
-        ...ownership,
-        ...propertyData,
-        images,
-        videos,
-        documents,
-        step: 4,
-      };
-      await authService.postPropInfo(datas).then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
-        } else {
-          toggleSellStep(4);
-          getPropId(response.data._id);
-        }
-      });
-    }
-  };
 
   const onSubmit = async (data) => {
     if (doc2.length !== 0 && doc3.length !== 0 && doc5.length !== 0) {
