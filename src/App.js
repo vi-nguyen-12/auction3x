@@ -784,11 +784,29 @@ function App() {
             </Route>
 
             <Route exact path="/Auctions">
-              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
+              <PropertyPages
+                colorChange={colorChange}
+                toggleChange={toggleChange}
+                setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+              />
             </Route>
 
-            <Route exact path="/Auctions/:filter">
-              <Auctions toggleSignIn={toggleSignIn} windowSize={windowSize} />
+            <Route exact path="/Auctions/:Country">
+              <PropertyPages
+                colorChange={colorChange}
+                toggleChange={toggleChange}
+                setHeaderWidth={setHeaderWidth}
+                setPositionLeft={setPositionLeft}
+                setPadRight={setPadRight}
+                toggleShow={toggleShow}
+                toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+              />
             </Route>
 
             <Route path="/contact">

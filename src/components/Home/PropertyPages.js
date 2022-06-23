@@ -8,6 +8,7 @@ import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";
 import JetPage from "../Jets/JetPage";
 import YachtPage from "../Yachts/YachtPage";
+import Auctions from "./Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
@@ -49,6 +50,8 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
 
+  console.log(filter);
+
   return (
     <>
       <h5 className="realHeader">
@@ -58,6 +61,8 @@ const PropertyPages = ({
           <p>JET</p>
         ) : path === "/yachts" ? (
           <p>YACHT</p>
+        ) : path === "/Auctions" ? (
+          <p>Auctions</p>
         ) : (
           <p>REAL ESTATE</p>
         )}
@@ -104,6 +109,13 @@ const PropertyPages = ({
           toggleChange={toggleChange}
           setShowImgYacht={setShowImgYacht}
           setImgYacht={setImgYacht}
+          toggleSignIn={toggleSignIn}
+          windowSize={windowSize}
+          filter={filter}
+        />
+      ) : path === "/Auctions" || "/Auctions/:Country" ? (
+        <Auctions
+          toggleChange={toggleChange}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}

@@ -91,7 +91,12 @@ function WinAuctions({ windowSize }) {
                       ? "Yacht"
                       : ""}
                   </td>
-                  <td colSpan={2}>{auction.property[0].details.address}</td>
+                  <td colSpan={2}>
+                    {
+                      auction.property[0].details.property_address
+                        .formatted_street_address
+                    }
+                  </td>
                   <td colSpan={2}>
                     <NumberFormat
                       value={auction.amount}

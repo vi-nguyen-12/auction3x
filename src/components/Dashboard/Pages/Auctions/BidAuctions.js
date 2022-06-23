@@ -73,7 +73,12 @@ function BidAuctions({ windowSize }) {
                     />
                   </div>
                 </td>
-                <td>{auction.property.details.address}</td>
+                <td>
+                  {
+                    auction.property.details.property_address
+                      .formatted_street_address
+                  }
+                </td>
                 {new Date().toISOString() < auction.auctionEndDate ? (
                   <td colSpan={2}>
                     Ongoing

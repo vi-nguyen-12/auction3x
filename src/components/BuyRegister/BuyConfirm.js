@@ -48,14 +48,7 @@ const BuyConfirm = ({ property }) => {
           Enter your Bid
         </Modal.Title>
       </Modal.Header>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
-          }
-        }}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <>
           <Table borderless>
             <tbody className="auction-info">
@@ -122,7 +115,7 @@ const BuyConfirm = ({ property }) => {
                     padding: "15px",
                   }}
                 >
-                  Your Bid:
+                  Minimum Bid:
                   <NumberFormat
                     style={{
                       marginLeft: "10px",
@@ -186,7 +179,7 @@ const BuyConfirm = ({ property }) => {
             >
               Submit
             </button>
-            <div
+            {/* <div
               style={{
                 width: "100%",
                 display: "flex",
@@ -196,7 +189,7 @@ const BuyConfirm = ({ property }) => {
               }}
             >
               <span>View Bid History</span>
-            </div>
+            </div> */}
           </div>
         </>
       </form>

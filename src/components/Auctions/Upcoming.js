@@ -28,7 +28,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                 upcomingAuctions.slice(0, 6).map((item) => (
                   <Col
                     key={item._id}
-                    style={{ padding:"0", marginBottom: "30px", marginTop: "20px" }}
+                    style={{ padding:"0", margin:"30px 0" }}
                   >
                     <Cards
                       data={item}

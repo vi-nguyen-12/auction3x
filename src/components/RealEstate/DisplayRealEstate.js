@@ -109,7 +109,6 @@ function DisplayRealEstate({
   toggleSignIn,
   windowSize,
 }) {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -835,7 +834,7 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 83px",
                         }}
                       >
                         <h4>
@@ -871,7 +870,7 @@ function DisplayRealEstate({
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 83px",
                         }}
                       >
                         <h4>

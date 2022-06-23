@@ -97,7 +97,10 @@ function PendingAuctions({ windowSize }) {
                       : ""}
                   </td>
                   <td colSpan={2}>
-                    {auction.auctionId.property.details.address}
+                    {
+                      auction.auctionId.property.details.property_address
+                        .formatted_street_address
+                    }
                   </td>
                   {auction.isApproved === "success" ? (
                     <td colSpan={2}>

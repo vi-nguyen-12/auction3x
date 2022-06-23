@@ -19,7 +19,6 @@ function RealEstateForm({
   setPropertyTest,
   toggleSignIn,
 }) {
-  console.log("hahaha");
   const [subStep, setSubStep] = useState(`${step}.1`);
   // const prop = useSelector((state) => state.incompProperty);
   const {
@@ -29,7 +28,6 @@ function RealEstateForm({
   } = useForm();
 
   const params = useParams();
-  console.log(propertyTest);
 
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address || ""
@@ -54,6 +52,7 @@ function RealEstateForm({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
+      console.log(results);
       setAddress(results[0].formatted_address.split(",")[0]);
 
       let cities = results[0].address_components.filter((item) => {
@@ -82,6 +81,7 @@ function RealEstateForm({
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
+      console.log(zipcodes);
       setZip(
         zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
       );
@@ -163,7 +163,6 @@ function RealEstateForm({
   };
 
   if (subStep === `${step}.1`) {
-    console.log("true");
     return (
       <div className="wrapper">
         <div className="sell-bottom">
@@ -305,12 +304,11 @@ function RealEstateForm({
               <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                 <input
                   className="form-control"
-                  type="number"
-                  min="0"
+                  type="text"
                   name="zip"
                   placeholder="Zip Code"
                   defaultValue={zip}
-                  {...register("zipCode", { required: false, maxLength: 10 })}
+                  {...register("zipCode", { required: true })}
                   required
                 />
                 <span style={{ fontWeight: "600", color: "black" }}>

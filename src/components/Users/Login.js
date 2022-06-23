@@ -40,7 +40,8 @@ const Login = ({
           localStorage.setItem("token", response.data.data.token);
           toggleButton();
           toggleSignIn();
-          history.push(location.pathname);
+          // history.push(location.pathname);
+          window.location.reload();
           window.setTimeout(() => {
             window.scrollTo(0, 0);
           }, 0);

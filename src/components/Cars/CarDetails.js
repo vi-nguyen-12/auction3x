@@ -523,7 +523,7 @@ function CarDetails({
         model: data.model ? data.model : model ? model : "",
         year: data.year ? data.year : year ? year : "",
         mileage: data.mileage ? data.mileage : mileage ? mileage : "",
-        transmission: data.transmission
+        gearbox: data.transmission
           ? data.transmission
           : transmission
           ? transmission
@@ -881,8 +881,6 @@ function CarDetails({
       );
     });
   };
-
-  console.log(make);
 
   return (
     <>

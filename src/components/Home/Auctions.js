@@ -5,12 +5,17 @@ import { Row, Col } from "react-bootstrap";
 import Cards from "../Cards/Cards";
 import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
+import PropertyPageHeader from "./PropertyPageHeader";
 
-function Auctions({ toggleSignIn, windowSize }) {
+function Auctions({ toggleSignIn, windowSize, toggleChange, filter }) {
   const params = useParams();
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [allAuctions, setAllAuctions] = useState([]);
+
+  useEffect(() => {
+    toggleChange();
+  }, []);
 
   useEffect(() => {
     authService.getUpcomingAuctions().then((res) => {
@@ -26,6 +31,18 @@ function Auctions({ toggleSignIn, windowSize }) {
       setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
     }
   }, [onGoingAuctions, upcomingAuctions]);
+
+  useEffect(() => {
+    if (filter) {
+      if (filter === "ongoing") {
+        setAllAuctions(onGoingAuctions);
+      } else if (filter === "upcoming") {
+        setAllAuctions(upcomingAuctions);
+      }
+    }
+  }, [filter, allAuctions]);
+
+  console.log(allAuctions);
 
   //   useEffect(() => {
   //     if (params.filter === "USA") {
@@ -52,9 +69,6 @@ function Auctions({ toggleSignIn, windowSize }) {
 
   return (
     <>
-      <h5 className="realHeader">
-        <p>Auctions</p>
-      </h5>
       {allAuctions.length > 0 ? (
         <Row
           style={{

@@ -59,7 +59,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price Range</option>
+                  <option>Starting Price</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
                   <option href="#">$150,000 - $250,000</option>
@@ -73,7 +73,7 @@ function PropertyPageHeader({
                   onClick={() => setPrice(!price)}
                   className=" RealButtonPrice "
                 >
-                  Price Range
+                  Starting Price
                 </Button>
                 {price && (
                   <div className="priceDrop">
@@ -174,7 +174,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price Range</option>
+                  <option>Starting Price</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
                   <option href="#">$150,000 - $250,000</option>
@@ -188,7 +188,7 @@ function PropertyPageHeader({
                   onClick={() => setPrice(!price)}
                   className=" RealButtonPrice "
                 >
-                  Price Range
+                  Starting Price
                 </Button>
                 {price && (
                   <div className="priceDrop">
@@ -281,7 +281,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price Range</option>
+                  <option>Starting Price</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
                   <option href="#">$150,000 - $250,000</option>
@@ -331,6 +331,90 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
+      ) : path === "/Auctions" || "/Auctions/:Country" ? (
+        <Row className="realEstateFilter">
+          <Col md={9}>
+            <Row>
+              <Col md={4} xs={12}>
+                <div style={{ width: "100%" }} className=" RealButton ">
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
+                  <input
+                    type="text"
+                    placeholder="Enter location to search"
+                    className="searchBar"
+                  />
+                </div>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Form.Select
+                  onChange={(e) => setFilter(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Auction Type</option>
+                  <option value="ongoing">Ongoing</option>
+                  <option value="upcoming">Upcoming</option>
+                </Form.Select>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Form.Select className=" RealButton ">
+                  <option>Property Type</option>
+                  <option href="#">Real Estate</option>
+                  <option href="#">Car</option>
+                  <option href="#">Jet</option>
+                  <option href="#">Yacht</option>
+                </Form.Select>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Form.Select className=" RealButton ">
+                  <option>Starting Price</option>
+                  <option href="#">$0 - $50,000</option>
+                  <option href="#">$50,000 - $2,000,000</option>
+                  <option href="#">$2,000,000 - $5,000,000</option>
+                  <option href="#">$5,000,000 - $10,000,000</option>
+                </Form.Select>
+              </Col>
+              {/* <Col className="d-flex justify-content-center">
+                <Form.Select className=" RealButton ">
+                  <option>More Filter</option>
+                  <option href="#">Bedrooms</option>
+                  <option href="#">Bathrooms</option>
+                  <option href="#">Area</option>
+                  <option href="#">Year Built</option>
+                  <option href="#">Garage</option>
+                </Form.Select>
+              </Col> */}
+              <Col className="d-flex justify-content-center">
+                <button className="galleryButton">Search</button>
+              </Col>
+            </Row>
+          </Col>
+          <Col md={3} className="filterResult">
+            <Row style={{ display: "flex", alignContent: "center" }}>
+              <Col
+                md={5}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: ".9rem",
+                }}
+                className="resultText"
+              >
+                9,000+ results
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <button className="mapButton" onClick={toggleMap}>
+                  Map
+                </button>
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <button className="galleryButton" onClick={toggleImage}>
+                  Gallery
+                </button>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       ) : (
         <Row className="realEstateFilter">
           <Col md={9}>
@@ -366,7 +450,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Price Range</option>
+                  <option>Starting Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
