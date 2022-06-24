@@ -14,7 +14,7 @@ import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
 import RegistrationTimer from "../Auctions/RegistrationTimer";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { IoImageOutline } from "react-icons/io5";
+import { IoCalculator, IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
@@ -1097,6 +1097,7 @@ function DisplayRealEstate({
                         padding: "0",
                         position: windowSize < 600 && "absolute",
                         width: windowSize < 600 && "92vw",
+                        height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1170,7 +1171,7 @@ function DisplayRealEstate({
           >
             <div
               style={{
-                marginTop: windowSize < 600 ? "200px" : "30px",
+                marginTop: windowSize < 600 ? "300px" : "30px",
                 alignItems: "center",
                 marginBottom: "20px",
                 padding: "0",

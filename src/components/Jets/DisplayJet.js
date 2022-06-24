@@ -1117,6 +1117,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                         padding: "0",
                         position: windowSize < 600 && "absolute",
                         width: windowSize < 600 && "92vw",
+                        height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1186,7 +1187,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
           >
             <div
               style={{
-                marginTop: windowSize < 600 ? "200px" : "30px",
+                marginTop: windowSize < 600 ? "300px" : "30px",
                 alignItems: "center",
                 marginBottom: "20px",
                 padding: "0",
