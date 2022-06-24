@@ -782,7 +782,7 @@ const Header = ({
             >
               <tbody>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     {" "}
                     <button
                       style={{
@@ -798,7 +798,7 @@ const Header = ({
                       REAL ESTATE
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -813,7 +813,7 @@ const Header = ({
                       SELL
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -830,7 +830,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -845,7 +845,7 @@ const Header = ({
                       CARS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -859,7 +859,7 @@ const Header = ({
                       BUY
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -876,7 +876,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -891,7 +891,7 @@ const Header = ({
                       YACHTS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -906,7 +906,7 @@ const Header = ({
                       SELLER
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -923,7 +923,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -938,7 +938,7 @@ const Header = ({
                       JETS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -953,7 +953,7 @@ const Header = ({
                       FAQ
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -970,7 +970,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -985,7 +985,7 @@ const Header = ({
                       ABOUT US
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -1000,7 +1000,7 @@ const Header = ({
                       BROKER
                     </button>
                   </td>
-                  {/* <td>
+                  {/* <td style={{padding:"0.5rem 0"}}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -1015,7 +1015,7 @@ const Header = ({
                       TEAM
                     </button>
                   </td> */}
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
