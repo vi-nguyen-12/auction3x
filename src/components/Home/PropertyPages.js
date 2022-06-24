@@ -61,7 +61,13 @@ const PropertyPages = ({
           <p>YACHT</p>
         ) : path === "/Auctions" ? (
           <p>Auctions</p>
-        ) : path === "/Auctions/:Country" ? (
+        ) : path === "/Auctions/Austin" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/Dallas" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/Houston" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/SanAntonio" ? (
           <p>Auctions</p>
         ) : (
           <p>REAL ESTATE</p>

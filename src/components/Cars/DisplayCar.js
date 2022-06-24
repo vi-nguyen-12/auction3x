@@ -844,7 +844,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 70px",
                         }}
                       >
                         <h4>
@@ -880,7 +880,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 70px",
                         }}
                       >
                         <h4>

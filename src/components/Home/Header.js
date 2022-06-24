@@ -122,11 +122,11 @@ const Header = ({
           alignContent: "center",
           height: "100%",
           justifyContent: "space-between",
-          padding: "0 10px",
+          padding: windowSize > 600 && "0 10px",
         }}
       >
         <div className="navbar-brand">
-          <Logo style={{ left: positionLeft ? positionLeft : left }} href="/">
+          <Logo href="/">
             <img
               src="/images/newName.png"
               width={windowSize > 800 ? 200 : 150}
