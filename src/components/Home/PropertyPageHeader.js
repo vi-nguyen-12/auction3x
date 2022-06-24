@@ -15,7 +15,6 @@ function PropertyPageHeader({
   toggleImgYacht,
   toggleMap,
 }) {
-  console.log(path);
   const [price, setPrice] = useState(false);
   return (
     <>

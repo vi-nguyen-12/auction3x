@@ -293,8 +293,8 @@ function DisplayRealEstate({
                     <div
                       style={{
                         position: "absolute",
-                        top: "25px",
-                        right: "25px",
+                        top: windowSize < 600 ? "0" : "25px",
+                        right: windowSize < 600 ? "0" : "25px",
                         zIndex: "999",
                       }}
                     >
@@ -340,8 +340,8 @@ function DisplayRealEstate({
                     <div
                       style={{
                         position: "absolute",
-                        top: "25px",
-                        right: "25px",
+                        top: windowSize < 600 ? "0" : "25px",
+                        right: windowSize < 600 ? "0" : "25px",
                         zIndex: "999",
                       }}
                     >
@@ -848,7 +848,7 @@ function DisplayRealEstate({
                           justifyContent: "center",
                           alignContent: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "100%",
+                          width: "280px",
                           height: "100%",
                           borderRadius: "10px",
                           padding: "30px 70px",
@@ -1080,15 +1080,6 @@ function DisplayRealEstate({
                     md={6}
                     xs={12}
                   >
-                    {/* <Table responsive striped hover>
-                      <thead>
-                        <th>#</th>
-                        <th>Bidder ID</th>
-                        <th>Bidder</th>
-                        <th>Bid Amount</th>
-                        <th>Date/Time</th>
-                      </thead>
-                    </Table> */}
                     <Table
                       responsive
                       striped

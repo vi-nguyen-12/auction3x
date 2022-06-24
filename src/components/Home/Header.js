@@ -77,8 +77,8 @@ const Header = ({
     if (window.onscroll !== undefined) {
       window.onscroll = function () {
         if (window.scrollY > 1) {
-          setColors("white");
-          setTextColor("#151515");
+          setColors("#181c35");
+          setTextColor("white");
           setBoxShadow("0 0 5px rgb(0 0 0 / 20%)");
           setTransition(
             "transform 120ms ease, background-color 250ms ease, color 250ms ease"
@@ -1015,22 +1015,22 @@ const Header = ({
                       TEAM
                     </button>
                   </td> */}
+                  <td>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toggleOpen();
+                        history.push("/Team");
+                      }}
+                    >
+                      TEAM
+                    </button>
+                  </td>
                 </tr>
-                <td>
-                  <button
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      toggleOpen();
-                      history.push("/Team");
-                    }}
-                  >
-                    TEAM
-                  </button>
-                </td>
               </tbody>
             </Table>
           </Modal.Body>

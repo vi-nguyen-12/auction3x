@@ -304,6 +304,7 @@ function App() {
               toggleButton={toggleButton}
               toggleForgotPass={toggleForgotPass}
               toggleConfirmModal={toggleConfirmModal}
+              windowSize={windowSize}
             />
           </Modal.Body>
         </Modal>
@@ -471,6 +472,7 @@ function App() {
               toggleSignUp={toggleSignUp}
               toggleConfirmModal={toggleConfirmModal}
               toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
             />
           </Modal.Body>
         </Modal>

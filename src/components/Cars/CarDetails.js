@@ -16,7 +16,6 @@ function CarDetails({
   setPropertyTest,
   toggleSignIn,
 }) {
-  console.log(propertyTest);
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState(propertyTest.details?.make || "");
   const [model, setModel] = useState(propertyTest.details?.model || "");

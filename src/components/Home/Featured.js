@@ -131,7 +131,7 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
             </Col>
           </Row>
           <Col md={12} className="m-auto">
-            <Row>
+            <Row style={{ height: "700px" }}>
               <Carousel {...settings}>
                 {auctions.map((item, index) => (
                   <Wrap key={index}>

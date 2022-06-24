@@ -17,7 +17,6 @@ function Ownership({
   toggleStep,
   step,
   setStep,
-
   ownership,
   propertyTest,
   setPropertyTest,
@@ -65,7 +64,6 @@ function Ownership({
   };
 
   const onSubmit = (data) => {
-    console.log(propertyTest._id);
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       alert("Please enter ownership information");
     } else {
@@ -147,7 +145,6 @@ function Ownership({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      console.log(results);
       setAddress(results[0].formatted_address);
 
       let cities = results[0].address_components.filter((item) => {
