@@ -122,6 +122,7 @@ const Header = ({
           alignContent: "center",
           height: "100%",
           justifyContent: "space-between",
+          padding: "0 10px",
         }}
       >
         <div className="navbar-brand">

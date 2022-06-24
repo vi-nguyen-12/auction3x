@@ -110,7 +110,7 @@
 }
 
 .form-control {
-  border: 2px solid #d58f5c;
+  /* border: 2px solid #d58f5c; */
   outline: none !important;
   background-color: transparent !important;
   /* padding: 6px !important; */

@@ -1,55 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import CompanyHeader from "./CompanyHeader";
+import authService from "../../services/authServices";
 
-function Privacy() {
+function Privacy({ windowSize }) {
   const location = useLocation();
+  const [privacy, setPrivacy] = useState();
+
+  useEffect(() => {
+    authService.getDocuments().then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        res.data.filter((doc) => {
+          if (doc.officialName === "privacy_policy") {
+            setPrivacy(doc.url);
+          }
+        });
+      }
+    });
+  }, []);
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
-      <Container>
-        <Row>
-          <Col md={10} className="pt-5">
-            <img
-              src="/images/privacy.png"
-              alt=""
-              style={{
-                marginBottom: "20px",
-                maxWidth: "250px",
-                maxHeight: "150px",
-              }}
-            />
-          </Col>
-        </Row>
-        <Row style={{ padding: "0 50px" }}>
-          <Col md={10} className="pt-5">
-            <h1 style={{ fontSize: "35px", color: "black" }}>Privacy Policy</h1>
-            <p style={{ fontSize: "20px" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo quam
-              nunc id diam. Aenean ut orci nec nibh cursus accumsan. Vestibulum
-              ante ipsum primis in faucibus orci luctus et ultrices posuere
-              cubilia Curae; Mauris sollicitudin tincidunt eros nec gravida. Ut
-              varius auctor accumsan.
-            </p>
-          </Col>
-        </Row>
-        <Row style={{ padding: "0 50px" }}>
-          <Col md={10} className="pt-5">
-            <h1 style={{ fontSize: "35px", color: "black" }}>
-              Terms and Conditions
-            </h1>
-            <p style={{ fontSize: "20px" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo quam
-              nunc id diam. Aenean ut orci nec nibh cursus accumsan. Vestibulum
-              ante ipsum primis in faucibus orci luctus et ultrices posuere
-              cubilia Curae; Mauris sollicitudin tincidunt eros nec gravida. Ut
-              varius auctor accumsan.
-            </p>
+      <Container
+        style={{ padding: windowSize < 600 ? "40px 10px" : "50px" }}
+        fluid
+      >
+        <Row style={{ height: "80vh" }}>
+          <Col>
+            <iframe src={privacy} width="100%" height="100%" />
           </Col>
         </Row>
       </Container>
