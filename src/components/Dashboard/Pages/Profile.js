@@ -14,7 +14,7 @@ import EditProfile from "../EditProfile";
 const Carousel = styled(Slider)`
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;

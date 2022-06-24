@@ -43,7 +43,7 @@ let ImgSettings = {
 
 const Carousel = styled(Slider)`
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;

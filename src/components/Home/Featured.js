@@ -10,7 +10,7 @@ import "../../App.css";
 
 const Carousel = styled(Slider)`
   // height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;
