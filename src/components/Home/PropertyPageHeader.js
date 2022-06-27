@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import "../../styles/realEstate.css";
-import NumberFormat from "react-number-format";
-import Dropdown from "react-bootstrap/Dropdown";
 import { MdOutlineMyLocation } from "react-icons/md";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 function PropertyPageHeader({
   path,
@@ -14,8 +16,107 @@ function PropertyPageHeader({
   toggleImgJet,
   toggleImgYacht,
   toggleMap,
+  resultLength,
 }) {
-  const [price, setPrice] = useState(false);
+  const [auctionType, setAuctionType] = useState();
+  const [propType, setPropType] = useState();
+  const [realType, setRealType] = useState();
+  const [minPrice, setMinPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState();
+  const [address, setAddress] = useState();
+  const [country, setCountry] = useState();
+  const [state, setState] = useState();
+  const [city, setCity] = useState();
+  const [zip, setZip] = useState();
+
+  const realEstateType = [
+    { value: "villa", name: "Villa" },
+    { value: "house", name: "House" },
+    { value: "estate", name: "Estate" },
+    { value: "country house", name: "Country House" },
+    { value: "finca", name: "Finca" },
+    { value: "chalet", name: "Chalet" },
+    { value: "townhouse", name: "Townhouse" },
+    { value: "bungalow", name: "Bungalow" },
+    { value: "apartment", name: "Apartment" },
+    { value: "penhouse", name: "Penhouse" },
+    { value: "condo", name: "Condo" },
+    { value: "co op", name: "Co-Op" },
+    { value: "land", name: "Land" },
+    { value: "castle", name: "Castle" },
+    { value: "chateau", name: "Chateau" },
+    { value: "farm ranch", name: "Farm Ranch" },
+    { value: "private island", name: "Private Island" },
+  ];
+
+  const prices = [
+    { min_price: 1000000, max_price: 5000000 },
+    { min_price: 5000000, max_price: 10000000 },
+    { min_price: 10000000, max_price: 20000000 },
+    { min_price: 20000000, max_price: 30000000 },
+    { min_price: 30000000, max_price: 40000000 },
+    { min_price: 40000000, max_price: 50000000 },
+  ];
+
+  const getFilter = () => {
+    setFilter({
+      auctionType: auctionType,
+      propType: propType,
+      real_esstate_type: realType,
+      min_price: minPrice,
+      max_price: maxPrice,
+      country: country,
+      state: state,
+      city: city,
+      zip: zip,
+    });
+  };
+
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      console.log(results);
+      setAddress(results[0].formatted_address);
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(
+        states[0].long_name ? states[0].long_name : states[0].short_name
+      );
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(
+        countries[0].long_name
+          ? countries[0].long_name
+          : countries[0].short_name
+      );
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip(
+        zipcodes[0]
+          ? zipcodes[0].long_name
+          : zipcodes[0]
+          ? zipcodes[0].short_name
+          : ""
+      );
+    });
+  };
+
   return (
     <>
       {path === "/cars" ? (
@@ -766,16 +867,73 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
+                  {/* <input
                     type="text"
                     placeholder="Enter location to search"
                     className="searchBar"
-                  />
+                  /> */}
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Enter Location to search",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
-                  onChange={(e) => setFilter(e.target.value)}
+                  onChange={(e) => {
+                    setAuctionType(e.target.value);
+                  }}
                   className=" RealButton "
                 >
                   <option value="">Auction Type</option>
@@ -785,21 +943,43 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
-                  <option>Property Type</option>
-                  <option href="#">Villa</option>
-                  <option href="#">Penthouse</option>
-                  <option href="#">Apartment</option>
-                  <option href="#">House</option>
+                <Form.Select
+                  onChange={(e) => {
+                    setRealType(e.target.value);
+                  }}
+                  className=" RealButton "
+                >
+                  <option value="">Property Type</option>
+                  {realEstateType.map((type, index) => (
+                    <option key={index} value={type.value}>
+                      {type.name}
+                    </option>
+                  ))}
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
-                  <option href="#">$0 - $50,000</option>
-                  <option href="#">$50,000 - $2,000,000</option>
-                  <option href="#">$2,000,000 - $5,000,000</option>
-                  <option href="#">$5,000,000 - $10,000,000</option>
+                <Form.Select
+                  onChange={(e) => {
+                    const getPrice = prices.filter(
+                      (price, index) => index === parseInt(e.target.value)
+                    );
+                    if (getPrice.length > 0) {
+                      setMinPrice(getPrice[0].min_price);
+                      setMaxPrice(getPrice[0].max_price);
+                    } else {
+                      setMinPrice();
+                      setMaxPrice();
+                    }
+                  }}
+                  className=" RealButton "
+                >
+                  <option value="">Starting Price</option>
+                  {prices.map((price, index) => (
+                    <option value={index} key={index}>
+                      ${price.min_price.toLocaleString()} - $
+                      {price.max_price.toLocaleString()}
+                    </option>
+                  ))}
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -813,7 +993,9 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <button className="galleryButton">Search</button>
+                <button onClick={() => getFilter()} className="galleryButton">
+                  Search
+                </button>
               </Col>
             </Row>
           </Col>
@@ -829,7 +1011,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.realEstate} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>

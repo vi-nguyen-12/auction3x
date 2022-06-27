@@ -90,6 +90,7 @@ function RealEstatePage({
   toggleSignIn,
   windowSize,
   filter,
+  setResultLength,
 }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -133,15 +134,21 @@ function RealEstatePage({
     }
   }, [onGoingAuctions, upcomingAuctions]);
 
+  console.log(auctions.length);
+
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAuctions(upcomingAuctions);
-      }
+      authService.propFilter(filter).then((res) => {
+        const realEstate = res.data.filter(
+          (item) => item.property.type === "real-estate"
+        );
+        setResultLength({ realEstate: realEstate.length });
+        setAuctions(realEstate);
+      });
+    } else {
+      setResultLength({ realEstate: auctions.length });
     }
-  }, [filter, auctions]);
+  }, [filter]);
 
   let settings = {
     dots: false,

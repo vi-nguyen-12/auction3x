@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import { IoInformationCircleSharp } from "react-icons/io5";
@@ -38,6 +38,26 @@ function EmptyRealEstateDetails({
   const [story, setStory] = useState();
   const [reservedAmount, setReservedAmount] = useState();
   const [discussedAmount, setDiscussedAmount] = useState();
+
+  const realEstateType = [
+    { value: "villa", name: "Villa" },
+    { value: "house", name: "House" },
+    { value: "estate", name: "Estate" },
+    { value: "country house", name: "Country House" },
+    { value: "finca", name: "Finca" },
+    { value: "chalet", name: "Chalet" },
+    { value: "townhouse", name: "Townhouse" },
+    { value: "bungalow", name: "Bungalow" },
+    { value: "apartment", name: "Apartment" },
+    { value: "penhouse", name: "Penhouse" },
+    { value: "condo", name: "Condo" },
+    { value: "co op", name: "Co-Op" },
+    { value: "land", name: "Land" },
+    { value: "castle", name: "Castle" },
+    { value: "chateau", name: "Chateau" },
+    { value: "farm ranch", name: "Farm Ranch" },
+    { value: "private island", name: "Private Island" },
+  ];
 
   const saveInfo = () => {
     if (propId || params.id) {
@@ -499,7 +519,7 @@ function EmptyRealEstateDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <input
+            {/* <input
               type="text"
               className="form-control"
               defaultValue={propType}
@@ -507,7 +527,14 @@ function EmptyRealEstateDetails({
               onChange={(e) => setPropType(e.target.value)}
               name="propertyType"
               required
-            />
+            /> */}
+            <Form.Select onChange={(e) => setPropType(e.target.value)}>
+              {realEstateType.map((type, index) => (
+                <option key={index} value={type.value}>
+                  {type.name}
+                </option>
+              ))}
+            </Form.Select>
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type <span style={{ color: "#ff0000" }}>*</span>
             </span>

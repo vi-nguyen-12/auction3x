@@ -339,7 +339,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "50px 0" }}>
-          <h1 style={{ fontSize: "1.3rem" }}>Are you an agent? (Optional) </h1>
+          <h1 style={{ fontSize: "1.3rem", paddingTop:"0" }}>Are you an agent? (Optional) </h1>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="agentNumber">Agent License Number</label>

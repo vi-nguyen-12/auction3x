@@ -425,12 +425,35 @@ const authService = {
     });
   },
   editRealEstate(id, data) {
-    console.log(data);
     return axios.put(apiUrl + `/api/properties/real-estate/${id}`, data, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
+  },
+
+  propFilter(data) {
+    return axios.get(
+      apiUrl +
+        `/api/auctions?${data.auctionType ? "time=" + data.auctionType : ""}&${
+          data.propType ? "type=" + data.propType : ""
+        }&${
+          data.real_esstate_type
+            ? "real_estate_type=" + data.real_esstate_type
+            : ""
+        }&${data.min_price ? "min_price=" + data.min_price : ""}&${
+          data.max_price ? "max_price=" + data.max_price : ""
+        }&${data.zip ? "real_estate_zip_code=" + data.zip : ""}&${
+          data.city ? "real_estate_city=" + data.city : ""
+        }&${data.state ? "real_estate_state=" + data.state : ""}&${
+          data.country ? "real_estate_country=" + data.country : ""
+        }`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
   },
 };
 
