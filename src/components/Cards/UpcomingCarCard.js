@@ -16,7 +16,7 @@ import "../../styles/card.css";
 
 const Carousel = styled(Slider)`
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   border-radius: 0;
 
   & > button {

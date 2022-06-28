@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useForm } from "react-hook-form";
 import "../../styles/buyer.css";
@@ -9,6 +9,7 @@ function AddFund() {
   const [loader, setLoader] = useState(false);
   const [other, setOther] = useState(false);
   const [self, setSelf] = useState(false);
+  const [registeredAuctions, setRegisteredAuctions] = useState([]);
   const toggleSelf = () => setSelf(!self);
   const toggleOther = () => setOther(!other);
 
@@ -29,6 +30,12 @@ function AddFund() {
     });
     e.target.value = null;
   };
+
+  useEffect(() => {
+    authService.getRegistStatus().then((res) => {
+      setRegisteredAuctions(res.data);
+    });
+  }, []);
 
   return (
     <Container style={{ padding: "20px" }}>
@@ -66,7 +73,27 @@ function AddFund() {
 
       {other === true ? (
         <>
-          <Row>
+          <Row className="mb-3">
+            <Col>
+              <label style={{ color: "black" }}>Proof of Fund for</label>
+              <Form.Select>
+                <option value="">Auctions</option>
+                {registeredAuctions.length > 0 ? (
+                  registeredAuctions.map((item, index) => (
+                    <option key={index} value={item._id}>
+                      {
+                        item.property.details.property_address
+                          .formatted_street_address
+                      }
+                    </option>
+                  ))
+                ) : (
+                  <option>You have not register to buy any property.</option>
+                )}
+              </Form.Select>
+            </Col>
+          </Row>
+          <Row className="mb-3">
             <Col>
               <label style={{ color: "black" }}>Name of Proof of Fund</label>
               <input
@@ -78,7 +105,7 @@ function AddFund() {
               />
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
               <label style={{ color: "black" }}>Fund Amount</label>
               <input
@@ -91,7 +118,7 @@ function AddFund() {
               />
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
               <label style={{ color: "black" }}>Provider Name</label>
               <input
@@ -113,7 +140,7 @@ function AddFund() {
               />
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
               <div>
                 <label style={{ color: "black" }}>Proof Of Fund</label>

@@ -12,6 +12,7 @@ import Auctions from "./Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
+import authService from "../../services/authServices";
 
 const mapStyles = {
   height: "90%",
@@ -40,6 +41,7 @@ const PropertyPages = ({
   const [showImgJet, setShowImgJet] = useState(false);
   const [showImgYacht, setShowImgYacht] = useState(false);
   const [filter, setFilter] = useState();
+  const [resultLength, setResultLength] = useState({});
   const [img, setImg] = useState([]);
   const [imgCar, setImgCar] = useState([]);
   const [imgJet, setImgJet] = useState([]);
@@ -61,7 +63,13 @@ const PropertyPages = ({
           <p>YACHT</p>
         ) : path === "/Auctions" ? (
           <p>Auctions</p>
-        ) : path === "/Auctions/:Country" ? (
+        ) : path === "/Auctions/Austin" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/Dallas" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/Houston" ? (
+          <p>Auctions</p>
+        ) : path === "/Auctions/SanAntonio" ? (
           <p>Auctions</p>
         ) : (
           <p>REAL ESTATE</p>
@@ -76,6 +84,7 @@ const PropertyPages = ({
         toggleImgJet={toggleImgJet}
         toggleImgYacht={toggleImgYacht}
         toggleMap={toggleMap}
+        resultLength={resultLength}
       />
       {path === "/realEstates" ? (
         <RealEstatePage
@@ -85,6 +94,7 @@ const PropertyPages = ({
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}
+          setResultLength={setResultLength}
         />
       ) : path === "/cars" ? (
         <CarPage

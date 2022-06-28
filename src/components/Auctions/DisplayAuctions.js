@@ -84,6 +84,8 @@ function DisplayAuctions({
     }
   }, [socket, auction]);
 
+  console.log(auction);
+
   return (
     <>
       {loader ? <Loading /> : null}

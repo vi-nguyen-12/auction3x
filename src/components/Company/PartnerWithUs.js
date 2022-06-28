@@ -58,11 +58,16 @@ function PartnerWithUs({ windowSize }) {
                   justifyContent: "center",
                 }}
               >
-                <h1 className="formTitle">Partner With Us</h1>
+                <h1
+                  style={{ fontSize: windowSize < 600 && "2rem" }}
+                  className="formTitle"
+                >
+                  Partner With Us
+                </h1>
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="mb-2" md={4} xs={12}>
                 <span>First Name</span>
                 <input
                   placeholder="Enter First Name"
@@ -70,7 +75,7 @@ function PartnerWithUs({ windowSize }) {
                   className="form-control"
                 />
               </Col>
-              <Col>
+              <Col className="mb-2" md={4} xs={12}>
                 <span>Last Name</span>
                 <input
                   placeholder="Enter Last Name"
@@ -78,7 +83,7 @@ function PartnerWithUs({ windowSize }) {
                   className="form-control"
                 />
               </Col>
-              <Col>
+              <Col className="mb-2" md={4} xs={12}>
                 <span>Company Name</span>
                 <input
                   placeholder="Enter Company Name"
@@ -88,7 +93,7 @@ function PartnerWithUs({ windowSize }) {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col className="mb-2" md={6} xs={12}>
                 <span>Email</span>
                 <input
                   placeholder="Enter Email"
@@ -96,7 +101,7 @@ function PartnerWithUs({ windowSize }) {
                   className="form-control"
                 />
               </Col>
-              <Col>
+              <Col className="mb-2" md={6} xs={12}>
                 <span>Phone</span>
                 <PhoneInput
                   disableCountryCode={false}

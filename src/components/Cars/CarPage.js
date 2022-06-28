@@ -11,7 +11,7 @@ import ErrorPage from "../Error/404page";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;

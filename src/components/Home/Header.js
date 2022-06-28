@@ -77,8 +77,8 @@ const Header = ({
     if (window.onscroll !== undefined) {
       window.onscroll = function () {
         if (window.scrollY > 1) {
-          setColors("white");
-          setTextColor("#151515");
+          setColors("#181c35");
+          setTextColor("white");
           setBoxShadow("0 0 5px rgb(0 0 0 / 20%)");
           setTransition(
             "transform 120ms ease, background-color 250ms ease, color 250ms ease"
@@ -122,11 +122,11 @@ const Header = ({
           alignContent: "center",
           height: "100%",
           justifyContent: "space-between",
-          padding: "0 10px",
+          padding: windowSize > 600 && "0 10px",
         }}
       >
         <div className="navbar-brand">
-          <Logo style={{ left: positionLeft ? positionLeft : left }} href="/">
+          <Logo href="/">
             <img
               src="/images/newName.png"
               width={windowSize > 800 ? 200 : 150}
@@ -782,7 +782,7 @@ const Header = ({
             >
               <tbody>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     {" "}
                     <button
                       style={{
@@ -798,7 +798,7 @@ const Header = ({
                       REAL ESTATE
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -813,7 +813,7 @@ const Header = ({
                       SELL
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -830,7 +830,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -845,7 +845,7 @@ const Header = ({
                       CARS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -859,7 +859,7 @@ const Header = ({
                       BUY
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -876,7 +876,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -891,7 +891,7 @@ const Header = ({
                       YACHTS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -906,7 +906,7 @@ const Header = ({
                       SELLER
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -923,7 +923,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -938,7 +938,7 @@ const Header = ({
                       JETS
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -953,7 +953,7 @@ const Header = ({
                       FAQ
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -970,7 +970,7 @@ const Header = ({
                   </td>
                 </tr>
                 <tr>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -985,7 +985,7 @@ const Header = ({
                       ABOUT US
                     </button>
                   </td>
-                  <td>
+                  <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -1000,7 +1000,7 @@ const Header = ({
                       BROKER
                     </button>
                   </td>
-                  {/* <td>
+                  {/* <td style={{padding:"0.5rem 0"}}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -1015,22 +1015,22 @@ const Header = ({
                       TEAM
                     </button>
                   </td> */}
+                  <td style={{ padding: "0.5rem 0" }}>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toggleOpen();
+                        history.push("/Team");
+                      }}
+                    >
+                      TEAM
+                    </button>
+                  </td>
                 </tr>
-                <td>
-                  <button
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      toggleOpen();
-                      history.push("/Team");
-                    }}
-                  >
-                    TEAM
-                  </button>
-                </td>
               </tbody>
             </Table>
           </Modal.Body>

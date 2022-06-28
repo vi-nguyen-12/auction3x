@@ -43,7 +43,7 @@ let ImgSettings = {
 
 const Carousel = styled(Slider)`
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;
@@ -277,8 +277,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                     <div
                       style={{
                         position: "absolute",
-                        top: "25px",
-                        right: "25px",
+                        top: windowSize < 600 ? "0" : "25px",
+                        right: windowSize < 600 ? "0" : "25px",
                         zIndex: "999",
                       }}
                     >
@@ -317,8 +317,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                     <div
                       style={{
                         position: "absolute",
-                        top: "25px",
-                        right: "25px",
+                        top: windowSize < 600 ? "0" : "25px",
+                        right: windowSize < 600 ? "0" : "25px",
                         zIndex: "999",
                       }}
                     >
@@ -386,7 +386,12 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       >
                         <Marker position={location} />
                       </GoogleMap>
-                      <p>{property.property.details.property_address}</p>
+                      <p>
+                        {
+                          property.property.details.property_address
+                            .formatted_street_address
+                        }
+                      </p>
                     </Modal.Body>
                   </Modal>
                 </div>
@@ -402,15 +407,20 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
               padding: windowSize > 500 ? "35px" : "15px",
             }}
           >
-            <Col xs={12} md={6}>
+            <Col style={{ padding: "0" }} xs={12} md={6}>
               <Row style={{ textAlign: windowSize < 500 && "center" }}>
-                <h2 style={{ color: "#b77b50" }}>
+                <h2 style={{ color: "#b77b50", padding: "0" }}>
                   {property.property.details.year} {""}
                   {property.property.details.make} {""}
                   {property.property.details.model}
                 </h2>
-                <h5 style={{ color: "#919191", fontWeight: "400" }}>
-                  {property.property.details.property_address}
+                <h5
+                  style={{ color: "#919191", fontWeight: "400", padding: "0" }}
+                >
+                  {
+                    property.property.details.property_address
+                      .formatted_street_address
+                  }
                 </h5>
               </Row>
             </Col>
@@ -686,7 +696,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                 }}
               >
                 {registEnded === false ? (
-                  <Col>
+                  <Col style={{ margin: "10px" }}>
                     <div
                       style={{
                         display: "grid",
@@ -787,10 +797,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         color: "black",
                       }}
                     >
-                      <AuctionTimer
-                        time={property.auctionStartDate}
-                        windowSize={windowSize}
-                      />
+                      <AuctionTimer time={property.auctionStartDate} />
                       <div
                         style={{
                           display: "flex",
@@ -839,12 +846,12 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         style={{
                           display: "grid",
                           justifyContent: "center",
-                          alignItems: "center",
+                          alignContent: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "100%",
+                          width: "280px",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 70px",
                         }}
                       >
                         <h4>
@@ -880,7 +887,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                           width: "100%",
                           height: "100%",
                           borderRadius: "10px",
-                          padding: "30px",
+                          padding: "30px 70px",
                         }}
                       >
                         <h4>
@@ -917,8 +924,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       justifyContent: "center",
                       alignItems: "center",
                       backgroundColor: "#e8e8e8",
-                      width: "200px",
-                      height: "150px",
+                      width: "280px",
+                      height: "165px",
                       borderRadius: "10px",
                       padding: "40px",
                     }}
@@ -1085,7 +1092,11 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                   </Table>
                 </Col>
                 {user._id && user.KYC && property.highestBidders && (
-                  <Col>
+                  <Col
+                    style={{ padding: windowSize < 600 && "0" }}
+                    md={6}
+                    xs={12}
+                  >
                     <Table
                       responsive
                       striped

@@ -70,7 +70,7 @@ function ContactUs({ windowSize }) {
             </Row>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Row>
-                <Col>
+                <Col className="mb-2" md={6} xs={12}>
                   <span>First Name</span>
                   <input
                     placeholder="Enter First Name"
@@ -80,7 +80,7 @@ function ContactUs({ windowSize }) {
                     {...register("firstName", { required: true })}
                   />
                 </Col>
-                <Col>
+                <Col className="mb-2" md={6} xs={12}>
                   <span>Last Name</span>
                   <input
                     placeholder="Enter Last Name"
@@ -92,7 +92,7 @@ function ContactUs({ windowSize }) {
                 </Col>
               </Row>
               <Row>
-                <Col>
+                <Col className="mb-2" md={6} xs={12}>
                   <span>Email</span>
                   <input
                     placeholder="Enter Email"
@@ -102,7 +102,7 @@ function ContactUs({ windowSize }) {
                     {...register("email", { required: true })}
                   />
                 </Col>
-                <Col>
+                <Col className="mb-2" md={6} xs={12}>
                   <span>Phone</span>
                   <PhoneInput
                     disableCountryCode={false}

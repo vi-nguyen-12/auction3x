@@ -156,7 +156,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
       </Modal.Header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Row style={{ margin: "20px 0" }}>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="firstName">
                 First Name <span style={{ color: "red" }}> *</span>
@@ -173,7 +173,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="lastName">
                 Last Name
@@ -193,7 +193,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "20px 0" }}>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="userName">
                 User Name <span style={{ color: "red" }}> *</span>
@@ -210,7 +210,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="email">
                 Email <span style={{ color: "red" }}> *</span>
@@ -229,7 +229,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "20px 0" }}>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="password">
                 Password <span style={{ color: "red" }}> *</span>
@@ -246,7 +246,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="confirmPassword">
                 Confirm Password <span style={{ color: "red" }}> *</span>
@@ -286,7 +286,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "20px 0" }}>
-          <Col>
+          <Col md={4} xs={12}>
             <div className="form-group">
               <label htmlFor="country">
                 Country <span style={{ color: "red" }}> *</span>
@@ -303,7 +303,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col md={4} xs={12}>
             <div className="form-group">
               <label htmlFor="state">
                 State <span style={{ color: "red" }}> *</span>
@@ -320,7 +320,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col md={4} xs={12}>
             <div className="form-group">
               <label htmlFor="city">
                 City <span style={{ color: "red" }}> *</span>
@@ -339,8 +339,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "50px 0" }}>
-          <h1 style={{ fontSize: "2.5rem" }}>Are you an agent? (Optional) </h1>
-          <Col>
+          <h1 style={{ fontSize: "1.3rem", paddingTop:"0" }}>Are you an agent? (Optional) </h1>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="agentNumber">Agent License Number</label>
               <input
@@ -353,7 +353,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               />
             </div>
           </Col>
-          <Col>
+          <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="agentFile">Agent License/Certificate</label>
               <input
@@ -424,6 +424,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
               display: "flex",
               justifyContent: "flex-end",
               marginBottom: "10px",
+              right: windowSize < 600 && "0",
+              top: windowSize < 600 && "0",
             }}
           >
             <CloseButton className="modal-close" onClick={toggleTerms} />

@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
-  overflow: hidden;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;
