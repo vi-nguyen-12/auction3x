@@ -106,9 +106,7 @@ function IncompleteListing({ windowSize }) {
                     <td>
                       <button
                         onClick={() => {
-                          window.open(
-                            `/multiSellForm/${user._id}/${listing._id}/${listing.step}`
-                          );
+                          window.open(`/multiSellForm/${listing._id}`);
                         }}
                         className="resume-btn"
                       >

@@ -153,14 +153,12 @@ function Ownership({
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+      setCity(cities[0] ? cities[0]?.long_name : cities[0]?.short_name);
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(
-        states[0].long_name ? states[0].long_name : states[0].short_name
-      );
+      setState(states[0] ? states[0].long_name : states[0]?.short_name);
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
@@ -174,9 +172,7 @@ function Ownership({
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip(
-        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
-      );
+      setZip(zipcodes[0] ? zipcodes[0]?.long_name : zipcodes[0]?.short_name);
     });
   };
 
@@ -228,8 +224,7 @@ function Ownership({
                       fontWeight: "bold",
                       fontSize: "18px",
                       color: "black",
-                      display: "flex",
-                      justifyContent: "center",
+                      textAlign: "center",
                     }}
                   >
                     Owner Information
@@ -237,6 +232,10 @@ function Ownership({
                 </Row>
                 <Row className="mt-3 d-flex justify-content-center">
                   <Col>
+                    <span style={{ fontWeight: "600" }}>
+                      Owner/Entity Name{" "}
+                      <span style={{ color: "#ff0000" }}>*</span>
+                    </span>
                     <input
                       type="text"
                       className="form-control"
@@ -250,10 +249,6 @@ function Ownership({
                       onChange={(e) => setOwnerName(e.target.value)}
                       required
                     />
-                    <span style={{ fontWeight: "600" }}>
-                      Owner/Entity Name{" "}
-                      <span style={{ color: "#ff0000" }}>*</span>
-                    </span>
                   </Col>
                 </Row>
                 <Row className="mt-3">
@@ -270,6 +265,9 @@ function Ownership({
                         loading,
                       }) => (
                         <div>
+                          <span style={{ fontWeight: "600", color: "black" }}>
+                            Address <span style={{ color: "#ff0000" }}>*</span>
+                          </span>
                           <input
                             {...getInputProps({
                               placeholder: "Search address",
@@ -277,9 +275,6 @@ function Ownership({
                             })}
                             required
                           />
-                          <span style={{ fontWeight: "600", color: "black" }}>
-                            Address <span style={{ color: "#ff0000" }}>*</span>
-                          </span>
                           {suggestions && suggestions.length > 0 && (
                             <div className="autocomplete-dropdown-container">
                               {loading && <div>Loading...</div>}
@@ -320,6 +315,9 @@ function Ownership({
                 </Row>
                 <Row className="mt-3">
                   <Col xs={12} md={6}>
+                    <span style={{ fontWeight: "600", color: "black" }}>
+                      Phone <span style={{ color: "#ff0000" }}>*</span>
+                    </span>
                     <PhoneInput
                       disableCountryCode={false}
                       onlyCountries={["ca", "us", "gb", "au"]}
@@ -339,11 +337,11 @@ function Ownership({
                       }}
                       onChange={setPhone}
                     />
-                    <span style={{ fontWeight: "600", color: "black" }}>
-                      Phone <span style={{ color: "#ff0000" }}>*</span>
-                    </span>
                   </Col>
                   <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+                    <span style={{ fontWeight: "600", color: "black" }}>
+                      Email <span style={{ color: "#ff0000" }}>*</span>
+                    </span>
                     <input
                       type="email"
                       className="form-control"
@@ -352,9 +350,6 @@ function Ownership({
                       }
                       onChange={(e) => setEmail(e.target.value)}
                     />
-                    <span style={{ fontWeight: "600", color: "black" }}>
-                      Email <span style={{ color: "#ff0000" }}>*</span>
-                    </span>
                   </Col>
                 </Row>
               </Row>

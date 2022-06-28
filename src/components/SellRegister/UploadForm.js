@@ -40,10 +40,13 @@ const UploadForm = ({
     const formData = new FormData();
 
     for (let i = 0; i < e.target.files.length; i++) {
+      // if (e.target.files[i].size > 3000000) {
+      //   alert("File size must be less than 3MB.");
+      // } else {
       formData.append("images", e.target.files[i]);
+      // }
     }
 
-    console.log(formData.forEach((data) => data.size));
     await authService.saveImages(formData).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
@@ -60,7 +63,11 @@ const UploadForm = ({
     const formData = new FormData();
 
     for (let i = 0; i < e.target.files.length; i++) {
+      // if (e.target.files[i].size > 150000000) {
+      //   alert("File size must be less than 150MB.");
+      // } else {
       formData.append("videos", e.target.files[i]);
+      // }
     }
     await authService.saveVideos(formData).then((response2) => {
       if (response2.data.error) {
@@ -193,10 +200,8 @@ const UploadForm = ({
   };
 
   const onSubmit = () => {
-    if (images.length !== 0) {
+    if (images.length !== 0 && videos.length !== 0) {
       const data = { images, videos, step: 3 };
-
-      console.log(propertyTest);
       authService
         .editProperty(propertyTest._id, data)
         .then((res) => {
@@ -214,7 +219,7 @@ const UploadForm = ({
           alert(error);
         });
     } else {
-      alert("Please upload at least one image!");
+      alert("Please upload at least one image and a video!");
     }
   };
 
@@ -234,10 +239,10 @@ const UploadForm = ({
                 id="images-btn"
                 accept="image/*"
                 type="file"
+                name="images"
                 multiple
                 hidden
                 {...register("images", { onChange: onChange })}
-                required
               />
               <div className="upload-wrapper">
                 <details>
@@ -286,7 +291,6 @@ const UploadForm = ({
                 name="videos"
                 hidden
                 {...register("videos", { onChange: onChangeVideos })}
-                required
               />
               <div className="upload-wrapper">
                 <label onClick={toggleExtra} htmlFor="videos-btn">

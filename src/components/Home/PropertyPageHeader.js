@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  FormControl,
+  InputGroup,
+} from "react-bootstrap";
 import "../../styles/realEstate.css";
 import { MdOutlineMyLocation } from "react-icons/md";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import NumberFormat from "react-number-format";
 
 function PropertyPageHeader({
   path,
@@ -29,6 +37,34 @@ function PropertyPageHeader({
   const [city, setCity] = useState();
   const [zip, setZip] = useState();
 
+  const [condition, setCondition] = useState();
+  const [minMileage, setMinMileage] = useState();
+  const [maxMileage, setMaxMileage] = useState();
+  const [make, setMake] = useState();
+  const [model, setModel] = useState();
+
+  const [results, setResults] = useState([]);
+
+  const [otherPrice, setOtherPrice] = useState(false);
+
+  const carMake = [
+    "FERRARI",
+    "ASTON MARTIN",
+    "ROLLS ROYCE",
+    "BUGATTI",
+    "PAGANI",
+    "KOENIG",
+    "LAMBORGHINI",
+    "W MOTORS",
+    "MERCEDES",
+    "McLAREN",
+    "ZENVO",
+    "BENTLEY",
+    "CZINGER",
+    "MAZZANTI",
+    "Other",
+  ];
+
   const realEstateType = [
     { value: "villa", name: "Villa" },
     { value: "house", name: "House" },
@@ -49,7 +85,7 @@ function PropertyPageHeader({
     { value: "private island", name: "Private Island" },
   ];
 
-  const prices = [
+  const CarPrices = [
     { min_price: 1000000, max_price: 5000000 },
     { min_price: 5000000, max_price: 10000000 },
     { min_price: 10000000, max_price: 20000000 },
@@ -58,18 +94,47 @@ function PropertyPageHeader({
     { min_price: 40000000, max_price: 50000000 },
   ];
 
-  const getFilter = () => {
-    setFilter({
-      auctionType: auctionType,
-      propType: propType,
-      real_esstate_type: realType,
-      min_price: minPrice,
-      max_price: maxPrice,
-      country: country,
-      state: state,
-      city: city,
-      zip: zip,
-    });
+  const RealEstatePrice = [
+    { min_price: 10000000, max_price: 20000000 },
+    { min_price: 20000000, max_price: 30000000 },
+    { min_price: 30000000, max_price: 40000000 },
+    { min_price: 40000000, max_price: 50000000 },
+    { min_price: 50000000, max_price: 60000000 },
+    { min_price: 60000000, max_price: 70000000 },
+  ];
+
+  const getFilter = (propType) => {
+    if (propType === "real-estate") {
+      setFilter({
+        auctionType: auctionType,
+        propType: propType,
+        real_esstate_type: realType,
+        min_price: minPrice,
+        max_price: maxPrice,
+        country: country,
+        state: state,
+        city: city,
+        zip: zip,
+      });
+    } else if (propType === "car") {
+      setFilter({
+        auctionType: auctionType,
+        condition: condition,
+        min_mileage: minMileage,
+        max_mileage: maxMileage,
+        make: make,
+        model: model,
+      });
+    }
+  };
+
+  const carSearch = (query) => {
+    console.log(query);
+    if (query !== "") {
+      setResults(carMake.filter((item) => item.includes(query.toUpperCase())));
+    } else {
+      setResults([]);
+    }
   };
 
   const handleChange = (address) => {
@@ -130,14 +195,35 @@ function PropertyPageHeader({
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <input
                     type="text"
-                    placeholder="Enter location to search"
+                    placeholder="Make, Model"
                     className="searchBar"
+                    onChange={(e) => carSearch(e.target.value)}
                   />
+                  {results.length > 0
+                    ? results.map((item, index) => (
+                        <Row
+                          style={{
+                            width: "300px",
+                            height: "100px",
+                            marginTop: "140px",
+                            marginLeft: "20px",
+                            padding: "10px",
+                          }}
+                          className="position-absolute bg-white rounded shadow-lg"
+                          key={index}
+                        >
+                          <Col>{item}</Col>
+                        </Row>
+                      ))
+                    : null}
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
-                  onChange={(e) => setFilter(e.target.value)}
+                  style={{ width: "150px" }}
+                  onChange={(e) => {
+                    setAuctionType(e.target.value);
+                  }}
                   className=" RealButton "
                 >
                   <option value="">Auction Type</option>
@@ -147,62 +233,102 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
-                  <option>Condition</option>
-                  <option>New</option>
-                  <option>Used</option>
-                  {/* <option href="#">Mercedes-Benz</option>
-                  <option href="#">Porsche</option>
-                  <option href="#">Chevrolet</option>
-                  <option href="#">Ford</option>
-                  <option href="#">Ferrari</option>
-                  <option href="#">Rolls-Royce</option>
-                  <option href="#">Land Rover</option>
-                  <option href="#">Bentley</option> */}
+                <Form.Select
+                  onChange={(e) => setCondition(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Condition</option>
+                  <option value="new">New</option>
+                  <option value="used">Used</option>
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
-                  <option href="#">$0 - $100,000</option>
-                  <option href="#"> $100,000 - $150,000</option>
-                  <option href="#">$150,000 - $250,000</option>
-                  <option href="#">$250,000 - $300,000</option>
-                  <option href="#">$300,000 - $400,000</option>
-                  <option href="#">$400,000 - $500,000</option>
-                  <option href="#">$500,000 - $1,500,000</option>
-                </Form.Select>
-                {/* <Button
-                  style={{ color: "black" }}
-                  onClick={() => setPrice(!price)}
-                  className=" RealButtonPrice "
+                <Form.Select
+                  style={{ width: "150px" }}
+                  onChange={(e) => {
+                    if (e.target.value === "Other") {
+                      setOtherPrice(true);
+                    } else {
+                      const getPrice = CarPrices.filter(
+                        (price, index) => index === parseInt(e.target.value)
+                      );
+                      if (getPrice.length > 0) {
+                        setMinPrice(getPrice[0].min_price);
+                        setMaxPrice(getPrice[0].max_price);
+                      } else {
+                        setMinPrice();
+                        setMaxPrice();
+                      }
+                    }
+                  }}
+                  className=" RealButton "
                 >
-                  Starting Price
-                </Button>
-                {price && (
-                  <div className="priceDrop">
-                    <div className="d-flex">
-                      <input
-                        placeholder="Min Price"
-                        type="number"
-                        min="0"
-                        className="form-control"
-                      />
-                      <span className="d-flex justify-content-center align-items-center px-2">
+                  <option value="">Price</option>
+                  {CarPrices.map((price, index) => (
+                    <option value={index} key={index}>
+                      ${price.min_price.toLocaleString()} - $
+                      {price.max_price.toLocaleString()}
+                    </option>
+                  ))}
+                  <option value="Other">Other</option>
+                </Form.Select>
+                {otherPrice === true && (
+                  <div
+                    style={{ zIndex: "999", marginTop: "65px", width: "400px" }}
+                    className="position-absolute bg-white rounded shadow-lg"
+                  >
+                    <Row className="d-grid mt-3">
+                      <span>Price Range</span>
+                      <Col className="d-flex justify-content-center align-items-center mt-4">
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={minPrice}
+                          className="form-control"
+                          placeholder="Min"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMinPrice(value);
+                          }}
+                          required
+                        />
                         -
-                      </span>
-                      <input
-                        placeholder="Max Price"
-                        type="number"
-                        min="0"
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="d-flex justify-content-center mt-2">
-                      <Button>Done</Button>
-                    </div>
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={maxPrice}
+                          placeholder="Max"
+                          className="form-control"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMaxPrice(value);
+                          }}
+                          required
+                        />
+                      </Col>
+                      <Col
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          backgroundColor: "#fcba7d",
+                        }}
+                        className="mt-5 p-2"
+                      >
+                        <Button
+                          style={{
+                            backgroundColor: "white",
+                            color: "#fcba7d",
+                            border: "none",
+                            fontWeight: "700",
+                          }}
+                          onClick={() => setOtherPrice(false)}
+                        >
+                          Done
+                        </Button>
+                      </Col>
+                    </Row>
                   </div>
-                )} */}
+                )}
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
@@ -214,7 +340,12 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
-                <button className="galleryButton">Search</button>
+                <button
+                  onClick={() => getFilter("car")}
+                  className="galleryButton"
+                >
+                  Search
+                </button>
               </Col>
             </Row>
           </Col>
@@ -944,6 +1075,94 @@ function PropertyPageHeader({
                 <Form.Select
                   style={{ width: "150px" }}
                   onChange={(e) => {
+                    if (e.target.value === "Other") {
+                      setOtherPrice(true);
+                    } else {
+                      const getPrice = RealEstatePrice.filter(
+                        (price, index) => index === parseInt(e.target.value)
+                      );
+                      if (getPrice.length > 0) {
+                        setMinPrice(getPrice[0].min_price);
+                        setMaxPrice(getPrice[0].max_price);
+                      } else {
+                        setMinPrice();
+                        setMaxPrice();
+                      }
+                    }
+                  }}
+                  className=" RealButton "
+                >
+                  <option value="">Price</option>
+                  {RealEstatePrice.map((price, index) => (
+                    <option value={index} key={index}>
+                      ${price.min_price.toLocaleString()} - $
+                      {price.max_price.toLocaleString()}
+                    </option>
+                  ))}
+                  <option value="Other">Other</option>
+                </Form.Select>
+                {otherPrice === true && (
+                  <div
+                    style={{ zIndex: "999", marginTop: "65px", width: "400px" }}
+                    className="position-absolute bg-white rounded shadow-lg"
+                  >
+                    <Row className="d-grid mt-3">
+                      <span>Price Range</span>
+                      <Col className="d-flex justify-content-center align-items-center mt-4">
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={minPrice}
+                          className="form-control"
+                          placeholder="Min"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMinPrice(value);
+                          }}
+                          required
+                        />
+                        -
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={maxPrice}
+                          placeholder="Max"
+                          className="form-control"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMaxPrice(value);
+                          }}
+                          required
+                        />
+                      </Col>
+                      <Col
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          backgroundColor: "#fcba7d",
+                        }}
+                        className="mt-5 p-2"
+                      >
+                        <Button
+                          style={{
+                            backgroundColor: "white",
+                            color: "#fcba7d",
+                            border: "none",
+                            fontWeight: "700",
+                          }}
+                          onClick={() => setOtherPrice(false)}
+                        >
+                          Done
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                )}
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Form.Select
+                  style={{ width: "150px" }}
+                  onChange={(e) => {
                     setRealType(e.target.value);
                   }}
                   className=" RealButton "
@@ -954,33 +1173,6 @@ function PropertyPageHeader({
                       {type.name}
                     </option>
                   ))}
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  style={{ width: "150px" }}
-                  onChange={(e) => {
-                    const getPrice = prices.filter(
-                      (price, index) => index === parseInt(e.target.value)
-                    );
-                    if (getPrice.length > 0) {
-                      setMinPrice(getPrice[0].min_price);
-                      setMaxPrice(getPrice[0].max_price);
-                    } else {
-                      setMinPrice();
-                      setMaxPrice();
-                    }
-                  }}
-                  className=" RealButton "
-                >
-                  <option value="">Starting Price</option>
-                  {prices.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
                 </Form.Select>
               </Col>
               {/* <Col className="d-flex justify-content-center">
@@ -997,7 +1189,10 @@ function PropertyPageHeader({
                 </Form.Select>
               </Col> */}
               <Col className="d-flex justify-content-center">
-                <button onClick={() => getFilter()} className="galleryButton">
+                <button
+                  onClick={() => getFilter("real-estate")}
+                  className="galleryButton"
+                >
                   Search
                 </button>
               </Col>

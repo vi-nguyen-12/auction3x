@@ -192,6 +192,9 @@ function CarDetails({
         </div>
         <Row className="mt-3">
           <Col xs={12} md={4}>
+            <span style={{ color: "black" }}>
+              Year<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               format="####"
               className="form-control"
@@ -204,11 +207,11 @@ function CarDetails({
               name="year"
               required
             />
-            <span style={{ color: "black" }}>
-              Year<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Make<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             {other ? (
               <input
                 type="text"
@@ -235,11 +238,11 @@ function CarDetails({
                 ))}
               </Form.Select>
             )}
-            <span style={{ color: "black" }}>
-              Make<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Model<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -248,13 +251,13 @@ function CarDetails({
               onChange={(e) => setModel(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Model<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              Gearbox<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <Form.Select
               className="form-control"
               name="gearbox"
@@ -267,11 +270,11 @@ function CarDetails({
               <option value="Automatic">Automatic</option>
               <option value="Manual">Manual</option>
             </Form.Select>
-            <span style={{ color: "black" }}>
-              Gearbox<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Mileage<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               className="form-control"
@@ -280,13 +283,13 @@ function CarDetails({
               onChange={(e) => setMileage(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Mileage<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              Power<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -295,11 +298,11 @@ function CarDetails({
               onChange={(e) => setPower(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Power<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Car Type<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -308,13 +311,13 @@ function CarDetails({
               onChange={(e) => setCarType(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Car Type<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              VIN<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -323,11 +326,11 @@ function CarDetails({
               onChange={(e) => setVin(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              VIN<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Color<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -336,13 +339,13 @@ function CarDetails({
               onChange={(e) => setColor(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Color<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              Fuel Type<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <Form.Select
               className="form-control"
               name="fuel"
@@ -356,11 +359,11 @@ function CarDetails({
               <option value="Electric">Electric</option>
               <option value="Hybrid">Hybrid</option>
             </Form.Select>
-            <span style={{ color: "black" }}>
-              Fuel Type<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Engine<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -369,13 +372,14 @@ function CarDetails({
               onChange={(e) => setEngine(e.target.value)}
               required
             />
-            <span style={{ color: "black" }}>
-              Engine<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              Approximate Market Price
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -387,28 +391,23 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>
-              Approximate Market Price
-              <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            {/* <input
-              type="text"
-              className="form-control"
-              defaultValue={condition}
-              {...register("condition", { maxLength: 100 })}
-              onChange={(e) => setCondition(e.target.value)}
-              required
-            /> */}
-            <Form.Select onChange={(e) => setCondition(e.target.value)}>
-              <option value="">Condition</option>
-              <option value="used">Used</option>
-              <option value="new">New</option>
-            </Form.Select>
             <span style={{ color: "black" }}>
               Condition<span style={{ color: "#ff0000" }}>*</span>
             </span>
+
+            <Form.Select
+              value={condition}
+              {...register("condition", { maxLength: 100 })}
+              onChange={(e) => setCondition(e.target.value)}
+              required
+            >
+              {" "}
+              <option value="">Select Condition</option>
+              <option value="used">Used</option>
+              <option value="new">New</option>
+            </Form.Select>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -425,6 +424,9 @@ function CarDetails({
                 loading,
               }) => (
                 <div>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Location <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
@@ -432,9 +434,7 @@ function CarDetails({
                     })}
                     required
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Location <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
+
                   {suggestions && suggestions.length > 0 && (
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Loading...</div>}
@@ -473,62 +473,65 @@ function CarDetails({
             </PlacesAutocomplete>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={country}
-              {...register("country", { maxLength: 100 })}
-              onChange={(e) => setCountry(e.target.value)}
-              required
-            />
             <span style={{ color: "black" }}>
               Country<span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              value={country}
+              {...register("country", { maxLength: 100 })}
+              // onChange={(e) => setCountry(e.target.value)}
+              required
+            />
           </Col>
         </Row>
         <Row className="mt-3">
           <Col className="mt-sm-3 mt-md-0">
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={state}
-              {...register("state", { maxLength: 100 })}
-              onChange={(e) => setState(e.target.value)}
-              required
-            />
             <span style={{ color: "black" }}>
               State<span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
-              defaultValue={city}
-              {...register("city", { maxLength: 100 })}
-              onChange={(e) => setCity(e.target.value)}
+              value={state}
+              {...register("state", { maxLength: 100 })}
+              // onChange={(e) => setState(e.target.value)}
               required
             />
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
             <span style={{ color: "black" }}>
               City<span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-          <Col className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
-              defaultValue={zip}
-              {...register("zipCode")}
-              onChange={(e) => setZip(e.target.value)}
+              value={city}
+              {...register("city", { maxLength: 100 })}
+              // onChange={(e) => setCity(e.target.value)}
               required
             />
+          </Col>
+          <Col className="mt-sm-3 mt-md-0">
             <span style={{ color: "black" }}>
               Zip Code<span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              value={zip}
+              {...register("zipCode")}
+              // onChange={(e) => setZip(e.target.value)}
+              required
+            />
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ color: "black" }}>
+              Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -540,11 +543,11 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>
-              Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ color: "black" }}>
+              Discussed Amount<span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -556,9 +559,6 @@ function CarDetails({
               }}
               required
             />
-            <span style={{ color: "black" }}>
-              Discussed Amount<span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
 
