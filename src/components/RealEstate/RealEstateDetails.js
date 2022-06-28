@@ -5,6 +5,9 @@ import authService from "../../services/authServices";
 import { IoInformationCircleSharp } from "react-icons/io5";
 import NumberFormat from "react-number-format";
 import SellHeader from "../SellRegister/SellHeader";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+} from "react-places-autocomplete";
 
 function RealEstateDetails({
   step,
@@ -34,6 +37,14 @@ function RealEstateDetails({
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.formatted_street_address
       ?.zip_code || property_address.zip
+  );
+  const [lat, setLat] = useState(
+    propertyTest.details?.property_address?.formatted_street_address?.lat ||
+      property_address.lat
+  );
+  const [lng, setLng] = useState(
+    propertyTest.details?.property_address?.formatted_street_address?.lng ||
+      property_address.lng
   );
   const [ownerName, setOwnerName] = useState(
     propertyTest.details?.owner?.name || ""
@@ -70,6 +81,50 @@ function RealEstateDetails({
   const [discussedAmount, setDiscussedAmount] = useState(
     propertyTest.discussedAmount || ""
   );
+  const handleChange = (address) => {
+    setAddress(address);
+  };
+
+  const handleSelect = (address) => {
+    geocodeByAddress(address).then((results) => {
+      setAddress(() => {
+        return results[0].formatted_address.split(",")[0];
+      });
+
+      let cities = results[0].address_components.filter((item) => {
+        return item.types.includes(
+          "locality" || "sublocality" || "neighborhood"
+        );
+      });
+      setCity(() => {
+        return cities[0].long_name;
+      });
+
+      let states = results[0].address_components.filter((item) => {
+        return item.types[0] === "administrative_area_level_1";
+      });
+      setState(states[0].long_name);
+
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
+      });
+      setCountry(countries[0].long_name);
+
+      let zipcodes = results[0].address_components.filter((item) => {
+        return item.types[0] === "postal_code";
+      });
+      setZip((prev) => {
+        return zipcodes[0].long_name;
+      });
+
+      setLat(() => {
+        return results[0].geometry.location.lat();
+      });
+      setLng(() => {
+        return results[0].geometry.location.lng();
+      });
+    });
+  };
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
@@ -77,16 +132,17 @@ function RealEstateDetails({
     } else {
       const submitedData = {
         street_address: address,
-        city: city,
-        state: state,
-        country: country,
+        city,
+        state,
+        country,
         zip_code: zip,
+        lat,
+        lng,
         real_estate_type: propType,
         year_built: year,
         owner_name: ownerName,
         baths_count: bathrooms,
         beds_count: bedrooms,
-        standardized_land_use_type: propType,
         total_value: totalValue,
         area_sq_ft: sqft,
         lot_size: lotSize,
@@ -141,82 +197,131 @@ function RealEstateDetails({
         </div>
         <Row className="mt-3">
           <Col>
-            <input
-              type="text"
-              className="form-control"
-              name="street_address"
-              defaultValue={address}
-              {...register("street_address")}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Address <span style={{ color: "#ff0000" }}>*</span>
-            </span>
+            <PlacesAutocomplete
+              value={address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Street Address <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search address",
+                      className: "form-control",
+                    })}
+                    required
+                  />
+
+                  {suggestions && suggestions.length > 0 && (
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>Loading...</div>}
+                      {suggestions.map((suggestion, index) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        const style = suggestion.active
+                          ? {
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
+                          : {
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
+                        return (
+                          <div
+                            key={index}
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </PlacesAutocomplete>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
               name="city"
-              defaultValue={city}
-              {...register("city")}
-              onChange={(e) => setCity(e.target.value)}
+              value={city}
+              // {...register("city")}
+              // onChange={(e) => setCity(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              City <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
               name="state"
-              defaultValue={state}
-              {...register("state")}
-              onChange={(e) => setState(e.target.value)}
+              value={state}
+              // {...register("state")}
+              // onChange={(e) => setState(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              State <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
               name="country"
-              defaultValue={country}
-              {...register("country")}
-              onChange={(e) => setCountry(e.target.value)}
+              value={country}
+              // {...register("country")}
+              // onChange={(e) => setCountry(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Country <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
               name="zipCode"
-              defaultValue={zip}
-              {...register("zipCode")}
-              onChange={(e) => setZip(e.target.value)}
+              value={zip}
+              // {...register("zipCode")}
+              // onChange={(e) => setZip(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Zip Code <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Owner/Entity Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -226,27 +331,45 @@ function RealEstateDetails({
               onChange={(e) => setOwnerName(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Owner/Entity Name <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <input
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Property Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <select
               type="text"
               className="form-control"
-              defaultValue={propType}
+              value={propType}
               {...register("propertyType")}
               onChange={(e) => setPropType(e.target.value)}
               name="propertyType"
               required
-            />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Property Type <span style={{ color: "#ff0000" }}>*</span>
-            </span>
+            >
+              <option value="house">House</option>
+              <option value="villa">Villa</option>
+              <option value="estate">Estate</option>
+              <option value="country_house">Country House</option>
+              <option value="finca">Finca</option>
+              <option value="chalet">Chalet</option>
+              <option value="townhouse">Townhouse</option>
+              <option value="bungalow">Bungalow</option>
+              <option value="apartment">Apartment</option>
+              <option value="penthouse">Penthouse</option>
+              <option value="condo">Condo</option>
+              <option value="co_op">Co-op</option>
+              <option value="land">Land</option>
+              <option value="castle">Castle</option>
+              <option value="chateau">Chateau</option>
+              <option value="farm_ranch">Farm Ranch</option>
+              <option value="private_island">Private Island</option>
+            </select>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               format="####"
               className="form-control"
@@ -259,11 +382,11 @@ function RealEstateDetails({
               name="year"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Year Built <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Lot Size (Acre) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               className="form-control"
@@ -273,13 +396,13 @@ function RealEstateDetails({
               name="lotSize"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Lot Size (Acre) <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Garage(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -289,11 +412,11 @@ function RealEstateDetails({
               name="garage"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Garage(s) <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              story(s) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               className="form-control"
@@ -303,13 +426,13 @@ function RealEstateDetails({
               name="story"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              story(s) <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               min="0"
@@ -320,11 +443,11 @@ function RealEstateDetails({
               name="bedrooms"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Bedrooms <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Bathrooms <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               min="0"
@@ -335,11 +458,11 @@ function RealEstateDetails({
               name="bathrooms"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Bathrooms <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -351,13 +474,13 @@ function RealEstateDetails({
                 setTotalValue(value);
               }}
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Sqft <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               min="0"
@@ -368,13 +491,13 @@ function RealEstateDetails({
               name="sqft"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Sqft <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -387,11 +510,11 @@ function RealEstateDetails({
               }}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -404,9 +527,6 @@ function RealEstateDetails({
               }}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-5">

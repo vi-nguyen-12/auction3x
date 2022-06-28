@@ -1,6 +1,4 @@
 import React from "react";
-import RealEstateDetails from "../RealEstate/RealEstateDetails";
-import EmptyRealEstateDetails from "../RealEstate/EmptyRealEstateDetails";
 import CarDetails from "../Cars/CarDetails";
 import JetDetails from "../Jets/JetDetails";
 import YachtDetails from "../Yachts/YachtDetails";
@@ -26,38 +24,7 @@ const PropertyDetails = ({
     <div className="wrapper">
       <SellHeader step={step} />
       <div className="sell-bottom">
-        {propertyTest.type === "real-estate" ? (
-          property.address &&
-          property.structure &&
-          property.market_assessments ? (
-            <RealEstateDetails
-              toggleStep={toggleStep}
-              step={step}
-              property={property}
-              propertyData={propertyData}
-              togglePropertyData={togglePropertyData}
-              propId={propId}
-              ownership={ownership}
-              getPropId={getPropId}
-              toggleSellStep={toggleSellStep}
-            />
-          ) : (
-            <EmptyRealEstateDetails
-              toggleStep={toggleStep}
-              step={step}
-              setStep={setStep}
-              property={property}
-              propertyData={propertyData}
-              togglePropertyData={togglePropertyData}
-              propId={propId}
-              ownership={ownership}
-              getPropId={getPropId}
-              toggleSellStep={toggleSellStep}
-              propertyTest={propertyTest}
-              setPropertyTest={setPropertyTest}
-            />
-          )
-        ) : propertyTest.type === "car" ? (
+        {propertyTest.type === "car" ? (
           <CarDetails
             toggleStep={toggleStep}
             step={step}

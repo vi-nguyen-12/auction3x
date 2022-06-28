@@ -693,19 +693,21 @@ function App() {
               </Route>
             )}
 
-            <Route path="/multiSellForm/:id">
-              <MultiSellForm
-                colorChange={colorChange}
-                toggleShow={toggleShow}
-                bodyColorChange={bodyColorChange}
-                setHeaderWidth={setHeaderWidth}
-                setPositionLeft={setPositionLeft}
-                setPadRight={setPadRight}
-                windowSize={windowSize}
-                toggleSignIn={toggleSignIn}
-                toggleSignUp={toggleSignUp}
-              />
-            </Route>
+            {user._id && (
+              <Route path="/multiSellForm/:id">
+                <MultiSellForm
+                  colorChange={colorChange}
+                  toggleShow={toggleShow}
+                  bodyColorChange={bodyColorChange}
+                  setHeaderWidth={setHeaderWidth}
+                  setPositionLeft={setPositionLeft}
+                  setPadRight={setPadRight}
+                  windowSize={windowSize}
+                  toggleSignIn={toggleSignIn}
+                  toggleSignUp={toggleSignUp}
+                />
+              </Route>
+            )}
             {user._id && (
               <Route exact path="/multiSellForm">
                 <MultiSellForm

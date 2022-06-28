@@ -78,7 +78,7 @@ const MultiSellForm = ({
     colorChange("black");
     bodyColorChange("#ffefe3");
     toggleShow();
-
+    console.log(params.id);
     if (params.id) {
       authService
         .getProperty(params.id)
@@ -92,7 +92,9 @@ const MultiSellForm = ({
           }
         });
     }
-  }, [params.step]);
+  }, []);
+  console.log(step);
+  console.log(propertyTest);
   return (
     <Container className="vh-100">
       <h1 className="fs-1">Sell On Auction3</h1>
