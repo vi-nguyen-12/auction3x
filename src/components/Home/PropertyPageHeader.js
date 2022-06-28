@@ -23,7 +23,7 @@ function PropertyPageHeader({
   const [realType, setRealType] = useState();
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
-  const [address, setAddress] = useState();
+  const [address, setAddress] = useState("");
   const [country, setCountry] = useState();
   const [state, setState] = useState();
   const [city, setCity] = useState();
@@ -86,13 +86,15 @@ function PropertyPageHeader({
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+      setCity(
+        cities[0] ? cities[0].long_name : cities[0] ? cities[0].short_name : ""
+      );
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
       setState(
-        states[0].long_name ? states[0].long_name : states[0].short_name
+        states[0] ? states[0].long_name : states[0] ? states[0].short_name : ""
       );
 
       let countries = results[0].address_components.filter((item) => {
@@ -867,11 +869,6 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  {/* <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  /> */}
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -886,7 +883,7 @@ function PropertyPageHeader({
                       <div className="w-100">
                         <input
                           {...getInputProps({
-                            placeholder: "Enter Location to search",
+                            placeholder: "Country, State, City, Postal Code",
                             className: "searchBar",
                           })}
                           required
@@ -931,6 +928,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  style={{ width: "150px" }}
                   onChange={(e) => {
                     setAuctionType(e.target.value);
                   }}
@@ -944,6 +942,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  style={{ width: "150px" }}
                   onChange={(e) => {
                     setRealType(e.target.value);
                   }}
@@ -959,6 +958,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  style={{ width: "150px" }}
                   onChange={(e) => {
                     const getPrice = prices.filter(
                       (price, index) => index === parseInt(e.target.value)
@@ -980,10 +980,14 @@ function PropertyPageHeader({
                       {price.max_price.toLocaleString()}
                     </option>
                   ))}
+                  <option value="Other">Other</option>
                 </Form.Select>
               </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
+              {/* <Col className="d-flex justify-content-center">
+                <Form.Select
+                  style={{ width: "150px" }}
+                  className=" RealButton "
+                >
                   <option>More Filter</option>
                   <option href="#">Bedrooms</option>
                   <option href="#">Bathrooms</option>
@@ -991,7 +995,7 @@ function PropertyPageHeader({
                   <option href="#">Year Built</option>
                   <option href="#">Garage</option>
                 </Form.Select>
-              </Col>
+              </Col> */}
               <Col className="d-flex justify-content-center">
                 <button onClick={() => getFilter()} className="galleryButton">
                   Search
@@ -999,10 +1003,9 @@ function PropertyPageHeader({
               </Col>
             </Row>
           </Col>
-          <Col md={3} className="filterResult">
-            <Row style={{ display: "flex", alignContent: "center" }}>
+          <Col className="d-flex justify-content-center filterResult" md={3}>
+            <Row>
               <Col
-                md={5}
                 style={{
                   display: "flex",
                   justifyContent: "center",

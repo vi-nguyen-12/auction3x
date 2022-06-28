@@ -393,14 +393,19 @@ function CarDetails({
             </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <input
+            {/* <input
               type="text"
               className="form-control"
               defaultValue={condition}
               {...register("condition", { maxLength: 100 })}
               onChange={(e) => setCondition(e.target.value)}
               required
-            />
+            /> */}
+            <Form.Select onChange={(e) => setCondition(e.target.value)}>
+              <option value="">Condition</option>
+              <option value="used">Used</option>
+              <option value="new">New</option>
+            </Form.Select>
             <span style={{ color: "black" }}>
               Condition<span style={{ color: "#ff0000" }}>*</span>
             </span>

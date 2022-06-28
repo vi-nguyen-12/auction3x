@@ -28,7 +28,6 @@ const UploadForm = ({
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState(propertyTest.images || []);
   const [videos, setVideos] = useState(propertyTest.videos || []);
-  console.log(images, videos);
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
@@ -43,6 +42,8 @@ const UploadForm = ({
     for (let i = 0; i < e.target.files.length; i++) {
       formData.append("images", e.target.files[i]);
     }
+
+    console.log(formData.forEach((data) => data.size));
     await authService.saveImages(formData).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
@@ -236,6 +237,7 @@ const UploadForm = ({
                 multiple
                 hidden
                 {...register("images", { onChange: onChange })}
+                required
               />
               <div className="upload-wrapper">
                 <details>
@@ -275,22 +277,24 @@ const UploadForm = ({
             </Col>
 
             <Col xs={12} md={6} className="px-sm-3">
-              Choose the Videos/ Live360 Files (optional)
+              Choose the Videos/ Live360 Files{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="videos-btn"
                 accept="video/*"
                 type="file"
                 name="videos"
-                multiple
                 hidden
                 {...register("videos", { onChange: onChangeVideos })}
+                required
               />
               <div className="upload-wrapper">
-                <details>
+                <label onClick={toggleExtra} htmlFor="videos-btn">
+                  + Videos
+                </label>
+                {/* <details>
                   <summary>
-                    <label onClick={toggleExtra} htmlFor="videos-btn">
-                      + Videos
-                    </label>
+
                   </summary>
 
                   <div>
@@ -301,7 +305,7 @@ const UploadForm = ({
                       <AiOutlinePlusCircle />
                     </label>
                   </div>
-                </details>
+                </details> */}
               </div>
               <div className="upload-list" style={{ width: "100%" }}>
                 {videos

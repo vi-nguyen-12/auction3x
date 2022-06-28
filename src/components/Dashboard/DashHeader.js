@@ -20,7 +20,14 @@ function DashHeader({ location, windowSize }) {
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
-            <div className="searchBar">
+            <div
+              className="searchBar"
+              style={{
+                borderRadius: "45px",
+                paddingLeft: "8px",
+                width: "400px",
+              }}
+            >
               <input type="text" placeholder="Search Here" />
               <FiSearch color="black" size={25} />
             </div>

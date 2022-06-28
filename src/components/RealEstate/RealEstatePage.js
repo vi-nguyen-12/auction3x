@@ -134,8 +134,6 @@ function RealEstatePage({
     }
   }, [onGoingAuctions, upcomingAuctions]);
 
-  console.log(auctions.length);
-
   useEffect(() => {
     if (filter) {
       authService.propFilter(filter).then((res) => {
