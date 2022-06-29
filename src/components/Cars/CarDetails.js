@@ -83,7 +83,7 @@ function CarDetails({
         make,
         model,
         year,
-        mileage,
+        mileage: parseInt(mileage),
         gearbox,
         car_type: carType,
         power,

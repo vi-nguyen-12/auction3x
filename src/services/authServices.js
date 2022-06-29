@@ -390,10 +390,6 @@ const authService = {
     return axios.get(apiUrl + `/api/auctions/${id}/result`);
   },
 
-  getDocuments() {
-    return axios.get(apiUrl + "/api/documents");
-  },
-
   submitContact(data) {
     return axios.post(apiUrl + "/api/contacts", data);
   },
@@ -474,6 +470,9 @@ const authService = {
         },
       }
     );
+  },
+  getDocument(data) {
+    return axios.get(apiUrl + `/api/documents`, { params: data });
   },
 };
 
