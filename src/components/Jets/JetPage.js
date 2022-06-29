@@ -87,6 +87,7 @@ function JetPage({
   toggleSignIn,
   windowSize,
   filter,
+  setResultLength,
 }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -134,13 +135,19 @@ function JetPage({
 
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAuctions(upcomingAuctions);
-      }
+      authService.propFilter(filter).then((res) => {
+        if (res.data.length > 0) {
+          const jet = res.data.filter((item) => item.property.type === "jet");
+          setResultLength({ jet: jet.length });
+          setAuctions(jet);
+        } else {
+          setAuctions([]);
+        }
+      });
+    } else {
+      setResultLength({ jet: auctions.length });
     }
-  }, [filter, auctions]);
+  }, [filter]);
 
   let settings = {
     dots: false,

@@ -131,9 +131,14 @@ function CarPage({
   useEffect(() => {
     if (filter) {
       authService.carFilter(filter).then((res) => {
-        const car = res.data.filter((item) => item.property.type === "car");
-        setResultLength({ car: car.length });
-        setAuctions(car);
+        if (res.data.length > 0) {
+          const car = res.data.filter((item) => item.property.type === "car");
+          setResultLength({ car: car.length });
+          setAuctions(car);
+        }
+        else{
+          setAuctions([]);
+        }
       });
     } else {
       setResultLength({ car: auctions.length });

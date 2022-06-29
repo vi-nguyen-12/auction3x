@@ -433,16 +433,27 @@ const authService = {
   },
 
   propFilter(data) {
+    console.log(data);
     return axios.get(
       apiUrl +
-        `/api/auctions?${data.auctionType ? "time=" + data.auctionType : ""}&${
-          data.propType ? "type=" + data.propType : ""
-        }&${
+        `/api/auctions?${
+          data.auctionType.realEstate
+            ? "time=" + data.auctionType.realEstate
+            : ""
+        }&${data.propType ? "type=" + data.propType : ""}&${
           data.real_esstate_type
             ? "real_estate_type=" + data.real_esstate_type
             : ""
-        }&${data.min_price ? "min_price=" + data.min_price : ""}&${
-          data.max_price ? "max_price=" + data.max_price : ""
+        }&${data.minYear.jet ? "min_year=" + data.minYear.jet : ""}&${
+          data.maxYear.jet ? "max_Year=" + data.maxYear.jet : ""
+        }&${
+          data.min_price.realEstate
+            ? "min_price=" + data.min_price.realEstate
+            : ""
+        }&${
+          data.max_price.realEstate
+            ? "max_price=" + data.max_price.realEstate
+            : ""
         }&${data.zip ? "real_estate_zip_code=" + data.zip : ""}&${
           data.city ? "real_estate_city=" + data.city : ""
         }&${data.state ? "real_estate_state=" + data.state : ""}&${
@@ -460,14 +471,66 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=car&${
-          data.auctionType ? "time=" + data.auctionType : ""
-        }&${data.min_price ? "min_price=" + data.min_price : ""}&${
-          data.max_price ? "max_price=" + data.max_price : ""
+          data.auctionType.car ? "time=" + data.auctionType.car : ""
+        }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
+          data.max_price.car ? "max_price=" + data.max_price.car : ""
         }&${data.condition ? "condition=" + data.condition : ""}&${
           data.make ? "make=" + data.make : ""
         }&${data.model ? "model=" + data.model : ""}&${
           data.min_mileage ? "min_mileage=" + data.min_mileage : ""
-        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}`,
+        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
+          data.zip ? "real_estate_zip_code=" + data.zip : ""
+        }&${data.city ? "real_estate_city=" + data.city : ""}&${
+          data.state ? "real_estate_state=" + data.state : ""
+        }&${data.country ? "real_estate_country=" + data.country : ""}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
+  jetFilter(data) {
+    return axios.get(
+      apiUrl +
+        `/api/auctions?type=jet&${
+          data.auctionType.car ? "time=" + data.auctionType.car : ""
+        }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
+          data.max_price.car ? "max_price=" + data.max_price.car : ""
+        }&${data.make ? "make=" + data.make : ""}&${
+          data.make ? "make=" + data.make : ""
+        }&${data.model ? "model=" + data.model : ""}&${
+          data.minYear.jet ? "min_year=" + data.minYear.jet : ""
+        }&${data.maxYear.jet ? "max_Year=" + data.maxYear.jet : ""}&${
+          data.zip ? "real_estate_zip_code=" + data.zip : ""
+        }&${data.city ? "real_estate_city=" + data.city : ""}&${
+          data.state ? "real_estate_state=" + data.state : ""
+        }&${data.country ? "real_estate_country=" + data.country : ""}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
+  yachtFilter(data) {
+    return axios.get(
+      apiUrl +
+        `/api/auctions?type=yacht&${
+          data.auctionType.car ? "time=" + data.auctionType.car : ""
+        }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
+          data.max_price.car ? "max_price=" + data.max_price.car : ""
+        }&${data.condition ? "condition=" + data.condition : ""}&${
+          data.make ? "make=" + data.make : ""
+        }&${data.model ? "model=" + data.model : ""}&${
+          data.min_mileage ? "min_mileage=" + data.min_mileage : ""
+        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
+          data.zip ? "real_estate_zip_code=" + data.zip : ""
+        }&${data.city ? "real_estate_city=" + data.city : ""}&${
+          data.state ? "real_estate_state=" + data.state : ""
+        }&${data.country ? "real_estate_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

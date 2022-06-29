@@ -109,7 +109,7 @@ function PartnerWithUs({ windowSize }) {
                   disableDropdown={false}
                   country={"us"}
                   dropdownStyle={{ paddingLeft: "0!important" }}
-                  value={phone}
+                  value={phone ? phone : null}
                   inputStyle={{ width: "100%" }}
                   buttonStyle={{
                     borderRight: "none",

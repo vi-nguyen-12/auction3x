@@ -19,6 +19,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [agent, setAgent] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [phone, setPhone] = useState();
   const toggleTerms = () => setShowTerms(!showTerms);
   const togglePrivacy = () => setShowPrivacy(!showPrivacy);
   const toggleAgent = () => setAgent(!agent);
@@ -70,8 +71,6 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
-    } else if (data.phone.length !== 10) {
-      alert("Please enter a valid phone number!");
     } else {
       if (data.agentNumber !== "") {
         const datas = {
@@ -79,7 +78,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           lastName: data.lastName,
           email: data.email,
           password: data.password,
-          phone: data.phone,
+          phone: data.phone ? data.phone : phone,
           userName: data.userName,
           country: data.country,
           city: data.city,
@@ -103,7 +102,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           lastName: data.lastName,
           email: data.email,
           password: data.password,
-          phone: data.phone,
+          phone: data.phone ? data.phone : phone,
           userName: data.userName,
           country: data.country,
           city: data.city,
@@ -276,11 +275,12 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
                 disableDropdown={false}
                 country={"us"}
                 dropdownStyle={{ paddingLeft: "0!important" }}
+                value={phone ? phone : null}
                 inputStyle={{ width: "100%" }}
                 buttonStyle={{
                   borderRight: "none",
                 }}
-                {...register("phone", { required: true })}
+                onChange={setPhone}
               />
             </div>
           </Col>
@@ -339,7 +339,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <Row style={{ margin: "50px 0" }}>
-          <h1 style={{ fontSize: "1.3rem", paddingTop:"0" }}>Are you an agent? (Optional) </h1>
+          <h1 style={{ fontSize: "1.3rem", paddingTop: "0" }}>
+            Are you an agent? (Optional){" "}
+          </h1>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="agentNumber">Agent License Number</label>
@@ -369,7 +371,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
             {file.length > 0 && (
               <div>
                 {file.map((file, index) => (
-                  <ul key={index}>
+                  <ul style={{ paddingLeft: "0.5rem" }} key={index}>
                     <li style={{ fontSize: "18px", listStyle: "none" }}>
                       {file.name}{" "}
                       <span>
