@@ -43,9 +43,11 @@ function PropertyPageHeader({
   const [make, setMake] = useState();
   const [model, setModel] = useState();
 
+  const [query, setQuery] = useState();
   const [results, setResults] = useState([]);
 
   const [otherPrice, setOtherPrice] = useState(false);
+  const [otherMileage, setOtherMileage] = useState(false);
 
   const carMake = [
     "FERRARI",
@@ -103,6 +105,15 @@ function PropertyPageHeader({
     { min_price: 60000000, max_price: 70000000 },
   ];
 
+  const mileage = [
+    { min: 0, max: 10000 },
+    { min: 10000, max: 30000 },
+    { min: 30000, max: 50000 },
+    { min: 50000, max: 70000 },
+    { min: 70000, max: 100000 },
+    { min: 100000, max: 200000 },
+  ];
+
   const getFilter = (propType) => {
     if (propType === "real-estate") {
       setFilter({
@@ -129,8 +140,8 @@ function PropertyPageHeader({
   };
 
   const carSearch = (query) => {
-    console.log(query);
     if (query !== "") {
+      setQuery(query);
       setResults(carMake.filter((item) => item.includes(query.toUpperCase())));
     } else {
       setResults([]);
@@ -229,7 +240,7 @@ function PropertyPageHeader({
                   <option value="">Auction Type</option>
                   <option value="ongoing">Ongoing</option>
                   <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
+                  <option value="completed">Completed</option>
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -331,13 +342,91 @@ function PropertyPageHeader({
                 )}
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
-                  <option>Mileage</option>
-                  <option href="#">0 mi - 1000 mi</option>
-                  <option href="#">10000 mi - 20000 mi</option>
-                  <option href="#">20000 mi - 40000 mi</option>
-                  <option href="#">40000 mi - 60000 mi</option>
+                <Form.Select
+                  onChange={(e) => {
+                    if (e.target.value === "Other") {
+                      setOtherMileage(true);
+                    } else {
+                      const getMileage = mileage.filter(
+                        (price, index) => index === parseInt(e.target.value)
+                      );
+                      if (getMileage.length > 0) {
+                        setMinMileage(getMileage[0].min);
+                        setMaxMileage(getMileage[0].max);
+                      } else {
+                        setMinMileage();
+                        setMaxMileage();
+                      }
+                    }
+                  }}
+                  className=" RealButton "
+                >
+                  <option value="">Mileage</option>
+                  {mileage.map((item, index) => (
+                    <option value={index} key={index}>
+                      {item.min.toLocaleString()} mil -{" "}
+                      {item.max.toLocaleString()} mil
+                    </option>
+                  ))}
+                  <option value="Other">Other</option>
                 </Form.Select>
+                {otherMileage === true && (
+                  <div
+                    style={{ zIndex: "999", marginTop: "65px", width: "400px" }}
+                    className="position-absolute bg-white rounded shadow-lg"
+                  >
+                    <Row className="d-grid mt-3">
+                      <span>Mileage Range</span>
+                      <Col className="d-flex justify-content-center align-items-center mt-4">
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={minMileage}
+                          className="form-control"
+                          placeholder="Min"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMinMileage(value);
+                          }}
+                          required
+                        />
+                        -
+                        <NumberFormat
+                          thousandSeparator={true}
+                          prefix="$"
+                          value={maxMileage}
+                          placeholder="Max"
+                          className="form-control"
+                          onValueChange={(values) => {
+                            const { value } = values;
+                            setMaxMileage(value);
+                          }}
+                          required
+                        />
+                      </Col>
+                      <Col
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          backgroundColor: "#fcba7d",
+                        }}
+                        className="mt-5 p-2"
+                      >
+                        <Button
+                          style={{
+                            backgroundColor: "white",
+                            color: "#fcba7d",
+                            border: "none",
+                            fontWeight: "700",
+                          }}
+                          onClick={() => setOtherMileage(false)}
+                        >
+                          Done
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                )}
               </Col>
               <Col className="d-flex justify-content-center">
                 <button
@@ -410,7 +499,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
                   <option href="#">$150,000 - $250,000</option>
@@ -518,7 +607,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $100,000</option>
                   <option href="#"> $100,000 - $150,000</option>
                   <option href="#">$150,000 - $250,000</option>
@@ -604,7 +693,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
@@ -689,7 +778,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
@@ -774,7 +863,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
@@ -859,7 +948,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
@@ -944,7 +1033,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select className=" RealButton ">
-                  <option>Starting Price</option>
+                  <option>Price</option>
                   <option href="#">$0 - $50,000</option>
                   <option href="#">$50,000 - $2,000,000</option>
                   <option href="#">$2,000,000 - $5,000,000</option>
@@ -1068,7 +1157,7 @@ function PropertyPageHeader({
                   <option value="">Auction Type</option>
                   <option value="ongoing">Ongoing</option>
                   <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
+                  <option value="completed">Completed</option>
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">

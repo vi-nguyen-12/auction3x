@@ -460,14 +460,14 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=car&${
-          data.min_price ? "min_price=" + data.min_price : ""
-        }&${data.max_price ? "max_price=" + data.max_price : ""}&${
-          data.condition ? "condition=" + data.condition : ""
-        }&${data.make ? "make=" + data.make : ""}&${
-          data.model ? "model=" + data.model : ""
-        }&${data.min_mileage ? "min_mileage=" + data.min_mileage : ""}&${
-          data.max_mileage ? "max_mileage=" + data.max_mileage : ""
-        }`,
+          data.auctionType ? "time=" + data.auctionType : ""
+        }&${data.min_price ? "min_price=" + data.min_price : ""}&${
+          data.max_price ? "max_price=" + data.max_price : ""
+        }&${data.condition ? "condition=" + data.condition : ""}&${
+          data.make ? "make=" + data.make : ""
+        }&${data.model ? "model=" + data.model : ""}&${
+          data.min_mileage ? "min_mileage=" + data.min_mileage : ""
+        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
