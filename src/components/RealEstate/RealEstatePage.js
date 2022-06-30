@@ -137,11 +137,15 @@ function RealEstatePage({
   useEffect(() => {
     if (filter) {
       authService.propFilter(filter).then((res) => {
-        const realEstate = res.data.filter(
-          (item) => item.property.type === "real-estate"
-        );
-        setResultLength({ realEstate: realEstate.length });
-        setAuctions(realEstate);
+        if (res.data.length > 0) {
+          const realEstate = res.data.filter(
+            (item) => item.property.type === "real-estate"
+          );
+          setResultLength({ realEstate: realEstate.length });
+          setAuctions(realEstate);
+        } else {
+          setAuctions([]);
+        }
       });
     } else {
       setResultLength({ realEstate: auctions.length });

@@ -146,8 +146,6 @@ function RealEstateDetails({
     { value: "private island", name: "Private Island" },
   ];
 
-  console.log(propType);
-
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
@@ -292,6 +290,7 @@ function RealEstateDetails({
               // {...register("city")}
               // onChange={(e) => setCity(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -306,6 +305,7 @@ function RealEstateDetails({
               // {...register("state")}
               // onChange={(e) => setState(e.target.value)}
               required
+              readOnly
             />
           </Col>
         </Row>
@@ -322,6 +322,7 @@ function RealEstateDetails({
               // {...register("country")}
               // onChange={(e) => setCountry(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -336,6 +337,7 @@ function RealEstateDetails({
               // {...register("zipCode")}
               // onChange={(e) => setZip(e.target.value)}
               required
+              readOnly
             />
           </Col>
         </Row>
@@ -360,7 +362,19 @@ function RealEstateDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Property Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <select
+            <Form.Select
+              value={propType}
+              onChange={(e) => setPropType(e.target.value)}
+              required
+            >
+              <option value="">Property Type</option>
+              {realEstateType.map((item, index) => (
+                <option value={item.value} key={index}>
+                  {item.name}
+                </option>
+              ))}
+            </Form.Select>
+            {/* <select
               type="text"
               className="form-control"
               value={propType}
@@ -386,7 +400,7 @@ function RealEstateDetails({
               <option value="chateau">Chateau</option>
               <option value="farm_ranch">Farm Ranch</option>
               <option value="private_island">Private Island</option>
-            </select>
+            </select> */}
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>

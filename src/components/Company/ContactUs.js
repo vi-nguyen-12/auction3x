@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contact from "../../../src/images/contactImg.png";
 import CompanyHeader from "./CompanyHeader";
@@ -12,6 +12,7 @@ import "react-phone-input-2/lib/bootstrap.css";
 function ContactUs({ windowSize }) {
   const location = useLocation();
   const { register, handleSubmit } = useForm();
+  const [phone, setPhone] = useState();
   const onSubmit = async (data) => {
     const submitContact = await authService.submitContact(data);
     if (submitContact.data.error) {
@@ -109,12 +110,13 @@ function ContactUs({ windowSize }) {
                     onlyCountries={["ca", "us", "gb", "au"]}
                     disableDropdown={false}
                     country={"us"}
+                    value={phone ? phone : null}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     inputStyle={{ width: "100%" }}
                     buttonStyle={{
                       borderRight: "none",
                     }}
-                    {...register("phone", { required: true })}
+                    onChange={setPhone}
                   />
                 </Col>
               </Row>

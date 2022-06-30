@@ -82,6 +82,7 @@ function CarPage({
   toggleSignIn,
   windowSize,
   filter,
+  setResultLength,
 }) {
   useEffect(() => {
     toggleChange();
@@ -129,13 +130,20 @@ function CarPage({
 
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAuctions(upcomingAuctions);
-      }
+      authService.carFilter(filter).then((res) => {
+        if (res.data.length > 0) {
+          const car = res.data.filter((item) => item.property.type === "car");
+          setResultLength({ car: car.length });
+          setAuctions(car);
+        }
+        else{
+          setAuctions([]);
+        }
+      });
+    } else {
+      setResultLength({ car: auctions.length });
     }
-  }, [filter, auctions]);
+  }, [filter]);
 
   let settings = {
     dots: false,

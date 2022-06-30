@@ -104,6 +104,7 @@ const PropertyPages = ({
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}
+          setResultLength={setResultLength}
         />
       ) : path === "/jets" ? (
         <JetPage
@@ -113,6 +114,7 @@ const PropertyPages = ({
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}
+          setResultLength={setResultLength}
         />
       ) : path === "/yachts" ? (
         <YachtPage
@@ -122,6 +124,7 @@ const PropertyPages = ({
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}
+          setResultLength={setResultLength}
         />
       ) : path === "/Auctions" || "/Auctions/:Country" ? (
         <Auctions
@@ -129,6 +132,7 @@ const PropertyPages = ({
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
           filter={filter}
+          setResultLength={setResultLength}
         />
       ) : null}
       {/* Map Button */}

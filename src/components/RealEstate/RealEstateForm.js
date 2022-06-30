@@ -193,6 +193,7 @@ function RealEstateForm({
                   value={city}
                   // {...register("city", { required: false })}
                   required
+                  readOnly
                 />
               </Col>
               <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -207,6 +208,7 @@ function RealEstateForm({
                   value={state}
                   // {...register("state", { required: false })}
                   required
+                  readOnly
                 />
               </Col>
             </Row>
@@ -226,6 +228,7 @@ function RealEstateForm({
                   //   maxLength: 100,
                   // })}
                   required
+                  readOnly
                 />
               </Col>
               <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -240,6 +243,7 @@ function RealEstateForm({
                   value={zip}
                   // {...register("zipCode", { required: false })}
                   required
+                  readOnly
                 />
               </Col>
             </Row>
