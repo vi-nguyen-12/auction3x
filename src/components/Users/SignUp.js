@@ -8,14 +8,15 @@ import Loading from "../../components/Loading";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import parse from "html-react-parser";
 
 require("react-bootstrap/ModalHeader");
 
 const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [showTerms, setShowTerms] = useState(false);
-  const [terms, setTerms] = useState();
-  const [file, setFile] = useState([]);
-  const [privacy, setPrivacy] = useState();
+  const [terms, setTerms] = useState("");
+  const [files, setFiles] = useState([]);
+  const [privacy, setPrivacy] = useState("");
   const [agent, setAgent] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -40,7 +41,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        setFile([...file, ...response.data]);
+        setFiles([...files, ...response.data]);
         setLoader(false);
       }
     });
@@ -57,12 +58,15 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          for (let doc in res.data) {
+          console.log(res.data);
+          for (let doc of res.data) {
             if (doc.officialName === "TC_user") {
-              setTerms(doc.url);
+              console.log(doc.official);
+              setTerms(doc.htmlText);
             }
             if (doc.officialName === "privacy_policy") {
-              setPrivacy(doc.url);
+              console.log(doc.htmlText);
+              setPrivacy(doc.htmlText);
             }
           }
         }
@@ -73,7 +77,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   }, []);
 
   const handleDelete = (url) => () => {
-    setFile(file.filter((document) => document.url !== url));
+    setFiles(files.filter((document) => document.url !== url));
   };
 
   const onSubmit = (data) => {
@@ -92,7 +96,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           city: data.city,
           agent: {
             licenseNumber: data.agentNumber,
-            licenseDocument: { ...file },
+            licenseDocument: files,
           },
         };
         authServices.register(datas).then((response) => {
@@ -101,7 +105,6 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
           } else {
             toggleSignUp();
             alert("Please check your email to verify your account");
-            // toggleConfirmModal();
           }
         });
       } else {
@@ -370,15 +373,15 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
                 type="file"
                 className="form-control"
                 id="agentFile"
-                placeholder="Enter Agent License File"
+                placeholder="Enter Agent License Files"
                 name="agentFile"
                 {...register("agentFile", { onChange: onChange })}
                 multiple
               />
             </div>
-            {file.length > 0 && (
+            {files.length > 0 && (
               <div>
-                {file.map((file, index) => (
+                {files.map((file, index) => (
                   <ul style={{ paddingLeft: "0.5rem" }} key={index}>
                     <li style={{ fontSize: "18px", listStyle: "none" }}>
                       {file.name}{" "}
@@ -428,35 +431,17 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         </button>
       </form>
       <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
-        <Modal.Body style={{ height: "90vh" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginBottom: "10px",
-              right: windowSize < 600 && "0",
-              top: windowSize < 600 && "0",
-            }}
-          >
-            <CloseButton className="modal-close" onClick={toggleTerms} />
-          </div>
-          <iframe title="terms" src={terms} width="100%" height="90%" />
-        </Modal.Body>
+        <Modal.Header closeButton>
+          <Modal.Title> User Terms and Conditions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{parse(terms)}</Modal.Body>
       </Modal>
 
       <Modal size="xl" show={showPrivacy} onHide={togglePrivacy} centered>
-        <Modal.Body style={{ height: "90vh" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginBottom: "10px",
-            }}
-          >
-            <CloseButton className="modal-close" onClick={togglePrivacy} />
-          </div>
-          <iframe title="terms" src={privacy} width="100%" height="90%" />
-        </Modal.Body>
+        <Modal.Header closeButton>
+          <Modal.Title>Privacy Policy</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{parse(privacy)}</Modal.Body>
       </Modal>
     </>
   );
