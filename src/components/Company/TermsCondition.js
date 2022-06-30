@@ -11,7 +11,7 @@ function TermsCondition({ windowSize }) {
 
   useEffect(() => {
     let queryParams = { officialName: "TC_selling" };
-    authService.getDocument(queryParams).then((res) => {
+    authService.getDocuments(queryParams).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
       } else {

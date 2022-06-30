@@ -48,20 +48,28 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   };
 
   useEffect(() => {
-    authServices.getDocuments().then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        res.data.filter((doc) => {
-          if (doc.officialName === "TC_user") {
-            setTerms(doc.url);
+    let params = new URLSearchParams();
+    params.append("officialName", "TC_user");
+    params.append("officialName", "privacy_policy");
+    authServices
+      .getDocuments(params)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          for (let doc in res.data) {
+            if (doc.officialName === "TC_user") {
+              setTerms(doc.url);
+            }
+            if (doc.officialName === "privacy_policy") {
+              setPrivacy(doc.url);
+            }
           }
-          if (doc.officialName === "privacy_policy") {
-            setPrivacy(doc.url);
-          }
-        });
-      }
-    });
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   }, []);
 
   const handleDelete = (url) => () => {

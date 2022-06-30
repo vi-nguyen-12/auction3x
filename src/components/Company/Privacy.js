@@ -11,7 +11,7 @@ function Privacy({ windowSize }) {
 
   useEffect(() => {
     let queryParams = { officialName: "privacy_policy" };
-    authService.getDocument(queryParams).then((res) => {
+    authService.getDocuments(queryParams).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
       } else {

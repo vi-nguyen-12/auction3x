@@ -534,7 +534,7 @@ const authService = {
       }
     );
   },
-  getDocument(data) {
+  getDocuments(data) {
     return axios.get(apiUrl + `/api/documents`, { params: data });
   },
 };

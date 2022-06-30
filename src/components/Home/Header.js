@@ -18,7 +18,6 @@ const Header = ({
   change,
   color,
   headerWidth,
-  positionLeft,
   toggleSignIn,
   toggleSignUp,
   windowSize,
