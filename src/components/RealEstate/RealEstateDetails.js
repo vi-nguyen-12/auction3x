@@ -21,18 +21,18 @@ function RealEstateDetails({
 
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address ||
-      property_address.address
+    property_address.address
   );
   const [city, setCity] = useState(
     propertyTest.details?.property_address?.city || property_address.city
   );
   const [state, setState] = useState(
     propertyTest.details?.property_address?.formatted_street_address?.state ||
-      property_address.state
+    property_address.state
   );
   const [country, setCountry] = useState(
     propertyTest.details?.property_address?.formatted_street_address?.country ||
-      property_address.country
+    property_address.country
   );
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.formatted_street_address
@@ -40,11 +40,11 @@ function RealEstateDetails({
   );
   const [lat, setLat] = useState(
     propertyTest.details?.property_address?.formatted_street_address?.lat ||
-      property_address.lat
+    property_address.lat
   );
   const [lng, setLng] = useState(
     propertyTest.details?.property_address?.formatted_street_address?.lng ||
-      property_address.lng
+    property_address.lng
   );
   const [ownerName, setOwnerName] = useState(
     propertyTest.details?.owner?.name || ""
@@ -156,8 +156,8 @@ function RealEstateDetails({
         state,
         country,
         zip_code: zip,
-        lat: parseInt(lat),
-        lng: parseInt(lng),
+        lat,
+        lng,
         real_estate_type: propType,
         year_built: year,
         owner_name: ownerName,
@@ -249,15 +249,15 @@ function RealEstateDetails({
                           : "suggestion-item";
                         const style = suggestion.active
                           ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
                           : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
                         return (
                           <div
                             key={index}

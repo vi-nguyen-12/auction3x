@@ -19,7 +19,7 @@ const SessionExpired = ({ toggleSignIn, toggleSessionTimedOut }) => {
       <Modal.Header contentclassname="modal-head-login" closeButton>
         <Modal.Title
           id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
+          style={{ color: "#D58F5C", fontSize: "1.4rem", fontWeight: "bold" }}
           contentclassname="custom-modal-title"
         >
           SESSION TIMEOUT
@@ -31,10 +31,11 @@ const SessionExpired = ({ toggleSignIn, toggleSessionTimedOut }) => {
       </Modal.Body>
       <Modal.Footer>
         <div className="col text-center mb-2">
-          <Button variant="primary" onClick={handleSignIn}>
+          <Button variant="primary" onClick={handleSignIn} style={{ width: "70px" }}>
             OK
           </Button>
-          <Button variant="secondary" onClick={handleCancel}>
+          <span style={{ width: "20px" }}></span>
+          <Button variant="secondary" onClick={handleCancel} style={{ width: "70px" }}>
             Cancel
           </Button>
         </div>

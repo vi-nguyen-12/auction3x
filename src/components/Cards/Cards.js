@@ -95,15 +95,16 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
   };
   const handleLike = () => {
     if (user._id) {
-      const data = {
+      const data_1 = {
         userId: user._id,
         auctionId: data._id,
       };
+
       if (favorite === false) {
-        authService.saveProperty(data);
+        authService.saveProperty(data_1);
         setFavorite(!favorite);
       } else if (favorite === true) {
-        authService.removeProperty(data);
+        authService.removeProperty(data_1);
         setFavorite(!favorite);
       }
     } else {
@@ -195,7 +196,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
             }}
           >
             {new Date().toISOString() < data.auctionStartDate &&
-            new Date().toISOString() < data.registerEndDate ? (
+              new Date().toISOString() < data.registerEndDate ? (
               <Col style={{ padding: "0" }}>
                 <p>Registration</p>
               </Col>
@@ -391,7 +392,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 />
               </p>
             </div>
-            {}
+            { }
             <div
               style={{
                 alignItems: "flex-end",

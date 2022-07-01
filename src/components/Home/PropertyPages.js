@@ -15,7 +15,7 @@ import PropertyPageHeader from "./PropertyPageHeader";
 import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "90%",
+  height: "50vh",
   width: "100%",
 };
 const PropertyPages = ({
@@ -35,6 +35,7 @@ const PropertyPages = ({
   }, []);
   const path = window.location.pathname;
   const [showMap, setShowMap] = useState(false);
+  const [centers, setCenters] = useState([]);
   const [location, setLocation] = useState([]);
   const [showImg, setShowImg] = useState(false);
   const [showImgCar, setShowImgCar] = useState(false);
@@ -51,7 +52,6 @@ const PropertyPages = ({
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
-
   return (
     <>
       <h5 className="realHeader">
@@ -83,11 +83,13 @@ const PropertyPages = ({
         toggleImgCar={toggleImgCar}
         toggleImgJet={toggleImgJet}
         toggleImgYacht={toggleImgYacht}
+        setLocation={setLocation}
         toggleMap={toggleMap}
         resultLength={resultLength}
       />
       {path === "/realEstates" ? (
         <RealEstatePage
+          setCenters={setCenters}
           toggleChange={toggleChange}
           toggleImage={toggleImage}
           setImg={setImg}
@@ -144,26 +146,28 @@ const PropertyPages = ({
         onHide={toggleMap}
         centered
       >
-        <Modal.Body style={{ height: "700px" }}>
-          <div
-            style={{
-              position: "absolute",
-              top: "25px",
-              right: "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton className="modal-close" onClick={toggleMap} />
-          </div>
-          <GoogleMap mapContainerStyle={mapStyles} zoom={18} center={location}>
-            <Marker position={location} />
+        <Modal.Body
+          style={{ height: "100%" }}
+        >
+          <CloseButton className="modal-close" onClick={toggleMap} stylr={{ justifyContent: "right" }} />
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            style={{ height: "800px" }}
+            center={centers[0]}
+            zoom={12}>
+            {centers.map((marker, index) => {
+              return (
+                <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} />
+              )
+            })}
           </GoogleMap>
-          <p>
-            {/* {
-              property.property.details.property_address
-                .formatted_street_address
-            } */}
-          </p>
+          {centers.map((marker, index) => {
+            return (
+              <span>
+                <h2>{marker.address}</h2>
+              </span>
+            )
+          })}
         </Modal.Body>
       </Modal>
       {/* Gallery Button */}

@@ -91,48 +91,48 @@ function RealEstatePage({
   windowSize,
   filter,
   setResultLength,
+  setCenters
 }) {
-  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+
   const [auctions, setAuctions] = useState([]);
 
-  useEffect(() => {
+  useEffect(async () => {
+
+
     toggleChange();
-    authService
-      .getOngoingAuctionsByType("real-estate")
-      .then((res) => {
-        setOnGoingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    authService
-      .getUpcomingAuctionsByType("real-estate")
-      .then((res) => {
-        setUpcomingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, []);
+    let auctions = []
+    const getAuctions = async () => {
+      const response1 = await authService.getOngoingAuctionsByType("real-estate");
+      if (response1.error) { alert(response1.error) }
+      else {
+        auctions = [...response1.data]
+      }
+      const response2 = await authService.getUpcomingAuctionsByType("real-estate");
+      if (response2.error) { alert(response2.error) }
+      else {
+        auctions = [...auctions, ...response2.data]
+      }
+      setAuctions(auctions)
+      if (auctions.length > 0) {
+        const imageUrl = auctions.map((image) => {
+          for (let i = 0; i < image.property.images.length; i++) {
+            return image.property.images[i].url;
+          }
+        })
+        setImg(imageUrl);
+      }
+      setCenters(auctions.map(item => {
+        return {
+          address: item.property.details.address,
+          lat: item.property.details.property_address.lat,
+          lng: item.property.details.property_address.lng,
 
-  useEffect(() => {
-    const Arr = [...onGoingAuctions, ...upcomingAuctions];
-    if (Arr.length > 0) {
-      const imageUrl = Arr.map((image) => {
-        for (let i = 0; i < image.property.images.length; i++) {
-          return image.property.images[i].url;
         }
-      });
-      setImg(imageUrl);
+      }))
+      console.log(auctions)
     }
-  }, [onGoingAuctions, upcomingAuctions]);
-
-  useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      setAuctions([...onGoingAuctions, ...upcomingAuctions]);
-    }
-  }, [onGoingAuctions, upcomingAuctions]);
+    getAuctions();
+  }, []);
 
   useEffect(() => {
     if (filter) {

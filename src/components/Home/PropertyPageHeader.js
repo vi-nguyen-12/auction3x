@@ -25,6 +25,7 @@ function PropertyPageHeader({
   toggleImgYacht,
   toggleMap,
   resultLength,
+  setLocation,
 }) {
   const [auctionType, setAuctionType] = useState({});
   const [propType, setPropType] = useState();
@@ -238,12 +239,14 @@ function PropertyPageHeader({
 
   const handleChange = (address) => {
     setAddress(address);
+    setLocation(address);
   };
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
       console.log(results);
       setAddress(results[0].formatted_address);
+      setLocation(results[0].formatted_address)
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
@@ -277,8 +280,8 @@ function PropertyPageHeader({
         zipcodes[0]
           ? zipcodes[0].long_name
           : zipcodes[0]
-          ? zipcodes[0].short_name
-          : ""
+            ? zipcodes[0].short_name
+            : ""
       );
     });
   };
@@ -321,15 +324,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
+                                  backgroundColor: "#fafafa",
+                                  cursor: "pointer",
+                                  color: "black",
+                                }
                                 : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
+                                  backgroundColor: "#ffffff",
+                                  cursor: "pointer",
+                                  color: "black",
+                                };
                               return (
                                 <div
                                   key={index}
@@ -1635,15 +1638,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
+                                  backgroundColor: "#fafafa",
+                                  cursor: "pointer",
+                                  color: "black",
+                                }
                                 : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
+                                  backgroundColor: "#ffffff",
+                                  cursor: "pointer",
+                                  color: "black",
+                                };
                               return (
                                 <div
                                   key={index}

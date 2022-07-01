@@ -45,6 +45,7 @@ function RealEstateForm({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
+
       setAddress(() => {
         return results[0].formatted_address.split(",")[0];
       });
@@ -138,15 +139,15 @@ function RealEstateForm({
                               : "suggestion-item";
                             const style = suggestion.active
                               ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                backgroundColor: "#fafafa",
+                                cursor: "pointer",
+                                color: "black",
+                              }
                               : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                backgroundColor: "#ffffff",
+                                cursor: "pointer",
+                                color: "black",
+                              };
                             return (
                               <div
                                 key={index}

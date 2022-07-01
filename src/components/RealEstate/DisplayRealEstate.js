@@ -501,9 +501,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-              property.isNotRegisteredToBuy === true &&
-              !property.isOwner &&
-              new Date().toISOString() < property.registerEndDate ? (
+                property.isNotRegisteredToBuy === true &&
+                !property.isOwner &&
+                new Date().toISOString() < property.registerEndDate ? (
                 <div
                   className="registBtn"
                   style={{ margin: windowSize < 500 && "30px 0" }}
@@ -592,9 +592,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-              !property.isNotRegisteredToBuy &&
-              !property.isOwner &&
-              property.highestBidders ? (
+                !property.isNotRegisteredToBuy &&
+                !property.isOwner &&
+                property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -752,7 +752,7 @@ function DisplayRealEstate({
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                new Date().toISOString() > property.auctionStartDate ? (
+                  new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{
