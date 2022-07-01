@@ -429,7 +429,6 @@ const authService = {
   },
 
   propFilter(data) {
-    console.log(data);
     return axios.get(
       apiUrl +
         `/api/auctions?${
@@ -440,8 +439,10 @@ const authService = {
           data.real_esstate_type
             ? "real_estate_type=" + data.real_esstate_type
             : ""
-        }&${data.minYear.jet ? "min_year=" + data.minYear.jet : ""}&${
-          data.maxYear.jet ? "max_Year=" + data.maxYear.jet : ""
+        }&${
+          data.minYear.realEstate ? "min_year=" + data.minYear.realEstate : ""
+        }&${
+          data.maxYear.realEstate ? "max_Year=" + data.maxYear.realEstate : ""
         }&${
           data.min_price.realEstate
             ? "min_price=" + data.min_price.realEstate
@@ -450,10 +451,10 @@ const authService = {
           data.max_price.realEstate
             ? "max_price=" + data.max_price.realEstate
             : ""
-        }&${data.zip ? "real_estate_zip_code=" + data.zip : ""}&${
-          data.city ? "real_estate_city=" + data.city : ""
-        }&${data.state ? "real_estate_state=" + data.state : ""}&${
-          data.country ? "real_estate_country=" + data.country : ""
+        }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
+          data.city ? "property_city=" + data.city : ""
+        }&${data.state ? "property_state=" + data.state : ""}&${
+          data.country ? "property_country=" + data.country : ""
         }`,
       {
         headers: {
@@ -471,14 +472,14 @@ const authService = {
         }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
           data.max_price.car ? "max_price=" + data.max_price.car : ""
         }&${data.condition ? "condition=" + data.condition : ""}&${
-          data.make ? "make=" + data.make : ""
+          data.make.car ? "make=" + data.make.car : ""
         }&${data.model ? "model=" + data.model : ""}&${
           data.min_mileage ? "min_mileage=" + data.min_mileage : ""
         }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
-          data.zip ? "real_estate_zip_code=" + data.zip : ""
-        }&${data.city ? "real_estate_city=" + data.city : ""}&${
-          data.state ? "real_estate_state=" + data.state : ""
-        }&${data.country ? "real_estate_country=" + data.country : ""}`,
+          data.zip ? "property_zip_code=" + data.zip : ""
+        }&${data.city ? "property_city=" + data.city : ""}&${
+          data.state ? "property_state=" + data.state : ""
+        }&${data.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -491,18 +492,16 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=jet&${
-          data.auctionType.car ? "time=" + data.auctionType.car : ""
-        }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
-          data.max_price.car ? "max_price=" + data.max_price.car : ""
-        }&${data.make ? "make=" + data.make : ""}&${
-          data.make ? "make=" + data.make : ""
-        }&${data.model ? "model=" + data.model : ""}&${
+          data.auctionType.jet ? "time=" + data.auctionType.jet : ""
+        }&${data.min_price.jet ? "min_price=" + data.min_price.jet : ""}&${
+          data.max_price.jet ? "max_price=" + data.max_price.jet : ""
+        }&${data.make.jet ? "aircraft_builder_name=" + data.make.jet : ""}&${
           data.minYear.jet ? "min_year=" + data.minYear.jet : ""
         }&${data.maxYear.jet ? "max_Year=" + data.maxYear.jet : ""}&${
-          data.zip ? "real_estate_zip_code=" + data.zip : ""
-        }&${data.city ? "real_estate_city=" + data.city : ""}&${
-          data.state ? "real_estate_state=" + data.state : ""
-        }&${data.country ? "real_estate_country=" + data.country : ""}`,
+          data.zip ? "property_zip_code=" + data.zip : ""
+        }&${data.city ? "property_city=" + data.city : ""}&${
+          data.state ? "property_state=" + data.state : ""
+        }&${data.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -515,18 +514,16 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=yacht&${
-          data.auctionType.car ? "time=" + data.auctionType.car : ""
-        }&${data.min_price.car ? "min_price=" + data.min_price.car : ""}&${
-          data.max_price.car ? "max_price=" + data.max_price.car : ""
-        }&${data.condition ? "condition=" + data.condition : ""}&${
-          data.make ? "make=" + data.make : ""
-        }&${data.model ? "model=" + data.model : ""}&${
-          data.min_mileage ? "min_mileage=" + data.min_mileage : ""
-        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
-          data.zip ? "real_estate_zip_code=" + data.zip : ""
-        }&${data.city ? "real_estate_city=" + data.city : ""}&${
-          data.state ? "real_estate_state=" + data.state : ""
-        }&${data.country ? "real_estate_country=" + data.country : ""}`,
+          data.auctionType.yacht ? "time=" + data.auctionType.yacht : ""
+        }&${data.min_price.yacht ? "min_price=" + data.min_price.yacht : ""}&${
+          data.max_price.yacht ? "max_price=" + data.max_price.yacht : ""
+        }&${data.make.yacht ? "manufacture_name=" + data.make.yacht : ""}&${
+          data.min_length ? "min_length=" + data.min_length : ""
+        }&${data.max_length ? "max_length=" + data.max_length : ""}&${
+          data.zip ? "property_zip_code=" + data.zip : ""
+        }&${data.city ? "property_city=" + data.city : ""}&${
+          data.state ? "property_state=" + data.state : ""
+        }&${data.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

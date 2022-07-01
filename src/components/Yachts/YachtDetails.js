@@ -16,6 +16,14 @@ function YachtDetails({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const { register, handleSubmit } = useForm();
   const [vessel_registration_number, setVessel_registration_number] = useState(
@@ -36,6 +44,7 @@ function YachtDetails({
   const [engine_deck_type, setEngine_deck_type] = useState(
     propertyTest.details?.engine_deck_type || ""
   );
+  const [length, setLength] = useState(propertyTest.details?.length || "");
   const [engine_manufacture_name, setEngine_manufacture_name] = useState(
     propertyTest.details?.engine_manufacture_name || ""
   );
@@ -93,46 +102,57 @@ function YachtDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      const submitedData = {
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        vessel_registration_number,
-        vessel_manufacturing_date,
-        manufacture_mark,
-        manufacturer_name,
-        engine_type,
-        engine_manufacture_name,
-        engine_deck_type,
-        running_cost,
-        no_of_crew_required,
-        property_address: {
-          formatted_street_address: address,
-          country,
-          state,
-          city,
-          zip_code: zip,
-        },
-        step: 2,
-      };
-      if (otherDetails?.length > 0) {
-        submitedData.others = otherDetails;
+      if (!summary && !invest && !locationInfo && !marketInfo) {
+        alert(
+          "Please enter summary, investment, location, and market information"
+        );
+      } else {
+        const submitedData = {
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          vessel_registration_number,
+          vessel_manufacturing_date,
+          manufacture_mark,
+          manufacturer_name,
+          engine_type,
+          length,
+          engine_manufacture_name,
+          engine_deck_type,
+          running_cost,
+          no_of_crew_required,
+          summary: summary?.yacht,
+          invest: invest?.yacht,
+          locationInfo: locationInfo?.yacht,
+          marketInfo: marketInfo?.yacht,
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+          },
+          step: 2,
+        };
+        if (otherDetails?.length > 0) {
+          submitedData.others = otherDetails;
+        }
+        authService
+          .editProperty(propertyTest._id, submitedData)
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                alert("Your session ended. Please log in! ");
+                toggleSignIn(true);
+              } else alert(res.data.error);
+            } else {
+              setPropertyTest(res.data);
+              setStep(step + 1);
+            }
+          })
+          .catch((error) => {
+            alert(error);
+          });
       }
-      authService
-        .editProperty(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });
     }
   };
 
@@ -315,6 +335,7 @@ function YachtDetails({
               {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
               required
+              readOnly
             />
             <span
               style={{
@@ -336,6 +357,7 @@ function YachtDetails({
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
+              readOnly
             />
             <span
               style={{
@@ -354,6 +376,7 @@ function YachtDetails({
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
+              readOnly
             />
             <span
               style={{
@@ -373,6 +396,7 @@ function YachtDetails({
               maxLength="5"
               onChange={(e) => setZip(e.target.value)}
               required
+              readOnly
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code <span style={{ color: "#ff0000" }}>*</span>
@@ -476,6 +500,24 @@ function YachtDetails({
               Engine Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
+          <Col>
+            <input
+              type="number"
+              className="form-control"
+              defaultValue={length}
+              {...register("length")}
+              onChange={(e) => setLength(e.target.value)}
+              required
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Vessel Length(ft) <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>
@@ -536,7 +578,29 @@ function YachtDetails({
             </span>
           </Col>
         </Row>
-        <Row style={{ marginTop: "30px", height: "200px" }}>
+        <Row className="mt-3">
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenSummary(true)}>
+              Property Summary <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenLocationInfo(true)}>
+              Location Information<span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenMarketInfo(true)}>
+              Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+        </Row>
+        <Row style={{ marginTop: "30px", height: "100px" }}>
           <Col>
             <textarea
               className="form-control"
@@ -593,7 +657,7 @@ function YachtDetails({
 
         <Row className="mt-5">
           <Col className="d-flex justify-content-center mt-2">
-            <Button className="pre-btn" onClick={() => toggleStep(step - 2)}>
+            <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
               Previous
             </Button>
             <Button className="nxt-btn" id="next" type="submit">

@@ -12,6 +12,14 @@ function RealEstateForm({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const [subStep, setSubStep] = useState(`${step}.1`);
   const { register, handleSubmit } = useForm();
@@ -275,6 +283,14 @@ function RealEstateForm({
           propertyTest={propertyTest}
           setPropertyTest={setPropertyTest}
           toggleSignIn={toggleSignIn}
+          setOpenSummary={setOpenSummary}
+          setOpenInvest={setOpenInvest}
+          setOpenLocationInfo={setOpenLocationInfo}
+          setOpenMarketInfo={setOpenMarketInfo}
+          summary={summary}
+          invest={invest}
+          locationInfo={locationInfo}
+          marketInfo={marketInfo}
         />
       </div>
     );

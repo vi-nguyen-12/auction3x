@@ -15,6 +15,14 @@ function CarDetails({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState(propertyTest.details?.make || "");
@@ -93,6 +101,10 @@ function CarDetails({
         fuel_type: fuelType,
         condition,
         market_price: price,
+        summary: summary?.car,
+        invest: invest?.car,
+        locationInfo: locationInfo?.car,
+        marketInfo: marketInfo?.car,
         property_address: {
           formatted_street_address: address,
           country,
@@ -300,16 +312,13 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
-              Car Type<span style={{ color: "#ff0000" }}>*</span>
-            </span>
+            <span style={{ color: "black" }}>Car Type</span>
             <input
               type="text"
               className="form-control"
               defaultValue={carType}
               {...register("carType", { maxLength: 100 })}
               onChange={(e) => setCarType(e.target.value)}
-              required
             />
           </Col>
         </Row>
@@ -483,6 +492,7 @@ function CarDetails({
               {...register("country", { maxLength: 100 })}
               // onChange={(e) => setCountry(e.target.value)}
               required
+              readOnly
             />
           </Col>
         </Row>
@@ -498,6 +508,7 @@ function CarDetails({
               {...register("state", { maxLength: 100 })}
               // onChange={(e) => setState(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
@@ -511,6 +522,7 @@ function CarDetails({
               {...register("city", { maxLength: 100 })}
               // onChange={(e) => setCity(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
@@ -524,7 +536,30 @@ function CarDetails({
               {...register("zipCode")}
               // onChange={(e) => setZip(e.target.value)}
               required
+              readOnly
             />
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenSummary(true)}>
+              Property Summary <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenLocationInfo(true)}>
+              Location Information<span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenMarketInfo(true)}>
+              Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
           </Col>
         </Row>
         <Row className="mt-3">

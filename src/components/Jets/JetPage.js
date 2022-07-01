@@ -135,7 +135,7 @@ function JetPage({
 
   useEffect(() => {
     if (filter) {
-      authService.propFilter(filter).then((res) => {
+      authService.jetFilter(filter).then((res) => {
         if (res.data.length > 0) {
           const jet = res.data.filter((item) => item.property.type === "jet");
           setResultLength({ jet: jet.length });

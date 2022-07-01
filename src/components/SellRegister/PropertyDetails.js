@@ -19,6 +19,14 @@ const PropertyDetails = ({
   toggleSignIn,
   propertyTest,
   setPropertyTest,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) => {
   return (
     <div className="wrapper">
@@ -39,6 +47,14 @@ const PropertyDetails = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
+            setOpenSummary={setOpenSummary}
+            setOpenInvest={setOpenInvest}
+            setOpenLocationInfo={setOpenLocationInfo}
+            setOpenMarketInfo={setOpenMarketInfo}
+            summary={summary}
+            invest={invest}
+            locationInfo={locationInfo}
+            marketInfo={marketInfo}
           />
         ) : propertyTest.type === "jet" ? (
           <JetDetails
@@ -55,6 +71,14 @@ const PropertyDetails = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
+            setOpenSummary={setOpenSummary}
+            setOpenInvest={setOpenInvest}
+            setOpenLocationInfo={setOpenLocationInfo}
+            setOpenMarketInfo={setOpenMarketInfo}
+            summary={summary}
+            invest={invest}
+            locationInfo={locationInfo}
+            marketInfo={marketInfo}
           />
         ) : propertyTest.type === "yacht" ? (
           <YachtDetails
@@ -71,6 +95,14 @@ const PropertyDetails = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
+            setOpenSummary={setOpenSummary}
+            setOpenInvest={setOpenInvest}
+            setOpenLocationInfo={setOpenLocationInfo}
+            setOpenMarketInfo={setOpenMarketInfo}
+            summary={summary}
+            invest={invest}
+            locationInfo={locationInfo}
+            marketInfo={marketInfo}
           />
         ) : null}
       </div>

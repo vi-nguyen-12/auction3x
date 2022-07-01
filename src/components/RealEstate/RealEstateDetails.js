@@ -16,6 +16,14 @@ function RealEstateDetails({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const { register, handleSubmit } = useForm();
 
@@ -168,6 +176,10 @@ function RealEstateDetails({
         lot_size: lotSize,
         type_of_garage: garage,
         number_of_stories: story,
+        summary: summary?.realEstate,
+        invest: invest?.realEstate,
+        locationInfo: locationInfo?.realEstate,
+        marketInfo: marketInfo?.realEstate,
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         step: 2,
@@ -527,6 +539,28 @@ function RealEstateDetails({
               name="sqft"
               required
             />
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenSummary(true)}>
+              Property Summary <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenLocationInfo(true)}>
+              Location Information<span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenMarketInfo(true)}>
+              Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
           </Col>
         </Row>
         <Row className="mt-3">

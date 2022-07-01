@@ -48,7 +48,7 @@
 .headerNav:focus {
   outline: none !important;
   box-shadow: none !important;
-  border-bottom: white solid 2px !important;
+  border-bottom: white solid 1px !important;
 }
 
 .sell_btn:focus {

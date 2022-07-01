@@ -58,14 +58,11 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          console.log(res.data);
           for (let doc of res.data) {
             if (doc.officialName === "TC_user") {
-              console.log(doc.official);
               setTerms(doc.htmlText);
             }
             if (doc.officialName === "privacy_policy") {
-              console.log(doc.htmlText);
               setPrivacy(doc.htmlText);
             }
           }

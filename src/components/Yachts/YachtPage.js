@@ -89,6 +89,7 @@ function YachtPage({
   toggleSignIn,
   windowSize,
   filter,
+  setResultLength,
 }) {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -137,13 +138,21 @@ function YachtPage({
 
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAuctions(upcomingAuctions);
-      }
+      authService.yachtFilter(filter).then((res) => {
+        if (res.data.length > 0) {
+          const yacht = res.data.filter(
+            (item) => item.property.type === "yacht"
+          );
+          setResultLength({ yacht: yacht.length });
+          setAuctions(yacht);
+        } else {
+          setAuctions([]);
+        }
+      });
+    } else {
+      setResultLength({ yacht: auctions.length });
     }
-  }, [filter, auctions]);
+  }, [filter]);
 
   let settings = {
     dots: false,

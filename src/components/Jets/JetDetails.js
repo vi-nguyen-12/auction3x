@@ -16,6 +16,14 @@ function JetDetails({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState(
@@ -44,6 +52,9 @@ function JetDetails({
   );
   const [propeller_builder_name, setPropeller_builder_name] = useState(
     propertyTest.details?.registration_mark || ""
+  );
+  const [year_built, setYear] = useState(
+    propertyTest.details?.year_built || ""
   );
   const [propeller_model_designation, setPropeller_model_designation] =
     useState(propertyTest.details?.propeller_builder_name || "");
@@ -101,8 +112,13 @@ function JetDetails({
           engine_model_designation,
           number_of_engines,
           propeller_builder_name,
+          year_built,
           propeller_model_designation,
           imported_aircraft: isImport,
+          summary: summary?.jet,
+          invest: invest?.jet,
+          locationInfo: locationInfo?.jet,
+          marketInfo: marketInfo?.jet,
           property_address: {
             formatted_street_address: address,
             country,
@@ -272,6 +288,7 @@ function JetDetails({
               {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
               required
+              readOnly
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Country <span style={{ color: "#ff0000" }}>*</span>
@@ -287,6 +304,7 @@ function JetDetails({
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
+              readOnly
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               State <span style={{ color: "#ff0000" }}>*</span>
@@ -300,6 +318,7 @@ function JetDetails({
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
+              readOnly
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               City <span style={{ color: "#ff0000" }}>*</span>
@@ -313,6 +332,7 @@ function JetDetails({
               {...register("zipCode")}
               onChange={(e) => setZip(e.target.value)}
               required
+              readOnly
             />
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code <span style={{ color: "#ff0000" }}>*</span>
@@ -335,7 +355,7 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={4}>
             {other ? (
               <input
                 type="text"
@@ -368,7 +388,7 @@ function JetDetails({
             </span>
           </Col>
 
-          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -380,6 +400,23 @@ function JetDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Aircraft Model Designation{" "}
               <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <NumberFormat
+              format="####"
+              className="form-control"
+              placeholder="YYYY"
+              value={year_built}
+              onValueChange={(values) => {
+                const { value } = values;
+                setYear(value);
+              }}
+              name="year"
+              required
+            />
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
@@ -497,6 +534,28 @@ function JetDetails({
               />{" "}
               No &nbsp;
             </div>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenSummary(true)}>
+              Property Summary <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenLocationInfo(true)}>
+              Location Information<span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenMarketInfo(true)}>
+              Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
           </Col>
         </Row>
         <Row className="mt-3">
