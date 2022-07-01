@@ -184,6 +184,8 @@ function YachtDetails({
             state,
             city,
             zip_code: zip,
+            lat,
+            lng,
           },
           step: 2,
         };
