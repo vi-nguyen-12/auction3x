@@ -583,7 +583,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.car} Results
+                {resultLength?.car} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -904,7 +904,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.jet} Results
+                {resultLength?.jet} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -1261,7 +1261,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9000+ results
+                {resultLength?.yacht} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -2026,7 +2026,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.realEstate} Results
+                {resultLength?.realEstate} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
