@@ -49,6 +49,12 @@ function CarDetails({
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.zip_code || ""
   );
+  const [lat, setLat] = useState(
+    propertyTest.details?.property_address?.lat || ""
+  );
+  const [lng, setLng] = useState(
+    propertyTest.details?.property_address?.lng || ""
+  );
   const [other, setOther] = useState(false);
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest.reservedAmount || ""
@@ -74,55 +80,6 @@ function CarDetails({
     "MAZZANTI",
     "Other",
   ];
-
-  const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
-    } else {
-      const submitedData = {
-        make,
-        model,
-        year,
-        mileage: parseInt(mileage),
-        gearbox,
-        car_type: carType,
-        power,
-        color,
-        VIN: vin,
-        engine,
-        fuel_type: fuelType,
-        condition,
-        market_price: price,
-        property_address: {
-          formatted_street_address: address,
-          country,
-          state,
-          city,
-          zip_code: zip,
-        },
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        step: 2,
-      };
-
-      authService
-        .editProperty(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
-  };
 
   const handleChange = (address) => {
     setAddress(address);
@@ -161,7 +118,64 @@ function CarDetails({
       setZip(
         zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
       );
+      setLat(() => {
+        return results[0].geometry.location.lat();
+      });
+      setLng(() => {
+        return results[0].geometry.location.lng();
+      });
     });
+  };
+
+  const onSubmit = (data) => {
+    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than discussed amount");
+    } else {
+      const submitedData = {
+        make,
+        model,
+        year,
+        mileage: parseInt(mileage),
+        gearbox,
+        car_type: carType,
+        power,
+        color,
+        VIN: vin,
+        engine,
+        fuel_type: fuelType,
+        condition,
+        market_price: price,
+        property_address: {
+          formatted_street_address: address,
+          country,
+          state,
+          city,
+          zip_code: zip,
+          lat,
+          lng,
+        },
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        step: 2,
+      };
+
+      authService
+        .editProperty(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
   };
 
   return (

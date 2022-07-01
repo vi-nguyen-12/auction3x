@@ -113,7 +113,7 @@ function RealEstateDetails({
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip((prev) => {
+      setZip(() => {
         return zipcodes[0].long_name;
       });
 

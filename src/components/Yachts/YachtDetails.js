@@ -45,6 +45,7 @@ function YachtDetails({
   const [no_of_crew_required, setNo_of_crew_required] = useState(
     propertyTest.details?.no_of_crew_required || ""
   );
+  const [length, setLength] = useState(propertyTest.details?.length || "");
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address || ""
   );
@@ -59,6 +60,12 @@ function YachtDetails({
   );
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.zip_code || ""
+  );
+  const [lat, setLat] = useState(
+    propertyTest.details?.property_address?.lat || ""
+  );
+  const [lng, setLng] = useState(
+    propertyTest.details?.property_address?.lng || ""
   );
   const [other, setOther] = useState(
     propertyTest.details?.property_address?.others || ""
@@ -88,53 +95,6 @@ function YachtDetails({
     "MANGUSTA",
     "Other",
   ];
-
-  const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
-    } else {
-      const submitedData = {
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        vessel_registration_number,
-        vessel_manufacturing_date,
-        manufacture_mark,
-        manufacturer_name,
-        engine_type,
-        engine_manufacture_name,
-        engine_deck_type,
-        running_cost,
-        no_of_crew_required,
-        property_address: {
-          formatted_street_address: address,
-          country,
-          state,
-          city,
-          zip_code: zip,
-        },
-        step: 2,
-      };
-      if (otherDetails?.length > 0) {
-        submitedData.others = otherDetails;
-      }
-      authService
-        .editProperty(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
-  };
 
   const handleChange = (address) => {
     setAddress(address);
@@ -173,7 +133,63 @@ function YachtDetails({
       setZip(
         zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
       );
+      setLat(() => {
+        return results[0].geometry.location.lat();
+      });
+      setLng(() => {
+        return results[0].geometry.location.lng();
+      });
     });
+  };
+
+  const onSubmit = (data) => {
+    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than discussed amount");
+    } else {
+      const submitedData = {
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        vessel_registration_number,
+        vessel_manufacturing_date,
+        manufacture_mark,
+        manufacturer_name,
+        engine_type,
+        engine_manufacture_name,
+        engine_deck_type,
+        running_cost,
+        no_of_crew_required,
+        length,
+        property_address: {
+          formatted_street_address: address,
+          country,
+          state,
+          city,
+          zip_code: zip,
+          lat,
+          lng,
+        },
+        step: 2,
+      };
+      if (otherDetails?.length > 0) {
+        submitedData.others = otherDetails;
+      }
+      authService
+        .editProperty(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
   };
 
   return (
@@ -458,7 +474,7 @@ function YachtDetails({
         </Row>
 
         <Row className="mt-3">
-          <Col>
+          <Col xs={12} md={6}>
             <input
               type="text"
               className="form-control"
@@ -474,6 +490,25 @@ function YachtDetails({
               }}
             >
               Engine Type <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+          </Col>
+          <Col xs={12} md={6}>
+            <NumberFormat
+              thousandSeparator={true}
+              value={length}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setLength(value);
+              }}
+            />
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Length <span style={{ color: "#ff0000" }}>*</span>
             </span>
           </Col>
         </Row>
