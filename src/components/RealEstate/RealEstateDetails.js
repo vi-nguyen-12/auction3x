@@ -121,7 +121,7 @@ function RealEstateDetails({
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip((prev) => {
+      setZip(() => {
         return zipcodes[0].long_name;
       });
 
@@ -176,10 +176,12 @@ function RealEstateDetails({
         lot_size: lotSize,
         type_of_garage: garage,
         number_of_stories: story,
-        summary: summary?.realEstate,
-        invest: invest?.realEstate,
-        locationInfo: locationInfo?.realEstate,
-        marketInfo: marketInfo?.realEstate,
+        description: {
+          summary: summary?.realEstate,
+          investment: invest?.realEstate,
+          location: locationInfo?.realEstate,
+          market: marketInfo?.realEstate,
+        },
         reservedAmount: parseInt(reservedAmount),
         discussedAmount: parseInt(discussedAmount),
         step: 2,

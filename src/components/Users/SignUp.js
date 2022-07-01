@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 import { Modal, Row, Col, Button } from "react-bootstrap";
 import "../../styles/modal.css";
-import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../components/Loading";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -17,13 +16,12 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   const [terms, setTerms] = useState("");
   const [files, setFiles] = useState([]);
   const [privacy, setPrivacy] = useState("");
-  const [agent, setAgent] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [loader, setLoader] = useState(false);
   const [phone, setPhone] = useState();
   const toggleTerms = () => setShowTerms(!showTerms);
   const togglePrivacy = () => setShowPrivacy(!showPrivacy);
-  const toggleAgent = () => setAgent(!agent);
+
   const {
     register,
     handleSubmit,

@@ -74,6 +74,13 @@ function JetDetails({
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.zip_code || ""
   );
+  const [lat, setLat] = useState(
+    propertyTest.details?.property_address?.lat || ""
+  );
+  const [lng, setLng] = useState(
+    propertyTest.details?.property_address?.lng || ""
+  );
+
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest.reservedAmount || ""
   );
@@ -97,61 +104,6 @@ function JetDetails({
     "PILATUS",
     "Other",
   ];
-
-  const onSubmit = (data) => {
-    if (reservedAmount > 0 && discussedAmount > 0) {
-      if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
-        alert("Reserved amount should be greater than discussed amount");
-      } else {
-        const submitedData = {
-          registration_mark,
-          aircraft_builder_name,
-          aircraft_model_designation,
-          aircraft_serial_no,
-          engine_builder_name,
-          engine_model_designation,
-          number_of_engines,
-          propeller_builder_name,
-          year_built,
-          propeller_model_designation,
-          imported_aircraft: isImport,
-          summary: summary?.jet,
-          invest: invest?.jet,
-          locationInfo: locationInfo?.jet,
-          marketInfo: marketInfo?.jet,
-          property_address: {
-            formatted_street_address: address,
-            country,
-            state,
-            city,
-            zip_code: zip,
-          },
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          step: 2,
-        };
-
-        authService
-          .editProperty(propertyTest._id, submitedData)
-          .then((res) => {
-            if (res.data.error) {
-              if (res.data.error === "Invalid Token") {
-                alert("Your session ended. Please log in! ");
-                toggleSignIn(true);
-              } else alert(res.data.error);
-            } else {
-              setPropertyTest(res.data);
-              setStep(step + 1);
-            }
-          })
-          .catch((error) => {
-            alert(error);
-          });
-      }
-    } else {
-      alert("Please fill out discussed amount adn reserved amount");
-    }
-  };
 
   const handleChange = (address) => {
     setAddress(address);
@@ -190,7 +142,70 @@ function JetDetails({
       setZip(
         zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
       );
+      setLat(() => {
+        return results[0].geometry.location.lat();
+      });
+      setLng(() => {
+        return results[0].geometry.location.lng();
+      });
     });
+  };
+
+  const onSubmit = (data) => {
+    if (reservedAmount > 0 && discussedAmount > 0) {
+      if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
+        alert("Reserved amount should be greater than discussed amount");
+      } else {
+        const submitedData = {
+          registration_mark,
+          aircraft_builder_name,
+          aircraft_model_designation,
+          aircraft_serial_no,
+          engine_builder_name,
+          engine_model_designation,
+          number_of_engines,
+          propeller_builder_name,
+          year_built,
+          propeller_model_designation,
+          imported_aircraft: isImport,
+          description: {
+            summary: summary?.jet,
+            investment: invest?.jet,
+            location: locationInfo?.jet,
+            market: marketInfo?.jet,
+          },
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+          },
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          step: 2,
+        };
+
+        authService
+          .editProperty(propertyTest._id, submitedData)
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                alert("Your session ended. Please log in! ");
+                toggleSignIn(true);
+              } else alert(res.data.error);
+            } else {
+              setPropertyTest(res.data);
+              setStep(step + 1);
+            }
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      }
+    } else {
+      alert("Please fill out discussed amount adn reserved amount");
+    }
   };
 
   return (
@@ -233,6 +248,9 @@ function JetDetails({
                 loading,
               }) => (
                 <div>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Location <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
@@ -240,9 +258,7 @@ function JetDetails({
                     })}
                     required
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Location <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
+
                   {suggestions && suggestions.length > 0 && (
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Loading...</div>}
@@ -281,22 +297,25 @@ function JetDetails({
             </PlacesAutocomplete>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
               value={country}
-              {...register("country")}
-              onChange={(e) => setCountry(e.target.value)}
+              // {...register("country")}
+              // onChange={(e) => setCountry(e.target.value)}
               required
               readOnly
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Country <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              State <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -306,11 +325,11 @@ function JetDetails({
               required
               readOnly
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              State <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              City <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -320,11 +339,11 @@ function JetDetails({
               required
               readOnly
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              City <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -334,13 +353,13 @@ function JetDetails({
               required
               readOnly
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Zip Code <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Registration Mark <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -349,13 +368,13 @@ function JetDetails({
               onChange={(e) => setRegistration_mark(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Registration Mark <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Manufacturer <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             {other ? (
               <input
                 type="text"
@@ -382,13 +401,12 @@ function JetDetails({
                 ))}
               </Form.Select>
             )}
+          </Col>
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              Aircraft Builder's Name{" "}
+              Aircraft Model Designation{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <input
               type="text"
               className="form-control"
@@ -397,12 +415,11 @@ function JetDetails({
               onChange={(e) => setAircraft_model_designation(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Aircraft Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Year Built <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               format="####"
               className="form-control"
@@ -415,13 +432,13 @@ function JetDetails({
               name="year"
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Year Built <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -430,13 +447,13 @@ function JetDetails({
               onChange={(e) => setAircraft_serial_no(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Aircraft Serial No. <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -445,11 +462,12 @@ function JetDetails({
               onChange={(e) => setEngine_builder_name(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Engine Model Designation{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -458,14 +476,13 @@ function JetDetails({
               onChange={(e) => setEngine_model_designation(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Engine Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Number of Engines <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="number"
               min="0"
@@ -475,11 +492,12 @@ function JetDetails({
               onChange={(e) => setNumber_of_engines(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Number of Engines <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Builder's Name{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -488,12 +506,12 @@ function JetDetails({
               onChange={(e) => setPropeller_builder_name(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Propeller Builder's Name{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Propeller Model Designation{" "}
+              <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -502,10 +520,6 @@ function JetDetails({
               onChange={(e) => setPropeller_model_designation(e.target.value)}
               required
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Propeller Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
         <Row className="mt-3">
