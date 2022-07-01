@@ -180,6 +180,8 @@ function JetDetails({
             state,
             city,
             zip_code: zip,
+            lat,
+            lng,
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
