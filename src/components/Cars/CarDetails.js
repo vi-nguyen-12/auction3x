@@ -15,6 +15,14 @@ function CarDetails({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setOpenSummary,
+  setOpenInvest,
+  setOpenLocationInfo,
+  setOpenMarketInfo,
+  summary,
+  invest,
+  locationInfo,
+  marketInfo,
 }) {
   const { handleSubmit, register } = useForm();
   const [make, setMake] = useState(propertyTest.details?.make || "");
@@ -49,6 +57,12 @@ function CarDetails({
   const [zip, setZip] = useState(
     propertyTest.details?.property_address?.zip_code || ""
   );
+  const [lat, setLat] = useState(
+    propertyTest.details?.property_address?.lat || ""
+  );
+  const [lng, setLng] = useState(
+    propertyTest.details?.property_address?.lng || ""
+  );
   const [other, setOther] = useState(false);
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest.reservedAmount || ""
@@ -74,55 +88,6 @@ function CarDetails({
     "MAZZANTI",
     "Other",
   ];
-
-  const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
-    } else {
-      const submitedData = {
-        make,
-        model,
-        year,
-        mileage: parseInt(mileage),
-        gearbox,
-        car_type: carType,
-        power,
-        color,
-        VIN: vin,
-        engine,
-        fuel_type: fuelType,
-        condition,
-        market_price: price,
-        property_address: {
-          formatted_street_address: address,
-          country,
-          state,
-          city,
-          zip_code: zip,
-        },
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        step: 2,
-      };
-
-      authService
-        .editProperty(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    }
-  };
 
   const handleChange = (address) => {
     setAddress(address);
@@ -161,7 +126,68 @@ function CarDetails({
       setZip(
         zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
       );
+      setLat(() => {
+        return results[0].geometry.location.lat();
+      });
+      setLng(() => {
+        return results[0].geometry.location.lng();
+      });
     });
+  };
+
+  const onSubmit = (data) => {
+    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than discussed amount");
+    } else {
+      const submitedData = {
+        make,
+        model,
+        year,
+        mileage: parseInt(mileage),
+        gearbox,
+        car_type: carType,
+        power,
+        color,
+        VIN: vin,
+        engine,
+        fuel_type: fuelType,
+        condition,
+        market_price: price,
+        description: {
+          summary: summary?.car,
+          investment: invest?.car,
+          location: locationInfo?.car,
+          market: marketInfo?.car,
+        },
+        property_address: {
+          formatted_street_address: address,
+          country,
+          state,
+          city,
+          zip_code: zip,
+        },
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        step: 2,
+      };
+
+      authService
+        .editProperty(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              alert("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else alert(res.data.error);
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
   };
 
   return (
@@ -300,16 +326,13 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
-              Car Type<span style={{ color: "#ff0000" }}>*</span>
-            </span>
+            <span style={{ color: "black" }}>Car Type</span>
             <input
               type="text"
               className="form-control"
               defaultValue={carType}
               {...register("carType", { maxLength: 100 })}
               onChange={(e) => setCarType(e.target.value)}
-              required
             />
           </Col>
         </Row>
@@ -483,6 +506,7 @@ function CarDetails({
               {...register("country", { maxLength: 100 })}
               // onChange={(e) => setCountry(e.target.value)}
               required
+              readOnly
             />
           </Col>
         </Row>
@@ -498,6 +522,7 @@ function CarDetails({
               {...register("state", { maxLength: 100 })}
               // onChange={(e) => setState(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
@@ -511,6 +536,7 @@ function CarDetails({
               {...register("city", { maxLength: 100 })}
               // onChange={(e) => setCity(e.target.value)}
               required
+              readOnly
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
@@ -524,7 +550,30 @@ function CarDetails({
               {...register("zipCode")}
               // onChange={(e) => setZip(e.target.value)}
               required
+              readOnly
             />
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenSummary(true)}>
+              Property Summary <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenLocationInfo(true)}>
+              Location Information<span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenMarketInfo(true)}>
+              Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
           </Col>
         </Row>
         <Row className="mt-3">

@@ -361,7 +361,7 @@ function Ownership({
                 <Col className="d-flex justify-content-center mt-2">
                   <Button
                     className="pre-btn"
-                    onClick={() => toggleStep(step - 1)}
+                    onClick={() => window.location.reload()}
                   >
                     Previous
                   </Button>

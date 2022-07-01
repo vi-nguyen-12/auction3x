@@ -63,6 +63,7 @@ function PropertyPageHeader({
     jet: false,
     yacht: false,
   });
+  const [otherLength, setOtherLength] = useState(false);
 
   const [minYear, setMinYear] = useState({});
   const [maxYear, setMaxYear] = useState({});
@@ -227,8 +228,8 @@ function PropertyPageHeader({
         min_price: minPrice,
         max_price: maxPrice,
         make: make,
-        minLength: minLength,
-        maxLength: maxLength,
+        min_length: minLength,
+        max_length: maxLength,
         country: country,
         state: state,
         city: city,
@@ -244,7 +245,6 @@ function PropertyPageHeader({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      console.log(results);
       setAddress(results[0].formatted_address);
       setLocation(results[0].formatted_address)
 
@@ -350,29 +350,6 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
-                  {/* <input
-                    type="text"
-                    placeholder="Make, Model"
-                    className="searchBar"
-                    onChange={(e) => carSearch(e.target.value)}
-                  />
-                  {results.length > 0
-                    ? results.map((item, index) => (
-                        <Row
-                          style={{
-                            width: "300px",
-                            height: "100px",
-                            marginTop: "140px",
-                            marginLeft: "20px",
-                            padding: "10px",
-                          }}
-                          className="position-absolute bg-white rounded shadow-lg"
-                          key={index}
-                        >
-                          <Col>{item}</Col>
-                        </Row>
-                      ))
-                    : null} */}
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -463,8 +440,8 @@ function PropertyPageHeader({
                           thousandSeparator={true}
                           prefix="$"
                           value={maxPrice ? maxPrice.car : ""}
-                          placeholder="Max"
                           className="form-control"
+                          placeholder="Max"
                           onValueChange={(values) => {
                             const { value } = values;
                             setMaxPrice({ car: value });
@@ -609,7 +586,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.car} Results
+                {resultLength?.car} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -640,7 +617,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
-                  onChange={(e) => setAuctionType(e.target.value)}
+                  onChange={(e) => setAuctionType({ jet: e.target.value })}
                   className=" RealButton "
                 >
                   <option value="">Auction Type</option>
@@ -694,7 +671,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice}
+                          value={minPrice ? minPrice.jet : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -707,9 +684,9 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice}
-                          placeholder="Max"
+                          value={maxPrice ? maxPrice.jet : ""}
                           className="form-control"
+                          placeholder="Max"
                           onValueChange={(values) => {
                             const { value } = values;
                             setMaxPrice({ jet: value });
@@ -789,7 +766,7 @@ function PropertyPageHeader({
                       <Col className="d-flex justify-content-center align-items-center mt-4">
                         <NumberFormat
                           thousandSeparator={true}
-                          value={minYear}
+                          value={minYear?.jet}
                           className="form-control"
                           placeholder="Min Year"
                           format="####"
@@ -802,7 +779,7 @@ function PropertyPageHeader({
                         -
                         <NumberFormat
                           thousandSeparator={true}
-                          value={maxYear}
+                          value={maxYear?.jet}
                           placeholder="Max Year"
                           format="####"
                           className="form-control"
@@ -910,7 +887,12 @@ function PropertyPageHeader({
                 )}
               </Col>
               <Col className="d-flex justify-content-center">
-                <button className="galleryButton">Search</button>
+                <button
+                  onClick={() => getFilter("jet")}
+                  className="galleryButton"
+                >
+                  Search
+                </button>
               </Col>
             </Row>
           </Col>
@@ -925,7 +907,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.jet} Results
+                {resultLength?.jet} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -947,11 +929,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1015,7 +1047,7 @@ function PropertyPageHeader({
                           <NumberFormat
                             thousandSeparator={true}
                             prefix="$"
-                            value={minPrice}
+                            value={minPrice ? minPrice.yacht : ""}
                             className="form-control"
                             placeholder="Min"
                             onValueChange={(values) => {
@@ -1028,9 +1060,9 @@ function PropertyPageHeader({
                           <NumberFormat
                             thousandSeparator={true}
                             prefix="$"
-                            value={maxPrice}
-                            placeholder="Max"
+                            value={maxPrice ? maxPrice.yacht : ""}
                             className="form-control"
+                            placeholder="Max"
                             onValueChange={(values) => {
                               const { value } = values;
                               setMaxPrice({ yacht: value });
@@ -1136,7 +1168,27 @@ function PropertyPageHeader({
                 )}
               </Col>
               <Col className="d-flex justify-content-center">
-                <Form.Select className=" RealButton ">
+                <Form.Select
+                  onChange={(e) => {
+                    if (e.target.value === "Other") {
+                      setMinLength();
+                      setMaxLength();
+                      setOtherLength(true);
+                    } else {
+                      const getLength = length.filter(
+                        (price, index) => index === parseInt(e.target.value)
+                      );
+                      if (getLength.length > 0) {
+                        setMinLength(getLength[0].min);
+                        setMaxLength(getLength[0].max);
+                      } else {
+                        setMinLength();
+                        setMaxLength();
+                      }
+                    }
+                  }}
+                  className=" RealButton "
+                >
                   <option value="">Length</option>
                   {length.map((item, index) => (
                     <option key={index} value={index}>
@@ -1145,9 +1197,59 @@ function PropertyPageHeader({
                   ))}
                   <option value="Other">Other</option>
                 </Form.Select>
+                {otherLength === true && (
+                  <div
+                    style={{ zIndex: "999", marginTop: "65px", width: "400px" }}
+                    className="position-absolute bg-white rounded shadow-lg"
+                  >
+                    <Row className="d-grid mt-3">
+                      <span>Length Range</span>
+                      <Col className="d-flex justify-content-center align-items-center mt-4">
+                        <input
+                          onChange={(e) => setMinLength(e.target.value)}
+                          className="form-control"
+                          placeholder="Min"
+                          type="number"
+                        />
+                        -
+                        <input
+                          onChange={(e) => setMaxLength(e.target.value)}
+                          className="form-control"
+                          placeholder="Max"
+                          type="number"
+                        />
+                      </Col>
+                      <Col
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          backgroundColor: "#fcba7d",
+                        }}
+                        className="mt-5 p-2"
+                      >
+                        <Button
+                          style={{
+                            backgroundColor: "white",
+                            color: "#fcba7d",
+                            border: "none",
+                            fontWeight: "700",
+                          }}
+                          onClick={() => setOtherLength(false)}
+                        >
+                          Done
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                )}
               </Col>
               <Col className="d-flex justify-content-center">
-                <button className="galleryButton">Search</button>
+                <button
+                  onClick={() => getFilter("yacht")}
+                  className="galleryButton"
+                >
+                  Search
+                </button>
               </Col>
             </Row>
           </Col>
@@ -1162,7 +1264,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9000+ results
+                {resultLength?.yacht} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -1743,9 +1845,9 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice : ""}
-                          placeholder="Max"
+                          value={maxPrice ? maxPrice.realEstate : ""}
                           className="form-control"
+                          placeholder="Max"
                           onValueChange={(values) => {
                             const { value } = values;
                             setMaxPrice({ realEstate: value });
@@ -1825,7 +1927,7 @@ function PropertyPageHeader({
                       <Col className="d-flex justify-content-center align-items-center mt-4">
                         <NumberFormat
                           thousandSeparator={true}
-                          value={minYear}
+                          value={minYear?.realEstate}
                           className="form-control"
                           placeholder="Min Year"
                           format="####"
@@ -1838,7 +1940,7 @@ function PropertyPageHeader({
                         -
                         <NumberFormat
                           thousandSeparator={true}
-                          value={maxYear}
+                          value={maxYear?.realEstate}
                           placeholder="Max Year"
                           format="####"
                           className="form-control"
@@ -1927,7 +2029,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                {resultLength.realEstate} Results
+                {resultLength?.realEstate} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>

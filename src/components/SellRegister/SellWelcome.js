@@ -8,14 +8,7 @@ import { IoIosBoat } from "react-icons/io";
 import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 
-const Sell = ({
-  step,
-  setStep,
-
-  windowSize,
-  propertyTest,
-  setPropertyTest,
-}) => {
+const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
   const [type, setType] = useState(propertyTest.type);
   const { handleSubmit } = useForm();
 

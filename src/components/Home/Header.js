@@ -47,6 +47,7 @@ const Header = ({
 
   const handleOnClick = (page) => () => {
     history.push(`/${page}`);
+    window.location.reload();
   };
 
   const handleSell = () => {
@@ -1045,7 +1046,7 @@ const Nav = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: transparent;
+  background: rgb(0, 0, 0, 0.4);
 `;
 
 const Menu = styled.div`
