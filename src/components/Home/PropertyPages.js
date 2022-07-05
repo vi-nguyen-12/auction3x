@@ -12,10 +12,9 @@ import Auctions from "./Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
-import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "50vh",
+  height: "60vh",
   width: "100%",
 };
 const PropertyPages = ({
@@ -146,28 +145,39 @@ const PropertyPages = ({
         onHide={toggleMap}
         centered
       >
-        <Modal.Body
-          style={{ height: "100%" }}
-        >
-          <CloseButton className="modal-close" onClick={toggleMap} stylr={{ justifyContent: "right" }} />
+        <Modal.Body>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton className="modal-close" onClick={toggleMap} />
+          </div>
           <GoogleMap
             mapContainerStyle={mapStyles}
             style={{ height: "800px" }}
             center={centers[0]}
-            zoom={12}>
+            zoom={12}
+          >
             {centers.map((marker, index) => {
               return (
-                <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} />
-              )
+                <Marker
+                  key={index}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                />
+              );
             })}
           </GoogleMap>
-          {centers.map((marker, index) => {
+          {/* {centers.map((marker, index) => {
             return (
               <span>
                 <h2>{marker.address}</h2>
               </span>
             )
-          })}
+          })} */}
         </Modal.Body>
       </Modal>
       {/* Gallery Button */}
@@ -184,12 +194,12 @@ const PropertyPages = ({
             <div
               style={{
                 position: "absolute",
-                top: "25px",
-                right: "25px",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImgCar} />
+              <CloseButton className="modal-close" onClick={toggleMap} />
             </div>
             {imgCar.length > 0 ? (
               <Row>
@@ -229,12 +239,12 @@ const PropertyPages = ({
             <div
               style={{
                 position: "absolute",
-                top: "25px",
-                right: "25px",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImgJet} />
+              <CloseButton className="modal-close" onClick={toggleMap} />
             </div>
             {imgJet.length > 0 ? (
               <Row>
@@ -274,12 +284,12 @@ const PropertyPages = ({
             <div
               style={{
                 position: "absolute",
-                top: "25px",
-                right: "25px",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImgYacht} />
+              <CloseButton className="modal-close" onClick={toggleMap} />
             </div>
             {imgYacht.length > 0 ? (
               <Row>
@@ -319,12 +329,12 @@ const PropertyPages = ({
             <div
               style={{
                 position: "absolute",
-                top: "25px",
-                right: "25px",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImage} />
+              <CloseButton className="modal-close" onClick={toggleMap} />
             </div>
             {img.length > 0 ? (
               <Row>

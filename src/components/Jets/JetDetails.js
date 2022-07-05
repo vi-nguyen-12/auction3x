@@ -169,10 +169,10 @@ function JetDetails({
           propeller_model_designation,
           imported_aircraft: isImport,
           description: {
-            summary: summary?.jet,
-            investment: invest?.jet,
-            location: locationInfo?.jet,
-            market: marketInfo?.jet,
+            summary: summary?.jet ? summary.jet : summary,
+            investment: invest?.jet ? invest?.jet : invest,
+            location: locationInfo?.jet ? locationInfo?.jet : locationInfo,
+            market: marketInfo?.jet ? marketInfo?.jet : marketInfo,
           },
           property_address: {
             formatted_street_address: address,

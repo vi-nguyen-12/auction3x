@@ -20,7 +20,7 @@ function PendingAuctions({ windowSize }) {
         setPendingAuctions(
           res.data.filter(
             (auction) =>
-              new Date().toISOString() < auction.auctionId.auctionEndDate
+              new Date().toISOString() < auction.auctionId?.auctionEndDate
           )
         );
       });

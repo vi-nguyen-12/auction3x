@@ -104,6 +104,15 @@ const MultiSellForm = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (propertyTest && params.id) {
+      setSummary(propertyTest.details?.description?.summary || "");
+      setLocationInfo(propertyTest.details?.description?.location || "");
+      setInvest(propertyTest.details?.description?.investment || "");
+      setMarketInfo(propertyTest.details?.description?.market || "");
+    }
+  }, [setPropertyTest]);
+
   return (
     <>
       <Container className="vh-100">
@@ -266,7 +275,9 @@ const MultiSellForm = ({
               }
             }}
             value={
-              propertyTest.type === "real-estate"
+              params.id
+                ? propertyTest.details?.description?.summary
+                : propertyTest.type === "real-estate"
                 ? summary?.realEstate
                 : propertyTest.type === "car"
                 ? summary?.car
@@ -309,7 +320,9 @@ const MultiSellForm = ({
               }
             }}
             value={
-              propertyTest.type === "real-estate"
+              params.id
+                ? propertyTest.details?.description?.investment
+                : propertyTest.type === "real-estate"
                 ? invest?.realEstate
                 : propertyTest.type === "car"
                 ? invest?.car
@@ -352,7 +365,9 @@ const MultiSellForm = ({
               }
             }}
             value={
-              propertyTest.type === "real-estate"
+              params.id
+                ? propertyTest.details?.description?.location
+                : propertyTest.type === "real-estate"
                 ? locationInfo?.realEstate
                 : propertyTest.type === "car"
                 ? locationInfo?.car
@@ -395,7 +410,9 @@ const MultiSellForm = ({
               }
             }}
             value={
-              propertyTest.type === "real-estate"
+              params.id
+                ? propertyTest.details?.description?.market
+                : propertyTest.type === "real-estate"
                 ? marketInfo?.realEstate
                 : propertyTest.type === "car"
                 ? marketInfo?.car

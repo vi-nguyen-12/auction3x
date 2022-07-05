@@ -23,7 +23,7 @@ import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "90%",
+  height: "60vh",
   width: "100%",
 };
 
@@ -109,6 +109,7 @@ function DisplayRealEstate({
   toggleSignIn,
   windowSize,
 }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -208,12 +209,8 @@ function DisplayRealEstate({
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
+      lat: property ? property.property.details.property_address.lat : null,
+      lng: property ? property.property.details.property_address.lng : null,
     });
   }, [property]);
   useEffect(() => {
@@ -399,8 +396,8 @@ function DisplayRealEstate({
                       <div
                         style={{
                           position: "absolute",
-                          top: "25px",
-                          right: "25px",
+                          top: windowSize < 600 ? "0" : "25px",
+                          right: windowSize < 600 ? "0" : "25px",
                           zIndex: "999",
                         }}
                       >
@@ -501,9 +498,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-                property.isNotRegisteredToBuy === true &&
-                !property.isOwner &&
-                new Date().toISOString() < property.registerEndDate ? (
+              property.isNotRegisteredToBuy === true &&
+              !property.isOwner &&
+              new Date().toISOString() < property.registerEndDate ? (
                 <div
                   className="registBtn"
                   style={{ margin: windowSize < 500 && "30px 0" }}
@@ -592,9 +589,9 @@ function DisplayRealEstate({
               )}
 
               {user._id &&
-                !property.isNotRegisteredToBuy &&
-                !property.isOwner &&
-                property.highestBidders ? (
+              !property.isNotRegisteredToBuy &&
+              !property.isOwner &&
+              property.highestBidders ? (
                 <div
                   style={{
                     display: "grid",
@@ -752,7 +749,7 @@ function DisplayRealEstate({
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
-                  new Date().toISOString() > property.auctionStartDate ? (
+                new Date().toISOString() > property.auctionStartDate ? (
                   <Col style={{ margin: "10px" }}>
                     <div
                       style={{

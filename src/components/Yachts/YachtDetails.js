@@ -173,10 +173,10 @@ function YachtDetails({
           running_cost,
           no_of_crew_required,
           description: {
-            summary: summary?.yacht,
-            investment: invest?.yacht,
-            location: locationInfo?.yacht,
-            market: marketInfo?.yacht,
+            summary: summary?.yacht ? summary.yacht : summary,
+            investment: invest?.yacht ? invest?.yacht : invest,
+            location: locationInfo?.yacht ? locationInfo?.yacht : locationInfo,
+            market: marketInfo?.yacht ? marketInfo?.yacht : marketInfo,
           },
           property_address: {
             formatted_street_address: address,

@@ -24,8 +24,8 @@ function EditProfile({ getProfilePic, getDescription }) {
     const datas = {
       id: user._id,
       details: {
-        oldPass,
-        newPass,
+        old_password: oldPass,
+        new_password: newPass,
       },
     };
     await authService.editUserInfo(datas).then((res) => {

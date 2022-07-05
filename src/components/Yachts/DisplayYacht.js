@@ -23,7 +23,7 @@ import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "98%",
+  height: "60vh",
   width: "100%",
 };
 // const StreetviewStyles = {
@@ -50,7 +50,7 @@ const Carousel = styled(Slider)`
   overflow: hidden;
 
   & > button {
-    opacity: 0;
+    opacity: 1;
     height: 100%;
     width: 5vw;
     z-index: 1;
@@ -79,27 +79,15 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    left: -75px;
-    width: 10vw;
+    left: -50px;
+    width: 12vw;
     height: 100%;
-    background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
-  }
-
-  .slick-prev:before {
-    display: none;
   }
 
   .slick-next {
-    right: -75px;
-    width: 10vw;
+    right: -50px;
+    width: 12vw;
     height: 100%;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
-  }
-
-  .slick-next:before {
-    display: none;
   }
 `;
 
@@ -169,12 +157,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
+      lat: property ? property.property.details.property_address.lat : null,
+      lng: property ? property.property.details.property_address.lng : null,
     });
   }, [property]);
 

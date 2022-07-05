@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Button,
-  Form,
-  FormControl,
-  InputGroup,
-} from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import { MdOutlineMyLocation } from "react-icons/md";
 import PlacesAutocomplete, {
@@ -246,7 +239,7 @@ function PropertyPageHeader({
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
       setAddress(results[0].formatted_address);
-      setLocation(results[0].formatted_address)
+      setLocation(results[0].formatted_address);
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
@@ -280,8 +273,8 @@ function PropertyPageHeader({
         zipcodes[0]
           ? zipcodes[0].long_name
           : zipcodes[0]
-            ? zipcodes[0].short_name
-            : ""
+          ? zipcodes[0].short_name
+          : ""
       );
     });
   };
@@ -324,15 +317,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -1286,11 +1279,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1371,11 +1414,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1456,11 +1549,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1541,11 +1684,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1626,11 +1819,61 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div className="autocomplete-dropdown-container">
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
+                                : {
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1740,15 +1983,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}

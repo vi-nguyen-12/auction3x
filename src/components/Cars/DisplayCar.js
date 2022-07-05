@@ -23,7 +23,7 @@ import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "98%",
+  height: "60vh",
   width: "100%",
 };
 
@@ -42,36 +42,48 @@ let ImgSettings = {
 };
 
 const Carousel = styled(Slider)`
-  height: 100vh;
-  overflow-x: hidden;
+  height: 100%;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
     height: 100%;
     width: 5vw;
     z-index: 1;
+
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
     }
   }
 
-  .slick-prev {
-    background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
+  ul li button {
+    &:before {
+      top: -5vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
   }
 
-  .slick-prev:before {
-    display: none;
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    left: -50px;
+    width: 12vw;
+    height: 100%;
   }
 
   .slick-next {
-    background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
-  }
-
-  .slick-next:before {
-    display: none;
+    right: -50px;
+    width: 12vw;
+    height: 100%;
   }
 `;
 
@@ -122,12 +134,8 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
+      lat: property ? property.property.details.property_address.lat : null,
+      lng: property ? property.property.details.property_address.lng : null,
     });
   }, [property]);
 

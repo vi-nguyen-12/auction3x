@@ -23,7 +23,7 @@ import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 
 const mapStyles = {
-  height: "98%",
+  height: "60vh",
   width: "100%",
 };
 // const StreetviewStyles = {
@@ -106,7 +106,6 @@ const Wrap = styled.div`
     padding: 0;
   }
 `;
-
 function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -165,12 +164,8 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
     //set location for map
     setLocation({
       name: "Property Location",
-      lat: property
-        ? property.property.details.property_address.latitude
-        : null,
-      lng: property
-        ? property.property.details.property_address.longitude
-        : null,
+      lat: property ? property.property.details.property_address.lat : null,
+      lng: property ? property.property.details.property_address.lng : null,
     });
   }, []);
 

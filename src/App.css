@@ -34,6 +34,10 @@
   align-items: center;
 }
 
+.btn-close {
+  background-color: white !important;
+}
+
 .submitBtn {
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   border: none;
@@ -209,6 +213,7 @@
   justify-content: center;
   text-align: center;
   position: relative;
+  text-shadow: 1px 1px 12px black;
   top: -100px;
 }
 
