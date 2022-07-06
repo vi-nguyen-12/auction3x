@@ -430,11 +430,11 @@ const authService = {
   propFilter(data) {
     return axios.get(
       apiUrl +
-        `/api/auctions?${
+        `/api/auctions?type=real-estate&${
           data.auctionType.realEstate
             ? "time=" + data.auctionType.realEstate
             : ""
-        }&${data.propType ? "type=" + data.propType : ""}&${
+        }&${
           data.real_esstate_type
             ? "real_estate_type=" + data.real_esstate_type
             : ""
@@ -532,6 +532,10 @@ const authService = {
   },
   getDocuments(data) {
     return axios.get(apiUrl + `/api/documents`, { params: data });
+  },
+
+  sendEmails(data) {
+    return axios.post(apiUrl + `/api/emails`, data);
   },
 };
 

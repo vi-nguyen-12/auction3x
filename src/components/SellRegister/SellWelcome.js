@@ -47,7 +47,7 @@ const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="wrapper">
       <SellHeader />
-      <div className="sell-bottom">
+      <div className="sell-bottom" style={{ paddingBottom: "100px" }}>
         <h3>PLEASE SELECT PROPERTY TO SELL</h3>
         <Row className="justify-content-center">
           {properties.map((property, index) => (
@@ -58,6 +58,7 @@ const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
               className="d-flex justify-content-center"
             >
               <Button
+                type="submit"
                 style={{
                   padding: windowSize < 800 && "10px",
                   background:
@@ -69,20 +70,20 @@ const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
                 }}
               >
                 {property.icon}
-                <label>{property.name}</label>
+                {property.name}
               </Button>
             </Col>
           ))}
         </Row>
 
-        <Row className="mt-5">
+        {/* <Row className="mt-5">
           <Button className="pre-btn" style={{ opacity: "0.4" }} disabled>
             Previous
           </Button>
           <Button type="submit" className="nxt-btn" id="next">
             Next
           </Button>
-        </Row>
+        </Row> */}
       </div>
     </form>
   );

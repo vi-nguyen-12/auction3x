@@ -131,7 +131,7 @@ function IncompleteListing({ windowSize }) {
           )}
         </Table>
       </Row>
-      <Row>
+      {/* <Row>
         {items.map((item, index) => (
           <Col style={{ display: "flex", flex: "0", padding: "0" }} key={index}>
             <Pagination
@@ -143,7 +143,7 @@ function IncompleteListing({ windowSize }) {
             </Pagination>
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </Container>
   );
 }

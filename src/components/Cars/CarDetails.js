@@ -154,10 +154,10 @@ function CarDetails({
         condition,
         market_price: price,
         description: {
-          summary: summary?.car,
-          investment: invest?.car,
-          location: locationInfo?.car,
-          market: marketInfo?.car,
+          summary: summary?.car ? summary.car : summary,
+          investment: invest?.car ? invest?.car : invest,
+          location: locationInfo?.car ? locationInfo?.car : locationInfo,
+          market: marketInfo?.car ? marketInfo?.car : marketInfo,
         },
         property_address: {
           formatted_street_address: address,
@@ -303,6 +303,7 @@ function CarDetails({
             </span>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={mileage}
               {...register("mileage")}

@@ -252,15 +252,15 @@ function RealEstateDocus({
       <h3 className="mb-1"> UPLOAD DOCUMENTS</h3>
       <p className="mb-4">We only accept PDF Files</p>
       {loader ? <Loading /> : null}
-      <form onSubmit={handleSubmit(onSubmit)} novalidate>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Row
           style={{
             overflowY: "scroll",
             color: "black",
           }}
         >
-          {datas.map((item) => (
-            <Row className="mt-3">
+          {datas.map((item, index) => (
+            <Row className="mt-3" key={index}>
               <Col lg={5}>
                 <h5>
                   {" "}

@@ -177,7 +177,16 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                       Luxury Market
                     </h2>
                     <span style={{ color: "white", fontSize: "20px" }}>
-                      HOUSE IN {auction.property.details.property_address.city},
+                      {auction.property.type === "real-estate"
+                        ? "Real Estate"
+                        : auction.property.type === "car"
+                        ? "Car"
+                        : auction.property.type === "jet"
+                        ? "Jet"
+                        : auction.property.type === "yacht"
+                        ? "Yacht"
+                        : ""}{" "}
+                      In {auction.property.details.property_address.city},
                       {auction.property.details.property_address.state} UNITED
                       STATES
                     </span>

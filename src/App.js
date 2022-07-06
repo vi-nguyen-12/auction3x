@@ -183,6 +183,7 @@ function App() {
         {/* All Modals */}
         <Modal
           backdrop="static"
+          size="md"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -334,40 +335,6 @@ function App() {
           <Modal.Body>
             <SessionExpired
               toggleSessionTimedOut={toggleSessionTimedOut}
-              toggleSignIn={toggleSignIn}
-            />
-          </Modal.Body>
-        </Modal>
-        <Modal
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showConfirm}
-          onHide={toggleConfirmModal}
-          contentclassname="confirm"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{ color: "#D58F5C" }}
-            >
-              Confirm Email
-            </Modal.Title>
-            <Modal.Title
-              className="pt-4"
-              style={{
-                fontSize: "12px",
-                color: "#D58F5C",
-                position: "absolute",
-                marginright: "10px",
-                marginTop: "8px",
-              }}
-            ></Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ReconfirmEmail
-              toggleConfirmModal={toggleConfirmModal}
               toggleSignIn={toggleSignIn}
             />
           </Modal.Body>
