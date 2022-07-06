@@ -303,6 +303,7 @@ function CarDetails({
             </span>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={mileage}
               {...register("mileage")}

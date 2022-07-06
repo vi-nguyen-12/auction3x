@@ -355,8 +355,8 @@ function YachtDocus({
             color: "black",
           }}
         >
-          {datas.map((item) => (
-            <Row className="mt-3">
+          {datas.map((item, index) => (
+            <Row key={index} className="mt-3">
               <Col lg={5}>
                 <h5>
                   {" "}

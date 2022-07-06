@@ -354,14 +354,26 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                       {property.property.videos.length > 0 ? (
                         property.property.videos.map((item, index) => (
                           <Wrap key={index}>
-                            <video
-                              className="vid-display"
-                              width="100%"
-                              height="100%"
-                              controls
-                            >
-                              <source src={item.url} type="video/webm" />
-                            </video>
+                            {item.name === "videos" ? (
+                              <iframe
+                                src={`https://www.youtube.com/embed/${item.url.slice(
+                                  32,
+                                  item.url.indexOf("&")
+                                )}`}
+                                height="500px"
+                                width="100%"
+                                allowFullScreen
+                              />
+                            ) : (
+                              <video
+                                className="vid-display"
+                                width="100%"
+                                height="100%"
+                                controls
+                              >
+                                <source src={item.url} type="video/webm" />
+                              </video>
+                            )}
                           </Wrap>
                         ))
                       ) : (

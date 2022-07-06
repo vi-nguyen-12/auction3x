@@ -519,6 +519,7 @@ function YachtDetails({
           <Col>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={length}
               {...register("length")}

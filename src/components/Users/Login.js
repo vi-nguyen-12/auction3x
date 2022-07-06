@@ -29,12 +29,15 @@ const Login = ({
         setShowLoading(true);
         const response = await authServices.login(data);
         if (response.data.error) {
-          alert(response.data.error);
-          setShowLoading(false);
-        } else if (response.data.error === "User has not been verified") {
-          alert(response.data.error);
-          toggleSignIn();
-          toggleConfirmModal();
+          if (response.data.error === "User has not been verified") {
+            alert(response.data.error);
+            toggleSignIn();
+            setShowLoading(false);
+            toggleConfirmModal();
+          } else {
+            alert(response.data.error);
+            setShowLoading(false);
+          }
         } else {
           dispatch(login(response.data.data));
           localStorage.setItem("token", response.data.data.token);

@@ -11,6 +11,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Container, Modal, Button } from "react-bootstrap";
 import DocumentsUpload from "./DocumentsUpload";
 import RealEstateForm from "../RealEstate/RealEstateForm";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const MultiSellForm = ({
   toggleShow,
@@ -82,6 +83,7 @@ const MultiSellForm = ({
 
   const [sellStep, setSellStep] = useState(0);
   const toggleSellStep = (sellStep) => setSellStep(sellStep);
+
   useEffect(() => {
     setHeaderWidth("100vw");
     setPositionLeft("20%");
@@ -94,6 +96,10 @@ const MultiSellForm = ({
         .getProperty(params.id)
         .then((response) => {
           setPropertyTest(response.data);
+          setSummary(response.data.details?.description?.summary);
+          setLocationInfo(response.data.details?.description?.location);
+          setInvest(response.data.details?.description?.investment);
+          setMarketInfo(response.data.details?.description?.market);
           setStep(response.data.step);
         })
         .catch((error) => {
@@ -104,19 +110,21 @@ const MultiSellForm = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (propertyTest && params.id) {
-      setSummary(propertyTest.details?.description?.summary || "");
-      setLocationInfo(propertyTest.details?.description?.location || "");
-      setInvest(propertyTest.details?.description?.investment || "");
-      setMarketInfo(propertyTest.details?.description?.market || "");
-    }
-  }, [setPropertyTest]);
-
   return (
     <>
       <Container className="vh-100">
-        <h1 className="fs-1">Sell On Auction3</h1>
+        <h1 className="fs-1">Sell On Auction3x</h1>
+        <p style={{ fontSize: "1.6em", fontWeight: "bold" }}>
+          {propertyTest?.type === "real-estate"
+            ? "Real Estate"
+            : propertyTest?.type === "car"
+            ? "Car"
+            : propertyTest?.type === "jet"
+            ? "Jet"
+            : propertyTest?.type === "yacht"
+            ? "Yacht"
+            : ""}
+        </p>
         {step === 0 ? (
           <SellWelcome
             togglePropertyType={togglePropertyType}
@@ -144,53 +152,30 @@ const MultiSellForm = ({
             toggleSignIn={toggleSignIn}
           />
         ) : step === 2 ? (
-          propertyTest.type === "real-estate" ? (
-            <RealEstateForm
-              properties={properties}
-              toggleStep={(data) => toggleStep(data)}
-              step={step}
-              setStep={setStep}
-              propertyType={propertyType}
-              property={property}
-              windowSize={windowSize}
-              propertyTest={propertyTest}
-              setPropertyTest={setPropertyTest}
-              toggleSignIn={toggleSignIn}
-              setOpenSummary={setOpenSummary}
-              setOpenInvest={setOpenInvest}
-              setOpenLocationInfo={setOpenLocationInfo}
-              setOpenMarketInfo={setOpenMarketInfo}
-              summary={summary}
-              invest={invest}
-              locationInfo={locationInfo}
-              marketInfo={marketInfo}
-            />
-          ) : (
-            <PropertyDetails
-              togglePropertyData={togglePropertyData}
-              property={property}
-              toggleStep={(data) => toggleStep(data)}
-              step={step}
-              setStep={setStep}
-              propertyType={propertyType}
-              propId={propId}
-              ownership={ownership}
-              getPropId={getPropId}
-              toggleSellStep={toggleSellStep}
-              propertyData={propertyData}
-              propertyTest={propertyTest}
-              setPropertyTest={setPropertyTest}
-              toggleSignIn={toggleSignIn}
-              setOpenSummary={setOpenSummary}
-              setOpenInvest={setOpenInvest}
-              setOpenLocationInfo={setOpenLocationInfo}
-              setOpenMarketInfo={setOpenMarketInfo}
-              summary={summary}
-              invest={invest}
-              locationInfo={locationInfo}
-              marketInfo={marketInfo}
-            />
-          )
+          <PropertyDetails
+            togglePropertyData={togglePropertyData}
+            property={property}
+            toggleStep={(data) => toggleStep(data)}
+            step={step}
+            setStep={setStep}
+            propertyType={propertyType}
+            propId={propId}
+            ownership={ownership}
+            getPropId={getPropId}
+            toggleSellStep={toggleSellStep}
+            propertyData={propertyData}
+            propertyTest={propertyTest}
+            setPropertyTest={setPropertyTest}
+            toggleSignIn={toggleSignIn}
+            setOpenSummary={setOpenSummary}
+            setOpenInvest={setOpenInvest}
+            setOpenLocationInfo={setOpenLocationInfo}
+            setOpenMarketInfo={setOpenMarketInfo}
+            summary={summary}
+            invest={invest}
+            locationInfo={locationInfo}
+            marketInfo={marketInfo}
+          />
         ) : step === 3 ? (
           <UploadForm
             toggleImages={toggleImages}

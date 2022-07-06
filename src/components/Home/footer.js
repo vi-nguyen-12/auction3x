@@ -21,7 +21,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               // padding: "0 50px",
             }}
           >
-            <div className="img-flex">
+            <div className="img-flex align-items-center">
               {/* <img src="/Vector.png" alt="" /> */}
               <img
                 src="/images/newName.png"

@@ -145,11 +145,7 @@ function Ownership({
   };
 
   const handleSelect = (address) => {
-    console.log("test")
     geocodeByAddress(address).then((results) => {
-
-      console.log(typeof (results[0].geometry.location.lat()))
-      console.log(results[0].geometry.location.lng())
       setAddress(results[0].formatted_address);
 
       let cities = results[0].address_components.filter((item) => {
@@ -247,8 +243,8 @@ function Ownership({
                         ownerName
                           ? ownerName
                           : ownership
-                            ? ownership.details.owner_name
-                            : ""
+                          ? ownership.details.owner_name
+                          : ""
                       }
                       onChange={(e) => setOwnerName(e.target.value)}
                       required
@@ -289,15 +285,15 @@ function Ownership({
                                 // inline style for demonstration purpose
                                 const style = suggestion.active
                                   ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
+                                      backgroundColor: "#fafafa",
+                                      cursor: "pointer",
+                                      color: "black",
+                                    }
                                   : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
+                                      backgroundColor: "#ffffff",
+                                      cursor: "pointer",
+                                      color: "black",
+                                    };
                                 return (
                                   <div
                                     key={index}
@@ -332,8 +328,8 @@ function Ownership({
                         phone
                           ? phone
                           : ownership
-                            ? ownership.details.phone
-                            : null
+                          ? ownership.details.phone
+                          : null
                       }
                       inputStyle={{ width: "100%" }}
                       buttonStyle={{
@@ -401,8 +397,8 @@ function Ownership({
                       ownerName
                         ? ownerName
                         : ownership
-                          ? ownership.details.owner_name
-                          : ""
+                        ? ownership.details.owner_name
+                        : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
@@ -419,8 +415,8 @@ function Ownership({
                       brokerName
                         ? brokerName
                         : ownership
-                          ? ownership.details.broker_name
-                          : ""
+                        ? ownership.details.broker_name
+                        : ""
                     }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
@@ -437,8 +433,8 @@ function Ownership({
                       brokerId
                         ? brokerId
                         : ownership
-                          ? ownership.details.broker_id
-                          : ""
+                        ? ownership.details.broker_id
+                        : ""
                     }
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
@@ -499,15 +495,15 @@ function Ownership({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}

@@ -1,36 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
-import { IoSend } from "react-icons/io5";
-import { AiFillPlusCircle, AiFillSetting } from "react-icons/ai";
+import authService from "../../../services/authServices";
+import { useSelector } from "react-redux";
 
 function Messaging({ windowSize }) {
+  const [subject, setSubject] = useState();
+  const [message, setMessage] = useState();
+  const [files, setFiles] = useState([]);
+  const user = useSelector((state) => state.user);
+
+  const getFiles = () => {};
+
+  const send = async () => {
+    const datas = {
+      type: "from_user",
+      userId: user._id,
+      subject: subject,
+      content: message,
+    };
+
+    await authService.sendEmails(datas).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        alert(res.data.message);
+      }
+    });
+  };
+
   return (
     <>
       <h1 style={{ margin: "50px" }}>Message</h1>
-      <Container className="chatContainer" style={{ width: "90vw", margin:"30px auto" }}>
-        <Row
-          className="d-flex justify-content-center mt-3"
-          style={{ alignItems: "center" }}
-        >
-          <Col
-            md={2}
-            lg={2}
-            className="d-flex"
-            style={{
-              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
-            }}
-          >
-            To :
-          </Col>
-          <Col md={7} lg={6} className="d-flex">
-            <select className="form-control">
-              <option>Select a user</option>
-              <option>User 1</option>
-              <option>User 2</option>
-              <option>User 3</option>
-            </select>
-          </Col>
-        </Row>
+      <Container
+        className="chatContainer"
+        style={{ width: "90vw", margin: "30px auto" }}
+      >
         <Row
           className="d-flex justify-content-center mt-3"
           style={{ alignItems: "center" }}
@@ -50,6 +54,8 @@ function Messaging({ windowSize }) {
               className="form-control"
               type="text"
               placeholder="Enter a subject"
+              onChange={(e) => setSubject(e.target.value)}
+              required
             />
           </Col>
         </Row>
@@ -69,6 +75,8 @@ function Messaging({ windowSize }) {
               className="form-control"
               rows="5"
               placeholder="Enter a message"
+              onChange={(e) => setMessage(e.target.value)}
+              required
             ></textarea>
           </Col>
         </Row>
@@ -99,6 +107,7 @@ function Messaging({ windowSize }) {
               variant="primary"
               style={{ fontWeight: "bold", padding: "10px 20px" }}
               className="mr-2"
+              onClick={() => send()}
             >
               Send
             </Button>

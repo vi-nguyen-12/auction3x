@@ -28,31 +28,25 @@ function RealEstateDetails({
   const { register, handleSubmit } = useForm();
 
   const [address, setAddress] = useState(
-    propertyTest.details?.property_address?.formatted_street_address ||
-      property_address.address
+    propertyTest.details?.property_address?.formatted_street_address || ""
   );
   const [city, setCity] = useState(
-    propertyTest.details?.property_address?.city || property_address.city
+    propertyTest.details?.property_address?.city || ""
   );
   const [state, setState] = useState(
-    propertyTest.details?.property_address?.formatted_street_address?.state ||
-      property_address.state
+    propertyTest.details?.property_address?.state || ""
   );
   const [country, setCountry] = useState(
-    propertyTest.details?.property_address?.formatted_street_address?.country ||
-      property_address.country
+    propertyTest.details?.property_address?.country || ""
   );
   const [zip, setZip] = useState(
-    propertyTest.details?.property_address?.formatted_street_address
-      ?.zip_code || property_address.zip
+    propertyTest.details?.property_address?.zip_code || ""
   );
   const [lat, setLat] = useState(
-    propertyTest.details?.property_address?.formatted_street_address?.lat ||
-      property_address.lat
+    propertyTest.details?.property_address?.lat || ""
   );
   const [lng, setLng] = useState(
-    propertyTest.details?.property_address?.formatted_street_address?.lng ||
-      property_address.lng
+    propertyTest.details?.property_address?.lng || ""
   );
   const [ownerName, setOwnerName] = useState(
     propertyTest.details?.owner?.name || ""
@@ -150,7 +144,7 @@ function RealEstateDetails({
     { value: "land", name: "Land" },
     { value: "castle", name: "Castle" },
     { value: "chateau", name: "Chateau" },
-    { value: "farm ranch", name: "Farm Ranch" },
+    { value: "farm_ranch", name: "Farm Ranch" },
     { value: "private_island", name: "Private Island" },
   ];
 
@@ -205,8 +199,7 @@ function RealEstateDetails({
     }
   };
   return (
-    <div className="sell-bottom">
-      <SellHeader step={step} />
+    <>
       <h3>Property Details</h3>
       <form onSubmit={handleSubmit(onSubmit)} className="list-form">
         <div
@@ -442,6 +435,7 @@ function RealEstateDetails({
             <input
               type="number"
               className="form-control"
+              min="0"
               defaultValue={lotSize}
               {...register("lotSize")}
               onChange={(e) => setLotSize(e.target.value)}
@@ -471,6 +465,7 @@ function RealEstateDetails({
             </span>
             <input
               type="number"
+              min="0"
               className="form-control"
               defaultValue={story}
               {...register("story")}
@@ -619,7 +614,7 @@ function RealEstateDetails({
           </Col>
         </Row>
       </form>
-    </div>
+    </>
   );
 }
 

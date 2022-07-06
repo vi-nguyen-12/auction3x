@@ -80,23 +80,15 @@
   box-shadow: 0px 0px 10px #ac744b;
   border: none;
   margin: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
 }
 
 .category-btn:hover {
   background-color: rgb(233 184 135);
   box-shadow: none;
-}
-
-/* .category-btn:focus {
-  outline: none;
-  background-color: none;
-} */
-
-.category-btn label {
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
 }
 
 /* Upload image form */

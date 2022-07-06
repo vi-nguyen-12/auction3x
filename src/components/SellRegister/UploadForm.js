@@ -6,6 +6,7 @@ import "../../styles/sell-register.css";
 import { MdClose } from "react-icons/md";
 import { Button, Row, Col } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { IoInformationCircleSharp } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
 import Loading from "../../components/Loading";
@@ -28,6 +29,7 @@ const UploadForm = ({
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState(propertyTest.images || []);
   const [videos, setVideos] = useState(propertyTest.videos || []);
+  const [link, setLink] = useState([]);
   const [loader, setLoader] = useState(false);
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
@@ -40,11 +42,11 @@ const UploadForm = ({
     const formData = new FormData();
 
     for (let i = 0; i < e.target.files.length; i++) {
-      // if (e.target.files[i].size > 3000000) {
-      //   alert("File size must be less than 3MB.");
-      // } else {
-      formData.append("images", e.target.files[i]);
-      // }
+      if (e.target.files[i].size > 3000000) {
+        alert("File size must be less than 3MB.");
+      } else {
+        formData.append("images", e.target.files[i]);
+      }
     }
 
     await authService.saveImages(formData).then((response) => {
@@ -63,11 +65,11 @@ const UploadForm = ({
     const formData = new FormData();
 
     for (let i = 0; i < e.target.files.length; i++) {
-      // if (e.target.files[i].size > 150000000) {
-      //   alert("File size must be less than 150MB.");
-      // } else {
-      formData.append("videos", e.target.files[i]);
-      // }
+      if (e.target.files[i].size > 150000000) {
+        alert("File size must be less than 150MB.");
+      } else {
+        formData.append("videos", e.target.files[i]);
+      }
     }
     await authService.saveVideos(formData).then((response2) => {
       if (response2.data.error) {
@@ -78,6 +80,12 @@ const UploadForm = ({
       }
     });
     e.target.value = null;
+  };
+
+  const getLink = () => {
+    if (link) {
+      setVideos([...videos, { name: "videos", url: link }]);
+    }
   };
 
   const saveInfo = async () => {
@@ -200,7 +208,7 @@ const UploadForm = ({
   };
 
   const onSubmit = () => {
-    if (images.length !== 0 && videos.length !== 0) {
+    if (images.length !== 0) {
       const data = { images, videos, step: 3 };
       authService
         .editProperty(propertyTest._id, data)
@@ -219,7 +227,7 @@ const UploadForm = ({
           alert(error);
         });
     } else {
-      alert("Please upload at least one image and a video!");
+      alert("Please upload at least one image!");
     }
   };
 
@@ -228,13 +236,39 @@ const UploadForm = ({
       <SellHeader step={step} />
       <div className="sell-bottom">
         <h3>UPLOAD PICTURES AND VIDEOS</h3>
-
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <div
+            className="dropdown-icon"
+            style={{
+              width: "fit-content",
+            }}
+          >
+            <IoInformationCircleSharp
+              style={{ cursor: "pointer" }}
+              color="blue"
+              size={30}
+            />
+            <div
+              className="dropdown-info"
+              style={{ width: "400px", marginLeft: "-20rem" }}
+            >
+              <p>
+                For Video, we recommend you to upload your youtube video link of
+                the property to make the process smoother. If not, you may click
+                on the "+ Videos" button to upload your video. *Video file size
+                must not exceed 150MB*
+              </p>
+            </div>
+          </div>
+        </div>
         {loader ? <Loading /> : null}
         {videoLoader ? <Loading /> : null}
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <Col xs={12} md={6} className="px-sm-3">
-              Choose the Image Files <span style={{ color: "#ff0000" }}>*</span>
+              Upload Image Files <span style={{ color: "#ff0000" }}>*</span>
               <input
                 id="images-btn"
                 accept="image/*"
@@ -282,8 +316,7 @@ const UploadForm = ({
             </Col>
 
             <Col xs={12} md={6} className="px-sm-3">
-              Choose the Videos/ Live360 Files{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Upload Videos {/* <span style={{ color: "#ff0000" }}>*</span> */}
               <input
                 id="videos-btn"
                 accept="video/*"
@@ -292,14 +325,28 @@ const UploadForm = ({
                 hidden
                 {...register("videos", { onChange: onChangeVideos })}
               />
-              <div className="upload-wrapper">
-                <label onClick={toggleExtra} htmlFor="videos-btn">
+              <div className="upload-wrapper d-grid">
+                <div className="d-flex">
+                  <input
+                    style={{ width: "80%" }}
+                    placeholder="Video Link Here"
+                    className="form-control mb-3 bg-white"
+                    type="text"
+                    onChange={(e) => setLink(e.target.value)}
+                  />
+                  <span style={{marginLeft:"20px"}}>
+                    <Button onClick={() => getLink()}>Upload</Button>
+                  </span>
+                </div>
+                <label
+                  onClick={toggleExtra}
+                  htmlFor="videos-btn"
+                  style={{ width: "50%" }}
+                >
                   + Videos
                 </label>
                 {/* <details>
-                  <summary>
-
-                  </summary>
+                  <summary></summary>
 
                   <div>
                     <label

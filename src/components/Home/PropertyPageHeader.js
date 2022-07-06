@@ -116,7 +116,7 @@ function PropertyPageHeader({
     { value: "villa", name: "Villa" },
     { value: "house", name: "House" },
     { value: "estate", name: "Estate" },
-    { value: "country house", name: "Country House" },
+    { value: "country_house", name: "Country House" },
     { value: "finca", name: "Finca" },
     { value: "chalet", name: "Chalet" },
     { value: "townhouse", name: "Townhouse" },
@@ -124,12 +124,12 @@ function PropertyPageHeader({
     { value: "apartment", name: "Apartment" },
     { value: "penhouse", name: "Penhouse" },
     { value: "condo", name: "Condo" },
-    { value: "co op", name: "Co-Op" },
+    { value: "co_op", name: "Co-Op" },
     { value: "land", name: "Land" },
     { value: "castle", name: "Castle" },
     { value: "chateau", name: "Chateau" },
-    { value: "farm ranch", name: "Farm Ranch" },
-    { value: "private island", name: "Private Island" },
+    { value: "farm_ranch", name: "Farm Ranch" },
+    { value: "private_island", name: "Private Island" },
   ];
 
   const CarPrices = [

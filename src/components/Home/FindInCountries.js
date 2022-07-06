@@ -10,7 +10,7 @@ const FindInCountries = (props) => {
   const history = useHistory();
   return (
     <>
-      <Container fluid>
+      <Container style={{ padding: "0 30px" }} fluid>
         <Row
           style={{
             margin: "0",
