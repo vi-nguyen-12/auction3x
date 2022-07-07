@@ -136,7 +136,7 @@ function RealEstatePage({
 
   useEffect(() => {
     if (filter) {
-      authService.propFilter(filter).then((res) => {
+      authService.realEstateFilter(filter).then((res) => {
         if (res.data.length > 0) {
           const realEstate = res.data.filter(
             (item) => item.property.type === "real-estate"

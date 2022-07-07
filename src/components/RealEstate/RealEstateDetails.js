@@ -152,50 +152,56 @@ function RealEstateDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      const submitedData = {
-        street_address: address,
-        city,
-        state,
-        country,
-        zip_code: zip,
-        lat,
-        lng,
-        real_estate_type: propType,
-        year_built: year,
-        owner_name: ownerName,
-        baths_count: bathrooms,
-        beds_count: bedrooms,
-        total_value: totalValue,
-        area_sq_ft: sqft,
-        lot_size: lotSize,
-        type_of_garage: garage,
-        number_of_stories: story,
-        description: {
-          summary: summary?.realEstate ? summary.realEstate : summary,
-          investment: invest?.realEstate ? invest?.realEstate : invest,
-          location: locationInfo?.realEstate
-            ? locationInfo?.realEstate
-            : locationInfo,
-          market: marketInfo?.realEstate ? marketInfo?.realEstate : marketInfo,
-        },
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        step: 2,
-      };
-      authService
-        .editRealEstate(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => alert(error));
+      if (year > new Date().getFullYear()) {
+        alert("Built year must be less than or equal to current year.");
+      } else {
+        const submitedData = {
+          street_address: address,
+          city,
+          state,
+          country,
+          zip_code: zip,
+          lat,
+          lng,
+          real_estate_type: propType,
+          year_built: year,
+          owner_name: ownerName,
+          baths_count: bathrooms,
+          beds_count: bedrooms,
+          total_value: totalValue,
+          area_sq_ft: sqft,
+          lot_size: lotSize,
+          type_of_garage: garage,
+          number_of_stories: story,
+          description: {
+            summary: summary?.realEstate ? summary.realEstate : summary,
+            investment: invest?.realEstate ? invest?.realEstate : invest,
+            location: locationInfo?.realEstate
+              ? locationInfo?.realEstate
+              : locationInfo,
+            market: marketInfo?.realEstate
+              ? marketInfo?.realEstate
+              : marketInfo,
+          },
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          step: 2,
+        };
+        authService
+          .editRealEstate(propertyTest._id, submitedData)
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                alert("Your session ended. Please log in! ");
+                toggleSignIn(true);
+              } else alert(res.data.error);
+            } else {
+              setPropertyTest(res.data);
+              setStep(step + 1);
+            }
+          })
+          .catch((error) => alert(error));
+      }
     }
   };
   return (

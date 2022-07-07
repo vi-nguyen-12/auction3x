@@ -28,7 +28,7 @@ function FAQ() {
         faqs={faqs}
       />
       <Container style={{ padding: "50px" }} fluid>
-        <Row>
+        {/* <Row>
           <Col
             style={{
               display: "flex",
@@ -60,7 +60,7 @@ function FAQ() {
               Account
             </Button>
           </Col>
-        </Row>
+        </Row> */}
         {/* question and answer */}
         <Row style={{ display: "flex", justifyContent: "center" }}>
           <Col md={10}>

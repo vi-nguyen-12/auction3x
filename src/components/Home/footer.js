@@ -131,9 +131,9 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               <li className="list-unstyled">
                 {/* <a href="#!">List with us</a> */}
               </li>
-              <li className="list-unstyled">
+              {/* <li className="list-unstyled">
                 <a href="/Broker">Broker</a>
-              </li>
+              </li> */}
               <li className="list-unstyled">
                 <a href="/Partner">Partner</a>
               </li>

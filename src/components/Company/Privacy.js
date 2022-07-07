@@ -28,7 +28,9 @@ function Privacy({ windowSize }) {
         }}
         fluid
       >
-        <Container>{parse(text)}</Container>
+        <Container unselectable="on" className="unselectable">
+          {parse(text)}
+        </Container>
       </Container>
     </>
   );

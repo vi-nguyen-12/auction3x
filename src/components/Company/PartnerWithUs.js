@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import contact from "../../../src/images/contactImg.png";
 import { useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
+import authService from "../../services/authServices";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
@@ -12,6 +13,28 @@ function PartnerWithUs({ windowSize }) {
   const location = useLocation();
   const [phone, setPhone] = useState();
   const { register, handleSubmit } = useForm();
+
+  const onSubmit = async (data) => {
+    const datas = {
+      type: "from_user",
+      firstName: data.firstName,
+      lastName: data.lastName,
+      company: data.company,
+      email: data.email,
+      phone: phone,
+      subject: data.subject,
+      content: data.message,
+    };
+    await authService.sendEmails(datas).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        alert(res.data.message);
+        window.location.reload();
+      }
+    });
+  };
+
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
@@ -66,72 +89,93 @@ function PartnerWithUs({ windowSize }) {
                 </h1>
               </Col>
             </Row>
-            <Row>
-              <Col className="mb-2" md={4} xs={12}>
-                <span>First Name</span>
-                <input
-                  placeholder="Enter First Name"
-                  type="text"
-                  className="form-control"
-                />
-              </Col>
-              <Col className="mb-2" md={4} xs={12}>
-                <span>Last Name</span>
-                <input
-                  placeholder="Enter Last Name"
-                  type="text"
-                  className="form-control"
-                />
-              </Col>
-              <Col className="mb-2" md={4} xs={12}>
-                <span>Company Name</span>
-                <input
-                  placeholder="Enter Company Name"
-                  type="text"
-                  className="form-control"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col className="mb-2" md={6} xs={12}>
-                <span>Email</span>
-                <input
-                  placeholder="Enter Email"
-                  type="text"
-                  className="form-control"
-                />
-              </Col>
-              <Col className="mb-2" md={6} xs={12}>
-                <span>Phone</span>
-                <PhoneInput
-                  disableCountryCode={false}
-                  onlyCountries={["ca", "us", "gb", "au"]}
-                  disableDropdown={false}
-                  country={"us"}
-                  dropdownStyle={{ paddingLeft: "0!important" }}
-                  value={phone ? phone : null}
-                  inputStyle={{ width: "100%" }}
-                  buttonStyle={{
-                    borderRight: "none",
-                  }}
-                  onChange={setPhone}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <span>Message</span>
-                <textarea
-                  placeholder="Enter Message"
-                  className="form-control"
-                />
-              </Col>
-            </Row>
-            <Row style={{ marginTop: "50px" }}>
-              <Col>
-                <button className="loginBtn">Send</button>
-              </Col>
-            </Row>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Row>
+                <Col className="mb-2" md={4} xs={12}>
+                  <span>First Name</span>
+                  <input
+                    placeholder="Enter First Name"
+                    type="text"
+                    className="form-control"
+                    {...register("firstName", { required: true })}
+                  />
+                </Col>
+                <Col className="mb-2" md={4} xs={12}>
+                  <span>Last Name</span>
+                  <input
+                    placeholder="Enter Last Name"
+                    type="text"
+                    className="form-control"
+                    {...register("lastName", { required: true })}
+                  />
+                </Col>
+                <Col className="mb-2" md={4} xs={12}>
+                  <span>Company Name</span>
+                  <input
+                    placeholder="Enter Company Name"
+                    type="text"
+                    className="form-control"
+                    {...register("company", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col className="mb-2" md={6} xs={12}>
+                  <span>Email</span>
+                  <input
+                    placeholder="Enter Email"
+                    type="text"
+                    className="form-control"
+                    {...register("email", { required: true })}
+                  />
+                </Col>
+                <Col className="mb-2" md={6} xs={12}>
+                  <span>Phone</span>
+                  <PhoneInput
+                    disableCountryCode={false}
+                    onlyCountries={["ca", "us", "gb", "au"]}
+                    disableDropdown={false}
+                    country={"us"}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
+                    value={phone ? phone : null}
+                    inputStyle={{ width: "100%" }}
+                    buttonStyle={{
+                      borderRight: "none",
+                    }}
+                    onChange={setPhone}
+                  />
+                </Col>
+              </Row>{" "}
+              <Row>
+                <Col className="mb-2">
+                  <span>Subject</span>
+                  <input
+                    placeholder="Subject"
+                    type="text"
+                    className="form-control"
+                    name="subject"
+                    {...register("subject", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <span>Message</span>
+                  <textarea
+                    placeholder="Enter Message"
+                    className="form-control"
+                    {...register("message", { required: true })}
+                  />
+                </Col>
+              </Row>
+              <Row style={{ marginTop: "50px" }}>
+                <Col>
+                  <button type="submit" className="loginBtn">
+                    Send
+                  </button>
+                </Col>
+              </Row>
+            </form>
           </Col>
         </Row>
       </Container>

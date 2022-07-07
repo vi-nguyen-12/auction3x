@@ -51,6 +51,8 @@ const PropertyPages = ({
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
+
+  console.log(filter);
   return (
     <>
       <h5 className="realHeader">

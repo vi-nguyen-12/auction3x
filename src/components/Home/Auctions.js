@@ -7,7 +7,14 @@ import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
 import PropertyPageHeader from "./PropertyPageHeader";
 
-function Auctions({ toggleSignIn, windowSize, toggleChange, filter }) {
+function Auctions({
+  toggleSignIn,
+  windowSize,
+  toggleChange,
+  filter,
+  setResultLength,
+}) {
+  console.log(filter);
   const params = useParams();
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -34,13 +41,18 @@ function Auctions({ toggleSignIn, windowSize, toggleChange, filter }) {
 
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAllAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAllAuctions(upcomingAuctions);
-      }
+      authService.propFilter(filter).then((res) => {
+        if (res.data.length > 0) {
+          setResultLength({ auctions: res.data.length });
+          setAllAuctions(res.data);
+        } else {
+          setAllAuctions([]);
+        }
+      });
+    } else {
+      setResultLength({ auctions: allAuctions.length });
     }
-  }, [filter, allAuctions]);
+  }, [filter]);
 
   //   useEffect(() => {
   //     if (params.filter === "USA") {

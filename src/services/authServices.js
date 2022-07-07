@@ -429,6 +429,29 @@ const authService = {
   },
 
   propFilter(data) {
+    console.log(data);
+    return axios.get(
+      apiUrl +
+        `/api/auctions?${data.type ? "type=" + data.type : ""}&${
+          data.auctionType.auctions ? "time=" + data.auctionType.auctions : ""
+        }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
+          data.city ? "property_city=" + data.city : ""
+        }&${data.state ? "property_state=" + data.state : ""}&${
+          data.country ? "property_country=" + data.country : ""
+        }&${
+          data.min_price.auctions ? "min_price=" + data.min_price.auctions : ""
+        }&${
+          data.max_price.auctions ? "max_price=" + data.max_price.auctions : ""
+        }`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
+  realEstateFilter(data) {
     return axios.get(
       apiUrl +
         `/api/auctions?type=real-estate&${

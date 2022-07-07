@@ -891,7 +891,7 @@ const Header = ({
                       YACHTS
                     </button>
                   </td>
-                  <td style={{ padding: "0.5rem 0" }}>
+                  {/* <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -904,6 +904,21 @@ const Header = ({
                       }}
                     >
                       SELLER
+                    </button>
+                  </td> */}
+                  <td style={{ padding: "0.5rem 0" }}>
+                    <button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        toggleOpen();
+                        history.push("/Team");
+                      }}
+                    >
+                      TEAM
                     </button>
                   </td>
                   <td style={{ padding: "0.5rem 0" }}>
@@ -985,7 +1000,7 @@ const Header = ({
                       ABOUT US
                     </button>
                   </td>
-                  <td style={{ padding: "0.5rem 0" }}>
+                  {/* <td style={{ padding: "0.5rem 0" }}>
                     <button
                       style={{
                         backgroundColor: "transparent",
@@ -999,7 +1014,7 @@ const Header = ({
                     >
                       BROKER
                     </button>
-                  </td>
+                  </td> */}
                   {/* <td style={{padding:"0.5rem 0"}}>
                     <button
                       style={{
@@ -1015,21 +1030,6 @@ const Header = ({
                       TEAM
                     </button>
                   </td> */}
-                  <td style={{ padding: "0.5rem 0" }}>
-                    <button
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "none",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        toggleOpen();
-                        history.push("/Team");
-                      }}
-                    >
-                      TEAM
-                    </button>
-                  </td>
                 </tr>
               </tbody>
             </Table>

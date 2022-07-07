@@ -429,14 +429,18 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         <Modal.Header closeButton>
           <Modal.Title> User Terms and Conditions</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{parse(terms)}</Modal.Body>
+        <Modal.Body unselectable="on" className="unselectable">
+          {parse(terms)}
+        </Modal.Body>
       </Modal>
 
       <Modal size="xl" show={showPrivacy} onHide={togglePrivacy} centered>
         <Modal.Header closeButton>
           <Modal.Title>Privacy Policy</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{parse(privacy)}</Modal.Body>
+        <Modal.Body unselectable="on" className="unselectable">
+          {parse(privacy)}
+        </Modal.Body>
       </Modal>
     </>
   );
