@@ -7,14 +7,20 @@ function Confirm() {
   const history = useHistory();
 
   useEffect(() => {
-    authServices.confirmEmail(token).then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        alert(res.data.message);
-        history.push("/");
-      }
-    });
+    console.log("test");
+    authServices
+      .confirmEmail(token)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert(res.data.message);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   }, []);
 
   return (
