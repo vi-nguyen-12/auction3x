@@ -34,8 +34,54 @@ function Auctions({
   }, []);
 
   useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
+    if (params.Country === "Austin") {
+      const datas = {
+        city: "Austin",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "Houston") {
+      const datas = {
+        city: "Houston",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "Dallas") {
+      const datas = {
+        city: "Dallas",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "SanAntonio") {
+      const datas = {
+        city: "San Antonio",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else {
+      if (onGoingAuctions && upcomingAuctions) {
+        setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
+      }
     }
   }, [onGoingAuctions, upcomingAuctions]);
 

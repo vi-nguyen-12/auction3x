@@ -26,17 +26,6 @@ const Agree = ({ toggleStep, step, propertyTest }) => {
   const { handleSubmit } = useForm();
   const history = useHistory();
 
-  // useEffect(() => {
-  //   let queryParams = { officialName: "TC_selling" };
-  //   authService.getDocuments(queryParams).then((res) => {
-  //     if (res.data.error) {
-  //       alert(res.data.error);
-  //     } else {
-  //       setTerms(res.data[0]?.htmlText || "");
-  //     }
-  //   });
-  // }, []);
-
   useEffect(() => {
     let params = new URLSearchParams();
     params.append("officialName", "TC_selling");

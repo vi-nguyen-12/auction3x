@@ -74,7 +74,7 @@ function PartnerWithUs({ windowSize }) {
             md={8}
             style={{ padding: windowSize > 800 ? "150px 100px" : "30px" }}
           >
-            <Row>
+            <Row className="mb-4">
               <Col
                 style={{
                   display: "flex",

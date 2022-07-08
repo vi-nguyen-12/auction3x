@@ -51,7 +51,7 @@ function Dashboard({
   return (
     <div style={{ display: "flex" }}>
       <Router>
-        {windowSize > 800 ? (
+        {windowSize > 1300 ? (
           <Sidebar path={path} />
         ) : (
           <div
@@ -126,9 +126,6 @@ function Dashboard({
         onHide={toggleShowModal}
         fullscreen
       >
-        <div className="modal-close">
-          <CloseButton onClick={toggleShowModal} />
-        </div>
         <Modal.Body
           style={{
             padding: "100px 50px",
@@ -137,6 +134,16 @@ function Dashboard({
             color: "white",
           }}
         >
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton className="modal-close" style={{fontSize:"1.3rem"}} onClick={toggleShowModal} />
+          </div>
           <Row>
             <Col
               onClick={() => {
