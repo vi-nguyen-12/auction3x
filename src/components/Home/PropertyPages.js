@@ -99,6 +99,7 @@ const PropertyPages = ({
         />
       ) : path === "/cars" ? (
         <CarPage
+          setCenters={setCenters}
           toggleChange={toggleChange}
           toggleImgCar={toggleImgCar}
           setImgCar={setImgCar}
@@ -109,6 +110,7 @@ const PropertyPages = ({
         />
       ) : path === "/jets" ? (
         <JetPage
+          setCenters={setCenters}
           toggleChange={toggleChange}
           setShowImgJet={setShowImgJet}
           setImgJet={setImgJet}
@@ -119,6 +121,7 @@ const PropertyPages = ({
         />
       ) : path === "/yachts" ? (
         <YachtPage
+          setCenters={setCenters}
           toggleChange={toggleChange}
           setShowImgYacht={setShowImgYacht}
           setImgYacht={setImgYacht}
@@ -132,6 +135,7 @@ const PropertyPages = ({
           toggleChange={toggleChange}
           toggleSignIn={toggleSignIn}
           windowSize={windowSize}
+          setCenters={setCenters}
           filter={filter}
           setResultLength={setResultLength}
         />
@@ -146,6 +150,7 @@ const PropertyPages = ({
         centered
       >
         <Modal.Body>
+          <CloseButton className="modal-close" onClick={toggleMap} style={{ display: "flex", justifyContent: "end" }} />
           <div
             style={{
               position: "absolute",
@@ -154,7 +159,6 @@ const PropertyPages = ({
               zIndex: "999",
             }}
           >
-            <CloseButton className="modal-close" onClick={toggleMap} />
           </div>
           <GoogleMap
             mapContainerStyle={mapStyles}
@@ -179,6 +183,7 @@ const PropertyPages = ({
             )
           })} */}
         </Modal.Body>
+
       </Modal>
       {/* Gallery Button */}
       {path === "/cars" ? (
@@ -199,7 +204,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleMap} />
+              <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             {imgCar.length > 0 ? (
               <Row>
@@ -244,7 +249,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleMap} />
+              <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             {imgJet.length > 0 ? (
               <Row>
@@ -289,7 +294,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleMap} />
+              <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             {imgYacht.length > 0 ? (
               <Row>
@@ -334,7 +339,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleMap} />
+              <CloseButton className="modal-close" onClick={toggleImage} />
             </div>
             {img.length > 0 ? (
               <Row>

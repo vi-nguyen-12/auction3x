@@ -83,50 +83,49 @@ function CarPage({
   windowSize,
   filter,
   setResultLength,
+  setCenters
 }) {
   useEffect(() => {
     toggleChange();
   }, []);
-  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+
   const [auctions, setAuctions] = useState([]);
 
   useEffect(() => {
-    authService
-      .getOngoingAuctionsByType("car")
-      .then((res) => {
-        setOnGoingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    authService
-      .getUpcomingAuctionsByType("car")
-      .then((res) => {
-        setUpcomingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, []);
+    toggleChange();
+    let auctions = []
+    const getAuctions = async () => {
+      const response1 = await authService.getOngoingAuctionsByType("car");
+      if (response1.error) { alert(response1.error) }
+      else {
+        auctions = [...response1.data]
+      }
+      const response2 = await authService.getUpcomingAuctionsByType("car");
+      if (response2.error) { alert(response2.error) }
+      else {
+        auctions = [...auctions, ...response2.data]
+      }
+      setAuctions(auctions)
+      if (auctions.length > 0) {
+        const imageUrl = auctions.map((image) => {
+          for (let i = 0; i < image.property.images.length; i++) {
+            return image.property.images[i].url;
+          }
+        })
+        setImgCar(imageUrl);
+      }
+      setCenters(auctions.map(item => {
+        return {
+          address: item.property.details.address,
+          lat: item.property.details.property_address.lat,
+          lng: item.property.details.property_address.lng,
 
-  useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      const Arr = [...onGoingAuctions, ...upcomingAuctions];
-      const imageUrl = Arr.map((image) => {
-        for (let i = 0; i < image.property.images.length; i++) {
-          return image.property.images[i].url;
         }
-      });
-      setImgCar(imageUrl);
+      }))
+      console.log(auctions)
     }
-  }, [onGoingAuctions, upcomingAuctions]);
-
-  useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      setAuctions([...onGoingAuctions, ...upcomingAuctions]);
-    }
-  }, [onGoingAuctions, upcomingAuctions]);
+    getAuctions();
+  }, []);
 
   useEffect(() => {
     if (filter) {
@@ -136,7 +135,7 @@ function CarPage({
           setResultLength({ car: car.length });
           setAuctions(car);
         }
-        else{
+        else {
           setAuctions([]);
         }
       });

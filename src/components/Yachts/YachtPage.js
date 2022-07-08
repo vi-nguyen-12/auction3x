@@ -90,52 +90,45 @@ function YachtPage({
   windowSize,
   filter,
   setResultLength,
+  setCenters
 }) {
-  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [auctions, setAuctions] = useState([]);
 
   useEffect(() => {
-    authService
-      .getOngoingAuctionsByType("yacht")
-      .then((res) => {
-        setOnGoingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-    authService
-      .getUpcomingAuctionsByType("yacht")
-      .then((res) => {
-        setUpcomingAuctions(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      const Arr = [...onGoingAuctions, ...upcomingAuctions];
-      const imageUrl = Arr.map((image) => {
-        for (let i = 0; i < image.property.images.length; i++) {
-          return image.property.images[i].url;
-        }
-      });
-      setImgYacht(imageUrl);
-    }
-  }, [onGoingAuctions, upcomingAuctions, setImgYacht]);
-
-  useEffect(() => {
     toggleChange();
-  }, [toggleChange]);
+    let auctions = []
+    const getAuctions = async () => {
+      const response1 = await authService.getOngoingAuctionsByType("yacht");
+      if (response1.error) { alert(response1.error) }
+      else {
+        auctions = [...response1.data]
+      }
+      const response2 = await authService.getUpcomingAuctionsByType("yacht");
+      if (response2.error) { alert(response2.error) }
+      else {
+        auctions = [...auctions, ...response2.data]
+      }
+      setAuctions(auctions)
+      if (auctions.length > 0) {
+        const imageUrl = auctions.map((image) => {
+          for (let i = 0; i < image.property.images.length; i++) {
+            return image.property.images[i].url;
+          }
+        })
+        setImgYacht(imageUrl);
+      }
+      setCenters(auctions.map(item => {
+        return {
+          address: item.property.details.address,
+          lat: item.property.details.property_address.lat,
+          lng: item.property.details.property_address.lng,
 
-  useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      setAuctions([...onGoingAuctions, ...upcomingAuctions]);
+        }
+      }))
+      console.log(auctions)
     }
-  }, [onGoingAuctions, upcomingAuctions]);
-
+    getAuctions();
+  }, []);
   useEffect(() => {
     if (filter) {
       authService.yachtFilter(filter).then((res) => {

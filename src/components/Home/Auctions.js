@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
 import PropertyPageHeader from "./PropertyPageHeader";
 
-function Auctions({ toggleSignIn, windowSize, toggleChange, filter }) {
+function Auctions({ toggleSignIn, windowSize, toggleChange, filter, setCenters }) {
   const params = useParams();
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
