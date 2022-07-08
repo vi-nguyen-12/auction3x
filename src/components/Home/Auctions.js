@@ -7,7 +7,15 @@ import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
 import PropertyPageHeader from "./PropertyPageHeader";
 
-function Auctions({ toggleSignIn, windowSize, toggleChange, filter, setCenters }) {
+function Auctions({
+  toggleSignIn,
+  windowSize,
+  toggleChange,
+  filter,
+  setResultLength,
+  setCenters
+}) {
+  console.log(filter);
   const params = useParams();
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -27,20 +35,85 @@ function Auctions({ toggleSignIn, windowSize, toggleChange, filter, setCenters }
   }, []);
 
   useEffect(() => {
-    if (onGoingAuctions && upcomingAuctions) {
-      setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
+    if (params.Country === "Austin") {
+      const datas = {
+        city: "Austin",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "Houston") {
+      const datas = {
+        city: "Houston",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "Dallas") {
+      const datas = {
+        city: "Dallas",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else if (params.Country === "SanAntonio") {
+      const datas = {
+        city: "San Antonio",
+        auctionType: "",
+        type: "",
+        min_price: "",
+        max_price: "",
+      };
+      authService.propFilter(datas).then((res) => {
+        setAllAuctions(res.data);
+      });
+    } else {
+      if (onGoingAuctions && upcomingAuctions) {
+        setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
+      }
     }
   }, [onGoingAuctions, upcomingAuctions]);
 
   useEffect(() => {
     if (filter) {
-      if (filter === "ongoing") {
-        setAllAuctions(onGoingAuctions);
-      } else if (filter === "upcoming") {
-        setAllAuctions(upcomingAuctions);
-      }
+      authService.propFilter(filter).then((res) => {
+        if (res.data.length > 0) {
+          setResultLength({ auctions: res.data.length });
+          setAllAuctions(res.data);
+        } else {
+          setAllAuctions([]);
+        }
+      });
+    } else {
+      setResultLength({ auctions: allAuctions.length });
     }
-  }, [filter, allAuctions]);
+  }, [filter]);
+
+  useEffect(() => {
+    if (allAuctions) {
+      setCenters(allAuctions.map(item => {
+        return {
+          address: item.property.details.address,
+          lat: item.property.details.property_address.lat,
+          lng: item.property.details.property_address.lng,
+
+        }
+      }))
+    }
+  }, [allAuctions])
+
 
   //   useEffect(() => {
   //     if (params.filter === "USA") {

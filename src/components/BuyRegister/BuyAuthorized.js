@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom";
 import axious from "axios";
 import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
+import parse from "html-react-parser";
 
 const BuyAuthorized = ({ setStep, step, answers, document }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
-  const [terms, setTerms] = useState();
+  const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
   const toggleTerms = () => setShow(!show);
 
@@ -35,17 +36,24 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
       });
     };
     getIp();
-    authService.getDocuments().then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        res.data.filter((item) => {
-          if (item.officialName === "TC_buying") {
-            setTerms(item.url);
+    let params = new URLSearchParams();
+    params.append("officialName", "TC_buying");
+    authService
+      .getDocuments(params)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          for (let doc of res.data) {
+            if (doc.officialName === "TC_buying") {
+              setTerms(doc.htmlText);
+            }
           }
-        });
-      }
-    });
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   }, []);
 
   const [agree, setAgree] = useState(false);
@@ -164,6 +172,14 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
           </Button>
         </Row>
       </Modal.Footer>
+      <Modal size="xl" show={show} onHide={toggleTerms} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> Buyer Terms and Conditions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body unselectable="on" className="unselectable">
+          {parse(terms)}
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

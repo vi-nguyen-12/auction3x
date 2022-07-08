@@ -21,6 +21,7 @@ const Login = ({
   const location = useLocation();
 
   const [showLoading, setShowLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -96,7 +97,7 @@ const Login = ({
             Password
           </label>
           <input
-            type="password"
+            type={hidden ? "password" : "text"}
             style={{ height: "50px", fontSize: "20px" }}
             className="form-control"
             placeholder="Password"
@@ -107,6 +108,13 @@ const Login = ({
             })}
             required
           />
+          <input
+            className="mt-3"
+            style={{ marginLeft: "10px" }}
+            type="checkbox"
+            onChange={() => setHidden(!hidden)}
+          />{" "}
+          <span>See Password</span>
         </div>
         <div className="form-group">
           <Button

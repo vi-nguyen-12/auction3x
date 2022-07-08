@@ -10,13 +10,14 @@ import SellHeader from "./SellHeader";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../components/Loading";
 import { Button, Row, Col } from "react-bootstrap";
+import parse from "html-react-parser";
 
 const Agree = ({ toggleStep, step, propertyTest }) => {
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [loader, setLoader] = useState(false);
-  const [terms, setTerms] = useState();
+  const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
   const toggleTerms = () => setShow(!show);
   const toggle = () => {
@@ -26,17 +27,24 @@ const Agree = ({ toggleStep, step, propertyTest }) => {
   const history = useHistory();
 
   useEffect(() => {
-    authService.getDocuments().then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        res.data.filter((doc) => {
-          if (doc.officialName === "TC_selling") {
-            setTerms(doc.url);
+    let params = new URLSearchParams();
+    params.append("officialName", "TC_selling");
+    authService
+      .getDocuments(params)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          for (let doc of res.data) {
+            if (doc.officialName === "TC_selling") {
+              setTerms(doc.htmlText);
+            }
           }
-        });
-      }
-    });
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   }, []);
 
   const handleSignDocusign = async () => {
@@ -136,18 +144,12 @@ const Agree = ({ toggleStep, step, propertyTest }) => {
         </div>
       </div>
 
-      <Modal size="lg" show={show} onHide={toggleTerms} centered>
-        <Modal.Body style={{ height: "70vh" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginBottom: "10px",
-            }}
-          >
-            <CloseButton className="modal-close" onClick={toggleTerms} />
-          </div>
-          <embed src={terms} width="100%" height="100%" />
+      <Modal size="xl" show={show} onHide={toggleTerms} centered>
+        <Modal.Header closeButton>
+          <Modal.Title> Seller Terms and Conditions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body unselectable="on" className="unselectable">
+          {parse(terms)}
         </Modal.Body>
       </Modal>
     </>

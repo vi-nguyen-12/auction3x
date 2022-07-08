@@ -13,16 +13,25 @@ function ContactUs({ windowSize }) {
   const location = useLocation();
   const { register, handleSubmit } = useForm();
   const [phone, setPhone] = useState();
+
   const onSubmit = async (data) => {
-    const submitContact = await authService.submitContact(data);
-    if (submitContact.data.error) {
-      alert(submitContact.data.error);
-    } else {
-      alert(
-        "Your message has been sent successfully. We will get back to you soon."
-      );
-      window.location.reload();
-    }
+    const datas = {
+      type: "from_user",
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: phone,
+      subject: data.subject,
+      content: data.message,
+    };
+    await authService.sendEmails(datas).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        alert(res.data.message);
+        window.location.reload();
+      }
+    });
   };
 
   return (
@@ -117,6 +126,18 @@ function ContactUs({ windowSize }) {
                       borderRight: "none",
                     }}
                     onChange={setPhone}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col className="mb-2">
+                  <span>Subject</span>
+                  <input
+                    placeholder="Subject"
+                    type="text"
+                    className="form-control"
+                    name="subject"
+                    {...register("subject", { required: true })}
                   />
                 </Col>
               </Row>

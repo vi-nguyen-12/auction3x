@@ -10,7 +10,7 @@ function TermsCondition({ windowSize }) {
   const location = useLocation();
 
   useEffect(() => {
-    let queryParams = { officialName: "TC_selling" };
+    let queryParams = { officialName: "terms_of_use" };
     authService.getDocuments(queryParams).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
@@ -29,7 +29,9 @@ function TermsCondition({ windowSize }) {
         }}
         fluid
       >
-        <Container>{parse(text)}</Container>
+        <Container unselectable="on" className="unselectable">
+          {parse(text)}
+        </Container>
       </Container>
     </>
   );

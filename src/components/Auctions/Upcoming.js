@@ -119,7 +119,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
   };
   return (
     <>
-      {windowSize > 800 ? (
+      {windowSize > 900 ? (
         <>
           {upcomingAuctions ? (
             <>
@@ -161,20 +161,29 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
           ) : null}
         </>
       ) : (
-        <Row style={{ height: "700px" }}>
-          <Carousel {...settings}>
-            {upcomingAuctions.map((item, index) => (
-              <Wrap key={index}>
-                <Cards
-                  toggleSignIn={toggleSignIn}
-                  windowSize={windowSize}
-                  data={item}
-                  type={item.property.type}
-                />
-              </Wrap>
-            ))}
-          </Carousel>
-        </Row>
+        <>
+          <Row style={{ padding: "0 50px" }}>
+            <Col style={{ padding: "0" }} className="pt-5">
+              <h2 style={{ color: "black", fontSize: "22px" }}>
+                Upcoming Auctions
+              </h2>
+            </Col>
+          </Row>
+          <Row style={{ height: "700px" }}>
+            <Carousel {...settings}>
+              {upcomingAuctions.map((item, index) => (
+                <Wrap key={index}>
+                  <Cards
+                    toggleSignIn={toggleSignIn}
+                    windowSize={windowSize}
+                    data={item}
+                    type={item.property.type}
+                  />
+                </Wrap>
+              ))}
+            </Carousel>
+          </Row>
+        </>
       )}
     </>
   );
