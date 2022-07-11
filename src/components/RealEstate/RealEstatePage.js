@@ -8,6 +8,7 @@ import "../../styles/realEstate.css";
 import Cards from "../Cards/Cards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
+import Loading from "../Loading";
 
 const Carousel = styled(Slider)`
   // height: 100%;
@@ -91,51 +92,57 @@ function RealEstatePage({
   windowSize,
   filter,
   setResultLength,
-  setCenters
+  setCenters,
 }) {
-
+  console.log(filter);
   const [auctions, setAuctions] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(async () => {
-
-
     toggleChange();
-    let auctions = []
+    let auctions = [];
     const getAuctions = async () => {
-      const response1 = await authService.getOngoingAuctionsByType("real-estate");
-      if (response1.error) { alert(response1.error) }
-      else {
-        auctions = [...response1.data]
+      const response1 = await authService.getOngoingAuctionsByType(
+        "real-estate"
+      );
+      if (response1.error) {
+        alert(response1.error);
+      } else {
+        auctions = [...response1.data];
       }
-      const response2 = await authService.getUpcomingAuctionsByType("real-estate");
-      if (response2.error) { alert(response2.error) }
-      else {
-        auctions = [...auctions, ...response2.data]
+      const response2 = await authService.getUpcomingAuctionsByType(
+        "real-estate"
+      );
+      if (response2.error) {
+        alert(response2.error);
+      } else {
+        auctions = [...auctions, ...response2.data];
       }
-      setAuctions(auctions)
+      setAuctions(auctions);
       if (auctions.length > 0) {
         const imageUrl = auctions.map((image) => {
           for (let i = 0; i < image.property.images.length; i++) {
             return image.property.images[i].url;
           }
-        })
+        });
         setImg(imageUrl);
       }
-      setCenters(auctions.map(item => {
-        return {
-          address: item.property.details.address,
-          lat: item.property.details.property_address.lat,
-          lng: item.property.details.property_address.lng,
-
-        }
-      }))
-      console.log(auctions)
-    }
+      setCenters(
+        auctions.map((item) => {
+          return {
+            address: item.property.details.address,
+            lat: item.property.details.property_address.lat,
+            lng: item.property.details.property_address.lng,
+          };
+        })
+      );
+    };
     getAuctions();
   }, []);
 
   useEffect(() => {
     if (filter) {
+      setLoader(true);
       authService.realEstateFilter(filter).then((res) => {
         if (res.data.length > 0) {
           const realEstate = res.data.filter(
@@ -143,8 +150,10 @@ function RealEstatePage({
           );
           setResultLength({ realEstate: realEstate.length });
           setAuctions(realEstate);
+          setLoader(false);
         } else {
           setAuctions([]);
+          setLoader(false);
         }
       });
     } else {
@@ -163,6 +172,7 @@ function RealEstatePage({
 
   return (
     <>
+      {loader && <Loading />}
       {auctions.length > 0 ? (
         <Row className="mt-5 mb-5">
           {windowSize > 800 ? (

@@ -6,8 +6,8 @@ const Work = ({ windowSize }) => {
   return (
     <section
       style={{
-        padding: windowSize < 600 ? "50px 20px" : "50px 50px",
-        paddingBottom: "150px",
+        padding: windowSize < 600 ? "50px 20px" : "150px 50px",
+        // paddingBottom: "150px",
         background: "#f8f8f8",
         marginTop: "50px",
       }}

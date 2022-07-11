@@ -8,6 +8,7 @@ import "../../styles/realEstate.css";
 import Cards from "../Cards/Cards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
+import Loading from "../Loading";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -88,55 +89,61 @@ function JetPage({
   windowSize,
   filter,
   setResultLength,
-  setCenters
+  setCenters,
 }) {
   const [auctions, setAuctions] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     toggleChange();
-    let auctions = []
+    let auctions = [];
     const getAuctions = async () => {
       const response1 = await authService.getOngoingAuctionsByType("jet");
-      if (response1.error) { alert(response1.error) }
-      else {
-        auctions = [...response1.data]
+      if (response1.error) {
+        alert(response1.error);
+      } else {
+        auctions = [...response1.data];
       }
       const response2 = await authService.getUpcomingAuctionsByType("jet");
-      if (response2.error) { alert(response2.error) }
-      else {
-        auctions = [...auctions, ...response2.data]
+      if (response2.error) {
+        alert(response2.error);
+      } else {
+        auctions = [...auctions, ...response2.data];
       }
-      setAuctions(auctions)
+      setAuctions(auctions);
       if (auctions.length > 0) {
         const imageUrl = auctions.map((image) => {
           for (let i = 0; i < image.property.images.length; i++) {
             return image.property.images[i].url;
           }
-        })
+        });
         setImgJet(imageUrl);
       }
-      setCenters(auctions.map(item => {
-        return {
-          address: item.property.details.address,
-          lat: item.property.details.property_address.lat,
-          lng: item.property.details.property_address.lng,
-
-        }
-      }))
-      console.log(auctions)
-    }
+      setCenters(
+        auctions.map((item) => {
+          return {
+            address: item.property.details.address,
+            lat: item.property.details.property_address.lat,
+            lng: item.property.details.property_address.lng,
+          };
+        })
+      );
+    };
     getAuctions();
   }, []);
 
   useEffect(() => {
     if (filter) {
+      setLoader(true);
       authService.jetFilter(filter).then((res) => {
         if (res.data.length > 0) {
           const jet = res.data.filter((item) => item.property.type === "jet");
           setResultLength({ jet: jet.length });
           setAuctions(jet);
+          setLoader(false);
         } else {
           setAuctions([]);
+          setLoader(false);
         }
       });
     } else {
@@ -155,6 +162,7 @@ function JetPage({
 
   return (
     <>
+      {loader && <Loading />}
       {auctions.length > 0 ? (
         <Row className="mt-5 mb-5">
           {windowSize > 800 ? (

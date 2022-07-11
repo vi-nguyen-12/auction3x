@@ -111,42 +111,41 @@ function JetDetails({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(results[0].formatted_address.split(",")[0]);
+      setAddress(() => {
+        return results[0]?.formatted_address.split(",")[0] || "";
+      });
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+      setCity(() => {
+        return cities[0]?.long_name || "";
+      });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(
-        states[0].long_name ? states[0].long_name : states[0].short_name
-      );
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(
-        countries[0].long_name
-          ? countries[0].long_name
-          : countries[0].short_name
-      );
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip(
-        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
-      );
+      setZip(() => {
+        return zipcodes[0]?.long_name || "";
+      });
+
       setLat(() => {
-        return results[0].geometry.location.lat();
+        return results[0]?.geometry.location.lat() || "";
       });
       setLng(() => {
-        return results[0].geometry.location.lng();
+        return results[0]?.geometry.location.lng() || "";
       });
     });
   };
@@ -156,57 +155,61 @@ function JetDetails({
       if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
         alert("Reserved amount should be greater than discussed amount");
       } else {
-        const submitedData = {
-          registration_mark,
-          aircraft_builder_name,
-          aircraft_model_designation,
-          aircraft_serial_no,
-          engine_builder_name,
-          engine_model_designation,
-          number_of_engines,
-          propeller_builder_name,
-          year_built,
-          propeller_model_designation,
-          imported_aircraft: isImport,
-          description: {
-            summary: summary?.jet ? summary.jet : summary,
-            investment: invest?.jet ? invest?.jet : invest,
-            location: locationInfo?.jet ? locationInfo?.jet : locationInfo,
-            market: marketInfo?.jet ? marketInfo?.jet : marketInfo,
-          },
-          property_address: {
-            formatted_street_address: address,
-            country,
-            state,
-            city,
-            zip_code: zip,
-            lat,
-            lng,
-          },
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          step: 2,
-        };
+        if (year_built > new Date().getFullYear()) {
+          alert("Built year must be less than or equal to current year.");
+        } else {
+          const submitedData = {
+            registration_mark,
+            aircraft_builder_name,
+            aircraft_model_designation,
+            aircraft_serial_no,
+            engine_builder_name,
+            engine_model_designation,
+            number_of_engines,
+            propeller_builder_name,
+            year_built,
+            propeller_model_designation,
+            imported_aircraft: isImport,
+            description: {
+              summary: summary?.jet ? summary.jet : summary,
+              investment: invest?.jet ? invest?.jet : invest,
+              location: locationInfo?.jet ? locationInfo?.jet : locationInfo,
+              market: marketInfo?.jet ? marketInfo?.jet : marketInfo,
+            },
+            property_address: {
+              formatted_street_address: address,
+              country,
+              state,
+              city,
+              zip_code: zip,
+              lat,
+              lng,
+            },
+            reservedAmount: parseInt(reservedAmount),
+            discussedAmount: parseInt(discussedAmount),
+            step: 2,
+          };
 
-        authService
-          .editProperty(propertyTest._id, submitedData)
-          .then((res) => {
-            if (res.data.error) {
-              if (res.data.error === "Invalid Token") {
-                alert("Your session ended. Please log in! ");
-                toggleSignIn(true);
-              } else alert(res.data.error);
-            } else {
-              setPropertyTest(res.data);
-              setStep(step + 1);
-            }
-          })
-          .catch((error) => {
-            alert(error);
-          });
+          authService
+            .editProperty(propertyTest._id, submitedData)
+            .then((res) => {
+              if (res.data.error) {
+                if (res.data.error === "Invalid Token") {
+                  alert("Your session ended. Please log in! ");
+                  toggleSignIn(true);
+                } else alert(res.data.error);
+              } else {
+                setPropertyTest(res.data);
+                setStep(step + 1);
+              }
+            })
+            .catch((error) => {
+              alert(error);
+            });
+        }
       }
     } else {
-      alert("Please fill out discussed amount adn reserved amount");
+      alert("Please fill out discussed amount and reserved amount");
     }
   };
 

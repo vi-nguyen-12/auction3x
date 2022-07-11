@@ -95,42 +95,41 @@ function CarDetails({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(results[0].formatted_address.split(",")[0]);
+      setAddress(() => {
+        return results[0]?.formatted_address.split(",")[0] || "";
+      });
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(cities[0].long_name ? cities[0].long_name : cities[0].short_name);
+      setCity(() => {
+        return cities[0]?.long_name || "";
+      });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(
-        states[0].long_name ? states[0].long_name : states[0].short_name
-      );
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(
-        countries[0].long_name
-          ? countries[0].long_name
-          : countries[0].short_name
-      );
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip(
-        zipcodes[0].long_name ? zipcodes[0].long_name : zipcodes[0].short_name
-      );
+      setZip(() => {
+        return zipcodes[0]?.long_name || "";
+      });
+
       setLat(() => {
-        return results[0].geometry.location.lat();
+        return results[0]?.geometry.location.lat() || "";
       });
       setLng(() => {
-        return results[0].geometry.location.lng();
+        return results[0]?.geometry.location.lng() || "";
       });
     });
   };
@@ -139,56 +138,60 @@ function CarDetails({
     if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
       alert("Reserved amount should be greater than discussed amount");
     } else {
-      const submitedData = {
-        make,
-        model,
-        year,
-        mileage: parseInt(mileage),
-        gearbox,
-        car_type: carType,
-        power,
-        color,
-        VIN: vin,
-        engine,
-        fuel_type: fuelType,
-        condition,
-        market_price: price,
-        description: {
-          summary: summary?.car ? summary.car : summary,
-          investment: invest?.car ? invest?.car : invest,
-          location: locationInfo?.car ? locationInfo?.car : locationInfo,
-          market: marketInfo?.car ? marketInfo?.car : marketInfo,
-        },
-        property_address: {
-          formatted_street_address: address,
-          country,
-          state,
-          city,
-          zip_code: zip,
-          lat,
-          lng,
-        },
-        reservedAmount: parseInt(reservedAmount),
-        discussedAmount: parseInt(discussedAmount),
-        step: 2,
-      };
+      if (year > new Date().getFullYear()) {
+        alert("Built year must be less than or equal to current year.");
+      } else {
+        const submitedData = {
+          make,
+          model,
+          year,
+          mileage: parseInt(mileage),
+          gearbox,
+          car_type: carType,
+          power,
+          color,
+          VIN: vin,
+          engine,
+          fuel_type: fuelType,
+          condition,
+          market_price: price,
+          description: {
+            summary: summary?.car ? summary.car : summary,
+            investment: invest?.car ? invest?.car : invest,
+            location: locationInfo?.car ? locationInfo?.car : locationInfo,
+            market: marketInfo?.car ? marketInfo?.car : marketInfo,
+          },
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+            lat,
+            lng,
+          },
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          step: 2,
+        };
 
-      authService
-        .editProperty(propertyTest._id, submitedData)
-        .then((res) => {
-          if (res.data.error) {
-            if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
-              toggleSignIn(true);
-            } else alert(res.data.error);
-          } else {
-            setPropertyTest(res.data);
-            setStep(step + 1);
-          }
-        })
-        .catch((error) => {
-          alert(error);
-        });
+        authService
+          .editProperty(propertyTest._id, submitedData)
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                alert("Your session ended. Please log in! ");
+                toggleSignIn(true);
+              } else alert(res.data.error);
+            } else {
+              setPropertyTest(res.data);
+              setStep(step + 1);
+            }
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      }
     }
   };
 
@@ -471,15 +474,15 @@ function CarDetails({
                         // inline style for demonstration purpose
                         const style = suggestion.active
                           ? {
-                            backgroundColor: "#fafafa",
-                            cursor: "pointer",
-                            color: "black",
-                          }
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
                           : {
-                            backgroundColor: "#ffffff",
-                            cursor: "pointer",
-                            color: "black",
-                          };
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
                         return (
                           <div
                             key={index}

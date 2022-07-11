@@ -90,7 +90,7 @@ function RealEstateDetails({
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
       setAddress(() => {
-        return results[0].formatted_address.split(",")[0];
+        return results[0]?.formatted_address.split(",")[0] || "";
       });
 
       let cities = results[0].address_components.filter((item) => {
@@ -99,31 +99,31 @@ function RealEstateDetails({
         );
       });
       setCity(() => {
-        return cities[0].long_name;
+        return cities[0]?.long_name || "";
       });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(states[0].long_name);
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(countries[0].long_name);
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
       setZip(() => {
-        return zipcodes[0].long_name;
+        return zipcodes[0]?.long_name || "";
       });
 
       setLat(() => {
-        return results[0].geometry.location.lat();
+        return results[0]?.geometry.location.lat() || "";
       });
       setLng(() => {
-        return results[0].geometry.location.lng();
+        return results[0]?.geometry.location.lng() || "";
       });
     });
   };

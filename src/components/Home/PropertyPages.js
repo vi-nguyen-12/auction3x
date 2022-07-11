@@ -52,7 +52,6 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
 
-  console.log(filter);
   return (
     <>
       <h5 className="realHeader">
@@ -152,7 +151,6 @@ const PropertyPages = ({
         centered
       >
         <Modal.Body>
-          <CloseButton className="modal-close" onClick={toggleMap} style={{ display: "flex", justifyContent: "end" }} />
           <div
             style={{
               position: "absolute",
@@ -161,6 +159,7 @@ const PropertyPages = ({
               zIndex: "999",
             }}
           >
+            <CloseButton className="modal-close" onClick={toggleMap} />
           </div>
           <GoogleMap
             mapContainerStyle={mapStyles}
@@ -185,7 +184,6 @@ const PropertyPages = ({
             )
           })} */}
         </Modal.Body>
-
       </Modal>
       {/* Gallery Button */}
       {path === "/cars" ? (
