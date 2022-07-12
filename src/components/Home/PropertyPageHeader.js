@@ -20,11 +20,11 @@ function PropertyPageHeader({
   resultLength,
   setLocation,
 }) {
-  const [auctionType, setAuctionType] = useState({});
+  const [auctionType, setAuctionType] = useState();
   const [propertyType, setPropertyType] = useState();
   const [realType, setRealType] = useState();
-  const [minPrice, setMinPrice] = useState({});
-  const [maxPrice, setMaxPrice] = useState({});
+  const [minPrice, setMinPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState();
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState();
   const [state, setState] = useState();
@@ -34,7 +34,7 @@ function PropertyPageHeader({
   const [condition, setCondition] = useState();
   const [minMileage, setMinMileage] = useState();
   const [maxMileage, setMaxMileage] = useState();
-  const [make, setMake] = useState({});
+  const [make, setMake] = useState();
   const [model, setModel] = useState();
 
   const [otherPrice, setOtherPrice] = useState({
@@ -59,8 +59,8 @@ function PropertyPageHeader({
   });
   const [otherLength, setOtherLength] = useState(false);
 
-  const [minYear, setMinYear] = useState({});
-  const [maxYear, setMaxYear] = useState({});
+  const [minYear, setMinYear] = useState();
+  const [maxYear, setMaxYear] = useState();
 
   const [minLength, setMinLength] = useState();
   const [maxLength, setMaxLength] = useState();
@@ -196,8 +196,8 @@ function PropertyPageHeader({
         max_mileage: maxMileage,
         min_price: minPrice,
         max_price: maxPrice,
-        make: make,
-        model: model,
+        // make: make,
+        // model: model,
         country: country,
         state: state,
         city: city,
@@ -290,48 +290,45 @@ function PropertyPageHeader({
   const handleChange = (address) => {
     setAddress(address);
     setLocation(address);
+    if (address === "") {
+      setCountry();
+      setState();
+      setCity();
+      setZip();
+    }
   };
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(results[0].formatted_address);
-      setLocation(results[0].formatted_address);
+      setAddress(() => {
+        return results[0]?.formatted_address.split(",")[0] || "";
+      });
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(
-        cities[0] ? cities[0].long_name : cities[0] ? cities[0].short_name : ""
-      );
+      setCity(() => {
+        return cities[0]?.long_name || "";
+      });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(
-        states[0] ? states[0].long_name : states[0] ? states[0].short_name : ""
-      );
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(
-        countries[0].long_name
-          ? countries[0].long_name
-          : countries[0].short_name
-      );
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip(
-        zipcodes[0]
-          ? zipcodes[0].long_name
-          : zipcodes[0]
-            ? zipcodes[0].short_name
-            : ""
-      );
+      setZip(() => {
+        return zipcodes[0]?.long_name || "";
+      });
     });
   };
 
@@ -343,7 +340,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -364,7 +360,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -399,6 +398,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -656,12 +656,65 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+                  >
+                    {({
+                      getInputProps,
+                      suggestions,
+                      getSuggestionItemProps,
+                      loading,
+                    }) => (
+                      <div className="w-100">
+                        <input
+                          {...getInputProps({
+                            placeholder: "Country, State, City, Postal Code",
+                            className: "searchBar",
+                          })}
+                          required
+                        />
+                        {suggestions && suggestions.length > 0 && (
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
+                            {loading && <div>Loading...</div>}
+                            {suggestions.map((suggestion, index) => {
+                              const className = suggestion.active
+                                ? "suggestion-item--active"
+                                : "suggestion-item";
+                              // inline style for demonstration purpose
+                              const style = suggestion.active
+                                ? {
+                                  backgroundColor: "#fafafa",
+                                  cursor: "pointer",
+                                  color: "black",
+                                }
+                                : {
+                                  backgroundColor: "#ffffff",
+                                  cursor: "pointer",
+                                  color: "black",
+                                };
+                              return (
+                                <div
+                                  key={index}
+                                  {...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style,
+                                  })}
+                                >
+                                  <span>{suggestion.description}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </PlacesAutocomplete>
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                  <input
-                    type="text"
-                    placeholder="Enter location to search"
-                    className="searchBar"
-                  />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -977,7 +1030,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -998,7 +1050,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -1033,6 +1088,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1162,7 +1218,7 @@ function PropertyPageHeader({
                   }}
                   className=" RealButton "
                 >
-                  <option>Makes</option>
+                  <option value="">Makes</option>
                   {yachtBuilder.map((item, index) => (
                     <option key={index} value={index}>
                       {item}
@@ -1332,7 +1388,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -1353,7 +1408,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -1388,6 +1446,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1536,7 +1595,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.auctions} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -1557,7 +1616,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -1578,7 +1636,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -1613,6 +1674,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1761,7 +1823,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.auctions} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -1782,7 +1844,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -1803,7 +1864,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -1838,6 +1902,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -1986,7 +2051,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.auctions} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -2007,7 +2072,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -2028,7 +2092,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -2063,6 +2130,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -2211,7 +2279,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.auctions} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -2232,7 +2300,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -2253,7 +2320,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -2288,6 +2358,7 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -2436,7 +2507,7 @@ function PropertyPageHeader({
                 }}
                 className="resultText"
               >
-                9,000+ results
+                {resultLength.auctions} Results
               </Col>
               <Col className="d-flex justify-content-center">
                 <button className="mapButton" onClick={toggleMap}>
@@ -2457,7 +2528,6 @@ function PropertyPageHeader({
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                   <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
@@ -2478,7 +2548,10 @@ function PropertyPageHeader({
                           required
                         />
                         {suggestions && suggestions.length > 0 && (
-                          <div className="autocomplete-dropdown-container">
+                          <div
+                            className="autocomplete-dropdown-container"
+                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
+                          >
                             {loading && <div>Loading...</div>}
                             {suggestions.map((suggestion, index) => {
                               const className = suggestion.active
@@ -2513,12 +2586,15 @@ function PropertyPageHeader({
                       </div>
                     )}
                   </PlacesAutocomplete>
+                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
                   onChange={(e) => {
-                    setAuctionType({ realEstate: e.target.value });
+                    setAuctionType({
+                      realEstate: e.target.value,
+                    });
                   }}
                   className=" RealButton "
                 >
@@ -2543,14 +2619,8 @@ function PropertyPageHeader({
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getPrice.length > 0) {
-                        setMinPrice((prevState) => ({
-                          ...prevState.realEstate,
-                          realEstate: getPrice[0].min_price,
-                        }));
-                        setMaxPrice((prevState) => ({
-                          ...prevState.realEstate,
-                          realEstate: getPrice[0].max_price,
-                        }));
+                        setMinPrice({ realEstate: getPrice[0].min_price });
+                        setMaxPrice({ realEstate: getPrice[0].max_price });
                       } else {
                         setMinPrice();
                         setMaxPrice();
@@ -2742,19 +2812,6 @@ function PropertyPageHeader({
                   ))}
                 </Form.Select>
               </Col>
-              {/* <Col className="d-flex justify-content-center">
-                <Form.Select
-                  style={{ width: "150px" }}
-                  className=" RealButton "
-                >
-                  <option>More Filter</option>
-                  <option href="#">Bedrooms</option>
-                  <option href="#">Bathrooms</option>
-                  <option href="#">Area</option>
-                  <option href="#">Year Built</option>
-                  <option href="#">Garage</option>
-                </Form.Select>
-              </Col> */}
               <Col className="d-flex justify-content-center">
                 <button
                   onClick={() => getFilter("real-estate")}

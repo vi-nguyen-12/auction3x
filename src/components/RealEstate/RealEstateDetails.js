@@ -90,7 +90,7 @@ function RealEstateDetails({
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
       setAddress(() => {
-        return results[0].formatted_address.split(",")[0];
+        return results[0]?.formatted_address.split(",")[0] || "";
       });
 
       let cities = results[0].address_components.filter((item) => {
@@ -120,10 +120,10 @@ function RealEstateDetails({
       });
 
       setLat(() => {
-        return results[0].geometry.location.lat();
+        return results[0]?.geometry.location.lat() || "";
       });
       setLng(() => {
-        return results[0].geometry.location.lng();
+        return results[0]?.geometry.location.lng() || "";
       });
     });
   };

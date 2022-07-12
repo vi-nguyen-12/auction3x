@@ -51,7 +51,7 @@ const RealEstate = (props) => {
         <div className="sell-real-estate">
           <div className="content">
             <h1 style={{ marginLeft: "60px", fontFamily: "Josefinslab" }}>
-              Sell Real Estate <br /> on Auction 3
+              Buy Real Estate <br /> on Auction3x
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of

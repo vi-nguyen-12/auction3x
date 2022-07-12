@@ -57,7 +57,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
       />
       <Work windowSize={windowSize} />
       <RealEstate />
-      <About />
+      <About toggleSignIn={toggleSignIn} />
     </>
   );
 };
