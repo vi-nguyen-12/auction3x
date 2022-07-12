@@ -854,6 +854,7 @@ const Header = ({
                       }}
                       onClick={() => {
                         toggleOpen();
+                        history.push("/Auctions");
                       }}
                     >
                       BUY

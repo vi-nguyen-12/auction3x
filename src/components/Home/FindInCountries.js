@@ -43,7 +43,10 @@ const FindInCountries = (props) => {
                   src={Austin}
                   alt="Austin"
                 />
-                <span>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => history.push("/Auctions/Austin")}
+                >
                   <h2>Austin</h2>
                   <p>12 Properties</p>
                 </span>
@@ -57,7 +60,10 @@ const FindInCountries = (props) => {
                   src={Houston}
                   alt=""
                 />
-                <span>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => history.push("/Auctions/Houston")}
+                >
                   <h2>Houston</h2>
                   <p>23 Properties</p>
                 </span>
@@ -73,7 +79,10 @@ const FindInCountries = (props) => {
                   src={Dallas}
                   alt=""
                 />
-                <span>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => history.push("/Auctions/Dallas")}
+                >
                   <h2>Dallas</h2>
                   <p>18 Properties</p>
                 </span>
@@ -87,7 +96,10 @@ const FindInCountries = (props) => {
                   src={SanAntonio}
                   alt=""
                 />
-                <span>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => history.push("/Auctions/SanAntonio")}
+                >
                   <h2>San Antonio</h2>
                   <p>33 Properties</p>
                 </span>
@@ -96,57 +108,6 @@ const FindInCountries = (props) => {
           </Row>
         </Row>
       </Container>
-
-      {/* <div className="mt-5 pt-5" style={{ background: "#f8f8f8", height:"95rem" }}>
- <Col md={10} className="m-auto pt-5">
-        <Row>
-          <Col md={4}>
-            <div className="circularCard">
-              <img
-                src="/images/feature.png"
-                style={{ height: 400 }}
-                alt=""
-                className="img-fluid"
-              />
-            </div>
-          </Col>
-          <Col md={8}>
-            <div className="circularCard">
-              <img
-                src="/images/Masterfully-Conceptual-Design-of-Emirates-Hills-Luxury-Mansion-in-Dubai-1 1.png"
-                style={{ height: 400 }}
-                alt=""
-                className="img-fluid"
-              />
-            </div>
-          </Col>
-        </Row>
-      </Col>
-      <Col md={10} className="m-auto pt-5">
-        <Row>
-          <Col md={8}>
-            <div className="circularCard">
-              <img
-                src="https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGJ1aWxkaW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                style={{ height: 400 }}
-                className="img-fluid"
-                alt=""
-              />
-            </div>
-          </Col>
-          <Col md={4}>
-            <div className="circularCard">
-              <img
-                src="https://images.unsplash.com/photo-1464938050520-ef2270bb8ce8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGJ1aWxkaW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                style={{ height: 400 }}
-                className="img-fluid"
-                alt=""
-              />
-            </div>
-          </Col>
-        </Row>
-      </Col>
- </div> */}
     </>
   );
 };

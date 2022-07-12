@@ -278,6 +278,17 @@ const authService = {
     );
   },
 
+  getBuyerApprovedAuctions(id) {
+    return axios.get(
+      apiUrl + `/api/users/${id}/buyer/auctions?status=success`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
   buyerApprovedAuctions(id) {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions?status=success`);
   },

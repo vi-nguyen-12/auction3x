@@ -47,7 +47,7 @@ h3 {
   height: 50px;
   background-color: #ffffff;
   border: none;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   /* display: flex;
   flex-direction: column; */
 }
@@ -515,7 +515,7 @@ h3 {
 }
 
 .notifi-drop-down {
-  display: none;
+  display: block;
   position: absolute;
   width: 250px;
   height: 300px;

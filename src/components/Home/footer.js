@@ -57,7 +57,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
             </h5>
             <ul style={{ paddingLeft: windowSize < 800 && "1.4rem" }}>
               <li className="list-unstyled">
-                <a href="#!">Buy</a>
+                <a href="/Auctions">Buy</a>
               </li>
               <li className="list-unstyled">
                 <a

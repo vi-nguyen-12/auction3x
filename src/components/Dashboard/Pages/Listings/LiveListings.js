@@ -60,10 +60,8 @@ function LiveListings({ windowSize }) {
                   <td>{index + 1}</td>
                   <td>{listing._id}</td>
                   <td>
-                    {listing.type === "real-estate"
-                      ? listing.details.property_address
-                          .formatted_street_address
-                      : listing.details.property_address}
+                    {listing.details.property_address
+                      ?.formatted_street_address || ""}
                     <div
                       style={{
                         width: "100%",

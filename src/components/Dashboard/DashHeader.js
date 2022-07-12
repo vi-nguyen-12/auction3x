@@ -35,13 +35,13 @@ function DashHeader({ location, windowSize }) {
           <Col>
             <div className="search">
               <Button
-                onMouseEnter={() => setNotifi(true)}
+                onClick={() => setNotifi(!notifi)}
                 onMouseLeave={() => setNotifi(false)}
                 className="bell"
               >
                 <BsBellFill color="#737b8b" size={23} />
               </Button>
-              <div className="notification">3</div>
+              <div className="notification">0</div>
               <div
                 onMouseEnter={() => setNotifi(true)}
                 onMouseLeave={() => setNotifi(false)}
@@ -91,7 +91,11 @@ function DashHeader({ location, windowSize }) {
           <Row style={{ marginBottom: "30px", width: "100%" }}>
             <Col>
               <div className="search" style={{ justifyContent: "center" }}>
-                <Button className="bell">
+                <Button
+                  onClick={() => setNotifi(!notifi)}
+                  onMouseLeave={() => setNotifi(false)}
+                  className="bell"
+                >
                   <BsBellFill color="#737b8b" size={23} />
                 </Button>
                 <div
@@ -102,18 +106,48 @@ function DashHeader({ location, windowSize }) {
                     marginRight: "0",
                   }}
                 >
-                  3
+                  0
                 </div>
                 <div
-                  style={{
-                    position: "absolute",
-                    width: "100px",
-                    height: "100px",
-                    background: "white",
-                  }}
+                  onMouseEnter={() => setNotifi(true)}
+                  onMouseLeave={() => setNotifi(false)}
+                  style={{ display: notifi ? "block" : "none" }}
+                  // style={{
+                  //   position: "absolute",
+                  //   width: "100px",
+                  //   height: "100px",
+                  //   background: "white",
+                  // }}
                   className="notifi-drop-down"
                 >
-                  <header>notification</header>
+                  <div className="notifi-drop-down-content">
+                    <header
+                      style={{
+                        width: "100%",
+                        height: "40px",
+                        background: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "10px 0",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Notification
+                    </header>
+                    <div
+                      style={{
+                        width: "100%",
+                        background: "#e8eff2",
+                        height: "260px",
+                        overflowY: "scroll",
+                      }}
+                      className="notifi-drop-down-body"
+                    >
+                      <div className="notifi-dropdown-item">Something here</div>
+                    </div>
+                  </div>
                 </div>
                 <Button
                   onClick={() => history.push("/Dashboard/Messaging")}

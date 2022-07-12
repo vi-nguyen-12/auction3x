@@ -6,7 +6,9 @@ import NumberFormat from "react-number-format";
 
 function PendingAuctions({ windowSize }) {
   const user = useSelector((state) => state.user);
-  const [PendingAuctions, setPendingAuctions] = useState([]);
+  const [pendingAuctions, setPendingAuctions] = useState([]);
+  const [approvedAuctions, setApprovedAuctions] = useState([]);
+  const [allAuctions, setAllAuctions] = useState([]);
   const [questionair, setQuestionair] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [showQuestionair, setShowQuestionair] = useState(false);
@@ -16,17 +18,22 @@ function PendingAuctions({ windowSize }) {
 
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
-      authService.getBuyerPendingAuctions(user._id).then((res) => {
-        setPendingAuctions(
-          res.data.filter(
-            (auction) =>
-              new Date().toISOString() < auction.auctionId?.auctionEndDate
-          )
-        );
+      await authService.getBuyerPendingAuctions(user._id).then((res) => {
+        setPendingAuctions(res.data);
+      });
+
+      await authService.getBuyerApprovedAuctions(user._id).then((res) => {
+        setApprovedAuctions(res.data);
       });
     };
     getBuyerPendingAuctions();
   }, []);
+
+  useEffect(() => {
+    if (pendingAuctions && approvedAuctions) {
+      setAllAuctions([...pendingAuctions, ...approvedAuctions]);
+    }
+  }, [pendingAuctions, approvedAuctions]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -59,8 +66,8 @@ function PendingAuctions({ windowSize }) {
               <th>View Auction</th>
             </tr>
           </thead>
-          {PendingAuctions.length > 0 ? (
-            PendingAuctions.map((auction, index) => (
+          {allAuctions.length > 0 ? (
+            allAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
