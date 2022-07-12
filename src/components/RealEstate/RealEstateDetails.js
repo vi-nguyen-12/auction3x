@@ -264,15 +264,15 @@ function RealEstateDetails({
                           : "suggestion-item";
                         const style = suggestion.active
                           ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
                           : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
                         return (
                           <div
                             key={index}
@@ -514,7 +514,7 @@ function RealEstateDetails({
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
+              Total Market Value <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
               thousandSeparator={true}

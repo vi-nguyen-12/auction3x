@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useForm } from "react-hook-form";
 import "../../styles/buyer.css";
+import NumberFormat from "react-number-format";
 
 function AddFund() {
   const { register, handleSubmit } = useForm();
@@ -34,6 +35,7 @@ function AddFund() {
   useEffect(() => {
     authService.getRegistStatus().then((res) => {
       setRegisteredAuctions(res.data);
+      console.log(res.data);
     });
   }, []);
 
@@ -108,11 +110,17 @@ function AddFund() {
           <Row className="mb-3">
             <Col>
               <label style={{ color: "black" }}>Fund Amount</label>
-              <input
-                type="number"
-                min="0"
-                name="fund"
+              <NumberFormat
+                thousandSeparator={true}
+                prefix="$"
+                // value={totalValue}
+                allowNegative={false}
                 className="form-control"
+                // onValueChange={(values) => {
+                //   const { value } = values;
+                //   setTotalValue(value);
+                // }}
+                name="fund"
                 placeholder="Amount"
                 required
               />
@@ -174,6 +182,7 @@ function AddFund() {
                 name="form"
                 className="form-control"
                 placeholder="Form"
+                {...register("document", { onChange: onChange1 })}
               />
             </Col>
             <Col style={{ padding: "0" }}>

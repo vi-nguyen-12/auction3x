@@ -127,19 +127,17 @@ function RealEstatePage({
         });
         setImg(imageUrl);
       }
-      setCenters(
-        auctions.map((item) => {
-          return {
-            address: item.property.details.address,
-            lat: item.property.details.property_address.lat,
-            lng: item.property.details.property_address.lng,
-          };
-        })
-      );
-    };
+      setCenters(auctions.map(item => {
+        return {
+          address: item.property.details.address,
+          lat: item.property.details.property_address.lat,
+          lng: item.property.details.property_address.lng,
+          id: item._id
+        }
+      }))
+    }
     getAuctions();
   }, []);
-
   useEffect(() => {
     if (filter) {
       setLoader(true);

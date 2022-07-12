@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { useHistory } from "react-router-dom";
 import { Row, Col, Modal, Image } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import RealEstatePage from "../RealEstate/RealEstatePage";
@@ -12,6 +12,7 @@ import Auctions from "./Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
+// import Auction from "../../../../auction10x-backend/model/Auction";
 
 const mapStyles = {
   height: "60vh",
@@ -51,6 +52,11 @@ const PropertyPages = ({
   const toggleImgCar = () => setShowImgCar(!showImgCar);
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
+  const history = useHistory();
+  const onMarkerClick = id => (e) => {
+    history.push(`/DisplayAuctions/${id}`);
+  }
+
 
   return (
     <>
@@ -142,6 +148,7 @@ const PropertyPages = ({
         />
       ) : null}
       {/* Map Button */}
+
       <Modal
         backdrop="static"
         keyboard={false}
@@ -151,40 +158,52 @@ const PropertyPages = ({
         centered
       >
         <Modal.Body>
-          <div
-            style={{
-              position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton className="modal-close" onClick={toggleMap} />
-          </div>
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            style={{ height: "800px" }}
-            center={centers[0]}
-            zoom={12}
-          >
-            {centers.map((marker, index) => {
-              return (
-                <Marker
-                  key={index}
-                  position={{ lat: marker.lat, lng: marker.lng }}
-                />
-              );
-            })}
-          </GoogleMap>
-          {/* {centers.map((marker, index) => {
+          <CloseButton className="modal-close" onClick={toggleMap} style={{ display: "flex", justifyContent: "end" }} />
+          {centers.length > 0 ? (
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  top: windowSize < 600 ? "0" : "25px",
+                  right: windowSize < 600 ? "0" : "25px",
+                  zIndex: "999",
+                }}
+              >
+              </div>
+              <GoogleMap
+                mapContainerStyle={mapStyles}
+                style={{ height: "800px" }}
+                center={centers[0]}
+                zoom={12}
+              >
+                {centers.map((marker, index) => {
+                  return (
+                    <Marker
+                      key={index}
+                      position={{ lat: marker.lat, lng: marker.lng }}
+                      onClick={onMarkerClick(marker.id)}
+                    />
+                  );
+                })}
+              </GoogleMap>
+              {/* {centers.map((marker, index) => {
             return (
               <span>
                 <h2>{marker.address}</h2>
               </span>
             )
           })} */}
+            </>
+          ) : (
+            <Row style={{ height: "50vh" }}>
+              <Col className="d-flex justify-content-center align-items-center">
+                <h1>No Auctions!</h1>
+              </Col>
+            </Row>
+          )}
         </Modal.Body>
       </Modal>
+
       {/* Gallery Button */}
       {path === "/cars" ? (
         <Modal
