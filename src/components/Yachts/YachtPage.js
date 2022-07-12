@@ -122,7 +122,7 @@ function YachtPage({
           address: item.property.details.address,
           lat: item.property.details.property_address.lat,
           lng: item.property.details.property_address.lng,
-
+          id: item._id
         }
       }))
       console.log(auctions)

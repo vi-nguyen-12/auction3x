@@ -99,24 +99,24 @@ function RealEstateDetails({
         );
       });
       setCity(() => {
-        return cities[0].long_name;
+        return cities[0]?.long_name || "";
       });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(states[0].long_name);
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(countries[0].long_name);
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
       setZip(() => {
-        return zipcodes[0].long_name;
+        return zipcodes[0]?.long_name || "";
       });
 
       setLat(() => {
@@ -264,15 +264,15 @@ function RealEstateDetails({
                           : "suggestion-item";
                         const style = suggestion.active
                           ? {
-                              backgroundColor: "#fafafa",
-                              cursor: "pointer",
-                              color: "black",
-                            }
+                            backgroundColor: "#fafafa",
+                            cursor: "pointer",
+                            color: "black",
+                          }
                           : {
-                              backgroundColor: "#ffffff",
-                              cursor: "pointer",
-                              color: "black",
-                            };
+                            backgroundColor: "#ffffff",
+                            cursor: "pointer",
+                            color: "black",
+                          };
                         return (
                           <div
                             key={index}
@@ -514,7 +514,7 @@ function RealEstateDetails({
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              Total Maket Value <span style={{ color: "#ff0000" }}>*</span>
+              Total Market Value <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
               thousandSeparator={true}
