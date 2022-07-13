@@ -665,6 +665,10 @@ const authService = {
   subscribe(data) {
     return axios.post(apiUrl + `/api/subscriptions`, { email: data });
   },
+
+  getPageContent(name) {
+    return axios.get(apiUrl + `/api/pageContents?name=${name}`);
+  },
 };
 
 export default authService;

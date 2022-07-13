@@ -110,6 +110,9 @@ function CarPage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      if (!filter) {
+        setResultLength({ car: auctions.length });
+      }
       if (auctions.length > 0) {
         const imageUrl = auctions.map((image) => {
           for (let i = 0; i < image.property.images.length; i++) {
@@ -118,16 +121,17 @@ function CarPage({
         });
         setImgCar(imageUrl);
       }
-      setCenters(auctions.map(item => {
-        return {
-          address: item.property.details.address,
-          lat: item.property.details.property_address.lat,
-          lng: item.property.details.property_address.lng,
-          id: item._id
-        }
-      }))
-      console.log(auctions)
-    }
+      setCenters(
+        auctions.map((item) => {
+          return {
+            address: item.property.details.address,
+            lat: item.property.details.property_address.lat,
+            lng: item.property.details.property_address.lng,
+            id: item._id,
+          };
+        })
+      );
+    };
     getAuctions();
   }, []);
 
@@ -142,11 +146,10 @@ function CarPage({
           setLoader(false);
         } else {
           setAuctions([]);
+          setResultLength({ car: 0 });
           setLoader(false);
         }
       });
-    } else {
-      setResultLength({ car: auctions.length });
     }
   }, [filter]);
 

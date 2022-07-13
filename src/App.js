@@ -283,7 +283,7 @@ function App() {
           centered
           show={showSignIn}
           onHide={toggleSignIn}
-        // contentclassname="custom-modal-title"
+          // contentclassname="custom-modal-title"
         >
           <div className="sign-In"></div>
         </Modal>
@@ -527,7 +527,7 @@ function App() {
             )}
 
             {user._id && (
-              <Route exact path="/Dashboard/Auctions/PendingAuctions">
+              <Route exact path="/Dashboard/Auctions/BuyerApproval">
                 <Dashboard
                   toggleShow={toggleShow}
                   colorChange={colorChange}

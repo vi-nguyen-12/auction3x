@@ -43,6 +43,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         featureAuctions={featureAuctions}
         onGoingAuctions={onGoingAuctions}
         upcomingAuctions={upcomingAuctions}
+        windowSize={windowSize}
       />
       <Featured
         toggleSignIn={toggleSignIn}

@@ -49,7 +49,7 @@ function WinAuctions({ windowSize }) {
               <th>View</th>
             </tr>
           </thead>
-          {winAuctions.length > 0 &&
+          {winAuctions.length > 0 ? (
             winAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
@@ -117,7 +117,14 @@ function WinAuctions({ windowSize }) {
                   </td>
                 </tr>
               </tbody>
-            ))}
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={12}>No Won Auctions</td>
+              </tr>
+            </tbody>
+          )}
         </Table>
         <Modal size="lg" show={showPic} onHide={toggleShowPic} centered>
           <Modal.Header closeButton>

@@ -95,7 +95,6 @@ function Auctions({
   setResultLength,
   setCenters,
 }) {
-  console.log(filter);
   const params = useParams();
   const [loader, setLoader] = useState(false);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
@@ -127,6 +126,7 @@ function Auctions({
       };
       authService.propFilter(datas).then((res) => {
         setAllAuctions(res.data);
+        setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
     } else if (params.Country === "Houston") {
@@ -140,6 +140,7 @@ function Auctions({
       };
       authService.propFilter(datas).then((res) => {
         setAllAuctions(res.data);
+        setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
     } else if (params.Country === "Dallas") {
@@ -153,6 +154,7 @@ function Auctions({
       };
       authService.propFilter(datas).then((res) => {
         setAllAuctions(res.data);
+        setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
     } else if (params.Country === "SanAntonio") {
@@ -166,6 +168,7 @@ function Auctions({
       };
       authService.propFilter(datas).then((res) => {
         setAllAuctions(res.data);
+        setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
     } else {
@@ -184,25 +187,26 @@ function Auctions({
           setAllAuctions(res.data);
           setLoader(false);
         } else {
+          setResultLength({ auctions: 0 });
           setAllAuctions([]);
           setLoader(false);
         }
       });
-    } else {
-      setResultLength({ auctions: allAuctions.length });
     }
   }, [filter]);
 
   useEffect(() => {
     if (allAuctions) {
-      setCenters(allAuctions.map(item => {
-        return {
-          address: item.property.details.address,
-          lat: item.property.details.property_address.lat,
-          lng: item.property.details.property_address.lng,
-          id: item._id
-        }
-      }))
+      setCenters(
+        allAuctions.map((item) => {
+          return {
+            address: item.property.details.address,
+            lat: item.property.details.property_address.lat,
+            lng: item.property.details.property_address.lng,
+            id: item._id,
+          };
+        })
+      );
     }
   }, [allAuctions]);
 

@@ -94,10 +94,8 @@ function RealEstatePage({
   setResultLength,
   setCenters,
 }) {
-  console.log(filter);
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
-
   useEffect(async () => {
     toggleChange();
     let auctions = [];
@@ -119,6 +117,9 @@ function RealEstatePage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      if (!filter) {
+        setResultLength({ realEstate: auctions.length });
+      }
       if (auctions.length > 0) {
         const imageUrl = auctions.map((image) => {
           for (let i = 0; i < image.property.images.length; i++) {
@@ -127,17 +128,20 @@ function RealEstatePage({
         });
         setImg(imageUrl);
       }
-      setCenters(auctions.map(item => {
-        return {
-          address: item.property.details.address,
-          lat: item.property.details.property_address.lat,
-          lng: item.property.details.property_address.lng,
-          id: item._id
-        }
-      }))
-    }
+      setCenters(
+        auctions.map((item) => {
+          return {
+            address: item.property.details.address,
+            lat: item.property.details.property_address.lat,
+            lng: item.property.details.property_address.lng,
+            id: item._id,
+          };
+        })
+      );
+    };
     getAuctions();
   }, []);
+
   useEffect(() => {
     if (filter) {
       setLoader(true);
@@ -150,12 +154,11 @@ function RealEstatePage({
           setAuctions(realEstate);
           setLoader(false);
         } else {
+          setResultLength({ realEstate: 0 });
           setAuctions([]);
           setLoader(false);
         }
       });
-    } else {
-      setResultLength({ realEstate: auctions.length });
     }
   }, [filter]);
 

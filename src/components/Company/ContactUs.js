@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contact from "../../../src/images/contactImg.png";
 import CompanyHeader from "./CompanyHeader";
@@ -6,13 +6,32 @@ import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import PhoneInput from "react-phone-input-2";
+import styled from "styled-components";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import parse from "html-react-parser";
+
+const Content = styled.div`
+  * {
+    margin: 0;
+  }
+`;
 
 function ContactUs({ windowSize }) {
   const location = useLocation();
   const { register, handleSubmit } = useForm();
   const [phone, setPhone] = useState();
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    authService.getPageContent("contact_us").then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setText(res.data[0]?.htmlText || "");
+      }
+    });
+  }, []);
 
   const onSubmit = async (data) => {
     const datas = {
@@ -57,15 +76,7 @@ function ContactUs({ windowSize }) {
             <Row>
               <Col style={{ margin: "20px 0" }}>
                 <h1 style={{ fontSize: "30px" }}>Contact Us</h1>
-                <p>+1-234-567-8910</p>
-                <p>+1-854-967-2310</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <h1 style={{ fontSize: "30px" }}>Email</h1>
-                <p>info@auction3x.com</p>
-                <p>support@auction3x.com</p>
+                <Content>{parse(text)}</Content>
               </Col>
             </Row>
           </Col>
