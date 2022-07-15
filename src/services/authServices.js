@@ -2,8 +2,10 @@ import axios from "axios";
 
 const apiUrl =
   process.env.REACT_APP_NODE_ENV === "production"
-    ? process.env.REACT_APP_API_URL
-    : "http://localhost:5000";
+    ? process.env.REACT_APP_PROD_API_URL
+    : process.env.REACT_APP_NODE_ENV === "test"
+    ? process.env.REACT_APP_TEST_API_URL
+    : process.env.REACT_APP_DEV_API_URL;
 const auth_token = localStorage.getItem("token");
 
 const authService = {
@@ -664,6 +666,9 @@ const authService = {
 
   subscribe(data) {
     return axios.post(apiUrl + `/api/subscriptions`, { email: data });
+  },
+  getPageContents(params) {
+    return axios.get(apiUrl + `/api/pageContents`, { params });
   },
 };
 
