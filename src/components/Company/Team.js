@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CompanyHeader from "./CompanyHeader";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import jay from "../../images/jay.jpg";
 import TeamCard from "../Cards/TeamCard";
-import team_member from "../Home/team_data";
 import authService from "../../services/authServices";
 
 function Team({ windowSize }) {
@@ -15,7 +13,6 @@ function Team({ windowSize }) {
       if (res.data.error) {
         alert(res.data.error);
       } else {
-        console.log(res.data);
         setTeam(res.data);
         setList(res.data);
       }
@@ -33,7 +30,7 @@ function Team({ windowSize }) {
   return (
     <>
       <CompanyHeader location={"Team"} />
-      <Container fluid>
+      <Container className="mb-5" fluid>
         <Row style={{ padding: windowSize > 800 ? "50px 180px" : "50px 10px" }}>
           <Col>
             <p>
