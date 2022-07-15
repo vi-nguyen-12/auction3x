@@ -92,7 +92,7 @@ function Dashboard({
             <Route exact path="/Dashboard/Auctions/BidAuctions">
               <BidAuctions windowSize={windowSize} />
             </Route>
-            <Route exact path="/Dashboard/Auctions/PendingAuctions">
+            <Route exact path="/Dashboard/Auctions/BuyerApproval">
               <PendingAuctions windowSize={windowSize} />
             </Route>
             <Route exact path="/Dashboard/Auctions/SavedAuctions">
@@ -142,7 +142,11 @@ function Dashboard({
               zIndex: "999",
             }}
           >
-            <CloseButton className="modal-close" style={{fontSize:"1.3rem"}} onClick={toggleShowModal} />
+            <CloseButton
+              className="modal-close"
+              style={{ fontSize: "1.3rem" }}
+              onClick={toggleShowModal}
+            />
           </div>
           <Row>
             <Col
@@ -180,7 +184,7 @@ function Dashboard({
                     </p>
                     <p
                       onClick={() => {
-                        history.push("/Dashboard/Auctions/PendingAuctions");
+                        history.push("/Dashboard/Auctions/BuyerApproval");
                         window.location.reload();
                       }}
                     >

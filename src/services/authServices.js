@@ -670,6 +670,14 @@ const authService = {
   getPageContents(params) {
     return axios.get(apiUrl + `/api/pageContents`, { params });
   },
+
+  getPageContent(name) {
+    return axios.get(apiUrl + `/api/pageContents?name=${name}`);
+  },
+
+  getTeam() {
+    return axios.get(apiUrl + `/api/teamMembers`);
+  },
 };
 
 export default authService;

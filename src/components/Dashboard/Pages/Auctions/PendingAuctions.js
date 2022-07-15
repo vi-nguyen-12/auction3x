@@ -38,7 +38,7 @@ function PendingAuctions({ windowSize }) {
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
-        <h1>Pending Auctions</h1>
+        <h1>Buyer Approval</h1>
         <Table
           striped
           borderless
@@ -197,7 +197,7 @@ function PendingAuctions({ windowSize }) {
           ) : (
             <tbody>
               <tr>
-                <td colSpan={3}>No Pending Auctions</td>
+                <td colSpan={12}>No Pending Approval</td>
               </tr>
             </tbody>
           )}

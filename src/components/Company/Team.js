@@ -1,24 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CompanyHeader from "./CompanyHeader";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import jay from "../../images/jay.jpg";
 import TeamCard from "../Cards/TeamCard";
-import team_member from "../Home/team_data";
+import authService from "../../services/authServices";
 
 function Team({ windowSize }) {
-  const [list, setList] = useState(team_member);
+  const [team, setTeam] = useState([]);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    authService.getTeam().then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setTeam(res.data);
+        setList(res.data);
+      }
+    });
+  }, []);
+
   const onClick = (title) => () => {
     if (title === "All") {
-      setList(team_member);
+      setList(team);
     } else {
-      setList(team_member.filter((item) => item.title === title));
+      setList(team.filter((item) => item.department === title));
     }
   };
 
   return (
     <>
       <CompanyHeader location={"Team"} />
-      <Container fluid>
+      <Container className="mb-5" fluid>
         <Row style={{ padding: windowSize > 800 ? "50px 180px" : "50px 10px" }}>
           <Col>
             <p>
@@ -72,7 +84,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Founder")}
+              onClick={onClick("founder")}
             >
               Founder
             </Button>
@@ -88,7 +100,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Operation")}
+              onClick={onClick("operation")}
             >
               Operation
             </Button>
@@ -104,7 +116,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Marketing")}
+              onClick={onClick("marketing")}
             >
               Marketing
             </Button>
@@ -120,7 +132,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Research")}
+              onClick={onClick("research")}
             >
               Research
             </Button>
@@ -136,7 +148,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Technology")}
+              onClick={onClick("technology")}
             >
               Technology
             </Button>
@@ -152,7 +164,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Business")}
+              onClick={onClick("business")}
             >
               Business
             </Button>
@@ -168,7 +180,7 @@ function Team({ windowSize }) {
                 width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
-              onClick={onClick("Legal")}
+              onClick={onClick("legal")}
             >
               Legal
             </Button>
@@ -238,24 +250,27 @@ function Team({ windowSize }) {
             alignContent: "center",
           }}
         >
-          {list.map((member, index) => (
-            <Col
-              className="ceo-card"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "20px",
-              }}
-              md={2}
-            >
-              <TeamCard
-                name={member.name}
-                location={member.location}
-                img={member.img}
-                linkedln={member.linkedin}
-              />
-            </Col>
-          ))}
+          {list.length > 0 &&
+            list.map((member, index) => (
+              <Col
+                key={index}
+                className="ceo-card"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "20px",
+                }}
+                md={2}
+              >
+                <TeamCard
+                  firstName={member.firstName}
+                  lastName={member.lastName}
+                  location={member.location}
+                  img={member.profileImage}
+                  linkedln={member.linkedln}
+                />
+              </Col>
+            ))}
         </Row>
       </Container>
     </>

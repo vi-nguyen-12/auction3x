@@ -151,7 +151,7 @@ function LiveListings({ windowSize }) {
           ) : (
             <tbody>
               <tr>
-                <td colSpan={10}>No Upcoming Listings</td>
+                <td colSpan={12}>No Upcoming Listings</td>
               </tr>
             </tbody>
           )}

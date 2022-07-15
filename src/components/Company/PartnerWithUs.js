@@ -8,11 +8,30 @@ import PhoneInput from "react-phone-input-2";
 import authService from "../../services/authServices";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import parse from "html-react-parser";
+import styled from "styled-components";
+
+const Content = styled.div`
+  * {
+    margin: 0;
+  }
+`;
 
 function PartnerWithUs({ windowSize }) {
   const location = useLocation();
   const [phone, setPhone] = useState();
   const { register, handleSubmit } = useForm();
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    authService.getPageContent("contact_us").then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setText(res.data[0]?.htmlText || "");
+      }
+    });
+  }, []);
 
   const onSubmit = async (data) => {
     const datas = {
@@ -58,15 +77,7 @@ function PartnerWithUs({ windowSize }) {
             <Row>
               <Col style={{ margin: "20px 0" }}>
                 <h1 style={{ fontSize: "30px" }}>Contact Us</h1>
-                <p>+1-234-567-8910</p>
-                <p>+1-854-967-2310</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <h1 style={{ fontSize: "30px" }}>Email</h1>
-                <p>info@auction3x.com</p>
-                <p>support@auction3x.com</p>
+                <Content>{parse(text)}</Content>
               </Col>
             </Row>
           </Col>

@@ -88,7 +88,7 @@ function SoldListings({ windowSize }) {
           ) : (
             <tbody>
               <tr>
-                <td colSpan={6}>No Sold Properties</td>
+                <td colSpan={12}>No Sold Properties</td>
               </tr>
             </tbody>
           )}

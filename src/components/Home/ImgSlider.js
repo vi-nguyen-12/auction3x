@@ -114,7 +114,12 @@ const BarGroup = styled.div`
   z-index: 10;
 `;
 
-const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
+const ImgSlider = ({
+  featureAuctions,
+  onGoingAuctions,
+  upcomingAuctions,
+  windowSize,
+}) => {
   const slider = useRef();
   const [Index, setIndex] = useState(0);
 
@@ -171,12 +176,22 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                     <img src={auction.property.images[0].url} alt="auction" />
                   </a>
                   <HomeBottom>
-                    <h2 style={{ fontSize: "50px", color: "white" }}>
+                    <h2
+                      style={{
+                        fontSize: windowSize < 600 ? "30px" : "50px",
+                        color: "white",
+                      }}
+                    >
                       The Best
                       <br />
                       Luxury Market
                     </h2>
-                    <span style={{ color: "white", fontSize: "20px" }}>
+                    <span
+                      style={{
+                        color: "white",
+                        fontSize: windowSize < 600 ? "18px" : "20px",
+                      }}
+                    >
                       {auction.property.type === "real-estate"
                         ? "Real Estate"
                         : auction.property.type === "car"
@@ -187,8 +202,8 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                         ? "Yacht"
                         : ""}{" "}
                       In {auction.property.details.property_address.city},
-                      {auction.property.details.property_address.state} UNITED
-                      STATES
+                      {auction.property.details.property_address.state}{" "}
+                      {auction.property.details.property_address.country}
                     </span>
                   </HomeBottom>
                 </Wrap>
@@ -216,16 +231,34 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                 <HomeBottom>
                   <h2>
                     <NumberFormat
-                      style={{ fontSize: "50px", color: "white" }}
+                      style={{
+                        fontSize: windowSize < 600 ? "30px" : "50px",
+                        color: "white",
+                      }}
                       value={item.startingBid}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
                     />
                   </h2>
-                  <span style={{ color: "white", fontSize: "20px" }}>
-                    HOUSE IN {item.property.details.property_address.city},
-                    {item.property.details.property_address.state} UNITED STATES
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                    }}
+                  >
+                    {item.property.type === "real-estate"
+                      ? "Real Estate"
+                      : item.property.type === "car"
+                      ? "Car"
+                      : item.property.type === "jet"
+                      ? "Jet"
+                      : item.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}{" "}
+                    In {item.property.details.property_address.city},
+                    {item.property.details.property_address.state}{" "}
+                    {item.property.details.property_address.country}
                   </span>
                 </HomeBottom>
               </Wrap>
@@ -257,16 +290,34 @@ const ImgSlider = ({ featureAuctions, onGoingAuctions, upcomingAuctions }) => {
                 <HomeBottom>
                   <h2>
                     <NumberFormat
-                      style={{ fontSize: "50px", color: "white" }}
+                      style={{
+                        fontSize: windowSize < 600 ? "30px" : "50px",
+                        color: "white",
+                      }}
                       value={item.startingBid}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
                     />
                   </h2>
-                  <span style={{ color: "white", fontSize: "20px" }}>
-                    HOUSE IN {item.property.details.property_address.city},
-                    {item.property.details.property_address.state} UNITED STATES
+                  <span
+                    style={{
+                      color: "white",
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                    }}
+                  >
+                    {item.property.type === "real-estate"
+                      ? "Real Estate"
+                      : item.property.type === "car"
+                      ? "Car"
+                      : item.property.type === "jet"
+                      ? "Jet"
+                      : item.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}{" "}
+                    In {item.property.details.property_address.city},
+                    {item.property.details.property_address.state}{" "}
+                    {item.property.details.property_address.country}
                   </span>
                 </HomeBottom>
               </Wrap>

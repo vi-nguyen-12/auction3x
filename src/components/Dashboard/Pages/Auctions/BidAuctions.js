@@ -48,108 +48,116 @@ function BidAuctions({ windowSize }) {
               <th>Bid</th>
             </tr>
           </thead>
-          {bidAuctions.map((auction, index) => (
-            <tbody key={index}>
-              <tr>
-                <td>{index + 1}</td>
-                <td>
-                  {auction._id}
-                  <div
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <img
-                      width="100px"
-                      height="50px"
-                      src={
-                        auction.property.images.length > 0
-                          ? auction.property.images[0].url
-                          : ""
-                      }
+          {bidAuctions.length > 0 ? (
+            bidAuctions.map((auction, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>
+                    {auction._id}
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <img
+                        width="100px"
+                        height="50px"
+                        src={
+                          auction.property.images.length > 0
+                            ? auction.property.images[0].url
+                            : ""
+                        }
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    {
+                      auction.property.details.property_address
+                        .formatted_street_address
+                    }
+                  </td>
+                  {new Date().toISOString() < auction.auctionEndDate ? (
+                    <td colSpan={2}>
+                      Ongoing
+                      <br />
+                      <span style={{ color: "green" }}>
+                        {new Date(auction.auctionEndDate).toLocaleDateString()}
+                      </span>
+                    </td>
+                  ) : (
+                    <td colSpan={2}>
+                      Ended
+                      <br />
+                      <span style={{ color: "red" }}>
+                        {new Date(auction.auctionEndDate).toLocaleDateString()}
+                      </span>
+                    </td>
+                  )}
+                  <td colSpan={2}>
+                    <NumberFormat
+                      value={auction.winner ? auction.winner.amount : 0}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
                     />
-                  </div>
-                </td>
-                <td>
-                  {
-                    auction.property.details.property_address
-                      .formatted_street_address
-                  }
-                </td>
-                {new Date().toISOString() < auction.auctionEndDate ? (
+                  </td>
                   <td colSpan={2}>
-                    Ongoing
-                    <br />
-                    <span style={{ color: "green" }}>
-                      {new Date(auction.auctionEndDate).toLocaleDateString()}
-                    </span>
+                    {" "}
+                    <NumberFormat
+                      value={auction.bids[auction.bids.length - 1].amount}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"$"}
+                    />
                   </td>
-                ) : (
-                  <td colSpan={2}>
-                    Ended
-                    <br />
-                    <span style={{ color: "red" }}>
-                      {new Date(auction.auctionEndDate).toLocaleDateString()}
-                    </span>
-                  </td>
-                )}
-                <td colSpan={2}>
-                  <NumberFormat
-                    value={auction.winner ? auction.winner.amount : 0}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </td>
-                <td colSpan={2}>
-                  {" "}
-                  <NumberFormat
-                    value={auction.bids[auction.bids.length - 1].amount}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </td>
-                <td>
-                  {auction.property.type === "real-estate"
-                    ? "Real Estate"
-                    : auction.property.type === "car"
-                    ? "Car"
-                    : auction.property.type === "jet"
-                    ? "Jet"
-                    : auction.property.type === "yacht"
-                    ? "Yacht"
-                    : ""}
-                </td>
-                {new Date().toISOString() < auction.auctionEndDate ? (
                   <td>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        window.open(`/DisplayAuctions/${auction._id}`);
-                      }}
-                    >
-                      Bid
-                    </Button>
+                    {auction.property.type === "real-estate"
+                      ? "Real Estate"
+                      : auction.property.type === "car"
+                      ? "Car"
+                      : auction.property.type === "jet"
+                      ? "Jet"
+                      : auction.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}
                   </td>
-                ) : (
-                  <td>
-                    <Button
-                      variant="primary"
-                      onClick={() => {
-                        window.open(`/DisplayAuctions/${auction._id}`);
-                      }}
-                    >
-                      View
-                    </Button>
-                  </td>
-                )}
+                  {new Date().toISOString() < auction.auctionEndDate ? (
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          window.open(`/DisplayAuctions/${auction._id}`);
+                        }}
+                      >
+                        Bid
+                      </Button>
+                    </td>
+                  ) : (
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          window.open(`/DisplayAuctions/${auction._id}`);
+                        }}
+                      >
+                        View
+                      </Button>
+                    </td>
+                  )}
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={12}>No Bid Auctions</td>
               </tr>
             </tbody>
-          ))}
+          )}
         </Table>
       </Row>
     </Container>

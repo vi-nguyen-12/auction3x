@@ -28,8 +28,8 @@ export const SidebarMenu = [
         path: "/Dashboard/Auctions/SavedAuctions",
       },
       {
-        name: "Pending Auctions",
-        path: "/Dashboard/Auctions/PendingAuctions",
+        name: "Buyer Approval",
+        path: "/Dashboard/Auctions/BuyerApproval",
       },
       {
         name: "Bid Auctions",

@@ -33,14 +33,14 @@ const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
       propType: "car",
     },
     {
-      icon: <IoIosBoat size={windowSize > 800 ? 40 : 25} />,
-      name: "Yacht",
-      propType: "yacht",
-    },
-    {
       icon: <IoAirplaneSharp size={windowSize > 800 ? 40 : 25} />,
       name: "Jet",
       propType: "jet",
+    },
+    {
+      icon: <IoIosBoat size={windowSize > 800 ? 40 : 25} />,
+      name: "Yacht",
+      propType: "yacht",
     },
   ];
 

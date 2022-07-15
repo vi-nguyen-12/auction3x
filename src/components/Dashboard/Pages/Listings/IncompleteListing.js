@@ -125,7 +125,7 @@ function IncompleteListing({ windowSize }) {
           ) : (
             <tbody>
               <tr>
-                <td colSpan="6">No Incomplete Listings</td>
+                <td colSpan={12}>No Incomplete Listings</td>
               </tr>
             </tbody>
           )}

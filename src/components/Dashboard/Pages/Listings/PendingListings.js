@@ -56,7 +56,7 @@ function PendingListings({ windowSize }) {
               <th>Last Updated</th>
             </tr>
           </thead>
-          {pendingListings.length > 0 &&
+          {pendingListings.length > 0 ? (
             pendingListings.map((auction, index) => (
               <tbody key={index}>
                 <tr>
@@ -113,7 +113,14 @@ function PendingListings({ windowSize }) {
                   <td>{new Date(auction.updatedAt).toLocaleString()}</td>
                 </tr>
               </tbody>
-            ))}
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={12}>No Pending Approval</td>
+              </tr>
+            </tbody>
+          )}
         </Table>
         <Modal size="lg" show={show} onHide={toggleShow} centered>
           <Modal.Header closeButton>
