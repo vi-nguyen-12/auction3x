@@ -321,7 +321,7 @@ const Header = ({
                       </button>
                     </div>
                   </div>
-                  {windowSize > 800 ? (
+                  <div className="dropdown">
                     <Button
                       className="headerNav"
                       style={{
@@ -331,7 +331,6 @@ const Header = ({
                         height: "47px",
                         display: "flex",
                         alignItems: "center",
-                        fontSize: "1.1rem",
                       }}
                       id={colors === "white" ? "hover" : ""}
                       // id="dropdown-basic-button"
@@ -339,54 +338,25 @@ const Header = ({
                       onMouseEnter={() => setShowWallet(true)}
                       onMouseLeave={() => setShowWallet(false)}
                     >
-                      <IoWallet size={20} />
-                      <NumberFormat
-                        style={{
-                          marginLeft: "10px",
-                        }}
-                        value={user.wallet}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                      {/* </Dropdown.Item> */}
+                      <IoWallet size={23} />
                     </Button>
-                  ) : (
-                    <div className="dropdown">
-                      <Button
-                        className="headerNav"
-                        style={{
-                          backgroundColor: "transparent",
-                          color: textColor,
-                          borderRadius: "0",
-                          height: "47px",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                        id={colors === "white" ? "hover" : ""}
-                        // id="dropdown-basic-button"
-                        title={<IoWallet size={30} />}
-                        onMouseEnter={() => setShowWallet(true)}
-                        onMouseLeave={() => setShowWallet(false)}
-                      >
-                        <IoWallet size={20} />
-                      </Button>
-                      <div className="dropdown-content">
-                        <button className="fw-bold">
-                          <NumberFormat
-                            style={{
-                              marginLeft: "10px",
-                            }}
-                            value={user.wallet}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"$"}
-                          />
-                        </button>
-                      </div>
+                    <div
+                      className="dropdown-content"
+                      style={{ marginLeft: "-40px" }}
+                    >
+                      <button className="fw-bold">
+                        <NumberFormat
+                          style={{
+                            marginLeft: "10px",
+                          }}
+                          value={user.wallet}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </button>
                     </div>
-                  )}
-
+                  </div>
                   <Button
                     className="headerNav"
                     style={{
@@ -403,9 +373,8 @@ const Header = ({
                       toggleOpen();
                     }}
                   >
-                    <FaBars size={20} />
+                    <FaBars size={23} />
                   </Button>
-
                   <Button
                     className="headerNav"
                     id={colors === "white" ? "hover" : ""}
@@ -417,7 +386,7 @@ const Header = ({
                       height: "47px",
                     }}
                   >
-                    <VscGlobe size={25} />
+                    <VscGlobe size={23} />
                   </Button>
                 </>
               ) : (
@@ -477,7 +446,7 @@ const Header = ({
                       toggleOpen();
                     }}
                   >
-                    <FaBars size={20} />
+                    <FaBars size={23} />
                   </Button>
 
                   <Button
@@ -493,7 +462,7 @@ const Header = ({
                       borderRadius: "0",
                     }}
                   >
-                    <VscGlobe size={25} />
+                    <VscGlobe size={23} />
                   </Button>
                 </>
               )}
@@ -559,7 +528,8 @@ const Header = ({
                     </button>
                   </div>
                 </div>
-                {windowSize > 800 ? (
+
+                <div className="dropdown">
                   <Button
                     className="headerNav"
                     style={{
@@ -571,57 +541,30 @@ const Header = ({
                       alignItems: "center",
                     }}
                     id={colors === "white" ? "hover" : ""}
+                    // id="dropdown-basic-button"
                     title={<IoWallet size={30} />}
                     onMouseEnter={() => setShowWallet(true)}
                     onMouseLeave={() => setShowWallet(false)}
                   >
-                    <IoWallet size={20} />
-                    <NumberFormat
-                      style={{
-                        marginLeft: "10px",
-                      }}
-                      value={user.wallet}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
+                    <IoWallet size={23} />
                   </Button>
-                ) : (
-                  <div className="dropdown">
-                    <Button
-                      className="headerNav"
-                      style={{
-                        backgroundColor: "transparent",
-                        color: textColor,
-                        borderRadius: "0",
-                        height: "47px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                      id={colors === "white" ? "hover" : ""}
-                      // id="dropdown-basic-button"
-                      title={<IoWallet size={30} />}
-                      onMouseEnter={() => setShowWallet(true)}
-                      onMouseLeave={() => setShowWallet(false)}
-                    >
-                      <IoWallet size={20} />
-                    </Button>
-                    <div className="dropdown-content">
-                      <button className="fw-bold">
-                        <NumberFormat
-                          style={{
-                            marginLeft: "10px",
-                          }}
-                          value={user.wallet}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                        />
-                      </button>
-                    </div>
+                  <div
+                    className="dropdown-content"
+                    style={{ marginLeft: "-40px" }}
+                  >
+                    <button className="fw-bold">
+                      <NumberFormat
+                        style={{
+                          marginLeft: "10px",
+                        }}
+                        value={user.wallet}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </button>
                   </div>
-                )}
-
+                </div>
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
@@ -638,7 +581,7 @@ const Header = ({
                     toggleOpen();
                   }}
                 >
-                  <FaBars size={20} />
+                  <FaBars size={23} />
                 </Button>
 
                 <Button
@@ -652,7 +595,7 @@ const Header = ({
                     height: "47px",
                   }}
                 >
-                  <VscGlobe size={25} />
+                  <VscGlobe size={23} />
                 </Button>
               </>
             ) : (

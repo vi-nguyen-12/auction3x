@@ -393,8 +393,10 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       <div
                         style={{
                           position: "absolute",
-                          top: "25px",
-                          right: "25px",
+                          top: windowSize < 600 ? "0" : "10px",
+                          right: windowSize < 600 ? "0" : "10px",
+                          marginTop: windowSize < 600 && "-15px",
+                          marginRight: windowSize < 600 && "-15px",
                           zIndex: "999",
                         }}
                       >
@@ -410,7 +412,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       >
                         <Marker position={location} />
                       </GoogleMap>
-                      <p>
+                      <p className="d-flex justify-content-center">
                         {
                           property.property.details.property_address
                             .formatted_street_address

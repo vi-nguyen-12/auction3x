@@ -408,8 +408,10 @@ function DisplayRealEstate({
                       <div
                         style={{
                           position: "absolute",
-                          top: windowSize < 600 ? "0" : "25px",
-                          right: windowSize < 600 ? "0" : "25px",
+                          top: windowSize < 600 ? "0" : "10px",
+                          right: windowSize < 600 ? "0" : "10px",
+                          marginTop: windowSize < 600 && "-15px",
+                          marginRight: windowSize < 600 && "-15px",
                           zIndex: "999",
                         }}
                       >
@@ -425,7 +427,7 @@ function DisplayRealEstate({
                       >
                         <Marker position={location} />
                       </GoogleMap>
-                      <p>
+                      <p className="d-flex justify-content-center">
                         {
                           property.property.details.property_address
                             .formatted_street_address

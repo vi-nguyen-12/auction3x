@@ -160,8 +160,10 @@ const PropertyPages = ({
           <div
             style={{
               position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
+              top: windowSize < 600 ? "0" : "10px",
+              right: windowSize < 600 ? "0" : "10px",
+              marginTop: windowSize < 600 && "-15px",
+              marginRight: windowSize < 600 && "-15px",
               zIndex: "999",
             }}
           >
@@ -169,14 +171,6 @@ const PropertyPages = ({
           </div>
           {centers.length > 0 ? (
             <>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              ></div>
               <GoogleMap
                 mapContainerStyle={mapStyles}
                 style={{ height: "800px" }}
