@@ -48,20 +48,20 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
 
   useEffect(() => {
     let params = new URLSearchParams();
-    params.append("officialName", "TC_user");
-    params.append("officialName", "privacy_policy");
+    params.append("name", "TC_user");
+    params.append("name", "privacy_policy");
     authServices
-      .getDocuments(params)
+      .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          for (let doc of res.data) {
-            if (doc.officialName === "TC_user") {
-              setTerms(doc.htmlText);
+          for (let item of res.data) {
+            if (item.name === "TC_user") {
+              setTerms(item.htmlText);
             }
-            if (doc.officialName === "privacy_policy") {
-              setPrivacy(doc.htmlText);
+            if (item.name === "privacy_policy") {
+              setPrivacy(item.htmlText);
             }
           }
         }

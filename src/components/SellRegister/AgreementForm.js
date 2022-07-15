@@ -28,16 +28,16 @@ const Agree = ({ toggleStep, step, propertyTest }) => {
 
   useEffect(() => {
     let params = new URLSearchParams();
-    params.append("officialName", "TC_selling");
+    params.append("name", "TC_selling");
     authService
-      .getDocuments(params)
+      .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          for (let doc of res.data) {
-            if (doc.officialName === "TC_selling") {
-              setTerms(doc.htmlText);
+          for (let item of res.data) {
+            if (item.name === "TC_selling") {
+              setTerms(item.htmlText);
             }
           }
         }

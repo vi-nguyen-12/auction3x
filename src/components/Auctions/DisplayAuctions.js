@@ -41,8 +41,10 @@ function DisplayAuctions({
     // let serverUrl = process.env.REACT_APP_API_URL;
     let serverUrl =
       process.env.REACT_APP_NODE_ENV === "production"
-        ? process.env.REACT_APP_API_URL
-        : "http://localhost:5000";
+        ? process.env.REACT_APP_PROD_API_URL
+        : process.env.REACT_APP_NODE_ENV === "test"
+        ? process.env.REACT_APP_TEST_API_URL
+        : process.env.REACT_APP_DEV_API_URL;
 
     const newSocket = io(serverUrl, { withCredentials: true });
     setSocket(newSocket);
