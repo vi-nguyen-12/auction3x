@@ -8,6 +8,7 @@ import frank from "../../images/frank.jpg";
 import james from "../../images/james.jpg";
 import anil from "../../images/anil.jpg";
 import mayur from "../../images/mayur.jpg";
+import yatin from "../../images/yatin.png";
 
 const team_member = [
     {
@@ -86,6 +87,12 @@ const team_member = [
         "img": anil,
         "location": "Sugar Land, TX, USA",
     },
+    {
+        "name": "Yatin Patel",
+        "title": "Technology",
+        "img": yatin,
+        "location": "Sugar Land, TX, USA",
+    }
 
 ]
 
