@@ -126,7 +126,16 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
               <div className="mt-5">
                 <Row style={{ padding: "0 50px" }}>
                   <Col style={{ padding: "0" }} className="pt-5">
-                    <h2 style={{ color: "black", fontSize: "22px" }}>
+                    <h2
+                      style={{
+                        color: "#282828",
+                        fontSize: "44px",
+                        marginBottom: "50px",
+                        fontWeight: "600",
+                        fontFamily: "Josefin Slab",
+                        fontStyle: "normal",
+                      }}
+                    >
                       Upcoming Auctions
                     </h2>
                   </Col>
@@ -164,23 +173,36 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
         <>
           <Row style={{ padding: "0 50px" }}>
             <Col style={{ padding: "0" }} className="pt-5">
-              <h2 style={{ color: "black", fontSize: "22px" }}>
+              <h2
+                style={{
+                  color: "#282828",
+                  fontSize: "24px",
+                  marginBottom: "50px",
+                  fontWeight: "600",
+                  fontFamily: "Josefin Slab",
+                  fontStyle: "normal",
+                }}
+              >
                 Upcoming Auctions
               </h2>
             </Col>
           </Row>
           <Row style={{ height: "700px" }}>
             <Carousel {...settings}>
-              {upcomingAuctions.map((item, index) => (
-                <Wrap key={index}>
-                  <Cards
-                    toggleSignIn={toggleSignIn}
-                    windowSize={windowSize}
-                    data={item}
-                    type={item.property.type}
-                  />
-                </Wrap>
-              ))}
+              {upcomingAuctions.length > 0 ? (
+                upcomingAuctions.map((item, index) => (
+                  <Wrap key={index}>
+                    <Cards
+                      toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
+                      data={item}
+                      type={item.property.type}
+                    />
+                  </Wrap>
+                ))
+              ) : (
+                <Error />
+              )}
             </Carousel>
           </Row>
         </>

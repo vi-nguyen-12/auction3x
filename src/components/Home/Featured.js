@@ -124,8 +124,18 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
       {auctions.length > 0 ? (
         <>
           <Row>
-            <Col md={12} className="m-auto">
-              <h2 style={{ color: "white", fontSize: "22px", padding: "20px" }}>
+            <Col md={12} className="m-auto p-0">
+              <h2
+                style={{
+                  color: "white",
+                  fontSize: windowSize < 600 ? "24px" : "44px",
+                  marginBottom: "50px",
+                  fontWeight: "600",
+                  fontFamily: "Josefin Slab",
+                  fontStyle: "normal",
+                  padding: "30px 50px",
+                }}
+              >
                 Featured Listings
               </h2>
             </Col>

@@ -100,7 +100,7 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
               TC: { time: agree, IPAddress: ip },
               answers: answers,
               docusignId: res.data._id,
-              documents,
+              funds: [documents],
             })
             .then((res) => {
               if (res.data.error) {

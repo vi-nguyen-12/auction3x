@@ -303,7 +303,7 @@ function YachtDetails({
                     required
                   />
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Location <span style={{ color: "#ff0000" }}>*</span>
+                    Address <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   {suggestions && suggestions.length > 0 && (
                     <div className="autocomplete-dropdown-container">

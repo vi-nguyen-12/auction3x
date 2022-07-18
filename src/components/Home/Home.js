@@ -50,7 +50,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         featureAuctions={featureAuctions}
         windowSize={windowSize}
       />
-      <FindInCountries />
+      <FindInCountries windowSize={windowSize} />
       <Upcoming
         toggleSignIn={toggleSignIn}
         upcomingAuctions={upcomingAuctions}
@@ -58,7 +58,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
       />
       <Work windowSize={windowSize} />
       <RealEstate />
-      <About toggleSignIn={toggleSignIn} />
+      <About toggleSignIn={toggleSignIn} windowSize={windowSize} />
     </>
   );
 };

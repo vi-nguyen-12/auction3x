@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import "../../styles/about.css";
 
-const About = ({ toggleSignIn }) => {
+const About = ({ toggleSignIn, windowSize }) => {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
@@ -32,7 +32,7 @@ const About = ({ toggleSignIn }) => {
         <Col className="banner-top-right">
           <h2>INVESTORS / BUYERS</h2>
           <p>
-            AUCTION 3 positioned itself as the leading marketplace for
+            AUCTION 3X positioned itself as the leading marketplace for
             professional real estate investors to auction platform for buying
             and selling their properties. It brings an opportunity for an
             investor to execute the transaction with greater eciency and higher
@@ -61,7 +61,7 @@ const About = ({ toggleSignIn }) => {
         <Col className="banner-top-left-2">
           <h2>BROKER</h2>
           <p>
-            AUCTION 3 positioned itself as the leading marketplace for
+            AUCTION 3X positioned itself as the leading marketplace for
             professional real estate investors to auction platform for buying
             and selling their properties. It brings an opportunity for an
             investor to execute the transaction with greater eciency and higher
@@ -72,6 +72,7 @@ const About = ({ toggleSignIn }) => {
               onClick={() => {
                 history.push("/Partner");
               }}
+              style={{ width: "200px" }}
             >
               Partner with us
             </button>
@@ -83,14 +84,26 @@ const About = ({ toggleSignIn }) => {
       </Row>
       <Row className="banner-container-1">
         <Col className="banner-left">
-          <h2>Stay updated with Auction 3</h2>
-          <p>
+          <h2
+            style={{
+              fontSize: "45px",
+              fontWeight: "600",
+              fontFamily: "Josefin Slab",
+              fontStyle: "normal",
+            }}
+          >
+            Stay updated with Auction 3X
+          </h2>
+          <p style={{ padding: windowSize < 600 && "0" }}>
             Receive the beautifully curated selection of what's trending in
             luxury with inside stories and tips from our experts.
           </p>
         </Col>
         <Col className="banner-right">
-          <div className="content-right">
+          <div
+            className="content-right"
+            style={{ padding: windowSize < 600 && "0" }}
+          >
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="text"

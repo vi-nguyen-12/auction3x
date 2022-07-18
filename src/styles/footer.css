@@ -1,6 +1,7 @@
 .card-footer {
   background-color: #282828 !important;
   border-radius: 0 !important;
+  padding-top: 5rem;
   /* margin-top: 10rem; */
 }
 
@@ -21,9 +22,11 @@
 
 .auction-content {
   color: #fff;
-  margin-top: 4rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: left;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .footer-title {
@@ -54,6 +57,7 @@ a {
   color: #fff;
   text-decoration: none !important;
   cursor: pointer;
+  font-family: Montserrat;
 }
 
 a:hover {
@@ -66,6 +70,7 @@ a:hover {
   color: #fff;
   text-align: center;
   padding: 2rem;
+  margin-top: 5rem;
 }
 
 @media screen and (max-width: 800px) {

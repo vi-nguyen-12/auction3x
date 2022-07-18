@@ -297,6 +297,7 @@ function DisplayRealEstate({
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={togglePics}
                       />
                     </div>
@@ -344,6 +345,7 @@ function DisplayRealEstate({
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={toggleVids}
                       />
                     </div>
@@ -417,6 +419,7 @@ function DisplayRealEstate({
                       >
                         <CloseButton
                           className="modal-close"
+                          style={{ backgroundColor: "rgb(0, 0, 0, 0.4)" }}
                           onClick={toggleMap}
                         />
                       </div>
@@ -744,8 +747,8 @@ function DisplayRealEstate({
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "200px",
-                        height: "150px",
+                        width: "278px",
+                        height: "180px",
                         borderRadius: "10px",
                       }}
                     >
@@ -829,8 +832,8 @@ function DisplayRealEstate({
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "200px",
-                          height: "150px",
+                          width: "278px",
+                          height: "180px",
                           borderRadius: "10px",
                           padding: "40px",
                         }}
@@ -936,7 +939,7 @@ function DisplayRealEstate({
                       alignItems: "center",
                       backgroundColor: "#e8e8e8",
                       width: "280px",
-                      height: "165px",
+                      height: "180px",
                       borderRadius: "10px",
                       padding: "40px",
                     }}

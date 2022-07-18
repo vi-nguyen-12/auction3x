@@ -304,6 +304,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={togglePics}
                       />
                     </div>
@@ -344,6 +345,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={toggleVids}
                       />
                     </div>
@@ -410,6 +412,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                       >
                         <CloseButton
                           className="modal-close"
+                          style={{ backgroundColor: "rgb(0, 0, 0, 0.4)" }}
                           onClick={toggleMap}
                         />
                       </div>
@@ -450,10 +453,8 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                 <h5
                   style={{ color: "#919191", fontWeight: "400", padding: "0" }}
                 >
-                  {
-                    property.property.details.property_address
-                      .formatted_street_address
-                  }
+                  {property.property.details.property_address.city},{" "}
+                  {property.property.details.property_address.state}
                 </h5>
               </Row>
             </Col>
@@ -729,8 +730,8 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "200px",
-                        height: "150px",
+                        width: "278px",
+                        height: "180px",
                         borderRadius: "10px",
                       }}
                     >
@@ -814,8 +815,8 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "200px",
-                          height: "150px",
+                          width: "278px",
+                          height: "180px",
                           borderRadius: "10px",
                           padding: "40px",
                         }}

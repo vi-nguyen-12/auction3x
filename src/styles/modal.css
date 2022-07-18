@@ -201,6 +201,7 @@
 
 .dropdown-content button {
   background-color: transparent;
+  border-radius: 0 0 5px 5px;
 }
 
 .dropdown-content a {

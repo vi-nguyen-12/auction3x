@@ -30,7 +30,8 @@
 }
 
 .content h1 {
-  font-weight: 500;
+  font-size: 65px;
+  font-weight: 600;
   background: -webkit-linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,11 +112,13 @@
 }
 
 .paragraph {
+  width: 40%;
+  padding: 0 70px 0 0;
   margin-left: 4rem;
   font-weight: 400;
   /* font family : Montserrat */
-  font-family: "Montserrat", sans-serif;
+  font-family: Montserrat;
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 25px;
   position: relative;
 }
