@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import * as FA from "react-icons/fa";
 
-const Founder = ({ name, title, img, linkedln, location }) => {
+const Founder = ({ firstName, lastName, title, img, linkedln, location }) => {
   return (
     <Card
       className="Card-info"
@@ -23,16 +23,19 @@ const Founder = ({ name, title, img, linkedln, location }) => {
         }}
       >
         <Card.Text>
-          <h2
+          <span
             style={{
               display: "flex",
               justifyContent: "center",
               fontSize: "16px",
+              fontWeight: "bold",
             }}
           >
-            {name}
-          </h2>
-          <p style={{ fontSize: "11px" }}>{location}</p>
+            {firstName} {lastName}
+          </span>
+          <span style={{ fontSize: "12px" }} className="mb-2">
+            {location.city}, {location.state}, {location.country}
+          </span>
           <a
             href={linkedln}
             target="_blank"
