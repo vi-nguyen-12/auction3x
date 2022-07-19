@@ -22,8 +22,12 @@ const SidebarLabel = styled.button`
   background: none;
   border: none;
   color: #96a0af;
-  font-weight: bold;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   &:hover {
     border-left: 4px solid #b77b50;
     color: #b77b50;
@@ -81,10 +85,10 @@ const SubMenu = ({ item, path }) => {
     <>
       <SidebarLink to={item.path} href={item.path} onClick={handleOnclick}>
         <SidebarLabel
-          style={{
-            color: item.path === path ? color : "none",
-            borderLeft: item.path === path ? "4px solid #b77b50" : "",
-          }}
+        // style={{
+        //   color: item.path === path ? color : "none",
+        //   borderLeft: item.path === path ? "4px solid #b77b50" : "",
+        // }}
         >
           {item.icon} <span style={{ padding: "15px" }} /> {item.name}
         </SidebarLabel>

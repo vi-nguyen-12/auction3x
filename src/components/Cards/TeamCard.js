@@ -7,7 +7,12 @@ const Founder = ({ firstName, lastName, title, img, linkedln, location }) => {
     <Card
       className="Card-info"
       size="sm"
-      style={{ width: "150px", margin: "10px", border: "none" }}
+      style={{
+        width: "150px",
+        margin: "10px",
+        border: "none",
+        backgroundColor: "transparent",
+      }}
     >
       <Card.Img
         variant="top"

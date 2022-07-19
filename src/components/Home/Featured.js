@@ -120,7 +120,7 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
   };
 
   return (
-    <div className="background" style={{ height: "100vh" }}>
+    <div id="feature" className="background" style={{ height: "100vh" }}>
       {auctions.length > 0 ? (
         <>
           <Row>

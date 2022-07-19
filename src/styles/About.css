@@ -99,7 +99,7 @@
 
 .banner-top-left-2 p {
   font-size: 20px;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   padding: 0 40px 20px 0;
 }
 .banner-top-left-2 h2 {
@@ -113,7 +113,7 @@
 
 .banner-top-right p {
   font-size: 20px;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   padding: 0 40px 20px 0;
 }
 .banner-top-right h2 {
@@ -148,7 +148,7 @@
 
 .banner-left p {
   font-size: 18px;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   padding: 0 100px 20px 0;
   color: #6d6d6d;
 }

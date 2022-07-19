@@ -24,7 +24,7 @@
   color: #fff;
   font-size: 1.2rem;
   text-align: left;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
 }
@@ -57,7 +57,7 @@ a {
   color: #fff;
   text-decoration: none !important;
   cursor: pointer;
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
 }
 
 a:hover {
