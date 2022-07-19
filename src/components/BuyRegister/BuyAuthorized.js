@@ -37,16 +37,16 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
     };
     getIp();
     let params = new URLSearchParams();
-    params.append("officialName", "TC_buying");
+    params.append("name", "TC_buying");
     authService
-      .getDocuments(params)
+      .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
           alert(res.data.error);
         } else {
-          for (let doc of res.data) {
-            if (doc.officialName === "TC_buying") {
-              setTerms(doc.htmlText);
+          for (let item of res.data) {
+            if (item.name === "TC_buying") {
+              setTerms(item.htmlText);
             }
           }
         }
@@ -100,7 +100,7 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
               TC: { time: agree, IPAddress: ip },
               answers: answers,
               docusignId: res.data._id,
-              documents,
+              funds: [documents],
             })
             .then((res) => {
               if (res.data.error) {

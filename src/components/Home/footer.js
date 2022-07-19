@@ -34,8 +34,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               style={{
                 display: "grid",
                 justifyContent: "center",
-                padding: windowSize > 500 ? "0 50px" : "0 3px",
-                marginTop: "1rem",
+                padding: windowSize > 500 ? "0 35px" : "0 3px",
               }}
               className="auction-content"
             >

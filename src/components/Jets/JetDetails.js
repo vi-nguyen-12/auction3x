@@ -254,7 +254,7 @@ function JetDetails({
               }) => (
                 <div>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Location <span style={{ color: "#ff0000" }}>*</span>
+                    Address <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
                     {...getInputProps({

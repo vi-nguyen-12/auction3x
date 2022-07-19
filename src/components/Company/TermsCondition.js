@@ -11,7 +11,7 @@ function TermsCondition({ windowSize }) {
 
   useEffect(() => {
     let queryParams = { officialName: "terms_of_use" };
-    authService.getDocuments(queryParams).then((res) => {
+    authService.getPageContents(queryParams).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
       } else {

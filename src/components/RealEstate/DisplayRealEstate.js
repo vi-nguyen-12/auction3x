@@ -297,6 +297,7 @@ function DisplayRealEstate({
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={togglePics}
                       />
                     </div>
@@ -344,6 +345,7 @@ function DisplayRealEstate({
                     >
                       <CloseButton
                         className="modal-close"
+                        style={{ backgroundColor: "white" }}
                         onClick={toggleVids}
                       />
                     </div>
@@ -408,13 +410,16 @@ function DisplayRealEstate({
                       <div
                         style={{
                           position: "absolute",
-                          top: windowSize < 600 ? "0" : "25px",
-                          right: windowSize < 600 ? "0" : "25px",
+                          top: windowSize < 600 ? "0" : "10px",
+                          right: windowSize < 600 ? "0" : "10px",
+                          marginTop: windowSize < 600 && "-15px",
+                          marginRight: windowSize < 600 && "-15px",
                           zIndex: "999",
                         }}
                       >
                         <CloseButton
                           className="modal-close"
+                          style={{ backgroundColor: "rgb(0, 0, 0, 0.4)" }}
                           onClick={toggleMap}
                         />
                       </div>
@@ -425,7 +430,7 @@ function DisplayRealEstate({
                       >
                         <Marker position={location} />
                       </GoogleMap>
-                      <p>
+                      <p className="d-flex justify-content-center">
                         {
                           property.property.details.property_address
                             .formatted_street_address
@@ -742,8 +747,8 @@ function DisplayRealEstate({
                         justifyContent: "center",
                         alignItems: "center",
                         backgroundColor: "#e8e8e8",
-                        width: "200px",
-                        height: "150px",
+                        width: "278px",
+                        height: "180px",
                         borderRadius: "10px",
                       }}
                     >
@@ -827,8 +832,8 @@ function DisplayRealEstate({
                           justifyContent: "center",
                           alignItems: "center",
                           backgroundColor: "#e8e8e8",
-                          width: "200px",
-                          height: "150px",
+                          width: "278px",
+                          height: "180px",
                           borderRadius: "10px",
                           padding: "40px",
                         }}
@@ -934,7 +939,7 @@ function DisplayRealEstate({
                       alignItems: "center",
                       backgroundColor: "#e8e8e8",
                       width: "280px",
-                      height: "165px",
+                      height: "180px",
                       borderRadius: "10px",
                       padding: "40px",
                     }}

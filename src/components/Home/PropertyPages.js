@@ -53,10 +53,9 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
   const history = useHistory();
-  const onMarkerClick = id => (e) => {
+  const onMarkerClick = (id) => (e) => {
     history.push(`/DisplayAuctions/${id}`);
-  }
-
+  };
 
   return (
     <>
@@ -158,18 +157,20 @@ const PropertyPages = ({
         centered
       >
         <Modal.Body>
-          <CloseButton className="modal-close" onClick={toggleMap} style={{ display: "flex", justifyContent: "end" }} />
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "10px",
+              right: windowSize < 600 ? "0" : "10px",
+              marginTop: windowSize < 600 && "-15px",
+              marginRight: windowSize < 600 && "-15px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton className="modal-close" onClick={toggleMap} />
+          </div>
           {centers.length > 0 ? (
             <>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-              </div>
               <GoogleMap
                 mapContainerStyle={mapStyles}
                 style={{ height: "800px" }}
@@ -223,7 +224,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImage} />
+              <CloseButton className="modal-close" onClick={toggleImgCar} />
             </div>
             {imgCar.length > 0 ? (
               <Row>
@@ -268,7 +269,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImage} />
+              <CloseButton className="modal-close" onClick={toggleImgJet} />
             </div>
             {imgJet.length > 0 ? (
               <Row>
@@ -313,7 +314,7 @@ const PropertyPages = ({
                 zIndex: "999",
               }}
             >
-              <CloseButton className="modal-close" onClick={toggleImage} />
+              <CloseButton className="modal-close" onClick={toggleImgYacht} />
             </div>
             {imgYacht.length > 0 ? (
               <Row>

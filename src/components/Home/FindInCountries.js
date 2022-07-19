@@ -6,11 +6,11 @@ import Houston from "../../images/houstonPark.jpg";
 import Dallas from "../../images/dallass.jpeg";
 import SanAntonio from "../../images/sanAntonio.jpeg";
 
-const FindInCountries = (props) => {
+const FindInCountries = ({ windowSize }) => {
   const history = useHistory();
   return (
     <>
-      <Container style={{ padding: "0 30px" }} fluid>
+      <Container style={{ padding: windowSize > 400 && "0 30px" }} fluid>
         <Row
           style={{
             margin: "0",
@@ -24,18 +24,20 @@ const FindInCountries = (props) => {
             <Col md={10} className="m-auto pt-5 text-center">
               <h2
                 style={{
-                  color: "black",
-                  fontSize: "22px",
+                  color: "#282828",
+                  fontSize: windowSize < 600 ? "24px" : "44px",
                   marginBottom: "50px",
-                  fontWeight: "bold",
+                  fontWeight: "600",
+                  fontFamily: "Josefin Slab",
+                  fontStyle: "normal",
                 }}
               >
                 Find Properties In These Cities
               </h2>
             </Col>
           </Row>
-          <Row>
-            <Col md={4}>
+          <Row className="mt-4 p-0">
+            <Col md={4} style={{ padding: windowSize < 600 && "0" }}>
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/Austin")}
@@ -52,7 +54,7 @@ const FindInCountries = (props) => {
                 </span>
               </div>
             </Col>
-            <Col md={8}>
+            <Col md={8} style={{ padding: windowSize < 600 && "0" }}>
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/Houston")}
@@ -71,7 +73,7 @@ const FindInCountries = (props) => {
             </Col>
           </Row>
           <Row>
-            <Col md={8}>
+            <Col md={8} style={{ padding: windowSize < 600 && "0" }}>
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/Dallas")}
@@ -88,7 +90,7 @@ const FindInCountries = (props) => {
                 </span>
               </div>
             </Col>
-            <Col md={4}>
+            <Col md={4} style={{ padding: windowSize < 600 && "0" }}>
               <div className="circularCard">
                 <img
                   onClick={() => history.push("/Auctions/SanAntonio")}

@@ -202,8 +202,8 @@ const ImgSlider = ({
                         ? "Yacht"
                         : ""}{" "}
                       In {auction.property.details.property_address.city},
-                      {auction.property.details.property_address.state} UNITED
-                      STATES
+                      {auction.property.details.property_address.state}{" "}
+                      {auction.property.details.property_address.country}
                     </span>
                   </HomeBottom>
                 </Wrap>
@@ -247,8 +247,18 @@ const ImgSlider = ({
                       fontSize: windowSize < 600 ? "18px" : "20px",
                     }}
                   >
-                    HOUSE IN {item.property.details.property_address.city},
-                    {item.property.details.property_address.state} UNITED STATES
+                    {item.property.type === "real-estate"
+                      ? "Real Estate"
+                      : item.property.type === "car"
+                      ? "Car"
+                      : item.property.type === "jet"
+                      ? "Jet"
+                      : item.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}{" "}
+                    In {item.property.details.property_address.city},
+                    {item.property.details.property_address.state}{" "}
+                    {item.property.details.property_address.country}
                   </span>
                 </HomeBottom>
               </Wrap>
@@ -296,8 +306,18 @@ const ImgSlider = ({
                       fontSize: windowSize < 600 ? "18px" : "20px",
                     }}
                   >
-                    HOUSE IN {item.property.details.property_address.city},
-                    {item.property.details.property_address.state} UNITED STATES
+                    {item.property.type === "real-estate"
+                      ? "Real Estate"
+                      : item.property.type === "car"
+                      ? "Car"
+                      : item.property.type === "jet"
+                      ? "Jet"
+                      : item.property.type === "yacht"
+                      ? "Yacht"
+                      : ""}{" "}
+                    In {item.property.details.property_address.city},
+                    {item.property.details.property_address.state}{" "}
+                    {item.property.details.property_address.country}
                   </span>
                 </HomeBottom>
               </Wrap>

@@ -50,8 +50,8 @@ const RealEstate = (props) => {
         </div>
         <div className="sell-real-estate">
           <div className="content">
-            <h1 style={{ marginLeft: "60px", fontFamily: "Josefinslab" }}>
-              Buy Real Estate <br /> on Auction3x
+            <h1 style={{ marginLeft: "60px" }}>
+              Buy Real Estate <br /> on Auction 3X
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of
