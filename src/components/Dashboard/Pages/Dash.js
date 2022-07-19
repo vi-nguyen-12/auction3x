@@ -96,11 +96,12 @@ function Dash({ windowSize, featureLength }) {
             padding: "20px",
           }}
         >
-          <div
+          <a
             className="liveAuc"
-            onClick={() => {
-              window.open(`/${"feature"}`);
-            }}
+            href="feature"
+            // onClick={() => {
+            //   window.open(`/${"feature"}`);
+            // }}
           >
             <div className="names">
               <span>Featured Listings</span>
@@ -109,17 +110,12 @@ function Dash({ windowSize, featureLength }) {
             <div className="progress">
               <CircularProgressbar value={70} strokeWidth={20} />
             </div>
-          </div>
+          </a>
         </Col>
         <Col
           style={{ display: "flex", justifyContent: "center", padding: "20px" }}
         >
-          <div
-            className="liveAuc"
-            onClick={() => {
-              window.open(`/${"upcoming"}`);
-            }}
-          >
+          <a className="liveAuc" href="upcoming">
             <div className="names">
               <span>Upcoming Auctions</span>
               <h3>{numOfUpcomingAuctions}</h3>
@@ -127,7 +123,7 @@ function Dash({ windowSize, featureLength }) {
             <div className="progress">
               <CircularProgressbar value={20} strokeWidth={20} stroke="red" />
             </div>
-          </div>
+          </a>
         </Col>
         {/* <Col>
           <div className="liveAuc">
@@ -143,7 +139,7 @@ function Dash({ windowSize, featureLength }) {
         <Col
           style={{ display: "flex", justifyContent: "center", padding: "20px" }}
         >
-          <div
+          <a
             className="liveAuc"
             onClick={() => {
               history.push("/Dashboard/Listings/AuctionListings");
@@ -156,7 +152,7 @@ function Dash({ windowSize, featureLength }) {
             <div className="progress">
               <CircularProgressbar value={35} strokeWidth={20} stroke="red" />
             </div>
-          </div>
+          </a>
         </Col>
       </Row>
 

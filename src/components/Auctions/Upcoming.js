@@ -123,7 +123,7 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
         <>
           {upcomingAuctions ? (
             <>
-              <div className="mt-5">
+              <div id="upcoming" className="mt-5">
                 <Row style={{ padding: "0 50px" }}>
                   <Col style={{ padding: "0" }} className="pt-5">
                     <h2
