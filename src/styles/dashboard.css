@@ -101,6 +101,7 @@ h3 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  font-family: "Popins", sans-serif;
 }
 
 .names {
@@ -109,8 +110,9 @@ h3 {
 }
 
 .names span {
+  font-weight: bold;
+  font-size: 16px;
   color: #737b8b;
-  font-weight: 500;
 }
 
 .names h3 {

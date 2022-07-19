@@ -2,7 +2,7 @@ import React from "react";
 import * as AI from "react-icons/ai";
 import * as RI from "react-icons/ri";
 import { RiAuctionFill } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
+import { FaUserCircle } from "react-icons/fa";
 
 const path = window.location.pathname;
 export const SidebarMenu = [
@@ -69,7 +69,7 @@ export const SidebarMenu = [
   {
     name: "Profile",
     path: "/Dashboard/Profile",
-    icon: <CgProfile size={30} />,
+    icon: <FaUserCircle size={30} />,
   },
 ];
 

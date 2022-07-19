@@ -3,6 +3,87 @@ import CompanyHeader from "./CompanyHeader";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import TeamCard from "../Cards/TeamCard";
 import authService from "../../services/authServices";
+import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+let settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  autoplay: false,
+};
+
+const Carousel = styled(Slider)`
+  height: 100%;
+  overflow: hidden;
+
+  & > button {
+    opacity: 1;
+    height: 100%;
+    width: 5vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+
+  ul li button {
+    &:before {
+      top: -5vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
+  }
+
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    left: 0;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-prev:before {
+    color: #769ccd;
+  }
+
+  .slick-next {
+    right: 0;
+    width: 12vw;
+    height: 100%;
+  }
+
+  .slick-next:before {
+    color: #769ccd;
+  }
+`;
+
+const Wrap = styled.div`
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding: 0;
+  }
+`;
 
 function Team({ windowSize }) {
   const [team, setTeam] = useState([]);
@@ -250,7 +331,7 @@ function Team({ windowSize }) {
             alignContent: "center",
           }}
         >
-          {list.length > 0 &&
+          {list.length > 0 && windowSize > 600 ? (
             list.map((member, index) => (
               <Col
                 key={index}
@@ -270,7 +351,26 @@ function Team({ windowSize }) {
                   linkedln={member.linkedln}
                 />
               </Col>
-            ))}
+            ))
+          ) : (
+            <Carousel {...settings}>
+              {list.map((member, index) => (
+                <Col
+                  key={index}
+                  className="ceo-card d-flex justify-content-center"
+                  xs={12}
+                >
+                  <TeamCard
+                    firstName={member.firstName}
+                    lastName={member.lastName}
+                    location={member.location}
+                    img={member.profileImage}
+                    linkedln={member.linkedln}
+                  />
+                </Col>
+              ))}
+            </Carousel>
+          )}
         </Row>
       </Container>
     </>
