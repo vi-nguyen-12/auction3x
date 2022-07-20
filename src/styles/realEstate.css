@@ -361,6 +361,12 @@
   height: 100%;
 }
 
+.propInfo tr:nth-child(n + 1){
+  font-family: "Josefin Slab", serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .propInfo tr:nth-child(n + 1) td:first-child {
   color: #6d6d6d;
 }

@@ -35,7 +35,6 @@ function AddFund() {
   useEffect(() => {
     authService.getRegistStatus().then((res) => {
       setRegisteredAuctions(res.data);
-      console.log(res.data);
     });
   }, []);
 

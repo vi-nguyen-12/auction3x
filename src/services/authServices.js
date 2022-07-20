@@ -656,6 +656,22 @@ const authService = {
   getTeam() {
     return axios.get(apiUrl + `/api/teamMembers`);
   },
+
+  getWallet(id) {
+    return axios.get(apiUrl + `/api/users/${id}/buyer/funds`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
+
+  getBuyerInfo(id) {
+    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
 };
 
 export default authService;

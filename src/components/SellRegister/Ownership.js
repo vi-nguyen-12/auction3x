@@ -100,7 +100,6 @@ function Ownership({
           authService
             .editRealEstate(propertyTest._id, submitedData)
             .then((res) => {
-              console.log(res.data);
               if (res.data.error) {
                 if (res.data.error === "Invalid Token") {
                   toggleSignIn(true);
@@ -114,7 +113,6 @@ function Ownership({
           authService
             .editProperty(propertyTest._id, submitedData)
             .then((res) => {
-              console.log(res.data);
               if (res.data.error) {
                 if (res.data.error === "Invalid Token") {
                   toggleSignIn(true);

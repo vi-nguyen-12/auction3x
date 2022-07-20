@@ -21,6 +21,7 @@ const Header = ({
   toggleSignIn,
   toggleSignUp,
   windowSize,
+  wallet,
 }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -342,14 +343,42 @@ const Header = ({
                     </Button>
                     <div
                       className="dropdown-content"
-                      style={{ marginLeft: "-40px" }}
+                      style={{ marginLeft: "-100px", width: "230px" }}
                     >
-                      <button className="fw-bold">
+                      <button className="d-flex justify-content-center">
+                        <span>Real Estate:</span>
                         <NumberFormat
-                          style={{
-                            marginLeft: "10px",
-                          }}
-                          value={user.wallet}
+                          value={wallet.RealEstate}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </button>
+
+                      <button className="d-flex justify-content-center">
+                        <span>Car:</span>
+                        <NumberFormat
+                          value={wallet.Car}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </button>
+
+                      <button className="d-flex justify-content-center">
+                        <span>Jet:</span>
+                        <NumberFormat
+                          value={wallet.Jet}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </button>
+
+                      <button className="d-flex justify-content-center">
+                        <span>Yacht:</span>
+                        <NumberFormat
+                          value={wallet.Yacht}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -550,14 +579,42 @@ const Header = ({
                   </Button>
                   <div
                     className="dropdown-content"
-                    style={{ marginLeft: "-40px" }}
+                    style={{ marginLeft: "-100px", width: "230px" }}
                   >
-                    <button className="fw-bold">
+                    <button className="d-flex justify-content-center">
+                      <span>Real Estate:</span>
                       <NumberFormat
-                        style={{
-                          marginLeft: "10px",
-                        }}
-                        value={user.wallet}
+                        value={wallet.RealEstate}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </button>
+
+                    <button className="d-flex justify-content-center">
+                      <span>Car:</span>
+                      <NumberFormat
+                        value={wallet.Car}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </button>
+
+                    <button className="d-flex justify-content-center">
+                      <span>Jet:</span>
+                      <NumberFormat
+                        value={wallet.Jet}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </button>
+
+                    <button className="d-flex justify-content-center">
+                      <span>Yacht:</span>
+                      <NumberFormat
+                        value={wallet.Yacht}
                         displayType={"text"}
                         thousandSeparator={true}
                         prefix={"$"}

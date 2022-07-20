@@ -109,7 +109,6 @@ function DisplayRealEstate({
   toggleSignIn,
   windowSize,
 }) {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -457,14 +456,29 @@ function DisplayRealEstate({
                   padding: "0",
                 }}
               >
-                <h2 style={{ color: "#b77b50", padding: "0" }}>
+                <h2
+                  style={{
+                    color: "#b77b50",
+                    padding: "0",
+                    fontFamily: "josefin slab",
+                    fontWeight: "600",
+                    fontSize: "45px",
+                  }}
+                >
                   {
                     property.property.details.property_address
                       .formatted_street_address
                   }
                 </h2>
                 <h5
-                  style={{ color: "#919191", fontWeight: "400", padding: "0" }}
+                  style={{
+                    color: "#919191",
+                    fontWeight: "400",
+                    padding: "0",
+                    fontFamily: "Montserrat",
+                    fontWeight: "400",
+                    fontSize: "25px",
+                  }}
                 >
                   {/* {
                     property.property.details.property_address
@@ -878,6 +892,7 @@ function DisplayRealEstate({
                               fontWeight: "700",
                               fontSize: "22px",
                               color: "black",
+                              fontFamily: "Josefin Slab",
                             }}
                           />
                         </h4>
@@ -914,6 +929,7 @@ function DisplayRealEstate({
                               fontWeight: "700",
                               fontSize: "22px",
                               color: "black",
+                              fontFamily: "Josefin Slab",
                             }}
                           />
                         </h4>
@@ -946,9 +962,12 @@ function DisplayRealEstate({
                   >
                     <h4
                       style={{
-                        fontWeight: "700",
                         fontSize: "22px",
                         color: "black",
+                        fontFamily: "Josefin Slab",
+                        fontWeight: "600",
+                        margin: "0",
+                        marginBottom: "-30px",
                       }}
                     >
                       199,530
@@ -981,6 +1000,7 @@ function DisplayRealEstate({
                       fontWeight: "600",
                       fontSize: "30px",
                       color: "black",
+                      fontFamily: "Josefin Slab",
                     }}
                   >
                     Property Info
@@ -1188,6 +1208,7 @@ function DisplayRealEstate({
                   fontWeight: "600",
                   fontSize: "30px",
                   color: "black",
+                  fontFamily: "Josefin Slab",
                 }}
               >
                 Executive Summary
@@ -1198,6 +1219,8 @@ function DisplayRealEstate({
                 fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
                 padding: windowSize > 800 && "20px 20px 20px 0",
+                fontFamily: "Josefin Slab",
+                fontWeight: "600",
               }}
               xs={12}
               md={6}
@@ -1227,6 +1250,8 @@ function DisplayRealEstate({
                 color: "black",
                 padding: windowSize > 800 && "20px 20px 20px 0",
                 marginTop: windowSize <= 767 && "20px",
+                fontFamily: "Josefin Slab",
+                fontWeight: "600",
               }}
               xs={12}
               md={6}
@@ -1256,7 +1281,7 @@ function DisplayRealEstate({
             ref={myRef}
             style={{
               marginTop: "50px",
-              padding: windowSize < 500 ? "25px 15px" : "35px",
+              padding: windowSize < 600 ? "15px" : "35px",
             }}
           >
             <Tabs
@@ -1273,12 +1298,44 @@ function DisplayRealEstate({
                   outline: "none",
                   fontSize: "17px",
                   borderRadius: "0",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3>Detailed Despcription</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Detailed Description
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1304,12 +1361,44 @@ function DisplayRealEstate({
                   outline: "none",
                   fontSize: "17px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3>Location Highlight</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Location Highlight
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1329,9 +1418,41 @@ function DisplayRealEstate({
                   padding: "20px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3> Market Overview</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Merket Overview
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1349,7 +1470,7 @@ function DisplayRealEstate({
                   outline: "none",
                   fontSize: "17px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "50px 30px",
                 }}
               >
                 <Row className="tabDocs">
@@ -1465,7 +1586,7 @@ function DisplayRealEstate({
                           margin: "10px 0",
                         }}
                       >
-                        Download Selected
+                        View Selected
                       </button>
                     </Col>
                     <Col style={{ display: "flex", justifyContent: "center" }}>
@@ -1485,7 +1606,7 @@ function DisplayRealEstate({
                           margin: "10px 0",
                         }}
                       >
-                        Download All
+                        View All
                       </button>
                     </Col>
                   </Row>

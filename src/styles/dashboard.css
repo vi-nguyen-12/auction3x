@@ -482,6 +482,7 @@ h3 {
   font-size: 2rem;
   background: transparent;
   color: white;
+  box-shadow: none;
 }
 
 .dashAccor .accordion-button:focus {

@@ -88,6 +88,12 @@ function App() {
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
   const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
+  const [wallet, setWallet] = useState({
+    RealEstate: 0,
+    Car: 0,
+    Jet: 0,
+    Yacht: 0,
+  });
 
   const toggleChangePass = () => popChangePass(!changePass);
   const toggleForgotPass = () => popForgotPass(!forgotPass);
@@ -137,14 +143,35 @@ function App() {
     }
   }, [dispatch]);
 
-  if (user._id) {
-    authService.getSavedProperties(user._id).then((res) => {
-      dispatch(addSavedProperty(res.data));
-    });
-    authService.getIncompleteProperty(user._id).then((res) => {
-      dispatch(addIncompProperty(res.data));
-    });
-  }
+  useEffect(() => {
+    if (user._id) {
+      authService.getSavedProperties(user._id).then((res) => {
+        dispatch(addSavedProperty(res.data));
+      });
+      authService.getIncompleteProperty(user._id).then((res) => {
+        dispatch(addIncompProperty(res.data));
+      });
+      authService.getWallet(user._id).then((res) => {
+        res.data.map((w) => {
+          if (w.property.type === "real-estate") {
+            setWallet((prevState) => ({
+              ...prevState.RealEstate,
+              RealEstate: w.totalFunds,
+            }));
+          } else if (w.property.type === "car") {
+            setWallet((prevState) => ({ ...prevState.Car, Car: w.totalFunds }));
+          } else if (w.property.type === "jet") {
+            setWallet((prevState) => ({ ...prevState.Jet, Jet: w.totalFunds }));
+          } else if (w.property.type === "yacht") {
+            setWallet((prevState) => ({
+              ...prevState.Yacht,
+              Yacht: w.totalFunds,
+            }));
+          }
+        });
+      });
+    }
+  }, [dispatch, user._id]);
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const handleWindowResize = () => {
@@ -176,6 +203,8 @@ function App() {
       }
     };
   }, [user]);
+
+  // console.log(wallet);
 
   return (
     <Suspense fallback={<Loading />}>
@@ -473,6 +502,7 @@ function App() {
             toggleSignIn={toggleSignIn}
             toggleSignUp={toggleSignUp}
             windowSize={windowSize}
+            wallet={wallet}
           />
           <ScrollTop />
 
