@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const Carousel = styled(Slider)`
   // height: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 
   & > button {
     opacity: 1;

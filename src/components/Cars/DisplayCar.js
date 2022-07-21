@@ -176,6 +176,14 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
     (doc) => doc.officialName === "valuation_report"
   );
 
+  const title = property.property.documents.filter(
+    (doc) => doc.officialName === "title_certificate"
+  );
+
+  const insurance = property.property.documents.filter(
+    (doc) => doc.officialName === "insurance_document"
+  );
+
   const download = (files) => (e) => {
     if (e.target.checked) {
       setDownloadFiles([...downloadFiles, ...files]);
@@ -1513,12 +1521,21 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       <div>
                         <input
                           type="checkbox"
+                          onChange={download(title.map((item) => item.url))}
+                        />{" "}
+                        Title Document ({title.length})
+                      </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
                           onChange={download(
                             ownershipDoc.map((item) => item.url)
                           )}
                         />{" "}
                         Ownership Documents ({ownershipDoc.length})
                       </div>
+
                       <div>
                         <input
                           type="checkbox"
@@ -1555,6 +1572,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         />{" "}
                         Loan Documents ({loanDoc.length})
                       </div>
+
                       <div>
                         <input
                           type="checkbox"
@@ -1564,6 +1582,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         />{" "}
                         Inspection Report ({inspectionDoc.length})
                       </div>
+
                       <div>
                         <input
                           type="checkbox"
@@ -1571,9 +1590,17 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         />{" "}
                         Engine Details ({engineDoc.length})
                       </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(insurance.map((item) => item.url))}
+                        />{" "}
+                        Insurance Document ({insurance.length})
+                      </div>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col
                       style={{
                         margin: "10px",
@@ -1588,7 +1615,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                         Diligence Documents are updated
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row
                     style={{
                       display: "flex",
@@ -1597,6 +1624,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                       width: "auto",
                       height: "auto",
                     }}
+                    className="mt-5"
                   >
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button

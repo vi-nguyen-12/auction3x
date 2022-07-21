@@ -204,6 +204,7 @@ function RealEstateDetails({
       }
     }
   };
+
   return (
     <>
       <h3>Property Details</h3>
@@ -264,15 +265,15 @@ function RealEstateDetails({
                           : "suggestion-item";
                         const style = suggestion.active
                           ? {
-                            backgroundColor: "#fafafa",
-                            cursor: "pointer",
-                            color: "black",
-                          }
+                              backgroundColor: "#fafafa",
+                              cursor: "pointer",
+                              color: "black",
+                            }
                           : {
-                            backgroundColor: "#ffffff",
-                            cursor: "pointer",
-                            color: "black",
-                          };
+                              backgroundColor: "#ffffff",
+                              cursor: "pointer",
+                              color: "black",
+                            };
                         return (
                           <div
                             key={index}
@@ -438,16 +439,29 @@ function RealEstateDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Lot Size (Acre) <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              thousandSeparator={true}
+              className="form-control"
+              value={lotSize}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setLotSize(value);
+              }}
+              name="lotSize"
+              required
+            />
+            {/* <input
               type="number"
               className="form-control"
               min="0"
+              step="any"
               defaultValue={lotSize}
               {...register("lotSize")}
               onChange={(e) => setLotSize(e.target.value)}
               name="lotSize"
               required
-            />
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">
@@ -467,9 +481,21 @@ function RealEstateDetails({
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              story(s) <span style={{ color: "#ff0000" }}>*</span>
+              Story(s) <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              className="form-control"
+              thousandSeparator={true}
+              value={story}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setStory(value);
+              }}
+              name="story"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -478,7 +504,7 @@ function RealEstateDetails({
               onChange={(e) => setStory(e.target.value)}
               name="story"
               required
-            />
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">
@@ -486,7 +512,19 @@ function RealEstateDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Bedrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              className="form-control"
+              thousandSeparator={true}
+              value={bedrooms}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setBedrooms(value);
+              }}
+              name="bedrooms"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -495,13 +533,25 @@ function RealEstateDetails({
               onChange={(e) => setBedrooms(e.target.value)}
               name="bedrooms"
               required
-            />
+            /> */}
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
               Bathrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              className="form-control"
+              thousandSeparator={true}
+              value={bathrooms}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setBathrooms(value);
+              }}
+              name="bathrooms"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -510,7 +560,7 @@ function RealEstateDetails({
               onChange={(e) => setBathrooms(e.target.value)}
               name="bathrooms"
               required
-            />
+            /> */}
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -534,7 +584,19 @@ function RealEstateDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Sqft <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              thousandSeparator={true}
+              className="form-control"
+              value={sqft}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setSqft(value);
+              }}
+              name="sqft"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -543,7 +605,7 @@ function RealEstateDetails({
               onChange={(e) => setSqft(e.target.value)}
               name="sqft"
               required
-            />
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">

@@ -54,11 +54,7 @@ function IncompleteListing({ windowSize }) {
   };
 
   for (let number = 1; number <= totalPages; number++) {
-    pageContent.push(
-      <Pagination.Item key={number}>
-        {number}
-      </Pagination.Item>
-    );
+    pageContent.push(<Pagination.Item key={number}>{number}</Pagination.Item>);
   }
   return (
     <Container
@@ -69,7 +65,7 @@ function IncompleteListing({ windowSize }) {
       }}
     >
       <Row>
-        <h1>Incomplete Listing</h1>
+        <h1>Incomplete Process</h1>
         <Table
           borderless
           hover
