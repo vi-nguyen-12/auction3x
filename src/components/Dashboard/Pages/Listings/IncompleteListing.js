@@ -8,28 +8,14 @@ import "react-circular-progressbar/dist/styles.css";
 
 function IncompleteListing({ windowSize }) {
   const user = useSelector((state) => state.user);
-  const pageSize = 5;
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
   const [pageContent, setPageContent] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const pageCount = IncompleteListings
-    ? Math.ceil(IncompleteListings.length / pageSize)
-    : 0;
-
-  // if(pageCount === 1) return null;
-
-  let active = 5;
-  let items = [];
-
-  for (let number = 1; number <= pageCount; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>
-    );
-  }
+  // let active = 5;
+  // let items = [];
 
   useEffect(() => {
     const fetchIncompleteListings = async () => {
@@ -42,6 +28,20 @@ function IncompleteListing({ windowSize }) {
 
   const getPage = (page) => {};
 
+  // seperate incomplete listings into pages
+  useEffect(() => {
+    if (IncompleteListings) {
+      const pages = [];
+      const reversed = IncompleteListings.slice().reverse();
+      const totalPages = Math.ceil(reversed.length / 5);
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(reversed.slice((i - 1) * 5, i * 5));
+      }
+      setPageContent(pages);
+      setTotalPages(totalPages);
+    }
+  }, [IncompleteListings]);
+
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
       if (res.data.error) {
@@ -52,6 +52,14 @@ function IncompleteListing({ windowSize }) {
       }
     });
   };
+
+  for (let number = 1; number <= totalPages; number++) {
+    pageContent.push(
+      <Pagination.Item key={number}>
+        {number}
+      </Pagination.Item>
+    );
+  }
   return (
     <Container
       style={{

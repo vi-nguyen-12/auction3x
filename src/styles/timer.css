@@ -1,6 +1,13 @@
 .timerHead th:nth-child(n + 1) {
-  font-size: large;
+  font-size: 25px;
+  font-family: "Josefin Slab", serif;
+  font-weight: 600;
 }
+
+/* .timerName td:nth-child(n + 1) {
+  font-size: large;
+  font-family: "Josefin Slab", serif;
+} */
 
 .timerTable > :not(caption) > * > * {
   padding: 0 0.2rem;
@@ -9,9 +16,15 @@
 
 @media screen and (max-width: 800px) {
   .timerHead th:nth-child(n + 1) {
-    font-size: medium;
+    /* font-size: medium; */
     margin: 0;
     /* padding: 0 !important; */
+  }
+
+  .timerHead th:nth-child(n + 1) {
+    font-size: 17px;
+    font-family: "Josefin Slab", serif;
+    font-weight: 600;
   }
 
   /* .timerName td:nth-child(n + 1) {

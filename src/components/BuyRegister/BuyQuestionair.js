@@ -97,7 +97,6 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
   useEffect(() => {
     const getQuestion = async () => {
       await authService.getBuyerQuestions().then((res) => {
-        console.log(res.data);
         setAnswers(res.data);
       });
     };

@@ -6,7 +6,6 @@ const apiUrl =
     : process.env.REACT_APP_NODE_ENV === "test"
     ? process.env.REACT_APP_TEST_API_URL
     : process.env.REACT_APP_DEV_API_URL;
-const auth_token = localStorage.getItem("token");
 
 const authService = {
   register(user) {
@@ -33,8 +32,7 @@ const authService = {
   saveRealEstate(data) {
     return axios.post(apiUrl + "/api/properties/real-estates/", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -42,8 +40,7 @@ const authService = {
   sellProperty(data) {
     return axios.post(apiUrl + "/api/properties", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -51,8 +48,7 @@ const authService = {
   saveImages(data) {
     return axios.post(apiUrl + "/api/aws/images/upload", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "content-type": "multipart/form-data",
       },
     });
@@ -61,8 +57,7 @@ const authService = {
   saveVideos(data) {
     return axios.post(apiUrl + "/api/aws/videos/upload", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "content-type": "multipart/form-data",
       },
     });
@@ -75,8 +70,7 @@ const authService = {
   verifyKyc(data) {
     return axios.get(apiUrl + "/api/kyc/verifyKyc", {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -84,8 +78,7 @@ const authService = {
   saveDocuments(data) {
     return axios.post(apiUrl + "/api/aws/documents/upload", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "content-type": "multipart/form-data",
       },
     });
@@ -98,8 +91,7 @@ const authService = {
   buyerRegister(data) {
     return axios.post(apiUrl + "/api/buyers", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -107,8 +99,7 @@ const authService = {
   getBuyerQuestions() {
     return axios.get(apiUrl + "/api/questions", {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -122,9 +113,7 @@ const authService = {
       },
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -155,8 +144,7 @@ const authService = {
   getAuction(id) {
     return axios.get(apiUrl + `/api/auctions/${id}`, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -164,8 +152,7 @@ const authService = {
   getRegistStatus() {
     return axios.get(apiUrl + "/api/auctions/status?buyer=true", {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -263,8 +250,7 @@ const authService = {
   getUserBidAuctions(id) {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : document.cookie.split("=")[1]),
+        Authorization: "Bearer " + document.cookie.split("=")[1],
       },
     });
   },
@@ -343,8 +329,7 @@ const authService = {
   postPropInfo(data) {
     return axios.post(apiUrl + "/api/properties", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -352,8 +337,7 @@ const authService = {
   putPropInfo(data) {
     return axios.put(apiUrl + `/api/properties/${data.id}`, data.changes, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -361,8 +345,7 @@ const authService = {
   postRealEstateInfo(data) {
     return axios.post(apiUrl + "/api/properties/real-estate", data, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -373,9 +356,7 @@ const authService = {
       data.changes,
       {
         headers: {
-          Authorization:
-            "Bearer " +
-            (auth_token ? auth_token : localStorage.getItem("token")),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
@@ -384,8 +365,7 @@ const authService = {
   saveInfo(data) {
     return axios.put(apiUrl + `/api/properties/${data.id}`, data.details, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -393,8 +373,7 @@ const authService = {
   deleteProperty(id) {
     return axios.delete(apiUrl + `/api/properties/${id}`, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -413,8 +392,7 @@ const authService = {
   getProperty(id) {
     return axios.get(apiUrl + `/api/properties/${id}`, {
       headers: {
-        Authorization:
-          "Bearer " + (auth_token ? auth_token : localStorage.getItem("token")),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
@@ -677,6 +655,22 @@ const authService = {
 
   getTeam() {
     return axios.get(apiUrl + `/api/teamMembers`);
+  },
+
+  getWallet(id) {
+    return axios.get(apiUrl + `/api/users/${id}/buyer/funds`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
+
+  getBuyerInfo(id) {
+    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 };
 

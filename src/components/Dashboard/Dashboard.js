@@ -154,6 +154,7 @@ function Dashboard({
                 history.push("/Dashboard");
                 window.location.reload();
               }}
+              style={{ cursor: "pointer" }}
             >
               Dashboard
             </Col>
@@ -164,6 +165,7 @@ function Dashboard({
                 history.push("/Dashboard/Messaging");
                 window.location.reload();
               }}
+              style={{ cursor: "pointer" }}
             >
               Messaging
             </Col>
@@ -172,13 +174,18 @@ function Dashboard({
             <Col>
               <Accordion className="dashAccor">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Auctions</Accordion.Header>
+                  <Accordion.Header
+                    style={{ cursor: "pointer", boxShadow: "none" }}
+                  >
+                    Auctions
+                  </Accordion.Header>
                   <Accordion.Body>
                     <p
                       onClick={() => {
                         history.push("/Dashboard/Auctions/BidAuctions");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Bid Auctions
                     </p>
@@ -187,6 +194,7 @@ function Dashboard({
                         history.push("/Dashboard/Auctions/BuyerApproval");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Pending Auctions
                     </p>
@@ -195,6 +203,7 @@ function Dashboard({
                         history.push("/Dashboard/Auctions/SavedAuctions");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Saved Auctions
                     </p>
@@ -203,6 +212,7 @@ function Dashboard({
                         history.push("/Dashboard/Auctions/WinAuctions");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Won Auctions
                     </p>
@@ -215,13 +225,16 @@ function Dashboard({
             <Col>
               <Accordion className="dashAccor">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Your Listings</Accordion.Header>
+                  <Accordion.Header style={{ cursor: "pointer" }}>
+                    Your Listings
+                  </Accordion.Header>
                   <Accordion.Body>
                     <p
                       onClick={() => {
                         history.push("/Dashboard/Listings/PendingApproval");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Pending Approval
                     </p>
@@ -230,6 +243,7 @@ function Dashboard({
                         history.push("/Dashboard/Listings/AuctionListings");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Auction Listings
                     </p>
@@ -238,6 +252,7 @@ function Dashboard({
                         history.push("/Dashboard/Listings/SoldListings");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Sold Listings
                     </p>
@@ -246,6 +261,7 @@ function Dashboard({
                         history.push("/Dashboard/Listings/IncompleteListing");
                         window.location.reload();
                       }}
+                      style={{ cursor: "pointer" }}
                     >
                       Incomplete Listings
                     </p>
@@ -260,6 +276,7 @@ function Dashboard({
                 history.push("/Dashboard/Profile");
                 window.location.reload();
               }}
+              style={{ cursor: "pointer" }}
             >
               Profile
             </Col>

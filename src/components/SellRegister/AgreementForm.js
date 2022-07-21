@@ -12,7 +12,7 @@ import Loading from "../../components/Loading";
 import { Button, Row, Col } from "react-bootstrap";
 import parse from "html-react-parser";
 
-const Agree = ({ toggleStep, step, propertyTest }) => {
+const Agree = ({ toggleStep, step, propertyTest, toggleSignIn }) => {
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -52,6 +52,11 @@ const Agree = ({ toggleStep, step, propertyTest }) => {
     await authService
       .getSellingDocuSign(envelopeId)
       .then((res) => {
+        if (res.data.error === "Invalid Token") {
+          alert("Your session ended. Please log in! ");
+          setLoader(false);
+          return toggleSignIn(true);
+        }
         setLoader(false);
         setEnvelopeId(res.data.envelopeId);
         if (

@@ -18,22 +18,20 @@ function PendingAuctions({ windowSize }) {
 
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
-      await authService.getBuyerPendingAuctions(user._id).then((res) => {
+      await authService.getBuyerInfo(user._id).then((res) => {
         setPendingAuctions(res.data);
-      });
-
-      await authService.getBuyerApprovedAuctions(user._id).then((res) => {
-        setApprovedAuctions(res.data);
       });
     };
     getBuyerPendingAuctions();
   }, []);
 
-  useEffect(() => {
-    if (pendingAuctions && approvedAuctions) {
-      setAllAuctions([...pendingAuctions, ...approvedAuctions]);
-    }
-  }, [pendingAuctions, approvedAuctions]);
+  // useEffect(() => {
+  //   if (pendingAuctions && approvedAuctions) {
+  //     setAllAuctions([...pendingAuctions, ...approvedAuctions]);
+  //   }
+  // }, [pendingAuctions, approvedAuctions]);
+
+  console.log(pendingAuctions);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -59,20 +57,19 @@ function PendingAuctions({ windowSize }) {
               <th>Auction ID</th>
               <th colSpan={2}>Property Type</th>
               <th colSpan={2}>Property Address</th>
-              <th colSpan={2}>Status</th>
               <th colSpan={2}>Questionair</th>
               <th colSpan={2}>Documents</th>
               <th colSpan={2}>Approved Fund</th>
               <th>View Auction</th>
             </tr>
           </thead>
-          {allAuctions.length > 0 ? (
-            allAuctions.map((auction, index) => (
+          {pendingAuctions.length > 0 ? (
+            pendingAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction.auctionId._id}
+                    {auction._id}
                     <div
                       style={{
                         width: "100%",
@@ -85,74 +82,34 @@ function PendingAuctions({ windowSize }) {
                         width="100px"
                         height="50px"
                         src={
-                          auction.auctionId.property.images.length > 0
-                            ? auction.auctionId.property.images[0].url
+                          auction.property.images.length > 0
+                            ? auction.property.images[0].url
                             : ""
                         }
                       />
                     </div>
                   </td>
                   <td colSpan={2}>
-                    {auction.auctionId.property.type === "real-estate"
+                    {auction.property.type === "real-estate"
                       ? "Real Estate"
-                      : auction.auctionId.property.type === "car"
+                      : auction.property.type === "car"
                       ? "Car"
-                      : auction.auctionId.property.type === "jet"
+                      : auction.property.type === "jet"
                       ? "Jet"
-                      : auction.auctionId.property.type === "yacht"
+                      : auction.property.type === "yacht"
                       ? "Yacht"
                       : ""}
                   </td>
                   <td colSpan={2}>
                     {
-                      auction.auctionId.property.details.property_address
+                      auction.property.details.property_address
                         .formatted_street_address
                     }
                   </td>
-                  {auction.isApproved === "success" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "green",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Approved
-                      </span>
-                    </td>
-                  ) : auction.isApproved === "pending" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "orange",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Pending
-                      </span>
-                    </td>
-                  ) : auction.isApproved === "fail" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "red",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Rejected
-                      </span>
-                    </td>
-                  ) : null}
                   <td colSpan={2}>
                     <Button
                       onClick={() => {
-                        setQuestionair(auction.answers);
+                        setQuestionair(auction.buyer.answers);
                         toggleQuestionair();
                       }}
                       variant="primary"
@@ -163,7 +120,7 @@ function PendingAuctions({ windowSize }) {
                   <td colSpan={2}>
                     <Button
                       onClick={() => {
-                        setDocuments(auction.documents);
+                        setDocuments(auction.buyer.funds);
                         toggleDocuments();
                       }}
                       variant="primary"
@@ -172,19 +129,24 @@ function PendingAuctions({ windowSize }) {
                     </Button>
                   </td>
                   <td colSpan={2}>
-                    <NumberFormat
-                      value={auction.approvedFund ? auction.approvedFund : 0}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
+                    {auction.buyer.funds.length > 0 ? (
+                      <NumberFormat
+                        value={auction.buyer.funds.reduce(
+                          (acc, curr) => acc + curr.amount,
+                          0
+                        )}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    ) : (
+                      "No Funds"
+                    )}
                   </td>
                   <td>
                     <Button
                       onClick={() => {
-                        window.open(
-                          `/DisplayAuctions/${auction.auctionId._id}`
-                        );
+                        window.open(`/DisplayAuctions/${auction._id}`);
                       }}
                       variant="primary"
                     >
@@ -262,20 +224,20 @@ function PendingAuctions({ windowSize }) {
                   documents.map((document, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
-                      <td>{document.officialName}</td>
+                      <td>{document.document.officialName}</td>
                       <td>
-                        {document.isVerified === "success"
+                        {document.document.isVerified === "success"
                           ? "Approved"
-                          : document.isVerified === "pending"
+                          : document.document.isVerified === "pending"
                           ? "Pending"
-                          : document.isVerified === "fail"
+                          : document.document.isVerified === "fail"
                           ? "Rejected"
                           : ""}
                       </td>
                       <td>
                         <Button
                           onClick={() => {
-                            window.open(document.url);
+                            window.open(document.document.url);
                           }}
                           variant="primary"
                         >

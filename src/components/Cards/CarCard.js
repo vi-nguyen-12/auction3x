@@ -68,20 +68,6 @@ const CarCard = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  // const toggleImage = () => {
-  //   const userId = user._id;
-  //   const data = {
-  //     userId: userId,
-  //     auctionId: id,
-  //   };
-  //   if (favorite === false) {
-  //     authService.saveProperty(data);
-  //     setFavorite(!favorite);
-  //   } else if (favorite === true) {
-  //     authService.removeProperty(data);
-  //     setFavorite(!favorite);
-  //   }
-  // };
   const [auctionEnded, setAuctionEnded] = useState(false);
   const toogleAuction = () => setAuctionEnded(!auctionEnded);
 

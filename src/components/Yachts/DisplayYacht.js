@@ -438,11 +438,26 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
           >
             <Col style={{ padding: "0" }} xs={12} md={6}>
               <Row style={{ textAlign: windowSize < 500 && "center" }}>
-                <h2 style={{ color: "#b77b50", padding: "0" }}>
+                <h2
+                  style={{
+                    color: "#b77b50",
+                    padding: "0",
+                    fontFamily: "josefin slab",
+                    fontWeight: "600",
+                    fontSize: "45px",
+                  }}
+                >
                   {property.property.details.manufacturer_name}
                 </h2>
                 <h5
-                  style={{ color: "#919191", fontWeight: "400", padding: "0" }}
+                  style={{
+                    color: "#919191",
+                    fontWeight: "400",
+                    padding: "0",
+                    fontFamily: "Montserrat",
+                    fontWeight: "400",
+                    fontSize: "25px",
+                  }}
                 >
                   {property.property.details.property_address.city},{" "}
                   {property.property.details.property_address.state}
@@ -771,7 +786,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                           display: "flex",
                           justifyContent: "left",
                           color: "Black",
-                          fontWeight: "bold",
+                          fontFamily: "Josefin Slab",
+                          fontWeight: "600",
+                          fontSize: "25px",
                         }}
                       >
                         <p>Registration Ended</p>
@@ -857,7 +874,9 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             display: "flex",
                             justifyContent: "left",
                             color: "Black",
-                            fontWeight: "bold",
+                            fontFamily: "Josefin Slab",
+                            fontWeight: "600",
+                            fontSize: "25px",
                           }}
                         >
                           <p>Auction Ended</p>
@@ -892,6 +911,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                               fontWeight: "700",
                               fontSize: "22px",
                               color: "black",
+                              fontFamily: "Josefin Slab",
                             }}
                           />
                         </h4>
@@ -928,6 +948,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                               fontWeight: "700",
                               fontSize: "22px",
                               color: "black",
+                              fontFamily: "Josefin Slab",
                             }}
                           />
                         </h4>
@@ -953,16 +974,19 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       alignItems: "center",
                       backgroundColor: "#e8e8e8",
                       width: "280px",
-                      height: "165px",
+                      height: "180px",
                       borderRadius: "10px",
                       padding: "40px",
                     }}
                   >
                     <h4
                       style={{
-                        fontWeight: "700",
                         fontSize: "22px",
                         color: "black",
+                        fontFamily: "Josefin Slab",
+                        fontWeight: "600",
+                        margin: "0",
+                        marginBottom: "-30px",
                       }}
                     >
                       199,530
@@ -995,6 +1019,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       fontWeight: "600",
                       fontSize: "30px",
                       color: "black",
+                      fontFamily: "Josefin Slab",
                     }}
                   >
                     Property Info
@@ -1097,7 +1122,14 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       <tr>
                         <td style={{ fontWeight: "700" }}>Running Cost</td>
                         {property.property.details.running_cost ? (
-                          <td>{property.property.details.running_cost}</td>
+                          <td>
+                            <NumberFormat
+                              value={property.property.details.running_cost}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                            />
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1212,6 +1244,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   fontWeight: "600",
                   fontSize: "30px",
                   color: "black",
+                  fontFamily: "Josefin Slab",
                 }}
               >
                 Executive Summary
@@ -1222,6 +1255,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                 fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
                 padding: windowSize > 800 && "20px 20px 20px 0",
+                fontFamily: "Josefin Slab",
+                fontWeight: "600",
               }}
               xs={12}
               md={6}
@@ -1251,6 +1286,8 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                 color: "black",
                 padding: windowSize > 800 && "20px 20px 20px 0",
                 marginTop: windowSize <= 767 && "20px",
+                fontFamily: "Josefin Slab",
+                fontWeight: "600",
               }}
               xs={12}
               md={6}
@@ -1276,7 +1313,13 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
             </Col>
           </Row>
 
-          <Row ref={myRef} style={{ marginTop: "50px", padding: "35px" }}>
+          <Row
+            ref={myRef}
+            style={{
+              marginTop: "50px",
+              padding: windowSize < 600 ? "15px" : "35px",
+            }}
+          >
             {/* ref={myRef}
             style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
@@ -1293,12 +1336,44 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   outline: "none",
                   fontSize: "12px",
                   borderRadius: "0",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3>Detailed Despcription</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Detailed Description
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1324,12 +1399,44 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   outline: "none",
                   fontSize: "12px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3>Location Highlight</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Location Highlight
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1346,12 +1453,44 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   outline: "none",
                   fontSize: "12px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
-                <div style={{ color: "white" }}>
-                  <h3> Market Overview</h3>
-                  <p>
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Merket Overview
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Pellentesque euismod, urna eu tempor congue, ipsum nunc
                     consectetur nisi, eget congue nisl nisl eget nunc.
@@ -1369,7 +1508,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   outline: "none",
                   fontSize: "12px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "50px 30px",
                 }}
               >
                 <Row className="tabDocs">
@@ -1491,7 +1630,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                           margin: "10px 0",
                         }}
                       >
-                        Download Selected
+                        View Selected
                       </button>
                     </Col>
                     <Col style={{ display: "flex", justifyContent: "center" }}>
@@ -1511,7 +1650,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                           margin: "10px 0",
                         }}
                       >
-                        Download All
+                        View All
                       </button>
                     </Col>
                   </Row>
