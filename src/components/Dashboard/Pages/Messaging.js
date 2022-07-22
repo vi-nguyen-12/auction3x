@@ -9,7 +9,7 @@ function Messaging({ windowSize }) {
   const [files, setFiles] = useState([]);
   const user = useSelector((state) => state.user);
 
-  const getFiles = () => {};
+  const getFiles = () => { };
 
   const send = async () => {
     const datas = {
@@ -30,10 +30,10 @@ function Messaging({ windowSize }) {
 
   return (
     <>
-      <h1 style={{ margin: "50px" }}>Message</h1>
+      <h1 style={{ margin: "50px" }}>Messaging</h1>
       <Container
         className="chatContainer"
-        style={{ width: "90vw", margin: "30px auto" }}
+        style={{ width: "100%", margin: "30px auto" }}
       >
         <Row
           className="d-flex justify-content-center mt-3"
@@ -51,10 +51,11 @@ function Messaging({ windowSize }) {
           </Col>
           <Col md={7} lg={6} className="d-flex">
             <input
-              className="form-control"
               type="text"
+              className="form-control"
               placeholder="Enter a subject"
               onChange={(e) => setSubject(e.target.value)}
+              style={{ width: "100%", border: "none" }}
               required
             />
           </Col>
@@ -103,14 +104,14 @@ function Messaging({ windowSize }) {
           style={{ alignItems: "center" }}
         >
           <Col className="d-flex" style={{ justifyContent: "center" }}>
-            <Button
+            <button
               variant="primary"
               style={{ fontWeight: "bold", padding: "10px 20px" }}
               className="mr-2"
               onClick={() => send()}
             >
               Send
-            </Button>
+            </button>
           </Col>
         </Row>
       </Container>

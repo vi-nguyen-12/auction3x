@@ -37,9 +37,9 @@
   color: #868686;
 }
 
-h2 {
-  /* margin-top: 5px !important; */
-}
+/* h2 {
+  margin-top: 5px !important;
+} */
 
 .card-number {
   height: 4rem;
@@ -173,7 +173,7 @@ h2 {
     margin: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-  .card-content{
+  .card-content {
     padding: 0 20px;
   }
 }
