@@ -28,10 +28,10 @@ const Work = ({ windowSize }) => {
           <Card className="work-box">
             <div className="numberBtn">1</div>
             <div className="card-content">
-              <span>Lorem Ipsum</span>
+              <span>Register as Buyer or Seller</span>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                The first step is to get you registered as an accredited
+                participant in the community.
               </p>
             </div>
           </Card>
@@ -47,10 +47,10 @@ const Work = ({ windowSize }) => {
           <Card className="work-box">
             <div className="numberBtn">2</div>
             <div className="card-content">
-              <span>Lorem Ipsum</span>
+              <span>List your assets for auction</span>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Set up an auction for your approved assets with a reserve price,
+                date, and length of auction.
               </p>
             </div>
           </Card>
@@ -66,10 +66,11 @@ const Work = ({ windowSize }) => {
           <Card className="work-box">
             <div className="numberBtn">3</div>
             <div className="card-content">
-              <span>Lorem Ipsum</span>
+              <span>Watch our community work!</span>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                The active participation of our community will help you achieve
+                your liquidation or acquisition goals in a trusted auction
+                format.
               </p>
             </div>
           </Card>

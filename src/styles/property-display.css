@@ -18,6 +18,8 @@
   cursor: pointer;
   background-color: transparent;
   height: 410px;
+  border-radius: 5px;
+  padding: 5px 0;
 }
 .logo {
   font-size: 50px;

@@ -156,16 +156,22 @@ function App() {
           if (w.property.type === "real-estate") {
             setWallet((prevState) => ({
               ...prevState.RealEstate,
-              RealEstate: w.totalFunds,
+              RealEstate: w.availableFund + prevState.RealEstate,
             }));
           } else if (w.property.type === "car") {
-            setWallet((prevState) => ({ ...prevState.Car, Car: w.totalFunds }));
+            setWallet((prevState) => ({
+              ...prevState.Car,
+              Car: w.availableFund + prevState.Car,
+            }));
           } else if (w.property.type === "jet") {
-            setWallet((prevState) => ({ ...prevState.Jet, Jet: w.totalFunds }));
+            setWallet((prevState) => ({
+              ...prevState.Jet,
+              Jet: w.availableFund + prevState.Jet,
+            }));
           } else if (w.property.type === "yacht") {
             setWallet((prevState) => ({
               ...prevState.Yacht,
-              Yacht: w.totalFunds,
+              Yacht: w.availableFund + prevState.Yacht,
             }));
           }
         });
@@ -203,8 +209,6 @@ function App() {
       }
     };
   }, [user]);
-
-  // console.log(wallet);
 
   return (
     <Suspense fallback={<Loading />}>

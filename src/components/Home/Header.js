@@ -13,6 +13,10 @@ import { useHistory } from "react-router-dom";
 import authService from "../../services/authServices";
 import { logout } from "../../slice/userSlice";
 import NumberFormat from "react-number-format";
+import { BsFillHouseFill } from "react-icons/bs";
+import { IoCarSportSharp } from "react-icons/io5";
+import { IoAirplaneSharp } from "react-icons/io5";
+import { IoIosBoat } from "react-icons/io";
 
 const Header = ({
   change,
@@ -337,53 +341,149 @@ const Header = ({
                       // id="dropdown-basic-button"
                       title={<IoWallet size={30} />}
                       onMouseEnter={() => setShowWallet(true)}
-                      onMouseLeave={() => setShowWallet(false)}
+                      onMouseLeave={() => setShowWallet(true)}
                     >
                       <IoWallet size={23} />
                     </Button>
                     <div
                       className="dropdown-content"
-                      style={{ marginLeft: "-100px", width: "230px" }}
+                      style={{
+                        marginLeft: "-100px",
+                        width: "230px",
+                        padding: "10px",
+                      }}
                     >
-                      <button className="d-flex justify-content-center">
-                        <span>Real Estate:</span>
-                        <NumberFormat
-                          value={wallet.RealEstate}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                        />
-                      </button>
+                      <div className="d-flex justify-content-start align-items-center">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <BsFillHouseFill size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            Real Estate
+                          </span>
+                          <NumberFormat
+                            style={{
+                              padding: "0",
+                              color: "#b6b7b8",
+                              display: "flex",
+                            }}
+                            value={wallet.RealEstate}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </div>
+                      </div>
 
-                      <button className="d-flex justify-content-center">
-                        <span>Car:</span>
-                        <NumberFormat
-                          value={wallet.Car}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                        />
-                      </button>
+                      <div className="d-flex justify-content-start align-items-center mt-2">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <IoCarSportSharp size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            Car
+                          </span>
+                          <NumberFormat
+                            style={{
+                              padding: "0",
+                              color: "#b6b7b8",
+                              display: "flex",
+                            }}
+                            value={wallet.Car}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </div>
+                      </div>
 
-                      <button className="d-flex justify-content-center">
-                        <span>Jet:</span>
-                        <NumberFormat
-                          value={wallet.Jet}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                        />
-                      </button>
+                      <div className="d-flex justify-content-start align-items-center mt-2">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <IoAirplaneSharp size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            Jet
+                          </span>
+                          <NumberFormat
+                            style={{
+                              padding: "0",
+                              color: "#b6b7b8",
+                              display: "flex",
+                            }}
+                            value={wallet.Jet}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </div>
+                      </div>
 
-                      <button className="d-flex justify-content-center">
-                        <span>Yacht:</span>
-                        <NumberFormat
-                          value={wallet.Yacht}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                        />
-                      </button>
+                      <div className="d-flex justify-content-start align-items-center mt-2">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <IoIosBoat size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            Yacht
+                          </span>
+                          <NumberFormat
+                            style={{
+                              padding: "0",
+                              color: "#b6b7b8",
+                              display: "flex",
+                            }}
+                            value={wallet.Yacht}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"$"}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <Button
@@ -579,47 +679,143 @@ const Header = ({
                   </Button>
                   <div
                     className="dropdown-content"
-                    style={{ marginLeft: "-100px", width: "230px" }}
+                    style={{
+                      marginLeft: "-100px",
+                      width: "230px",
+                      padding: "10px",
+                    }}
                   >
-                    <button className="d-flex justify-content-center">
-                      <span>Real Estate:</span>
-                      <NumberFormat
-                        value={wallet.RealEstate}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </button>
+                    <div className="d-flex justify-content-start align-items-center">
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          backgroundColor: "#e9bc4d",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <BsFillHouseFill size={20} color="white" />
+                      </div>
+                      <div className="d-grid justify-content-start">
+                        <span style={{ padding: "0", display: "flex" }}>
+                          Real Estate
+                        </span>
+                        <NumberFormat
+                          style={{
+                            padding: "0",
+                            color: "#b6b7b8",
+                            display: "flex",
+                          }}
+                          value={wallet.RealEstate}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </div>
+                    </div>
 
-                    <button className="d-flex justify-content-center">
-                      <span>Car:</span>
-                      <NumberFormat
-                        value={wallet.Car}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </button>
+                    <div className="d-flex justify-content-start align-items-center mt-2">
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          backgroundColor: "#e9bc4d",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <IoCarSportSharp size={20} color="white" />
+                      </div>
+                      <div className="d-grid justify-content-start">
+                        <span style={{ padding: "0", display: "flex" }}>
+                          Car
+                        </span>
+                        <NumberFormat
+                          style={{
+                            padding: "0",
+                            color: "#b6b7b8",
+                            display: "flex",
+                          }}
+                          value={wallet.Car}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </div>
+                    </div>
 
-                    <button className="d-flex justify-content-center">
-                      <span>Jet:</span>
-                      <NumberFormat
-                        value={wallet.Jet}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </button>
+                    <div className="d-flex justify-content-start align-items-center mt-2">
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          backgroundColor: "#e9bc4d",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <IoAirplaneSharp size={20} color="white" />
+                      </div>
+                      <div className="d-grid justify-content-start">
+                        <span style={{ padding: "0", display: "flex" }}>
+                          Jet
+                        </span>
+                        <NumberFormat
+                          style={{
+                            padding: "0",
+                            color: "#b6b7b8",
+                            display: "flex",
+                          }}
+                          value={wallet.Jet}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </div>
+                    </div>
 
-                    <button className="d-flex justify-content-center">
-                      <span>Yacht:</span>
-                      <NumberFormat
-                        value={wallet.Yacht}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                        prefix={"$"}
-                      />
-                    </button>
+                    <div className="d-flex justify-content-start align-items-center mt-2">
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          backgroundColor: "#e9bc4d",
+                          width: "40px",
+                          height: "40px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginRight: "10px",
+                        }}
+                      >
+                        <IoIosBoat size={20} color="white" />
+                      </div>
+                      <div className="d-grid justify-content-start">
+                        <span style={{ padding: "0", display: "flex" }}>
+                          Yacht
+                        </span>
+                        <NumberFormat
+                          style={{
+                            padding: "0",
+                            color: "#b6b7b8",
+                            display: "flex",
+                          }}
+                          value={wallet.Yacht}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <Button
