@@ -206,6 +206,30 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
     (doc) => doc.officialName === "valuation_report"
   );
 
+  const title = property.property.documents.filter(
+    (doc) => doc.officialName === "title_certificate"
+  );
+
+  const insurance = property.property.documents.filter(
+    (doc) => doc.officialName === "insurance_document"
+  );
+
+  const details = property.property.documents.filter(
+    (doc) => doc.officialName === "detail_specification"
+  );
+
+  const detailHistory = property.property.documents.filter(
+    (doc) => doc.officialName === "jet_detail_history"
+  );
+
+  const fitness = property.property.documents.filter(
+    (doc) => doc.officialName === "fitness_report"
+  );
+
+  const electric = property.property.documents.filter(
+    (doc) => doc.officialName === "electric_work_details"
+  );
+
   const download = (files) => (e) => {
     if (e.target.checked) {
       setDownloadFiles([...downloadFiles, ...files]);
@@ -1545,7 +1569,32 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                         />{" "}
                         Valuation Report ({valuationDoc.length})
                       </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(
+                            detailHistory.map((item) => item.url)
+                          )}
+                        />{" "}
+                        Jet Detail History ({detailHistory.length})
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(fitness.map((item) => item.url))}
+                        />{" "}
+                        Fitness Report ({fitness.length})
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(electric.map((item) => item.url))}
+                        />{" "}
+                        Electric Work Details ({electric.length})
+                      </div>
                     </Col>
+
                     <Col
                       style={{
                         display: "grid",
@@ -1578,9 +1627,31 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                         />{" "}
                         Engine Details ({engineDoc.length})
                       </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(title.map((item) => item.url))}
+                        />{" "}
+                        Title Documents ({title.length})
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(details.map((item) => item.url))}
+                        />{" "}
+                        Details Specification ({details.length})
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(insurance.map((item) => item.url))}
+                        />{" "}
+                        Insurance Documents ({insurance.length})
+                      </div>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col
                       style={{
                         margin: "10px",
@@ -1598,7 +1669,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                         Diligence Documents are updated
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row
                     style={{
                       display: "flex",
@@ -1607,6 +1678,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                       width: "auto",
                       height: "auto",
                     }}
+                    className="mt-5"
                   >
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button

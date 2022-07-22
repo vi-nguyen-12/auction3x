@@ -86,7 +86,6 @@ function CarDetails({
     "BENTLEY",
     "CZINGER",
     "MAZZANTI",
-    "Other",
   ];
 
   const handleChange = (address) => {
@@ -244,14 +243,20 @@ function CarDetails({
               Make<span style={{ color: "#ff0000" }}>*</span>
             </span>
             {other ? (
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={make}
-                {...register("make", { maxLength: 100 })}
-                onChange={(e) => setMake(e.target.value)}
-                required
-              />
+              <>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Make"
+                  defaultValue={make}
+                  {...register("make", { maxLength: 100 })}
+                  onChange={(e) => setMake(e.target.value)}
+                  required
+                />
+                <span className="d-flex justify-content-end mt-1">
+                  <Button onClick={() => setOther(false)}>Back</Button>
+                </span>
+              </>
             ) : (
               <Form.Select
                 value={make}
@@ -267,6 +272,7 @@ function CarDetails({
                     {item}
                   </option>
                 ))}
+                <option value="Other">Other</option>
               </Form.Select>
             )}
           </Col>
@@ -306,7 +312,19 @@ function CarDetails({
             <span style={{ color: "black" }}>
               Mileage<span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              className="form-control"
+              thousandSeparator={true}
+              value={mileage}
+              allowNegative={false}
+              onValueChange={(values) => {
+                const { value } = values;
+                setMileage(value);
+              }}
+              name="mileage"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -314,22 +332,34 @@ function CarDetails({
               {...register("mileage")}
               onChange={(e) => setMileage(e.target.value)}
               required
-            />
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
             <span style={{ color: "black" }}>
-              Power<span style={{ color: "#ff0000" }}>*</span>
+              Power (Horsepower)<span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              thousandSeparator={true}
+              className="form-control"
+              allowNegative={false}
+              value={power}
+              onValueChange={(values) => {
+                const { value } = values;
+                setPower(value);
+              }}
+              name="power"
+              required
+            />
+            {/* <input
               type="text"
               className="form-control"
               defaultValue={power}
               {...register("power")}
               onChange={(e) => setPower(e.target.value)}
               required
-            />
+            /> */}
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ color: "black" }}>Car Type</span>
@@ -351,6 +381,7 @@ function CarDetails({
               type="text"
               className="form-control"
               defaultValue={vin}
+              onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               {...register("vin")}
               onChange={(e) => setVin(e.target.value)}
               required

@@ -15,14 +15,14 @@ const Home = ({ toggleSignIn, windowSize }) => {
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
-  useEffect(() => {
-    authService.getFeaturedAuctions().then((res) => {
+  useEffect(async () => {
+    await authService.getFeaturedAuctions().then((res) => {
       setFeatureAuctions(res.data);
     });
-    authService.getUpcomingAuctions().then((res) => {
+    await authService.getUpcomingAuctions().then((res) => {
       setUpcomingAuctions(res.data);
     });
-    authService.getOngoingAuctions().then((res) => {
+    await authService.getOngoingAuctions().then((res) => {
       setOnGoingAuctions(res.data);
     });
   }, []);

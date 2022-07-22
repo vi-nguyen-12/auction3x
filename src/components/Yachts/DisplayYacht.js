@@ -199,6 +199,14 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
     (doc) => doc.officialName === "vessel_valuation_report"
   );
 
+  const engine = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_engine_type"
+  );
+
+  const insurance = property.property.documents.filter(
+    (doc) => doc.officialName === "vessel_insurance"
+  );
+
   const download = (files) => (e) => {
     if (e.target.checked) {
       setDownloadFiles([...downloadFiles, ...files]);
@@ -1529,7 +1537,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             vesselRegist.map((item) => item.url)
                           )}
                         />{" "}
-                        Broker Offering Memorandum ({vesselRegist.length})
+                        Vessel Registration Document ({vesselRegist.length})
                       </div>
                       <div>
                         <input
@@ -1538,7 +1546,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             vesselMaintenance.map((item) => item.url)
                           )}
                         />{" "}
-                        Market and Valuations ({vesselMaintenance.length})
+                        Vessel Maintenance Report ({vesselMaintenance.length})
                       </div>
                       <div>
                         <input
@@ -1547,7 +1555,15 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             valuationDoc.map((item) => item.url)
                           )}
                         />{" "}
-                        Operating and Financial ({valuationDoc.length})
+                        Vessel Valuation Report ({valuationDoc.length})
+                      </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(engine.map((item) => item.url))}
+                        />{" "}
+                        Vessel Engine Details ({engine.length})
                       </div>
                     </Col>
                     <Col
@@ -1566,7 +1582,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             deckDetails.map((item) => item.url)
                           )}
                         />{" "}
-                        Purchase Agreement ({deckDetails.length})
+                        Vessel Deck Details ({deckDetails.length})
                       </div>
                       <div>
                         <input
@@ -1575,7 +1591,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             marineReport.map((item) => item.url)
                           )}
                         />{" "}
-                        Third Party Reports ({marineReport.length})
+                        Marine Surveyor Report ({marineReport.length})
                       </div>
                       <div>
                         <input
@@ -1584,11 +1600,19 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                             vesselPerformance.map((item) => item.url)
                           )}
                         />{" "}
-                        Title and Insurance ({vesselPerformance.length})
+                        Vessel Performance Report ({vesselPerformance.length})
+                      </div>
+
+                      <div>
+                        <input
+                          type="checkbox"
+                          onChange={download(insurance.map((item) => item.url))}
+                        />{" "}
+                        Vessel Insurance Document ({insurance.length})
                       </div>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col
                       style={{
                         margin: "10px",
@@ -1603,7 +1627,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                         Diligence Documents are updated
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row
                     style={{
                       display: "flex",
@@ -1612,6 +1636,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       width: "auto",
                       height: "auto",
                     }}
+                    className="mt-5"
                   >
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button

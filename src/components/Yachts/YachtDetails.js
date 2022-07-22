@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Button, Form } from "react-bootstrap";
-
 import authService from "../../services/authServices";
 import { IoInformationCircleSharp } from "react-icons/io5";
 import PlacesAutocomplete, {
@@ -239,14 +238,6 @@ function YachtDetails({
         </div>
         <Row className="mt-3">
           <Col>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={vessel_registration_number}
-              {...register("vessel_registration_number")}
-              onChange={(e) => setVessel_registration_number(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -256,19 +247,22 @@ function YachtDetails({
               Vessel Registration Number{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={vessel_registration_number}
+              onInput={(e) => {
+                e.target.value = e.target.value.toUpperCase();
+              }}
+              {...register("vessel_registration_number")}
+              onChange={(e) => setVessel_registration_number(e.target.value)}
+              required
+            />
           </Col>
         </Row>
 
         <Row className="mt-3">
           <Col>
-            <input
-              type="date"
-              className="form-control"
-              defaultValue={vessel_manufacturing_date}
-              {...register("vessel_manufacturing_date")}
-              onChange={(e) => setVessel_manufacturing_date(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -278,6 +272,14 @@ function YachtDetails({
               Vessel Manufacturing Date{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="date"
+              className="form-control"
+              defaultValue={vessel_manufacturing_date}
+              {...register("vessel_manufacturing_date")}
+              onChange={(e) => setVessel_manufacturing_date(e.target.value)}
+              required
+            />
           </Col>
         </Row>
 
@@ -295,6 +297,9 @@ function YachtDetails({
                 loading,
               }) => (
                 <div>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Address <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
@@ -302,9 +307,6 @@ function YachtDetails({
                     })}
                     required
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Address <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                   {suggestions && suggestions.length > 0 && (
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Loading...</div>}
@@ -343,6 +345,14 @@ function YachtDetails({
             </PlacesAutocomplete>
           </Col>
           <Col>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Country <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -352,19 +362,19 @@ function YachtDetails({
               required
               readOnly
             />
+          </Col>
+        </Row>
+
+        <Row className="mt-3">
+          <Col>
             <span
               style={{
                 fontWeight: "600",
                 color: "black",
               }}
             >
-              Country <span style={{ color: "#ff0000" }}>*</span>
+              State <span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-        </Row>
-
-        <Row className="mt-3">
-          <Col>
             <input
               type="text"
               className="form-control"
@@ -374,16 +384,16 @@ function YachtDetails({
               required
               readOnly
             />
+          </Col>
+          <Col>
             <span
               style={{
                 fontWeight: "600",
                 color: "black",
               }}
             >
-              State <span style={{ color: "#ff0000" }}>*</span>
+              City <span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-          <Col>
             <input
               type="text"
               className="form-control"
@@ -393,16 +403,11 @@ function YachtDetails({
               required
               readOnly
             />
-            <span
-              style={{
-                fontWeight: "600",
-                color: "black",
-              }}
-            >
-              City <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
           <Col>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Zip Code <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <input
               type="text"
               className="form-control"
@@ -413,22 +418,11 @@ function YachtDetails({
               required
               readOnly
             />
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Zip Code <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
 
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={manufacture_mark}
-              {...register("manufacture_mark")}
-              onChange={(e) => setManufacture_mark(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -437,17 +431,39 @@ function YachtDetails({
             >
               Manufacture Mark <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={manufacture_mark}
+              {...register("manufacture_mark")}
+              onChange={(e) => setManufacture_mark(e.target.value)}
+              required
+            />
           </Col>
           <Col xs={12} md={4}>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Manufacturer Name <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             {other ? (
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={manufacturer_name}
-                {...register("manufacturer_name")}
-                onChange={(e) => setManufacturer_name(e.target.value)}
-                required
-              />
+              <>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Manufacturer Name"
+                  defaultValue={manufacturer_name}
+                  {...register("manufacturer_name")}
+                  onChange={(e) => setManufacturer_name(e.target.value)}
+                  required
+                />
+                <span className="d-flex justify-content-end mt-1">
+                  <Button onClick={() => setOther(false)}>Back</Button>
+                </span>
+              </>
             ) : (
               <Form.Select
                 value={manufacturer_name}
@@ -465,25 +481,9 @@ function YachtDetails({
                 ))}
               </Form.Select>
             )}
-            <span
-              style={{
-                fontWeight: "600",
-                color: "black",
-              }}
-            >
-              Manufacturer Name <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
 
           <Col xs={12} md={4}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={engine_manufacture_name}
-              {...register("engine_manufacture_name")}
-              onChange={(e) => setEngine_manufacture_name(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -493,19 +493,19 @@ function YachtDetails({
               Engine Manufacturer Name{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={engine_manufacture_name}
+              {...register("engine_manufacture_name")}
+              onChange={(e) => setEngine_manufacture_name(e.target.value)}
+              required
+            />
           </Col>
         </Row>
 
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={engine_type}
-              {...register("engine_type")}
-              onChange={(e) => setEngine_type(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -514,17 +514,16 @@ function YachtDetails({
             >
               Engine Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-          <Col>
             <input
-              type="number"
-              min="0"
+              type="text"
               className="form-control"
-              defaultValue={length}
-              {...register("length")}
-              onChange={(e) => setLength(e.target.value)}
+              defaultValue={engine_type}
+              {...register("engine_type")}
+              onChange={(e) => setEngine_type(e.target.value)}
               required
             />
+          </Col>
+          <Col>
             <span
               style={{
                 fontWeight: "600",
@@ -533,18 +532,30 @@ function YachtDetails({
             >
               Vessel Length(ft) <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <NumberFormat
+              className="form-control"
+              thousandSeparator={true}
+              allowNegative={false}
+              value={length}
+              onValueChange={(values) => {
+                const { value } = values;
+                setLength(value);
+              }}
+              required
+            />
+            {/* <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={length}
+              {...register("length")}
+              onChange={(e) => setLength(e.target.value)}
+              required
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={engine_deck_type}
-              {...register("engine_deck_type")}
-              onChange={(e) => setEngine_deck_type(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -553,18 +564,16 @@ function YachtDetails({
             >
               Engine Deck Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={engine_deck_type}
+              {...register("engine_deck_type")}
+              onChange={(e) => setEngine_deck_type(e.target.value)}
+              required
+            />
           </Col>
           <Col xs={12} md={4}>
-            <NumberFormat
-              thousandSeparator={true}
-              prefix="$"
-              value={running_cost}
-              className="form-control"
-              onValueChange={(values) => {
-                const { value } = values;
-                setRunning_cost(value);
-              }}
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -573,17 +582,19 @@ function YachtDetails({
             >
               Running Cost <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <NumberFormat
+              thousandSeparator={true}
+              allowNegative={false}
+              prefix="$"
+              value={running_cost}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setRunning_cost(value);
+              }}
+            />
           </Col>
           <Col xs={12} md={4}>
-            <input
-              type="number"
-              min="0"
-              className="form-control"
-              defaultValue={no_of_crew_required}
-              {...register("no_of_crew_required")}
-              onChange={(e) => setNo_of_crew_required(e.target.value)}
-              required
-            />
             <span
               style={{
                 fontWeight: "600",
@@ -592,6 +603,26 @@ function YachtDetails({
             >
               No. Crew Required <span style={{ color: "#ff0000" }}>*</span>
             </span>
+            <NumberFormat
+              thousandSeparator={true}
+              allowNegative={false}
+              value={no_of_crew_required}
+              className="form-control"
+              onValueChange={(values) => {
+                const { value } = values;
+                setNo_of_crew_required(value);
+              }}
+              required
+            />
+            {/* <input
+              type="number"
+              min="0"
+              className="form-control"
+              defaultValue={no_of_crew_required}
+              {...register("no_of_crew_required")}
+              onChange={(e) => setNo_of_crew_required(e.target.value)}
+              required
+            /> */}
           </Col>
         </Row>
         <Row className="mt-3">
@@ -630,6 +661,14 @@ function YachtDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
+            <span
+              style={{
+                fontWeight: "600",
+                color: "black",
+              }}
+            >
+              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            </span>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -640,16 +679,16 @@ function YachtDetails({
                 setReservedAmount(value);
               }}
             />
+          </Col>
+          <Col xs={12} md={6}>
             <span
               style={{
                 fontWeight: "600",
                 color: "black",
               }}
             >
-              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
             </span>
-          </Col>
-          <Col xs={12} md={6}>
             <NumberFormat
               thousandSeparator={true}
               prefix="$"
@@ -660,14 +699,6 @@ function YachtDetails({
                 setDiscussedAmount(value);
               }}
             />
-            <span
-              style={{
-                fontWeight: "600",
-                color: "black",
-              }}
-            >
-              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
-            </span>
           </Col>
         </Row>
 

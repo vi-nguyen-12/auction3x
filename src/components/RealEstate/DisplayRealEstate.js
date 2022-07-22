@@ -174,6 +174,10 @@ function DisplayRealEstate({
     (doc) => doc.officialName === "financial_document"
   );
 
+  const demographics = property.property.documents.filter(
+    (doc) => doc.officialName === "demographics"
+  );
+
   const download = (files) => (e) => {
     if (e.target.checked) {
       setDownloadFiles([...downloadFiles, ...files]);
@@ -1488,10 +1492,10 @@ function DisplayRealEstate({
                         <input
                           type="checkbox"
                           onChange={download(
-                            purchaseAgreement.map((item) => item.url)
+                            demographics.map((item) => item.url)
                           )}
                         />{" "}
-                        Broker Offering Memorandum (0)
+                        Demographics ({demographics.length})
                       </div>
                       <div>
                         <input
@@ -1533,7 +1537,7 @@ function DisplayRealEstate({
                           type="checkbox"
                           onChange={download(financial.map((item) => item.url))}
                         />{" "}
-                        Operating and Financial ({financial.length})
+                        Financial Documents ({financial.length})
                       </div>
                       <div>
                         <input
@@ -1544,7 +1548,7 @@ function DisplayRealEstate({
                       </div>
                     </Col>
                   </Row>
-                  <Row>
+                  {/* <Row>
                     <Col
                       style={{
                         margin: "10px",
@@ -1552,6 +1556,8 @@ function DisplayRealEstate({
                         color: "white",
                         display: "flex",
                         justifyContent: "center",
+                        fontFamily: "Josefin Slab",
+                        fontWeight: "500",
                       }}
                     >
                       <div>
@@ -1559,7 +1565,7 @@ function DisplayRealEstate({
                         Diligence Documents are updated
                       </div>
                     </Col>
-                  </Row>
+                  </Row> */}
                   <Row
                     style={{
                       display: "flex",
@@ -1568,6 +1574,7 @@ function DisplayRealEstate({
                       width: "auto",
                       height: "auto",
                     }}
+                    className="mt-5"
                   >
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <button

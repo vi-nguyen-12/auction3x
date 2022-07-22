@@ -102,7 +102,6 @@ function JetDetails({
     "GULFSTREAM",
     "PIAGGIO",
     "PILATUS",
-    "Other",
   ];
 
   const handleChange = (address) => {
@@ -381,14 +380,19 @@ function JetDetails({
               Aircraft Manufacturer <span style={{ color: "#ff0000" }}>*</span>
             </span>
             {other ? (
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={aircraft_builder_name}
-                {...register("aircraft_builder_name")}
-                onChange={(e) => setAircraft_builder_name(e.target.value)}
-                required
-              />
+              <>
+                <input
+                  type="text"
+                  className="form-control"
+                  defaultValue={aircraft_builder_name}
+                  {...register("aircraft_builder_name")}
+                  onChange={(e) => setAircraft_builder_name(e.target.value)}
+                  required
+                />
+                <span className="d-flex justify-content-end mt-1">
+                  <Button onClick={() => setOther(false)}>Back</Button>
+                </span>
+              </>
             ) : (
               <Form.Select
                 value={aircraft_builder_name}
@@ -404,6 +408,7 @@ function JetDetails({
                     {item}
                   </option>
                 ))}
+                <option value="Other">Other</option>
               </Form.Select>
             )}
           </Col>
@@ -448,6 +453,9 @@ function JetDetails({
               type="text"
               className="form-control"
               defaultValue={aircraft_serial_no}
+              onInput={(e) => {
+                e.target.value = e.target.value.toUpperCase();
+              }}
               {...register("aircraft_serial_no")}
               onChange={(e) => setAircraft_serial_no(e.target.value)}
               required
@@ -488,7 +496,19 @@ function JetDetails({
             <span style={{ fontWeight: "600", color: "black" }}>
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
+            <NumberFormat
+              thousandSeparator={true}
+              className="form-control"
+              allowNegative={false}
+              value={number_of_engines}
+              onValueChange={(values) => {
+                const { value } = values;
+                setNumber_of_engines(value);
+              }}
+              name="number_of_engines"
+              required
+            />
+            {/* <input
               type="number"
               min="0"
               className="form-control"
@@ -496,7 +516,7 @@ function JetDetails({
               {...register("number_of_engines")}
               onChange={(e) => setNumber_of_engines(e.target.value)}
               required
-            />
+            /> */}
           </Col>
           <Col className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
