@@ -49,11 +49,11 @@ function DisplayAuctions({
     const newSocket = io(serverUrl, { withCredentials: true });
     setSocket(newSocket);
     newSocket.on("connect", () => {
-      console.log("connected socket with back-end");
+      // console.log("connected socket with back-end");
     });
     return () => {
       newSocket.on("disconnect", () => {
-        console.log("disconnected socket with back-end");
+        // console.log("disconnected socket with back-end");
       });
     };
   }, []);

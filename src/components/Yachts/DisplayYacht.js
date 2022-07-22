@@ -1240,7 +1240,12 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
           >
             <div
               style={{
-                marginTop: windowSize < 600 ? "300px" : "30px",
+                marginTop:
+                  windowSize < 600 && property.highestBidders?.length > 0
+                    ? "300px"
+                    : windowSize < 600
+                    ? "150px"
+                    : "0",
                 alignItems: "center",
                 marginBottom: "20px",
                 padding: "0",
@@ -1267,28 +1272,12 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                 fontWeight: "600",
               }}
               xs={12}
-              md={6}
+              // md={6}
             >
-              The Reid Group & Keller Williams Realty, in partnership with
-              Ten-X, is pleased to offer for sale this West Milwaukee Medical
-              Office. The property is being offered in a Fee Simple interest,
-              unencumbered by a management contract. Built by masonry stone in
-              1957 and located in West Milwaukee, Wisconsin, this property is a
-              single-story, ‡4,856-SF office most recently used as a medical
-              office. It features small, private rooms/offices that can be
-              converted to something a new investor has a vision for. It is
-              zoned NS2, which is commercial and neighborhood shopping. The
-              structure itself totals about six offices, a fully functional
-              basement, and six surface parking spaces on a 18-acre lot. The
-              property is a great value-add opportunity that has been well
-              maintained but would absolutely benefit from a renovation and
-              strategic marketing/lease-up plan. Today, Milwaukee is one of the
-              most ethnically and culturally diverse cities in the United
-              States. German immigrants heavily influenced its history in the
-              19th century, and it became well known for its brewing industry.
+              {property.property.details.description?.summary}
             </Col>
 
-            <Col
+            {/* <Col
               style={{
                 fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
@@ -1318,7 +1307,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
               Harley-Davidson. Property tours are available by appointment only.
               Please contact Alexander Reid to schedule at 847-791-2420 or
               alexander@reidgroup.house.
-            </Col>
+            </Col> */}
           </Row>
 
           <Row
@@ -1343,7 +1332,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "0",
+                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1373,7 +1362,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                         fontFamily: "Josefin Slab",
                       }}
                     >
-                      Detailed Description
+                      Investment Opportunity
                     </span>
                   </div>
                   <p
@@ -1382,19 +1371,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       textAlign: "left",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque euismod, urna eu tempor congue, ipsum nunc
-                    consectetur nisi, eget congue nisl nisl eget nunc.
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; Donec euismod, nisi eget
-                    tincidunt congue, nisl nisl euismod nisi, eget congue nisl
-                    nisl eget nunc. Vestibulum ante ipsum primis in faucibus
-                    orci luctus et ultrices posuere cubilia Curae; Donec
-                    euismod, nisi eget tincidunt congue, nisl nisl euismod nisi,
-                    eget congue nisl nisl eget nunc. Vestibulum ante ipsum
-                    primis in faucibus orci luctus et ultrices posuere cubilia
-                    Curae; Donec euismod, nisi eget tincidunt congue, nisl nisl
-                    euismod nisi,
+                    {property.property.details.description?.investment}
                   </p>
                 </div>
               </Tab>
@@ -1445,10 +1422,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       textAlign: "left",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque euismod, urna eu tempor congue, ipsum nunc
-                    consectetur nisi, eget congue nisl nisl eget nunc.
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
+                    {property.property.details.description?.location}
                   </p>
                 </div>
               </Tab>
@@ -1499,10 +1473,7 @@ function DisplayYacht({ toggleChange, property, toggleSignIn, windowSize }) {
                       textAlign: "left",
                     }}
                   >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Pellentesque euismod, urna eu tempor congue, ipsum nunc
-                    consectetur nisi, eget congue nisl nisl eget nunc.
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
+                    {property.property.details.description?.market}
                   </p>
                 </div>
               </Tab>

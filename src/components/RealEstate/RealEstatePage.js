@@ -179,7 +179,7 @@ function RealEstatePage({
           {windowSize > 800 ? (
             auctions.map((auction, index) => {
               return (
-                <Col key={index}>
+                <Col className="mb-5" key={index}>
                   <Wrap>
                     <Cards
                       data={auction}
