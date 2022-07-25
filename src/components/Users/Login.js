@@ -125,7 +125,7 @@ const Login = ({
             style={{ marginTop: "5px", marginBottom: "30px", fontSize: "20px" }}
             className="nav-link-signup"
           >
-            Forgot Password?
+            Reset Password
           </Button>
         </div>
         <Modal.Footer>

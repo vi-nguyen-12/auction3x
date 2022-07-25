@@ -1658,7 +1658,10 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
             keyboard={false}
             size="md"
             show={placeBid}
-            onHide={togglePlaceBid}
+            onHide={() => {
+              togglePlaceBid();
+              window.location.reload();
+            }}
             centered
           >
             <Modal.Body>

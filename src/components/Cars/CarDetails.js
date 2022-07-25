@@ -134,8 +134,8 @@ function CarDetails({
   };
 
   const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
+    if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than or equal to discussed amount");
     } else {
       if (year > new Date().getFullYear()) {
         alert("Built year must be less than or equal to current year.");

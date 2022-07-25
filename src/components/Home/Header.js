@@ -26,6 +26,7 @@ const Header = ({
   toggleSignUp,
   windowSize,
   wallet,
+  subWallet,
 }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -42,6 +43,13 @@ const Header = ({
   const [borderBottom, setBorderBottom] = useState("");
   const toggleOpen = () => setOpen(!open);
   const [showWallet, setShowWallet] = useState(false);
+
+  const [showSubWallet, setShowSubWallet] = useState({
+    RealEstate: false,
+    Car: false,
+    Jet: false,
+    Yacht: false,
+  });
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -377,12 +385,40 @@ const Header = ({
                               padding: "0",
                               color: "#b6b7b8",
                               display: "flex",
+                              cursor: "pointer",
                             }}
                             value={wallet.RealEstate}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
+                            onClick={() => {
+                              setShowSubWallet((prev) => ({
+                                ...prev.RealEstate,
+                                RealEstate: !prev.RealEstate,
+                              }));
+                            }}
                           />
+                          {showSubWallet.RealEstate === true &&
+                            subWallet.RealEstate.map((item, index) => (
+                              <span className="p-0" key={index}>
+                                <NumberFormat
+                                  thousandSeparator={true}
+                                  value={item.availableFund}
+                                  displayType={"text"}
+                                  prefix={
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                      ? "* $"
+                                      : "- $"
+                                  }
+                                  style={{
+                                    padding: "0",
+                                    display: "flex",
+                                    fontSize: "12px",
+                                  }}
+                                />
+                              </span>
+                            ))}
                         </div>
                       </div>
 
@@ -410,12 +446,40 @@ const Header = ({
                               padding: "0",
                               color: "#b6b7b8",
                               display: "flex",
+                              cursor: "pointer",
                             }}
                             value={wallet.Car}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
+                            onClick={() => {
+                              setShowSubWallet((prev) => ({
+                                ...prev.Car,
+                                Car: !prev.Car,
+                              }));
+                            }}
                           />
+                          {showSubWallet.Car === true &&
+                            subWallet.Car.map((item, index) => (
+                              <span className="p-0" key={index}>
+                                <NumberFormat
+                                  thousandSeparator={true}
+                                  value={item.availableFund}
+                                  displayType={"text"}
+                                  prefix={
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                      ? "* $"
+                                      : "- $"
+                                  }
+                                  style={{
+                                    padding: "0",
+                                    display: "flex",
+                                    fontSize: "12px",
+                                  }}
+                                />
+                              </span>
+                            ))}
                         </div>
                       </div>
 
@@ -443,12 +507,40 @@ const Header = ({
                               padding: "0",
                               color: "#b6b7b8",
                               display: "flex",
+                              cursor: "pointer",
                             }}
                             value={wallet.Jet}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
+                            onClick={() => {
+                              setShowSubWallet((prev) => ({
+                                ...prev.Jet,
+                                Jet: !prev.Jet,
+                              }));
+                            }}
                           />
+                          {showSubWallet.Jet === true &&
+                            subWallet.Jet.map((item, index) => (
+                              <span className="p-0" key={index}>
+                                <NumberFormat
+                                  thousandSeparator={true}
+                                  value={item.availableFund}
+                                  displayType={"text"}
+                                  prefix={
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                      ? "* $"
+                                      : "- $"
+                                  }
+                                  style={{
+                                    padding: "0",
+                                    display: "flex",
+                                    fontSize: "12px",
+                                  }}
+                                />
+                              </span>
+                            ))}
                         </div>
                       </div>
 
@@ -476,12 +568,40 @@ const Header = ({
                               padding: "0",
                               color: "#b6b7b8",
                               display: "flex",
+                              cursor: "pointer",
                             }}
                             value={wallet.Yacht}
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
+                            onClick={() => {
+                              setShowSubWallet((prev) => ({
+                                ...prev.Yacht,
+                                Yacht: !prev.Yacht,
+                              }));
+                            }}
                           />
+                          {showSubWallet.Yacht === true &&
+                            subWallet.Yacht.map((item, index) => (
+                              <span className="p-0" key={index}>
+                                <NumberFormat
+                                  thousandSeparator={true}
+                                  value={item.availableFund}
+                                  displayType={"text"}
+                                  prefix={
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                      ? "* $"
+                                      : "- $"
+                                  }
+                                  style={{
+                                    padding: "0",
+                                    display: "flex",
+                                    fontSize: "12px",
+                                  }}
+                                />
+                              </span>
+                            ))}
                         </div>
                       </div>
                     </div>
@@ -709,12 +829,40 @@ const Header = ({
                             padding: "0",
                             color: "#b6b7b8",
                             display: "flex",
+                            cursor: "pointer",
                           }}
                           value={wallet.RealEstate}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
+                          onClick={() => {
+                            setShowSubWallet((prev) => ({
+                              ...prev.RealEstate,
+                              RealEstate: !prev.RealEstate,
+                            }));
+                          }}
                         />
+                        {showSubWallet.RealEstate === true &&
+                          subWallet.RealEstate.map((item, index) => (
+                            <span className="p-0" key={index}>
+                              <NumberFormat
+                                thousandSeparator={true}
+                                value={item.availableFund}
+                                displayType={"text"}
+                                prefix={
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                                    ? "* $"
+                                    : "- $"
+                                }
+                                style={{
+                                  padding: "0",
+                                  display: "flex",
+                                  fontSize: "12px",
+                                }}
+                              />
+                            </span>
+                          ))}
                       </div>
                     </div>
 
@@ -742,12 +890,40 @@ const Header = ({
                             padding: "0",
                             color: "#b6b7b8",
                             display: "flex",
+                            cursor: "pointer",
                           }}
                           value={wallet.Car}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
+                          onClick={() => {
+                            setShowSubWallet((prev) => ({
+                              ...prev.Car,
+                              Car: !prev.Car,
+                            }));
+                          }}
                         />
+                        {showSubWallet.Car === true &&
+                          subWallet.Car.map((item, index) => (
+                            <span className="p-0" key={index}>
+                              <NumberFormat
+                                thousandSeparator={true}
+                                value={item.availableFund}
+                                displayType={"text"}
+                                prefix={
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                                    ? "* $"
+                                    : "- $"
+                                }
+                                style={{
+                                  padding: "0",
+                                  display: "flex",
+                                  fontSize: "12px",
+                                }}
+                              />
+                            </span>
+                          ))}
                       </div>
                     </div>
 
@@ -775,12 +951,40 @@ const Header = ({
                             padding: "0",
                             color: "#b6b7b8",
                             display: "flex",
+                            cursor: "pointer",
                           }}
                           value={wallet.Jet}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
+                          onClick={() => {
+                            setShowSubWallet((prev) => ({
+                              ...prev.Jet,
+                              Jet: !prev.Jet,
+                            }));
+                          }}
                         />
+                        {showSubWallet.Jet === true &&
+                          subWallet.Jet.map((item, index) => (
+                            <span className="p-0" key={index}>
+                              <NumberFormat
+                                thousandSeparator={true}
+                                value={item.availableFund}
+                                displayType={"text"}
+                                prefix={
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                                    ? "* $"
+                                    : "- $"
+                                }
+                                style={{
+                                  padding: "0",
+                                  display: "flex",
+                                  fontSize: "12px",
+                                }}
+                              />
+                            </span>
+                          ))}
                       </div>
                     </div>
 
@@ -808,12 +1012,40 @@ const Header = ({
                             padding: "0",
                             color: "#b6b7b8",
                             display: "flex",
+                            cursor: "pointer",
                           }}
                           value={wallet.Yacht}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
+                          onClick={() => {
+                            setShowSubWallet((prev) => ({
+                              ...prev.Yacht,
+                              Yacht: !prev.Yacht,
+                            }));
+                          }}
                         />
+                        {showSubWallet.Yacht === true &&
+                          subWallet.Yacht.map((item, index) => (
+                            <span className="p-0" key={index}>
+                              <NumberFormat
+                                thousandSeparator={true}
+                                value={item.availableFund}
+                                displayType={"text"}
+                                prefix={
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                                    ? "* $"
+                                    : "- $"
+                                }
+                                style={{
+                                  padding: "0",
+                                  display: "flex",
+                                  fontSize: "12px",
+                                }}
+                              />
+                            </span>
+                          ))}
                       </div>
                     </div>
                   </div>

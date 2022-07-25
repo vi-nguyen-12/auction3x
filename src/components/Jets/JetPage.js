@@ -187,7 +187,7 @@ function JetPage({
             <Carousel {...settings}>
               {auctions.map((item, index) => (
                 <Wrap key={index}>
-                  <Col style={{ marginBottom: "30px" }}>
+                  <Col className="mb-5">
                     <Cards
                       data={item}
                       toggleSignIn={toggleSignIn}

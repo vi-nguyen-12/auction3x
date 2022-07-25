@@ -94,6 +94,12 @@ function App() {
     Jet: 0,
     Yacht: 0,
   });
+  const [subWallet, setSubWallet] = useState({
+    RealEstate: [],
+    Car: [],
+    Jet: [],
+    Yacht: [],
+  });
 
   const toggleChangePass = () => popChangePass(!changePass);
   const toggleForgotPass = () => popForgotPass(!forgotPass);
@@ -152,29 +158,43 @@ function App() {
         dispatch(addIncompProperty(res.data));
       });
       authService.getWallet(user._id).then((res) => {
+        const newWallet = { RealEstate: 0, Car: 0, Jet: 0, Yacht: 0 };
+        const newSubWallet = { RealEstate: [], Car: [], Jet: [], Yacht: [] };
         res.data.map((w) => {
           if (w.property.type === "real-estate") {
-            setWallet((prevState) => ({
-              ...prevState.RealEstate,
-              RealEstate: w.availableFund + prevState.RealEstate,
-            }));
+            newWallet.RealEstate = newWallet.RealEstate + w.availableFund;
+            newSubWallet.RealEstate = [...newSubWallet.RealEstate, w];
+            // setWallet((prevState) => ({
+            //   ...prevState.RealEstate,
+            //   RealEstate: w.availableFund + prevState.RealEstate,
+            // }));
           } else if (w.property.type === "car") {
-            setWallet((prevState) => ({
-              ...prevState.Car,
-              Car: w.availableFund + prevState.Car,
-            }));
+            newWallet.Car = newWallet.Car + w.availableFund;
+            newSubWallet.Car = [...newSubWallet.Car, w];
+            // setWallet((prevState) => ({
+            //   ...prevState.Car,
+            //   Car: w.availableFund + prevState.Car,
+            // }));
           } else if (w.property.type === "jet") {
-            setWallet((prevState) => ({
-              ...prevState.Jet,
-              Jet: w.availableFund + prevState.Jet,
-            }));
+            newWallet.Jet = newWallet.Jet + w.availableFund;
+            newSubWallet.Jet = [...newSubWallet.Jet, w];
+
+            // setWallet((prevState) => ({
+            //   ...prevState.Jet,
+            //   Jet: w.availableFund + prevState.Jet,
+            // }));
           } else if (w.property.type === "yacht") {
-            setWallet((prevState) => ({
-              ...prevState.Yacht,
-              Yacht: w.availableFund + prevState.Yacht,
-            }));
+            newWallet.Yacht = newWallet.Yacht + w.availableFund;
+            newSubWallet.Yacht = [...newSubWallet.Yacht, w];
+
+            // setWallet((prevState) => ({
+            //   ...prevState.Yacht,
+            //   Yacht: w.availableFund + prevState.Yacht,
+            // }));
           }
         });
+        setWallet(newWallet);
+        setSubWallet(newSubWallet);
       });
     }
   }, [dispatch, user._id]);
@@ -250,7 +270,6 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
-          size="md"
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
@@ -266,7 +285,7 @@ function App() {
             />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           size="md"
           backdrop="static"
           keyboard={false}
@@ -294,7 +313,7 @@ function App() {
               toggleChangePass={toggleChangePass}
             />
           </Modal.Body>
-        </Modal>
+        </Modal> */}
         <Modal
           backdrop="static"
           keyboard={false}
@@ -309,7 +328,6 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
-          size="xl"
           backdrop="static"
           keyboard={false}
           // aria-labelledby="contained-modal-title-vcenter"
@@ -507,6 +525,7 @@ function App() {
             toggleSignUp={toggleSignUp}
             windowSize={windowSize}
             wallet={wallet}
+            subWallet={subWallet}
           />
           <ScrollTop />
 

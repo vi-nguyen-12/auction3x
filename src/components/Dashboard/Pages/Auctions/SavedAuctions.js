@@ -9,8 +9,8 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel = styled(Slider)`
-  // height: 100%;
-  // overflow-x: hidden;
+  height: 100vh;
+  overflow-x: hidden;
 
   & > button {
     opacity: 1;

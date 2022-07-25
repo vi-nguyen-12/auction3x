@@ -87,7 +87,9 @@ function JetDetails({
   const [discussedAmount, setDiscussedAmount] = useState(
     propertyTest.discussedAmount || ""
   );
+
   const [other, setOther] = useState(false);
+  const [empty, setEmpty] = useState(false);
 
   const builder = [
     "AIRBUS",
@@ -151,8 +153,10 @@ function JetDetails({
 
   const onSubmit = (data) => {
     if (reservedAmount > 0 && discussedAmount > 0) {
-      if (parseInt(reservedAmount) <= parseInt(discussedAmount)) {
-        alert("Reserved amount should be greater than discussed amount");
+      if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
+        alert(
+          "Reserved amount should be greater than or equal to discussed amount"
+        );
       } else {
         if (year_built > new Date().getFullYear()) {
           alert("Built year must be less than or equal to current year.");
@@ -398,8 +402,14 @@ function JetDetails({
                 value={aircraft_builder_name}
                 {...register("aircraft_builder_name", { maxLength: 100 })}
                 onChange={(e) => {
-                  setAircraft_builder_name(e.target.value);
-                  e.target.value === "Other" ? setOther(true) : setOther(false);
+                  if (e.target.value !== "") {
+                    setAircraft_builder_name(e.target.value);
+                    e.target.value === "Other"
+                      ? setOther(true)
+                      : setOther(false);
+                  } else {
+                    setEmpty(true);
+                  }
                 }}
               >
                 <option value="">Manufacturer</option>
@@ -497,6 +507,7 @@ function JetDetails({
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
+              format="#"
               thousandSeparator={true}
               className="form-control"
               allowNegative={false}

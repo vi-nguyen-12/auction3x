@@ -169,7 +169,7 @@ function CarPage({
           {windowSize > 800 ? (
             auctions.map((auction, index) => {
               return (
-                <Col key={index}>
+                <Col className="mb-5" key={index}>
                   <Wrap>
                     <Cards
                       data={auction}
@@ -185,7 +185,7 @@ function CarPage({
             <Carousel {...settings}>
               {auctions.map((item, index) => (
                 <Wrap key={index}>
-                  <Col style={{ marginBottom: "30px" }}>
+                  <Col className="mb-5">
                     <Cards
                       data={item}
                       toggleSignIn={toggleSignIn}

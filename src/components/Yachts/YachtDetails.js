@@ -149,8 +149,8 @@ function YachtDetails({
   };
 
   const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) <= parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than discussed amount");
+    if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
+      alert("Reserved amount should be greater than or equal to discussed amount");
     } else {
       if (!summary && !invest && !locationInfo && !marketInfo) {
         alert(
