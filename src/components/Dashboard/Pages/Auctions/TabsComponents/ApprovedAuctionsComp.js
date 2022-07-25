@@ -44,22 +44,22 @@ const Carousel = styled(Slider)`
     left: -75px;
     width: 12vw;
     height: 100%;
+    background: url("./images/back-btn.png") center center no-repeat !important;
   }
 
   .slick-prev:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 
   .slick-next {
     right: -75px;
     width: 12vw;
+    background: url("./images/next-btn.png") center center no-repeat !important;
     height: 100%;
   }
 
   .slick-next:before {
-    color: #e9af84;
-    font-size: 50px;
+    display: none;
   }
 `;
 
