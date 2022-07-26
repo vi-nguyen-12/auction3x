@@ -515,6 +515,7 @@ function RealEstateDetails({
               Bedrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
+              format="###"
               className="form-control"
               thousandSeparator={true}
               value={bedrooms}
@@ -542,6 +543,7 @@ function RealEstateDetails({
               Bathrooms <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
+              format="###"
               className="form-control"
               thousandSeparator={true}
               value={bathrooms}

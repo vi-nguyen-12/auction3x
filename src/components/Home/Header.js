@@ -387,7 +387,13 @@ const Header = ({
                               display: "flex",
                               cursor: "pointer",
                             }}
-                            value={wallet.RealEstate}
+                            value={
+                              subWallet.RealEstate.filter(
+                                (item) =>
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                              )[0]?.availableFund || wallet.RealEstate
+                            }
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -448,7 +454,13 @@ const Header = ({
                               display: "flex",
                               cursor: "pointer",
                             }}
-                            value={wallet.Car}
+                            value={
+                              subWallet.Car.filter(
+                                (item) =>
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                              )[0]?.availableFund || wallet.Car
+                            }
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -509,7 +521,13 @@ const Header = ({
                               display: "flex",
                               cursor: "pointer",
                             }}
-                            value={wallet.Jet}
+                            value={
+                              subWallet.Jet.filter(
+                                (item) =>
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                              )[0]?.availableFund || wallet.Jet
+                            }
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -570,7 +588,13 @@ const Header = ({
                               display: "flex",
                               cursor: "pointer",
                             }}
-                            value={wallet.Yacht}
+                            value={
+                              subWallet.Yacht.filter(
+                                (item) =>
+                                  item.auctionId ===
+                                  history.location.pathname.slice(17)
+                              )[0]?.availableFund || wallet.Yacht
+                            }
                             displayType={"text"}
                             thousandSeparator={true}
                             prefix={"$"}
@@ -831,7 +855,13 @@ const Header = ({
                             display: "flex",
                             cursor: "pointer",
                           }}
-                          value={wallet.RealEstate}
+                          value={
+                            subWallet.RealEstate.filter(
+                              (item) =>
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                            )[0]?.availableFund || wallet.RealEstate
+                          }
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -892,7 +922,13 @@ const Header = ({
                             display: "flex",
                             cursor: "pointer",
                           }}
-                          value={wallet.Car}
+                          value={
+                            subWallet.Car.filter(
+                              (item) =>
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                            )[0]?.availableFund || wallet.Car
+                          }
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -953,7 +989,13 @@ const Header = ({
                             display: "flex",
                             cursor: "pointer",
                           }}
-                          value={wallet.Jet}
+                          value={
+                            subWallet.Jet.filter(
+                              (item) =>
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                            )[0]?.availableFund || wallet.Jet
+                          }
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -1014,7 +1056,13 @@ const Header = ({
                             display: "flex",
                             cursor: "pointer",
                           }}
-                          value={wallet.Yacht}
+                          value={
+                            subWallet.Yacht.filter(
+                              (item) =>
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                            )[0]?.availableFund || wallet.Yacht
+                          }
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
@@ -1314,10 +1362,10 @@ const Header = ({
                       }}
                       onClick={() => {
                         toggleOpen();
-                        history.push("/yachts");
+                        history.push("/jets");
                       }}
                     >
-                      YACHTS
+                      JETS
                     </button>
                   </td>
                   {/* <td style={{ padding: "0.5rem 0" }}>
@@ -1376,10 +1424,10 @@ const Header = ({
                       }}
                       onClick={() => {
                         toggleOpen();
-                        history.push("/jets");
+                        history.push("/yachts");
                       }}
                     >
-                      JETS
+                      YACHTS
                     </button>
                   </td>
                   <td style={{ padding: "0.5rem 0" }}>

@@ -106,10 +106,10 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                 <a href="/cars">Cars</a>
               </li>
               <li className="list-unstyled">
-                <a href="/yachts">Yachts</a>
+                <a href="/jets">Jets</a>
               </li>
               <li className="list-unstyled">
-                <a href="/jets">Jets</a>
+                <a href="/yachts">Yachts</a>
               </li>
               {/* <li className="list-unstyled">
                             <a href="#!">Jewels</a>

@@ -387,6 +387,7 @@ function JetDetails({
               <>
                 <input
                   type="text"
+                  placeholder="Enter Aircraft Manufacturer"
                   className="form-control"
                   defaultValue={aircraft_builder_name}
                   {...register("aircraft_builder_name")}
@@ -412,7 +413,7 @@ function JetDetails({
                   }
                 }}
               >
-                <option value="">Manufacturer</option>
+                <option value=""></option>
                 {builder.map((item, index) => (
                   <option key={index} value={item}>
                     {item}

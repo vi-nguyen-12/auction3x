@@ -124,7 +124,7 @@
 }
 
 .dropdown-content {
-  display: block;
+  display: none;
   position: absolute;
   text-align: center;
   background-color: white;
@@ -253,7 +253,7 @@
   background-image: linear-gradient(to right, #d58f5c, #f9d8c8, #dda074);
   /* position: fixed; */
   display: flex;
-   margin-left: -220px !important;
+  margin-left: -220px !important;
   /*margin-top: -210px !important; */
   border-radius: 10px;
   justify-content: center;
@@ -266,7 +266,7 @@
   background-image: linear-gradient(to right, #d58f5c, #f9d8c8, #dda074);
   position: absolute;
   display: flex;
-   margin-left: -80px !important;
+  margin-left: -80px !important;
   margin-top: -305px !important;
   border-radius: 10px;
   justify-content: center;
