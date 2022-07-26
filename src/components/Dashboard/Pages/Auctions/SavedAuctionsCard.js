@@ -32,24 +32,30 @@ const Carousel_1 = styled(Slider)`
       transition: opacity 0.2s ease 0s;
     }
   }
+  .slick-prev:before {
+    display: none;
+  }
   .slick-prev {
+    display: block;
+    width: 5vw;
     left: 5vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
-    margin: 0 -50px !important;
-  }
-  .slick-next {
-    right: 5vw;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
   }
   .slick-next:before {
     display: none;
   }
-  .slick-prev:before {
-    display: none;
+  .slick-next {
+    display: block;
+    width: 20px;
+    right: 5vw;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
+    margin: 0 -50px !important;
   }
+
+
 `;
 function SavedAuctionsCard({
   urls,

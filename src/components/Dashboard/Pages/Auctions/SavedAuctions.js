@@ -99,7 +99,7 @@ function SavedAuctions({ windowSize }) {
   };
 
   return (
-    <Carousel_3 style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
         <h1 style={{ marginBottom: "40px" }}>Saved Auctions</h1>
         {savedProperty.length > 0 ? (
@@ -125,7 +125,7 @@ function SavedAuctions({ windowSize }) {
           <ErrorPage />
         )}
       </Row>
-    </Carousel_3>
+    </Container>
   );
 }
 
