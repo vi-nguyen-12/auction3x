@@ -164,33 +164,15 @@ function App() {
           if (w.property.type === "real-estate") {
             newWallet.RealEstate = newWallet.RealEstate + w.availableFund;
             newSubWallet.RealEstate = [...newSubWallet.RealEstate, w];
-            // setWallet((prevState) => ({
-            //   ...prevState.RealEstate,
-            //   RealEstate: w.availableFund + prevState.RealEstate,
-            // }));
           } else if (w.property.type === "car") {
             newWallet.Car = newWallet.Car + w.availableFund;
             newSubWallet.Car = [...newSubWallet.Car, w];
-            // setWallet((prevState) => ({
-            //   ...prevState.Car,
-            //   Car: w.availableFund + prevState.Car,
-            // }));
           } else if (w.property.type === "jet") {
             newWallet.Jet = newWallet.Jet + w.availableFund;
             newSubWallet.Jet = [...newSubWallet.Jet, w];
-
-            // setWallet((prevState) => ({
-            //   ...prevState.Jet,
-            //   Jet: w.availableFund + prevState.Jet,
-            // }));
           } else if (w.property.type === "yacht") {
             newWallet.Yacht = newWallet.Yacht + w.availableFund;
             newSubWallet.Yacht = [...newSubWallet.Yacht, w];
-
-            // setWallet((prevState) => ({
-            //   ...prevState.Yacht,
-            //   Yacht: w.availableFund + prevState.Yacht,
-            // }));
           }
         });
         setWallet(newWallet);
