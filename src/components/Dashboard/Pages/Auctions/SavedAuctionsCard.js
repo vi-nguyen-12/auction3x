@@ -39,7 +39,7 @@ const Carousel_1 = styled(Slider)`
     display: block;
     width: 5vw;
     left: 5vw;
-    background: url("./images/back-icon.png") center center no-repeat !important;
+    background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
   }
@@ -50,7 +50,7 @@ const Carousel_1 = styled(Slider)`
     display: block;
     width: 5vw;
     right: 5vw;
-    background: url("./images/next-icon.png") center center no-repeat !important;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
   }
