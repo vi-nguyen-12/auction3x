@@ -35,18 +35,18 @@ function Dash({ windowSize, featureLength }) {
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
-      authServices.getFeaturedAuctions().then((res) => {
+      await authServices.getFeaturedAuctions().then((res) => {
         setNumOfLiveAuctions(res.data.length);
       });
     };
     const getUpcomingAuctions = async () => {
-      authServices.getUpcomingAuctions().then((res) => {
+      await authServices.getUpcomingAuctions().then((res) => {
         setNumOfUpcomingAuctions(res.data.length);
       });
     };
 
     const getUserListings = async () => {
-      authServices.sellerPropInAuctions(user._id).then((res) => {
+      await authServices.sellerPropInAuctions(user._id).then((res) => {
         setListing(res.data.length);
       });
     };
@@ -252,7 +252,7 @@ function Dash({ windowSize, featureLength }) {
                 </button>
               </div> */}
               <div className="refresh">
-                <GoPlus color="white" size={28} />
+                <GoPlus onClick={toggleFundReq} color="white" size={28} />
                 <button onClick={toggleFundReq} className="resetBtn">
                   <span>Add Fund</span>
                 </button>

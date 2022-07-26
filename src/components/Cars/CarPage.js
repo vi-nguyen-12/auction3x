@@ -161,6 +161,7 @@ function CarPage({
     slidesToShow:
       windowSize > 800 ? (auctions.length > 3 ? 3 : auctions.length) : 1,
   };
+
   return (
     <>
       {loader && <Loading />}

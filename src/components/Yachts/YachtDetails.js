@@ -148,9 +148,19 @@ function YachtDetails({
     });
   };
 
+  const fixDate = (date) => {
+    const newDate = new Date(date);
+    const day = newDate.getDate() + 1;
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    setVessel_manufacturing_date(`${month}-${day}-${year}`);
+  };
+
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than or equal to discussed amount");
+      alert(
+        "Reserved amount should be greater than or equal to discussed amount"
+      );
     } else {
       if (!summary && !invest && !locationInfo && !marketInfo) {
         alert(
@@ -277,7 +287,7 @@ function YachtDetails({
               className="form-control"
               defaultValue={vessel_manufacturing_date}
               {...register("vessel_manufacturing_date")}
-              onChange={(e) => setVessel_manufacturing_date(e.target.value)}
+              onChange={(e) => fixDate(e.target.value)}
               required
             />
           </Col>

@@ -175,7 +175,7 @@ const PropertyPages = ({
                 mapContainerStyle={mapStyles}
                 style={{ height: "800px" }}
                 center={centers[0]}
-                zoom={12}
+                zoom={8}
               >
                 {centers.map((marker, index) => {
                   return (

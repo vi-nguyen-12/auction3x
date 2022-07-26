@@ -672,6 +672,18 @@ const authService = {
       },
     });
   },
+
+  addFund(data) {
+    return axios.put(
+      apiUrl + `/api/buyers/${data.id}/funds/addition`,
+      { documents: [data.details] },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
 };
 
 export default authService;

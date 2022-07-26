@@ -270,6 +270,7 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
+          size="md"
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
@@ -278,12 +279,10 @@ function App() {
           onHide={toggleForgotPass}
           contentclassname="forgotPass"
         >
-          <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-            <ForgotPass
-              toggleForgotPass={toggleForgotPass}
-              toggleChangePass={toggleChangePass}
-            />
-          </Modal.Body>
+          <Modal.Body
+            contentclassname="forgotPass"
+            className="forgot-modal"
+          ></Modal.Body>
         </Modal>
         {/* <Modal
           size="md"
@@ -390,7 +389,7 @@ function App() {
             />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           size="md"
           backdrop="static"
           keyboard={false}
@@ -401,14 +400,14 @@ function App() {
           contentclassname="forgotPass"
         >
           <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-            {/* <ForgotPass
+            <ForgotPass
               toggleForgotPass={toggleForgotPass}
               toggleChangePass={toggleChangePass}
-            /> */}
+            />
           </Modal.Body>
-        </Modal>
+        </Modal> */}
         <Modal
-          size="md"
+          size="lg"
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
@@ -463,7 +462,6 @@ function App() {
           </Modal.Body>
         </Modal>
         <Modal
-          size="xl"
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"

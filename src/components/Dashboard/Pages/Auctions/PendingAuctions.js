@@ -31,8 +31,6 @@ function PendingAuctions({ windowSize }) {
   //   }
   // }, [pendingAuctions, approvedAuctions]);
 
-  console.log(pendingAuctions);
-
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>

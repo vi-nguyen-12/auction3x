@@ -146,7 +146,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <div className="auction-reserved">
-          © 2022 AUCTION3. All Rights Reserved
+          © 2022 AUCTION3X. All Rights Reserved
         </div>
       </Card>
     </footer>

@@ -60,7 +60,7 @@ const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
               <Button
                 type="submit"
                 style={{
-                  padding: windowSize < 800 && "10px",
+                  padding: windowSize < 800 && "15px 40px",
                   background:
                     type === `${property.propType}` ? "rgb(233 184 135)" : "",
                 }}
