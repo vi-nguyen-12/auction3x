@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const Carousel = styled(Slider)`
+const Carousel_3 = styled(Slider)`
   height: 100vh;
   overflow-x: hidden;
 
@@ -99,11 +99,11 @@ function SavedAuctions({ windowSize }) {
   };
 
   return (
-    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+    <Carousel_3 style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
         <h1 style={{ marginBottom: "40px" }}>Saved Auctions</h1>
         {savedProperty.length > 0 ? (
-          <Carousel {...settings}>
+          <Carousel_3 {...settings}>
             {savedProperty.map((auction, index) => (
               <Wrap key={index}>
                 <SavedAuctionsCard
@@ -120,12 +120,12 @@ function SavedAuctions({ windowSize }) {
                 />
               </Wrap>
             ))}
-          </Carousel>
+          </Carousel_3>
         ) : (
           <ErrorPage />
         )}
       </Row>
-    </Container>
+    </Carousel_3>
   );
 }
 

@@ -104,14 +104,16 @@ function Messaging({ windowSize }) {
           style={{ alignItems: "center" }}
         >
           <Col className="d-flex" style={{ justifyContent: "center" }}>
-            <button
-              variant="primary"
-              style={{ fontWeight: "bold", padding: "10px 20px" }}
-              className="mr-2"
-              onClick={() => send()}
-            >
-              Send
-            </button>
+            <div className="refresh">
+              <button
+                variant="primary"
+                style={{ fontWeight: "bold", padding: "1px 10px" }}
+                onClick={() => send()}
+                className="resetBtn"
+              >
+                Send
+              </button>
+            </div>
           </Col>
         </Row>
       </Container>

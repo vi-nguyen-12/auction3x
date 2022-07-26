@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const Carousel = styled(Slider)`
+const Carousel_2 = styled(Slider)`
   // height: 100%;
   overflow: hidden;
 
@@ -95,7 +95,7 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
 
   return (
     <>
-      <Carousel {...settings}>
+      <Carousel_2 {...settings}>
         {savedProp.map((property, index) => (
           <Wrap key={index}>
             <SavedAuctionsCard
@@ -116,7 +116,7 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
             />
           </Wrap>
         ))}
-      </Carousel>
+      </Carousel_2>
     </>
   );
 }
