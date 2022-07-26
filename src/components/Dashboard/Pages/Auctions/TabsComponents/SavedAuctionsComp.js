@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const Carousel = styled(Slider)`
+const Carousel_2 = styled(Slider)`
   // height: 100%;
   overflow: hidden;
 
@@ -44,6 +44,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     // left: 2vw;
     z-index: 1;
+    background: url("./images/back-icon.png") center center no-repeat ;
     margin: -50px;
   }
 
@@ -55,7 +56,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     // right: 2vw;
     z-index: 1;
-    content: ">";
+    background: url("./images/next-icon.png") center center no-repeat ;
     margin: -50px;
   }
 
@@ -94,7 +95,7 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
 
   return (
     <>
-      <Carousel {...settings}>
+      <Carousel_2 {...settings}>
         {savedProp.map((property, index) => (
           <Wrap key={index}>
             <SavedAuctionsCard
@@ -115,7 +116,7 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
             />
           </Wrap>
         ))}
-      </Carousel>
+      </Carousel_2>
     </>
   );
 }

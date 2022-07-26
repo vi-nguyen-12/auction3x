@@ -18,7 +18,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import "../../../../styles/card.css";
 
-const Carousel = styled(Slider)`
+const Carousel_1 = styled(Slider)`
   height: 100%;
   overflow-x: hidden;
   border-radius: 0;
@@ -32,24 +32,30 @@ const Carousel = styled(Slider)`
       transition: opacity 0.2s ease 0s;
     }
   }
+  .slick-prev:before {
+    display: none;
+  }
   .slick-prev {
+    display: block;
+    width: 5vw;
     left: 5vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
-    margin: 0 -50px !important;
-  }
-  .slick-next {
-    right: 5vw;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
   }
   .slick-next:before {
     display: none;
   }
-  .slick-prev:before {
-    display: none;
+  .slick-next {
+    display: block;
+    width: 5vw;
+    right: 5vw;
+    background: url("./images/arrow_next.png") center center no-repeat !important;
+    font-size: 50px;
+    margin: 0 -50px !important;
   }
+
+
 `;
 function SavedAuctionsCard({
   urls,
@@ -127,7 +133,7 @@ function SavedAuctionsCard({
           {showKYC && (
             <Toast type="warning" message="Please complete your KYC" />
           )}
-          <Carousel {...settings}>
+          <Carousel_1 {...settings}>
             {urls.map((items, index) => (
               <Card.Img
                 onClick={handleBid}
@@ -141,7 +147,7 @@ function SavedAuctionsCard({
                 }}
               />
             ))}
-          </Carousel>
+          </Carousel_1>
           <button onClick={toggleImage} className="favBtn">
             {favorite ? (
               <img src="/images/hearted.png" alt="" />
@@ -173,7 +179,7 @@ function SavedAuctionsCard({
             </Row>
             <Row>
               {new Date().toISOString() < auctionStartDate &&
-              new Date().toISOString() < endRegister ? (
+                new Date().toISOString() < endRegister ? (
                 <Col md={5} style={{ width: "50%", color: "black" }}>
                   <p style={{ fontSize: "15px", color: "black" }}>
                     Registration
