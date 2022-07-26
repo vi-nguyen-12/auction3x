@@ -44,7 +44,7 @@ const Carousel = styled(Slider)`
   .slick-prev {
     height: 150px;
     z-index: 1;
-    background: url("./images/back-btn.png") center center no-repeat !important;
+    background: url("./images/back-icon.png") center center no-repeat !important;
     margin: -50px;
   }
 
@@ -55,7 +55,7 @@ const Carousel = styled(Slider)`
   .slick-next {
     height: 150px;
     z-index: 1;
-    background: url("./images/next-btn.png") center center no-repeat !important;
+    background: url("./images/next-icon.png") center center no-repeat !important;
     margin: -50px;
   }
 

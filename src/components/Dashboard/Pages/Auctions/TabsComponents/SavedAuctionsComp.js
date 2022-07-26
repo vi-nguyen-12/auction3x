@@ -44,6 +44,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     // left: 2vw;
     z-index: 1;
+    background: url("./images/back-icon.png") center center no-repeat !important;
     margin: -50px;
   }
 
@@ -55,7 +56,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     // right: 2vw;
     z-index: 1;
-    content: ">";
+    background: url("./images/next-icon.png") center center no-repeat !important;
     margin: -50px;
   }
 
