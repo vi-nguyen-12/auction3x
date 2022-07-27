@@ -1211,7 +1211,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
                                 key={index}
                               >
                                 <td>{index + 1}</td>
-                                <td>{bid.userId}</td>
+                                <td>{bid.buyerId}</td>
                                 {bid.userId === user._id ? (
                                   <td>
                                     {user.firstName + " " + user.lastName}
@@ -1721,7 +1721,7 @@ function DisplayJet({ toggleChange, property, toggleSignIn, windowSize }) {
             onHide={togglePlaceBid}
             centered
           >
-            <Modal.Body>
+            <Modal.Body className="p-0 pb-4">
               <BuyConfirm property={property} />
             </Modal.Body>
           </Modal>
