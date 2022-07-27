@@ -1,11 +1,12 @@
 import React from "react";
-import { Modal, Table } from "react-bootstrap";
+import { Modal, Table, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
 
 const BuyConfirm = ({ property }) => {
+  console.log(property);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount
@@ -34,23 +35,12 @@ const BuyConfirm = ({ property }) => {
 
   return (
     <>
-      <Modal.Header closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{
-            color: "#D58F5C",
-            fontSize: "40px",
-            fontWeight: "bold",
-            marginBottom: "20px",
-          }}
-          contentclassname="custom-modal-title"
-        >
-          Enter your Bid
-        </Modal.Title>
+      <Modal.Header className="auction-modal-header" closeButton>
+        <Modal.Title className="auction-modal-title">Enter Bid</Modal.Title>
       </Modal.Header>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
         <>
-          <Table borderless>
+          {/* <Table borderless>
             <tbody className="auction-info">
               <tr>
                 {property.highestBid ? (
@@ -135,50 +125,90 @@ const BuyConfirm = ({ property }) => {
                 </td>
               </tr>
             </tbody>
-          </Table>
+          </Table> */}
 
-          <div
-            style={{
-              position: "relative",
-              display: "inline-block",
-              width: "100%",
-              margin: "auto",
-              padding: "15px",
-            }}
-          >
-            <span className="prefix">$</span>
-            {/* <input
-              className="has-prefix"
-              type="number"
-              min="0"
-              placeholder="Enter Amount"
-              name="bid"
-              value={bid}
-              onChange={(e) => setBid(e.target.value)}
-            /> */}
-            <NumberFormat
-              thousandSeparator={true}
-              value={bid}
-              allowNegative={false}
-              className="has-prefix"
-              onValueChange={(values) => {
-                const { value } = values;
-                setBid(value);
-              }}
-              required
-            />
-            <button
-              style={{
-                padding: "10px",
-                width: "100%",
-                marginTop: "10px",
-                borderRadius: "8px",
-              }}
-              className="nxt-btn"
-              type="submit"
-            >
-              Submit
-            </button>
+          <Row style={{ padding: "0 20px" }}>
+            <Col className="fw-bold">Leading Bid:</Col>
+            <Col className="d-flex justify-content-end">
+              {property.highestBid ? (
+                <NumberFormat
+                  style={{ marginLeft: "10px", fontWeight: "normal" }}
+                  value={property.highestBid}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              ) : (
+                <NumberFormat
+                  style={{ marginLeft: "10px", fontWeight: "normal" }}
+                  value={property.startingBid}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
+                />
+              )}
+            </Col>
+          </Row>
+          <Row style={{ padding: "0 20px" }} className="mt-3">
+            <Col className="fw-bold">Increment Amount:</Col>
+            <Col className="d-flex justify-content-end">
+              <NumberFormat
+                value={property.incrementAmount}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+              />
+            </Col>
+          </Row>
+          <Row style={{ padding: "0 20px" }} className="mt-3">
+            <Col className="fw-bold">Minimum Bid:</Col>
+            <Col className="d-flex justify-content-end">
+              <NumberFormat
+                style={{
+                  color: "#b77b50",
+                  fontWeight: "bold",
+                }}
+                value={property.highestBid + property.incrementAmount}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"$"}
+                onValueChange={(values) => {
+                  const { value } = values;
+                  setBid(value);
+                }}
+              />
+            </Col>
+          </Row>
+
+          <Row style={{ padding: "0 20px" }} className="mt-5">
+            <Col md={12}>
+              <NumberFormat
+                thousandSeparator={true}
+                className="form-control"
+                value={bid}
+                prefix={"$"}
+                allowNegative={false}
+                onValueChange={(values) => {
+                  const { value } = values;
+                  setBid(value);
+                }}
+                required
+              />
+            </Col>
+            <Col md={12}>
+              <button
+                style={{
+                  padding: "10px",
+                  width: "100%",
+                  marginTop: "10px",
+                  borderRadius: "8px",
+                }}
+                className="nxt-btn"
+                type="submit"
+              >
+                Submit
+              </button>
+            </Col>
             {/* <div
               style={{
                 width: "100%",
@@ -190,7 +220,7 @@ const BuyConfirm = ({ property }) => {
             >
               <span>View Bid History</span>
             </div> */}
-          </div>
+          </Row>
         </>
       </form>
     </>

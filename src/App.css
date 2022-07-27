@@ -386,3 +386,10 @@ h1 {
   -ms-user-select: none;
   user-select: none;
 }
+
+.auction-modal-header {
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(60deg, #43bbf3, #3a7ec7, #3047a2);
+  color: white;
+}

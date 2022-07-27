@@ -570,20 +570,29 @@ function JetDetails({
                 checked={isImport === true ? true : false}
                 type="radio"
                 name="is_import"
+                id="yes"
                 value={true}
                 onChange={(e) => setIsImport(true)}
                 required
               />{" "}
-              Yes &nbsp;
+              <label
+                htmlFor="yes"
+                style={{ fontWeight: "600", color: "black" }}
+              >
+                Yes &nbsp;
+              </label>{" "}
               <input
                 checked={isImport === false ? true : false}
                 type="radio"
                 name="is_import"
+                id="no"
                 value={false}
                 onChange={(e) => setIsImport(false)}
                 required
               />{" "}
-              No &nbsp;
+              <label htmlFor="no" style={{ fontWeight: "600", color: "black" }}>
+                No
+              </label>
             </div>
           </Col>
         </Row>
