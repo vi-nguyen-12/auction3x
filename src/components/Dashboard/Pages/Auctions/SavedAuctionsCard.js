@@ -38,7 +38,7 @@ const Carousel_1 = styled(Slider)`
   .slick-prev {
     display: block;
     width: 5vw;
-    left: 5vw;
+    left: 3vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
@@ -49,13 +49,27 @@ const Carousel_1 = styled(Slider)`
   .slick-next {
     display: block;
     width: 5vw;
-    right: 5vw;
+    right: 3vw;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
     margin: 0 -50px !important;
   }
 
-
+  @media (max-width: 700px) {
+    .slick-prev {
+      display: block;
+      background: url("./images/arrow_back.png") center center no-repeat !important;
+      font-size: 50px;
+      margin: 0 -50px !important;
+      width: 110px;
+    }
+    .slick-next {
+      display: block;
+      background: url("./images/arrow_next.png") center center no-repeat !important;
+      font-size: 50px;
+      margin: 0 -50px !important;
+      width: 110px;
+    }
 `;
 function SavedAuctionsCard({
   urls,

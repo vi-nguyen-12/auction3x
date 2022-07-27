@@ -16,7 +16,6 @@ const Carousel_2 = styled(Slider)`
     height: 100%;
     width: 15vw;
     z-index: 1;
-
     &:hover {
       opacity: 1;
       transition: opacity 0.2s ease 0s;
@@ -45,7 +44,7 @@ const Carousel_2 = styled(Slider)`
     // left: 2vw;
     z-index: 1;
     background: url("./images/back-icon.png") center center no-repeat ;
-    margin: -50px;
+    margin-left: -70px;
   }
 
   .slick-prev:before {
@@ -57,12 +56,13 @@ const Carousel_2 = styled(Slider)`
     // right: 2vw;
     z-index: 1;
     background: url("./images/next-icon.png") center center no-repeat ;
-    margin: -50px;
+    margin-right: -70px;
   }
 
   .slick-next:before {
     display: none;
   }
+  // 
 `;
 
 const Wrap = styled.div`

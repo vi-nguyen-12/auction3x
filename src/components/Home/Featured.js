@@ -45,7 +45,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     left: 2vw;
     z-index: 1;
-    background: url("./images/arrow_back.png") center center no-repeat !important;
+    background: url("./images/back-icon.png") center center no-repeat ;
     margin: -50px;
   }
 
@@ -57,7 +57,7 @@ const Carousel = styled(Slider)`
     height: 150px;
     right: 2vw;
     z-index: 1;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
+    background: url("./images/next-icon.png") center center no-repeat ;
     margin: -50px;
   }
 

@@ -47,6 +47,21 @@ const Carousel = styled(Slider)`
   .slick-prev:before {
     display: none;
   }
+  @media (max-width:700px) {
+    // .slick-prev {
+    //   display: block !important;
+    //     width: 50px !important; 
+    // }
+    // .slick-next {
+    //   display: block !important;
+    //     width: 50px !important; 
+    // }
+    .slick-prev {
+      display: block;
+    }
+    .slick-next {
+      display: block;
+    }
 `;
 
 function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {

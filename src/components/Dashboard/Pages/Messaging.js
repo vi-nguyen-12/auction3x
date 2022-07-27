@@ -47,6 +47,31 @@ function Messaging({ windowSize }) {
               justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
             }}
           >
+            To :
+          </Col>
+          <Col md={7} lg={6} className="d-flex">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter a subject"
+              onChange={(e) => setSubject(e.target.value)}
+              style={{ width: "100%", border: "none" }}
+              required
+            />
+          </Col>
+        </Row>
+        <Row
+          className="d-flex justify-content-center mt-3"
+          style={{ alignItems: "center" }}
+        >
+          <Col
+            md={2}
+            lg={2}
+            className="d-flex"
+            style={{
+              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
+            }}
+          >
             Subject :
           </Col>
           <Col md={7} lg={6} className="d-flex">
@@ -107,7 +132,7 @@ function Messaging({ windowSize }) {
             <div className="refresh">
               <button
                 variant="primary"
-                style={{ fontWeight: "bold", padding: "1px 10px" }}
+                style={{ fontWeight: "bold", padding: "px 10px" }}
                 onClick={() => send()}
                 className="resetBtn"
               >
