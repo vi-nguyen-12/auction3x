@@ -103,7 +103,14 @@ const Wrap = styled.div`
   }
 `;
 
-function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
+function DisplayCar({
+  toggleChange,
+  property,
+  toggleSignIn,
+  windowSize,
+  setRefresh,
+  refresh,
+}) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -1184,7 +1191,7 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
                               <tr
                                 style={{
                                   backgroundColor:
-                                    bid.userId === user._id ? "#6de8b1" : "",
+                                    bid.userId === user._id ? "#e8e8e8" : "",
                                 }}
                                 key={index}
                               >
@@ -1664,6 +1671,28 @@ function DisplayCar({ toggleChange, property, toggleSignIn, windowSize }) {
             }}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title className="auction-modal-title">
+                Enter Bid
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  togglePlaceBid();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body className="p-0 pb-4">
               <BuyConfirm property={property} />
             </Modal.Body>

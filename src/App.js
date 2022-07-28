@@ -88,6 +88,7 @@ function App() {
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
   const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [wallet, setWallet] = useState({
     RealEstate: 0,
     Car: 0,
@@ -179,7 +180,7 @@ function App() {
         setSubWallet(newSubWallet);
       });
     }
-  }, [dispatch, user._id]);
+  }, [dispatch, user._id, refresh]);
 
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const handleWindowResize = () => {
@@ -735,6 +736,8 @@ function App() {
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
             </Route>
 

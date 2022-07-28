@@ -17,6 +17,8 @@ function DisplayAuctions({
   toggleShow,
   toggleSignIn,
   windowSize,
+  setRefresh,
+  refresh,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -110,6 +112,8 @@ function DisplayAuctions({
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
             windowSize={windowSize}
+            setRefresh={setRefresh}
+            refresh={refresh}
           />
         ) : auction.property.type === "car" ? (
           <DisplayCar
@@ -117,6 +121,8 @@ function DisplayAuctions({
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
             windowSize={windowSize}
+            setRefresh={setRefresh}
+            refresh={refresh}
           />
         ) : auction.property.type === "jet" ? (
           <DisplayJet
@@ -124,6 +130,8 @@ function DisplayAuctions({
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
             windowSize={windowSize}
+            setRefresh={setRefresh}
+            refresh={refresh}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
@@ -131,6 +139,8 @@ function DisplayAuctions({
             toggleChange={toggleChange}
             toggleSignIn={toggleSignIn}
             windowSize={windowSize}
+            setRefresh={setRefresh}
+            refresh={refresh}
           />
         ) : null
       ) : (

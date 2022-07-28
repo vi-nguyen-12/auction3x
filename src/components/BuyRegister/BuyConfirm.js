@@ -4,9 +4,11 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
+import { useSelector } from "react-redux";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const BuyConfirm = ({ property }) => {
-  console.log(property);
+  const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount
@@ -14,8 +16,6 @@ const BuyConfirm = ({ property }) => {
 
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
-  const [auctionEnded, setAuctionEnded] = useState(false);
-  const toggleAuction = () => setAuctionEnded(!auctionEnded);
 
   const onSubmit = async (data) => {
     if (bid === undefined) {
@@ -33,106 +33,24 @@ const BuyConfirm = ({ property }) => {
     }
   };
 
+  const highestBidder =
+    property.highestBidders.length > 0
+      ? property.highestBidders[property.highestBidders.length - 1]
+      : "";
+
   return (
     <>
-      <Modal.Header className="auction-modal-header" closeButton>
-        <Modal.Title className="auction-modal-title">Enter Bid</Modal.Title>
-      </Modal.Header>
       <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
         <>
-          {/* <Table borderless>
-            <tbody className="auction-info">
-              <tr>
-                {property.highestBid ? (
-                  <td
-                    style={{
-                      position: "relative",
-                      fontWeight: "bold",
-                      padding: "15px",
-                    }}
-                  >
-                    Leading Bid:
-                    <NumberFormat
-                      style={{ marginLeft: "10px", fontWeight: "normal" }}
-                      value={property.highestBid}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                  </td>
-                ) : (
-                  <td
-                    style={{
-                      position: "relative",
-                      fontWeight: "bold",
-                      padding: "15px",
-                    }}
-                  >
-                    Leading Bid:
-                    <NumberFormat
-                      style={{ marginLeft: "10px", fontWeight: "normal" }}
-                      value={property.startingBid}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      prefix={"$"}
-                    />
-                  </td>
-                )}
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    position: "relative",
-                    fontWeight: "bold",
-                    padding: "15px",
-                  }}
-                >
-                  Increment Amount:
-                  <NumberFormat
-                    style={{ marginLeft: "10px", fontWeight: "normal" }}
-                    value={property.incrementAmount}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td
-                  style={{
-                    position: "relative",
-                    fontWeight: "bold",
-                    padding: "15px",
-                  }}
-                >
-                  Minimum Bid:
-                  <NumberFormat
-                    style={{
-                      marginLeft: "10px",
-                      fontWeight: "normal",
-                      color: "#b77b50",
-                      fontWeight: "bold",
-                    }}
-                    value={property.highestBid + property.incrementAmount}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                    onValueChange={(values) => {
-                      const { value } = values;
-                      setBid(value);
-                    }}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table> */}
-
           <Row style={{ padding: "0 20px" }}>
             <Col className="fw-bold">Leading Bid:</Col>
             <Col className="d-flex justify-content-end">
               {property.highestBid ? (
                 <NumberFormat
-                  style={{ marginLeft: "10px", fontWeight: "normal" }}
+                  style={{
+                    color: highestBidder.userId === user._id ? "green" : "",
+                    fontWeight: "bold",
+                  }}
                   value={property.highestBid}
                   displayType={"text"}
                   thousandSeparator={true}
@@ -140,7 +58,6 @@ const BuyConfirm = ({ property }) => {
                 />
               ) : (
                 <NumberFormat
-                  style={{ marginLeft: "10px", fontWeight: "normal" }}
                   value={property.startingBid}
                   displayType={"text"}
                   thousandSeparator={true}
