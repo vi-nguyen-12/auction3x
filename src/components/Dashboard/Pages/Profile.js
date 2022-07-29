@@ -145,14 +145,15 @@ function Profile({ id, windowSize }) {
         >
           <div className="profileOutline">
             <div className="profileInline">
-              <img
+              <div
                 style={{
                   borderRadius: "20px",
                   width: "100%",
                   height: "100%",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundImage: `url(${user.profileImage})`,
                 }}
-                src={user.profileImage}
-                alt="profile"
               />
             </div>
           </div>

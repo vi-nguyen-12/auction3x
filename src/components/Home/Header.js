@@ -135,7 +135,7 @@ const Header = ({
           alignContent: "center",
           height: "100%",
           justifyContent: "space-between",
-          padding: windowSize > 600 && "0 10px",
+          padding: windowSize > 600 && "0 50px",
         }}
       >
         <div className="navbar-brand">
@@ -648,7 +648,7 @@ const Header = ({
                   >
                     <FaBars size={23} />
                   </Button>
-                  <Button
+                  {/* <Button
                     className="headerNav"
                     id={colors === "white" ? "hover" : ""}
                     style={{
@@ -660,7 +660,7 @@ const Header = ({
                     }}
                   >
                     <VscGlobe size={23} />
-                  </Button>
+                  </Button> */}
                 </>
               ) : (
                 <>
@@ -722,7 +722,7 @@ const Header = ({
                     <FaBars size={23} />
                   </Button>
 
-                  <Button
+                  {/* <Button
                     id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
                     style={{
@@ -736,7 +736,7 @@ const Header = ({
                     }}
                   >
                     <VscGlobe size={23} />
-                  </Button>
+                  </Button> */}
                 </>
               )}
             </div>
@@ -1116,7 +1116,7 @@ const Header = ({
                 >
                   <FaBars size={23} />
                 </Button>
-
+                {/* 
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
@@ -1129,7 +1129,7 @@ const Header = ({
                   }}
                 >
                   <VscGlobe size={23} />
-                </Button>
+                </Button> */}
               </>
             ) : (
               <>
@@ -1214,7 +1214,7 @@ const Header = ({
                   <FaBars size={20} />
                 </Button>
 
-                <Button
+                {/* <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
@@ -1227,7 +1227,7 @@ const Header = ({
                   }}
                 >
                   <VscGlobe size={25} />
-                </Button>
+                </Button> */}
               </>
             )}
           </div>

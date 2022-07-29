@@ -11,8 +11,18 @@ import "react-phone-input-2/lib/bootstrap.css";
 function EditProfile({ getProfilePic, getDescription }) {
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [username, setUsername] = useState(user.userName);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone);
+  const [description, setDescription] = useState();
+  const [facebook, setFacebook] = useState(user.social_links.facebook);
+  const [instagram, setInstagram] = useState(user.social_links.instagram);
+  const [twitter, setTwitter] = useState(user.social_links.twitter);
   const [oldPass, setOldPass] = useState();
   const [newPass, setNewPass] = useState();
+  const [confirmPass, setConfirmPass] = useState();
   const [country, setCountry] = useState();
   const [city, setCity] = useState();
   const [changePass, setChangePass] = useState(false);
@@ -21,22 +31,26 @@ function EditProfile({ getProfilePic, getDescription }) {
   const [loader, setLoader] = useState(false);
 
   const changePassword = async () => {
-    const datas = {
-      id: user._id,
-      details: {
-        old_password: oldPass,
-        new_password: newPass,
-      },
-    };
-    await authService.editUserInfo(datas).then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        alert("Password changed successfully");
-        setOldPass("");
-        setNewPass("");
-      }
-    });
+    if (newPass !== confirmPass) {
+      alert("Please make sure your new password matches");
+    } else {
+      const datas = {
+        id: user._id,
+        details: {
+          old_password: oldPass,
+          new_password: newPass,
+        },
+      };
+      await authService.editUserInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Password changed successfully");
+          setOldPass("");
+          setNewPass("");
+        }
+      });
+    }
   };
 
   const changePlaces = async () => {
@@ -78,22 +92,20 @@ function EditProfile({ getProfilePic, getDescription }) {
     const datas = {
       id: user._id,
       details: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phone: data.phone,
-        userName: data.userName,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        userName: username,
         profileImage: profilePic ? profilePic : user.profileImage,
         social_links: {
-          facebook: data.facebook ? data.facebook : "https://www.facebook.com/",
-          twitter: data.twitter ? data.twitter : "https://www.twitter.com/",
-          instagram: data.instagram
-            ? data.instagram
-            : "https://www.instagram.com/",
+          facebook: facebook ? facebook : "https://www.facebook.com/",
+          twitter: twitter ? twitter : "https://www.twitter.com/",
+          instagram: instagram ? instagram : "https://www.instagram.com/",
         },
       },
     };
-    getDescription(data.description);
+    getDescription(description);
     await authService.editUserInfo(datas).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
@@ -104,210 +116,169 @@ function EditProfile({ getProfilePic, getDescription }) {
     });
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Container style={{ padding: "20px", paddingBottom: "30px" }}>
-        <Row>
-          <Col>
-            <span>First Name</span>
-            <input
-              className="form-control"
-              defaultValue={user.firstName}
-              type="text"
-              {...register("firstName", { required: true })}
-            />
-          </Col>
-          <Col>
-            <span>Last Name</span>
-            <input
-              className="form-control"
-              defaultValue={user.lastName}
-              type="text"
-              {...register("lastName", { required: true })}
-            />
-          </Col>
-          <Col>
-            <span>Title</span>
-            <input
-              className="form-control"
-              defaultValue={"Owner"}
-              type="text"
-              {...register("title", { required: true })}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
-            <span>Username</span>
-            <input
-              className="form-control"
-              defaultValue={user.userName}
-              type="text"
-              {...register("userName", { required: true })}
-            />
-          </Col>
-          <Col>
-            <span>Email</span>
-            <input
-              className="form-control"
-              defaultValue={user.email}
-              type="email"
-              {...register("email", { required: true })}
-            />
-          </Col>
-          <Col>
-            <span>Phone</span>
-            <PhoneInput
-              disableCountryCode={false}
-              onlyCountries={["ca", "us", "gb", "au"]}
-              disableDropdown={false}
-              country={"us"}
-              dropdownStyle={{ paddingLeft: "0!important" }}
-              inputStyle={{ width: "100%" }}
-              buttonStyle={{
-                borderRight: "none",
-              }}
-              {...register("phone", { required: true })}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
-            {loader ? <Loading /> : null}
-            <span style={{ fontSize: "20px", fontWeight: "700" }}>
-              Profile Picture
-            </span>
-            <input
-              className="form-control"
-              type="file"
-              {...register("images", { onChange: changeProfilePic })}
-            />
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "20px" }}>
-          <Col style={{ fontSize: "20px", fontWeight: "700" }}>
-            Social Media
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <span>Instagram</span>
-            {/* <input
-              className="form-control"
-              defaultValue={user.social_links.instagram ? user.social_links.instagram : ""}
-              type="text"
-              {...register("instagram", { required: false })}
-            /> */}
-          </Col>
-          <Col>
-            <span>Facebook</span>
-            {/* <input
-              className="form-control"
-              defaultValue={user.social_links.facebook ? user.social_links.facebook : ""}
-              type="text"
-              {...register("facebook", { required: false })}
-            /> */}
-          </Col>
-          <Col>
-            <span>Twitter</span>
-            {/* <input
-              className="form-control"
-              defaultValue={user.social_links.twitter ? user.social_links.twitter : ""}
-              type="text"
-              {...register("twitter", { required: false })}
-            /> */}
-          </Col>
-        </Row>
-        <Row
+    <Container style={{ padding: "20px", paddingBottom: "30px" }}>
+      <Row>
+        <Col>
+          <span>First Name</span>
+          <input
+            className="form-control"
+            defaultValue={firstName}
+            type="text"
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>Last Name</span>
+          <input
+            className="form-control"
+            defaultValue={lastName}
+            type="text"
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>Username</span>
+          <input
+            className="form-control"
+            defaultValue={username}
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <Col>
+          <span>Email</span>
+          <input
+            className="form-control"
+            defaultValue={email}
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>Phone</span>
+          <PhoneInput
+            disableCountryCode={false}
+            onlyCountries={["ca", "us", "gb", "au"]}
+            disableDropdown={false}
+            country={"us"}
+            dropdownStyle={{ paddingLeft: "0!important" }}
+            inputStyle={{ width: "100%" }}
+            buttonStyle={{
+              borderRight: "none",
+            }}
+            value={phone}
+            onChange={setPhone}
+          />
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <Col>
+          {loader ? <Loading /> : null}
+          <span style={{ fontSize: "20px", fontWeight: "700" }}>
+            Profile Picture
+          </span>
+          <input
+            className="form-control"
+            type="file"
+            {...register("images", { onChange: changeProfilePic })}
+          />
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "20px" }}>
+        <Col style={{ fontSize: "20px", fontWeight: "700" }}>Social Media</Col>
+      </Row>
+      <Row>
+        <Col>
+          <span>Instagram</span>
+          <input
+            className="form-control"
+            defaultValue={instagram}
+            type="text"
+            onChange={(e) => setInstagram(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>Facebook</span>
+          <input
+            className="form-control"
+            defaultValue={facebook}
+            type="text"
+            onChange={(e) => setFacebook(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>Twitter</span>
+          <input
+            className="form-control"
+            defaultValue={twitter}
+            type="text"
+            onChange={(e) => setTwitter(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row
+        style={{
+          marginTop: "20px",
+        }}
+      >
+        <Col
           style={{
-            marginTop: "20px",
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <Col
-            style={{
-              fontSize: "20px",
-              fontWeight: "700",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Button onClick={() => setChangePass(!changePass)}>
+          <Button onClick={() => setChangePass(!changePass)}>
+            Change Password
+          </Button>
+        </Col>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
+          <Button onClick={() => setChangePlace(!changePlace)}>
+            Change Place
+          </Button>
+        </Col>
+      </Row>
+
+      {changePass ? (
+        <Row>
+          <Row style={{ marginTop: "20px" }}>
+            <Col
+              style={{
+                fontSize: "20px",
+                fontWeight: "700",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
               Change Password
-            </Button>
-          </Col>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
-            <Button onClick={() => setChangePlace(!changePlace)}>
-              Change Place
-            </Button>
-          </Col>
-        </Row>
-
-        {changePass ? (
-          <Row>
-            <Row style={{ marginTop: "20px" }}>
-              <Col
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                Change Password
-              </Col>
-            </Row>
-            <Row style={{ marginTop: "20px" }}>
-              <Col>
-                <span>Current Password</span>
-                <input
-                  className="form-control"
-                  type="password"
-                  onChange={(e) => setOldPass(e.target.value)}
-                />
-              </Col>
-              <Col>
-                <span>New Password</span>
-                <input
-                  className="form-control"
-                  type="password"
-                  onChange={(e) => setNewPass(e.target.value)}
-                />
-              </Col>
-              <Col>
-                <span>Confirm Password</span>
-                <input className="form-control" type="password" />
-              </Col>
-              <Row style={{ marginTop: "20px" }}>
-                <Col style={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    className="btn btn-primary"
-                    onClick={() => {
-                      changePassword();
-                    }}
-                  >
-                    Save
-                  </Button>
-                </Col>
-              </Row>
-            </Row>
+            </Col>
           </Row>
-        ) : null}
-
-        {changePlace ? (
-          <Row>
+          <Row style={{ marginTop: "20px" }}>
             <Col>
-              <span>Country</span>
+              <span>Current Password</span>
               <input
                 className="form-control"
-                type="text"
-                onChange={(e) => setCountry(e.target.value)}
+                type="password"
+                onChange={(e) => setOldPass(e.target.value)}
               />
             </Col>
             <Col>
-              <span>City</span>
+              <span>New Password</span>
               <input
                 className="form-control"
-                type="text"
-                onChange={(e) => setCity(e.target.value)}
+                type="password"
+                onChange={(e) => setNewPass(e.target.value)}
+              />
+            </Col>
+            <Col>
+              <span>Confirm Password</span>
+              <input
+                className="form-control"
+                onChange={(e) => setConfirmPass(e.target.value)}
+                type="password"
               />
             </Col>
             <Row style={{ marginTop: "20px" }}>
@@ -315,7 +286,7 @@ function EditProfile({ getProfilePic, getDescription }) {
                 <Button
                   className="btn btn-primary"
                   onClick={() => {
-                    changePlaces();
+                    changePassword();
                   }}
                 >
                   Save
@@ -323,32 +294,66 @@ function EditProfile({ getProfilePic, getDescription }) {
               </Col>
             </Row>
           </Row>
-        ) : null}
-        <Row style={{ marginTop: "20px" }}>
-          <Col>
-            <span style={{ fontSize: "20px", fontWeight: "700" }}>
-              Description
-            </span>
-          </Col>
         </Row>
+      ) : null}
+
+      {changePlace ? (
         <Row>
           <Col>
-            <textarea
-              style={{ height: "150px" }}
+            <span>Country</span>
+            <input
               className="form-control"
-              {...register("description", { required: false })}
+              type="text"
+              onChange={(e) => setCountry(e.target.value)}
             />
           </Col>
-        </Row>
-        <Row style={{ marginTop: "50px" }}>
-          <Col style={{ display: "flex", justifyContent: "center" }}>
-            <Button className="btn btn-primary" type="submit">
-              Change
-            </Button>
+          <Col>
+            <span>City</span>
+            <input
+              className="form-control"
+              type="text"
+              onChange={(e) => setCity(e.target.value)}
+            />
           </Col>
+          <Row style={{ marginTop: "20px" }}>
+            <Col style={{ display: "flex", justifyContent: "center" }}>
+              <Button
+                className="btn btn-primary"
+                onClick={() => {
+                  changePlaces();
+                }}
+              >
+                Save
+              </Button>
+            </Col>
+          </Row>
         </Row>
-      </Container>
-    </form>
+      ) : null}
+      <Row style={{ marginTop: "20px" }}>
+        <Col>
+          <span style={{ fontSize: "20px", fontWeight: "700" }}>
+            Description
+          </span>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <textarea
+            style={{ height: "150px" }}
+            className="form-control"
+            defaultValue={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "50px" }}>
+        <Col style={{ display: "flex", justifyContent: "center" }}>
+          <Button onClick={onSubmit} className="btn btn-primary" type="submit">
+            Change
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

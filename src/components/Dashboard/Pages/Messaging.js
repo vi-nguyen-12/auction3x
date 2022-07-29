@@ -2,14 +2,71 @@ import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import authService from "../../../services/authServices";
 import { useSelector } from "react-redux";
+import ReactQuill from "react-quill";
+import Loading from "../../Loading";
+import { useForm } from "react-hook-form";
+import { MdClose } from "react-icons/md";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+
+const modules = {
+  toolbar: [
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    ["link", "blockquote"],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "list",
+  "bullet",
+  "align",
+  "color",
+  "background",
+  "link",
+];
 
 function Messaging({ windowSize }) {
+  const { register, handleSubmit } = useForm();
   const [subject, setSubject] = useState();
   const [message, setMessage] = useState();
-  const [files, setFiles] = useState([]);
+  const [document, setDocument] = useState([]);
+  const [loader, setLoader] = useState(false);
   const user = useSelector((state) => state.user);
 
-  const getFiles = () => { };
+  const handleOnChangeText = (value) => {
+    setMessage(value);
+  };
+
+  const onChange1 = async (e) => {
+    setLoader(true);
+    const formData1 = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData1.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData1).then((response) => {
+      if (response.status === 200) {
+        setDocument([...document, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
+  };
+
+  const handleDelete = (url) => () => {
+    setDocument(document.filter((document) => document.url !== url));
+  };
 
   const send = async () => {
     const datas = {
@@ -30,115 +87,89 @@ function Messaging({ windowSize }) {
 
   return (
     <>
+      {loader && <Loading />}
       <h1 style={{ margin: "50px" }}>Messaging</h1>
       <Container
-        className="chatContainer"
-        style={{ width: "100%", margin: "30px auto" }}
+        className="chatContainer p-5"
+        style={{ width: windowSize < 600 ? "100%" : "50%" }}
       >
-        <Row
-          className="d-flex justify-content-center mt-3"
-          style={{ alignItems: "center" }}
-        >
-          <Col
-            md={2}
-            lg={2}
-            className="d-flex"
-            style={{
-              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
-            }}
-          >
-            To :
-          </Col>
-          <Col md={7} lg={6} className="d-flex">
+        {/* <Row className="d-flex justify-content-center">
+          <Col>
+            <span>To: </span>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter a subject"
+              className="form-control mt-2"
               onChange={(e) => setSubject(e.target.value)}
-              style={{ width: "100%", border: "none" }}
               required
             />
           </Col>
-        </Row>
-        <Row
-          className="d-flex justify-content-center mt-3"
-          style={{ alignItems: "center" }}
-        >
-          <Col
-            md={2}
-            lg={2}
-            className="d-flex"
-            style={{
-              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
-            }}
-          >
-            Subject :
-          </Col>
-          <Col md={7} lg={6} className="d-flex">
+        </Row> */}
+        <Row className="d-flex justify-content-center mt-3">
+          <Col>
+            <span>Subject: </span>
             <input
               type="text"
-              className="form-control"
-              placeholder="Enter a subject"
+              className="form-control mt-2"
               onChange={(e) => setSubject(e.target.value)}
-              style={{ width: "100%", border: "none" }}
               required
             />
           </Col>
         </Row>
         <Row className="d-flex justify-content-center mt-3">
-          <Col
-            md={2}
-            lg={2}
-            className="d-flex"
-            style={{
-              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
-            }}
-          >
-            Message :
-          </Col>
-          <Col md={7} lg={6} className="d-flex">
-            <textarea
-              className="form-control"
-              rows="5"
-              placeholder="Enter a message"
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            ></textarea>
+          <Col>
+            <span>Message: </span>
+            <ReactQuill
+              theme="snow"
+              className="mt-2"
+              modules={modules}
+              formats={formats}
+              value={message}
+              onChange={handleOnChangeText}
+            ></ReactQuill>
           </Col>
         </Row>
-        <Row
-          className="d-flex justify-content-center mt-3"
-          style={{ alignItems: "center" }}
-        >
-          <Col
-            md={2}
-            lg={2}
-            className="d-flex"
-            style={{
-              justifyContent: windowSize > 767 ? "flex-end" : "flex-start",
-            }}
-          >
-            Attachment :
-          </Col>
-          <Col md={7} lg={6} className="d-flex">
-            <input className="form-control" type="file" />
-          </Col>
-        </Row>
-        <Row
-          className="d-flex justify-content-center mt-3"
-          style={{ alignItems: "center" }}
-        >
-          <Col className="d-flex" style={{ justifyContent: "center" }}>
-            <div className="refresh">
-              <button
-                variant="primary"
-                style={{ fontWeight: "bold", padding: "px 10px" }}
-                onClick={() => send()}
-                className="resetBtn"
-              >
-                Send
-              </button>
+        <Row className="d-flex justify-content-center mt-3">
+          <Col>
+            <span>Attachments: </span>
+            <div>
+              <input
+                type="file"
+                name="form"
+                id="doc"
+                className="form-control"
+                {...register("document", { onChange: onChange1 })}
+                hidden
+                required
+              />
+              <div className="mt-2">
+                <label htmlFor="doc" className="btn btn-primary">
+                  Upload
+                </label>
+              </div>
+              <div className="upload-list" style={{ width: "100%" }}>
+                {document.map((document, index) => (
+                  <div key={index}>
+                    <span>
+                      {document.name}
+                      <Button
+                        className="bg-transparent"
+                        style={{ border: "none" }}
+                        onClick={handleDelete(document.url)}
+                      >
+                        <MdClose fontSize="1.5em" color="red" />
+                      </Button>
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
+          </Col>
+        </Row>
+        <Row className="d-flex justify-content-center mt-5">
+          <Col className="d-flex justify-content-center">
+            <Button variant="primary" onClick={() => send()}>
+              Send
+            </Button>
           </Col>
         </Row>
       </Container>

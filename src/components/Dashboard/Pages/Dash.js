@@ -251,7 +251,7 @@ function Dash({ windowSize, featureLength }) {
                   <span>Filter</span>
                 </button>
               </div> */}
-              <div className="refresh">
+              <div onClick={toggleFundReq} className="refresh">
                 <GoPlus onClick={toggleFundReq} color="white" size={28} />
                 <button onClick={toggleFundReq} className="resetBtn">
                   <span>Add Fund</span>
@@ -285,8 +285,8 @@ function Dash({ windowSize, featureLength }) {
                     <span>Filter</span>
                   </button>
                 </div> */}
-                <div className="refresh">
-                  <GoPlus color="white" size={28} />
+                <div onClick={toggleFundReq} className="refresh">
+                  <GoPlus onClick={toggleFundReq} color="white" size={28} />
                   <button onClick={toggleFundReq} className="resetBtn">
                     <span>Add Fund</span>
                   </button>

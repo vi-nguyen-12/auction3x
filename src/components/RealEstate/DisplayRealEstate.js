@@ -1399,7 +1399,7 @@ function DisplayRealEstate({
                   outline: "none",
                   fontSize: "17px",
                   borderRadius: "4px",
-                  padding: "20px",
+                  padding: "30px",
                 }}
               >
                 <div
