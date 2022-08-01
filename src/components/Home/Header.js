@@ -17,6 +17,7 @@ import { BsFillHouseFill } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
+import { AiFillDollarCircle } from "react-icons/ai";
 
 const Header = ({
   change,
@@ -648,19 +649,51 @@ const Header = ({
                   >
                     <FaBars size={23} />
                   </Button>
-                  {/* <Button
-                    className="headerNav"
-                    id={colors === "white" ? "hover" : ""}
-                    style={{
-                      backgroundColor: "transparent",
-                      color: textColor,
-                      borderRadius: "0",
-                      lineHeight: "normal",
-                      height: "47px",
-                    }}
-                  >
-                    <VscGlobe size={23} />
-                  </Button> */}
+                  <div className="dropdown">
+                    <Button
+                      className="headerNav"
+                      id={colors === "white" ? "hover" : ""}
+                      style={{
+                        backgroundColor: "transparent",
+                        color: textColor,
+                        borderRadius: "0",
+                        lineHeight: "normal",
+                        height: "47px",
+                      }}
+                    >
+                      <VscGlobe size={23} />
+                    </Button>
+                    <div
+                      className="dropdown-content"
+                      style={{
+                        marginLeft: "-50px",
+                        width: "130px",
+                        // padding: "10px",
+                      }}
+                    >
+                      <Button className="d-flex justify-content-start align-items-center">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <AiFillDollarCircle size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            USA
+                          </span>
+                        </div>
+                      </Button>
+                    </div>
+                  </div>
                 </>
               ) : (
                 <>
@@ -722,7 +755,7 @@ const Header = ({
                     <FaBars size={23} />
                   </Button>
 
-                  {/* <Button
+                  <Button
                     id={colors === "white" ? "hover" : ""}
                     className="headerNav mt-0"
                     style={{
@@ -736,7 +769,7 @@ const Header = ({
                     }}
                   >
                     <VscGlobe size={23} />
-                  </Button> */}
+                  </Button>
                 </>
               )}
             </div>
@@ -1116,7 +1149,7 @@ const Header = ({
                 >
                   <FaBars size={23} />
                 </Button>
-                {/* 
+
                 <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
@@ -1129,7 +1162,7 @@ const Header = ({
                   }}
                 >
                   <VscGlobe size={23} />
-                </Button> */}
+                </Button>
               </>
             ) : (
               <>
@@ -1214,7 +1247,7 @@ const Header = ({
                   <FaBars size={20} />
                 </Button>
 
-                {/* <Button
+                <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerNav mt-0"
                   style={{
@@ -1227,7 +1260,7 @@ const Header = ({
                   }}
                 >
                   <VscGlobe size={25} />
-                </Button> */}
+                </Button>
               </>
             )}
           </div>

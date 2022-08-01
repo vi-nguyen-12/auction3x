@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Row, Container, Table, Button } from "react-bootstrap";
+import { Row, Container, Table, Button, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
+import { useHistory } from "react-router-dom";
 
 function LiveListings({ windowSize }) {
   const user = useSelector((state) => state.user);
+  const history = useHistory();
   const [upcomingListings, setUpcomingListings] = useState([]);
   const [showImages, setShowImages] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [images, setImages] = useState([]);
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
   const toggleImages = () => setShowImages(!showImages);
@@ -23,144 +27,250 @@ function LiveListings({ windowSize }) {
   }, []);
 
   return (
-    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
-      <Row>
-        <h1>Upcoming Listings</h1>
-        <Table
-          striped
-          borderless
-          hover
-          style={{
-            overflow: windowSize < 800 ? "auto" : "hidden",
-            display: windowSize < 800 && "block",
-            tableLayout: windowSize < 800 && "auto",
-            padding: "0",
-            borderRadius: "5px",
-            boxShadow: "#d7c4c4 0px 0px 20px 16px",
-            marginTop: "50px",
-          }}
-        >
-          <thead
-            style={{ background: "black", color: "white", padding: "50px" }}
+    <>
+      <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+        <Row>
+          <h1>Upcoming Listings</h1>
+          <Table
+            striped
+            borderless
+            hover
+            style={{
+              overflow: windowSize < 800 ? "auto" : "hidden",
+              display: windowSize < 800 && "block",
+              tableLayout: windowSize < 800 && "auto",
+              padding: "0",
+              borderRadius: "5px",
+              boxShadow: "#d7c4c4 0px 0px 20px 16px",
+              marginTop: "50px",
+            }}
           >
-            <tr>
-              <th>#</th>
-              <th>Property ID</th>
-              <th>Property Address</th>
-              <th colSpan={2}>Property Status</th>
-              <th colSpan={2}>Property Documents</th>
-              <th>Property Type</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          {upcomingListings.length > 0 ? (
-            upcomingListings.map((listing, index) => (
-              <tbody key={index}>
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{listing._id}</td>
-                  <td>
-                    {listing.details.property_address
-                      ?.formatted_street_address || ""}
-                    <div
-                      style={{
-                        width: "100%",
-                        alignItems: "right",
-                        cursor: "pointer",
-                      }}
-                    >
-                      <img
-                        width="100px"
-                        height="50px"
+            <thead
+              style={{ background: "black", color: "white", padding: "50px" }}
+            >
+              <tr>
+                <th>#</th>
+                <th>Property ID</th>
+                <th>Property Address</th>
+                <th colSpan={2}>Property Status</th>
+                <th colSpan={2}>Property Documents</th>
+                <th>Property Type</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            {upcomingListings.length > 0 ? (
+              upcomingListings.map((listing, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{listing._id}</td>
+                    <td>
+                      {listing.details.property_address
+                        ?.formatted_street_address || ""}
+                      <div
+                        style={{
+                          width: "100%",
+                          alignItems: "right",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <img
+                          width="100px"
+                          height="50px"
+                          onClick={() => {
+                            setImages(listing.images);
+                            toggleImages();
+                          }}
+                          src={
+                            listing.images.length > 0
+                              ? listing.images[0].url
+                              : ""
+                          }
+                        />
+                      </div>
+                    </td>
+                    {listing.isApproved === "success" ? (
+                      <td colSpan={2}>
+                        <span
+                          style={{
+                            background: "green",
+                            color: "white",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          Approved
+                        </span>
+                      </td>
+                    ) : listing.isApproved === "pending" ? (
+                      <td colSpan={2}>
+                        <span
+                          style={{
+                            background: "orange",
+                            color: "white",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          Pending
+                        </span>
+                      </td>
+                    ) : listing.isApproved === "fail" ? (
+                      <td colSpan={2}>
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            padding: "5px",
+                            borderRadius: "5px",
+                          }}
+                        >
+                          Pending
+                        </span>
+                      </td>
+                    ) : null}
+                    <td colSpan={2}>
+                      <Button
                         onClick={() => {
-                          toggleImages();
+                          setDocuments(listing.documents);
+                          toggleDocuments();
                         }}
-                        src={
-                          listing.images.length > 0 ? listing.images[0].url : ""
-                        }
-                      />
-                    </div>
-                  </td>
-                  {listing.isApproved === "success" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "green",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
+                        variant="primary"
                       >
-                        Approved
-                      </span>
+                        View
+                      </Button>
                     </td>
-                  ) : listing.isApproved === "pending" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "orange",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
+                    <td>
+                      {listing.type === "real-estate"
+                        ? "Real Estate"
+                        : listing.type === "car"
+                        ? "Car"
+                        : listing.type === "jet"
+                        ? "Jet"
+                        : listing.type === "yacht"
+                        ? "Yacht"
+                        : ""}
+                    </td>
+                    <td>
+                      <Button
+                        onClick={() => history.push("/Dashboard/Messaging")}
+                        variant="primary"
                       >
-                        Pending
-                      </span>
+                        Email
+                      </Button>
                     </td>
-                  ) : listing.isApproved === "fail" ? (
-                    <td colSpan={2}>
-                      <span
-                        style={{
-                          background: "red",
-                          color: "white",
-                          padding: "5px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Pending
-                      </span>
-                    </td>
-                  ) : null}
-                  <td colSpan={2}>
-                    <Button
-                      onClick={() => {
-                        toggleDocuments();
-                      }}
-                      variant="primary"
-                    >
-                      View
-                    </Button>
-                  </td>
-                  <td>
-                    {listing.type === "real-estate"
-                      ? "Real Estate"
-                      : listing.type === "car"
-                      ? "Car"
-                      : listing.type === "jet"
-                      ? "Jet"
-                      : listing.type === "yacht"
-                      ? "Yacht"
-                      : ""}
-                  </td>
-                  <td>
-                    <Button variant="primary">Email</Button>
-                  </td>
+                  </tr>
+                </tbody>
+              ))
+            ) : (
+              <tbody>
+                <tr>
+                  <td colSpan={12}>No Upcoming Listings</td>
                 </tr>
               </tbody>
-            ))
-          ) : (
-            <tbody>
+            )}
+          </Table>
+        </Row>
+        <Row style={{ marginTop: "50px" }}>
+          <ApprovedListings windowSize={windowSize} />
+        </Row>
+      </Container>
+
+      <Modal size="lg" show={showDocuments} onHide={toggleDocuments} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Documents</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Table
+            style={{
+              overflow: windowSize < 800 ? "auto" : "hidden",
+              display: windowSize < 800 && "block",
+              tableLayout: windowSize < 800 && "auto",
+              padding: "0",
+            }}
+          >
+            <thead>
               <tr>
-                <td colSpan={12}>No Upcoming Listings</td>
+                <th>#</th>
+                <th>Document Name</th>
+                <th>Document Official Name</th>
+                <th>Document Status</th>
+                <th>Document URL</th>
               </tr>
-            </tbody>
-          )}
-        </Table>
-      </Row>
-      <Row style={{ marginTop: "50px" }}>
-        <ApprovedListings windowSize={windowSize} />
-      </Row>
-    </Container>
+            </thead>
+            {documents.length > 0 &&
+              documents.map((document, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{document.name}</td>
+                    <td>{document.officialName}</td>
+                    {document.isVerified === "pending" ? (
+                      <td>Pending</td>
+                    ) : document.isVerified === "success" ? (
+                      <td>Approved</td>
+                    ) : document.isVerified === "fail" ? (
+                      <td>Rejected</td>
+                    ) : null}
+                    <td>
+                      <Button
+                        onClick={() => {
+                          window.open(document.url, "_blank");
+                        }}
+                      >
+                        View
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </Table>
+        </Modal.Body>
+      </Modal>
+
+      <Modal size="lg" show={showImages} onHide={toggleImages} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Images</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Image Name</th>
+                  <th>Image Status</th>
+                  <th>Image URL</th>
+                </tr>
+              </thead>
+              {images.length > 0 &&
+                images.map((image, index) => (
+                  <tbody key={index}>
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{image.name}</td>
+                      {image.isVerified === "pending" ? (
+                        <td>Pending</td>
+                      ) : image.isVerified === "success" ? (
+                        <td>Approved</td>
+                      ) : image.isVerified === "fail" ? (
+                        <td>Rejected</td>
+                      ) : null}
+                      <td>
+                        <Button
+                          onClick={() => {
+                            window.open(image.url, "_blank");
+                          }}
+                        >
+                          View
+                        </Button>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
+            </Table>
+          </Modal.Body>
+        </Modal>
+    </>
   );
 }
 

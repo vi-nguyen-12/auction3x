@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Table, Row, Col, Container, Pagination } from "react-bootstrap";
+import {
+  Table,
+  Row,
+  Col,
+  Container,
+  Pagination,
+  Button,
+} from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 import "../../../../styles/dashboard.css";
@@ -11,11 +18,11 @@ function IncompleteListing({ windowSize }) {
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
   const [pageContent, setPageContent] = useState([]);
+  const [currentPageContent, setCurrentPageContent] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  // let active = 5;
-  // let items = [];
+  let items = [];
 
   useEffect(() => {
     const fetchIncompleteListings = async () => {
@@ -25,8 +32,6 @@ function IncompleteListing({ windowSize }) {
     };
     fetchIncompleteListings();
   }, [incompProperty]);
-
-  const getPage = (page) => {};
 
   // seperate incomplete listings into pages
   useEffect(() => {
@@ -54,8 +59,17 @@ function IncompleteListing({ windowSize }) {
   };
 
   for (let number = 1; number <= totalPages; number++) {
-    pageContent.push(<Pagination.Item key={number}>{number}</Pagination.Item>);
+    items.push(
+      <Pagination.Item active={number === currentPage} key={number}>
+        {number}
+      </Pagination.Item>
+    );
   }
+
+  const handlePageChange = (key) => {
+    setCurrentPage(key);
+    setCurrentPageContent(key - 1);
+  };
   return (
     <Container
       style={{
@@ -89,43 +103,41 @@ function IncompleteListing({ windowSize }) {
               <th>Actions</th>
             </tr>
           </thead>
-          {IncompleteListings.length > 0 ? (
-            IncompleteListings.slice()
-              .reverse()
-              .map((listing, index) => (
-                <tbody key={index}>
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{listing._id}</td>
-                    <td>{listing.type}</td>
-                    <td className="progress-1">
-                      <CircularProgressbar
-                        value={listing.step}
-                        text={`${(listing.step / 5) * 100}%`}
-                        maxValue={5}
-                        strokeWidth={20}
-                      />
-                    </td>
-                    <td>{new Date(listing.updatedAt).toLocaleString()}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          window.open(`/multiSellForm/${listing._id}`);
-                        }}
-                        className="resume-btn"
-                      >
-                        Resume
-                      </button>{" "}
-                      <button
-                        onClick={() => handleDelete(listing._id)}
-                        className="del-btn"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              ))
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((listing, index) => (
+              <tbody key={index}>
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{listing._id}</td>
+                  <td>{listing.type}</td>
+                  <td className="progress-1">
+                    <CircularProgressbar
+                      value={listing.step}
+                      text={`${(listing.step / 5) * 100}%`}
+                      maxValue={5}
+                      strokeWidth={20}
+                    />
+                  </td>
+                  <td>{new Date(listing.updatedAt).toLocaleString()}</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        window.open(`/multiSellForm/${listing._id}`);
+                      }}
+                    >
+                      Resume
+                    </Button>{" "}
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(listing._id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            ))
           ) : (
             <tbody>
               <tr>
@@ -135,19 +147,29 @@ function IncompleteListing({ windowSize }) {
           )}
         </Table>
       </Row>
-      {/* <Row>
+      <Row>
         {items.map((item, index) => (
-          <Col style={{ display: "flex", flex: "0", padding: "0" }} key={index}>
+          <Col
+            style={{
+              display: "flex",
+              flex: "0",
+              padding: "0",
+            }}
+            key={index}
+          >
             <Pagination
-              onClick={() => {
-                console.log(item.key);
+              style={{
+                background: "transparent",
+                margin: "0 2px",
+                borderRadius: "5px",
               }}
+              onClick={() => handlePageChange(parseInt(item.key))}
             >
               {item}
             </Pagination>
           </Col>
         ))}
-      </Row> */}
+      </Row>
     </Container>
   );
 }

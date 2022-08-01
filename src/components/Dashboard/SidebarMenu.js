@@ -57,7 +57,7 @@ export const SidebarMenu = [
         path: "/Dashboard/Listings/AuctionListings",
       },
       {
-        name: "Sold Listings",
+        name: "Sold Properties",
         path: "/Dashboard/Listings/SoldListings",
       },
       {
