@@ -684,6 +684,17 @@ const authService = {
       }
     );
   },
+
+  deleteNotification(id) {
+    return axios.delete(
+      apiUrl + `/api/users/${id.userId}/notifications/${id.notificationId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
 };
 
 export default authService;

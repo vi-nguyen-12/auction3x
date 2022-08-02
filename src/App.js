@@ -30,6 +30,7 @@ import LiveListings from "./components/Dashboard/Pages/Listings/LiveListings";
 import PendingListings from "./components/Dashboard/Pages/Listings/PendingListings";
 import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
 import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
+import ViewProfile from "./components/Users/ViewProfile";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -88,6 +89,7 @@ function App() {
   const [forgotPass, popForgotPass] = useState(false);
   const [changePass, popChangePass] = useState(false);
   const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
+  const [bodyPadding, setBodyPadding] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [wallet, setWallet] = useState({
     RealEstate: 0,
@@ -215,7 +217,13 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="App" style={{ background: bodyColor }}>
+      <div
+        className="App"
+        style={{
+          background: bodyColor,
+          paddingTop: bodyPadding,
+        }}
+      >
         {/* All Modals */}
         <Modal
           backdrop="static"
@@ -738,6 +746,14 @@ function App() {
                 windowSize={windowSize}
                 setRefresh={setRefresh}
                 refresh={refresh}
+              />
+            </Route>
+
+            <Route path="/Profile/:id">
+              <ViewProfile
+                windowSize={windowSize}
+                bodyColorChange={bodyColorChange}
+                setBodyPadding={setBodyPadding}
               />
             </Route>
 

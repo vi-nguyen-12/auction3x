@@ -476,19 +476,25 @@ function Dash({ windowSize, featureLength }) {
         centered
         className="fund-modal"
       >
-        <div>
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Add Funds
+          </Modal.Title>
+        </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
           <CloseButton
-            style={{
-              position: "absolute",
-              right: "25px",
-              top: "25px",
-              width: "25px",
-              height: "25px",
-              zIndex: "999",
-              backgroundColor: "white",
-              boxShadow: "none",
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleFundReq();
             }}
-            onClick={toggleFundReq}
           />
         </div>
         <Modal.Body>

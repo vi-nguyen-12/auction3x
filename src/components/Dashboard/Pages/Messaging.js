@@ -93,17 +93,6 @@ function Messaging({ windowSize }) {
         className="chatContainer p-5"
         style={{ width: windowSize < 600 ? "100%" : "50%" }}
       >
-        {/* <Row className="d-flex justify-content-center">
-          <Col>
-            <span>To: </span>
-            <input
-              type="text"
-              className="form-control mt-2"
-              onChange={(e) => setSubject(e.target.value)}
-              required
-            />
-          </Col>
-        </Row> */}
         <Row className="d-flex justify-content-center mt-3">
           <Col>
             <span>Subject: </span>

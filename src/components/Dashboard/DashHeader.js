@@ -4,11 +4,36 @@ import { FiSearch } from "react-icons/fi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import authService from "../../services/authServices";
 import "../../styles/dashboard.css";
 
 function DashHeader({ location, windowSize }) {
+  const user = useSelector((state) => state.user);
   const history = useHistory();
   const [notifi, setNotifi] = useState(false);
+  const [notifications, setNotifications] = useState(user.notifications);
+
+  const handleDelete = async (id) => {
+    const ids = {
+      userId: user._id,
+      notificationId: id,
+    };
+    setNotifications(notifications.filter((noti) => noti._id !== id));
+    await authService
+      .deleteNotification(ids)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Notification deleted");
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
   return (
     <Container
       style={{
@@ -41,7 +66,7 @@ function DashHeader({ location, windowSize }) {
               >
                 <BsBellFill color="#737b8b" size={23} />
               </Button>
-              <div className="notification">0</div>
+              <div className="notification">{notifications.length}</div>
               <div
                 onMouseEnter={() => setNotifi(true)}
                 onMouseLeave={() => setNotifi(false)}
@@ -73,7 +98,17 @@ function DashHeader({ location, windowSize }) {
                     }}
                     className="notifi-drop-down-body"
                   >
-                    <div className="notifi-dropdown-item">Something here</div>
+                    {notifications.map((notification, index) => (
+                      <div key={index} className="notifi-dropdown-item">
+                        {notification.message}
+                        <span
+                          onClick={() => handleDelete(notification._id)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          X
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -106,7 +141,7 @@ function DashHeader({ location, windowSize }) {
                     marginRight: "0",
                   }}
                 >
-                  0
+                  {notifications.length}
                 </div>
                 <div
                   onMouseEnter={() => setNotifi(true)}
@@ -145,7 +180,17 @@ function DashHeader({ location, windowSize }) {
                       }}
                       className="notifi-drop-down-body"
                     >
-                      <div className="notifi-dropdown-item">Something here</div>
+                      {notifications.map((notification, index) => (
+                        <div key={index} className="notifi-dropdown-item">
+                          {notification.message}
+                          <span
+                            onClick={() => handleDelete(notification._id)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            X
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>

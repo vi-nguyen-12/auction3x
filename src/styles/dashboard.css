@@ -540,5 +540,6 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 2px solid #e6e6e6;
+  border-top: 2px solid #e6e6e6;
 }

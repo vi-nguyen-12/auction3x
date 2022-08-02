@@ -151,8 +151,24 @@
   color: #fcba7d;
 }
 
+.headerButton {
+  background-color: #fcba7d;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
 .user {
-  font-style: normal;
+  background-color: #fcba7d;
+  color: black;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 9px 25px;
+  /* font-style: normal;
   font-weight: 700;
   font-size: 23px;
   line-height: 57px;
@@ -163,18 +179,18 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  box-sizing: content-box;
+  box-sizing: content-box; */
 }
 
 .user:hover {
-  color: #fcba7d;
-  border-bottom: white solid 1px;
+  /* color: #fcba7d; */
+  /* border-bottom: white solid 1px; */
 }
 
 .user:focus {
   outline: none !important;
   box-shadow: none !important;
-  border-bottom: white solid 2px !important;
+  /* border-bottom: white solid 2px !important; */
 }
 
 .collapse navbar-collapse {

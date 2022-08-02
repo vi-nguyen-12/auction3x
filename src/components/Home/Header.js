@@ -18,6 +18,7 @@ import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
 import { AiFillDollarCircle } from "react-icons/ai";
+import { FaGlobeAmericas } from "react-icons/fa";
 
 const Header = ({
   change,
@@ -263,7 +264,7 @@ const Header = ({
                 user._id ? (
                   <button
                     id={colors === "white" ? "hover" : ""}
-                    style={{ color: textColor }}
+                    style={{ color: textColor, marginRight: "1rem" }}
                     className="headerNav"
                     onClick={handleSell}
                   >
@@ -312,53 +313,543 @@ const Header = ({
                         Hello, {user.firstName}
                       </button>
                     ) : (
-                      <button className="user mt-0">
+                      <button
+                        className="user mt-0"
+                        style={{ padding: windowSize < 600 && "7px" }}
+                      >
                         {String(user.firstName[0]).toUpperCase()}
                         {String(user.lastName[0]).toUpperCase()}
                       </button>
                     )}
                     <div className="dropdown-content">
-                      <button
-                        className="fw-bold p-3"
-                        onClick={handleOnClick("Dashboard")}
-                      >
-                        DashBoard
-                      </button>
-                      {/* <button
+                      <div className="dropdown-content-items">
+                        <button
+                          className="fw-bold p-3"
+                          onClick={handleOnClick("Dashboard")}
+                        >
+                          DashBoard
+                        </button>
+                        {/* <button
                         className="fw-bold p-3"
                         onClick={handleOnClick("ads")}
                       >
                         My Ads
                       </button> */}
-                      <button className="fw-bold p-3" onClick={handleLogout}>
-                        Log Out
-                      </button>
+                        <button className="fw-bold p-3" onClick={handleLogout}>
+                          Log Out
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className="dropdown">
-                    <Button
-                      className="headerNav"
-                      style={{
-                        backgroundColor: "transparent",
-                        color: textColor,
-                        borderRadius: "0",
-                        height: "47px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
+                    <button
+                      className="headerButton"
                       id={colors === "white" ? "hover" : ""}
+                      style={{ padding: windowSize < 600 && "8px" }}
                       // id="dropdown-basic-button"
                       title={<IoWallet size={30} />}
                       onMouseEnter={() => setShowWallet(true)}
                       onMouseLeave={() => setShowWallet(true)}
                     >
                       <IoWallet size={23} />
-                    </Button>
-                    <div
-                      className="dropdown-content"
+                    </button>
+                    <div className="dropdown-content">
+                      <div
+                        className="dropdown-content-items"
+                        style={{
+                          marginLeft: "-80px",
+                          width: "200px",
+                          padding: "10px",
+                        }}
+                      >
+                        <div className="d-flex justify-content-start align-items-center">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <BsFillHouseFill size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              Real Estate
+                            </span>
+                            <NumberFormat
+                              style={{
+                                padding: "0",
+                                color: "#b6b7b8",
+                                display: "flex",
+                                cursor: "pointer",
+                              }}
+                              value={
+                                subWallet.RealEstate.filter(
+                                  (item) =>
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                )[0]?.availableFund || wallet.RealEstate
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                              onClick={() => {
+                                setShowSubWallet((prev) => ({
+                                  ...prev.RealEstate,
+                                  RealEstate: !prev.RealEstate,
+                                }));
+                              }}
+                            />
+                            {showSubWallet.RealEstate === true &&
+                              subWallet.RealEstate.map((item, index) => (
+                                <span className="p-0" key={index}>
+                                  <NumberFormat
+                                    thousandSeparator={true}
+                                    value={item.availableFund}
+                                    displayType={"text"}
+                                    prefix={
+                                      item.auctionId ===
+                                      history.location.pathname.slice(17)
+                                        ? "* $"
+                                        : "- $"
+                                    }
+                                    style={{
+                                      padding: "0",
+                                      display: "flex",
+                                      fontSize: "12px",
+                                    }}
+                                  />
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+
+                        <div className="d-flex justify-content-start align-items-center mt-2">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <IoCarSportSharp size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              Car
+                            </span>
+                            <NumberFormat
+                              style={{
+                                padding: "0",
+                                color: "#b6b7b8",
+                                display: "flex",
+                                cursor: "pointer",
+                              }}
+                              value={
+                                subWallet.Car.filter(
+                                  (item) =>
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                )[0]?.availableFund || wallet.Car
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                              onClick={() => {
+                                setShowSubWallet((prev) => ({
+                                  ...prev.Car,
+                                  Car: !prev.Car,
+                                }));
+                              }}
+                            />
+                            {showSubWallet.Car === true &&
+                              subWallet.Car.map((item, index) => (
+                                <span className="p-0" key={index}>
+                                  <NumberFormat
+                                    thousandSeparator={true}
+                                    value={item.availableFund}
+                                    displayType={"text"}
+                                    prefix={
+                                      item.auctionId ===
+                                      history.location.pathname.slice(17)
+                                        ? "* $"
+                                        : "- $"
+                                    }
+                                    style={{
+                                      padding: "0",
+                                      display: "flex",
+                                      fontSize: "12px",
+                                    }}
+                                  />
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+
+                        <div className="d-flex justify-content-start align-items-center mt-2">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <IoAirplaneSharp size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              Jet
+                            </span>
+                            <NumberFormat
+                              style={{
+                                padding: "0",
+                                color: "#b6b7b8",
+                                display: "flex",
+                                cursor: "pointer",
+                              }}
+                              value={
+                                subWallet.Jet.filter(
+                                  (item) =>
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                )[0]?.availableFund || wallet.Jet
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                              onClick={() => {
+                                setShowSubWallet((prev) => ({
+                                  ...prev.Jet,
+                                  Jet: !prev.Jet,
+                                }));
+                              }}
+                            />
+                            {showSubWallet.Jet === true &&
+                              subWallet.Jet.map((item, index) => (
+                                <span className="p-0" key={index}>
+                                  <NumberFormat
+                                    thousandSeparator={true}
+                                    value={item.availableFund}
+                                    displayType={"text"}
+                                    prefix={
+                                      item.auctionId ===
+                                      history.location.pathname.slice(17)
+                                        ? "* $"
+                                        : "- $"
+                                    }
+                                    style={{
+                                      padding: "0",
+                                      display: "flex",
+                                      fontSize: "12px",
+                                    }}
+                                  />
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+
+                        <div className="d-flex justify-content-start align-items-center mt-2">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <IoIosBoat size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              Yacht
+                            </span>
+                            <NumberFormat
+                              style={{
+                                padding: "0",
+                                color: "#b6b7b8",
+                                display: "flex",
+                                cursor: "pointer",
+                              }}
+                              value={
+                                subWallet.Yacht.filter(
+                                  (item) =>
+                                    item.auctionId ===
+                                    history.location.pathname.slice(17)
+                                )[0]?.availableFund || wallet.Yacht
+                              }
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"$"}
+                              onClick={() => {
+                                setShowSubWallet((prev) => ({
+                                  ...prev.Yacht,
+                                  Yacht: !prev.Yacht,
+                                }));
+                              }}
+                            />
+                            {showSubWallet.Yacht === true &&
+                              subWallet.Yacht.map((item, index) => (
+                                <span className="p-0" key={index}>
+                                  <NumberFormat
+                                    thousandSeparator={true}
+                                    value={item.availableFund}
+                                    displayType={"text"}
+                                    prefix={
+                                      item.auctionId ===
+                                      history.location.pathname.slice(17)
+                                        ? "* $"
+                                        : "- $"
+                                    }
+                                    style={{
+                                      padding: "0",
+                                      display: "flex",
+                                      fontSize: "12px",
+                                    }}
+                                  />
+                                </span>
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    className="headerButton"
+                    id={colors === "white" ? "hover" : ""}
+                    style={{ padding: windowSize < 600 && "8px" }}
+                    onClick={() => {
+                      toggleOpen();
+                    }}
+                  >
+                    <FaBars size={23} />
+                  </button>
+                  <div className="dropdown">
+                    <button
+                      className="headerButton"
+                      id={colors === "white" ? "hover" : ""}
                       style={{
-                        marginLeft: "-100px",
-                        width: "230px",
+                        marginRight: windowSize < 600 && "0.5rem",
+                        padding: windowSize < 600 && "8px",
+                      }}
+                    >
+                      <FaGlobeAmericas size={23} />
+                    </button>
+                    <div className="dropdown-content">
+                      <div
+                        className="dropdown-content-items"
+                        style={{
+                          marginLeft: "-50px",
+                          // width: "130px",
+                        }}
+                      >
+                        <Button className="d-flex justify-content-start align-items-center">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <AiFillDollarCircle size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              USA
+                            </span>
+                          </div>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {windowSize > 800 ? (
+                    <div
+                      className="mt-0"
+                      style={{
+                        // marginRight: windowSize > 800 ? "50px" : "10px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        className="signIn-btn mt-0"
+                        style={{ color: textColor }}
+                        variant="success"
+                        onClick={toggleSignIn}
+                        id={colors === "white" ? "hover" : ""}
+                      >
+                        Sign In
+                      </Button>
+                      <label style={{ color: textColor }}>|</label>
+                      <Button
+                        id={colors === "white" ? "hover" : ""}
+                        className="signUp-btn mt-0"
+                        style={{ color: textColor }}
+                        variant="success"
+                        onClick={toggleSignUp}
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      id={colors === "white" ? "hover" : ""}
+                      style={{ color: textColor }}
+                      className="signIn-btn mt-0 bg-transparent"
+                      onClick={toggleSignIn}
+                    >
+                      Sign In
+                    </Button>
+                  )}
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav mt-0"
+                    style={{
+                      height: "47px",
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                      color: textColor,
+                      lineHeight: "normal",
+                      borderRadius: "0",
+                    }}
+                    onClick={() => {
+                      toggleOpen();
+                    }}
+                  >
+                    <FaBars size={23} />
+                  </Button>
+
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav mt-0"
+                    style={{
+                      height: "47px",
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                      lineHeight: "normal",
+                      color: textColor,
+                      borderRadius: "0",
+                    }}
+                  >
+                    <FaGlobeAmericas size={23} />
+                  </Button>
+                </>
+              )}
+            </div>
+          </>
+        ) : (
+          <div
+            className="d-flex flex-row"
+            style={{ height: "100%", alignItems: "center" }}
+          >
+            {user._id && !user.KYC && (
+              <>
+                <div className="dropdown">
+                  <button style={{ background: "transparent" }}>
+                    <img
+                      src="/images/bell.png"
+                      style={{ maxHeight: "30px" }}
+                      alt=""
+                    />
+                  </button>
+                  <div className="dropdown-content">
+                    <a href={kycUrl}>Please complete your KYC</a>
+                  </div>
+                </div>
+              </>
+            )}
+            {user._id ? (
+              <>
+                {windowSize > 800 ? (
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav bg-transparent outline-none"
+                    style={{
+                      borderRadius: "0",
+                      color: textColor,
+                      height: "47px",
+                      marginRight: "1rem",
+                    }}
+                    onClick={handleSell}
+                  >
+                    Sell
+                  </Button>
+                ) : null}
+                <div className="dropdown">
+                  {windowSize > 800 ? (
+                    <button className="user mt-0">
+                      Hello, {user.firstName}
+                    </button>
+                  ) : (
+                    <button
+                      className="user mt-0"
+                      style={{ padding: windowSize < 600 && "7px" }}
+                    >
+                      {String(user.firstName[0]).toUpperCase()}
+                      {String(user.lastName[0]).toUpperCase()}
+                    </button>
+                  )}
+                  <div className="dropdown-content">
+                    <div className="dropdown-content-items">
+                      <button
+                        className="fw-bold p-3"
+                        onClick={handleOnClick("Dashboard")}
+                      >
+                        Dashboard
+                      </button>
+                      <button className="fw-bold p-3" onClick={handleLogout}>
+                        Log Out
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="dropdown">
+                  <button
+                    className="headerButton"
+                    id={colors === "white" ? "hover" : ""}
+                    style={{ padding: windowSize < 600 && "8px" }}
+                    // id="dropdown-basic-button"
+                    title={<IoWallet size={30} />}
+                    onMouseEnter={() => setShowWallet(true)}
+                    onMouseLeave={() => setShowWallet(false)}
+                  >
+                    <IoWallet size={23} />
+                  </button>
+                  <div className="dropdown-content">
+                    <div
+                      className="dropdown-content-items"
+                      style={{
+                        marginLeft: "-80px",
+                        width: "200px",
                         padding: "10px",
                       }}
                     >
@@ -631,44 +1122,35 @@ const Header = ({
                       </div>
                     </div>
                   </div>
-                  <Button
-                    className="headerNav"
-                    style={{
-                      backgroundColor: "transparent",
-                      color: textColor,
-                      borderRadius: "0",
-                      lineHeight: "normal",
-                      height: "47px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
+                </div>
+                <button
+                  id={colors === "white" ? "hover" : ""}
+                  className="headerButton"
+                  style={{ padding: windowSize < 600 && "8px" }}
+                  onClick={() => {
+                    toggleOpen();
+                  }}
+                >
+                  <FaBars size={23} />
+                </button>
+
+                <div className="dropdown">
+                  <button
                     id={colors === "white" ? "hover" : ""}
-                    onClick={() => {
-                      toggleOpen();
+                    className="headerButton"
+                    style={{
+                      marginRight: windowSize < 600 && "0.5rem",
+                      padding: windowSize < 600 && "8px",
                     }}
                   >
-                    <FaBars size={23} />
-                  </Button>
-                  <div className="dropdown">
-                    <Button
-                      className="headerNav"
-                      id={colors === "white" ? "hover" : ""}
-                      style={{
-                        backgroundColor: "transparent",
-                        color: textColor,
-                        borderRadius: "0",
-                        lineHeight: "normal",
-                        height: "47px",
-                      }}
-                    >
-                      <VscGlobe size={23} />
-                    </Button>
+                    <FaGlobeAmericas size={23} />
+                  </button>
+                  <div className="dropdown-content">
                     <div
-                      className="dropdown-content"
+                      className="dropdown-content-items"
                       style={{
                         marginLeft: "-50px",
-                        width: "130px",
-                        // padding: "10px",
+                        // width: "130px",
                       }}
                     >
                       <Button className="d-flex justify-content-start align-items-center">
@@ -694,475 +1176,7 @@ const Header = ({
                       </Button>
                     </div>
                   </div>
-                </>
-              ) : (
-                <>
-                  {windowSize > 800 ? (
-                    <div
-                      className="mt-0"
-                      style={{
-                        marginRight: windowSize > 800 ? "50px" : "10px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Button
-                        className="signIn-btn mt-0"
-                        style={{ color: textColor }}
-                        variant="success"
-                        onClick={toggleSignIn}
-                        id={colors === "white" ? "hover" : ""}
-                      >
-                        Sign In
-                      </Button>
-                      <label style={{ color: textColor }}>|</label>
-                      <Button
-                        id={colors === "white" ? "hover" : ""}
-                        className="signUp-btn mt-0"
-                        style={{ color: textColor }}
-                        variant="success"
-                        onClick={toggleSignUp}
-                      >
-                        Sign Up
-                      </Button>
-                    </div>
-                  ) : (
-                    <Button
-                      id={colors === "white" ? "hover" : ""}
-                      style={{ color: textColor }}
-                      className="signIn-btn mt-0 bg-transparent"
-                      onClick={toggleSignIn}
-                    >
-                      Sign In
-                    </Button>
-                  )}
-                  <Button
-                    id={colors === "white" ? "hover" : ""}
-                    className="headerNav mt-0"
-                    style={{
-                      height: "47px",
-                      display: "flex",
-                      alignItems: "center",
-                      backgroundColor: "transparent",
-                      color: textColor,
-                      lineHeight: "normal",
-                      borderRadius: "0",
-                    }}
-                    onClick={() => {
-                      toggleOpen();
-                    }}
-                  >
-                    <FaBars size={23} />
-                  </Button>
-
-                  <Button
-                    id={colors === "white" ? "hover" : ""}
-                    className="headerNav mt-0"
-                    style={{
-                      height: "47px",
-                      display: "flex",
-                      alignItems: "center",
-                      backgroundColor: "transparent",
-                      lineHeight: "normal",
-                      color: textColor,
-                      borderRadius: "0",
-                    }}
-                  >
-                    <VscGlobe size={23} />
-                  </Button>
-                </>
-              )}
-            </div>
-          </>
-        ) : (
-          <div
-            className="d-flex flex-row"
-            style={{ height: "100%", alignItems: "center" }}
-          >
-            {user._id && !user.KYC && (
-              <>
-                <div className="dropdown">
-                  <button style={{ background: "transparent" }}>
-                    <img
-                      src="/images/bell.png"
-                      style={{ maxHeight: "30px" }}
-                      alt=""
-                    />
-                  </button>
-                  <div className="dropdown-content">
-                    <a href={kycUrl}>Please complete your KYC</a>
-                  </div>
                 </div>
-              </>
-            )}
-            {user._id ? (
-              <>
-                {windowSize > 800 ? (
-                  <Button
-                    id={colors === "white" ? "hover" : ""}
-                    className="headerNav bg-transparent outline-none"
-                    style={{
-                      borderRadius: "0",
-                      color: textColor,
-                      height: "47px",
-                    }}
-                    onClick={handleSell}
-                  >
-                    Sell
-                  </Button>
-                ) : null}
-                <div className="dropdown">
-                  {windowSize > 800 ? (
-                    <button className="user mt-0">
-                      Hello, {user.firstName}
-                    </button>
-                  ) : (
-                    <button className="user mt-0">
-                      {String(user.firstName[0]).toUpperCase()}
-                      {String(user.lastName[0]).toUpperCase()}
-                    </button>
-                  )}
-                  <div className="dropdown-content ">
-                    <button
-                      className="fw-bold p-3"
-                      onClick={handleOnClick("Dashboard")}
-                    >
-                      Dashboard
-                    </button>
-                    <button className="fw-bold p-3" onClick={handleLogout}>
-                      Log Out
-                    </button>
-                  </div>
-                </div>
-
-                <div className="dropdown">
-                  <Button
-                    className="headerNav"
-                    style={{
-                      backgroundColor: "transparent",
-                      color: textColor,
-                      borderRadius: "0",
-                      height: "47px",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                    id={colors === "white" ? "hover" : ""}
-                    // id="dropdown-basic-button"
-                    title={<IoWallet size={30} />}
-                    onMouseEnter={() => setShowWallet(true)}
-                    onMouseLeave={() => setShowWallet(false)}
-                  >
-                    <IoWallet size={23} />
-                  </Button>
-                  <div
-                    className="dropdown-content"
-                    style={{
-                      marginLeft: "-100px",
-                      width: "230px",
-                      padding: "10px",
-                    }}
-                  >
-                    <div className="d-flex justify-content-start align-items-center">
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          backgroundColor: "#e9bc4d",
-                          width: "40px",
-                          height: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginRight: "10px",
-                        }}
-                      >
-                        <BsFillHouseFill size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span style={{ padding: "0", display: "flex" }}>
-                          Real Estate
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            color: "#b6b7b8",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.RealEstate.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.RealEstate
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.RealEstate,
-                              RealEstate: !prev.RealEstate,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.RealEstate === true &&
-                          subWallet.RealEstate.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-start align-items-center mt-2">
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          backgroundColor: "#e9bc4d",
-                          width: "40px",
-                          height: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginRight: "10px",
-                        }}
-                      >
-                        <IoCarSportSharp size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span style={{ padding: "0", display: "flex" }}>
-                          Car
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            color: "#b6b7b8",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Car.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Car
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Car,
-                              Car: !prev.Car,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Car === true &&
-                          subWallet.Car.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-start align-items-center mt-2">
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          backgroundColor: "#e9bc4d",
-                          width: "40px",
-                          height: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginRight: "10px",
-                        }}
-                      >
-                        <IoAirplaneSharp size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span style={{ padding: "0", display: "flex" }}>
-                          Jet
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            color: "#b6b7b8",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Jet.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Jet
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Jet,
-                              Jet: !prev.Jet,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Jet === true &&
-                          subWallet.Jet.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-start align-items-center mt-2">
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          backgroundColor: "#e9bc4d",
-                          width: "40px",
-                          height: "40px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginRight: "10px",
-                        }}
-                      >
-                        <IoIosBoat size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span style={{ padding: "0", display: "flex" }}>
-                          Yacht
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            color: "#b6b7b8",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Yacht.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Yacht
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Yacht,
-                              Yacht: !prev.Yacht,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Yacht === true &&
-                          subWallet.Yacht.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <Button
-                  id={colors === "white" ? "hover" : ""}
-                  className="headerNav mt-0"
-                  style={{
-                    backgroundColor: "transparent",
-                    color: textColor,
-                    borderRadius: "0",
-                    lineHeight: "normal",
-                    height: "47px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                  onClick={() => {
-                    toggleOpen();
-                  }}
-                >
-                  <FaBars size={23} />
-                </Button>
-
-                <Button
-                  id={colors === "white" ? "hover" : ""}
-                  className="headerNav mt-0"
-                  style={{
-                    backgroundColor: "transparent",
-                    color: textColor,
-                    borderRadius: "0",
-                    lineHeight: "normal",
-                    height: "47px",
-                  }}
-                >
-                  <VscGlobe size={23} />
-                </Button>
               </>
             ) : (
               <>
@@ -1244,7 +1258,7 @@ const Header = ({
                     toggleOpen();
                   }}
                 >
-                  <FaBars size={20} />
+                  <FaBars size={23} />
                 </Button>
 
                 <Button
@@ -1259,7 +1273,7 @@ const Header = ({
                     // paddingTop: "13px",
                   }}
                 >
-                  <VscGlobe size={25} />
+                  <FaGlobeAmericas size={23} />
                 </Button>
               </>
             )}

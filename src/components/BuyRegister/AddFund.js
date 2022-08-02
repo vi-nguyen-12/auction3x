@@ -13,7 +13,7 @@ function AddFund() {
   const user = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
   const [other, setOther] = useState(false);
-  const [self, setSelf] = useState(false);
+  const [self, setSelf] = useState(true);
   const [registeredAuctions, setRegisteredAuctions] = useState([]);
   const toggleSelf = () => setSelf(!self);
   const toggleOther = () => setOther(!other);
@@ -110,7 +110,6 @@ function AddFund() {
   return (
     <Container style={{ padding: "20px", paddingBottom: "70px" }}>
       {loader && <Loading />}
-      <h1 style={{ paddingTop: "30px" }}>Add Fund</h1>
       <Row style={{ margin: "20px", marginTop: "40px" }}>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
