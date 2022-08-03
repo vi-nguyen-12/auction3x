@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
+import CloseButton from "react-bootstrap/CloseButton";
+import PropertyDetails from "../../PropertyDetails";
 
-function PendingListings({ windowSize }) {
+function PendingListings({
+  windowSize,
+  toggleShowDocu,
+  setDocuments,
+  documents,
+}) {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
-  const [documents, setDocuments] = useState([]);
-  const [images, setImages] = useState([]);
-  const [show, setShow] = useState(false);
-  const toggleShow = () => setShow(!show);
+  const [property, setProperty] = useState([]);
   const [showImages, setShowImages] = useState(false);
   const toggleShowImages = () => setShowImages(!showImages);
 
@@ -26,6 +30,8 @@ function PendingListings({ windowSize }) {
     };
     fetchPendingListings();
   }, []);
+
+  console.log(documents);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -50,9 +56,9 @@ function PendingListings({ windowSize }) {
               <th>#</th>
               <th>Owner Name</th>
               <th>Property Type</th>
-              <th>Status</th>
-              <th>Images</th>
+              <th>Property</th>
               <th>Documents</th>
+              <th>Status</th>
               <th>Last Updated</th>
             </tr>
           </thead>
@@ -73,14 +79,8 @@ function PendingListings({ windowSize }) {
                       ? "Yacht"
                       : ""}
                   </td>
-                  {auction.isApproved === "pending" ? (
-                    <td>Pending</td>
-                  ) : auction.isApproved === "success" ? (
-                    <td>Approved</td>
-                  ) : auction.isApproved === "fail" ? (
-                    <td>Rejected</td>
-                  ) : null}
                   <td>
+                    {auction.details.property_address.formatted_street_address}
                     <div
                       style={{
                         width: "100%",
@@ -92,7 +92,7 @@ function PendingListings({ windowSize }) {
                         width="100px"
                         height="50px"
                         onClick={() => {
-                          setImages(auction.images);
+                          setProperty(auction);
                           toggleShowImages();
                         }}
                         src={auction.images[0].url}
@@ -100,16 +100,39 @@ function PendingListings({ windowSize }) {
                     </div>
                   </td>
                   <td>
-                    <Button
+                    <button
                       onClick={() => {
-                        setDocuments(auction.documents);
-                        toggleShow();
+                        setDocuments([
+                          ...documents,
+                          ...auction.documents,
+                          ...auction.images,
+                        ]);
+                        toggleShowDocu();
                       }}
-                      variant="primary"
+                      className="btn btn-primary"
                     >
-                      View
-                    </Button>
+                      View Documents
+                    </button>
                   </td>
+                  {auction.isApproved === "pending" ? (
+                    <td>
+                      <span
+                        style={{
+                          background: "orange",
+                          color: "white",
+                          padding: "10px",
+                          fontWeight: "bold",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        Pending
+                      </span>
+                    </td>
+                  ) : auction.isApproved === "success" ? (
+                    <td>Approved</td>
+                  ) : auction.isApproved === "fail" ? (
+                    <td>Rejected</td>
+                  ) : null}
                   <td>{new Date(auction.updatedAt).toLocaleString()}</td>
                 </tr>
               </tbody>
@@ -122,63 +145,32 @@ function PendingListings({ windowSize }) {
             </tbody>
           )}
         </Table>
-        <Modal size="lg" show={show} onHide={toggleShow} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Documents</Modal.Title>
+
+        <Modal size="xl" show={showImages} onHide={toggleShowImages} centered>
+          <Modal.Header className="auction-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Property Details
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Table
-              style={{
-                overflow: windowSize < 800 ? "auto" : "hidden",
-                display: windowSize < 800 && "block",
-                tableLayout: windowSize < 800 && "auto",
-                padding: "0",
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleShowImages();
               }}
-            >
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Document Name</th>
-                  <th>Document Official Name</th>
-                  <th>Document Status</th>
-                  <th>Document URL</th>
-                </tr>
-              </thead>
-              {documents.length > 0 &&
-                documents.map((document, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{document.name}</td>
-                      <td>{document.officialName}</td>
-                      {document.isVerified === "pending" ? (
-                        <td>Pending</td>
-                      ) : document.isVerified === "success" ? (
-                        <td>Approved</td>
-                      ) : document.isVerified === "fail" ? (
-                        <td>Rejected</td>
-                      ) : null}
-                      <td>
-                        <Button
-                          onClick={() => {
-                            window.open(document.url, "_blank");
-                          }}
-                        >
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </Table>
-          </Modal.Body>
-        </Modal>
-        <Modal size="lg" show={showImages} onHide={toggleShowImages} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Images</Modal.Title>
-          </Modal.Header>
+            />
+          </div>
           <Modal.Body>
-            <Table>
+            <PropertyDetails property={property} />
+            {/* <Table>
               <thead>
                 <tr>
                   <th>#</th>
@@ -212,7 +204,7 @@ function PendingListings({ windowSize }) {
                     </tr>
                   </tbody>
                 ))}
-            </Table>
+            </Table> */}
           </Modal.Body>
         </Modal>
       </Row>

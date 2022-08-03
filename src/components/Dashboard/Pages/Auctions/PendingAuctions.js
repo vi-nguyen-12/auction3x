@@ -3,12 +3,11 @@ import { Table, Button, Modal, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import NumberFormat from "react-number-format";
+import CloseButton from "react-bootstrap/CloseButton";
 
 function PendingAuctions({ windowSize }) {
   const user = useSelector((state) => state.user);
   const [pendingAuctions, setPendingAuctions] = useState([]);
-  const [approvedAuctions, setApprovedAuctions] = useState([]);
-  const [allAuctions, setAllAuctions] = useState([]);
   const [questionair, setQuestionair] = useState([]);
   const [documents, setDocuments] = useState([]);
   const [showQuestionair, setShowQuestionair] = useState(false);
@@ -168,9 +167,27 @@ function PendingAuctions({ windowSize }) {
           onHide={toggleQuestionair}
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title>Questionair</Modal.Title>
+          <Modal.Header className="auction-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Questionair
+            </Modal.Title>
           </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleQuestionair();
+              }}
+            />
+          </div>
           <Modal.Body>
             <Table striped bordered hover>
               <thead>
@@ -194,9 +211,27 @@ function PendingAuctions({ windowSize }) {
           </Modal.Body>
         </Modal>
         <Modal size="lg" show={showDocuments} onHide={toggleDocuments} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Documents</Modal.Title>
+          <Modal.Header className="auction-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Proof of Funds
+            </Modal.Title>
           </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleDocuments();
+              }}
+            />
+          </div>
           <Modal.Body>
             <Table
               style={{

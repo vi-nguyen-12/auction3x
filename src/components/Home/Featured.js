@@ -6,6 +6,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import Next from "../../images/Next.png";
+import Prev from "../../images/Previous.png";
 import "../../App.css";
 
 const Carousel = styled(Slider)`
@@ -42,27 +44,60 @@ const Carousel = styled(Slider)`
   }
 
   .slick-prev {
-    height: 150px;
-    left: 2vw;
+    width: 60px;
+    height: 60px;
+    left: 8vw;
     z-index: 1;
-    background: url("./images/back-icon.png") center center no-repeat ;
+    background: url(${Prev});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 45% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
     margin: -50px;
   }
 
   .slick-prev:before {
     display: none;
+    // font-size: 60px;
+    // color: #e9af84;
   }
 
   .slick-next {
-    height: 150px;
-    right: 2vw;
+    width: 60px;
+    height: 60px;
+    right: 8vw;
     z-index: 1;
-    background: url("./images/next-icon.png") center center no-repeat ;
+    background: url(${Next});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 53% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
     margin: -50px;
   }
 
   .slick-next:before {
     display: none;
+    // font-size: 60px;
+    // color: #e9af84;
+  }
+
+  @media (max-width: 600px) {
+    .slick-prev {
+      width: 50px;
+      height: 50px;
+      left: 15vw;
+      margin-top: -75px;
+    }
+    .slick-next {
+      width: 50px;
+      height: 50px;
+      right: 15vw;
+      margin-top: -75px;
+    }
   }
 `;
 

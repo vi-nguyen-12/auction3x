@@ -19,7 +19,7 @@ import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
 import { FaBars } from "react-icons/fa";
-import { Button, Modal, Row, Col } from "react-bootstrap";
+import { Button, Modal, Row, Col, Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import Accordion from "react-bootstrap/Accordion";
@@ -36,6 +36,16 @@ function Dashboard({
 }) {
   const [show, setShow] = useState(false);
   const toggleShowModal = () => setShow(!show);
+
+  const [showDocu, setShowDocu] = useState(false);
+  const toggleShowDocu = () => setShowDocu(!showDocu);
+
+  const [documents, setDocuments] = useState([]);
+
+  const handleDeleteDocu = async (id) => {
+    setDocuments(documents.filter((doc) => doc._id !== id));
+  };
+
   const history = useHistory();
   useEffect(() => {
     setHeaderWidth("100vw");
@@ -105,7 +115,12 @@ function Dashboard({
               <LiveListings windowSize={windowSize} />
             </Route>
             <Route exact path="/Dashboard/Listings/PendingApproval">
-              <PendingListings windowSize={windowSize} />
+              <PendingListings
+                windowSize={windowSize}
+                toggleShowDocu={toggleShowDocu}
+                setDocuments={setDocuments}
+                documents={documents}
+              />
             </Route>
             <Route exact path="/Dashboard/Listings/SoldListings">
               <SoldListings windowSize={windowSize} />
@@ -281,6 +296,95 @@ function Dashboard({
               Profile
             </Col>
           </Row>
+        </Modal.Body>
+      </Modal>
+
+      <Modal size="xl" show={showDocu} onHide={toggleShowDocu} centered>
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Property Documents
+          </Modal.Title>
+        </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleShowDocu();
+            }}
+          />
+        </div>
+        <Modal.Body>
+          <Table
+            style={{
+              overflow: windowSize < 800 ? "auto" : "hidden",
+              display: windowSize < 800 && "block",
+              tableLayout: windowSize < 800 && "auto",
+              padding: "0",
+            }}
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Document Name</th>
+                <th>Official Name</th>
+                <th>Status</th>
+                <th>View</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            {documents.length > 0 &&
+              documents.map((document, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{document.name}</td>
+                    <td>
+                      {document.officialName
+                        ? document.officialName
+                        : "Image/Video"}
+                    </td>
+                    {document.isVerified === "pending" ? (
+                      <td>Pending</td>
+                    ) : document.isVerified === "success" ? (
+                      <td>Approved</td>
+                    ) : document.isVerified === "fail" ? (
+                      <td>Rejected</td>
+                    ) : null}
+                    <td>
+                      <Button
+                        onClick={() => {
+                          window.open(document.url, "_blank");
+                        }}
+                      >
+                        View
+                      </Button>
+                    </td>
+                    <td>
+                      <Button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "red",
+                          fontSize: "1.3rem",
+                          textAlign: "center",
+                        }}
+                        onClick={() => handleDeleteDocu(document._id)}
+                      >
+                        X
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </Table>
         </Modal.Body>
       </Modal>
     </div>

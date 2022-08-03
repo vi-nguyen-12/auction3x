@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
 import { useHistory } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
 
 function LiveListings({ windowSize }) {
   const user = useSelector((state) => state.user);
@@ -11,7 +12,7 @@ function LiveListings({ windowSize }) {
   const [upcomingListings, setUpcomingListings] = useState([]);
   const [showImages, setShowImages] = useState(false);
   const [documents, setDocuments] = useState([]);
-  const [images, setImages] = useState([]);
+  const [property, setProperty] = useState([]);
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
   const toggleImages = () => setShowImages(!showImages);
@@ -78,7 +79,7 @@ function LiveListings({ windowSize }) {
                           width="100px"
                           height="50px"
                           onClick={() => {
-                            setImages(listing.images);
+                            setProperty(listing);
                             toggleImages();
                           }}
                           src={
@@ -95,8 +96,9 @@ function LiveListings({ windowSize }) {
                           style={{
                             background: "green",
                             color: "white",
-                            padding: "5px",
+                            padding: "10px",
                             borderRadius: "5px",
+                            fontWeight: "bold",
                           }}
                         >
                           Approved
@@ -108,8 +110,9 @@ function LiveListings({ windowSize }) {
                           style={{
                             background: "orange",
                             color: "white",
-                            padding: "5px",
+                            padding: "10px",
                             borderRadius: "5px",
+                            fontWeight: "bold",
                           }}
                         >
                           Pending
@@ -121,8 +124,9 @@ function LiveListings({ windowSize }) {
                           style={{
                             background: "red",
                             color: "white",
-                            padding: "5px",
+                            padding: "10px",
                             borderRadius: "5px",
+                            fontWeight: "bold",
                           }}
                         >
                           Pending
@@ -132,7 +136,7 @@ function LiveListings({ windowSize }) {
                     <td colSpan={2}>
                       <Button
                         onClick={() => {
-                          setDocuments(listing.documents);
+                          setProperty(listing);
                           toggleDocuments();
                         }}
                         variant="primary"
@@ -229,47 +233,65 @@ function LiveListings({ windowSize }) {
       </Modal>
 
       <Modal size="lg" show={showImages} onHide={toggleImages} centered>
-          <Modal.Header closeButton>
-            <Modal.Title>Images</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Image Name</th>
-                  <th>Image Status</th>
-                  <th>Image URL</th>
-                </tr>
-              </thead>
-              {images.length > 0 &&
-                images.map((image, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{image.name}</td>
-                      {image.isVerified === "pending" ? (
-                        <td>Pending</td>
-                      ) : image.isVerified === "success" ? (
-                        <td>Approved</td>
-                      ) : image.isVerified === "fail" ? (
-                        <td>Rejected</td>
-                      ) : null}
-                      <td>
-                        <Button
-                          onClick={() => {
-                            window.open(image.url, "_blank");
-                          }}
-                        >
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </Table>
-          </Modal.Body>
-        </Modal>
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Property Details
+          </Modal.Title>
+        </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleImages();
+            }}
+          />
+        </div>
+        <Modal.Body>
+          {/* <Table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image Name</th>
+                <th>Image Status</th>
+                <th>Image URL</th>
+              </tr>
+            </thead>
+            {images.length > 0 &&
+              images.map((image, index) => (
+                <tbody key={index}>
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{image.name}</td>
+                    {image.isVerified === "pending" ? (
+                      <td>Pending</td>
+                    ) : image.isVerified === "success" ? (
+                      <td>Approved</td>
+                    ) : image.isVerified === "fail" ? (
+                      <td>Rejected</td>
+                    ) : null}
+                    <td>
+                      <Button
+                        onClick={() => {
+                          window.open(image.url, "_blank");
+                        }}
+                      >
+                        View
+                      </Button>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
+          </Table> */}
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
