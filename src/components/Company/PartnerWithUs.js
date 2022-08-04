@@ -43,6 +43,7 @@ function PartnerWithUs({ windowSize }) {
       phone: phone,
       subject: data.subject,
       content: data.message,
+      autoReply: "partner_with_us_reply",
     };
     await authService.sendEmails(datas).then((res) => {
       if (res.data.error) {
