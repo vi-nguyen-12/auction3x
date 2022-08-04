@@ -695,6 +695,14 @@ const authService = {
       }
     );
   },
+
+  editProp(data, id) {
+    return axios.put(apiUrl + `/api/properties/${id}`, data.details, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+  },
 };
 
 export default authService;

@@ -229,6 +229,7 @@ const MultiSellForm = ({
             videos={videos}
             documents={documents}
             ownership={ownership}
+            windowSize={windowSize}
             sellStep={sellStep}
             propId={propId}
             propertyType={propertyType}

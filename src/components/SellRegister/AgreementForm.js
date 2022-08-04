@@ -12,7 +12,7 @@ import Loading from "../../components/Loading";
 import { Button, Row, Col } from "react-bootstrap";
 import parse from "html-react-parser";
 
-const Agree = ({ toggleStep, step, propertyTest, toggleSignIn }) => {
+const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => {
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -150,9 +150,27 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn }) => {
       </div>
 
       <Modal size="xl" show={show} onHide={toggleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title> Seller Terms and Conditions</Modal.Title>
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Seller Terms and Conditions
+          </Modal.Title>
         </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleTerms();
+            }}
+          />
+        </div>
         <Modal.Body unselectable="on" className="unselectable">
           {parse(terms)}
         </Modal.Body>

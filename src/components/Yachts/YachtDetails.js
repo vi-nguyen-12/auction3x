@@ -153,7 +153,7 @@ function YachtDetails({
     const day = newDate.getDate() + 1;
     const month = newDate.getMonth() + 1;
     const year = newDate.getFullYear();
-    setVessel_manufacturing_date(`${month}-${day}-${year}`);
+    setVessel_manufacturing_date(`${month}/${day}/${year}`);
   };
 
   const onSubmit = (data) => {
@@ -657,7 +657,7 @@ function YachtDetails({
             </Button>
           </Col>
         </Row>
-        <Row style={{ marginTop: "30px", height: "100px" }}>
+        {/* <Row style={{ marginTop: "30px", height: "100px" }}>
           <Col>
             <textarea
               className="form-control"
@@ -668,7 +668,7 @@ function YachtDetails({
               onChange={(e) => setOtherDetails(e.target.value)}
             />
           </Col>
-        </Row>
+        </Row> */}
         <Row className="mt-3">
           <Col xs={12} md={6}>
             <span

@@ -14,6 +14,7 @@ function RealEstate({ property, setEdit, edit }) {
           <NumberFormat
             value={property.details.year_built}
             thousandSeparator={true}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             allowNegative={false}
             format="####"
             className="form-control"
@@ -32,6 +33,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.details.parcel.area_sq_ft}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             onValueChange={(values) => {
@@ -47,6 +49,7 @@ function RealEstate({ property, setEdit, edit }) {
           <input
             type="text"
             className="form-control"
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             defaultValue={property.details.real_estate_type}
             disabled={!edit.step2}
           />
@@ -61,6 +64,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.details.structure.beds_count}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             format="###"
@@ -78,6 +82,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.details.structure.baths_count}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             format="###"
@@ -95,6 +100,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.details.parcel.lot_size}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             onValueChange={(values) => {
@@ -112,6 +118,7 @@ function RealEstate({ property, setEdit, edit }) {
           <input
             type="text"
             className="form-control"
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             defaultValue={property.details.type_of_garage}
             disabled={!edit.step2}
           />
@@ -124,6 +131,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.details.number_of_stories}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             format="###"
@@ -142,6 +150,7 @@ function RealEstate({ property, setEdit, edit }) {
             thousandSeparator={true}
             prefix="$"
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             className="form-control"
             disabled={!edit.step2}
             onValueChange={(values) => {
@@ -160,6 +169,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.reservedAmount}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             prefix={"$"}
             className="form-control"
             onValueChange={(values) => {
@@ -177,6 +187,7 @@ function RealEstate({ property, setEdit, edit }) {
             value={property.discussedAmount}
             thousandSeparator={true}
             allowNegative={false}
+            style={{ border: edit.step2 ? "2px solid #2ecc71" : "" }}
             prefix={"$"}
             className="form-control"
             onValueChange={(values) => {
@@ -188,11 +199,11 @@ function RealEstate({ property, setEdit, edit }) {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col className="d-flex justify-content-center">
+        <Col className="d-flex justify-content-end">
           <Button
             className="mx-3"
             onClick={() =>
-              setEdit((prev) => ({ ...prev.step2, step2: !edit.step2.step2 }))
+              setEdit((prev) => ({ ...prev.step2, step2: !edit.step2 }))
             }
           >
             Edit

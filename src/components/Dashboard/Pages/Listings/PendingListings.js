@@ -8,14 +8,13 @@ import PropertyDetails from "../../PropertyDetails";
 function PendingListings({
   windowSize,
   toggleShowDocu,
+  toggleShowProperty,
+  setProperty,
   setDocuments,
-  documents,
+  setImages,
 }) {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
-  const [property, setProperty] = useState([]);
-  const [showImages, setShowImages] = useState(false);
-  const toggleShowImages = () => setShowImages(!showImages);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -30,8 +29,6 @@ function PendingListings({
     };
     fetchPendingListings();
   }, []);
-
-  console.log(documents);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -54,10 +51,10 @@ function PendingListings({
           <thead style={{ background: "black", color: "white" }}>
             <tr>
               <th>#</th>
-              <th>Owner Name</th>
-              <th>Property Type</th>
+              <th>Property ID</th>
               <th>Property</th>
-              <th>Documents</th>
+              <th>Edit Property Details</th>
+              <th>Documents/Media</th>
               <th>Status</th>
               <th>Last Updated</th>
             </tr>
@@ -67,18 +64,7 @@ function PendingListings({
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{auction.details.owner_name}</td>
-                  <td>
-                    {auction.type === "real-estate"
-                      ? "Real Estate"
-                      : auction.type === "car"
-                      ? "Car"
-                      : auction.type === "jet"
-                      ? "Jet"
-                      : auction.type === "yacht"
-                      ? "Yacht"
-                      : ""}
-                  </td>
+                  <td>{auction._id}</td>
                   <td>
                     {auction.details.property_address.formatted_street_address}
                     <div
@@ -91,22 +77,26 @@ function PendingListings({
                       <img
                         width="100px"
                         height="50px"
-                        onClick={() => {
-                          setProperty(auction);
-                          toggleShowImages();
-                        }}
                         src={auction.images[0].url}
                       />
                     </div>
                   </td>
                   <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => {
+                        setProperty(auction);
+                        toggleShowProperty();
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </td>
+                  <td>
                     <button
                       onClick={() => {
-                        setDocuments([
-                          ...documents,
-                          ...auction.documents,
-                          ...auction.images,
-                        ]);
+                        setDocuments(auction.documents);
+                        setImages(auction.images);
                         toggleShowDocu();
                       }}
                       className="btn btn-primary"
@@ -145,68 +135,6 @@ function PendingListings({
             </tbody>
           )}
         </Table>
-
-        <Modal size="xl" show={showImages} onHide={toggleShowImages} centered>
-          <Modal.Header className="auction-modal-header">
-            <Modal.Title className="auction-modal-title px-3">
-              Property Details
-            </Modal.Title>
-          </Modal.Header>
-          <div
-            style={{
-              position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton
-              className="modal-close"
-              style={{ backgroundColor: "white" }}
-              onClick={() => {
-                toggleShowImages();
-              }}
-            />
-          </div>
-          <Modal.Body>
-            <PropertyDetails property={property} />
-            {/* <Table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Image Name</th>
-                  <th>Image Status</th>
-                  <th>Image URL</th>
-                </tr>
-              </thead>
-              {images.length > 0 &&
-                images.map((image, index) => (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{image.name}</td>
-                      {image.isVerified === "pending" ? (
-                        <td>Pending</td>
-                      ) : image.isVerified === "success" ? (
-                        <td>Approved</td>
-                      ) : image.isVerified === "fail" ? (
-                        <td>Rejected</td>
-                      ) : null}
-                      <td>
-                        <Button
-                          onClick={() => {
-                            window.open(image.url, "_blank");
-                          }}
-                        >
-                          View
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
-            </Table> */}
-          </Modal.Body>
-        </Modal>
       </Row>
     </Container>
   );
