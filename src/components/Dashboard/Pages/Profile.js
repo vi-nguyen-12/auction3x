@@ -10,6 +10,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import { Modal } from "react-bootstrap";
 import EditProfile from "../EditProfile";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -123,11 +124,27 @@ function Profile({ id, windowSize }) {
           keyboard={false}
           className="edit-modal"
         >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+          <Modal.Header className="auction-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
               Edit Profile
             </Modal.Title>
           </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleEdit();
+              }}
+            />
+          </div>
           <Modal.Body>
             <EditProfile getDescription={getDescription} />
           </Modal.Body>

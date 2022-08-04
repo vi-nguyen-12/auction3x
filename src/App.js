@@ -31,6 +31,7 @@ import PendingListings from "./components/Dashboard/Pages/Listings/PendingListin
 import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
 import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
 import ViewProfile from "./components/Users/ViewProfile";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -235,24 +236,27 @@ function App() {
           onHide={toggleConfirmModal}
           contentclassname="confirm"
         >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{ color: "#D58F5C" }}
-            >
+          <Modal.Header className="auction-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
               Confirm Email
             </Modal.Title>
-            <Modal.Title
-              className="pt-4"
-              style={{
-                fontSize: "12px",
-                color: "#D58F5C",
-                position: "absolute",
-                marginright: "10px",
-                marginTop: "8px",
-              }}
-            ></Modal.Title>
           </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleConfirmModal();
+              }}
+            />
+          </div>
           <Modal.Body>
             <ReconfirmEmail
               toggleConfirmModal={toggleConfirmModal}
@@ -339,6 +343,27 @@ function App() {
           contentclassname="login"
           className="form-group mb-4 mt-3"
         >
+          <Modal.Header className="login-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Log In
+            </Modal.Title>
+          </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleSignIn();
+              }}
+            />
+          </div>
           <Modal.Body>
             <Login
               toggleSignUp={toggleSignUp}
@@ -407,31 +432,30 @@ function App() {
           onHide={toggleForgotPass}
           contentclassname="forgotPass"
         >
-          <Modal.Header closeButton>
-            {windowSize > 330 ? (
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{
-                  color: "#D58F5C",
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                }}
-              >
-                Forgot Password
-              </Modal.Title>
-            ) : (
-              <Modal.Title
-                id="contained-modal-title-vcenter"
-                style={{
-                  color: "#D58F5C",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                }}
-              >
-                Forgot Password
-              </Modal.Title>
-            )}
+          <Modal.Header className="login-modal-header">
+            <Modal.Title
+              className="auction-modal-title px-3"
+              style={{ fontSize: windowSize < 600 && "30px" }}
+            >
+              Forgot Password
+            </Modal.Title>
           </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleForgotPass();
+              }}
+            />
+          </div>
           <Modal.Body>
             <ForgotPass
               toggleForgotPass={toggleForgotPass}
@@ -474,6 +498,27 @@ function App() {
           onHide={toggleSignUp}
           contentclassname="custom-modal-style"
         >
+          <Modal.Header className="login-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Sign Up
+            </Modal.Title>
+          </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                toggleSignUp();
+              }}
+            />
+          </div>
           <Modal.Body>
             <SignUp
               toggleSignUp={toggleSignUp}

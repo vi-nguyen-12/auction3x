@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const Carousel = styled(Slider)`
   height: 100%;

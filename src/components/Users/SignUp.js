@@ -8,7 +8,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 import parse from "html-react-parser";
-
+import CloseButton from "react-bootstrap/CloseButton";
 require("react-bootstrap/ModalHeader");
 
 const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
@@ -129,7 +129,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
   return (
     <>
       {loader ? <Loading /> : null}
-      <Modal.Header
+      {/* <Modal.Header
         style={{ paddingTop: "20px" }}
         contentclassname="modal-head-signup"
         closeButton
@@ -158,7 +158,18 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
             </Button>
           </div>
         </Modal.Title>
-      </Modal.Header>
+      </Modal.Header> */}
+      <div>
+        <Button
+          className="signup-link"
+          onClick={() => {
+            toggleSignIn();
+            toggleSignUp();
+          }}
+        >
+          Already Registered? Sign In
+        </Button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Row style={{ margin: "20px 0" }}>
           <Col className="mb-2" md={6} xs={12}>
@@ -426,18 +437,54 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         </button>
       </form>
       <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title> User Terms and Conditions</Modal.Title>
+        <Modal.Header className="login-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            User Terms & Conditions
+          </Modal.Title>
         </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleTerms();
+            }}
+          />
+        </div>
         <Modal.Body unselectable="on" className="unselectable">
           {parse(terms)}
         </Modal.Body>
       </Modal>
 
       <Modal size="xl" show={showPrivacy} onHide={togglePrivacy} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Privacy Policy</Modal.Title>
+        <Modal.Header className="login-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Privacy Policy
+          </Modal.Title>
         </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              togglePrivacy();
+            }}
+          />
+        </div>
         <Modal.Body unselectable="on" className="unselectable">
           {parse(privacy)}
         </Modal.Body>

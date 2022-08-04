@@ -60,16 +60,6 @@ const Login = ({
   return (
     <>
       {showLoading && <Loading />}
-
-      <Modal.Header contentclassname="modal-head-login" closeButton>
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{ color: "#D58F5C", fontSize: "35px", fontWeight: "bold" }}
-          contentclassname="custom-modal-title"
-        >
-          LOGIN NOW
-        </Modal.Title>
-      </Modal.Header>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group mb-4 mt-3">
           <label

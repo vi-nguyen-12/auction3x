@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
-
 import PhoneInput from "react-phone-input-2";
 import SellHeader from "./SellHeader";
 import PlacesAutocomplete, {
