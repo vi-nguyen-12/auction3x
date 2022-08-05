@@ -30,16 +30,20 @@ const Carousel = styled(Slider)`
     }
   }
   .slick-prev {
-    height: 100px !important;
+    height: 60px !important;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px !important;
+    margin-top: 5px !important;
+    margin-left: -100px !important;
+    box-shadow: none !important;
   }
   .slick-next {
-    height: 100px !important;
+    height: 60px !important;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px !important;
+    margin-top: 5px !important;
+    margin-right: -100px !important;
+    box-shadow: none !important;
   }
   .slick-next:before {
     display: none;
