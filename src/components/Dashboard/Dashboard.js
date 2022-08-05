@@ -19,11 +19,13 @@ import Messaging from "./Pages/Messaging";
 import DashHeader from "./DashHeader";
 import IncompleteListing from "./Pages/Listings/IncompleteListing";
 import { FaBars } from "react-icons/fa";
-import { Button, Modal, Row, Col, Table } from "react-bootstrap";
+import { Button, Modal, Row, Col, Table, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import CloseButton from "react-bootstrap/CloseButton";
 import Accordion from "react-bootstrap/Accordion";
 import PropertyDetails from "./PropertyDetails";
+import authService from "../../services/authServices";
+import Loading from "../Loading";
 
 function Dashboard({
   toggleChange,
@@ -36,21 +38,93 @@ function Dashboard({
   windowSize,
 }) {
   const [show, setShow] = useState(false);
+  const [loader, setLoader] = useState(false);
   const toggleShowModal = () => setShow(!show);
 
   const [showDocu, setShowDocu] = useState(false);
   const toggleShowDocu = () => setShowDocu(!showDocu);
 
+  const [doc, setDoc] = useState("");
+
   const [property, setProperty] = useState();
   const [documents, setDocuments] = useState([]);
   const [images, setImages] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [showProperty, setShowProperty] = useState(false);
   const toggleShowProperty = () => setShowProperty(!showProperty);
+
+  const [refresh, setRefresh] = useState(false);
 
   const [edit, setEdit] = useState({
     docu: false,
     image: false,
+    video: false,
   });
+
+  const onChangeMedia = async (e) => {
+    setLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("images", e.target.files[i]);
+    }
+
+    await authService.saveImages(formData).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        setImages([...images, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
+  };
+
+  const onChangeVideos = async (e) => {
+    setLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("videos", e.target.files[i]);
+    }
+
+    await authService.saveVideos(formData).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        setVideos([...videos, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
+  };
+
+  const onChangeDocu = async (e) => {
+    if (doc === "") {
+      alert("Please select a document type");
+    } else {
+      setLoader(true);
+      const formData = new FormData();
+
+      for (let i = 0; i < e.target.files.length; i++) {
+        formData.append("documents", e.target.files[i]);
+      }
+
+      await authService.saveDocuments(formData).then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const document = response.data.map((document) => {
+            return { ...document, officialName: doc };
+          });
+          console.log(document);
+          setDocuments([...documents, ...document]);
+          setLoader(false);
+        }
+      });
+      e.target.value = null;
+    }
+  };
 
   const handleDeleteDocu = (id) => {
     setDocuments(documents.filter((docu) => docu._id !== id));
@@ -58,6 +132,10 @@ function Dashboard({
 
   const handleDeleteImage = (id) => {
     setImages(images.filter((image) => image._id !== id));
+  };
+
+  const handleDeleteVideo = (id) => {
+    setVideos(videos.filter((video) => video._id !== id));
   };
 
   const history = useHistory();
@@ -73,8 +151,242 @@ function Dashboard({
   const location = useLocation();
   const path = window.location.pathname;
 
+  const realEstateDocu = [
+    {
+      value: "title_report",
+      label: "Title Report",
+    },
+    {
+      value: "insurance_copy",
+      label: "Insurance Copy",
+    },
+    {
+      value: "financial_document",
+      label: "Financial Document",
+    },
+    {
+      value: "purchase_agreement",
+      label: "Purchase Agreement",
+    },
+    {
+      value: "third-party_report",
+      label: "Third-Party Report",
+    },
+    {
+      value: "market_and_valuations",
+      label: "Market and Valuations",
+    },
+    {
+      value: "demographics",
+      label: "Demographics",
+    },
+    {
+      value: "others",
+      label: "Other",
+    },
+  ];
+
+  const carDocu = [
+    {
+      value: "ownership_document",
+      label: "Ownership Document",
+    },
+    {
+      value: "registration_document",
+      label: "Registration Document",
+    },
+    {
+      value: "title_certificate",
+      label: "Title Certificate",
+    },
+    {
+      value: "loan_document",
+      label: "Loan Document",
+    },
+    {
+      value: "inspection_report",
+      label: "Inspection Report",
+    },
+    {
+      value: "engine_details",
+      label: "Engine Details",
+    },
+    {
+      value: "insurance_document",
+      label: "Insurance Document",
+    },
+    {
+      value: "valuation_report",
+      label: "Valuation Report",
+    },
+    {
+      value: "others",
+      label: "Other",
+    },
+  ];
+
+  const jetDocu = [
+    {
+      value: "ownership_document",
+      label: "Ownership Document",
+    },
+    {
+      value: "registration_document",
+      label: "Registration Document",
+    },
+    {
+      value: "title_certificate",
+      label: "Title Certificate",
+    },
+    {
+      value: "detail_specification",
+      label: "Detail Specification",
+    },
+    {
+      value: "insurance_document",
+      label: "Insurance Document",
+    },
+    {
+      value: "loan_document",
+      label: "Loan Document",
+    },
+    {
+      value: "jet_detail_history",
+      label: "Jet Detail History",
+    },
+    {
+      value: "fitness_report",
+      label: "Fitness Report",
+    },
+    {
+      value: "electric_work_details",
+      label: "Electric Work Details",
+    },
+    {
+      value: "engine_details",
+      label: "Engine Details",
+    },
+    {
+      value: "inspection_report",
+      label: "Inspection Report",
+    },
+    {
+      value: "valuation_report",
+      label: "Valuation Report",
+    },
+    {
+      value: "others",
+      label: "Other",
+    },
+  ];
+
+  const yachtDocu = [
+    {
+      value: "vessel_registration",
+      label: "Vessel Registration",
+    },
+    {
+      value: "vessel_maintenance_report",
+      label: "Vessel Maintenance Report",
+    },
+    {
+      value: "vessel_engine_type",
+      label: "Vessel Engine Type",
+    },
+    {
+      value: "vessel_performance_report",
+      label: "Vessel Performance Report",
+    },
+    {
+      value: "vessel_deck_details",
+      label: "Vessel Deck Details",
+    },
+    {
+      value: "vessel_insurance",
+      label: "Vessel Insurance",
+    },
+    {
+      value: "vessel_marine_surveyor_report",
+      label: "Vessel Marine Surveyor Report",
+    },
+    {
+      value: "vessel_valuation_report",
+      label: "Vessel Valuation Report",
+    },
+    {
+      value: "others",
+      label: "Other",
+    },
+  ];
+
+  const onSubmit = async (step) => {
+    let submitedData;
+    if (step === 3) {
+      if (images.length > 0) {
+        submitedData = {
+          images,
+          videos,
+          step: 3,
+        };
+      }
+    } else if (step === 4) {
+      if (property.type === "real-estate") {
+        if (documents.length >= 2) {
+          submitedData = {
+            documents,
+            step: 4,
+          };
+        } else {
+          alert("Title and Purchase Agreement are required");
+        }
+      } else if (property.type === "car") {
+        if (documents.length >= 3) {
+          submitedData = {
+            documents,
+            step: 4,
+          };
+        } else {
+          alert("Title, Inspection, and Registration documents are required");
+        }
+      } else if (property.type === "jet") {
+        if (documents.length >= 6) {
+          submitedData = {
+            documents,
+            step: 4,
+          };
+        } else {
+          alert(
+            "Title, Fitness report, Engine details, Jet detail history, Registration and Inspection report documents are required"
+          );
+        }
+      } else if (property.type === "yacht") {
+        if (documents.length >= 2) {
+          submitedData = {
+            documents,
+            step: 4,
+          };
+        } else {
+          alert(
+            "Vessel Registration and Vessel Maintenance Report are required"
+          );
+        }
+      }
+    }
+    if (submitedData) {
+      await authService.editProp(submitedData, property._id).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Property updated successfully");
+          window.location.reload();
+        }
+      });
+    }
+  };
+
   return (
     <div style={{ display: "flex" }}>
+      {loader ? <Loading /> : null}
       <Router>
         {windowSize > 1300 ? (
           <Sidebar path={path} />
@@ -137,6 +449,9 @@ function Dashboard({
                 setProperty={setProperty}
                 setDocuments={setDocuments}
                 setImages={setImages}
+                setVideos={setVideos}
+                setRefresh={setRefresh}
+                refresh={refresh}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/SoldListings">
@@ -335,10 +650,12 @@ function Dashboard({
             style={{ backgroundColor: "white" }}
             onClick={() => {
               toggleShowDocu();
+              setEdit({ ...edit.image, image: !edit.image });
+              setEdit({ ...edit.docu, docu: !edit.docu });
             }}
           />
         </div>
-        <Modal.Body>
+        <Modal.Body style={{ paddingBottom: "8rem" }}>
           <>
             <Row className="mt-3">
               <Col
@@ -421,9 +738,141 @@ function Dashboard({
                 </Table>
               </Col>
               <Col md={12} className="d-flex justify-content-end">
-                {edit.image ? <Button className="mx-3">Upload</Button> : null}
+                {edit.image ? (
+                  <>
+                    <input
+                      type="file"
+                      id="media"
+                      multiple
+                      hidden
+                      onChange={onChangeMedia}
+                    />
+                    <label htmlFor="media" className="btn btn-primary mx-3">
+                      Upload
+                    </label>
+                  </>
+                ) : null}
+                {edit.image ? (
+                  <Button
+                    className="bg-success border-0 mx-2"
+                    onClick={() => onSubmit(3)}
+                  >
+                    Save
+                  </Button>
+                ) : null}
                 <Button
                   onClick={() => setEdit({ ...edit.image, image: !edit.image })}
+                >
+                  Edit
+                </Button>
+              </Col>
+            </Row>
+
+            <Row className="mt-3">
+              <Col
+                style={{
+                  color: "#376ebc",
+                  fontSize: "20px",
+                  borderBottom: "1px solid black",
+                }}
+              >
+                Property Videos
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col>
+                <Table
+                  borderless
+                  striped
+                  hover
+                  style={{
+                    overflow: windowSize < 800 ? "auto" : "hidden",
+                    display: windowSize < 800 && "block",
+                    tableLayout: windowSize < 800 && "auto",
+                    padding: "0",
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Document Name</th>
+                      <th>Official Name</th>
+                      <th>Status</th>
+                      <th>View</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  {videos?.length > 0 &&
+                    videos?.map((document, index) => (
+                      <tbody key={index}>
+                        <tr>
+                          <td>{index + 1}</td>
+                          <td>{document.name}</td>
+                          <td>
+                            {document.officialName
+                              ? document.officialName
+                              : "Image/Video"}
+                          </td>
+                          {document.isVerified === "pending" ? (
+                            <td>Pending</td>
+                          ) : document.isVerified === "success" ? (
+                            <td>Approved</td>
+                          ) : document.isVerified === "fail" ? (
+                            <td>Rejected</td>
+                          ) : null}
+                          <td>
+                            <Button
+                              onClick={() => {
+                                window.open(document.url, "_blank");
+                              }}
+                            >
+                              View
+                            </Button>
+                          </td>
+                          <td>
+                            <Button
+                              style={{
+                                background: "transparent",
+                                border: "none",
+                                color: "red",
+                                fontSize: "1.3rem",
+                                textAlign: "center",
+                              }}
+                              onClick={() => handleDeleteVideo(document._id)}
+                            >
+                              X
+                            </Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
+                </Table>
+              </Col>
+              <Col md={12} className="d-flex justify-content-end">
+                {edit.video ? (
+                  <>
+                    <input
+                      type="file"
+                      id="media"
+                      multiple
+                      hidden
+                      onChange={onChangeVideos}
+                    />
+                    <label htmlFor="media" className="btn btn-primary mx-3">
+                      Upload
+                    </label>
+                  </>
+                ) : null}
+                {edit.video ? (
+                  <Button
+                    className="bg-success border-0 mx-2"
+                    onClick={() => onSubmit(3)}
+                  >
+                    Save
+                  </Button>
+                ) : null}
+                <Button
+                  onClick={() => setEdit({ ...edit.video, video: !edit.video })}
                 >
                   Edit
                 </Button>
@@ -511,7 +960,62 @@ function Dashboard({
                 </Table>
               </Col>
               <Col md={12} className="d-flex justify-content-end">
-                {edit.docu ? <Button className="mx-3">Upload</Button> : null}
+                {edit.docu ? (
+                  <Form.Select
+                    className="form-control"
+                    onChange={(e) => setDoc(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Document Type</option>
+                    {property.type === "real-estate"
+                      ? realEstateDocu.map((docu, index) => (
+                          <option key={index} value={docu.value}>
+                            {docu.label}
+                          </option>
+                        ))
+                      : property.type === "car"
+                      ? carDocu.map((docu, index) => (
+                          <option key={index} value={docu.value}>
+                            {docu.label}
+                          </option>
+                        ))
+                      : property.type === "jet"
+                      ? jetDocu.map((docu, index) => (
+                          <option key={index} value={docu.value}>
+                            {docu.label}
+                          </option>
+                        ))
+                      : property.type === "yacht"
+                      ? yachtDocu.map((docu, index) => (
+                          <option key={index} value={docu.value}>
+                            {docu.label}
+                          </option>
+                        ))
+                      : null}
+                  </Form.Select>
+                ) : null}
+                {edit.docu ? (
+                  <>
+                    <input
+                      type="file"
+                      id="docu"
+                      multiple
+                      hidden
+                      onChange={onChangeDocu}
+                    />
+                    <label htmlFor="docu" className="btn btn-primary mx-3">
+                      Upload
+                    </label>
+                  </>
+                ) : null}
+                {edit.docu ? (
+                  <Button
+                    className="bg-success border-0 mx-2"
+                    onClick={() => onSubmit(4)}
+                  >
+                    Save
+                  </Button>
+                ) : null}
                 <Button
                   onClick={() => setEdit({ ...edit.docu, docu: !edit.docu })}
                 >
@@ -546,7 +1050,11 @@ function Dashboard({
           />
         </div>
         <Modal.Body>
-          <PropertyDetails property={property} />
+          <PropertyDetails
+            property={property}
+            setRefresh={setRefresh}
+            refresh={refresh}
+          />
         </Modal.Body>
       </Modal>
     </div>

@@ -143,7 +143,7 @@ function CarDetails({
         const submitedData = {
           make,
           model,
-          year,
+          year: parseInt(year),
           mileage: parseInt(mileage),
           gearbox,
           car_type: carType,
@@ -153,7 +153,7 @@ function CarDetails({
           engine,
           fuel_type: fuelType,
           condition,
-          market_price: price,
+          market_price: parseInt(price),
           description: {
             summary: summary?.car ? summary.car : summary,
             investment: invest?.car ? invest?.car : invest,

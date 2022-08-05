@@ -10,8 +10,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
-import { scryRenderedComponentsWithType } from "react-dom/test-utils";
-import { Autocomplete } from "@react-google-maps/api";
+import { MdClose } from "react-icons/md";
 
 function Ownership({
   toggleStep,
@@ -61,6 +60,12 @@ function Ownership({
         res.data.map((doc) => ({ ...doc, officialName: "listing_agreement" }))
       );
     });
+  };
+
+  const handleDelete = (url) => () => {
+    setListingAgreements(
+      listingAgreements.filter((document) => document.url !== url)
+    );
   };
 
   const onSubmit = (data) => {
@@ -387,6 +392,10 @@ function Ownership({
               </Row>
               <Row className="mt-3">
                 <Col xs={12} md={4}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Owner/Entity Name{" "}
+                    <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     type="text"
                     className="form-control"
@@ -399,12 +408,11 @@ function Ownership({
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Owner/Entity Name{" "}
-                    <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker Name <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     type="text"
                     className="form-control"
@@ -418,11 +426,12 @@ function Ownership({
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Broker Name <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker License Number{" "}
+                    <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     type="text"
                     className="form-control"
@@ -433,29 +442,54 @@ function Ownership({
                         ? ownership.details.broker_id
                         : ""
                     }
+                    onInput={(e) => {
+                      e.target.value = e.target.value.toUpperCase();
+                    }}
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Broker License Number{" "}
-                    <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                 </Col>
               </Row>
               <Row className="mt-3">
                 <Col>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    className="form-control"
-                    // defaultValue={listingAgreements}
-                    {...register("file", { onChange: getFile })}
-                    multiple
-                  />
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Listing Agreement(.pdf){" "}
                     <span style={{ color: "#ff0000" }}>*</span>
                   </span>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    className="form-control"
+                    multiple
+                    hidden
+                    {...register("file", { onChange: getFile })}
+                  />
+                  <input
+                    type="file"
+                    id="docu"
+                    className="form-control"
+                    onChange={getFile}
+                    hidden
+                    multiple
+                  />
+                  <div className="d-flex">
+                    <label htmlFor="docu" className="btn btn-primary">
+                      Upload
+                    </label>
+                  </div>
+                  <div className="d-grid">
+                    {listingAgreements.map((doc, index) => (
+                      <span key={index}>
+                        {doc.name}
+                        <Button
+                          className="bg-transparent border-0"
+                          onClick={handleDelete(doc.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    ))}
+                  </div>
                 </Col>
               </Row>
               <Row className="mt-3">
@@ -472,6 +506,9 @@ function Ownership({
                       loading,
                     }) => (
                       <div>
+                        <span style={{ fontWeight: "600", color: "black" }}>
+                          Address <span style={{ color: "#ff0000" }}>*</span>
+                        </span>
                         <input
                           {...getInputProps({
                             placeholder: "Search address",
@@ -479,9 +516,6 @@ function Ownership({
                           })}
                           required
                         />
-                        <span style={{ fontWeight: "600", color: "black" }}>
-                          Address <span style={{ color: "#ff0000" }}>*</span>
-                        </span>
                         {suggestions && suggestions.length > 0 && (
                           <div className="autocomplete-dropdown-container">
                             {loading && <div>Loading...</div>}
@@ -522,6 +556,9 @@ function Ownership({
               </Row>
               <Row className="mt-3">
                 <Col xs={12} md={6}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Phone <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <PhoneInput
                     disableCountryCode={false}
                     onlyCountries={["ca", "us", "gb", "au"]}
@@ -537,11 +574,11 @@ function Ownership({
                     }}
                     onChange={setPhone}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                 </Col>
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Email <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
                   <input
                     type="email"
                     className="form-control"
@@ -550,9 +587,6 @@ function Ownership({
                     }
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    Email <span style={{ color: "#ff0000" }}>*</span>
-                  </span>
                 </Col>
               </Row>
 

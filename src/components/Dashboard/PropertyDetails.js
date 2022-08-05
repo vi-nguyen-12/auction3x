@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, InputGroup } from "react-bootstrap";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -12,10 +12,10 @@ import Car from "./PropertiesDetails/Car";
 import Yacht from "./PropertiesDetails/Yacht";
 import Jet from "./PropertiesDetails/Jet";
 import authService from "../../services/authServices";
+import Loading from "../Loading";
+import { MdClose } from "react-icons/md";
 
-function PropertyDetails({ property }) {
-  console.log(property);
-
+function PropertyDetails({ property, setRefresh, refresh }) {
   const [edit, setEdit] = useState({
     step1: false,
     step2: false,
@@ -25,12 +25,17 @@ function PropertyDetails({ property }) {
     step4: false,
   });
 
-  const [phone, setPhone] = useState(
-    property.details.broker_name ? "" : property.details.phone
+  const [listingAgreement, setListingAgreement] = useState(
+    property.details.broker_documents
   );
+  const [loader, setLoader] = useState(false);
+
+  const [phone, setPhone] = useState(property.details.phone);
   const [address, setAddress] = useState(
     property.details?.property_address.formatted_street_address || ""
   );
+  const [lat, setLat] = useState(property.details?.property_address?.lat || "");
+  const [lng, setLng] = useState(property.details?.property_address?.lng || "");
   const [city, setCity] = useState(
     property.details?.property_address?.city || ""
   );
@@ -60,10 +65,6 @@ function PropertyDetails({ property }) {
   const [brokerEmail, setBrokerEmail] = useState(
     property.details.broker_name ? property.details.email : ""
   );
-  const [brokerPhone, setBrokerPhone] = useState(
-    property.details.broker_name ? property.details.phone : ""
-  );
-
   const [brokerId, setBrokerId] = useState(property.details.broker_id || "");
 
   const handleChange = (address) => {
@@ -86,34 +87,68 @@ function PropertyDetails({ property }) {
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(results[0].formatted_address);
+      setAddress(() => {
+        return results[0]?.formatted_address.split(",")[0] || "";
+      });
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
           "locality" || "sublocality" || "neighborhood"
         );
       });
-      setCity(cities[0] ? cities[0]?.long_name : cities[0]?.short_name);
+      setCity(() => {
+        return cities[0]?.long_name || "";
+      });
 
       let states = results[0].address_components.filter((item) => {
         return item.types[0] === "administrative_area_level_1";
       });
-      setState(states[0] ? states[0].long_name : states[0]?.short_name);
+      setState(states[0]?.long_name || "");
 
       let countries = results[0].address_components.filter((item) => {
         return item.types[0] === "country";
       });
-      setCountry(
-        countries[0].long_name
-          ? countries[0].long_name
-          : countries[0].short_name
-      );
+      setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
         return item.types[0] === "postal_code";
       });
-      setZip(zipcodes[0] ? zipcodes[0]?.long_name : zipcodes[0]?.short_name);
+      setZip(() => {
+        return zipcodes[0]?.long_name || "";
+      });
+
+      setLat(() => {
+        return results[0]?.geometry.location.lat() || "";
+      });
+      setLng(() => {
+        return results[0]?.geometry.location.lng() || "";
+      });
     });
+  };
+
+  const handleDelete = (url) => () => {
+    setListingAgreement(
+      listingAgreement.filter((document) => document.url !== url)
+    );
+  };
+
+  const onChange = async (e) => {
+    setLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+
+    await authService.saveDocuments(formData).then((response) => {
+      if (response.data.error) {
+        alert(response.data.error);
+      } else {
+        setListingAgreement([...listingAgreement, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
   };
 
   const onSubmit = async (prop, step) => {
@@ -129,7 +164,7 @@ function PropertyDetails({ property }) {
             phone: phone,
             email: prop.details.email,
             address: address,
-            // broker_documents: listingAgreements,
+            broker_documents: listingAgreement,
           },
           step: 1,
         };
@@ -149,14 +184,167 @@ function PropertyDetails({ property }) {
         if (res.data.error) {
           alert(res.data.error);
         } else {
+          alert("Property updated successfully");
           window.location.reload();
         }
       });
+    }
+    if (step === 2) {
+      let submitedData;
+      if (prop.type === "real-estate") {
+        submitedData = {
+          street_address: address,
+          city,
+          state,
+          country,
+          zip_code: zip,
+          lat,
+          lng,
+          real_estate_type: prop.details.real_estate_type,
+          year_built: parseInt(prop.details.year_built),
+          owner_name: prop.details.owner_name,
+          baths_count: parseInt(prop.details.structure.baths_count),
+          beds_count: parseInt(prop.details.structure.beds_count),
+          total_value: parseInt(prop.details.market_assessments[0].total_value),
+          area_sq_ft: parseInt(prop.details.parcel.area_sq_ft),
+          lot_size: parseInt(prop.details.parcel.lot_size),
+          type_of_garage: prop.details.type_of_garage,
+          number_of_stories: parseInt(prop.details.number_of_stories),
+          description: {
+            summary: prop.details.description.summary,
+            investment: prop.details.description.investment,
+            location: prop.details.description.location,
+            market: prop.details.description.market,
+          },
+          reservedAmount: parseInt(prop.reservedAmount),
+          discussedAmount: parseInt(prop.discussedAmount),
+          step: 2,
+        };
+      } else if (prop.type === "car") {
+        submitedData = {
+          make: prop.details.make,
+          model: prop.details.model,
+          year: parseInt(prop.details.year),
+          mileage: parseInt(prop.details.mileage),
+          gearbox: prop.details.gearbox,
+          car_type: prop.details.car_type,
+          power: prop.details.power,
+          color: prop.details.color,
+          VIN: prop.details.VIN,
+          engine: prop.details.engine,
+          fuel_type: prop.details.fuel_type,
+          condition: prop.details.condition,
+          market_price: parseInt(prop.details.market_price),
+          description: {
+            summary: prop.details.description.summary,
+            investment: prop.details.description.investment,
+            location: prop.details.description.location,
+            market: prop.details.description.market,
+          },
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+            lat,
+            lng,
+          },
+          reservedAmount: parseInt(prop.reservedAmount),
+          discussedAmount: parseInt(prop.discussedAmount),
+          step: 2,
+        };
+      } else if (prop.type === "jet") {
+        submitedData = {
+          registration_mark: prop.details.registration_mark,
+          aircraft_builder_name: prop.details.aircraft_builder_name,
+          aircraft_model_designation: prop.details.aircraft_model_designation,
+          aircraft_serial_no: prop.details.aircraft_serial_no,
+          engine_builder_name: prop.details.engine_builder_name,
+          engine_model_designation: prop.details.engine_model_designation,
+          number_of_engines: parseInt(prop.details.number_of_engines),
+          propeller_builder_name: prop.details.propeller_builder_name,
+          year_built: parseInt(prop.details.year_built),
+          propeller_model_designation: prop.details.propeller_model_designation,
+          imported_aircraft: prop.details.imported_aircraft,
+          description: {
+            summary: prop.details.description.summary,
+            investment: prop.details.description.investment,
+            location: prop.details.description.location,
+            market: prop.details.description.market,
+          },
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+            lat,
+            lng,
+          },
+          reservedAmount: parseInt(prop.reservedAmount),
+          discussedAmount: parseInt(prop.discussedAmount),
+          step: 2,
+        };
+      } else if (prop.type === "yacht") {
+        submitedData = {
+          reservedAmount: parseInt(prop.reservedAmount),
+          discussedAmount: parseInt(prop.discussedAmount),
+          vessel_registration_number: prop.details.vessel_registration_number,
+          vessel_manufacturing_date: prop.details.vessel_manufacturing_date,
+          manufacture_mark: prop.details.manufacture_mark,
+          manufacturer_name: prop.details.manufacturer_name,
+          engine_type: prop.details.engine_type,
+          length: parseInt(prop.details.length),
+          engine_manufacture_name: prop.details.engine_manufacture_name,
+          engine_deck_type: prop.details.engine_deck_type,
+          running_cost: parseInt(prop.details.running_cost),
+          no_of_crew_required: parseInt(prop.details.no_of_crew_required),
+          description: {
+            summary: prop.details.description.summary,
+            investment: prop.details.description.investment,
+            location: prop.details.description.location,
+            market: prop.details.description.market,
+          },
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+            lat,
+            lng,
+          },
+          step: 2,
+        };
+      }
+      if (prop.type === "real-estate") {
+        await authService.editRealEstate(prop._id, submitedData).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            alert("Property updated successfully");
+            setRefresh(!refresh);
+            // window.location.reload();
+          }
+        });
+      } else {
+        await authService.editProp(submitedData, prop._id).then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            alert("Property updated successfully");
+            setRefresh(!refresh);
+            // window.location.reload();
+          }
+        });
+      }
     }
   };
 
   return (
     <Container className="mb-4">
+      {loader && <Loading />}
       <Row>
         <Col
           style={{
@@ -169,7 +357,7 @@ function PropertyDetails({ property }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col>
+        <Col xs={12} md={property.details.broker_name ? 12 : 4}>
           <span style={{ fontWeight: "600", color: "black" }}>Owner Name</span>
           <input
             type="text"
@@ -180,41 +368,49 @@ function PropertyDetails({ property }) {
             disabled={!edit.step1}
           />
         </Col>
-        <Col>
-          <span style={{ fontWeight: "600", color: "black" }}>Owner Phone</span>
-          <PhoneInput
-            disableCountryCode={false}
-            onlyCountries={["ca", "us", "gb", "au"]}
-            disableD={!edit.step1}
-            ropdown={false}
-            style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
-            country={"us"}
-            dropdownStyle={{ paddingLeft: "0!important" }}
-            value={phone}
-            inputStyle={{ width: "100%" }}
-            buttonStyle={{
-              borderRight: "none",
-            }}
-            onChange={setPhone}
-            disabled={!edit.step1}
-          />
-        </Col>
-        <Col>
-          <span style={{ fontWeight: "600", color: "black" }}>Owner Email</span>
-          <input
-            type="text"
-            className="form-control"
-            style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
-            defaultValue={ownerEmail}
-            onChange={(e) => (property.details.email = e.target.value)}
-            disabled={!edit.step1}
-          />
-        </Col>
+        {!property.details.broker_name && (
+          <>
+            <Col xs={12} md={4}>
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Owner Phone
+              </span>
+              <PhoneInput
+                disableCountryCode={false}
+                onlyCountries={["ca", "us", "gb", "au"]}
+                disableD={!edit.step1}
+                ropdown={false}
+                style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
+                country={"us"}
+                dropdownStyle={{ paddingLeft: "0!important" }}
+                value={property.details.broker_name ? "" : phone}
+                inputStyle={{ width: "100%" }}
+                buttonStyle={{
+                  borderRight: "none",
+                }}
+                onChange={setPhone}
+                disabled={!edit.step1}
+              />
+            </Col>
+            <Col xs={12} md={4}>
+              <span style={{ fontWeight: "600", color: "black" }}>
+                Owner Email
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
+                defaultValue={ownerEmail}
+                onChange={(e) => (property.details.email = e.target.value)}
+                disabled={!edit.step1}
+              />
+            </Col>
+          </>
+        )}
       </Row>
       {property.details.broker_name && (
         <>
           <Row className="mt-3">
-            <Col>
+            <Col xs={12} md={4}>
               <span style={{ fontWeight: "600", color: "black" }}>
                 Broker Name
               </span>
@@ -229,7 +425,7 @@ function PropertyDetails({ property }) {
                 disabled={!edit.step1}
               />
             </Col>
-            <Col>
+            <Col xs={12} md={4}>
               <span style={{ fontWeight: "600", color: "black" }}>
                 Broker Phone
               </span>
@@ -252,7 +448,7 @@ function PropertyDetails({ property }) {
                 disabled={!edit.step1}
               />
             </Col>
-            <Col>
+            <Col xs={12} md={4}>
               <span style={{ fontWeight: "600", color: "black" }}>
                 Broker Email
               </span>
@@ -267,7 +463,7 @@ function PropertyDetails({ property }) {
             </Col>
           </Row>
           <Row className="mt-3">
-            <Col>
+            <Col xs={12} md={6}>
               <span style={{ fontWeight: "600", color: "black" }}>
                 Broker ID
               </span>
@@ -280,24 +476,51 @@ function PropertyDetails({ property }) {
                 disabled={!edit.step1}
               />
             </Col>
-            <Col>
-              <span style={{ fontWeight: "600", color: "black" }}>
-                Listing Agreements
-              </span>
-              <input
-                type="file"
-                className="form-control"
-                style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
-                // defaultValue={listingAgreements}
-                // onChange={(e) => setListingAgreements(e.target.value)}
-                disabled={!edit.step1}
-              />
+            <Col xs={12} md={6}>
+              <Row>
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Listing Agreements
+                </span>
+                <Col md={2} xs={12}>
+                  <input
+                    type="file"
+                    id="docu"
+                    className="form-control"
+                    style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
+                    onChange={onChange}
+                    hidden
+                    multiple
+                    disabled={!edit.step1}
+                  />
+                  <div className="d-flex">
+                    <label htmlFor="docu" className="btn btn-primary">
+                      Upload
+                    </label>
+                  </div>
+                </Col>
+                <Col md={10} xs={12} className="pl-2">
+                  <div className="d-grid">
+                    {listingAgreement.map((doc, index) => (
+                      <span key={index}>
+                        {doc.name}
+                        <Button
+                          className="bg-transparent border-0"
+                          onClick={handleDelete(doc.url)}
+                          disabled={!edit.step1}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    ))}
+                  </div>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </>
       )}
       <Row className="mt-3">
-        <Col>
+        <Col xs={12}>
           <PlacesAutocomplete
             value={ownerAddress}
             onChange={handleOwnerChange}
@@ -386,7 +609,7 @@ function PropertyDetails({ property }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col>
+        <Col xs={12} md={6}>
           <PlacesAutocomplete
             value={address}
             onChange={handleChange}
@@ -447,7 +670,7 @@ function PropertyDetails({ property }) {
             )}
           </PlacesAutocomplete>
         </Col>
-        <Col>
+        <Col xs={12} md={6}>
           <span style={{ fontWeight: "600", color: "black" }}>Country</span>
           <input
             type="text"
@@ -460,7 +683,7 @@ function PropertyDetails({ property }) {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={12} md={4}>
           <span style={{ fontWeight: "600", color: "black" }}>State</span>
           <input
             type="text"
@@ -471,7 +694,7 @@ function PropertyDetails({ property }) {
             disabled={!edit.step2}
           />
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <span style={{ fontWeight: "600", color: "black" }}>City</span>
           <input
             type="text"
@@ -482,7 +705,7 @@ function PropertyDetails({ property }) {
             disabled={!edit.step2}
           />
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <span style={{ fontWeight: "600", color: "black" }}>Zip</span>
           <input
             type="text"
@@ -504,7 +727,9 @@ function PropertyDetails({ property }) {
           >
             Edit
           </Button>
-          {edit.step2 ? <Button>Save</Button> : null}
+          {edit.step2 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
         </Col>
       </Row>
       <Row className="mt-4">
@@ -540,7 +765,7 @@ function PropertyDetails({ property }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col>
+        <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
             Investment Opportunity
           </span>
@@ -555,7 +780,7 @@ function PropertyDetails({ property }) {
             disabled={!edit.step2_2}
           />
         </Col>
-        <Col>
+        <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
             Location Highlight
           </span>
@@ -572,7 +797,7 @@ function PropertyDetails({ property }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col>
+        <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
             Market Overview
           </span>
@@ -587,7 +812,7 @@ function PropertyDetails({ property }) {
             disabled={!edit.step2_2}
           />
         </Col>
-        <Col>
+        <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
             Executive Summary
           </span>
@@ -612,7 +837,9 @@ function PropertyDetails({ property }) {
           >
             Edit
           </Button>
-          {edit.step2_2 ? <Button>Save</Button> : null}
+          {edit.step2_2 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
         </Col>
       </Row>
     </Container>

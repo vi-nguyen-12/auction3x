@@ -697,7 +697,7 @@ const authService = {
   },
 
   editProp(data, id) {
-    return axios.put(apiUrl + `/api/properties/${id}`, data.details, {
+    return axios.put(apiUrl + `/api/properties/${id}`, data, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },

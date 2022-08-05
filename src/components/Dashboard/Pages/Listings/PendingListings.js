@@ -12,6 +12,9 @@ function PendingListings({
   setProperty,
   setDocuments,
   setImages,
+  setVideos,
+  setRefresh,
+  refresh,
 }) {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
@@ -28,7 +31,7 @@ function PendingListings({
       });
     };
     fetchPendingListings();
-  }, []);
+  }, [refresh]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -97,6 +100,8 @@ function PendingListings({
                       onClick={() => {
                         setDocuments(auction.documents);
                         setImages(auction.images);
+                        setVideos(auction.videos);
+                        setProperty(auction);
                         toggleShowDocu();
                       }}
                       className="btn btn-primary"

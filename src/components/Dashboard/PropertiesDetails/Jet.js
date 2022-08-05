@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
+import authService from "../../../services/authServices";
 
-function Jet({ property, setEdit, edit }) {
+function Jet({ property, setEdit, edit, setRefresh, refresh }) {
   const [other, setOther] = useState(false);
   const [isImported, setIsImported] = useState(
     property.details.imported_aircraft
@@ -22,6 +23,52 @@ function Jet({ property, setEdit, edit }) {
     "PIAGGIO",
     "PILATUS",
   ];
+
+  const onSubmit = async (prop, step) => {
+    if (step === 2) {
+      let submitedData = {
+        registration_mark: prop.details.registration_mark,
+        aircraft_builder_name: prop.details.aircraft_builder_name,
+        aircraft_model_designation: prop.details.aircraft_model_designation,
+        aircraft_serial_no: prop.details.aircraft_serial_no,
+        engine_builder_name: prop.details.engine_builder_name,
+        engine_model_designation: prop.details.engine_model_designation,
+        number_of_engines: parseInt(prop.details.number_of_engines),
+        propeller_builder_name: prop.details.propeller_builder_name,
+        year_built: parseInt(prop.details.year_built),
+        propeller_model_designation: prop.details.propeller_model_designation,
+        imported_aircraft: isImported,
+        description: {
+          summary: prop.details.description.summary,
+          investment: prop.details.description.investment,
+          location: prop.details.description.location,
+          market: prop.details.description.market,
+        },
+        property_address: {
+          formatted_street_address:
+            prop.details.property_address.formatted_street_address,
+          country: prop.details.property_address.country,
+          state: prop.details.property_address.state,
+          city: prop.details.property_address.city,
+          zip_code: prop.details.property_address.zip_code,
+          lat: prop.details.property_address.lat,
+          lng: prop.details.property_address.lng,
+        },
+        reservedAmount: parseInt(prop.reservedAmount),
+        discussedAmount: parseInt(prop.discussedAmount),
+        step: 2,
+      };
+      await authService.editProp(submitedData, prop._id).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Property updated successfully");
+          setRefresh(!refresh);
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Row className="mt-3">
@@ -272,7 +319,9 @@ function Jet({ property, setEdit, edit }) {
           >
             Edit
           </Button>
-          {edit.step2_1 ? <Button>Save</Button> : null}
+          {edit.step2_1 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
         </Col>
       </Row>
     </>

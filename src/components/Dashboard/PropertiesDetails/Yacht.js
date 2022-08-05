@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
+import authService from "../../../services/authServices";
 
-function Yacht({ property, setEdit, edit }) {
+function Yacht({ property, setEdit, edit, setRefresh, refresh }) {
   const [other, setOther] = useState(false);
   const [vessel_manufacturing_date, setVessel_manufacturing_date] = useState(
     property.details.vessel_manufacturing_date
@@ -30,6 +31,50 @@ function Yacht({ property, setEdit, edit }) {
     const month = newDate.getMonth() + 1;
     const year = newDate.getFullYear();
     setVessel_manufacturing_date(`${month}/${day}/${year}`);
+  };
+
+  const onSubmit = async (prop, step) => {
+    if (step === 2) {
+      let submitedData = {
+        reservedAmount: parseInt(prop.reservedAmount),
+        discussedAmount: parseInt(prop.discussedAmount),
+        vessel_registration_number: prop.details.vessel_registration_number,
+        vessel_manufacturing_date: vessel_manufacturing_date,
+        manufacture_mark: prop.details.manufacture_mark,
+        manufacturer_name: prop.details.manufacturer_name,
+        engine_type: prop.details.engine_type,
+        length: parseInt(prop.details.length),
+        engine_manufacture_name: prop.details.engine_manufacture_name,
+        engine_deck_type: prop.details.engine_deck_type,
+        running_cost: parseInt(prop.details.running_cost),
+        no_of_crew_required: parseInt(prop.details.no_of_crew_required),
+        description: {
+          summary: prop.details.description.summary,
+          investment: prop.details.description.investment,
+          location: prop.details.description.location,
+          market: prop.details.description.market,
+        },
+        property_address: {
+          formatted_street_address:
+            prop.details.property_address.formatted_street_address,
+          country: prop.details.property_address.country,
+          state: prop.details.property_address.state,
+          city: prop.details.property_address.city,
+          zip_code: prop.details.property_address.zip_code,
+          lat: prop.details.property_address.lat,
+          lng: prop.details.property_address.lng,
+        },
+        step: 2,
+      };
+      await authService.editProp(submitedData, prop._id).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Property updated successfully");
+          setRefresh(!refresh);
+        }
+      });
+    }
   };
 
   return (
@@ -353,7 +398,9 @@ function Yacht({ property, setEdit, edit }) {
           >
             Edit
           </Button>
-          {edit.step2_1 ? <Button>Save</Button> : null}
+          {edit.step2_1 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
         </Col>
       </Row>
     </>
