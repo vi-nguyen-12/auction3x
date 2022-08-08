@@ -15,12 +15,12 @@ const Work = ({ windowSize }) => {
       <Row>
         <Col className="work-title">
           <div className="heading">How it Works?</div>
-          <div className="content-1">
+          {/* <div className="content-1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             <br />
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <br />
-          </div>
+          </div> */}
         </Col>
       </Row>
       <Row style={{ marginTop: "100px" }}>

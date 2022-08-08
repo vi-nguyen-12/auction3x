@@ -145,7 +145,7 @@ function DisplayAuctions({
         ) : null
       ) : (
         <div
-          className="real-estate-wrap"
+          className="real-estate-wrap m-5"
           style={{
             display: "flex",
             justifyContent: "center",

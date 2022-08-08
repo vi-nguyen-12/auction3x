@@ -117,7 +117,6 @@ function Dashboard({
           const document = response.data.map((document) => {
             return { ...document, officialName: doc };
           });
-          console.log(document);
           setDocuments([...documents, ...document]);
           setLoader(false);
         }
@@ -439,7 +438,15 @@ function Dashboard({
               <WinAuctions windowSize={windowSize} />'
             </Route>
             <Route exact path="/Dashboard/Listings/AuctionListings">
-              <LiveListings windowSize={windowSize} />
+              <LiveListings
+                windowSize={windowSize}
+                toggleShowDocu={toggleShowDocu}
+                toggleShowProperty={toggleShowProperty}
+                setProperty={setProperty}
+                setDocuments={setDocuments}
+                setImages={setImages}
+                setVideos={setVideos}
+              />
             </Route>
             <Route exact path="/Dashboard/Listings/PendingApproval">
               <PendingListings

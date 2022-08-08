@@ -507,7 +507,7 @@ h3 {
   position: absolute;
   width: 23px;
   height: 23px;
-  font-size: 12px;
+  font-size: 0.7rem;
   font-weight: bold;
   border-radius: 50%;
   background-color: #db1313;
@@ -520,10 +520,12 @@ h3 {
 .notifi-drop-down {
   display: block;
   position: absolute;
-  width: 250px;
-  height: 300px;
-  margin-top: 330px;
-  padding-top: 15px;
+  border-radius: 5px;
+  width: 20rem;
+  height: 355px;
+  margin-top: 310px;
+  margin-right: -60px;
+  padding-top: 55px;
   z-index: 2;
 }
 
@@ -532,7 +534,7 @@ h3 {
   height: 100%;
   background: white;
   border-radius: 5px;
-  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 0 0 20px #888888;
 }
 
 .notifi-dropdown-item {
