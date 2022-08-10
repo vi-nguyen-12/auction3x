@@ -64,6 +64,8 @@ function CarDetails({
     propertyTest.details?.property_address?.lng || ""
   );
   const [other, setOther] = useState(false);
+  const [otherType, setOtherType] = useState(false);
+
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest.reservedAmount || ""
   );
@@ -135,7 +137,9 @@ function CarDetails({
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
-      alert("Reserved amount should be greater than or equal to discussed amount");
+      alert(
+        "Reserved amount should be greater than or equal to discussed amount"
+      );
     } else {
       if (year > new Date().getFullYear()) {
         alert("Built year must be less than or equal to current year.");
@@ -362,14 +366,45 @@ function CarDetails({
             /> */}
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>Car Type</span>
-            <input
-              type="text"
-              className="form-control"
-              defaultValue={carType}
-              {...register("carType", { maxLength: 100 })}
-              onChange={(e) => setCarType(e.target.value)}
-            />
+            <span style={{ color: "black" }}>Body Type</span>
+            {otherType ? (
+              <>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter Body Type"
+                  defaultValue={carType}
+                  {...register("carType", { maxLength: 100 })}
+                  onChange={(e) => setCarType(e.target.value)}
+                  required
+                />
+                <span className="d-flex justify-content-end mt-1">
+                  <Button onClick={() => setOtherType(false)}>Back</Button>
+                </span>
+              </>
+            ) : (
+              <Form.Select
+                value={carType}
+                onChange={(e) => {
+                  if (e.target.value === "Other") {
+                    setOtherType(true);
+                  } else {
+                    setCarType(e.target.value);
+                  }
+                }}
+                required
+              >
+                <option value="">Select Body Type</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Convertible">Convertible</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Van">Van</option>
+                <option value="Wagon">Wagon</option>
+                <option value="Other">Other</option>
+              </Form.Select>
+            )}
           </Col>
         </Row>
         <Row className="mt-3">

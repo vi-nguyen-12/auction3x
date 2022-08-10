@@ -1673,6 +1673,31 @@ function DisplayYacht({
             onHide={toggleRegister}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+              >
+                Buyer Registration
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  toggleRegister();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body>
               <MultiBuyForm windowSize={windowSize} />
             </Modal.Body>

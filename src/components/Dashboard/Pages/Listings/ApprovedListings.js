@@ -23,6 +23,8 @@ function ApprovedListings({
     });
   }, []);
 
+  console.log(approvedLists);
+
   return (
     <Row>
       <h1>Listed</h1>

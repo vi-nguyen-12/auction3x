@@ -1040,13 +1040,13 @@ function DisplayJet({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
-                          <td>{property.property.type}</td>
+                          <td>{property.property.type.toUpperCase()}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>registration Mark</td>
+                        <td style={{ fontWeight: "700" }}>Registration Mark</td>
                         {property.property.details.registration_mark ? (
                           <td>{property.property.details.registration_mark}</td>
                         ) : (
@@ -1054,9 +1054,7 @@ function DisplayJet({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>
-                          Aircraft Builder Name
-                        </td>
+                        <td style={{ fontWeight: "700" }}>Aircraft Builder</td>
                         {property.property.details.aircraft_builder_name ? (
                           <td>
                             {property.property.details.aircraft_builder_name}
@@ -1066,9 +1064,7 @@ function DisplayJet({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>
-                          Aircraft Model Designation
-                        </td>
+                        <td style={{ fontWeight: "700" }}>Aircraft Model</td>
                         {property.property.details
                           .aircraft_model_designation ? (
                           <td>
@@ -1106,9 +1102,7 @@ function DisplayJet({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>
-                          engine_model_designation
-                        </td>
+                        <td style={{ fontWeight: "700" }}>Engine Model</td>
                         {property.property.details.engine_model_designation ? (
                           <td>
                             {property.property.details.engine_model_designation}
@@ -1153,7 +1147,7 @@ function DisplayJet({
                           <td>N/A</td>
                         )}
                       </tr>
-                      <tr>
+                      {/* <tr>
                         <td style={{ fontWeight: "700" }}>
                           Number Of Aircraft
                         </td>
@@ -1164,13 +1158,13 @@ function DisplayJet({
                         ) : (
                           <td>N/A</td>
                         )}
-                      </tr>
+                      </tr> */}
                       <tr>
                         <td style={{ fontWeight: "700" }}>Imported Aircraft</td>
                         {property.property.details.imported_aircraft ? (
-                          <td>{property.property.details.imported_aircraft}</td>
+                          <td>Yes</td>
                         ) : (
-                          <td>N/A</td>
+                          <td>No</td>
                         )}
                       </tr>
                     </tbody>
@@ -1704,11 +1698,6 @@ function DisplayJet({
               </Tab>
             </Tabs>
           </Row>
-          <Modal size="lg" show={bid} onHide={toggleBid} centered>
-            <Modal.Body>
-              <MultiBuyForm windowSize={windowSize} />
-            </Modal.Body>
-          </Modal>
 
           <Modal
             size="lg"
@@ -1718,6 +1707,31 @@ function DisplayJet({
             onHide={toggleRegister}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+              >
+                Buyer Registration
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  toggleRegister();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body>
               <MultiBuyForm />
             </Modal.Body>

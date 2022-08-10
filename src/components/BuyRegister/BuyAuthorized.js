@@ -123,16 +123,6 @@ const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
     <>
       {" "}
       {loader ? <Loading /> : null}
-      <Modal.Header closeButton>
-        <Modal.Title
-          className="fw-bold fs-1 "
-          style={{
-            color: "#D58F5C",
-          }}
-        >
-          Buyer Agreement
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
           <Button className="btn btn-primary" onClick={handleSignDocusign}>

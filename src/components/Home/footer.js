@@ -55,7 +55,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               Quick Links
             </h5>
             <ul style={{ paddingLeft: windowSize < 800 && "1.4rem" }}>
-              <li className="list-unstyled">
+              {/* <li className="list-unstyled">
                 <a href="/Auctions">Buy</a>
               </li>
               <li className="list-unstyled">
@@ -72,7 +72,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
                 >
                   Sell
                 </a>
-              </li>
+              </li> */}
               <li className="list-unstyled">
                 <a href="/AboutUs">About Us</a>
               </li>

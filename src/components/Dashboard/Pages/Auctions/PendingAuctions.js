@@ -20,6 +20,7 @@ function PendingAuctions({ windowSize }) {
   const [edit, setEdit] = useState();
   const [editFund, setEditFund] = useState(false);
   const [questionair, setQuestionair] = useState([]);
+  const [buyerId, setBuyerId] = useState();
   const [fundType, setFundType] = useState("");
   const [loader, setLoader] = useState(false);
   const [doc, setDoc] = useState([]);
@@ -99,6 +100,39 @@ function PendingAuctions({ windowSize }) {
 
   console.log(pendingAuctions);
 
+  const onSubmit = async (id, data) => {
+    console.log(data);
+    let answers = data.map((item) => {
+      return {
+        questionId: item.questionId,
+        answer: item.answer,
+        explanation: item.explanation,
+        files: [...doc],
+      };
+    });
+
+    answers = answers.map((item) => {
+      if (item.answer === "no") {
+        delete item.files;
+      }
+      return item;
+    });
+
+    setLoader(true);
+    let submitedData = {
+      answers: answers,
+      documents: documents.document,
+    };
+    await authService.editBuyer(id, submitedData).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setLoader(false);
+        alert("Successfully Updated Buyer info");
+      }
+    });
+  };
+
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       {loader && <Loading />}
@@ -177,6 +211,7 @@ function PendingAuctions({ windowSize }) {
                     <Button
                       onClick={() => {
                         setQuestionair(auction.buyer.answers);
+                        setBuyerId(auction.buyer._id);
                         setDocuments(auction.buyer.funds);
                         toggleQuestionair();
                       }}
@@ -190,6 +225,7 @@ function PendingAuctions({ windowSize }) {
                       onClick={() => {
                         setDocuments(auction.buyer.funds);
                         setQuestionair(auction.buyer.answers);
+                        setBuyerId(auction.buyer._id);
                         toggleDocuments();
                       }}
                       variant="primary"
@@ -279,6 +315,7 @@ function PendingAuctions({ windowSize }) {
                     <th>Question ID</th>
                     <th>Question</th>
                     <th>Answer</th>
+                    <th>Explanation</th>
                     <th>Files</th>
                     <th>Edit</th>
                     {/* <th>Delete</th> */}
@@ -321,6 +358,37 @@ function PendingAuctions({ windowSize }) {
                         ) : (
                           <td>{question.answer}</td>
                         )}
+
+                        {edit === index ? (
+                          <td>
+                            <textarea
+                              type="text"
+                              className="form-control"
+                              value={question.explanation}
+                              onChange={(e) => {
+                                setQuestionair(
+                                  questionair.map((q, i) => {
+                                    if (i === index) {
+                                      return {
+                                        ...q,
+                                        explanation: e.target.value,
+                                      };
+                                    } else {
+                                      return q;
+                                    }
+                                  })
+                                );
+                              }}
+                            />
+                          </td>
+                        ) : (
+                          <td>
+                            {question.explanation
+                              ? question.explanation
+                              : "N/A"}
+                          </td>
+                        )}
+
                         {edit === index ? (
                           <td>
                             <input
@@ -386,6 +454,8 @@ function PendingAuctions({ windowSize }) {
                               onClick={() => {
                                 setEdit(index);
                                 setDoc(question.files);
+                                delete question.isApproved;
+                                delete question._id;
                               }}
                               variant="primary"
                             >
@@ -394,8 +464,8 @@ function PendingAuctions({ windowSize }) {
                           )}
                           {edit === index && (
                             <Button
-                              onClick={() => setEdit()}
-                              className="mx-2 bg-success border-0"
+                              onClick={() => onSubmit(buyerId, questionair)}
+                              className="mt-2 bg-success border-0"
                             >
                               Save
                             </Button>

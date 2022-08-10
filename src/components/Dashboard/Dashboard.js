@@ -641,7 +641,7 @@ function Dashboard({
       <Modal size="xl" show={showDocu} onHide={toggleShowDocu} centered>
         <Modal.Header className="auction-modal-header">
           <Modal.Title className="auction-modal-title px-3">
-            Property Documents
+            Documents
           </Modal.Title>
         </Modal.Header>
         <div
@@ -692,7 +692,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>
@@ -750,6 +750,7 @@ function Dashboard({
                     <input
                       type="file"
                       id="media"
+                      accept="image/*"
                       multiple
                       hidden
                       onChange={onChangeMedia}
@@ -803,7 +804,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>
@@ -861,6 +862,7 @@ function Dashboard({
                     <input
                       type="file"
                       id="media"
+                      accept="video/*"
                       multiple
                       hidden
                       onChange={onChangeVideos}
@@ -914,7 +916,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>
