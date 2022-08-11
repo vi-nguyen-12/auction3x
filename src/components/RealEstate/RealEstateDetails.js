@@ -555,16 +555,6 @@ function RealEstateDetails({
               name="bathrooms"
               required
             />
-            {/* <input
-              type="number"
-              min="0"
-              className="form-control"
-              defaultValue={bathrooms}
-              {...register("bathrooms")}
-              onChange={(e) => setBathrooms(e.target.value)}
-              name="bathrooms"
-              required
-            /> */}
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
@@ -600,16 +590,6 @@ function RealEstateDetails({
               name="sqft"
               required
             />
-            {/* <input
-              type="number"
-              min="0"
-              className="form-control"
-              defaultValue={sqft}
-              {...register("sqft")}
-              onChange={(e) => setSqft(e.target.value)}
-              name="sqft"
-              required
-            /> */}
           </Col>
         </Row>
         <Row className="mt-3">

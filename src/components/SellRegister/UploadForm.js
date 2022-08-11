@@ -88,116 +88,6 @@ const UploadForm = ({
     }
   };
 
-  const saveInfo = async () => {
-    if (propertyType === "real-estate") {
-      if (propId || params.id) {
-        if (sellStep === 2 || parseInt(params.step) === 2) {
-          const datas = {
-            id: propId ? propId : params.id,
-            changes: {
-              images: images,
-              videos: videos,
-              step: 3,
-            },
-          };
-          await authService.putRealEstateInfo(datas).then((response) => {
-            if (response.data.error) {
-              alert(response.data.error);
-            } else {
-              toggleSellStep(3);
-            }
-          });
-        } else if (sellStep === 1 || parseInt(params.step) === 1) {
-          const datas = {
-            id: propId ? propId : params.id,
-            changes: {
-              ...propertyData,
-              images,
-              videos,
-              step: 3,
-            },
-          };
-          await authService.putRealEstateInfo(datas).then((response) => {
-            if (response.data.error) {
-              alert(response.data.error);
-            } else {
-              toggleSellStep(3);
-            }
-          });
-        }
-      } else {
-        const datas = {
-          ...ownership,
-          ...propertyData,
-          images,
-          videos,
-          step: 3,
-        };
-        await authService.postRealEstateInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(3);
-            getPropId(response.data._id);
-          }
-        });
-      }
-    } else {
-      if (propId || params.id) {
-        if (sellStep === 2 || parseInt(params.step) === 2) {
-          const datas = {
-            id: propId ? propId : params.id,
-            details: {
-              images,
-              videos,
-              step: 3,
-            },
-          };
-          await authService.saveInfo(datas).then((response) => {
-            if (response.data.error) {
-              alert(response.data.error);
-            } else {
-              toggleSellStep(3);
-            }
-          });
-        } else if (sellStep === 1 || parseInt(params.step) === 1) {
-          const datas = {
-            id: propId ? propId : params.id,
-            details: {
-              ...propertyData,
-              images,
-              videos,
-              step: 3,
-            },
-          };
-          await authService.saveInfo(datas).then((response) => {
-            if (response.data.error) {
-              alert(response.data.error);
-            } else {
-              toggleSellStep(3);
-            }
-          });
-        }
-      } else {
-        const datas = {
-          ...ownership,
-          ...propertyData,
-          images,
-          videos,
-          step: 3,
-        };
-        await authService.postPropInfo(datas).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
-          } else {
-            toggleSellStep(3);
-            getPropId(response.data._id);
-          }
-        });
-      }
-    }
-  };
-
   const handleDelete = (url) => () => {
     setImages(images.filter((image) => image.url !== url));
     // make button not hit submit
@@ -334,7 +224,7 @@ const UploadForm = ({
                     type="text"
                     onChange={(e) => setLink(e.target.value)}
                   />
-                  <span style={{marginLeft:"20px"}}>
+                  <span style={{ marginLeft: "20px" }}>
                     <Button onClick={() => getLink()}>Upload</Button>
                   </span>
                 </div>
@@ -345,18 +235,6 @@ const UploadForm = ({
                 >
                   + Videos
                 </label>
-                {/* <details>
-                  <summary></summary>
-
-                  <div>
-                    <label
-                      style={{ width: "50%", marginTop: "10px" }}
-                      htmlFor="images-btn"
-                    >
-                      <AiOutlinePlusCircle />
-                    </label>
-                  </div>
-                </details> */}
               </div>
               <div className="upload-list" style={{ width: "100%" }}>
                 {videos
