@@ -4,7 +4,7 @@ import BuyAuthorized from "./BuyAuthorized";
 import BuyQuestionair from "./BuyQuestionair";
 import FundUpload from "./Fund Request/FundUpload";
 
-const MultiBuyForm = () => {
+const MultiBuyForm = ({ windowSize }) => {
   const [step, setStep] = useState(1);
 
   const [document, setDocument] = useState();
@@ -54,6 +54,7 @@ const MultiBuyForm = () => {
           step={step}
           answers={answers}
           document={document}
+          windowSize={windowSize}
         />
       </div>
     );

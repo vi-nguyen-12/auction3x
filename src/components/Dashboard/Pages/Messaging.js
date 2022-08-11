@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { MdClose } from "react-icons/md";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
+import { MdAttachFile as GrAttachment } from "react-icons/md";
 
 const modules = {
   toolbar: [
@@ -117,9 +118,8 @@ function Messaging({ windowSize }) {
             ></ReactQuill>
           </Col>
         </Row>
-        <Row className="d-flex justify-content-center mt-3">
-          <Col>
-            <span>Attachments: </span>
+        <Row className="d-flex justify-content-center mt-5">
+          <Col className="d-flex justify-content-end align-items-center">
             <div>
               <input
                 type="file"
@@ -130,9 +130,9 @@ function Messaging({ windowSize }) {
                 hidden
                 required
               />
-              <div className="mt-2">
-                <label htmlFor="doc" className="btn btn-primary">
-                  Upload
+              <div>
+                <label htmlFor="doc" style={{ cursor: "pointer" }}>
+                  <GrAttachment size={25} color="rgb(96 95 95)" />
                 </label>
               </div>
               <div className="upload-list" style={{ width: "100%" }}>
@@ -153,10 +153,12 @@ function Messaging({ windowSize }) {
               </div>
             </div>
           </Col>
-        </Row>
-        <Row className="d-flex justify-content-center mt-5">
-          <Col className="d-flex justify-content-center">
-            <Button variant="primary" onClick={() => send()}>
+          <Col
+            md={2}
+            xs={12}
+            className="d-flex justify-content-start align-items-start"
+          >
+            <Button className="btn btn-primary" onClick={() => send()}>
               Send
             </Button>
           </Col>

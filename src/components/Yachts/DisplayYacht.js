@@ -459,7 +459,7 @@ function DisplayYacht({
                     padding: "0",
                     fontFamily: "josefin slab",
                     fontWeight: "600",
-                    fontSize: "45px",
+                    fontSize: windowSize < 600 ? "1.7rem" : "2.6rem",
                   }}
                 >
                   {property.property.details.manufacturer_name}
@@ -1206,7 +1206,10 @@ function DisplayYacht({
                                 key={index}
                               >
                                 <td>{index + 1}</td>
-                                <td>{bid.buyerId}</td>
+                                <td>
+                                  *****
+                                  {bid.buyerId.slice(bid.buyerId.length - 5)}
+                                </td>
                                 {bid.userId === user._id ? (
                                   <td>
                                     {user.firstName + " " + user.lastName}
@@ -1670,8 +1673,33 @@ function DisplayYacht({
             onHide={toggleRegister}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+              >
+                Buyer Registration
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  toggleRegister();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body>
-              <MultiBuyForm />
+              <MultiBuyForm windowSize={windowSize} />
             </Modal.Body>
           </Modal>
 

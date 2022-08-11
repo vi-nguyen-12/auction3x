@@ -117,7 +117,6 @@ function Dashboard({
           const document = response.data.map((document) => {
             return { ...document, officialName: doc };
           });
-          console.log(document);
           setDocuments([...documents, ...document]);
           setLoader(false);
         }
@@ -439,7 +438,15 @@ function Dashboard({
               <WinAuctions windowSize={windowSize} />'
             </Route>
             <Route exact path="/Dashboard/Listings/AuctionListings">
-              <LiveListings windowSize={windowSize} />
+              <LiveListings
+                windowSize={windowSize}
+                toggleShowDocu={toggleShowDocu}
+                toggleShowProperty={toggleShowProperty}
+                setProperty={setProperty}
+                setDocuments={setDocuments}
+                setImages={setImages}
+                setVideos={setVideos}
+              />
             </Route>
             <Route exact path="/Dashboard/Listings/PendingApproval">
               <PendingListings
@@ -634,7 +641,7 @@ function Dashboard({
       <Modal size="xl" show={showDocu} onHide={toggleShowDocu} centered>
         <Modal.Header className="auction-modal-header">
           <Modal.Title className="auction-modal-title px-3">
-            Property Documents
+            Documents
           </Modal.Title>
         </Modal.Header>
         <div
@@ -685,7 +692,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>
@@ -743,6 +750,7 @@ function Dashboard({
                     <input
                       type="file"
                       id="media"
+                      accept="image/*"
                       multiple
                       hidden
                       onChange={onChangeMedia}
@@ -796,7 +804,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>
@@ -854,6 +862,7 @@ function Dashboard({
                     <input
                       type="file"
                       id="media"
+                      accept="video/*"
                       multiple
                       hidden
                       onChange={onChangeVideos}
@@ -907,7 +916,7 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
-                      <th>Official Name</th>
+                      <th>Document Type</th>
                       <th>Status</th>
                       <th>View</th>
                       <th>Delete</th>

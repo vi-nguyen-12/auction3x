@@ -142,14 +142,12 @@ function DisplayRealEstate({
     }
   };
 
-  const [bid, setBid] = useState(false);
   const [placeBid, setPlaceBid] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [registEnded, setRegistEnded] = useState(false);
   const toggleRegistEnded = () => setRegistEnded(!registEnded);
   const toggleRegister = () => setShowRegister(!showRegister);
   const togglePlaceBid = () => setPlaceBid(!placeBid);
-  const toggleBid = () => setBid(!bid);
 
   // if auction id is found, then set property as already registered
   const myRef = useRef(null);
@@ -468,7 +466,7 @@ function DisplayRealEstate({
                     padding: "0",
                     fontFamily: "josefin slab",
                     fontWeight: "600",
-                    fontSize: "45px",
+                    fontSize: windowSize < 600 ? "1.7rem" : "2.6rem",
                   }}
                 >
                   {
@@ -1029,13 +1027,14 @@ function DisplayRealEstate({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Property Type</td>
-                        {property.property.details.parcel
-                          .standardized_land_use_type ? (
+                        {property.property.details.real_estate_type ? (
                           <td>
-                            {
-                              property.property.details.parcel
-                                .standardized_land_use_type
-                            }
+                            {property.property.details.real_estate_type
+                              .replaceAll("_", " ")[0]
+                              .toUpperCase() +
+                              property.property.details.real_estate_type
+                                .replaceAll("_", " ")
+                                .slice(1)}
                           </td>
                         ) : (
                           <td>N/A</td>
@@ -1055,34 +1054,24 @@ function DisplayRealEstate({
                         <td style={{ fontWeight: "700" }}>
                           Year Built/Renovated
                         </td>
-                        {property.property.details.structure.year_built ? (
-                          <td>
-                            {property.property.details.structure.year_built}
-                          </td>
+                        {property.property.details.year_built ? (
+                          <td>{property.property.details.year_built}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Garage(s)</td>
-                        {property.property.details.structure.type_of_garage ? (
-                          <td>
-                            {property.property.details.structure.type_of_garage}
-                          </td>
+                        {property.property.details.type_of_garage ? (
+                          <td>{property.property.details.type_of_garage}</td>
                         ) : (
                           <td>N/A</td>
                         )}
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Story(s)</td>
-                        {property.property.details.structure
-                          .number_of_stories ? (
-                          <td>
-                            {
-                              property.property.details.structure
-                                .number_of_stories
-                            }
-                          </td>
+                        {property.property.details.number_of_stories ? (
+                          <td>{property.property.details.number_of_stories}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1109,7 +1098,7 @@ function DisplayRealEstate({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Sqft</td>
-                        {property.property.details.structure.area_sq_ft ? (
+                        {property.property.details.parcel.area_sq_ft ? (
                           <td>{property.property.details.parcel.area_sq_ft}</td>
                         ) : (
                           <td>N/A</td>
@@ -1165,7 +1154,10 @@ function DisplayRealEstate({
                                 key={index}
                               >
                                 <td>{index + 1}</td>
-                                <td>{bid.buyerId}</td>
+                                <td>
+                                  *****
+                                  {bid.buyerId.slice(bid.buyerId.length - 5)}
+                                </td>
                                 {bid.userId === user._id ? (
                                   <td>
                                     {user.firstName + " " + user.lastName}
@@ -1598,11 +1590,6 @@ function DisplayRealEstate({
               </Tab>
             </Tabs>
           </Row>
-          <Modal size="lg" show={bid} onHide={toggleBid} centered>
-            <Modal.Body>
-              <MultiBuyForm />
-            </Modal.Body>
-          </Modal>
 
           <Modal
             size="lg"
@@ -1612,6 +1599,31 @@ function DisplayRealEstate({
             onHide={toggleRegister}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+              >
+                Buyer Registration
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  toggleRegister();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body>
               <MultiBuyForm />
             </Modal.Body>

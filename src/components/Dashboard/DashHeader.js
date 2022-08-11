@@ -25,8 +25,6 @@ function DashHeader({ location, windowSize }) {
       .then((res) => {
         if (res.data.error) {
           alert(res.data.error);
-        } else {
-          alert("Notification deleted");
         }
       })
       .catch((err) => {
@@ -66,7 +64,15 @@ function DashHeader({ location, windowSize }) {
               >
                 <BsBellFill color="#737b8b" size={23} />
               </Button>
-              <div className="notification">{notifications.length}</div>
+              <div
+                className="notification"
+                style={{
+                  width: notifications.length > 10 && "1.8rem",
+                  borderRadius: notifications.length > 10 && "0.8em",
+                }}
+              >
+                {notifications.length > 10 ? "10+" : notifications.length}
+              </div>
               <div
                 onMouseEnter={() => setNotifi(true)}
                 onMouseLeave={() => setNotifi(false)}
@@ -139,20 +145,21 @@ function DashHeader({ location, windowSize }) {
                     marginBottom: "30px",
                     marginLeft: "-20px",
                     marginRight: "0",
+                    width: notifications.length > 10 && "1.8rem",
+                    borderRadius: notifications.length > 10 && "0.8em",
                   }}
                 >
-                  {notifications.length}
+                  {notifications.length > 10 ? "10+" : notifications.length}
                 </div>
                 <div
                   onMouseEnter={() => setNotifi(true)}
                   onMouseLeave={() => setNotifi(false)}
-                  style={{ display: notifi ? "block" : "none" }}
-                  // style={{
-                  //   position: "absolute",
-                  //   width: "100px",
-                  //   height: "100px",
-                  //   background: "white",
-                  // }}
+                  style={{
+                    display: notifi ? "block" : "none",
+                    marginLeft: "-50px",
+                    marginTop: "380px",
+                    paddingTop: "20px",
+                  }}
                   className="notifi-drop-down"
                 >
                   <div className="notifi-drop-down-content">

@@ -108,16 +108,6 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
   return (
     <>
       {loading && <Loading />}
-      <Modal.Header closeButton>
-        <Modal.Title
-          className="fw-bold fs-1 "
-          style={{
-            color: "#D58F5C",
-          }}
-        >
-          Questionaire
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body>
         <form>
           {answers?.length > 0 &&

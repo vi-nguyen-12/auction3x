@@ -9,6 +9,8 @@ import Cards from "../Cards/Cards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
+import Next from "../../images/Next.png";
+import Prev from "../../images/Previous.png";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -43,28 +45,85 @@ const Carousel = styled(Slider)`
     overflow: initial;
   }
 
+  // .slick-prev {
+  //   left: -75px;
+  //   width: 12vw;
+  //   height: 100%;
+  //   background: url("./images/arrow_back.png") center center no-repeat !important;
+  //   font-size: 50px;
+  // }
+
+  // .slick-prev:before {
+  //   display: none;
+  // }
+
+  // .slick-next {
+  //   right: -75px;
+  //   width: 12vw;
+  //   height: 100%;
+  //   background: url("./images/arrow_next.png") center center no-repeat !important;
+  //   font-size: 50px;
+  // }
+
+  // .slick-next:before {
+  //   display: none;
+  // }
+
   .slick-prev {
-    left: -75px;
-    width: 12vw;
-    height: 100%;
-    background: url("./images/arrow_back.png") center center no-repeat !important;
-    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    left: 8vw;
+    z-index: 1;
+    background: url(${Prev});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 45% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+    margin: -50px;
   }
 
   .slick-prev:before {
     display: none;
+    // font-size: 60px;
+    // color: #e9af84;
   }
 
   .slick-next {
-    right: -75px;
-    width: 12vw;
-    height: 100%;
-    background: url("./images/arrow_next.png") center center no-repeat !important;
-    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    right: 8vw;
+    z-index: 1;
+    background: url(${Next});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 53% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+    margin: -50px;
   }
 
   .slick-next:before {
     display: none;
+    // font-size: 60px;
+    // color: #e9af84;
+  }
+
+  @media (max-width: 600px) {
+    .slick-prev {
+      width: 50px;
+      height: 50px;
+      left: 15vw;
+      margin-top: -75px;
+    }
+    .slick-next {
+      width: 50px;
+      height: 50px;
+      right: 15vw;
+      margin-top: -75px;
+    }
   }
 `;
 

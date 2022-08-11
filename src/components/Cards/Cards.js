@@ -30,16 +30,20 @@ const Carousel = styled(Slider)`
     }
   }
   .slick-prev {
-    height: 100px !important;
+    height: 60px !important;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px !important;
+    margin-top: 5px !important;
+    margin-left: -100px !important;
+    box-shadow: none !important;
   }
   .slick-next {
-    height: 100px !important;
+    height: 60px !important;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    margin: -5px !important;
+    margin-top: 5px !important;
+    margin-right: -100px !important;
+    box-shadow: none !important;
   }
   .slick-next:before {
     display: none;
@@ -65,10 +69,6 @@ const Carousel = styled(Slider)`
 `;
 
 function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
-  const [auctionEnded, setAuctionEnded] = useState(false);
-  const [registrationEnded, setRegistrationEnded] = useState(false);
-  const toggleRegistEnded = () => setRegistrationEnded(!registrationEnded);
-  const toogleAuction = () => setAuctionEnded(!auctionEnded);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [favorite, setFavorite] = useState(false);
@@ -95,9 +95,9 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
   };
 
   const handleDisplay = () => {
-    if (auctionEnded) {
+    if (new Date().toISOString() > data.auctionEndDate) {
       alert("Auction has ended");
-    } else if (!auctionEnded) {
+    } else {
       if (
         history.location.pathname === "/Dashboard" ||
         history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
@@ -211,7 +211,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
             }}
           >
             {new Date().toISOString() < data.auctionStartDate &&
-              new Date().toISOString() < data.registerEndDate ? (
+            new Date().toISOString() < data.registerEndDate ? (
               <Col style={{ padding: "0" }}>
                 <p>Registration</p>
               </Col>
@@ -407,7 +407,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 />
               </p>
             </div>
-            { }
+            {}
             <div
               style={{
                 alignItems: "flex-end",
@@ -420,7 +420,12 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 className="black-button text-white"
                 variant="dark"
               >
-                Place Bid
+                {new Date().toISOString() > data.auctionEndDate
+                  ? "Completed"
+                  : new Date().toISOString() > data.auctionStartDate &&
+                    new Date().toISOString() < data.auctionEndDate
+                  ? "Place Bid"
+                  : "Register"}
               </Button>
             </div>
           </div>

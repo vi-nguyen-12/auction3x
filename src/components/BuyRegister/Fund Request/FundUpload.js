@@ -122,29 +122,15 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
       toggleDocument(documents);
       setStep(step + 1);
     } else {
-      alert("Please upload atleast one document");
+      alert("Please upload at least one document");
     }
   };
   return (
     <>
       {loader ? <Loading /> : null}
-      <Modal.Header closeButton>
-        <div>
-          <Modal.Title
-            className="fw-bold fs-1"
-            style={{
-              color: "#D58F5C",
-            }}
-          >
-            Upload Documents
-          </Modal.Title>
-          <br />
-          <Modal.Title className="fs-5">We only accept PDF Files *</Modal.Title>
-        </div>
-      </Modal.Header>
       <Modal.Body>
         <Row style={{ borderBottom: "#333 solid 1px" }}>
-          <Col className="input-form-3">
+          <Col md={6} xs={12} className="input-form-3">
             Bank Statement (.pdf) <span style={{ color: "#ff0000" }}>*</span>
             <input
               id="documents-btn1"
@@ -159,21 +145,23 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
             <div className="upload-cover">
               <details>
                 <summary>
-                  <label htmlFor="documents-btn1">+ Documents</label>
+                  <label
+                    htmlFor="documents-btn1"
+                    className="justify-content-start"
+                  >
+                    + Documents
+                  </label>
                 </summary>
                 <div>
-                  <label
-                    style={{ width: "50%", marginTop: "10px" }}
-                    htmlFor="documents-btn1"
-                  >
-                    <AiOutlinePlusCircle />
+                  <label className="w-100" htmlFor="documents-btn1">
+                    <AiOutlinePlusCircle size={20} />
                   </label>
                 </div>
               </details>
             </div>
           </Col>
-          <Col>
-            <div className="upload-list">
+          <Col md={6} xs={12}>
+            <div className="upload-list w-100">
               {document1
                 ? document1.map((document, index, arr) => (
                     <div key={index} className="upload-list-item">
@@ -193,7 +181,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
           </Col>
         </Row>
         <Row style={{ borderBottom: "#333 solid 1px" }}>
-          <Col className="input-form-3">
+          <Col md={6} xs={12} className="input-form-3">
             Brokerage account statement{" "}
             <span style={{ color: "#ff0000" }}>*</span>
             <input
@@ -209,21 +197,23 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
             <div className="upload-cover">
               <details>
                 <summary>
-                  <label htmlFor="documents-btn2">+ Documents</label>
+                  <label
+                    htmlFor="documents-btn2"
+                    className="justify-content-start"
+                  >
+                    + Documents
+                  </label>
                 </summary>
                 <div>
-                  <label
-                    style={{ width: "50%", marginTop: "10px" }}
-                    htmlFor="documents-btn2"
-                  >
-                    <AiOutlinePlusCircle />
+                  <label className="w-100" htmlFor="documents-btn2">
+                    <AiOutlinePlusCircle size={20} />
                   </label>
                 </div>
               </details>
             </div>
           </Col>
-          <Col>
-            <div className="upload-list">
+          <Col md={6} xs={12}>
+            <div className="upload-list w-100">
               {document2
                 ? document2.map((document, index, arr) => (
                     <div key={index} className="upload-list-item">
@@ -244,7 +234,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
         </Row>
 
         <Row style={{ borderBottom: "#333 solid 1px" }}>
-          <Col className="input-form-3">
+          <Col md={6} xs={12} className="input-form-3">
             Line of credit doc (.pdf){" "}
             <span style={{ color: "#ff0000" }}>*</span>
             <input
@@ -260,21 +250,23 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
             <div className="upload-cover">
               <details>
                 <summary>
-                  <label htmlFor="documents-btn3">+ Documents</label>
+                  <label
+                    htmlFor="documents-btn3"
+                    className="justify-content-start"
+                  >
+                    + Documents
+                  </label>
                 </summary>
                 <div>
-                  <label
-                    style={{ width: "50%", marginTop: "10px" }}
-                    htmlFor="documents-btn3"
-                  >
-                    <AiOutlinePlusCircle />
+                  <label className="w-100" htmlFor="documents-btn3">
+                    <AiOutlinePlusCircle size={20} />
                   </label>
                 </div>
               </details>
             </div>
           </Col>
-          <Col>
-            <div className="upload-list">
+          <Col md={6} xs={12}>
+            <div className="upload-list w-100">
               {document3
                 ? document3.map((document, index, arr) => (
                     <div key={index} className="upload-list-item">

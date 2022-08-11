@@ -116,7 +116,7 @@
 .form-control {
   /* border: 2px solid #d58f5c; */
   outline: none !important;
-  background-color: transparent !important;
+  background-color: transparent;
   /* padding: 6px !important; */
   color: rgb(0, 0, 0);
   /* font-size: 12px; */

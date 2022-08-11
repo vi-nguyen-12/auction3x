@@ -111,6 +111,7 @@ function DisplayCar({
   setRefresh,
   refresh,
 }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -455,7 +456,7 @@ function DisplayCar({
                     padding: "0",
                     fontFamily: "josefin slab",
                     fontWeight: "600",
-                    fontSize: "45px",
+                    fontSize: windowSize < 600 ? "1.7rem" : "2.6rem",
                   }}
                 >
                   {property.property.details.year} {""}
@@ -1050,7 +1051,10 @@ function DisplayCar({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Property Type</td>
                         {property.property.type ? (
-                          <td>{property.property.type}</td>
+                          <td>
+                            {property.property.type[0].toUpperCase() +
+                              property.property.type.slice(1)}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1066,7 +1070,10 @@ function DisplayCar({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Model</td>
                         {property.property.details.model ? (
-                          <td>{property.property.details.model}</td>
+                          <td>
+                            {property.property.details.model[0].toUpperCase() +
+                              property.property.details.model.slice(1)}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1082,7 +1089,10 @@ function DisplayCar({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Color</td>
                         {property.property.details.color ? (
-                          <td>{property.property.details.color}</td>
+                          <td>
+                            {property.property.details.color[0].toUpperCase() +
+                              property.property.details.color.slice(1)}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1097,8 +1107,8 @@ function DisplayCar({
                       </tr>
                       <tr>
                         <td style={{ fontWeight: "700" }}>Transmission</td>
-                        {property.property.details.transmission ? (
-                          <td>{property.property.details.transmission}</td>
+                        {property.property.details.gearbox ? (
+                          <td>{property.property.details.gearbox}</td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1112,7 +1122,7 @@ function DisplayCar({
                         )}
                       </tr>
                       <tr>
-                        <td style={{ fontWeight: "700" }}>Car Type</td>
+                        <td style={{ fontWeight: "700" }}>Body Type</td>
                         {property.property.details.car_type ? (
                           <td>{property.property.details.car_type}</td>
                         ) : (
@@ -1130,7 +1140,10 @@ function DisplayCar({
                       <tr>
                         <td style={{ fontWeight: "700" }}>Condition</td>
                         {property.property.details.condition ? (
-                          <td>{property.property.details.condition}</td>
+                          <td>
+                            {property.property.details.condition[0].toUpperCase() +
+                              property.property.details.condition.slice(1)}
+                          </td>
                         ) : (
                           <td>N/A</td>
                         )}
@@ -1196,7 +1209,10 @@ function DisplayCar({
                                 key={index}
                               >
                                 <td>{index + 1}</td>
-                                <td>{bid.buyerId}</td>
+                                <td>
+                                  *****
+                                  {bid.buyerId.slice(bid.buyerId.length - 5)}
+                                </td>
                                 {bid.userId === user._id ? (
                                   <td>
                                     {user.firstName + " " + user.lastName}
@@ -1647,6 +1663,7 @@ function DisplayCar({
               </Tab>
             </Tabs>
           </Row>
+
           <Modal
             size="lg"
             backdrop="static"
@@ -1655,8 +1672,33 @@ function DisplayCar({
             onHide={toggleRegister}
             centered
           >
+            <Modal.Header className="auction-modal-header">
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+              >
+                Buyer Registration
+              </Modal.Title>
+            </Modal.Header>
+            <div
+              style={{
+                position: "absolute",
+                top: windowSize < 600 ? "0" : "25px",
+                right: windowSize < 600 ? "0" : "25px",
+                zIndex: "999",
+              }}
+            >
+              <CloseButton
+                className="modal-close"
+                style={{ backgroundColor: "white" }}
+                onClick={() => {
+                  toggleRegister();
+                  setRefresh(!refresh);
+                }}
+              />
+            </div>
             <Modal.Body>
-              <MultiBuyForm />
+              <MultiBuyForm windowSize={windowSize} />
             </Modal.Body>
           </Modal>
 

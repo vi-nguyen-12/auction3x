@@ -17,16 +17,6 @@ const BuyAgreement = ({ setStep, step }) => {
   };
   return (
     <>
-      <Modal.Header closeButton>
-        <Modal.Title
-          className="fw-bold fs-1 "
-          style={{
-            color: "#D58F5C",
-          }}
-        >
-          Buyer Agreement
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body className="px-md-5">
         <h3 className="fs-2 text-center my-3">Terms and Conditions</h3>
         <Container className="fs-5">

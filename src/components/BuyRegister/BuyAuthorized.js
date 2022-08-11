@@ -8,8 +8,9 @@ import axious from "axios";
 import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
 import parse from "html-react-parser";
+import CloseButton from "react-bootstrap/CloseButton";
 
-const BuyAuthorized = ({ setStep, step, answers, document }) => {
+const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -122,16 +123,6 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
     <>
       {" "}
       {loader ? <Loading /> : null}
-      <Modal.Header closeButton>
-        <Modal.Title
-          className="fw-bold fs-1 "
-          style={{
-            color: "#D58F5C",
-          }}
-        >
-          Buyer Agreement
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body style={{ height: "300px" }}>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
           <Button className="btn btn-primary" onClick={handleSignDocusign}>
@@ -173,9 +164,27 @@ const BuyAuthorized = ({ setStep, step, answers, document }) => {
         </Row>
       </Modal.Footer>
       <Modal size="xl" show={show} onHide={toggleTerms} centered>
-        <Modal.Header closeButton>
-          <Modal.Title> Buyer Terms and Conditions</Modal.Title>
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Buyer Terms and Conditions
+          </Modal.Title>
         </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleTerms();
+            }}
+          />
+        </div>
         <Modal.Body unselectable="on" className="unselectable">
           {parse(terms)}
         </Modal.Body>
