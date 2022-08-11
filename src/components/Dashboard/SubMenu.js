@@ -74,16 +74,21 @@ const DropdownLink = styled(Link)`
   font-weight: 400;
 `;
 
-const SubMenu = ({ item, path }) => {
+const SubMenu = ({ item, path, setLocation }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
   const [color] = useState("#b77b50");
-  const handleOnclick = () => {
+  const handleOnclick = (path) => {
+    setLocation(path);
     item.subNav && showSubnav();
   };
   return (
     <>
-      <SidebarLink to={item.path} href={item.path} onClick={handleOnclick}>
+      <SidebarLink
+        to={item.path}
+        href={item.path}
+        onClick={() => handleOnclick(item.path)}
+      >
         <SidebarLabel
         // style={{
         //   color: item.path === path ? color : "none",
@@ -103,7 +108,11 @@ const SubMenu = ({ item, path }) => {
       {subnav &&
         item.subNav.map((item, index) => {
           return (
-            <DropdownLink to={item.path} key={index}>
+            <DropdownLink
+              to={item.path}
+              key={index}
+              onClick={() => handleOnclick(item.path)}
+            >
               <SidebarLabel
                 style={{
                   border: "none",

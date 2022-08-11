@@ -45,6 +45,11 @@ function Dashboard({
   const toggleShowDocu = () => setShowDocu(!showDocu);
 
   const [doc, setDoc] = useState("");
+  const [location, setLocation] = useState();
+  const loca = useLocation();
+
+  const [searchBy, setSearchBy] = useState("id");
+  const [search, setSearch] = useState();
 
   const [property, setProperty] = useState();
   const [documents, setDocuments] = useState([]);
@@ -147,7 +152,7 @@ function Dashboard({
     toggleChange();
     toggleShow();
   }, []);
-  const location = useLocation();
+
   const path = window.location.pathname;
 
   const realEstateDocu = [
@@ -388,7 +393,7 @@ function Dashboard({
       {loader ? <Loading /> : null}
       <Router>
         {windowSize > 1300 ? (
-          <Sidebar path={path} />
+          <Sidebar path={path} setLocation={setLocation} />
         ) : (
           <div
             style={{
@@ -415,8 +420,10 @@ function Dashboard({
           }}
         >
           <DashHeader
-            location={location.pathname.split("/")[1]}
             windowSize={windowSize}
+            location={location ? location : loca.pathname}
+            setSearch={setSearch}
+            setSearchBy={setSearchBy}
           />
           <Switch>
             <Route exact path="/Dashboard">
@@ -426,16 +433,32 @@ function Dashboard({
               <Messaging windowSize={windowSize} />
             </Route>
             <Route exact path="/Dashboard/Auctions/BidAuctions">
-              <BidAuctions windowSize={windowSize} />
+              <BidAuctions
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Auctions/BuyerApproval">
-              <PendingAuctions windowSize={windowSize} />
+              <PendingAuctions
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Auctions/SavedAuctions">
-              <SavedAuctions windowSize={windowSize} />
+              <SavedAuctions
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Auctions/WinAuctions">
-              <WinAuctions windowSize={windowSize} />'
+              <WinAuctions
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Listings/AuctionListings">
               <LiveListings
@@ -446,6 +469,8 @@ function Dashboard({
                 setDocuments={setDocuments}
                 setImages={setImages}
                 setVideos={setVideos}
+                searchBy={searchBy}
+                search={search}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/PendingApproval">
@@ -459,13 +484,23 @@ function Dashboard({
                 setVideos={setVideos}
                 setRefresh={setRefresh}
                 refresh={refresh}
+                searchBy={searchBy}
+                search={search}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/SoldListings">
-              <SoldListings windowSize={windowSize} />
+              <SoldListings
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Listings/IncompleteListing">
-              <IncompleteListing windowSize={windowSize} />
+              <IncompleteListing
+                windowSize={windowSize}
+                searchBy={searchBy}
+                search={search}
+              />
             </Route>
             <Route exact path="/Dashboard/Profile">
               <Profile windowSize={windowSize} />

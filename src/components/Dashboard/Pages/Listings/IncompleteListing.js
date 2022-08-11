@@ -108,7 +108,7 @@ function IncompleteListing({ windowSize }) {
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{listing._id}</td>
+                  <td>*****{listing._id.slice(listing._id.length - 5)}</td>
                   <td>{listing.type}</td>
                   <td className="progress-1">
                     <CircularProgressbar

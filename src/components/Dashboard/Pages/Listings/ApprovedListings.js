@@ -12,6 +12,8 @@ function ApprovedListings({
   setDocuments,
   setImages,
   setVideos,
+  searchBy,
+  search,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -23,7 +25,30 @@ function ApprovedListings({
     });
   }, []);
 
-  console.log(approvedLists);
+  useEffect(() => {
+    if (search !== undefined || search !== "") {
+      if (searchBy === "id") {
+        setApprovedLists(
+          approvedLists.filter((listing) => listing._id.includes(search))
+        );
+      } else if (searchBy === "propType") {
+        setApprovedLists(
+          approvedLists.filter((listing) => listing.type.includes(search))
+        );
+      } else if (searchBy === "address") {
+        setApprovedLists(
+          approvedLists.filter((listing) =>
+            listing.details.property_address.formatted_street_address.includes(
+              search
+            )
+          )
+        );
+      }
+    } else {
+      console.log(approvedLists);
+      setApprovedLists(approvedLists);
+    }
+  }, [search, searchBy]);
 
   return (
     <Row>
@@ -60,7 +85,7 @@ function ApprovedListings({
             <tbody key={index}>
               <tr>
                 <td>{index + 1}</td>
-                <td>****{listing._id.slice(listing._id.length - 5)}</td>
+                <td>*****{listing._id.slice(listing._id.length - 5)}</td>
                 <td>
                   {listing.details.property_address?.formatted_street_address ||
                     ""}

@@ -10,7 +10,7 @@ function TermsCondition({ windowSize }) {
   const location = useLocation();
 
   useEffect(() => {
-    let queryParams = { officialName: "terms_of_use" };
+    let queryParams = { name: "terms_of_use" };
     authService.getPageContents(queryParams).then((res) => {
       if (res.data.error) {
         alert(res.data.error);

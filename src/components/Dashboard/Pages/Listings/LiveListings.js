@@ -14,7 +14,10 @@ function LiveListings({
   setDocuments,
   setImages,
   setVideos,
+  searchBy,
+  search,
 }) {
+  console.log(search);
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [upcomingListings, setUpcomingListings] = useState([]);
@@ -28,6 +31,31 @@ function LiveListings({
     };
     fetchApprovedProperty();
   }, []);
+
+  useEffect(() => {
+    if (search !== undefined || search !== "") {
+      if (searchBy === "id") {
+        setUpcomingListings(
+          upcomingListings.filter((listing) => listing._id.includes(search))
+        );
+      } else if (searchBy === "propType") {
+        setUpcomingListings(
+          upcomingListings.filter((listing) => listing.type.includes(search))
+        );
+      } else if (searchBy === "address") {
+        setUpcomingListings(
+          upcomingListings.filter((listing) =>
+            listing.details.property_address.formatted_street_address.includes(
+              search
+            )
+          )
+        );
+      }
+    } else if(search === "") {
+      console.log("hello");
+      setUpcomingListings(upcomingListings);
+    }
+  }, [search, searchBy]);
 
   return (
     <>
@@ -66,7 +94,7 @@ function LiveListings({
                 <tbody key={index}>
                   <tr>
                     <td>{index + 1}</td>
-                    <td>{listing._id}</td>
+                    <td>*****{listing._id.slice(listing._id.length - 5)}</td>
                     <td>
                       {listing.details.property_address
                         ?.formatted_street_address || ""}
@@ -196,6 +224,8 @@ function LiveListings({
             setDocuments={setDocuments}
             setImages={setImages}
             setVideos={setVideos}
+            searchBy={searchBy}
+            search={search}
           />
         </Row>
       </Container>

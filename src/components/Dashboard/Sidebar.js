@@ -3,7 +3,7 @@ import "../../styles/sidebar.css";
 import SidebarMenu from "../Dashboard/SidebarMenu";
 import SubMenu from "./SubMenu";
 
-const Sidebar = ({ path }) => {
+const Sidebar = ({ path, setLocation }) => {
   return (
     <div className="sideBar">
       {/* <h1>
@@ -11,7 +11,14 @@ const Sidebar = ({ path }) => {
             </h1> */}
       <ul className="sideBarList">
         {SidebarMenu.map((item, index) => {
-          return <SubMenu key={index} item={item} path={path} />;
+          return (
+            <SubMenu
+              key={index}
+              item={item}
+              path={path}
+              setLocation={setLocation}
+            />
+          );
         })}
       </ul>
     </div>

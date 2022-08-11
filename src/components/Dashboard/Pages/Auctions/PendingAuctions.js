@@ -25,6 +25,7 @@ function PendingAuctions({ windowSize }) {
   const [loader, setLoader] = useState(false);
   const [doc, setDoc] = useState([]);
   const [documents, setDocuments] = useState([]);
+  const [isSelf, setIsSelf] = useState(false);
   const [showQuestionair, setShowQuestionair] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
@@ -39,6 +40,7 @@ function PendingAuctions({ windowSize }) {
     getBuyerPendingAuctions();
   }, []);
 
+  // Questionair files handler
   const handleFile = async (e) => {
     setLoader(true);
     const formData = new FormData();
@@ -58,6 +60,7 @@ function PendingAuctions({ windowSize }) {
     e.target.value = null;
   };
 
+  // Proof of Funds
   const handleFundFile = async (e) => {
     if (fundType === "") {
       alert("Please select a document type");
@@ -73,10 +76,16 @@ function PendingAuctions({ windowSize }) {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          const document = response.data.map((document) => {
-            return { ...document, officialName: fundType };
+          const docu = documents.map((item) => {
+            delete item.document?.isVerified;
+            return item?.document || item;
           });
-          setDocuments([...documents, ...document]);
+
+          const document = response.data.map((document) => {
+            return { ...document, officialName: fundType, isSelf: true };
+          });
+
+          setDocuments([...docu, ...document]);
           setLoader(false);
         }
       });
@@ -84,12 +93,14 @@ function PendingAuctions({ windowSize }) {
     }
   };
 
+  // delete questionair file
   const handleDeleteDocu = (id) => {
     setDoc(doc.filter((doc) => doc._id !== id));
   };
 
+  // delete fund file
   const handleDeleteFund = (id) => {
-    setDocuments(documents.filter((doc) => doc._id !== id));
+    setDocuments(documents.filter((doc, index) => index !== id));
   };
 
   // useEffect(() => {
@@ -98,21 +109,22 @@ function PendingAuctions({ windowSize }) {
   //   }
   // }, [pendingAuctions, approvedAuctions]);
 
-  console.log(pendingAuctions);
-
   const onSubmit = async (id, data) => {
-    console.log(data);
     let answers = data.map((item) => {
+      delete item.files.map((file) => {
+        delete file._id;
+        return file;
+      });
       return {
         questionId: item.questionId,
         answer: item.answer,
         explanation: item.explanation,
-        files: [...doc],
+        files: doc,
       };
     });
 
     answers = answers.map((item) => {
-      if (item.answer === "no") {
+      if (item?.answer === "no") {
         delete item.files;
       }
       return item;
@@ -121,17 +133,25 @@ function PendingAuctions({ windowSize }) {
     setLoader(true);
     let submitedData = {
       answers: answers,
-      documents: documents.document,
+      documents: documents.map((item) => {
+        delete item.document?.isVerified;
+        return item?.document || item;
+      }),
     };
+
     await authService.editBuyer(id, submitedData).then((res) => {
       if (res.data.error) {
         alert(res.data.error);
+        setLoader(false);
       } else {
         setLoader(false);
         alert("Successfully Updated Buyer info");
+        window.location.reload();
       }
     });
   };
+
+  console.log(pendingAuctions);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -156,7 +176,7 @@ function PendingAuctions({ windowSize }) {
             <tr>
               <th>#</th>
               <th>Auction ID</th>
-              {/* <th colSpan={2}>Property Type</th> */}
+              <th>Auction Status</th>
               <th colSpan={2}>Property Address</th>
               <th colSpan={2}>Questionair</th>
               <th colSpan={2}>Documents</th>
@@ -170,7 +190,8 @@ function PendingAuctions({ windowSize }) {
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction._id}
+                    *****
+                    {auction._id.slice(auction._id.length - 5)}
                     <div
                       style={{
                         width: "100%",
@@ -190,6 +211,50 @@ function PendingAuctions({ windowSize }) {
                       />
                     </div>
                   </td>
+                  {auction.auctionEndDate > new Date().toISOString() &&
+                  auction.auctionStartDate <= new Date().toISOString() ? (
+                    <td>
+                      <span
+                        style={{
+                          background: "green",
+                          color: "white",
+                          padding: "10px",
+                          borderRadius: "5px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Ongoing
+                      </span>
+                    </td>
+                  ) : auction.auctionEndDate < new Date().toISOString() ? (
+                    <td>
+                      <span
+                        style={{
+                          background: "red",
+                          color: "white",
+                          padding: "10px",
+                          borderRadius: "5px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Ended
+                      </span>
+                    </td>
+                  ) : (
+                    <td>
+                      <span
+                        style={{
+                          background: "orange",
+                          color: "white",
+                          padding: "10px",
+                          borderRadius: "5px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Upcoming
+                      </span>
+                    </td>
+                  )}
                   {/* <td colSpan={2}>
                     {auction.property.type === "real-estate"
                       ? "Real Estate"
@@ -271,6 +336,8 @@ function PendingAuctions({ windowSize }) {
         </Table>
         <Modal
           size="xl"
+          backdrop="static"
+          keyboard={false}
           show={showQuestionair}
           onHide={toggleQuestionair}
           centered
@@ -445,7 +512,7 @@ function PendingAuctions({ windowSize }) {
                           {edit === index ? (
                             <Button
                               onClick={() => setEdit()}
-                              className="bg-danger border-0"
+                              className="bg-danger border-0 mx-2 mt-2"
                             >
                               Edit
                             </Button>
@@ -458,6 +525,7 @@ function PendingAuctions({ windowSize }) {
                                 delete question._id;
                               }}
                               variant="primary"
+                              className="mx-2"
                             >
                               Edit
                             </Button>
@@ -516,7 +584,14 @@ function PendingAuctions({ windowSize }) {
           </Modal.Body>
         </Modal>
 
-        <Modal size="xl" show={showDocuments} onHide={toggleDocuments} centered>
+        <Modal
+          size="xl"
+          backdrop="static"
+          keyboard={false}
+          show={showDocuments}
+          onHide={toggleDocuments}
+          centered
+        >
           <Modal.Header className="auction-modal-header">
             <Modal.Title
               className="auction-modal-title px-3"
@@ -570,17 +645,17 @@ function PendingAuctions({ windowSize }) {
                     documents.map((document, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{document.document?.name || document.name}</td>
+                        <td>{document?.document?.name || document?.name}</td>
                         <td>
-                          {document.document?.officialName ||
-                            document.officialName}
+                          {document?.document?.officialName ||
+                            document?.officialName}
                         </td>
                         <td>
-                          {document.document?.isVerified === "success"
+                          {document?.document?.isVerified === "success"
                             ? "Approved"
-                            : document.document?.isVerified === "pending"
+                            : document?.document?.isVerified === "pending"
                             ? "Pending"
-                            : document.document?.isVerified === "fail"
+                            : document?.document?.isVerified === "fail"
                             ? "Rejected"
                             : ""}
                         </td>
@@ -609,7 +684,7 @@ function PendingAuctions({ windowSize }) {
                           <Button
                             className="bg-transparent border-0 text-danger fw-bold"
                             style={{ fontSize: "1.3rem" }}
-                            onClick={() => handleDeleteFund(document._id)}
+                            onClick={() => handleDeleteFund(index)}
                             disabled={!editFund}
                           >
                             X
@@ -636,6 +711,29 @@ function PendingAuctions({ windowSize }) {
                         </option>
                       </Form.Select>
                     </Col>
+                    {/* <Col>
+                      <span>Do you own this proof of fund?</span>
+                      <div>
+                        <input
+                          checked={isSelf ? true : false}
+                          type="radio"
+                          id="yes"
+                          value={true}
+                          className="mx-2"
+                          onChange={(e) => setIsSelf(true)}
+                        />
+                        <label htmlFor="yes">Yes</label>
+                        <input
+                          checked={!isSelf ? true : false}
+                          type="radio"
+                          id="no"
+                          value={false}
+                          className="mx-2"
+                          onChange={(e) => setIsSelf(false)}
+                        />
+                        <label htmlFor="no">No</label>
+                      </div>
+                    </Col> */}
                     <Col>
                       <input
                         type="file"
@@ -653,7 +751,20 @@ function PendingAuctions({ windowSize }) {
                 )}
 
                 <Col className="d-flex justify-content-end">
-                  <Button onClick={() => setEditFund(!editFund)}>Edit</Button>
+                  <Button
+                    className="mx-2"
+                    onClick={() => setEditFund(!editFund)}
+                  >
+                    Edit
+                  </Button>
+                  {editFund && (
+                    <Button
+                      className="mx-2 bg-success border-0"
+                      onClick={() => onSubmit(buyerId, questionair)}
+                    >
+                      Save
+                    </Button>
+                  )}
                 </Col>
               </Row>
               {editFund && (
@@ -662,9 +773,9 @@ function PendingAuctions({ windowSize }) {
                     <div>
                       {documents.map((file, index) => (
                         <div key={index}>
-                          <span>{file.document?.name || file.name}</span>
+                          <span>{file?.document?.name || file?.name}</span>
                           <Button
-                            onClick={() => handleDeleteFund(file._id)}
+                            onClick={() => handleDeleteFund(index)}
                             className="bg-transparent border-0 text-danger fw-bold"
                           >
                             X

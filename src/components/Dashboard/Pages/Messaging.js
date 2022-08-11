@@ -89,10 +89,10 @@ function Messaging({ windowSize }) {
   return (
     <>
       {loader && <Loading />}
-      <h1 style={{ margin: "50px" }}>Messaging</h1>
+      {/* <h1 style={{ margin: "50px" }}>Messaging</h1> */}
       <Container
         className="chatContainer p-5"
-        style={{ width: windowSize < 600 ? "100%" : "50%" }}
+        style={{ width: windowSize < 600 ? "100%" : "50%", marginTop:"8%" }}
       >
         <Row className="d-flex justify-content-center mt-3">
           <Col>

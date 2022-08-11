@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Container } from "react-bootstrap";
+import { Row, Col, Button, Container, Form } from "react-bootstrap";
 import { FiSearch } from "react-icons/fi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillMessage } from "react-icons/ai";
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
 import "../../styles/dashboard.css";
 
-function DashHeader({ location, windowSize }) {
+function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [notifi, setNotifi] = useState(false);
@@ -43,17 +43,43 @@ function DashHeader({ location, windowSize }) {
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
-            <div
-              className="searchBar"
-              style={{
-                borderRadius: "45px",
-                paddingLeft: "8px",
-                width: "400px",
-              }}
-            >
-              <input type="text" placeholder="Search Here" />
-              <FiSearch color="black" size={25} />
-            </div>
+            {location === "/Dashboard/Messaging" ? (
+              <h1 className="mx-5">Messaging</h1>
+            ) : location === "/Dashboard/Profile" ? (
+              <h1 className="mx-5">Profile</h1>
+            ) : (
+              <div className="d-flex">
+                {location !== "/Dashboard" && (
+                  <Form.Select
+                    className="form-control mx-3"
+                    style={{ width: "150px" }}
+                    onChange={(e) => setSearchBy(e.target.value)}
+                  >
+                    <option value="id">ID</option>
+                    <option value="propType">Property Type</option>
+                    <option value="address">Address</option>
+                  </Form.Select>
+                )}
+                <div
+                  className="searchBar"
+                  style={{
+                    borderRadius: "45px",
+                    paddingLeft: "8px",
+                    width: "400px",
+                  }}
+                >
+                  <input
+                    type="text"
+                    onInput={(e) =>
+                      (e.target.value = e.target.value.toLowerCase())
+                    }
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Here"
+                  />
+                  <FiSearch color="black" size={25} />
+                </div>
+              </div>
+            )}
           </Col>
           <Col>
             <div className="search">
@@ -212,10 +238,16 @@ function DashHeader({ location, windowSize }) {
           </Row>
           <Row style={{ marginBottom: "30px" }}>
             <Col style={{ display: "flex", justifyContent: "center" }}>
-              <div className="searchBar">
-                <input type="text" placeholder="Search Here" />
-                <FiSearch color="black" size={25} />
-              </div>
+              {location === "/Dashboard/Messaging" ? (
+                <h1 className="mx-5">Messaging</h1>
+              ) : location === "/Dashboard/Profile" ? (
+                <h1 className="mx-5">Profile</h1>
+              ) : (
+                <div className="searchBar">
+                  <input type="text" placeholder="Search Here" />
+                  <FiSearch color="black" size={25} />
+                </div>
+              )}
             </Col>
           </Row>
         </>
