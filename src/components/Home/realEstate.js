@@ -66,7 +66,7 @@ const RealEstate = (props) => {
             className="content"
           >
             <h1 style={{ marginLeft: "60px" }}>
-              Buy Real Estate <br /> on Auction 3X
+              Buy Real Estate <br /> on Auction3
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of
@@ -80,7 +80,7 @@ const RealEstate = (props) => {
             className="content"
           >
             <h1 style={{ marginLeft: "60px" }}>
-              Buy Car <br /> on Auction 3X
+              Buy Car <br /> on Auction3
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of
@@ -94,7 +94,7 @@ const RealEstate = (props) => {
             className="content"
           >
             <h1 style={{ marginLeft: "60px" }}>
-              Buy Jet <br /> on Auction 3X
+              Buy Jet <br /> on Auction3
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of
@@ -108,7 +108,7 @@ const RealEstate = (props) => {
             className="content"
           >
             <h1 style={{ marginLeft: "60px" }}>
-              Buy Yacht <br /> on Auction 3X
+              Buy Yacht <br /> on Auction3
             </h1>
             <p className="paragraph">
               Attract quality leads within the highest concentration of

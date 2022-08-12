@@ -15,40 +15,50 @@ function ApprovedListings({
   searchBy,
   search,
 }) {
+  // console.log(searchBy, search);
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [approvedLists, setApprovedLists] = useState([]);
+  const [newApprovedLists, setNewApprovedLists] = useState([]);
 
   useEffect(() => {
     authService.sellerPropInAuctions(user._id).then((res) => {
-      setApprovedLists(res.data);
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setApprovedLists(res.data);
+        setNewApprovedLists(res.data);
+      }
     });
   }, []);
 
   useEffect(() => {
-    if (search !== undefined || search !== "") {
+    if (!(search === undefined || search === "")) {
       if (searchBy === "id") {
-        setApprovedLists(
-          approvedLists.filter((listing) => listing._id.includes(search))
+        setNewApprovedLists(
+          approvedLists.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
         );
       } else if (searchBy === "propType") {
-        setApprovedLists(
-          approvedLists.filter((listing) => listing.type.includes(search))
+        setNewApprovedLists(
+          approvedLists.filter((listing) =>
+            listing.type?.includes(search.toLowerCase())
+          )
         );
       } else if (searchBy === "address") {
-        setApprovedLists(
+        setNewApprovedLists(
           approvedLists.filter((listing) =>
-            listing.details.property_address.formatted_street_address.includes(
-              search
-            )
+            listing.details.property_address.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
           )
         );
       }
     } else {
-      console.log(approvedLists);
-      setApprovedLists(approvedLists);
+      setNewApprovedLists(approvedLists);
     }
-  }, [search, searchBy]);
+  }, [search]);
 
   return (
     <Row>
@@ -80,8 +90,8 @@ function ApprovedListings({
             <th>View Auction</th>
           </tr>
         </thead>
-        {approvedLists.length > 0 ? (
-          approvedLists.map((listing, index) => (
+        {newApprovedLists.length > 0 ? (
+          newApprovedLists.map((listing, index) => (
             <tbody key={index}>
               <tr>
                 <td>{index + 1}</td>

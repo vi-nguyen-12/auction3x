@@ -14,9 +14,10 @@ import NumberFormat from "react-number-format";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../../Loading";
 
-function PendingAuctions({ windowSize }) {
+function PendingAuctions({ windowSize, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const [pendingAuctions, setPendingAuctions] = useState([]);
+  const [newPendingAuctions, setNewPendingAuctions] = useState([]);
   const [edit, setEdit] = useState();
   const [editFund, setEditFund] = useState(false);
   const [questionair, setQuestionair] = useState([]);
@@ -34,11 +35,44 @@ function PendingAuctions({ windowSize }) {
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
       await authService.getBuyerInfo(user._id).then((res) => {
-        setPendingAuctions(res.data);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setPendingAuctions(res.data);
+          setNewPendingAuctions(res.data);
+        }
       });
     };
     getBuyerPendingAuctions();
   }, []);
+
+  useEffect(() => {
+    if (!(search === undefined || search === "")) {
+      if (searchBy === "id") {
+        setNewPendingAuctions(
+          pendingAuctions.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewPendingAuctions(
+          pendingAuctions.filter((listing) =>
+            listing.property.type?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewPendingAuctions(
+          pendingAuctions.filter((listing) =>
+            listing.property.details.property_address.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewPendingAuctions(pendingAuctions);
+    }
+  }, [search]);
 
   // Questionair files handler
   const handleFile = async (e) => {
@@ -151,8 +185,6 @@ function PendingAuctions({ windowSize }) {
     });
   };
 
-  console.log(pendingAuctions);
-
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       {loader && <Loading />}
@@ -184,8 +216,8 @@ function PendingAuctions({ windowSize }) {
               <th>View Auction</th>
             </tr>
           </thead>
-          {pendingAuctions.length > 0 ? (
-            pendingAuctions.map((auction, index) => (
+          {newPendingAuctions.length > 0 ? (
+            newPendingAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>

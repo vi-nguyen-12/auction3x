@@ -40,6 +40,132 @@ function Dashboard({
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
   const toggleShowModal = () => setShow(!show);
+  const [suggest, setSuggest] = useState();
+
+  let keywords = [
+    {
+      key: ["message", "messaging", "chat", "email"],
+      name: "Messaging",
+      value: "/Dashboard/Messaging",
+    },
+    {
+      key: ["profile", "account", "settings"],
+      name: "Profile",
+      value: "/Dashboard/Profile",
+    },
+    {
+      key: [
+        "saved",
+        "saved auctions",
+        "liked",
+        "liked auctions",
+        "like",
+        "like auctions",
+      ],
+      name: "Save Auctions",
+      value: "/Dashboard/Auctions/SavedAuctions",
+    },
+    {
+      key: [
+        "buyer",
+        "buyer approval",
+        "proof of funds",
+        "registered auctions",
+        "register auction",
+        "funds",
+        "funds approval",
+      ],
+      name: "Buyer Approval",
+      value: "/Dashboard/Auctions/BuyerApproval",
+    },
+    {
+      key: [
+        "bids",
+        "bids auctions",
+        "bid",
+        "bid auctions",
+        "my bids",
+        "my bids auctions",
+      ],
+      name: "Bid Auctions",
+      value: "/Dashboard/Auctions/BidAuctions",
+    },
+    {
+      key: [
+        "win",
+        "win auctions",
+        "won",
+        "won auctions",
+        "winning",
+        "winning auctions",
+      ],
+      name: "Win Auctions",
+      value: "/Dashboard/Auctions/WinAuctions",
+    },
+    {
+      key: [
+        "pending",
+        "pending listings",
+        "pending auctions",
+        "pending my auctions",
+        "pending my listings",
+        "my pending auctions",
+        "my pending listings",
+      ],
+      name: "Pending Listings",
+      value: "/Dashboard/Listings/PendingApproval",
+    },
+    {
+      key: [
+        "live",
+        "live listings",
+        "live auctions",
+        "live my auctions",
+        "live my listings",
+        "my live auctions",
+        "my live listings",
+        "my upcoming auctions",
+        "my upcoming listings",
+        "upcoming auctions",
+        "upcoming listings",
+        "listed auctions",
+        "listed listings",
+        "my listed auctions",
+        "my listed listings",
+      ],
+      name: "Auctions Listings",
+      value: "/Dashboard/Listings/AuctionListings",
+    },
+    {
+      key: [
+        "sold",
+        "sold listings",
+        "sold auctions",
+        "sold my auctions",
+        "sold my listings",
+        "my sold auctions",
+        "my sold listings",
+      ],
+      name: "Sold Listings",
+      value: "/Dashboard/Listings/SoldListings",
+    },
+    {
+      key: [
+        "incomplete",
+        "incomplete listings",
+        "incomplete auctions",
+        "incomplete my auctions",
+        "incomplete my listings",
+        "my incomplete auctions",
+        "my incomplete listings",
+        "incomplete registration",
+        "incomplete seller registration",
+        "incomplete selling",
+      ],
+      name: "Incomplete Process",
+      value: "/Dashboard/Listings/IncompleteListing",
+    },
+  ];
 
   const [showDocu, setShowDocu] = useState(false);
   const toggleShowDocu = () => setShowDocu(!showDocu);
@@ -129,6 +255,20 @@ function Dashboard({
       e.target.value = null;
     }
   };
+
+  useEffect(() => {
+    if (!(search === undefined || search === "")) {
+      setSuggest(
+        keywords.filter((keyword) => {
+          return keyword.key.some((key) => {
+            return key.toLowerCase().includes(search.toLowerCase());
+          });
+        })
+      );
+    } else {
+      setSuggest([]);
+    }
+  }, [search]);
 
   const handleDeleteDocu = (id) => {
     setDocuments(documents.filter((docu) => docu._id !== id));
@@ -424,6 +564,8 @@ function Dashboard({
             location={location ? location : loca.pathname}
             setSearch={setSearch}
             setSearchBy={setSearchBy}
+            suggest={suggest}
+            setSuggest={setSuggest}
           />
           <Switch>
             <Route exact path="/Dashboard">

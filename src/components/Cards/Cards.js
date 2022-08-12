@@ -419,6 +419,9 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 onClick={handleBid}
                 className="black-button text-white"
                 variant="dark"
+                disabled={
+                  new Date().toISOString() > data.auctionEndDate ? true : false
+                }
               >
                 {new Date().toISOString() > data.auctionEndDate
                   ? "Completed"

@@ -4,19 +4,53 @@ import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 
-function BidAuctions({ windowSize }) {
+function BidAuctions({ windowSize, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const [bidAuctions, setBidAuctions] = useState([]);
+  const [newBidAuctions, setNewBidAuctions] = useState([]);
 
   useEffect(() => {
     const fetchBidAuctions = async () => {
       const id = user._id;
       await authService.getUserBidAuctions(id).then((res) => {
-        setBidAuctions(res.data);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setBidAuctions(res.data);
+          setNewBidAuctions(res.data);
+        }
       });
     };
     fetchBidAuctions();
   }, []);
+
+  useEffect(() => {
+    if (!(search === undefined || search === "")) {
+      if (searchBy === "id") {
+        setNewBidAuctions(
+          bidAuctions.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewBidAuctions(
+          bidAuctions.filter((listing) =>
+            listing.property.type?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewBidAuctions(
+          bidAuctions.filter((listing) =>
+            listing.property.details.property_address.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewBidAuctions(bidAuctions);
+    }
+  }, [search]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -48,8 +82,8 @@ function BidAuctions({ windowSize }) {
               <th>Bid</th>
             </tr>
           </thead>
-          {bidAuctions.length > 0 ? (
-            bidAuctions.map((auction, index) => (
+          {newBidAuctions.length > 0 ? (
+            newBidAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>

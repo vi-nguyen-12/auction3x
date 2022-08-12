@@ -226,7 +226,7 @@ function CarDetails({
         </div>
         <Row className="mt-3">
           <Col xs={12} md={4}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Year<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
@@ -243,7 +243,7 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Make<span style={{ color: "#ff0000" }}>*</span>
             </span>
             {other ? (
@@ -281,7 +281,7 @@ function CarDetails({
             )}
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Model<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -296,7 +296,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Gearbox<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
@@ -313,7 +313,7 @@ function CarDetails({
             </Form.Select>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Mileage<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
@@ -341,7 +341,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Power (Horsepower)<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
@@ -366,7 +366,7 @@ function CarDetails({
             /> */}
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>Body Type</span>
+            <span style={{ fontWeight: "600" }}>Body Type</span>
             {otherType ? (
               <>
                 <input
@@ -409,7 +409,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               VIN<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -423,7 +423,7 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Color<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -438,7 +438,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Fuel Type<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
@@ -456,7 +456,7 @@ function CarDetails({
             </Form.Select>
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Engine<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -471,7 +471,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Approximate Market Price
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -488,7 +488,7 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Condition<span style={{ color: "#ff0000" }}>*</span>
             </span>
 
@@ -519,7 +519,7 @@ function CarDetails({
                 loading,
               }) => (
                 <div>
-                  <span style={{ fontWeight: "600", color: "black" }}>
+                  <span style={{ fontWeight: "600" }}>
                     Address <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
@@ -568,7 +568,7 @@ function CarDetails({
             </PlacesAutocomplete>
           </Col>
           <Col className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Country<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -584,7 +584,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               State<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -598,7 +598,7 @@ function CarDetails({
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               City<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -612,7 +612,7 @@ function CarDetails({
             />
           </Col>
           <Col className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Zip Code<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
@@ -650,7 +650,7 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Reserved Amount<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
@@ -666,7 +666,7 @@ function CarDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ color: "black" }}>
+            <span style={{ fontWeight: "600" }}>
               Discussed Amount<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat

@@ -111,7 +111,6 @@ function DisplayCar({
   setRefresh,
   refresh,
 }) {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -667,6 +666,11 @@ function DisplayCar({
                       fontSize: "20px",
                     }}
                     onClick={togglePlaceBid}
+                    disabled={
+                      new Date().toISOString() > property.auctionEndDate
+                        ? true
+                        : false
+                    }
                   >
                     Bid Now!
                   </button>

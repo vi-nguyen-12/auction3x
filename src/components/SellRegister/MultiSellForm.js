@@ -113,7 +113,7 @@ const MultiSellForm = ({
   return (
     <>
       <Container className="vh-100">
-        <h1 className="fs-1">Sell On Auction3x</h1>
+        <h1 className="fs-1">Sell On Auction3</h1>
         <p
           style={{ fontSize: "1.6em", fontWeight: "bold" }}
           className="d-flex justify-content-center"

@@ -32,7 +32,7 @@ const About = ({ toggleSignIn, windowSize }) => {
         <Col className="banner-top-right">
           <h2>INVESTORS / BUYERS</h2>
           <p>
-            AUCTION 3X positioned itself as the leading marketplace for
+            AUCTION3 positioned itself as the leading marketplace for
             professional real estate investors to auction platform for buying
             and selling their properties. It brings an opportunity for an
             investor to execute the transaction with greater eciency and higher
@@ -61,7 +61,7 @@ const About = ({ toggleSignIn, windowSize }) => {
         <Col className="banner-top-left-2">
           <h2>BROKER</h2>
           <p>
-            AUCTION 3X positioned itself as the leading marketplace for
+            AUCTION3 positioned itself as the leading marketplace for
             professional real estate investors to auction platform for buying
             and selling their properties. It brings an opportunity for an
             investor to execute the transaction with greater eciency and higher
@@ -92,7 +92,7 @@ const About = ({ toggleSignIn, windowSize }) => {
               fontStyle: "normal",
             }}
           >
-            Stay updated with Auction 3X
+            Stay updated with Auction3
           </h2>
           <p style={{ padding: windowSize < 600 && "0" }}>
             Receive the beautifully curated selection of what's trending in

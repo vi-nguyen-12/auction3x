@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 
-function WinAuctions({ windowSize }) {
+function WinAuctions({ windowSize, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const [winAuctions, setWinAuctions] = useState([]);
+  const [newWinAuctions, setNewWinAuctions] = useState([]);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
   const toggleShowPic = () => setShowPic(!showPic);
@@ -15,11 +16,44 @@ function WinAuctions({ windowSize }) {
     const fetchWinAuctions = async () => {
       const id = user._id;
       await authService.buyerWonAuctions(id).then((res) => {
-        setWinAuctions(res.data);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setWinAuctions(res.data);
+          setNewWinAuctions(res.data);
+        }
       });
     };
     fetchWinAuctions();
   }, []);
+
+  useEffect(() => {
+    if (!(search === undefined || search === "")) {
+      if (searchBy === "id") {
+        setNewWinAuctions(
+          winAuctions.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewWinAuctions(
+          winAuctions.filter((listing) =>
+            listing.property.type?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewWinAuctions(
+          winAuctions.filter((listing) =>
+            listing.property.details.property_address.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewWinAuctions(winAuctions);
+    }
+  }, [search]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -49,8 +83,8 @@ function WinAuctions({ windowSize }) {
               <th>View</th>
             </tr>
           </thead>
-          {winAuctions.length > 0 ? (
-            winAuctions.map((auction, index) => (
+          {newWinAuctions.length > 0 ? (
+            newWinAuctions.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>

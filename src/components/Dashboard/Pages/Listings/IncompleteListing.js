@@ -13,10 +13,11 @@ import "../../../../styles/dashboard.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function IncompleteListing({ windowSize }) {
+function IncompleteListing({ windowSize, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
+  const [newIncompleteListings, setNewIncompleteListings] = useState([]);
   const [pageContent, setPageContent] = useState([]);
   const [currentPageContent, setCurrentPageContent] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,17 +28,50 @@ function IncompleteListing({ windowSize }) {
   useEffect(() => {
     const fetchIncompleteListings = async () => {
       await authService.getIncompleteProperty(user._id).then((res) => {
-        setIncompleteListings(res.data);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setIncompleteListings(res.data);
+          setNewIncompleteListings(res.data);
+        }
       });
     };
     fetchIncompleteListings();
   }, [incompProperty]);
 
+  useEffect(() => {
+    if (!(search === undefined || search === "")) {
+      if (searchBy === "id") {
+        setNewIncompleteListings(
+          IncompleteListings.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewIncompleteListings(
+          IncompleteListings.filter((listing) =>
+            listing.type?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewIncompleteListings(
+          IncompleteListings.filter((listing) =>
+            listing.details?.property_address?.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewIncompleteListings(IncompleteListings);
+    }
+  }, [search]);
+
   // seperate incomplete listings into pages
   useEffect(() => {
-    if (IncompleteListings) {
+    if (newIncompleteListings) {
       const pages = [];
-      const reversed = IncompleteListings.slice().reverse();
+      const reversed = newIncompleteListings.slice().reverse();
       const totalPages = Math.ceil(reversed.length / 5);
       for (let i = 1; i <= totalPages; i++) {
         pages.push(reversed.slice((i - 1) * 5, i * 5));
@@ -45,7 +79,9 @@ function IncompleteListing({ windowSize }) {
       setPageContent(pages);
       setTotalPages(totalPages);
     }
-  }, [IncompleteListings]);
+  }, [newIncompleteListings]);
+
+  console.log(IncompleteListings);
 
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
@@ -70,6 +106,7 @@ function IncompleteListing({ windowSize }) {
     setCurrentPage(key);
     setCurrentPageContent(key - 1);
   };
+
   return (
     <Container
       style={{

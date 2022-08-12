@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ErrorPage from "../../../Error/404page";
 import SavedAuctionsCard from "./SavedAuctionsCard";
+import authService from "../../../../services/authServices";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -44,7 +45,7 @@ const Carousel_3 = styled(Slider)`
   .slick-prev {
     height: 150px;
     z-index: 1;
-    background: url("./images/back-icon.png") center center no-repeat ;
+    background: url("./images/back-icon.png") center center no-repeat;
     margin: -50px;
   }
 
@@ -55,7 +56,7 @@ const Carousel_3 = styled(Slider)`
   .slick-next {
     height: 150px;
     z-index: 1;
-    background: url("./images/next-icon.png") center center no-repeat ;
+    background: url("./images/next-icon.png") center center no-repeat;
     margin: -50px;
   }
 
@@ -82,8 +83,52 @@ align-content: center;
 }
 `;
 
-function SavedAuctions({ windowSize }) {
-  const savedProperty = useSelector((state) => state.savedProperty);
+function SavedAuctions({ windowSize, searchBy, search }) {
+  const user = useSelector((state) => state.user);
+  const [SavedAuctions, setSavedAuctions] = useState([]);
+  const [newSavedAuctions, setNewSavedAuctions] = useState([]);
+
+  useEffect(() => {
+    const fetchSavedAuctions = async () => {
+      await authService.getSavedProperties(user._id).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setSavedAuctions(res.data);
+          setNewSavedAuctions(res.data);
+        }
+      });
+    };
+    fetchSavedAuctions();
+  }, [user._id]);
+
+  useEffect(() => {
+    if (search !== undefined || search !== "") {
+      if (searchBy === "id") {
+        setNewSavedAuctions(
+          SavedAuctions.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewSavedAuctions(
+          SavedAuctions.filter((listing) =>
+            listing.property.type?.includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewSavedAuctions(
+          SavedAuctions.filter((listing) =>
+            listing.property.details?.property_address?.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewSavedAuctions(SavedAuctions);
+    }
+  }, [search]);
 
   let settings = {
     dots: false,
@@ -92,9 +137,9 @@ function SavedAuctions({ windowSize }) {
     autoplay: false,
     slidesToShow:
       windowSize > 800
-        ? savedProperty.length > 2
+        ? newSavedAuctions.length > 2
           ? 2
-          : savedProperty.length
+          : newSavedAuctions.length
         : 1,
   };
 
@@ -102,9 +147,9 @@ function SavedAuctions({ windowSize }) {
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
         <h1 style={{ marginBottom: "40px" }}>Saved Auctions</h1>
-        {savedProperty.length > 0 ? (
+        {newSavedAuctions.length > 0 ? (
           <Carousel_3 {...settings}>
-            {savedProperty.map((auction, index) => (
+            {newSavedAuctions.map((auction, index) => (
               <Wrap key={index}>
                 <SavedAuctionsCard
                   url={auction.property.images[0].url}

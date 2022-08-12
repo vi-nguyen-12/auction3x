@@ -256,7 +256,7 @@ function JetDetails({
                 loading,
               }) => (
                 <div>
-                  <span style={{ fontWeight: "600", color: "black" }}>
+                  <span style={{ fontWeight: "600" }}>
                     Address <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input

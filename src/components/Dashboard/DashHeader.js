@@ -6,12 +6,21 @@ import { AiFillMessage } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
+import Loading from "../Loading";
 import "../../styles/dashboard.css";
 
-function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
+function DashHeader({
+  location,
+  windowSize,
+  setSearchBy,
+  setSearch,
+  suggest,
+  setSuggest,
+}) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [notifi, setNotifi] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [notifications, setNotifications] = useState(user.notifications);
 
   const handleDelete = async (id) => {
@@ -40,6 +49,7 @@ function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
         margin: windowSize < 800 && "0",
       }}
     >
+      {loader && <Loading />}
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
@@ -62,11 +72,11 @@ function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
                 )}
                 <div
                   className="searchBar"
-                  style={{
-                    borderRadius: "45px",
-                    paddingLeft: "8px",
-                    width: "400px",
-                  }}
+                  // style={{
+                  //   borderRadius: "45px",
+                  //   paddingLeft: "8px",
+                  //   width: "400px",
+                  // }}
                 >
                   <input
                     type="text"
@@ -78,6 +88,38 @@ function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
                   />
                   <FiSearch color="black" size={25} />
                 </div>
+
+                {location === "/Dashboard" && suggest?.length > 0 && (
+                  <div
+                    className="position-absolute bg-white shadow"
+                    style={{
+                      width: "25rem",
+                      height: "8rem",
+                      marginTop: "50px",
+                      borderRadius: "0 0 5px 5px",
+                      overflow: "auto",
+                    }}
+                  >
+                    {suggest.map((suggestion, index) => (
+                      <div
+                        className="suggest w-100 p-2 px-3"
+                        style={{
+                          cursor: "pointer",
+                          borderBottom: "1px solid #e9ecef",
+                        }}
+                        onClick={() => {
+                          setLoader(true);
+                          history.push(suggestion.value);
+                          // setSuggest([]);
+                          window.location.reload();
+                          setLoader(false);
+                        }}
+                      >
+                        {suggestion.name}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </Col>
@@ -93,8 +135,8 @@ function DashHeader({ location, windowSize, setSearchBy, setSearch }) {
               <div
                 className="notification"
                 style={{
-                  width: notifications.length > 10 && "1.8rem",
-                  borderRadius: notifications.length > 10 && "0.8em",
+                  width: notifications?.length > 10 && "1.8rem",
+                  borderRadius: notifications?.length > 10 && "0.8em",
                 }}
               >
                 {notifications.length > 10 ? "10+" : notifications.length}

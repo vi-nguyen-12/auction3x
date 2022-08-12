@@ -15,9 +15,12 @@ function PendingListings({
   setVideos,
   setRefresh,
   refresh,
+  searchBy,
+  search,
 }) {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
+  const [newPendingListings, setNewPendingListings] = useState([]);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -27,11 +30,40 @@ function PendingListings({
           alert(res.data.error);
         } else {
           setPendingListings(res.data);
+          setNewPendingListings(res.data);
         }
       });
     };
     fetchPendingListings();
   }, [refresh]);
+
+  useEffect(() => {
+    if (search !== undefined || search !== "") {
+      if (searchBy === "id") {
+        setNewPendingListings(
+          pendingListings.filter((listing) =>
+            listing._id.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewPendingListings(
+          pendingListings.filter((listing) =>
+            listing.type.toLowerCase().includes(search.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewPendingListings(
+          pendingListings.filter((listing) =>
+            listing.details.property_address.formatted_street_address
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewPendingListings(pendingListings);
+    }
+  }, [search]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -62,12 +94,12 @@ function PendingListings({
               <th>Last Updated</th>
             </tr>
           </thead>
-          {pendingListings.length > 0 ? (
-            pendingListings.map((auction, index) => (
+          {newPendingListings.length > 0 ? (
+            newPendingListings.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
-                  <td>{auction._id}</td>
+                  <td>*****{auction._id.slice(auction._id.length - 5)}</td>
                   <td>
                     {auction.details.property_address.formatted_street_address}
                     <div

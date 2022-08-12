@@ -24,33 +24,32 @@ function FundAgreement({ toggleStep, step }) {
           <li className="buyer-agree">
             {" "}
             1.1. The following terms and conditions apply to the use of the
-            Auction 3 platform and the services provided by the Auction 3 team.
+            Auction3 platform and the services provided by the Auction3 team.
           </li>
           <li className="buyer-agree">
-            1.2. The Auction 3 platform is a platform for the sale of
-            properties.
+            1.2. The Auction3 platform is a platform for the sale of properties.
           </li>
           <li className="buyer-agree">
-            1.3. The Auction 3 team is a team of professional real estate
+            1.3. The Auction3 team is a team of professional real estate
             investors and brokers.
           </li>
           <li className="buyer-agree">
-            1.4. The Auction 3 team is not a real estate broker.
+            1.4. The Auction3 team is not a real estate broker.
           </li>
           <li className="buyer-agree">
-            1.5. The Auction 3 team is not a real estate investor.
+            1.5. The Auction3 team is not a real estate investor.
           </li>
           <li className="buyer-agree">
-            1.6. The Auction 3 team is not a real estate agent.
+            1.6. The Auction3 team is not a real estate agent.
           </li>
           <li className="buyer-agree">
-            1.7. The Auction 3 team is not a real estate developer.
+            1.7. The Auction3 team is not a real estate developer.
           </li>
           <li className="buyer-agree">
-            1.8. The Auction 3 team is not a real estate developer.
+            1.8. The Auction3 team is not a real estate developer.
           </li>
           <li className="buyer-agree">
-            1.9. The Auction 3 team is not a real estate developer.
+            1.9. The Auction3 team is not a real estate developer.
           </li>
         </ul>
         <input

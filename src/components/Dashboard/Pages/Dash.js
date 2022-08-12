@@ -168,6 +168,7 @@ function Dash({ windowSize, featureLength }) {
                     getSavedProperty();
                     toggleShowSavedProp(true);
                   }}
+                  style={{ fontSize: windowSize < 600 && "0.9rem" }}
                   id={window.location.pathname === "/Dashboard" ? "active" : ""}
                   // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
                   className="tabs"
@@ -182,6 +183,7 @@ function Dash({ windowSize, featureLength }) {
                     getSavedProperty();
                     toggleShowSavedProp(true);
                   }}
+                  style={{ fontSize: windowSize < 600 && "0.9rem" }}
                   // style={{ borderBottom: color, color: textColor }}
                   className="tabs"
                 >
@@ -320,6 +322,7 @@ function Dash({ windowSize, featureLength }) {
                       getSavedProperty();
                       toggleShowSavedProp(true);
                     }}
+                    style={{ padding: windowSize < 600 && "5px" }}
                     id={
                       window.location.pathname === "/Dashboard" ? "active" : ""
                     }
@@ -336,6 +339,7 @@ function Dash({ windowSize, featureLength }) {
                       getSavedProperty();
                       toggleShowSavedProp(true);
                     }}
+                    style={{ padding: windowSize < 600 && "5px" }}
                     // style={{ borderBottom: color, color: textColor }}
                     className="tabs"
                   >

@@ -545,3 +545,7 @@ h3 {
   border-bottom: 2px solid #e6e6e6;
   border-top: 2px solid #e6e6e6;
 }
+
+.suggest:hover {
+  background-color: #b9b9b9;
+}

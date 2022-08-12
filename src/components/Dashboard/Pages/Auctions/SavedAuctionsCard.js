@@ -41,7 +41,7 @@ const Carousel_1 = styled(Slider)`
     left: 3vw;
     background: url("./images/arrow_back.png") center center no-repeat !important;
     font-size: 50px;
-    margin: 0 -50px !important;
+    margin: 0 -60px !important;
   }
   .slick-next:before {
     display: none;
@@ -52,7 +52,7 @@ const Carousel_1 = styled(Slider)`
     right: 3vw;
     background: url("./images/arrow_next.png") center center no-repeat !important;
     font-size: 50px;
-    margin: 0 -50px !important;
+    margin: 0 -60px !important;
   }
 
   @media (max-width: 700px) {

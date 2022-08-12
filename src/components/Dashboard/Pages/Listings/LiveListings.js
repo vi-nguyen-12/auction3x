@@ -17,45 +17,49 @@ function LiveListings({
   searchBy,
   search,
 }) {
-  console.log(search);
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [upcomingListings, setUpcomingListings] = useState([]);
+  const [newUpcomingListings, setNewUpcomingListings] = useState([]);
 
   useEffect(() => {
     const fetchApprovedProperty = async () => {
       const id = user._id;
       await authService.sellerApprovedListings(id).then((res) => {
         setUpcomingListings(res.data);
+        setNewUpcomingListings(res.data);
       });
     };
     fetchApprovedProperty();
   }, []);
 
   useEffect(() => {
-    if (search !== undefined || search !== "") {
+    if (!(search === undefined || search === "")) {
       if (searchBy === "id") {
-        setUpcomingListings(
-          upcomingListings.filter((listing) => listing._id.includes(search))
+        setNewUpcomingListings(
+          upcomingListings.filter((listing) =>
+            listing._id?.includes(search.toLowerCase())
+          )
         );
       } else if (searchBy === "propType") {
-        setUpcomingListings(
-          upcomingListings.filter((listing) => listing.type.includes(search))
+        setNewUpcomingListings(
+          upcomingListings.filter((listing) =>
+            listing.type?.includes(search.toLowerCase())
+          )
         );
       } else if (searchBy === "address") {
-        setUpcomingListings(
+        setNewUpcomingListings(
           upcomingListings.filter((listing) =>
-            listing.details.property_address.formatted_street_address.includes(
-              search
-            )
+            listing.details.property_address.formatted_street_address
+              ?.toLowerCase()
+              .includes(search.toLowerCase())
           )
         );
       }
-    } else if(search === "") {
-      console.log("hello");
-      setUpcomingListings(upcomingListings);
+    } else {
+      setNewUpcomingListings((pre) => [...upcomingListings]);
     }
-  }, [search, searchBy]);
+  }, [search]);
 
   return (
     <>
@@ -89,8 +93,8 @@ function LiveListings({
                 <th>Email</th>
               </tr>
             </thead>
-            {upcomingListings.length > 0 ? (
-              upcomingListings.map((listing, index) => (
+            {newUpcomingListings.length > 0 ? (
+              newUpcomingListings.map((listing, index) => (
                 <tbody key={index}>
                   <tr>
                     <td>{index + 1}</td>

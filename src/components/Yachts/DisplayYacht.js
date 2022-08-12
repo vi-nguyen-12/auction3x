@@ -671,6 +671,11 @@ function DisplayYacht({
                       fontSize: "20px",
                     }}
                     onClick={togglePlaceBid}
+                    disabled={
+                      new Date().toISOString() > property.auctionEndDate
+                        ? true
+                        : false
+                    }
                   >
                     Bid Now!
                   </button>

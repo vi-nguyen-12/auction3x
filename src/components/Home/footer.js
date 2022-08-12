@@ -38,10 +38,10 @@ const Footer = ({ toggleSignIn, windowSize }) => {
               }}
               className="auction-content"
             >
-              AUCTION 3 is an innovative online bidding platform that
-              specialized in the expediting sale of real estate through auction
-              and brings the exciting real estate opportunities to both buyers
-              and sellers with true value for money.
+              AUCTION3 is an innovative online bidding platform that specialized
+              in the expediting sale of real estate through auction and brings
+              the exciting real estate opportunities to both buyers and sellers
+              with true value for money.
             </p>
           </Col>
           <Col>
@@ -146,7 +146,7 @@ const Footer = ({ toggleSignIn, windowSize }) => {
           </Col>
         </Row>
         <div className="auction-reserved">
-          © 2022 AUCTION3X. All Rights Reserved
+          © 2022 AUCTION3. All Rights Reserved
         </div>
       </Card>
     </footer>

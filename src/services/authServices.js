@@ -250,7 +250,7 @@ const authService = {
   getUserBidAuctions(id) {
     return axios.get(apiUrl + `/api/users/${id}/buyer/auctions/bid`, {
       headers: {
-        Authorization: "Bearer " + document.cookie.split("=")[1],
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
   },
