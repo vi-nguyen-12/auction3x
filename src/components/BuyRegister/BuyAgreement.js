@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal, Row, Button, Container, Form } from "react-bootstrap";
 import { useState } from "react";
-import ToastMessage from '../../components/Toast'
-import "../../styles/Buyer.css";
+import ToastMessage from "../../components/Toast";
+import "../../styles/buyer.css";
 
 const BuyAgreement = ({ setStep, step }) => {
   const [agreement, setAgreement] = useState(false);
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(true);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
@@ -14,7 +14,7 @@ const BuyAgreement = ({ setStep, step }) => {
     if (agreement === true) {
       setStep(step + 1);
     } else {
-     setShow(false)
+      setShow(false);
     }
   };
   return (
@@ -61,9 +61,13 @@ const BuyAgreement = ({ setStep, step }) => {
               I agree to the terms and conditions
             </Form.Check.Label>
           </Form.Check>
-            {show == false && (
-              <ToastMessage message={"Please Read the agreement and check the box to continue"}/>
-            )}
+          {show == false && (
+            <ToastMessage
+              message={
+                "Please Read the agreement and check the box to continue"
+              }
+            />
+          )}
         </Container>
       </Modal.Body>
       <Modal.Footer>
