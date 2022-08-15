@@ -53,6 +53,7 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
   const history = useHistory();
+  
   const onMarkerClick = (id) => (e) => {
     history.push(`/DisplayAuctions/${id}`);
   };
@@ -61,23 +62,23 @@ const PropertyPages = ({
     <>
       <h5 className="realHeader">
         {path === "/cars" ? (
-          <p>CAR</p>
+          <title>CAR</title>
         ) : path === "/jets" ? (
-          <p>JET</p>
+          <title>JET</title>
         ) : path === "/yachts" ? (
-          <p>YACHT</p>
+          <title>YACHT</title>
         ) : path === "/Auctions" ? (
-          <p>Auctions</p>
+          <title>Auctions</title>
         ) : path === "/Auctions/Austin" ? (
-          <p>Auctions</p>
+          <title>Auctions</title>
         ) : path === "/Auctions/Dallas" ? (
-          <p>Auctions</p>
+          <title>Auctions</title>
         ) : path === "/Auctions/Houston" ? (
-          <p>Auctions</p>
+          <title>Auctions</title>
         ) : path === "/Auctions/SanAntonio" ? (
-          <p>Auctions</p>
+          <title>Auctions</title>
         ) : (
-          <p>REAL ESTATE</p>
+          <title>REAL ESTATE</title>
         )}
       </h5>
       <PropertyPageHeader

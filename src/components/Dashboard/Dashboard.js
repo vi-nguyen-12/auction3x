@@ -68,6 +68,8 @@ function Dashboard({
     {
       key: [
         "buyer",
+        "edit buyer",
+        "edit",
         "buyer approval",
         "proof of funds",
         "registered auctions",
@@ -105,6 +107,10 @@ function Dashboard({
     {
       key: [
         "pending",
+        "edit pending auction",
+        "edit properties",
+        "edit property auction",
+        "edit property",
         "pending listings",
         "pending auctions",
         "pending my auctions",
@@ -122,6 +128,12 @@ function Dashboard({
         "live auctions",
         "live my auctions",
         "live my listings",
+        "edit live auction",
+        "edit live listing",
+        "edit ongoing auction",
+        "edit ongoing listing",
+        "edit upcoming auction",
+        "edit upcoming listing",
         "my live auctions",
         "my live listings",
         "my upcoming auctions",

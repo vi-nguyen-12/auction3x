@@ -88,7 +88,7 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
     }
     if (!isExplainedIfAnswerIsTrue) {
       return alert(
-        'Please explain reason and upload supported document for question with answer is "yes"'
+        'Please explain reason and upload supported document for question with answer "yes"'
       );
     }
     setStep(step + 1);
@@ -97,7 +97,11 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
   useEffect(() => {
     const getQuestion = async () => {
       await authService.getBuyerQuestions().then((res) => {
-        setAnswers(res.data);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setAnswers(res.data);
+        }
       });
     };
     if (!answers) {

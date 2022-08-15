@@ -53,6 +53,8 @@ const Header = ({
     Yacht: false,
   });
 
+  console.log(history);
+
   const handleLogout = async () => {
     localStorage.removeItem("token");
     dispatch(logout());
@@ -72,7 +74,11 @@ const Header = ({
       if (!user.KYC) {
         alert("Please complete your Kyc");
       } else {
-        history.push("/multiSellForm");
+        if (history.location.pathname === "/multiSellForm") {
+          window.location.reload();
+        } else {
+          history.push("/multiSellForm");
+        }
       }
     }
   };

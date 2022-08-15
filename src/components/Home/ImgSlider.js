@@ -149,7 +149,7 @@ const ImgSlider = ({
         <>
           <BarGroup className="Bar-group">
             {featureAuctions.length > 0 &&
-              featureAuctions.map((images, index) => (
+              featureAuctions.slice(0, 5).map((images, index) => (
                 <Bar
                   key={index}
                   color={index === Index ? "white" : "transparent"}
@@ -170,7 +170,7 @@ const ImgSlider = ({
           </BarGroup>
           {featureAuctions.length > 0 && (
             <Carousel ref={slider} {...settings}>
-              {featureAuctions.map((auction, index) => (
+              {featureAuctions.slice(0, 5).map((auction, index) => (
                 <Wrap key={index} setIndex={setIndex}>
                   <a href={`/DisplayAuctions/${auction._id}`}>
                     <img src={auction.property.images[0].url} alt="auction" />

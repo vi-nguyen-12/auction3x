@@ -372,15 +372,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -688,15 +688,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -1062,15 +1062,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -1420,15 +1420,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -1648,15 +1648,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -1876,15 +1876,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -2104,15 +2104,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -2332,15 +2332,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
@@ -2560,15 +2560,15 @@ function PropertyPageHeader({
                               // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
-                                  backgroundColor: "#fafafa",
-                                  cursor: "pointer",
-                                  color: "black",
-                                }
+                                    backgroundColor: "#fafafa",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  }
                                 : {
-                                  backgroundColor: "#ffffff",
-                                  cursor: "pointer",
-                                  color: "black",
-                                };
+                                    backgroundColor: "#ffffff",
+                                    cursor: "pointer",
+                                    color: "black",
+                                  };
                               return (
                                 <div
                                   key={index}
