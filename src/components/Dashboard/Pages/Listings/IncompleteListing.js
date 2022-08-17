@@ -116,7 +116,6 @@ function IncompleteListing({ windowSize, searchBy, search }) {
       }}
     >
       <Row>
-        <h1>Incomplete Process</h1>
         <Table
           borderless
           hover

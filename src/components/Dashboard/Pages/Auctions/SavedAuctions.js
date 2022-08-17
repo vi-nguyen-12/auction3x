@@ -146,7 +146,6 @@ function SavedAuctions({ windowSize, searchBy, search }) {
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
-        <h1 style={{ marginBottom: "40px" }}>Saved Auctions</h1>
         {newSavedAuctions.length > 0 ? (
           <Carousel_3 {...settings}>
             {newSavedAuctions.map((auction, index) => (

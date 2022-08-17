@@ -111,7 +111,7 @@ const SubMenu = ({ item, path, setLocation }) => {
             <DropdownLink
               to={item.path}
               key={index}
-              onClick={() => handleOnclick(item.path)}
+              onClick={() => setLocation(item.path)}
             >
               <SidebarLabel
                 style={{

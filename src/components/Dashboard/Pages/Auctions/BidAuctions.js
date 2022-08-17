@@ -52,10 +52,11 @@ function BidAuctions({ windowSize, searchBy, search }) {
     }
   }, [search]);
 
+  console.log(newBidAuctions);
+
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
-        <h1>Bid Auctions</h1>
         <Table
           striped
           borderless
@@ -78,7 +79,6 @@ function BidAuctions({ windowSize, searchBy, search }) {
               <th colSpan={2}>Auction Status</th>
               <th colSpan={2}>Auction Highest Bid</th>
               <th colSpan={2}>Your Highest Bid</th>
-              <th>Property Type</th>
               <th>Bid</th>
             </tr>
           </thead>
@@ -88,7 +88,7 @@ function BidAuctions({ windowSize, searchBy, search }) {
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction._id}
+                    *****{auction._id.slice(auction._id.length - 5)}
                     <div
                       style={{
                         width: "100%",
@@ -142,22 +142,11 @@ function BidAuctions({ windowSize, searchBy, search }) {
                   <td colSpan={2}>
                     {" "}
                     <NumberFormat
-                      value={auction.bids[auction.bids.length - 1].amount}
+                      value={auction.highestBid?.amount}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
                     />
-                  </td>
-                  <td>
-                    {auction.property.type === "real-estate"
-                      ? "Real Estate"
-                      : auction.property.type === "car"
-                      ? "Car"
-                      : auction.property.type === "jet"
-                      ? "Jet"
-                      : auction.property.type === "yacht"
-                      ? "Yacht"
-                      : ""}
                   </td>
                   {new Date().toISOString() < auction.auctionEndDate ? (
                     <td>

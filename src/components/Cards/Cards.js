@@ -95,18 +95,18 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
   };
 
   const handleDisplay = () => {
-    if (new Date().toISOString() > data.auctionEndDate) {
-      alert("Auction has ended");
+    // if (new Date().toISOString() > data.auctionEndDate) {
+    //   alert("Auction has ended");
+    // } else {
+    if (
+      history.location.pathname === "/Dashboard" ||
+      history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
+    ) {
+      window.open(`/DisplayAuctions/${data._id}`);
     } else {
-      if (
-        history.location.pathname === "/Dashboard" ||
-        history.location.pathname === "/Dashboard/Auctions/SavedAuctions"
-      ) {
-        window.open(`/DisplayAuctions/${data._id}`);
-      } else {
-        history.push(`/DisplayAuctions/${data._id}`);
-      }
+      history.push(`/DisplayAuctions/${data._id}`);
     }
+    // }
   };
   const handleLike = () => {
     if (user._id) {
@@ -166,7 +166,11 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
         {reserveMet === true && user._id && (
           <div className="badge-label" aria-label="Reserved Met !" />
         )}
-        <button onClick={handleLike} className="favBtn">
+        <button
+          onClick={handleLike}
+          className="favBtn"
+          disabled={new Date().toISOString() > data.auctionEndDate}
+        >
           {favorite ? (
             <img src="/images/hearted.png" alt="" />
           ) : (
@@ -259,9 +263,11 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
               <Col>
                 <p
                   style={{
-                    fontSize: "15px",
-                    width: "200px",
+                    fontSize: windowSize < 600 ? "12px" : "15px",
+                    // width: "200px",
                     fontWeight: "bold",
+                    padding: windowSize < 600 ? "0" : "1.1rem 0",
+                    marginBottom: windowSize < 600 && "0",
                   }}
                 >
                   Registration Ended

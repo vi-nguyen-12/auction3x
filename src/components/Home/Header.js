@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
-import { VscGlobe } from "react-icons/vsc";
 import { IoWallet } from "react-icons/io5";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -52,8 +51,6 @@ const Header = ({
     Jet: false,
     Yacht: false,
   });
-
-  console.log(history);
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
@@ -638,7 +635,7 @@ const Header = ({
                       </div>
                     </div>
                   </div>
-                  <button
+                  <Button
                     className="headerButton"
                     id={colors === "white" ? "hover" : ""}
                     style={{ padding: windowSize < 600 && "8px" }}
@@ -646,10 +643,10 @@ const Header = ({
                       toggleOpen();
                     }}
                   >
-                    <FaBars size={23} />
-                  </button>
+                    <FaBars size={windowSize <= 1536 ? 20 : 23} />
+                  </Button>
                   <div className="dropdown">
-                    <button
+                    <Button
                       className="headerButton"
                       id={colors === "white" ? "hover" : ""}
                       style={{
@@ -657,8 +654,8 @@ const Header = ({
                         padding: windowSize < 600 && "8px",
                       }}
                     >
-                      <FaGlobeAmericas size={23} />
-                    </button>
+                      <FaGlobeAmericas size={windowSize <= 1536 ? 20 : 23} />
+                    </Button>
                     <div className="dropdown-content">
                       <div
                         className="dropdown-content-items"
@@ -749,24 +746,58 @@ const Header = ({
                       toggleOpen();
                     }}
                   >
-                    <FaBars size={23} />
+                    <FaBars size={windowSize <= 1536 ? 20 : 23} />
                   </Button>
 
-                  <Button
-                    id={colors === "white" ? "hover" : ""}
-                    className="headerNav mt-0"
-                    style={{
-                      height: "47px",
-                      display: "flex",
-                      alignItems: "center",
-                      backgroundColor: "transparent",
-                      lineHeight: "normal",
-                      color: textColor,
-                      borderRadius: "0",
-                    }}
-                  >
-                    <FaGlobeAmericas size={23} />
-                  </Button>
+                  <div className="dropdown">
+                    <Button
+                      id={colors === "white" ? "hover" : ""}
+                      className="headerNav mt-0"
+                      style={{
+                        height: "47px",
+                        display: "flex",
+                        alignItems: "center",
+                        backgroundColor: "transparent",
+                        lineHeight: "normal",
+                        color: textColor,
+                        borderRadius: "0",
+                      }}
+                    >
+                      <FaGlobeAmericas size={windowSize <= 1536 ? 20 : 23} />
+                    </Button>
+                    <div className="dropdown-content">
+                      <div
+                        className="dropdown-content-items"
+                        style={{
+                          marginLeft: "-50px",
+                          marginTop: "-8px",
+                          // width: "130px",
+                        }}
+                      >
+                        <Button className="d-flex justify-content-start align-items-center">
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              backgroundColor: "#e9bc4d",
+                              width: "40px",
+                              height: "40px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginRight: "10px",
+                            }}
+                          >
+                            <AiFillDollarCircle size={20} color="white" />
+                          </div>
+                          <div className="d-grid justify-content-start">
+                            <span style={{ padding: "0", display: "flex" }}>
+                              USA
+                            </span>
+                          </div>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </>
               )}
             </div>
@@ -1129,7 +1160,7 @@ const Header = ({
                     </div>
                   </div>
                 </div>
-                <button
+                <Button
                   id={colors === "white" ? "hover" : ""}
                   className="headerButton"
                   style={{ padding: windowSize < 600 && "8px" }}
@@ -1137,11 +1168,11 @@ const Header = ({
                     toggleOpen();
                   }}
                 >
-                  <FaBars size={23} />
-                </button>
+                  <FaBars size={windowSize <= 1536 ? 20 : 23} />
+                </Button>
 
                 <div className="dropdown">
-                  <button
+                  <Button
                     id={colors === "white" ? "hover" : ""}
                     className="headerButton"
                     style={{
@@ -1149,8 +1180,8 @@ const Header = ({
                       padding: windowSize < 600 && "8px",
                     }}
                   >
-                    <FaGlobeAmericas size={23} />
-                  </button>
+                    <FaGlobeAmericas size={windowSize <= 1536 ? 20 : 23} />
+                  </Button>
                   <div className="dropdown-content">
                     <div
                       className="dropdown-content-items"
@@ -1264,23 +1295,59 @@ const Header = ({
                     toggleOpen();
                   }}
                 >
-                  <FaBars size={23} />
+                  <FaBars size={windowSize <= 1536 ? 20 : 23} />
                 </Button>
 
-                <Button
-                  id={colors === "white" ? "hover" : ""}
-                  className="headerNav mt-0"
-                  style={{
-                    backgroundColor: "transparent",
-                    lineHeight: "normal",
-                    color: textColor,
-                    borderRadius: "0",
-                    height: "47px",
-                    // paddingTop: "13px",
-                  }}
-                >
-                  <FaGlobeAmericas size={23} />
-                </Button>
+                <div className="dropdown">
+                  <Button
+                    id={colors === "white" ? "hover" : ""}
+                    className="headerNav mt-0"
+                    style={{
+                      backgroundColor: "transparent",
+                      lineHeight: "normal",
+                      color: textColor,
+                      borderRadius: "0",
+                      height: "47px",
+                      display: "flex",
+                      alignItems: "center",
+                      // paddingTop: "13px",
+                    }}
+                  >
+                    <FaGlobeAmericas size={windowSize <= 1536 ? 20 : 23} />
+                  </Button>
+                  <div className="dropdown-content">
+                    <div
+                      className="dropdown-content-items"
+                      style={{
+                        marginLeft: "-50px",
+                        marginTop: "-8px",
+                        // width: "130px",
+                      }}
+                    >
+                      <Button className="d-flex justify-content-start align-items-center">
+                        <div
+                          style={{
+                            borderRadius: "50%",
+                            backgroundColor: "#e9bc4d",
+                            width: "40px",
+                            height: "40px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: "10px",
+                          }}
+                        >
+                          <AiFillDollarCircle size={20} color="white" />
+                        </div>
+                        <div className="d-grid justify-content-start">
+                          <span style={{ padding: "0", display: "flex" }}>
+                            USA
+                          </span>
+                        </div>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </>
             )}
           </div>

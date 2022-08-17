@@ -189,7 +189,6 @@ function PendingAuctions({ windowSize, searchBy, search }) {
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       {loader && <Loading />}
       <Row>
-        <h1>Buyer Approval</h1>
         <Table
           striped
           borderless

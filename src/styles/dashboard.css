@@ -510,21 +510,22 @@ h3 {
   font-size: 0.7rem;
   font-weight: bold;
   border-radius: 50%;
-  background-color: #db1313;
+  background-color: #b77b50;
   border: 2px solid #ffefe3;
   color: white;
   margin-right: 59px;
   margin-bottom: 30px;
+  padding: 0 0.9rem;
 }
 
 .notifi-drop-down {
   display: block;
   position: absolute;
   border-radius: 5px;
-  width: 20rem;
+  width: 18rem;
   height: 355px;
   margin-top: 310px;
-  margin-right: -60px;
+  /* margin-right: -40px; */
   padding-top: 55px;
   z-index: 2;
 }
@@ -539,7 +540,7 @@ h3 {
 
 .notifi-dropdown-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 10px;
   border-bottom: 2px solid #e6e6e6;

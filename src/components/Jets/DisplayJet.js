@@ -114,6 +114,7 @@ function DisplayJet({
   setRefresh,
   refresh,
 }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);

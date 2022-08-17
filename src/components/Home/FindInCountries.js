@@ -10,11 +10,16 @@ const FindInCountries = ({ windowSize }) => {
   const history = useHistory();
   return (
     <>
-      <Container style={{ padding: windowSize > 400 && "0 30px" }} fluid>
+      <Container
+        style={{ padding: windowSize > 400 && "0 30px" }}
+        className={windowSize > 600 && "mt-5"}
+        fluid
+      >
         <Row
           style={{
             margin: "0",
             padding: "0 10px",
+            paddingTop: windowSize > 600 && "3rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

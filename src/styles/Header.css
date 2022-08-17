@@ -160,6 +160,18 @@
   margin-left: 8px;
 }
 
+.headerButton:hover {
+  background-color: #fcba7d;
+  color: black;
+}
+
+.headerButton:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #fcba7d !important;
+  color: black !important;
+}
+
 .user {
   background-color: #fcba7d;
   color: black;

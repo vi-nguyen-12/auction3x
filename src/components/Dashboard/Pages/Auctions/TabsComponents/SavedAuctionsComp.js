@@ -43,8 +43,8 @@ const Carousel_2 = styled(Slider)`
     height: 150px;
     // left: 2vw;
     z-index: 1;
-    background: url("./images/back-icon.png") center center no-repeat ;
-    margin-left: -70px;
+    background: url("./images/back-icon.png") center center no-repeat;
+    margin-left: -6rem;
   }
 
   .slick-prev:before {
@@ -55,14 +55,14 @@ const Carousel_2 = styled(Slider)`
     height: 150px;
     // right: 2vw;
     z-index: 1;
-    background: url("./images/next-icon.png") center center no-repeat ;
-    margin-right: -70px;
+    background: url("./images/next-icon.png") center center no-repeat;
+    margin-right: -6rem;
   }
 
   .slick-next:before {
     display: none;
   }
-  // 
+  //
 `;
 
 const Wrap = styled.div`

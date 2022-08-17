@@ -264,7 +264,7 @@ function App() {
             />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           size="md"
           backdrop="static"
           keyboard={false}
@@ -278,7 +278,7 @@ function App() {
             contentclassname="forgotPass"
             className="forgot-modal"
           ></Modal.Body>
-        </Modal>
+        </Modal> */}
         {/* <Modal
           size="md"
           backdrop="static"
@@ -321,7 +321,7 @@ function App() {
             <ChangePass toggleChangePass={toggleChangePass} />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           backdrop="static"
           keyboard={false}
           // aria-labelledby="contained-modal-title-vcenter"
@@ -331,7 +331,7 @@ function App() {
           // contentclassname="custom-modal-title"
         >
           <div className="sign-In"></div>
-        </Modal>
+        </Modal> */}
         <Modal
           size="lg"
           backdrop="static"
@@ -375,7 +375,7 @@ function App() {
             />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           size="lg"
           backdrop="static"
           keyboard={false}
@@ -386,7 +386,7 @@ function App() {
           contentclassname="sign-In"
         >
           <Modal.Body className="sign-Up"></Modal.Body>
-        </Modal>
+        </Modal> */}
         <Modal
           size="lg"
           backdrop="static"
@@ -476,7 +476,7 @@ function App() {
             <ChangePass toggleChangePass={toggleChangePass} />
           </Modal.Body>
         </Modal>
-        <Modal
+        {/* <Modal
           backdrop="static"
           keyboard={false}
           aria-labelledby="contained-modal-title-vcenter"
@@ -486,7 +486,7 @@ function App() {
           contentclassname="custom-modal-style"
         >
           <div className="sign-Up"></div>
-        </Modal>
+        </Modal> */}
         <Modal
           size="lg"
           backdrop="static"
@@ -547,7 +547,7 @@ function App() {
           </Modal.Body>
         </Modal>
         {/* End of Modal */}
-        <ButtontoTop />{" "}
+        {/* <ButtontoTop />{" "} */}
         <Router>
           <Header
             color={color}

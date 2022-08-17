@@ -94,13 +94,13 @@ function DisplayAuctions({
       {auction && (
         <h5 className="realHeader">
           {auction.property.type === "car" ? (
-            <p>CAR</p>
+            <title>CAR</title>
           ) : auction.property.type === "jet" ? (
-            <p>JET</p>
+            <title>JET</title>
           ) : auction.property.type === "yacht" ? (
-            <p>YACHT</p>
+            <title>YACHT</title>
           ) : (
-            <p>REAL ESTATE</p>
+            <title>REAL ESTATE</title>
           )}
         </h5>
       )}

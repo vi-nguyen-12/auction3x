@@ -41,6 +41,8 @@ function DashHeader({
       });
   };
 
+  console.log(location);
+
   return (
     <Container
       style={{
@@ -53,78 +55,187 @@ function DashHeader({
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
-            {location === "/Dashboard/Messaging" ? (
-              <h1 className="mx-5">Messaging</h1>
+            {location === "/Dashboard/Listings/AuctionListings" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Your Listings
+              </h1>
+            ) : location === "/Dashboard/Messaging" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Messaging
+              </h1>
             ) : location === "/Dashboard/Profile" ? (
-              <h1 className="mx-5">Profile</h1>
-            ) : (
-              <div className="d-flex">
-                {location !== "/Dashboard" && (
-                  <Form.Select
-                    className="form-control mx-3"
-                    style={{ width: "150px" }}
-                    onChange={(e) => setSearchBy(e.target.value)}
-                  >
-                    <option value="id">ID</option>
-                    <option value="propType">Property Type</option>
-                    <option value="address">Address</option>
-                  </Form.Select>
-                )}
-                <div
-                  className="searchBar"
-                  // style={{
-                  //   borderRadius: "45px",
-                  //   paddingLeft: "8px",
-                  //   width: "400px",
-                  // }}
-                >
-                  <input
-                    type="text"
-                    onInput={(e) =>
-                      (e.target.value = e.target.value.toLowerCase())
-                    }
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search Here"
-                  />
-                  <FiSearch color="black" size={25} />
-                </div>
-
-                {location === "/Dashboard" && suggest?.length > 0 && (
-                  <div
-                    className="position-absolute bg-white shadow"
-                    style={{
-                      width: "25rem",
-                      height: "8rem",
-                      marginTop: "50px",
-                      borderRadius: "0 0 5px 5px",
-                      overflow: "auto",
-                    }}
-                  >
-                    {suggest.map((suggestion, index) => (
-                      <div
-                        className="suggest w-100 p-2 px-3"
-                        style={{
-                          cursor: "pointer",
-                          borderBottom: "1px solid #e9ecef",
-                        }}
-                        onClick={() => {
-                          setLoader(true);
-                          history.push(suggestion.value);
-                          // setSuggest([]);
-                          window.location.reload();
-                          setLoader(false);
-                        }}
-                      >
-                        {suggestion.name}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Profile
+              </h1>
+            ) : location === "/Dashboard" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Dashboard
+              </h1>
+            ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Saved Auctions
+              </h1>
+            ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Buyer Approval
+              </h1>
+            ) : location === "/Dashboard/Auctions/BidAuctions" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Bid Auctions
+              </h1>
+            ) : location === "/Dashboard/Auctions/WinAuctions" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Won Auctions
+              </h1>
+            ) : location === "/Dashboard/Listings/PendingApproval" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Pending Approval
+              </h1>
+            ) : location === "/Dashboard/Listings/SoldListings" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Sold Listings
+              </h1>
+            ) : location === "/Dashboard/Listings/IncompleteListing" ? (
+              <h1
+                style={{
+                  fontFamily: "Poppins",
+                  fontWeight: "600",
+                  color: "#273240",
+                }}
+              >
+                Incomplete Listings
+              </h1>
+            ) : null}
           </Col>
           <Col>
             <div className="search">
+              {location === "/Dashboard/Messaging" ? (
+                <></>
+              ) : location === "/Dashboard/Profile" ? (
+                <></>
+              ) : (
+                <div className="d-flex">
+                  {location !== "/Dashboard" && (
+                    <Form.Select
+                      className="form-control mx-3 border-0"
+                      style={{ width: "150px" }}
+                      onChange={(e) => setSearchBy(e.target.value)}
+                    >
+                      <option value="id">ID</option>
+                      <option value="propType">Property Type</option>
+                      <option value="address">Address</option>
+                    </Form.Select>
+                  )}
+                  <div
+                    className="searchBar"
+                    style={{
+                      marginRight: "1rem",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      onInput={(e) =>
+                        (e.target.value = e.target.value.toLowerCase())
+                      }
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Search Here"
+                    />
+                    <FiSearch color="black" size={25} />
+                  </div>
+
+                  {location === "/Dashboard" && suggest?.length > 0 && (
+                    <div
+                      className="position-absolute bg-white shadow"
+                      style={{
+                        width: "25rem",
+                        height: "8rem",
+                        marginTop: "50px",
+                        borderRadius: "0 0 5px 5px",
+                        overflow: "auto",
+                      }}
+                    >
+                      {suggest.map((suggestion, index) => (
+                        <div
+                          className="suggest w-100 p-2 px-3"
+                          style={{
+                            cursor: "pointer",
+                            borderBottom: "1px solid #e9ecef",
+                          }}
+                          onClick={() => {
+                            setLoader(true);
+                            history.push(suggestion.value);
+                            // setSuggest([]);
+                            window.location.reload();
+                            setLoader(false);
+                          }}
+                        >
+                          {suggestion.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
               <Button
                 onClick={() => setNotifi(!notifi)}
                 onMouseLeave={() => setNotifi(false)}
@@ -281,13 +392,144 @@ function DashHeader({
           <Row style={{ marginBottom: "30px" }}>
             <Col style={{ display: "flex", justifyContent: "center" }}>
               {location === "/Dashboard/Messaging" ? (
-                <h1 className="mx-5">Messaging</h1>
+                <h1
+                  style={{
+                    fontFamily: "Poppins",
+                    fontWeight: "600",
+                    color: "#273240",
+                  }}
+                >
+                  Messaging
+                </h1>
               ) : location === "/Dashboard/Profile" ? (
-                <h1 className="mx-5">Profile</h1>
+                <h1
+                  style={{
+                    fontFamily: "Poppins",
+                    fontWeight: "600",
+                    color: "#273240",
+                  }}
+                >
+                  Profile
+                </h1>
               ) : (
-                <div className="searchBar">
-                  <input type="text" placeholder="Search Here" />
-                  <FiSearch color="black" size={25} />
+                <div className="d-grid">
+                  <div className="d-flex">
+                    {location !== "/Dashboard" && (
+                      <Form.Select
+                        className="form-control mx-3 border-0"
+                        style={{ width: "150px" }}
+                        onChange={(e) => setSearchBy(e.target.value)}
+                      >
+                        <option value="id">ID</option>
+                        <option value="propType">Property Type</option>
+                        <option value="address">Address</option>
+                      </Form.Select>
+                    )}
+                    <div className="searchBar">
+                      <input
+                        type="text"
+                        placeholder="Search Here"
+                        onInput={(e) =>
+                          (e.target.value = e.target.value.toLowerCase())
+                        }
+                        onChange={(e) => setSearch(e.target.value)}
+                      />
+                      <FiSearch color="black" size={25} />
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-center mt-4">
+                    {location === "/Dashboard/Listings/AuctionListings" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Your Listings
+                      </h1>
+                    ) : location === "/Dashboard" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Dashboard
+                      </h1>
+                    ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Saved Auctions
+                      </h1>
+                    ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Buyer Approval
+                      </h1>
+                    ) : location === "/Dashboard/Auctions/BidAuctions" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Bid Auctions
+                      </h1>
+                    ) : location === "/Dashboard/Auctions/WinAuctions" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Won Auctions
+                      </h1>
+                    ) : location === "/Dashboard/Listings/PendingApproval" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Pending Approval
+                      </h1>
+                    ) : location === "/Dashboard/Listings/SoldListings" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Sold Listings
+                      </h1>
+                    ) : location === "/Dashboard/Listings/IncompleteListing" ? (
+                      <h1
+                        style={{
+                          fontFamily: "Poppins",
+                          fontWeight: "600",
+                          color: "#273240",
+                        }}
+                      >
+                        Incomplete Listings
+                      </h1>
+                    ) : null}
+                  </div>
                 </div>
               )}
             </Col>

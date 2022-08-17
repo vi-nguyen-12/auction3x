@@ -68,7 +68,6 @@ function PendingListings({
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
-        <h1>Pending Approval</h1>
         <Table
           striped
           borderless

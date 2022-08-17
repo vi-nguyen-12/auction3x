@@ -58,7 +58,6 @@ function WinAuctions({ windowSize, searchBy, search }) {
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
-        <h1>Won Auctions</h1>
         <Table
           striped
           borderless
