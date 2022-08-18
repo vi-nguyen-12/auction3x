@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ErrorPage from "../../../Error/404page";
+import Loading from "../../../Loading";
 import SavedAuctionsCard from "./SavedAuctionsCard";
 import authService from "../../../../services/authServices";
 import "slick-carousel/slick/slick.css";
@@ -87,8 +88,10 @@ function SavedAuctions({ windowSize, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const [SavedAuctions, setSavedAuctions] = useState([]);
   const [newSavedAuctions, setNewSavedAuctions] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    setLoader(true);
     const fetchSavedAuctions = async () => {
       await authService.getSavedProperties(user._id).then((res) => {
         if (res.data.error) {
@@ -96,6 +99,7 @@ function SavedAuctions({ windowSize, searchBy, search }) {
         } else {
           setSavedAuctions(res.data);
           setNewSavedAuctions(res.data);
+          setLoader(false);
         }
       });
     };
@@ -145,6 +149,7 @@ function SavedAuctions({ windowSize, searchBy, search }) {
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+      {loader && <Loading />}
       <Row>
         {newSavedAuctions.length > 0 ? (
           <Carousel_3 {...settings}>
@@ -165,9 +170,9 @@ function SavedAuctions({ windowSize, searchBy, search }) {
               </Wrap>
             ))}
           </Carousel_3>
-        ) : (
+        ) : !loader ? (
           <ErrorPage />
-        )}
+        ) : null}
       </Row>
     </Container>
   );

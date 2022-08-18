@@ -56,6 +56,7 @@ const Carousel = styled(Slider)`
     border-radius: 50%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
     margin: -50px;
+    margin-left: -120px;
   }
 
   .slick-prev:before {
@@ -77,6 +78,7 @@ const Carousel = styled(Slider)`
     border-radius: 50%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
     margin: -50px;
+    margin-right: -120px;
   }
 
   .slick-next:before {
@@ -124,7 +126,14 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
     infinite: true,
     speed: 500,
     autoplay: false,
-    slidesToShow: auctions.length > 2 ? 2 : auctions.length,
+    slidesToShow:
+      windowSize >= 1536
+        ? auctions.length > 3
+          ? 3
+          : auctions.length
+        : auctions.length > 2
+        ? 2
+        : auctions.length,
     responsive: [
       {
         breakpoint: 1024,

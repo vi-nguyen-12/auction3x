@@ -154,6 +154,7 @@ function CarPage({
 
   useEffect(() => {
     toggleChange();
+    setLoader(true);
     let auctions = [];
     const getAuctions = async () => {
       const response1 = await authService.getOngoingAuctionsByType("car");
@@ -169,6 +170,7 @@ function CarPage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      setLoader(false);
       if (!filter) {
         setResultLength({ car: auctions.length });
       }
@@ -258,8 +260,10 @@ function CarPage({
             </Carousel>
           )}
         </Row>
-      ) : (
+      ) : !loader ? (
         <ErrorPage />
+      ) : (
+        <Row style={{ height: "100vh" }}></Row>
       )}
     </>
   );

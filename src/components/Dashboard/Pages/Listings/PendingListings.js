@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Modal, Row, Container } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Row,
+  Col,
+  Container,
+  Pagination,
+} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -21,6 +28,26 @@ function PendingListings({
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
   const [newPendingListings, setNewPendingListings] = useState([]);
+  const [pageContent, setPageContent] = useState([]);
+  const [currentPageContent, setCurrentPageContent] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  let items = [];
+
+  // seperate incomplete listings into pages
+  useEffect(() => {
+    if (newPendingListings) {
+      const pages = [];
+      const reversed = newPendingListings.slice().reverse();
+      const totalPages = Math.ceil(reversed.length / 5);
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(reversed.slice((i - 1) * 5, i * 5));
+      }
+      setPageContent(pages);
+      setTotalPages(totalPages);
+    }
+  }, [newPendingListings]);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -65,6 +92,19 @@ function PendingListings({
     }
   }, [search]);
 
+  for (let number = 1; number <= totalPages; number++) {
+    items.push(
+      <Pagination.Item active={number === currentPage} key={number}>
+        {number}
+      </Pagination.Item>
+    );
+  }
+
+  const handlePageChange = (key) => {
+    setCurrentPage(key);
+    setCurrentPageContent(key - 1);
+  };
+
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
@@ -93,8 +133,8 @@ function PendingListings({
               <th>Last Updated</th>
             </tr>
           </thead>
-          {newPendingListings.length > 0 ? (
-            newPendingListings.map((auction, index) => (
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
@@ -171,6 +211,30 @@ function PendingListings({
             </tbody>
           )}
         </Table>
+      </Row>
+
+      <Row>
+        {items.map((item, index) => (
+          <Col
+            style={{
+              display: "flex",
+              flex: "0",
+              padding: "0",
+            }}
+            key={index}
+          >
+            <Pagination
+              style={{
+                background: "transparent",
+                margin: "0 2px",
+                borderRadius: "5px",
+              }}
+              onClick={() => handlePageChange(parseInt(item.key))}
+            >
+              {item}
+            </Pagination>
+          </Col>
+        ))}
       </Row>
     </Container>
   );

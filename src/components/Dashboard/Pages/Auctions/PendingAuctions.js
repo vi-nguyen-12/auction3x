@@ -26,7 +26,7 @@ function PendingAuctions({ windowSize, searchBy, search }) {
   const [loader, setLoader] = useState(false);
   const [doc, setDoc] = useState([]);
   const [documents, setDocuments] = useState([]);
-  const [isSelf, setIsSelf] = useState(false);
+  const [oldFund, setOldFund] = useState([]);
   const [showQuestionair, setShowQuestionair] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
@@ -309,6 +309,11 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                         setQuestionair(auction.buyer.answers);
                         setBuyerId(auction.buyer._id);
                         setDocuments(auction.buyer.funds);
+                        setOldFund(
+                          ...auction.buyer.funds.map((item) => {
+                            return item.document.url;
+                          })
+                        );
                         toggleQuestionair();
                       }}
                       variant="primary"
@@ -322,6 +327,11 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                         setDocuments(auction.buyer.funds);
                         setQuestionair(auction.buyer.answers);
                         setBuyerId(auction.buyer._id);
+                        setOldFund(
+                          auction.buyer.funds.map((item) => {
+                            return item.document.url;
+                          })
+                        );
                         toggleDocuments();
                       }}
                       variant="primary"
@@ -668,7 +678,7 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                     <th>Document Status</th>
                     <th>Approved Amount</th>
                     <th>View Document</th>
-                    <th>Delete</th>
+                    {/* <th>Delete</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -711,7 +721,7 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                             View
                           </Button>
                         </td>
-                        <td>
+                        {/* <td>
                           <Button
                             className="bg-transparent border-0 text-danger fw-bold"
                             style={{ fontSize: "1.3rem" }}
@@ -720,7 +730,7 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                           >
                             X
                           </Button>
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                 </tbody>
@@ -805,12 +815,16 @@ function PendingAuctions({ windowSize, searchBy, search }) {
                       {documents.map((file, index) => (
                         <div key={index}>
                           <span>{file?.document?.name || file?.name}</span>
-                          <Button
-                            onClick={() => handleDeleteFund(index)}
-                            className="bg-transparent border-0 text-danger fw-bold"
-                          >
-                            X
-                          </Button>
+                          {!oldFund.find((old) =>
+                            old === file?.url ? file?.url : file?.document?.url
+                          ) ? (
+                            <Button
+                              onClick={() => handleDeleteFund(index)}
+                              className="bg-transparent border-0 text-danger fw-bold"
+                            >
+                              X
+                            </Button>
+                          ) : null}
                         </div>
                       ))}
                     </div>

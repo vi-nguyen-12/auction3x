@@ -26,10 +26,14 @@ const AuctionTimer = ({ time, windowSize }) => {
       if (distance < 0) {
         clearInterval(interval.current);
       } else {
-        setDays(days);
-        setHours(hours);
-        setMinutes(minutes);
-        setSeconds(seconds);
+        setDays(days.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+        setHours(hours.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+        setMinutes(
+          minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        );
+        setSeconds(
+          seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 })
+        );
       }
     }, 1000);
   };
@@ -43,23 +47,23 @@ const AuctionTimer = ({ time, windowSize }) => {
     <Table className="timerTable" style={{ padding: "0" }} borderless>
       <thead>
         <tr className="timerHead">
-          <th>{days}</th>
-          <th>{hours}</th>
-          <th>{minutes}</th>
+          <th>{days} :</th>
+          <th>{hours} :</th>
+          <th>{minutes} :</th>
           <th>{seconds}</th>
         </tr>
       </thead>
       <tbody>
         <tr className="timerName">
-          <td>Days</td>
-          <td>Hours</td>
+          <td>D</td>
+          <td>HR</td>
           <td>
             {/* {windowSize > 800 ? "Minutes" : "Min"} */}
-            Minutes
+            MIN
           </td>
           <td>
             {/* {windowSize > 800 ? "Seconds" : "Sec"} */}
-            Seconds
+            SEC
           </td>
         </tr>
       </tbody>

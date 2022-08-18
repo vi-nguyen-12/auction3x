@@ -217,7 +217,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
             {new Date().toISOString() < data.auctionStartDate &&
             new Date().toISOString() < data.registerEndDate ? (
               <Col style={{ padding: "0" }}>
-                <p>Registration</p>
+                <p>Registration Ends</p>
               </Col>
             ) : (
               <Col style={{ padding: "0" }}>
@@ -426,7 +426,11 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 className="black-button text-white"
                 variant="dark"
                 disabled={
-                  new Date().toISOString() > data.auctionEndDate ? true : false
+                  new Date().toISOString() > data.auctionEndDate
+                    ? true
+                    : false || new Date().toISOString() > data.registerEndDate
+                    ? true
+                    : false
                 }
               >
                 {new Date().toISOString() > data.auctionEndDate

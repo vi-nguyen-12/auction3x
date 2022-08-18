@@ -81,8 +81,6 @@ function IncompleteListing({ windowSize, searchBy, search }) {
     }
   }, [newIncompleteListings]);
 
-  console.log(IncompleteListings);
-
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
       if (res.data.error) {

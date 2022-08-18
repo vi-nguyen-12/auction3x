@@ -155,6 +155,7 @@ function JetPage({
 
   useEffect(() => {
     toggleChange();
+    setLoader(true);
     let auctions = [];
     const getAuctions = async () => {
       const response1 = await authService.getOngoingAuctionsByType("jet");
@@ -170,6 +171,7 @@ function JetPage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      setLoader(false);
       if (!filter) {
         setResultLength({ jet: auctions.length });
       }
@@ -259,8 +261,10 @@ function JetPage({
             </Carousel>
           )}
         </Row>
-      ) : (
+      ) : !loader ? (
         <ErrorPage />
+      ) : (
+        <Row style={{ height: "100vh" }}></Row>
       )}
     </>
   );

@@ -4,13 +4,12 @@
   font-weight: 600;
 }
 
-/* .timerName td:nth-child(n + 1) {
-  font-size: large;
-  font-family: "Josefin Slab", serif;
-} */
+.timerName td:nth-child(n + 1) {
+  font-size: 1rem;
+}
 
 .timerTable > :not(caption) > * > * {
-  padding: 0 0.2rem;
+  padding: 0 0.3rem;
   margin: 0;
 }
 

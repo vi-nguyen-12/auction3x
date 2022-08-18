@@ -7,20 +7,24 @@ import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
 import { useParams } from "react-router-dom";
 import { Upcoming } from "../Auctions/Upcoming";
+import Loading from "../Loading";
 
 import About from "./About";
 
 const Home = ({ toggleSignIn, windowSize }) => {
+  const [loader, setLoader] = useState(false);
   const [featureAuctions, setFeatureAuctions] = useState([]);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
 
   useEffect(async () => {
+    setLoader(true);
     await authService.getFeaturedAuctions().then((res) => {
       setFeatureAuctions(res.data);
     });
     await authService.getUpcomingAuctions().then((res) => {
       setUpcomingAuctions(res.data);
+      setLoader(false);
     });
     await authService.getOngoingAuctions().then((res) => {
       setOnGoingAuctions(res.data);
@@ -39,6 +43,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
 
   return (
     <>
+      {loader ? <Loading /> : null}
       <ImgSlider
         featureAuctions={featureAuctions}
         onGoingAuctions={onGoingAuctions}
@@ -55,6 +60,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         toggleSignIn={toggleSignIn}
         upcomingAuctions={upcomingAuctions}
         windowSize={windowSize}
+        loader={loader}
       />
       <Work windowSize={windowSize} />
       <RealEstate />

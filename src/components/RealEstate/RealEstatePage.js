@@ -157,6 +157,7 @@ function RealEstatePage({
   const [loader, setLoader] = useState(false);
   useEffect(async () => {
     toggleChange();
+    setLoader(true);
     let auctions = [];
     const getAuctions = async () => {
       const response1 = await authService.getOngoingAuctionsByType(
@@ -176,6 +177,7 @@ function RealEstatePage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      setLoader(false);
       if (!filter) {
         setResultLength({ realEstate: auctions.length });
       }
@@ -265,8 +267,10 @@ function RealEstatePage({
             </Carousel>
           )}
         </Row>
-      ) : (
+      ) : !loader ? (
         <ErrorPage />
+      ) : (
+        <Row style={{ height: "100vh" }}></Row>
       )}
     </>
   );

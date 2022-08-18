@@ -157,6 +157,7 @@ function YachtPage({
 
   useEffect(() => {
     toggleChange();
+    setLoader(true);
     let auctions = [];
     const getAuctions = async () => {
       const response1 = await authService.getOngoingAuctionsByType("yacht");
@@ -172,6 +173,7 @@ function YachtPage({
         auctions = [...auctions, ...response2.data];
       }
       setAuctions(auctions);
+      setLoader(false);
       if (!filter) {
         setResultLength({ yacht: auctions.length });
       }
@@ -261,8 +263,10 @@ function YachtPage({
             </Carousel>
           )}
         </Row>
-      ) : (
+      ) : !loader ? (
         <ErrorPage />
+      ) : (
+        <Row style={{ height: "100vh" }}></Row>
       )}
     </>
   );

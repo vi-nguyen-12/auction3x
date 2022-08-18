@@ -881,9 +881,9 @@ function Dashboard({
                     <tr>
                       <th>#</th>
                       <th>Document Name</th>
+                      <th>View</th>
                       <th>Document Type</th>
                       <th>Status</th>
-                      <th>View</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -893,6 +893,22 @@ function Dashboard({
                         <tr>
                           <td>{index + 1}</td>
                           <td>{document.name}</td>
+                          <td>
+                            <div
+                              style={{
+                                width: "100%",
+                                alignItems: "right",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <img
+                                width="100px"
+                                height="50px"
+                                src={document.url}
+                                onClick={() => window.open(document.url)}
+                              />
+                            </div>
+                          </td>
                           <td>
                             {document.officialName
                               ? document.officialName
@@ -905,15 +921,6 @@ function Dashboard({
                           ) : document.isVerified === "fail" ? (
                             <td>Rejected</td>
                           ) : null}
-                          <td>
-                            <Button
-                              onClick={() => {
-                                window.open(document.url, "_blank");
-                              }}
-                            >
-                              View
-                            </Button>
-                          </td>
                           <td>
                             <Button
                               style={{

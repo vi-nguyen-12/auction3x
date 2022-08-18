@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import Cards from "../Cards/Cards";
 import Error from "../Error/404page";
+import Loading from "../Loading";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -141,7 +142,7 @@ align-content: center;
 }
 `;
 
-const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
+const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize, loader }) => {
   let settings = {
     dots: false,
     infinite: true,
@@ -220,8 +221,10 @@ const Upcoming = ({ toggleSignIn, upcomingAuctions, windowSize }) => {
                         />
                       </Col>
                     ))
-                  ) : (
+                  ) : !loader ? (
                     <Error />
+                  ) : (
+                    <Row style={{ height: "100vh" }}></Row>
                   )}
                 </Row>
               </div>
