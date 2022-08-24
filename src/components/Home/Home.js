@@ -20,7 +20,11 @@ const Home = ({ toggleSignIn, windowSize }) => {
   useEffect(async () => {
     setLoader(true);
     await authService.getFeaturedAuctions().then((res) => {
-      setFeatureAuctions(res.data);
+      setFeatureAuctions(
+        res.data.filter(
+          (auction) => auction.auctionEndDate > new Date().toISOString()
+        )
+      );
     });
     await authService.getUpcomingAuctions().then((res) => {
       setUpcomingAuctions(res.data);

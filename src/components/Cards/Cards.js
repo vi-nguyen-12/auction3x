@@ -219,6 +219,11 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
               <Col style={{ padding: "0" }}>
                 <p>Registration Ends</p>
               </Col>
+            ) : new Date().toISOString() > data.registerEndDate &&
+              new Date().toISOString() < data.auctionStartDate ? (
+              <Col style={{ padding: "0" }}>
+                <p>Auction Starts</p>
+              </Col>
             ) : (
               <Col style={{ padding: "0" }}>
                 <p>Online Auction</p>
@@ -260,8 +265,15 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
               </Col>
             ) : new Date().toISOString() < data.auctionStartDate &&
               new Date().toISOString() > data.registerEndDate ? (
-              <Col>
-                <p
+              <Col className="p-0">
+                <div style={{ fontSize: "12px" }}>
+                  <AuctionTimer
+                    time={data.auctionStartDate}
+                    id={data._id}
+                    windowSize={windowSize}
+                  />
+                </div>
+                {/* <p
                   style={{
                     fontSize: windowSize < 600 ? "12px" : "15px",
                     // width: "200px",
@@ -271,7 +283,7 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                   }}
                 >
                   Registration Ended
-                </p>
+                </p> */}
               </Col>
             ) : new Date().toISOString() > data.auctionStartDate &&
               new Date().toISOString() < data.auctionEndDate ? (
@@ -426,11 +438,9 @@ function Cards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 className="black-button text-white"
                 variant="dark"
                 disabled={
-                  new Date().toISOString() > data.auctionEndDate
-                    ? true
-                    : false || new Date().toISOString() > data.registerEndDate
-                    ? true
-                    : false
+                  new Date().toISOString() > data.auctionEndDate ||
+                  (new Date().toISOString() > data.registerEndDate &&
+                    new Date().toISOString() < data.auctionStartDate)
                 }
               >
                 {new Date().toISOString() > data.auctionEndDate

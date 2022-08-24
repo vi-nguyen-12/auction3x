@@ -16,6 +16,7 @@ import Loading from "../Loading";
 import { MdClose } from "react-icons/md";
 
 function PropertyDetails({ property, setRefresh, refresh }) {
+  console.log(property);
   const [edit, setEdit] = useState({
     step1: false,
     step2: false,
@@ -589,6 +590,10 @@ function PropertyDetails({ property, setRefresh, refresh }) {
             onClick={() =>
               setEdit((prev) => ({ ...prev.step1, step1: !edit.step1 }))
             }
+            disabled={
+              property.auctionDetails?.auctionStartDate ||
+              property.isApproved === "success"
+            }
           >
             Edit
           </Button>
@@ -724,6 +729,10 @@ function PropertyDetails({ property, setRefresh, refresh }) {
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2, step2: !edit.step2 }))
             }
+            disabled={
+              property.auctionDetails?.auctionStartDate ||
+              property.isApproved === "success"
+            }
           >
             Edit
           </Button>
@@ -833,6 +842,10 @@ function PropertyDetails({ property, setRefresh, refresh }) {
             className="mx-3"
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_2, step2_2: !edit.step2_2 }))
+            }
+            disabled={
+              property.auctionDetails?.auctionStartDate ||
+              property.isApproved === "success"
             }
           >
             Edit

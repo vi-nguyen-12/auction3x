@@ -55,14 +55,14 @@ const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
       <tbody>
         <tr className="timerName">
           <td>D</td>
-          <td>HR</td>
+          <td>Hr</td>
           <td>
             {/* {windowSize > 800 ? "Minutes" : "Min"} */}
-            MIN
+            Min
           </td>
           <td>
             {/* {windowSize > 800 ? "Seconds" : "Sec"} */}
-            SEC
+            Sec
           </td>
         </tr>
       </tbody>

@@ -128,7 +128,7 @@ function LiveListings({
                           toggleShowProperty();
                         }}
                       >
-                        Edit
+                        View
                       </Button>
                     </td>
                     <td colSpan={2}>

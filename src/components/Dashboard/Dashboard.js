@@ -846,8 +846,10 @@ function Dashboard({
             style={{ backgroundColor: "white" }}
             onClick={() => {
               toggleShowDocu();
-              setEdit({ ...edit.image, image: !edit.image });
-              setEdit({ ...edit.docu, docu: !edit.docu });
+              // setEdit({ ...edit.image, image: !edit.image });
+              // setEdit({ ...edit.docu, docu: !edit.docu });
+              const edits = { image: false, docu: false, video: false };
+              setEdit({ ...edit, ...edits });
             }}
           />
         </div>
@@ -931,6 +933,7 @@ function Dashboard({
                                 textAlign: "center",
                               }}
                               onClick={() => handleDeleteImage(document._id)}
+                              disabled={!edit.image}
                             >
                               X
                             </Button>
@@ -966,6 +969,10 @@ function Dashboard({
                 ) : null}
                 <Button
                   onClick={() => setEdit({ ...edit.image, image: !edit.image })}
+                  disabled={
+                    property?.auctionDetails?.auctionStartDate ||
+                    property?.isApproved === "success"
+                  }
                 >
                   Edit
                 </Button>
@@ -1043,6 +1050,7 @@ function Dashboard({
                                 textAlign: "center",
                               }}
                               onClick={() => handleDeleteVideo(document._id)}
+                              disabled={!edit.video}
                             >
                               X
                             </Button>
@@ -1078,6 +1086,10 @@ function Dashboard({
                 ) : null}
                 <Button
                   onClick={() => setEdit({ ...edit.video, video: !edit.video })}
+                  disabled={
+                    property?.auctionDetails?.auctionStartDate ||
+                    property?.isApproved === "success"
+                  }
                 >
                   Edit
                 </Button>
@@ -1155,6 +1167,7 @@ function Dashboard({
                                 textAlign: "center",
                               }}
                               onClick={() => handleDeleteDocu(document._id)}
+                              disabled={!edit.docu}
                             >
                               X
                             </Button>
@@ -1223,6 +1236,10 @@ function Dashboard({
                 ) : null}
                 <Button
                   onClick={() => setEdit({ ...edit.docu, docu: !edit.docu })}
+                  disabled={
+                    property?.auctionDetails?.auctionStartDate ||
+                    property?.isApproved === "success"
+                  }
                 >
                   Edit
                 </Button>

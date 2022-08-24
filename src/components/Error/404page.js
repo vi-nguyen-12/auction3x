@@ -48,7 +48,7 @@ function ErrorPage() {
             color: "white",
           }}
         >
-          <span>404</span>
+          {/* <span>404</span> */}
           <p
             style={{
               fontSize: "25px",

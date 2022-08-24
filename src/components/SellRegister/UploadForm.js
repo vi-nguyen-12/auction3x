@@ -191,6 +191,12 @@ const UploadForm = ({
                   ? images.map((image, index, arr) => (
                       <div key={index} className="upload-item">
                         <span>
+                          <img
+                            src={image.url}
+                            alt="image"
+                            width={100}
+                            height={70}
+                          />{" "}
                           {image.name}
                           <Button
                             className="delete-btn"

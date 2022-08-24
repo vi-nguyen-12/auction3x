@@ -165,25 +165,25 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
 
   return (
     <div id="feature" className="background" style={{ height: "100vh" }}>
+      <Row>
+        <Col md={12} className="m-auto p-0">
+          <h2
+            style={{
+              color: "white",
+              fontSize: windowSize < 600 ? "24px" : "44px",
+              marginBottom: "50px",
+              fontWeight: "600",
+              fontFamily: "Josefin Slab",
+              fontStyle: "normal",
+              padding: "30px 50px",
+            }}
+          >
+            Featured Listings
+          </h2>
+        </Col>
+      </Row>
       {auctions.length > 0 ? (
         <>
-          <Row>
-            <Col md={12} className="m-auto p-0">
-              <h2
-                style={{
-                  color: "white",
-                  fontSize: windowSize < 600 ? "24px" : "44px",
-                  marginBottom: "50px",
-                  fontWeight: "600",
-                  fontFamily: "Josefin Slab",
-                  fontStyle: "normal",
-                  padding: "30px 50px",
-                }}
-              >
-                Featured Listings
-              </h2>
-            </Col>
-          </Row>
           <Col md={12} className="m-auto">
             <Row style={{ height: "700px" }}>
               <Carousel {...settings}>
@@ -201,7 +201,18 @@ const Featured = ({ toggleSignIn, featureAuctions: auctions, windowSize }) => {
             </Row>
           </Col>
         </>
-      ) : null}
+      ) : (
+        <Col md={12} className="m-auto px-5">
+          <div
+            className="text-center"
+            // style={{ border: "20px solid #55c2ff", padding: "30px 0" }}
+          >
+            <h3 style={{ color: "white" }}>
+              No Featured Listings
+            </h3>
+          </div>
+        </Col>
+      )}
     </div>
   );
 };

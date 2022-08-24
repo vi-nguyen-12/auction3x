@@ -82,11 +82,11 @@ function ApprovedListings({
             <th>#</th>
             <th>Property ID</th>
             <th>Property</th>
-            <th>Edit Property</th>
+            <th>Property Info</th>
             <th>Property Documents</th>
             <th colSpan={2}>Auction Status</th>
             <th>Property Status</th>
-            <th>Email</th>
+            {/* <th>Email</th> */}
             <th>View Auction</th>
           </tr>
         </thead>
@@ -123,7 +123,7 @@ function ApprovedListings({
                       toggleShowProperty();
                     }}
                   >
-                    Edit
+                    View
                   </Button>
                 </td>
                 <td>
@@ -241,14 +241,14 @@ function ApprovedListings({
                     ? "Yacht"
                     : ""}
                 </td> */}
-                <td>
+                {/* <td>
                   <Button
                     onClick={() => history.push("/Dashboard/Messaging")}
                     variant="primary"
                   >
                     Email
                   </Button>
-                </td>
+                </td> */}
                 <td>
                   <Button
                     onClick={() =>

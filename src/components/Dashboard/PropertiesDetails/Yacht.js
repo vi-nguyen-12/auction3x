@@ -395,6 +395,10 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh }) {
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_1, step2_1: !edit.step2_1 }))
             }
+            disabled={
+              property.auctionDetails?.auctionStartDate ||
+              property.isApproved === "success"
+            }
           >
             Edit
           </Button>
