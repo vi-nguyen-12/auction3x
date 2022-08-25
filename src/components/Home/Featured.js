@@ -78,7 +78,7 @@ const Carousel = styled(Slider)`
     border-radius: 50%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
     margin: -50px;
-    margin-right: -120px;
+    margin-right: -122px;
   }
 
   .slick-next:before {
