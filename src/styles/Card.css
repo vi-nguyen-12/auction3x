@@ -84,3 +84,69 @@
     transform: translateX(0px);
   }
 }
+
+.card-container {
+  border-radius: 0;
+  width: 540px;
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid #d1dcee;
+}
+.card-img {
+  border-radius: 0;
+  object-fit: fill;
+  height: 380px;
+  width: 100%;
+}
+
+.card-section-title {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(79, 79, 89, 0.8);
+}
+
+.prop-title {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  color: #08080a;
+}
+
+.card-bid-btn {
+  background: #b77b50;
+  border: none;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.starting-amount {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  color: #08080a;
+}
+
+.auction-end {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #6d6d6d;
+}
+
+.info-text {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #080808;
+}

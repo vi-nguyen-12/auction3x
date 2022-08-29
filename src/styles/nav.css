@@ -1,0 +1,84 @@
+@import url("https://use.typekit.net/ajt6eeb.css");
+
+.logo {
+  cursor: pointer;
+}
+
+.nav-container {
+  height: 90px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: rgb(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  list-style: none;
+}
+
+.nav-item {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin: 0 50px;
+  cursor: pointer;
+  height: 90px;
+}
+
+.nav-item:hover {
+  border-bottom: 1px solid #fff;
+  line-height: normal;
+}
+
+.nav-button {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+  height: 90px;
+}
+
+.nav-button:hover {
+  border-bottom: 1px solid #fff;
+  line-height: normal;
+}
+
+.nav-button:hover {
+  background-color: transparent;
+}
+
+.nav-button:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.menu-icon {
+  cursor: pointer;
+  height: 90px;
+}
+
+.menu-icon:hover {
+  border-bottom: 1px solid #fff;
+  line-height: normal;
+}

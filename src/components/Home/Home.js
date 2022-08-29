@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Featured } from "./Featured";
+import Features from "./NewHome/Features";
 import FindInCountries from "./FindInCountries";
 import ImgSlider from "./ImgSlider";
+import PremiumProp from "./NewHome/PremiumProp";
 import Work from "./work";
 import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
 import { useParams } from "react-router-dom";
 import { Upcoming } from "../Auctions/Upcoming";
 import Loading from "../Loading";
-
 import About from "./About";
 
 const Home = ({ toggleSignIn, windowSize }) => {
@@ -48,15 +49,15 @@ const Home = ({ toggleSignIn, windowSize }) => {
   return (
     <>
       {loader ? <Loading /> : null}
-      <ImgSlider
+      <PremiumProp
         featureAuctions={featureAuctions}
         onGoingAuctions={onGoingAuctions}
         upcomingAuctions={upcomingAuctions}
         windowSize={windowSize}
       />
-      <Featured
+      <Features
         toggleSignIn={toggleSignIn}
-        featureAuctions={featureAuctions}
+        featureAuctions={onGoingAuctions}
         windowSize={windowSize}
       />
       <FindInCountries windowSize={windowSize} />

@@ -14,6 +14,7 @@ import { addSavedProperty } from "./slice/savedPropertySlice";
 import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
 import Header from "./components/Home/Header";
+import NavBar from "./components/Home/NewHome/NavBar";
 import ScrollTop from "./components/ScrollTop";
 import ButtontoTop from "./components/ButtontoTop";
 import Footer from "./components/Home/footer";
@@ -549,7 +550,7 @@ function App() {
         {/* End of Modal */}
         {/* <ButtontoTop />{" "} */}
         <Router>
-          <Header
+          <NavBar
             color={color}
             change={change}
             headerWidth={headerWidth}

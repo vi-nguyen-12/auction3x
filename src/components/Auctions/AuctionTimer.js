@@ -44,30 +44,45 @@ const AuctionTimer = ({ time, windowSize }) => {
   }, []);
 
   return (
-    <Table className="timerTable" style={{ padding: "0" }} borderless>
-      <thead>
-        <tr className="timerHead">
-          <th>{days} :</th>
-          <th>{hours} :</th>
-          <th>{minutes} :</th>
-          <th>{seconds}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="timerName">
-          <td>D</td>
-          <td>Hr</td>
-          <td>
-            {/* {windowSize > 800 ? "Minutes" : "Min"} */}
-            Min
-          </td>
-          <td>
-            {/* {windowSize > 800 ? "Seconds" : "Sec"} */}
-            Sec
-          </td>
-        </tr>
-      </tbody>
-    </Table>
+    <ul className="d-flex p-0 m-0 timer">
+      <li
+        style={{
+          listStyle: "none",
+          marginRight: "30px",
+          fontSize: "20px",
+          fontWeight: "700",
+        }}
+      >
+        {days}d
+      </li>
+      <li
+        style={{
+          marginRight: "35px",
+          fontSize: "20px",
+          fontWeight: "700",
+        }}
+      >
+        {hours}h
+      </li>
+      <li
+        style={{
+          marginRight: "35px",
+          fontSize: "20px",
+          fontWeight: "700",
+        }}
+      >
+        {minutes}m
+      </li>
+      <li
+        style={{
+          marginRight: "35px",
+          fontSize: "20px",
+          fontWeight: "700",
+        }}
+      >
+        {seconds}s
+      </li>
+    </ul>
   );
 };
 

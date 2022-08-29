@@ -1,36 +1,27 @@
-.timerHead th:nth-child(n + 1) {
-  font-size: 25px;
-  font-family: "Josefin Slab", serif;
-  font-weight: 600;
+.timer {
+  background: linear-gradient(180deg, #e0bc8f 0%, #bf9767 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.timerName td:nth-child(n + 1) {
-  font-size: 1rem;
-}
-
-.timerTable > :not(caption) > * > * {
-  padding: 0 0.3rem;
+.timer {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-@media screen and (max-width: 800px) {
-  .timerHead th:nth-child(n + 1) {
-    /* font-size: medium; */
-    margin: 0;
-    /* padding: 0 !important; */
-  }
-
-  .timerHead th:nth-child(n + 1) {
-    font-size: 17px;
-    font-family: "Josefin Slab", serif;
-    font-weight: 600;
-  }
-
-  /* .timerName td:nth-child(n + 1) {
-    padding: 0 !important;
-  } */
-
-  /* .table > :not(caption) > * > * {
-    padding: 0;
-  } */
+.timer li::before {
+  content: "•";
+  color: #bf9767;
+  /* font-weight: bold; */
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
