@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { BsArrowRight } from "react-icons/bs";
-import Cards from "../../Cards/Cards";
 import NewCards from "../../Cards/NewCards";
 import "../../../styles/feature.css";
 

@@ -1,0 +1,78 @@
+.info-title {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  text-align: center;
+  color: #08080a;
+}
+
+.info-card-container {
+  width: 540px;
+  height: 547px;
+  background: #ffffff;
+  border: 1px solid #d1dcee;
+  border-radius: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  padding: 0 80px;
+}
+
+/* .info-card {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  
+} */
+
+.info-logo {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(180deg, #e0bc8f 0%, #bf9767 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-subtitle {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: #08080a;
+}
+
+.info-descript {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: #08080a;
+  opacity: 0.5;
+}
+
+.info-button {
+  padding: 15px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff2e9;
+  color: #b77b50;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+}
+
+.info-button:hover {
+  background: #b77b50;
+  color: #fff2e9;
+}

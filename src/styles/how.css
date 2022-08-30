@@ -1,0 +1,44 @@
+.how-container {
+  height: 639px;
+  background: #08080a;
+}
+
+.how-title {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.how-logo {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(180deg, #e0bc8f 0%, #bf9767 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.how-texts{
+    width: 350px;
+}
+
+.how-subtitle {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.how-descript {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}

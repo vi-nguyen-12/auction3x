@@ -1,0 +1,77 @@
+.prime-cate-card {
+  width: 395px;
+  height: 481px;
+  border-radius: 0;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  /* transition: transform 1s; */
+}
+
+/* .prime-cate-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+  transition: all ease 800ms;
+} */
+
+.prime-cate-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-position: center;
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding: 20px;
+  transition: all 1s;
+}
+
+.prime-cate-card-img:hover {
+  transform: scale(1.08);
+  /* box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+  transition: all ease 800ms; */
+}
+
+.prime-cate-info-container {
+  width: 100%;
+  height: 150px;
+  border-radius: 0;
+  border: 0;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  padding: 20px;
+}
+
+.prime-cate-info {
+  width: 100%;
+  height: 101px;
+  padding: 10px 30px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.prime-cate-title {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  color: #ffffff;
+}
+
+.prime-cate-subtitle {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 0.7;
+}

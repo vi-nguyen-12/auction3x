@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Featured } from "./Featured";
 import Features from "./NewHome/Features";
 import FindInCountries from "./FindInCountries";
+import PrimeCate from "./NewHome/PrimeCate";
 import ImgSlider from "./ImgSlider";
 import PremiumProp from "./NewHome/PremiumProp";
 import Work from "./work";
+import How from "./NewHome/How";
+import Info from "./NewHome/Info";
 import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
 import { useParams } from "react-router-dom";
@@ -60,16 +63,16 @@ const Home = ({ toggleSignIn, windowSize }) => {
         featureAuctions={onGoingAuctions}
         windowSize={windowSize}
       />
-      <FindInCountries windowSize={windowSize} />
+      <PrimeCate windowSize={windowSize} />
+      <How windowSize={windowSize} />
       <Upcoming
         toggleSignIn={toggleSignIn}
         upcomingAuctions={upcomingAuctions}
         windowSize={windowSize}
         loader={loader}
       />
-      <Work windowSize={windowSize} />
-      <RealEstate />
-      <About toggleSignIn={toggleSignIn} windowSize={windowSize} />
+      {/* <RealEstate /> */}
+      <Info toggleSignIn={toggleSignIn} windowSize={windowSize} />
     </>
   );
 };

@@ -1,0 +1,126 @@
+.top-row {
+  background: linear-gradient(180deg, #ffffff 50%, #08080a 50%);
+  padding: 0 2vw;
+  height: 50vh;
+}
+
+.subscript-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d1dcee;
+  /* height: auto; */
+  width: 100%;
+  /* padding: 80px 40px; */
+}
+
+.subscript-title {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 60px;
+  display: flex;
+  align-items: center;
+  color: #b77b50;
+}
+
+.subscript-descript {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  color: #6d6d6d;
+}
+
+.subscript-input {
+  background: #f9f9f9;
+  border-radius: 0;
+  border: 1px solid #a5a5a5;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  color: #878792;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+.subscript-btn {
+  background: #b77b50;
+  border-radius: 0;
+  border: none;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  padding: 20px 40px;
+}
+
+.subscript-text {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: #08080a;
+  opacity: 0.5;
+}
+
+.bottom-row {
+  background: #08080a;
+  padding: 0 2vw;
+  height: 40vh;
+}
+
+.footer-texts {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 35px;
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.footer-list {
+  list-style: none;
+}
+
+.footer-list-item-title {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, #e0bc8f 0%, #bf9767 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-list-item {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 30px;
+  color: #ffffff;
+}
