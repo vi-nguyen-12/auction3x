@@ -1,7 +1,7 @@
 .top-row {
   background: linear-gradient(180deg, #ffffff 50%, #08080a 50%);
   padding: 0 2vw;
-  height: 50vh;
+  height: 60%;
 }
 
 .subscript-container {
@@ -13,6 +13,13 @@
   /* height: auto; */
   width: 100%;
   /* padding: 80px 40px; */
+  box-shadow: -15px -15px 60px rgba(25, 90, 255, 0.08);
+}
+
+.subscript-box {
+  display: grid;
+  justify-content: end;
+  align-items: center;
 }
 
 .subscript-title {
@@ -35,7 +42,24 @@
   display: flex;
   align-items: center;
   color: #6d6d6d;
+  padding: 1rem 0;
 }
+
+.small-box {
+  width: 95px;
+  height: 100%;
+  border-top: 2px solid #b77b50;
+}
+
+/* .subscript-descript::before {
+  content: "";
+  position: absolute;
+  margin-top: 7%;
+  width: 95px;
+  height: 0;
+  background-color: #b77b50;
+  border: 2px solid #b77b50;
+} */
 
 .subscript-input {
   background: #f9f9f9;
@@ -85,7 +109,32 @@
 .bottom-row {
   background: #08080a;
   padding: 0 2vw;
-  height: 40vh;
+  height: 50%;
+}
+
+.footer-icon-box {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+}
+
+.footer-copyRight-container {
+  background: #08080a;
+  padding: 0 2vw;
+  border-top: 2px solid #b77b50;
+  height: 10%;
+}
+
+.footer-copyRight {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 30px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-texts {
@@ -123,4 +172,73 @@
   font-size: 25px;
   line-height: 30px;
   color: #ffffff;
+}
+
+@media screen and (max-width: 800px) {
+  .top-row {
+    height: 40%;
+  }
+
+  .bottom-row {
+    height: 60%;
+  }
+
+  .footer-icon-box {
+    display: grid;
+    justify-content: center;
+  }
+
+  .footer-texts {
+    font-size: 1.2rem;
+    line-height: 25px;
+  }
+
+  .subscript-box {
+    justify-content: center;
+  }
+
+  .subscript-title {
+    font-size: 2rem;
+    line-height: 35px;
+  }
+
+  .subscript-descript {
+    font-size: 1rem;
+    line-height: 35px;
+  }
+
+  .subscript-input {
+    font-size: 1rem;
+    line-height: 29px;
+    padding: 20px 20px;
+  }
+
+  .subscript-btn {
+    font-size: 1rem;
+    line-height: 29px;
+  }
+
+  .subscript-text {
+    font-size: 0.5rem;
+    line-height: 10px;
+  }
+
+  .footer-list-item-title {
+    font-size: 1.8rem;
+    line-height: 24px;
+  }
+
+  .footer-list-item {
+    font-size: 1rem;
+    line-height: 20px;
+  }
+
+  .footer-copyRight {
+    font-size: 1.1rem;
+    line-height: 20px;
+  }
+
+  /* .subscript-descript::before {
+    margin-top: 34%;
+  } */
 }

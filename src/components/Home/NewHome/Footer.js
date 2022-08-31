@@ -5,11 +5,18 @@ import "../../../styles/newFooter.css";
 function Footer({ windowSize }) {
   return (
     <Row>
-      <Col className="footer-container">
+      <Col className="footer-container p-0">
         <Row className="d-flex justify-content-center align-items-center top-row">
-          <Col className="d-flex align-items-center px-5">
+          <Col
+            className="d-flex align-items-center"
+            style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem" }}
+          >
             <Row className="subscript-container py-5 px-4">
-              <Col className="d-grid justify-content-center align-items-center">
+              <Col
+                md={6}
+                xs={12}
+                className="d-grid justify-content-center align-items-center"
+              >
                 <span className="subscript-title">
                   Stay updated with Auction3
                 </span>
@@ -17,8 +24,9 @@ function Footer({ windowSize }) {
                   Receive the beautifully curated selection of what's trending
                   in luxury with inside stories and tips from our experts.
                 </p>
+                <p className="small-box"></p>
               </Col>
-              <Col className="d-grid justify-content-end align-items-center">
+              <Col md={6} xs={12} className="subscript-box">
                 <input
                   className="subscript-input"
                   type="email"
@@ -33,12 +41,15 @@ function Footer({ windowSize }) {
             </Row>
           </Col>
         </Row>
-        <Row className="d-flex justify-content-between align-items-start bottom-row px-5">
-          <Col md={6} className="d-grid justify-content-start mt-2 p-0">
+        <Row
+          className="d-flex justify-content-between align-items-start bottom-row px-5"
+          style={{ paddingBottom: windowSize < 800 && "4rem" }}
+        >
+          <Col md={6} className="mt-2 p-0 footer-icon-box">
             <img
               src="/images/newName.png"
               alt=""
-              width={windowSize < 768 ? "150px" : "300px"}
+              width={windowSize < 768 ? "250px" : "300px"}
               height="auto"
             />
             <p className="footer-texts mt-3 px-4">
@@ -48,7 +59,10 @@ function Footer({ windowSize }) {
               with true value for money.
             </p>
           </Col>
-          <Col md={6} className="d-flex justify-content-end align-items-center mt-2 p-0">
+          <Col
+            md={6}
+            className="d-flex justify-content-end align-items-center mt-2 p-0"
+          >
             <Row>
               <Col>
                 <ul className="footer-list mt-4">
@@ -79,8 +93,8 @@ function Footer({ windowSize }) {
             </Row>
           </Col>
         </Row>
-        <Row className="mt-5 d-flex justify-content-center align-items-center">
-          <Col className="d-grid justify-content-center mt-2 p-0">
+        <Row className="d-flex justify-content-center align-items-center footer-copyRight-container">
+          <Col className="d-grid justify-content-center mt-2 p-0 footer-copyRight">
             © 2022 AUCTION3. All Rights Reserved
           </Col>
         </Row>

@@ -12,6 +12,7 @@ import Auctions from "./Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
+import RealEstatePageBg from "../../images/RealEstatePageBg.png";
 // import Auction from "../../../../auction10x-backend/model/Auction";
 
 const mapStyles = {
@@ -53,34 +54,39 @@ const PropertyPages = ({
   const toggleImgJet = () => setShowImgJet(!showImgJet);
   const toggleImgYacht = () => setShowImgYacht(!showImgYacht);
   const history = useHistory();
-  
+
   const onMarkerClick = (id) => (e) => {
     history.push(`/DisplayAuctions/${id}`);
   };
 
   return (
     <>
-      <h5 className="realHeader">
-        {path === "/cars" ? (
+      {path === "/cars" ? (
+        <Row className="realHeader">
           <title>CAR</title>
-        ) : path === "/jets" ? (
-          <title>JET</title>
-        ) : path === "/yachts" ? (
-          <title>YACHT</title>
-        ) : path === "/Auctions" ? (
-          <title>Auctions</title>
-        ) : path === "/Auctions/Austin" ? (
-          <title>Auctions</title>
-        ) : path === "/Auctions/Dallas" ? (
-          <title>Auctions</title>
-        ) : path === "/Auctions/Houston" ? (
-          <title>Auctions</title>
-        ) : path === "/Auctions/SanAntonio" ? (
-          <title>Auctions</title>
-        ) : (
+        </Row>
+      ) : path === "/jets" ? (
+        <title>JET</title>
+      ) : path === "/yachts" ? (
+        <title>YACHT</title>
+      ) : path === "/Auctions" ? (
+        <title>Auctions</title>
+      ) : path === "/Auctions/Austin" ? (
+        <title>Auctions</title>
+      ) : path === "/Auctions/Dallas" ? (
+        <title>Auctions</title>
+      ) : path === "/Auctions/Houston" ? (
+        <title>Auctions</title>
+      ) : path === "/Auctions/SanAntonio" ? (
+        <title>Auctions</title>
+      ) : (
+        <Row
+          className="realHeader"
+          style={{ background: `url(${RealEstatePageBg})` }}
+        >
           <title>REAL ESTATE</title>
-        )}
-      </h5>
+        </Row>
+      )}
       <PropertyPageHeader
         path={path}
         windowSize={windowSize}

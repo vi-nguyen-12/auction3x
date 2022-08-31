@@ -6,7 +6,7 @@ import "../../../styles/feature.css";
 
 function Features({ toggleSignIn, featureAuctions, windowSize }) {
   return (
-    <Row className="p-5">
+    <Row style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem" }}>
       <Row>
         <Col>
           <h1 className="section-title">Featured Listings</h1>
@@ -22,7 +22,7 @@ function Features({ toggleSignIn, featureAuctions, windowSize }) {
             <Col
               key={index}
               md={4}
-              className="p-0 m-0 d-flex justify-content-center"
+              className="py-2 d-flex justify-content-center"
             >
               {/* <NewCards
                 toggleSignIn={toggleSignIn}
@@ -40,7 +40,11 @@ function Features({ toggleSignIn, featureAuctions, windowSize }) {
           ))
         ) : (
           <Col>
-            <h1>No Featured Auctions</h1>
+            <div className="no-feature-container">
+              <span className="no-feature-text">
+                No featured listing available at the moment.
+              </span>
+            </div>
           </Col>
         )}
       </Row>

@@ -8,7 +8,7 @@
 }
 
 .info-card-container {
-  width: 540px;
+  width: 100%;
   height: 547px;
   background: #ffffff;
   border: 1px solid #d1dcee;
@@ -16,7 +16,8 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  padding: 0 80px;
+  padding: 20px 60px;
+  margin: 0 auto;
 }
 
 /* .info-card {
@@ -40,10 +41,12 @@
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
+  line-height: 38px;
   display: flex;
   align-items: center;
   text-transform: uppercase;
   color: #08080a;
+  /* border: 1px solid #d1dcee; */
 }
 
 .info-descript {
@@ -75,4 +78,21 @@
 .info-button:hover {
   background: #b77b50;
   color: #fff2e9;
+}
+
+@media screen and (max-width: 800px) {
+  .info-card-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+  }
+  .info-title {
+    font-size: 1.5rem;
+  }
+  .info-card {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
 }

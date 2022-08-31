@@ -60,7 +60,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
       />
       <Features
         toggleSignIn={toggleSignIn}
-        featureAuctions={onGoingAuctions}
+        featureAuctions={featureAuctions}
         windowSize={windowSize}
       />
       <PrimeCate windowSize={windowSize} />

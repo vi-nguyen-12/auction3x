@@ -1,5 +1,5 @@
 .how-container {
-  height: 639px;
+  height: 100%;
   background: #08080a;
 }
 
@@ -23,8 +23,8 @@
   align-items: center;
 }
 
-.how-texts{
-    width: 350px;
+.how-texts {
+  width: 350px;
 }
 
 .how-subtitle {
@@ -41,4 +41,36 @@
   font-weight: 300;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.rightArrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .how-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+  /* .how-info-box {
+    padding-left: 5rem;
+  } */
+  .how-logo {
+    margin: 0 2rem;
+  }
+
+  .how-title {
+    font-size: 2rem;
+  }
+  .how-subtitle {
+    font-size: 1.3rem;
+    padding: 0 2rem;
+  }
+  .how-descript {
+    font-size: 12px;
+    padding: 0 2rem;
+  }
 }

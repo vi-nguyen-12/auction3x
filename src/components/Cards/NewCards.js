@@ -38,7 +38,7 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
   return (
     <Card
       className="card-container"
-      style={{ width: windowSize < 1680 && "440px" }}
+      // style={{ width: windowSize < 1680 && "440px" }}
     >
       <Card.Img
         className="card-img"
@@ -277,17 +277,10 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                 )}
               </div>
             </Col>
-            <Col className="px-0 d-flex justify-content-center">
+            <Col className="d-flex justify-content-center">
               <div>
                 <span className="card-section-title">Listed On</span>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "700",
-                  }}
-                >
-                  Aug 18, 2022
-                </p>
+                <p className="info-text">Aug 18, 2022</p>
               </div>
             </Col>
           </Col>

@@ -6,7 +6,7 @@ import sellers from "../../../images/sellers.png";
 import { BsArrowRight } from "react-icons/bs";
 import "../../../styles/info.css";
 
-function Info() {
+function Info({ windowSize }) {
   const info = [
     {
       logo: investor,
@@ -19,19 +19,24 @@ function Info() {
       logo: brokers,
       title: "Brokers",
       description:
-        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots",
+        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
       buttonText: "Earn Now",
     },
     {
       logo: sellers,
       title: "sellers",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
       buttonText: "Sell Now",
     },
   ];
   return (
-    <Row className="p-5">
+    <Row
+      style={{
+        padding: windowSize < 800 ? "3rem 0.6rem" : "3rem",
+        marginTop: windowSize < 800 && "5rem",
+      }}
+    >
       <Row>
         <Col className="info-container mb-5">
           <Row className="d-flex justify-content-center align-items-center">
@@ -43,7 +48,9 @@ function Info() {
             {info.map((item, index) => (
               <Col
                 key={index}
-                className="d-grid justify-content-center align-items-center mt-2 p-0"
+                md={windowSize < 1285 ? 12 : 4}
+                xs={12}
+                className="d-grid justify-content-center align-items-center mt-2"
               >
                 <div className="info-card-container">
                   <div className="info-card">

@@ -47,7 +47,7 @@ function NavBar({
       <Col
         md={3}
         xs={6}
-        className="p-0 m-0 d-flex justify-content-center align-items-center"
+        className="m-0 d-flex justify-content-start align-items-center"
       >
         <img
           onClick={() => history.push("/")}

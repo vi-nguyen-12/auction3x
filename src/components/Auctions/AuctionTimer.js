@@ -49,8 +49,6 @@ const AuctionTimer = ({ time, windowSize }) => {
         style={{
           listStyle: "none",
           marginRight: "30px",
-          fontSize: "20px",
-          fontWeight: "700",
         }}
       >
         {days}d
@@ -58,8 +56,6 @@ const AuctionTimer = ({ time, windowSize }) => {
       <li
         style={{
           marginRight: "35px",
-          fontSize: "20px",
-          fontWeight: "700",
         }}
       >
         {hours}h
@@ -67,8 +63,6 @@ const AuctionTimer = ({ time, windowSize }) => {
       <li
         style={{
           marginRight: "35px",
-          fontSize: "20px",
-          fontWeight: "700",
         }}
       >
         {minutes}m
@@ -76,8 +70,6 @@ const AuctionTimer = ({ time, windowSize }) => {
       <li
         style={{
           marginRight: "35px",
-          fontSize: "20px",
-          fontWeight: "700",
         }}
       >
         {seconds}s

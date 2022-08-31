@@ -74,7 +74,7 @@ const HomeBottom = styled.div`
   );
   opacity: 0.7;
   z-index: 1;
-  left: 5vw;
+  padding: 0 2rem;
   a {
     color: white !important;
     font-size: 24px;

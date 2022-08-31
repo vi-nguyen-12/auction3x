@@ -21,3 +21,32 @@
   background-color: transparent;
   color: #4f4f59;
 }
+
+.view-btn:active {
+  background-color: transparent;
+  color: #4f4f59;
+}
+
+.no-feature-container {
+  background: #d1dcee;
+  border-radius: 0;
+  padding: 40px;
+}
+
+.no-feature-text {
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  color: #08080a;
+}
+
+@media screen and (max-width: 800px) {
+  .view-btn {
+    font-size: 1rem;
+    padding: 6px;
+  }
+  .no-feature-text {
+    font-size: 1.3rem;
+  }
+}

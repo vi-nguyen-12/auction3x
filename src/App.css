@@ -408,3 +408,9 @@ h1 {
   font-size: 48px;
   color: #08080a;
 }
+
+@media screen and (max-width: 800px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

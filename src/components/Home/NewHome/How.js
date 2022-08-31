@@ -8,19 +8,29 @@ import "../../../styles/how.css";
 
 function How({ windowSize }) {
   return (
-    <Row className="p-5">
-      <Row>
+    <Row style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem" }}>
+      <Row className="px-2">
         <Col className="how-container p-5">
           <Row className="d-flex justify-content-center align-items-center">
-            <Col className="d-flex justify-content-center align-items-center mt-5">
+            <Col className="d-flex justify-content-center align-items-center mt-5 p-0">
               <span className="how-title">How it works?</span>
             </Col>
           </Row>
           <Row
-            className="mt-5 d-flex justify-content-center align-items-center"
+            className="mt-5 d-flex justify-content-between align-items-center"
             style={{ padding: windowSize > 1470 && "0 3rem" }}
           >
-            <Col className="d-grid justify-content-center mt-2 p-0">
+            <Col
+              md={
+                windowSize < 1450 && windowSize > 960
+                  ? 6
+                  : windowSize < 960
+                  ? 12
+                  : 3
+              }
+              xs={12}
+              className="d-grid justify-content-center mt-2 p-0"
+            >
               <div className="how-logo">
                 <img src={checkList} alt="" />
               </div>
@@ -35,11 +45,24 @@ function How({ windowSize }) {
               </div>
             </Col>
 
-            <Col className="d-flex justify-content-center align-items-center mt-2 p-0">
+            <Col
+              style={{ display: windowSize < 1450 && "none" }}
+              className="rightArrow mt-2 p-0"
+            >
               <img src={ArrowRight} alt="" />
             </Col>
 
-            <Col className="d-grid justify-content-center mt-2 p-0">
+            <Col
+              md={
+                windowSize < 1450 && windowSize > 960
+                  ? 6
+                  : windowSize < 960
+                  ? 12
+                  : 3
+              }
+              xs={12}
+              className="d-grid justify-content-center mt-2 p-0"
+            >
               <div className="how-logo">
                 <img src={monitor} alt="" />
               </div>
@@ -54,11 +77,24 @@ function How({ windowSize }) {
               </div>
             </Col>
 
-            <Col className="d-flex justify-content-center align-items-center mt-2 p-0">
+            <Col
+              style={{ display: windowSize < 1450 && "none" }}
+              className="rightArrow mt-2 p-0"
+            >
               <img src={ArrowRight} alt="" />
             </Col>
 
-            <Col className="d-grid justify-content-center mt-2 p-0">
+            <Col
+              md={
+                windowSize < 1450 && windowSize > 960
+                  ? 6
+                  : windowSize < 960
+                  ? 12
+                  : 3
+              }
+              xs={12}
+              className="d-grid justify-content-center mt-2 p-0"
+            >
               <div className="how-logo">
                 <img src={handshake} alt="" />
               </div>
