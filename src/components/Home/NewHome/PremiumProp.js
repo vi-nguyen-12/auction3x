@@ -89,7 +89,7 @@ const HomeBottom = styled.div`
 `;
 const Bar = styled.button`
   width: 100px;
-  height: 1px;
+  height: 0;
   border: none;
   margin: 15px;
   padding: 0;
@@ -121,6 +121,13 @@ const BarGroup = styled.div`
   align-content: center;
   width: 100%;
   z-index: 10;
+
+  @media (max-width: 800px) {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+  }
 `;
 
 function PremiumProp({
@@ -168,7 +175,7 @@ function PremiumProp({
               featureAuctions.slice(0, 5).map((images, index) => (
                 <Bar
                   key={index}
-                  color={index === Index ? "white" : "transparent"}
+                  color={index === Index ? "white" : "white"}
                   size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
                   onClick={handleClick(index)}
                 >

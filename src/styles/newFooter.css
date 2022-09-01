@@ -172,6 +172,12 @@
   font-size: 25px;
   line-height: 30px;
   color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.footer-list-item:hover {
+  color: #ffffff;
 }
 
 @media screen and (max-width: 800px) {

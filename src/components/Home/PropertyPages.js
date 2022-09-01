@@ -66,19 +66,33 @@ const PropertyPages = ({
           <title>CAR</title>
         </Row>
       ) : path === "/jets" ? (
-        <title>JET</title>
+        <Row className="realHeader">
+          <title>JET</title>
+        </Row>
       ) : path === "/yachts" ? (
-        <title>YACHT</title>
+        <Row className="realHeader">
+          <title>YACHT</title>
+        </Row>
       ) : path === "/Auctions" ? (
-        <title>Auctions</title>
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : path === "/Auctions/Austin" ? (
-        <title>Auctions</title>
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : path === "/Auctions/Dallas" ? (
-        <title>Auctions</title>
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : path === "/Auctions/Houston" ? (
-        <title>Auctions</title>
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : path === "/Auctions/SanAntonio" ? (
-        <title>Auctions</title>
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : (
         <Row
           className="realHeader"

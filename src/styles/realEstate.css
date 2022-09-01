@@ -28,6 +28,7 @@
   /* margin-top: 60px; */
   display: grid;
   justify-items: center;
+  background-color: #08080a;
   align-items: center;
   object-fit: cover;
   background-size: cover;

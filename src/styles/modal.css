@@ -53,6 +53,7 @@
   height: 90px;
   display: flex;
   padding-bottom: 40px;
+  border-radius: 0;
 }
 
 .nav-link-signup {

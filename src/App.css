@@ -231,7 +231,7 @@
 }
 
 .modal-content {
-  border-radius: 10px !important;
+  border-radius: 0!important;
 }
 
 .GoTop-btn {

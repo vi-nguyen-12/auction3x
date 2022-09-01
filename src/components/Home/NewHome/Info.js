@@ -4,9 +4,24 @@ import brokers from "../../../images/brokers.png";
 import investor from "../../../images/investor.png";
 import sellers from "../../../images/sellers.png";
 import { BsArrowRight } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../../../styles/info.css";
 
-function Info({ windowSize }) {
+function Info({ windowSize, toggleSignIn }) {
+  const user = useSelector((state) => state.user);
+  const history = useHistory();
+
+  const handleOnClick = (item) => () => {
+    if (item.buttonText === "Sell Now") {
+      if (!user._id) {
+        return toggleSignIn();
+      } else {
+        history.push("/multiSellForm");
+      }
+    }
+  };
+
   const info = [
     {
       logo: investor,
@@ -60,7 +75,10 @@ function Info({ windowSize }) {
                     <div className="info-texts mt-5">
                       <span className="info-subtitle mt-3">{item.title}</span>
                       <p className="info-descript mt-3">{item.description}</p>
-                      <Button className="info-button mt-3">
+                      <Button
+                        onClick={handleOnClick(item)}
+                        className="info-button mt-3"
+                      >
                         {item.buttonText}
                         <BsArrowRight className="mx-2" />
                       </Button>

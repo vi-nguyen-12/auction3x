@@ -12,6 +12,7 @@ import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
 import { useParams } from "react-router-dom";
 import { Upcoming } from "../Auctions/Upcoming";
+import UpcomingAuctions from "./NewHome/UpcomingAuctions";
 import Loading from "../Loading";
 import About from "./About";
 
@@ -65,7 +66,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
       />
       <PrimeCate windowSize={windowSize} />
       <How windowSize={windowSize} />
-      <Upcoming
+      <UpcomingAuctions
         toggleSignIn={toggleSignIn}
         upcomingAuctions={upcomingAuctions}
         windowSize={windowSize}

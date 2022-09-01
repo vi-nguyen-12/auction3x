@@ -1,8 +1,10 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import "../../../styles/newFooter.css";
 
 function Footer({ windowSize }) {
+  const history = useHistory();
   return (
     <Row>
       <Col className="footer-container p-0">
@@ -67,27 +69,72 @@ function Footer({ windowSize }) {
               <Col>
                 <ul className="footer-list mt-4">
                   <li className="footer-list-item-title">Quick Links</li>
-                  <li className="footer-list-item mt-5">About Us</li>
-                  <li className="footer-list-item mt-3">Team</li>
-                  <li className="footer-list-item mt-3">FAQ</li>
-                  <li className="footer-list-item mt-3">Contact Us</li>
+                  <li href="/AboutUs" className="footer-list-item mt-5">
+                    <a className="footer-list-item" href="/AboutUs">
+                      About Us
+                    </a>
+                    {/* About Us */}
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/Team">
+                      Team
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/FAQ">
+                      FAQ
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/contact">
+                      Contact Us
+                    </a>
+                  </li>
                 </ul>
               </Col>
               <Col>
                 <ul className="footer-list mt-4">
                   <li className="footer-list-item-title">Categories</li>
-                  <li className="footer-list-item mt-5">Real Estate</li>
-                  <li className="footer-list-item mt-3">Cars</li>
-                  <li className="footer-list-item mt-3">Jets</li>
-                  <li className="footer-list-item mt-3">Yachts</li>
+                  <li className="footer-list-item mt-5">
+                    <a className="footer-list-item" href="/realEstates">
+                      Real Estate
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/cars">
+                      Cars
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/jets">
+                      Jets
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/yachts">
+                      Yachts
+                    </a>
+                  </li>
                 </ul>
               </Col>
               <Col>
                 <ul className="footer-list mt-4">
                   <li className="footer-list-item-title">Others</li>
-                  <li className="footer-list-item mt-5">Partner</li>
-                  <li className="footer-list-item mt-3">Privacy Policy</li>
-                  <li className="footer-list-item mt-3">Terms & Conditions</li>
+                  <li className="footer-list-item mt-5">
+                    <a className="footer-list-item" href="/Partner">
+                      Partner
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/PrivacyPolicy">
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li className="footer-list-item mt-3">
+                    <a className="footer-list-item" href="/TermsOfUse">
+                      Terms &amp; Conditions
+                    </a>
+                  </li>
                 </ul>
               </Col>
             </Row>

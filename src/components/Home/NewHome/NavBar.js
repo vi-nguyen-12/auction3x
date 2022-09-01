@@ -100,7 +100,7 @@ function NavBar({
           </div>
         )}
         <div className="d-flex align-items-center menu-icon">
-          <RiMenu2Line size={28} color="#E0BC8F" />
+          <RiMenu2Line size={windowSize > 1670 ? 28 : 27} color="#E0BC8F" />
         </div>
       </Col>
     </Row>
