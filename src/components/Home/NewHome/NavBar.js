@@ -14,13 +14,14 @@ function NavBar({
   windowSize,
   wallet,
   subWallet,
+  bodyColorChange,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
   const handleOnClick = (page) => () => {
+    bodyColorChange("#F5F9FF");
     history.push(`/${page}`);
-    window.location.reload();
   };
 
   const handleSell = () => {
@@ -48,9 +49,13 @@ function NavBar({
         md={3}
         xs={6}
         className="m-0 d-flex justify-content-start align-items-center"
+        style={{ paddingLeft: windowSize > 1070 && "4rem" }}
       >
         <img
-          onClick={() => history.push("/")}
+          onClick={() => {
+            history.push("/");
+            window.location.reload();
+          }}
           src="/images/newName.png"
           width={windowSize < 768 ? "150px" : "180px"}
           height="auto"

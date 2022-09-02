@@ -24,7 +24,7 @@ function Features({ toggleSignIn, featureAuctions, windowSize }) {
           featureAuctions.slice(0, 3).map((item, index) => (
             <Col
               key={index}
-              md={4}
+              md={windowSize > 1400 ? 4 : 6}
               className="py-2 d-flex justify-content-center"
             >
               {/* <NewCards

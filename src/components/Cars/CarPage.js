@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
 import "../../styles/realEstate.css";
 import Cards from "../Cards/Cards";
+import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
@@ -227,28 +228,31 @@ function CarPage({
     <>
       {loader && <Loading />}
       {auctions.length > 0 ? (
-        <Row className="mt-5 mb-5">
-          {windowSize > 800 ? (
-            auctions.map((auction, index) => {
-              return (
-                <Col className="mb-5" key={index}>
-                  <Wrap>
-                    <Cards
-                      data={auction}
-                      toggleSignIn={toggleSignIn}
-                      type={auction.property.type}
-                      windowSize={windowSize}
-                    />
-                  </Wrap>
-                </Col>
-              );
-            })
-          ) : (
+        <Row className="p-4 mt-3">
+          {/* {windowSize > 800 ? ( */}
+          {auctions.map((auction, index) => {
+            return (
+              <Col
+                lg={windowSize < 1650 ? 4 : 3}
+                md={windowSize > 1400 ? 4 : 6}
+                className="mb-5 py-2 d-flex justify-content-center"
+                key={index}
+              >
+                <NewCards
+                  data={auction}
+                  toggleSignIn={toggleSignIn}
+                  type={auction.property.type}
+                  windowSize={windowSize}
+                />
+              </Col>
+            );
+          })}
+          {/* ) : (
             <Carousel {...settings}>
               {auctions.map((item, index) => (
                 <Wrap key={index}>
                   <Col className="mb-5">
-                    <Cards
+                    <NewCards
                       data={item}
                       toggleSignIn={toggleSignIn}
                       type={item.property.type}
@@ -258,7 +262,7 @@ function CarPage({
                 </Wrap>
               ))}
             </Carousel>
-          )}
+          )} */}
         </Row>
       ) : !loader ? (
         <ErrorPage />

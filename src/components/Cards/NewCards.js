@@ -42,6 +42,10 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
     >
       <Card.Img
         className="card-img"
+        style={{
+          height:
+            history.location.pathname === "/" && windowSize > 1680 && "100%",
+        }}
         variant="top"
         onClick={handleDisplay}
         src={data.property.images[0].url}

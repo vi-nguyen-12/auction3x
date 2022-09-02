@@ -26,6 +26,17 @@
   margin-left: -1em;
 }
 
+.timerTable > :not(caption) > * > * {
+  padding: 0.3rem 0.3rem;
+}
+
+.timerHead:nth-child(n + 1) {
+  color: #bf9767;
+  font-size: 20px;
+  /* font-weight: bold; */
+  display: inline-block;
+}
+
 @media screen and (max-width: 800px) {
   .timer {
     font-size: 1rem;

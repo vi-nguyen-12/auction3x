@@ -46,26 +46,12 @@ const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
     <Table className="timerTable" style={{ padding: "0" }} borderless>
       <thead>
         <tr className="timerHead">
-          <th>{days} :</th>
-          <th>{hours} :</th>
-          <th>{minutes} :</th>
-          <th>{seconds}</th>
+          <th>{days}d •</th>
+          <th>{hours}h •</th>
+          <th>{minutes}m •</th>
+          <th>{seconds}s</th>
         </tr>
       </thead>
-      <tbody>
-        <tr className="timerName">
-          <td>D</td>
-          <td>Hr</td>
-          <td>
-            {/* {windowSize > 800 ? "Minutes" : "Min"} */}
-            Min
-          </td>
-          <td>
-            {/* {windowSize > 800 ? "Seconds" : "Sec"} */}
-            Sec
-          </td>
-        </tr>
-      </tbody>
     </Table>
   );
 };

@@ -562,6 +562,7 @@ function App() {
             windowSize={windowSize}
             wallet={wallet}
             subWallet={subWallet}
+            bodyColorChange={bodyColorChange}
           />
           <ScrollTop />
 
