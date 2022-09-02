@@ -1,10 +1,27 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import authService from "../../../services/authServices";
 import "../../../styles/newFooter.css";
 
 function Footer({ windowSize }) {
-  const history = useHistory();
+  const [email, setEmail] = React.useState();
+
+  const subscribe = async () => {
+    if (email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      await authService.subscribe(email).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert(
+            "Thank you for subscribing, we will be sending you the best deals!"
+          );
+        }
+      });
+    } else {
+      alert("Please enter a valid email address");
+    }
+  };
+
   return (
     <Row>
       <Col className="footer-container p-0">
@@ -32,9 +49,16 @@ function Footer({ windowSize }) {
                 <input
                   className="subscript-input"
                   type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Address"
                 />
-                <Button className="subscript-btn mt-2">Subscribe</Button>
+                <Button
+                  className="subscript-btn mt-2"
+                  onClick={(e) => subscribe(e.target.value)}
+                >
+                  Subscribe
+                </Button>
                 <span className="mt-1 subscript-text">
                   BY SHARING YOUR EMAIL, YOU AGREE TO OUR TERMS OF USE AND
                   PRIVACY.
