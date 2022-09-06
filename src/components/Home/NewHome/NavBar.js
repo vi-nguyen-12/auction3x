@@ -99,11 +99,14 @@ function NavBar({
           xs={6}
           className="p-0 m-0 d-flex justify-content-center align-items-center"
         >
+          <Button onClick={handleSell} className="nav-button">
+            Sell
+          </Button>
           <Button className="bg-success border-0">
             {user.firstName} {user.lastName}
           </Button>
           <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
-            DashBoard
+            Dashboard
           </Button>
           <Button variant="danger" onClick={handleLogout}>
             Logout
