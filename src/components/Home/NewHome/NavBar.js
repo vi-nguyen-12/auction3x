@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { RiMenu2Line } from "react-icons/ri";
 import { Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../../slice/userSlice";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -18,10 +19,18 @@ function NavBar({
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleOnClick = (page) => () => {
     bodyColorChange("#F5F9FF");
     history.push(`/${page}`);
+  };
+
+  const handleLogout = async () => {
+    localStorage.removeItem("token");
+    dispatch(logout());
+    history.push("/");
+    window.location.reload();
   };
 
   const handleSell = () => {
@@ -83,31 +92,50 @@ function NavBar({
           </li>
         </ul>
       </Col>
-      <Col
-        md={windowSize < 1070 ? 5 : 3}
-        xs={6}
-        className="p-0 m-0 d-flex justify-content-center align-items-center"
-      >
-        <Button onClick={handleSell} className="nav-button">
-          Sell
-        </Button>
-        {windowSize < 768 ? (
-          <Button className="nav-button">Login</Button>
-        ) : (
-          <div className="text-light h-100">
-            <Button onClick={toggleSignIn} className="nav-button">
-              Sign In
-            </Button>
-            |
-            <Button onClick={toggleSignUp} className="nav-button">
-              Sign Up
-            </Button>
+
+      {user._id ? (
+        <Col
+          md={windowSize < 1070 ? 5 : 3}
+          xs={6}
+          className="p-0 m-0 d-flex justify-content-center align-items-center"
+        >
+          <Button className="bg-success border-0">
+            {user.firstName} {user.lastName}
+          </Button>
+          <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
+            DashBoard
+          </Button>
+          <Button variant="danger" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Col>
+      ) : (
+        <Col
+          md={windowSize < 1070 ? 5 : 3}
+          xs={6}
+          className="p-0 m-0 d-flex justify-content-center align-items-center"
+        >
+          <Button onClick={handleSell} className="nav-button">
+            Sell
+          </Button>
+          {windowSize < 768 ? (
+            <Button className="nav-button">Login</Button>
+          ) : (
+            <div className="text-light h-100">
+              <Button onClick={toggleSignIn} className="nav-button">
+                Sign In
+              </Button>
+              |
+              <Button onClick={toggleSignUp} className="nav-button">
+                Sign Up
+              </Button>
+            </div>
+          )}
+          <div className="d-flex align-items-center menu-icon">
+            <RiMenu2Line size={windowSize > 1670 ? 28 : 27} color="#E0BC8F" />
           </div>
-        )}
-        <div className="d-flex align-items-center menu-icon">
-          <RiMenu2Line size={windowSize > 1670 ? 28 : 27} color="#E0BC8F" />
-        </div>
-      </Col>
+        </Col>
+      )}
     </Row>
   );
 }

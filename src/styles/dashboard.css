@@ -102,6 +102,7 @@ h3 {
   justify-content: center;
   cursor: pointer;
   font-family: "Popins", sans-serif;
+  text-decoration: none;
 }
 
 .names {
