@@ -41,8 +41,6 @@ function DashHeader({
       });
   };
 
-  console.log(location);
-
   return (
     <Container
       style={{

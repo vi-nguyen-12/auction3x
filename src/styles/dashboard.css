@@ -551,3 +551,19 @@ h3 {
 .suggest:hover {
   background-color: #b9b9b9;
 }
+
+.carousel-cards {
+  padding: 0 3rem;
+}
+
+@media screen and (max-width: 1250px) {
+  .carousel-cards {
+    padding: 0 10rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .carousel-cards {
+    padding: 2rem 0.4rem;
+  }
+}

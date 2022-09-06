@@ -179,7 +179,7 @@ function PremiumProp({
                   size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
                   onClick={handleClick(index)}
                 >
-                  <Button
+                  <div
                     style={{
                       borderRadius: "0",
                       border: "none",
@@ -190,7 +190,7 @@ function PremiumProp({
                       backgroundColor: "white",
                       padding: "0",
                     }}
-                  ></Button>
+                  ></div>
                 </Bar>
               ))}
           </BarGroup>
@@ -263,7 +263,7 @@ function PremiumProp({
                   size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
                   onClick={handleClick(index)}
                 >
-                  <Button
+                  <div
                     style={{
                       borderRadius: "0",
                       border: "none",
@@ -274,7 +274,7 @@ function PremiumProp({
                       backgroundColor: "white",
                       padding: "0",
                     }}
-                  ></Button>
+                  ></div>
                   {/* <hr
                     style={{
                       borderRadius: "15px",
@@ -366,7 +366,7 @@ function PremiumProp({
                   size={index === Index ? "0 0 0 0.2rem" : "0 0 0 0"}
                   onClick={handleClick(index)}
                 >
-                  <Button
+                  <div
                     style={{
                       borderRadius: "0",
                       border: "none",
@@ -377,7 +377,7 @@ function PremiumProp({
                       backgroundColor: "white",
                       padding: "0",
                     }}
-                  ></Button>
+                  ></div>
                 </Bar>
               ))}
           </BarGroup>

@@ -12,6 +12,123 @@ import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp
 import CloseButton from "react-bootstrap/CloseButton";
 import AddFund from "../../BuyRegister/AddFund";
 import { useHistory } from "react-router-dom";
+import NewCards from "../../Cards/NewCards";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import styled from "styled-components";
+import Next from "../../../images/Next.png";
+import Prev from "../../../images/Previous.png";
+
+const Carousel = styled(Slider)`
+  // height: 100%;
+  overflow-x: hidden;
+
+  & > button {
+    opacity: 1;
+    height: 100%;
+    width: 15vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.2s ease 0s;
+    }
+  }
+
+  ul li button {
+    &:before {
+      top: -3vh;
+      font-size: 20px;
+      color: gray;
+      left: -35px;
+    }
+  }
+
+  li.slick-active button:before {
+    color: #e9af84;
+  }
+
+  .slick-list {
+    overflow: initial;
+  }
+
+  .slick-prev {
+    width: 60px;
+    height: 60px;
+    left: 8vw;
+    z-index: 1;
+    background: url(${Prev});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 45% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+    margin: -50px;
+    margin-left: -120px;
+  }
+
+  .slick-prev:before {
+    display: none;
+    // font-size: 60px;
+    // color: #e9af84;
+  }
+
+  .slick-next {
+    width: 60px;
+    height: 60px;
+    right: 8vw;
+    z-index: 1;
+    background: url(${Next});
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: 53% 50%;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+    margin: -50px;
+    margin-right: -122px;
+  }
+
+  .slick-next:before {
+    display: none;
+    // font-size: 60px;
+    // color: #e9af84;
+  }
+
+  @media (max-width: 600px) {
+    .slick-prev {
+      width: 50px;
+      height: 50px;
+      left: 15vw;
+      margin-top: -75px;
+    }
+    .slick-next {
+      width: 50px;
+      height: 50px;
+      right: 15vw;
+      margin-top: -75px;
+    }
+  }
+`;
+
+const Wrap = styled.div`
+border-radius: 4px;
+cursor: pointer;
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+align-content: center;
+// margin-top: auto;  // Just for display
+
+  &:hover {
+    padding: 0;
+    transition-duration: 300ms;
+  }
+}
+`;
 
 function Dash({ windowSize, featureLength }) {
   const [savedProp, setSavedProp] = useState([]);
@@ -32,6 +149,43 @@ function Dash({ windowSize, featureLength }) {
   const toggleFundReq = () => popFundReq(!showFundReq);
 
   const history = useHistory();
+
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow:
+      windowSize >= 1250 ? (savedProp.length >= 3 ? 2 : savedProp.length) : 1,
+  };
+
+  let bidSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow:
+      windowSize >= 1250
+        ? bidAuctions.length >= 3
+          ? 2
+          : bidAuctions.length
+        : 1,
+  };
+
+  let approvedSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: false,
+    slidesToShow:
+      windowSize >= 1250
+        ? approvedAuctions.length >= 3
+          ? 2
+          : approvedAuctions.length
+        : 1,
+  };
+
+  console.log(bidAuctions);
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
@@ -409,12 +563,39 @@ function Dash({ windowSize, featureLength }) {
       )}
 
       <Row>
-        {showSavedProp && savedProp.length > 0 ? (
-          <Col>
-            <SavedAuctionsComp savedProp={savedProp} windowSize={windowSize} />
-          </Col>
+        {showSavedProp && savedProp.length > 0 && savedProp.left < 3 ? (
+          savedProp.map((property, index) => (
+            <Col
+              md={windowSize > 1400 ? 5 : 6}
+              key={index}
+              className="py-2 d-flex justify-content-center"
+            >
+              <NewCards
+                // toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                data={property}
+                type={property.property.type}
+              />
+            </Col>
+          ))
+        ) : // savedProp.length === 0 &&
+        showSavedProp && savedProp.length >= 3 ? (
+          <Carousel {...settings}>
+            {savedProp.map((property, index) => (
+              <Col
+                key={index}
+                className="d-flex justify-content-center carousel-cards"
+              >
+                <NewCards
+                  // toggleSignIn={toggleSignIn}
+                  windowSize={windowSize}
+                  data={property}
+                  type={property.property.type}
+                />
+              </Col>
+            ))}
+          </Carousel>
         ) : (
-          // savedProp.length === 0 &&
           showSavedProp && (
             <div
               style={{
@@ -430,10 +611,38 @@ function Dash({ windowSize, featureLength }) {
           )
         )}
 
-        {showBidAuctions && bidAuctions.length > 0 ? (
-          <BidAuctionsComp bidAuctions={bidAuctions} windowSize={windowSize} />
+        {showBidAuctions && bidAuctions.length > 0 && bidAuctions.length < 3 ? (
+          bidAuctions.map((property, index) => (
+            <Col
+              md={windowSize > 1400 ? 5 : 6}
+              key={index}
+              className="py-2 d-flex justify-content-center"
+            >
+              <NewCards
+                // toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                data={property}
+                type={property.property.type}
+              />
+            </Col>
+          ))
+        ) : showBidAuctions && bidAuctions.length >= 3 ? (
+          <Carousel {...bidSettings}>
+            {bidAuctions.map((property, index) => (
+              <Col
+                key={index}
+                className="d-flex justify-content-center carousel-cards"
+              >
+                <NewCards
+                  // toggleSignIn={toggleSignIn}
+                  windowSize={windowSize}
+                  data={property}
+                  type={property.property.type}
+                />
+              </Col>
+            ))}
+          </Carousel>
         ) : (
-          // bidAuctions.length === 0 &&
           showBidAuctions && (
             <div
               style={{
@@ -454,8 +663,23 @@ function Dash({ windowSize, featureLength }) {
             approvedAuctions={approvedAuctions}
             windowSize={windowSize}
           />
+        ) : showApprovedAuctions && approvedAuctions.length >= 3 ? (
+          <Carousel {...approvedSettings}>
+            {savedProp.map((property, index) => (
+              <Col
+                key={index}
+                className="d-flex justify-content-center carousel-cards"
+              >
+                <NewCards
+                  // toggleSignIn={toggleSignIn}
+                  windowSize={windowSize}
+                  data={property}
+                  type={property.property.type}
+                />
+              </Col>
+            ))}
+          </Carousel>
         ) : (
-          // approvedAuctions.length === 0 &&
           showApprovedAuctions && (
             <div
               style={{

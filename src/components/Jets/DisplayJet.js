@@ -482,7 +482,7 @@ function DisplayJet({
                   style={{
                     color: "#b77b50",
                     padding: "0",
-                    fontFamily: "josefin slab",
+                    fontFamily: "Interstate, sans-serif",
                     fontWeight: "600",
                     fontSize: windowSize < 600 ? "1.7rem" : "2.6rem",
                   }}
@@ -495,7 +495,7 @@ function DisplayJet({
                     color: "#919191",
                     fontWeight: "400",
                     padding: "0",
-                    fontFamily: "Montserrat",
+                    fontFamily: "Interstate, sans-serif",
                     fontWeight: "400",
                     fontSize: "25px",
                   }}

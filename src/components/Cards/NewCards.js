@@ -4,10 +4,17 @@ import AuctionTimer from "../Auctions/AuctionTimer";
 import NumberFormat from "react-number-format";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import authService from "../../services/authServices";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import "../../styles/card.css";
 
 function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
+  const [favorite, setFavorite] = useState(false);
+
   const user = useSelector((state) => state.user);
+  const savedProperty = useSelector((state) => state.savedProperty);
+
   const history = useHistory();
   const handleBid = () => {
     if (!user._id) {
@@ -18,6 +25,25 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
     // } else {
     //   setShowKYC(true);
     // }
+  };
+
+  const handleLike = () => {
+    if (user._id) {
+      const data_1 = {
+        userId: user._id,
+        auctionId: data._id,
+      };
+
+      if (favorite === false) {
+        authService.saveProperty(data_1);
+        setFavorite(!favorite);
+      } else if (favorite === true) {
+        authService.removeProperty(data_1);
+        setFavorite(!favorite);
+      }
+    } else {
+      return toggleSignIn();
+    }
   };
 
   const handleDisplay = () => {
@@ -35,6 +61,19 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
     // }
   };
 
+  useEffect(() => {
+    if (user._id) {
+      if (savedProperty.length > 0) {
+        const saved = savedProperty.find((item) => item._id === data._id);
+        if (saved) {
+          setFavorite(true);
+        } else {
+          setFavorite(false);
+        }
+      }
+    }
+  }, [savedProperty]);
+
   return (
     <Card
       className="card-container"
@@ -50,6 +89,17 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
         onClick={handleDisplay}
         src={data.property.images[0].url}
       />
+      <button
+        onClick={handleLike}
+        className="favBtn"
+        disabled={new Date().toISOString() > data.auctionEndDate}
+      >
+        {favorite ? (
+          <AiFillHeart size={25} className="favIcon" color="" />
+        ) : (
+          <AiOutlineHeart size={25} className="favIcon" />
+        )}
+      </button>
       <Card.Body className="p-0 px-4">
         <Row>
           <Col
@@ -231,20 +281,21 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                   )}
                 </div>
               </div>
-              <div style={{ paddingBottom: "1.5rem" }}>
-                {new Date().toISOString() < data.auctionStartDate &&
+
+              {new Date().toISOString() < data.auctionStartDate &&
+              new Date().toISOString() < data.registerEndDate ? (
+                <span className="card-section-title">Registration Ends</span>
+              ) : new Date().toISOString() > data.registerEndDate &&
+                new Date().toISOString() < data.auctionStartDate ? (
+                <span className="card-section-title">Auction Starts</span>
+              ) : (
+                <span className="card-section-title">Online Auction</span>
+              )}
+              {new Date().toISOString() > data.auctionEndDate ? (
+                <p className="auction-end p-0 m-0">Auction Ended</p>
+              ) : new Date().toISOString() < data.auctionStartDate &&
                 new Date().toISOString() < data.registerEndDate ? (
-                  <span className="card-section-title">Registration Ends</span>
-                ) : new Date().toISOString() > data.registerEndDate &&
-                  new Date().toISOString() < data.auctionStartDate ? (
-                  <span className="card-section-title">Auction Starts</span>
-                ) : (
-                  <span className="card-section-title">Online Auction</span>
-                )}
-                {new Date().toISOString() > data.auctionEndDate ? (
-                  <p className="auction-end">Auction Ended</p>
-                ) : new Date().toISOString() < data.auctionStartDate &&
-                  new Date().toISOString() < data.registerEndDate ? (
+                <div style={{ paddingBottom: "1.8rem" }}>
                   <div className="position-absolute">
                     <AuctionTimer
                       time={data.registerEndDate}
@@ -252,8 +303,10 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                       windowSize={windowSize}
                     />
                   </div>
-                ) : new Date().toISOString() < data.auctionStartDate &&
-                  new Date().toISOString() > data.registerEndDate ? (
+                </div>
+              ) : new Date().toISOString() < data.auctionStartDate &&
+                new Date().toISOString() > data.registerEndDate ? (
+                <div style={{ paddingBottom: "1.8rem" }}>
                   <div className="position-absolute">
                     <AuctionTimer
                       time={data.auctionStartDate}
@@ -261,8 +314,10 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                       windowSize={windowSize}
                     />
                   </div>
-                ) : new Date().toISOString() > data.auctionStartDate &&
-                  new Date().toISOString() < data.auctionEndDate ? (
+                </div>
+              ) : new Date().toISOString() > data.auctionStartDate &&
+                new Date().toISOString() < data.auctionEndDate ? (
+                <div style={{ paddingBottom: "1.8rem" }}>
                   <div className="position-absolute">
                     <AuctionTimer
                       time={data.auctionEndDate}
@@ -270,7 +325,9 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                       windowSize={windowSize}
                     />
                   </div>
-                ) : (
+                </div>
+              ) : (
+                <div style={{ paddingBottom: "1.8rem" }}>
                   <div className="position-absolute">
                     <AuctionTimer
                       time={data.auctionEndDate}
@@ -278,15 +335,15 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
                       windowSize={windowSize}
                     />
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </Col>
-            <Col className="d-flex justify-content-center">
+            {/* <Col className="d-flex justify-content-center">
               <div>
                 <span className="card-section-title">Listed On</span>
                 <p className="info-text">Aug 18, 2022</p>
               </div>
-            </Col>
+            </Col> */}
           </Col>
         </Row>
         <Row>

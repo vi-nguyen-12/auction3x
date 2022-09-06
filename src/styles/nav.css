@@ -56,6 +56,9 @@
   border-radius: 0;
   color: #fff;
   height: 90px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }
 
 .nav-button:hover {
@@ -73,7 +76,7 @@
   background-color: transparent;
 }
 
-.menu-icon {
+/* .menu-icon {
   cursor: pointer;
   height: 90px;
 }
@@ -81,4 +84,67 @@
 .menu-icon:hover {
   border-bottom: 1px solid #fff;
   line-height: normal;
+} */
+
+/* .menu-icon {
+  background: linear-gradient(90deg, #e0bc8f 100%, #bf9767 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+} */
+
+.user-name {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url("../images/downArrow.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  padding-right: 1.5rem; */
+  border-radius: 0;
+  height: 90px;
+}
+
+.user-name:hover {
+  border-bottom: 1px solid #fff;
+  line-height: normal;
+  background: transparent;
+}
+
+.user-name:focus {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.drop-item {
+  width: 130px;
+  margin-top: 230px;
+  margin-right: 100px;
+}
+
+.drop-item-lists {
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.drop-item-lists:hover {
+  background-color: rgb(109, 106, 106);
+  color: #000;
 }

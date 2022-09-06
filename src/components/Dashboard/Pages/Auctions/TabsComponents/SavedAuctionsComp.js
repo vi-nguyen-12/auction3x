@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import "react-circular-progressbar/dist/styles.css";
 import SavedAuctionsCard from "../../Auctions/SavedAuctionsCard";
+import NewCards from "../../../../Cards/NewCards";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -95,28 +96,16 @@ function SavedAuctionsComp({ savedProp, windowSize }) {
 
   return (
     <>
-      <Carousel_2 {...settings}>
-        {savedProp.map((property, index) => (
-          <Wrap key={index}>
-            <SavedAuctionsCard
-              url={property.property.images[0].url}
-              urls={property.property.images}
-              data={property.property.details}
-              id={property._id}
-              auctionStartDate={property.auctionStartDate}
-              auctionEndDate={property.auctionEndDate}
-              startingBid={
-                property.highestBid
-                  ? property.highestBid.amount
-                  : property.startingBid
-              }
-              auctionId={property._id}
-              type={property.property.type}
-              windowSize={windowSize}
-            />
-          </Wrap>
-        ))}
-      </Carousel_2>
+      {savedProp.map((property, index) => (
+        <Col key={index}>
+          <NewCards
+            // toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
+            data={property}
+            type={property.property.type}
+          />
+        </Col>
+      ))}
     </>
   );
 }

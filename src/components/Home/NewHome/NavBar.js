@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../slice/userSlice";
+import wallets from "../../../images/wallet.png";
+import { IoIosArrowDown } from "react-icons/io";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -58,7 +60,7 @@ function NavBar({
         md={3}
         xs={6}
         className="m-0 d-flex justify-content-start align-items-center"
-        style={{ paddingLeft: windowSize > 1070 && "4rem" }}
+        style={{ paddingLeft: windowSize > 1070 && "2rem" }}
       >
         <img
           onClick={() => {
@@ -97,20 +99,51 @@ function NavBar({
         <Col
           md={windowSize < 1070 ? 5 : 3}
           xs={6}
-          className="p-0 m-0 d-flex justify-content-center align-items-center"
+          className="p-0 m-0 d-flex justify-content-evenly align-items-center"
         >
-          <Button onClick={handleSell} className="nav-button">
-            Sell
-          </Button>
-          <Button className="bg-success border-0">
-            {user.firstName} {user.lastName}
-          </Button>
-          <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
+          {windowSize > 520 && (
+            <Button onClick={handleSell} className="nav-button">
+              Sell
+            </Button>
+          )}
+          <div className="d-flex justify-content-around align-items-center">
+            <Button className="user-name p-0">
+              Hello, {user.firstName[0].toUpperCase() + user.firstName.slice(1)}
+              <div className="d-flex justify-content-center align-items-center mx-2">
+                <IoIosArrowDown />
+              </div>
+            </Button>
+            <div className="position-absolute bg-white drop-item">
+              <div className="drop-item-lists">Dashboard</div>
+              <div className="drop-item-lists">
+                <Button variant="danger" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
+            </div>
+            <Button className="nav-button">
+              <img
+                style={{ cursor: "pointer" }}
+                src={wallets}
+                width={windowSize > 1670 ? "23px" : "26px"}
+                height="auto"
+                alt=""
+              />
+            </Button>
+            <Button className="nav-button p-0">
+              <RiMenu2Line
+                size={windowSize > 1670 ? 28 : 32}
+                className="menu-icon"
+                color="#bf9767"
+              />
+            </Button>
+            {/* <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
             Dashboard
           </Button>
           <Button variant="danger" onClick={handleLogout}>
             Logout
-          </Button>
+          </Button> */}
+          </div>
         </Col>
       ) : (
         <Col
