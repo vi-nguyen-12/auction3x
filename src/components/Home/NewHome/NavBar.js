@@ -23,6 +23,8 @@ function NavBar({
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [dropdown, setDropdown] = useState(false);
+
   const handleOnClick = (page) => () => {
     bodyColorChange("#F5F9FF");
     history.push(`/${page}`);
@@ -80,16 +82,16 @@ function NavBar({
         style={{ display: windowSize < 1100 && "none" }}
       >
         <ul className="nav-list">
-          <li onClick={handleOnClick("realEstates")} className="nav-item">
+          <li onClick={handleOnClick("realEstates")} className="nav-items">
             Real Estate
           </li>
-          <li onClick={handleOnClick("cars")} className="nav-item">
+          <li onClick={handleOnClick("cars")} className="nav-items">
             Car
           </li>
-          <li onClick={handleOnClick("jets")} className="nav-item">
+          <li onClick={handleOnClick("jets")} className="nav-items">
             Jet
           </li>
-          <li onClick={handleOnClick("yachts")} className="nav-item">
+          <li onClick={handleOnClick("yachts")} className="nav-items">
             Yacht
           </li>
         </ul>
@@ -107,35 +109,44 @@ function NavBar({
             </Button>
           )}
           <div className="d-flex justify-content-around align-items-center">
-            <Button className="user-name p-0">
+            <Button
+              onClick={() => setDropdown(!dropdown)}
+              className="user-name px-2"
+            >
               Hello, {user.firstName[0].toUpperCase() + user.firstName.slice(1)}
-              <div className="d-flex justify-content-center align-items-center mx-2">
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ marginLeft: "1rem" }}
+              >
                 <IoIosArrowDown />
               </div>
             </Button>
-            <div className="position-absolute bg-white drop-item">
-              <div className="drop-item-lists">Dashboard</div>
-              <div className="drop-item-lists">
-                <Button variant="danger" onClick={handleLogout}>
-                  Logout
-                </Button>
+            {dropdown && (
+              <div className="position-absolute bg-white drop-item">
+                <div
+                  onClick={() => history.push("/Dashboard")}
+                  className="drop-item-lists"
+                >
+                  Dashboard
+                </div>
+                <div className="drop-item-lists">
+                  <Button variant="danger" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
             <Button className="nav-button">
               <img
                 style={{ cursor: "pointer" }}
                 src={wallets}
-                width={windowSize > 1670 ? "23px" : "26px"}
+                width={windowSize > 1670 ? "22px" : "20px"}
                 height="auto"
                 alt=""
               />
             </Button>
-            <Button className="nav-button p-0">
-              <RiMenu2Line
-                size={windowSize > 1670 ? 28 : 32}
-                className="menu-icon"
-                color="#bf9767"
-              />
+            <Button className="nav-button">
+              <RiMenu2Line size={windowSize > 1670 ? 28 : 32} color="#bf9767" />
             </Button>
             {/* <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
             Dashboard

@@ -244,7 +244,7 @@ function DisplayCar({
           <div style={{ position: "relative", width: "100%" }}>
             <div
               className="mini-header"
-              style={{ padding: windowSize < 500 && "35px 15px" }}
+              style={{ padding: windowSize < 500 && "20px 15px 0 15px" }}
             >
               {new Date().toISOString() < property.auctionStartDate ? (
                 <div className="mini-header-text">
@@ -261,12 +261,12 @@ function DisplayCar({
                 <div className="mini-header-text">AUCTION ENDED</div>
               )}
             </div>
-            {property.isReservedMet === true && (
+            {/* {property.isReservedMet === true && (
               <span className="badge">Reserved Met!</span>
-            )}
+            )} */}
             <img
               src={property.property.images[0].url}
-              style={{ padding: windowSize < 500 && "5px 15px" }}
+              style={{ padding: windowSize < 500 && "0 15px" }}
               alt="Snow"
               className="display-property"
             />
@@ -453,9 +453,10 @@ function DisplayCar({
                   style={{
                     color: "#b77b50",
                     padding: "0",
-                    fontFamily: "josefin slab",
+                    fontFamily: "Tzimmes",
+                    fontStyle: "normal",
                     fontWeight: "600",
-                    fontSize: windowSize < 600 ? "1.7rem" : "2.6rem",
+                    fontSize: windowSize < 600 ? "1.7rem" : "3rem",
                   }}
                 >
                   {property.property.details.year} {""}
@@ -465,9 +466,9 @@ function DisplayCar({
                 <h5
                   style={{
                     color: "#919191",
-                    fontWeight: "400",
                     padding: "0",
-                    fontFamily: "Montserrat",
+                    fontFamily: "Interstate, sans-serif",
+                    fontStyle: "normal",
                     fontWeight: "400",
                     fontSize: "25px",
                   }}
@@ -483,77 +484,16 @@ function DisplayCar({
                   className="registBtn"
                   style={{ margin: windowSize < 500 && "30px 0" }}
                 >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={toggleSignIn}
-                  >
+                  <button className="registsBtn" onClick={toggleSignIn}>
                     Register to Bid
                   </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
+                  <div className="d-flex justify-content-center mt-2">
+                    <button className="view-docs-btn" onClick={executeScroll}>
                       View Documents
                     </button>
                   </div>
                 </div>
               )}
-
-              {/* {user._id && !user.KYC && (
-                <div
-                  style={{
-                    display: "grid",
-                    justifyContent: "right",
-                    width: "100%",
-                  }}
-                >
-                  <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
-                    onClick={handleKYC}
-                  >
-                    Register to Bid
-                  </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
-                      View Documents
-                    </button>
-                  </div>
-                </div>
-              )} */}
 
               {user._id &&
               property.isNotRegisteredToBuy === true &&
@@ -566,18 +506,8 @@ function DisplayCar({
                   <button className="registsBtn" onClick={toggleRegister}>
                     Register to Bid
                   </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
+                  <div className="d-flex justify-content-center mt-2">
+                    <button className="view-docs-btn" onClick={executeScroll}>
                       View Documents
                     </button>
                   </div>
@@ -585,7 +515,10 @@ function DisplayCar({
               ) : user._id &&
                 property.isNotRegisteredToBuy === true &&
                 property.isOwner ? (
-                <div className="registBtn">
+                <div
+                  className="registBtn"
+                  style={{ margin: windowSize < 500 && "30px 0" }}
+                >
                   <button
                     className="registsBtn"
                     onClick={toggleRegister}
@@ -624,18 +557,8 @@ function DisplayCar({
                     >
                       Register to Bid
                     </button>
-                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                      <button
-                        style={{
-                          fontWeight: "500",
-                          border: "0",
-                          borderBottom: "1px solid #919191",
-                          backgroundColor: "transparent",
-                          width: "fit-content",
-                          pointer: "cursor",
-                        }}
-                        onClick={executeScroll}
-                      >
+                    <div className="d-flex justify-content-center mt-2">
+                      <button className="view-docs-btn" onClick={executeScroll}>
                         View Documents
                       </button>
                     </div>
@@ -650,21 +573,13 @@ function DisplayCar({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: windowSize < 600 ? "center" : "right",
+                    justifyContent: "right",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
                 >
                   <button
-                    style={{
-                      backgroundColor: "#e8a676",
-                      borderRadius: "10px",
-                      border: "0",
-                      width: "200px",
-                      height: "50px",
-                      fontWeight: "bold",
-                      fontSize: "20px",
-                    }}
+                    className="registsBtn"
                     onClick={togglePlaceBid}
                     disabled={
                       new Date().toISOString() > property.auctionEndDate
@@ -674,18 +589,8 @@ function DisplayCar({
                   >
                     Bid Now!
                   </button>
-                  <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                    <button
-                      style={{
-                        fontWeight: "500",
-                        border: "0",
-                        borderBottom: "1px solid #919191",
-                        backgroundColor: "transparent",
-                        width: "fit-content",
-                        pointer: "cursor",
-                      }}
-                      onClick={executeScroll}
-                    >
+                  <div className="d-flex justify-content-center mt-2">
+                    <button className="view-docs-btn" onClick={executeScroll}>
                       View Documents
                     </button>
                   </div>
@@ -699,32 +604,15 @@ function DisplayCar({
                     style={{ margin: windowSize < 500 && "30px 0" }}
                   >
                     <button
-                      style={{
-                        backgroundColor: "#e8a676",
-                        borderRadius: "10px",
-                        border: "0",
-                        width: "200px",
-                        height: "50px",
-                        fontWeight: "bold",
-                        fontSize: "20px",
-                      }}
+                      className="registsBtn"
+                      style={{ color: "#a8a8a8" }}
                       onClick={togglePlaceBid}
                       disabled
                     >
                       Under Review
                     </button>
-                    <div style={{ marginLeft: "35px", marginTop: "10px" }}>
-                      <button
-                        style={{
-                          fontWeight: "500",
-                          border: "0",
-                          borderBottom: "1px solid #919191",
-                          backgroundColor: "transparent",
-                          width: "fit-content",
-                          pointer: "cursor",
-                        }}
-                        onClick={executeScroll}
-                      >
+                    <div className="d-flex justify-content-center mt-2">
+                      <button className="view-docs-btn" onClick={executeScroll}>
                         View Documents
                       </button>
                     </div>
@@ -742,434 +630,289 @@ function DisplayCar({
               padding: windowSize > 500 ? "0 35px" : "0 15px",
             }}
           >
-            <Col style={{ display: "grid", padding: "0" }}>
+            <Col className="d-grid p-0">
               <Row
                 xs="auto"
+                className="m-0 p-0"
                 style={{
                   width: "100%",
-                  padding: "0",
-                  margin: " 0",
                   display: "flex",
-                  justifyContent: "center",
+                  justifyContent: windowSize < 500 ? "center" : "flex-start",
                 }}
               >
                 {registEnded === false ? (
-                  <Col style={{ margin: "10px" }}>
-                    <div
-                      style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        alignContent: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "10px",
-                        padding: "30px",
-                      }}
-                    >
+                  <Col
+                    style={{ paddingLeft: windowSize > 800 && "0" }}
+                    className="mt-2"
+                  >
+                    <div className="d-grid justify-content-center auction-boxes">
                       <RegistrationTimer
                         time={property.registerEndDate}
                         toggleRegistEnded={toggleRegistEnded}
                         windowSize={windowSize}
                       />
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          color: "#7c7c7c",
-                        }}
-                      >
-                        <p>Registration Ends</p>
-                      </div>
+                      <span>Registration Ends</span>
                     </div>
                   </Col>
                 ) : (
-                  <Col style={{ margin: "10px" }}>
+                  <Col
+                    style={{ paddingLeft: windowSize > 800 && "0" }}
+                    className="mt-2"
+                  >
                     <div
+                      className="d-grid justify-content-center align-items-center auction-boxes"
                       style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "278px",
-                        height: "180px",
-                        borderRadius: "10px",
+                        padding: "3.1rem 40px",
+                        width: windowSize < 800 && "306px",
                       }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          color: "Black",
-                          fontFamily: "Josefin Slab",
-                          fontWeight: "600",
-                          fontSize: "25px",
-                        }}
-                      >
-                        <p>Registration Ended</p>
-                      </div>
+                      <p>Registration Ended</p>
                     </div>
                   </Col>
                 )}
                 {new Date().toISOString() < property.auctionEndDate &&
                 new Date().toISOString() > property.auctionStartDate ? (
-                  <Col style={{ margin: "10px" }}>
-                    <div
-                      style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        alignContent: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "10px",
-                        padding: "30px",
-                      }}
-                    >
+                  <Col className="mt-2">
+                    <div className="d-grid justify-content-center align-items-center auction-boxes">
                       <AuctionTimer
                         time={property.auctionEndDate}
                         id={property._id}
                         windowSize={windowSize}
                       />
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          color: "#7c7c7c",
-                        }}
-                      >
-                        <p>Auction Ends</p>
-                      </div>
+                      <span>Auction Ends</span>
                     </div>
                   </Col>
                 ) : new Date().toISOString() < property.auctionStartDate ? (
-                  <Col style={{ margin: "10px" }}>
-                    <div
-                      style={{
-                        display: "grid",
-                        justifyContent: "center",
-                        alignContent: "center",
-                        backgroundColor: "#e8e8e8",
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "10px",
-                        padding: "30px",
-                        color: "black",
-                      }}
-                    >
+                  <Col className="mt-2">
+                    <div className="d-grid justify-content-center align-items-center auction-boxes">
                       <AuctionTimer time={property.auctionStartDate} />
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "left",
-                          color: "#7c7c7c",
-                        }}
-                      >
-                        <p>Auction Starts In</p>
-                      </div>
+                      <span>Auction Starts In</span>
                     </div>
                   </Col>
                 ) : (
                   new Date().toISOString() > property.auctionEndDate && (
-                    <Col style={{ margin: "10px" }}>
+                    <Col className="mt-2">
                       <div
+                        className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          display: "grid",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          backgroundColor: "#e8e8e8",
-                          width: "278px",
-                          height: "180px",
-                          borderRadius: "10px",
-                          padding: "40px",
+                          padding: "3.1rem 40px",
+                          width: windowSize < 800 && "306px",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "left",
-                            color: "Black",
-                            fontFamily: "Josefin Slab",
-                            fontWeight: "600",
-                            fontSize: "25px",
-                          }}
-                        >
-                          <p>Auction Ended</p>
-                        </div>
+                        <p>Auction Ended</p>
                       </div>
                     </Col>
                   )
                 )}
 
                 {property.highestBidders && (
-                  <Col style={{ margin: "10px" }}>
+                  <Col className="mt-2">
                     {property.highestBid ? (
                       <div
+                        className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          display: "grid",
-                          justifyContent: "center",
-                          alignContent: "center",
-                          backgroundColor: "#e8e8e8",
-                          width: "280px",
-                          height: "100%",
-                          borderRadius: "10px",
-                          padding: "30px 70px",
+                          padding: "2.1rem 40px",
+                          width: windowSize < 800 && "306px",
                         }}
                       >
-                        <h4>
-                          <NumberFormat
-                            value={property.highestBid}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"$"}
-                            style={{
-                              fontWeight: "600",
-                              fontSize: "22px",
-                              color: "black",
-                              fontFamily: "Josefin Slab",
-                            }}
-                          />
-                        </h4>
-                        <p
+                        <NumberFormat
+                          value={property.highestBid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
                           style={{
-                            display: "flex",
-                            justifyContent: "left",
-                            color: "#7c7c7c",
+                            fontWeight: "600",
+                            fontSize: "32px",
+                            color: "#08080A",
+                            fontFamily: "Tzimmes",
                           }}
-                        >
-                          Current Bid
-                        </p>
+                        />
+                        <span>Current Bid</span>
                       </div>
                     ) : (
                       <div
+                        className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          display: "grid",
-                          justifyContent: "center",
-                          alignContent: "center",
-                          backgroundColor: "#e8e8e8",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "10px",
-                          padding: "30px 70px",
+                          padding: "2.1rem 40px",
+                          width: windowSize < 800 && "306px",
                         }}
                       >
-                        <h4>
-                          <NumberFormat
-                            value={property.startingBid}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                            prefix={"$"}
-                            style={{
-                              fontWeight: "600",
-                              fontSize: "22px",
-                              color: "black",
-                              fontFamily: "Josefin Slab",
-                            }}
-                          />
-                        </h4>
-                        <p
+                        <NumberFormat
+                          value={property.startingBid}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          prefix={"$"}
                           style={{
-                            display: "flex",
-                            justifyContent: "left",
-                            color: "#7c7c7c",
+                            fontWeight: "600",
+                            fontSize: "32px",
+                            color: "#08080A",
+                            fontFamily: "Tzimmes",
                           }}
-                        >
-                          Current Bid
-                        </p>
+                        />
+                        <p>Current Bid</p>
                       </div>
                     )}
                   </Col>
                 )}
 
-                <Col style={{ margin: "10px" }}>
+                <Col className="mt-2">
                   <div
+                    className="d-grid justify-content-center align-items-center auction-boxes"
                     style={{
-                      display: "grid",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundColor: "#e8e8e8",
-                      width: "280px",
-                      height: "180px",
-                      borderRadius: "10px",
-                      padding: "40px",
+                      padding: "2.1rem 40px",
+                      width: windowSize < 800 && "306px",
                     }}
                   >
-                    <h4
+                    <NumberFormat
+                      value={property.viewCounts}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={""}
                       style={{
-                        fontSize: "22px",
-                        color: "black",
-                        fontFamily: "Josefin Slab",
                         fontWeight: "600",
-                        margin: "0",
-                        marginBottom: "-30px",
+                        fontSize: "32px",
+                        color: "#08080A",
+                        fontFamily: "Tzimmes",
                       }}
-                    >
-                      199,530
-                    </h4>
-                    <p
-                      style={{
-                        display: "flex",
-                        justifyContent: "left",
-                        color: "#7c7c7c",
-                      }}
-                    >
-                      Views
-                    </p>
+                    />
+                    <span>Views</span>
                   </div>
                 </Col>
               </Row>
 
-              <Row style={{ padding: "0", margin: "0" }}>
-                <div
-                  style={{
-                    marginTop: "30px",
-                    alignItems: "center",
-                    marginBottom: "30px",
-                    padding: "0",
-                  }}
-                >
-                  <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
-                  <span
-                    style={{
-                      fontWeight: "600",
-                      fontSize: "30px",
-                      color: "black",
-                      fontFamily: "Josefin Slab",
-                    }}
-                  >
-                    Property Info
-                  </span>
-                </div>
-
+              <Row className="p-0 m-0 mt-5">
                 <Col style={{ padding: "0" }}>
-                  <Table striped hover responsive>
-                    <tbody className="propInfo">
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Sale Type</td>
-                        <td>Auction</td>
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Sale Condition</td>
-                        <td>Auction Sale</td>
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Property Type</td>
-                        {property.property.type ? (
-                          <td>
-                            {property.property.type[0].toUpperCase() +
-                              property.property.type.slice(1)}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Make</td>
-                        {property.property.details.make ? (
-                          <td>{property.property.details.make}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Model</td>
-                        {property.property.details.model ? (
-                          <td>
-                            {property.property.details.model[0].toUpperCase() +
-                              property.property.details.model.slice(1)}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Year</td>
-                        {property.property.details.year ? (
-                          <td>{property.property.details.year}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Color</td>
-                        {property.property.details.color ? (
-                          <td>
-                            {property.property.details.color[0].toUpperCase() +
-                              property.property.details.color.slice(1)}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Mileage</td>
-                        {property.property.details.mileage ? (
-                          <td>{property.property.details.mileage}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Transmission</td>
-                        {property.property.details.gearbox ? (
-                          <td>{property.property.details.gearbox}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>VIN</td>
-                        {property.property.details.VIN ? (
-                          <td>{property.property.details.VIN}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Body Type</td>
-                        {property.property.details.car_type ? (
-                          <td>{property.property.details.car_type}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Fuel Type</td>
-                        {property.property.details.fuel_type ? (
-                          <td>{property.property.details.fuel_type}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Condition</td>
-                        {property.property.details.condition ? (
-                          <td>
-                            {property.property.details.condition[0].toUpperCase() +
-                              property.property.details.condition.slice(1)}
-                          </td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Engine</td>
-                        {property.property.details.engine ? (
-                          <td>{property.property.details.engine}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td style={{ fontWeight: "700" }}>Power</td>
-                        {property.property.details.power ? (
-                          <td>{property.property.details.power}</td>
-                        ) : (
-                          <td>N/A</td>
-                        )}
-                      </tr>
-                    </tbody>
-                  </Table>
+                  <div className="prop-info-table">
+                    <span>Property Info</span>
+                    <Table borderless responsive>
+                      <tbody className="propInfo">
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Sale Type</td>
+                          <td>Auction</td>
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Sale Condition</td>
+                          <td>Auction Sale</td>
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Property Type</td>
+                          {property.property.type ? (
+                            <td>
+                              {property.property.type[0].toUpperCase() +
+                                property.property.type.slice(1)}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Make</td>
+                          {property.property.details.make ? (
+                            <td>{property.property.details.make}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Model</td>
+                          {property.property.details.model ? (
+                            <td>
+                              {property.property.details.model[0].toUpperCase() +
+                                property.property.details.model.slice(1)}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Year</td>
+                          {property.property.details.year ? (
+                            <td>{property.property.details.year}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Color</td>
+                          {property.property.details.color ? (
+                            <td>
+                              {property.property.details.color[0].toUpperCase() +
+                                property.property.details.color.slice(1)}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Mileage</td>
+                          {property.property.details.mileage ? (
+                            <td>{property.property.details.mileage}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Transmission</td>
+                          {property.property.details.gearbox ? (
+                            <td>{property.property.details.gearbox}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>VIN</td>
+                          {property.property.details.VIN ? (
+                            <td>{property.property.details.VIN}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Body Type</td>
+                          {property.property.details.car_type ? (
+                            <td>{property.property.details.car_type}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Fuel Type</td>
+                          {property.property.details.fuel_type ? (
+                            <td>{property.property.details.fuel_type}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Condition</td>
+                          {property.property.details.condition ? (
+                            <td>
+                              {property.property.details.condition[0].toUpperCase() +
+                                property.property.details.condition.slice(1)}
+                            </td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Engine</td>
+                          {property.property.details.engine ? (
+                            <td>{property.property.details.engine}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td style={{ fontWeight: "700" }}>Power</td>
+                          {property.property.details.power ? (
+                            <td>{property.property.details.power}</td>
+                          ) : (
+                            <td>N/A</td>
+                          )}
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </div>
                 </Col>
                 {user._id && user.KYC && property.highestBidders && (
                   <Col
@@ -1182,9 +925,9 @@ function DisplayCar({
                       striped
                       style={{
                         padding: "0",
-                        position: windowSize < 600 && "absolute",
+                        // position: windowSize < 600 && "absolute",
                         width: windowSize < 600 && "92vw",
-                        height: windowSize < 600 && "300px",
+                        // height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1249,49 +992,39 @@ function DisplayCar({
           </Row>
 
           <Row
+            className="mt-4"
             style={{
               margin: "0",
               padding: "0",
               padding: windowSize < 500 ? "25px 15px" : "35px",
             }}
           >
-            <div
-              style={{
-                marginTop:
-                  windowSize < 600 && property.highestBidders?.length > 0
-                    ? "300px"
-                    : windowSize < 600
-                    ? "150px"
-                    : "0",
-                alignItems: "center",
-                marginBottom: "20px",
-                padding: "0",
-              }}
-            >
-              <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
-              <span
-                style={{
-                  fontWeight: "600",
-                  fontSize: "30px",
-                  color: "black",
-                  fontFamily: "Josefin Slab",
-                }}
-              >
-                Executive Summary
-              </span>
-            </div>
             <Col
               style={{
-                fontSize: windowSize > 800 ? "20px" : "17px",
                 color: "black",
                 padding: windowSize > 800 && "20px 20px 20px 0",
-                fontFamily: "Josefin Slab",
-                fontWeight: "600",
+                fontFamily: "Interstate, sans-serif",
+                fontWeight: "300",
               }}
+              className="p-0"
               xs={12}
-              // md={8}
+              // md={6}
             >
-              {property.property.details.description?.summary}
+              <div
+                style={{
+                  fontSize: windowSize > 800 ? "20px" : "17px",
+                  // marginTop:
+                  //   windowSize < 600 && property.highestBidders?.length > 0
+                  //     ? "300px"
+                  //     : windowSize < 600
+                  //     ? "150px"
+                  //     : "0",
+                }}
+                className="summary-container d-grid"
+              >
+                <span>Executive Summary</span>
+                {property.property.details.description?.summary}
+              </div>
             </Col>
 
             {/* <Col
@@ -1329,8 +1062,8 @@ function DisplayCar({
 
           <Row
             ref={myRef}
+            className="mt-1"
             style={{
-              marginTop: "50px",
               padding: windowSize < 600 ? "15px" : "35px",
             }}
           >
@@ -1629,16 +1362,7 @@ function DisplayCar({
                         onClick={() => {
                           viewSelected();
                         }}
-                        style={{
-                          backgroundColor: "white",
-                          border: "none",
-                          outline: "none",
-                          color: "#b77b50",
-                          padding: "10px 20px",
-                          borderRadius: "8px",
-                          fontSize: "18px",
-                          width: "200px",
-                        }}
+                        className="mt-2 docs-view-btn"
                       >
                         View Selected
                       </button>
@@ -1648,16 +1372,7 @@ function DisplayCar({
                         onClick={() => {
                           viewAll();
                         }}
-                        style={{
-                          backgroundColor: "white",
-                          border: "none",
-                          outline: "none",
-                          color: "#b77b50",
-                          padding: "10px 20px",
-                          borderRadius: "8px",
-                          fontSize: "18px",
-                          width: "200px",
-                        }}
+                        className="mt-2 docs-view-btn"
                       >
                         View All
                       </button>

@@ -412,3 +412,8 @@ h1 {
     font-size: 1.5rem;
   }
 }
+
+.btn:active {
+  outline: none;
+  box-shadow: none !important;
+}
