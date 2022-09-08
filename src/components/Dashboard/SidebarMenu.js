@@ -3,18 +3,21 @@ import * as AI from "react-icons/ai";
 import * as RI from "react-icons/ri";
 import { RiAuctionFill } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
+import { IoMdListBox } from "react-icons/io";
+import { RiMessage2Fill } from "react-icons/ri";
+import { IoGrid } from "react-icons/io5";
 
 const path = window.location.pathname;
 export const SidebarMenu = [
   {
     name: "Dashboard",
     path: "/Dashboard",
-    icon: <AI.AiFillHome size={30} />,
+    icon: <IoGrid size={30} />,
   },
   {
     name: "Messaging",
     path: "/Dashboard/Messaging",
-    icon: <AI.AiFillMessage size={30} />,
+    icon: <RiMessage2Fill size={30} />,
   },
   {
     name: "Auctions",
@@ -44,7 +47,7 @@ export const SidebarMenu = [
   {
     name: "Your Listings",
     path: { path },
-    icon: <RiAuctionFill size={30} />,
+    icon: <IoMdListBox size={30} />,
     iconClosed: <RI.RiArrowDropDownLine color="#c4c4c4" className="arrow" />,
     iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow " />,
     subNav: [

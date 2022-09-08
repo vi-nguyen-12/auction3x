@@ -46,8 +46,8 @@ h3 {
   width: 100%;
   height: 50px;
   background-color: #ffffff;
-  border: none;
-  border-radius: 5px;
+  border: 1px solid #d1dcee;
+  border-radius: 0;
   /* display: flex;
   flex-direction: column; */
 }
@@ -69,9 +69,9 @@ h3 {
 .search Button {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 0;
   background-color: #ffffff !important;
-  border: none !important;
+  border: 1px solid #d1dcee;
   margin: 0 5px;
 }
 
@@ -94,9 +94,8 @@ h3 {
   display: flex;
   width: 350px;
   height: 150px;
-  border-radius: 15px;
-  border: none;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  border: 1px solid #d1dcee;
   background-color: #ffffff;
   align-items: center;
   justify-content: center;
@@ -133,7 +132,7 @@ h3 {
 }
 .CircularProgressbar .CircularProgressbar-path {
   stroke: #b77b50 !important;
-  stroke-linecap: round;
+  stroke-linecap: initial !important;
   transition: stroke-dashoffset 0.5s ease 0s;
 }
 
@@ -144,12 +143,19 @@ h3 {
   margin-top: 3em;
   width: 450px;
   height: 50px;
-  border-radius: 15px;
-  border: none;
+  border-radius: 0;
+  border: 1px solid #d1dcee;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); */
+}
+
+#active {
+  color: #b77b50;
+  border-radius: 0;
+  border-bottom: 2px solid #b77b50;
+  line-height: normal;
 }
 
 .tab .tabs {
@@ -163,15 +169,18 @@ h3 {
 
 .tab .tabs:hover {
   color: #b77b50;
-  border-bottom: 4px solid #b77b50;
-  border-radius: 0 0 3px 3px;
+  border-bottom: 2px solid #b77b50;
+  line-height: normal;
+  border-radius: 0;
 }
 
 .tab .tabs:focus {
   outline: none;
   box-shadow: none;
   color: #b77b50;
-  border-bottom: 4px solid #b77b50;
+  border-radius: 0;
+  border-bottom: 2px solid #b77b50;
+  line-height: normal;
 }
 
 .filter {
@@ -190,7 +199,7 @@ h3 {
 .filterIcon,
 .refresh {
   background-color: #b77b50;
-  border-radius: 16px;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,7 +212,7 @@ h3 {
   border: none;
   font-size: 20px;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 1550px) {
@@ -217,9 +226,10 @@ h3 {
 
 .profileContainer {
   width: 100vw;
-  background-color: white;
-  border-radius: 20px;
+  background-color: #ffffff;
+  border-radius: 0;
   padding: 20px 20px 50px 50px;
+  box-shadow: 0px 4px 20px rgba(94, 132, 194, 0.06);
 }
 
 .profilePicCol {
@@ -231,7 +241,7 @@ h3 {
   height: 320px;
   width: 280px;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 0;
   box-shadow: 0px 0px 40px 0px rgba(87, 115, 240, 0.2);
   display: flex;
   justify-content: center;
@@ -242,7 +252,7 @@ h3 {
   height: 94%;
   width: 92%;
   background-color: transparent;
-  border-radius: 20px;
+  border-radius: 0;
 }
 
 .list {
@@ -277,7 +287,7 @@ h3 {
   justify-content: center;
   background-color: #d3e2fb;
   border: none;
-  border-radius: 50%;
+  border-radius: 0;
   height: 50px;
   width: 50px;
 }
@@ -364,42 +374,51 @@ h3 {
 }
 
 .name h3 {
-  color: black;
-  font-size: 23px;
+  font-family: "Tzimmes";
+  font-style: normal;
+  color: #08080a;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .name p {
-  color: #4bd67f;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  color: #b77b50;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .address {
-  color: #7c8392;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: "Interstate", sans-serif;
+  font-style: normal;
+  color: #737b8b;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .address Button {
-  border-radius: 50%;
-  margin: 10px;
+  border-radius: 0;
+  margin-right: 10px;
   height: 50px;
-  background-color: #d3e2fb;
+  background-color: #f8f2ee;
   border: none;
 }
 
-/* .social Button {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  background-color: #d3e2fb;
-  border: none;
-  margin: auto 10px;
-} */
-
 .address Button:hover {
   background-color: transparent;
+}
+
+.address Button:focus {
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.address Button:active {
+  background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Incomplete*/
@@ -510,9 +529,9 @@ h3 {
   height: 23px;
   font-size: 0.7rem;
   font-weight: bold;
-  border-radius: 50%;
+  border-radius: 0;
   background-color: #b77b50;
-  border: 2px solid #ffefe3;
+  border: 1px solid #ffffff;
   color: white;
   margin-right: 59px;
   margin-bottom: 30px;
@@ -552,18 +571,27 @@ h3 {
   background-color: #b9b9b9;
 }
 
-.carousel-cards {
-  padding: 0 3rem;
+.slide-circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #b9b9b9;
+  margin: 0 5px;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 1250px) {
+/* .carousel-cards {
+  padding: 0 4rem;
+} */
+
+/* @media screen and (max-width: 1250px) {
   .carousel-cards {
     padding: 0 10rem;
   }
-}
+} */
 
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
   .carousel-cards {
     padding: 2rem 0.4rem;
   }
-}
+} */

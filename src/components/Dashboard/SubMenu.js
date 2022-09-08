@@ -8,7 +8,7 @@ const SidebarLink = styled(Link)`
   color: #96a0af;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding-right: 20px;
   list-style: none;
   height: 70px;
   text-decoration: none;
@@ -29,7 +29,7 @@ const SidebarLabel = styled.button`
   align-items: center;
   justify-content: space-between;
   &:hover {
-    border-left: 4px solid #b77b50;
+    border-left: 3px solid #b77b50;
     color: #b77b50;
     cursor: pointer;
   }

@@ -13,6 +13,9 @@ import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";
 import RealEstatePageBg from "../../images/RealEstatePageBg.png";
+import CarPageBg from "../../images/CarPageBg.png";
+import JetPageBg from "../../images/JetPageBg.png";
+import YachtPageBg from "../../images/YachtPageBg.png";
 // import Auction from "../../../../auction10x-backend/model/Auction";
 
 const mapStyles = {
@@ -62,15 +65,18 @@ const PropertyPages = ({
   return (
     <>
       {path === "/cars" ? (
-        <Row className="realHeader">
+        <Row className="realHeader" style={{ background: `url(${CarPageBg})` }}>
           <title>CAR</title>
         </Row>
       ) : path === "/jets" ? (
-        <Row className="realHeader">
+        <Row className="realHeader" style={{ background: `url(${JetPageBg})` }}>
           <title>JET</title>
         </Row>
       ) : path === "/yachts" ? (
-        <Row className="realHeader">
+        <Row
+          className="realHeader"
+          style={{ background: `url(${YachtPageBg})` }}
+        >
           <title>YACHT</title>
         </Row>
       ) : path === "/Auctions" ? (

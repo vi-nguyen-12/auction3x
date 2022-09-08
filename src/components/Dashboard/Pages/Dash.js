@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Button, Container, Modal } from "react-bootstrap";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { RiFilter2Fill } from "react-icons/ri";
 import { GoPlus } from "react-icons/go";
 import "react-circular-progressbar/dist/styles.css";
 import authServices from "../../../services/authServices";
 import { useSelector } from "react-redux";
-import SavedAuctionsComp from "./Auctions/TabsComponents/SavedAuctionsComp";
-import BidAuctionsComp from "./Auctions/TabsComponents/BidAuctionsComp";
-import ApprovedAuctionsComp from "./Auctions/TabsComponents/ApprovedAuctionsComp";
 import CloseButton from "react-bootstrap/CloseButton";
 import AddFund from "../../BuyRegister/AddFund";
 import { useHistory } from "react-router-dom";
@@ -38,7 +34,8 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
+      position: absolute;
+      // top: -3vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -53,21 +50,21 @@ const Carousel = styled(Slider)`
     overflow: initial;
   }
 
-  .slick-prev {
-    width: 60px;
-    height: 60px;
-    left: 8vw;
-    z-index: 1;
-    background: url(${Prev});
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: 45% 50%;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
-    margin: -50px;
-    margin-left: -120px;
-  }
+  // .slick-prev {
+  //   width: 60px;
+  //   height: 60px;
+  //   left: 8vw;
+  //   z-index: 1;
+  //   background: url(${Prev});
+  //   background-size: 15px;
+  //   background-repeat: no-repeat;
+  //   background-position: 45% 50%;
+  //   background-color: white;
+  //   border-radius: 50%;
+  //   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  //   margin: -50px;
+  //   margin-left: -120px;
+  // }
 
   .slick-prev:before {
     display: none;
@@ -75,21 +72,21 @@ const Carousel = styled(Slider)`
     // color: #e9af84;
   }
 
-  .slick-next {
-    width: 60px;
-    height: 60px;
-    right: 8vw;
-    z-index: 1;
-    background: url(${Next});
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: 53% 50%;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
-    margin: -50px;
-    margin-right: -122px;
-  }
+  // .slick-next {
+  //   width: 60px;
+  //   height: 60px;
+  //   right: 8vw;
+  //   z-index: 1;
+  //   background: url(${Next});
+  //   background-size: 15px;
+  //   background-repeat: no-repeat;
+  //   background-position: 53% 50%;
+  //   background-color: white;
+  //   border-radius: 50%;
+  //   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+  //   margin: -50px;
+  //   margin-right: -122px;
+  // }
 
   .slick-next:before {
     display: none;
@@ -97,20 +94,20 @@ const Carousel = styled(Slider)`
     // color: #e9af84;
   }
 
-  @media (max-width: 600px) {
-    .slick-prev {
-      width: 50px;
-      height: 50px;
-      left: 15vw;
-      margin-top: -75px;
-    }
-    .slick-next {
-      width: 50px;
-      height: 50px;
-      right: 15vw;
-      margin-top: -75px;
-    }
-  }
+  // @media (max-width: 600px) {
+  //   .slick-prev {
+  //     width: 50px;
+  //     height: 50px;
+  //     left: 15vw;
+  //     margin-top: -75px;
+  //   }
+  //   .slick-next {
+  //     width: 50px;
+  //     height: 50px;
+  //     right: 15vw;
+  //     margin-top: -75px;
+  //   }
+  // }
 `;
 
 const Wrap = styled.div`
@@ -147,16 +144,22 @@ function Dash({ windowSize, featureLength }) {
   const savedProperties = useSelector((state) => state.savedProperty);
   const [showFundReq, popFundReq] = useState(false);
   const toggleFundReq = () => popFundReq(!showFundReq);
+  const slider = useRef();
+  const [slideIndex, setSlideIndex] = useState(0);
 
   const history = useHistory();
 
+  //slider circles
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: false,
     slidesToShow:
-      windowSize >= 1250 ? (savedProp.length >= 3 ? 2 : savedProp.length) : 1,
+      windowSize >= 1250 ? (savedProp.length >= 3 ? 3 : savedProp.length) : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
 
   let bidSettings = {
@@ -167,9 +170,12 @@ function Dash({ windowSize, featureLength }) {
     slidesToShow:
       windowSize >= 1250
         ? bidAuctions.length >= 3
-          ? 2
+          ? 3
           : bidAuctions.length
         : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
 
   let approvedSettings = {
@@ -180,12 +186,23 @@ function Dash({ windowSize, featureLength }) {
     slidesToShow:
       windowSize >= 1250
         ? approvedAuctions.length >= 3
-          ? 2
+          ? 3
           : approvedAuctions.length
         : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
 
-  console.log(bidAuctions);
+  const handleClick = (index) => () => {
+    setSlideIndex(index);
+  };
+
+  useEffect(() => {
+    if (slider.current) {
+      slider.current.slickGoTo(slideIndex);
+    }
+  }, [slideIndex]);
 
   useEffect(() => {
     const getOngoingAuctions = async () => {
@@ -231,6 +248,7 @@ function Dash({ windowSize, featureLength }) {
     const data = await authServices.buyerApprovedAuctions(id);
     setApprovedAuctions(data);
   };
+
   return (
     <Container
       className="container2"
@@ -562,13 +580,13 @@ function Dash({ windowSize, featureLength }) {
         </>
       )}
 
-      <Row>
+      <Row className="mb-2 mt-3">
         {showSavedProp && savedProp.length > 0 && savedProp.left < 3 ? (
           savedProp.map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
               key={index}
-              className="py-2 d-flex justify-content-center"
+              className="py-2 d-flex justify-content-center align-items-center my-5"
             >
               <NewCards
                 // toggleSignIn={toggleSignIn}
@@ -580,11 +598,11 @@ function Dash({ windowSize, featureLength }) {
           ))
         ) : // savedProp.length === 0 &&
         showSavedProp && savedProp.length >= 3 ? (
-          <Carousel {...settings}>
+          <Carousel {...settings} ref={slider}>
             {savedProp.map((property, index) => (
               <Col
                 key={index}
-                className="d-flex justify-content-center carousel-cards"
+                className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
                   // toggleSignIn={toggleSignIn}
@@ -627,11 +645,11 @@ function Dash({ windowSize, featureLength }) {
             </Col>
           ))
         ) : showBidAuctions && bidAuctions.length >= 3 ? (
-          <Carousel {...bidSettings}>
+          <Carousel {...bidSettings} ref={slider}>
             {bidAuctions.map((property, index) => (
               <Col
                 key={index}
-                className="d-flex justify-content-center carousel-cards"
+                className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
                   // toggleSignIn={toggleSignIn}
@@ -659,16 +677,26 @@ function Dash({ windowSize, featureLength }) {
         )}
 
         {showApprovedAuctions && approvedAuctions.length > 0 ? (
-          <ApprovedAuctionsComp
-            approvedAuctions={approvedAuctions}
-            windowSize={windowSize}
-          />
+          approvedAuctions.map((property, index) => (
+            <Col
+              md={windowSize > 1400 ? 5 : 6}
+              key={index}
+              className="py-2 d-flex justify-content-center"
+            >
+              <NewCards
+                // toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                data={property}
+                type={property.property.type}
+              />
+            </Col>
+          ))
         ) : showApprovedAuctions && approvedAuctions.length >= 3 ? (
-          <Carousel {...approvedSettings}>
+          <Carousel {...approvedSettings} ref={slider}>
             {savedProp.map((property, index) => (
               <Col
                 key={index}
-                className="d-flex justify-content-center carousel-cards"
+                className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
                   // toggleSignIn={toggleSignIn}
@@ -695,6 +723,37 @@ function Dash({ windowSize, featureLength }) {
           )
         )}
       </Row>
+      <Row className="d-flex justify-content-center align-items-center">
+        {showSavedProp && savedProp.length > 0
+          ? savedProp.map((property, index) => (
+              <div
+                onClick={handleClick(index)}
+                key={index}
+                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                className="slide-circle"
+              ></div>
+            ))
+          : showBidAuctions && bidAuctions.length > 0
+          ? bidAuctions.map((property, index) => (
+              <div
+                onClick={handleClick(index)}
+                key={index}
+                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                className="slide-circle"
+              ></div>
+            ))
+          : showApprovedAuctions && approvedAuctions.length > 0
+          ? approvedAuctions.map((property, index) => (
+              <div
+                onClick={handleClick(index)}
+                key={index}
+                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                className="slide-circle"
+              ></div>
+            ))
+          : null}
+      </Row>
+
       <Modal
         backdrop="static"
         keyboard={false}

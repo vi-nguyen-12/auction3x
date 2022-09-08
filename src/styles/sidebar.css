@@ -10,10 +10,10 @@
 .sideBarList {
   width: 100%;
   padding-left: 0 !important;
-  margin-top: 100px;
+  margin-top: 8rem;
   height: 100vh;
-  margin-left: -20px;
-  display: table;
+  /* margin-left: -20px; */
+  /* display: table; */
 }
 @media (max-width: 1300px) {
   .sideBar {
@@ -30,11 +30,6 @@
 a:after {
   color: black !important;
   text-decoration: none !important;
-}
-
-#active {
-  color: #b77b50;
-  border-bottom: 4px solid #b77b50;
 }
 
 #activeSideBar {

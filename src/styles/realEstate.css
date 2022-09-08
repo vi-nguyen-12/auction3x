@@ -29,12 +29,12 @@
   display: grid;
   justify-items: center;
   background-color: #08080a;
-  align-items: center;
+  align-items: flex-end;
   object-fit: cover;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 510px;
+  height: 360px;
   width: 100%;
   justify-content: center;
   font-size: 50px;
@@ -43,25 +43,15 @@
 }
 
 .realHeader title {
-  /* font-family: "Montserrat"; */
+  font-family: 'Tzimmes';
   font-style: normal;
   font-weight: 700;
-  font-size: 45px;
-  line-height: 55px;
+  font-size: 64px;
+  line-height: 77px;
+  color: #ffffff;
   display: flex;
-  align-items: center;
-  text-transform: uppercase;
-
-  background: linear-gradient(
-    90deg,
-    #d58f5c 0%,
-    #ffc195 31.25%,
-    #dd9c6d 62.5%,
-    #edb48b 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .realHeader p {

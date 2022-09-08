@@ -14,10 +14,11 @@ import NumberFormat from "react-number-format";
 import AuctionTimer from "../Auctions/AuctionTimer";
 import RegistrationTimer from "../Auctions/RegistrationTimer";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { IoCalculator, IoImageOutline } from "react-icons/io5";
+import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
+import ReservedMet from "../../images/ReservedMet.png";
 import CloseButton from "react-bootstrap/CloseButton";
 import "../../styles/property-display.css";
 import authService from "../../services/authServices";
@@ -216,6 +217,7 @@ function DisplayRealEstate({
       lng: property ? property.property.details.property_address.lng : null,
     });
   }, [property]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     if (user._id) {
@@ -459,39 +461,46 @@ function DisplayRealEstate({
                   textAlign: windowSize < 500 && "center",
                 }}
               >
-                <h2
-                  style={{
-                    color: "#b77b50",
-                    padding: "0",
-                    fontFamily: "Tzimmes",
-                    fontStyle: "normal",
-                    fontWeight: "600",
-                    fontSize: windowSize < 600 ? "1.7rem" : "3rem",
-                  }}
-                >
-                  {
-                    property.property.details.property_address
-                      .formatted_street_address
-                  }
-                </h2>
-                <h5
-                  style={{
-                    color: "#919191",
-                    padding: "0",
-                    fontFamily: "Interstate, sans-serif",
-                    fontStyle: "normal",
-                    fontWeight: "400",
-                    fontSize: "25px",
-                  }}
-                >
-                  {/* {
+                <Col className="p-0" md={windowSize > 900 ? 7 : 12} xs={12}>
+                  <h2
+                    style={{
+                      color: "#b77b50",
+                      padding: "0",
+                      fontFamily: "Tzimmes",
+                      fontStyle: "normal",
+                      fontWeight: "600",
+                      fontSize: windowSize < 600 ? "1.7rem" : "3rem",
+                    }}
+                  >
+                    {
+                      property.property.details.property_address
+                        .formatted_street_address
+                    }
+                  </h2>
+                  <h5
+                    style={{
+                      color: "#919191",
+                      padding: "0",
+                      fontFamily: "Interstate, sans-serif",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      fontSize: "25px",
+                    }}
+                  >
+                    {/* {
                     property.property.details.property_address
                       .formatted_street_address
                   }{" "} */}
-                  {property.property.details.property_address.city}
-                  {","} {property.property.details.property_address.state}{" "}
-                  {property.property.details.property_address.zip_code}
-                </h5>
+                    {property.property.details.property_address.city}
+                    {","} {property.property.details.property_address.state}{" "}
+                    {property.property.details.property_address.zip_code}
+                  </h5>
+                </Col>
+                {property.isReservedMet && (
+                  <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
+                    <img src={ReservedMet} alt="" />
+                  </Col>
+                )}
               </Row>
             </Col>
             <Col style={{ padding: "0" }}>

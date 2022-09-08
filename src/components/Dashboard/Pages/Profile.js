@@ -164,7 +164,7 @@ function Profile({ id, windowSize }) {
             <div className="profileInline">
               <div
                 style={{
-                  borderRadius: "20px",
+                  borderRadius: "0",
                   width: "100%",
                   height: "100%",
                   backgroundSize: "cover",
@@ -207,7 +207,7 @@ function Profile({ id, windowSize }) {
           style={{
             display: "inline-grid",
             justifyContent: "center",
-            textAlign: "center",
+            textAlign: "start",
             marginTop: "30px",
           }}
         >
@@ -228,7 +228,7 @@ function Profile({ id, windowSize }) {
                 );
               }}
             >
-              <BsInstagram size={25} color="#216fed" />
+              <BsInstagram size={25} color="#b77b50" />
             </Button>
             <Button
               onClick={() => {
@@ -239,7 +239,7 @@ function Profile({ id, windowSize }) {
                 );
               }}
             >
-              <BsFacebook size={29} color="#216fed" />
+              <BsFacebook size={29} color="#b77b50" />
             </Button>
             <Button
               onClick={() => {
@@ -250,7 +250,7 @@ function Profile({ id, windowSize }) {
                 );
               }}
             >
-              <BsTwitter size={27} color="#216fed" />
+              <BsTwitter size={27} color="#b77b50" />
             </Button>
           </div>
         </Col>
@@ -266,24 +266,35 @@ function Profile({ id, windowSize }) {
           <Row>
             <Carousel {...settings}>
               {savedProperty.length > 0
-                ? savedProperty.map((property, index) => (
-                    <Wrap key={index}>
-                      <div className="listItem">
-                        <img
-                          src={property.property.images[0].url}
-                          alt="property"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            width: "100%",
-                            height: "100%",
-                            borderRadius: "15px",
-                            cursor: "pointer",
-                          }}
-                        />
-                      </div>
-                    </Wrap>
-                  ))
+                ? savedProperty.map(
+                    (property, index) => (
+                      console.log(property),
+                      (
+                        <Wrap key={index}>
+                          <div className="listItem">
+                            <img
+                              src={property.property.images[0].url}
+                              alt="property"
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "0",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                window.open(
+                                  `/DisplayAuctions/${property._id}`,
+                                  "_blank"
+                                );
+                              }}
+                            />
+                          </div>
+                        </Wrap>
+                      )
+                    )
+                  )
                 : null}
             </Carousel>
           </Row>

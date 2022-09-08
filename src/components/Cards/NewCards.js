@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import ReservedMet from "../../images/ReservedMet.png";
 import "../../styles/card.css";
 
-function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
+function NewCards({ data, type, toggleSignIn, windowSize }) {
   const [favorite, setFavorite] = useState(false);
 
   const user = useSelector((state) => state.user);
@@ -77,8 +78,25 @@ function NewCards({ data, reserveMet, type, toggleSignIn, windowSize }) {
   return (
     <Card
       className="card-container"
-      // style={{ width: windowSize < 1680 && "440px" }}
+      style={{
+        width: history.location.pathname === "/" && windowSize > 1680 && "100%",
+      }}
     >
+      {data.isReservedMet && (
+        <div
+          className="position-absolute"
+          style={{
+            marginTop: windowSize > 600 ? "-2rem" : "0.5rem",
+            marginLeft: windowSize > 600 ? "-1rem" : "0.5rem",
+          }}
+        >
+          <img
+            src={ReservedMet}
+            alt="property"
+            width={windowSize < 600 && "50px"}
+          />
+        </div>
+      )}
       <Card.Img
         className="card-img"
         style={{

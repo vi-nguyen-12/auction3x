@@ -300,7 +300,7 @@ function Dashboard({
     setPositionLeft("20%");
     setPadRight("3rem");
     colorChange("black");
-    bodyColorChange("#ffefe3");
+    bodyColorChange("#F5F9FF");
     toggleChange();
     toggleShow();
   }, []);
@@ -550,7 +550,7 @@ function Dashboard({
           <div
             style={{
               position: "absolute",
-              top: "80px",
+              top: windowSize > 600 ? "10%" : "13%",
               left: "20px",
               boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
               borderRadius: "10px",
@@ -567,8 +567,7 @@ function Dashboard({
         <div
           style={{
             display: "-moz-initial",
-            margin: "0 auto",
-            marginTop: "105px",
+            margin: "8rem auto",
           }}
         >
           <DashHeader

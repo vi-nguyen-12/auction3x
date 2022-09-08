@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ErrorPage from "../../../Error/404page";
 import Loading from "../../../Loading";
 import SavedAuctionsCard from "./SavedAuctionsCard";
+import NewCards from "../../../Cards/NewCards";
 import authService from "../../../../services/authServices";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,7 +12,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 
 const Carousel_3 = styled(Slider)`
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
 
   & > button {
@@ -89,6 +90,8 @@ function SavedAuctions({ windowSize, searchBy, search }) {
   const [SavedAuctions, setSavedAuctions] = useState([]);
   const [newSavedAuctions, setNewSavedAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
+  const slider = useRef();
+  const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     setLoader(true);
@@ -111,13 +114,13 @@ function SavedAuctions({ windowSize, searchBy, search }) {
       if (searchBy === "id") {
         setNewSavedAuctions(
           SavedAuctions.filter((listing) =>
-            listing._id?.includes(search.toLowerCase())
+            listing._id?.includes(search?.toLowerCase())
           )
         );
       } else if (searchBy === "propType") {
         setNewSavedAuctions(
           SavedAuctions.filter((listing) =>
-            listing.property.type?.includes(search.toLowerCase())
+            listing.property.type?.includes(search?.toLowerCase())
           )
         );
       } else if (searchBy === "address") {
@@ -125,7 +128,7 @@ function SavedAuctions({ windowSize, searchBy, search }) {
           SavedAuctions.filter((listing) =>
             listing.property.details?.property_address?.formatted_street_address
               ?.toLowerCase()
-              .includes(search.toLowerCase())
+              .includes(search?.toLowerCase())
           )
         );
       }
@@ -141,38 +144,59 @@ function SavedAuctions({ windowSize, searchBy, search }) {
     autoplay: false,
     slidesToShow:
       windowSize > 800
-        ? newSavedAuctions.length > 2
-          ? 2
+        ? newSavedAuctions.length >= 3
+          ? 3
           : newSavedAuctions.length
         : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
 
+  const handleClick = (index) => () => {
+    setSlideIndex(index);
+  };
+
+  useEffect(() => {
+    if (slider.current) {
+      slider.current.slickGoTo(slideIndex);
+    }
+  }, [slideIndex]);
+
   return (
-    <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+    <Container style={{ width: "100vw", height: "100%", marginTop: "50px" }}>
       {loader && <Loading />}
       <Row>
         {newSavedAuctions.length > 0 ? (
-          <Carousel_3 {...settings}>
+          <Carousel_3 {...settings} ref={slider}>
             {newSavedAuctions.map((auction, index) => (
-              <Wrap key={index}>
-                <SavedAuctionsCard
-                  url={auction.property.images[0].url}
-                  urls={auction.property.images}
-                  data={auction.property.details}
-                  id={auction._id}
-                  auctionStartDate={auction.auctionStartDate}
-                  auctionEndDate={auction.auctionEndDate}
-                  startingBid={auction.startingBid}
-                  auctionId={auction._id}
-                  type={auction.property.type}
+              <Col
+                key={index}
+                className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
+              >
+                <NewCards
                   windowSize={windowSize}
+                  data={auction}
+                  type={auction.property.type}
                 />
-              </Wrap>
+              </Col>
             ))}
           </Carousel_3>
         ) : !loader ? (
           <ErrorPage />
         ) : null}
+      </Row>
+      <Row className="d-flex justify-content-center align-items-center mt-2">
+        {newSavedAuctions.length > 0
+          ? newSavedAuctions.map((property, index) => (
+              <div
+                onClick={handleClick(index)}
+                key={index}
+                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                className="slide-circle"
+              ></div>
+            ))
+          : null}
       </Row>
     </Container>
   );

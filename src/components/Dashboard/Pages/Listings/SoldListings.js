@@ -26,7 +26,7 @@ function SoldListings({ windowSize }) {
           style={{
             overflow: "hidden",
             borderRadius: "5px",
-            boxShadow: "#d7c4c4 0px 0px 20px 16px",
+            boxShadow: "#d1dcee 0px 0px 20px 16px",
             marginTop: "50px",
           }}
         >

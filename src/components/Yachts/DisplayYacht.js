@@ -17,6 +17,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
 import { Md360 } from "react-icons/md";
+import ReservedMet from "../../images/ReservedMet.png";
 import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
 import "../../styles/property-display.css";
@@ -453,31 +454,38 @@ function DisplayYacht({
           >
             <Col style={{ padding: "0" }} xs={12} md={6}>
               <Row style={{ textAlign: windowSize < 500 && "center" }}>
-                <h2
-                  style={{
-                    color: "#b77b50",
-                    padding: "0",
-                    fontFamily: "Tzimmes",
-                    fontStyle: "normal",
-                    fontWeight: "600",
-                    fontSize: windowSize < 600 ? "1.7rem" : "3rem",
-                  }}
-                >
-                  {property.property.details.manufacturer_name}
-                </h2>
-                <h5
-                  style={{
-                    color: "#919191",
-                    padding: "0",
-                    fontFamily: "Interstate, sans-serif",
-                    fontStyle: "normal",
-                    fontWeight: "400",
-                    fontSize: "25px",
-                  }}
-                >
-                  {property.property.details.property_address.city},{" "}
-                  {property.property.details.property_address.state}
-                </h5>
+                <Col className="p-0" md={windowSize > 900 ? 7 : 12} xs={12}>
+                  <h2
+                    style={{
+                      color: "#b77b50",
+                      padding: "0",
+                      fontFamily: "Tzimmes",
+                      fontStyle: "normal",
+                      fontWeight: "600",
+                      fontSize: windowSize < 600 ? "1.7rem" : "3rem",
+                    }}
+                  >
+                    {property.property.details.manufacturer_name}
+                  </h2>
+                  <h5
+                    style={{
+                      color: "#919191",
+                      padding: "0",
+                      fontFamily: "Interstate, sans-serif",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      fontSize: "25px",
+                    }}
+                  >
+                    {property.property.details.property_address.city},{" "}
+                    {property.property.details.property_address.state}
+                  </h5>
+                </Col>
+                {property.isReservedMet && (
+                  <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
+                    <img src={ReservedMet} alt="" />
+                  </Col>
+                )}
               </Row>
             </Col>
             <Col style={{ padding: "0" }}>

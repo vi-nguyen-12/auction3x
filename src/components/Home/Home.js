@@ -63,6 +63,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         toggleSignIn={toggleSignIn}
         featureAuctions={featureAuctions}
         windowSize={windowSize}
+        loader={loader}
       />
       <PrimeCate windowSize={windowSize} />
       <How windowSize={windowSize} />
