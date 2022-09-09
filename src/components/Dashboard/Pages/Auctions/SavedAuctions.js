@@ -183,7 +183,7 @@ function SavedAuctions({ windowSize, searchBy, search }) {
             ))}
           </Carousel_3>
         ) : !loader ? (
-          <ErrorPage />
+          <ErrorPage windowSize={windowSize} />
         ) : null}
       </Row>
       <Row className="d-flex justify-content-center align-items-center mt-2">

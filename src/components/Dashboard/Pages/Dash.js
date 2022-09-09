@@ -127,7 +127,7 @@ align-content: center;
 }
 `;
 
-function Dash({ windowSize, featureLength }) {
+function Dash({ windowSize, featureLength, loader }) {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
@@ -613,6 +613,8 @@ function Dash({ windowSize, featureLength }) {
               </Col>
             ))}
           </Carousel>
+        ) : !loader ? (
+          <Col></Col>
         ) : (
           showSavedProp && (
             <div

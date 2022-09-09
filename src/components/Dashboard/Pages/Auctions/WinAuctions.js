@@ -67,8 +67,7 @@ function WinAuctions({ windowSize, searchBy, search }) {
             display: windowSize < 800 && "block",
             tableLayout: windowSize < 800 && "auto",
             padding: "0",
-            borderRadius: "5px",
-            boxShadow: "#d1dcee 0px 0px 20px 16px",
+            boxShadow: "#d1dcee 0px 0px 20px 10px",
             marginTop: "50px",
           }}
         >

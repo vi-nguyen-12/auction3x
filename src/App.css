@@ -120,6 +120,7 @@
   /* padding: 6px !important; */
   color: rgb(0, 0, 0);
   /* font-size: 12px; */
+  border-radius: 0!important;
 }
 .form-control::placeholder {
   color: rgb(0, 0, 0) !important;

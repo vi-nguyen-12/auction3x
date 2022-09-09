@@ -5,13 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
 import "../../styles/realEstate.css";
-import Cards from "../Cards/Cards";
 import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
 import Next from "../../images/Next.png";
 import Prev from "../../images/Previous.png";
+import { useHistory } from "react-router-dom";
 
 const Carousel = styled(Slider)`
   // height: 100%;
@@ -156,6 +156,11 @@ function RealEstatePage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
+  const history = useHistory();
+
+  // const urlSearchParams = new URLSearchParams(history.location.search);
+  // const filters = Object.fromEntries(urlSearchParams.entries());
+
   useEffect(async () => {
     toggleChange();
     setLoader(true);
@@ -273,7 +278,7 @@ function RealEstatePage({
           )} */}
         </Row>
       ) : !loader ? (
-        <ErrorPage />
+        <ErrorPage windowSize={windowSize} />
       ) : (
         <Row style={{ height: "100vh" }}></Row>
       )}

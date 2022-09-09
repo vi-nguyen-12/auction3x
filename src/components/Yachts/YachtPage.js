@@ -265,7 +265,7 @@ function YachtPage({
           )} */}
         </Row>
       ) : !loader ? (
-        <ErrorPage />
+        <ErrorPage windowSize={windowSize} />
       ) : (
         <Row style={{ height: "100vh" }}></Row>
       )}

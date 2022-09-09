@@ -99,6 +99,14 @@ const PropertyPages = ({
         <Row className="realHeader">
           <title>Auctions</title>
         </Row>
+      ) : path === "/Auctions/Featured" ? (
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
+      ) : path === "/Auctions/Upcoming" ? (
+        <Row className="realHeader">
+          <title>Auctions</title>
+        </Row>
       ) : (
         <Row
           className="realHeader"
@@ -107,6 +115,7 @@ const PropertyPages = ({
           <title>REAL ESTATE</title>
         </Row>
       )}
+
       <PropertyPageHeader
         path={path}
         windowSize={windowSize}
@@ -119,6 +128,7 @@ const PropertyPages = ({
         toggleMap={toggleMap}
         resultLength={resultLength}
       />
+
       {path === "/realEstates" ? (
         <RealEstatePage
           setCenters={setCenters}
@@ -163,7 +173,7 @@ const PropertyPages = ({
           filter={filter}
           setResultLength={setResultLength}
         />
-      ) : path === "/Auctions" || "/Auctions/:Country" ? (
+      ) : path === "/Auctions" || "/Auctions/:parameter" ? (
         <Auctions
           toggleChange={toggleChange}
           toggleSignIn={toggleSignIn}

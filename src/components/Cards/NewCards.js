@@ -20,12 +20,9 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
   const handleBid = () => {
     if (!user._id) {
       return toggleSignIn();
+    } else {
+      history.push(`/DisplayAuctions/${data._id}`);
     }
-    // if (user.KYC) {
-    //   history.push(`/DisplayAuctions/${data._id}`);
-    // } else {
-    //   setShowKYC(true);
-    // }
   };
 
   const handleLike = () => {
@@ -79,21 +76,22 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
     <Card
       className="card-container"
       style={{
-        width: history.location.pathname === "/" && windowSize > 1680 && "100%",
+        width:
+          history.location.pathname === "/" && windowSize > 1680 ? "100%" : "",
       }}
     >
       {data.isReservedMet && (
         <div
           className="position-absolute"
           style={{
-            marginTop: windowSize > 600 ? "-2rem" : "0.5rem",
+            marginTop: windowSize > 600 ? "-1rem" : "0.5rem",
             marginLeft: windowSize > 600 ? "-1rem" : "0.5rem",
           }}
         >
           <img
             src={ReservedMet}
             alt="property"
-            width={windowSize < 600 && "50px"}
+            width={windowSize < 600 ? "50px" : ""}
           />
         </div>
       )}
@@ -379,8 +377,21 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
             </p>
           </Col>
           <Col className="d-flex justify-content-end align-items-center py-3 px-0">
-            <Button onClick={handleBid} className="card-bid-btn">
-              Place Bid
+            <Button
+              onClick={handleBid}
+              disabled={
+                new Date().toISOString() > data.auctionEndDate ||
+                (new Date().toISOString() > data.registerEndDate &&
+                  new Date().toISOString() < data.auctionStartDate)
+              }
+              className="card-bid-btn"
+            >
+              {new Date().toISOString() > data.auctionEndDate
+                ? "Completed"
+                : new Date().toISOString() > data.auctionStartDate &&
+                  new Date().toISOString() < data.auctionEndDate
+                ? "Place Bid"
+                : "Register"}
             </Button>
           </Col>
         </Row>

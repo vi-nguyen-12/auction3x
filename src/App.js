@@ -817,7 +817,7 @@ function App() {
                 windowSize={windowSize}
               />
             </Route>
-            <Route exact path="/Cars">
+            <Route exact path="/cars">
               <PropertyPages
                 colorChange={colorChange}
                 toggleChange={toggleChange}
@@ -829,7 +829,7 @@ function App() {
                 windowSize={windowSize}
               />
             </Route>
-            <Route exact path="/Jets">
+            <Route exact path="/jets">
               <PropertyPages
                 colorChange={colorChange}
                 toggleChange={toggleChange}
@@ -867,7 +867,7 @@ function App() {
               />
             </Route>
 
-            <Route exact path="/Auctions/:Country">
+            <Route exact path="/Auctions/:parameter">
               <PropertyPages
                 colorChange={colorChange}
                 toggleChange={toggleChange}

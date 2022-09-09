@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { BsArrowRight } from "react-icons/bs";
 import NewCards from "../../Cards/NewCards";
+import { useHistory } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -56,6 +57,7 @@ const Carousel = styled(Slider)`
 `;
 
 function Features({ toggleSignIn, featureAuctions, windowSize, loader }) {
+  const history = useHistory();
   const slider = useRef();
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -91,12 +93,17 @@ function Features({ toggleSignIn, featureAuctions, windowSize, loader }) {
       style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem" }}
     >
       <Row>
-        <Col>
-          <h1 className="section-title">Featured Listings</h1>
-        </Col>
-        <Col className="d-flex justify-content-end align-items-center">
-          <Button className="view-btn">View All</Button>
-          <BsArrowRight size={28} color="#4F4F59" />
+        <Col className="d-flex justify-content-between align-items-center">
+          <h1 className="section-title m-0">Featured Listings</h1>
+          <div>
+            <Button
+              onClick={() => history.push("Auctions/Featured")}
+              className="view-btn"
+            >
+              View All
+            </Button>
+            <BsArrowRight size={28} color="#4F4F59" />
+          </div>
         </Col>
       </Row>
       <Row className="mt-5">

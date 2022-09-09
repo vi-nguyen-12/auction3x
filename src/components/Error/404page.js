@@ -2,76 +2,61 @@ import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import error from "../../../src/images/error.png";
+import ErrorIcon from "../../images/ErrorIcon.png";
 
-function ErrorPage() {
+function ErrorPage({ windowSize }) {
   const history = useHistory();
   return (
-    <Row
-      style={{
-        margin: "0",
-        padding: "0",
-        height: "100vh",
-      }}
-    >
+    <Row style={{ background: "#F5F9FF", padding: windowSize < 800 ? "1rem" : "3rem" }}>
       <Col
-        style={{
-          backgroundColor: "#282828",
-          margin: "0",
-          padding: "0",
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-        }}
+        className="d-grid justify-content-center align-items-center p-5"
+        style={{ backgroundColor: "#e3eaf6" }}
         md={12}
       >
-        <img
-          src={error}
-          alt="error"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        />
-        <div
-          style={{
-            display: "grid",
-            justifyContent: "center",
-            fontSize: "10rem",
-            alignContent: "center",
-            width: "100%",
-            height: "fit-content",
-            position: "absolute",
-            color: "white",
-          }}
-        >
-          {/* <span>404</span> */}
-          <p
+        <div className="d-grid justify-content-center align-items-center">
+          <img
+            src={ErrorIcon}
+            alt="error"
+            width={windowSize < 800 ? "200px" : ""}
+          />
+        </div>
+        <div className="d-grid justify-content-center align-items-center my-5">
+          <span
             style={{
-              fontSize: "25px",
-              display: "flex",
-              justifyContent: "center",
+              fontFamily: "Tzimmes",
+              fontStyle: "normal",
+              fontWeight: "700",
+              fontSize: windowSize < 800 ? "1.5rem" : "48px",
+              color: "#08080A",
+              textAlign: "center",
             }}
           >
-            No Auctions Found!
-          </p>
-          <Button
-            style={{
-              background: "white",
-              color: "#B77B50",
-              fontWeight: "bold",
-              border: "none",
-              padding: "10px",
-            }}
-            onClick={() => {
-              history.push("/");
-            }}
-          >
-            Take Me Home
-          </Button>
+            No related auctions available at the moment.
+          </span>
+          <div className="d-grid justify-content-center align-items-center mt-5">
+            <Button
+              style={{
+                fontFamily: "Interstate, sans-serif",
+                fontStyle: "normal",
+                fontWeight: "700",
+                fontSize: windowSize < 800 ? "0.6rem" : "1.5rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textTransform: "uppercase",
+                color: "#FFFFFF",
+                backgroundColor: "#B77B50",
+                borderRadius: "0",
+                border: "none",
+                padding: "1rem 2rem",
+              }}
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              Take Me Home
+            </Button>
+          </div>
         </div>
       </Col>
     </Row>

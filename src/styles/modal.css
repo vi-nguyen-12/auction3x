@@ -307,7 +307,7 @@
   color: white;
   font-weight: bold;
   font-size: 35px;
-  border-radius: 8px;
+  border-radius: 0;
   border: none;
   margin-bottom: 30px;
 }
@@ -325,5 +325,5 @@
   font-weight: bold;
   font-size: 35px;
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
 }

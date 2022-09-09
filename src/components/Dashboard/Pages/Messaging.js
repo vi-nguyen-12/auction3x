@@ -82,6 +82,7 @@ function Messaging({ windowSize }) {
         alert(res.data.error);
       } else {
         alert(res.data.message);
+        window.location.reload();
       }
     });
   };

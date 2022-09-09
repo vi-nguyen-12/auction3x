@@ -580,7 +580,7 @@ function Dashboard({
           />
           <Switch>
             <Route exact path="/Dashboard">
-              <Dash windowSize={windowSize} />
+              <Dash windowSize={windowSize} loader={loader} />
             </Route>
             <Route exact path="/Dashboard/Messaging">
               <Messaging windowSize={windowSize} />

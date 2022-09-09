@@ -3,9 +3,9 @@ import authService from "../../services/authServices";
 import "../../styles/realEstate.css";
 import { Row, Col } from "react-bootstrap";
 import Cards from "../Cards/Cards";
+import NewCards from "../Cards/NewCards";
 import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
-import PropertyPageHeader from "./PropertyPageHeader";
 import Loading from "../Loading";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -114,8 +114,18 @@ function Auctions({
     });
   }, []);
 
-  useEffect(() => {
-    if (params.Country === "Austin") {
+  useEffect(async () => {
+    if (params.parameter === "Featured") {
+      await authService.getFeaturedAuctions().then((res) => {
+        setAllAuctions(
+          res.data.filter(
+            (auction) => auction.auctionEndDate > new Date().toISOString()
+          )
+        );
+      });
+    } else if (params.parameter === "Upcoming") {
+      setAllAuctions(upcomingAuctions);
+    } else if (params.parameter === "Austin") {
       setLoader(true);
       const datas = {
         city: "Austin",
@@ -129,7 +139,7 @@ function Auctions({
         setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
-    } else if (params.Country === "Houston") {
+    } else if (params.parameter === "Houston") {
       setLoader(true);
       const datas = {
         city: "Houston",
@@ -143,7 +153,7 @@ function Auctions({
         setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
-    } else if (params.Country === "Dallas") {
+    } else if (params.parameter === "Dallas") {
       setLoader(true);
       const datas = {
         city: "Dallas",
@@ -157,7 +167,7 @@ function Auctions({
         setResultLength({ auctions: res.data.length });
         setLoader(false);
       });
-    } else if (params.Country === "SanAntonio") {
+    } else if (params.parameter === "SanAntonio") {
       setLoader(true);
       const datas = {
         city: "San Antonio",
@@ -225,15 +235,15 @@ function Auctions({
       {allAuctions.length > 0 ? (
         <Row className="mt-5 mb-5">
           {windowSize > 800 ? (
-            allAuctions.map((auction, index) => {
+            allAuctions.map((item, index) => {
               return (
                 <Col className="mb-5" key={index}>
                   <Wrap>
-                    <Cards
-                      data={auction}
+                    <NewCards
                       toggleSignIn={toggleSignIn}
-                      type={auction.property.type}
                       windowSize={windowSize}
+                      data={item}
+                      type={item.property.type}
                     />
                   </Wrap>
                 </Col>
@@ -243,11 +253,11 @@ function Auctions({
             <Carousel {...settings}>
               {allAuctions.map((item, index) => (
                 <Wrap key={index}>
-                  <Cards
-                    data={item}
+                  <NewCards
                     toggleSignIn={toggleSignIn}
-                    type={item.property.type}
                     windowSize={windowSize}
+                    data={item}
+                    type={item.property.type}
                   />
                 </Wrap>
               ))}
@@ -255,7 +265,7 @@ function Auctions({
           )}
         </Row>
       ) : (
-        <ErrorPage />
+        <ErrorPage windowSize={windowSize} />
       )}
     </>
   );

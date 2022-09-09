@@ -7,6 +7,8 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import NumberFormat from "react-number-format";
+import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function PropertyPageHeader({
   path,
@@ -20,6 +22,8 @@ function PropertyPageHeader({
   resultLength,
   setLocation,
 }) {
+  const history = useHistory();
+  console.log(history);
   const [auctionType, setAuctionType] = useState();
   const [propertyType, setPropertyType] = useState();
   const [realType, setRealType] = useState();
@@ -332,6 +336,8 @@ function PropertyPageHeader({
     });
   };
 
+  const params = useParams();
+
   return (
     <>
       {path === "/cars" ? (
@@ -369,7 +375,6 @@ function PropertyPageHeader({
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
@@ -414,16 +419,6 @@ function PropertyPageHeader({
                   <option value="ongoing">Ongoing</option>
                   <option value="upcoming">Upcoming</option>
                   <option value="completed">Completed</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setCondition(e.target.value)}
-                  className=" RealButton "
-                >
-                  <option value="">Condition</option>
-                  <option value="new">New</option>
-                  <option value="used">Used</option>
                 </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
@@ -526,6 +521,16 @@ function PropertyPageHeader({
                     </Row>
                   </div>
                 )}
+              </Col>
+              <Col className="d-flex justify-content-center">
+                <Form.Select
+                  onChange={(e) => setCondition(e.target.value)}
+                  className=" RealButton "
+                >
+                  <option value="">Condition</option>
+                  <option value="new">New</option>
+                  <option value="used">Used</option>
+                </Form.Select>
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
@@ -685,7 +690,6 @@ function PropertyPageHeader({
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
@@ -1059,7 +1063,6 @@ function PropertyPageHeader({
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
@@ -1382,7 +1385,7 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
-      ) : path === "/Auctions" ? (
+      ) : params.parameter ? (
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
@@ -1417,7 +1420,6 @@ function PropertyPageHeader({
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
@@ -1610,918 +1612,6 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
-      ) : path === "/Auctions/Austin" ? (
-        <Row className="realEstateFilter">
-          <Col md={9}>
-            <Row>
-              <Col md={4} xs={12}>
-                <div style={{ width: "100%" }} className=" RealButton ">
-                  <PlacesAutocomplete
-                    value={address}
-                    onChange={handleChange}
-                    onSelect={handleSelect}
-                  >
-                    {({
-                      getInputProps,
-                      suggestions,
-                      getSuggestionItemProps,
-                      loading,
-                    }) => (
-                      <div className="w-100">
-                        <input
-                          {...getInputProps({
-                            placeholder: "Country, State, City, Postal Code",
-                            className: "searchBar",
-                          })}
-                          required
-                        />
-                        {suggestions && suggestions.length > 0 && (
-                          <div
-                            className="autocomplete-dropdown-container"
-                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
-                          >
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion, index) => {
-                              const className = suggestion.active
-                                ? "suggestion-item--active"
-                                : "suggestion-item";
-                              // inline style for demonstration purpose
-                              const style = suggestion.active
-                                ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
-                                : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
-                              return (
-                                <div
-                                  key={index}
-                                  {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                  })}
-                                >
-                                  <span>{suggestion.description}</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </PlacesAutocomplete>
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                </div>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setAuctionType({ auctions: e.target.value })}
-                  className="RealButton"
-                >
-                  <option value="">Auction Type</option>
-                  <option value="ongoing">Ongoing</option>
-                  <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setPropertyType(e.target.value)}
-                  className=" RealButton "
-                >
-                  <option value="">Property Type</option>
-                  <option value="real-estate">Real Estate</option>
-                  <option value="car">Car</option>
-                  <option value="jet">Jet</option>
-                  <option value="yacht">Yacht</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => {
-                    if (e.target.value === "Other") {
-                      setMinPrice();
-                      setMaxPrice();
-                      setOtherPrice((prevState) => ({
-                        ...prevState.other,
-                        other: true,
-                      }));
-                    } else {
-                      const getPrice = CarPrices.filter(
-                        (price, index) => index === parseInt(e.target.value)
-                      );
-                      if (getPrice.length > 0) {
-                        setMinPrice({ auctions: getPrice[0].min_price });
-                        setMaxPrice({ auctions: getPrice[0].max_price });
-                      } else {
-                        setMinPrice();
-                        setMaxPrice();
-                      }
-                    }
-                  }}
-                  className=" RealButton "
-                >
-                  <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
-                </Form.Select>
-                {otherPrice.other === true && (
-                  <div
-                    style={{
-                      zIndex: "999",
-                      marginTop: "65px",
-                      width: "400px",
-                    }}
-                    className="position-absolute bg-white rounded shadow-lg"
-                  >
-                    <Row className="d-grid mt-3">
-                      <span>Price Range</span>
-                      <Col className="d-flex justify-content-center align-items-center mt-4">
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={minPrice ? minPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Min"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMinPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                        -
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={maxPrice ? maxPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Max"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMaxPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                      </Col>
-                      <Col
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          backgroundColor: "#fcba7d",
-                        }}
-                        className="mt-5 p-2"
-                      >
-                        <Button
-                          style={{
-                            backgroundColor: "white",
-                            color: "#fcba7d",
-                            border: "none",
-                            fontWeight: "700",
-                          }}
-                          onClick={() =>
-                            setOtherPrice((prevState) => ({
-                              ...prevState.other,
-                              other: false,
-                            }))
-                          }
-                        >
-                          Done
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button
-                  onClick={() => getFilter("austin")}
-                  className="galleryButton"
-                >
-                  Search
-                </button>
-              </Col>
-            </Row>
-          </Col>
-          <Col md={3} className="filterResult">
-            <Row style={{ display: "flex", alignContent: "center" }}>
-              <Col
-                md={5}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: ".9rem",
-                }}
-                className="resultText"
-              >
-                {resultLength.auctions} Results
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button className="mapButton" onClick={toggleMap}>
-                  Map
-                </button>
-              </Col>
-              {/* <Col className="d-flex justify-content-center">
-                <button className="galleryButton" onClick={toggleImage}>
-                  Gallery
-                </button>
-              </Col> */}
-            </Row>
-          </Col>
-        </Row>
-      ) : path === "/Auctions/Houston" ? (
-        <Row className="realEstateFilter">
-          <Col md={9}>
-            <Row>
-              <Col md={4} xs={12}>
-                <div style={{ width: "100%" }} className=" RealButton ">
-                  <PlacesAutocomplete
-                    value={address}
-                    onChange={handleChange}
-                    onSelect={handleSelect}
-                  >
-                    {({
-                      getInputProps,
-                      suggestions,
-                      getSuggestionItemProps,
-                      loading,
-                    }) => (
-                      <div className="w-100">
-                        <input
-                          {...getInputProps({
-                            placeholder: "Country, State, City, Postal Code",
-                            className: "searchBar",
-                          })}
-                          required
-                        />
-                        {suggestions && suggestions.length > 0 && (
-                          <div
-                            className="autocomplete-dropdown-container"
-                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
-                          >
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion, index) => {
-                              const className = suggestion.active
-                                ? "suggestion-item--active"
-                                : "suggestion-item";
-                              // inline style for demonstration purpose
-                              const style = suggestion.active
-                                ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
-                                : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
-                              return (
-                                <div
-                                  key={index}
-                                  {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                  })}
-                                >
-                                  <span>{suggestion.description}</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </PlacesAutocomplete>
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                </div>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setAuctionType({ auctions: e.target.value })}
-                  className="RealButton"
-                >
-                  <option value="">Auction Type</option>
-                  <option value="ongoing">Ongoing</option>
-                  <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setPropertyType(e.target.value)}
-                  className=" RealButton "
-                >
-                  <option value="">Property Type</option>
-                  <option value="real-estate">Real Estate</option>
-                  <option value="car">Car</option>
-                  <option value="jet">Jet</option>
-                  <option value="yacht">Yacht</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => {
-                    if (e.target.value === "Other") {
-                      setMinPrice();
-                      setMaxPrice();
-                      setOtherPrice((prevState) => ({
-                        ...prevState.other,
-                        other: true,
-                      }));
-                    } else {
-                      const getPrice = CarPrices.filter(
-                        (price, index) => index === parseInt(e.target.value)
-                      );
-                      if (getPrice.length > 0) {
-                        setMinPrice({ auctions: getPrice[0].min_price });
-                        setMaxPrice({ auctions: getPrice[0].max_price });
-                      } else {
-                        setMinPrice();
-                        setMaxPrice();
-                      }
-                    }
-                  }}
-                  className=" RealButton "
-                >
-                  <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
-                </Form.Select>
-                {otherPrice.other === true && (
-                  <div
-                    style={{
-                      zIndex: "999",
-                      marginTop: "65px",
-                      width: "400px",
-                    }}
-                    className="position-absolute bg-white rounded shadow-lg"
-                  >
-                    <Row className="d-grid mt-3">
-                      <span>Price Range</span>
-                      <Col className="d-flex justify-content-center align-items-center mt-4">
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={minPrice ? minPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Min"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMinPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                        -
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={maxPrice ? maxPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Max"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMaxPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                      </Col>
-                      <Col
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          backgroundColor: "#fcba7d",
-                        }}
-                        className="mt-5 p-2"
-                      >
-                        <Button
-                          style={{
-                            backgroundColor: "white",
-                            color: "#fcba7d",
-                            border: "none",
-                            fontWeight: "700",
-                          }}
-                          onClick={() =>
-                            setOtherPrice((prevState) => ({
-                              ...prevState.other,
-                              other: false,
-                            }))
-                          }
-                        >
-                          Done
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button
-                  onClick={() => getFilter("houston")}
-                  className="galleryButton"
-                >
-                  Search
-                </button>
-              </Col>
-            </Row>
-          </Col>
-          <Col md={3} className="filterResult">
-            <Row style={{ display: "flex", alignContent: "center" }}>
-              <Col
-                md={5}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: ".9rem",
-                }}
-                className="resultText"
-              >
-                {resultLength.auctions} Results
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button className="mapButton" onClick={toggleMap}>
-                  Map
-                </button>
-              </Col>
-              {/* <Col className="d-flex justify-content-center">
-                <button className="galleryButton" onClick={toggleImage}>
-                  Gallery
-                </button>
-              </Col> */}
-            </Row>
-          </Col>
-        </Row>
-      ) : path === "/Auctions/Dallas" ? (
-        <Row className="realEstateFilter">
-          <Col md={9}>
-            <Row>
-              <Col md={4} xs={12}>
-                <div style={{ width: "100%" }} className=" RealButton ">
-                  <PlacesAutocomplete
-                    value={address}
-                    onChange={handleChange}
-                    onSelect={handleSelect}
-                  >
-                    {({
-                      getInputProps,
-                      suggestions,
-                      getSuggestionItemProps,
-                      loading,
-                    }) => (
-                      <div className="w-100">
-                        <input
-                          {...getInputProps({
-                            placeholder: "Country, State, City, Postal Code",
-                            className: "searchBar",
-                          })}
-                          required
-                        />
-                        {suggestions && suggestions.length > 0 && (
-                          <div
-                            className="autocomplete-dropdown-container"
-                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
-                          >
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion, index) => {
-                              const className = suggestion.active
-                                ? "suggestion-item--active"
-                                : "suggestion-item";
-                              // inline style for demonstration purpose
-                              const style = suggestion.active
-                                ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
-                                : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
-                              return (
-                                <div
-                                  key={index}
-                                  {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                  })}
-                                >
-                                  <span>{suggestion.description}</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </PlacesAutocomplete>
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                </div>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setAuctionType({ auctions: e.target.value })}
-                  className="RealButton"
-                >
-                  <option value="">Auction Type</option>
-                  <option value="ongoing">Ongoing</option>
-                  <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setPropertyType(e.target.value)}
-                  className=" RealButton "
-                >
-                  <option value="">Property Type</option>
-                  <option value="real-estate">Real Estate</option>
-                  <option value="car">Car</option>
-                  <option value="jet">Jet</option>
-                  <option value="yacht">Yacht</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => {
-                    if (e.target.value === "Other") {
-                      setMinPrice();
-                      setMaxPrice();
-                      setOtherPrice((prevState) => ({
-                        ...prevState.other,
-                        other: true,
-                      }));
-                    } else {
-                      const getPrice = CarPrices.filter(
-                        (price, index) => index === parseInt(e.target.value)
-                      );
-                      if (getPrice.length > 0) {
-                        setMinPrice({ auctions: getPrice[0].min_price });
-                        setMaxPrice({ auctions: getPrice[0].max_price });
-                      } else {
-                        setMinPrice();
-                        setMaxPrice();
-                      }
-                    }
-                  }}
-                  className=" RealButton "
-                >
-                  <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
-                </Form.Select>
-                {otherPrice.other === true && (
-                  <div
-                    style={{
-                      zIndex: "999",
-                      marginTop: "65px",
-                      width: "400px",
-                    }}
-                    className="position-absolute bg-white rounded shadow-lg"
-                  >
-                    <Row className="d-grid mt-3">
-                      <span>Price Range</span>
-                      <Col className="d-flex justify-content-center align-items-center mt-4">
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={minPrice ? minPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Min"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMinPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                        -
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={maxPrice ? maxPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Max"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMaxPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                      </Col>
-                      <Col
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          backgroundColor: "#fcba7d",
-                        }}
-                        className="mt-5 p-2"
-                      >
-                        <Button
-                          style={{
-                            backgroundColor: "white",
-                            color: "#fcba7d",
-                            border: "none",
-                            fontWeight: "700",
-                          }}
-                          onClick={() =>
-                            setOtherPrice((prevState) => ({
-                              ...prevState.other,
-                              other: false,
-                            }))
-                          }
-                        >
-                          Done
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button
-                  onClick={() => getFilter("dallas")}
-                  className="galleryButton"
-                >
-                  Search
-                </button>
-              </Col>
-            </Row>
-          </Col>
-          <Col md={3} className="filterResult">
-            <Row style={{ display: "flex", alignContent: "center" }}>
-              <Col
-                md={5}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: ".9rem",
-                }}
-                className="resultText"
-              >
-                {resultLength.auctions} Results
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button className="mapButton" onClick={toggleMap}>
-                  Map
-                </button>
-              </Col>
-              {/* <Col className="d-flex justify-content-center">
-                <button className="galleryButton" onClick={toggleImage}>
-                  Gallery
-                </button>
-              </Col> */}
-            </Row>
-          </Col>
-        </Row>
-      ) : path === "/Auctions/SanAntonio" ? (
-        <Row className="realEstateFilter">
-          <Col md={9}>
-            <Row>
-              <Col md={4} xs={12}>
-                <div style={{ width: "100%" }} className=" RealButton ">
-                  <PlacesAutocomplete
-                    value={address}
-                    onChange={handleChange}
-                    onSelect={handleSelect}
-                  >
-                    {({
-                      getInputProps,
-                      suggestions,
-                      getSuggestionItemProps,
-                      loading,
-                    }) => (
-                      <div className="w-100">
-                        <input
-                          {...getInputProps({
-                            placeholder: "Country, State, City, Postal Code",
-                            className: "searchBar",
-                          })}
-                          required
-                        />
-                        {suggestions && suggestions.length > 0 && (
-                          <div
-                            className="autocomplete-dropdown-container"
-                            style={{ marginTop: "-10px", marginLeft: "-10px" }}
-                          >
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map((suggestion, index) => {
-                              const className = suggestion.active
-                                ? "suggestion-item--active"
-                                : "suggestion-item";
-                              // inline style for demonstration purpose
-                              const style = suggestion.active
-                                ? {
-                                    backgroundColor: "#fafafa",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  }
-                                : {
-                                    backgroundColor: "#ffffff",
-                                    cursor: "pointer",
-                                    color: "black",
-                                  };
-                              return (
-                                <div
-                                  key={index}
-                                  {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                  })}
-                                >
-                                  <span>{suggestion.description}</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </PlacesAutocomplete>
-                  <MdOutlineMyLocation size={24} color="#A0A0A0" />
-                </div>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setAuctionType({ auctions: e.target.value })}
-                  className="RealButton"
-                >
-                  <option value="">Auction Type</option>
-                  <option value="ongoing">Ongoing</option>
-                  <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setPropertyType(e.target.value)}
-                  className=" RealButton "
-                >
-                  <option value="">Property Type</option>
-                  <option value="real-estate">Real Estate</option>
-                  <option value="car">Car</option>
-                  <option value="jet">Jet</option>
-                  <option value="yacht">Yacht</option>
-                </Form.Select>
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => {
-                    if (e.target.value === "Other") {
-                      setMinPrice();
-                      setMaxPrice();
-                      setOtherPrice((prevState) => ({
-                        ...prevState.other,
-                        other: true,
-                      }));
-                    } else {
-                      const getPrice = CarPrices.filter(
-                        (price, index) => index === parseInt(e.target.value)
-                      );
-                      if (getPrice.length > 0) {
-                        setMinPrice({ auctions: getPrice[0].min_price });
-                        setMaxPrice({ auctions: getPrice[0].max_price });
-                      } else {
-                        setMinPrice();
-                        setMaxPrice();
-                      }
-                    }
-                  }}
-                  className=" RealButton "
-                >
-                  <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
-                    </option>
-                  ))}
-                  <option value="Other">Other</option>
-                </Form.Select>
-                {otherPrice.other === true && (
-                  <div
-                    style={{
-                      zIndex: "999",
-                      marginTop: "65px",
-                      width: "400px",
-                    }}
-                    className="position-absolute bg-white rounded shadow-lg"
-                  >
-                    <Row className="d-grid mt-3">
-                      <span>Price Range</span>
-                      <Col className="d-flex justify-content-center align-items-center mt-4">
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={minPrice ? minPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Min"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMinPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                        -
-                        <NumberFormat
-                          thousandSeparator={true}
-                          prefix="$"
-                          value={maxPrice ? maxPrice.auctions : ""}
-                          className="form-control"
-                          placeholder="Max"
-                          onValueChange={(values) => {
-                            const { value } = values;
-                            setMaxPrice({ auctions: value });
-                          }}
-                          required
-                        />
-                      </Col>
-                      <Col
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          backgroundColor: "#fcba7d",
-                        }}
-                        className="mt-5 p-2"
-                      >
-                        <Button
-                          style={{
-                            backgroundColor: "white",
-                            color: "#fcba7d",
-                            border: "none",
-                            fontWeight: "700",
-                          }}
-                          onClick={() =>
-                            setOtherPrice((prevState) => ({
-                              ...prevState.other,
-                              other: false,
-                            }))
-                          }
-                        >
-                          Done
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                )}
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button
-                  onClick={() => getFilter("sanAntonio")}
-                  className="galleryButton"
-                >
-                  Search
-                </button>
-              </Col>
-            </Row>
-          </Col>
-          <Col md={3} className="filterResult">
-            <Row style={{ display: "flex", alignContent: "center" }}>
-              <Col
-                md={5}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: ".9rem",
-                }}
-                className="resultText"
-              >
-                {resultLength.auctions} Results
-              </Col>
-              <Col className="d-flex justify-content-center">
-                <button className="mapButton" onClick={toggleMap}>
-                  Map
-                </button>
-              </Col>
-              {/* <Col className="d-flex justify-content-center">
-                <button className="galleryButton" onClick={toggleImage}>
-                  Gallery
-                </button>
-              </Col> */}
-            </Row>
-          </Col>
-        </Row>
       ) : path === "/realEstates" ? (
         <Row className="realEstateFilter">
           <Col md={9}>
@@ -2557,7 +1647,6 @@ function PropertyPageHeader({
                               const className = suggestion.active
                                 ? "suggestion-item--active"
                                 : "suggestion-item";
-                              // inline style for demonstration purpose
                               const style = suggestion.active
                                 ? {
                                     backgroundColor: "#fafafa",
@@ -2815,6 +1904,26 @@ function PropertyPageHeader({
               <Col className="d-flex justify-content-center">
                 <button
                   onClick={() => getFilter("real-estate")}
+                  // onClick={() =>
+                  //   history.push({
+                  //     pathname: "/realEstates",
+                  //     search: `?address=${address}&country=${
+                  //       country ? country : ""
+                  //     }&state=${state ? state : ""}&city=${
+                  //       city ? city : ""
+                  //     }&zip=${zip ? zip : ""}&auctionType=${
+                  //       auctionType?.realEstate ? auctionType.realEstate : ""
+                  //     }&minPrice=${
+                  //       minPrice?.realEstate ? minPrice.realEstate : ""
+                  //     }&maxPrice=${
+                  //       maxPrice?.realEstate ? maxPrice.realEstate : ""
+                  //     }&minYear=${
+                  //       minYear?.realEstate ? minYear.realEstate : ""
+                  //     }&maxYear=${
+                  //       maxYear?.realEstate ? maxYear.realEstate : ""
+                  //     }&type=${realType ? realType : ""}`,
+                  //   })
+                  // }
                   className="galleryButton"
                 >
                   Search

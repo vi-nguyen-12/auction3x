@@ -24,9 +24,11 @@ function SoldListings({ windowSize }) {
           borderless
           hover
           style={{
-            overflow: "hidden",
-            borderRadius: "5px",
-            boxShadow: "#d1dcee 0px 0px 20px 16px",
+            overflow: windowSize < 800 ? "auto" : "hidden",
+            display: windowSize < 800 && "block",
+            tableLayout: windowSize < 800 && "auto",
+            padding: "0",
+            boxShadow: "#d1dcee 0px 0px 20px 10px",
             marginTop: "50px",
           }}
         >

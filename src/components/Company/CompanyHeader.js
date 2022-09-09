@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "../../styles/realEstate.css";
-import partner from "../../../src/images/partner.png";
-import contact from "../../../src/images/contact.png";
-import about2 from "../../../src/images/about2.png";
-import privacy from "../../../src/images/privacy.png";
-import terms from "../../../src/images/terms.png";
-import broker from "../../../src/images/broker.png";
-import team from "../../../src/images/team.png";
+import partner from "../../images/partner.png";
+import contact from "../../images/contact.png";
+import about2 from "../../images/about2.png";
+import privacy from "../../images/privacy.png";
+import terms from "../../images/terms.png";
+import broker from "../../images/broker.png";
+import team from "../../images/team.png";
+import RealEstatePageBg from "../../images/RealEstatePageBg.png";
+import { FiSearch } from "react-icons/fi";
 import { Button } from "react-bootstrap";
 import { set } from "react-hook-form";
 
@@ -20,11 +22,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${about2})`,
           }}
         >
-          <p>
+          <span>
             Know More About Us
-            <span>{"Home > About Us"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > About Us"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -32,7 +34,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "contact" ? (
         <div
@@ -41,11 +43,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${contact})`,
           }}
         >
-          <p>
+          <span>
             Get In Touch
-            <span>{"Home > Contact Us"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Contact Us"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -53,7 +55,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "PrivacyPolicy" ? (
         <div
@@ -62,11 +64,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${privacy})`,
           }}
         >
-          <p>
+          <span>
             Privacy Policy
-            <span>{"Home > Privacy Policy"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Privacy Policy"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -74,20 +76,21 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "FAQ" ? (
-        <div className="companyHeader">
-          <p>
+        <div
+          className="companyHeader align-items-end"
+          style={{ background: `url(${RealEstatePageBg})` }}
+        >
+          <span>
             Have a Question?
-            <span>{"Home > FAQ"}</span>
-          </p>
-          <div
-            style={{ width: "100%", display: "grid", justifyContent: "center" }}
-          >
-            <span
+            {/* <span>{"Home > FAQ"}</span> */}
+          </span>
+          <div className="d-grid justify-content-center">
+            {/* <p
               style={{
-                fontSize: "35px",
+                fontSize: "25px",
                 fontWeight: "bold",
                 width: "100%",
                 color: "white",
@@ -97,7 +100,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
               }}
             >
               {"Search Here"}
-            </span>
+            </p> */}
             <div className="faqSearch">
               <input
                 onChange={(e) => {
@@ -116,7 +119,8 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 type="text"
                 placeholder="Enter Your Question"
               />
-              <Button>Search</Button>
+              <FiSearch color="black" size={25} />
+              {/* <Button>Search</Button> */}
             </div>
           </div>
         </div>
@@ -127,11 +131,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${terms})`,
           }}
         >
-          <p>
+          <span>
             Terms & Conditions
-            <span>{"Home > Terms & Conditions"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Terms & Conditions"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -139,7 +143,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "Partner" ? (
         <div
@@ -148,11 +152,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${partner})`,
           }}
         >
-          <p>
+          <span>
             PARTNER WITH US
-            <span>{"Home > Partner With Us"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Partner With Us"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -160,7 +164,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "Broker" ? (
         <div
@@ -169,11 +173,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${broker})`,
           }}
         >
-          <p>
+          <span>
             Broker
-            <span>{"Home > Broker"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Broker"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -181,7 +185,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : location === "Team" ? (
         <div
@@ -190,11 +194,11 @@ function CompanyHeader({ location, setQuery, faqs }) {
             backgroundImage: `url(${team})`,
           }}
         >
-          <p>
+          <span>
             Our Team
-            <span>{"Home > Our Team"}</span>
-          </p>
-          <div
+            {/* <span>{"Home > Our Team"}</span> */}
+          </span>
+          {/* <div
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
             <span className="descript">
@@ -202,7 +206,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
                 "Have a little somthing. somthing you wanna talk to us about? Send us email, or fill out that form below."
               }
             </span>
-          </div>
+          </div> */}
         </div>
       ) : null}
     </>

@@ -300,9 +300,10 @@ h3 {
 }
 /* Chat Messaging */
 .chatContainer {
-  background-color: white;
-  border-radius: 20px;
+  background-color: #ffffff;
+  border-radius: 0;
   padding: 20px;
+  box-shadow: #d1dcee 0px 0px 20px 2px;
 }
 
 .top-chat {
@@ -501,14 +502,14 @@ h3 {
   align-items: none;
   font-size: 2rem;
   background: transparent;
-  color: white;
+  color: #ffffff;
   box-shadow: none;
 }
 
 .dashAccor .accordion-button:focus {
   outline: none;
   border: none;
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   background: none;
   box-shadow: none;
@@ -517,7 +518,7 @@ h3 {
 .dashAccor .accordion-button::after {
   margin-left: 50px;
   margin-top: 10px;
-  color: white;
+  color: #ffffff;
 }
 
 .notification {
@@ -532,7 +533,7 @@ h3 {
   border-radius: 0;
   background-color: #b77b50;
   border: 1px solid #ffffff;
-  color: white;
+  color: #ffffff;
   margin-right: 59px;
   margin-bottom: 30px;
   padding: 0 0.9rem;
@@ -553,7 +554,7 @@ h3 {
 .notifi-drop-down-content {
   width: 100%;
   height: 100%;
-  background: white;
+  background: #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 20px #888888;
 }
