@@ -4,13 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
-import "../../styles/realEstate.css";
 import authService from "../../services/authServices";
 import NewCards from "../Cards/NewCards";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
 import Next from "../../images/Next.png";
 import Prev from "../../images/Previous.png";
+import { useHistory } from "react-router-dom";
+import "../../styles/realEstate.css";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -152,12 +153,20 @@ function YachtPage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    toggleChange();
-    setLoader(true);
+    const urlSearchParams = new URLSearchParams(history.location.search);
+    const filters = Object.fromEntries(urlSearchParams.entries());
+    setFiltered(filters);
+  }, [history.location.search]);
+
+  useEffect(async () => {
     let auctions = [];
-    const getAuctions = async () => {
+    if (!history.location.search) {
+      toggleChange();
+      setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("yacht");
       if (response1.error) {
         alert(response1.error);
@@ -170,19 +179,30 @@ function YachtPage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
-      setAuctions(auctions);
       setLoader(false);
-      if (!filter) {
-        setResultLength({ yacht: auctions.length });
-      }
-      if (auctions.length > 0) {
-        const imageUrl = auctions.map((image) => {
-          for (let i = 0; i < image.property.images.length; i++) {
-            return image.property.images[i].url;
-          }
-        });
-        setImgYacht(imageUrl);
-      }
+      setResultLength({ yacht: auctions.length });
+    } else {
+      setLoader(true);
+      authService.yachtFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          const yacht = res.data.filter(
+            (item) => item.property.type === "yacht"
+          );
+          setResultLength({ yacht: yacht.length });
+          auctions = [...yacht];
+          setLoader(false);
+        } else {
+          setResultLength({ yacht: 0 });
+          auctions = [];
+          setLoader(false);
+        }
+      });
+    }
+    setAuctions(auctions);
+  }, []);
+
+  useEffect(() => {
+    if (auctions) {
       setCenters(
         auctions.map((item) => {
           return {
@@ -193,14 +213,19 @@ function YachtPage({
           };
         })
       );
-    };
-    getAuctions();
-  }, []);
+      const imageUrl = auctions.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImgYacht(imageUrl);
+    }
+  }, [auctions]);
 
   useEffect(() => {
-    if (filter) {
+    if (filtered) {
       setLoader(true);
-      authService.yachtFilter(filter).then((res) => {
+      authService.yachtFilter(filtered).then((res) => {
         if (res.data.length > 0) {
           const yacht = res.data.filter(
             (item) => item.property.type === "yacht"
@@ -215,7 +240,7 @@ function YachtPage({
         }
       });
     }
-  }, [filter]);
+  }, [filtered]);
 
   let settings = {
     dots: false,

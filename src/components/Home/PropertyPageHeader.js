@@ -23,12 +23,11 @@ function PropertyPageHeader({
   setLocation,
 }) {
   const history = useHistory();
-  console.log(history);
   const [auctionType, setAuctionType] = useState();
-  const [propertyType, setPropertyType] = useState();
+  const [type, setPropertyType] = useState();
   const [realType, setRealType] = useState();
-  const [minPrice, setMinPrice] = useState();
-  const [maxPrice, setMaxPrice] = useState();
+  const [min_price, setMinPrice] = useState();
+  const [max_price, setMaxPrice] = useState();
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState();
   const [state, setState] = useState();
@@ -66,8 +65,8 @@ function PropertyPageHeader({
   const [minYear, setMinYear] = useState();
   const [maxYear, setMaxYear] = useState();
 
-  const [minLength, setMinLength] = useState();
-  const [maxLength, setMaxLength] = useState();
+  const [min_length, setMinLength] = useState();
+  const [max_length, setMaxLength] = useState();
 
   // const carMake = [
   //   "FERRARI",
@@ -178,117 +177,90 @@ function PropertyPageHeader({
   ];
 
   const getFilter = (propType) => {
+    let filters = {};
     if (propType === "real-estate") {
-      setFilter({
-        auctionType: auctionType,
-        propType: propType,
-        real_esstate_type: realType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        minYear: minYear,
-        maxYear: maxYear,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
+      filters = {
+        auctionType: auctionType?.realEstate || "",
+        propType,
+        realType: realType || "",
+        min_price: min_price?.realEstate || "",
+        max_price: max_price?.realEstate || "",
+        minYear: minYear?.realEstate || "",
+        maxYear: maxYear?.realEstate || "",
+        country: country || "",
+        state: state || "",
+        city: city || "",
+        zip: zip || "",
+      };
     } else if (propType === "car") {
-      setFilter({
-        auctionType: auctionType,
-        condition: condition,
-        min_mileage: minMileage,
-        max_mileage: maxMileage,
-        min_price: minPrice,
-        max_price: maxPrice,
+      filters = {
+        auctionType: auctionType?.car || "",
+        condition: condition || "",
+        minMileage: minMileage || "",
+        maxMileage: maxMileage || "",
+        min_price: min_price?.car || "",
+        max_price: max_price?.car || "",
         // make: make,
         // model: model,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
+        country: country || "",
+        state: state || "",
+        city: city || "",
+        zip: zip || "",
+      };
     } else if (propType === "jet") {
-      setFilter({
-        auctionType: auctionType,
-        minYear: minYear,
-        maxYear: maxYear,
-        min_price: minPrice,
-        max_price: maxPrice,
-        make: make,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
+      filters = {
+        auctionType: auctionType?.jet || "",
+        minYear: minYear?.jet || "",
+        maxYear: maxYear?.jet || "",
+        min_price: min_price?.jet || "",
+        max_price: max_price?.jet || "",
+        make: make?.jet || "",
+        country: country || "",
+        state: state || "",
+        city: city || "",
+        zip: zip || "",
+      };
     } else if (propType === "yacht") {
-      setFilter({
-        auctionType: auctionType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        make: make,
-        min_length: minLength,
-        max_length: maxLength,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
+      filters = {
+        auctionType: auctionType?.yacht || "",
+        min_price: min_price?.yacht || "",
+        max_price: max_price?.yacht || "",
+        make: make?.yacht || "",
+        min_length: min_length || "",
+        max_length: max_length || "",
+        country: country || "",
+        state: state || "",
+        city: city || "",
+        zip: zip || "",
+      };
     } else if (propType === "auctions") {
-      setFilter({
-        auctionType: auctionType,
-        type: propertyType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
-    } else if (propType === "austin") {
-      setFilter({
-        auctionType: auctionType,
-        type: propertyType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
-    } else if (propType === "houston") {
-      setFilter({
-        auctionType: auctionType,
-        type: propertyType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
-    } else if (propType === "dallas") {
-      setFilter({
-        auctionType: auctionType,
-        type: propertyType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
-    } else if (propType === "sanAntonio") {
-      setFilter({
-        auctionType: auctionType,
-        type: propertyType,
-        min_price: minPrice,
-        max_price: maxPrice,
-        country: country,
-        state: state,
-        city: city,
-        zip: zip,
-      });
+      filters = {
+        auctionType: auctionType?.auctions || "",
+        type: type || "",
+        min_price: min_price?.auctions || "",
+        max_price: max_price?.auctions || "",
+        country: country || "",
+        state: state || "",
+        city: city || "",
+        zip: zip || "",
+      };
     }
+    setFilter(filters);
+    history.push({
+      pathname:
+        propType === "auctions"
+          ? "/auctions"
+          : propType === "car"
+          ? "/cars"
+          : propType === "real-estate"
+          ? "/realEstates"
+          : propType === "jet"
+          ? "/jets"
+          : propType === "yacht"
+          ? "/yachts"
+          : "/",
+      search: `?${new URLSearchParams(filters).toString()}`,
+    });
   };
 
   const handleChange = (address) => {
@@ -470,7 +442,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice ? minPrice.car : ""}
+                          value={min_price ? min_price.car : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -483,7 +455,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice.car : ""}
+                          value={max_price ? max_price.car : ""}
                           className="form-control"
                           placeholder="Max"
                           onValueChange={(values) => {
@@ -777,7 +749,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice ? minPrice.jet : ""}
+                          value={min_price ? min_price.jet : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -790,7 +762,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice.jet : ""}
+                          value={max_price ? max_price.jet : ""}
                           className="form-control"
                           placeholder="Max"
                           onValueChange={(values) => {
@@ -940,7 +912,7 @@ function PropertyPageHeader({
                   }}
                   className=" RealButton "
                 >
-                  <option>Makes</option>
+                  <option value="">Makes</option>
                   {JetBuilder.map((item, index) => (
                     <option key={index} value={index}>
                       {item}
@@ -1154,7 +1126,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice ? minPrice.yacht : ""}
+                          value={min_price ? min_price.yacht : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -1167,7 +1139,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice.yacht : ""}
+                          value={max_price ? max_price.yacht : ""}
                           className="form-control"
                           placeholder="Max"
                           onValueChange={(values) => {
@@ -1216,7 +1188,10 @@ function PropertyPageHeader({
                         yacht: true,
                       }));
                     } else {
-                      setMake({ yacht: e.target.value });
+                      const getMake = yachtBuilder.filter(
+                        (make, index) => index === parseInt(e.target.value)
+                      );
+                      setMake({ yacht: getMake[0] });
                     }
                   }}
                   className=" RealButton "
@@ -1385,7 +1360,7 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
-      ) : params.parameter ? (
+      ) : params.parameter || history.location.search ? (
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
@@ -1523,7 +1498,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice ? minPrice.auctions : ""}
+                          value={min_price ? min_price.auctions : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -1536,7 +1511,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice.auctions : ""}
+                          value={max_price ? max_price.auctions : ""}
                           className="form-control"
                           placeholder="Max"
                           onValueChange={(values) => {
@@ -1738,7 +1713,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={minPrice ? minPrice.realEstate : ""}
+                          value={min_price ? min_price.realEstate : ""}
                           className="form-control"
                           placeholder="Min"
                           onValueChange={(values) => {
@@ -1751,7 +1726,7 @@ function PropertyPageHeader({
                         <NumberFormat
                           thousandSeparator={true}
                           prefix="$"
-                          value={maxPrice ? maxPrice.realEstate : ""}
+                          value={max_price ? max_price.realEstate : ""}
                           className="form-control"
                           placeholder="Max"
                           onValueChange={(values) => {
@@ -1790,7 +1765,7 @@ function PropertyPageHeader({
                   </div>
                 )}
               </Col>
-              <Col className="d-flex justify-content-center">
+              {/* <Col className="d-flex justify-content-center">
                 <Form.Select
                   onChange={(e) => {
                     if (e.target.value === "Other") {
@@ -1805,8 +1780,8 @@ function PropertyPageHeader({
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getYears.length > 0) {
-                        setMinYear({ realEstate: getYears[0].min_price });
-                        setMaxYear({ realEstate: getYears[0].max_price });
+                        setMinYear({ realEstate: getYears[0].min });
+                        setMaxYear({ realEstate: getYears[0].max });
                       } else {
                         setMinYear();
                         setMaxYear();
@@ -1885,7 +1860,7 @@ function PropertyPageHeader({
                     </Row>
                   </div>
                 )}
-              </Col>
+              </Col> */}
               <Col className="d-flex justify-content-center">
                 <Form.Select
                   onChange={(e) => {

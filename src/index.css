@@ -10,7 +10,7 @@ html {
 
 body {
   /* overflow: hidden; */
-  background: #f5f9ff;
+  background: #f5f9ff!important;
   color: black;
   font-family: Avenir-Roman, sans-serif;
   /* margin: auto; */
@@ -18,13 +18,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.container{
+/* .container{
   background: #F5F9FF;
 }
 
 .container-fluid{
   background: #F5F9FF;
-}
+} */
 
 a {
   color: #000000;

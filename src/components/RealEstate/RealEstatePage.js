@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
-import "../../styles/realEstate.css";
 import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
@@ -12,6 +11,7 @@ import Loading from "../Loading";
 import Next from "../../images/Next.png";
 import Prev from "../../images/Previous.png";
 import { useHistory } from "react-router-dom";
+import "../../styles/realEstate.css";
 
 const Carousel = styled(Slider)`
   // height: 100%;
@@ -156,16 +156,20 @@ function RealEstatePage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [filtered, setFiltered] = useState();
   const history = useHistory();
 
-  // const urlSearchParams = new URLSearchParams(history.location.search);
-  // const filters = Object.fromEntries(urlSearchParams.entries());
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(history.location.search);
+    const filters = Object.fromEntries(urlSearchParams.entries());
+    setFiltered(filters);
+  }, [history.location.search]);
 
   useEffect(async () => {
-    toggleChange();
-    setLoader(true);
     let auctions = [];
-    const getAuctions = async () => {
+    if (!history.location.search) {
+      toggleChange();
+      setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType(
         "real-estate"
       );
@@ -182,19 +186,31 @@ function RealEstatePage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
-      setAuctions(auctions);
+      // setAuctions(auctions);
+      setResultLength({ realEstate: auctions.length });
       setLoader(false);
-      if (!filter) {
-        setResultLength({ realEstate: auctions.length });
-      }
-      if (auctions.length > 0) {
-        const imageUrl = auctions.map((image) => {
-          for (let i = 0; i < image.property.images.length; i++) {
-            return image.property.images[i].url;
-          }
-        });
-        setImg(imageUrl);
-      }
+    } else {
+      setLoader(true);
+      await authService.realEstateFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          const realEstate = res.data.filter(
+            (item) => item.property.type === "real-estate"
+          );
+          setResultLength({ realEstate: realEstate.length });
+          auctions = [...realEstate];
+          setLoader(false);
+        } else {
+          setResultLength({ realEstate: 0 });
+          auctions = [];
+          setLoader(false);
+        }
+      });
+    }
+    setAuctions(auctions);
+  }, []);
+
+  useEffect(() => {
+    if (auctions) {
       setCenters(
         auctions.map((item) => {
           return {
@@ -205,14 +221,19 @@ function RealEstatePage({
           };
         })
       );
-    };
-    getAuctions();
-  }, []);
+      const imageUrl = auctions.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImg(imageUrl);
+    }
+  }, [auctions]);
 
   useEffect(() => {
-    if (filter) {
+    if (filtered) {
       setLoader(true);
-      authService.realEstateFilter(filter).then((res) => {
+      authService.realEstateFilter(filtered).then((res) => {
         if (res.data.length > 0) {
           const realEstate = res.data.filter(
             (item) => item.property.type === "real-estate"
@@ -227,7 +248,7 @@ function RealEstatePage({
         }
       });
     }
-  }, [filter]);
+  }, [filtered]);
 
   let settings = {
     dots: false,

@@ -95,7 +95,7 @@ function UpcomingAuctions({
 
   return (
     <Row
-      id="feature"
+      id="upcoming"
       style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem" }}
     >
       <Row>

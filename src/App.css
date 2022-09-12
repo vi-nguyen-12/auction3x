@@ -34,9 +34,11 @@
   align-items: center;
 }
 
-/* .btn-close {
-  background-color: rgb(0, 0, 0, 0.4) !important;
-} */
+.btn-close {
+  background-color: #ffffff !important;
+  opacity: 0.8;
+  border-radius: 0.175rem !important;
+}
 
 .submitBtn {
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
@@ -120,7 +122,7 @@
   /* padding: 6px !important; */
   color: rgb(0, 0, 0);
   /* font-size: 12px; */
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 .form-control::placeholder {
   color: rgb(0, 0, 0) !important;
@@ -325,7 +327,7 @@ h1 {
     width: 25px;
     height: 25px;
     z-index: 999;
-    background-color: transparent;
+    background-color: #ffffff !important;
     box-shadow: none;
   }
 }
@@ -405,6 +407,7 @@ h1 {
   font-style: normal;
   font-weight: 500;
   font-size: 48px;
+  font-size: 3vmax;
   color: #08080a;
 }
 

@@ -4,14 +4,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Row, Col } from "react-bootstrap";
-import "../../styles/realEstate.css";
-import Cards from "../Cards/Cards";
+import { useHistory } from "react-router-dom";
 import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
 import Next from "../../images/Next.png";
 import Prev from "../../images/Previous.png";
+import "../../styles/realEstate.css";
 
 const Carousel = styled(Slider)`
   // height: 30vh;
@@ -153,12 +153,20 @@ function JetPage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    toggleChange();
-    setLoader(true);
+    const urlSearchParams = new URLSearchParams(history.location.search);
+    const filters = Object.fromEntries(urlSearchParams.entries());
+    setFiltered(filters);
+  }, [history.location.search]);
+
+  useEffect(async () => {
     let auctions = [];
-    const getAuctions = async () => {
+    if (!history.location.search) {
+      toggleChange();
+      setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("jet");
       if (response1.error) {
         alert(response1.error);
@@ -171,19 +179,28 @@ function JetPage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
-      setAuctions(auctions);
       setLoader(false);
-      if (!filter) {
-        setResultLength({ jet: auctions.length });
-      }
-      if (auctions.length > 0) {
-        const imageUrl = auctions.map((image) => {
-          for (let i = 0; i < image.property.images.length; i++) {
-            return image.property.images[i].url;
-          }
-        });
-        setImgJet(imageUrl);
-      }
+      setResultLength({ jet: auctions.length });
+    } else {
+      setLoader(true);
+      authService.jetFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          const jet = res.data.filter((item) => item.property.type === "jet");
+          setResultLength({ jet: jet.length });
+          auctions = [...jet];
+          setLoader(false);
+        } else {
+          setResultLength({ jet: 0 });
+          auctions = [];
+          setLoader(false);
+        }
+      });
+    }
+    setAuctions(auctions);
+  }, []);
+
+  useEffect(() => {
+    if (auctions) {
       setCenters(
         auctions.map((item) => {
           return {
@@ -194,14 +211,19 @@ function JetPage({
           };
         })
       );
-    };
-    getAuctions();
-  }, []);
+      const imageUrl = auctions.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImgJet(imageUrl);
+    }
+  }, [auctions]);
 
   useEffect(() => {
-    if (filter) {
+    if (filtered) {
       setLoader(true);
-      authService.jetFilter(filter).then((res) => {
+      authService.jetFilter(filtered).then((res) => {
         if (res.data.length > 0) {
           const jet = res.data.filter((item) => item.property.type === "jet");
           setResultLength({ jet: jet.length });
@@ -214,7 +236,7 @@ function JetPage({
         }
       });
     }
-  }, [filter]);
+  }, [filtered]);
 
   let settings = {
     dots: false,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import "../../styles/realEstate.css";
 import { Row, Col } from "react-bootstrap";
-import Cards from "../Cards/Cards";
+import { useHistory } from "react-router-dom";
 import NewCards from "../Cards/NewCards";
 import { useParams } from "react-router-dom";
 import ErrorPage from "../../components/Error/404page";
@@ -94,12 +94,21 @@ function Auctions({
   filter,
   setResultLength,
   setCenters,
+  setImg,
 }) {
   const params = useParams();
+  const history = useHistory();
   const [loader, setLoader] = useState(false);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [allAuctions, setAllAuctions] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(history.location.search);
+    const filters = Object.fromEntries(urlSearchParams.entries());
+    setFiltered(filters);
+  }, [history.location.search]);
 
   useEffect(() => {
     toggleChange();
@@ -115,95 +124,36 @@ function Auctions({
   }, []);
 
   useEffect(async () => {
-    if (params.parameter === "Featured") {
-      await authService.getFeaturedAuctions().then((res) => {
-        setAllAuctions(
-          res.data.filter(
+    let auctions = [];
+    if (!history.location.search) {
+      if (params.parameter === "Featured") {
+        await authService.getFeaturedAuctions().then((res) => {
+          auctions = res.data.filter(
             (auction) => auction.auctionEndDate > new Date().toISOString()
-          )
-        );
-      });
-    } else if (params.parameter === "Upcoming") {
-      setAllAuctions(upcomingAuctions);
-    } else if (params.parameter === "Austin") {
-      setLoader(true);
-      const datas = {
-        city: "Austin",
-        auctionType: "",
-        type: "",
-        min_price: "",
-        max_price: "",
-      };
-      authService.propFilter(datas).then((res) => {
-        setAllAuctions(res.data);
-        setResultLength({ auctions: res.data.length });
-        setLoader(false);
-      });
-    } else if (params.parameter === "Houston") {
-      setLoader(true);
-      const datas = {
-        city: "Houston",
-        auctionType: "",
-        type: "",
-        min_price: "",
-        max_price: "",
-      };
-      authService.propFilter(datas).then((res) => {
-        setAllAuctions(res.data);
-        setResultLength({ auctions: res.data.length });
-        setLoader(false);
-      });
-    } else if (params.parameter === "Dallas") {
-      setLoader(true);
-      const datas = {
-        city: "Dallas",
-        auctionType: "",
-        type: "",
-        min_price: "",
-        max_price: "",
-      };
-      authService.propFilter(datas).then((res) => {
-        setAllAuctions(res.data);
-        setResultLength({ auctions: res.data.length });
-        setLoader(false);
-      });
-    } else if (params.parameter === "SanAntonio") {
-      setLoader(true);
-      const datas = {
-        city: "San Antonio",
-        auctionType: "",
-        type: "",
-        min_price: "",
-        max_price: "",
-      };
-      authService.propFilter(datas).then((res) => {
-        setAllAuctions(res.data);
-        setResultLength({ auctions: res.data.length });
-        setLoader(false);
-      });
-    } else {
-      if (onGoingAuctions && upcomingAuctions) {
-        setAllAuctions([...onGoingAuctions, ...upcomingAuctions]);
+          );
+        });
+      } else if (params.parameter === "Upcoming") {
+        auctions = [...upcomingAuctions];
+      } else {
+        if (onGoingAuctions && upcomingAuctions) {
+          auctions = [...onGoingAuctions, ...upcomingAuctions];
+        }
       }
-    }
-  }, [onGoingAuctions, upcomingAuctions]);
-
-  useEffect(() => {
-    if (filter) {
+    } else {
       setLoader(true);
-      authService.propFilter(filter).then((res) => {
+      authService.propFilter(filtered).then((res) => {
         if (res.data.length > 0) {
-          setResultLength({ auctions: res.data.length });
-          setAllAuctions(res.data);
+          auctions = [...res.data];
           setLoader(false);
         } else {
-          setResultLength({ auctions: 0 });
-          setAllAuctions([]);
+          auctions = [];
           setLoader(false);
         }
       });
     }
-  }, [filter]);
+    setAllAuctions(auctions);
+    setResultLength({ auctions: auctions.length });
+  }, [onGoingAuctions, upcomingAuctions]);
 
   useEffect(() => {
     if (allAuctions) {
@@ -217,8 +167,31 @@ function Auctions({
           };
         })
       );
+      const imageUrl = allAuctions.map((image) => {
+        for (let i = 0; i < image.property.images.length; i++) {
+          return image.property.images[i].url;
+        }
+      });
+      setImg(imageUrl);
     }
   }, [allAuctions]);
+
+  useEffect(() => {
+    if (filtered) {
+      setLoader(true);
+      authService.propFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          setResultLength({ auctions: res.data.length });
+          setAllAuctions(res.data);
+          setLoader(false);
+        } else {
+          setResultLength({ auctions: 0 });
+          setAllAuctions([]);
+          setLoader(false);
+        }
+      });
+    }
+  }, [filtered]);
 
   let settings = {
     dots: false,

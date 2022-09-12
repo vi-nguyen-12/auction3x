@@ -17,10 +17,12 @@ import Loading from "../Loading";
 import About from "./About";
 
 const Home = ({ toggleSignIn, windowSize }) => {
+  const params = useParams();
   const [loader, setLoader] = useState(false);
   const [featureAuctions, setFeatureAuctions] = useState([]);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
+  const [auctions, setAuctions] = useState([]);
 
   useEffect(async () => {
     setLoader(true);
@@ -40,7 +42,11 @@ const Home = ({ toggleSignIn, windowSize }) => {
     });
   }, []);
 
-  const params = useParams();
+  useEffect(() => {
+    if (onGoingAuctions && upcomingAuctions) {
+      setAuctions([...onGoingAuctions, ...upcomingAuctions]);
+    }
+  }, [onGoingAuctions, upcomingAuctions]);
 
   useEffect(() => {
     if (params.sectionId === "feature") {
@@ -65,7 +71,7 @@ const Home = ({ toggleSignIn, windowSize }) => {
         windowSize={windowSize}
         loader={loader}
       />
-      <PrimeCate windowSize={windowSize} />
+      <PrimeCate windowSize={windowSize} auctions={auctions} />
       <How windowSize={windowSize} />
       <UpcomingAuctions
         toggleSignIn={toggleSignIn}

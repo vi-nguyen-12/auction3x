@@ -422,27 +422,13 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?${data.type ? "type=" + data.type : ""}&${
-          data.auctionType
-            ? data.auctionType.auctions
-              ? "time=" + data.auctionType.auctions
-              : ""
-            : ""
+          data.auctionType ? "time=" + data.auctionType : ""
         }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
           data.city ? "property_city=" + data.city : ""
         }&${data.state ? "property_state=" + data.state : ""}&${
           data.country ? "property_country=" + data.country : ""
-        }&${
-          data.min_price
-            ? data.min_price.auctions
-              ? "min_price=" + data.min_price.auctions
-              : ""
-            : ""
-        }&${
-          data.max_price
-            ? data.max_price.auctions
-              ? "max_price=" + data.max_price.auctions
-              : ""
-            : ""
+        }&${data.min_price ? "min_price=" + data.min_price : ""}&${
+          data.max_price ? "max_price=" + data.max_price : ""
         }`,
       {
         headers: {
@@ -453,48 +439,19 @@ const authService = {
   },
 
   realEstateFilter(data) {
-    console.log(data);
     return axios.get(
       apiUrl +
         `/api/auctions?type=real-estate&${
-          data.auctionType
-            ? data.auctionType.realEstate
-              ? "time=" + data.auctionType.realEstate
-              : ""
-            : ""
-        }&${
-          data.real_esstate_type
-            ? "real_estate_type=" + data.real_esstate_type
-            : ""
-        }&${
-          data.minYear
-            ? data.minYear.realEstate
-              ? "min_year=" + data.minYear.realEstate
-              : ""
-            : ""
-        }&${
-          data.maxYear
-            ? data.maxYear.realEstate
-              ? "max_Year=" + data.maxYear.realEstate
-              : ""
-            : ""
-        }&${
-          data.min_price
-            ? data.min_price.realEstate
-              ? "min_price=" + data.min_price.realEstate
-              : ""
-            : ""
-        }&${
-          data.max_price
-            ? data.max_price.realEstate
-              ? "max_price=" + data.max_price.realEstate
-              : ""
-            : ""
-        }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
-          data.city ? "property_city=" + data.city : ""
-        }&${data.state ? "property_state=" + data.state : ""}&${
-          data.country ? "property_country=" + data.country : ""
-        }`,
+          data?.auctionType ? "time=" + data.auctionType : ""
+        }&${data?.realType ? "real_estate_type=" + data.realType : ""}&${
+          data?.minYear ? "min_year=" + data.minYear : ""
+        }&${data?.maxYear ? "max_Year=" + data.maxYear : ""}&${
+          data?.min_price ? "min_price=" + data.min_price : ""
+        }&${data?.max_price ? "max_price=" + data.max_price : ""}&${
+          data?.zip ? "property_zip_code=" + data.zip : ""
+        }&${data?.city ? "property_city=" + data.city : ""}&${
+          data?.state ? "property_state=" + data.state : ""
+        }&${data?.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -507,32 +464,18 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=car&${
-          data.auctionType
-            ? data.auctionType.car
-              ? "time=" + data.auctionType.car
-              : ""
-            : ""
-        }&${
-          data.min_price
-            ? data.min_price.car
-              ? "min_price=" + data.min_price.car
-              : ""
-            : ""
-        }&${
-          data.max_price
-            ? data.max_price.car
-              ? "max_price=" + data.max_price.car
-              : ""
-            : ""
-        }&${data.condition ? "condition=" + data.condition : ""}&${
-          data.make ? "make=" + data.make.car : ""
-        }&${data.model ? "model=" + data.model : ""}&${
-          data.min_mileage ? "min_mileage=" + data.min_mileage : ""
-        }&${data.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
-          data.zip ? "property_zip_code=" + data.zip : ""
-        }&${data.city ? "property_city=" + data.city : ""}&${
-          data.state ? "property_state=" + data.state : ""
-        }&${data.country ? "property_country=" + data.country : ""}`,
+          data?.auctionType ? "time=" + data.auctionType : ""
+        }&${data?.min_price ? "min_price=" + data.min_price : ""}&${
+          data?.max_price ? "max_price=" + data.max_price : ""
+        }&${data?.condition ? "condition=" + data.condition : ""}&${
+          data?.make ? "make=" + data.make : ""
+        }&${data?.model ? "model=" + data.model : ""}&${
+          data?.min_mileage ? "min_mileage=" + data.min_mileage : ""
+        }&${data?.max_mileage ? "max_mileage=" + data.max_mileage : ""}&${
+          data?.zip ? "property_zip_code=" + data.zip : ""
+        }&${data?.city ? "property_city=" + data.city : ""}&${
+          data?.state ? "property_state=" + data.state : ""
+        }&${data?.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -545,46 +488,16 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=jet&${
-          data.auctionType
-            ? data.auctionType.jet
-              ? "time=" + data.auctionType.jet
-              : ""
-            : ""
-        }&${
-          data.min_price
-            ? data.min_price.jet
-              ? "min_price=" + data.min_price.jet
-              : ""
-            : ""
-        }&${
-          data.max_price
-            ? data.max_price.jet
-              ? "max_price=" + data.max_price.jet
-              : ""
-            : ""
-        }&${
-          data.make
-            ? data.make.jet
-              ? "aircraft_builder_name=" + data.make.jet
-              : ""
-            : ""
-        }&${
-          data.minYear
-            ? data.minYear.jet
-              ? "min_year=" + data.minYear.jet
-              : ""
-            : ""
-        }&${
-          data.maxYear
-            ? data.maxYear.jet
-              ? "max_Year=" + data.maxYear.jet
-              : ""
-            : ""
-        }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
-          data.city ? "property_city=" + data.city : ""
-        }&${data.state ? "property_state=" + data.state : ""}&${
-          data.country ? "property_country=" + data.country : ""
-        }`,
+          data?.auctionType ? "time=" + data.auctionType : ""
+        }&${data?.min_price ? "min_price=" + data.min_price : ""}&${
+          data?.max_price ? "max_price=" + data.max_price : ""
+        }&${data?.make ? "aircraft_builder_name=" + data.make : ""}&${
+          data?.minYear ? "min_year=" + data.minYear : ""
+        }&${data?.maxYear ? "max_Year=" + data.maxYear : ""}&${
+          data?.zip ? "property_zip_code=" + data.zip : ""
+        }&${data?.city ? "property_city=" + data.city : ""}&${
+          data?.state ? "property_state=" + data.state : ""
+        }&${data?.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -597,36 +510,16 @@ const authService = {
     return axios.get(
       apiUrl +
         `/api/auctions?type=yacht&${
-          data.auctionType
-            ? data.auctionType.yacht
-              ? "time=" + data.auctionType.yacht
-              : ""
-            : ""
-        }&${
-          data.min_price
-            ? data.min_price.yacht
-              ? "min_price=" + data.min_price.yacht
-              : ""
-            : ""
-        }&${
-          data.max_price
-            ? data.max_price.yacht
-              ? "max_price=" + data.max_price.yacht
-              : ""
-            : ""
-        }&${
-          data.make
-            ? data.make.yacht
-              ? "manufacture_name=" + data.make.yacht
-              : ""
-            : ""
-        }&${data.min_length ? "min_length=" + data.min_length : ""}&${
-          data.max_length ? "max_length=" + data.max_length : ""
-        }&${data.zip ? "property_zip_code=" + data.zip : ""}&${
-          data.city ? "property_city=" + data.city : ""
-        }&${data.state ? "property_state=" + data.state : ""}&${
-          data.country ? "property_country=" + data.country : ""
-        }`,
+          data?.auctionType ? "time=" + data.auctionType : ""
+        }&${data?.min_price ? "min_price=" + data.min_price : ""}&${
+          data?.max_price ? "max_price=" + data.max_price : ""
+        }&${data?.make ? "manufacturer_name=" + data.make : ""}&${
+          data?.min_length ? "min_length=" + data.min_length : ""
+        }&${data?.max_length ? "max_length=" + data.max_length : ""}&${
+          data?.zip ? "property_zip_code=" + data.zip : ""
+        }&${data?.city ? "property_city=" + data.city : ""}&${
+          data?.state ? "property_state=" + data.state : ""
+        }&${data?.country ? "property_country=" + data.country : ""}`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

@@ -8,6 +8,11 @@ import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
 import Loading from "../../components/Loading";
 import io from "socket.io-client";
+import { Row } from "react-bootstrap";
+import RealEstatePageBg from "../../images/RealEstatePageBg.png";
+import CarPageBg from "../../images/CarPageBg.png";
+import JetPageBg from "../../images/JetPageBg.png";
+import YachtPageBg from "../../images/YachtPageBg.png";
 
 function DisplayAuctions({
   toggleChange,
@@ -91,19 +96,36 @@ function DisplayAuctions({
   return (
     <>
       {loader ? <Loading /> : null}
-      {auction && (
-        <h5 className="realHeader">
-          {auction.property.type === "car" ? (
+      {auction &&
+        (auction.property.type === "car" ? (
+          <Row
+            className="realHeader"
+            style={{ background: `url(${CarPageBg})` }}
+          >
             <title>CAR</title>
-          ) : auction.property.type === "jet" ? (
+          </Row>
+        ) : auction.property.type === "jet" ? (
+          <Row
+            className="realHeader"
+            style={{ background: `url(${JetPageBg})` }}
+          >
             <title>JET</title>
-          ) : auction.property.type === "yacht" ? (
+          </Row>
+        ) : auction.property.type === "yacht" ? (
+          <Row
+            className="realHeader"
+            style={{ background: `url(${YachtPageBg})` }}
+          >
             <title>YACHT</title>
-          ) : (
+          </Row>
+        ) : (
+          <Row
+            className="realHeader"
+            style={{ background: `url(${RealEstatePageBg})` }}
+          >
             <title>REAL ESTATE</title>
-          )}
-        </h5>
-      )}
+          </Row>
+        ))}
       {auction ? (
         auction.property.type === "real-estate" ? (
           <DisplayRealEstate

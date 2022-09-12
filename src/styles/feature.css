@@ -7,6 +7,7 @@
   font-style: normal;
   font-weight: 300;
   font-size: 24px;
+  font-size: 1.47vmax;
 }
 
 .view-btn:hover {
@@ -37,7 +38,7 @@
   font-family: "Interstate", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 32px;
+  font-size: 1.65vmax;
   color: #08080a;
 }
 

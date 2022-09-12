@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
@@ -10,6 +10,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import { Modal } from "react-bootstrap";
 import EditProfile from "../EditProfile";
+import authService from "../../../services/authServices";
 import CloseButton from "react-bootstrap/CloseButton";
 
 const Carousel = styled(Slider)`
@@ -85,14 +86,25 @@ height: 150px;
 `;
 
 function Profile({ id, windowSize }) {
-  const savedProperty = useSelector((state) => state.savedProperty);
   const user = useSelector((state) => state.user);
+  const [listedProp, setListedProp] = useState([]);
+
+  useEffect(async () => {
+    await authService.sellerPropInAuctions(user._id).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      } else {
+        setListedProp(res.data);
+      }
+    });
+  }, []);
+
   let settings = {
     dots: false,
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: savedProperty.length > 3 ? 3 : savedProperty.length,
+    slidesToShow: listedProp.length > 3 ? 3 : listedProp.length,
   };
   // const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
@@ -101,6 +113,8 @@ function Profile({ id, windowSize }) {
   const getDescription = (descript) => setDescription(descript);
 
   const descriptPlaceHolder = "Please Enter Description";
+
+  console.log(listedProp);
   return (
     <Container
       className="profileContainer"
@@ -265,36 +279,31 @@ function Profile({ id, windowSize }) {
           </h3>
           <Row>
             <Carousel {...settings}>
-              {savedProperty.length > 0
-                ? savedProperty.map(
-                    (property, index) => (
-                      console.log(property),
-                      (
-                        <Wrap key={index}>
-                          <div className="listItem">
-                            <img
-                              src={property.property.images[0].url}
-                              alt="property"
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "0",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                window.open(
-                                  `/DisplayAuctions/${property._id}`,
-                                  "_blank"
-                                );
-                              }}
-                            />
-                          </div>
-                        </Wrap>
-                      )
-                    )
-                  )
+              {listedProp.length > 0
+                ? listedProp.map((property, index) => (
+                    <Wrap key={index}>
+                      <div className="listItem">
+                        <img
+                          src={property.images[0].url}
+                          alt="property"
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "0",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            window.open(
+                              `/DisplayAuctions/${property.auctionDetails._id}`,
+                              "_blank"
+                            );
+                          }}
+                        />
+                      </div>
+                    </Wrap>
+                  ))
                 : null}
             </Carousel>
           </Row>

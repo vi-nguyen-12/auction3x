@@ -34,6 +34,7 @@ import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
 import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
 import ViewProfile from "./components/Users/ViewProfile";
 import CloseButton from "react-bootstrap/CloseButton";
+import { createBrowserHistory } from "history";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -217,6 +218,14 @@ function App() {
       }
     };
   }, [user]);
+
+  // url change
+  let urlChange = createBrowserHistory();
+  urlChange.listen((location, action) => {
+    if (location?.action === "POP") {
+      window.location.reload();
+    }
+  });
 
   return (
     <Suspense fallback={<Loading />}>

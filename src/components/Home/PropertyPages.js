@@ -181,6 +181,7 @@ const PropertyPages = ({
           setCenters={setCenters}
           filter={filter}
           setResultLength={setResultLength}
+          setImg={setImg}
         />
       ) : null}
       {/* Map Button */}
@@ -212,7 +213,7 @@ const PropertyPages = ({
                 mapContainerStyle={mapStyles}
                 style={{ height: "800px" }}
                 center={centers[0]}
-                zoom={8}
+                zoom={4}
               >
                 {centers.map((marker, index) => {
                   return (
