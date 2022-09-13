@@ -438,6 +438,44 @@ const authService = {
     );
   },
 
+  featureFilter(data) {
+    return axios.get(
+      apiUrl +
+        `/api/auctions?isFeatured=true&${
+          data.type ? "type=" + data.type : ""
+        }&${data.auctionType ? "time=" + data.auctionType : ""}&${
+          data.zip ? "property_zip_code=" + data.zip : ""
+        }&${data.city ? "property_city=" + data.city : ""}&${
+          data.state ? "property_state=" + data.state : ""
+        }&${data.country ? "property_country=" + data.country : ""}&${
+          data.min_price ? "min_price=" + data.min_price : ""
+        }&${data.max_price ? "max_price=" + data.max_price : ""}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
+  upcomingFilter(data) {
+    return axios.get(
+      apiUrl +
+        `/api/auctions?${data.type ? "type=" + data.type : ""}&time=upcoming&${
+          data.zip ? "property_zip_code=" + data.zip : ""
+        }&${data.city ? "property_city=" + data.city : ""}&${
+          data.state ? "property_state=" + data.state : ""
+        }&${data.country ? "property_country=" + data.country : ""}&${
+          data.min_price ? "min_price=" + data.min_price : ""
+        }&${data.max_price ? "max_price=" + data.max_price : ""}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
   realEstateFilter(data) {
     return axios.get(
       apiUrl +

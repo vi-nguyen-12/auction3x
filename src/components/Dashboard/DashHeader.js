@@ -319,7 +319,7 @@ function DashHeader({
                 <div
                   className="notification"
                   style={{
-                    marginBottom: "30px",
+                    marginBottom: "40px",
                     marginLeft: "-20px",
                     marginRight: "0",
                     width: notifications.length > 10 && "1.8rem",

@@ -104,7 +104,8 @@ function Profile({ id, windowSize }) {
     infinite: true,
     speed: 500,
     autoplay: true,
-    slidesToShow: listedProp.length > 3 ? 3 : listedProp.length,
+    slidesToShow:
+      windowSize > 800 ? (listedProp.length > 3 ? 3 : listedProp.length) : 2,
   };
   // const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
@@ -281,8 +282,7 @@ function Profile({ id, windowSize }) {
             <Carousel {...settings}>
               {listedProp.length > 0
                 ? listedProp.map((property, index) => (
-                    <Wrap key={index}>
-                      <div className="listItem">
+                      <div className="listItem px-1" key={index}>
                         <img
                           src={property.images[0].url}
                           alt="property"
@@ -302,7 +302,6 @@ function Profile({ id, windowSize }) {
                           }}
                         />
                       </div>
-                    </Wrap>
                   ))
                 : null}
             </Carousel>

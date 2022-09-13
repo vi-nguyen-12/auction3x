@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import authService from "../../services/authServices";
 import "../../styles/realEstate.css";
 import { Row, Col } from "react-bootstrap";
@@ -13,7 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 const Carousel = styled(Slider)`
-  // height: 100%;
+  // height: 100vh;
   overflow: hidden;
 
   & > button {
@@ -30,7 +30,8 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
+      position: absolute;
+      // top: -3vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -45,46 +46,17 @@ const Carousel = styled(Slider)`
     overflow: initial;
   }
 
-  .slick-prev {
-    height: 150px;
-    // left: 2vw;
-    z-index: 1;
-    margin: -50px;
-  }
-
   .slick-prev:before {
     display: none;
-  }
-
-  .slick-next {
-    height: 150px;
-    // right: 2vw;
-    z-index: 1;
-    content: ">";
-    margin: -50px;
+    // font-size: 60px;
+    // color: #e9af84;
   }
 
   .slick-next:before {
     display: none;
+    // font-size: 60px;
+    // color: #e9af84;
   }
-`;
-
-const Wrap = styled.div`
-border-radius: 4px;
-cursor: pointer;
-position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
-align-content: center;
-// margin-top: auto;  // Just for display
-
-  &:hover {
-    padding: 0;
-    // border: 4px solid rgba(249, 249, 249, 0.8);
-    transition-duration: 300ms;
-  }
-}
 `;
 
 function Auctions({
@@ -98,6 +70,8 @@ function Auctions({
 }) {
   const params = useParams();
   const history = useHistory();
+  const slider = useRef();
+  const [slideIndex, setSlideIndex] = useState(0);
   const [loader, setLoader] = useState(false);
   const [onGoingAuctions, setOnGoingAuctions] = useState([]);
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
@@ -124,8 +98,8 @@ function Auctions({
   }, []);
 
   useEffect(async () => {
-    let auctions = [];
     if (!history.location.search) {
+      let auctions = [];
       if (params.parameter === "Featured") {
         await authService.getFeaturedAuctions().then((res) => {
           auctions = res.data.filter(
@@ -139,20 +113,48 @@ function Auctions({
           auctions = [...onGoingAuctions, ...upcomingAuctions];
         }
       }
+      setAllAuctions(auctions);
+      setResultLength({ auctions: auctions.length });
+    } else if (history.location.search && params.parameter === "Featured") {
+      setLoader(true);
+      authService.featureFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          setAllAuctions(res.data);
+          setResultLength({ auctions: res.data.length });
+          setLoader(false);
+        } else {
+          setAllAuctions([]);
+          setResultLength({ auctions: 0 });
+          setLoader(false);
+        }
+      });
+    } else if (history.location.search && params.parameter === "Upcoming") {
+      setLoader(true);
+      authService.upcomingFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          setAllAuctions(res.data);
+          setResultLength({ auctions: res.data.length });
+          setLoader(false);
+        } else {
+          setAllAuctions([]);
+          setResultLength({ auctions: 0 });
+          setLoader(false);
+        }
+      });
     } else {
       setLoader(true);
       authService.propFilter(filtered).then((res) => {
         if (res.data.length > 0) {
-          auctions = [...res.data];
+          setAllAuctions(res.data);
+          setResultLength({ auctions: res.data.length });
           setLoader(false);
         } else {
-          auctions = [];
+          setAllAuctions([]);
+          setResultLength({ auctions: 0 });
           setLoader(false);
         }
       });
     }
-    setAllAuctions(auctions);
-    setResultLength({ auctions: auctions.length });
   }, [onGoingAuctions, upcomingAuctions]);
 
   useEffect(() => {
@@ -177,7 +179,33 @@ function Auctions({
   }, [allAuctions]);
 
   useEffect(() => {
-    if (filtered) {
+    if (filtered && params.parameter === "Upcoming") {
+      setLoader(true);
+      authService.upcomingFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          setResultLength({ auctions: res.data.length });
+          setAllAuctions(res.data);
+          setLoader(false);
+        } else {
+          setResultLength({ auctions: 0 });
+          setAllAuctions([]);
+          setLoader(false);
+        }
+      });
+    } else if (filtered && params.parameter === "Featured") {
+      setLoader(true);
+      authService.featureFilter(filtered).then((res) => {
+        if (res.data.length > 0) {
+          setResultLength({ auctions: res.data.length });
+          setAllAuctions(res.data);
+          setLoader(false);
+        } else {
+          setResultLength({ auctions: 0 });
+          setAllAuctions([]);
+          setLoader(false);
+        }
+      });
+    } else if (filtered) {
       setLoader(true);
       authService.propFilter(filtered).then((res) => {
         if (res.data.length > 0) {
@@ -200,45 +228,85 @@ function Auctions({
     autoplay: false,
     slidesToShow:
       windowSize > 800 ? (allAuctions.length > 3 ? 3 : allAuctions.length) : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
+
+  const handleClick = (index) => () => {
+    setSlideIndex(index);
+  };
+
+  useEffect(() => {
+    if (slider.current) {
+      slider.current.slickGoTo(slideIndex);
+    }
+  }, [slideIndex]);
 
   return (
     <>
       {loader && <Loading />}
       {allAuctions.length > 0 ? (
-        <Row className="mt-5 mb-5">
-          {windowSize > 800 ? (
-            allAuctions.map((item, index) => {
-              return (
-                <Col className="mb-5" key={index}>
-                  <Wrap>
+        <>
+          <Row
+            className="mt-4"
+            style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
+          >
+            {windowSize > 800 ? (
+              allAuctions.map((item, index) => {
+                return (
+                  <Col
+                    lg={windowSize < 1650 ? 4 : 3}
+                    md={windowSize > 1400 ? 4 : 6}
+                    className="mb-5 py-2 d-flex justify-content-center"
+                    key={index}
+                  >
                     <NewCards
                       toggleSignIn={toggleSignIn}
                       windowSize={windowSize}
                       data={item}
                       type={item.property.type}
                     />
-                  </Wrap>
-                </Col>
-              );
-            })
-          ) : (
-            <Carousel {...settings}>
-              {allAuctions.map((item, index) => (
-                <Wrap key={index}>
-                  <NewCards
-                    toggleSignIn={toggleSignIn}
-                    windowSize={windowSize}
-                    data={item}
-                    type={item.property.type}
-                  />
-                </Wrap>
-              ))}
-            </Carousel>
-          )}
-        </Row>
-      ) : (
+                  </Col>
+                );
+              })
+            ) : (
+              <Carousel {...settings} ref={slider}>
+                {allAuctions.map((item, index) => (
+                  <Col
+                    key={index}
+                    className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-1"
+                  >
+                    <NewCards
+                      data={item}
+                      toggleSignIn={toggleSignIn}
+                      type={item.property.type}
+                      windowSize={windowSize}
+                    />
+                  </Col>
+                ))}
+              </Carousel>
+            )}
+          </Row>
+          <Row className="d-flex justify-content-center align-items-center mt-2">
+            {allAuctions.length > 0 && windowSize < 800
+              ? allAuctions.map((property, index) => (
+                  <div
+                    onClick={handleClick(index)}
+                    key={index}
+                    style={{
+                      backgroundColor: index === slideIndex && "#B77B50",
+                    }}
+                    className="slide-circle"
+                  ></div>
+                ))
+              : null}
+          </Row>
+        </>
+      ) : !loader ? (
         <ErrorPage windowSize={windowSize} />
+      ) : (
+        <Row style={{ height: "100vh" }}></Row>
       )}
     </>
   );

@@ -567,7 +567,8 @@ function Dashboard({
         <div
           style={{
             display: "-moz-initial",
-            margin: "8rem auto",
+            margin: "0 auto",
+            marginTop: "8rem",
           }}
         >
           <DashHeader

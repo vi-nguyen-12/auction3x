@@ -11,6 +11,9 @@ import { BsFillHouseFill } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
+import { HiUser } from "react-icons/hi";
+import { RiDashboardFill } from "react-icons/ri";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -157,19 +160,28 @@ function NavBar({
               )}
               <div className="dropdown-content">
                 <div className="dropdown-content-items">
+                  <span className="d-flex justify-content-center user-names">
+                    {user.firstName[0].toUpperCase() + user.firstName.slice(1)}{" "}
+                    {user.lastName[0].toUpperCase() + user.lastName.slice(1)}
+                  </span>
                   <button
-                    className="fw-bold p-3"
+                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
                     onClick={handleOnClick("Dashboard")}
                   >
-                    Dashboard
+                    <RiDashboardFill size={20} /> Dashboard
                   </button>
                   <button
-                    className="fw-bold p-3"
+                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
                     onClick={handleOnClick("Dashboard/Profile")}
                   >
-                    My Profile
+                    <HiUser size={20} />
+                    Profile
                   </button>
-                  <button className="fw-bold p-3" onClick={handleLogout}>
+                  <button
+                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
+                    onClick={handleLogout}
+                  >
+                    <RiLogoutBoxRFill size={20} />
                     Log Out
                   </button>
                 </div>

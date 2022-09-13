@@ -127,16 +127,26 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  text-align: center;
+  text-align: start;
   background-color: transparent;
   z-index: 1;
-  width: fit-content;
+  width: 100%;
 }
 
 .dropdown-content-items {
   background-color: white;
-  border-radius: 0 0 5px 5px;
+  /* border-radius: 0 0 5px 5px; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  padding: 0 5px;
+}
+
+.dropdown-content-items .user-names {
+  font-family: "Tzimmes";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+  height: fit-content;
 }
 
 /* .dropdown-content::after {
@@ -152,60 +162,12 @@
   border-bottom: 20px solid white;
 } */
 
-.dropdown-content-1 {
-  color: black;
-  display: none;
-  position: absolute;
-  text-align: center;
-  background-color: white;
-  min-width: 110px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-.dropdown:hover .dropdown-content-1 {
-  display: block;
-  margin-left: -108px;
-}
-.dropdown-content-1 button {
-  background-color: transparent;
-}
-
-.dropdown-content-1 a {
-  color: black !important;
-  padding: 12px 12px;
-  text-decoration: none;
-  display: block;
-  font-size: 15px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-.dropdown-content-1 span {
-  color: black !important;
-  padding: 12px 12px;
-  text-decoration: none;
-  display: block;
-  font-size: 15px;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.dropdown-content-1 button {
-  border: none;
-}
-.dropdown-content-1 button:hover {
-  background-color: #d58f5c;
-  width: 100%;
-  color: white;
-}
-
-.dropdown-content-1 a:hover {
-  background-color: #d58f5c;
-  border-radius: 0;
-}
-
 .dropdown-content button {
   background-color: transparent;
-  border-radius: 0 0 5px 5px;
+  /* border-radius: 0 0 5px 5px; */
+  width: 100%;
+  border: none;
+  border-top: 1px solid #e3eaf6;
 }
 
 .dropdown-content a {
@@ -227,14 +189,11 @@
   font-weight: bold;
 }
 
-.dropdown-content button {
-  border: none;
-}
-.dropdown-content button:hover {
+/* .dropdown-content button:hover {
   background-color: #d58f5c;
   width: 100%;
   color: white;
-}
+} */
 
 .dropdown-content a:hover {
   background-color: #d58f5c;

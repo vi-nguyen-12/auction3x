@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,13 +9,11 @@ import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
-import Next from "../../images/Next.png";
-import Prev from "../../images/Previous.png";
 import "../../styles/realEstate.css";
 
 const Carousel = styled(Slider)`
-  // height: 30vh;
-  overflow-x: hidden;
+  // height: 100vh;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -31,7 +29,8 @@ const Carousel = styled(Slider)`
 
   ul li button {
     &:before {
-      top: -3vh;
+      position: absolute;
+      // top: -3vh;
       font-size: 20px;
       color: gray;
       left: -35px;
@@ -46,58 +45,10 @@ const Carousel = styled(Slider)`
     overflow: initial;
   }
 
-  // .slick-prev {
-  //   background: url("./images/arrow_back.png") center center no-repeat !important;
-  //   font-size: 50px;
-  // }
-
-  // .slick-prev:before {
-  //   display: none;
-  // }
-
-  // .slick-next {
-  //   background: url("./images/arrow_next.png") center center no-repeat !important;
-  //   font-size: 50px;
-  // }
-
-  // .slick-next:before {
-  //   display: none;
-  // }
-
-  .slick-prev {
-    width: 60px;
-    height: 60px;
-    left: 8vw;
-    z-index: 1;
-    background: url(${Prev});
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: 45% 50%;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
-    margin: -50px;
-  }
-
   .slick-prev:before {
     display: none;
     // font-size: 60px;
     // color: #e9af84;
-  }
-
-  .slick-next {
-    width: 60px;
-    height: 60px;
-    right: 8vw;
-    z-index: 1;
-    background: url(${Next});
-    background-size: 15px;
-    background-repeat: no-repeat;
-    background-position: 53% 50%;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
-    margin: -50px;
   }
 
   .slick-next:before {
@@ -105,35 +56,6 @@ const Carousel = styled(Slider)`
     // font-size: 60px;
     // color: #e9af84;
   }
-
-  @media (max-width: 600px) {
-    .slick-prev {
-      width: 50px;
-      height: 50px;
-      left: 15vw;
-      margin-top: -75px;
-    }
-    .slick-next {
-      width: 50px;
-      height: 50px;
-      right: 15vw;
-      margin-top: -75px;
-    }
-  }
-`;
-
-const Wrap = styled.div`
-border-radius: 4px;
-cursor: pointer;
-position: relative;
-
-
-&:hover {
-  padding: 0;
-  // border: 4px solid rgba(249, 249, 249, 0.8);
-  transition-duration: 300ms;
-}
-}
 `;
 
 function CarPage({
@@ -150,9 +72,11 @@ function CarPage({
     toggleChange();
   }, []);
   const history = useHistory();
+  const slider = useRef();
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
   const [filtered, setFiltered] = useState([]);
+  const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(history.location.search);
@@ -161,9 +85,9 @@ function CarPage({
   }, [history.location.search]);
 
   useEffect(async () => {
-    let auctions = [];
+    toggleChange();
     if (!history.location.search) {
-      toggleChange();
+      let auctions = [];
       setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("car");
       if (response1.error) {
@@ -177,6 +101,7 @@ function CarPage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
+      setAuctions(auctions);
       setResultLength({ car: auctions.length });
       setLoader(false);
     } else {
@@ -185,16 +110,16 @@ function CarPage({
         if (res.data.length > 0) {
           const car = res.data.filter((item) => item.property.type === "car");
           setResultLength({ car: car.length });
-          auctions = [...car];
+          setAuctions(car);
           setLoader(false);
         } else {
-          auctions = [];
+          setAuctions([]);
           setResultLength({ car: 0 });
           setLoader(false);
         }
       });
     }
-    setAuctions(auctions);
+    // setAuctions(auctions);
   }, []);
 
   useEffect(() => {
@@ -219,7 +144,7 @@ function CarPage({
   }, [auctions]);
 
   useEffect(() => {
-    if (filtered) {
+    if (filtered && history.location.search) {
       setLoader(true);
       authService.carFilter(filtered).then((res) => {
         if (res.data.length > 0) {
@@ -234,7 +159,7 @@ function CarPage({
         }
       });
     }
-  }, [filtered]);
+  }, [filtered, history.location.search]);
 
   let settings = {
     dots: false,
@@ -243,36 +168,55 @@ function CarPage({
     autoplay: false,
     slidesToShow:
       windowSize > 800 ? (auctions.length > 3 ? 3 : auctions.length) : 1,
+    beforeChange: (current, next) => {
+      setSlideIndex(next);
+    },
   };
+
+  const handleClick = (index) => () => {
+    setSlideIndex(index);
+  };
+
+  useEffect(() => {
+    if (slider.current) {
+      slider.current.slickGoTo(slideIndex);
+    }
+  }, [slideIndex]);
 
   return (
     <>
       {loader && <Loading />}
       {auctions.length > 0 ? (
-        <Row className="p-4 mt-3">
-          {/* {windowSize > 800 ? ( */}
-          {auctions.map((auction, index) => {
-            return (
-              <Col
-                lg={windowSize < 1650 ? 4 : 3}
-                md={windowSize > 1400 ? 4 : 6}
-                className="mb-5 py-2 d-flex justify-content-center"
-                key={index}
-              >
-                <NewCards
-                  data={auction}
-                  toggleSignIn={toggleSignIn}
-                  type={auction.property.type}
-                  windowSize={windowSize}
-                />
-              </Col>
-            );
-          })}
-          {/* ) : (
-            <Carousel {...settings}>
-              {auctions.map((item, index) => (
-                <Wrap key={index}>
-                  <Col className="mb-5">
+        <>
+          <Row
+            className="mt-4"
+            style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
+          >
+            {windowSize > 800 ? (
+              auctions.map((auction, index) => {
+                return (
+                  <Col
+                    lg={windowSize < 1650 ? 4 : 3}
+                    md={windowSize > 1400 ? 4 : 6}
+                    className="mb-5 py-2 d-flex justify-content-center"
+                    key={index}
+                  >
+                    <NewCards
+                      data={auction}
+                      toggleSignIn={toggleSignIn}
+                      type={auction.property.type}
+                      windowSize={windowSize}
+                    />
+                  </Col>
+                );
+              })
+            ) : (
+              <Carousel {...settings} ref={slider}>
+                {auctions.map((item, index) => (
+                  <Col
+                    key={index}
+                    className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-1"
+                  >
                     <NewCards
                       data={item}
                       toggleSignIn={toggleSignIn}
@@ -280,11 +224,25 @@ function CarPage({
                       windowSize={windowSize}
                     />
                   </Col>
-                </Wrap>
-              ))}
-            </Carousel>
-          )} */}
-        </Row>
+                ))}
+              </Carousel>
+            )}
+          </Row>
+          <Row className="d-flex justify-content-center align-items-center mt-2">
+            {auctions.length > 0 && windowSize < 800
+              ? auctions.map((property, index) => (
+                  <div
+                    onClick={handleClick(index)}
+                    key={index}
+                    style={{
+                      backgroundColor: index === slideIndex && "#B77B50",
+                    }}
+                    className="slide-circle"
+                  ></div>
+                ))
+              : null}
+          </Row>
+        </>
       ) : !loader ? (
         <ErrorPage windowSize={windowSize} />
       ) : (

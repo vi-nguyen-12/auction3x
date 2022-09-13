@@ -4,7 +4,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5vw;
+  height: 0.7vw;
 }
 
 ::-webkit-scrollbar-track {
@@ -420,4 +421,14 @@ h1 {
 .btn:active {
   outline: none;
   box-shadow: none !important;
+}
+
+.page-link {
+  color: rgb(0, 0, 0) !important;
+}
+
+.page-item.active .page-link {
+  color: #ffffff !important;
+  background-color: #b77b50 !important;
+  border-color: #b77b50 !important;
 }

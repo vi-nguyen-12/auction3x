@@ -15,6 +15,7 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import Next from "../../../images/Next.png";
 import Prev from "../../../images/Previous.png";
+import Error from "../../Error/404page";
 
 const Carousel = styled(Slider)`
   // height: 100%;
@@ -711,17 +712,18 @@ function Dash({ windowSize, featureLength, loader }) {
           </Carousel>
         ) : (
           showApprovedAuctions && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "30px",
-              }}
-            >
-              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
-                No Approved Auction
-              </h1>
-            </div>
+            <Error windowSize={windowSize} />
+            // <div
+            //   style={{
+            //     display: "flex",
+            //     justifyContent: "center",
+            //     marginTop: "30px",
+            //   }}
+            // >
+            //   <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+            //     No Approved Auction
+            //   </h1>
+            // </div>
           )
         )}
       </Row>

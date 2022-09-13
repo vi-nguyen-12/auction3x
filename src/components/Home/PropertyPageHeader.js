@@ -249,7 +249,9 @@ function PropertyPageHeader({
     history.push({
       pathname:
         propType === "auctions"
-          ? "/auctions"
+          ? params?.parameter
+            ? `/Auctions/${params.parameter}`
+            : "/Auctions"
           : propType === "car"
           ? "/cars"
           : propType === "real-estate"
@@ -1426,17 +1428,21 @@ function PropertyPageHeader({
                   <MdOutlineMyLocation size={24} color="#A0A0A0" />
                 </div>
               </Col>
-              <Col className="d-flex justify-content-center">
-                <Form.Select
-                  onChange={(e) => setAuctionType({ auctions: e.target.value })}
-                  className="RealButton"
-                >
-                  <option value="">Auction Type</option>
-                  <option value="ongoing">Ongoing</option>
-                  <option value="upcoming">Upcoming</option>
-                  <option value="completed">completed</option>
-                </Form.Select>
-              </Col>
+              {params.parameter !== "Upcoming" && (
+                <Col className="d-flex justify-content-center">
+                  <Form.Select
+                    onChange={(e) =>
+                      setAuctionType({ auctions: e.target.value })
+                    }
+                    className="RealButton"
+                  >
+                    <option value="">Auction Type</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="completed">completed</option>
+                  </Form.Select>
+                </Col>
+              )}
               <Col className="d-flex justify-content-center">
                 <Form.Select
                   onChange={(e) => setPropertyType(e.target.value)}
