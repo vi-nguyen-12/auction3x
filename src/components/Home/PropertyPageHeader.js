@@ -1362,7 +1362,7 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
-      ) : params.parameter || history.location.search ? (
+      ) : params.parameter || history.location.search || path === "/Auctions" ? (
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>

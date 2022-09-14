@@ -16,6 +16,7 @@ import RealEstatePageBg from "../../images/RealEstatePageBg.png";
 import CarPageBg from "../../images/CarPageBg.png";
 import JetPageBg from "../../images/JetPageBg.png";
 import YachtPageBg from "../../images/YachtPageBg.png";
+import allProperty from "../../images/allProperty.png";
 // import Auction from "../../../../auction10x-backend/model/Auction";
 
 const mapStyles = {
@@ -80,31 +81,24 @@ const PropertyPages = ({
           <title>YACHT</title>
         </Row>
       ) : path === "/Auctions" ? (
-        <Row className="realHeader">
-          <title>Auctions</title>
-        </Row>
-      ) : path === "/Auctions/Austin" ? (
-        <Row className="realHeader">
-          <title>Auctions</title>
-        </Row>
-      ) : path === "/Auctions/Dallas" ? (
-        <Row className="realHeader">
-          <title>Auctions</title>
-        </Row>
-      ) : path === "/Auctions/Houston" ? (
-        <Row className="realHeader">
-          <title>Auctions</title>
-        </Row>
-      ) : path === "/Auctions/SanAntonio" ? (
-        <Row className="realHeader">
+        <Row
+          className="realHeader"
+          style={{ background: `url(${allProperty})` }}
+        >
           <title>Auctions</title>
         </Row>
       ) : path === "/Auctions/Featured" ? (
-        <Row className="realHeader">
+        <Row
+          className="realHeader"
+          style={{ background: `url(${allProperty})` }}
+        >
           <title>Auctions</title>
         </Row>
       ) : path === "/Auctions/Upcoming" ? (
-        <Row className="realHeader">
+        <Row
+          className="realHeader"
+          style={{ background: `url(${allProperty})` }}
+        >
           <title>Auctions</title>
         </Row>
       ) : (

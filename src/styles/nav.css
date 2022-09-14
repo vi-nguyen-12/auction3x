@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   background: rgb(0, 0, 0, 0.4);
-  z-index: 999;
+  z-index: 998;
   display: flex;
   justify-content: center;
   align-items: center;

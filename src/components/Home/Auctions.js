@@ -73,28 +73,13 @@ function Auctions({
   const slider = useRef();
   const [slideIndex, setSlideIndex] = useState(0);
   const [loader, setLoader] = useState(false);
-  const [onGoingAuctions, setOnGoingAuctions] = useState([]);
-  const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [allAuctions, setAllAuctions] = useState([]);
-  const [filtered, setFiltered] = useState([]);
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    const filters = Object.fromEntries(urlSearchParams.entries());
-    setFiltered(filters);
-  }, [history.location.search]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
 
   useEffect(() => {
     toggleChange();
-  }, []);
-
-  useEffect(() => {
-    authService.getUpcomingAuctions().then((res) => {
-      setUpcomingAuctions(res.data);
-    });
-    authService.getOngoingAuctions().then((res) => {
-      setOnGoingAuctions(res.data);
-    });
   }, []);
 
   useEffect(async () => {
@@ -107,17 +92,26 @@ function Auctions({
           );
         });
       } else if (params.parameter === "Upcoming") {
-        auctions = [...upcomingAuctions];
+        await authService.getUpcomingAuctions().then((res) => {
+          auctions = [...res.data];
+        });
       } else {
-        if (onGoingAuctions && upcomingAuctions) {
-          auctions = [...onGoingAuctions, ...upcomingAuctions];
-        }
+        await authService.getUpcomingAuctions().then((res) => {
+          auctions = [...res.data];
+        });
+        await authService.getOngoingAuctions().then((res) => {
+          auctions = [...auctions, ...res.data];
+        });
       }
       setAllAuctions(auctions);
       setResultLength({ auctions: auctions.length });
-    } else if (history.location.search && params.parameter === "Featured") {
+    } else if (
+      history.location.search &&
+      params.parameter === "Featured" &&
+      filters
+    ) {
       setLoader(true);
-      authService.featureFilter(filtered).then((res) => {
+      authService.featureFilter(filters).then((res) => {
         if (res.data.length > 0) {
           setAllAuctions(res.data);
           setResultLength({ auctions: res.data.length });
@@ -128,9 +122,13 @@ function Auctions({
           setLoader(false);
         }
       });
-    } else if (history.location.search && params.parameter === "Upcoming") {
+    } else if (
+      history.location.search &&
+      params.parameter === "Upcoming" &&
+      filters
+    ) {
       setLoader(true);
-      authService.upcomingFilter(filtered).then((res) => {
+      authService.upcomingFilter(filters).then((res) => {
         if (res.data.length > 0) {
           setAllAuctions(res.data);
           setResultLength({ auctions: res.data.length });
@@ -141,9 +139,9 @@ function Auctions({
           setLoader(false);
         }
       });
-    } else {
+    } else if (history.location.search && filters) {
       setLoader(true);
-      authService.propFilter(filtered).then((res) => {
+      authService.propFilter(filters).then((res) => {
         if (res.data.length > 0) {
           setAllAuctions(res.data);
           setResultLength({ auctions: res.data.length });
@@ -155,7 +153,7 @@ function Auctions({
         }
       });
     }
-  }, [onGoingAuctions, upcomingAuctions]);
+  }, [params.parameter, history.location.search]);
 
   useEffect(() => {
     if (allAuctions) {
@@ -177,49 +175,6 @@ function Auctions({
       setImg(imageUrl);
     }
   }, [allAuctions]);
-
-  useEffect(() => {
-    if (filtered && params.parameter === "Upcoming") {
-      setLoader(true);
-      authService.upcomingFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          setResultLength({ auctions: res.data.length });
-          setAllAuctions(res.data);
-          setLoader(false);
-        } else {
-          setResultLength({ auctions: 0 });
-          setAllAuctions([]);
-          setLoader(false);
-        }
-      });
-    } else if (filtered && params.parameter === "Featured") {
-      setLoader(true);
-      authService.featureFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          setResultLength({ auctions: res.data.length });
-          setAllAuctions(res.data);
-          setLoader(false);
-        } else {
-          setResultLength({ auctions: 0 });
-          setAllAuctions([]);
-          setLoader(false);
-        }
-      });
-    } else if (filtered) {
-      setLoader(true);
-      authService.propFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          setResultLength({ auctions: res.data.length });
-          setAllAuctions(res.data);
-          setLoader(false);
-        } else {
-          setResultLength({ auctions: 0 });
-          setAllAuctions([]);
-          setLoader(false);
-        }
-      });
-    }
-  }, [filtered]);
 
   let settings = {
     dots: false,

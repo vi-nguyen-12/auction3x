@@ -75,14 +75,10 @@ function CarPage({
   const slider = useRef();
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [filtered, setFiltered] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    const filters = Object.fromEntries(urlSearchParams.entries());
-    setFiltered(filters);
-  }, [history.location.search]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
 
   useEffect(async () => {
     toggleChange();
@@ -104,9 +100,9 @@ function CarPage({
       setAuctions(auctions);
       setResultLength({ car: auctions.length });
       setLoader(false);
-    } else {
+    } else if (history.location.search && filters) {
       setLoader(true);
-      authService.carFilter(filtered).then((res) => {
+      authService.carFilter(filters).then((res) => {
         if (res.data.length > 0) {
           const car = res.data.filter((item) => item.property.type === "car");
           setResultLength({ car: car.length });
@@ -119,8 +115,7 @@ function CarPage({
         }
       });
     }
-    // setAuctions(auctions);
-  }, []);
+  }, [history.location.search]);
 
   useEffect(() => {
     if (auctions) {
@@ -142,24 +137,6 @@ function CarPage({
       setImgCar(imageUrl);
     }
   }, [auctions]);
-
-  useEffect(() => {
-    if (filtered && history.location.search) {
-      setLoader(true);
-      authService.carFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          const car = res.data.filter((item) => item.property.type === "car");
-          setResultLength({ car: car.length });
-          setAuctions(car);
-          setLoader(false);
-        } else {
-          setAuctions([]);
-          setResultLength({ car: 0 });
-          setLoader(false);
-        }
-      });
-    }
-  }, [filtered, history.location.search]);
 
   let settings = {
     dots: false,

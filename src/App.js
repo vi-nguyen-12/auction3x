@@ -34,6 +34,7 @@ import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
 import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
 import ViewProfile from "./components/Users/ViewProfile";
 import CloseButton from "react-bootstrap/CloseButton";
+import cookies from "./images/cookies.png";
 import { createBrowserHistory } from "history";
 
 const PropertyPages = React.lazy(() =>
@@ -80,6 +81,8 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const [expendedMenuId, setExpendedMenuId] = useState();
+  const [acceptedCookies, setAcceptedCookies] = useState(false);
   const [color, setColor] = useState("");
   const [bodyColor, setBodyColor] = useState("");
   const [show, setShow] = useState(true);
@@ -227,8 +230,66 @@ function App() {
     }
   });
 
+  const acceptCookies = () => {
+    localStorage.setItem("acceptCookies", true);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const acceptCookies = localStorage.getItem("acceptCookies");
+    if (acceptCookies) {
+      setAcceptedCookies(true);
+    }
+  }, []);
+
   return (
     <Suspense fallback={<Loading />}>
+      <div className="expendMenu-container" id={expendedMenuId}>
+        <div className="expendMenu">
+          <div className="expendMenu-items d-flex justify-content-between">
+            <span>Welcome!</span>
+            <button onClick={() => setExpendedMenuId()}>X</button>
+          </div>
+          <div className="expendMenu-items">
+            <a href="/realEstates">Real Estate</a>
+            <a href="/cars">Car</a>
+            <a href="/jets">Jet</a>
+            <a href="/yachts">Yacht</a>
+          </div>
+          <div className="expendMenu-items">
+            <a href="/multiSellForm">Sell</a>
+            <a href="/Auctions">Buy</a>
+            <a href="/Partner">Broker</a>
+            <a href="/Partner">Invest</a>
+          </div>
+          <div className="expendMenu-items">
+            <a href="/AboutUs">About Us</a>
+            <a href="/FAQ">Help & FAQ</a>
+            <a href="/TermsOfUse">Terms & Conditions</a>
+            <a href="/PrivacyPolicy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      {!acceptedCookies && (
+        <div className="cookies-container position-fixed">
+          <div className="cookies-info">
+            <div className="cookies">
+              <img src={cookies} alt="cookie" />
+            </div>
+            <div>
+              <span>
+                We use third-party cookies to personalize your site experience
+                and analyze the site traffic.
+              </span>
+              <p>Learn More</p>
+            </div>
+            <div>
+              <button onClick={acceptCookies}>Accept</button>
+            </div>
+          </div>
+        </div>
+      )}
       <div
         className="App"
         style={{
@@ -572,6 +633,7 @@ function App() {
             wallet={wallet}
             subWallet={subWallet}
             bodyColorChange={bodyColorChange}
+            setExpendedMenuId={setExpendedMenuId}
           />
           <ScrollTop />
 

@@ -26,6 +26,7 @@ function NavBar({
   wallet,
   subWallet,
   bodyColorChange,
+  setExpendedMenuId,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -458,7 +459,12 @@ function NavBar({
                 </div>
               )}
             </div>
-            <Button className="nav-button">
+            <Button
+              onClick={() => {
+                setExpendedMenuId("expended");
+              }}
+              className="nav-button"
+            >
               <RiMenu2Line size={windowSize > 1670 ? 28 : 32} color="#bf9767" />
             </Button>
             {/* <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
@@ -493,9 +499,14 @@ function NavBar({
               </Button>
             </div>
           )}
-          <div className="d-flex align-items-center menu-icon">
-            <RiMenu2Line size={windowSize > 1670 ? 28 : 27} color="#E0BC8F" />
-          </div>
+          <Button
+            onClick={() => {
+              setExpendedMenuId("expended");
+            }}
+            className="nav-button"
+          >
+            <RiMenu2Line size={windowSize > 1670 ? 28 : 32} color="#bf9767" />
+          </Button>
         </Col>
       )}
     </Row>

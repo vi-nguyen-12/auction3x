@@ -69,21 +69,17 @@ function JetPage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [filtered, setFiltered] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
   const history = useHistory();
   const slider = useRef();
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    const filters = Object.fromEntries(urlSearchParams.entries());
-    setFiltered(filters);
-  }, [history.location.search]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
 
   useEffect(async () => {
-    let auctions = [];
+    toggleChange();
     if (!history.location.search) {
-      toggleChange();
+      let auctions = [];
       setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("jet");
       if (response1.error) {
@@ -97,25 +93,25 @@ function JetPage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
-      setLoader(false);
+      setAuctions(auctions);
       setResultLength({ jet: auctions.length });
-    } else {
+      setLoader(false);
+    } else if (history.location.search && filters) {
       setLoader(true);
-      authService.jetFilter(filtered).then((res) => {
+      authService.jetFilter(filters).then((res) => {
         if (res.data.length > 0) {
           const jet = res.data.filter((item) => item.property.type === "jet");
           setResultLength({ jet: jet.length });
-          auctions = [...jet];
+          setAuctions(jet);
           setLoader(false);
         } else {
           setResultLength({ jet: 0 });
-          auctions = [];
+          setAuctions([]);
           setLoader(false);
         }
       });
     }
-    setAuctions(auctions);
-  }, []);
+  }, [history.location.search]);
 
   useEffect(() => {
     if (auctions) {
@@ -137,24 +133,6 @@ function JetPage({
       setImgJet(imageUrl);
     }
   }, [auctions]);
-
-  useEffect(() => {
-    if (filtered && history.location.search) {
-      setLoader(true);
-      authService.jetFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          const jet = res.data.filter((item) => item.property.type === "jet");
-          setResultLength({ jet: jet.length });
-          setAuctions(jet);
-          setLoader(false);
-        } else {
-          setResultLength({ jet: 0 });
-          setAuctions([]);
-          setLoader(false);
-        }
-      });
-    }
-  }, [filtered, history.location.search]);
 
   let settings = {
     dots: false,

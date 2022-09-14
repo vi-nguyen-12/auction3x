@@ -69,21 +69,17 @@ function YachtPage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [filtered, setFiltered] = useState([]);
   const [slideIndex, setSlideIndex] = useState(0);
   const history = useHistory();
   const slider = useRef();
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    const filters = Object.fromEntries(urlSearchParams.entries());
-    setFiltered(filters);
-  }, [history.location.search]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
 
   useEffect(async () => {
-    let auctions = [];
+    toggleChange();
     if (!history.location.search) {
-      toggleChange();
+      let auctions = [];
       setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("yacht");
       if (response1.error) {
@@ -97,27 +93,27 @@ function YachtPage({
       } else {
         auctions = [...auctions, ...response2.data];
       }
-      setLoader(false);
+      setAuctions(auctions);
       setResultLength({ yacht: auctions.length });
-    } else {
+      setLoader(false);
+    } else if (history.location.search && filters) {
       setLoader(true);
-      authService.yachtFilter(filtered).then((res) => {
+      authService.yachtFilter(filters).then((res) => {
         if (res.data.length > 0) {
           const yacht = res.data.filter(
             (item) => item.property.type === "yacht"
           );
           setResultLength({ yacht: yacht.length });
-          auctions = [...yacht];
+          setAuctions(yacht);
           setLoader(false);
         } else {
           setResultLength({ yacht: 0 });
-          auctions = [];
+          setAuctions([]);
           setLoader(false);
         }
       });
     }
-    setAuctions(auctions);
-  }, []);
+  }, [history.location.search]);
 
   useEffect(() => {
     if (auctions) {
@@ -139,26 +135,6 @@ function YachtPage({
       setImgYacht(imageUrl);
     }
   }, [auctions]);
-
-  useEffect(() => {
-    if (filtered && history.location.search) {
-      setLoader(true);
-      authService.yachtFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          const yacht = res.data.filter(
-            (item) => item.property.type === "yacht"
-          );
-          setResultLength({ yacht: yacht.length });
-          setAuctions(yacht);
-          setLoader(false);
-        } else {
-          setResultLength({ yacht: 0 });
-          setAuctions([]);
-          setLoader(false);
-        }
-      });
-    }
-  }, [filtered, history.location.search]);
 
   let settings = {
     dots: false,

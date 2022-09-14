@@ -69,16 +69,12 @@ function RealEstatePage({
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [filtered, setFiltered] = useState();
   const [slideIndex, setSlideIndex] = useState(0);
   const history = useHistory();
   const slider = useRef();
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(history.location.search);
-    const filters = Object.fromEntries(urlSearchParams.entries());
-    setFiltered(filters);
-  }, [history.location.search]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
 
   useEffect(async () => {
     toggleChange();
@@ -102,9 +98,9 @@ function RealEstatePage({
       setAuctions(auctions);
       setResultLength({ realEstate: auctions.length });
       setLoader(false);
-    } else {
+    } else if (history.location.search && filters) {
       setLoader(true);
-      await authService.realEstateFilter(filtered).then((res) => {
+      await authService.realEstateFilter(filters).then((res) => {
         if (res.data.length > 0) {
           const realEstate = res.data.filter(
             (item) => item.property.type === "real-estate"
@@ -119,7 +115,7 @@ function RealEstatePage({
         }
       });
     }
-  }, []);
+  }, [history.location.search]);
 
   useEffect(() => {
     if (auctions) {
@@ -141,26 +137,6 @@ function RealEstatePage({
       setImg(imageUrl);
     }
   }, [auctions]);
-
-  useEffect(() => {
-    if (filtered && history.location.search) {
-      setLoader(true);
-      authService.realEstateFilter(filtered).then((res) => {
-        if (res.data.length > 0) {
-          const realEstate = res.data.filter(
-            (item) => item.property.type === "real-estate"
-          );
-          setResultLength({ realEstate: realEstate.length });
-          setAuctions(realEstate);
-          setLoader(false);
-        } else {
-          setResultLength({ realEstate: 0 });
-          setAuctions([]);
-          setLoader(false);
-        }
-      });
-    }
-  }, [filtered, history.location.search]);
 
   let settings = {
     dots: false,

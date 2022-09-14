@@ -314,12 +314,13 @@
 }
 .filterResult {
   background-color: #b77b50;
-  /* display: flex;
-  justify-content: end;
-  align-items: center; */
-  /* padding: 10px;
-  margin-left: 20%;
-  width: 75%; */
+  color: #ffffff;
+}
+
+.resultText {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
   color: #ffffff;
 }
 
