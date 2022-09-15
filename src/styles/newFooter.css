@@ -18,8 +18,8 @@
 
 .subscript-box {
   display: grid;
-  justify-content: end;
   align-items: center;
+  padding-left: 5rem;
 }
 
 .subscript-title {
@@ -98,8 +98,7 @@
   font-family: "Interstate", sans-serif;
   font-style: normal;
   font-weight: 300;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 0.9vw;
   display: flex;
   align-items: center;
   color: #08080a;
@@ -201,6 +200,7 @@
 
   .subscript-box {
     justify-content: center;
+    padding: 0;
   }
 
   .subscript-title {

@@ -141,7 +141,7 @@ function NavBar({
                     className="d-flex justify-content-center align-items-center"
                     style={{ marginLeft: "1rem" }}
                   >
-                    <IoIosArrowDown />
+                    <IoIosArrowDown size={20}/>
                   </div>
                 </Button>
               ) : (

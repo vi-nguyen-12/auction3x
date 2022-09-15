@@ -531,6 +531,7 @@ function DisplayYacht({
                 >
                   <button
                     className="registsBtn"
+                    style={{ backgroundColor: "gray", color: "#c5c4c4" }}
                     onClick={toggleRegister}
                     disabled
                   >
@@ -562,6 +563,7 @@ function DisplayYacht({
                   >
                     <button
                       className="registsBtn"
+                      style={{ backgroundColor: "gray", color: "#c5c4c4" }}
                       onClick={toggleRegister}
                       disabled
                     >
@@ -672,7 +674,7 @@ function DisplayYacht({
                     <div
                       className="d-grid justify-content-center align-items-center auction-boxes"
                       style={{
-                        padding: "3.1rem 40px",
+                        padding: "3.32rem 40px",
                         width: windowSize < 800 && "306px",
                       }}
                     >
@@ -705,7 +707,7 @@ function DisplayYacht({
                       <div
                         className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          padding: "3.1rem 40px",
+                          padding: "3.32rem 40px",
                           width: windowSize < 800 && "306px",
                         }}
                       >
@@ -721,7 +723,7 @@ function DisplayYacht({
                       <div
                         className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          padding: "2.1rem 40px",
+                          padding: "1.875rem 40px",
                           width: windowSize < 800 && "306px",
                         }}
                       >
@@ -735,6 +737,7 @@ function DisplayYacht({
                             fontSize: "32px",
                             color: "#08080A",
                             fontFamily: "Tzimmes",
+                            paddingBottom: "0.875rem",
                           }}
                         />
                         <span>Current Bid</span>
@@ -743,7 +746,7 @@ function DisplayYacht({
                       <div
                         className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          padding: "2.1rem 40px",
+                          padding: "1.875rem 40px",
                           width: windowSize < 800 && "306px",
                         }}
                       >
@@ -757,6 +760,7 @@ function DisplayYacht({
                             fontSize: "32px",
                             color: "#08080A",
                             fontFamily: "Tzimmes",
+                            paddingBottom: "0.875rem",
                           }}
                         />
                         <p>Current Bid</p>
@@ -769,7 +773,7 @@ function DisplayYacht({
                   <div
                     className="d-grid justify-content-center align-items-center auction-boxes"
                     style={{
-                      padding: "2.1rem 40px",
+                      padding: "1.875rem 40px",
                       width: windowSize < 800 && "306px",
                     }}
                   >
@@ -783,6 +787,7 @@ function DisplayYacht({
                         fontSize: "32px",
                         color: "#08080A",
                         fontFamily: "Tzimmes",
+                        paddingBottom: "0.875rem",
                       }}
                     />
                     <span>Views</span>

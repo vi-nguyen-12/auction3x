@@ -23,54 +23,10 @@ function EditProfile({ getProfilePic, getDescription }) {
   const [oldPass, setOldPass] = useState();
   const [newPass, setNewPass] = useState();
   const [confirmPass, setConfirmPass] = useState();
-  const [country, setCountry] = useState();
-  const [city, setCity] = useState();
-  const [changePass, setChangePass] = useState(false);
-  const [changePlace, setChangePlace] = useState(false);
+  const [country, setCountry] = useState(user.country);
+  const [city, setCity] = useState(user.city);
   const [profilePic, setProfilePic] = useState();
   const [loader, setLoader] = useState(false);
-
-  const changePassword = async () => {
-    if (newPass !== confirmPass) {
-      alert("Please make sure your new password matches");
-    } else {
-      const datas = {
-        id: user._id,
-        details: {
-          old_password: oldPass,
-          new_password: newPass,
-        },
-      };
-      await authService.editUserInfo(datas).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          alert("Password changed successfully");
-          setOldPass("");
-          setNewPass("");
-        }
-      });
-    }
-  };
-
-  const changePlaces = async () => {
-    const datas = {
-      id: user._id,
-      details: {
-        country,
-        city,
-      },
-    };
-    await authService.editUserInfo(datas).then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        alert("Place changed successfully");
-        setCountry("");
-        setCity("");
-      }
-    });
-  };
 
   const changeProfilePic = async (e) => {
     setLoader(true);
@@ -89,31 +45,39 @@ function EditProfile({ getProfilePic, getDescription }) {
   };
 
   const onSubmit = async (data) => {
-    const datas = {
-      id: user._id,
-      details: {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phone: phone,
-        userName: username,
-        profileImage: profilePic ? profilePic : user.profileImage,
-        social_links: {
-          facebook: facebook ? facebook : "https://www.facebook.com/",
-          twitter: twitter ? twitter : "https://www.twitter.com/",
-          instagram: instagram ? instagram : "https://www.instagram.com/",
+    if (newPass !== confirmPass) {
+      alert("Please make sure your new password matches");
+    } else {
+      const datas = {
+        id: user._id,
+        details: {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phone: phone,
+          userName: username,
+          profileImage: profilePic ? profilePic : user.profileImage,
+          social_links: {
+            facebook: facebook ? facebook : "https://www.facebook.com/",
+            twitter: twitter ? twitter : "https://www.twitter.com/",
+            instagram: instagram ? instagram : "https://www.instagram.com/",
+          },
+          country: country,
+          city: city,
+          old_password: oldPass,
+          new_password: newPass,
         },
-      },
-    };
-    getDescription(description);
-    await authService.editUserInfo(datas).then((res) => {
-      if (res.data.error) {
-        alert(res.data.error);
-      } else {
-        alert("Profile changed successfully");
-        window.location.reload();
-      }
-    });
+      };
+      getDescription(description);
+      await authService.editUserInfo(datas).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          alert("Profile changed successfully");
+          window.location.reload();
+        }
+      });
+    }
   };
   return (
     <Container style={{ padding: "20px", paddingBottom: "30px" }}>
@@ -146,7 +110,7 @@ function EditProfile({ getProfilePic, getDescription }) {
           />
         </Col>
       </Row>
-      <Row style={{ marginTop: "20px" }}>
+      <Row className="mt-3">
         <Col>
           <span>Email</span>
           <input
@@ -173,7 +137,27 @@ function EditProfile({ getProfilePic, getDescription }) {
           />
         </Col>
       </Row>
-      <Row style={{ marginTop: "20px" }}>
+      <Row className="mt-3">
+        <Col>
+          <span>Country</span>
+          <input
+            className="form-control"
+            type="text"
+            defaultValue={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+        </Col>
+        <Col>
+          <span>City</span>
+          <input
+            className="form-control"
+            type="text"
+            defaultValue={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </Col>
+      </Row>
+      <Row className="mt-3">
         <Col>
           {loader ? <Loading /> : null}
           <span style={{ fontSize: "20px", fontWeight: "700" }}>
@@ -186,7 +170,7 @@ function EditProfile({ getProfilePic, getDescription }) {
           />
         </Col>
       </Row>
-      <Row style={{ marginTop: "20px" }}>
+      <Row className="mt-3">
         <Col style={{ fontSize: "20px", fontWeight: "700" }}>Social Media</Col>
       </Row>
       <Row>
@@ -218,118 +202,48 @@ function EditProfile({ getProfilePic, getDescription }) {
           />
         </Col>
       </Row>
-      <Row
-        style={{
-          marginTop: "20px",
-        }}
-      >
-        <Col
-          style={{
-            fontSize: "20px",
-            fontWeight: "700",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Button onClick={() => setChangePass(!changePass)}>
+      <Row className="mt-3">
+        <Row className="mt-3">
+          <Col
+            style={{
+              fontSize: "20px",
+              fontWeight: "700",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             Change Password
-          </Button>
-        </Col>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={() => setChangePlace(!changePlace)}>
-            Change Place
-          </Button>
-        </Col>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <span>Current Password</span>
+            <input
+              className="form-control"
+              type="password"
+              onChange={(e) => setOldPass(e.target.value)}
+            />
+          </Col>
+          <Col>
+            <span>New Password</span>
+            <input
+              className="form-control"
+              type="password"
+              onChange={(e) => setNewPass(e.target.value)}
+            />
+          </Col>
+          <Col>
+            <span>Confirm Password</span>
+            <input
+              className="form-control"
+              onChange={(e) => setConfirmPass(e.target.value)}
+              type="password"
+            />
+          </Col>
+        </Row>
       </Row>
 
-      {changePass ? (
-        <Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col
-              style={{
-                fontSize: "20px",
-                fontWeight: "700",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              Change Password
-            </Col>
-          </Row>
-          <Row style={{ marginTop: "20px" }}>
-            <Col>
-              <span>Current Password</span>
-              <input
-                className="form-control"
-                type="password"
-                onChange={(e) => setOldPass(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <span>New Password</span>
-              <input
-                className="form-control"
-                type="password"
-                onChange={(e) => setNewPass(e.target.value)}
-              />
-            </Col>
-            <Col>
-              <span>Confirm Password</span>
-              <input
-                className="form-control"
-                onChange={(e) => setConfirmPass(e.target.value)}
-                type="password"
-              />
-            </Col>
-            <Row style={{ marginTop: "20px" }}>
-              <Col style={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    changePassword();
-                  }}
-                >
-                  Save
-                </Button>
-              </Col>
-            </Row>
-          </Row>
-        </Row>
-      ) : null}
-
-      {changePlace ? (
-        <Row>
-          <Col>
-            <span>Country</span>
-            <input
-              className="form-control"
-              type="text"
-              onChange={(e) => setCountry(e.target.value)}
-            />
-          </Col>
-          <Col>
-            <span>City</span>
-            <input
-              className="form-control"
-              type="text"
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </Col>
-          <Row style={{ marginTop: "20px" }}>
-            <Col style={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                className="btn btn-primary"
-                onClick={() => {
-                  changePlaces();
-                }}
-              >
-                Save
-              </Button>
-            </Col>
-          </Row>
-        </Row>
-      ) : null}
-      <Row style={{ marginTop: "20px" }}>
+      <Row className="mt-3">
         <Col>
           <span style={{ fontSize: "20px", fontWeight: "700" }}>
             Description

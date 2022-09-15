@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import { Table } from "react-bootstrap";
 
 const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
+  const params = useParams();
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
@@ -46,10 +48,38 @@ const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
     <Table className="timerTable" style={{ padding: "0" }} borderless>
       <thead>
         <tr className="timerHead">
-          <th>{days}d •</th>
-          <th>{hours}h •</th>
-          <th>{minutes}m •</th>
-          <th>{seconds}s</th>
+          <th
+            style={{
+              color: params.id && "#08080A",
+              fontSize: params.id && windowSize > 800 && "1.5rem",
+            }}
+          >
+            {days}d •
+          </th>
+          <th
+            style={{
+              color: params.id && "#08080A",
+              fontSize: params.id && windowSize > 800 && "1.5rem",
+            }}
+          >
+            {hours}h •
+          </th>
+          <th
+            style={{
+              color: params.id && "#08080A",
+              fontSize: params.id && windowSize > 800 && "1.5rem",
+            }}
+          >
+            {minutes}m •
+          </th>
+          <th
+            style={{
+              color: params.id && "#08080A",
+              fontSize: params.id && windowSize > 800 && "1.5rem",
+            }}
+          >
+            {seconds}s
+          </th>
         </tr>
       </thead>
     </Table>

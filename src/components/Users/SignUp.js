@@ -297,6 +297,10 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
                 buttonStyle={{
                   borderRight: "none",
                 }}
+                inputProps={{
+                  name: "phone",
+                  required: true,
+                }}
                 onChange={setPhone}
               />
             </div>

@@ -267,9 +267,17 @@ const PropertyPages = ({
                     className="p-2"
                   >
                     <Image
-                      src={imgCars}
+                      src={imgCars.url}
                       alt="gallery"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        history.push(`/DisplayAuctions/${imgCars.id}`)
+                      }
                     />
                   </Col>
                 ))}
@@ -312,9 +320,17 @@ const PropertyPages = ({
                     className="p-2"
                   >
                     <Image
-                      src={imgJets}
+                      src={imgJets.url}
                       alt="gallery"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        cursor: "pointer",
+                        objectFit: "cover",
+                      }}
+                      onClick={() =>
+                        history.push(`/DisplayAuctions/${imgJets.id}`)
+                      }
                     />
                   </Col>
                 ))}
@@ -357,9 +373,17 @@ const PropertyPages = ({
                     className="p-2"
                   >
                     <Image
-                      src={imgYacht}
+                      src={imgYacht.url}
                       alt="gallery"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        cursor: "pointer",
+                        objectFit: "cover",
+                      }}
+                      onClick={() =>
+                        history.push(`/DisplayAuctions/${imgYacht.id}`)
+                      }
                     />
                   </Col>
                 ))}
@@ -402,9 +426,17 @@ const PropertyPages = ({
                     className="p-2"
                   >
                     <Image
-                      src={imgs}
+                      src={imgs.url}
                       alt="gallery"
-                      style={{ width: "100%", height: "100%" }}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        cursor: "pointer",
+                        objectFit: "cover",
+                      }}
+                      onClick={() =>
+                        history.push(`/DisplayAuctions/${imgs.id}`)
+                      }
                     />
                   </Col>
                 ))}

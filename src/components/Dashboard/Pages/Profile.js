@@ -114,8 +114,6 @@ function Profile({ id, windowSize }) {
   const getDescription = (descript) => setDescription(descript);
 
   const descriptPlaceHolder = "Please Enter Description";
-
-  console.log(listedProp);
   return (
     <Container
       className="profileContainer"
@@ -221,19 +219,22 @@ function Profile({ id, windowSize }) {
           xs={12}
           style={{
             display: "inline-grid",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             textAlign: "start",
             marginTop: "30px",
           }}
         >
           <div className="name">
             <h3>
-              {user.firstName} {user.lastName}
+              {user.firstName[0].toUpperCase() + user.firstName.slice(1)}{" "}
+              {user.lastName[0].toUpperCase() + user.lastName.slice(1)}
             </h3>
             <p>Owner</p>
           </div>
           <div className="address">
-            <p>Midnight Corner St. Suite 600 San Francisco, CADGE 94107</p>
+            <p>
+              {user.country}, {user.city}
+            </p>
             <Button
               onClick={() => {
                 window.open(
@@ -282,26 +283,26 @@ function Profile({ id, windowSize }) {
             <Carousel {...settings}>
               {listedProp.length > 0
                 ? listedProp.map((property, index) => (
-                      <div className="listItem px-1" key={index}>
-                        <img
-                          src={property.images[0].url}
-                          alt="property"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            width: "100%",
-                            height: "100%",
-                            borderRadius: "0",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            window.open(
-                              `/DisplayAuctions/${property.auctionDetails._id}`,
-                              "_blank"
-                            );
-                          }}
-                        />
-                      </div>
+                    <div className="listItem px-1" key={index}>
+                      <img
+                        src={property.images[0].url}
+                        alt="property"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "0",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          window.open(
+                            `/DisplayAuctions/${property.auctionDetails._id}`,
+                            "_blank"
+                          );
+                        }}
+                      />
+                    </div>
                   ))
                 : null}
             </Carousel>

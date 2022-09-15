@@ -59,10 +59,25 @@ function Footer({ windowSize }) {
                 >
                   Subscribe
                 </Button>
-                <span className="mt-1 subscript-text">
-                  BY SHARING YOUR EMAIL, YOU AGREE TO OUR TERMS OF USE AND
-                  PRIVACY.
-                </span>
+                <label className="mt-1 subscript-text">
+                  BY SHARING YOUR EMAIL, YOU AGREE TO OUR{" "}
+                  <a
+                    href="/TermsOfUse"
+                    style={{ cursor: "pointer" }}
+                    className="px-1"
+                  >
+                    {" "}
+                    TERMS OF USE
+                  </a>{" "}
+                  AND{" "}
+                  <a
+                    href="/PrivacyPolicy"
+                    style={{ cursor: "pointer", paddingLeft: "0.25rem" }}
+                  >
+                    PRIVACY POLICY
+                  </a>
+                  .
+                </label>
               </Col>
             </Row>
           </Col>
