@@ -328,7 +328,7 @@ h1 {
   padding: 2rem 3rem;
 }
 
-.cookies-info .cookies{
+.cookies-info .cookies {
   margin-right: 1rem;
 }
 
@@ -543,7 +543,7 @@ h1 {
     width: 100%;
   }
 
-  .cookies-info{
+  .cookies-info {
     display: grid;
   }
 }

@@ -35,6 +35,7 @@ import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteL
 import ViewProfile from "./components/Users/ViewProfile";
 import CloseButton from "react-bootstrap/CloseButton";
 import cookies from "./images/cookies.png";
+import parse from "html-react-parser";
 import { createBrowserHistory } from "history";
 
 const PropertyPages = React.lazy(() =>
@@ -82,6 +83,8 @@ function App() {
   const dispatch = useDispatch();
 
   const [expendedMenuId, setExpendedMenuId] = useState();
+  const [cookiesPolicy, setCookiesPolicy] = useState("");
+  const [showCookiesPolicy, setShowCookiesPolicy] = useState(false);
   const [acceptedCookies, setAcceptedCookies] = useState(false);
   const [color, setColor] = useState("");
   const [bodyColor, setBodyColor] = useState("");
@@ -222,6 +225,28 @@ function App() {
     };
   }, [user]);
 
+  //get Cookies Policy
+  useEffect(() => {
+    let params = new URLSearchParams();
+    params.append("name", "US_cookie_policy");
+    authService
+      .getPageContents(params)
+      .then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          for (let item of res.data) {
+            if (item.name === "US_cookie_policy") {
+              setCookiesPolicy(item.htmlText);
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }, []);
+
   // url change
   let urlChange = createBrowserHistory();
   urlChange.listen((location, action) => {
@@ -282,7 +307,9 @@ function App() {
                 We use third-party cookies to personalize your site experience
                 and analyze the site traffic.
               </span>
-              <p>Learn More</p>
+              <p onClick={() => setShowCookiesPolicy(!showCookiesPolicy)}>
+                Learn More
+              </p>
             </div>
             <div>
               <button onClick={acceptCookies}>Accept</button>
@@ -298,6 +325,38 @@ function App() {
         }}
       >
         {/* All Modals */}
+        <Modal
+          size="xl"
+          show={showCookiesPolicy}
+          onHide={() => setShowCookiesPolicy(!showCookiesPolicy)}
+          centered
+        >
+          <Modal.Header className="login-modal-header">
+            <Modal.Title className="auction-modal-title px-3">
+              Cookies Policy
+            </Modal.Title>
+          </Modal.Header>
+          <div
+            style={{
+              position: "absolute",
+              top: windowSize < 600 ? "0" : "25px",
+              right: windowSize < 600 ? "0" : "25px",
+              zIndex: "999",
+            }}
+          >
+            <CloseButton
+              className="modal-close"
+              style={{ backgroundColor: "white" }}
+              onClick={() => {
+                setShowCookiesPolicy(!showCookiesPolicy);
+              }}
+            />
+          </div>
+          <Modal.Body unselectable="on" className="unselectable">
+            {parse(cookiesPolicy)}
+          </Modal.Body>
+        </Modal>
+
         <Modal
           backdrop="static"
           size="md"
