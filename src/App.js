@@ -227,24 +227,26 @@ function App() {
 
   //get Cookies Policy
   useEffect(() => {
-    let params = new URLSearchParams();
-    params.append("name", "US_cookie_policy");
-    authService
-      .getPageContents(params)
-      .then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          for (let item of res.data) {
-            if (item.name === "US_cookie_policy") {
-              setCookiesPolicy(item.htmlText);
+    if (!localStorage.getItem("acceptCookies")) {
+      let params = new URLSearchParams();
+      params.append("name", "US_cookie_policy");
+      authService
+        .getPageContents(params)
+        .then((res) => {
+          if (res.data.error) {
+            alert(res.data.error);
+          } else {
+            for (let item of res.data) {
+              if (item.name === "US_cookie_policy") {
+                setCookiesPolicy(item.htmlText);
+              }
             }
           }
-        }
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }
   }, []);
 
   // url change

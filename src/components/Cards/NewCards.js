@@ -120,7 +120,10 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         <Row>
           <Col
             className="py-3 px-0"
-            style={{ borderBottom: "1px solid rgba(209, 214, 226, 0.5)" }}
+            style={{
+              borderBottom: "1px solid rgba(209, 214, 226, 0.5)",
+              overflow: "auto",
+            }}
           >
             {type === "yacht" ? (
               <span className="prop-title">
@@ -151,7 +154,10 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         <Row>
           <Col
             className="py-3 px-0 d-flex"
-            style={{ borderBottom: "1px solid rgba(209, 214, 226, 0.5)" }}
+            style={{
+              borderBottom: "1px solid rgba(209, 214, 226, 0.5)",
+              overflow: "auto",
+            }}
           >
             <Col>
               <div>

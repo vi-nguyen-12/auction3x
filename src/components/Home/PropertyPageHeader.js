@@ -23,12 +23,16 @@ function PropertyPageHeader({
   setLocation,
 }) {
   const history = useHistory();
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const filters = Object.fromEntries(urlSearchParams.entries());
+  const params = useParams();
+
   const [auctionType, setAuctionType] = useState();
   const [type, setPropertyType] = useState();
   const [realType, setRealType] = useState();
   const [min_price, setMinPrice] = useState();
   const [max_price, setMaxPrice] = useState();
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState();
   const [country, setCountry] = useState();
   const [state, setState] = useState();
   const [city, setCity] = useState();
@@ -67,6 +71,11 @@ function PropertyPageHeader({
 
   const [min_length, setMinLength] = useState();
   const [max_length, setMaxLength] = useState();
+
+  const [selectedPrice, setSelectedPrice] = useState();
+  const [selectedMileage, setSelectedMileage] = useState();
+  const [selectedYear, setSelectedYear] = useState();
+  const [selectedLength, setSelectedLength] = useState();
 
   // const carMake = [
   //   "FERRARI",
@@ -177,75 +186,79 @@ function PropertyPageHeader({
   ];
 
   const getFilter = (propType) => {
-    let filters = {};
+    let filter = {};
     if (propType === "real-estate") {
-      filters = {
+      filter = {
+        address: address,
         auctionType: auctionType?.realEstate || "",
-        propType,
-        realType: realType || "",
+        realType: realType || filters?.realType || "",
         min_price: min_price?.realEstate || "",
         max_price: max_price?.realEstate || "",
         minYear: minYear?.realEstate || "",
         maxYear: maxYear?.realEstate || "",
-        country: country || "",
-        state: state || "",
-        city: city || "",
-        zip: zip || "",
+        country: country || filters?.country || "",
+        state: state || filters?.state || "",
+        city: city || filters?.city || "",
+        zip: zip || filters?.zip || "",
       };
     } else if (propType === "car") {
-      filters = {
+      filter = {
+        address: address,
         auctionType: auctionType?.car || "",
-        condition: condition || "",
+        condition: condition || filters?.condition || "",
         minMileage: minMileage || "",
         maxMileage: maxMileage || "",
         min_price: min_price?.car || "",
         max_price: max_price?.car || "",
         // make: make,
         // model: model,
-        country: country || "",
-        state: state || "",
-        city: city || "",
-        zip: zip || "",
+        country: country || filters?.country || "",
+        state: state || filters?.state || "",
+        city: city || filters?.city || "",
+        zip: zip || filters?.zip || "",
       };
     } else if (propType === "jet") {
-      filters = {
+      filter = {
+        address: address,
         auctionType: auctionType?.jet || "",
-        minYear: minYear?.jet || "",
-        maxYear: maxYear?.jet || "",
+        minYear: minYear || "",
+        maxYear: maxYear || "",
         min_price: min_price?.jet || "",
         max_price: max_price?.jet || "",
-        make: make?.jet || "",
-        country: country || "",
-        state: state || "",
-        city: city || "",
-        zip: zip || "",
+        make: make || filters?.make || "",
+        country: country || filters?.country || "",
+        state: state || filters?.state || "",
+        city: city || filters?.city || "",
+        zip: zip || filters?.zip || "",
       };
     } else if (propType === "yacht") {
-      filters = {
+      filter = {
+        address: address,
         auctionType: auctionType?.yacht || "",
         min_price: min_price?.yacht || "",
         max_price: max_price?.yacht || "",
-        make: make?.yacht || "",
+        make: make || filters?.make || "",
         min_length: min_length || "",
         max_length: max_length || "",
-        country: country || "",
-        state: state || "",
-        city: city || "",
-        zip: zip || "",
+        country: country || filters?.country || "",
+        state: state || filters?.state || "",
+        city: city || filters?.city || "",
+        zip: zip || filters?.zip || "",
       };
     } else if (propType === "auctions") {
-      filters = {
+      filter = {
+        address: address,
         auctionType: auctionType?.auctions || "",
-        type: type || "",
+        type: type || filters?.type || "",
         min_price: min_price?.auctions || "",
         max_price: max_price?.auctions || "",
-        country: country || "",
-        state: state || "",
-        city: city || "",
-        zip: zip || "",
+        country: country || filters?.country || "",
+        state: state || filters?.state || "",
+        city: city || filters?.city || "",
+        zip: zip || filters?.zip || "",
       };
     }
-    setFilter(filters);
+    setFilter(filter);
     history.push({
       pathname:
         propType === "auctions"
@@ -261,18 +274,19 @@ function PropertyPageHeader({
           : propType === "yacht"
           ? "/yachts"
           : "/",
-      search: `?${new URLSearchParams(filters).toString()}`,
+      search: `?${new URLSearchParams(filter).toString()}`,
     });
   };
 
-  const handleChange = (address) => {
-    setAddress(address);
-    setLocation(address);
-    if (address === "") {
+  const handleChange = (e) => {
+    if (e === "") {
+      setAddress("");
       setCountry();
       setState();
       setCity();
       setZip();
+    } else {
+      setAddress(e);
     }
   };
 
@@ -310,7 +324,58 @@ function PropertyPageHeader({
     });
   };
 
-  const params = useParams();
+  useEffect(() => {
+    if (history.location.search) {
+      if (history.location.pathname === "/realEstates") {
+        RealEstatePrice.map((item, index) => {
+          if (
+            item.min_price === parseInt(filters?.min_price) &&
+            item.max_price === parseInt(filters?.max_price)
+          ) {
+            setSelectedPrice(index);
+          }
+        });
+      } else {
+        CarPrices.map((item, index) => {
+          if (
+            item.min_price === parseInt(filters?.min_price) &&
+            item.max_price === parseInt(filters?.max_price)
+          ) {
+            setSelectedPrice(index);
+          }
+        });
+
+        years.map((item, index) => {
+          if (
+            item.minYear === parseInt(filters?.minYear) &&
+            item.maxYear === parseInt(filters?.maxYear)
+          ) {
+            setSelectedYear(index);
+          }
+        });
+
+        length.map((item, index) => {
+          if (
+            item.min_length === parseInt(filters?.min_length) &&
+            item.max_length === parseInt(filters?.max_length)
+          ) {
+            setSelectedLength(index);
+          }
+        });
+
+        mileage.map((item, index) => {
+          if (
+            item.minMileage === parseInt(filters?.minMileage) &&
+            item.maxMileage === parseInt(filters?.maxMileage)
+          ) {
+            setSelectedMileage(index);
+          }
+        });
+      }
+    }
+  }, [history.location.search]);
+
+  console.log(selectedYear);
 
   return (
     <>
@@ -321,7 +386,7 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <PlacesAutocomplete
-                    value={address}
+                    value={address || filters?.address || ""}
                     onChange={handleChange}
                     onSelect={handleSelect}
                   >
@@ -382,6 +447,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => {
                     setAuctionType({
                       car: e.target.value,
@@ -397,8 +463,13 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedPrice}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinPrice();
+                      setMaxPrice();
+                      setSelectedPrice("");
+                    } else if (e.target.value === "Other") {
                       setMinPrice();
                       setMaxPrice();
                       setOtherPrice((prevState) => ({
@@ -406,6 +477,7 @@ function PropertyPageHeader({
                         car: true,
                       }));
                     } else {
+                      setSelectedPrice(parseInt(e.target.value));
                       const getPrice = CarPrices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -498,6 +570,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={condition || filters?.condition || ""}
                   onChange={(e) => setCondition(e.target.value)}
                   className=" RealButton "
                 >
@@ -508,12 +581,18 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedMileage}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinMileage();
+                      setMaxMileage();
+                      setSelectedMileage("");
+                    } else if (e.target.value === "Other") {
                       setMinMileage();
                       setMaxMileage();
                       setOtherMileage(true);
                     } else {
+                      setSelectedMileage(parseInt(e.target.value));
                       const getMileage = mileage.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -636,7 +715,7 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <PlacesAutocomplete
-                    value={address}
+                    value={address || filters?.address || ""}
                     onChange={handleChange}
                     onSelect={handleSelect}
                   >
@@ -697,6 +776,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => setAuctionType({ jet: e.target.value })}
                   className=" RealButton "
                 >
@@ -708,8 +788,13 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedPrice}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinPrice();
+                      setMaxPrice();
+                      setSelectedPrice("");
+                    } else if (e.target.value === "Other") {
                       setMinPrice();
                       setMaxPrice();
                       setOtherPrice((prevState) => ({
@@ -717,6 +802,7 @@ function PropertyPageHeader({
                         jet: true,
                       }));
                     } else {
+                      setSelectedPrice(parseInt(e.target.value));
                       const getPrice = CarPrices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -805,8 +891,14 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedYear}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      console.log("here");
+                      setMinYear();
+                      setMaxYear();
+                      setSelectedYear("empty");
+                    } else if (e.target.value === "Other") {
                       setMinYear();
                       setMaxYear();
                       setOtherYear((prevState) => ({
@@ -814,12 +906,13 @@ function PropertyPageHeader({
                         jet: true,
                       }));
                     } else {
+                      setSelectedYear(parseInt(e.target.value));
                       const getYears = years.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getYears.length > 0) {
-                        setMinYear({ jet: getYears[0].min });
-                        setMaxYear({ jet: getYears[0].max });
+                        setMinYear(getYears[0].min);
+                        setMaxYear(getYears[0].max);
                       } else {
                         setMinYear();
                         setMaxYear();
@@ -852,7 +945,7 @@ function PropertyPageHeader({
                           format="####"
                           onValueChange={(values) => {
                             const { value } = values;
-                            setMinYear({ jet: value });
+                            setMinYear(value);
                           }}
                           required
                         />
@@ -865,7 +958,7 @@ function PropertyPageHeader({
                           className="form-control"
                           onValueChange={(values) => {
                             const { value } = values;
-                            setMaxYear({ jet: value });
+                            setMaxYear(value);
                           }}
                           required
                         />
@@ -901,22 +994,25 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={make || filters?.make}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      filters.make = "";
+                    } else if (e.target.value === "Other") {
                       setMake();
                       setOtherMakes((prevState) => ({
                         ...prevState.jet,
                         jet: true,
                       }));
                     } else {
-                      setMake({ jet: e.target.value });
+                      setMake(e.target.value);
                     }
                   }}
                   className=" RealButton "
                 >
                   <option value="">Makes</option>
                   {JetBuilder.map((item, index) => (
-                    <option key={index} value={index}>
+                    <option key={index} value={item}>
                       {item}
                     </option>
                   ))}
@@ -931,7 +1027,7 @@ function PropertyPageHeader({
                       <span>Make</span>
                       <Col className="d-flex justify-content-center align-items-center mt-4">
                         <input
-                          onChange={(e) => setMake({ jet: e.target.value })}
+                          onChange={(e) => setMake(e.target.value)}
                           className="form-control"
                           placeholder="Makes"
                           type="text"
@@ -1009,7 +1105,7 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <PlacesAutocomplete
-                    value={address}
+                    value={address || filters?.address || ""}
                     onChange={handleChange}
                     onSelect={handleSelect}
                   >
@@ -1070,6 +1166,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => setAuctionType({ yacht: e.target.value })}
                   className=" RealButton "
                 >
@@ -1081,8 +1178,13 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedPrice}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinPrice();
+                      setMaxPrice();
+                      setSelectedPrice();
+                    } else if (e.target.value === "Other") {
                       setMinPrice();
                       setMaxPrice();
                       setOtherPrice((prevState) => ({
@@ -1090,6 +1192,7 @@ function PropertyPageHeader({
                         yacht: true,
                       }));
                     } else {
+                      setSelectedPrice(parseInt(e.target.value));
                       const getPrice = CarPrices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -1182,6 +1285,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={make || filters?.make}
                   onChange={(e) => {
                     if (e.target.value === "Other") {
                       setMake();
@@ -1190,17 +1294,14 @@ function PropertyPageHeader({
                         yacht: true,
                       }));
                     } else {
-                      const getMake = yachtBuilder.filter(
-                        (make, index) => index === parseInt(e.target.value)
-                      );
-                      setMake({ yacht: getMake[0] });
+                      setMake(e.target.value);
                     }
                   }}
                   className=" RealButton "
                 >
                   <option value="">Makes</option>
                   {yachtBuilder.map((item, index) => (
-                    <option key={index} value={index}>
+                    <option key={index} value={item}>
                       {item}
                     </option>
                   ))}
@@ -1215,7 +1316,8 @@ function PropertyPageHeader({
                       <span>Make</span>
                       <Col className="d-flex justify-content-center align-items-center mt-4">
                         <input
-                          onChange={(e) => setMake({ yacht: e.target.value })}
+                          value={make}
+                          onChange={(e) => setMake(e.target.value)}
                           className="form-control"
                           placeholder="Makes"
                           type="text"
@@ -1252,12 +1354,18 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedLength}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinLength();
+                      setMaxLength();
+                      setSelectedLength();
+                    } else if (e.target.value === "Other") {
                       setMinLength();
                       setMaxLength();
                       setOtherLength(true);
                     } else {
+                      setSelectedLength(parseInt(e.target.value));
                       const getLength = length.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -1362,14 +1470,14 @@ function PropertyPageHeader({
             </Row>
           </Col>
         </Row>
-      ) : params.parameter || history.location.search || path === "/Auctions" ? (
+      ) : params.parameter || path === "/Auctions" ? (
         <Row className="realEstateFilter">
           <Col md={9}>
             <Row>
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <PlacesAutocomplete
-                    value={address}
+                    value={address || filters?.address || ""}
                     onChange={handleChange}
                     onSelect={handleSelect}
                   >
@@ -1431,6 +1539,7 @@ function PropertyPageHeader({
               {params.parameter !== "Upcoming" && (
                 <Col className="d-flex justify-content-center">
                   <Form.Select
+                    defaultValue={auctionType || filters?.auctionType || ""}
                     onChange={(e) =>
                       setAuctionType({ auctions: e.target.value })
                     }
@@ -1445,6 +1554,7 @@ function PropertyPageHeader({
               )}
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={type || filters?.type}
                   onChange={(e) => setPropertyType(e.target.value)}
                   className=" RealButton "
                 >
@@ -1457,8 +1567,13 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  value={selectedPrice}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinPrice();
+                      setMaxPrice();
+                      setSelectedPrice();
+                    } else if (e.target.value === "Other") {
                       setMinPrice();
                       setMaxPrice();
                       setOtherPrice((prevState) => ({
@@ -1466,6 +1581,7 @@ function PropertyPageHeader({
                         other: true,
                       }));
                     } else {
+                      setSelectedPrice(parseInt(e.target.value));
                       const getPrice = CarPrices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -1600,7 +1716,7 @@ function PropertyPageHeader({
               <Col md={4} xs={12}>
                 <div style={{ width: "100%" }} className=" RealButton ">
                   <PlacesAutocomplete
-                    value={address}
+                    value={address || filters?.address || ""}
                     onChange={handleChange}
                     onSelect={handleSelect}
                   >
@@ -1661,6 +1777,7 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => {
                     setAuctionType({
                       realEstate: e.target.value,
@@ -1676,8 +1793,14 @@ function PropertyPageHeader({
               </Col>
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  // defaultValue price
+                  value={selectedPrice}
                   onChange={(e) => {
-                    if (e.target.value === "Other") {
+                    if (e.target.value === "") {
+                      setMinPrice();
+                      setMaxPrice();
+                      setSelectedPrice("");
+                    } else if (e.target.value === "Other") {
                       setMinPrice();
                       setMaxPrice();
                       setOtherPrice((prevState) => ({
@@ -1685,6 +1808,7 @@ function PropertyPageHeader({
                         realEstate: true,
                       }));
                     } else {
+                      setSelectedPrice(parseInt(e.target.value));
                       const getPrice = RealEstatePrice.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
@@ -1718,6 +1842,7 @@ function PropertyPageHeader({
                       <Col className="d-flex justify-content-center align-items-center mt-4">
                         <NumberFormat
                           thousandSeparator={true}
+                          allowNegative={false}
                           prefix="$"
                           value={min_price ? min_price.realEstate : ""}
                           className="form-control"
@@ -1731,6 +1856,7 @@ function PropertyPageHeader({
                         -
                         <NumberFormat
                           thousandSeparator={true}
+                          allowNegative={false}
                           prefix="$"
                           value={max_price ? max_price.realEstate : ""}
                           className="form-control"
@@ -1869,6 +1995,7 @@ function PropertyPageHeader({
               </Col> */}
               <Col className="d-flex justify-content-center">
                 <Form.Select
+                  defaultValue={realType || filters?.realType || ""}
                   onChange={(e) => {
                     setRealType(e.target.value);
                   }}
