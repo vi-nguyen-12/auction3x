@@ -154,7 +154,8 @@ function DisplayYacht({
   const toggleRegister = () => setShowRegister(!showRegister);
   const togglePlaceBid = () => setPlaceBid(!placeBid);
 
-  //if auction id is found, then set property as already registered
+  let disabled = new Date().toISOString() > property.auctionEndDate;
+
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
 
@@ -593,11 +594,11 @@ function DisplayYacht({
                   <button
                     className="registsBtn"
                     onClick={togglePlaceBid}
-                    disabled={
-                      new Date().toISOString() > property.auctionEndDate
-                        ? true
-                        : false
-                    }
+                    disabled={disabled}
+                    style={{
+                      backgroundColor: disabled && "gray",
+                      color: disabled && "#c5c4c4",
+                    }}
                   >
                     Bid Now!
                   </button>
@@ -697,7 +698,11 @@ function DisplayYacht({
                 ) : new Date().toISOString() < property.auctionStartDate ? (
                   <Col className="mt-2">
                     <div className="d-grid justify-content-center align-items-center auction-boxes">
-                      <AuctionTimer time={property.auctionStartDate} />
+                      <AuctionTimer
+                        time={property.auctionStartDate}
+                        id={property._id}
+                        windowSize={windowSize}
+                      />
                       <span>Auction Starts In</span>
                     </div>
                   </Col>

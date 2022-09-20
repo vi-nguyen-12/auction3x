@@ -11,8 +11,8 @@ import ReservedMet from "../../images/ReservedMet.png";
 import "../../styles/card.css";
 
 function NewCards({ data, type, toggleSignIn, windowSize }) {
+  console.log("data", data);
   const [favorite, setFavorite] = useState(false);
-
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
 
@@ -128,6 +128,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
             {type === "yacht" ? (
               <span className="prop-title">
                 {data.property.details.manufacturer_name}{" "}
+                {data.property.details.engine_manufacture_name}{" "}
                 {data.property.details.engine_type}
               </span>
             ) : type === "car" ? (
@@ -137,6 +138,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
               </span>
             ) : type === "jet" ? (
               <span className="prop-title">
+                {data.property.details.year_built}{" "}
                 {data.property.details.aircraft_builder_name}{" "}
                 {data.property.details.aircraft_model_designation}
               </span>
@@ -239,9 +241,8 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                           marginRight: "8px",
                         }}
                       >
-                        {data.property.details.number_of_engines
-                          ? data.property.details.number_of_engines +
-                            " Engines "
+                        {data.property.details.engine_builder_name
+                          ? data.property.details.engine_builder_name
                           : "N/A"}
                       </p>{" "}
                       •{" "}
@@ -251,9 +252,9 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                           marginLeft: "8px",
                         }}
                       >
-                        {data.property.details.imported_aircraft
-                          ? "Imported"
-                          : "Local"}
+                        {data.property.details.engine_model_designation
+                          ? data.property.details.engine_model_designation
+                          : "N/A"}
                       </p>{" "}
                       <p
                         className="info-text"
@@ -261,8 +262,9 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                           marginLeft: "10px",
                         }}
                       >
-                        {data.property.details.year_built
-                          ? data.property.details.year_built
+                        {data.property.details.number_of_engines
+                          ? data.property.details.number_of_engines +
+                            " Engines "
                           : "N/A"}
                       </p>
                     </>

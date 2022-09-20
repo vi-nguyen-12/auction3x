@@ -145,7 +145,7 @@ function PropertyPageHeader({
     { value: "private_island", name: "Private Island" },
   ];
 
-  const CarPrices = [
+  const prices = [
     { min_price: 1000000, max_price: 5000000 },
     { min_price: 5000000, max_price: 10000000 },
     { min_price: 10000000, max_price: 20000000 },
@@ -190,7 +190,7 @@ function PropertyPageHeader({
     if (propType === "real-estate") {
       filter = {
         address: address,
-        auctionType: auctionType?.realEstate || "",
+        auctionType: auctionType || filters?.auctionType,
         realType: realType || filters?.realType || "",
         min_price: min_price?.realEstate || "",
         max_price: max_price?.realEstate || "",
@@ -204,7 +204,7 @@ function PropertyPageHeader({
     } else if (propType === "car") {
       filter = {
         address: address,
-        auctionType: auctionType?.car || "",
+        auctionType: auctionType || filters?.auctionType || "",
         condition: condition || filters?.condition || "",
         minMileage: minMileage || "",
         maxMileage: maxMileage || "",
@@ -220,7 +220,7 @@ function PropertyPageHeader({
     } else if (propType === "jet") {
       filter = {
         address: address,
-        auctionType: auctionType?.jet || "",
+        auctionType: auctionType || filters?.auctionType || "",
         minYear: minYear || "",
         maxYear: maxYear || "",
         min_price: min_price?.jet || "",
@@ -234,7 +234,7 @@ function PropertyPageHeader({
     } else if (propType === "yacht") {
       filter = {
         address: address,
-        auctionType: auctionType?.yacht || "",
+        auctionType: auctionType || filters?.auctionType || "",
         min_price: min_price?.yacht || "",
         max_price: max_price?.yacht || "",
         make: make || filters?.make || "",
@@ -248,7 +248,7 @@ function PropertyPageHeader({
     } else if (propType === "auctions") {
       filter = {
         address: address,
-        auctionType: auctionType?.auctions || "",
+        auctionType: auctionType || filters?.auctionType || "",
         type: type || filters?.type || "",
         min_price: min_price?.auctions || "",
         max_price: max_price?.auctions || "",
@@ -333,49 +333,85 @@ function PropertyPageHeader({
             item.max_price === parseInt(filters?.max_price)
           ) {
             setSelectedPrice(index);
+            setMinPrice({ realEstate: item.min_price });
+            setMaxPrice({ realEstate: item.max_price });
           }
         });
-      } else {
-        CarPrices.map((item, index) => {
+      } else if (history.location.pathname === "/cars") {
+        prices.map((item, index) => {
           if (
             item.min_price === parseInt(filters?.min_price) &&
             item.max_price === parseInt(filters?.max_price)
           ) {
             setSelectedPrice(index);
-          }
-        });
-
-        years.map((item, index) => {
-          if (
-            item.minYear === parseInt(filters?.minYear) &&
-            item.maxYear === parseInt(filters?.maxYear)
-          ) {
-            setSelectedYear(index);
-          }
-        });
-
-        length.map((item, index) => {
-          if (
-            item.min_length === parseInt(filters?.min_length) &&
-            item.max_length === parseInt(filters?.max_length)
-          ) {
-            setSelectedLength(index);
+            setMinPrice({ car: item.min_price });
+            setMaxPrice({ car: item.max_price });
           }
         });
 
         mileage.map((item, index) => {
           if (
-            item.minMileage === parseInt(filters?.minMileage) &&
-            item.maxMileage === parseInt(filters?.maxMileage)
+            item.min === parseInt(filters?.minMileage) &&
+            item.max === parseInt(filters?.maxMileage)
           ) {
             setSelectedMileage(index);
+            setMinMileage(item.min);
+            setMaxMileage(item.max);
+          }
+        });
+      } else if (history.location.pathname === "/jets") {
+        prices.map((item, index) => {
+          if (
+            item.min_price === parseInt(filters?.min_price) &&
+            item.max_price === parseInt(filters?.max_price)
+          ) {
+            setSelectedPrice(index);
+            setMinPrice({ jet: item.min_price });
+            setMaxPrice({ jet: item.max_price });
+          }
+        });
+
+        years.map((item, index) => {
+          if (
+            item.min === parseInt(filters?.minYear) &&
+            item.max === parseInt(filters?.maxYear)
+          ) {
+            setSelectedYear(index);
+            setMinYear(item.min);
+            setMaxYear(item.max);
+          }
+        });
+      } else if (history.location.pathname === "/yachts") {
+        prices.map((item, index) => {
+          if (
+            item.min_price === parseInt(filters?.min_price) &&
+            item.max_price === parseInt(filters?.max_price)
+          ) {
+            setSelectedPrice(index);
+            setMinPrice({ yacht: item.min_price });
+            setMaxPrice({ yacht: item.max_price });
+          }
+        });
+
+        length.map((item, index) => {
+          if (
+            item.min === parseInt(filters?.min_length) &&
+            item.max === parseInt(filters?.max_length)
+          ) {
+            setSelectedLength(index);
+            setMinLength(item.min);
+            setMaxLength(item.max);
           }
         });
       }
     }
-  }, [history.location.search]);
-
-  console.log(selectedYear);
+  }, [
+    history.location.search,
+    setSelectedLength,
+    setSelectedMileage,
+    setSelectedPrice,
+    setSelectedYear,
+  ]);
 
   return (
     <>
@@ -449,9 +485,7 @@ function PropertyPageHeader({
                 <Form.Select
                   defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => {
-                    setAuctionType({
-                      car: e.target.value,
-                    });
+                    setAuctionType(e.target.value);
                   }}
                   className=" RealButton "
                 >
@@ -478,7 +512,7 @@ function PropertyPageHeader({
                       }));
                     } else {
                       setSelectedPrice(parseInt(e.target.value));
-                      const getPrice = CarPrices.filter(
+                      const getPrice = prices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getPrice.length > 0) {
@@ -493,7 +527,7 @@ function PropertyPageHeader({
                   className=" RealButton "
                 >
                   <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
+                  {prices.map((price, index) => (
                     <option
                       style={{ padding: "0 10px" }}
                       value={index}
@@ -777,7 +811,7 @@ function PropertyPageHeader({
               <Col className="d-flex justify-content-center">
                 <Form.Select
                   defaultValue={auctionType || filters?.auctionType || ""}
-                  onChange={(e) => setAuctionType({ jet: e.target.value })}
+                  onChange={(e) => setAuctionType(e.target.value)}
                   className=" RealButton "
                 >
                   <option value="">Auction Type</option>
@@ -803,7 +837,7 @@ function PropertyPageHeader({
                       }));
                     } else {
                       setSelectedPrice(parseInt(e.target.value));
-                      const getPrice = CarPrices.filter(
+                      const getPrice = prices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getPrice.length > 0) {
@@ -818,7 +852,7 @@ function PropertyPageHeader({
                   className=" RealButton "
                 >
                   <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
+                  {prices.map((price, index) => (
                     <option value={index} key={index}>
                       ${price.min_price.toLocaleString()} - $
                       {price.max_price.toLocaleString()}
@@ -894,10 +928,9 @@ function PropertyPageHeader({
                   value={selectedYear}
                   onChange={(e) => {
                     if (e.target.value === "") {
-                      console.log("here");
                       setMinYear();
                       setMaxYear();
-                      setSelectedYear("empty");
+                      setSelectedYear("");
                     } else if (e.target.value === "Other") {
                       setMinYear();
                       setMaxYear();
@@ -921,7 +954,7 @@ function PropertyPageHeader({
                   }}
                   className=" RealButton "
                 >
-                  <option>Years</option>
+                  <option value="">Years</option>
                   {years.map((item, index) => (
                     <option key={index} value={index}>
                       {item.min} - {item.max}
@@ -1167,7 +1200,7 @@ function PropertyPageHeader({
               <Col className="d-flex justify-content-center">
                 <Form.Select
                   defaultValue={auctionType || filters?.auctionType || ""}
-                  onChange={(e) => setAuctionType({ yacht: e.target.value })}
+                  onChange={(e) => setAuctionType(e.target.value)}
                   className=" RealButton "
                 >
                   <option value="">Auction Type</option>
@@ -1193,7 +1226,7 @@ function PropertyPageHeader({
                       }));
                     } else {
                       setSelectedPrice(parseInt(e.target.value));
-                      const getPrice = CarPrices.filter(
+                      const getPrice = prices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getPrice.length > 0) {
@@ -1208,7 +1241,7 @@ function PropertyPageHeader({
                   className=" RealButton "
                 >
                   <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
+                  {prices.map((price, index) => (
                     <option value={index} key={index}>
                       ${price.min_price.toLocaleString()} - $
                       {price.max_price.toLocaleString()}
@@ -1540,9 +1573,7 @@ function PropertyPageHeader({
                 <Col className="d-flex justify-content-center">
                   <Form.Select
                     defaultValue={auctionType || filters?.auctionType || ""}
-                    onChange={(e) =>
-                      setAuctionType({ auctions: e.target.value })
-                    }
+                    onChange={(e) => setAuctionType(e.target.value)}
                     className="RealButton"
                   >
                     <option value="">Auction Type</option>
@@ -1582,7 +1613,7 @@ function PropertyPageHeader({
                       }));
                     } else {
                       setSelectedPrice(parseInt(e.target.value));
-                      const getPrice = CarPrices.filter(
+                      const getPrice = prices.filter(
                         (price, index) => index === parseInt(e.target.value)
                       );
                       if (getPrice.length > 0) {
@@ -1597,7 +1628,7 @@ function PropertyPageHeader({
                   className=" RealButton "
                 >
                   <option value="">Price</option>
-                  {CarPrices.map((price, index) => (
+                  {prices.map((price, index) => (
                     <option value={index} key={index}>
                       ${price.min_price.toLocaleString()} - $
                       {price.max_price.toLocaleString()}
@@ -1779,9 +1810,7 @@ function PropertyPageHeader({
                 <Form.Select
                   defaultValue={auctionType || filters?.auctionType || ""}
                   onChange={(e) => {
-                    setAuctionType({
-                      realEstate: e.target.value,
-                    });
+                    setAuctionType(e.target.value);
                   }}
                   className=" RealButton "
                 >

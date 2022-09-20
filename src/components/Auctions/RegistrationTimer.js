@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import "../../styles/timer.css";
 
 const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
   const params = useParams();
