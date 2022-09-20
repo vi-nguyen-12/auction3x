@@ -150,7 +150,7 @@ function DisplayRealEstate({
   const toggleRegister = () => setShowRegister(!showRegister);
   const togglePlaceBid = () => setPlaceBid(!placeBid);
 
-  let disabled = new Date().toISOString() > property.auctionEndDate;
+  let disabled = new Date().toISOString() >= property.auctionEndDate;
 
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
