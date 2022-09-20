@@ -1,20 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Featured } from "./Featured";
+import React, { useState, useEffect } from "react";
 import Features from "./NewHome/Features";
-import FindInCountries from "./FindInCountries";
 import PrimeCate from "./NewHome/PrimeCate";
-import ImgSlider from "./ImgSlider";
 import PremiumProp from "./NewHome/PremiumProp";
-import Work from "./work";
 import How from "./NewHome/How";
 import Info from "./NewHome/Info";
-import RealEstate from "./realEstate";
 import authService from "../../services/authServices.js";
 import { useParams } from "react-router-dom";
-import { Upcoming } from "../Auctions/Upcoming";
 import UpcomingAuctions from "./NewHome/UpcomingAuctions";
 import Loading from "../Loading";
-import About from "./About";
 
 const Home = ({ toggleSignIn, windowSize }) => {
   const params = useParams();
@@ -24,22 +17,39 @@ const Home = ({ toggleSignIn, windowSize }) => {
   const [upcomingAuctions, setUpcomingAuctions] = useState([]);
   const [auctions, setAuctions] = useState([]);
 
-  useEffect(async () => {
-    setLoader(true);
-    await authService.getFeaturedAuctions().then((res) => {
-      setFeatureAuctions(
-        res.data.filter(
-          (auction) => auction.auctionEndDate > new Date().toISOString()
-        )
-      );
-    });
-    await authService.getUpcomingAuctions().then((res) => {
-      setUpcomingAuctions(res.data);
-      setLoader(false);
-    });
-    await authService.getOngoingAuctions().then((res) => {
-      setOnGoingAuctions(res.data);
-    });
+  useEffect(() => {
+    async function getAuctions() {
+      setLoader(true);
+      await authService.getFeaturedAuctions().then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setFeatureAuctions(
+            res.data.filter(
+              (auction) => auction.auctionEndDate > new Date().toISOString()
+            )
+          );
+          setLoader(false);
+        }
+      });
+      await authService.getUpcomingAuctions().then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setUpcomingAuctions(res.data);
+          setLoader(false);
+        }
+      });
+      await authService.getOngoingAuctions().then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setOnGoingAuctions(res.data);
+          setLoader(false);
+        }
+      });
+    }
+    getAuctions();
   }, []);
 
   useEffect(() => {
@@ -79,7 +89,6 @@ const Home = ({ toggleSignIn, windowSize }) => {
         windowSize={windowSize}
         loader={loader}
       />
-      {/* <RealEstate /> */}
       <Info toggleSignIn={toggleSignIn} windowSize={windowSize} />
     </>
   );

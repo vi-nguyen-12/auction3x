@@ -11,7 +11,6 @@ import ReservedMet from "../../images/ReservedMet.png";
 import "../../styles/card.css";
 
 function NewCards({ data, type, toggleSignIn, windowSize }) {
-  console.log("data", data);
   const [favorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);

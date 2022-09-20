@@ -9,7 +9,6 @@ import "../../../styles/primeCategory.css";
 
 function PrimeCate({ windowSize, auctions }) {
   const history = useHistory();
-
   const properties = [
     {
       name: "Real Estate",
@@ -37,7 +36,8 @@ function PrimeCate({ windowSize, auctions }) {
       name: "Yachts",
       image: Yacht,
       path: "/yachts",
-      lists: auctions.filter((auction) => auction.property.type === "yacht"),
+      lists: auctions.filter((auction) => auction.property.type === "yacht")
+        .length,
     },
   ];
 

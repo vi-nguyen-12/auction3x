@@ -5,10 +5,39 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import Loading from "../../components/Loading";
 import PhoneInput from "react-phone-input-2";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+import parse from "html-react-parser";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
-function EditProfile({ getProfilePic, getDescription }) {
+const modules = {
+  toolbar: [
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "list",
+  "bullet",
+  "align",
+  "color",
+  "background",
+];
+
+function EditProfile() {
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [firstName, setFirstName] = useState(user.firstName);
@@ -16,7 +45,7 @@ function EditProfile({ getProfilePic, getDescription }) {
   const [username, setUsername] = useState(user.userName);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState(user.description);
   const [facebook, setFacebook] = useState(user.social_links.facebook);
   const [instagram, setInstagram] = useState(user.social_links.instagram);
   const [twitter, setTwitter] = useState(user.social_links.twitter);
@@ -66,9 +95,9 @@ function EditProfile({ getProfilePic, getDescription }) {
           city: city,
           old_password: oldPass,
           new_password: newPass,
+          description: description,
         },
       };
-      getDescription(description);
       await authService.editUserInfo(datas).then((res) => {
         if (res.data.error) {
           alert(res.data.error);
@@ -82,6 +111,18 @@ function EditProfile({ getProfilePic, getDescription }) {
   return (
     <Container style={{ padding: "20px", paddingBottom: "30px" }}>
       <Row>
+        <Col
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
+        >
+          User Info
+        </Col>
+      </Row>
+      <Row className="mt-2">
         <Col>
           <span>First Name</span>
           <input
@@ -209,13 +250,13 @@ function EditProfile({ getProfilePic, getDescription }) {
               fontSize: "20px",
               fontWeight: "700",
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "flex-start",
             }}
           >
             Change Password
           </Col>
         </Row>
-        <Row className="mt-3">
+        <Row className="mt-2">
           <Col>
             <span>Current Password</span>
             <input
@@ -252,12 +293,13 @@ function EditProfile({ getProfilePic, getDescription }) {
       </Row>
       <Row>
         <Col>
-          <textarea
-            style={{ height: "150px" }}
-            className="form-control"
-            defaultValue={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={description}
+            onChange={(e) => setDescription(e)}
+          ></ReactQuill>
         </Col>
       </Row>
       <Row style={{ marginTop: "50px" }}>

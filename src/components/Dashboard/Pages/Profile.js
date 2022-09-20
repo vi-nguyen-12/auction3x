@@ -12,6 +12,7 @@ import { Modal } from "react-bootstrap";
 import EditProfile from "../EditProfile";
 import authService from "../../../services/authServices";
 import CloseButton from "react-bootstrap/CloseButton";
+import parse from "html-react-parser";
 
 const Carousel = styled(Slider)`
   height: 100%;
@@ -110,10 +111,7 @@ function Profile({ id, windowSize }) {
   // const { register, handleSubmit, errors } = useForm();
   const [showEdit, setShowEdit] = useState(false);
   const toggleEdit = () => setShowEdit(!showEdit);
-  const [description, setDescription] = useState("");
-  const getDescription = (descript) => setDescription(descript);
 
-  const descriptPlaceHolder = "Please Enter Description";
   return (
     <Container
       className="profileContainer"
@@ -159,7 +157,7 @@ function Profile({ id, windowSize }) {
             />
           </div>
           <Modal.Body>
-            <EditProfile getDescription={getDescription} />
+            <EditProfile />
           </Modal.Body>
         </Modal>
       </div>
@@ -204,10 +202,12 @@ function Profile({ id, windowSize }) {
             <p
               style={{
                 height: windowSize < 800 && "100%",
-                textAlign: windowSize < 800 && "center",
+                textAlign: windowSize < 800 && "start",
               }}
             >
-              {description ? description : descriptPlaceHolder}
+              {user.description
+                ? parse(user.description)
+                : "Please Enter Description"}
             </p>
           </div>
         </Col>
