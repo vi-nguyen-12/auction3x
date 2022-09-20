@@ -98,7 +98,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         className="card-img"
         style={{
           height:
-            history.location.pathname === "/" && windowSize > 1680 && "100%",
+            history.location.pathname === "/" && windowSize > 1680 && "380px",
         }}
         variant="top"
         onClick={handleDisplay}
