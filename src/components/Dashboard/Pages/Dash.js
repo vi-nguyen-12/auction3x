@@ -135,8 +135,8 @@ function Dash({ windowSize, featureLength, loader }) {
   const [showSavedProp, setShowSavedProp] = useState(true);
   const [showBidAuctions, setShowBidAuctions] = useState(false);
   const [showApprovedAuctions, setShowApprovedAuctions] = useState(false);
-  const [numOfLiveAuctions, setNumOfLiveAuctions] = useState(0);
-  const [listing, setListing] = useState();
+  const [featureListings, setFeatureListings] = useState(0);
+  const [listing, setListing] = useState(0);
   const [numOfUpcomingAuctions, setNumOfUpcomingAuctions] = useState(0);
   const toggleShowSavedProp = (state) => setShowSavedProp(state);
   const toggleShowBidAuctions = (state) => setShowBidAuctions(state);
@@ -206,20 +206,36 @@ function Dash({ windowSize, featureLength, loader }) {
   }, [slideIndex]);
 
   useEffect(() => {
-    const getOngoingAuctions = async () => {
+    const getFeatureAuctions = async () => {
       await authServices.getFeaturedAuctions().then((res) => {
-        setNumOfLiveAuctions(res.data.length);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setFeatureListings(
+            res.data.filter(
+              (auction) => auction.auctionEndDate > new Date().toISOString()
+            ).length
+          );
+        }
       });
     };
     const getUpcomingAuctions = async () => {
       await authServices.getUpcomingAuctions().then((res) => {
-        setNumOfUpcomingAuctions(res.data.length);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setNumOfUpcomingAuctions(res.data.length);
+        }
       });
     };
 
     const getUserListings = async () => {
       await authServices.sellerPropInAuctions(user._id).then((res) => {
-        setListing(res.data.length);
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          setListing(res.data.length);
+        }
       });
     };
     // setUpcomingAuctions(property.length);
@@ -227,7 +243,7 @@ function Dash({ windowSize, featureLength, loader }) {
     if (user._id) {
       setSavedProp(savedProperties);
     }
-    getOngoingAuctions();
+    getFeatureAuctions();
     getUpcomingAuctions();
     getUserListings();
   }, [savedProperties, user]);
@@ -261,13 +277,13 @@ function Dash({ windowSize, featureLength, loader }) {
         margin: windowSize < 800 && "0",
       }}
     >
-      <Row lg={3}>
+      <Row>
         <Col
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "20px",
-          }}
+          className="d-flex justify-content-center mt-2"
+          lg={4}
+          md={6}
+          sm={12}
+          xs={12}
         >
           <a
             className="liveAuc"
@@ -277,8 +293,8 @@ function Dash({ windowSize, featureLength, loader }) {
             // }}
           >
             <div className="names">
-              <span>Featured Listings</span>
-              <h3>{numOfLiveAuctions}</h3>
+              <span>Featured Auctions</span>
+              <h3>{featureListings}</h3>
             </div>
             <div className="progress">
               <CircularProgressbar value={70} strokeWidth={20} />
@@ -286,7 +302,11 @@ function Dash({ windowSize, featureLength, loader }) {
           </a>
         </Col>
         <Col
-          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+          className="d-flex justify-content-center mt-2"
+          lg={4}
+          md={6}
+          sm={12}
+          xs={12}
         >
           <a className="liveAuc" href="upcoming">
             <div className="names">
@@ -310,7 +330,11 @@ function Dash({ windowSize, featureLength, loader }) {
           </div>
         </Col> */}
         <Col
-          style={{ display: "flex", justifyContent: "center", padding: "20px" }}
+          className="d-flex justify-content-center mt-2"
+          lg={4}
+          md={6}
+          sm={12}
+          xs={12}
         >
           <a
             className="liveAuc"

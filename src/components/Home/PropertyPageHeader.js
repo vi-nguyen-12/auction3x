@@ -7,8 +7,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import NumberFormat from "react-number-format";
-import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, useSearchParams, useParams } from "react-router-dom";
 
 function PropertyPageHeader({
   path,
