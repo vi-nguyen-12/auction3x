@@ -235,7 +235,12 @@ const authService = {
 
   getIncompleteProperty(id) {
     return axios.get(
-      apiUrl + `/api/users/${id}/seller/properties?completed=false`
+      apiUrl + `/api/users/${id}/seller/properties?completed=false`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
     );
   },
 
