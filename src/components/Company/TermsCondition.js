@@ -5,7 +5,7 @@ import CompanyHeader from "./CompanyHeader";
 import authService from "../../services/authServices";
 import parse from "html-react-parser";
 
-function TermsCondition({ windowSize }) {
+function TermsCondition({ windowSize, setMessage }) {
   const [text, setText] = useState("");
   const location = useLocation();
 
@@ -13,7 +13,8 @@ function TermsCondition({ windowSize }) {
     let queryParams = { name: "terms_of_use" };
     authService.getPageContents(queryParams).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setText(res.data[0]?.htmlText || "");
       }

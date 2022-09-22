@@ -24,6 +24,7 @@ function PendingListings({
   refresh,
   searchBy,
   search,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
@@ -54,7 +55,8 @@ function PendingListings({
       const id = user._id;
       await authService.sellerPendingAuctions(id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setPendingListings(res.data);
           setNewPendingListings(res.data);

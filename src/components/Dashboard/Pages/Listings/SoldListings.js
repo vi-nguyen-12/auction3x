@@ -3,7 +3,7 @@ import { Table, Row, Container } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 
-function SoldListings({ windowSize }) {
+function SoldListings({ windowSize, setMessage }) {
   const user = useSelector((state) => state.user);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
@@ -12,7 +12,12 @@ function SoldListings({ windowSize }) {
 
   useEffect(() => {
     authService.getSellerSoldListings(user._id).then((res) => {
-      setSoldListings(res.data);
+      if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
+      } else {
+        setSoldListings(res.data);
+      }
     });
   }, []);
 

@@ -3,22 +3,25 @@ import { Row, Col, Button } from "react-bootstrap";
 import authService from "../../../services/authServices";
 import "../../../styles/newFooter.css";
 
-function Footer({ windowSize }) {
+function Footer({ windowSize, setMessage }) {
   const [email, setEmail] = React.useState();
 
   const subscribe = async () => {
     if (email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       await authService.subscribe(email).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert(
+          setMessage("");
+          setMessage(
             "Thank you for subscribing, we will be sending you the best deals!"
           );
         }
       });
     } else {
-      alert("Please enter a valid email address");
+      setMessage("");
+      setMessage("Please enter a valid email address");
     }
   };
 

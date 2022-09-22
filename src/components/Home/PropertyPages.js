@@ -31,6 +31,7 @@ const PropertyPages = ({
   toggleShow,
   toggleSignIn,
   windowSize,
+  setMessage,
 }) => {
   useEffect(() => {
     toggleShow(true);
@@ -121,6 +122,7 @@ const PropertyPages = ({
         setLocation={setLocation}
         toggleMap={toggleMap}
         resultLength={resultLength}
+        setMessage={setMessage}
       />
 
       {path === "/realEstates" ? (
@@ -133,6 +135,7 @@ const PropertyPages = ({
           windowSize={windowSize}
           filter={filter}
           setResultLength={setResultLength}
+          setMessage={setMessage}
         />
       ) : path === "/cars" ? (
         <CarPage
@@ -144,6 +147,7 @@ const PropertyPages = ({
           windowSize={windowSize}
           filter={filter}
           setResultLength={setResultLength}
+          setMessage={setMessage}
         />
       ) : path === "/jets" ? (
         <JetPage
@@ -155,6 +159,7 @@ const PropertyPages = ({
           windowSize={windowSize}
           filter={filter}
           setResultLength={setResultLength}
+          setMessage={setMessage}
         />
       ) : path === "/yachts" ? (
         <YachtPage
@@ -166,6 +171,7 @@ const PropertyPages = ({
           windowSize={windowSize}
           filter={filter}
           setResultLength={setResultLength}
+          setMessage={setMessage}
         />
       ) : path === "/Auctions" || "/Auctions/:parameter" ? (
         <Auctions
@@ -176,6 +182,7 @@ const PropertyPages = ({
           filter={filter}
           setResultLength={setResultLength}
           setImg={setImg}
+          setMessage={setMessage}
         />
       ) : null}
       {/* Map Button */}

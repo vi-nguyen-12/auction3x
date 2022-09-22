@@ -17,6 +17,7 @@ function YachtDocus({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setMessage,
 }) {
   const { register, handleSubmit } = useForm();
   const [doc1, setDocument1] = useState([]);
@@ -331,16 +332,21 @@ function YachtDocus({
       authService.editProperty(propertyTest._id, data).then((res) => {
         if (res.data.error) {
           if (res.data.error === "Invalid Token") {
-            alert("Your session ended. Please log in! ");
+            setMessage("");
+            setMessage("Your session ended. Please log in! ");
             toggleSignIn(true);
-          } else alert(res.data.error);
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           setPropertyTest(res.data);
           setStep(step + 1);
         }
       });
     } else {
-      alert("Please upload the required documents");
+      setMessage("");
+      setMessage("Please upload the required documents");
     }
   };
   return (

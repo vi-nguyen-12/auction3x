@@ -3,16 +3,18 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
 
-function ReconfirmEmail({ toggleConfirmModal, toggleSignIn }) {
+function ReconfirmEmail({ toggleConfirmModal, toggleSignIn, setMessage }) {
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
   const onSubmit = (data) => {
     authService.resendConfirmEmail(data).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
-        alert(res.data.message);
+        setMessage("");
+        setMessage(res.data.message);
         history.push("/");
       }
     });

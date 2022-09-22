@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Table, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import CloseButton from "react-bootstrap/CloseButton";
 
-const BuyConfirm = ({ property }) => {
+const BuyConfirm = ({ property, setMessage }) => {
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
@@ -19,15 +19,18 @@ const BuyConfirm = ({ property }) => {
 
   const onSubmit = async (data) => {
     if (bid === undefined) {
-      alert("Please enter a bid amount");
+      setMessage("");
+      setMessage("Please enter a bid amount");
     } else {
       const Bid = { id: property._id, biddingTimes, bidding: parseInt(bid) };
       await authService.auctionBid(Bid).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setBid(res.data.highestBid + property.incrementAmount);
-          alert("Bid Successful!");
+          setMessage("");
+          setMessage("Bid Successful!");
         }
       });
     }

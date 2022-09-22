@@ -15,16 +15,10 @@ const UploadForm = ({
   toggleStep,
   step,
   setStep,
-  toggleSellStep,
-  sellStep,
-  propertyData,
-  propId,
-  ownership,
-  getPropId,
-  propertyType,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setMessage,
 }) => {
   const { register, handleSubmit } = useForm();
   const [images, setImages] = useState(propertyTest.images || []);
@@ -43,7 +37,8 @@ const UploadForm = ({
 
     for (let i = 0; i < e.target.files.length; i++) {
       if (e.target.files[i].size > 3000000) {
-        alert("File size must be less than 3MB.");
+        setMessage("");
+        setMessage("File size must be less than 3MB.");
       } else {
         formData.append("images", e.target.files[i]);
       }
@@ -51,7 +46,8 @@ const UploadForm = ({
 
     await authService.saveImages(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage(response.data.error);
+        setLoader(false);
       } else {
         setImages([...images, ...response.data]);
         setLoader(false);
@@ -66,14 +62,17 @@ const UploadForm = ({
 
     for (let i = 0; i < e.target.files.length; i++) {
       if (e.target.files[i].size > 150000000) {
-        alert("File size must be less than 150MB.");
+        setMessage("");
+        setMessage("File size must be less than 150MB.");
       } else {
         formData.append("videos", e.target.files[i]);
       }
     }
     await authService.saveVideos(formData).then((response2) => {
       if (response2.data.error) {
-        alert(response2.data.error);
+        setMessage("");
+        setMessage(response2.data.error);
+        setVideoLoader(false);
       } else {
         setVideos([...videos, ...response2.data]);
         setVideoLoader(false);
@@ -105,19 +104,25 @@ const UploadForm = ({
         .then((res) => {
           if (res.data.error) {
             if (res.data.error === "Invalid Token") {
-              alert("Your session ended. Please log in! ");
+              setMessage("");
+              setMessage("Your session ended. Please log in! ");
               toggleSignIn(true);
-            } else alert(res.data.error);
+            } else {
+              setMessage("");
+              setMessage(res.data.error);
+            }
           } else {
             setPropertyTest(res.data);
             setStep(step + 1);
           }
         })
         .catch((error) => {
-          alert(error);
+          setMessage("");
+          setMessage(error.message);
         });
     } else {
-      alert("Please upload at least one image!");
+      setMessage("");
+      setMessage("Please upload at least one image!");
     }
   };
 

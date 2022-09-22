@@ -10,7 +10,14 @@ import Loading from "../../components/Loading";
 import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
 
-const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
+const BuyAuthorized = ({
+  setStep,
+  step,
+  answers,
+  document,
+  windowSize,
+  setMessage,
+}) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -43,7 +50,8 @@ const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
       .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           for (let item of res.data) {
             if (item.name === "TC_buying") {
@@ -53,7 +61,8 @@ const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        setMessage("");
+        setMessage(error.message);
       });
   }, []);
 
@@ -85,7 +94,8 @@ const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
           res.data.status !== "viewing_complete"
         ) {
           setLoader(false);
-          alert("Please sign the docusign before proceeding ");
+          setMessage("");
+          setMessage("Please sign the docusign before proceeding");
         } else {
           answers = answers.map((item) => {
             return {
@@ -105,18 +115,23 @@ const BuyAuthorized = ({ setStep, step, answers, document, windowSize }) => {
             })
             .then((res) => {
               if (res.data.error) {
+                setMessage("");
+                setMessage(res.data.error);
                 setLoader(false);
-                alert(res.data.error);
               } else {
+                setMessage("");
+                setMessage(
+                  "You have successfully registered to buy this auction"
+                );
                 setLoader(false);
-                alert("You have successfully registered to buy this auction");
                 window.location.reload();
               }
             });
         }
       });
     } else {
-      alert("Please agree to the terms and conditions");
+      setMessage("");
+      setMessage("Please agree to the terms and conditions");
     }
   };
   return (

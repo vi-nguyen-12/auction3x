@@ -24,6 +24,7 @@ function RealEstateDetails({
   invest,
   locationInfo,
   marketInfo,
+  setMessage,
 }) {
   const { register, handleSubmit } = useForm();
 
@@ -150,12 +151,14 @@ function RealEstateDetails({
 
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
-      alert(
+      setMessage("");
+      setMessage(
         "Reserved amount should be greater than or eequal to discussed amount"
       );
     } else {
       if (year > new Date().getFullYear()) {
-        alert("Built year must be less than or equal to current year.");
+        setMessage("");
+        setMessage("Built year must be less than or equal to current year.");
       } else {
         const submitedData = {
           street_address: address,
@@ -194,15 +197,22 @@ function RealEstateDetails({
           .then((res) => {
             if (res.data.error) {
               if (res.data.error === "Invalid Token") {
-                alert("Your session ended. Please log in! ");
+                setMessage("");
+                setMessage("Your session ended. Please log in! ");
                 toggleSignIn(true);
-              } else alert(res.data.error);
+              } else {
+                setMessage("");
+                setMessage(res.data.error);
+              }
             } else {
               setPropertyTest(res.data);
               setStep(step + 1);
             }
           })
-          .catch((error) => alert(error));
+          .catch((error) => {
+            setMessage("");
+            setMessage(error.message);
+          });
       }
     }
   };

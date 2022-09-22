@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function FundAgreement({ toggleStep, step }) {
+function FundAgreement({ toggleStep, step, setMessage }) {
   const [agree, setAgree] = useState(false);
   const toggleAgree = () => {
     setAgree(!agree);
@@ -10,7 +10,8 @@ function FundAgreement({ toggleStep, step }) {
     if (agree === true) {
       toggleStep(step + 1);
     } else {
-      alert("Please Read the agreement and check the box to continue");
+      setMessage("");
+      setMessage("Please Read the agreement and check the box to continue");
     }
   };
 

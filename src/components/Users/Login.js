@@ -15,6 +15,7 @@ const Login = ({
   toggleButton,
   toggleForgotPass,
   toggleConfirmModal,
+  setMessage,
 }) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -31,12 +32,14 @@ const Login = ({
         const response = await authServices.login(data);
         if (response.data.error) {
           if (response.data.error === "User has not been verified") {
-            alert(response.data.error);
+            setMessage("");
+            setMessage(response.data.error);
             toggleSignIn();
             setShowLoading(false);
             toggleConfirmModal();
           } else {
-            alert(response.data.error);
+            setMessage("");
+            setMessage(response.data.error);
             setShowLoading(false);
           }
         } else {
@@ -52,7 +55,8 @@ const Login = ({
           setShowLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        setMessage("");
+        setMessage(error.message);
       }
     };
     getUser();

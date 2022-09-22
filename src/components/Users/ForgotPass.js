@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 
-function ForgotPass({ toggleForgotPass, toggleChangePass }) {
+function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
   const {
     register,
     handleSubmit,
@@ -11,9 +11,11 @@ function ForgotPass({ toggleForgotPass, toggleChangePass }) {
     //authServices.verify(data);
     authServices.forgotPassword(data).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
       } else {
-        alert("Password reset link has been sent to your email");
+        setMessage("");
+        setMessage("Password reset link has been sent to your email");
         toggleForgotPass();
       }
     });

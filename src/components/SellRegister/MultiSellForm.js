@@ -22,6 +22,7 @@ const MultiSellForm = ({
   setPadRight,
   windowSize,
   toggleSignIn,
+  setMessage,
 }) => {
   const [step, setStep] = useState(0);
   const toggleStep = (step) => {
@@ -138,6 +139,7 @@ const MultiSellForm = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
+            setMessage={setMessage}
           />
         ) : step === 1 ? (
           <Ownership
@@ -153,6 +155,7 @@ const MultiSellForm = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
+            setMessage={setMessage}
           />
         ) : step === 2 ? (
           <PropertyDetails
@@ -178,6 +181,7 @@ const MultiSellForm = ({
             invest={invest}
             locationInfo={locationInfo}
             marketInfo={marketInfo}
+            setMessage={setMessage}
           />
         ) : step === 3 ? (
           <UploadForm
@@ -198,6 +202,7 @@ const MultiSellForm = ({
             toggleSignIn={toggleSignIn}
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
+            setMessage={setMessage}
           />
         ) : step === 4 ? (
           <DocumentsUpload
@@ -218,6 +223,7 @@ const MultiSellForm = ({
             toggleSignIn={toggleSignIn}
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
+            setMessage={setMessage}
           />
         ) : step === 5 ? (
           <AgreementForm
@@ -236,6 +242,7 @@ const MultiSellForm = ({
             toggleSignIn={toggleSignIn}
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
+            setMessage={setMessage}
           />
         ) : null}
       </Container>
@@ -276,7 +283,7 @@ const MultiSellForm = ({
                 ? summary?.yacht
                 : ""
             }
-            placeholder="Please Enter Propety Summary Here"
+            placeholder="Please Enter Property Summary Here"
             className="form-control h-100"
           ></textarea>
         </Modal.Body>

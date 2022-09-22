@@ -13,7 +13,7 @@ import "../../../../styles/dashboard.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function IncompleteListing({ windowSize, searchBy, search }) {
+function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
@@ -29,7 +29,8 @@ function IncompleteListing({ windowSize, searchBy, search }) {
     const fetchIncompleteListings = async () => {
       await authService.getIncompleteProperty(user._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setIncompleteListings(res.data);
           setNewIncompleteListings(res.data);
@@ -84,9 +85,11 @@ function IncompleteListing({ windowSize, searchBy, search }) {
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
-        alert("Property Deleted Successfully");
+        setMessage("");
+        setMessage("Property Deleted Successfully");
         window.location.reload();
       }
     });

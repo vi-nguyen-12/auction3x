@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import authServices from "../../services/authServices";
 
-function Confirm() {
+function Confirm({ setMessage }) {
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
 
@@ -12,14 +12,17 @@ function Confirm() {
       .confirmEmail(token)
       .then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert(res.data.message);
+          setMessage("");
+          setMessage(res.data.message);
           history.push("/");
         }
       })
       .catch((err) => {
-        alert(err.message);
+        setMessage("");
+        setMessage(err.message);
       });
   }, []);
 

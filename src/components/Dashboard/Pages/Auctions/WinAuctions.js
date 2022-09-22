@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 
-function WinAuctions({ windowSize, searchBy, search }) {
+function WinAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [winAuctions, setWinAuctions] = useState([]);
   const [newWinAuctions, setNewWinAuctions] = useState([]);
@@ -17,7 +17,8 @@ function WinAuctions({ windowSize, searchBy, search }) {
       const id = user._id;
       await authService.buyerWonAuctions(id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setWinAuctions(res.data);
           setNewWinAuctions(res.data);

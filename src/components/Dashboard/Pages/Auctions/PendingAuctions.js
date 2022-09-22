@@ -14,7 +14,7 @@ import NumberFormat from "react-number-format";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../../Loading";
 
-function PendingAuctions({ windowSize, searchBy, search }) {
+function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [pendingAuctions, setPendingAuctions] = useState([]);
   const [newPendingAuctions, setNewPendingAuctions] = useState([]);
@@ -36,7 +36,8 @@ function PendingAuctions({ windowSize, searchBy, search }) {
     const getBuyerPendingAuctions = async () => {
       await authService.getBuyerInfo(user._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setPendingAuctions(res.data);
           setNewPendingAuctions(res.data);
@@ -85,7 +86,9 @@ function PendingAuctions({ windowSize, searchBy, search }) {
 
     await authService.saveDocuments(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
+        setLoader(false);
       } else {
         setDoc([...doc, ...response.data]);
         setLoader(false);
@@ -97,7 +100,8 @@ function PendingAuctions({ windowSize, searchBy, search }) {
   // Proof of Funds
   const handleFundFile = async (e) => {
     if (fundType === "") {
-      alert("Please select a document type");
+      setMessage("");
+      setMessage("Please select a document type");
     } else {
       setLoader(true);
       const formData = new FormData();
@@ -108,7 +112,9 @@ function PendingAuctions({ windowSize, searchBy, search }) {
 
       await authService.saveDocuments(formData).then((response) => {
         if (response.data.error) {
-          alert(response.data.error);
+          setMessage("");
+          setMessage(response.data.error);
+          setLoader(false);
         } else {
           const docu = documents.map((item) => {
             delete item.document?.isVerified;
@@ -175,11 +181,13 @@ function PendingAuctions({ windowSize, searchBy, search }) {
 
     await authService.editBuyer(id, submitedData).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
         setLoader(false);
       } else {
+        setMessage("");
+        setMessage("Successfully Updated Buyer info");
         setLoader(false);
-        alert("Successfully Updated Buyer info");
         window.location.reload();
       }
     });

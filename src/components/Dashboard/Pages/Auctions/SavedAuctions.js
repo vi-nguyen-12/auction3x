@@ -3,7 +3,6 @@ import { Row, Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import ErrorPage from "../../../Error/404page";
 import Loading from "../../../Loading";
-import SavedAuctionsCard from "./SavedAuctionsCard";
 import NewCards from "../../../Cards/NewCards";
 import authService from "../../../../services/authServices";
 import "slick-carousel/slick/slick.css";
@@ -85,7 +84,7 @@ align-content: center;
 }
 `;
 
-function SavedAuctions({ windowSize, searchBy, search }) {
+function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [SavedAuctions, setSavedAuctions] = useState([]);
   const [newSavedAuctions, setNewSavedAuctions] = useState([]);
@@ -98,7 +97,9 @@ function SavedAuctions({ windowSize, searchBy, search }) {
     const fetchSavedAuctions = async () => {
       await authService.getSavedProperties(user._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
+          setLoader(false);
         } else {
           setSavedAuctions(res.data);
           setNewSavedAuctions(res.data);

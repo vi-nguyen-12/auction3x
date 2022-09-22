@@ -3,7 +3,7 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
 
-function Car({ property, setEdit, edit, setRefresh, refresh }) {
+function Car({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
   const [other, setOther] = useState(false);
 
   const carMake = [
@@ -61,9 +61,11 @@ function Car({ property, setEdit, edit, setRefresh, refresh }) {
       };
       await authService.editProp(submitedData, prop._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Property updated successfully");
+          setMessage("");
+          setMessage("Property updated successfully");
           setRefresh(!refresh);
         }
       });

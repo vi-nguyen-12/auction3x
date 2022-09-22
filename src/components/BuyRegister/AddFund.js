@@ -8,7 +8,7 @@ import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
 
-function AddFund() {
+function AddFund({ setMessage }) {
   const { register, handleSubmit } = useForm();
   const user = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
@@ -76,10 +76,12 @@ function AddFund() {
       };
       await authService.addFund(datas).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
           setLoader(false);
         } else {
-          alert("Fund Added Successfully");
+          setMessage("");
+          setMessage("Fund Added Successfully");
           setLoader(false);
           window.location.reload();
         }
@@ -96,10 +98,12 @@ function AddFund() {
       };
       await authService.addFund(datas).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
           setLoader(false);
         } else {
-          alert("Fund Added Successfully");
+          setMessage("");
+          setMessage("Fund Added Successfully");
           setLoader(false);
           window.location.reload();
         }

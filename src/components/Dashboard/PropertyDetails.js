@@ -15,7 +15,7 @@ import authService from "../../services/authServices";
 import Loading from "../Loading";
 import { MdClose } from "react-icons/md";
 
-function PropertyDetails({ property, setRefresh, refresh }) {
+function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
   console.log(property);
   const [edit, setEdit] = useState({
     step1: false,
@@ -143,7 +143,8 @@ function PropertyDetails({ property, setRefresh, refresh }) {
 
     await authService.saveDocuments(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
       } else {
         setListingAgreement([...listingAgreement, ...response.data]);
         setLoader(false);
@@ -183,9 +184,11 @@ function PropertyDetails({ property, setRefresh, refresh }) {
       }
       await authService.editProp(submitedData, prop._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Property updated successfully");
+          setMessage("");
+          setMessage("Property updated successfully");
           window.location.reload();
         }
       });
@@ -322,9 +325,11 @@ function PropertyDetails({ property, setRefresh, refresh }) {
       if (prop.type === "real-estate") {
         await authService.editRealEstate(prop._id, submitedData).then((res) => {
           if (res.data.error) {
-            alert(res.data.error);
+            setMessage("");
+            setMessage(res.data.error);
           } else {
-            alert("Property updated successfully");
+            setMessage("");
+            setMessage("Property updated successfully");
             setRefresh(!refresh);
             // window.location.reload();
           }
@@ -332,9 +337,11 @@ function PropertyDetails({ property, setRefresh, refresh }) {
       } else {
         await authService.editProp(submitedData, prop._id).then((res) => {
           if (res.data.error) {
-            alert(res.data.error);
+            setMessage("");
+            setMessage(res.data.error);
           } else {
-            alert("Property updated successfully");
+            setMessage("");
+            setMessage("Property updated successfully");
             setRefresh(!refresh);
             // window.location.reload();
           }

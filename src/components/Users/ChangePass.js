@@ -4,7 +4,7 @@ import authServices from "../../services/authServices";
 import { useLocation, useHistory } from "react-router-dom";
 require("react-bootstrap/ModalHeader");
 
-const ChangePass = ({ colorChange, toggleShow }) => {
+const ChangePass = ({ colorChange, toggleShow, setMessage }) => {
   const { register, handleSubmit } = useForm();
   const token = useLocation().search.split("=")[1];
   const history = useHistory();
@@ -15,13 +15,16 @@ const ChangePass = ({ colorChange, toggleShow }) => {
       token: token,
     };
     if (data.newPassword !== data.confirmPassword) {
-      alert("Passwords do not match");
+      setMessage("");
+      setMessage("Passwords do not match");
     } else {
       authServices.resetPassword(datas).then((response) => {
         if (response.data.error) {
-          alert(response.data.error);
+          setMessage("");
+          setMessage(response.data.error);
         } else {
-          alert("Successfully Change Password!");
+          setMessage("");
+          setMessage("Successfully Change Password!");
           history.push("/");
         }
       });

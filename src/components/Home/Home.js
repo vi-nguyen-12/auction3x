@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import UpcomingAuctions from "./NewHome/UpcomingAuctions";
 import Loading from "../Loading";
 
-const Home = ({ toggleSignIn, windowSize }) => {
+const Home = ({ toggleSignIn, windowSize, setMessage }) => {
   const params = useParams();
   const [loader, setLoader] = useState(false);
   const [featureAuctions, setFeatureAuctions] = useState([]);
@@ -22,7 +22,8 @@ const Home = ({ toggleSignIn, windowSize }) => {
       setLoader(true);
       await authService.getFeaturedAuctions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setFeatureAuctions(
             res.data.filter(
@@ -34,7 +35,8 @@ const Home = ({ toggleSignIn, windowSize }) => {
       });
       await authService.getUpcomingAuctions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setUpcomingAuctions(res.data);
           setLoader(false);
@@ -42,7 +44,8 @@ const Home = ({ toggleSignIn, windowSize }) => {
       });
       await authService.getOngoingAuctions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setOnGoingAuctions(res.data);
           setLoader(false);

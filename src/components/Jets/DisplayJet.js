@@ -114,6 +114,7 @@ function DisplayJet({
   windowSize,
   setRefresh,
   refresh,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -162,7 +163,8 @@ function DisplayJet({
 
   const handleKYC = () => {
     if (!user.KYC) {
-      return alert("Please Complete your KYC first to bid");
+      setMessage("");
+      return setMessage("Please Complete your KYC first to bid");
     }
   };
 
@@ -1566,7 +1568,7 @@ function DisplayJet({
               />
             </div>
             <Modal.Body>
-              <MultiBuyForm />
+              <MultiBuyForm setMessage={setMessage} windowSize={windowSize} />
             </Modal.Body>
           </Modal>
 
@@ -1604,7 +1606,7 @@ function DisplayJet({
               />
             </div>
             <Modal.Body className="p-0 pb-4">
-              <BuyConfirm property={property} />
+              <BuyConfirm property={property} setMessage={setMessage} />
             </Modal.Body>
           </Modal>
         </>

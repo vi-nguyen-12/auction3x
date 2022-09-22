@@ -36,6 +36,7 @@ import ViewProfile from "./components/Users/ViewProfile";
 import CloseButton from "react-bootstrap/CloseButton";
 import cookies from "./images/cookies.png";
 import parse from "html-react-parser";
+import ToastMessage from "./components/Toast";
 import { createBrowserHistory } from "history";
 
 const PropertyPages = React.lazy(() =>
@@ -83,6 +84,8 @@ function App() {
   const dispatch = useDispatch();
 
   const [expendedMenuId, setExpendedMenuId] = useState();
+  const [message, setMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const [cookiesPolicy, setCookiesPolicy] = useState("");
   const [showCookiesPolicy, setShowCookiesPolicy] = useState(false);
   const [acceptedCookies, setAcceptedCookies] = useState(false);
@@ -165,10 +168,20 @@ function App() {
   useEffect(() => {
     if (user._id) {
       authService.getSavedProperties(user._id).then((res) => {
-        dispatch(addSavedProperty(res.data));
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+        } else {
+          dispatch(addSavedProperty(res.data));
+        }
       });
       authService.getIncompleteProperty(user._id).then((res) => {
-        dispatch(addIncompProperty(res.data));
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+        } else {
+          dispatch(addIncompProperty(res.data));
+        }
       });
       authService.getWallet(user._id).then((res) => {
         const newWallet = { RealEstate: 0, Car: 0, Jet: 0, Yacht: 0 };
@@ -234,7 +247,8 @@ function App() {
         .getPageContents(params)
         .then((res) => {
           if (res.data.error) {
-            alert(res.data.error);
+            setMessage("");
+            setMessage(res.data.error);
           } else {
             for (let item of res.data) {
               if (item.name === "US_cookie_policy") {
@@ -244,7 +258,8 @@ function App() {
           }
         })
         .catch((error) => {
-          alert(error.message);
+          setMessage("");
+          setMessage(error.message);
         });
     }
   }, []);
@@ -254,6 +269,7 @@ function App() {
   urlChange.listen((location, action) => {
     if (location?.action === "POP") {
       window.location.reload();
+      setMessage("");
     }
   });
 
@@ -290,6 +306,7 @@ function App() {
             <a href="/Partner">Invest</a>
           </div>
           <div className="expendMenu-items">
+            <a href="/team">Team</a>
             <a href="/AboutUs">About Us</a>
             <a href="/FAQ">Help & FAQ</a>
             <a href="/TermsOfUse">Terms & Conditions</a>
@@ -319,6 +336,9 @@ function App() {
           </div>
         </div>
       )}
+
+      {message && <ToastMessage message={message} />}
+
       <div
         className="App"
         style={{
@@ -394,6 +414,7 @@ function App() {
             <ReconfirmEmail
               toggleConfirmModal={toggleConfirmModal}
               toggleSignIn={toggleSignIn}
+              setMessage={setMessage}
             />
           </Modal.Body>
         </Modal>
@@ -451,7 +472,10 @@ function App() {
           contentclassname="forgotPass"
         >
           <Modal.Body>
-            <ChangePass toggleChangePass={toggleChangePass} />
+            <ChangePass
+              toggleChangePass={toggleChangePass}
+              setMessage={setMessage}
+            />
           </Modal.Body>
         </Modal>
         {/* <Modal
@@ -504,6 +528,7 @@ function App() {
               toggleButton={toggleButton}
               toggleForgotPass={toggleForgotPass}
               toggleConfirmModal={toggleConfirmModal}
+              setMessage={setMessage}
               windowSize={windowSize}
             />
           </Modal.Body>
@@ -535,6 +560,7 @@ function App() {
             <SessionExpired
               toggleSessionTimedOut={toggleSessionTimedOut}
               toggleSignIn={toggleSignIn}
+              setMessage={setMessage}
             />
           </Modal.Body>
         </Modal>
@@ -593,6 +619,7 @@ function App() {
             <ForgotPass
               toggleForgotPass={toggleForgotPass}
               toggleChangePass={toggleChangePass}
+              setMessage={setMessage}
             />
           </Modal.Body>
         </Modal>
@@ -606,7 +633,10 @@ function App() {
           contentclassname="forgotPass"
         >
           <Modal.Body>
-            <ChangePass toggleChangePass={toggleChangePass} />
+            <ChangePass
+              toggleChangePass={toggleChangePass}
+              setMessage={setMessage}
+            />
           </Modal.Body>
         </Modal>
         {/* <Modal
@@ -658,6 +688,7 @@ function App() {
               toggleConfirmModal={toggleConfirmModal}
               toggleSignIn={toggleSignIn}
               windowSize={windowSize}
+              setMessage={setMessage}
             />
           </Modal.Body>
         </Modal>
@@ -676,6 +707,7 @@ function App() {
             <SessionExpired
               toggleSessionTimedOut={toggleSessionTimedOut}
               toggleSignIn={toggleSignIn}
+              setMessage={setMessage}
             />
           </Modal.Body>
         </Modal>
@@ -695,6 +727,7 @@ function App() {
             subWallet={subWallet}
             bodyColorChange={bodyColorChange}
             setExpendedMenuId={setExpendedMenuId}
+            setMessage={setMessage}
           />
           <ScrollTop />
 
@@ -710,6 +743,7 @@ function App() {
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
                   windowSize={windowSize}
+                  setMessage={setMessage}
                 />
               </Route>
             )}
@@ -724,6 +758,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <Messaging />
@@ -741,6 +776,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <BidAuctions />
@@ -758,6 +794,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <PendingAuctions />
@@ -775,6 +812,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <SavedAuctions windowSize={windowSize} />
@@ -792,6 +830,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <WinAuctions />
@@ -809,6 +848,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <LiveListings windowSize={windowSize} />
@@ -826,6 +866,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <PendingListings />
@@ -843,6 +884,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <SoldListings />
@@ -860,6 +902,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <IncompleteListing />
@@ -877,6 +920,7 @@ function App() {
                   setHeaderWidth={setHeaderWidth}
                   setPositionLeft={setPositionLeft}
                   setPadRight={setPadRight}
+                  setMessage={setMessage}
                   windowSize={windowSize}
                 >
                   <Profile />
@@ -896,6 +940,7 @@ function App() {
                   windowSize={windowSize}
                   toggleSignIn={toggleSignIn}
                   toggleSignUp={toggleSignUp}
+                  setMessage={setMessage}
                 />
               </Route>
             )}
@@ -910,6 +955,7 @@ function App() {
                   setPadRight={setPadRight}
                   windowSize={windowSize}
                   toggleSignIn={toggleSignIn}
+                  setMessage={setMessage}
                 />
               </Route>
             )}
@@ -925,6 +971,7 @@ function App() {
                 toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
                 setRefresh={setRefresh}
+                setMessage={setMessage}
                 refresh={refresh}
               />
             </Route>
@@ -946,6 +993,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
@@ -958,6 +1006,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
@@ -970,6 +1019,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
@@ -982,6 +1032,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
@@ -995,6 +1046,7 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
@@ -1008,36 +1060,37 @@ function App() {
                 setPadRight={setPadRight}
                 toggleShow={toggleShow}
                 toggleSignIn={toggleSignIn}
+                setMessage={setMessage}
                 windowSize={windowSize}
               />
             </Route>
 
             <Route path="/contact">
-              <ContactUs windowSize={windowSize} />
+              <ContactUs windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/AboutUs">
-              <AboutUs windowSize={windowSize} />
+              <AboutUs windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/FAQ">
-              <FAQ windowSize={windowSize} />
+              <FAQ windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/Team">
-              <Team windowSize={windowSize} />
+              <Team windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/PrivacyPolicy">
-              <Privacy windowSize={windowSize} />
+              <Privacy windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/TermsOfUse">
-              <TermsCondition windowSize={windowSize} />
+              <TermsCondition windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/Partner">
-              <PartnerWithUs windowSize={windowSize} />
+              <PartnerWithUs windowSize={windowSize} setMessage={setMessage} />
             </Route>
 
             <Route path="/Broker">
@@ -1049,27 +1102,38 @@ function App() {
                 colorChange={colorChange}
                 toggleShow={toggleShow}
                 setHeaderWidth={setHeaderWidth}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/confirm_email">
               <EmailConfirm
                 colorChange={colorChange}
                 setHeaderWidth={setHeaderWidth}
+                setMessage={setMessage}
               />
             </Route>
             <Route path="/docusign/callback/:envelopeId">
               <Docusign
                 colorChange={colorChange}
                 setHeaderWidth={setHeaderWidth}
+                setMessage={setMessage}
               />
             </Route>
 
             <Route exact path="/">
-              <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
+              <Home
+                toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                setMessage={setMessage}
+              />
             </Route>
 
             <Route exact path="/:sectionId">
-              <Home toggleSignIn={toggleSignIn} windowSize={windowSize} />
+              <Home
+                toggleSignIn={toggleSignIn}
+                windowSize={windowSize}
+                setMessage={setMessage}
+              />
             </Route>
 
             <Route path="">
@@ -1078,7 +1142,11 @@ function App() {
           </Switch>
         </Router>
         {show ? (
-          <Footer toggleSignIn={toggleSignIn} windowSize={windowSize} />
+          <Footer
+            toggleSignIn={toggleSignIn}
+            windowSize={windowSize}
+            setMessage={setMessage}
+          />
         ) : null}
       </div>
     </Suspense>

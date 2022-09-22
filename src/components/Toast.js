@@ -11,8 +11,8 @@ const ToastMessage = ({ type, message, duration = 5000 }) => {
     <>
       {showToast && (
         <div
-          className="fixed-bottom d-flex justify-content-center"
-          style={{ zIndex: "18" }}
+          className="d-flex justify-content-center align-items-center position-fixed w-100 mt-3"
+          style={{ zIndex: "10000" }}
         >
           <div
             className={`toast p-3  bg-${type}`}

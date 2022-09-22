@@ -16,6 +16,7 @@ function DashHeader({
   setSearch,
   suggest,
   setSuggest,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -33,11 +34,13 @@ function DashHeader({
       .deleteNotification(ids)
       .then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         }
       })
       .catch((err) => {
-        alert(err);
+        setMessage("");
+        setMessage(err.message);
       });
   };
 

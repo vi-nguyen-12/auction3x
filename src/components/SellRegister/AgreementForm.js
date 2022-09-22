@@ -12,7 +12,14 @@ import Loading from "../../components/Loading";
 import { Button, Row, Col } from "react-bootstrap";
 import parse from "html-react-parser";
 
-const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => {
+const Agree = ({
+  toggleStep,
+  step,
+  propertyTest,
+  toggleSignIn,
+  windowSize,
+  setMessage,
+}) => {
   window.scrollTo(0, 0);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
@@ -33,7 +40,8 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => 
       .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           for (let item of res.data) {
             if (item.name === "TC_selling") {
@@ -43,7 +51,8 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => 
         }
       })
       .catch((error) => {
-        alert(error.message);
+        setMessage("");
+        setMessage(error.message);
       });
   }, []);
 
@@ -53,7 +62,8 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => 
       .getSellingDocuSign(envelopeId)
       .then((res) => {
         if (res.data.error === "Invalid Token") {
-          alert("Your session ended. Please log in! ");
+          setMessage("");
+          setMessage("Your session ended. Please log in! ");
           setLoader(false);
           return toggleSignIn(true);
         }
@@ -67,13 +77,15 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => 
         }
       })
       .catch((error) => {
-        alert(error);
+        setMessage("");
+        setMessage(error.message);
       });
   };
 
   const onSubmit = async (data) => {
     if (!agree) {
-      alert("You must agree to the terms and conditions");
+      setMessage("");
+      setMessage("You must agree to the terms and conditions");
     } else {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
@@ -82,15 +94,18 @@ const Agree = ({ toggleStep, step, propertyTest, toggleSignIn, windowSize }) => 
           res.data.status !== "viewing_complete"
         ) {
           setLoader(false);
-          alert("Please sign the docusign before proceeding ");
+          setMessage("");
+          setMessage("Please sign the docusign before proceeding ");
         } else {
           const data = { docusignId: res.data._id, step: 5 };
           authService.editProperty(propertyTest._id, data).then((res) => {
             setLoader(false);
             if (res.data.error) {
-              alert(res.data.error);
+              setMessage("");
+              setMessage(res.data.error);
             } else {
-              alert("Property Successfully Created!");
+              setMessage("");
+              setMessage("Property Successfully Created!");
               history.push("/");
               window.scrollTo(0, 0);
             }

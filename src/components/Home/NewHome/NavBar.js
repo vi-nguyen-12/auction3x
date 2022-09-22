@@ -27,6 +27,7 @@ function NavBar({
   subWallet,
   bodyColorChange,
   setExpendedMenuId,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -59,7 +60,8 @@ function NavBar({
       return toggleSignIn();
     } else {
       if (!user.KYC) {
-        alert("Please complete your Kyc");
+        setMessage("");
+        setMessage("Please complete your Kyc");
       } else {
         if (history.location.pathname === "/multiSellForm") {
           window.location.reload();
@@ -141,7 +143,7 @@ function NavBar({
                     className="d-flex justify-content-center align-items-center"
                     style={{ marginLeft: "1rem" }}
                   >
-                    <IoIosArrowDown size={20}/>
+                    <IoIosArrowDown size={20} />
                   </div>
                 </Button>
               ) : (

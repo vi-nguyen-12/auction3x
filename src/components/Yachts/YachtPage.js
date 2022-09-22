@@ -66,6 +66,7 @@ function YachtPage({
   filter,
   setResultLength,
   setCenters,
+  setMessage,
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -82,14 +83,16 @@ function YachtPage({
       let auctions = [];
       setLoader(true);
       const response1 = await authService.getOngoingAuctionsByType("yacht");
-      if (response1.error) {
-        alert(response1.error);
+      if (response1.data.error) {
+        setMessage("");
+        setMessage(response1.data.error);
       } else {
         auctions = [...response1.data];
       }
       const response2 = await authService.getUpcomingAuctionsByType("yacht");
-      if (response2.error) {
-        alert(response2.error);
+      if (response2.data.error) {
+        setMessage("");
+        setMessage(response2.data.error);
       } else {
         auctions = [...auctions, ...response2.data];
       }

@@ -85,14 +85,15 @@ const Wrap = styled.div`
   }
 `;
 
-function Team({ windowSize }) {
+function Team({ windowSize, setMessage }) {
   const [team, setTeam] = useState([]);
   const [list, setList] = useState([]);
 
   useEffect(() => {
     authService.getTeam().then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setTeam(res.data);
         setList(res.data);

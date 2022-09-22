@@ -20,6 +20,7 @@ function Ownership({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setMessage,
 }) {
   const { register, handleSubmit } = useForm();
   const [isOwner, setIsOwner] = useState(
@@ -70,7 +71,8 @@ function Ownership({
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
-      alert("Please enter ownership information");
+      setMessage("");
+      setMessage("Please enter ownership information");
     } else {
       let submitedData;
       if (data.brokerName !== "") {
@@ -107,7 +109,10 @@ function Ownership({
               if (res.data.error) {
                 if (res.data.error === "Invalid Token") {
                   toggleSignIn(true);
-                } else alert(res.data.error);
+                } else {
+                  setMessage("");
+                  setMessage(res.data.error);
+                }
               } else {
                 setPropertyTest(res.data);
                 setStep(2);
@@ -120,7 +125,10 @@ function Ownership({
               if (res.data.error) {
                 if (res.data.error === "Invalid Token") {
                   toggleSignIn(true);
-                } else alert(res.data.error);
+                } else {
+                  setMessage("");
+                  setMessage(res.data.error);
+                }
               } else {
                 setPropertyTest(res.data);
                 setStep(2);
@@ -132,7 +140,10 @@ function Ownership({
           if (res.data.error) {
             if (res.data.error === "Invalid Token") {
               toggleSignIn(true);
-            } else alert(res.data.error);
+            } else {
+              setMessage("");
+              setMessage(res.data.error);
+            }
           } else {
             setPropertyTest(res.data);
             setStep(2);

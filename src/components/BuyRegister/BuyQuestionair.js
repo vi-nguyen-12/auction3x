@@ -6,7 +6,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import Loading from "../../components/Loading";
 import { MdClose } from "react-icons/md";
 
-const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
+const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
   const [loading, setLoading] = useState(false);
   const handleChoose = (id) => (e) => {
     setAnswers((prev) => {
@@ -84,10 +84,12 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
       }
     }
     if (!isAllAnswered) {
-      return alert("Please answer all questions");
+      setMessage("");
+      return setMessage("Please answer all questions");
     }
     if (!isExplainedIfAnswerIsTrue) {
-      return alert(
+      setMessage("");
+      return setMessage(
         'Please explain reason and upload supported document for question with answer "yes"'
       );
     }
@@ -98,7 +100,8 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers }) => {
     const getQuestion = async () => {
       await authService.getBuyerQuestions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setAnswers(res.data);
         }

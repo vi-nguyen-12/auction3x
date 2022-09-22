@@ -15,7 +15,7 @@ import authService from "../../../services/authServices";
 import "../../../styles/buyer.css";
 import Loading from "../../../components/Loading";
 
-const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
+const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
   const { register } = useForm();
   const [document1, setDocument1] = useState([]);
   const [document2, setDocument2] = useState([]);
@@ -122,7 +122,8 @@ const FundUpload = ({ setStep, step, toggleDocument, docu }) => {
       toggleDocument(documents);
       setStep(step + 1);
     } else {
-      alert("Please upload at least one document");
+      setMessage("");
+      setMessage("Please upload at least one document");
     }
   };
   return (

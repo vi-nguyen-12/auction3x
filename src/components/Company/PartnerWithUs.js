@@ -17,7 +17,7 @@ const Content = styled.div`
   }
 `;
 
-function PartnerWithUs({ windowSize }) {
+function PartnerWithUs({ windowSize, setMessage }) {
   const location = useLocation();
   const [phone, setPhone] = useState();
   const { register, handleSubmit } = useForm();
@@ -26,7 +26,8 @@ function PartnerWithUs({ windowSize }) {
   useEffect(() => {
     authService.getPageContent("contact_us").then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setText(res.data[0]?.htmlText || "");
       }
@@ -47,9 +48,11 @@ function PartnerWithUs({ windowSize }) {
     };
     await authService.sendEmails(datas).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
-        alert(res.data.message);
+        setMessage("");
+        setMessage(res.data.message);
         window.location.reload();
       }
     });

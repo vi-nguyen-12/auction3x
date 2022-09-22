@@ -86,14 +86,15 @@ height: 150px;
 }
 `;
 
-function Profile({ id, windowSize }) {
+function Profile({ id, windowSize, setMessage }) {
   const user = useSelector((state) => state.user);
   const [listedProp, setListedProp] = useState([]);
 
   useEffect(async () => {
     await authService.sellerPropInAuctions(user._id).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setListedProp(res.data);
       }
@@ -199,7 +200,7 @@ function Profile({ id, windowSize }) {
             <h3 style={{ textAlign: windowSize < 800 && "center" }}>
               Description
             </h3>
-            <p
+            <span
               style={{
                 height: windowSize < 800 && "100%",
                 textAlign: windowSize < 800 && "start",
@@ -208,7 +209,7 @@ function Profile({ id, windowSize }) {
               {user.description
                 ? parse(user.description)
                 : "Please Enter Description"}
-            </p>
+            </span>
           </div>
         </Col>
       </Row>

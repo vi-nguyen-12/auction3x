@@ -5,7 +5,7 @@ import CompanyHeader from "./CompanyHeader";
 import authService from "../../services/authServices";
 import parse from "html-react-parser";
 
-function Privacy({ windowSize }) {
+function Privacy({ windowSize, setMessage }) {
   const location = useLocation();
   const [text, setText] = useState("");
 
@@ -13,7 +13,8 @@ function Privacy({ windowSize }) {
     let queryParams = { name: "privacy_policy" };
     authService.getPageContents(queryParams).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setText(res.data[0]?.htmlText || "");
       }

@@ -37,7 +37,7 @@ const formats = [
   "background",
 ];
 
-function EditProfile() {
+function EditProfile({ setMessage }) {
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [firstName, setFirstName] = useState(user.firstName);
@@ -65,7 +65,8 @@ function EditProfile() {
     }
     await authService.saveImages(formData).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setProfilePic(res.data[0].url);
         setLoader(false);
@@ -75,7 +76,8 @@ function EditProfile() {
 
   const onSubmit = async (data) => {
     if (newPass !== confirmPass) {
-      alert("Please make sure your new password matches");
+      setMessage("");
+      setMessage("Please make sure your new password matches");
     } else {
       const datas = {
         id: user._id,
@@ -100,9 +102,11 @@ function EditProfile() {
       };
       await authService.editUserInfo(datas).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Profile changed successfully");
+          setMessage("");
+          setMessage("Profile changed successfully");
           window.location.reload();
         }
       });

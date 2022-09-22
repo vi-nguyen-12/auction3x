@@ -37,16 +37,16 @@ const formats = [
   "link",
 ];
 
-function Messaging({ windowSize }) {
+function Messaging({ windowSize, setMessage }) {
   const { register, handleSubmit } = useForm();
   const [subject, setSubject] = useState();
-  const [message, setMessage] = useState();
+  const [messages, setMessages] = useState();
   const [document, setDocument] = useState([]);
   const [loader, setLoader] = useState(false);
   const user = useSelector((state) => state.user);
 
   const handleOnChangeText = (value) => {
-    setMessage(value);
+    setMessages(value);
   };
 
   const onChange1 = async (e) => {
@@ -74,14 +74,16 @@ function Messaging({ windowSize }) {
       type: "from_user",
       userId: user._id,
       subject: subject,
-      content: message,
+      content: messages,
     };
 
     await authService.sendEmails(datas).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
-        alert(res.data.message);
+        setMessage("");
+        setMessage(res.data.message);
         window.location.reload();
       }
     });
@@ -114,7 +116,7 @@ function Messaging({ windowSize }) {
               className="mt-2"
               modules={modules}
               formats={formats}
-              value={message}
+              value={messages}
               onChange={handleOnChangeText}
             ></ReactQuill>
           </Col>

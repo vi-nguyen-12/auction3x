@@ -66,6 +66,7 @@ function RealEstatePage({
   filter,
   setResultLength,
   setCenters,
+  setMessage,
 }) {
   const [auctions, setAuctions] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -83,14 +84,16 @@ function RealEstatePage({
       setLoader(true);
       await authService.getOngoingAuctionsByType("real-estate").then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           auctions = [...res.data];
         }
       });
       await authService.getUpcomingAuctionsByType("real-estate").then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           auctions = [...auctions, ...res.data];
         }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 
-function BidAuctions({ windowSize, searchBy, search }) {
+function BidAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [newBidAuctions, setNewBidAuctions] = useState([]);
@@ -14,7 +14,8 @@ function BidAuctions({ windowSize, searchBy, search }) {
       const id = user._id;
       await authService.getUserBidAuctions(id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setBidAuctions(res.data);
           setNewBidAuctions(res.data);
@@ -51,8 +52,6 @@ function BidAuctions({ windowSize, searchBy, search }) {
       setNewBidAuctions(bidAuctions);
     }
   }, [search]);
-
-  console.log(newBidAuctions);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>

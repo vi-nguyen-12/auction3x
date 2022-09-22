@@ -3,7 +3,7 @@ import { SiDocusign } from "react-icons/si";
 import { useForm } from "react-hook-form";
 import { Button } from "react-bootstrap";
 
-function FundDocuSign({ step, toggleStep, document }) {
+function FundDocuSign({ step, toggleStep, document, setMessage }) {
   const { handleSubmit } = useForm();
   const [term, setTerm] = useState(false);
   const toggleTerms = () => setTerm(!term);
@@ -18,7 +18,8 @@ function FundDocuSign({ step, toggleStep, document }) {
 
   const onSubmit = (data) => {
     if (term === false) {
-      alert("Please agree to the terms and conditions");
+      setMessage("");
+      setMessage("Please agree to the terms and conditions");
     } else {
       window.location.reload();
     }

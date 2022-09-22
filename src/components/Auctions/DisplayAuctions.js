@@ -24,6 +24,7 @@ function DisplayAuctions({
   windowSize,
   setRefresh,
   refresh,
+  setMessage,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -38,11 +39,12 @@ function DisplayAuctions({
     setLoader(true);
     authService.getAuction(id).then((res) => {
       if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
         setLoader(false);
-        alert(res.data.error);
       } else {
-        setLoader(false);
         setAuction(res.data);
+        setLoader(false);
       }
     });
     // let serverUrl = process.env.REACT_APP_API_URL;
@@ -136,6 +138,7 @@ function DisplayAuctions({
             windowSize={windowSize}
             setRefresh={setRefresh}
             refresh={refresh}
+            setMessage={setMessage}
           />
         ) : auction.property.type === "car" ? (
           <DisplayCar
@@ -145,6 +148,7 @@ function DisplayAuctions({
             windowSize={windowSize}
             setRefresh={setRefresh}
             refresh={refresh}
+            setMessage={setMessage}
           />
         ) : auction.property.type === "jet" ? (
           <DisplayJet
@@ -154,6 +158,7 @@ function DisplayAuctions({
             windowSize={windowSize}
             setRefresh={setRefresh}
             refresh={refresh}
+            setMessage={setMessage}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
@@ -163,6 +168,7 @@ function DisplayAuctions({
             windowSize={windowSize}
             setRefresh={setRefresh}
             refresh={refresh}
+            setMessage={setMessage}
           />
         ) : null
       ) : (

@@ -14,17 +14,18 @@ function ApprovedListings({
   setVideos,
   searchBy,
   search,
+  setMessage,
 }) {
   // console.log(searchBy, search);
   const user = useSelector((state) => state.user);
-  const history = useHistory();
   const [approvedLists, setApprovedLists] = useState([]);
   const [newApprovedLists, setNewApprovedLists] = useState([]);
 
   useEffect(() => {
     authService.sellerPropInAuctions(user._id).then((res) => {
       if (res.data.error) {
-        alert(res.data.error);
+        setMessage("");
+        setMessage(res.data.error);
       } else {
         setApprovedLists(res.data);
         setNewApprovedLists(res.data);

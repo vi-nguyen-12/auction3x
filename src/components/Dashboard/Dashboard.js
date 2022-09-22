@@ -36,6 +36,7 @@ function Dashboard({
   setPositionLeft,
   setPadRight,
   windowSize,
+  setMessage,
 }) {
   const [show, setShow] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -186,6 +187,12 @@ function Dashboard({
   const [location, setLocation] = useState();
   const loca = useLocation();
 
+  useEffect(() => {
+    if (location || loca) {
+      setMessage("");
+    }
+  }, [location, loca]);
+
   const [searchBy, setSearchBy] = useState("id");
   const [search, setSearch] = useState();
 
@@ -214,7 +221,8 @@ function Dashboard({
 
     await authService.saveImages(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
       } else {
         setImages([...images, ...response.data]);
         setLoader(false);
@@ -233,7 +241,8 @@ function Dashboard({
 
     await authService.saveVideos(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
       } else {
         setVideos([...videos, ...response.data]);
         setLoader(false);
@@ -244,7 +253,8 @@ function Dashboard({
 
   const onChangeDocu = async (e) => {
     if (doc === "") {
-      alert("Please select a document type");
+      setMessage("");
+      setMessage("Please select a document type");
     } else {
       setLoader(true);
       const formData = new FormData();
@@ -255,7 +265,8 @@ function Dashboard({
 
       await authService.saveDocuments(formData).then((response) => {
         if (response.data.error) {
-          alert(response.data.error);
+          setMessage("");
+          setMessage(response.data.error);
         } else {
           const document = response.data.map((document) => {
             return { ...document, officialName: doc };
@@ -493,7 +504,8 @@ function Dashboard({
             step: 4,
           };
         } else {
-          alert("Title and Purchase Agreement are required");
+          setMessage("");
+          setMessage("Title and Purchase Agreement are required");
         }
       } else if (property.type === "car") {
         if (documents.length >= 3) {
@@ -502,7 +514,10 @@ function Dashboard({
             step: 4,
           };
         } else {
-          alert("Title, Inspection, and Registration documents are required");
+          setMessage("");
+          setMessage(
+            "Title, Inspection, and Registration documents are required"
+          );
         }
       } else if (property.type === "jet") {
         if (documents.length >= 6) {
@@ -511,7 +526,8 @@ function Dashboard({
             step: 4,
           };
         } else {
-          alert(
+          setMessage("");
+          setMessage(
             "Title, Fitness report, Engine details, Jet detail history, Registration and Inspection report documents are required"
           );
         }
@@ -522,7 +538,8 @@ function Dashboard({
             step: 4,
           };
         } else {
-          alert(
+          setMessage("");
+          setMessage(
             "Vessel Registration and Vessel Maintenance Report are required"
           );
         }
@@ -531,9 +548,11 @@ function Dashboard({
     if (submitedData) {
       await authService.editProp(submitedData, property._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Property updated successfully");
+          setMessage("");
+          setMessage("Property updated successfully");
           window.location.reload();
         }
       });
@@ -581,16 +600,21 @@ function Dashboard({
           />
           <Switch>
             <Route exact path="/Dashboard">
-              <Dash windowSize={windowSize} loader={loader} />
+              <Dash
+                windowSize={windowSize}
+                loader={loader}
+                setMessage={setMessage}
+              />
             </Route>
             <Route exact path="/Dashboard/Messaging">
-              <Messaging windowSize={windowSize} />
+              <Messaging windowSize={windowSize} setMessage={setMessage} />
             </Route>
             <Route exact path="/Dashboard/Auctions/BidAuctions">
               <BidAuctions
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Auctions/BuyerApproval">
@@ -598,6 +622,7 @@ function Dashboard({
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Auctions/SavedAuctions">
@@ -605,6 +630,7 @@ function Dashboard({
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Auctions/WinAuctions">
@@ -612,6 +638,7 @@ function Dashboard({
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/AuctionListings">
@@ -625,6 +652,7 @@ function Dashboard({
                 setVideos={setVideos}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/PendingApproval">
@@ -640,6 +668,7 @@ function Dashboard({
                 refresh={refresh}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/SoldListings">
@@ -647,6 +676,7 @@ function Dashboard({
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Listings/IncompleteListing">
@@ -654,10 +684,11 @@ function Dashboard({
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}
+                setMessage={setMessage}
               />
             </Route>
             <Route exact path="/Dashboard/Profile">
-              <Profile windowSize={windowSize} />
+              <Profile windowSize={windowSize} setMessage={setMessage} />
             </Route>
           </Switch>
         </div>

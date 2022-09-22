@@ -3,7 +3,7 @@ import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
 
-function Jet({ property, setEdit, edit, setRefresh, refresh }) {
+function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
   const [other, setOther] = useState(false);
   const [isImported, setIsImported] = useState(
     property.details.imported_aircraft
@@ -60,9 +60,11 @@ function Jet({ property, setEdit, edit, setRefresh, refresh }) {
       };
       await authService.editProp(submitedData, prop._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Property updated successfully");
+          setMessage("");
+          setMessage("Property updated successfully");
           setRefresh(!refresh);
         }
       });

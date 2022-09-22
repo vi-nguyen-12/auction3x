@@ -3,7 +3,14 @@ import { Row, Col, Button } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
 
-function RealEstate({ property, setEdit, edit, setRefresh, refresh }) {
+function RealEstate({
+  property,
+  setEdit,
+  edit,
+  setRefresh,
+  refresh,
+  setMessage,
+}) {
   console.log(property);
 
   const onSubmit = async (prop, step) => {
@@ -38,9 +45,11 @@ function RealEstate({ property, setEdit, edit, setRefresh, refresh }) {
       };
       await authService.editRealEstate(prop._id, submitedData).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
-          alert("Property updated successfully");
+          setMessage("");
+          setMessage("Property updated successfully");
           setRefresh(!refresh);
         }
       });

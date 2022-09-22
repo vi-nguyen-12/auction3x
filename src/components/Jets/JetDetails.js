@@ -24,6 +24,7 @@ function JetDetails({
   invest,
   locationInfo,
   marketInfo,
+  setMessage,
 }) {
   const { register, handleSubmit } = useForm();
   const [isImport, setIsImport] = useState(
@@ -154,12 +155,14 @@ function JetDetails({
   const onSubmit = (data) => {
     if (reservedAmount > 0 && discussedAmount > 0) {
       if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
-        alert(
+        setMessage("");
+        setMessage(
           "Reserved amount should be greater than or equal to discussed amount"
         );
       } else {
         if (year_built > new Date().getFullYear()) {
-          alert("Built year must be less than or equal to current year.");
+          setMessage("");
+          setMessage("Built year must be less than or equal to current year.");
         } else {
           const submitedData = {
             registration_mark,
@@ -198,21 +201,27 @@ function JetDetails({
             .then((res) => {
               if (res.data.error) {
                 if (res.data.error === "Invalid Token") {
-                  alert("Your session ended. Please log in! ");
+                  setMessage("");
+                  setMessage("Your session ended. Please log in! ");
                   toggleSignIn(true);
-                } else alert(res.data.error);
+                } else {
+                  setMessage("");
+                  setMessage(res.data.error);
+                }
               } else {
                 setPropertyTest(res.data);
                 setStep(step + 1);
               }
             })
             .catch((error) => {
-              alert(error);
+              setMessage("");
+              setMessage(error.message);
             });
         }
       }
     } else {
-      alert("Please fill out discussed amount and reserved amount");
+      setMessage("");
+      setMessage("Please fill out discussed amount and reserved amount");
     }
   };
 

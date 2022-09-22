@@ -11,7 +11,7 @@ import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
 require("react-bootstrap/ModalHeader");
 
-const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
+const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState("");
   const [files, setFiles] = useState([]);
@@ -37,7 +37,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
     }
     await authServices.saveDocuments(formData).then((response) => {
       if (response.data.error) {
-        alert(response.data.error);
+        setMessage("");
+        setMessage(response.data.error);
+        setLoader(false);
       } else {
         setFiles([...files, ...response.data]);
         setLoader(false);
@@ -54,7 +56,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
       .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           for (let item of res.data) {
             if (item.name === "TC_user") {
@@ -67,7 +70,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         }
       })
       .catch((error) => {
-        alert(error.message);
+        setMessage("");
+        setMessage(error.message);
       });
   }, []);
 
@@ -77,7 +81,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
 
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
-      alert("Passwords do not match");
+      setMessage("");
+      setMessage("Passwords do not match");
     } else {
       if (data.agentNumber !== "") {
         const datas = {
@@ -96,10 +101,12 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         };
         authServices.register(datas).then((response) => {
           if (response.data.error) {
-            alert(response.data.error);
+            setMessage("");
+            setMessage(response.data.error);
           } else {
+            setMessage("");
             toggleSignUp();
-            alert("Please check your email to verify your account");
+            setMessage("Please check your email to verify your account");
           }
         });
       } else {
@@ -115,10 +122,12 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize }) => {
         };
         authServices.register(datas).then((response) => {
           if (response.data.error) {
-            alert(response.data.error);
+            setMessage("");
+            setMessage(response.data.error);
           } else {
+            setMessage("");
             toggleSignUp();
-            alert("Please check your email to verify your account");
+            setMessage("Please check your email to verify your account");
             // toggleConfirmModal();
           }
         });

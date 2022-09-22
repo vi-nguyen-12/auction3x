@@ -128,7 +128,7 @@ align-content: center;
 }
 `;
 
-function Dash({ windowSize, featureLength, loader }) {
+function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
@@ -209,7 +209,8 @@ function Dash({ windowSize, featureLength, loader }) {
     const getFeatureAuctions = async () => {
       await authServices.getFeaturedAuctions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setFeatureListings(
             res.data.filter(
@@ -222,7 +223,8 @@ function Dash({ windowSize, featureLength, loader }) {
     const getUpcomingAuctions = async () => {
       await authServices.getUpcomingAuctions().then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setNumOfUpcomingAuctions(res.data.length);
         }
@@ -232,7 +234,8 @@ function Dash({ windowSize, featureLength, loader }) {
     const getUserListings = async () => {
       await authServices.sellerPropInAuctions(user._id).then((res) => {
         if (res.data.error) {
-          alert(res.data.error);
+          setMessage("");
+          setMessage(res.data.error);
         } else {
           setListing(res.data.length);
         }
@@ -256,14 +259,26 @@ function Dash({ windowSize, featureLength, loader }) {
 
   const getBidAuctions = async () => {
     const id = user._id;
-    const data = await authServices.getUserBidAuctions(id);
-    setBidAuctions(data.data);
+    await authServices.getUserBidAuctions(id).then((res) => {
+      if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
+      } else {
+        setBidAuctions(res.data);
+      }
+    });
   };
 
   const getApprovedAuctions = async () => {
     const id = user._id;
-    const data = await authServices.buyerApprovedAuctions(id);
-    setApprovedAuctions(data);
+    await authServices.buyerApprovedAuctions(id).then((res) => {
+      if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
+      } else {
+        setApprovedAuctions(res.data);
+      }
+    });
   };
 
   return (

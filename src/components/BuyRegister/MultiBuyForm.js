@@ -4,7 +4,7 @@ import BuyAuthorized from "./BuyAuthorized";
 import BuyQuestionair from "./BuyQuestionair";
 import FundUpload from "./Fund Request/FundUpload";
 
-const MultiBuyForm = ({ windowSize }) => {
+const MultiBuyForm = ({ windowSize, setMessage }) => {
   const [step, setStep] = useState(1);
 
   const [document, setDocument] = useState();
@@ -21,7 +21,7 @@ const MultiBuyForm = ({ windowSize }) => {
   if (step === 1) {
     return (
       <div className="buy-register-container">
-        <BuyAgreement setStep={setStep} step={step} />
+        <BuyAgreement setStep={setStep} step={step} setMessage={setMessage} />
       </div>
     );
   } else if (step === 2) {
@@ -32,6 +32,7 @@ const MultiBuyForm = ({ windowSize }) => {
           step={step}
           toggleDocument={toggleDocument}
           docu={document}
+          setMessage={setMessage}
         />
       </div>
     );
@@ -43,6 +44,7 @@ const MultiBuyForm = ({ windowSize }) => {
           step={step}
           setAnswers={setAnswers}
           answers={answers}
+          setMessage={setMessage}
         />
       </div>
     );
@@ -55,6 +57,7 @@ const MultiBuyForm = ({ windowSize }) => {
           answers={answers}
           document={document}
           windowSize={windowSize}
+          setMessage={setMessage}
         />
       </div>
     );

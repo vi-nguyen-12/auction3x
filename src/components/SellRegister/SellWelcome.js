@@ -8,13 +8,21 @@ import { IoIosBoat } from "react-icons/io";
 import SellHeader from "./SellHeader";
 import "../../styles/sell-register.css";
 
-const Sell = ({ step, setStep, windowSize, propertyTest, setPropertyTest }) => {
+const Sell = ({
+  step,
+  setStep,
+  windowSize,
+  propertyTest,
+  setPropertyTest,
+  setMessage,
+}) => {
   const [type, setType] = useState(propertyTest.type);
   const { handleSubmit } = useForm();
 
   const onSubmit = () => {
     if (type === undefined) {
-      alert("Please select property to sell");
+      setMessage("");
+      setMessage("Please select property to sell");
     } else {
       setPropertyTest({ ...propertyTest, type });
       setStep(step + 1);

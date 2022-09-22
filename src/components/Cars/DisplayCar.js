@@ -111,6 +111,7 @@ function DisplayCar({
   windowSize,
   setRefresh,
   refresh,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -1436,7 +1437,7 @@ function DisplayCar({
               />
             </div>
             <Modal.Body>
-              <MultiBuyForm windowSize={windowSize} />
+              <MultiBuyForm windowSize={windowSize} setMessage={setMessage} />
             </Modal.Body>
           </Modal>
 
@@ -1474,7 +1475,7 @@ function DisplayCar({
               />
             </div>
             <Modal.Body className="p-0 pb-4">
-              <BuyConfirm property={property} />
+              <BuyConfirm property={property} setMessage={setMessage} />
             </Modal.Body>
           </Modal>
         </>

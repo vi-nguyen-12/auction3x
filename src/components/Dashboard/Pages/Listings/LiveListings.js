@@ -16,6 +16,7 @@ function LiveListings({
   setVideos,
   searchBy,
   search,
+  setMessage,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
@@ -26,8 +27,13 @@ function LiveListings({
     const fetchApprovedProperty = async () => {
       const id = user._id;
       await authService.sellerApprovedListings(id).then((res) => {
-        setUpcomingListings(res.data);
-        setNewUpcomingListings(res.data);
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+        } else {
+          setUpcomingListings(res.data);
+          setNewUpcomingListings(res.data);
+        }
       });
     };
     fetchApprovedProperty();
@@ -229,6 +235,7 @@ function LiveListings({
             setVideos={setVideos}
             searchBy={searchBy}
             search={search}
+            setMessage={setMessage}
           />
         </Row>
       </Container>
