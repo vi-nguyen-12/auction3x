@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
 
-function ReconfirmEmail({ toggleConfirmModal, toggleSignIn, setMessage }) {
+function ReconfirmEmail({ setMessage }) {
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 

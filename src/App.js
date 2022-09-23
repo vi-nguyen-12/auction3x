@@ -391,7 +391,7 @@ function App() {
         >
           <Modal.Header className="auction-modal-header">
             <Modal.Title className="auction-modal-title px-3">
-              Confirm Email
+              Re-Send Verification Email
             </Modal.Title>
           </Modal.Header>
           <div
