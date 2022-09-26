@@ -1100,7 +1100,6 @@ function DisplayCar({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1151,7 +1150,6 @@ function DisplayCar({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1202,7 +1200,6 @@ function DisplayCar({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1254,7 +1251,6 @@ function DisplayCar({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "50px 30px",
                 }}
               >

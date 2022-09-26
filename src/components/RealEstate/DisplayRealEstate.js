@@ -1082,7 +1082,6 @@ function DisplayRealEstate({
                   border: "none",
                   outline: "none",
                   fontSize: "17px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1133,7 +1132,6 @@ function DisplayRealEstate({
                   border: "none",
                   outline: "none",
                   fontSize: "17px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1184,7 +1182,6 @@ function DisplayRealEstate({
                   border: "none",
                   outline: "none",
                   fontSize: "17px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1236,7 +1233,6 @@ function DisplayRealEstate({
                   border: "none",
                   outline: "none",
                   fontSize: "17px",
-                  borderRadius: "4px",
                   padding: "50px 30px",
                 }}
               >

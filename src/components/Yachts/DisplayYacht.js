@@ -1114,7 +1114,6 @@ function DisplayYacht({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1165,7 +1164,6 @@ function DisplayYacht({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1216,7 +1214,6 @@ function DisplayYacht({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "30px",
                 }}
               >
@@ -1268,7 +1265,6 @@ function DisplayYacht({
                   border: "none",
                   outline: "none",
                   fontSize: "12px",
-                  borderRadius: "4px",
                   padding: "50px 30px",
                 }}
               >
