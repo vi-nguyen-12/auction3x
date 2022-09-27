@@ -254,7 +254,9 @@ function Dashboard({
   const onChangeDocu = async (e) => {
     if (doc === "") {
       setMessage("");
-      setMessage("Please select a document type");
+      setTimeout(() => {
+        setMessage("Please select a document type");
+      }, 100);
     } else {
       setLoader(true);
       const formData = new FormData();
@@ -505,7 +507,9 @@ function Dashboard({
           };
         } else {
           setMessage("");
-          setMessage("Title and Purchase Agreement are required");
+          setTimeout(() => {
+            setMessage("Title and Purchase Agreement are required");
+          }, 100);
         }
       } else if (property.type === "car") {
         if (documents.length >= 3) {
@@ -515,9 +519,11 @@ function Dashboard({
           };
         } else {
           setMessage("");
-          setMessage(
-            "Title, Inspection, and Registration documents are required"
-          );
+          setTimeout(() => {
+            setMessage(
+              "Title, Inspection, and Registration documents are required"
+            );
+          }, 100);
         }
       } else if (property.type === "jet") {
         if (documents.length >= 6) {
@@ -527,9 +533,11 @@ function Dashboard({
           };
         } else {
           setMessage("");
-          setMessage(
-            "Title, Fitness report, Engine details, Jet detail history, Registration and Inspection report documents are required"
-          );
+          setTimeout(() => {
+            setMessage(
+              "Title, Fitness report, Engine details, Jet detail history, Registration and Inspection report documents are required"
+            );
+          }, 100);
         }
       } else if (property.type === "yacht") {
         if (documents.length >= 2) {
@@ -539,9 +547,11 @@ function Dashboard({
           };
         } else {
           setMessage("");
-          setMessage(
-            "Vessel Registration and Vessel Maintenance Report are required"
-          );
+          setTimeout(() => {
+            setMessage(
+              "Vessel Registration and Vessel Maintenance Report are required"
+            );
+          }, 100);
         }
       }
     }

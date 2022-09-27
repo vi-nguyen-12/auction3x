@@ -248,7 +248,9 @@ function RealEstateDocus({
       });
     } else {
       setMessage("");
-      setMessage("Please upload all required documents");
+      setTimeout(() => {
+        setMessage("Please upload all required documents");
+      }, 100);
     }
   };
 

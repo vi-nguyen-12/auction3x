@@ -38,7 +38,9 @@ const UploadForm = ({
     for (let i = 0; i < e.target.files.length; i++) {
       if (e.target.files[i].size > 3000000) {
         setMessage("");
-        setMessage("File size must be less than 3MB.");
+        setTimeout(() => {
+          setMessage("File size must be less than 3MB.");
+        }, 100);
       } else {
         formData.append("images", e.target.files[i]);
       }
@@ -63,7 +65,9 @@ const UploadForm = ({
     for (let i = 0; i < e.target.files.length; i++) {
       if (e.target.files[i].size > 150000000) {
         setMessage("");
-        setMessage("File size must be less than 150MB.");
+        setTimeout(() => {
+          setMessage("File size must be less than 150MB.");
+        }, 100);
       } else {
         formData.append("videos", e.target.files[i]);
       }
@@ -122,7 +126,9 @@ const UploadForm = ({
         });
     } else {
       setMessage("");
-      setMessage("Please upload at least one image!");
+      setTimeout(() => {
+        setMessage("Please upload at least one image!");
+      }, 100);
     }
   };
 

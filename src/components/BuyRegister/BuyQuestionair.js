@@ -85,13 +85,17 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
     }
     if (!isAllAnswered) {
       setMessage("");
-      return setMessage("Please answer all questions");
+      return setTimeout(() => {
+        setMessage("Please answer all questions");
+      }, 100);
     }
     if (!isExplainedIfAnswerIsTrue) {
       setMessage("");
-      return setMessage(
-        'Please explain reason and upload supported document for question with answer "yes"'
-      );
+      return setTimeout(() => {
+        setMessage(
+          'Please explain reason and upload supported document for question with answer "yes"'
+        );
+      }, 100);
     }
     setStep(step + 1);
   };

@@ -85,7 +85,9 @@ const Agree = ({
   const onSubmit = async (data) => {
     if (!agree) {
       setMessage("");
-      setMessage("You must agree to the terms and conditions");
+      setTimeout(() => {
+        setMessage("You must agree to the terms and conditions");
+      }, 100);
     } else {
       setLoader(true);
       await authService.getDocuSignStatus(envelopeId).then((res) => {
@@ -95,7 +97,9 @@ const Agree = ({
         ) {
           setLoader(false);
           setMessage("");
-          setMessage("Please sign the docusign before proceeding ");
+          setTimeout(() => {
+            setMessage("Please sign the docusign before proceeding ");
+          }, 100);
         } else {
           const data = { docusignId: res.data._id, step: 5 };
           authService.editProperty(propertyTest._id, data).then((res) => {

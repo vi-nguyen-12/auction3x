@@ -156,13 +156,19 @@ function JetDetails({
     if (reservedAmount > 0 && discussedAmount > 0) {
       if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
         setMessage("");
-        setMessage(
-          "Reserved amount should be greater than or equal to discussed amount"
-        );
+        setTimeout(() => {
+          setMessage(
+            "Reserved amount should be greater than or equal to discussed amount"
+          );
+        }, 100);
       } else {
         if (year_built > new Date().getFullYear()) {
           setMessage("");
-          setMessage("Built year must be less than or equal to current year.");
+          setTimeout(() => {
+            setMessage(
+              "Built year must be less than or equal to current year."
+            );
+          }, 100);
         } else {
           const submitedData = {
             registration_mark,
@@ -221,7 +227,9 @@ function JetDetails({
       }
     } else {
       setMessage("");
-      setMessage("Please fill out discussed amount and reserved amount");
+      setTimeout(() => {
+        setMessage("Please fill out discussed amount and reserved amount");
+      }, 100);
     }
   };
 

@@ -366,7 +366,9 @@ function JetDocus({
       });
     } else {
       setMessage("");
-      setMessage("Please upload the required documents");
+      setTimeout(() => {
+        setMessage("Please upload the required documents");
+      }, 100);
     }
   };
 

@@ -77,7 +77,9 @@ function EditProfile({ setMessage }) {
   const onSubmit = async (data) => {
     if (newPass !== confirmPass) {
       setMessage("");
-      setMessage("Please make sure your new password matches");
+      setTimeout(() => {
+        setMessage("Please make sure your new password matches");
+      }, 100);
     } else {
       const datas = {
         id: user._id,

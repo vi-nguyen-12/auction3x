@@ -22,7 +22,9 @@ const Sell = ({
   const onSubmit = () => {
     if (type === undefined) {
       setMessage("");
-      setMessage("Please select property to sell");
+      setTimeout(() => {
+        setMessage("Please select property to sell");
+      }, 100);
     } else {
       setPropertyTest({ ...propertyTest, type });
       setStep(step + 1);

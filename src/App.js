@@ -126,6 +126,7 @@ function App() {
   const toggleSessionTimedOut = () => {
     setShowSessionTimedOut(!showSessionTimedOut);
   };
+  console.log(message);
 
   const toggleShow = (value) => {
     setShow(value);

@@ -16,7 +16,9 @@ const ChangePass = ({ colorChange, toggleShow, setMessage }) => {
     };
     if (data.newPassword !== data.confirmPassword) {
       setMessage("");
-      setMessage("Passwords do not match");
+      setTimeout(() => {
+        setMessage("Passwords do not match");
+      }, 100);
     } else {
       authServices.resetPassword(datas).then((response) => {
         if (response.data.error) {

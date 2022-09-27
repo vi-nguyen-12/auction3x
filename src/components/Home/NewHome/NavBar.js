@@ -61,7 +61,9 @@ function NavBar({
     } else {
       if (!user.KYC) {
         setMessage("");
-        setMessage("Please complete your Kyc");
+        setTimeout(() => {
+          setMessage("Please complete your Kyc");
+        }, 100);
       } else {
         if (history.location.pathname === "/multiSellForm") {
           window.location.reload();

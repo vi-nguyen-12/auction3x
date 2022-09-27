@@ -101,7 +101,9 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
   const handleFundFile = async (e) => {
     if (fundType === "") {
       setMessage("");
-      setMessage("Please select a document type");
+      setTimeout(() => {
+        setMessage("Please select a document type");
+      }, 100);
     } else {
       setLoader(true);
       const formData = new FormData();

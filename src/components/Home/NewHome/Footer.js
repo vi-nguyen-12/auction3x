@@ -21,7 +21,9 @@ function Footer({ windowSize, setMessage }) {
       });
     } else {
       setMessage("");
-      setMessage("Please enter a valid email address");
+      setTimeout(() => {
+        setMessage("Please enter a valid email address");
+      }, 100);
     }
   };
 

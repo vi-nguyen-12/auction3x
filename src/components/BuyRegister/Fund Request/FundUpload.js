@@ -123,7 +123,9 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
       setStep(step + 1);
     } else {
       setMessage("");
-      setMessage("Please upload at least one document");
+      setTimeout(() => {
+        setMessage("Please upload at least one document");
+      }, 100);
     }
   };
   return (

@@ -19,7 +19,9 @@ function FundDocuSign({ step, toggleStep, document, setMessage }) {
   const onSubmit = (data) => {
     if (term === false) {
       setMessage("");
-      setMessage("Please agree to the terms and conditions");
+      setTimeout(() => {
+        setMessage("Please agree to the terms and conditions");
+      }, 100);
     } else {
       window.location.reload();
     }

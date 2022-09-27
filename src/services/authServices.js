@@ -283,40 +283,74 @@ const authService = {
   },
 
   buyerApprovedAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/buyer/auctions?status=success`);
+    return axios.get(
+      apiUrl + `/api/users/${id}/buyer/auctions?status=success`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
   },
 
   buyerWonAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/buyer/winAuctions`);
+    return axios.get(apiUrl + `/api/users/${id}/buyer/winAuctions`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 
   sellerApprovedAuctions(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/auctions`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/auctions`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 
   sellerPendingAuctions(id) {
     return axios.get(
       apiUrl +
-        `/api/users/${id}/seller/properties?status=pending&inAuction=false&completed=true`
+        `/api/users/${id}/seller/properties?status=pending&inAuction=false&completed=true`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
     );
   },
 
   sellerApprovedListings(id) {
     return axios.get(
       apiUrl +
-        `/api/users/${id}/seller/properties?status=success&inAuction=false`
+        `/api/users/${id}/seller/properties?status=success&inAuction=false`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
     );
   },
 
   sellerPropInAuctions(id) {
     return axios.get(
       apiUrl +
-        `/api/users/${id}/seller/properties?status=success&inAuction=true`
+        `/api/users/${id}/seller/properties?status=success&inAuction=true`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
     );
   },
 
   getSellerSoldListings(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/properties?sold=true`);
+    return axios.get(apiUrl + `/api/users/${id}/seller/properties?sold=true`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 
   editUserInfo(data) {

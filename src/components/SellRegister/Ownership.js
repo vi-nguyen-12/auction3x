@@ -72,7 +72,9 @@ function Ownership({
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       setMessage("");
-      setMessage("Please enter ownership information");
+      setTimeout(() => {
+        setMessage("Please enter ownership information");
+      }, 100);
     } else {
       let submitedData;
       if (data.brokerName !== "") {

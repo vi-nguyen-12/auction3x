@@ -164,7 +164,9 @@ function DisplayJet({
   const handleKYC = () => {
     if (!user.KYC) {
       setMessage("");
-      return setMessage("Please Complete your KYC first to bid");
+      return setTimeout(() => {
+        setMessage("Please Complete your KYC first to bid");
+      }, 100);
     }
   };
 

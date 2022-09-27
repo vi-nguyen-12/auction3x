@@ -11,7 +11,9 @@ function FundAgreement({ toggleStep, step, setMessage }) {
       toggleStep(step + 1);
     } else {
       setMessage("");
-      setMessage("Please Read the agreement and check the box to continue");
+      setTimeout(() => {
+        setMessage("Please Read the agreement and check the box to continue");
+      }, 100);
     }
   };
 

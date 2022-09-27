@@ -15,7 +15,9 @@ function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
         setMessage(response.data.error);
       } else {
         setMessage("");
-        setMessage("Password reset link has been sent to your email");
+        setTimeout(() => {
+          setMessage("Password reset link has been sent to your email");
+        }, 100);
         toggleForgotPass();
       }
     });

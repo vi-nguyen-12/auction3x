@@ -382,7 +382,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
                   }}
                   style={{ fontSize: windowSize < 600 && "0.9rem" }}
                   id={window.location.pathname === "/Dashboard" ? "active" : ""}
-                  // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
                   className="tabs"
                 >
                   <span>Saved Auction</span>
@@ -459,12 +458,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
 
           <Col>
             <div className="filter">
-              {/* <div className="filterIcon">
-                <RiFilter2Fill color="white" size={25} />
-                <button className="filterBtn">
-                  <span>Filter</span>
-                </button>
-              </div> */}
               <div onClick={toggleFundReq} className="refresh">
                 <GoPlus onClick={toggleFundReq} color="white" size={28} />
                 <button onClick={toggleFundReq} className="resetBtn">
@@ -493,12 +486,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
               }}
             >
               <div className="filter">
-                {/* <div className="filterIcon">
-                  <RiFilter2Fill color="white" size={25} />
-                  <button className="filterBtn">
-                    <span>Filter</span>
-                  </button>
-                </div> */}
                 <div onClick={toggleFundReq} className="refresh">
                   <GoPlus onClick={toggleFundReq} color="white" size={28} />
                   <button onClick={toggleFundReq} className="resetBtn">
@@ -538,7 +525,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
                     id={
                       window.location.pathname === "/Dashboard" ? "active" : ""
                     }
-                    // style={{ borderBottom: "4px solid black", color: "black" ? 'true' : 'false' }}
                     className="tabs"
                   >
                     <span>Saved Auction</span>
@@ -552,7 +538,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
                       toggleShowSavedProp(true);
                     }}
                     style={{ padding: windowSize < 600 && "5px" }}
-                    // style={{ borderBottom: color, color: textColor }}
                     className="tabs"
                   >
                     <span>Saved Auction</span>
@@ -621,7 +606,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
       )}
 
       <Row className="mb-2 mt-3">
-        {showSavedProp && savedProp.length > 0 && savedProp.left < 3 ? (
+        {showSavedProp && savedProp.length > 0 && savedProp.length < 3 ? (
           savedProp.map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
@@ -629,15 +614,13 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
               className="py-2 d-flex justify-content-center align-items-center my-5"
             >
               <NewCards
-                // toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
                 data={property}
                 type={property.property.type}
               />
             </Col>
           ))
-        ) : // savedProp.length === 0 &&
-        showSavedProp && savedProp.length >= 3 ? (
+        ) : showSavedProp && savedProp.length >= 3 ? (
           <Carousel {...settings} ref={slider}>
             {savedProp.map((property, index) => (
               <Col
@@ -645,7 +628,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
-                  // toggleSignIn={toggleSignIn}
                   windowSize={windowSize}
                   data={property}
                   type={property.property.type}
@@ -679,7 +661,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
               className="py-2 d-flex justify-content-center"
             >
               <NewCards
-                // toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
                 data={property}
                 type={property.property.type}
@@ -694,7 +675,6 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
-                  // toggleSignIn={toggleSignIn}
                   windowSize={windowSize}
                   data={property}
                   type={property.property.type}
@@ -718,15 +698,16 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           )
         )}
 
-        {showApprovedAuctions && approvedAuctions.length > 0 ? (
+        {showApprovedAuctions &&
+        approvedAuctions.length > 0 &&
+        approvedAuctions.length < 3 ? (
           approvedAuctions.map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
               key={index}
-              className="py-2 d-flex justify-content-center"
+              className="py-2 d-flex justify-content-center align-items-center my-5"
             >
               <NewCards
-                // toggleSignIn={toggleSignIn}
                 windowSize={windowSize}
                 data={property}
                 type={property.property.type}
@@ -735,13 +716,12 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           ))
         ) : showApprovedAuctions && approvedAuctions.length >= 3 ? (
           <Carousel {...approvedSettings} ref={slider}>
-            {savedProp.map((property, index) => (
+            {approvedAuctions.map((property, index) => (
               <Col
                 key={index}
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
               >
                 <NewCards
-                  // toggleSignIn={toggleSignIn}
                   windowSize={windowSize}
                   data={property}
                   type={property.property.type}
@@ -749,20 +729,21 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
               </Col>
             ))}
           </Carousel>
+        ) : !loader ? (
+          <Col></Col>
         ) : (
           showApprovedAuctions && (
-            <Error windowSize={windowSize} />
-            // <div
-            //   style={{
-            //     display: "flex",
-            //     justifyContent: "center",
-            //     marginTop: "30px",
-            //   }}
-            // >
-            //   <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
-            //     No Approved Auction
-            //   </h1>
-            // </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
+              <h1 style={{ fontSize: windowSize < 800 && "2rem" }}>
+                No Saved Auction
+              </h1>
+            </div>
           )
         )}
       </Row>

@@ -20,7 +20,9 @@ const BuyConfirm = ({ property, setMessage }) => {
   const onSubmit = async (data) => {
     if (bid === undefined) {
       setMessage("");
-      setMessage("Please enter a bid amount");
+      setTimeout(() => {
+        setMessage("Please enter a bid amount");
+      }, 100);
     } else {
       const Bid = { id: property._id, biddingTimes, bidding: parseInt(bid) };
       await authService.auctionBid(Bid).then((res) => {
@@ -30,7 +32,9 @@ const BuyConfirm = ({ property, setMessage }) => {
         } else {
           setBid(res.data.highestBid + property.incrementAmount);
           setMessage("");
-          setMessage("Bid Successful!");
+          setTimeout(() => {
+            setMessage("Bid Successful!");
+          }, 100);
         }
       });
     }

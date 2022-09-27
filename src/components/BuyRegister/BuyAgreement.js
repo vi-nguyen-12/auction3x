@@ -4,17 +4,20 @@ import { useState } from "react";
 import ToastMessage from "../../components/Toast";
 import "../../styles/buyer.css";
 
-const BuyAgreement = ({ setStep, step }) => {
+const BuyAgreement = ({ setStep, step, setMessage }) => {
   const [agreement, setAgreement] = useState(false);
-  const [show, setShow] = useState(true);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
+
   const handleNext = () => {
-    if (agreement === true) {
-      setStep(step + 1);
+    if (agreement === false) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please Read the agreement and check the box to continue");
+      }, 100);
     } else {
-      setShow(false);
+      setStep(step + 1);
     }
   };
   return (
@@ -61,13 +64,6 @@ const BuyAgreement = ({ setStep, step }) => {
               I agree to the terms and conditions
             </Form.Check.Label>
           </Form.Check>
-          {show == false && (
-            <ToastMessage
-              message={
-                "Please Read the agreement and check the box to continue"
-              }
-            />
-          )}
         </Container>
       </Modal.Body>
       <Modal.Footer>

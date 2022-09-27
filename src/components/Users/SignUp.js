@@ -82,7 +82,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   const onSubmit = (data) => {
     if (data.password !== data.confirmPassword) {
       setMessage("");
-      setMessage("Passwords do not match");
+      setTimeout(() => {
+        setMessage("Passwords do not match");
+      }, 100);
     } else {
       if (data.agentNumber !== "") {
         const datas = {
@@ -106,7 +108,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           } else {
             setMessage("");
             toggleSignUp();
-            setMessage("Please check your email to verify your account");
+            setTimeout(() => {
+              setMessage("Please check your email to verify your account");
+            }, 100);
           }
         });
       } else {
@@ -127,7 +131,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           } else {
             setMessage("");
             toggleSignUp();
-            setMessage("Please check your email to verify your account");
+            setTimeout(() => {
+              setMessage("Please check your email to verify your account");
+            }, 100);
             // toggleConfirmModal();
           }
         });

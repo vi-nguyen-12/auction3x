@@ -95,7 +95,9 @@ const BuyAuthorized = ({
         ) {
           setLoader(false);
           setMessage("");
-          setMessage("Please sign the docusign before proceeding");
+          setTimeout(() => {
+            setMessage("Please sign the docusign before proceeding");
+          }, 100);
         } else {
           answers = answers.map((item) => {
             return {
@@ -131,7 +133,9 @@ const BuyAuthorized = ({
       });
     } else {
       setMessage("");
-      setMessage("Please agree to the terms and conditions");
+      setTimeout(() => {
+        setMessage("Please agree to the terms and conditions");
+      }, 100);
     }
   };
   return (

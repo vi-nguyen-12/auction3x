@@ -160,15 +160,19 @@ function YachtDetails({
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
       setMessage("");
-      setMessage(
-        "Reserved amount should be greater than or equal to discussed amount"
-      );
+      setTimeout(() => {
+        setMessage(
+          "Reserved amount should be greater than or equal to discussed amount"
+        );
+      }, 100);
     } else {
       if (!summary && !invest && !locationInfo && !marketInfo) {
         setMessage("");
-        setMessage(
-          "Please enter summary, investment, location, and market information"
-        );
+        setTimeout(() => {
+          setMessage(
+            "Please enter summary, investment, location, and market information"
+          );
+        }, 100);
       } else {
         const submitedData = {
           reservedAmount: parseInt(reservedAmount),
