@@ -681,6 +681,10 @@ const authService = {
       },
     });
   },
+
+  getMaintenanceStatus() {
+    return axios.get(apiUrl + `/api/maintenance`);
+  },
 };
 
 export default authService;

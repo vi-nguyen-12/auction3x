@@ -252,7 +252,9 @@ function ApprovedListings({
                 <td>
                   <Button
                     onClick={() =>
-                      window.open(`/DisplayAuctions/${listing._id}`)
+                      window.open(
+                        `/DisplayAuctions/${listing.auctionDetails._id}`
+                      )
                     }
                     variant="primary"
                   >

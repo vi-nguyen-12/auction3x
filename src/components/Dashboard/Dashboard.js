@@ -1292,7 +1292,10 @@ function Dashboard({
 
       <Modal size="xl" show={showProperty} onHide={toggleShowProperty} centered>
         <Modal.Header className="auction-modal-header">
-          <Modal.Title className="auction-modal-title px-3">
+          <Modal.Title
+            className="auction-modal-title px-3"
+            style={{ fontSize: windowSize < 800 && "1.5rem" }}
+          >
             Property Details
           </Modal.Title>
         </Modal.Header>
