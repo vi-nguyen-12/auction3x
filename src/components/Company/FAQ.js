@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import CompanyHeader from "./CompanyHeader";
 import authService from "../../services/authServices";
 
-function FAQ() {
+function FAQ({ windowSize }) {
   const location = useLocation();
   const [faqs, setFaqs] = useState([]);
   const [query, setQuery] = useState([]);
@@ -27,7 +27,7 @@ function FAQ() {
         setQuery={setQuery}
         faqs={faqs}
       />
-      <Container style={{ padding: "50px" }} fluid>
+      <Container style={{ padding: "50px 0" }} fluid>
         {/* <Row>
           <Col
             style={{
