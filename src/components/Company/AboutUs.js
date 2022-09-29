@@ -2,55 +2,60 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
+import Info from "../Home/NewHome/Info";
+import How from "../Home/NewHome/How";
+import "../../styles/aboutUs.css";
 
-function AboutUs() {
+function AboutUs({ toggleSignIn, windowSize, setMessage }) {
   const location = useLocation();
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />
-      <Container>
-        <Row>
-          <Col md={10} className="pt-5">
-            <img
-              src="/images/aboutus.png"
-              alt=""
-              style={{
-                marginBottom: "20px",
-                maxWidth: "250px",
-                maxHeight: "150px",
-              }}
-            />
-          </Col>
-        </Row>
-        <Row style={{ padding: "0 50px" }}>
-          <Col md={10} className="pt-5">
-            <h1 style={{ fontSize: "35px", color: "black" }}>About Us</h1>
-            <p style={{ fontSize: "20px" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo quam
-              nunc id diam. Aenean ut orci nec nibh cursus accumsan. Vestibulum
-              ante ipsum primis in faucibus orci luctus et ultrices posuere
-              cubilia Curae; Mauris sollicitudin tincidunt eros nec gravida. Ut
-              varius auctor accumsan.
-            </p>
-          </Col>
-        </Row>
-        <Row style={{ padding: "0 50px" }}>
-          <Col md={10} className="pt-5">
-            <h1 style={{ fontSize: "35px", color: "black" }}>Team</h1>
-            <p style={{ fontSize: "20px" }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla, ut commodo quam
-              nunc id diam. Aenean ut orci nec nibh cursus accumsan. Vestibulum
-              ante ipsum primis in faucibus orci luctus et ultrices posuere
-              cubilia Curae; Mauris sollicitudin tincidunt eros nec gravida. Ut
-              varius auctor accumsan.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+      <Row style={{ padding: windowSize < 800 ? "2rem 1rem" : "3rem" }}>
+        <Col md={12}>
+          <h1 className="section-title m-0">Who are we?</h1>
+        </Col>
+        <Col md={12} className="px-4">
+          <p className="p-0 m-0 aboutus-p">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum.
+          </p>
+        </Col>
+      </Row>
+      <Row style={{ padding: windowSize < 800 ? "2rem 1rem" : "3rem" }}>
+        <Col>
+          <Row className="aboutus-our-section">
+            <Col md={6} xs={12} className="my-5">
+              <span>Our Mission</span>
+              <p className="p-0 m-0 aboutus-p-our">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </Col>
+            <Col md={6} xs={12} className="my-5">
+              <span>Our Vision</span>
+              <p className="p-0 m-0 aboutus-p-our">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <Info toggleSignIn={toggleSignIn} windowSize={windowSize} />
+      <How windowSize={windowSize} />
     </>
   );
 }

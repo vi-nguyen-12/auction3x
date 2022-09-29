@@ -187,14 +187,14 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
           <ErrorPage windowSize={windowSize} />
         ) : null}
       </Row>
-      <Row className="d-flex justify-content-center align-items-center mt-2">
+      <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
         {newSavedAuctions.length > 0
           ? newSavedAuctions.map((property, index) => (
               <div
                 onClick={handleClick(index)}
                 key={index}
                 style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
+                className="slide-circle my-1"
               ></div>
             ))
           : null}

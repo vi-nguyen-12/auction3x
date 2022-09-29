@@ -7,7 +7,7 @@ function Footer({ windowSize, setMessage }) {
   const [email, setEmail] = React.useState();
 
   const subscribe = async () => {
-    if (email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+    if (email?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       await authService.subscribe(email).then((res) => {
         if (res.data.error) {
           setMessage("");

@@ -5,7 +5,7 @@ import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import NewCards from "../Cards/NewCards";
 import { useParams } from "react-router-dom";
-import ErrorPage from "../../components/Error/404page";
+import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
@@ -243,7 +243,7 @@ function Auctions({
               </Carousel>
             )}
           </Row>
-          <Row className="d-flex justify-content-center align-items-center mt-2">
+          <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
             {allAuctions.length > 0 && windowSize < 800
               ? allAuctions.map((property, index) => (
                   <div
@@ -252,7 +252,7 @@ function Auctions({
                     style={{
                       backgroundColor: index === slideIndex && "#B77B50",
                     }}
-                    className="slide-circle"
+                    className="slide-circle my-1"
                   ></div>
                 ))
               : null}

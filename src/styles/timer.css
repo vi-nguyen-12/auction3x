@@ -37,6 +37,14 @@
   display: inline-block;
 }
 
+.bid-timer {
+  /* font-family: "Interstate"; */
+  font-style: normal;
+  font-weight: bold;
+  line-height: 32px;
+  color: #b77b50;
+}
+
 @media screen and (max-width: 800px) {
   .timer {
     font-size: 1rem;

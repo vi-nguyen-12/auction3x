@@ -1471,7 +1471,11 @@ function DisplayCar({
               />
             </div>
             <Modal.Body className="p-0 pb-4">
-              <BuyConfirm property={property} setMessage={setMessage} />
+              <BuyConfirm
+                property={property}
+                setMessage={setMessage}
+                windowSize={windowSize}
+              />
             </Modal.Body>
           </Modal>
         </>

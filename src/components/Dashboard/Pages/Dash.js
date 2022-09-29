@@ -244,7 +244,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
     // setUpcomingAuctions(property.length);
     // setLiveAuctions(auctions.length);
     if (user._id) {
-      setSavedProp(savedProperties);
+      setSavedProp(savedProperties.slice().reverse());
     }
     getFeatureAuctions();
     getUpcomingAuctions();
@@ -253,7 +253,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
 
   const getSavedProperty = () => {
     if (user._id) {
-      setSavedProp(savedProperties);
+      setSavedProp(savedProperties.slice().reverse());
     }
   };
 
@@ -264,7 +264,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         setMessage("");
         setMessage(res.data.error);
       } else {
-        setBidAuctions(res.data);
+        setBidAuctions(res.data.slice().reverse());
       }
     });
   };
@@ -276,7 +276,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         setMessage("");
         setMessage(res.data.error);
       } else {
-        setApprovedAuctions(res.data);
+        setApprovedAuctions(res.data.slice().reverse());
       }
     });
   };
@@ -607,7 +607,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
 
       <Row className="mb-2 mt-3">
         {showSavedProp && savedProp.length > 0 && savedProp.length < 3 ? (
-          savedProp.map((property, index) => (
+          savedProp.slice(0, 5).map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
               key={index}
@@ -622,7 +622,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           ))
         ) : showSavedProp && savedProp.length >= 3 ? (
           <Carousel {...settings} ref={slider}>
-            {savedProp.map((property, index) => (
+            {savedProp.slice(0, 5).map((property, index) => (
               <Col
                 key={index}
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
@@ -654,7 +654,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         )}
 
         {showBidAuctions && bidAuctions.length > 0 && bidAuctions.length < 3 ? (
-          bidAuctions.map((property, index) => (
+          bidAuctions.slice(0, 5).map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
               key={index}
@@ -669,7 +669,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           ))
         ) : showBidAuctions && bidAuctions.length >= 3 ? (
           <Carousel {...bidSettings} ref={slider}>
-            {bidAuctions.map((property, index) => (
+            {bidAuctions.slice(0, 5).map((property, index) => (
               <Col
                 key={index}
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
@@ -701,7 +701,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         {showApprovedAuctions &&
         approvedAuctions.length > 0 &&
         approvedAuctions.length < 3 ? (
-          approvedAuctions.map((property, index) => (
+          approvedAuctions.slice(0, 5).map((property, index) => (
             <Col
               md={windowSize > 1400 ? 5 : 6}
               key={index}
@@ -716,7 +716,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           ))
         ) : showApprovedAuctions && approvedAuctions.length >= 3 ? (
           <Carousel {...approvedSettings} ref={slider}>
-            {approvedAuctions.map((property, index) => (
+            {approvedAuctions.slice(0, 5).map((property, index) => (
               <Col
                 key={index}
                 className="d-flex justify-content-center align-items-center align-content-center position-relative carousel-cards px-2"
@@ -749,32 +749,38 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
       </Row>
       <Row className="d-flex justify-content-center align-items-center">
         {showSavedProp && savedProp.length > 0
-          ? savedProp.map((property, index) => (
-              <div
-                onClick={handleClick(index)}
-                key={index}
-                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
-              ></div>
-            ))
+          ? savedProp
+              .slice(0, 5)
+              .map((property, index) => (
+                <div
+                  onClick={handleClick(index)}
+                  key={index}
+                  style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                  className="slide-circle"
+                ></div>
+              ))
           : showBidAuctions && bidAuctions.length > 0
-          ? bidAuctions.map((property, index) => (
-              <div
-                onClick={handleClick(index)}
-                key={index}
-                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
-              ></div>
-            ))
+          ? bidAuctions
+              .slice(0, 5)
+              .map((property, index) => (
+                <div
+                  onClick={handleClick(index)}
+                  key={index}
+                  style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                  className="slide-circle"
+                ></div>
+              ))
           : showApprovedAuctions && approvedAuctions.length > 0
-          ? approvedAuctions.map((property, index) => (
-              <div
-                onClick={handleClick(index)}
-                key={index}
-                style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
-              ></div>
-            ))
+          ? approvedAuctions
+              .slice(0, 5)
+              .map((property, index) => (
+                <div
+                  onClick={handleClick(index)}
+                  key={index}
+                  style={{ backgroundColor: index === slideIndex && "#B77B50" }}
+                  className="slide-circle"
+                ></div>
+              ))
           : null}
       </Row>
 

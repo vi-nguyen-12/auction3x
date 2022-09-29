@@ -8,7 +8,7 @@ import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";
 import JetPage from "../Jets/JetPage";
 import YachtPage from "../Yachts/YachtPage";
-import Auctions from "./Auctions";
+import Auctions from "../Auctions/Auctions";
 import CloseButton from "react-bootstrap/CloseButton";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import PropertyPageHeader from "./PropertyPageHeader";

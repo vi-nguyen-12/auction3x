@@ -1,0 +1,31 @@
+.aboutus-p .aboutus-p-our {
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 46px;
+}
+
+.aboutus-p {
+  color: #6d6d6d;
+}
+
+.aboutus-p-our {
+  color: #ffffff;
+}
+
+.aboutus-our-section {
+  background: #08080a;
+  padding: 3rem;
+}
+
+.aboutus-our-section span {
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  display: flex;
+  align-items: center;
+  color: #fcba7d;
+}

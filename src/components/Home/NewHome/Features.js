@@ -158,14 +158,14 @@ function Features({ toggleSignIn, featureAuctions, windowSize, loader }) {
           <Row style={{ height: "100vh" }}></Row>
         )}
       </Row>
-      <Row className="d-flex justify-content-center align-items-center mt-2">
+      <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
         {featureAuctions.length > 0 && windowSize < 800
           ? featureAuctions.map((property, index) => (
               <div
                 onClick={handleClick(index)}
                 key={index}
                 style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
+                className="slide-circle my-1"
               ></div>
             ))
           : null}

@@ -5,9 +5,11 @@ import authService from "../../services/authServices";
 import { useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
+import AuctionBidTimer from "../Auctions/AuctionBidTimer";
 import CloseButton from "react-bootstrap/CloseButton";
 
-const BuyConfirm = ({ property, setMessage }) => {
+const BuyConfirm = ({ property, setMessage, windowSize }) => {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [bid, setBid] = useState(
@@ -50,6 +52,15 @@ const BuyConfirm = ({ property, setMessage }) => {
       <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
         <>
           <Row style={{ padding: "0 20px" }}>
+            <Col className="fw-bold">Auction Ends In: </Col>
+            <Col className="d-flex justify-content-end">
+              <AuctionBidTimer
+                time={property.auctionEndDate}
+                windowSize={windowSize}
+              />
+            </Col>
+          </Row>
+          <Row style={{ padding: "0 20px" }} className="mt-3">
             <Col className="fw-bold">Leading Bid:</Col>
             <Col className="d-flex justify-content-end">
               {property.highestBid ? (
@@ -77,6 +88,7 @@ const BuyConfirm = ({ property, setMessage }) => {
             <Col className="fw-bold">Increment Amount:</Col>
             <Col className="d-flex justify-content-end">
               <NumberFormat
+                className="fw-bold"
                 value={property.incrementAmount}
                 displayType={"text"}
                 thousandSeparator={true}

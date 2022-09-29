@@ -208,7 +208,7 @@ function RealEstatePage({
               </Carousel>
             )}
           </Row>
-          <Row className="d-flex justify-content-center align-items-center mt-2">
+          <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
             {auctions.length > 0 && windowSize < 800
               ? auctions.map((property, index) => (
                   <div
@@ -217,7 +217,7 @@ function RealEstatePage({
                     style={{
                       backgroundColor: index === slideIndex && "#B77B50",
                     }}
-                    className="slide-circle"
+                    className="slide-circle my-1"
                   ></div>
                 ))
               : null}

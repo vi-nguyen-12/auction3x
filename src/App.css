@@ -562,3 +562,136 @@ h1 {
   background-color: #b77b50 !important;
   border-color: #b77b50 !important;
 }
+
+.maintenance-title h1 {
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 76px;
+  letter-spacing: 0.01em;
+  color: #b77b50;
+}
+
+.maintenance-title span {
+  font-family: "Popins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: #a5a5a5;
+}
+
+.maintenance-form input {
+  width: 345px;
+  height: 56px;
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 8px !important;
+}
+
+.maintenance-form button {
+  width: 345px;
+  height: 64px;
+  background: #b77b50;
+  color: #ffffff;
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  border: none;
+  border-radius: 8px;
+}
+
+.maintenance-social span {
+  font-family: "Popins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: #333333;
+}
+
+.social-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.maintenance-copyright {
+  font-family: "Interstate";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: #a5a5a5;
+}
+
+#toast-container {
+  animation: toast 0.5s ease-in-out;
+}
+
+#toast-container-hide {
+  animation: toast-hide 0.5s ease-in-out;
+}
+
+@keyframes toast-hide {
+  0% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast {
+  0% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.toast-message {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #6d6d6d;
+}
+
+.toast-close-btn {
+  border-radius: 50%;
+  border: none;
+  background: #f1f1f1;
+  padding: 0 0.4rem;
+  color: #6d6d6d;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 800px) {
+  .maintenance-title h1 {
+    font-size: 2rem;
+  }
+
+  .maintenance-title span {
+    font-size: 1rem;
+  }
+
+  .maintenance-form input {
+    width: 100%;
+  }
+
+  .maintenance-form button {
+    width: 100%;
+  }
+}

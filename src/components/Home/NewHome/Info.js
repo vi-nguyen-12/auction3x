@@ -66,6 +66,7 @@ function Info({ windowSize, toggleSignIn }) {
                 md={windowSize < 1285 ? 12 : 4}
                 xs={12}
                 className="d-grid justify-content-center align-items-center mt-2"
+                style={{ padding: windowSize < 800 && "0" }}
               >
                 <div className="info-card-container">
                   <div className="info-card">

@@ -37,7 +37,15 @@ import CloseButton from "react-bootstrap/CloseButton";
 import cookies from "./images/cookies.png";
 import parse from "html-react-parser";
 import ToastMessage from "./components/Toast";
+import Maintenance from "./images/Maintenance.png";
+import BlackLogo from "./images/BlackLogo.png";
 import { createBrowserHistory } from "history";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagramSquare,
+  FaLinkedin,
+} from "react-icons/fa";
 
 const PropertyPages = React.lazy(() =>
   import("./components/Home/PropertyPages")
@@ -45,7 +53,7 @@ const PropertyPages = React.lazy(() =>
 const EmailConfirm = React.lazy(() =>
   import("./components/Users/EmailConfirm")
 );
-const Auctions = React.lazy(() => import("./components/Home/Auctions"));
+const Auctions = React.lazy(() => import("./components/Auctions/Auctions"));
 const Docusign = React.lazy(() => import("./components/Docusign"));
 const DisplayAuctions = React.lazy(() =>
   import("./components/Auctions/DisplayAuctions")
@@ -1094,7 +1102,11 @@ function App() {
                 </Route>
 
                 <Route path="/AboutUs">
-                  <AboutUs windowSize={windowSize} setMessage={setMessage} />
+                  <AboutUs
+                    windowSize={windowSize}
+                    setMessage={setMessage}
+                    toggleSignIn={toggleSignIn}
+                  />
                 </Route>
 
                 <Route path="/FAQ">
@@ -1181,9 +1193,89 @@ function App() {
           </div>
         </Suspense>
       ) : (
-        <Row className="d-flex justify-content-center align-items-center vh-100">
-          <Col className="d-flex justify-content-center align-items-center">
-            <h1>Website Under Maintenance</h1>
+        <Row
+          className="vh-100"
+          style={{ padding: windowSize < 800 ? "0" : "3rem" }}
+        >
+          <Col style={{ padding: windowSize < 800 ? "0" : "1.5rem" }}>
+            <Row>
+              <Col
+                className="d-flex justify-content-start align-items-start"
+                style={{ padding: windowSize < 800 ? "1.5rem" : "0" }}
+              >
+                <img src={BlackLogo} alt="logo" />
+              </Col>
+            </Row>
+            <Row>
+              <Col
+                md={3}
+                xs={12}
+                className="d-grid justify-content-start align-items-end"
+                style={{
+                  zIndex: 100,
+                  marginTop: windowSize < 800 && "8%",
+                  padding: windowSize < 800 ? "1.5rem" : "0",
+                }}
+              >
+                <div className="maintenance-title">
+                  <h1>
+                    Under
+                    <br />
+                    Maintenance
+                  </h1>
+                  <span>
+                    Our team is working hard to resolve the issue. You can
+                    subscribe to our mailing list order to get notified.
+                  </span>
+                </div>
+                <div
+                  className="maintenance-form"
+                  style={{ marginTop: windowSize < 800 && "8%" }}
+                >
+                  <span>Email</span>
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="form-control"
+                  />
+                  <button className="mt-3">Subscribe</button>
+                </div>
+                <div
+                  className="maintenance-social"
+                  style={{ marginTop: windowSize < 800 && "8%" }}
+                >
+                  <span>You can also follow us on</span>
+                  <div className="d-flex justify-content-start align-items-start social-icons mt-3">
+                    <button>
+                      <FaFacebookF color="#3B5998" size={24} />
+                    </button>
+                    <button>
+                      <FaTwitter color="#1DA1F2" size={24} />
+                    </button>
+                    <button>
+                      <FaInstagramSquare color="#833AB4" size={24} />
+                    </button>
+                    <button>
+                      <FaLinkedin color="#0077B5" size={24} />
+                    </button>
+                  </div>
+                </div>
+                <span
+                  className="maintenance-copyright"
+                  style={{ marginTop: windowSize < 800 && "8%" }}
+                >
+                  © Copyrights Auction3 | All Rights Reserved
+                </span>
+              </Col>
+              <Col
+                md={9}
+                xs={12}
+                className="d-flex justify-content-center"
+                style={{ zIndex: "1", overflow: windowSize < 800 && "hidden" }}
+              >
+                <img src={Maintenance} alt="maintenance" />
+              </Col>
+            </Row>
           </Col>
         </Row>
       )}

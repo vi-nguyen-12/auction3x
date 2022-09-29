@@ -164,14 +164,14 @@ function UpcomingAuctions({
           <Row style={{ height: "100vh" }}></Row>
         )}
       </Row>
-      <Row className="d-flex justify-content-center align-items-center mt-2">
+      <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
         {upcomingAuctions.length > 0 && windowSize < 800
           ? upcomingAuctions.map((property, index) => (
               <div
                 onClick={handleClick(index)}
                 key={index}
                 style={{ backgroundColor: index === slideIndex && "#B77B50" }}
-                className="slide-circle"
+                className="slide-circle my-1"
               ></div>
             ))
           : null}
