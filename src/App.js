@@ -328,7 +328,7 @@ function App() {
           setMessage("");
           setTimeout(() => {
             setMessage(
-              "Thank you for subscribing, we will be sending you the best deals!"
+              "Thank you for subscribing, we will let you know as soon as we are back online!"
             );
           }, 100);
           setEmail("");
