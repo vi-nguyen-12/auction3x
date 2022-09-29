@@ -113,6 +113,7 @@ function App() {
   const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
   const [bodyPadding, setBodyPadding] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [email, setEmail] = useState();
   const [wallet, setWallet] = useState({
     RealEstate: 0,
     Car: 0,
@@ -315,8 +316,35 @@ function App() {
     }
   }, [maintenance]);
 
+  //subcribe
+  const subscribe = async () => {
+    if (email?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      await authService.subscribe(email).then((res) => {
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+          setEmail("");
+        } else {
+          setMessage("");
+          setTimeout(() => {
+            setMessage(
+              "Thank you for subscribing, we will be sending you the best deals!"
+            );
+          }, 100);
+          setEmail("");
+        }
+      });
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter a valid email address");
+      }, 100);
+    }
+  };
+
   return (
     <>
+      {message && <ToastMessage message={message} />}
       {!maintenance ? (
         <Suspense fallback={<Loading />}>
           <div className="expendMenu-container" id={expendedMenuId}>
@@ -368,8 +396,6 @@ function App() {
               </div>
             </div>
           )}
-
-          {message && <ToastMessage message={message} />}
 
           <div
             className="App"
@@ -1237,8 +1263,11 @@ function App() {
                     type="email"
                     placeholder="Enter your email"
                     className="form-control"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <button className="mt-3">Subscribe</button>
+                  <button onClick={subscribe} className="mt-3">
+                    Subscribe
+                  </button>
                 </div>
                 <div
                   className="maintenance-social"
@@ -1246,16 +1275,22 @@ function App() {
                 >
                   <span>You can also follow us on</span>
                   <div className="d-flex justify-content-start align-items-start social-icons mt-3">
-                    <button>
+                    <button
+                      onClick={() => window.open("https://www.facebook.com/")}
+                    >
                       <FaFacebookF color="#3B5998" size={24} />
                     </button>
-                    <button>
+                    <button onClick={() => window.open("https://twitter.com/")}>
                       <FaTwitter color="#1DA1F2" size={24} />
                     </button>
-                    <button>
+                    <button
+                      onClick={() => window.open("https://www.instagram.com/")}
+                    >
                       <FaInstagramSquare color="#833AB4" size={24} />
                     </button>
-                    <button>
+                    <button
+                      onClick={() => window.open("https://www.linkedin.com/")}
+                    >
                       <FaLinkedin color="#0077B5" size={24} />
                     </button>
                   </div>
