@@ -285,6 +285,29 @@
   display: inline;
 }
 
+.real-estate-wrap {
+  padding: 100px 50px;
+  height: 100vh;
+}
+/* responsive width and height */
+
+@media (max-height: 830px) {
+  .real-estate-wrap {
+    padding: 100px 50px;
+    height: 100%;
+  }
+}
+@media (max-width: 800px) {
+  .real-estate-wrap {
+    height: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .real-estate-wrap {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .prop-info-table {
     padding: 0.3rem 0.5rem;

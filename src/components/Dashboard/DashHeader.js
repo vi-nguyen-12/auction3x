@@ -59,7 +59,7 @@ function DashHeader({
             {location === "/Dashboard/Listings/AuctionListings" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -69,7 +69,7 @@ function DashHeader({
             ) : location === "/Dashboard/Messaging" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -79,7 +79,7 @@ function DashHeader({
             ) : location === "/Dashboard/Profile" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -89,7 +89,7 @@ function DashHeader({
             ) : location === "/Dashboard" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -99,7 +99,7 @@ function DashHeader({
             ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -109,7 +109,7 @@ function DashHeader({
             ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -119,7 +119,7 @@ function DashHeader({
             ) : location === "/Dashboard/Auctions/BidAuctions" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -129,7 +129,7 @@ function DashHeader({
             ) : location === "/Dashboard/Auctions/WinAuctions" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -139,7 +139,7 @@ function DashHeader({
             ) : location === "/Dashboard/Listings/PendingApproval" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -149,7 +149,7 @@ function DashHeader({
             ) : location === "/Dashboard/Listings/SoldListings" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -159,7 +159,7 @@ function DashHeader({
             ) : location === "/Dashboard/Listings/IncompleteListing" ? (
               <h1
                 style={{
-                  fontFamily: "Poppins",
+                  fontFamily: "Interstate",
                   fontWeight: "600",
                   color: "#273240",
                 }}
@@ -395,7 +395,7 @@ function DashHeader({
               {location === "/Dashboard/Messaging" ? (
                 <h1
                   style={{
-                    fontFamily: "Poppins",
+                    fontFamily: "Interstate",
                     fontWeight: "600",
                     color: "#273240",
                   }}
@@ -405,7 +405,7 @@ function DashHeader({
               ) : location === "/Dashboard/Profile" ? (
                 <h1
                   style={{
-                    fontFamily: "Poppins",
+                    fontFamily: "Interstate",
                     fontWeight: "600",
                     color: "#273240",
                   }}
@@ -442,7 +442,7 @@ function DashHeader({
                     {location === "/Dashboard/Listings/AuctionListings" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -452,7 +452,7 @@ function DashHeader({
                     ) : location === "/Dashboard" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -462,7 +462,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -472,7 +472,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -482,7 +482,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Auctions/BidAuctions" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -492,7 +492,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Auctions/WinAuctions" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -502,7 +502,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Listings/PendingApproval" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -512,7 +512,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Listings/SoldListings" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}
@@ -522,7 +522,7 @@ function DashHeader({
                     ) : location === "/Dashboard/Listings/IncompleteListing" ? (
                       <h1
                         style={{
-                          fontFamily: "Poppins",
+                          fontFamily: "Interstate",
                           fontWeight: "600",
                           color: "#273240",
                         }}

@@ -106,7 +106,7 @@
   background-color: #ffffff;
   color: black;
   padding: 0.5rem;
-  font-family: sans-serif;
+  font-family: "Interstate";
   border-radius: 0.3rem;
   cursor: pointer;
   width: 150%;
@@ -258,7 +258,7 @@ ul.dashed > li:before {
   justify-content: center;
   align-items: center;
   z-index: 1;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Interstate";
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -275,7 +275,7 @@ ul.dashed > li:before {
   justify-content: center;
   align-items: center;
   color: white; /* different */
-  font-family: "Montserrat", sans-serif;
+  font-family: "Interstate";
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -332,7 +332,7 @@ h1 {
   background-color: #ffffff;
   color: black;
   padding: 0.5rem;
-  font-family: sans-serif;
+  font-family: "Interstate";
   border-radius: 0.3rem;
   cursor: pointer;
   display: inline-flex;

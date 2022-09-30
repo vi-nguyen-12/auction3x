@@ -9,7 +9,7 @@ import NewCards from "../Cards/NewCards";
 import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 
 const Carousel = styled(Slider)`
   // height: 100vh;

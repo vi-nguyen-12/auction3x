@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 import partner from "../../images/partner.png";
 import contact from "../../images/contact.png";
 import about2 from "../../images/about2.png";

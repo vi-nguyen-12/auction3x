@@ -113,6 +113,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     type="text"
                     className="form-control"
                     {...register("firstName", { required: true })}
+                    required
                   />
                 </Col>
                 <Col className="mb-2" md={4} xs={12}>
@@ -122,6 +123,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     type="text"
                     className="form-control"
                     {...register("lastName", { required: true })}
+                    required
                   />
                 </Col>
                 <Col className="mb-2" md={4} xs={12}>
@@ -131,6 +133,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     type="text"
                     className="form-control"
                     {...register("company", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
@@ -142,6 +145,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     type="text"
                     className="form-control"
                     {...register("email", { required: true })}
+                    required
                   />
                 </Col>
                 <Col className="mb-2" md={6} xs={12}>
@@ -158,6 +162,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                       borderRight: "none",
                     }}
                     onChange={setPhone}
+                    required
                   />
                 </Col>
               </Row>{" "}
@@ -170,6 +175,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="subject"
                     {...register("subject", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
@@ -180,12 +186,13 @@ function PartnerWithUs({ windowSize, setMessage }) {
                     placeholder="Enter Message"
                     className="form-control"
                     {...register("message", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
               <Row style={{ marginTop: "50px" }}>
-                <Col>
-                  <button type="submit" className="loginBtn">
+                <Col className="d-flex justify-content-end">
+                  <button type="submit" className="btn btn-primary">
                     Send
                   </button>
                 </Col>

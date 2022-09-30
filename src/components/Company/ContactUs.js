@@ -103,6 +103,7 @@ function ContactUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="firstName"
                     {...register("firstName", { required: true })}
+                    required
                   />
                 </Col>
                 <Col className="mb-2" md={6} xs={12}>
@@ -113,6 +114,7 @@ function ContactUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="lastName"
                     {...register("lastName", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
@@ -125,6 +127,7 @@ function ContactUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="email"
                     {...register("email", { required: true })}
+                    required
                   />
                 </Col>
                 <Col className="mb-2" md={6} xs={12}>
@@ -141,6 +144,7 @@ function ContactUs({ windowSize, setMessage }) {
                       borderRight: "none",
                     }}
                     onChange={setPhone}
+                    required
                   />
                 </Col>
               </Row>
@@ -153,6 +157,7 @@ function ContactUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="subject"
                     {...register("subject", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
@@ -164,12 +169,13 @@ function ContactUs({ windowSize, setMessage }) {
                     className="form-control"
                     name="message"
                     {...register("message", { required: true })}
+                    required
                   />
                 </Col>
               </Row>
               <Row style={{ marginTop: "50px" }}>
-                <Col>
-                  <button type="submit" className="loginBtn">
+                <Col className="d-flex justify-content-end">
+                  <button type="submit" className="btn btn-primary">
                     Send
                   </button>
                 </Col>

@@ -13,7 +13,6 @@ import { login, logout } from "./slice/userSlice";
 import { addSavedProperty } from "./slice/savedPropertySlice";
 import { addIncompProperty } from "./slice/incompleteProp";
 import authService from "./services/authServices";
-import Header from "./components/Home/Header";
 import NavBar from "./components/Home/NewHome/NavBar";
 import ScrollTop from "./components/ScrollTop";
 import ButtontoTop from "./components/ButtontoTop";

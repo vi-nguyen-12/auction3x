@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 import { Modal, Table, Row, Col } from "react-bootstrap";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import styled from "styled-components";

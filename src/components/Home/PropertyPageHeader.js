@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 import { MdOutlineMyLocation } from "react-icons/md";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -258,7 +258,6 @@ function PropertyPageHeader({
       };
     }
     setFilter(filter);
-    console.log(filter);
     history.push({
       pathname:
         propType === "auctions"
@@ -434,8 +433,6 @@ function PropertyPageHeader({
     setSelectedPrice,
     setSelectedYear,
   ]);
-
-  console.log(selectedPrice);
 
   return (
     <>

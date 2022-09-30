@@ -24,7 +24,7 @@ const SidebarLabel = styled.button`
   color: #96a0af;
   font-weight: 500;
   font-size: 18px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Interstate", sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;

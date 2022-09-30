@@ -9,7 +9,7 @@ import authService from "../../services/authServices";
 import ErrorPage from "../Error/404page";
 import Loading from "../Loading";
 import { useHistory } from "react-router-dom";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 
 const Carousel = styled(Slider)`
   // height: 100vh;

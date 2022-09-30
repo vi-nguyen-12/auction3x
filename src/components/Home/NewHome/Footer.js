@@ -14,9 +14,11 @@ function Footer({ windowSize, setMessage }) {
           setMessage(res.data.error);
         } else {
           setMessage("");
-          setMessage(
-            "Thank you for subscribing, we will be sending you the best deals!"
-          );
+          setTimeout(() => {
+            setMessage(
+              "Thank you for subscribing, we will be sending you the best deals!"
+            );
+          }, 100);
         }
       });
     } else {

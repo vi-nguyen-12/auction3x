@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/realEstate.css";
+import "../../styles/property-display.css";
 import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
 import DisplayRealEstate from "../RealEstate/DisplayRealEstate";

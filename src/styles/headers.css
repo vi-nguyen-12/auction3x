@@ -1,29 +1,5 @@
 /*Display Form*/
 
-.display-content {
-  margin: auto;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  height: 1000px;
-  width: 850px;
-  top: 50px;
-}
-
-.list-info-1 {
-  display: inline-flex;
-  justify-content: left;
-}
-.list-info-1 p {
-  display: flex;
-  justify-content: left;
-}
-
 .realHeader {
   /* margin-top: 60px; */
   display: grid;
@@ -55,7 +31,7 @@
 }
 
 .realHeader p {
-  font-family: "Montserrat";
+  font-family: "Interstate";
   font-style: normal;
   font-weight: normal;
   color: #ffffff;
@@ -199,22 +175,6 @@
   border-bottom: 2px solid #edb48b;
 }
 
-.DocVault {
-  padding: 20px;
-  font-size: large;
-}
-
-.DocVault-1 {
-  padding: 20px;
-  font-size: large;
-  display: flex;
-  justify-content: center;
-}
-
-.styl {
-  background-color: white;
-}
-
 .modal-head-map {
   width: 100% !important;
 }
@@ -231,63 +191,11 @@
   cursor: pointer;
 }
 
-.RealButtonPrice {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  height: 50px;
-  margin: 10px 0;
-  border: none;
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.RealButtonPrice:hover {
-  background: white;
-  border: 1px solid grey;
-}
-.RealButtonPrice:focus {
-  background: white;
-  border: 1px solid grey;
-}
-
-.priceDrop {
-  width: 300px;
-  height: auto;
-  position: absolute;
-  background: white;
-  display: grid;
-  justify-content: center;
-  padding: 20px;
-  border-radius: 0.25rem;
-  margin-left: -50px;
-  margin-top: 65px;
-}
-
-.priceDrop input {
-  height: fit-content;
-}
-
-/* .RealButtonPrice:hover .priceDrop{
-  display: block;
-} */
-
 @media (max-width: 1100px) {
-  /* .row > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
   .RealButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 160px;
-  }
-  .filterText {
-    margin: 10px 0;
     width: 160px;
   }
 }
@@ -308,6 +216,7 @@
   margin: 0;
   padding: 0;
   border: none;
+  margin: 10px;
 }
 .searchBar:focus {
   outline: none;
@@ -343,10 +252,6 @@
   color: white;
   width: 100%;
   height: 50px;
-}
-.searchBar {
-  width: 100%;
-  margin: 10px;
 }
 
 .slick-slider {

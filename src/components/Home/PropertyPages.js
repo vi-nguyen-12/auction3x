@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useHistory } from "react-router-dom";
 import { Row, Col, Modal, Image } from "react-bootstrap";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 import RealEstatePage from "../RealEstate/RealEstatePage";
 import CarPage from "../Cars/CarPage";
 import JetPage from "../Jets/JetPage";

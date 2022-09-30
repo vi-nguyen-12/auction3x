@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import authService from "../../services/authServices";
-import "../../styles/realEstate.css";
+import "../../styles/headers.css";
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import NewCards from "../Cards/NewCards";
