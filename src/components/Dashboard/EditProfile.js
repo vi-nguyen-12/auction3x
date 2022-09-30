@@ -129,7 +129,7 @@ function EditProfile({ setMessage }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col>
+        <Col md={4} xs={12}>
           <span>First Name</span>
           <input
             className="form-control"
@@ -138,7 +138,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={4} xs={12}>
           <span>Last Name</span>
           <input
             className="form-control"
@@ -147,7 +147,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setLastName(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={4} xs={12}>
           <span>Username</span>
           <input
             className="form-control"
@@ -158,7 +158,7 @@ function EditProfile({ setMessage }) {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col>
+        <Col md={6} xs={12}>
           <span>Email</span>
           <input
             className="form-control"
@@ -167,7 +167,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={6} xs={12}>
           <span>Phone</span>
           <PhoneInput
             disableCountryCode={false}
@@ -185,7 +185,7 @@ function EditProfile({ setMessage }) {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col>
+        <Col md={6} xs={12}>
           <span>Country</span>
           <input
             className="form-control"
@@ -194,7 +194,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setCountry(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={6} xs={12}>
           <span>City</span>
           <input
             className="form-control"
@@ -221,7 +221,7 @@ function EditProfile({ setMessage }) {
         <Col style={{ fontSize: "20px", fontWeight: "700" }}>Social Media</Col>
       </Row>
       <Row>
-        <Col>
+        <Col md={4} xs={12}>
           <span>Instagram</span>
           <input
             className="form-control"
@@ -230,7 +230,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setInstagram(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={4} xs={12}>
           <span>Facebook</span>
           <input
             className="form-control"
@@ -239,7 +239,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setFacebook(e.target.value)}
           />
         </Col>
-        <Col>
+        <Col md={4} xs={12}>
           <span>Twitter</span>
           <input
             className="form-control"
@@ -263,7 +263,7 @@ function EditProfile({ setMessage }) {
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col>
+          <Col md={4} xs={12}>
             <span>Current Password</span>
             <input
               className="form-control"
@@ -271,7 +271,7 @@ function EditProfile({ setMessage }) {
               onChange={(e) => setOldPass(e.target.value)}
             />
           </Col>
-          <Col>
+          <Col md={4} xs={12}>
             <span>New Password</span>
             <input
               className="form-control"
@@ -279,7 +279,7 @@ function EditProfile({ setMessage }) {
               onChange={(e) => setNewPass(e.target.value)}
             />
           </Col>
-          <Col>
+          <Col md={4} xs={12}>
             <span>Confirm Password</span>
             <input
               className="form-control"
