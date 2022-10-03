@@ -74,6 +74,15 @@ function NavBar({
     }
   };
 
+  const handleLogoClick = () => {
+    if (history.location.pathname === "/") {
+      window.scrollTo(0, 0);
+    } else {
+      history.push("/");
+      window.location.reload();
+    }
+  };
+
   return (
     <Row
       className="p-0 m-0 nav-container"
@@ -89,10 +98,7 @@ function NavBar({
         style={{ paddingLeft: windowSize > 1070 && "2rem" }}
       >
         <img
-          onClick={() => {
-            history.push("/");
-            window.location.reload();
-          }}
+          onClick={handleLogoClick}
           src="/images/newName.png"
           width={windowSize < 768 ? "150px" : "180px"}
           height="auto"

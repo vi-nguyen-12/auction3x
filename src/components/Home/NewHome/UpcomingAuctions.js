@@ -164,7 +164,7 @@ function UpcomingAuctions({
           <Row style={{ height: "100vh" }}></Row>
         )}
       </Row>
-      <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
+      <Row className="d-flex justify-content-center align-items-center mt-2 px-5">
         {upcomingAuctions.length > 0 && windowSize < 800
           ? upcomingAuctions.map((property, index) => (
               <div

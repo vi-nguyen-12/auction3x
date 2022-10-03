@@ -305,8 +305,11 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                 </div>
               </div>
 
-              {new Date().toISOString() < data.auctionStartDate &&
-              new Date().toISOString() < data.registerEndDate ? (
+              {new Date().toISOString() < data.registerStartDate ? (
+                <span className="card-section-title">Registration Starts</span>
+              ) : new Date().toISOString() < data.auctionStartDate &&
+                new Date().toISOString() < data.registerEndDate &&
+                new Date().toISOString() >= data.registerStartDate ? (
                 <span className="card-section-title">Registration Ends</span>
               ) : new Date().toISOString() > data.registerEndDate &&
                 new Date().toISOString() < data.auctionStartDate ? (
@@ -316,8 +319,18 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
               )}
               {new Date().toISOString() > data.auctionEndDate ? (
                 <p className="auction-end p-0 m-0">Auction Ended</p>
+              ) : new Date().toISOString() < data.registerStartDate ? (
+                <div style={{ paddingBottom: "1.8rem" }}>
+                  <div className="position-absolute">
+                    <AuctionTimer
+                      time={data.registerStartDate}
+                      windowSize={windowSize}
+                    />
+                  </div>
+                </div>
               ) : new Date().toISOString() < data.auctionStartDate &&
-                new Date().toISOString() < data.registerEndDate ? (
+                new Date().toISOString() < data.registerEndDate &&
+                new Date().toISOString() >= data.registerStartDate ? (
                 <div style={{ paddingBottom: "1.8rem" }}>
                   <div className="position-absolute">
                     <AuctionTimer
@@ -389,7 +402,8 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
               disabled={
                 new Date().toISOString() > data.auctionEndDate ||
                 (new Date().toISOString() > data.registerEndDate &&
-                  new Date().toISOString() < data.auctionStartDate)
+                  new Date().toISOString() < data.auctionStartDate) ||
+                new Date().toISOString() < data.registerStartDate
               }
               className="card-bid-btn"
             >

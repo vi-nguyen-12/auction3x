@@ -215,7 +215,7 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
           <thead style={{ background: "black", color: "white" }}>
             <tr>
               <th>#</th>
-              <th>Auction ID</th>
+              <th>Auction</th>
               <th>Auction Status</th>
               <th colSpan={2}>Property Address</th>
               <th colSpan={2}>Questionair</th>

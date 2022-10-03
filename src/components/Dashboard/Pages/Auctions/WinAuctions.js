@@ -55,6 +55,8 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
       setNewWinAuctions(winAuctions);
     }
   }, [search]);
+  
+  console.log(winAuctions);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -75,7 +77,7 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
           <thead style={{ background: "black", color: "white" }}>
             <tr>
               <th>#</th>
-              <th>Auction ID</th>
+              <th>Auction</th>
               <th colSpan={2}>Property Type</th>
               <th colSpan={2}>Property Address</th>
               <th colSpan={2}>Bid Amount</th>

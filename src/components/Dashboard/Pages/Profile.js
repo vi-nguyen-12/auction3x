@@ -15,8 +15,8 @@ import CloseButton from "react-bootstrap/CloseButton";
 import parse from "html-react-parser";
 
 const Carousel = styled(Slider)`
-  height: 100%;
-  width: 100%;
+  // height: 100%;
+  // width: 100%;
   overflow-x: hidden;
 
   & > button {
@@ -71,21 +71,6 @@ const Carousel = styled(Slider)`
   }
 `;
 
-const Wrap = styled.div`
-border-radius: 15px;
-// cursor: pointer;
-// position: relative;
-width: 250px;
-height: 150px;
-
-  // &:hover {
-  //   padding: 0;
-  //   transform: scale(1.03);
-  //   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  // }
-}
-`;
-
 function Profile({ id, windowSize, setMessage }) {
   const user = useSelector((state) => state.user);
   const [listedProp, setListedProp] = useState([]);
@@ -126,41 +111,6 @@ function Profile({ id, windowSize, setMessage }) {
         >
           <FiEdit size={20} />
         </Button>
-        <Modal
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showEdit}
-          onHide={toggleEdit}
-          backdrop="static"
-          keyboard={false}
-          className="edit-modal"
-        >
-          <Modal.Header className="auction-modal-header">
-            <Modal.Title className="auction-modal-title px-3">
-              Edit Profile
-            </Modal.Title>
-          </Modal.Header>
-          <div
-            style={{
-              position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton
-              className="modal-close"
-              style={{ backgroundColor: "white" }}
-              onClick={() => {
-                toggleEdit();
-              }}
-            />
-          </div>
-          <Modal.Body>
-            <EditProfile />
-          </Modal.Body>
-        </Modal>
       </div>
       <Row>
         <Col
@@ -310,6 +260,42 @@ function Profile({ id, windowSize, setMessage }) {
           </Row>
         </Col>
       </Row>
+
+      <Modal
+        size="lg"
+        // aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showEdit}
+        onHide={toggleEdit}
+        backdrop="static"
+        keyboard={false}
+        className="edit-modal"
+      >
+        <Modal.Header className="auction-modal-header">
+          <Modal.Title className="auction-modal-title px-3">
+            Edit Profile
+          </Modal.Title>
+        </Modal.Header>
+        <div
+          style={{
+            position: "absolute",
+            top: windowSize < 600 ? "0" : "25px",
+            right: windowSize < 600 ? "0" : "25px",
+            zIndex: "999",
+          }}
+        >
+          <CloseButton
+            className="modal-close"
+            style={{ backgroundColor: "white" }}
+            onClick={() => {
+              toggleEdit();
+            }}
+          />
+        </div>
+        <Modal.Body>
+          <EditProfile />
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 }

@@ -289,7 +289,7 @@ function DashHeader({
                         {notification.message}
                         <span
                           onClick={() => handleDelete(notification._id)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", color: "red" }}
                         >
                           X
                         </span>

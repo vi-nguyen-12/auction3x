@@ -514,7 +514,13 @@ function DisplayCar({
                   className="registBtn"
                   style={{ margin: windowSize < 500 && "30px 0" }}
                 >
-                  <button className="registsBtn" onClick={toggleRegister}>
+                  <button
+                    className="registsBtn"
+                    disabled={
+                      new Date().toISOString() < property.registerStartDate
+                    }
+                    onClick={toggleRegister}
+                  >
                     Register to Bid
                   </button>
                   <div className="d-flex justify-content-center mt-2">
@@ -660,11 +666,19 @@ function DisplayCar({
                   >
                     <div className="d-grid justify-content-center auction-boxes">
                       <RegistrationTimer
-                        time={property.registerEndDate}
+                        time={
+                          new Date().toISOString() < property.registerStartDate
+                            ? property.registerStartDate
+                            : property.registerEndDate
+                        }
                         toggleRegistEnded={toggleRegistEnded}
                         windowSize={windowSize}
                       />
-                      <span>Registration Ends</span>
+                      <span>
+                        {new Date().toISOString() < property.registerStartDate
+                          ? "Registration Starts"
+                          : "Registration Ends"}
+                      </span>
                     </div>
                   </Col>
                 ) : (

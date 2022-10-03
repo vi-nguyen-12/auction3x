@@ -53,6 +53,8 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
     }
   }, [search]);
 
+  console.log(bidAuctions);
+
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>
@@ -72,7 +74,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
           <thead style={{ background: "black", color: "white" }}>
             <tr>
               <th>#</th>
-              <th>Auction ID</th>
+              <th>Auction</th>
               <th>Property Address</th>
               <th colSpan={2}>Auction Status</th>
               <th colSpan={2}>Auction Highest Bid</th>
@@ -131,7 +133,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                   )}
                   <td colSpan={2}>
                     <NumberFormat
-                      value={auction.winner ? auction.winner.amount : 0}
+                      value={auction.highestBid?.amount}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
@@ -140,7 +142,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                   <td colSpan={2}>
                     {" "}
                     <NumberFormat
-                      value={auction.highestBid?.amount}
+                      value={auction.bids[auction.bids.length - 1].amount}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={"$"}
