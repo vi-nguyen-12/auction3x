@@ -444,8 +444,8 @@ h1 {
   justify-content: center;
   background-image: linear-gradient(60deg, #43bbf3, #3a7ec7, #3047a2);
   color: white;
-  border-radius: 0!important;
-  padding: 2.5rem 1rem!important;
+  border-radius: 0 !important;
+  padding: 2.5rem 1rem !important;
 }
 
 .login-modal-header {
@@ -634,20 +634,22 @@ h1 {
   color: #a5a5a5;
 }
 
-#toast-container {
-  animation: toast 0.5s ease-in-out;
+.toast-container {
+  animation: toast 0.4s linear forwards, toast-hide 0.4s linear forwards 3s;
 }
 
-#toast-container-hide {
+/* #toast-container-hide {
   animation: toast-hide 0.5s ease-in-out;
-}
+} */
 
 @keyframes toast-hide {
   0% {
-    transform: translateY(50px);
+    opacity: 1;
+    transform: translateY(0);
   }
   100% {
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateY(-20px);
   }
 }
 

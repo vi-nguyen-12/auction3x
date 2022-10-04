@@ -7,6 +7,7 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import "../../styles/team.css";
 
 let settings = {
   dots: false,
@@ -88,6 +89,7 @@ const Wrap = styled.div`
 function Team({ windowSize, setMessage }) {
   const [team, setTeam] = useState([]);
   const [list, setList] = useState([]);
+  const [id, setId] = useState("");
 
   useEffect(() => {
     authService.getTeam().then((res) => {
@@ -97,6 +99,7 @@ function Team({ windowSize, setMessage }) {
       } else {
         setTeam(res.data);
         setList(res.data);
+        setId("pop-up");
       }
     });
   }, []);
@@ -104,10 +107,19 @@ function Team({ windowSize, setMessage }) {
   const onClick = (title) => () => {
     if (title === "All") {
       setList(team);
+      setId("pop-up");
     } else {
-      setList(team.filter((item) => item.department === title));
+      setId("");
+      setTimeout(() => {
+        setId("pop-up");
+      }, 1);
+      setTimeout(() => {
+        setList(team.filter((item) => item.department === title));
+      }, 3);
     }
   };
+
+  console.log(id);
 
   return (
     <>
@@ -132,22 +144,11 @@ function Team({ windowSize, setMessage }) {
           </Col>
         </Row>
 
-        <Row
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            // alignContent: "center",
-          }}
-        >
+        <Row className="d-flex justify-content-center">
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("All")}
@@ -157,13 +158,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("founder")}
@@ -173,13 +169,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("operation")}
@@ -189,13 +180,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("marketing")}
@@ -205,13 +191,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("research")}
@@ -221,13 +202,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("technology")}
@@ -237,13 +213,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("business")}
@@ -253,13 +224,8 @@ function Team({ windowSize, setMessage }) {
           </Col>
           <Col style={{ flex: "0" }}>
             <Button
+              className="team-btn"
               style={{
-                fontSize: "20px",
-                background: "none",
-                color: "#706666",
-                fontWeight: "bold",
-                border: "1px solid #e2e2e2 ",
-                width: "130px",
                 margin: windowSize < 800 && "10px 0",
               }}
               onClick={onClick("legal")}
@@ -325,23 +291,12 @@ function Team({ windowSize, setMessage }) {
             </Col>
           </Row>
         )} */}
-        <Row
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "center",
-          }}
-        >
+        <Row className="d-flex justify-content-evenly align-items-center">
           {list.length > 0 && windowSize > 600 ? (
             list.map((member, index) => (
               <Col
                 key={index}
-                className="ceo-card"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  margin: "20px",
-                }}
+                className="d-flex justify-content-center m-2"
                 md={2}
               >
                 <TeamCard
@@ -350,6 +305,7 @@ function Team({ windowSize, setMessage }) {
                   location={member.location}
                   img={member.profileImage}
                   linkedln={member.linkedln}
+                  id={id}
                 />
               </Col>
             ))
@@ -367,6 +323,7 @@ function Team({ windowSize, setMessage }) {
                     location={member.location}
                     img={member.profileImage}
                     linkedln={member.linkedln}
+                    id={id}
                   />
                 </Col>
               ))}

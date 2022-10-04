@@ -12,8 +12,8 @@ const ToastMessage = ({ type, message, duration = 5000 }) => {
     <>
       {showToast && (
         <div
-          className="d-flex justify-content-center align-items-center position-fixed bg-white"
-          id={showToast ? "toast-container" : "toast-container-hide"}
+          className="d-flex justify-content-center align-items-center position-fixed bg-white toast-container"
+          // id={showToast ? "toast-container" : "toast-container-hide"}
           style={{
             zIndex: "10000",
             right: "20px",

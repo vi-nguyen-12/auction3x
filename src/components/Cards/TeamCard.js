@@ -1,44 +1,28 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import * as FA from "react-icons/fa";
+import "../../styles/team.css";
 
-const Founder = ({ firstName, lastName, title, img, linkedln, location }) => {
+const Founder = ({
+  firstName,
+  lastName,
+  title,
+  img,
+  linkedln,
+  location,
+  id,
+}) => {
   return (
-    <Card
-      className="Card-info"
-      size="sm"
-      style={{
-        width: "150px",
-        margin: "10px",
-        border: "none",
-        backgroundColor: "transparent",
-      }}
-    >
+    <Card className="team-card" id={id} size="sm">
       <Card.Img
         variant="top"
         src={img}
         className="img-fluid"
         style={{ borderRadius: "50%", border: "2px solid #769ccd" }}
       />
-      <Card.Body
-        style={{
-          display: "grid",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "0",
-        }}
-      >
+      <Card.Body className="d-grid justify-content-center align-items-center p-0">
         <Card.Text>
-          <span
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginBottom: "10px",
-              color: "#181c35",
-            }}
-          >
+          <span className="team-card-name">
             {firstName} {lastName}
           </span>
           {/* <span style={{ fontSize: "12px"}} className="mb-2">
