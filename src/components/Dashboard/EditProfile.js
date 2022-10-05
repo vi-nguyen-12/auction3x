@@ -213,6 +213,7 @@ function EditProfile({ setMessage }) {
           <input
             className="form-control"
             type="file"
+            accept="image/*"
             {...register("images", { onChange: changeProfilePic })}
           />
         </Col>

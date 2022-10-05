@@ -410,7 +410,7 @@ function App() {
               onHide={() => setShowCookiesPolicy(!showCookiesPolicy)}
               centered
             >
-              <Modal.Header className="login-modal-header">
+              <Modal.Header className="auction-modal-header">
                 <Modal.Title className="auction-modal-title px-3">
                   Cookies Policy
                 </Modal.Title>
@@ -438,7 +438,7 @@ function App() {
 
             <Modal
               backdrop="static"
-              size="md"
+              size="lg"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -447,8 +447,11 @@ function App() {
               contentclassname="confirm"
             >
               <Modal.Header className="auction-modal-header">
-                <Modal.Title className="auction-modal-title px-3">
-                  Re-Send Verification Email
+                <Modal.Title
+                  className="auction-modal-title px-3"
+                  style={{ fontSize: windowSize < 800 && "1.5rem" }}
+                >
+                  Re-Send Confirmation
                 </Modal.Title>
               </Modal.Header>
               <div

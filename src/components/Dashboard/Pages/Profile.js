@@ -293,7 +293,7 @@ function Profile({ id, windowSize, setMessage }) {
           />
         </div>
         <Modal.Body>
-          <EditProfile />
+          <EditProfile setMessage={setMessage} windowSize={windowSize} />
         </Modal.Body>
       </Modal>
     </Container>
