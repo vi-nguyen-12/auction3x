@@ -14,7 +14,7 @@ import NumberFormat from "react-number-format";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../../Loading";
 
-function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
+function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [pendingAuctions, setPendingAuctions] = useState([]);
   const [newPendingAuctions, setNewPendingAuctions] = useState([]);
@@ -219,7 +219,7 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
               <th>Auction Status</th>
               <th colSpan={2}>Property Address</th>
               <th colSpan={2}>Questionair</th>
-              <th colSpan={2}>Documents</th>
+              <th colSpan={2}>Funds</th>
               <th colSpan={2}>Total Approved Fund</th>
               <th>View Auction</th>
             </tr>
@@ -449,7 +449,7 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
                             question.questionId.length - 5
                           )}
                         </td>
-                        <td>{question.question}</td>
+                        <td>{question.questionText}</td>
                         {edit === index ? (
                           <td>
                             <input
@@ -462,7 +462,7 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
                                     if (i === index) {
                                       return {
                                         ...q,
-                                        answer: e.target.value,
+                                        answer: e.target.value.toLowerCase(),
                                       };
                                     } else {
                                       return q;
@@ -496,6 +496,9 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
                                   })
                                 );
                               }}
+                              disabled={
+                                question.answer === "yes" ? false : true
+                              }
                             />
                           </td>
                         ) : (
@@ -514,6 +517,9 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
                               onChange={handleFile}
                               multiple
                               hidden
+                              disabled={
+                                question.answer === "yes" ? false : true
+                              }
                             />
                             <label
                               htmlFor="fileEdit"
@@ -562,9 +568,9 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
                           {edit === index ? (
                             <Button
                               onClick={() => setEdit()}
-                              className="bg-danger border-0 mx-2 mt-2"
+                              className="bg-danger border-0"
                             >
-                              Edit
+                              Close
                             </Button>
                           ) : (
                             <Button
@@ -848,4 +854,4 @@ function PendingAuctions({ windowSize, searchBy, search, setMessage }) {
   );
 }
 
-export default PendingAuctions;
+export default BuyerApproval;

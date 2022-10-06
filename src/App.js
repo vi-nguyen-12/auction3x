@@ -25,7 +25,7 @@ import Messaging from "./components/Dashboard/Pages/Messaging";
 import Profile from "./components/Dashboard/Pages/Profile";
 import BidAuctions from "./components/Dashboard/Pages/Auctions/BidAuctions";
 import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
-import PendingAuctions from "./components/Dashboard/Pages/Auctions/PendingAuctions";
+import BuyerApproval from "./components/Dashboard/Pages/Auctions/BuyerApproval";
 import WinAuctions from "./components/Dashboard/Pages/Auctions/WinAuctions";
 import LiveListings from "./components/Dashboard/Pages/Listings/LiveListings";
 import PendingListings from "./components/Dashboard/Pages/Listings/PendingListings";
@@ -857,7 +857,7 @@ function App() {
                       setMessage={setMessage}
                       windowSize={windowSize}
                     >
-                      <PendingAuctions />
+                      <BuyerApproval />
                     </Dashboard>
                   </Route>
                 )}

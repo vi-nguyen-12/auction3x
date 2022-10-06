@@ -9,7 +9,7 @@ import Sidebar from "./Sidebar";
 import Profile from "./Pages/Profile";
 import BidAuctions from "./Pages/Auctions/BidAuctions";
 import SavedAuctions from "./Pages/Auctions/SavedAuctions";
-import PendingAuctions from "./Pages/Auctions/PendingAuctions";
+import BuyerApproval from "./Pages/Auctions/BuyerApproval";
 import WinAuctions from "./Pages/Auctions/WinAuctions";
 import LiveListings from "./Pages/Listings/LiveListings";
 import PendingListings from "./Pages/Listings/PendingListings";
@@ -628,7 +628,7 @@ function Dashboard({
               />
             </Route>
             <Route exact path="/Dashboard/Auctions/BuyerApproval">
-              <PendingAuctions
+              <BuyerApproval
                 windowSize={windowSize}
                 searchBy={searchBy}
                 search={search}

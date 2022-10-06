@@ -55,11 +55,12 @@ function AddFund({ setMessage }) {
   };
 
   const fixDate = (date) => {
-    const newDate = new Date(date);
-    const day = newDate.getDate() + 1;
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
-    setValidityDate(`${month}-${day}-${year}`);
+    // const newDate = new Date(date);
+    // const day = newDate.getDate() + 1;
+    // const month = newDate.getMonth() + 1;
+    // const year = newDate.getFullYear();
+    // setValidityDate(`${month}-${day}-${year}`);
+    setValidityDate(new Date(date).toISOString());
   };
 
   const onSubmit = async (data) => {
