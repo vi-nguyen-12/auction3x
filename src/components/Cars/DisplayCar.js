@@ -148,7 +148,7 @@ function DisplayCar({
       lat: property ? property.property.details.property_address.lat : null,
       lng: property ? property.property.details.property_address.lng : null,
     });
-  }, [property]);
+  }, [property, toggleChange]);
 
   useEffect(() => {
     if (user._id) {
@@ -161,7 +161,7 @@ function DisplayCar({
         }
       }
     }
-  }, [savedProperty]);
+  }, [savedProperty, user._id, property._id]);
 
   const ownershipDoc = property.property.documents.filter(
     (doc) => doc.officialName === "ownership_document"
@@ -365,6 +365,7 @@ function DisplayCar({
                           <Wrap key={index}>
                             {item.name === "videos" ? (
                               <iframe
+                                title="video"
                                 src={`https://www.youtube.com/embed/${item.url.slice(
                                   32,
                                   item.url.indexOf("&")
@@ -447,7 +448,6 @@ function DisplayCar({
           <Row
             style={{
               margin: "0",
-              padding: "0",
               padding: windowSize > 500 ? "35px" : "15px",
             }}
           >
@@ -645,7 +645,6 @@ function DisplayCar({
           <Row
             style={{
               margin: "0",
-              padding: "0",
               padding: windowSize > 500 ? "0 35px" : "0 15px",
             }}
           >
@@ -1029,7 +1028,6 @@ function DisplayCar({
             className="mt-4"
             style={{
               margin: "0",
-              padding: "0",
               padding: windowSize < 500 ? "25px 15px" : "35px",
             }}
           >

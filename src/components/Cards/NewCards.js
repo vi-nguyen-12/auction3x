@@ -69,7 +69,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         }
       }
     }
-  }, [savedProperty]);
+  }, [savedProperty, user._id, data._id]);
 
   return (
     <Card
@@ -103,6 +103,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         variant="top"
         onClick={handleDisplay}
         src={data.property.images[0].url}
+        alt="property"
       />
       <button
         onClick={handleLike}

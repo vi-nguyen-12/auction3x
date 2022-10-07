@@ -3,13 +3,12 @@ import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useForm } from "react-hook-form";
 import "../../styles/buyer.css";
-import NumberFormat from "react-number-format";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
 
 function AddFund({ setMessage }) {
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
   const user = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
   const [other, setOther] = useState(false);
@@ -40,11 +39,11 @@ function AddFund({ setMessage }) {
     e.target.value = null;
   };
 
-  useEffect(async () => {
-    await authService.getBuyerInfo(user._id).then((res) => {
+  useEffect(() => {
+    authService.getBuyerInfo(user._id).then((res) => {
       setRegisteredAuctions(res.data);
     });
-  }, []);
+  }, [user._id]);
 
   const fundDoc = document.map((doc) => {
     return { ...doc, officialName: name };

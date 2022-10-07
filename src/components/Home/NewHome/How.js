@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import React from "react";
+import { Row, Col } from "react-bootstrap";
 import monitor from "../../../images/monitor.png";
 import checkList from "../../../images/checkList.png";
 import handshake from "../../../images/handshake.png";

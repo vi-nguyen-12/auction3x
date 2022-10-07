@@ -1,5 +1,4 @@
 import React from "react";
-import * as AI from "react-icons/ai";
 import * as RI from "react-icons/ri";
 import { RiAuctionFill } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";

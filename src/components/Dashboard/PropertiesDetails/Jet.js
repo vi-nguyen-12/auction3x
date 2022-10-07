@@ -127,8 +127,7 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
                       : setOther(false);
                   }
                 } else {
-                  property.details.aircraft_builder_name =
-                    property.details.aircraft_builder_name;
+                  return property.details.aircraft_builder_name;
                 }
               }}
               disabled={!edit.step2_1}

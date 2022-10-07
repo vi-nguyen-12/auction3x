@@ -53,7 +53,7 @@ const Home = ({ toggleSignIn, windowSize, setMessage }) => {
       });
     }
     getAuctions();
-  }, []);
+  }, [setMessage]);
 
   useEffect(() => {
     if (onGoingAuctions && upcomingAuctions) {
@@ -67,7 +67,7 @@ const Home = ({ toggleSignIn, windowSize, setMessage }) => {
     } else if (params.sectionId === "upcoming") {
       window.scrollTo(0, windowSize > 800 ? 2800 : 3500);
     }
-  }, []);
+  }, [params.sectionId, windowSize]);
 
   return (
     <>

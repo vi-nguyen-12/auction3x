@@ -1,13 +1,17 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import error from "../../../src/images/error.png";
 import ErrorIcon from "../../images/ErrorIcon.png";
 
 function ErrorPage({ windowSize }) {
   const history = useHistory();
   return (
-    <Row style={{ background: "#F5F9FF", padding: windowSize < 800 ? "1rem" : "3rem" }}>
+    <Row
+      style={{
+        background: "#F5F9FF",
+        padding: windowSize < 800 ? "1rem" : "3rem",
+      }}
+    >
       <Col
         className="d-grid justify-content-center align-items-center p-5"
         style={{ backgroundColor: "#e3eaf6" }}

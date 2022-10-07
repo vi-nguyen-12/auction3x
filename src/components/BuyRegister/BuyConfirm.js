@@ -6,12 +6,11 @@ import { useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 import AuctionBidTimer from "../Auctions/AuctionBidTimer";
-import CloseButton from "react-bootstrap/CloseButton";
 
 const BuyConfirm = ({ property, setMessage, windowSize }) => {
   console.log(property);
   const user = useSelector((state) => state.user);
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount
   );

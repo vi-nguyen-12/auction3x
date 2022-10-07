@@ -8,7 +8,6 @@ import PhoneInput from "react-phone-input-2";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import parse from "html-react-parser";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
@@ -39,7 +38,7 @@ const formats = [
 
 function EditProfile({ setMessage }) {
   const user = useSelector((state) => state.user);
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [username, setUsername] = useState(user.userName);

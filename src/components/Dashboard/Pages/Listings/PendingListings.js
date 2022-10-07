@@ -9,8 +9,6 @@ import {
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
-import CloseButton from "react-bootstrap/CloseButton";
-import PropertyDetails from "../../PropertyDetails";
 
 function PendingListings({
   windowSize,
@@ -48,7 +46,7 @@ function PendingListings({
       setPageContent(pages);
       setTotalPages(totalPages);
     }
-  }, [newPendingListings]);
+  }, [newPendingListings, refresh]);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -64,7 +62,7 @@ function PendingListings({
       });
     };
     fetchPendingListings();
-  }, [refresh]);
+  }, [refresh, setMessage, user._id]);
 
   useEffect(() => {
     if (search !== undefined || search !== "") {
@@ -92,7 +90,7 @@ function PendingListings({
     } else {
       setNewPendingListings(pendingListings);
     }
-  }, [search]);
+  }, [search, searchBy, pendingListings]);
 
   for (let number = 1; number <= totalPages; number++) {
     items.push(
@@ -153,6 +151,7 @@ function PendingListings({
                         width="100px"
                         height="50px"
                         src={auction.images[0].url}
+                        alt="property"
                       />
                     </div>
                   </td>

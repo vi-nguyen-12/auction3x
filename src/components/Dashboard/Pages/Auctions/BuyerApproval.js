@@ -45,7 +45,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
       });
     };
     getBuyerPendingAuctions();
-  }, []);
+  }, [setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -73,7 +73,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewPendingAuctions(pendingAuctions);
     }
-  }, [search]);
+  }, [search, searchBy, pendingAuctions]);
 
   // Questionair files handler
   const handleFile = async (e) => {
@@ -248,6 +248,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                             ? auction.property.images[0].url
                             : ""
                         }
+                        alt="auction"
                       />
                     </div>
                   </td>

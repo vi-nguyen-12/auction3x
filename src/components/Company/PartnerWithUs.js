@@ -32,7 +32,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
         setText(res.data[0]?.htmlText || "");
       }
     });
-  }, []);
+  }, [setMessage]);
 
   const onSubmit = async (data) => {
     const datas = {

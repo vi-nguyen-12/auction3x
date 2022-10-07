@@ -4,10 +4,9 @@ import "../../styles/headers.css";
 import { MdOutlineMyLocation } from "react-icons/md";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng,
 } from "react-places-autocomplete";
 import NumberFormat from "react-number-format";
-import { useHistory, useSearchParams, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 function PropertyPageHeader({
   path,
@@ -41,7 +40,7 @@ function PropertyPageHeader({
   const [minMileage, setMinMileage] = useState();
   const [maxMileage, setMaxMileage] = useState();
   const [make, setMake] = useState();
-  const [model, setModel] = useState();
+  // const [model, setModel] = useState();
 
   const [otherPrice, setOtherPrice] = useState({
     realEstate: false,

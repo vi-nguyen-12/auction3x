@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../styles/headers.css";
 import partner from "../../images/partner.png";
 import contact from "../../images/contact.png";
@@ -9,8 +9,6 @@ import broker from "../../images/broker.png";
 import team from "../../images/team.png";
 import RealEstatePageBg from "../../images/RealEstatePageBg.png";
 import { FiSearch } from "react-icons/fi";
-import { Button } from "react-bootstrap";
-import { set } from "react-hook-form";
 
 function CompanyHeader({ location, setQuery, faqs }) {
   return (

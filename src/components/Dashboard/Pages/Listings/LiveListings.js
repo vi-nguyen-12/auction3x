@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Row, Container, Table, Button, Modal } from "react-bootstrap";
+import { Row, Container, Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
 import { useHistory } from "react-router-dom";
-import CloseButton from "react-bootstrap/CloseButton";
 
 function LiveListings({
   windowSize,
@@ -37,7 +36,7 @@ function LiveListings({
       });
     };
     fetchApprovedProperty();
-  }, []);
+  }, [setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -65,7 +64,7 @@ function LiveListings({
     } else {
       setNewUpcomingListings((pre) => [...upcomingListings]);
     }
-  }, [search]);
+  }, [search, searchBy, upcomingListings]);
 
   return (
     <>
@@ -122,6 +121,7 @@ function LiveListings({
                               ? listing.images[0].url
                               : ""
                           }
+                          alt="property"
                         />
                       </div>
                     </td>

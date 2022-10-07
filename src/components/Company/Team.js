@@ -70,22 +70,6 @@ const Carousel = styled(Slider)`
   }
 `;
 
-const Wrap = styled.div`
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
-
-  img {
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    cursor: pointer;
-    display: block;
-    position: relative;
-    padding: 0;
-  }
-`;
-
 function Team({ windowSize, setMessage }) {
   const [team, setTeam] = useState([]);
   const [list, setList] = useState([]);
@@ -102,7 +86,7 @@ function Team({ windowSize, setMessage }) {
         setId("pop-up");
       }
     });
-  }, []);
+  }, [setMessage]);
 
   const onClick = (title) => () => {
     if (title === "All") {

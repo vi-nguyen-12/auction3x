@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Button, InputGroup } from "react-bootstrap";
+import React, { useState } from "react";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  getLatLng,
 } from "react-places-autocomplete";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
@@ -16,7 +15,6 @@ import Loading from "../Loading";
 import { MdClose } from "react-icons/md";
 
 function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
-  console.log(property);
   const [edit, setEdit] = useState({
     step1: false,
     step2: false,
@@ -50,23 +48,20 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
     property.details?.property_address?.country || ""
   );
 
-  const [ownerName, setOwnerName] = useState(property.details.owner_name || "");
+  const [ownerName] = useState(property.details.owner_name || "");
   const [ownerAddress, setOwnerAddress] = useState(
     property.details.address || ""
   );
-  const [ownerEmail, setOwnerEmail] = useState(
+  const [ownerEmail] = useState(
     property.details?.broker_name ? "" : property.details?.email
   );
-  const [ownerPhone, setOwnerPhone] = useState(
-    property.details.broker_name ? "" : property.details.phone
-  );
-  const [brokerName, setBrokerName] = useState(
+  const [brokerName] = useState(
     property.details?.broker_name ? property.details?.broker_name : ""
   );
-  const [brokerEmail, setBrokerEmail] = useState(
+  const [brokerEmail] = useState(
     property.details.broker_name ? property.details.email : ""
   );
-  const [brokerId, setBrokerId] = useState(property.details.broker_id || "");
+  const [brokerId] = useState(property.details.broker_id || "");
 
   const handleChange = (address) => {
     setAddress(address);

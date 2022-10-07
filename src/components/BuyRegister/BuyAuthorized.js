@@ -64,7 +64,7 @@ const BuyAuthorized = ({
         setMessage("");
         setMessage(error.message);
       });
-  }, []);
+  }, [setMessage]);
 
   const [agree, setAgree] = useState(false);
   const dateTime = new Date().toISOString();

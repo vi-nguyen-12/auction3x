@@ -38,7 +38,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
       });
     };
     fetchIncompleteListings();
-  }, [incompProperty]);
+  }, [incompProperty, setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -66,7 +66,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewIncompleteListings(IncompleteListings);
     }
-  }, [search]);
+  }, [search, searchBy, IncompleteListings]);
 
   // seperate incomplete listings into pages
   useEffect(() => {
@@ -80,7 +80,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
       setPageContent(pages);
       setTotalPages(totalPages);
     }
-  }, [newIncompleteListings]);
+  }, [newIncompleteListings, currentPage]);
 
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {

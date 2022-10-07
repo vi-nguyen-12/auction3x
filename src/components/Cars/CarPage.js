@@ -71,7 +71,7 @@ function CarPage({
 }) {
   useEffect(() => {
     toggleChange();
-  }, []);
+  }, [toggleChange]);
   const history = useHistory();
   const slider = useRef();
   const [auctions, setAuctions] = useState([]);
@@ -81,44 +81,46 @@ function CarPage({
   const urlSearchParams = new URLSearchParams(history.location.search);
   const filters = Object.fromEntries(urlSearchParams.entries());
 
-  useEffect(async () => {
-    toggleChange();
-    if (!history.location.search) {
-      let auctions = [];
-      setLoader(true);
-      const response1 = await authService.getOngoingAuctionsByType("car");
-      if (response1.data.error) {
-        setMessage("");
-        setMessage(response1.data.error);
-      } else {
-        auctions = [...response1.data];
-      }
-      const response2 = await authService.getUpcomingAuctionsByType("car");
-      if (response2.data.error) {
-        setMessage("");
-        setMessage(response2.data.error);
-      } else {
-        auctions = [...auctions, ...response2.data];
-      }
-      setAuctions(auctions);
-      setResultLength({ car: auctions.length });
-      setLoader(false);
-    } else if (history.location.search && filters) {
-      setLoader(true);
-      authService.carFilter(filters).then((res) => {
-        if (res.data.length > 0) {
-          const car = res.data.filter((item) => item.property.type === "car");
-          setResultLength({ car: car.length });
-          setAuctions(car);
-          setLoader(false);
+  useEffect(() => {
+    async function fetchData() {
+      if (!history.location.search) {
+        let auctions = [];
+        setLoader(true);
+        const response1 = await authService.getOngoingAuctionsByType("car");
+        if (response1.data.error) {
+          setMessage("");
+          setMessage(response1.data.error);
         } else {
-          setAuctions([]);
-          setResultLength({ car: 0 });
-          setLoader(false);
+          auctions = [...response1.data];
         }
-      });
+        const response2 = await authService.getUpcomingAuctionsByType("car");
+        if (response2.data.error) {
+          setMessage("");
+          setMessage(response2.data.error);
+        } else {
+          auctions = [...auctions, ...response2.data];
+        }
+        setAuctions(auctions);
+        setResultLength({ car: auctions.length });
+        setLoader(false);
+      } else if (history.location.search && filters) {
+        setLoader(true);
+        authService.carFilter(filters).then((res) => {
+          if (res.data.length > 0) {
+            const car = res.data.filter((item) => item.property.type === "car");
+            setResultLength({ car: car.length });
+            setAuctions(car);
+            setLoader(false);
+          } else {
+            setAuctions([]);
+            setResultLength({ car: 0 });
+            setLoader(false);
+          }
+        });
+      }
     }
-  }, [history.location.search]);
+    fetchData();
+  }, [history.location.search, filters, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {
@@ -139,7 +141,7 @@ function CarPage({
       });
       setImgCar(imageUrl);
     }
-  }, [auctions]);
+  }, [auctions, setCenters, setImgCar]);
 
   let settings = {
     dots: false,

@@ -31,6 +31,7 @@ const Founder = ({
           <a
             href={linkedln}
             target="_blank"
+            rel="noreferrer"
             style={{ display: "flex", justifyContent: "center" }}
           >
             <FA.FaLinkedin size={30} color={linkedln ? "#0a66c2" : "gray"} />

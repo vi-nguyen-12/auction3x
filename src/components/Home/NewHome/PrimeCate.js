@@ -1,9 +1,9 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import RealEstate from "../../../images/RealEstate.png";
-import Car from "../../../images/Car.png";
-import Jet from "../../../images/jet.png";
-import Yacht from "../../../images/yacht.png";
+import { Row, Col } from "react-bootstrap";
+import RealEstate from "../../../images/RealEstate.webp";
+import Car from "../../../images/Car.webp";
+import Jet from "../../../images/jet.webp";
+import Yacht from "../../../images/yacht.webp";
 import { useHistory } from "react-router-dom";
 import "../../../styles/primeCategory.css";
 

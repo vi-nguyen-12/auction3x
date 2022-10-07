@@ -191,7 +191,7 @@ function Dashboard({
     if (location || loca) {
       setMessage("");
     }
-  }, [location, loca]);
+  }, [location, loca, setMessage]);
 
   const [searchBy, setSearchBy] = useState("id");
   const [search, setSearch] = useState();
@@ -316,7 +316,15 @@ function Dashboard({
     bodyColorChange("#F5F9FF");
     toggleChange();
     toggleShow();
-  }, []);
+  }, [
+    toggleChange,
+    toggleShow,
+    colorChange,
+    bodyColorChange,
+    setHeaderWidth,
+    setPositionLeft,
+    setPadRight,
+  ]);
 
   const path = window.location.pathname;
 
@@ -949,6 +957,7 @@ function Dashboard({
                                 height="50px"
                                 src={document.url}
                                 onClick={() => window.open(document.url)}
+                                alt="document"
                               />
                             </div>
                           </td>

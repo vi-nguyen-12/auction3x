@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, Row, Col, Container } from "react-bootstrap";
+import { Button, Modal, Row, Col } from "react-bootstrap";
 import authService from "../../services/authServices";
 import { useState, useEffect } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -114,7 +114,7 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
     if (!answers) {
       getQuestion();
     }
-  }, []);
+  }, [setAnswers, answers, setMessage]);
 
   return (
     <>

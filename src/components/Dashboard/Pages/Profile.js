@@ -75,16 +75,19 @@ function Profile({ id, windowSize, setMessage }) {
   const user = useSelector((state) => state.user);
   const [listedProp, setListedProp] = useState([]);
 
-  useEffect(async () => {
-    await authService.sellerPropInAuctions(user._id).then((res) => {
-      if (res.data.error) {
-        setMessage("");
-        setMessage(res.data.error);
-      } else {
-        setListedProp(res.data);
-      }
-    });
-  }, []);
+  useEffect(() => {
+    async function fetchData() {
+      await authService.sellerPropInAuctions(user._id).then((res) => {
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+        } else {
+          setListedProp(res.data);
+        }
+      });
+    }
+    fetchData();
+  }, [setMessage, user._id]);
 
   let settings = {
     dots: false,

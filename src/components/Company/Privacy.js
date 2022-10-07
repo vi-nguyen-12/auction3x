@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import CompanyHeader from "./CompanyHeader";
 import authService from "../../services/authServices";
@@ -19,7 +19,7 @@ function Privacy({ windowSize, setMessage }) {
         setText(res.data[0]?.htmlText || "");
       }
     });
-  }, []);
+  }, [setMessage]);
   return (
     <>
       <CompanyHeader location={location.pathname.split("/")[1]} />

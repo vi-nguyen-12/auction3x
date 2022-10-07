@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Row, Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
-import { useHistory } from "react-router-dom";
 
 function ApprovedListings({
   windowSize,
@@ -31,7 +30,7 @@ function ApprovedListings({
         setNewApprovedLists(res.data);
       }
     });
-  }, []);
+  }, [setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -59,7 +58,7 @@ function ApprovedListings({
     } else {
       setNewApprovedLists(approvedLists);
     }
-  }, [search]);
+  }, [search, searchBy, approvedLists]);
 
   return (
     <Row>
@@ -112,6 +111,7 @@ function ApprovedListings({
                       src={
                         listing.images.length > 0 ? listing.images[0].url : ""
                       }
+                      alt="property"
                     />
                   </div>
                 </td>

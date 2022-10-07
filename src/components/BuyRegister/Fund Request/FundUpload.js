@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Modal,
-  Col,
-  Row,
-  Container,
-  Button,
-  CloseButton,
-} from "react-bootstrap";
+import { Modal, Col, Row, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
@@ -92,7 +85,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
           : []
       );
     }
-  }, []);
+  }, [docu]);
 
   const bankStatment = document1.map((item) => {
     return { ...item, officialName: "bank_statement", isSelf: true };

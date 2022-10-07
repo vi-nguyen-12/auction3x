@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
 import { Row, Col, Button } from "react-bootstrap";
 import Loading from "../../components/Loading";
@@ -103,10 +102,6 @@ function CarDocus({
       : []
     : [];
 
-  const params = useParams();
-
-  const steps = sellStep ? sellStep : params.step ? params.step : 0;
-
   const onChange = (number) => async (e) => {
     setLoader(true);
 
@@ -200,7 +195,7 @@ function CarDocus({
         );
       });
     }
-  }, []);
+  }, [propertyTest.documents]);
 
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));

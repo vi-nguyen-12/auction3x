@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 
 function SoldListings({ windowSize, setMessage }) {
   const user = useSelector((state) => state.user);
-  const [images, setImages] = useState([]);
-  const [showPic, setShowPic] = useState(false);
-  const toggleShowPic = () => setShowPic(!showPic);
+  // const [images, setImages] = useState([]);
+  // const [showPic, setShowPic] = useState(false);
+  // const toggleShowPic = () => setShowPic(!showPic);
   const [soldListings, setSoldListings] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function SoldListings({ windowSize, setMessage }) {
         setSoldListings(res.data);
       }
     });
-  }, []);
+  }, [setMessage, user._id]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -67,13 +67,14 @@ function SoldListings({ windowSize, setMessage }) {
                       <img
                         width="100px"
                         height="50px"
-                        onClick={() => {
-                          setImages(auction.property.images);
-                          toggleShowPic();
-                        }}
+                        // onClick={() => {
+                        //   setImages(auction.property.images);
+                        //   toggleShowPic();
+                        // }}
                         src={
                           auction.images.length > 0 ? auction.images[0].url : ""
                         }
+                        alt="property"
                       />
                     </div>
                   </td>

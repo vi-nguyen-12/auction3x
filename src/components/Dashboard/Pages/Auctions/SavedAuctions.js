@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import styled from "styled-components";
 
-const Carousel_3 = styled(Slider)`
+const Carousel3 = styled(Slider)`
   height: 100%;
   overflow-x: hidden;
 
@@ -66,24 +66,6 @@ const Carousel_3 = styled(Slider)`
   }
 `;
 
-const Wrap = styled.div`
-border-radius: 4px;
-cursor: pointer;
-position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
-align-content: center;
-// margin-top: auto;  // Just for display
-
-  &:hover {
-    padding: 0;
-    // border: 4px solid rgba(249, 249, 249, 0.8);
-    transition-duration: 300ms;
-  }
-}
-`;
-
 function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [SavedAuctions, setSavedAuctions] = useState([]);
@@ -108,7 +90,7 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
       });
     };
     fetchSavedAuctions();
-  }, [user._id]);
+  }, [user._id, setMessage]);
 
   useEffect(() => {
     if (search !== undefined || search !== "") {
@@ -136,7 +118,7 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewSavedAuctions(SavedAuctions);
     }
-  }, [search]);
+  }, [search, searchBy, SavedAuctions]);
 
   let settings = {
     dots: false,
@@ -169,7 +151,7 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
       {loader && <Loading />}
       <Row>
         {newSavedAuctions.length > 0 ? (
-          <Carousel_3 {...settings} ref={slider}>
+          <Carousel3 {...settings} ref={slider}>
             {newSavedAuctions.map((auction, index) => (
               <Col
                 key={index}
@@ -182,7 +164,7 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
                 />
               </Col>
             ))}
-          </Carousel_3>
+          </Carousel3>
         ) : !loader ? (
           <ErrorPage windowSize={windowSize} />
         ) : null}

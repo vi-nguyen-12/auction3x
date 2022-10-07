@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../slice/userSlice";
@@ -99,10 +99,10 @@ function NavBar({
       >
         <img
           onClick={handleLogoClick}
-          src="/images/newName.png"
+          src="/images/newName.Webp"
           width={windowSize < 768 ? "150px" : "180px"}
           height="auto"
-          alt=""
+          alt="logo"
           className="logo"
         />
       </Col>
@@ -514,6 +514,7 @@ function NavBar({
               setExpendedMenuId("expended");
             }}
             className="nav-button"
+            aria-label="menu"
           >
             <RiMenu2Line size={windowSize > 1670 ? 28 : 32} color="#bf9767" />
           </Button>

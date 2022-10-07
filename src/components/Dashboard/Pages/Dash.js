@@ -15,7 +15,6 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import Next from "../../../images/Next.png";
 import Prev from "../../../images/Previous.png";
-import Error from "../../Error/404page";
 
 const Carousel = styled(Slider)`
   // height: 100%;
@@ -109,23 +108,6 @@ const Carousel = styled(Slider)`
   //     margin-top: -75px;
   //   }
   // }
-`;
-
-const Wrap = styled.div`
-border-radius: 4px;
-cursor: pointer;
-position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
-align-content: center;
-// margin-top: auto;  // Just for display
-
-  &:hover {
-    padding: 0;
-    transition-duration: 300ms;
-  }
-}
 `;
 
 function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
@@ -249,7 +231,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
     getFeatureAuctions();
     getUpcomingAuctions();
     getUserListings();
-  }, [savedProperties, user]);
+  }, [savedProperties, user, setMessage]);
 
   const getSavedProperty = () => {
     if (user._id) {
@@ -286,7 +268,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
       className="container2"
       style={{
         width: windowSize < 800 && "100vw",
-        justifyContent: windowSize < 800 && "grid",
+        // justifyContent: windowSize < 800 && "grid",
         justifyContent: windowSize < 800 && "center",
         padding: windowSize < 800 && "0",
         margin: windowSize < 800 && "0",

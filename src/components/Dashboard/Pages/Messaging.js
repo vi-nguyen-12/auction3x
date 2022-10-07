@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import authService from "../../../services/authServices";
 import { useSelector } from "react-redux";
@@ -38,7 +38,7 @@ const formats = [
 ];
 
 function Messaging({ windowSize, setMessage }) {
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
   const [subject, setSubject] = useState();
   const [messages, setMessages] = useState();
   const [document, setDocument] = useState([]);

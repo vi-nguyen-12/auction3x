@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Row, Col, Button } from "react-bootstrap";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import NumberFormat from "react-number-format";
 
 const Carousel = styled(Slider)`
   height: 100vh;

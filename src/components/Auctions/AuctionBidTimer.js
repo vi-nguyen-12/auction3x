@@ -1,11 +1,8 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { Table } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import "../../styles/timer.css";
 
 function AuctionBidTimer({ time, windowSize }) {
-  const params = useParams();
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();

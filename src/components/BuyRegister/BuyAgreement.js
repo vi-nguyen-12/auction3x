@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, Row, Button, Container, Form } from "react-bootstrap";
 import { useState } from "react";
-import ToastMessage from "../../components/Toast";
 import "../../styles/buyer.css";
 
 const BuyAgreement = ({ setStep, step, setMessage }) => {

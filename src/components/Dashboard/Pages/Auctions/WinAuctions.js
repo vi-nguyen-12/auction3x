@@ -26,7 +26,7 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
       });
     };
     fetchWinAuctions();
-  }, []);
+  }, [setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -54,9 +54,7 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewWinAuctions(winAuctions);
     }
-  }, [search]);
-  
-  console.log(winAuctions);
+  }, [search, searchBy, winAuctions]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>

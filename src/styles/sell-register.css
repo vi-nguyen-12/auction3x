@@ -166,7 +166,7 @@
   border-bottom: 2px solid #efd3bf;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   padding: 20px 0 !important;
 }
 

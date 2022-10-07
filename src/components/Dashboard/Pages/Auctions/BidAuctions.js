@@ -23,7 +23,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
       });
     };
     fetchBidAuctions();
-  }, []);
+  }, [setMessage, user._id]);
 
   useEffect(() => {
     if (!(search === undefined || search === "")) {
@@ -51,9 +51,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewBidAuctions(bidAuctions);
     }
-  }, [search]);
-
-  console.log(bidAuctions);
+  }, [search, searchBy, bidAuctions]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -105,6 +103,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                             ? auction.property.images[0].url
                             : ""
                         }
+                        alt="property"
                       />
                     </div>
                   </td>
