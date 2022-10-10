@@ -48,7 +48,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   }, [setMessage, user._id]);
 
   useEffect(() => {
-    if (!(search === undefined || search === "")) {
+    if (search) {
       if (searchBy === "id") {
         setNewPendingAuctions(
           pendingAuctions.filter((listing) =>

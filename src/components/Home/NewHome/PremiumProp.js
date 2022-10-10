@@ -199,7 +199,7 @@ function PremiumProp({
                   <img
                     src={auction.property.images[0].url}
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 && "cover" }}
+                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                   />
                 </a>
                 <HomeBottom>
@@ -292,7 +292,7 @@ function PremiumProp({
                   <img
                     src={auction.property.images[0].url}
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 && "cover" }}
+                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                   />
                   {/* <div
                     style={{
@@ -386,7 +386,7 @@ function PremiumProp({
                   <img
                     src={auction.property.images[0].url}
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 && "cover" }}
+                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                   />
                 </a>
                 <HomeBottom>

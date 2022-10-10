@@ -21,6 +21,10 @@
   background: #999999;
 }
 
+@font-face{
+  font-display: swap;
+}
+
 .customButton {
   background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
   border: none;

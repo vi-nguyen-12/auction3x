@@ -29,7 +29,7 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
   }, [setMessage, user._id]);
 
   useEffect(() => {
-    if (!(search === undefined || search === "")) {
+    if (search) {
       if (searchBy === "id") {
         setNewWinAuctions(
           winAuctions.filter((listing) =>

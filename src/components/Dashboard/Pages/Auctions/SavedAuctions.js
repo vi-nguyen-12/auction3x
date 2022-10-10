@@ -93,7 +93,7 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
   }, [user._id, setMessage]);
 
   useEffect(() => {
-    if (search !== undefined || search !== "") {
+    if (search) {
       if (searchBy === "id") {
         setNewSavedAuctions(
           SavedAuctions.filter((listing) =>

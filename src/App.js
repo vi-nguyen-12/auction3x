@@ -19,76 +19,50 @@ import parse from "html-react-parser";
 // import ToastMessage from "./components/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "./slice/userSlice";
+import { IdleTimer } from "./services/idleTimer";
+import { addSavedProperty } from "./slice/savedPropertySlice";
+import { addIncompProperty } from "./slice/incompleteProp";
 import ScrollTop from "./components/ScrollTop";
 import Loading from "./components/Loading";
 import CloseButton from "react-bootstrap/CloseButton";
 import authService from "./services/authServices";
+import Maintenance from "./images/Maintenance.png";
+import BlackLogo from "./images/BlackLogo.png";
 
-// const { login, logout } = React.lazy(() => import("./slice/userSlice"));
-// import { addSavedProperty } from "./slice/savedPropertySlice";
-const { addSavedProperty } = React.lazy(() =>
-  import("./slice/savedPropertySlice")
-);
-// import { addIncompProperty } from "./slice/incompleteProp";
-const { addIncompProperty } = React.lazy(() =>
-  import("./slice/incompleteProp")
-);
-// import { IdleTimer } from "./services/idleTimer";
-const { IdleTimer } = React.lazy(() => import("./services/idleTimer"));
-// import cookies from "./images/cookies.png";
 const cookies = React.lazy(() => import("./images/cookies.png"));
-
 const ToastMessage = React.lazy(() => import("./components/Toast"));
-// import Maintenance from "./images/Maintenance.png";
-const Maintenance = React.lazy(() => import("./images/Maintenance.png"));
-// import BlackLogo from "./images/BlackLogo.png";
-const BlackLogo = React.lazy(() => import("./images/BlackLogo.png"));
-// import ButtontoTop from "./components/ButtontoTop";
-// import Footer from "./components/Home/NewHome/Footer";
 const Footer = React.lazy(() => import("./components/Home/NewHome/Footer"));
-// import NotFound from "./components/Error/NotFound";
 const NotFound = React.lazy(() => import("./components/Error/NotFound"));
-// import Messaging from "./components/Dashboard/Pages/Messaging";
 const Messaging = React.lazy(() =>
   import("./components/Dashboard/Pages/Messaging")
 );
-// import Profile from "./components/Dashboard/Pages/Profile";
 const Profile = React.lazy(() =>
   import("./components/Dashboard/Pages/Profile")
 );
-// import BidAuctions from "./components/Dashboard/Pages/Auctions/BidAuctions";
 const BidAuctions = React.lazy(() =>
   import("./components/Dashboard/Pages/Auctions/BidAuctions")
 );
-// import SavedAuctions from "./components/Dashboard/Pages/Auctions/SavedAuctions";
 const SavedAuctions = React.lazy(() =>
   import("./components/Dashboard/Pages/Auctions/SavedAuctions")
 );
-// import BuyerApproval from "./components/Dashboard/Pages/Auctions/BuyerApproval";
 const BuyerApproval = React.lazy(() =>
   import("./components/Dashboard/Pages/Auctions/BuyerApproval")
 );
-// import WinAuctions from "./components/Dashboard/Pages/Auctions/WinAuctions";
 const WinAuctions = React.lazy(() =>
   import("./components/Dashboard/Pages/Auctions/WinAuctions")
 );
-// import LiveListings from "./components/Dashboard/Pages/Listings/LiveListings";
 const LiveListings = React.lazy(() =>
   import("./components/Dashboard/Pages/Listings/LiveListings")
 );
-// import PendingListings from "./components/Dashboard/Pages/Listings/PendingListings";
 const PendingListings = React.lazy(() =>
   import("./components/Dashboard/Pages/Listings/PendingListings")
 );
-// import SoldListings from "./components/Dashboard/Pages/Listings/SoldListings";
 const SoldListings = React.lazy(() =>
   import("./components/Dashboard/Pages/Listings/SoldListings")
 );
-// import IncompleteListing from "./components/Dashboard/Pages/Listings/IncompleteListing";
 const IncompleteListing = React.lazy(() =>
   import("./components/Dashboard/Pages/Listings/IncompleteListing")
 );
-// import ViewProfile from "./components/Users/ViewProfile";
 const ViewProfile = React.lazy(() => import("./components/Users/ViewProfile"));
 
 const PropertyPages = React.lazy(() =>
@@ -97,7 +71,6 @@ const PropertyPages = React.lazy(() =>
 const EmailConfirm = React.lazy(() =>
   import("./components/Users/EmailConfirm")
 );
-// const Auctions = React.lazy(() => import("./components/Auctions/Auctions"));
 const Docusign = React.lazy(() => import("./components/Docusign"));
 const DisplayAuctions = React.lazy(() =>
   import("./components/Auctions/DisplayAuctions")
@@ -387,10 +360,10 @@ function App() {
   };
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       {message && <ToastMessage message={message} />}
       {!maintenance ? (
-        <Suspense fallback={<Loading />}>
+        <>
           <div className="expendMenu-container" id={expendedMenuId}>
             <div className="expendMenu">
               <div className="expendMenu-items d-flex justify-content-between">
@@ -1264,7 +1237,7 @@ function App() {
               />
             ) : null}
           </div>
-        </Suspense>
+        </>
       ) : (
         <Row
           className="vh-100"
@@ -1353,7 +1326,10 @@ function App() {
                 md={9}
                 xs={12}
                 className="d-flex justify-content-center"
-                style={{ zIndex: "1", overflow: windowSize < 800 && "hidden" }}
+                style={{
+                  zIndex: "1",
+                  overflow: windowSize < 800 && "hidden",
+                }}
               >
                 <img src={Maintenance} alt="maintenance" />
               </Col>
@@ -1361,7 +1337,7 @@ function App() {
           </Col>
         </Row>
       )}
-    </>
+    </Suspense>
   );
 }
 

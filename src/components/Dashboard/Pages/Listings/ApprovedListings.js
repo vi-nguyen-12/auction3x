@@ -33,7 +33,7 @@ function ApprovedListings({
   }, [setMessage, user._id]);
 
   useEffect(() => {
-    if (!(search === undefined || search === "")) {
+    if (search) {
       if (searchBy === "id") {
         setNewApprovedLists(
           approvedLists.filter((listing) =>

@@ -39,7 +39,7 @@ function LiveListings({
   }, [setMessage, user._id]);
 
   useEffect(() => {
-    if (!(search === undefined || search === "")) {
+    if (search) {
       if (searchBy === "id") {
         setNewUpcomingListings(
           upcomingListings.filter((listing) =>

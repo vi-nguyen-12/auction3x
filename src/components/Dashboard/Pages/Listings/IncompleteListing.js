@@ -41,7 +41,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
   }, [incompProperty, setMessage, user._id]);
 
   useEffect(() => {
-    if (!(search === undefined || search === "")) {
+    if (search) {
       if (searchBy === "id") {
         setNewIncompleteListings(
           IncompleteListings.filter((listing) =>

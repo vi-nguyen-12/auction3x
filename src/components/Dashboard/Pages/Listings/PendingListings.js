@@ -65,17 +65,17 @@ function PendingListings({
   }, [refresh, setMessage, user._id]);
 
   useEffect(() => {
-    if (search !== undefined || search !== "") {
+    if (search) {
       if (searchBy === "id") {
         setNewPendingListings(
           pendingListings.filter((listing) =>
-            listing._id.toLowerCase().includes(search.toLowerCase())
+            listing._id.toLowerCase().includes(search?.toLowerCase())
           )
         );
       } else if (searchBy === "propType") {
         setNewPendingListings(
           pendingListings.filter((listing) =>
-            listing.type.toLowerCase().includes(search.toLowerCase())
+            listing.type.toLowerCase().includes(search?.toLowerCase())
           )
         );
       } else if (searchBy === "address") {
@@ -83,7 +83,7 @@ function PendingListings({
           pendingListings.filter((listing) =>
             listing.details.property_address.formatted_street_address
               .toLowerCase()
-              .includes(search.toLowerCase())
+              .includes(search?.toLowerCase())
           )
         );
       }
