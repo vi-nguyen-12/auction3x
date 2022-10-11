@@ -572,14 +572,6 @@ h3 {
   background-color: #b9b9b9;
 }
 
-.slide-circle {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background-color: #b9b9b9;
-  margin: 0 5px;
-  cursor: pointer;
-}
 
 /* .carousel-cards {
   padding: 0 4rem;

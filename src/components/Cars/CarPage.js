@@ -120,7 +120,7 @@ function CarPage({
       }
     }
     fetchData();
-  }, [history.location.search, filters, setResultLength, setMessage]);
+  }, [history.location.search, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {

@@ -77,48 +77,55 @@ function RealEstatePage({
   const urlSearchParams = new URLSearchParams(history.location.search);
   const filters = Object.fromEntries(urlSearchParams.entries());
 
-  useEffect(async () => {
+  useEffect(() => {
     toggleChange();
-    if (!history.location.search) {
-      let auctions = [];
-      setLoader(true);
-      await authService.getOngoingAuctionsByType("real-estate").then((res) => {
-        if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
-        } else {
-          auctions = [...res.data];
-        }
-      });
-      await authService.getUpcomingAuctionsByType("real-estate").then((res) => {
-        if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
-        } else {
-          auctions = [...auctions, ...res.data];
-        }
-      });
-      setAuctions(auctions);
-      setResultLength({ realEstate: auctions.length });
-      setLoader(false);
-    } else if (history.location.search && filters) {
-      setLoader(true);
-      await authService.realEstateFilter(filters).then((res) => {
-        if (res.data.length > 0) {
-          const realEstate = res.data.filter(
-            (item) => item.property.type === "real-estate"
-          );
-          setResultLength({ realEstate: realEstate.length });
-          setAuctions(realEstate);
-          setLoader(false);
-        } else {
-          setResultLength({ realEstate: 0 });
-          setAuctions([]);
-          setLoader(false);
-        }
-      });
+    async function fetchData() {
+      if (!history.location.search) {
+        let auctions = [];
+        setLoader(true);
+        await authService
+          .getOngoingAuctionsByType("real-estate")
+          .then((res) => {
+            if (res.data.error) {
+              setMessage("");
+              setMessage(res.data.error);
+            } else {
+              auctions = [...res.data];
+            }
+          });
+        await authService
+          .getUpcomingAuctionsByType("real-estate")
+          .then((res) => {
+            if (res.data.error) {
+              setMessage("");
+              setMessage(res.data.error);
+            } else {
+              auctions = [...auctions, ...res.data];
+            }
+          });
+        setAuctions(auctions);
+        setResultLength({ realEstate: auctions.length });
+        setLoader(false);
+      } else if (history.location.search && filters) {
+        setLoader(true);
+        await authService.realEstateFilter(filters).then((res) => {
+          if (res.data.length > 0) {
+            const realEstate = res.data.filter(
+              (item) => item.property.type === "real-estate"
+            );
+            setResultLength({ realEstate: realEstate.length });
+            setAuctions(realEstate);
+            setLoader(false);
+          } else {
+            setResultLength({ realEstate: 0 });
+            setAuctions([]);
+            setLoader(false);
+          }
+        });
+      }
     }
-  }, [history.location.search]);
+    fetchData();
+  }, [history.location.search, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {

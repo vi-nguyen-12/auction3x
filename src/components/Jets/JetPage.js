@@ -77,44 +77,47 @@ function JetPage({
   const urlSearchParams = new URLSearchParams(history.location.search);
   const filters = Object.fromEntries(urlSearchParams.entries());
 
-  useEffect(async () => {
+  useEffect(() => {
     toggleChange();
-    if (!history.location.search) {
-      let auctions = [];
-      setLoader(true);
-      const response1 = await authService.getOngoingAuctionsByType("jet");
-      if (response1.data.error) {
-        setMessage("");
-        setMessage(response1.data.error);
-      } else {
-        auctions = [...response1.data];
-      }
-      const response2 = await authService.getUpcomingAuctionsByType("jet");
-      if (response2.data.error) {
-        setMessage("");
-        setMessage(response2.data.error);
-      } else {
-        auctions = [...auctions, ...response2.data];
-      }
-      setAuctions(auctions);
-      setResultLength({ jet: auctions.length });
-      setLoader(false);
-    } else if (history.location.search && filters) {
-      setLoader(true);
-      authService.jetFilter(filters).then((res) => {
-        if (res.data.length > 0) {
-          const jet = res.data.filter((item) => item.property.type === "jet");
-          setResultLength({ jet: jet.length });
-          setAuctions(jet);
-          setLoader(false);
+    async function fetchData() {
+      if (!history.location.search) {
+        let auctions = [];
+        setLoader(true);
+        const response1 = await authService.getOngoingAuctionsByType("jet");
+        if (response1.data.error) {
+          setMessage("");
+          setMessage(response1.data.error);
         } else {
-          setResultLength({ jet: 0 });
-          setAuctions([]);
-          setLoader(false);
+          auctions = [...response1.data];
         }
-      });
+        const response2 = await authService.getUpcomingAuctionsByType("jet");
+        if (response2.data.error) {
+          setMessage("");
+          setMessage(response2.data.error);
+        } else {
+          auctions = [...auctions, ...response2.data];
+        }
+        setAuctions(auctions);
+        setResultLength({ jet: auctions.length });
+        setLoader(false);
+      } else if (history.location.search && filters) {
+        setLoader(true);
+        authService.jetFilter(filters).then((res) => {
+          if (res.data.length > 0) {
+            const jet = res.data.filter((item) => item.property.type === "jet");
+            setResultLength({ jet: jet.length });
+            setAuctions(jet);
+            setLoader(false);
+          } else {
+            setResultLength({ jet: 0 });
+            setAuctions([]);
+            setLoader(false);
+          }
+        });
+      }
     }
-  }, [history.location.search]);
+    fetchData();
+  }, [history.location.search, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {

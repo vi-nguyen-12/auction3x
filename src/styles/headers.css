@@ -1,4 +1,7 @@
-/*Display Form*/
+.row{
+  margin: 0;
+  padding: 0;
+}
 
 .realHeader {
   /* margin-top: 60px; */

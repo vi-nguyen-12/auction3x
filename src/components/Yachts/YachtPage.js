@@ -77,46 +77,49 @@ function YachtPage({
   const urlSearchParams = new URLSearchParams(history.location.search);
   const filters = Object.fromEntries(urlSearchParams.entries());
 
-  useEffect(async () => {
+  useEffect(() => {
     toggleChange();
-    if (!history.location.search) {
-      let auctions = [];
-      setLoader(true);
-      const response1 = await authService.getOngoingAuctionsByType("yacht");
-      if (response1.data.error) {
-        setMessage("");
-        setMessage(response1.data.error);
-      } else {
-        auctions = [...response1.data];
-      }
-      const response2 = await authService.getUpcomingAuctionsByType("yacht");
-      if (response2.data.error) {
-        setMessage("");
-        setMessage(response2.data.error);
-      } else {
-        auctions = [...auctions, ...response2.data];
-      }
-      setAuctions(auctions);
-      setResultLength({ yacht: auctions.length });
-      setLoader(false);
-    } else if (history.location.search && filters) {
-      setLoader(true);
-      authService.yachtFilter(filters).then((res) => {
-        if (res.data.length > 0) {
-          const yacht = res.data.filter(
-            (item) => item.property.type === "yacht"
-          );
-          setResultLength({ yacht: yacht.length });
-          setAuctions(yacht);
-          setLoader(false);
+    async function fetchData() {
+      if (!history.location.search) {
+        let auctions = [];
+        setLoader(true);
+        const response1 = await authService.getOngoingAuctionsByType("yacht");
+        if (response1.data.error) {
+          setMessage("");
+          setMessage(response1.data.error);
         } else {
-          setResultLength({ yacht: 0 });
-          setAuctions([]);
-          setLoader(false);
+          auctions = [...response1.data];
         }
-      });
+        const response2 = await authService.getUpcomingAuctionsByType("yacht");
+        if (response2.data.error) {
+          setMessage("");
+          setMessage(response2.data.error);
+        } else {
+          auctions = [...auctions, ...response2.data];
+        }
+        setAuctions(auctions);
+        setResultLength({ yacht: auctions.length });
+        setLoader(false);
+      } else if (history.location.search && filters) {
+        setLoader(true);
+        authService.yachtFilter(filters).then((res) => {
+          if (res.data.length > 0) {
+            const yacht = res.data.filter(
+              (item) => item.property.type === "yacht"
+            );
+            setResultLength({ yacht: yacht.length });
+            setAuctions(yacht);
+            setLoader(false);
+          } else {
+            setResultLength({ yacht: 0 });
+            setAuctions([]);
+            setLoader(false);
+          }
+        });
+      }
     }
-  }, [history.location.search]);
+    fetchData();
+  }, [history.location.search, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {

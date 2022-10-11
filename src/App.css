@@ -21,7 +21,7 @@
   background: #999999;
 }
 
-@font-face{
+@font-face {
   font-display: swap;
 }
 
@@ -702,4 +702,13 @@ h1 {
   .maintenance-form button {
     width: 100%;
   }
+}
+
+.slide-circle {
+  width: 1.5rem!important;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #b9b9b9;
+  margin: 0 5px;
+  cursor: pointer;
 }
