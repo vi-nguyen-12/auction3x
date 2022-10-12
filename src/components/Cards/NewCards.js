@@ -326,6 +326,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                     <AuctionTimer
                       time={data.registerStartDate}
                       windowSize={windowSize}
+                      id={data._id}
                     />
                   </div>
                 </div>

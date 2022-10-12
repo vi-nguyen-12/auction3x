@@ -1,12 +1,24 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import authService from "../../services/authServices";
+import { useParams } from "react-router-dom";
 import "../../styles/timer.css";
 
 function AuctionBidTimer({ time, windowSize }) {
+  const params = useParams();
   const [days, setDays] = useState();
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
+
+  async function setWinner() {
+    await authService.setWinner(params.id).then((res) => {
+      if (res.data.error) {
+        alert(res.data.error);
+      }
+    });
+  }
+
   let interval = useRef();
   const startTimer = () => {
     interval.current = setInterval(() => {
@@ -23,6 +35,7 @@ function AuctionBidTimer({ time, windowSize }) {
 
       if (distance < 0) {
         clearInterval(interval.current);
+        setWinner();
       } else {
         setDays(days.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
         setHours(hours.toLocaleString(undefined, { minimumIntegerDigits: 2 }));

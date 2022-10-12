@@ -14,12 +14,12 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
 
   useEffect(() => {
     const fetchWinAuctions = async () => {
-      const id = user._id;
-      await authService.buyerWonAuctions(id).then((res) => {
+      await authService.buyerWonAuctions(user._id).then((res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
+          console.log(res.data);
           setWinAuctions(res.data);
           setNewWinAuctions(res.data);
         }
@@ -76,9 +76,9 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
             <tr>
               <th>#</th>
               <th>Auction</th>
-              <th colSpan={2}>Property Type</th>
-              <th colSpan={2}>Property Address</th>
-              <th colSpan={2}>Bid Amount</th>
+              <th>Property</th>
+              <th>Property Address</th>
+              <th>Bid Amount</th>
               <th>View</th>
             </tr>
           </thead>
@@ -88,7 +88,8 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction._id}
+                    *****
+                    {auction._id.slice(auction._id.length - 5)}
                     <div
                       style={{
                         width: "100%",
@@ -113,24 +114,42 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
                       />
                     </div>
                   </td>
-                  <td colSpan={2}>
-                    {auction.property[0].type === "real-estate"
-                      ? "Real Estate"
-                      : auction.property[0].type === "car"
-                      ? "Car"
-                      : auction.property[0].type === "jet"
-                      ? "Jet"
-                      : auction.property[0].type === "yacht"
-                      ? "Yacht"
-                      : ""}
+                  <td>
+                    {auction.property[0].type === "yacht" ? (
+                      <span>
+                        {auction.property[0].details.manufacturer_name}{" "}
+                        {auction.property[0].details.engine_manufacture_name}{" "}
+                        {auction.property[0].details.engine_type}
+                      </span>
+                    ) : auction.property[0].type === "car" ? (
+                      <span>
+                        {auction.property[0].details.year}{" "}
+                        {auction.property[0].details.make}{" "}
+                        {auction.property[0].details.model}
+                      </span>
+                    ) : auction.property[0].type === "jet" ? (
+                      <span>
+                        {auction.property[0].details.year_built}{" "}
+                        {auction.property[0].details.aircraft_builder_name}{" "}
+                        {auction.property[0].details.aircraft_model_designation}
+                      </span>
+                    ) : (
+                      <span>
+                        {
+                          auction.property[0].details.property_address
+                            .formatted_street_address
+                        }
+                        , {auction.property[0].details.property_address.state}
+                      </span>
+                    )}
                   </td>
-                  <td colSpan={2}>
+                  <td>
                     {
                       auction.property[0].details.property_address
                         .formatted_street_address
                     }
                   </td>
-                  <td colSpan={2}>
+                  <td>
                     <NumberFormat
                       value={auction.amount}
                       displayType={"text"}

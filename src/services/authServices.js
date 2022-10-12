@@ -346,7 +346,7 @@ const authService = {
   },
 
   getSellerSoldListings(id) {
-    return axios.get(apiUrl + `/api/users/${id}/seller/properties?sold=true`, {
+    return axios.get(apiUrl + `/api/users/${id}/seller/auctions?isSold=true`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -684,6 +684,14 @@ const authService = {
 
   getMaintenanceStatus() {
     return axios.get(apiUrl + `/api/maintenance`);
+  },
+
+  setWinner(id) {
+    return axios.put(apiUrl + `/api/auctions/${id}/winner`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 };
 
