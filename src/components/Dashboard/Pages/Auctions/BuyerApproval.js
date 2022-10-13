@@ -114,9 +114,13 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
 
       await authService.saveDocuments(formData).then((response) => {
         if (response.data.error) {
-          setMessage("");
-          setMessage(response.data.error);
-          setLoader(false);
+          if (response.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(response.data.error);
+            setLoader(false);
+          }
         } else {
           const docu = documents.map((item) => {
             delete item.document?.isVerified;
@@ -183,9 +187,13 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
 
     await authService.editBuyer(id, submitedData).then((res) => {
       if (res.data.error) {
-        setMessage("");
-        setMessage(res.data.error);
-        setLoader(false);
+        if (res.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(res.data.error);
+          setLoader(false);
+        }
       } else {
         setMessage("");
         setMessage("Successfully Updated Buyer info");

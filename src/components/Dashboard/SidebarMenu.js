@@ -55,8 +55,8 @@ export const SidebarMenu = [
         path: "/Dashboard/Listings/PendingApproval",
       },
       {
-        name: "Auction Listings",
-        path: "/Dashboard/Listings/AuctionListings",
+        name: "Your Listings",
+        path: "/Dashboard/Listings/YourListings",
       },
       {
         name: "Sold Properties",

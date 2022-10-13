@@ -23,7 +23,14 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
       formData1.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData1).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        if (response.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(response.data.error);
+        }
+      } else {
         setDocument1([...document1, ...response.data]);
         setLoader(false);
       }
@@ -39,7 +46,14 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
       formData2.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData2).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        if (response.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(response.data.error);
+        }
+      } else {
         setDocument2([...document2, ...response.data]);
         setLoader(false);
       }
@@ -55,7 +69,14 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
       formData3.append("documents", e.target.files[i]);
     }
     await authService.saveDocuments(formData3).then((response) => {
-      if (response.status === 200) {
+      if (response.data.error) {
+        if (response.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(response.data.error);
+        }
+      } else {
         setDocument3([...document3, ...response.data]);
         setLoader(false);
       }

@@ -29,8 +29,12 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
     const fetchIncompleteListings = async () => {
       await authService.getIncompleteProperty(user._id).then((res) => {
         if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
+          if (res.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           setIncompleteListings(res.data);
           setNewIncompleteListings(res.data);
@@ -85,8 +89,12 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
       if (res.data.error) {
-        setMessage("");
-        setMessage(res.data.error);
+        if (res.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(res.data.error);
+        }
       } else {
         setMessage("");
         setMessage("Property Deleted Successfully");

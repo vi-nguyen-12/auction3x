@@ -221,8 +221,12 @@ function Dashboard({
 
     await authService.saveImages(formData).then((response) => {
       if (response.data.error) {
-        setMessage("");
-        setMessage(response.data.error);
+        if (response.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(response.data.error);
+        }
       } else {
         setImages([...images, ...response.data]);
         setLoader(false);
@@ -241,8 +245,12 @@ function Dashboard({
 
     await authService.saveVideos(formData).then((response) => {
       if (response.data.error) {
-        setMessage("");
-        setMessage(response.data.error);
+        if (response.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(response.data.error);
+        }
       } else {
         setVideos([...videos, ...response.data]);
         setLoader(false);
@@ -267,8 +275,12 @@ function Dashboard({
 
       await authService.saveDocuments(formData).then((response) => {
         if (response.data.error) {
-          setMessage("");
-          setMessage(response.data.error);
+          if (response.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(response.data.error);
+          }
         } else {
           const document = response.data.map((document) => {
             return { ...document, officialName: doc };
@@ -566,8 +578,12 @@ function Dashboard({
     if (submitedData) {
       await authService.editProp(submitedData, property._id).then((res) => {
         if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
+          if (res.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           setMessage("");
           setMessage("Property updated successfully");
@@ -659,7 +675,7 @@ function Dashboard({
                 setMessage={setMessage}
               />
             </Route>
-            <Route exact path="/Dashboard/Listings/AuctionListings">
+            <Route exact path="/Dashboard/Listings/YourListings">
               <LiveListings
                 windowSize={windowSize}
                 toggleShowDocu={toggleShowDocu}

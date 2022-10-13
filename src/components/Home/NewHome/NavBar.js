@@ -87,15 +87,15 @@ function NavBar({
     <Row
       className="p-0 m-0 nav-container"
       style={{
-        justifyContent: windowSize < 1070 && "space-around",
+        justifyContent: windowSize < 1160 && "space-around",
         background: color,
       }}
     >
       <Col
-        md={3}
+        md={2}
         xs={6}
         className="m-0 d-flex justify-content-start align-items-center"
-        style={{ paddingLeft: windowSize > 1070 && "2rem" }}
+        style={{ paddingLeft: windowSize > 1160 && "2rem" }}
       >
         <img
           onClick={handleLogoClick}
@@ -109,7 +109,7 @@ function NavBar({
       <Col
         md={6}
         className="p-0 m-0"
-        style={{ display: windowSize < 1100 && "none" }}
+        style={{ display: windowSize < 1160 && "none" }}
       >
         <ul className="nav-list">
           <li onClick={handleOnClick("realEstates")} className="nav-items">
@@ -129,7 +129,7 @@ function NavBar({
 
       {user._id ? (
         <Col
-          md={windowSize < 1070 ? 5 : 3}
+          md={windowSize < 1160 ? 6 : 3}
           xs={6}
           className="p-0 m-0 d-flex justify-content-evenly align-items-center"
         >

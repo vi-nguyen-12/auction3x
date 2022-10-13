@@ -53,8 +53,12 @@ function PendingListings({
       const id = user._id;
       await authService.sellerPendingAuctions(id).then((res) => {
         if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
+          if (res.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           setPendingListings(res.data);
           setNewPendingListings(res.data);

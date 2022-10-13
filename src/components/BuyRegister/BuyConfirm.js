@@ -28,8 +28,12 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
       const Bid = { id: property._id, biddingTimes, bidding: parseInt(bid) };
       await authService.auctionBid(Bid).then((res) => {
         if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
+          if (res.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           setBid(res.data.highestBid + property.incrementAmount);
           setMessage("");

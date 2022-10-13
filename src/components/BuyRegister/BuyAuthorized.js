@@ -50,8 +50,12 @@ const BuyAuthorized = ({
       .getPageContents(params)
       .then((res) => {
         if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
+          if (res.data.error === "Invalid Token") {
+            window.location.reload();
+          } else {
+            setMessage("");
+            setMessage(res.data.error);
+          }
         } else {
           for (let item of res.data) {
             if (item.name === "TC_buying") {
@@ -117,9 +121,13 @@ const BuyAuthorized = ({
             })
             .then((res) => {
               if (res.data.error) {
-                setMessage("");
-                setMessage(res.data.error);
-                setLoader(false);
+                if (res.data.error === "Invalid Token") {
+                  window.location.reload();
+                } else {
+                  setMessage("");
+                  setMessage(res.data.error);
+                  setLoader(false);
+                }
               } else {
                 setMessage("");
                 setMessage(

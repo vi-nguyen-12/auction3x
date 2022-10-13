@@ -65,14 +65,8 @@ function DisplayAuctions({
         // console.log("disconnected socket with back-end");
       });
     };
-  }, [
-    setHeaderWidth,
-    setPositionLeft,
-    setPadRight,
-    toggleShow,
-    id,
-    setMessage,
-  ]);
+  }, [setHeaderWidth, setPositionLeft, setPadRight, id, setMessage]);
+  
   useEffect(() => {
     if (socket) {
       socket

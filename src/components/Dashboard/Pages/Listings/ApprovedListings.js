@@ -23,8 +23,12 @@ function ApprovedListings({
   useEffect(() => {
     authService.sellerPropInAuctions(user._id).then((res) => {
       if (res.data.error) {
-        setMessage("");
-        setMessage(res.data.error);
+        if (res.data.error === "Invalid Token") {
+          window.location.reload();
+        } else {
+          setMessage("");
+          setMessage(res.data.error);
+        }
       } else {
         setApprovedLists(res.data);
         setNewApprovedLists(res.data);
@@ -62,7 +66,9 @@ function ApprovedListings({
 
   return (
     <Row>
-      <h1>Listed</h1>
+      <h3>
+        <ins>Ongoing Listings</ins>
+      </h3>
       <Table
         striped
         borderless

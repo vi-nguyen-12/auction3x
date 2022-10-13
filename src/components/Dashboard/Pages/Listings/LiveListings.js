@@ -70,7 +70,9 @@ function LiveListings({
     <>
       <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
         <Row>
-          <h1>Upcoming Listings</h1>
+          <h3>
+            <ins>Upcoming Listings</ins>
+          </h3>
           <Table
             striped
             borderless

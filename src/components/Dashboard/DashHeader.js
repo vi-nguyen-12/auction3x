@@ -56,7 +56,7 @@ function DashHeader({
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
-            {location === "/Dashboard/Listings/AuctionListings" ? (
+            {location === "/Dashboard/Listings/YourListings" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",

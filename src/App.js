@@ -917,7 +917,7 @@ function App() {
                 )}
 
                 {user._id && (
-                  <Route exact path="/Dashboard/Listings/AuctionListings">
+                  <Route exact path="/Dashboard/Listings/YourListings">
                     <Dashboard
                       toggleShow={toggleShow}
                       colorChange={colorChange}
