@@ -1599,7 +1599,7 @@ function DisplayJet({
             }}
             centered
           >
-            <Modal.Header className="auction-modal-header">
+            <Modal.Header className="auction-modal-header p-3">
               <Modal.Title className="auction-modal-title">
                 Enter Bid
               </Modal.Title>

@@ -284,17 +284,20 @@ function DashHeader({
                     }}
                     className="notifi-drop-down-body"
                   >
-                    {notifications.map((notification, index) => (
-                      <div key={index} className="notifi-dropdown-item">
-                        {notification.message}
-                        <span
-                          onClick={() => handleDelete(notification._id)}
-                          style={{ cursor: "pointer", color: "red" }}
-                        >
-                          X
-                        </span>
-                      </div>
-                    ))}
+                    {notifications
+                      .slice()
+                      .reverse()
+                      .map((notification, index) => (
+                        <div key={index} className="notifi-dropdown-item">
+                          {notification.message}
+                          <span
+                            onClick={() => handleDelete(notification._id)}
+                            style={{ cursor: "pointer", color: "red" }}
+                          >
+                            X
+                          </span>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
