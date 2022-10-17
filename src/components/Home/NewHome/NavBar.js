@@ -92,10 +92,10 @@ function NavBar({
       }}
     >
       <Col
-        md={2}
+        md={windowSize < 1160 ? 6 : 3}
         xs={6}
         className="m-0 d-flex justify-content-start align-items-center"
-        style={{ paddingLeft: windowSize > 1160 && "2rem" }}
+        style={{ paddingLeft: windowSize > 1260 && "5rem" }}
       >
         <img
           onClick={handleLogoClick}
@@ -487,7 +487,7 @@ function NavBar({
         </Col>
       ) : (
         <Col
-          md={windowSize < 1070 ? 5 : 3}
+          md={windowSize < 1160 ? 6 : 3}
           xs={6}
           className="p-0 m-0 d-flex justify-content-center align-items-center"
         >
