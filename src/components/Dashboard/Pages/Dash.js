@@ -284,7 +284,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         >
           <a
             className="liveAuc"
-            href="feature"
+            href="/Auctions/Featured"
             // onClick={() => {
             //   window.open(`/${"feature"}`);
             // }}
@@ -305,7 +305,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           sm={12}
           xs={12}
         >
-          <a className="liveAuc" href="upcoming">
+          <a className="liveAuc" href="/Auctions/Upcoming">
             <div className="names">
               <span>Upcoming Auctions</span>
               <h3>{numOfUpcomingAuctions}</h3>
@@ -336,7 +336,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           <a
             className="liveAuc"
             onClick={() => {
-              history.push("/Dashboard/Listings/AuctionListings");
+              history.push("/Dashboard/Listings/YourListings");
             }}
           >
             <div className="names">

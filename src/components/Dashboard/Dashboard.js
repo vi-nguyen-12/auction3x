@@ -603,7 +603,7 @@ function Dashboard({
           <div
             style={{
               position: "absolute",
-              top: windowSize > 600 ? "10%" : "13%",
+              top: "14%",
               left: "20px",
               boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
               borderRadius: "10px",
@@ -621,7 +621,7 @@ function Dashboard({
           style={{
             display: "-moz-initial",
             margin: "0 auto",
-            marginTop: "8rem",
+            marginTop: windowSize < 1100 ? "12rem" : "8rem",
           }}
         >
           <DashHeader

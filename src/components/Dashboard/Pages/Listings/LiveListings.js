@@ -94,7 +94,7 @@ function LiveListings({
                 <th>Property ID</th>
                 <th>Property</th>
                 <th>Edit Property</th>
-                <th colSpan={2}>Property Documents</th>
+                <th colSpan={2}>Documents</th>
                 <th colSpan={2}>Property Status</th>
                 <th>Email</th>
               </tr>

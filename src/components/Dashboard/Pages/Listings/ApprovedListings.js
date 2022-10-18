@@ -88,7 +88,7 @@ function ApprovedListings({
             <th>Property ID</th>
             <th>Property</th>
             <th>Property Info</th>
-            <th>Property Documents</th>
+            <th>Documents</th>
             <th colSpan={2}>Auction Status</th>
             <th>Property Status</th>
             {/* <th>Email</th> */}

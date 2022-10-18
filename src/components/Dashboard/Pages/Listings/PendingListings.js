@@ -131,7 +131,7 @@ function PendingListings({
               <th>Property ID</th>
               <th>Property</th>
               <th>Edit Property Details</th>
-              <th>Documents/Media</th>
+              <th>Documents</th>
               <th>Status</th>
               <th>Last Updated</th>
             </tr>

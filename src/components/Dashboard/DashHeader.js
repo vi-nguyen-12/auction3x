@@ -48,7 +48,7 @@ function DashHeader({
     <Container
       style={{
         width: "100vw",
-        padding: windowSize < 800 && "0",
+        padding: windowSize < 800 ? "0" : "0 5%",
         margin: windowSize < 800 && "0",
       }}
     >
@@ -289,7 +289,20 @@ function DashHeader({
                       .reverse()
                       .map((notification, index) => (
                         <div key={index} className="notifi-dropdown-item">
-                          {notification.message}
+                          <span
+                            onClick={() =>
+                              notification.auctionId.length > 0
+                                ? window.open(
+                                    `/DisplayAuctions/${notification.auctionId}`
+                                  )
+                                : notification.buyerId.length > 0 &&
+                                  history.push(
+                                    `/Dashboard/Auctions/BuyerApproval`
+                                  )
+                            }
+                          >
+                            {notification.message}
+                          </span>
                           <span
                             onClick={() => handleDelete(notification._id)}
                             style={{ cursor: "pointer", color: "red" }}
