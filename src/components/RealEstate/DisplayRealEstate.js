@@ -498,11 +498,12 @@ function DisplayRealEstate({
                     {property.property.details.property_address.zip_code}
                   </h5>
                 </Col>
-                {property.isReservedMet && (
-                  <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
-                    <img src={ReservedMet} alt="" />
-                  </Col>
-                )}
+                {property.isReservedMet ||
+                  (property.winner && (
+                    <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
+                      <img src={ReservedMet} alt="" />
+                    </Col>
+                  ))}
               </Row>
             </Col>
             <Col style={{ padding: "0" }}>

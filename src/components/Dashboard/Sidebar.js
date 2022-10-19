@@ -6,9 +6,6 @@ import SubMenu from "./SubMenu";
 const Sidebar = ({ path, setLocation }) => {
   return (
     <div className="sideBar">
-      {/* <h1>
-                Hello, {user.firstName} {" "} {user.lastName}
-            </h1> */}
       <ul className="sideBarList">
         {SidebarMenu.map((item, index) => {
           return (

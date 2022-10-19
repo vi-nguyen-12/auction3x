@@ -17,7 +17,7 @@ const SidebarLink = styled(Link)`
 
 const SidebarLabel = styled.button`
   padding: 10px;
-  padding-left: 15%;
+  padding-left: 10%;
   display: flex;
   background: none;
   border: none;
@@ -29,7 +29,7 @@ const SidebarLabel = styled.button`
   align-items: center;
   justify-content: space-between;
   &:hover {
-    border-left: 3px solid #b77b50;
+    // border-left: 3px solid #b77b50;
     color: #b77b50;
     cursor: pointer;
   }
