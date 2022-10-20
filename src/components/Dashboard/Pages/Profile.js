@@ -134,6 +134,7 @@ function Profile({ id, windowSize, setMessage }) {
                   height: "100%",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                   backgroundImage: `url(${user.profileImage})`,
                 }}
               />

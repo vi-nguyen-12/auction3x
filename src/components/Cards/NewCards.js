@@ -79,22 +79,21 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
           history.location.pathname === "/" && windowSize > 1680 ? "100%" : "",
       }}
     >
-      {data.isReservedMet ||
-        (data.winner && (
-          <div
-            className="position-absolute"
-            style={{
-              marginTop: windowSize > 600 ? "-1rem" : "0.5rem",
-              marginLeft: windowSize > 600 ? "-1rem" : "0.5rem",
-            }}
-          >
-            <img
-              src={ReservedMet}
-              alt="property"
-              width={windowSize < 600 ? "50px" : ""}
-            />
-          </div>
-        ))}
+      {(data.isReservedMet || data.winner?.buyerId) && (
+        <div
+          className="position-absolute"
+          style={{
+            marginTop: windowSize > 600 ? "-1rem" : "0.5rem",
+            marginLeft: windowSize > 600 ? "-1rem" : "0.5rem",
+          }}
+        >
+          <img
+            src={ReservedMet}
+            alt="property"
+            width={windowSize < 600 ? "50px" : ""}
+          />
+        </div>
+      )}
       <Card.Img
         className="card-img"
         style={{

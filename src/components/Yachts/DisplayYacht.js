@@ -483,12 +483,11 @@ function DisplayYacht({
                     {property.property.details.property_address.state}
                   </h5>
                 </Col>
-                {property.isReservedMet ||
-                  (property.winner && (
-                    <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
-                      <img src={ReservedMet} alt="" />
-                    </Col>
-                  ))}
+                {(property.isReservedMet || property.winner?.buyerId) && (
+                  <Col md={windowSize > 900 ? 5 : 12} xs={12} className="p-0">
+                    <img src={ReservedMet} alt="" />
+                  </Col>
+                )}
               </Row>
             </Col>
             <Col style={{ padding: "0" }}>

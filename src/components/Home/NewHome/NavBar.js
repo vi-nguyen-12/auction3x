@@ -169,32 +169,48 @@ function NavBar({
                   </div>
                 </Button>
               )}
-              <div className="dropdown-content">
-                <div className="dropdown-content-items">
-                  <span className="d-flex justify-content-center user-names">
+              <div className="dropdown-content-user">
+                <div className="dropdown-content-items p-4 py-4">
+                  {/* <span className="d-flex justify-content-center user-names">
                     {user.firstName[0].toUpperCase() + user.firstName.slice(1)}{" "}
                     {user.lastName[0].toUpperCase() + user.lastName.slice(1)}
-                  </span>
-                  <button
-                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
+                  </span> */}
+                  <span
+                    className="fw-bold d-flex py-2 justify-content-start align-items-center"
                     onClick={handleOnClick("Dashboard")}
+                    style={{
+                      cursor: "pointer",
+                      fontFamily: "Interstate",
+                      fontSize: "1.2rem",
+                      color: "#08080A",
+                    }}
                   >
-                    <RiDashboardFill size={20} /> Dashboard
-                  </button>
-                  <button
-                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
+                    Dashboard
+                  </span>
+                  <span
+                    className="fw-bold d-flex py-2 justify-content-start align-items-center"
                     onClick={handleOnClick("Dashboard/Profile")}
+                    style={{
+                      cursor: "pointer",
+                      fontFamily: "Interstate",
+                      fontSize: "1.2rem",
+                      color: "#08080A",
+                    }}
                   >
-                    <HiUser size={20} />
                     Profile
-                  </button>
-                  <button
-                    className="fw-bold p-3 d-flex justify-content-start align-items-center"
+                  </span>
+                  <span
+                    className="fw-bold d-flex py-2 justify-content-start align-items-center"
                     onClick={handleLogout}
+                    style={{
+                      cursor: "pointer",
+                      fontFamily: "Interstate",
+                      fontSize: "1.2rem",
+                      color: "#08080A",
+                    }}
                   >
-                    <RiLogoutBoxRFill size={20} />
                     Log Out
-                  </button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -215,14 +231,14 @@ function NavBar({
               {showWallet && (
                 <div className="dropdown-content">
                   <div
-                    className="dropdown-content-items"
+                    className="dropdown-content-items px-4"
                     style={{
                       marginLeft: "-80px",
                       width: "200px",
                       padding: "10px",
                     }}
                   >
-                    <div className="d-flex justify-content-start align-items-center">
+                    <div className="d-flex justify-content-start align-items-center py-2">
                       <div className="wallet-icon">
                         <BsFillHouseFill size={20} color="white" />
                       </div>
@@ -283,7 +299,7 @@ function NavBar({
                       </div>
                     </div>
 
-                    <div className="d-flex justify-content-start align-items-center mt-2">
+                    <div className="d-flex justify-content-start align-items-center py-2">
                       <div className="wallet-icon">
                         <IoCarSportSharp size={20} color="white" />
                       </div>
@@ -344,7 +360,7 @@ function NavBar({
                       </div>
                     </div>
 
-                    <div className="d-flex justify-content-start align-items-center mt-2">
+                    <div className="d-flex justify-content-start align-items-center py-2">
                       <div className="wallet-icon">
                         <IoAirplaneSharp size={20} color="white" />
                       </div>
@@ -405,7 +421,7 @@ function NavBar({
                       </div>
                     </div>
 
-                    <div className="d-flex justify-content-start align-items-center mt-2">
+                    <div className="d-flex justify-content-start align-items-center py-2">
                       <div className="wallet-icon">
                         <IoIosBoat size={20} color="white" />
                       </div>

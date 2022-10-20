@@ -3,12 +3,10 @@ import { Table, Row, Container } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 
-function SoldListings({ windowSize, setMessage }) {
+function SoldListings({ windowSize, setMessage, searchBy, search }) {
   const user = useSelector((state) => state.user);
-  // const [images, setImages] = useState([]);
-  // const [showPic, setShowPic] = useState(false);
-  // const toggleShowPic = () => setShowPic(!showPic);
   const [soldListings, setSoldListings] = useState([]);
+  const [newSoldListings, setNewSoldListings] = useState([]);
 
   useEffect(() => {
     authService.getSellerSoldListings(user._id).then((res) => {
@@ -17,9 +15,38 @@ function SoldListings({ windowSize, setMessage }) {
         setMessage(res.data.error);
       } else {
         setSoldListings(res.data);
+        setNewSoldListings(res.data);
       }
     });
   }, [setMessage, user._id]);
+
+  useEffect(() => {
+    if (search) {
+      if (searchBy === "id") {
+        setNewSoldListings(
+          soldListings.filter((listing) =>
+            listing._id.toLowerCase().includes(search?.toLowerCase())
+          )
+        );
+      } else if (searchBy === "propType") {
+        setNewSoldListings(
+          soldListings.filter((listing) =>
+            listing.type.toLowerCase().includes(search?.toLowerCase())
+          )
+        );
+      } else if (searchBy === "address") {
+        setNewSoldListings(
+          soldListings.filter((listing) =>
+            listing.details.property_address.formatted_street_address
+              .toLowerCase()
+              .includes(search?.toLowerCase())
+          )
+        );
+      }
+    } else {
+      setNewSoldListings(soldListings);
+    }
+  }, [search, searchBy, soldListings]);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -41,44 +68,51 @@ function SoldListings({ windowSize, setMessage }) {
             <tr>
               <th>#</th>
               <th>Auction</th>
-              <th>Property</th>
-              <th>Bid Amount</th>
+              <th>Auction Start Date</th>
+              <th>Auction End Date</th>
+              <th>Winner</th>
               <th>View</th>
             </tr>
           </thead>
-          {soldListings.length > 0 ? (
-            soldListings.map((auction, index) => (
+          {newSoldListings.length > 0 ? (
+            newSoldListings.map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    {auction.auctionStartDate} - {auction.auctionEndDate}
-                  </td>
-                  <td>
-                    {auction.property.details.address}
+                    *****
+                    {auction._id.slice(auction._id.length - 5)}
                     <div
                       style={{
                         width: "100%",
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "flex-start",
                         cursor: "pointer",
                       }}
                     >
                       <img
                         width="100px"
                         height="50px"
-                        // onClick={() => {
-                        //   setImages(auction.property.images);
-                        //   toggleShowPic();
-                        // }}
                         src={
-                          auction.images.length > 0 ? auction.images[0].url : ""
+                          auction.property.images.length > 0
+                            ? auction.property.images[0].url
+                            : ""
                         }
                         alt="property"
                       />
                     </div>
                   </td>
-                  <td>{auction.bidAmount}</td>
+                  <td>{new Date(auction.auctionStartDate).toLocaleString()}</td>
+                  <td>{new Date(auction.auctionEndDate).toLocaleString()}</td>
+                  <td>
+                    <span className="fw-bold">Buyer ID: </span> *****
+                    {auction.winner.buyerId.slice(
+                      auction.winner.buyerId.length - 5
+                    )}
+                    <br />
+                    <span className="fw-bold">Amount: </span> $
+                    {auction.winner.amount.toLocaleString()}
+                  </td>
                   <td>
                     <button
                       className="btn btn-primary"
