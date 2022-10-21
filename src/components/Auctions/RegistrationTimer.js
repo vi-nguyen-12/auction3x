@@ -24,7 +24,7 @@ const RegistrationTimer = ({ time, toggleRegistEnded, windowSize }) => {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      if (distance < 0) {
+      if (distance <= 0) {
         clearInterval(interval.current);
         toggleRegistEnded();
       } else {

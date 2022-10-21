@@ -4,15 +4,28 @@ import styled from "styled-components";
 import "../../styles/sidebar.css";
 
 const SidebarLink = styled(Link)`
-  display: flex;
-  color: #96a0af;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 20px;
-  list-style: none;
-  height: 70px;
-  text-decoration: none;
-  font-size: 18px;
+display: flex;
+color: #a5a5a5;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+list-style: none;
+height: 60px;
+text-decoration: none;
+font-size: 18px;
+font-weight: 700;
+&:hover {
+  background-color: gray;
+  color: #ffffff;
+  cursor: pointer;
+}
+&:focus  {
+  color:#b77b50;
+  border-left: 3px solid #b77b50;
+  // border-radius: 5px;
+  font-weight: bold;
+}
+}
 `;
 
 const SidebarLabel = styled.button`
@@ -89,14 +102,10 @@ const SubMenu = ({ item, path, setLocation }) => {
         href={item.path}
         onClick={() => handleOnclick(item.path)}
       >
-        <SidebarLabel
-        // style={{
-        //   color: item.path === path ? color : "none",
-        //   borderLeft: item.path === path ? "4px solid #b77b50" : "",
-        // }}
-        >
-          {item.icon} <span style={{ padding: "15px" }} /> {item.name}
-        </SidebarLabel>
+        <div className="d-flex">
+          <div>{item.icon}</div>
+          <div className="mx-3">{item.name}</div>
+        </div>
         <div>
           {item.subNav && subnav
             ? item.iconOpened

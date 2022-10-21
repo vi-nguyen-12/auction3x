@@ -22,8 +22,8 @@ export const SidebarMenu = [
     name: "Auctions",
     path: { path },
     icon: <RiAuctionFill size={30} />,
-    iconClosed: <RI.RiArrowDropDownLine color="#c4c4c4" className="arrow" />,
-    iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow" />,
+    iconClosed: <RI.RiArrowDropDownLine className="arrow" />,
+    iconOpened: <RI.RiArrowDropUpLine className="arrow" />,
     subNav: [
       {
         name: "Saved Auctions",
@@ -47,8 +47,8 @@ export const SidebarMenu = [
     name: "Your Listings",
     path: { path },
     icon: <IoMdListBox size={30} />,
-    iconClosed: <RI.RiArrowDropDownLine color="#c4c4c4" className="arrow" />,
-    iconOpened: <RI.RiArrowDropUpLine color="#c4c4c4" className="arrow " />,
+    iconClosed: <RI.RiArrowDropDownLine className="arrow" />,
+    iconOpened: <RI.RiArrowDropUpLine className="arrow " />,
     subNav: [
       {
         name: "Pending Approval",

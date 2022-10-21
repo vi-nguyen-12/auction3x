@@ -113,7 +113,6 @@ function DisplayRealEstate({
   refresh,
   setMessage,
 }) {
-  console.log("property", property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [location, setLocation] = useState([]);
@@ -533,9 +532,7 @@ function DisplayRealEstate({
                 >
                   <button
                     className="registsBtn"
-                    disabled={
-                      new Date().toISOString() < property.registerStartDate
-                    }
+                    disabled={registEnded}
                     onClick={toggleRegister}
                   >
                     Register to Bid

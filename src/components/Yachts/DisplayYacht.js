@@ -517,9 +517,7 @@ function DisplayYacht({
                 >
                   <button
                     className="registsBtn"
-                    disabled={
-                      new Date().toISOString() < property.registerStartDate
-                    }
+                    disabled={registEnded}
                     onClick={toggleRegister}
                   >
                     Register to Bid

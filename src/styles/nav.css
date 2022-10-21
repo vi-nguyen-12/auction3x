@@ -107,7 +107,7 @@
   font-weight: 400;
   font-size: 1.2rem;
   cursor: pointer;
-  /* line-height: 22px; */
+  line-height: normal;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,7 +120,7 @@
 }
 
 .user-name:hover {
-  border-bottom: 1px solid #fff;
+  /* border-bottom: 1px solid #fff; */
   line-height: normal;
   background: transparent;
 }

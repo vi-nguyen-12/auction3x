@@ -248,7 +248,6 @@ function DashHeader({
                 className="notification"
                 style={{
                   width: notifications?.length > 10 && "1.8rem",
-                  borderRadius: notifications?.length > 10 && "0.8em",
                 }}
               >
                 {notifications.length > 10 ? "10+" : notifications.length}
@@ -342,7 +341,6 @@ function DashHeader({
                     marginLeft: "-20px",
                     marginRight: "0",
                     width: notifications.length > 10 && "1.8rem",
-                    borderRadius: notifications.length > 10 && "0.8em",
                   }}
                 >
                   {notifications.length > 10 ? "10+" : notifications.length}
