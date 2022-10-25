@@ -47,6 +47,19 @@
   border-radius: 10px 0 0 10px;
 }
 
+.favBtn {
+  border: none;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 /* upcoming Card */
 .img-card {
   display: block;

@@ -108,10 +108,10 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
       <button
         onClick={handleLike}
         className="favBtn"
-        disabled={new Date().toISOString() > data.auctionEndDate}
+        // disabled={new Date().toISOString() > data.auctionEndDate}
       >
         {favorite ? (
-          <AiFillHeart size={25} className="favIcon" color="" />
+          <AiFillHeart size={25} className="favIcon" color="#ff5260" />
         ) : (
           <AiOutlineHeart size={25} className="favIcon" />
         )}

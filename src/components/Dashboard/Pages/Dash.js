@@ -22,8 +22,8 @@ const Carousel = styled(Slider)`
 
   & > button {
     opacity: 1;
-    height: 100%;
-    width: 15vw;
+    height: 80%;
+    width: 5vw;
     z-index: 1;
 
     &:hover {
@@ -274,6 +274,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         margin: windowSize < 800 && "0",
       }}
     >
+      {/* <a href="mailto:nungkhual@gmail.com?subject = test"> Contact Us</a> */}
       <Row>
         <Col
           className="d-flex justify-content-center mt-2"

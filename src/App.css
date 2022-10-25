@@ -270,18 +270,6 @@
   border: 2px solid #b77b50;
 }
 
-.favBtn {
-  border: none;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* margin-left: 88%; */
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  color: #ffffff;
-}
 @keyframes movebtn {
   0% {
     transform: translateY(0px);
@@ -705,7 +693,7 @@ h1 {
 }
 
 .slide-circle {
-  width: 1.5rem!important;
+  width: 1.5rem !important;
   height: 1.5rem;
   border-radius: 50%;
   background-color: #b9b9b9;

@@ -19,13 +19,15 @@ function Info({ windowSize, toggleSignIn }) {
       } else {
         history.push("/multiSellForm");
       }
+    } else if (item.buttonText === "Start Now") {
+      history.push("/Auctions");
     }
   };
 
   const info = [
     {
       logo: investor,
-      title: "Investors / Buyers",
+      title: "Buyers",
       description:
         "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
       buttonText: "Start Now",

@@ -380,7 +380,7 @@ function App() {
                 <a href="/multiSellForm">Sell</a>
                 <a href="/Auctions">Buy</a>
                 <a href="/Partner">Broker</a>
-                <a href="/Partner">Invest</a>
+                {/* <a href="/Partner">Invest</a> */}
               </div>
               <div className="expendMenu-items">
                 <a href="/team">Team</a>
