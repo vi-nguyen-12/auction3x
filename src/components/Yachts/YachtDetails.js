@@ -688,8 +688,27 @@ function YachtDetails({
                 fontWeight: "600",
                 color: "black",
               }}
+              className="d-flex"
             >
-              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+              Reserve Amount <span style={{ color: "#ff0000" }}>*</span>
+              <div
+                className="dropdown-icon mx-2"
+                style={{
+                  width: "fit-content",
+                }}
+              >
+                <IoInformationCircleSharp
+                  style={{ cursor: "pointer" }}
+                  color="blue"
+                  size={25}
+                />
+                {/* <div className="dropdown-info">
+                  <p>
+                    We will be using these details to match you with the right
+                    buyer.
+                  </p>
+                </div> */}
+              </div>
             </span>
             <NumberFormat
               thousandSeparator={true}
@@ -708,8 +727,27 @@ function YachtDetails({
                 fontWeight: "600",
                 color: "black",
               }}
+              className="d-flex"
             >
-              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+              Negotiable Amount <span style={{ color: "#ff0000" }}>*</span>
+              <div
+                className="dropdown-icon mx-2"
+                style={{
+                  width: "fit-content",
+                }}
+              >
+                <IoInformationCircleSharp
+                  style={{ cursor: "pointer" }}
+                  color="blue"
+                  size={25}
+                />
+                {/* <div className="dropdown-info">
+                  <p>
+                    We will be using these details to match you with the right
+                    buyer.
+                  </p>
+                </div> */}
+              </div>
             </span>
             <NumberFormat
               thousandSeparator={true}

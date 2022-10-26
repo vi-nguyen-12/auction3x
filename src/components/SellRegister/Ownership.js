@@ -51,6 +51,8 @@ function Ownership({
     propertyTest.details?.broker_documents || []
   );
 
+  const [attorney, setAttorney] = useState([]);
+
   const getFile = async (e) => {
     const formData = new FormData();
     for (let i = 0; i < e.target.files.length; i++) {
@@ -63,10 +65,26 @@ function Ownership({
     });
   };
 
+  const getAttorneyFile = async (e) => {
+    const formData = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData).then((res) => {
+      setAttorney((prev) =>
+        res.data.map((doc) => ({ ...doc, officialName: "attorney" }))
+      );
+    });
+  };
+
   const handleDelete = (url) => () => {
     setListingAgreements(
       listingAgreements.filter((document) => document.url !== url)
     );
+  };
+
+  const handleDeleteAttorney = (url) => () => {
+    setAttorney(attorney.filter((document) => document.url !== url));
   };
 
   const onSubmit = (data) => {
@@ -404,7 +422,7 @@ function Ownership({
                 </Col>
               </Row>
               <Row className="mt-3">
-                <Col xs={12} md={4}>
+                <Col xs={12} md={5} lg={4}>
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Owner/Entity Name{" "}
                     <span style={{ color: "#ff0000" }}>*</span>
@@ -422,7 +440,7 @@ function Ownership({
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
                 </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                <Col xs={12} md={5} lg={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
@@ -440,7 +458,7 @@ function Ownership({
                     onChange={(e) => setBrokerName(e.target.value)}
                   />
                 </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                <Col xs={12} md={5} lg={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker License Number{" "}
                     <span style={{ color: "#ff0000" }}>*</span>
@@ -464,7 +482,7 @@ function Ownership({
                 </Col>
               </Row>
               <Row className="mt-3">
-                <Col>
+                <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Listing Agreement(.pdf){" "}
                     <span style={{ color: "#ff0000" }}>*</span>
@@ -480,6 +498,7 @@ function Ownership({
                   <input
                     type="file"
                     id="docu"
+                    accept=".pdf"
                     className="form-control"
                     onChange={getFile}
                     hidden
@@ -497,6 +516,47 @@ function Ownership({
                         <Button
                           className="bg-transparent border-0"
                           onClick={handleDelete(doc.url)}
+                        >
+                          <MdClose fontSize="1.5em" color="red" />
+                        </Button>
+                      </span>
+                    ))}
+                  </div>
+                </Col>
+                <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Power of Attorney(.pdf){" "}
+                    <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    className="form-control"
+                    multiple
+                    hidden
+                    {...register("file", { onChange: getAttorneyFile })}
+                  />
+                  <input
+                    type="file"
+                    id="docus"
+                    accept=".pdf"
+                    className="form-control"
+                    onChange={getAttorneyFile}
+                    hidden
+                    multiple
+                  />
+                  <div className="d-flex">
+                    <label htmlFor="docus" className="btn btn-primary">
+                      Upload
+                    </label>
+                  </div>
+                  <div className="d-grid">
+                    {attorney.map((doc, index) => (
+                      <span key={index}>
+                        {doc.name}
+                        <Button
+                          className="bg-transparent border-0"
+                          onClick={handleDeleteAttorney(doc.url)}
                         >
                           <MdClose fontSize="1.5em" color="red" />
                         </Button>

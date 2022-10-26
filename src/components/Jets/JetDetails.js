@@ -637,8 +637,29 @@ function JetDetails({
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={6}>
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Reserved Amount <span style={{ color: "#ff0000" }}>*</span>
+            <span
+              style={{ fontWeight: "600", color: "black" }}
+              className="d-flex"
+            >
+              Reserve Amount <span style={{ color: "#ff0000" }}>*</span>
+              <div
+                className="dropdown-icon mx-2"
+                style={{
+                  width: "fit-content",
+                }}
+              >
+                <IoInformationCircleSharp
+                  style={{ cursor: "pointer" }}
+                  color="blue"
+                  size={25}
+                />
+                {/* <div className="dropdown-info">
+                  <p>
+                    We will be using these details to match you with the right
+                    buyer.
+                  </p>
+                </div> */}
+              </div>
             </span>
             <NumberFormat
               thousandSeparator={true}
@@ -654,8 +675,29 @@ function JetDetails({
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-            <span style={{ fontWeight: "600", color: "black" }}>
-              Discussed Amount <span style={{ color: "#ff0000" }}>*</span>
+            <span
+              style={{ fontWeight: "600", color: "black" }}
+              className="d-flex"
+            >
+              Negotiable Amount <span style={{ color: "#ff0000" }}>*</span>
+              <div
+                className="dropdown-icon mx-2"
+                style={{
+                  width: "fit-content",
+                }}
+              >
+                <IoInformationCircleSharp
+                  style={{ cursor: "pointer" }}
+                  color="blue"
+                  size={25}
+                />
+                {/* <div className="dropdown-info">
+                  <p>
+                    We will be using these details to match you with the right
+                    buyer.
+                  </p>
+                </div> */}
+              </div>
             </span>
             <NumberFormat
               thousandSeparator={true}

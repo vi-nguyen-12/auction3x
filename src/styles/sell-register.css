@@ -1,3 +1,11 @@
+.sell-container {
+  overflow: auto;
+}
+
+.sell-container::-webkit-scrollbar {
+  display: none;
+}
+
 .text {
   margin: auto;
   color: white;

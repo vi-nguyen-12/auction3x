@@ -16,8 +16,8 @@ import parse from "html-react-parser";
 
 const Carousel = styled(Slider)`
   // height: 100%;
-  // width: 100%;
-  overflow-x: hidden;
+  width: 100%;
+  overflow: hidden;
 
   & > button {
     opacity: 1;
@@ -92,7 +92,8 @@ function Profile({ id, windowSize, setMessage }) {
   let settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 800,
+    slidesToScroll: 1,
     autoplay: true,
     slidesToShow:
       windowSize > 800 ? (listedProp.length > 3 ? 3 : listedProp.length) : 2,

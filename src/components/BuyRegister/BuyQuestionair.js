@@ -129,21 +129,27 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
                 </p>
                 <input
                   type="radio"
-                  name={item._id}
-                  value={"yes"}
+                  name={item._id + "yes"}
+                  value="yes"
+                  id={item._id + "yes"}
                   checked={item.answer === "yes"}
                   onChange={handleChoose(item._id)}
                 />
-                <label className="ms-2">Yes</label>
+                <label htmlFor={item._id + "yes"} className="ms-2">
+                  Yes
+                </label>
                 <input
                   className="ms-4"
                   type="radio"
                   name={item._id}
                   value="no"
+                  id={item._id + "no"}
                   checked={item.answer === "no"}
                   onChange={handleChoose(item._id)}
                 />
-                <label className="ms-2">No</label>
+                <label htmlFor={item._id + "no"} className="ms-2">
+                  No
+                </label>
                 {item.answer === "yes" && (
                   <>
                     <Row className="mt-3">
@@ -217,7 +223,11 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
         </form>
       </Modal.Body>
       <Modal.Footer
-        style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
       >
         <div style={{ display: "flex" }}>
           <button className="pre-btn" onClick={() => setStep(step - 1)}>

@@ -113,7 +113,7 @@ const MultiSellForm = ({
 
   return (
     <>
-      <Container className="vh-100 mt-5">
+      <Container className="vh-100 sell-container">
         <h1 className="fs-1">Sell On Auction3</h1>
         <p
           style={{ fontSize: "1.6em", fontWeight: "bold" }}
@@ -256,7 +256,11 @@ const MultiSellForm = ({
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>Property Summary</Modal.Header>
+        <Modal.Header className="auction-modal-header p-4" closeButton>
+          <Modal.Title className="auction-modal-title">
+            Property Summary
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
             onChange={(e) => {
@@ -301,7 +305,11 @@ const MultiSellForm = ({
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>Investment Opportunity</Modal.Header>
+        <Modal.Header className="auction-modal-header p-4" closeButton>
+          <Modal.Title className="auction-modal-title">
+            Investment Opportunity
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
             onChange={(e) => {
@@ -346,7 +354,11 @@ const MultiSellForm = ({
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>Location Information</Modal.Header>
+        <Modal.Header className="auction-modal-header p-4" closeButton>
+          <Modal.Title className="auction-modal-title">
+            Location Information
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
             onChange={(e) => {
@@ -391,7 +403,11 @@ const MultiSellForm = ({
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>Market Information</Modal.Header>
+        <Modal.Header className="auction-modal-header p-4" closeButton>
+          <Modal.Title className="auction-modal-title">
+            Market Information
+          </Modal.Title>
+        </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
             onChange={(e) => {
