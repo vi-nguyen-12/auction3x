@@ -32,17 +32,26 @@ const MultiSellForm = ({
   const params = useParams();
   const history = useHistory();
 
-  const [summary, setSummary] = useState();
-  const [invest, setInvest] = useState();
-  const [locationInfo, setLocationInfo] = useState();
-  const [marketInfo, setMarketInfo] = useState();
+  const [propertyTest, setPropertyTest] = useState({});
+
+  const [summary, setSummary] = useState(
+    params.id ? propertyTest.details?.description?.summary : ""
+  );
+  const [invest, setInvest] = useState(
+    params.id ? propertyTest.details?.description?.investment : ""
+  );
+  const [locationInfo, setLocationInfo] = useState(
+    params.id ? propertyTest.details?.description?.location : ""
+  );
+  const [marketInfo, setMarketInfo] = useState(
+    params.id ? propertyTest.details?.description?.market : ""
+  );
 
   const [openSummary, setOpenSummary] = useState(false);
   const [openInvest, setOpenInvest] = useState(false);
   const [openLocationInfo, setOpenLocationInfo] = useState(false);
   const [openMarketInfo, setOpenMarketInfo] = useState(false);
 
-  const [propertyTest, setPropertyTest] = useState({});
   const [property, setProperty] = useState({});
   const [propertyData, setPropertyData] = useState({});
   const togglePropertyData = (propertyData) => {
@@ -263,30 +272,8 @@ const MultiSellForm = ({
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
-            onChange={(e) => {
-              if (propertyTest.type === "real-estate") {
-                setSummary({ realEstate: e.target.value });
-              } else if (propertyTest.type === "car") {
-                setSummary({ car: e.target.value });
-              } else if (propertyTest.type === "jet") {
-                setSummary({ jet: e.target.value });
-              } else if (propertyTest.type === "yacht") {
-                setSummary({ yacht: e.target.value });
-              }
-            }}
-            value={
-              params.id
-                ? propertyTest.details?.description?.summary
-                : propertyTest.type === "real-estate"
-                ? summary?.realEstate
-                : propertyTest.type === "car"
-                ? summary?.car
-                : propertyTest.type === "jet"
-                ? summary?.jet
-                : propertyTest.type === "yacht"
-                ? summary?.yacht
-                : ""
-            }
+            onChange={(e) => setSummary(e.target.value)}
+            value={summary}
             placeholder="Please Enter Property Summary Here"
             className="form-control h-100"
           ></textarea>
@@ -312,30 +299,8 @@ const MultiSellForm = ({
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
-            onChange={(e) => {
-              if (propertyTest.type === "real-estate") {
-                setInvest({ realEstate: e.target.value });
-              } else if (propertyTest.type === "car") {
-                setInvest({ car: e.target.value });
-              } else if (propertyTest.type === "jet") {
-                setInvest({ jet: e.target.value });
-              } else if (propertyTest.type === "yacht") {
-                setInvest({ yacht: e.target.value });
-              }
-            }}
-            value={
-              params.id
-                ? propertyTest.details?.description?.investment
-                : propertyTest.type === "real-estate"
-                ? invest?.realEstate
-                : propertyTest.type === "car"
-                ? invest?.car
-                : propertyTest.type === "jet"
-                ? invest?.jet
-                : propertyTest.type === "yacht"
-                ? invest?.yacht
-                : ""
-            }
+            onChange={(e) => setInvest(e.target.value)}
+            defaultValue={invest}
             placeholder="Please Enter Investment Opportunity Here"
             className="form-control h-100"
           ></textarea>
@@ -361,30 +326,8 @@ const MultiSellForm = ({
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
-            onChange={(e) => {
-              if (propertyTest.type === "real-estate") {
-                setLocationInfo({ realEstate: e.target.value });
-              } else if (propertyTest.type === "car") {
-                setLocationInfo({ car: e.target.value });
-              } else if (propertyTest.type === "jet") {
-                setLocationInfo({ jet: e.target.value });
-              } else if (propertyTest.type === "yacht") {
-                setLocationInfo({ yacht: e.target.value });
-              }
-            }}
-            value={
-              params.id
-                ? propertyTest.details?.description?.location
-                : propertyTest.type === "real-estate"
-                ? locationInfo?.realEstate
-                : propertyTest.type === "car"
-                ? locationInfo?.car
-                : propertyTest.type === "jet"
-                ? locationInfo?.jet
-                : propertyTest.type === "yacht"
-                ? locationInfo?.yacht
-                : ""
-            }
+            onChange={(e) => setLocationInfo(e.target.value)}
+            value={locationInfo}
             placeholder="Please Enter Location Information Here"
             className="form-control h-100"
           ></textarea>
@@ -410,30 +353,8 @@ const MultiSellForm = ({
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
           <textarea
-            onChange={(e) => {
-              if (propertyTest.type === "real-estate") {
-                setMarketInfo({ realEstate: e.target.value });
-              } else if (propertyTest.type === "car") {
-                setMarketInfo({ car: e.target.value });
-              } else if (propertyTest.type === "jet") {
-                setMarketInfo({ jet: e.target.value });
-              } else if (propertyTest.type === "yacht") {
-                setMarketInfo({ yacht: e.target.value });
-              }
-            }}
-            value={
-              params.id
-                ? propertyTest.details?.description?.market
-                : propertyTest.type === "real-estate"
-                ? marketInfo?.realEstate
-                : propertyTest.type === "car"
-                ? marketInfo?.car
-                : propertyTest.type === "jet"
-                ? marketInfo?.jet
-                : propertyTest.type === "yacht"
-                ? marketInfo?.yacht
-                : ""
-            }
+            onChange={(e) => setMarketInfo(e.target.value)}
+            value={marketInfo}
             placeholder="Please Enter Market Information Here"
             className="form-control h-100"
           ></textarea>

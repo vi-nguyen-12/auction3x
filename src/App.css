@@ -383,6 +383,7 @@ h1 {
 .dropdown-info {
   display: none;
   position: absolute;
+  top: 51%;
   text-align: center;
   width: 10rem;
   margin-left: -160px;

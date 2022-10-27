@@ -170,6 +170,15 @@ function JetDetails({
             );
           }, 100);
         } else {
+          const descriptions = {
+            summary: summary ? summary : "",
+            investment: invest ? invest : "",
+            location: locationInfo ? locationInfo : "",
+            market: marketInfo ? marketInfo : "",
+          };
+
+          !invest && delete descriptions.investment;
+
           const submitedData = {
             registration_mark,
             aircraft_builder_name,
@@ -182,12 +191,7 @@ function JetDetails({
             year_built,
             propeller_model_designation,
             imported_aircraft: isImport,
-            description: {
-              summary: summary?.jet ? summary.jet : summary,
-              investment: invest?.jet ? invest?.jet : invest,
-              location: locationInfo?.jet ? locationInfo?.jet : locationInfo,
-              market: marketInfo?.jet ? marketInfo?.jet : marketInfo,
-            },
+            description: descriptions,
             property_address: {
               formatted_street_address: address,
               country,

@@ -9,6 +9,8 @@ import { SiDocusign } from "react-icons/si";
 import Loading from "../../components/Loading";
 import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
+import { MdClose } from "react-icons/md";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const BuyAuthorized = ({
   setStep,
@@ -23,11 +25,37 @@ const BuyAuthorized = ({
   const [envelopeId, setEnvelopeId] = useState();
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
+  const [buyerType, setBuyerType] = useState();
+  const [brokerControl, setBrokerControl] = useState();
+  const [buyerControl, setBuyerControl] = useState();
+  const [attorney, setAttorney] = useState([]);
+
   const toggleTerms = () => setShow(!show);
 
   const [ip, setIp] = useState();
 
   const documents = [];
+
+  const getAttorneyFile = async (e) => {
+    const formData = new FormData();
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData).then((res) => {
+      if (res.data.error) {
+        setMessage(res.data.error);
+      } else {
+        setAttorney((prev) =>
+          res.data.map((doc) => ({ ...doc, officialName: "attorney" }))
+        );
+        setBuyerControl("attorney");
+      }
+    });
+  };
+
+  const handleDeleteAttorney = (url) => () => {
+    setAttorney(attorney.filter((document) => document.url !== url));
+  };
 
   //push document to array if it is not empty
 
@@ -146,23 +174,106 @@ const BuyAuthorized = ({
       }, 100);
     }
   };
+
   return (
     <>
       {" "}
       {loader ? <Loading /> : null}
       <Modal.Body style={{ height: "300px" }}>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
-          <Button className="btn btn-primary" onClick={handleSignDocusign}>
-            <SiDocusign />
-            <span className="ms-3 fs-5">
-              <strong>Sign</strong>
-            </span>
-            <span className="ms-2 fs-5">
-              <strong>Document</strong>
-            </span>
-          </Button>
+          <div className="d-flex">
+            <Button onClick={() => setBuyerControl("buyer")} className="mx-2">
+              Buyer
+            </Button>
+            <Button onClick={() => setBuyerControl("broker")}>Broker</Button>
+          </div>
+          {(buyerControl === "buyer" || buyerControl === "attorney") && (
+            <Button
+              className="btn btn-primary mt-4"
+              onClick={handleSignDocusign}
+            >
+              <SiDocusign />
+              <span className="ms-3 fs-5">
+                <strong>Sign Document</strong>
+              </span>
+            </Button>
+          )}
+          {buyerControl === "broker" && (
+            <div className="d-flex align-items-center mt-3">
+              <div className="d-flex flex-column">
+                <span style={{ fontWeight: "600", color: "black" }}>
+                  Power of Attorney(.pdf){" "}
+                </span>
+                <input
+                  type="file"
+                  id="docus"
+                  accept=".pdf"
+                  className="form-control"
+                  onChange={getAttorneyFile}
+                  hidden
+                  multiple
+                />
+                <div className="d-flex">
+                  <label htmlFor="docus" className="btn btn-primary">
+                    Upload
+                  </label>
+                </div>
+                <div className="d-grid">
+                  {attorney.map((doc, index) => (
+                    <span key={index}>
+                      {doc.name}
+                      <Button
+                        className="bg-transparent border-0"
+                        onClick={handleDeleteAttorney(doc.url)}
+                      >
+                        <MdClose fontSize="1.5em" color="red" />
+                      </Button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="d-flex align-items-center fw-bold my-2 mx-4">
+                Or
+              </div>
+              <div className="d-flex">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Owner Email"
+                />
+                <div className="d-flex justify-content-end mx-2">
+                  <Button
+                    className="btn btn-primary d-flex justify-content-center"
+                    style={{ width: "50px" }}
+                    onClick={() => setBuyerControl("send")}
+                  >
+                    Send
+                  </Button>
+                </div>
+              </div>
+              {/* {attorney.length > 0 && (
+                          <Button
+                            className="btn btn-primary mt-4"
+                            onClick={handleSignDocusign}
+                          >
+                            <SiDocusign />
+                            <span className="ms-3 fs-5">
+                              <strong>Sign Document</strong>
+                            </span>
+                          </Button>
+                        )} */}
+            </div>
+          )}
+          {buyerControl === "send" && (
+            <div className="d-flex flex-column align-items-center mt-3">
+              <BsFillCheckCircleFill color="green" fontSize="2em" />
+              <span className="ms-3 fs-5">
+                <strong>Document Sent</strong>
+              </span>
+            </div>
+          )}
 
-          <div className="mt-3">
+          <div className="mt-5">
             <input
               type="checkbox"
               name="terms"

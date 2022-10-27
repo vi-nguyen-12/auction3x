@@ -227,7 +227,7 @@ function App() {
         authService.getWallet(user._id).then((res) => {
           const newWallet = { RealEstate: 0, Car: 0, Jet: 0, Yacht: 0 };
           const newSubWallet = { RealEstate: [], Car: [], Jet: [], Yacht: [] };
-          res.data.map((w) => {
+          res?.data?.map((w) => {
             if (w.property.type === "real-estate") {
               newWallet.RealEstate = newWallet.RealEstate + w.availableFund;
               newSubWallet.RealEstate = [...newSubWallet.RealEstate, w];

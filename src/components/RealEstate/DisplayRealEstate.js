@@ -1382,7 +1382,7 @@ function DisplayRealEstate({
             onHide={toggleRegister}
             centered
           >
-            <Modal.Header className="auction-modal-header">
+            <Modal.Header className="auction-modal-header p-4">
               <Modal.Title
                 className="auction-modal-title"
                 style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}

@@ -174,6 +174,15 @@ function YachtDetails({
           );
         }, 100);
       } else {
+        const descriptions = {
+          summary: summary ? summary : "",
+          investment: invest ? invest : "",
+          location: locationInfo ? locationInfo : "",
+          market: marketInfo ? marketInfo : "",
+        };
+
+        !invest && delete descriptions.investment;
+
         const submitedData = {
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
@@ -187,12 +196,7 @@ function YachtDetails({
           engine_deck_type,
           running_cost: parseInt(running_cost),
           no_of_crew_required: parseInt(no_of_crew_required),
-          description: {
-            summary: summary?.yacht ? summary.yacht : summary,
-            investment: invest?.yacht ? invest?.yacht : invest,
-            location: locationInfo?.yacht ? locationInfo?.yacht : locationInfo,
-            market: marketInfo?.yacht ? marketInfo?.yacht : marketInfo,
-          },
+          description: descriptions,
           property_address: {
             formatted_street_address: address,
             country,

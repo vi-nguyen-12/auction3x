@@ -334,8 +334,11 @@ function Car({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
+          {edit.step2_1 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
           <Button
-            className="mx-3"
+            className={edit.step2_1 ? "mx-3 btn btn-danger" : "mx-3"}
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_1, step2_1: !edit.step2_1 }))
             }
@@ -346,9 +349,6 @@ function Car({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
           >
             Edit
           </Button>
-          {edit.step2_1 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
-          ) : null}
         </Col>
       </Row>
     </>

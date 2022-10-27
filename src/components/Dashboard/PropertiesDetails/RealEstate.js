@@ -203,7 +203,7 @@ function RealEstate({
       <Row className="mt-2">
         <Col>
           <span style={{ fontWeight: "600", color: "black" }}>
-            Reserved Amount
+            Reserve Amount
           </span>
           <NumberFormat
             value={property.reservedAmount}
@@ -221,7 +221,7 @@ function RealEstate({
         </Col>
         <Col>
           <span style={{ fontWeight: "600", color: "black" }}>
-            Disscussed Amount
+            Negotiable Amount
           </span>
           <NumberFormat
             value={property.discussedAmount}
@@ -240,8 +240,11 @@ function RealEstate({
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
+          {edit.step2_1 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
           <Button
-            className="mx-3"
+            className={edit.step2_1 ? "mx-3 btn btn-danger" : "mx-3"}
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_1, step2_1: !edit.step2_1 }))
             }
@@ -252,9 +255,6 @@ function RealEstate({
           >
             Edit
           </Button>
-          {edit.step2_1 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
-          ) : null}
         </Col>
       </Row>
     </>

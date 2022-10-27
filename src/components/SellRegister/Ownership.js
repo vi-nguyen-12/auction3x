@@ -440,7 +440,46 @@ function Ownership({
                     onChange={(e) => setOwnerName(e.target.value)}
                   />
                 </Col>
-                <Col xs={12} md={5} lg={4} className="mt-sm-3 mt-md-0">
+                <Col xs={12} md={5} lg={4}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Owner Email <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    // defaultValue={
+                    //   ownerName
+                    //     ? ownerName
+                    //     : ownership
+                    //     ? ownership.details.owner_name
+                    //     : ""
+                    // }
+                    // onChange={(e) => setOwnerName(e.target.value)}
+                  />
+                </Col>
+                <Col xs={12} md={5} lg={4}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Owner Phone <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <PhoneInput
+                    disableCountryCode={false}
+                    onlyCountries={["ca", "us", "gb", "au"]}
+                    disableDropdown={false}
+                    country={"us"}
+                    dropdownStyle={{ paddingLeft: "0!important" }}
+                    // value={
+                    //   phone ? phone : ownership ? ownership.details.phone : null
+                    // }
+                    inputStyle={{ width: "100%" }}
+                    buttonStyle={{
+                      borderRight: "none",
+                    }}
+                    // onChange={setPhone}
+                  />
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
@@ -458,7 +497,7 @@ function Ownership({
                     onChange={(e) => setBrokerName(e.target.value)}
                   />
                 </Col>
-                <Col xs={12} md={5} lg={4} className="mt-sm-3 mt-md-0">
+                <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Broker License Number{" "}
                     <span style={{ color: "#ff0000" }}>*</span>
@@ -487,14 +526,6 @@ function Ownership({
                     Listing Agreement(.pdf){" "}
                     <span style={{ color: "#ff0000" }}>*</span>
                   </span>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    className="form-control"
-                    multiple
-                    hidden
-                    {...register("file", { onChange: getFile })}
-                  />
                   <input
                     type="file"
                     id="docu"
@@ -526,16 +557,7 @@ function Ownership({
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Power of Attorney(.pdf){" "}
-                    <span style={{ color: "#ff0000" }}>*</span>
                   </span>
-                  <input
-                    type="file"
-                    accept=".pdf"
-                    className="form-control"
-                    multiple
-                    hidden
-                    {...register("file", { onChange: getAttorneyFile })}
-                  />
                   <input
                     type="file"
                     id="docus"
@@ -630,7 +652,7 @@ function Ownership({
               <Row className="mt-3">
                 <Col xs={12} md={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone <span style={{ color: "#ff0000" }}>*</span>
+                    Broker Phone <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <PhoneInput
                     disableCountryCode={false}
@@ -650,7 +672,7 @@ function Ownership({
                 </Col>
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Email <span style={{ color: "#ff0000" }}>*</span>
+                    Broker Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
                     type="email"

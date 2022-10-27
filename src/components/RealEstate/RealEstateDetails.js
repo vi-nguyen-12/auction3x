@@ -141,7 +141,7 @@ function RealEstateDetails({
     { value: "penhouse", name: "Penhouse" },
     { value: "condo", name: "Condo" },
     { value: "co_op", name: "Co-Op" },
-    { value: "land", name: "Land" },
+    // { value: "land", name: "Land" },
     { value: "castle", name: "Castle" },
     { value: "chateau", name: "Chateau" },
     { value: "farm_ranch", name: "Farm Ranch" },
@@ -163,6 +163,15 @@ function RealEstateDetails({
           setMessage("Built year must be less than or equal to current year.");
         }, 100);
       } else {
+        const descriptions = {
+          summary: summary ? summary : "",
+          investment: invest ? invest : "",
+          location: locationInfo ? locationInfo : "",
+          market: marketInfo ? marketInfo : "",
+        };
+
+        !invest && delete descriptions.investment;
+
         const submitedData = {
           street_address: address,
           city,
@@ -181,16 +190,7 @@ function RealEstateDetails({
           lot_size: parseInt(lotSize),
           type_of_garage: garage,
           number_of_stories: parseInt(story),
-          description: {
-            summary: summary?.realEstate ? summary.realEstate : summary,
-            investment: invest?.realEstate ? invest?.realEstate : invest,
-            location: locationInfo?.realEstate
-              ? locationInfo?.realEstate
-              : locationInfo,
-            market: marketInfo?.realEstate
-              ? marketInfo?.realEstate
-              : marketInfo,
-          },
+          description: descriptions,
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
           step: 2,
@@ -612,11 +612,6 @@ function RealEstateDetails({
             </Button>
           </Col>
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <Button onClick={() => setOpenInvest(true)}>
-              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
-            </Button>
-          </Col>
-          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
             <Button onClick={() => setOpenLocationInfo(true)}>
               Location Information<span style={{ color: "#ff0000" }}>*</span>
             </Button>
@@ -624,6 +619,11 @@ function RealEstateDetails({
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
             <Button onClick={() => setOpenMarketInfo(true)}>
               Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </Button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <Button onClick={() => setOpenInvest(true)}>
+              Investment Opportunity
             </Button>
           </Col>
         </Row>

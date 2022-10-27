@@ -585,7 +585,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           </PlacesAutocomplete>
         </Col>
       </Row>
-      <Row className="mt-3">
+      {/* <Row className="mt-3">
         <Col className="d-flex justify-content-end">
           <Button
             className="mx-3"
@@ -603,7 +603,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             <Button onClick={() => onSubmit(property, 1)}>Save</Button>
           ) : null}
         </Col>
-      </Row>
+      </Row> */}
       <Row className="mt-4">
         <Col
           style={{
@@ -726,8 +726,11 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
+          {edit.step2 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
           <Button
-            className="mx-3"
+            className={edit.step2 ? "mx-3 btn btn-danger" : "mx-3"}
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2, step2: !edit.step2 }))
             }
@@ -738,9 +741,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           >
             Edit
           </Button>
-          {edit.step2 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
-          ) : null}
         </Col>
       </Row>
       <Row className="mt-4">
@@ -840,8 +840,11 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
+          {edit.step2_2 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
           <Button
-            className="mx-3"
+            className={edit.step2_2 ? "mx-3 btn btn-danger" : "mx-3"}
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_2, step2_2: !edit.step2_2 }))
             }
@@ -852,9 +855,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           >
             Edit
           </Button>
-          {edit.step2_2 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
-          ) : null}
         </Col>
       </Row>
     </Container>

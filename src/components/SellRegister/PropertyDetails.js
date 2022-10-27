@@ -28,6 +28,7 @@ const PropertyDetails = ({
   invest,
   locationInfo,
   marketInfo,
+  setMessage,
 }) => {
   return (
     <div className="wrapper">
@@ -56,6 +57,7 @@ const PropertyDetails = ({
             invest={invest}
             locationInfo={locationInfo}
             marketInfo={marketInfo}
+            setMessage={setMessage}
           />
         ) : propertyTest.type === "jet" ? (
           <JetDetails
@@ -80,6 +82,7 @@ const PropertyDetails = ({
             invest={invest}
             locationInfo={locationInfo}
             marketInfo={marketInfo}
+            setMessage={setMessage}
           />
         ) : propertyTest.type === "yacht" ? (
           <YachtDetails
@@ -104,6 +107,7 @@ const PropertyDetails = ({
             invest={invest}
             locationInfo={locationInfo}
             marketInfo={marketInfo}
+            setMessage={setMessage}
           />
         ) : propertyTest.type === "real-estate" ? (
           <RealEstateDetails
@@ -128,6 +132,7 @@ const PropertyDetails = ({
             invest={invest}
             locationInfo={locationInfo}
             marketInfo={marketInfo}
+            setMessage={setMessage}
           />
         ) : null}
       </div>

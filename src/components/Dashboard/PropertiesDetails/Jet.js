@@ -311,9 +311,60 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
         </Col>
       </Row>
       <Row className="mt-3">
+        <Col xs={12} md={6}>
+          <span
+            style={{
+              fontWeight: "600",
+              color: "black",
+            }}
+          >
+            Reserve Amount
+          </span>
+          <NumberFormat
+            thousandSeparator={true}
+            allowNegative={false}
+            prefix="$"
+            value={property.reservedAmount}
+            className="form-control"
+            style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
+            onValueChange={(values) => {
+              const { value } = values;
+              property.reservedAmount = value;
+            }}
+            disabled={!edit.step2_1}
+          />
+        </Col>
+        <Col xs={12} md={6}>
+          <span
+            style={{
+              fontWeight: "600",
+              color: "black",
+            }}
+          >
+            Negotiable Amount
+          </span>
+          <NumberFormat
+            thousandSeparator={true}
+            allowNegative={false}
+            prefix="$"
+            value={property.discussedAmount}
+            className="form-control"
+            style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
+            onValueChange={(values) => {
+              const { value } = values;
+              property.discussedAmount = value;
+            }}
+            disabled={!edit.step2_1}
+          />
+        </Col>
+      </Row>
+      <Row className="mt-3">
         <Col className="d-flex justify-content-end">
+          {edit.step2_1 ? (
+            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+          ) : null}
           <Button
-            className="mx-3"
+            className={edit.step2_1 ? "mx-3 btn btn-danger" : "mx-3"}
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_1, step2_1: !edit.step2_1 }))
             }
@@ -324,9 +375,6 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
           >
             Edit
           </Button>
-          {edit.step2_1 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
-          ) : null}
         </Col>
       </Row>
     </>

@@ -151,6 +151,15 @@ function CarDetails({
           setMessage("Built year must be less than or equal to current year.");
         }, 100);
       } else {
+        const descriptions = {
+          summary: summary ? summary : "",
+          investment: invest ? invest : "",
+          location: locationInfo ? locationInfo : "",
+          market: marketInfo ? marketInfo : "",
+        };
+
+        !invest && delete descriptions.investment;
+
         const submitedData = {
           make,
           model,
@@ -165,12 +174,7 @@ function CarDetails({
           fuel_type: fuelType,
           condition,
           market_price: parseInt(price),
-          description: {
-            summary: summary?.car ? summary.car : summary,
-            investment: invest?.car ? invest?.car : invest,
-            location: locationInfo?.car ? locationInfo?.car : locationInfo,
-            market: marketInfo?.car ? marketInfo?.car : marketInfo,
-          },
+          description: descriptions,
           property_address: {
             formatted_street_address: address,
             country,

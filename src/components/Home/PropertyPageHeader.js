@@ -144,43 +144,36 @@ function PropertyPageHeader({
   ];
 
   const prices = [
+    { min_price: "", max_price: 1000000 },
     { min_price: 1000000, max_price: 5000000 },
     { min_price: 5000000, max_price: 10000000 },
-    { min_price: 10000000, max_price: 20000000 },
-    { min_price: 20000000, max_price: 30000000 },
-    { min_price: 30000000, max_price: 40000000 },
-    { min_price: 40000000, max_price: 50000000 },
+    { min_price: 10000000, max_price: "" },
   ];
 
   const RealEstatePrice = [
-    { min_price: 10000000, max_price: 20000000 },
-    { min_price: 20000000, max_price: 30000000 },
-    { min_price: 30000000, max_price: 40000000 },
-    { min_price: 40000000, max_price: 50000000 },
-    { min_price: 50000000, max_price: 60000000 },
-    { min_price: 60000000, max_price: 70000000 },
+    { min_price: "", max_price: 20000000 },
+    { min_price: 20000000, max_price: 40000000 },
+    { min_price: 40000000, max_price: 60000000 },
+    { min_price: 60000000, max_price: 80000000 },
+    { min_price: 80000000, max_price: "" },
   ];
 
   const mileage = [
-    { min: 0, max: 10000 },
-    { min: 10000, max: 30000 },
-    { min: 30000, max: 50000 },
-    { min: 50000, max: 70000 },
-    { min: 70000, max: 100000 },
-    { min: 100000, max: 200000 },
+    { min: "", max: 50000 },
+    { min: 50000, max: 100000 },
+    { min: 100000, max: "" },
   ];
 
   const years = [
-    { min: 2010, max: 2013 },
-    { min: 2013, max: 2016 },
-    { min: 2016, max: 2019 },
-    { min: 2019, max: 2022 },
+    { min: "", max: 2010 },
+    { min: 2010, max: 2020 },
+    { min: 2020, max: "" },
   ];
 
   const length = [
-    { min: 200, max: 400 },
+    { min: "", max: 400 },
     { min: 400, max: 600 },
-    { min: 600, max: 800 },
+    { min: 600, max: "" },
   ];
 
   const getFilter = (propType) => {
@@ -553,8 +546,12 @@ function PropertyPageHeader({
                       value={index}
                       key={index}
                     >
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
+                      {price.min_price === ""
+                        ? ""
+                        : "$" + price.min_price.toLocaleString()}{" "}
+                      {price.max_price === ""
+                        ? "+"
+                        : "- " + " $" + price.max_price.toLocaleString()}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -664,8 +661,12 @@ function PropertyPageHeader({
                   <option value="">Mileage</option>
                   {mileage.map((item, index) => (
                     <option value={index} key={index}>
-                      {item.min.toLocaleString()} mil -{" "}
-                      {item.max.toLocaleString()} mil
+                      {item.min === ""
+                        ? ""
+                        : item.min.toLocaleString() + " Miles"}{" "}
+                      {item.max === ""
+                        ? "+"
+                        : "- " + item.max.toLocaleString() + " Miles"}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -874,8 +875,12 @@ function PropertyPageHeader({
                   <option value="">Price</option>
                   {prices.map((price, index) => (
                     <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
+                      {price.min_price === ""
+                        ? ""
+                        : "$" + price.min_price.toLocaleString()}{" "}
+                      {price.max_price === ""
+                        ? "+"
+                        : "- " + " $" + price.max_price.toLocaleString()}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -977,7 +982,8 @@ function PropertyPageHeader({
                   <option value="">Years</option>
                   {years.map((item, index) => (
                     <option key={index} value={index}>
-                      {item.min} - {item.max}
+                      {item.min === "" ? "" : item.min}{" "}
+                      {item.max === "" ? "+" : "- " + item.max}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -1263,8 +1269,12 @@ function PropertyPageHeader({
                   <option value="">Price</option>
                   {prices.map((price, index) => (
                     <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
+                      {price.min_price === ""
+                        ? ""
+                        : "$" + price.min_price.toLocaleString()}{" "}
+                      {price.max_price === ""
+                        ? "+"
+                        : "- " + " $" + price.max_price.toLocaleString()}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -1439,7 +1449,10 @@ function PropertyPageHeader({
                   <option value="">Length</option>
                   {length.map((item, index) => (
                     <option key={index} value={index}>
-                      {item.min} ft - {item.max} ft
+                      {item.min === "" ? "" : item.min.toLocaleString() + "ft"}{" "}
+                      {item.max === ""
+                        ? "+"
+                        : "- " + item.max.toLocaleString() + "ft"}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -1653,8 +1666,12 @@ function PropertyPageHeader({
                   <option value="">Price</option>
                   {prices.map((price, index) => (
                     <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
+                      {price.min_price === ""
+                        ? ""
+                        : "$" + price.min_price.toLocaleString()}{" "}
+                      {price.max_price === ""
+                        ? "+"
+                        : "- " + " $" + price.max_price.toLocaleString()}
                     </option>
                   ))}
                   <option value="Other">Other</option>
@@ -1877,9 +1894,17 @@ function PropertyPageHeader({
                 >
                   <option value="">Price</option>
                   {RealEstatePrice.map((price, index) => (
-                    <option value={index} key={index}>
-                      ${price.min_price.toLocaleString()} - $
-                      {price.max_price.toLocaleString()}
+                    <option
+                      value={index}
+                      key={index}
+                      className="d-flex justify-content-center"
+                    >
+                      {price.min_price === ""
+                        ? ""
+                        : "$" + price.min_price.toLocaleString()}{" "}
+                      {price.max_price === ""
+                        ? "+"
+                        : "- " + " $" + price.max_price.toLocaleString()}
                     </option>
                   ))}
                   <option value="Other">Other</option>
