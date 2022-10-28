@@ -25,8 +25,6 @@ const BuyAuthorized = ({
   const [envelopeId, setEnvelopeId] = useState();
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
-  const [buyerType, setBuyerType] = useState();
-  const [brokerControl, setBrokerControl] = useState();
   const [buyerControl, setBuyerControl] = useState();
   const [attorney, setAttorney] = useState([]);
 
@@ -182,10 +180,24 @@ const BuyAuthorized = ({
       <Modal.Body style={{ height: "300px" }}>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
           <div className="d-flex">
-            <Button onClick={() => setBuyerControl("buyer")} className="mx-2">
+            <Button
+              onClick={() => setBuyerControl("buyer")}
+              className="mx-2 submitBtn border-0"
+              style={{
+                background: buyerControl === "buyer" ? "#d68e5a" : "#edb48b",
+              }}
+            >
               Buyer
             </Button>
-            <Button onClick={() => setBuyerControl("broker")}>Broker</Button>
+            <Button
+              onClick={() => setBuyerControl("broker")}
+              className="submitBtn border-0"
+              style={{
+                background: buyerControl === "broker" ? "#d68e5a" : "#edb48b",
+              }}
+            >
+              Broker
+            </Button>
           </div>
           {(buyerControl === "buyer" || buyerControl === "attorney") && (
             <Button

@@ -4,14 +4,39 @@ import SellWelcome from "./SellWelcome";
 import UploadForm from "./UploadForm";
 import "../../styles/sell-register.css";
 import PropertyDetails from "./PropertyDetails";
-
 import Ownership from "./Ownership";
 import authService from "../../services/authServices";
 import { useParams, useHistory } from "react-router-dom";
 import { Container, Modal, Button } from "react-bootstrap";
 import DocumentsUpload from "./DocumentsUpload";
-import RealEstateForm from "../RealEstate/RealEstateForm";
-import { propTypes } from "react-bootstrap/esm/Image";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+
+const modules = {
+  toolbar: [
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "list",
+  "bullet",
+  "align",
+  "color",
+  "background",
+];
 
 const MultiSellForm = ({
   toggleShow,
@@ -271,15 +296,24 @@ const MultiSellForm = ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
-          <textarea
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={summary}
+            onChange={(e) => setSummary(e)}
+          ></ReactQuill>
+          {/* <textarea
             onChange={(e) => setSummary(e.target.value)}
             value={summary}
             placeholder="Please Enter Property Summary Here"
             className="form-control h-100"
-          ></textarea>
+          ></textarea> */}
         </Modal.Body>
         <div className="d-flex justify-content-end m-2 mb-3 p-2">
-          <Button onClick={() => setOpenSummary(false)}>Done</Button>
+          <Button onClick={() => setOpenSummary(false)} className="rounded-0">
+            Done
+          </Button>
         </div>
       </Modal>
 
@@ -298,15 +332,24 @@ const MultiSellForm = ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
-          <textarea
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={invest}
+            onChange={(e) => setInvest(e)}
+          ></ReactQuill>
+          {/* <textarea
             onChange={(e) => setInvest(e.target.value)}
             defaultValue={invest}
             placeholder="Please Enter Investment Opportunity Here"
             className="form-control h-100"
-          ></textarea>
+          ></textarea> */}
         </Modal.Body>
         <div className="d-flex justify-content-end m-2 mb-3 p-2">
-          <Button onClick={() => setOpenInvest(false)}>Done</Button>
+          <Button onClick={() => setOpenInvest(false)} className="rounded-0">
+            Done
+          </Button>
         </div>
       </Modal>
 
@@ -325,15 +368,27 @@ const MultiSellForm = ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
-          <textarea
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={locationInfo}
+            onChange={(e) => setLocationInfo(e)}
+          ></ReactQuill>
+          {/* <textarea
             onChange={(e) => setLocationInfo(e.target.value)}
             value={locationInfo}
             placeholder="Please Enter Location Information Here"
             className="form-control h-100"
-          ></textarea>
+          ></textarea> */}
         </Modal.Body>
         <div className="d-flex justify-content-end m-2 mb-3 p-2">
-          <Button onClick={() => setOpenLocationInfo(false)}>Done</Button>
+          <Button
+            onClick={() => setOpenLocationInfo(false)}
+            className="rounded-0"
+          >
+            Done
+          </Button>
         </div>
       </Modal>
 
@@ -352,15 +407,27 @@ const MultiSellForm = ({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "40vh" }}>
-          <textarea
+          <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            value={marketInfo}
+            onChange={(e) => setMarketInfo(e)}
+          ></ReactQuill>
+          {/* <textarea
             onChange={(e) => setMarketInfo(e.target.value)}
             value={marketInfo}
             placeholder="Please Enter Market Information Here"
             className="form-control h-100"
-          ></textarea>
+          ></textarea> */}
         </Modal.Body>
         <div className="d-flex justify-content-end m-2 mb-3 p-2">
-          <Button onClick={() => setOpenMarketInfo(false)}>Done</Button>
+          <Button
+            onClick={() => setOpenMarketInfo(false)}
+            className="rounded-0"
+          >
+            Done
+          </Button>
         </div>
       </Modal>
     </>

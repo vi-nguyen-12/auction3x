@@ -20,13 +20,13 @@
   border: none;
   cursor: pointer;
   background-color: transparent;
-  height: 410px;
+  height: fit-content;
   border-radius: 5px;
-  padding: 5px 0;
 }
-.logo {
+
+.info_logo {
   font-size: 50px;
-  color: #c58753;
+  color: #e5a97d;
 }
 @media (max-width: 800px) {
   .info-box {
@@ -106,7 +106,6 @@
 .live-btn {
   border: none;
   position: relative;
-
   background: none;
   display: flex;
   justify-content: center;

@@ -159,7 +159,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
               {...register("document1", { onChange: onChange1 })}
               required
             />
-            <div className="upload-cover">
+            <div className="upload-wrapper m-0">
               <details>
                 <summary>
                   <label
@@ -169,7 +169,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
                     + Documents
                   </label>
                 </summary>
-                <div>
+                <div className="mt-2">
                   <label className="w-100" htmlFor="documents-btn1">
                     <AiOutlinePlusCircle size={20} />
                   </label>
@@ -211,7 +211,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
               {...register("document2", { onChange: onChange2 })}
               required
             />
-            <div className="upload-cover">
+            <div className="upload-wrapper m-0">
               <details>
                 <summary>
                   <label
@@ -221,7 +221,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
                     + Documents
                   </label>
                 </summary>
-                <div>
+                <div className="mt-2">
                   <label className="w-100" htmlFor="documents-btn2">
                     <AiOutlinePlusCircle size={20} />
                   </label>
@@ -264,7 +264,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
               {...register("document3", { onChange: onChange3 })}
               required
             />
-            <div className="upload-cover">
+            <div className="upload-wrapper m-0">
               <details>
                 <summary>
                   <label
@@ -274,7 +274,7 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
                     + Documents
                   </label>
                 </summary>
-                <div>
+                <div className="mt-2">
                   <label className="w-100" htmlFor="documents-btn3">
                     <AiOutlinePlusCircle size={20} />
                   </label>

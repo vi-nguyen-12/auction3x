@@ -386,12 +386,12 @@ function DisplayJet({
                         onClick={toggleVids}
                       />
                     </div>
-                    <Carousel
-                      style={{ height: "100%", borderRadius: "0" }}
-                      {...settings}
-                    >
-                      {property.property.videos.length > 0 ? (
-                        property.property.videos.map((item, index) => (
+                    {property.property.videos.length > 0 ? (
+                      <Carousel
+                        style={{ height: "100%", borderRadius: "0" }}
+                        {...settings}
+                      >
+                        {property.property.videos.map((item, index) => (
                           <Wrap key={index}>
                             {item.name === "videos" ? (
                               <iframe
@@ -414,21 +414,24 @@ function DisplayJet({
                               </video>
                             )}
                           </Wrap>
-                        ))
-                      ) : (
-                        <div>
-                          <h1>No Videos Available</h1>
-                        </div>
-                      )}
-                    </Carousel>
+                        ))}
+                      </Carousel>
+                    ) : (
+                      <div
+                        className="d-flex justify-content-center align-items-center"
+                        style={{ height: "500px" }}
+                      >
+                        <h1 className="py-5">No Video Available</h1>
+                      </div>
+                    )}
                   </Modal.Body>
                 </Modal>
               </div>
-              <div>
+              {/* <div>
                 <button className="live-btn" onClick={toggleLive}>
                   <Md360 className="logo" />
                 </button>
-              </div>
+              </div> */}
 
               {property && (
                 <div>
@@ -1207,60 +1210,9 @@ function DisplayJet({
             {/* ref={myRef}
             style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
-              defaultActiveKey="Investment Opportunity"
+              defaultActiveKey="Location Information"
               className="RealEstate-Tab"
             >
-              <Tab
-                eventKey="Investment Opportunity"
-                title={windowSize > 800 ? "Investment Opportunity" : "IO"}
-                className="RealEstate-Tab-1"
-                style={{
-                  backgroundColor: "#B77B50",
-                  border: "none",
-                  outline: "none",
-                  fontSize: "12px",
-                  padding: "30px",
-                }}
-              >
-                <div
-                  style={{
-                    color: "white",
-                    fontFamily: "Josefin Slab",
-                    fontWeight: "600",
-                  }}
-                >
-                  <div
-                    style={{
-                      // marginTop: windowSize < 600 ? "300px" : "30px",
-                      alignItems: "center",
-                      marginBottom: "20px",
-                      padding: "0",
-                    }}
-                  >
-                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
-                      |
-                    </span>
-                    <span
-                      style={{
-                        fontWeight: "600",
-                        fontSize: "25px",
-                        color: "white",
-                        fontFamily: "Josefin Slab",
-                      }}
-                    >
-                      Investment Opportunity
-                    </span>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: windowSize < 600 ? "18px" : "20px",
-                      textAlign: "left",
-                    }}
-                  >
-                    {property.property.details.description?.investment}
-                  </p>
-                </div>
-              </Tab>
               <Tab
                 eventKey="Location Information"
                 title={windowSize > 800 ? "Location Information" : "LI"}
@@ -1361,7 +1313,57 @@ function DisplayJet({
                   </p>
                 </div>
               </Tab>
-
+              <Tab
+                eventKey="Investment Opportunity"
+                title={windowSize > 800 ? "Investment Opportunity" : "IO"}
+                className="RealEstate-Tab-1"
+                style={{
+                  backgroundColor: "#B77B50",
+                  border: "none",
+                  outline: "none",
+                  fontSize: "12px",
+                  padding: "30px",
+                }}
+              >
+                <div
+                  style={{
+                    color: "white",
+                    fontFamily: "Josefin Slab",
+                    fontWeight: "600",
+                  }}
+                >
+                  <div
+                    style={{
+                      // marginTop: windowSize < 600 ? "300px" : "30px",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                      padding: "0",
+                    }}
+                  >
+                    <span style={{ color: "#fcba7d", fontSize: "40px" }}>
+                      |
+                    </span>
+                    <span
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "25px",
+                        color: "white",
+                        fontFamily: "Josefin Slab",
+                      }}
+                    >
+                      Investment Opportunity
+                    </span>
+                  </div>
+                  <p
+                    style={{
+                      fontSize: windowSize < 600 ? "18px" : "20px",
+                      textAlign: "left",
+                    }}
+                  >
+                    {property.property.details.description?.investment}
+                  </p>
+                </div>
+              </Tab>
               <Tab
                 eventKey="Document Vault"
                 title={windowSize > 800 ? "Document Vault" : "DV"}

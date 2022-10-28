@@ -337,15 +337,15 @@ h1 {
 /* loader */
 
 .input-form-3 label {
-  background-color: #ffffff;
-  color: black;
+  /* background-color: #ffffff; */
+  /* color: black; */
   padding: 0.5rem;
   font-family: "Interstate";
   border-radius: 0.3rem;
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
-  width: 150%;
+  /* width: 100%; */
 }
 
 .delete-btn {

@@ -46,12 +46,23 @@
 }
 
 .submitBtn {
-  background-image: linear-gradient(#d58f5c, #ffc195, #dd9c6d, #edb48b);
+  background: #edb48b;
   border: none;
   outline: none;
-  border-radius: 4px;
+  border-radius: 0 !important;
   padding: 8px;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background: #d68e5a!important;
+}
+
+.submitBtn:focus {
+  border: none!important;
+  outline: none!important;
+  box-shadow: none!important;
 }
 
 .registerBtn {
@@ -383,7 +394,7 @@ h1 {
 .dropdown-info {
   display: none;
   position: absolute;
-  top: 51%;
+  /* top: 51%; */
   text-align: center;
   width: 10rem;
   margin-left: -160px;
@@ -700,4 +711,24 @@ h1 {
   background-color: #b9b9b9;
   margin: 0 5px;
   cursor: pointer;
+}
+
+.general_btn {
+  padding: 15px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #b77b50;
+  color: #fff2e9;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+}
+
+.general_btn:hover {
+  background: #fff2e9;
+  color: #b77b50;
 }

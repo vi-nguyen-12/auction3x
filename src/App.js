@@ -579,7 +579,10 @@ function App() {
               className="form-group mb-4 mt-3"
             >
               <Modal.Header className="login-modal-header">
-                <Modal.Title className="auction-modal-title px-3">
+                <Modal.Title
+                  className="auction-modal-title px-3"
+                  style={{ fontSize: "2rem" }}
+                >
                   Log In
                 </Modal.Title>
               </Modal.Header>
@@ -740,7 +743,10 @@ function App() {
               contentclassname="custom-modal-style"
             >
               <Modal.Header className="login-modal-header">
-                <Modal.Title className="auction-modal-title px-3">
+                <Modal.Title
+                  className="auction-modal-title px-3"
+                  style={{ fontSize: "2rem" }}
+                >
                   Sign Up
                 </Modal.Title>
               </Modal.Header>

@@ -218,12 +218,9 @@ function Ownership({
             style={{ display: "flex", width: "100%", justifyContent: "center" }}
           >
             <Button
-              className="submitBtn"
+              className="submitBtn border-0"
               style={{
-                border: "none",
-                color: isOwner ? "black" : "white",
-                fontWeight: "bold",
-                background: !isOwner && "rgb(233 184 135)",
+                background: isOwner ? "#d68e5a" : "#edb48b",
               }}
               onClick={() => {
                 setIsOwner(true);
@@ -232,13 +229,9 @@ function Ownership({
               Owner
             </Button>
             <Button
-              className="submitBtn"
+              className="submitBtn border-0 mx-2"
               style={{
-                margin: "0px 10px",
-                border: "none",
-                color: !isOwner ? "black" : "white",
-                fontWeight: "bold",
-                background: isOwner && "rgb(233 184 135)",
+                background: !isOwner ? "#d68e5a" : "#edb48b",
               }}
               onClick={() => {
                 setIsOwner(false);

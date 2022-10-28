@@ -644,24 +644,40 @@ function CarDetails({
         </Row>
         <Row className="mt-3">
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <Button onClick={() => setOpenSummary(true)}>
+            <button
+              onClick={() => setOpenSummary(true)}
+              className="general_btn"
+              type="button"
+            >
               Property Summary <span style={{ color: "#ff0000" }}>*</span>
-            </Button>
+            </button>
           </Col>
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <Button onClick={() => setOpenInvest(true)}>
+            <button
+              onClick={() => setOpenInvest(true)}
+              className="general_btn"
+              type="button"
+            >
               Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
-            </Button>
+            </button>
           </Col>
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <Button onClick={() => setOpenLocationInfo(true)}>
+            <button
+              onClick={() => setOpenLocationInfo(true)}
+              className="general_btn"
+              type="button"
+            >
               Location Information<span style={{ color: "#ff0000" }}>*</span>
-            </Button>
+            </button>
           </Col>
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <Button onClick={() => setOpenMarketInfo(true)}>
+            <button
+              onClick={() => setOpenMarketInfo(true)}
+              className="general_btn"
+              type="button"
+            >
               Market Information <span style={{ color: "#ff0000" }}>*</span>
-            </Button>
+            </button>
           </Col>
         </Row>
         <Row className="mt-3">
