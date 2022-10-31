@@ -1,5 +1,6 @@
 .sell-container {
   overflow: auto;
+  padding: 2rem 13rem;
 }
 
 .sell-container::-webkit-scrollbar {
@@ -176,6 +177,7 @@
   justify-content: center;
   align-items: flex-start;
   padding: 20px 0 !important;
+  --bs-gutter-x: 0;
 }
 
 .fee-sell-bottom {
@@ -386,6 +388,36 @@ summary::after {
 details[open] summary::after {
   transform: rotate(180deg);
   content: "\002D";
+}
+
+.docusign-section {
+  background-color: #214e9e;
+  height: 270px;
+}
+
+.docusign-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.docusign-text{
+  text-align: center;
+}
+
+.docusign-btn {
+  width: fit-content;
+  padding: 0.6rem 0.8rem;
+  background-color: #ffc324;
+  border: none;
+  font-weight: bold;
+  color: #3c3113;
+  margin: auto;
 }
 
 @media screen and (max-width: 1024px) {

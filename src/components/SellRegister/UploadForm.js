@@ -6,7 +6,7 @@ import "../../styles/sell-register.css";
 import { MdClose } from "react-icons/md";
 import { Button, Row, Col } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { IoInformationCircleSharp } from "react-icons/io5";
+import { BsQuestionCircleFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
 import Loading from "../../components/Loading";
@@ -140,7 +140,22 @@ const UploadForm = ({
         <div
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <div
+          <p className="m-0">
+            <span
+              className="tooltip-left"
+              data-tooltip='For Video, we recommend you to upload your youtube video link of
+              the property to make the process smoother. If not, you may click
+              on the "+ Videos" button to upload your video. *Video file size
+              must not exceed 150MB*.'
+            >
+              <BsQuestionCircleFill
+                style={{ cursor: "pointer" }}
+                color="#bf9767"
+                size={30}
+              />
+            </span>{" "}
+          </p>
+          {/* <div
             className="dropdown-icon"
             style={{
               width: "fit-content",
@@ -162,7 +177,7 @@ const UploadForm = ({
                 must not exceed 150MB*
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
         {loader ? <Loading /> : null}
         {videoLoader ? <Loading /> : null}

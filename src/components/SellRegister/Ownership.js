@@ -29,6 +29,12 @@ function Ownership({
   const [ownerName, setOwnerName] = useState(
     propertyTest.details?.owner_name || ""
   );
+  const [ownerEmail, setOwnerEmail] = useState(
+    propertyTest.details?.owner_email || ""
+  );
+  const [ownerPhone, setOwnerPhone] = useState(
+    propertyTest.details?.owner_phone || ""
+  );
   const [brokerName, setBrokerName] = useState(
     propertyTest.details?.broker_name || ""
   );
@@ -48,10 +54,16 @@ function Ownership({
   );
 
   const [listingAgreements, setListingAgreements] = useState(
-    propertyTest.details?.broker_documents || []
+    propertyTest.details?.broker_documents.filter(
+      (item) => item.officialName === "listing_agreement"
+    ) || []
   );
 
-  const [attorney, setAttorney] = useState([]);
+  const [attorney, setAttorney] = useState(
+    propertyTest.details?.broker_documents.filter(
+      (item) => item.officialName === "power_of_attorney"
+    ) || []
+  );
 
   const getFile = async (e) => {
     const formData = new FormData();
@@ -72,7 +84,7 @@ function Ownership({
     }
     await authService.saveDocuments(formData).then((res) => {
       setAttorney((prev) =>
-        res.data.map((doc) => ({ ...doc, officialName: "attorney" }))
+        res.data.map((doc) => ({ ...doc, officialName: "power_of_attorney" }))
       );
     });
   };
@@ -102,10 +114,12 @@ function Ownership({
             owner_name: ownerName,
             broker_name: brokerName ? brokerName : null,
             broker_id: brokerId ? brokerId : null,
+            owner_email: ownerEmail ? ownerEmail : null,
+            owner_phone: ownerPhone ? ownerPhone : null,
             phone: phone,
             email: email,
             address: address,
-            broker_documents: listingAgreements,
+            broker_documents: [...listingAgreements, ...attorney],
           },
           step: 1,
         };
@@ -440,14 +454,14 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    // defaultValue={
-                    //   ownerName
-                    //     ? ownerName
-                    //     : ownership
-                    //     ? ownership.details.owner_name
-                    //     : ""
-                    // }
-                    // onChange={(e) => setOwnerName(e.target.value)}
+                    defaultValue={
+                      ownerEmail
+                        ? ownerEmail
+                        : ownership
+                        ? ownership.details.owner_email
+                        : ""
+                    }
+                    onChange={(e) => setOwnerEmail(e.target.value)}
                   />
                 </Col>
                 <Col xs={12} md={5} lg={4}>
@@ -460,14 +474,18 @@ function Ownership({
                     disableDropdown={false}
                     country={"us"}
                     dropdownStyle={{ paddingLeft: "0!important" }}
-                    // value={
-                    //   phone ? phone : ownership ? ownership.details.phone : null
-                    // }
+                    value={
+                      ownerPhone
+                        ? ownerPhone
+                        : ownership
+                        ? ownership.details.owner_phone
+                        : null
+                    }
                     inputStyle={{ width: "100%" }}
                     buttonStyle={{
                       borderRight: "none",
                     }}
-                    // onChange={setPhone}
+                    onChange={setOwnerPhone}
                   />
                 </Col>
               </Row>

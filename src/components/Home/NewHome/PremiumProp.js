@@ -200,6 +200,7 @@ function PremiumProp({
                     src={auction.property.images[0].url}
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    loading="lazy"
                   />
                 </a>
                 <HomeBottom>
@@ -293,6 +294,7 @@ function PremiumProp({
                     src={auction.property.images[0].url}
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    loading="lazy"
                   />
                   {/* <div
                     style={{
@@ -387,6 +389,7 @@ function PremiumProp({
                     src={auction.property.images[0].url}
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    loading="lazy"
                   />
                 </a>
                 <HomeBottom>

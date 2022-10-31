@@ -105,7 +105,11 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
 
   for (let number = 1; number <= totalPages; number++) {
     items.push(
-      <Pagination.Item active={number === currentPage} key={number}>
+      <Pagination.Item
+        style={{ borderRadius: "0" }}
+        active={number === currentPage}
+        key={number}
+      >
         {number}
       </Pagination.Item>
     );
@@ -205,7 +209,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
               style={{
                 background: "transparent",
                 margin: "0 2px",
-                borderRadius: "5px",
+                borderRadius: "0",
               }}
               onClick={() => handlePageChange(parseInt(item.key))}
             >

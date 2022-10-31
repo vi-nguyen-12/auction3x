@@ -180,10 +180,9 @@ const authService = {
     });
   },
 
-  getSellingDocuSign(data) {
+  getSellingDocuSign(id) {
     return axios.get(
-      apiUrl +
-        `/api/docusign/signature/selling_agreement/uiviews?envelopeId=${data}`,
+      apiUrl + `/api/docusign/signature/selling_agreement/${id}/uiviews`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -191,10 +190,9 @@ const authService = {
       }
     );
   },
-  getBuyingDocuSign(data) {
+  getBuyingDocuSign(id) {
     return axios.get(
-      apiUrl +
-        `/api/docusign/signature/buying_agreement/uiviews?envelopeId=${data}`,
+      apiUrl + `/api/docusign/signature/buying_agreement/${id}/uiviews`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
@@ -207,6 +205,17 @@ const authService = {
     return axios.get(apiUrl + `/api/docusign/envelopes/${data}/status`, {
       withCredentials: true,
     });
+  },
+
+  sendSellDocuSign(id) {
+    return axios.post(
+      apiUrl + `/api/docusign/signature/selling_agreement/${id}/email`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
   },
 
   saveProperty(data) {

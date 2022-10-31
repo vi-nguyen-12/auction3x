@@ -147,7 +147,10 @@ const MultiSellForm = ({
 
   return (
     <>
-      <Container className="vh-100 sell-container">
+      <div
+        className="vh-100 sell-container"
+        style={{ padding: windowSize < 800 && "0" }}
+      >
         <h1 className="fs-1">Sell On Auction3</h1>
         <p
           style={{ fontSize: "1.6em", fontWeight: "bold" }}
@@ -279,7 +282,7 @@ const MultiSellForm = ({
             setMessage={setMessage}
           />
         ) : null}
-      </Container>
+      </div>
 
       {/* summary */}
       <Modal
@@ -295,7 +298,7 @@ const MultiSellForm = ({
             Property Summary
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ height: "40vh" }}>
+        <Modal.Body style={{ overflow: "auto" }}>
           <ReactQuill
             theme="snow"
             modules={modules}
@@ -331,7 +334,7 @@ const MultiSellForm = ({
             Investment Opportunity
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ height: "40vh" }}>
+        <Modal.Body style={{ overflow: "auto" }}>
           <ReactQuill
             theme="snow"
             modules={modules}
@@ -367,7 +370,7 @@ const MultiSellForm = ({
             Location Information
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ height: "40vh" }}>
+        <Modal.Body style={{ overflow: "auto" }}>
           <ReactQuill
             theme="snow"
             modules={modules}
@@ -406,7 +409,7 @@ const MultiSellForm = ({
             Market Information
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ height: "40vh" }}>
+        <Modal.Body style={{ overflow: "auto" }}>
           <ReactQuill
             theme="snow"
             modules={modules}

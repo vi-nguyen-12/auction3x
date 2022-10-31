@@ -73,7 +73,7 @@ function Info({ windowSize, toggleSignIn }) {
                 <div className="info-card-container">
                   <div className="info-card">
                     <div className="info-logo">
-                      <img src={item.logo} alt="" />
+                      <img src={item.logo} alt="" loading="lazy" />
                     </div>
                     <div className="info-texts mt-5">
                       <span className="info-subtitle mt-3">{item.title}</span>

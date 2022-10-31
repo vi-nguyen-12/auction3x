@@ -19,6 +19,7 @@ const BuyAuthorized = ({
   document,
   windowSize,
   setMessage,
+  propertyId,
 }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
@@ -104,7 +105,7 @@ const BuyAuthorized = ({
 
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getBuyingDocuSign(envelopeId).then((res) => {
+    await authService.getBuyingDocuSign(propertyId).then((res) => {
       setLoader(false);
       setEnvelopeId(res.data.envelopeId);
       if (

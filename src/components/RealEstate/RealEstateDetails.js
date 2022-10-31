@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import authService from "../../services/authServices";
-import { IoInformationCircleSharp } from "react-icons/io5";
+import { BsQuestionCircleFill } from "react-icons/bs";
 import NumberFormat from "react-number-format";
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -227,7 +227,20 @@ function RealEstateDetails({
         <div
           style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          <div
+          <p className="m-0">
+            <span
+              className="tooltip-left"
+              data-tooltip="We will be using these details to match you with the right
+              buyer."
+            >
+              <BsQuestionCircleFill
+                style={{ cursor: "pointer" }}
+                color="#bf9767"
+                size={30}
+              />
+            </span>{" "}
+          </p>
+          {/* <div
             className="dropdown-icon"
             style={{
               width: "fit-content",
@@ -244,7 +257,7 @@ function RealEstateDetails({
                 buyer.
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
         <Row className="mt-3">
           <Col>
@@ -650,24 +663,19 @@ function RealEstateDetails({
               className="d-flex"
             >
               Reserve Amount <span style={{ color: "#ff0000" }}>*</span>
-              <div
-                className="dropdown-icon mx-2"
-                style={{
-                  width: "fit-content",
-                }}
-              >
-                <IoInformationCircleSharp
-                  style={{ cursor: "pointer" }}
-                  color="blue"
-                  size={25}
-                />
-                {/* <div className="dropdown-info">
-                  <p>
-                    We will be using these details to match you with the right
-                    buyer.
-                  </p>
-                </div> */}
-              </div>
+              <p className="m-0 mx-2 mb-1">
+                <span
+                  className="tooltip-bottom"
+                  data-tooltip="We will be using these details to match you with the right
+              buyer."
+                >
+                  <BsQuestionCircleFill
+                    style={{ cursor: "pointer" }}
+                    color="#bf9767"
+                    size={23}
+                  />
+                </span>{" "}
+              </p>
             </span>
             <NumberFormat
               thousandSeparator={true}
@@ -688,24 +696,19 @@ function RealEstateDetails({
               className="d-flex"
             >
               Negotiable Amount <span style={{ color: "#ff0000" }}>*</span>
-              <div
-                className="dropdown-icon mx-2"
-                style={{
-                  width: "fit-content",
-                }}
-              >
-                <IoInformationCircleSharp
-                  style={{ cursor: "pointer" }}
-                  color="blue"
-                  size={25}
-                />
-                {/* <div className="dropdown-info">
-                  <p>
-                    We will be using these details to match you with the right
-                    buyer.
-                  </p>
-                </div> */}
-              </div>
+              <p className="m-0 mx-2 mb-1">
+                <span
+                  className="tooltip-bottom"
+                  data-tooltip="We will be using these details to match you with the right
+              buyer."
+                >
+                  <BsQuestionCircleFill
+                    style={{ cursor: "pointer" }}
+                    color="#bf9767"
+                    size={23}
+                  />
+                </span>{" "}
+              </p>
             </span>
             <NumberFormat
               thousandSeparator={true}

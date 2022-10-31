@@ -91,6 +91,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
             src={ReservedMet}
             alt="property"
             width={windowSize < 600 ? "50px" : ""}
+            loading="lazy"
           />
         </div>
       )}

@@ -1584,7 +1584,11 @@ function DisplayJet({
               />
             </div>
             <Modal.Body>
-              <MultiBuyForm setMessage={setMessage} windowSize={windowSize} />
+              <MultiBuyForm
+                setMessage={setMessage}
+                windowSize={windowSize}
+                propertyId={property.property._id}
+              />
             </Modal.Body>
           </Modal>
 

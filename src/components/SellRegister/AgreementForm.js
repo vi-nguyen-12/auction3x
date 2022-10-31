@@ -6,6 +6,7 @@ import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
 import { SiDocusign } from "react-icons/si";
 import { useParams } from "react-router-dom";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import SellHeader from "./SellHeader";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../components/Loading";
@@ -33,6 +34,10 @@ const Agree = ({
   const { handleSubmit } = useForm();
   const history = useHistory();
 
+  let attorney = propertyTest.details.broker_documents.filter(
+    (item) => item.officialName === "power_of_attorney"
+  );
+
   useEffect(() => {
     let params = new URLSearchParams();
     params.append("name", "TC_selling");
@@ -56,10 +61,28 @@ const Agree = ({
       });
   }, []);
 
+  const sendDocusign = async () => {
+    setLoader(true);
+    await authService.sendSellDocuSign(propertyTest._id).then((res) => {
+      if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage(
+            `DocuSign successfully sent to ${propertyTest.details?.owner_email}!`
+          );
+        }, 100);
+      }
+    });
+    setLoader(false);
+  };
+
   const handleSignDocusign = async () => {
     setLoader(true);
     await authService
-      .getSellingDocuSign(envelopeId)
+      .getSellingDocuSign(propertyTest._id)
       .then((res) => {
         if (res.data.error === "Invalid Token") {
           setMessage("");
@@ -79,6 +102,7 @@ const Agree = ({
       .catch((error) => {
         setMessage("");
         setMessage(error.message);
+        setLoader(false);
       });
   };
 
@@ -127,6 +151,7 @@ const Agree = ({
         <div className="sell-bottom">
           <h3>SELLER AGREEMENT</h3>
           <form
+            className="w-100 px-5"
             onSubmit={handleSubmit(onSubmit)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -134,16 +159,28 @@ const Agree = ({
               }
             }}
           >
-            <Row className="mt-5">
-              <Button className="btn btn-primary" onClick={handleSignDocusign}>
-                Sign DocuSign <SiDocusign />
-              </Button>
+            <Row className="docusign-section">
+              {propertyTest.details.broker_id && attorney.length === 0 ? (
+                <Button className="btn btn-primary" onClick={sendDocusign}>
+                  Send Docusign to Owner
+                </Button>
+              ) : (
+                <Col className="d-grid justify-content-center align-items-center">
+                  <div className="d-flex justify-content-center align-items-center docusign-logo">
+                    <IoDocumentTextOutline size={35} color="#ffffff" />
+                  </div>
+                  <span className="text-white docusign-text">
+                    Please review and sign the Seller Agreement below
+                  </span>
+                  <button onClick={handleSignDocusign} className="docusign-btn">
+                    REVIEW DOCUMENT
+                  </button>
+                </Col>
+              )}
             </Row>
-            <Row className="mt-3 mb-5">
-              <Col sm={1}>
-                <input className="mr-2" type="checkbox" onChange={toggle} />
-              </Col>
-              <Col>
+            <Row className="mt-3 mb-5 d-flex justify-content-center">
+              <Col className="d-flex justify-content-center">
+                <input className="mx-2" type="checkbox" onChange={toggle} />
                 <label>
                   I agree to the
                   <span
@@ -156,7 +193,7 @@ const Agree = ({
                 </label>
               </Col>
             </Row>
-            <Row className="mt-5">
+            <Row className="mt-5 d-flex justify-content-center">
               <Button className="pre-btn" onClick={() => toggleStep(step - 1)}>
                 Previous
               </Button>

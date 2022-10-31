@@ -104,6 +104,7 @@ function NavBar({
           height="auto"
           alt="logo"
           className="logo"
+          loading="lazy"
         />
       </Col>
       <Col
@@ -226,6 +227,7 @@ function NavBar({
                   width={windowSize > 1670 ? "22px" : "20px"}
                   height="auto"
                   alt=""
+                  loading="lazy"
                 />
               </Button>
               {showWallet && (

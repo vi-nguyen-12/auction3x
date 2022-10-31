@@ -32,7 +32,7 @@ function How({ windowSize }) {
               className="d-grid justify-content-center mt-2 p-0"
             >
               <div className="how-logo">
-                <img src={checkList} alt="" />
+                <img src={checkList} alt="" loading="lazy" />
               </div>
               <div className="how-texts mt-4">
                 <span className="how-subtitle mt-3">
@@ -49,7 +49,7 @@ function How({ windowSize }) {
               style={{ display: windowSize < 1450 && "none" }}
               className="rightArrow mt-2 p-0"
             >
-              <img src={ArrowRight} alt="" />
+              <img src={ArrowRight} alt="" loading="lazy" />
             </Col>
 
             <Col
@@ -64,7 +64,7 @@ function How({ windowSize }) {
               className="d-grid justify-content-center mt-2 p-0"
             >
               <div className="how-logo">
-                <img src={monitor} alt="" />
+                <img src={monitor} alt="" loading="lazy" />
               </div>
               <div className="how-texts mt-4">
                 <span className="how-subtitle mt-3">
@@ -81,7 +81,7 @@ function How({ windowSize }) {
               style={{ display: windowSize < 1450 && "none" }}
               className="rightArrow mt-2 p-0"
             >
-              <img src={ArrowRight} alt="" />
+              <img src={ArrowRight} alt="" loading="lazy" />
             </Col>
 
             <Col
@@ -96,7 +96,7 @@ function How({ windowSize }) {
               className="d-grid justify-content-center mt-2 p-0"
             >
               <div className="how-logo">
-                <img src={handshake} alt="" />
+                <img src={handshake} alt="" loading="lazy" />
               </div>
               <div className="how-texts mt-4">
                 <span className="how-subtitle mt-3">

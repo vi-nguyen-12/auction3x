@@ -1410,7 +1410,11 @@ function DisplayRealEstate({
               />
             </div>
             <Modal.Body>
-              <MultiBuyForm windowSize={windowSize} setMessage={setMessage} />
+              <MultiBuyForm
+                windowSize={windowSize}
+                setMessage={setMessage}
+                propertyId={property.property._id}
+              />
             </Modal.Body>
           </Modal>
 
