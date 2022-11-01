@@ -115,6 +115,8 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
     );
   }
 
+  console.log(incompProperty);
+
   const handlePageChange = (key) => {
     setCurrentPage(key);
     setCurrentPageContent(key - 1);

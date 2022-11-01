@@ -53,13 +53,14 @@ const BuyAgreement = ({ setStep, step, setMessage }) => {
           <Row className="mb-2">
             1.9. The Auction3 team is not a real estate developer.
           </Row>
-          <Form.Check className="mt-4">
+          <Form.Check className="mt-4 d-flex justify-content-center">
             <Form.Check.Input
               className="me-3"
               type="checkbox"
+              id="agree"
               onChange={toggleAgree}
             />
-            <Form.Check.Label>
+            <Form.Check.Label htmlFor="agree">
               I agree to the terms and conditions
             </Form.Check.Label>
           </Form.Check>

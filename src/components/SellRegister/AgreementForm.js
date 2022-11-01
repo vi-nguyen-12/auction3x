@@ -22,6 +22,7 @@ const Agree = ({
   setMessage,
 }) => {
   window.scrollTo(0, 0);
+  console.log("propertyTest", propertyTest);
   const [agree, setAgree] = useState(false);
   const [envelopeId, setEnvelopeId] = useState();
   const [loader, setLoader] = useState(false);
@@ -160,28 +161,49 @@ const Agree = ({
             }}
           >
             <Row className="docusign-section">
-              {propertyTest.details.broker_id && attorney.length === 0 ? (
-                <Button className="btn btn-primary" onClick={sendDocusign}>
-                  Send Docusign to Owner
-                </Button>
-              ) : (
-                <Col className="d-grid justify-content-center align-items-center">
-                  <div className="d-flex justify-content-center align-items-center docusign-logo">
-                    <IoDocumentTextOutline size={35} color="#ffffff" />
-                  </div>
-                  <span className="text-white docusign-text">
-                    Please review and sign the Seller Agreement below
-                  </span>
-                  <button onClick={handleSignDocusign} className="docusign-btn">
-                    REVIEW DOCUMENT
-                  </button>
-                </Col>
-              )}
+              <Col className="d-grid justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center docusign-logo">
+                  <IoDocumentTextOutline size={35} color="#ffffff" />
+                </div>
+                {propertyTest.details.broker_id && attorney.length === 0 ? (
+                  <>
+                    <span className="text-white docusign-text">
+                      You are not authorized to sign this document. Please send
+                      the document to the owner for signing.
+                    </span>
+                    <button
+                      type="button"
+                      onClick={sendDocusign}
+                      className="docusign-btn"
+                    >
+                      SEND DOCUSIGN TO OWNER
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-white docusign-text">
+                      Please review and sign the Seller Agreement below
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleSignDocusign}
+                      className="docusign-btn"
+                    >
+                      REVIEW DOCUMENT
+                    </button>
+                  </>
+                )}
+              </Col>
             </Row>
             <Row className="mt-3 mb-5 d-flex justify-content-center">
               <Col className="d-flex justify-content-center">
-                <input className="mx-2" type="checkbox" onChange={toggle} />
-                <label>
+                <input
+                  className="mx-2"
+                  type="checkbox"
+                  id="agree"
+                  onChange={toggle}
+                />
+                <label htmlFor="agree">
                   I agree to the
                   <span
                     onClick={() => toggleTerms()}

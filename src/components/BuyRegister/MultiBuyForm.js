@@ -4,7 +4,7 @@ import BuyAuthorized from "./BuyAuthorized";
 import BuyQuestionair from "./BuyQuestionair";
 import FundUpload from "./Fund Request/FundUpload";
 
-const MultiBuyForm = ({ windowSize, setMessage, propertyId }) => {
+const MultiBuyForm = ({ windowSize, setMessage, auctionId }) => {
   const [step, setStep] = useState(1);
 
   const [document, setDocument] = useState();
@@ -58,7 +58,7 @@ const MultiBuyForm = ({ windowSize, setMessage, propertyId }) => {
           document={document}
           windowSize={windowSize}
           setMessage={setMessage}
-          propertyId={propertyId}
+          auctionId={auctionId}
         />
       </div>
     );

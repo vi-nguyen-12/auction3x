@@ -1587,7 +1587,7 @@ function DisplayJet({
               <MultiBuyForm
                 setMessage={setMessage}
                 windowSize={windowSize}
-                propertyId={property.property._id}
+                auctionId={property._id}
               />
             </Modal.Body>
           </Modal>

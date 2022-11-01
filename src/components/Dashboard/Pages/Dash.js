@@ -798,7 +798,7 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
           />
         </div>
         <Modal.Body>
-          <AddFund />
+          <AddFund setMessage={setMessage} />
         </Modal.Body>
       </Modal>
     </Container>

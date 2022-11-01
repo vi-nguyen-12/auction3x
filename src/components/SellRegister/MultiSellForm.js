@@ -149,11 +149,11 @@ const MultiSellForm = ({
     <>
       <div
         className="vh-100 sell-container"
-        style={{ padding: windowSize < 800 && "0" }}
+        style={{ padding: windowSize < 1000 && "0" }}
       >
-        <h1 className="fs-1">Sell On Auction3</h1>
+        <h1 className="fw-bold text-black">Sell On Auction3</h1>
         <p
-          style={{ fontSize: "1.6em", fontWeight: "bold" }}
+          style={{ fontSize: "1.2em", fontWeight: "bold" }}
           className="d-flex justify-content-center"
         >
           {propertyTest?.type === "real-estate"

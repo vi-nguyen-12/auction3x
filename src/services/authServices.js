@@ -208,7 +208,7 @@ const authService = {
   },
 
   sendSellDocuSign(id) {
-    return axios.post(
+    return axios.get(
       apiUrl + `/api/docusign/signature/selling_agreement/${id}/email`,
       {
         headers: {

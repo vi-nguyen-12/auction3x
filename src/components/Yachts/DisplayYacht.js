@@ -1464,7 +1464,7 @@ function DisplayYacht({
               <MultiBuyForm
                 windowSize={windowSize}
                 setMessage={setMessage}
-                propertyId={property.property._id}
+                auctionId={property._id}
               />
             </Modal.Body>
           </Modal>

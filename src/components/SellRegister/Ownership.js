@@ -11,6 +11,7 @@ import PlacesAutocomplete, {
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 import { MdClose } from "react-icons/md";
+import {useSelector} from 'react-redux'
 
 function Ownership({
   toggleStep,
@@ -22,6 +23,7 @@ function Ownership({
   toggleSignIn,
   setMessage,
 }) {
+  const user = useSelector(state => state.user)
   const { register, handleSubmit } = useForm();
   const [isOwner, setIsOwner] = useState(
     propertyTest.details?.broker_name ? false : true
@@ -41,8 +43,8 @@ function Ownership({
   const [brokerId, setBrokerId] = useState(
     propertyTest.details?.broker_id || ""
   );
-  const [phone, setPhone] = useState(propertyTest.details?.phone || "");
-  const [email, setEmail] = useState(propertyTest.details?.email || "");
+  const [phone, setPhone] = useState(propertyTest.details?.phone || user.phone);
+  const [email, setEmail] = useState(propertyTest.details?.email || user.email);
   const [address, setAddress] = useState(propertyTest.details?.address || "");
   const [city, setCity] = useState(propertyTest.details?.address?.city || "");
   const [state, setState] = useState(
@@ -376,6 +378,7 @@ function Ownership({
                         borderRight: "none",
                       }}
                       onChange={setPhone}
+                      required
                     />
                   </Col>
                   <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -389,6 +392,7 @@ function Ownership({
                         email ? email : ownership ? ownership.details.email : ""
                       }
                       onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </Col>
                 </Row>
@@ -445,6 +449,7 @@ function Ownership({
                         : ""
                     }
                     onChange={(e) => setOwnerName(e.target.value)}
+                    required
                   />
                 </Col>
                 <Col xs={12} md={5} lg={4}>
@@ -462,6 +467,7 @@ function Ownership({
                         : ""
                     }
                     onChange={(e) => setOwnerEmail(e.target.value)}
+                    required
                   />
                 </Col>
                 <Col xs={12} md={5} lg={4}>
@@ -486,6 +492,7 @@ function Ownership({
                       borderRight: "none",
                     }}
                     onChange={setOwnerPhone}
+                    required
                   />
                 </Col>
               </Row>
@@ -506,6 +513,7 @@ function Ownership({
                     }
                     {...register("brokerName", { required: false })}
                     onChange={(e) => setBrokerName(e.target.value)}
+                    required
                   />
                 </Col>
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -528,6 +536,7 @@ function Ownership({
                     }}
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
+                    required
                   />
                 </Col>
               </Row>
@@ -679,6 +688,7 @@ function Ownership({
                       borderRight: "none",
                     }}
                     onChange={setPhone}
+                    required
                   />
                 </Col>
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -692,6 +702,7 @@ function Ownership({
                       email ? email : ownership ? ownership.details.email : ""
                     }
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </Col>
               </Row>

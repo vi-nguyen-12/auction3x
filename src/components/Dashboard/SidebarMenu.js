@@ -44,7 +44,7 @@ export const SidebarMenu = [
     ],
   },
   {
-    name: "Your Listings",
+    name: "Listings",
     path: { path },
     icon: <IoMdListBox size={30} />,
     iconClosed: <RI.RiArrowDropDownLine className="arrow" />,

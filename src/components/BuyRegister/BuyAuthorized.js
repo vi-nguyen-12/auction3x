@@ -1,11 +1,11 @@
 import React from "react";
 import "../../styles/sell-register.css";
-import { Modal, Button, Container, Row } from "react-bootstrap";
+import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
 import { useParams } from "react-router-dom";
 import axious from "axios";
-import { SiDocusign } from "react-icons/si";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import Loading from "../../components/Loading";
 import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -19,7 +19,7 @@ const BuyAuthorized = ({
   document,
   windowSize,
   setMessage,
-  propertyId,
+  auctionId,
 }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
@@ -103,18 +103,35 @@ const BuyAuthorized = ({
     setAgree(dateTime);
   };
 
+  // const sendDocusign = async () => {
+  //   setLoader(true);
+  //   await authService.send
+
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService.getBuyingDocuSign(propertyId).then((res) => {
-      setLoader(false);
-      setEnvelopeId(res.data.envelopeId);
-      if (
-        res.data.status !== "signing_complete" &&
-        res.data.status !== "viewing_complete"
-      ) {
-        window.open(res.data.redirectUrl);
-      }
-    });
+    await authService
+      .getBuyingDocuSign(auctionId)
+      .then((res) => {
+        if (res.data.error === "Invalid Token") {
+          setMessage("");
+          setMessage("Your session ended. Please log in! ");
+          setLoader(false);
+          window.location.reload();
+        }
+        setLoader(false);
+        setEnvelopeId(res.data.envelopeId);
+        if (
+          res.data.status !== "signing_complete" &&
+          res.data.status !== "viewing_complete"
+        ) {
+          window.open(res.data.redirectUrl);
+        }
+      })
+      .catch((error) => {
+        setMessage("");
+        setMessage(error.message);
+        setLoader(false);
+      });
   };
   const handleSubmit = async () => {
     if (agree) {
@@ -178,7 +195,7 @@ const BuyAuthorized = ({
     <>
       {" "}
       {loader ? <Loading /> : null}
-      <Modal.Body style={{ height: "300px" }}>
+      <Modal.Body>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
           <div className="d-flex">
             <Button
@@ -201,18 +218,29 @@ const BuyAuthorized = ({
             </Button>
           </div>
           {(buyerControl === "buyer" || buyerControl === "attorney") && (
-            <Button
-              className="btn btn-primary mt-4"
-              onClick={handleSignDocusign}
-            >
-              <SiDocusign />
-              <span className="ms-3 fs-5">
-                <strong>Sign Document</strong>
-              </span>
-            </Button>
+            <Row className="docusign-section w-100 mt-3">
+              <Col className="d-flex flex-column align-items-center justify-content-center">
+                <div className="d-flex justify-content-center align-items-center docusign-logo">
+                  <IoDocumentTextOutline size={35} color="#ffffff" />
+                </div>
+                <span className="text-white docusign-text">
+                  Please review and sign the Seller Agreement below
+                </span>
+                <button
+                  type="button"
+                  onClick={handleSignDocusign}
+                  className="docusign-btn"
+                >
+                  REVIEW DOCUMENT
+                </button>
+              </Col>
+            </Row>
           )}
           {buyerControl === "broker" && (
-            <div className="d-flex align-items-center mt-3">
+            <div
+              className="d-flex align-items-center"
+              style={{ height: "200px" }}
+            >
               <div className="d-flex flex-column">
                 <span style={{ fontWeight: "600", color: "black" }}>
                   Power of Attorney(.pdf){" "}
@@ -248,33 +276,15 @@ const BuyAuthorized = ({
               <div className="d-flex align-items-center fw-bold my-2 mx-4">
                 Or
               </div>
-              <div className="d-flex">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Owner Email"
-                />
-                <div className="d-flex justify-content-end mx-2">
-                  <Button
-                    className="btn btn-primary d-flex justify-content-center"
-                    style={{ width: "50px" }}
-                    onClick={() => setBuyerControl("send")}
-                  >
-                    Send
-                  </Button>
-                </div>
+              <div className="d-flex justify-content-end mx-2">
+                <button
+                  type="button"
+                  className="docusign-btn"
+                  onClick={() => setBuyerControl("send")}
+                >
+                  Send Docusign to Owner
+                </button>
               </div>
-              {/* {attorney.length > 0 && (
-                          <Button
-                            className="btn btn-primary mt-4"
-                            onClick={handleSignDocusign}
-                          >
-                            <SiDocusign />
-                            <span className="ms-3 fs-5">
-                              <strong>Sign Document</strong>
-                            </span>
-                          </Button>
-                        )} */}
             </div>
           )}
           {buyerControl === "send" && (

@@ -54,60 +54,69 @@ function AddFund({ setMessage }) {
   };
 
   const fixDate = (date) => {
-    // const newDate = new Date(date);
-    // const day = newDate.getDate() + 1;
-    // const month = newDate.getMonth() + 1;
-    // const year = newDate.getFullYear();
-    // setValidityDate(`${month}-${day}-${year}`);
     setValidityDate(new Date(date).toISOString());
   };
 
   const onSubmit = async (data) => {
     if (other === true) {
-      setLoader(true);
-      const datas = {
-        id: buyerId,
-        details: {
-          ...fundDoc[0],
-          isSelf: false,
-          validity: validityDate,
-          providerName: provider,
-        },
-      };
-      await authService.addFund(datas).then((res) => {
-        if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
-          setLoader(false);
-        } else {
-          setMessage("");
-          setMessage("Fund Added Successfully");
-          setLoader(false);
-          window.location.reload();
-        }
-      });
+      if (validityDate && name && provider && document.length > 0) {
+        setLoader(true);
+        const datas = {
+          id: buyerId,
+          details: {
+            ...fundDoc[0],
+            isSelf: false,
+            validity: validityDate,
+            providerName: provider,
+          },
+        };
+        await authService.addFund(datas).then((res) => {
+          if (res.data.error) {
+            setMessage("");
+            setMessage(res.data.error);
+            setLoader(false);
+          } else {
+            setMessage("");
+            setMessage("Fund Added Successfully");
+            setLoader(false);
+            window.location.reload();
+          }
+        });
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage("Please fill all fields");
+        }, 100);
+      }
     } else {
-      setLoader(true);
-      const datas = {
-        id: buyerId,
-        details: {
-          ...fundDoc[0],
-          isSelf: true,
-          validity: validityDate,
-        },
-      };
-      await authService.addFund(datas).then((res) => {
-        if (res.data.error) {
-          setMessage("");
-          setMessage(res.data.error);
-          setLoader(false);
-        } else {
-          setMessage("");
-          setMessage("Fund Added Successfully");
-          setLoader(false);
-          window.location.reload();
-        }
-      });
+      if (document.length > 0 && name && validityDate) {
+        setLoader(true);
+        const datas = {
+          id: buyerId,
+          details: {
+            ...fundDoc[0],
+            isSelf: true,
+            validity: validityDate,
+          },
+        };
+        await authService.addFund(datas).then((res) => {
+          if (res.data.error) {
+            setMessage("");
+            setMessage(res.data.error);
+            setLoader(false);
+          } else {
+            setMessage("");
+            setMessage("Fund Added Successfully");
+            setLoader(false);
+            window.location.reload();
+          }
+        });
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage("Please fill all fields");
+        }, 100);
+      }
     }
   };
 

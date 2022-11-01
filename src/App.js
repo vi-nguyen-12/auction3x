@@ -568,7 +568,7 @@ function App() {
           <div className="sign-In"></div>
         </Modal> */}
             <Modal
-              size="lg"
+              size="md"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
@@ -663,7 +663,7 @@ function App() {
           </Modal.Body>
         </Modal> */}
             <Modal
-              size="lg"
+              size="md"
               backdrop="static"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"

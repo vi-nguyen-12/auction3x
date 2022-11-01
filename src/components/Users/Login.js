@@ -6,6 +6,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { login } from "../../slice/userSlice";
 import { useHistory, useLocation } from "react-router-dom";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 import "../../styles/modal.css";
 require("react-bootstrap/ModalHeader");
 
@@ -64,60 +65,53 @@ const Login = ({
   return (
     <>
       {showLoading && <Loading />}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="px-3">
         <div className="form-group mb-4 mt-3">
-          <label
-            style={{ fontSize: "35px", color: "black" }}
-            htmlFor="exampleInputEmail1"
-          >
-            Username or Email
-          </label>
           <input
             type="text"
             style={{ height: "50px", fontSize: "20px" }}
-            className="form-control"
-            placeholder="Username or Email"
+            className="form-control login-input px-1"
+            placeholder="Email"
             {...register("userName", {
               required: true,
             })}
             required
           />
         </div>
-        <div className="form-group mt-3">
-          <label
-            style={{ fontSize: "35px", color: "black" }}
-            htmlFor="exampleInputPassword1"
-          >
-            Password
-          </label>
+        <div className="form-group mt-3 d-flex justify-content-between align-items-center">
           <input
             type={hidden ? "password" : "text"}
             style={{ height: "50px", fontSize: "20px" }}
-            className="form-control"
+            className="form-control login-input px-1"
             placeholder="Password"
             {...register("password", {
               required: true,
-              // minLength: 6,
-              // maxLength: 12,
             })}
             required
           />
-          <input
-            className="mt-3"
-            style={{ marginLeft: "10px" }}
-            type="checkbox"
-            onChange={() => setHidden(!hidden)}
-          />{" "}
-          <span>See Password</span>
+          <div className="eyes_container">
+            {hidden ? (
+              <RiEyeCloseLine
+                className="eye-icon"
+                onClick={() => setHidden(false)}
+                size={23}
+              />
+            ) : (
+              <RiEyeLine
+                className="eye-icon"
+                onClick={() => setHidden(true)}
+                size={23}
+              />
+            )}
+          </div>
         </div>
-        <div className="form-group">
+        <div className="form-group d-flex justify-content-end mb-4">
           <Button
             onClick={() => {
               toggleForgotPass();
               toggleSignIn();
             }}
-            style={{ marginTop: "5px", marginBottom: "30px", fontSize: "20px" }}
-            className="nav-link-signup"
+            className="nav-link-signup px-0"
           >
             Reset Password
           </Button>
@@ -125,7 +119,7 @@ const Login = ({
         <Modal.Footer>
           <div className="col text-center mb-2">
             <button type="submit" className="loginBtn mb-3">
-              LOGIN
+              Log In
             </button>
             <div
               className="pb-2"
