@@ -197,7 +197,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
           )}
         </Table>
       </Row>
-      <Row>
+      <Row className="d-flex justify-content-end">
         {items.map((item, index) => (
           <Col
             style={{

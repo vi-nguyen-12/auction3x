@@ -69,6 +69,7 @@ function NavBar({
           window.location.reload();
         } else {
           history.push("/multiSellForm");
+          window.location.reload();
         }
       }
     }

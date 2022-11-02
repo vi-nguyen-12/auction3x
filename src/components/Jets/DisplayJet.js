@@ -312,16 +312,16 @@ function DisplayJet({
                   className="favorite-button"
                 >
                   {favorite ? (
-                    <AiFillHeart className="logo" />
+                    <AiFillHeart className="info_logo" />
                   ) : (
-                    <AiOutlineHeart className="logo" />
+                    <AiOutlineHeart className="info_logo" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline className="logo" />
+                  <IoImageOutline className="info_logo" />
                 </button>
                 <Modal
                   size="xl"
@@ -351,13 +351,12 @@ function DisplayJet({
                     >
                       {property.property.images.map((item, index) => (
                         <Wrap key={index}>
-                          {/* <a> */}
                           <img
-                            style={{ height: "100%" }}
+                            width="100%"
+                            height="100%"
                             src={item.url}
                             alt=""
                           />
-                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -367,7 +366,7 @@ function DisplayJet({
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine className="logo" />
+                  <RiVideoLine className="info_logo" />
                 </button>
 
                 <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
@@ -429,14 +428,14 @@ function DisplayJet({
               </div>
               {/* <div>
                 <button className="live-btn" onClick={toggleLive}>
-                  <Md360 className="logo" />
+                  <Md360 className="info_logo" />
                 </button>
               </div> */}
 
               {property && (
                 <div>
                   <button onClick={toggleMap} className="map-btn">
-                    <IoLocationOutline className="logo" />
+                    <IoLocationOutline className="info_logo" />
                   </button>
                   <Modal size="xl" show={showMap} onHide={toggleMap} centered>
                     <Modal.Body>

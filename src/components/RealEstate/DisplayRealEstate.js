@@ -271,23 +271,25 @@ function DisplayRealEstate({
             />
             <div className="info-box">
               <div>
-                <button onClick={toggleImage} className="favorite-button">
+                <button
+                  onClick={toggleImage}
+                  // icon={favorite ? "/images/star-before.png" : "/images/star.png"}
+                  className="favorite-button"
+                >
                   {favorite ? (
-                    <AiFillHeart className="logo" />
+                    <AiFillHeart className="info_logo" />
                   ) : (
-                    <AiOutlineHeart className="logo" />
+                    <AiOutlineHeart className="info_logo" />
                   )}
                 </button>
               </div>
 
               <div>
                 <button className="img-btn" onClick={togglePics}>
-                  <IoImageOutline className="logo" />
+                  <IoImageOutline className="info_logo" />
                 </button>
                 <Modal
                   size="xl"
-                  backdrop="static"
-                  keyboard={false}
                   style={{ height: "100%" }}
                   show={showPics}
                   onHide={togglePics}
@@ -314,13 +316,12 @@ function DisplayRealEstate({
                     >
                       {property.property.images.map((item, index) => (
                         <Wrap key={index}>
-                          {/* <a> */}
                           <img
-                            style={{ height: "100%" }}
+                            width="100%"
+                            height="100%"
                             src={item.url}
                             alt=""
                           />
-                          {/* </a> */}
                         </Wrap>
                       ))}
                     </Carousel>
@@ -330,17 +331,10 @@ function DisplayRealEstate({
 
               <div>
                 <button onClick={toggleVids} className="vid-btn">
-                  <RiVideoLine className="logo" />
+                  <RiVideoLine className="info_logo" />
                 </button>
 
-                <Modal
-                  backdrop="static"
-                  keyboard={false}
-                  size="xl"
-                  show={showVideos}
-                  onHide={toggleVids}
-                  centered
-                >
+                <Modal size="xl" show={showVideos} onHide={toggleVids} centered>
                   <Modal.Body>
                     <div
                       style={{
@@ -398,24 +392,17 @@ function DisplayRealEstate({
                 </Modal>
               </div>
               {/* <div>
-                <button className="live-btn" onClick={toggleLive} disabled>
-                  <Md360 className="logo" color="#6d6d6d" />
+                <button className="live-btn" onClick={toggleLive}>
+                  <Md360 className="info_logo" />
                 </button>
               </div> */}
 
               {property && (
                 <div>
                   <button onClick={toggleMap} className="map-btn">
-                    <IoLocationOutline className="logo" />
+                    <IoLocationOutline className="info_logo" />
                   </button>
-                  <Modal
-                    backdrop="static"
-                    keyboard={false}
-                    size="xl"
-                    show={showMap}
-                    onHide={toggleMap}
-                    centered
-                  >
+                  <Modal size="xl" show={showMap} onHide={toggleMap} centered>
                     <Modal.Body>
                       <div
                         style={{

@@ -28,6 +28,7 @@ const Agree = ({
   const [loader, setLoader] = useState(false);
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
+  const [sent, setSent] = useState(false);
   const toggleTerms = () => setShow(!show);
   const toggle = () => {
     setAgree(!agree);
@@ -75,6 +76,7 @@ const Agree = ({
             `DocuSign successfully sent to ${propertyTest.details?.owner_email}!`
           );
         }, 100);
+        setSent(true);
       }
     });
     setLoader(false);
@@ -113,34 +115,62 @@ const Agree = ({
       setTimeout(() => {
         setMessage("You must agree to the terms and conditions");
       }, 100);
+    } else if (sent === false) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please send the DocuSign to the owner to continue.");
+      }, 100);
     } else {
       setLoader(true);
-      await authService.getDocuSignStatus(envelopeId).then((res) => {
-        if (
-          res.data.status !== "signing_complete" &&
-          res.data.status !== "viewing_complete"
-        ) {
-          setLoader(false);
-          setMessage("");
-          setTimeout(() => {
-            setMessage("Please sign the docusign before proceeding ");
-          }, 100);
-        } else {
-          const data = { docusignId: res.data._id, step: 5 };
-          authService.editProperty(propertyTest._id, data).then((res) => {
+      if (
+        propertyTest.details?.broker_id &&
+        propertyTest.details?.broker_documents.filter(
+          (item) => item.officialName === "power_of_attorney"
+        ).length > 0
+      ) {
+        await authService.getDocuSignStatus(envelopeId).then((res) => {
+          if (
+            res.data.status !== "signing_complete" &&
+            res.data.status !== "viewing_complete"
+          ) {
             setLoader(false);
-            if (res.data.error) {
-              setMessage("");
-              setMessage(res.data.error);
-            } else {
-              setMessage("");
-              setMessage("Property Successfully Created!");
-              history.push("/");
-              window.scrollTo(0, 0);
-            }
-          });
-        }
-      });
+            setMessage("");
+            setTimeout(() => {
+              setMessage("Please sign the docusign before proceeding ");
+            }, 100);
+          } else {
+            const data = { docusignId: res.data._id, step: 5 };
+            authService.editProperty(propertyTest._id, data).then((res) => {
+              setLoader(false);
+              if (res.data.error) {
+                setMessage("");
+                setMessage(res.data.error);
+              } else {
+                setMessage("");
+                setMessage("Property Successfully Created!");
+                history.push("/");
+                window.location.reload();
+                window.scrollTo(0, 0);
+              }
+            });
+          }
+        });
+      } else {
+        const data = { step: 5 };
+        authService.editProperty(propertyTest._id, data).then((res) => {
+          setLoader(false);
+          if (res.data.error) {
+            setMessage("");
+            setMessage(res.data.error);
+          } else {
+            setMessage("");
+            setMessage("Property Successfully Created!");
+            history.push("/");
+            window.location.reload();
+            window.scrollTo(0, 0);
+          }
+        });
+      }
     }
   };
 

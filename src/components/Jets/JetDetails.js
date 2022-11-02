@@ -623,15 +623,6 @@ function JetDetails({
           </Col>
           <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
             <button
-              onClick={() => setOpenInvest(true)}
-              className="general_btn"
-              type="button"
-            >
-              Investment Opportunity <span style={{ color: "#ff0000" }}>*</span>
-            </button>
-          </Col>
-          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
-            <button
               onClick={() => setOpenLocationInfo(true)}
               className="general_btn"
               type="button"
@@ -646,6 +637,15 @@ function JetDetails({
               type="button"
             >
               Market Information <span style={{ color: "#ff0000" }}>*</span>
+            </button>
+          </Col>
+          <Col className="mt-3 d-flex justify-content-center" md={3} xs={12}>
+            <button
+              onClick={() => setOpenInvest(true)}
+              className="general_btn"
+              type="button"
+            >
+              Investment Opportunity
             </button>
           </Col>
         </Row>
