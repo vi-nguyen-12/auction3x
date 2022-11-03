@@ -28,8 +28,9 @@ import CloseButton from "react-bootstrap/CloseButton";
 import authService from "./services/authServices";
 import Maintenance from "./images/Maintenance.png";
 import BlackLogo from "./images/BlackLogo.png";
+import cookies from "./images/cookies.png";
 
-const cookies = React.lazy(() => import("./images/cookies.png"));
+// const cookies = React.lazy(() => import("./images/cookies.png"));
 const ToastMessage = React.lazy(() => import("./components/Toast"));
 const Footer = React.lazy(() => import("./components/Home/NewHome/Footer"));
 const NotFound = React.lazy(() => import("./components/Error/NotFound"));
@@ -456,7 +457,7 @@ function App() {
 
             <Modal
               backdrop="static"
-              size="lg"
+              size="md"
               keyboard={false}
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -464,7 +465,7 @@ function App() {
               onHide={toggleConfirmModal}
               contentclassname="confirm"
             >
-              <Modal.Header className="auction-modal-header">
+              <Modal.Header className="login-modal-header">
                 <Modal.Title
                   className="auction-modal-title px-3"
                   style={{ fontSize: windowSize < 800 && "1.5rem" }}
@@ -495,6 +496,17 @@ function App() {
                   setMessage={setMessage}
                 />
               </Modal.Body>
+              <Modal.Footer>
+                <button
+                  onClick={() => {
+                    toggleConfirmModal();
+                    toggleSignIn();
+                  }}
+                  className="back-login-btn"
+                >
+                  Back to Login
+                </button>
+              </Modal.Footer>
             </Modal>
             {/* <Modal
           size="md"
@@ -703,6 +715,17 @@ function App() {
                   setMessage={setMessage}
                 />
               </Modal.Body>
+              <Modal.Footer>
+                <button
+                  onClick={() => {
+                    toggleForgotPass();
+                    toggleSignIn();
+                  }}
+                  className="back-login-btn"
+                >
+                  Back to Login
+                </button>
+              </Modal.Footer>
             </Modal>
             <Modal
               backdrop="static"

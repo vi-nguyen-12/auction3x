@@ -254,7 +254,8 @@ ul.dashed > li:before {
 }
 
 .sell-top-col-line {
-  align-self: center;
+  align-self: flex-start;
+  padding-top: 2rem;
 }
 
 .circle {
@@ -297,7 +298,6 @@ ul.dashed > li:before {
   height: 5px;
   background: #6d6d6d;
   opacity: 0.1;
-  z-index: 0;
 }
 .line-1 {
   width: 100%;
@@ -430,7 +430,7 @@ details[open] summary::after {
   .circle,
   .circle-active {
     font-size: 12px;
-    width: 80%;
+    width: 100%;
   }
   .step-title {
     font-size: 10px;

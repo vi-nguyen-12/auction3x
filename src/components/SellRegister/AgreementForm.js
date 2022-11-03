@@ -36,7 +36,7 @@ const Agree = ({
   const { handleSubmit } = useForm();
   const history = useHistory();
 
-  let attorney = propertyTest.details.broker_documents.filter(
+  let attorney = propertyTest?.details?.broker_documents?.filter(
     (item) => item.officialName === "power_of_attorney"
   );
 
@@ -124,7 +124,7 @@ const Agree = ({
       setLoader(true);
       if (
         propertyTest.details?.broker_id &&
-        propertyTest.details?.broker_documents.filter(
+        propertyTest.details?.broker_documents?.filter(
           (item) => item.officialName === "power_of_attorney"
         ).length > 0
       ) {

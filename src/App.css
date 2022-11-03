@@ -684,6 +684,34 @@ h1 {
   color: white;
 }
 
+.login-modal-btn {
+  background-image: linear-gradient(60deg, #f38f43, #c7723a, #a23830);
+  color: white;
+  border: none;
+  height: 48px;
+  padding: 13px 14px;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 12px;
+  letter-spacing: 1px;
+}
+
+.back-login-btn {
+  background: transparent;
+  border: none;
+  text-decoration: underline #d0d0d0;
+  transition: all 0.3s ease;
+  text-underline-offset: 3px;
+  font-family: inter, Arial, Helvetica, sans-serif;
+}
+
+.back-login-btn:hover {
+  text-decoration: underline #151515;
+}
+
 .section-title {
   font-family: "Tzimmes";
   font-style: normal;

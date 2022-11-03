@@ -11,7 +11,7 @@ import PlacesAutocomplete, {
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 import { MdClose } from "react-icons/md";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 
 function Ownership({
   toggleStep,
@@ -23,7 +23,7 @@ function Ownership({
   toggleSignIn,
   setMessage,
 }) {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const { register, handleSubmit } = useForm();
   const [isOwner, setIsOwner] = useState(
     propertyTest.details?.broker_name ? false : true
@@ -46,23 +46,15 @@ function Ownership({
   const [phone, setPhone] = useState(propertyTest.details?.phone || user.phone);
   const [email, setEmail] = useState(propertyTest.details?.email || user.email);
   const [address, setAddress] = useState(propertyTest.details?.address || "");
-  const [city, setCity] = useState(propertyTest.details?.address?.city || "");
-  const [state, setState] = useState(
-    propertyTest.details?.address?.state || ""
-  );
-  const [zip, setZip] = useState(propertyTest.details?.address?.zip_code || "");
-  const [country, setCountry] = useState(
-    propertyTest.details?.address?.country || ""
-  );
 
   const [listingAgreements, setListingAgreements] = useState(
-    propertyTest.details?.broker_documents.filter(
+    propertyTest.details?.broker_documents?.filter(
       (item) => item.officialName === "listing_agreement"
     ) || []
   );
 
   const [attorney, setAttorney] = useState(
-    propertyTest.details?.broker_documents.filter(
+    propertyTest.details?.broker_documents?.filter(
       (item) => item.officialName === "power_of_attorney"
     ) || []
   );
@@ -137,6 +129,16 @@ function Ownership({
           step: 1,
         };
       }
+      submitedData.details.owner_phone === null &&
+        delete submitedData.details.owner_phone;
+      submitedData.details.owner_email === null &&
+        delete submitedData.details.owner_email;
+      submitedData.details.broker_name === null &&
+        delete submitedData.details.broker_name;
+      submitedData.details.broker_id === null &&
+        delete submitedData.details.broker_id;
+      submitedData.details.broker_documents.length === 0 &&
+        delete submitedData.details.broker_documents;
       if (propertyTest._id) {
         if (propertyTest.type === "real-estate") {
           authService
@@ -196,32 +198,6 @@ function Ownership({
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
       setAddress(results[0].formatted_address);
-
-      let cities = results[0].address_components.filter((item) => {
-        return item.types.includes(
-          "locality" || "sublocality" || "neighborhood"
-        );
-      });
-      setCity(cities[0] ? cities[0]?.long_name : cities[0]?.short_name);
-
-      let states = results[0].address_components.filter((item) => {
-        return item.types[0] === "administrative_area_level_1";
-      });
-      setState(states[0] ? states[0].long_name : states[0]?.short_name);
-
-      let countries = results[0].address_components.filter((item) => {
-        return item.types[0] === "country";
-      });
-      setCountry(
-        countries[0].long_name
-          ? countries[0].long_name
-          : countries[0].short_name
-      );
-
-      let zipcodes = results[0].address_components.filter((item) => {
-        return item.types[0] === "postal_code";
-      });
-      setZip(zipcodes[0] ? zipcodes[0]?.long_name : zipcodes[0]?.short_name);
     });
   };
 

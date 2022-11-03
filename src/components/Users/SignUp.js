@@ -185,7 +185,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           Already Registered? Sign In
         </Button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="pb-3">
         <Row style={{ margin: "20px 0" }}>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
@@ -387,6 +387,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
                 id="agentNumber"
                 placeholder="Enter Agent License Number"
                 name="agentNumber"
+                onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
                 {...register("agentNumber")}
               />
             </div>
@@ -451,7 +452,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
             Terms & Conditions
           </span>
         </label>
-        <button type="submit" className="signUpBtn">
+        <button type="submit" className="login-modal-btn w-100" style={{fontSize:"1.4rem"}}>
           REGISTER
         </button>
       </form>

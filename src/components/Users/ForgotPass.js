@@ -24,10 +24,7 @@ function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
   };
   return (
     // reset password
-    <form
-      style={{ height: "300px", padding: "50px 20px" }}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form style={{ padding: "50px 20px" }} onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label style={{ fontSize: "25px", color: "black" }}>
           Please enter the account email
@@ -43,21 +40,9 @@ function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
           })}
         />
       </div>
-      <div
-        className="form-group"
-        style={{ display: "flex", justifyContent: "center" }}
-      >
-        <button
-          type="submit"
-          className="customButton mt-4"
-          style={{
-            width: "100px",
-            color: "white",
-            fontWeight: "bold",
-            fontSize: "15px",
-          }}
-        >
-          SEND
+      <div className="form-group" style={{ display: "flex" }}>
+        <button type="submit" className="login-modal-btn mt-3 fw-bold w-100">
+          CONTINUE
         </button>
       </div>
     </form>

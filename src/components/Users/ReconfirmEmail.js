@@ -21,7 +21,7 @@ function ReconfirmEmail({ setMessage }) {
   };
   return (
     <>
-      <div className="form-group mb-2 p-4">
+      <div className="form-group p-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <p style={{ justifyContent: "left" }}>
@@ -40,14 +40,10 @@ function ReconfirmEmail({ setMessage }) {
           </div>
           <div
             className="form-group"
-            style={{ display: "flex", justifyContent: "center" }}
+            style={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <button
-              type="submit"
-              className="customButton mt-4"
-              style={{ width: "80px", fontSize: "15px" }}
-            >
-              Send
+            <button type="submit" className="login-modal-btn mt-3 w-100">
+              SEND
             </button>
           </div>
         </form>
