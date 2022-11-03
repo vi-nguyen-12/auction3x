@@ -126,8 +126,8 @@ function AddFund({ setMessage }) {
       <Row style={{ margin: "20px", marginTop: "40px" }}>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
+            className="rounded-0 border-0 w-100"
             style={{
-              width: "100%",
               background: self ? "rgb(21 45 131)" : "",
             }}
             onClick={() => {
@@ -145,8 +145,8 @@ function AddFund({ setMessage }) {
         </Col>
         <Col style={{ display: "flex", justifyContent: "center" }}>
           <Button
+            className="rounded-0 border-0 w-100"
             style={{
-              width: "100%",
               background: other ? "rgb(21 45 131)" : "",
             }}
             onClick={() => {
@@ -260,7 +260,10 @@ function AddFund({ setMessage }) {
                   required
                 />
                 <div className="mt-2">
-                  <label htmlFor="doc" className="btn btn-primary">
+                  <label
+                    htmlFor="doc"
+                    className="btn btn-primary rounded-0 border-0"
+                  >
                     Upload
                   </label>
                 </div>
@@ -288,7 +291,7 @@ function AddFund({ setMessage }) {
               <Button
                 onClick={onSubmit}
                 variant="primary"
-                className="btn-block"
+                className="btn-block rounded-0"
               >
                 Submit
               </Button>
@@ -368,7 +371,10 @@ function AddFund({ setMessage }) {
                 required
               />
               <div className="mt-2">
-                <label htmlFor="doc1" className="btn btn-primary">
+                <label
+                  htmlFor="doc1"
+                  className="btn btn-primary rounded-0 border-0"
+                >
                   Upload
                 </label>
               </div>
@@ -406,7 +412,7 @@ function AddFund({ setMessage }) {
               <Button
                 onClick={onSubmit}
                 variant="primary"
-                className="btn-block"
+                className="btn-block rounded-0"
               >
                 Submit
               </Button>

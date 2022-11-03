@@ -11,7 +11,6 @@ const DocumentsUpload = ({
   toggleStep,
   step,
   setStep,
-
   toggleDocuments,
   ownership,
   propId,
@@ -25,6 +24,7 @@ const DocumentsUpload = ({
   propertyTest,
   setPropertyTest,
   toggleSignIn,
+  setMessage,
 }) => {
   return (
     <Container className="wrapper">
@@ -47,6 +47,7 @@ const DocumentsUpload = ({
           propertyTest={propertyTest}
           setPropertyTest={setPropertyTest}
           toggleSignIn={toggleSignIn}
+          setMessage={setMessage}
         />
       ) : propertyTest.type === "car" ? (
         <CarDocus
@@ -66,6 +67,7 @@ const DocumentsUpload = ({
           propertyTest={propertyTest}
           setPropertyTest={setPropertyTest}
           toggleSignIn={toggleSignIn}
+          setMessage={setMessage}
         />
       ) : propertyTest.type === "jet" ? (
         <JetDocus
@@ -85,6 +87,7 @@ const DocumentsUpload = ({
           propertyTest={propertyTest}
           setPropertyTest={setPropertyTest}
           toggleSignIn={toggleSignIn}
+          setMessage={setMessage}
         />
       ) : propertyTest.type === "yacht" ? (
         <YachtDocus
@@ -104,6 +107,7 @@ const DocumentsUpload = ({
           propertyTest={propertyTest}
           setPropertyTest={setPropertyTest}
           toggleSignIn={toggleSignIn}
+          setMessage={setMessage}
         />
       ) : null}
     </Container>

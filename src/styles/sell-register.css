@@ -254,8 +254,7 @@ ul.dashed > li:before {
 }
 
 .sell-top-col-line {
-  align-self: flex-start;
-  padding-top: 2rem;
+  align-self: center;
 }
 
 .circle {

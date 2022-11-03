@@ -126,8 +126,9 @@ function DisplayYacht({
   const [showPics, setShowPics] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const [showLives, setShowLives] = useState(false);
-  const toggleLive = () => setShowLives(!showLives);
+  // const [showLives, setShowLives] = useState(false);
+  // const toggleLive = () => setShowLives(!showLives);
+  const [viewDocs, setViewDocs] = useState("Location Information");
   const toggleMap = () => setShowMap(!showMap);
   const toggleVids = () => setShowVideos(!showVideos);
   const togglePics = () => setShowPics(!showPics);
@@ -158,7 +159,10 @@ function DisplayYacht({
   let disabled = new Date().toISOString() >= property.auctionEndDate;
 
   const myRef = useRef(null);
-  const executeScroll = () => myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+  const executeScroll = () => {
+    myRef.current.scrollIntoView(); // run this function from an event handler or pass it to useEffect to execute scroll
+    setViewDocs("Document Vault");
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1118,6 +1122,8 @@ function DisplayYacht({
             style={{ padding: "35px", backgroundColor: "white" }}> */}
             <Tabs
               defaultActiveKey="Location Information"
+              activeKey={viewDocs}
+              onSelect={(k) => setViewDocs(k)}
               className="RealEstate-Tab"
             >
               <Tab
