@@ -68,7 +68,7 @@ function LiveListings({
 
   return (
     <>
-      <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
+      <Container className="vh-100 vw-100 mt-4">
         <Row>
           <h3>
             <ins>Upcoming Listings</ins>

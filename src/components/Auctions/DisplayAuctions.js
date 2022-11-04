@@ -25,6 +25,8 @@ function DisplayAuctions({
   setRefresh,
   refresh,
   setMessage,
+  toggleDocu,
+  setDocuUrl,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -66,7 +68,7 @@ function DisplayAuctions({
       });
     };
   }, [setHeaderWidth, setPositionLeft, setPadRight, id, setMessage]);
-  
+
   useEffect(() => {
     if (socket) {
       socket
@@ -140,6 +142,8 @@ function DisplayAuctions({
             setRefresh={setRefresh}
             refresh={refresh}
             setMessage={setMessage}
+            toggleDocu={toggleDocu}
+            setDocuUrl={setDocuUrl}
           />
         ) : auction.property.type === "car" ? (
           <DisplayCar
@@ -150,6 +154,8 @@ function DisplayAuctions({
             setRefresh={setRefresh}
             refresh={refresh}
             setMessage={setMessage}
+            toggleDocu={toggleDocu}
+            setDocuUrl={setDocuUrl}
           />
         ) : auction.property.type === "jet" ? (
           <DisplayJet
@@ -160,6 +166,8 @@ function DisplayAuctions({
             setRefresh={setRefresh}
             refresh={refresh}
             setMessage={setMessage}
+            toggleDocu={toggleDocu}
+            setDocuUrl={setDocuUrl}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
@@ -170,6 +178,8 @@ function DisplayAuctions({
             setRefresh={setRefresh}
             refresh={refresh}
             setMessage={setMessage}
+            toggleDocu={toggleDocu}
+            setDocuUrl={setDocuUrl}
           />
         ) : null
       ) : (

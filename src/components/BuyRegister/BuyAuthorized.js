@@ -20,44 +20,20 @@ const BuyAuthorized = ({
   windowSize,
   setMessage,
   auctionId,
+  toggleDocu,
+  setDocuUrl,
 }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
-  const [envelopeId, setEnvelopeId] = useState();
+  const [docuId, setDocuId] = useState();
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
-  const [buyerControl, setBuyerControl] = useState();
-  const [attorney, setAttorney] = useState([]);
-
   const toggleTerms = () => setShow(!show);
-
   const [ip, setIp] = useState();
 
   const documents = [];
 
-  const getAttorneyFile = async (e) => {
-    const formData = new FormData();
-    for (let i = 0; i < e.target.files.length; i++) {
-      formData.append("documents", e.target.files[i]);
-    }
-    await authService.saveDocuments(formData).then((res) => {
-      if (res.data.error) {
-        setMessage(res.data.error);
-      } else {
-        setAttorney((prev) =>
-          res.data.map((doc) => ({ ...doc, officialName: "attorney" }))
-        );
-        setBuyerControl("attorney");
-      }
-    });
-  };
-
-  const handleDeleteAttorney = (url) => () => {
-    setAttorney(attorney.filter((document) => document.url !== url));
-  };
-
   //push document to array if it is not empty
-
   document.map((item) => {
     if (item.url) {
       documents.push(item);
@@ -119,12 +95,14 @@ const BuyAuthorized = ({
           window.location.reload();
         }
         setLoader(false);
-        setEnvelopeId(res.data.envelopeId);
+        setDocuId(res.data.docusignId);
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
           window.open(res.data.redirectUrl);
+          // setDocuUrl(res.data.redirectUrl);
+          // toggleDocu();
         }
       })
       .catch((error) => {
@@ -136,7 +114,7 @@ const BuyAuthorized = ({
   const handleSubmit = async () => {
     if (agree) {
       setLoader(true);
-      await authService.getDocuSignStatus(envelopeId).then((res) => {
+      await authService.getDocuSignStatus(docuId).then((res) => {
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
@@ -162,6 +140,12 @@ const BuyAuthorized = ({
               answers: answers,
               docusignId: res.data._id,
               documents,
+              // client: {
+              //   clientName: name,
+              //   clientEmail: email,
+              //   clientPhone: phone,
+              //   powerOfAttorney: powerOfAttorney,
+              // },
             })
             .then((res) => {
               if (res.data.error) {
@@ -197,104 +181,23 @@ const BuyAuthorized = ({
       {loader ? <Loading /> : null}
       <Modal.Body>
         <Container className="d-flex flex-column align-items-center justify-content-center h-100">
-          <div className="d-flex">
-            <Button
-              onClick={() => setBuyerControl("buyer")}
-              className="mx-2 submitBtn border-0"
-              style={{
-                background: buyerControl === "buyer" ? "#d68e5a" : "#edb48b",
-              }}
-            >
-              Buyer
-            </Button>
-            <Button
-              onClick={() => setBuyerControl("broker")}
-              className="submitBtn border-0"
-              style={{
-                background: buyerControl === "broker" ? "#d68e5a" : "#edb48b",
-              }}
-            >
-              Broker
-            </Button>
-          </div>
-          {(buyerControl === "buyer" || buyerControl === "attorney") && (
-            <Row className="docusign-section w-100 mt-3">
-              <Col className="d-flex flex-column align-items-center justify-content-center">
-                <div className="d-flex justify-content-center align-items-center docusign-logo">
-                  <IoDocumentTextOutline size={35} color="#ffffff" />
-                </div>
-                <span className="text-white docusign-text">
-                  Please review and sign the Seller Agreement below
-                </span>
-                <button
-                  type="button"
-                  onClick={handleSignDocusign}
-                  className="docusign-btn"
-                >
-                  REVIEW DOCUMENT
-                </button>
-              </Col>
-            </Row>
-          )}
-          {buyerControl === "broker" && (
-            <div
-              className="d-flex align-items-center"
-              style={{ height: "200px" }}
-            >
-              <div className="d-flex flex-column">
-                <span style={{ fontWeight: "600", color: "black" }}>
-                  Power of Attorney(.pdf){" "}
-                </span>
-                <input
-                  type="file"
-                  id="docus"
-                  accept=".pdf"
-                  className="form-control"
-                  onChange={getAttorneyFile}
-                  hidden
-                  multiple
-                />
-                <div className="d-flex">
-                  <label htmlFor="docus" className="btn btn-primary">
-                    Upload
-                  </label>
-                </div>
-                <div className="d-grid">
-                  {attorney.map((doc, index) => (
-                    <span key={index}>
-                      {doc.name}
-                      <Button
-                        className="bg-transparent border-0"
-                        onClick={handleDeleteAttorney(doc.url)}
-                      >
-                        <MdClose fontSize="1.5em" color="red" />
-                      </Button>
-                    </span>
-                  ))}
-                </div>
+          <Row className="docusign-section w-100 mt-3">
+            <Col className="d-flex flex-column align-items-center justify-content-center">
+              <div className="d-flex justify-content-center align-items-center docusign-logo">
+                <IoDocumentTextOutline size={35} color="#ffffff" />
               </div>
-              <div className="d-flex align-items-center fw-bold my-2 mx-4">
-                Or
-              </div>
-              <div className="d-flex justify-content-end mx-2">
-                <button
-                  type="button"
-                  className="docusign-btn"
-                  onClick={() => setBuyerControl("send")}
-                >
-                  Send Docusign to Owner
-                </button>
-              </div>
-            </div>
-          )}
-          {buyerControl === "send" && (
-            <div className="d-flex flex-column align-items-center mt-3">
-              <BsFillCheckCircleFill color="green" fontSize="2em" />
-              <span className="ms-3 fs-5">
-                <strong>Document Sent</strong>
+              <span className="text-white docusign-text">
+                Please review and sign the Seller Agreement below
               </span>
-            </div>
-          )}
+              <button
+                type="button"
+                onClick={handleSignDocusign}
+                className="docusign-btn"
+              >
+                REVIEW DOCUMENT
+              </button>
+            </Col>
+          </Row>
 
           <div className="mt-5">
             <input
@@ -325,8 +228,8 @@ const BuyAuthorized = ({
         </Row>
       </Modal.Footer>
       <Modal size="xl" show={show} onHide={toggleTerms} centered>
-        <Modal.Header className="auction-modal-header">
-          <Modal.Title className="auction-modal-title px-3">
+        <Modal.Header className="auction-modal-header p-4">
+          <Modal.Title className="auction-modal-title">
             Buyer Terms and Conditions
           </Modal.Title>
         </Modal.Header>

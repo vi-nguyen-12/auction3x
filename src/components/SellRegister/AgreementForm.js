@@ -20,11 +20,13 @@ const Agree = ({
   toggleSignIn,
   windowSize,
   setMessage,
+  toggleDocu,
+  setDocuUrl,
 }) => {
   window.scrollTo(0, 0);
   console.log("propertyTest", propertyTest);
   const [agree, setAgree] = useState(false);
-  const [envelopeId, setEnvelopeId] = useState();
+  const [docuId, setDocuId] = useState();
   const [loader, setLoader] = useState(false);
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
@@ -94,12 +96,14 @@ const Agree = ({
           return toggleSignIn(true);
         }
         setLoader(false);
-        setEnvelopeId(res.data.envelopeId);
+        setDocuId(res.data.docusignId);
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
           window.open(res.data.redirectUrl);
+          // setDocuUrl(res.data.redirectUrl);
+          // toggleDocu();
         }
       })
       .catch((error) => {
@@ -115,7 +119,7 @@ const Agree = ({
       setTimeout(() => {
         setMessage("You must agree to the terms and conditions");
       }, 100);
-    } else if (sent === false) {
+    } else if (propertyTest?.details?.broker_id && sent === false) {
       setMessage("");
       setTimeout(() => {
         setMessage("Please send the DocuSign to the owner to continue.");
@@ -123,12 +127,13 @@ const Agree = ({
     } else {
       setLoader(true);
       if (
-        propertyTest.details?.broker_id &&
-        propertyTest.details?.broker_documents?.filter(
-          (item) => item.officialName === "power_of_attorney"
-        ).length > 0
+        (propertyTest.details?.broker_id &&
+          propertyTest.details?.broker_documents?.filter(
+            (item) => item.officialName === "power_of_attorney"
+          ).length > 0) ||
+        !propertyTest.details?.broker_id
       ) {
-        await authService.getDocuSignStatus(envelopeId).then((res) => {
+        await authService.getDocuSignStatus(docuId).then((res) => {
           if (
             res.data.status !== "signing_complete" &&
             res.data.status !== "viewing_complete"
@@ -149,7 +154,7 @@ const Agree = ({
                 setMessage("");
                 setMessage("Property Successfully Created!");
                 history.push("/");
-                window.location.reload();
+                // window.location.reload();
                 window.scrollTo(0, 0);
               }
             });
@@ -166,7 +171,7 @@ const Agree = ({
             setMessage("");
             setMessage("Property Successfully Created!");
             history.push("/");
-            window.location.reload();
+            // window.location.reload();
             window.scrollTo(0, 0);
           }
         });

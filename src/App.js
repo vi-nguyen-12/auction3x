@@ -119,6 +119,8 @@ function App() {
   const [color, setColor] = useState("");
   const [bodyColor, setBodyColor] = useState("");
   const [show, setShow] = useState(true);
+  const [docuUrl, setDocuUrl] = useState();
+  const [showDocu, setShowDocu] = useState(false);
   const [headerWidth, setHeaderWidth] = useState("");
   const [positionLeft, setPositionLeft] = useState("");
   const [padRight, setPadRight] = useState("");
@@ -145,6 +147,7 @@ function App() {
     Yacht: [],
   });
 
+  const toggleDocu = () => setShowDocu(!showDocu);
   const toggleChangePass = () => popChangePass(!changePass);
   const toggleForgotPass = () => popForgotPass(!forgotPass);
   const toggleButton = () => popButton(!showButton);
@@ -205,6 +208,8 @@ function App() {
       }
     }
   }, [dispatch, maintenance, history]);
+
+  console.log(showDocu);
 
   useEffect(() => {
     if (!maintenance) {
@@ -423,6 +428,35 @@ function App() {
             }}
           >
             {/* All Modals */}
+            <Modal
+              size="xl"
+              backdrop="static"
+              keyboard={false}
+              show={showDocu}
+              onHide={toggleDocu}
+              centered
+            >
+              <Modal.Body className="vh-100">
+                <div
+                  style={{
+                    position: "absolute",
+                    top: windowSize < 600 ? "0" : "25px",
+                    right: windowSize < 600 ? "0" : "25px",
+                    zIndex: "999",
+                  }}
+                >
+                  <CloseButton
+                    className="modal-close"
+                    style={{ backgroundColor: "white" }}
+                    onClick={() => {
+                      toggleDocu();
+                    }}
+                  />
+                </div>
+                <embed src={docuUrl} width="100%" height="100%" />
+              </Modal.Body>
+            </Modal>
+
             <Modal
               size="xl"
               show={showCookiesPolicy}
@@ -1048,6 +1082,8 @@ function App() {
                       toggleSignIn={toggleSignIn}
                       toggleSignUp={toggleSignUp}
                       setMessage={setMessage}
+                      toggleDocu={toggleDocu}
+                      setDocuUrl={setDocuUrl}
                     />
                   </Route>
                 )}
@@ -1063,6 +1099,8 @@ function App() {
                       windowSize={windowSize}
                       toggleSignIn={toggleSignIn}
                       setMessage={setMessage}
+                      toggleDocu={toggleDocu}
+                      setDocuUrl={setDocuUrl}
                     />
                   </Route>
                 )}
@@ -1080,6 +1118,8 @@ function App() {
                     setRefresh={setRefresh}
                     setMessage={setMessage}
                     refresh={refresh}
+                    toggleDocu={toggleDocu}
+                    setDocuUrl={setDocuUrl}
                   />
                 </Route>
 
@@ -1234,6 +1274,7 @@ function App() {
                     colorChange={colorChange}
                     setHeaderWidth={setHeaderWidth}
                     setMessage={setMessage}
+                    toggleDocu={toggleDocu}
                   />
                 </Route>
 

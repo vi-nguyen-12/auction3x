@@ -434,7 +434,9 @@ function PremiumProp({
             ))}
           </Carousel>
         </>
-      ) : null}
+      ) : (
+        <div className="vh-100"></div>
+      )}
     </>
   );
 }

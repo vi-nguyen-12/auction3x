@@ -48,6 +48,8 @@ const MultiSellForm = ({
   windowSize,
   toggleSignIn,
   setMessage,
+  toggleDocu,
+  setDocuUrl,
 }) => {
   const [step, setStep] = useState(0);
   const toggleStep = (step) => {
@@ -280,6 +282,8 @@ const MultiSellForm = ({
             propertyTest={propertyTest}
             setPropertyTest={setPropertyTest}
             setMessage={setMessage}
+            toggleDocu={toggleDocu}
+            setDocuUrl={setDocuUrl}
           />
         ) : null}
       </div>

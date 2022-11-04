@@ -116,6 +116,8 @@ function DisplayYacht({
   setRefresh,
   refresh,
   setMessage,
+  toggleDocu,
+  setDocuUrl,
 }) {
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
@@ -1471,6 +1473,8 @@ function DisplayYacht({
                 windowSize={windowSize}
                 setMessage={setMessage}
                 auctionId={property._id}
+                toggleDocu={toggleDocu}
+                setDocuUrl={setDocuUrl}
               />
             </Modal.Body>
           </Modal>

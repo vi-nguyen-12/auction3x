@@ -257,7 +257,9 @@ const UploadForm = ({
                     onChange={(e) => setLink(e.target.value)}
                   />
                   <span style={{ marginLeft: "20px" }}>
-                    <Button onClick={() => getLink()}>Upload</Button>
+                    <Button onClick={() => getLink()} className="rounded-0">
+                      Upload
+                    </Button>
                   </span>
                 </div>
                 <label

@@ -9,7 +9,7 @@ const apiUrl =
     ? process.env.REACT_APP_TEST_API_URL
     : process.env.REACT_APP_DEV_API_URL;
 
-const Docusign = () => {
+const Docusign = ({ toggleDocu }) => {
   const search = useLocation().search;
   const state = new URLSearchParams(search).get("state");
   const event = new URLSearchParams(search).get("event");

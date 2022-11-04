@@ -3,8 +3,15 @@ import BuyAgreement from "./BuyAgreement";
 import BuyAuthorized from "./BuyAuthorized";
 import BuyQuestionair from "./BuyQuestionair";
 import FundUpload from "./Fund Request/FundUpload";
+import BuyerRegistStart from "./BuyerRegistStart";
 
-const MultiBuyForm = ({ windowSize, setMessage, auctionId }) => {
+const MultiBuyForm = ({
+  windowSize,
+  setMessage,
+  auctionId,
+  toggleDocu,
+  setDocuUrl,
+}) => {
   const [step, setStep] = useState(1);
 
   const [document, setDocument] = useState();
@@ -21,7 +28,11 @@ const MultiBuyForm = ({ windowSize, setMessage, auctionId }) => {
   if (step === 1) {
     return (
       <div className="buy-register-container">
-        <BuyAgreement setStep={setStep} step={step} setMessage={setMessage} />
+        <BuyerRegistStart
+          setStep={setStep}
+          step={step}
+          setMessage={setMessage}
+        />
       </div>
     );
   } else if (step === 2) {
@@ -59,6 +70,8 @@ const MultiBuyForm = ({ windowSize, setMessage, auctionId }) => {
           windowSize={windowSize}
           setMessage={setMessage}
           auctionId={auctionId}
+          toggleDocu={toggleDocu}
+          setDocuUrl={setDocuUrl}
         />
       </div>
     );

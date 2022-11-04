@@ -201,8 +201,8 @@ const authService = {
     );
   },
 
-  getDocuSignStatus(data) {
-    return axios.get(apiUrl + `/api/docusign/envelopes/${data}/status`, {
+  getDocuSignStatus(id) {
+    return axios.get(apiUrl + `/api/docusign/${id}`, {
       withCredentials: true,
     });
   },

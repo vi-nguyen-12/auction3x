@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
@@ -93,6 +93,16 @@ function Ownership({
     setAttorney(attorney.filter((document) => document.url !== url));
   };
 
+  useEffect(() => {
+    if (!propertyTest.details && isOwner === true) {
+      setBrokerName("");
+      setOwnerName(user.firstName + " " + user.lastName);
+    } else if (!propertyTest.details && isOwner === false) {
+      setOwnerName("");
+      setBrokerName(user.firstName + " " + user.lastName);
+    }
+  }, [isOwner]);
+
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       setMessage("");
@@ -137,7 +147,7 @@ function Ownership({
         delete submitedData.details.broker_name;
       submitedData.details.broker_id === null &&
         delete submitedData.details.broker_id;
-      submitedData.details.broker_documents.length === 0 &&
+      submitedData?.details?.broker_documents?.length === 0 &&
         delete submitedData.details.broker_documents;
       if (propertyTest._id) {
         if (propertyTest.type === "real-estate") {
@@ -257,7 +267,7 @@ function Ownership({
                     <input
                       type="text"
                       className="form-control"
-                      defaultValue={
+                      value={
                         ownerName
                           ? ownerName
                           : ownership
@@ -417,7 +427,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={
+                    value={
                       ownerName
                         ? ownerName
                         : ownership
@@ -480,7 +490,7 @@ function Ownership({
                   <input
                     type="text"
                     className="form-control"
-                    defaultValue={
+                    value={
                       brokerName
                         ? brokerName
                         : ownership
@@ -532,7 +542,7 @@ function Ownership({
                     multiple
                   />
                   <div className="d-flex">
-                    <label htmlFor="docu" className="btn btn-primary">
+                    <label htmlFor="docu" className="btn btn-primary rounded-0">
                       Upload
                     </label>
                   </div>
@@ -564,7 +574,10 @@ function Ownership({
                     multiple
                   />
                   <div className="d-flex">
-                    <label htmlFor="docus" className="btn btn-primary">
+                    <label
+                      htmlFor="docus"
+                      className="btn btn-primary rounded-0"
+                    >
                       Upload
                     </label>
                   </div>
