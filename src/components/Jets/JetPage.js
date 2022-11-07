@@ -106,7 +106,15 @@ function JetPage({
           if (res.data.length > 0) {
             const jet = res.data.filter((item) => item.property.type === "jet");
             setResultLength({ jet: jet.length });
-            setAuctions(jet);
+            if (filters.auctionType !== "completed") {
+              setAuctions(
+                jet.filter(
+                  (item) => item.auctionEndDate > new Date().toISOString()
+                )
+              );
+            } else {
+              setAuctions(jet);
+            }
             setLoader(false);
           } else {
             setResultLength({ jet: 0 });

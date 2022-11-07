@@ -114,7 +114,15 @@ function RealEstatePage({
               (item) => item.property.type === "real-estate"
             );
             setResultLength({ realEstate: realEstate.length });
-            setAuctions(realEstate);
+            if (filters.auctionType !== "completed") {
+              setAuctions(
+                realEstate.filter(
+                  (item) => item.auctionEndDate > new Date().toISOString()
+                )
+              );
+            } else {
+              setAuctions(realEstate);
+            }
             setLoader(false);
           } else {
             setResultLength({ realEstate: 0 });

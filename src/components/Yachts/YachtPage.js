@@ -108,7 +108,15 @@ function YachtPage({
               (item) => item.property.type === "yacht"
             );
             setResultLength({ yacht: yacht.length });
-            setAuctions(yacht);
+            if (filters.auctionType !== "completed") {
+              setAuctions(
+                yacht.filter(
+                  (item) => item.auctionEndDate > new Date().toISOString()
+                )
+              );
+            } else {
+              setAuctions(yacht);
+            }
             setLoader(false);
           } else {
             setResultLength({ yacht: 0 });

@@ -166,6 +166,7 @@ function PendingListings({
                         setProperty(auction);
                         toggleShowProperty();
                       }}
+                      className="rounded-0"
                     >
                       Edit
                     </Button>
@@ -179,7 +180,7 @@ function PendingListings({
                         setProperty(auction);
                         toggleShowDocu();
                       }}
-                      className="btn btn-primary"
+                      className="btn btn-primary rounded-0"
                     >
                       View Documents
                     </button>
@@ -192,7 +193,7 @@ function PendingListings({
                           color: "white",
                           padding: "10px",
                           fontWeight: "bold",
-                          borderRadius: "5px",
+                          borderRadius: "0",
                         }}
                       >
                         Pending

@@ -163,6 +163,7 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
                         window.open(`/DisplayAuctions/${auction._id}`);
                       }}
                       variant="primary"
+                      className="rounded-0"
                     >
                       View
                     </Button>

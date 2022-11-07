@@ -209,8 +209,6 @@ function App() {
     }
   }, [dispatch, maintenance, history]);
 
-  console.log(showDocu);
-
   useEffect(() => {
     if (!maintenance) {
       if (user._id) {
@@ -370,7 +368,12 @@ function App() {
       {message && <ToastMessage message={message} />}
       {!maintenance ? (
         <>
-          <div className="expendMenu-container" id={expendedMenuId}>
+          <div
+            className="expendMenu-container"
+            id={expendedMenuId}
+            onClick={() => setExpendedMenuId()}
+          ></div>
+          <div id={expendedMenuId}>
             <div className="expendMenu">
               <div className="expendMenu-items d-flex justify-content-between">
                 <span>Welcome!</span>

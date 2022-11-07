@@ -225,7 +225,7 @@ function NavBar({
                 <img
                   style={{ cursor: "pointer" }}
                   src={wallets}
-                  width={windowSize > 1670 ? "25px" : "20px"}
+                  width={windowSize > 1670 ? "22px" : "20px"}
                   height="auto"
                   alt=""
                   loading="lazy"

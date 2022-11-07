@@ -250,6 +250,9 @@ function PropertyPageHeader({
       };
     }
     setFilter(filter);
+    Object.keys(filter).forEach((key) => {
+      filter[key] === "" && delete filter[key];
+    });
     history.push({
       pathname:
         propType === "auctions"

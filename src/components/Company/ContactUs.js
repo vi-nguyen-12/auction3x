@@ -175,7 +175,7 @@ function ContactUs({ windowSize, setMessage }) {
               </Row>
               <Row style={{ marginTop: "50px" }}>
                 <Col className="d-flex justify-content-end">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="general_btn px-3 py-2">
                     Send
                   </button>
                 </Col>

@@ -156,7 +156,7 @@ function Auctions({
       }
     }
     getAuctions();
-  }, [params.parameter, history.location.search, filters, setResultLength]);
+  }, [params.parameter, history.location.search, setResultLength]);
 
   useEffect(() => {
     if (allAuctions) {

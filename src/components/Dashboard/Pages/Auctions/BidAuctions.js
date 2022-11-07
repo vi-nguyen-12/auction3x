@@ -165,6 +165,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                         onClick={() => {
                           window.open(`/DisplayAuctions/${auction._id}`);
                         }}
+                        className="rounded-0"
                       >
                         View
                       </Button>

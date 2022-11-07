@@ -1020,20 +1020,24 @@ function Dashboard({
                       hidden
                       onChange={onChangeMedia}
                     />
-                    <label htmlFor="media" className="btn btn-primary mx-3">
+                    <label
+                      htmlFor="media"
+                      className="btn btn-primary mx-3 rounded-0"
+                    >
                       Upload
                     </label>
                   </>
                 ) : null}
                 {edit.image ? (
                   <Button
-                    className="bg-success border-0 mx-2"
+                    className="bg-success border-0 mx-2 rounded-0"
                     onClick={() => onSubmit(3)}
                   >
                     Save
                   </Button>
                 ) : null}
                 <Button
+                  className="rounded-0"
                   onClick={() => setEdit({ ...edit.image, image: !edit.image })}
                   disabled={
                     property?.auctionDetails?.auctionStartDate ||
@@ -1137,20 +1141,24 @@ function Dashboard({
                       hidden
                       onChange={onChangeVideos}
                     />
-                    <label htmlFor="media" className="btn btn-primary mx-3">
+                    <label
+                      htmlFor="media"
+                      className="btn btn-primary mx-3 rounded-0"
+                    >
                       Upload
                     </label>
                   </>
                 ) : null}
                 {edit.video ? (
                   <Button
-                    className="bg-success border-0 mx-2"
+                    className="bg-success border-0 mx-2 rounded-0"
                     onClick={() => onSubmit(3)}
                   >
                     Save
                   </Button>
                 ) : null}
                 <Button
+                  className="rounded-0"
                   onClick={() => setEdit({ ...edit.video, video: !edit.video })}
                   disabled={
                     property?.auctionDetails?.auctionStartDate ||
@@ -1287,20 +1295,24 @@ function Dashboard({
                       hidden
                       onChange={onChangeDocu}
                     />
-                    <label htmlFor="docu" className="btn btn-primary mx-3">
+                    <label
+                      htmlFor="docu"
+                      className="btn btn-primary mx-3 rounded-0"
+                    >
                       Upload
                     </label>
                   </>
                 ) : null}
                 {edit.docu ? (
                   <Button
-                    className="bg-success border-0 mx-2"
+                    className="bg-success border-0 mx-2 rounded-0"
                     onClick={() => onSubmit(4)}
                   >
                     Save
                   </Button>
                 ) : null}
                 <Button
+                  className="rounded-0"
                   onClick={() => setEdit({ ...edit.docu, docu: !edit.docu })}
                   disabled={
                     property?.auctionDetails?.auctionStartDate ||

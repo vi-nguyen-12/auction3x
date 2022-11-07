@@ -39,7 +39,7 @@ function Footer({ windowSize, setMessage }) {
           >
             <Row className="subscript-container py-5 px-4">
               <Col
-                md={6}
+                md={windowSize < 1455 ? 12 : 6}
                 xs={12}
                 className="d-grid justify-content-center align-items-center"
               >
@@ -52,7 +52,12 @@ function Footer({ windowSize, setMessage }) {
                 </p>
                 <p className="small-box"></p>
               </Col>
-              <Col md={6} xs={12} className="subscript-box">
+              <Col
+                md={windowSize < 1455 ? 12 : 6}
+                xs={12}
+                className="subscript-box"
+                style={{ padding: windowSize < 1455 && "0" }}
+              >
                 <input
                   className="subscript-input"
                   type="email"
@@ -91,11 +96,11 @@ function Footer({ windowSize, setMessage }) {
         </Row>
         <Row
           className="d-flex justify-content-between align-items-start bottom-row px-5"
-          style={{ paddingBottom: windowSize < 800 && "4rem" }}
+          // style={{ paddingBottom: windowSize < 800 && "4rem" }}
         >
           <Col md={6} className="mt-2 p-0 footer-icon-box">
             <img
-              src="/images/newName.png"
+              src="/images/newName.Webp"
               alt=""
               width={windowSize < 768 ? "250px" : "300px"}
               height="auto"

@@ -13,6 +13,35 @@ import Jet from "./PropertiesDetails/Jet";
 import authService from "../../services/authServices";
 import Loading from "../Loading";
 import { MdClose } from "react-icons/md";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
+import parse from "html-react-parser";
+
+const modules = {
+  toolbar: [
+    [{ font: [] }],
+    [{ size: ["small", false, "large", "huge"] }],
+    ["bold", "italic", "underline"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "list",
+  "bullet",
+  "align",
+  "color",
+  "background",
+];
 
 function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
   const [edit, setEdit] = useState({
@@ -496,7 +525,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                     disabled={!edit.step1}
                   />
                   <div className="d-flex">
-                    <label htmlFor="docu" className="btn btn-primary">
+                    <label htmlFor="docu" className="btn btn-primary rounded-0">
                       Upload
                     </label>
                   </div>
@@ -727,10 +756,14 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
           {edit.step2 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+            <Button className="rounded-0" onClick={() => onSubmit(property, 2)}>
+              Save
+            </Button>
           ) : null}
           <Button
-            className={edit.step2 ? "mx-3 btn btn-danger" : "mx-3"}
+            className={
+              edit.step2 ? "mx-3 btn btn-danger rounded-0" : "mx-3 rounded-0"
+            }
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2, step2: !edit.step2 }))
             }
@@ -778,21 +811,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       <Row className="mt-2">
         <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
-            Investment Opportunity
-          </span>
-          <textarea
-            type="text"
-            className="form-control"
-            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details?.description.investment}
-            onChange={(e) =>
-              (property.details.description.investment = e.target.value)
-            }
-            disabled={!edit.step2_2}
-          />
-        </Col>
-        <Col xs={12}>
-          <span style={{ fontWeight: "600", color: "black" }}>
             Location Highlight
           </span>
           <textarea
@@ -806,8 +824,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             disabled={!edit.step2_2}
           />
         </Col>
-      </Row>
-      <Row className="mt-2">
         <Col xs={12}>
           <span style={{ fontWeight: "600", color: "black" }}>
             Market Overview
@@ -837,14 +853,33 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             disabled={!edit.step2_2}
           />
         </Col>
+        <Col xs={12}>
+          <span style={{ fontWeight: "600", color: "black" }}>
+            Investment Opportunity
+          </span>
+          <textarea
+            type="text"
+            className="form-control"
+            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+            defaultValue={property.details?.description.investment}
+            onChange={(e) =>
+              (property.details.description.investment = e.target.value)
+            }
+            disabled={!edit.step2_2}
+          />
+        </Col>
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
           {edit.step2_2 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+            <Button className="rounded-0" onClick={() => onSubmit(property, 2)}>
+              Save
+            </Button>
           ) : null}
           <Button
-            className={edit.step2_2 ? "mx-3 btn btn-danger" : "mx-3"}
+            className={
+              edit.step2_2 ? "mx-3 btn btn-danger rounded-0" : "mx-3 rounded-0"
+            }
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_2, step2_2: !edit.step2_2 }))
             }

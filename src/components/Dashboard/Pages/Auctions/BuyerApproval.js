@@ -282,7 +282,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                           background: "red",
                           color: "white",
                           padding: "10px",
-                          borderRadius: "5px",
+                          borderRadius: "0",
                           fontWeight: "bold",
                         }}
                       >
@@ -335,6 +335,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         toggleQuestionair();
                       }}
                       variant="primary"
+                      className="rounded-0"
                     >
                       View
                     </Button>
@@ -353,6 +354,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         toggleDocuments();
                       }}
                       variant="primary"
+                      className="rounded-0"
                     >
                       View
                     </Button>
@@ -378,6 +380,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         window.open(`/DisplayAuctions/${auction._id}`);
                       }}
                       variant="primary"
+                      className="rounded-0"
                     >
                       View
                     </Button>
@@ -532,7 +535,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                             />
                             <label
                               htmlFor="fileEdit"
-                              className="btn btn-primary"
+                              className="btn btn-primary rounded-0"
                               onClick={(e) => console.log(question.files)}
                             >
                               Upload
@@ -577,7 +580,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                           {edit === index ? (
                             <Button
                               onClick={() => setEdit()}
-                              className="bg-danger border-0"
+                              className="bg-danger border-0 rounded-0"
                             >
                               Close
                             </Button>
@@ -590,7 +593,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                                 delete question._id;
                               }}
                               variant="primary"
-                              className="mx-2"
+                              className="mx-2 rounded-0"
                             >
                               Edit
                             </Button>
@@ -598,7 +601,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                           {edit === index && (
                             <Button
                               onClick={() => onSubmit(buyerId, questionair)}
-                              className="mt-2 bg-success border-0"
+                              className="mt-2 bg-success border-0 rounded-0"
                             >
                               Save
                             </Button>
@@ -741,6 +744,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                               );
                             }}
                             variant="primary"
+                            className="rounded-0"
                           >
                             View
                           </Button>
@@ -808,7 +812,10 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         hidden
                         onChange={handleFundFile}
                       />
-                      <label htmlFor="funds" className="btn btn-primary">
+                      <label
+                        htmlFor="funds"
+                        className="btn btn-primary rounded-0"
+                      >
                         Upload
                       </label>
                     </Col>
@@ -816,18 +823,27 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                 )}
 
                 <Col className="d-flex justify-content-end">
-                  <Button
-                    className="mx-2"
-                    onClick={() => setEditFund(!editFund)}
-                  >
-                    Edit
-                  </Button>
                   {editFund && (
                     <Button
-                      className="mx-2 bg-success border-0"
+                      className="mx-2 bg-success border-0 rounded-0"
                       onClick={() => onSubmit(buyerId, questionair)}
                     >
                       Save
+                    </Button>
+                  )}
+                  {editFund ? (
+                    <Button
+                      className="mx-2 bg-danger border-0 rounded-0"
+                      onClick={() => setEditFund(!editFund)}
+                    >
+                      Cancel
+                    </Button>
+                  ) : (
+                    <Button
+                      className="mx-2 rounded-0"
+                      onClick={() => setEditFund(!editFund)}
+                    >
+                      Edit
                     </Button>
                   )}
                 </Col>

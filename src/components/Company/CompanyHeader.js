@@ -99,8 +99,15 @@ function CompanyHeader({ location, setQuery, faqs }) {
             >
               {"Search Here"}
             </p> */}
-            <div className="faqSearch">
+            <div
+              className="searchBar d-flex align-items-center"
+              style={{
+                fontSize: "20px",
+              }}
+            >
               <input
+                type="text"
+                className="d-flex align-items-center"
                 onChange={(e) => {
                   if (e.target.value !== "") {
                     setQuery(
@@ -114,11 +121,9 @@ function CompanyHeader({ location, setQuery, faqs }) {
                     setQuery([]);
                   }
                 }}
-                type="text"
                 placeholder="Enter Your Question"
               />
               <FiSearch color="black" size={25} />
-              {/* <Button>Search</Button> */}
             </div>
           </div>
         </div>

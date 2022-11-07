@@ -109,7 +109,15 @@ function CarPage({
           if (res.data.length > 0) {
             const car = res.data.filter((item) => item.property.type === "car");
             setResultLength({ car: car.length });
-            setAuctions(car);
+            if (filters.auctionType !== "completed") {
+              setAuctions(
+                car.filter(
+                  (item) => item.auctionEndDate > new Date().toISOString()
+                )
+              );
+            } else {
+              setAuctions(car);
+            }
             setLoader(false);
           } else {
             setAuctions([]);

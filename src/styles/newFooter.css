@@ -180,9 +180,9 @@
 }
 
 @media screen and (max-width: 800px) {
-  .top-row {
+  /* .top-row {
     height: 40%;
-  }
+  } */
 
   .bottom-row {
     height: 60%;

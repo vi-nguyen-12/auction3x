@@ -376,11 +376,11 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
         </Row>
         <Row style={{ margin: "50px 0" }}>
           <h1 style={{ fontSize: "1.3rem", paddingTop: "0" }}>
-            Are you an agent? (Optional){" "}
+            Are you a Broker? (Optional){" "}
           </h1>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
-              <label htmlFor="agentNumber">Agent License Number</label>
+              <label htmlFor="agentNumber">Broker License Number</label>
               <input
                 type="text"
                 className="form-control"
@@ -394,7 +394,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           </Col>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
-              <label htmlFor="agentFile">Agent License/Certificate</label>
+              <label htmlFor="agentFile">Broker License/Certificate</label>
               <input
                 type="file"
                 className="form-control"
@@ -452,7 +452,11 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
             Terms & Conditions
           </span>
         </label>
-        <button type="submit" className="login-modal-btn w-100" style={{fontSize:"1.4rem"}}>
+        <button
+          type="submit"
+          className="login-modal-btn w-100"
+          style={{ fontSize: "1.4rem" }}
+        >
           REGISTER
         </button>
       </form>

@@ -136,11 +136,11 @@ function CarDetails({
   };
 
   const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
+    if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
       setMessage("");
       setTimeout(() => {
         setMessage(
-          "Reserved amount should be greater than or equal to discussed amount"
+          "Reserved amount should be greater than or equal to negotiable amount"
         );
       }, 100);
     } else {

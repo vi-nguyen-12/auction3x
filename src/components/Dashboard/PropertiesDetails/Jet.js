@@ -109,7 +109,9 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
                 disabled={!edit.step2_1}
               />
               <span className="d-flex justify-content-end mt-1">
-                <Button onClick={() => setOther(false)}>Back</Button>
+                <Button className="rounded-0" onClick={() => setOther(false)}>
+                  Back
+                </Button>
               </span>
             </>
           ) : (
@@ -361,10 +363,14 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
       <Row className="mt-3">
         <Col className="d-flex justify-content-end">
           {edit.step2_1 ? (
-            <Button onClick={() => onSubmit(property, 2)}>Save</Button>
+            <Button className="rounded-0" onClick={() => onSubmit(property, 2)}>
+              Save
+            </Button>
           ) : null}
           <Button
-            className={edit.step2_1 ? "mx-3 btn btn-danger" : "mx-3"}
+            className={
+              edit.step2_1 ? "mx-3 btn btn-danger rounded-0" : "mx-3 rounded-0"
+            }
             onClick={() =>
               setEdit((prev) => ({ ...prev.step2_1, step2_1: !edit.step2_1 }))
             }

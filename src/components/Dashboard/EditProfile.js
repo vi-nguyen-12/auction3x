@@ -308,9 +308,9 @@ function EditProfile({ setMessage }) {
           ></ReactQuill>
         </Col>
       </Row>
-      <Row style={{ marginTop: "50px" }}>
-        <Col style={{ display: "flex", justifyContent: "center" }}>
-          <Button onClick={onSubmit} className="btn btn-primary" type="submit">
+      <Row className="mt-3">
+        <Col className="d-flex w-100">
+          <Button onClick={onSubmit} className="w-100 rounded-0" type="submit">
             Change
           </Button>
         </Col>

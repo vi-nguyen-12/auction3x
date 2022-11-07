@@ -39,33 +39,6 @@ h3 {
   align-items: center;
 }
 
-.searchBar {
-  display: flex;
-  align-items: center;
-  padding-right: 15px;
-  width: 100%;
-  height: 50px;
-  background-color: #ffffff;
-  border: 1px solid #d1dcee;
-  border-radius: 0;
-  /* display: flex;
-  flex-direction: column; */
-}
-
-.searchBar input {
-  width: 100%;
-  height: 100%;
-  /* border-radius: 40px; */
-  border: none;
-  padding-left: 20px;
-  background-color: transparent;
-  /* margin-right: 8px; */
-}
-
-.searchBar input:focus {
-  outline: none;
-}
-
 .search Button {
   width: 50px;
   height: 50px;
@@ -572,7 +545,6 @@ h3 {
 .suggest:hover {
   background-color: #b9b9b9;
 }
-
 
 /* .carousel-cards {
   padding: 0 4rem;
