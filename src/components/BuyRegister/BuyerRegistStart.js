@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Modal, Form } from "react-bootstrap";
 import { MdClose } from "react-icons/md";
 import authService from "../../services/authServices";
@@ -6,13 +6,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
-function BuyerRegistStart({ setStep, step, setMessage }) {
+function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
   const [buyerControl, setBuyerControl] = useState();
-  const [clientName, setClientName] = useState();
-  const [clientEmail, setClientEmail] = useState();
-  const [clientPhone, setClientPhone] = useState();
+  const [clientName, setClientName] = useState(client?.name);
+  const [clientEmail, setClientEmail] = useState(client?.email);
+  const [clientPhone, setClientPhone] = useState(client?.phone);
   const [agreement, setAgreement] = useState(false);
-  const [attorney, setAttorney] = useState([]);
+  const [attorney, setAttorney] = useState(client?.documents);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
@@ -28,11 +28,19 @@ function BuyerRegistStart({ setStep, step, setMessage }) {
         setMessage(res.data.error);
       } else {
         setAttorney((prev) =>
-          res.data.map((doc) => ({ ...doc, officialName: "attorney" }))
+          res.data.map((doc) => ({ ...doc, officialName: "power_of_attorney" }))
         );
       }
     });
   };
+
+  useEffect(() => {
+    if (client) {
+      setBuyerControl("broker");
+    } else {
+      setBuyerControl("buyer");
+    }
+  }, [client]);
 
   const handleDeleteAttorney = (url) => () => {
     setAttorney(attorney.filter((document) => document.url !== url));
@@ -60,6 +68,14 @@ function BuyerRegistStart({ setStep, step, setMessage }) {
         setMessage("Please fill in the client information");
       }, 100);
     } else {
+      if (buyerControl === "broker") {
+        setClient({
+          name: clientName,
+          email: clientEmail,
+          phone: clientPhone,
+          documents: attorney,
+        });
+      }
       setStep(step + 1);
     }
   };
@@ -140,26 +156,41 @@ function BuyerRegistStart({ setStep, step, setMessage }) {
           )}
           {buyerControl === "broker" ? (
             <>
+              <Row className="mt-4">
+                <Col
+                  style={{
+                    color: "#376ebc",
+                    fontSize: "20px",
+                    borderBottom: "1px solid black",
+                  }}
+                >
+                  Client Information
+                </Col>
+              </Row>
               <Row className="my-3">
                 <Col xs={12} md={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Client Name <span style={{ color: "#ff0000" }}>*</span>
+                    Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
                     type="text"
                     placeholder="Name"
                     className="form-control"
+                    defaultValue={clientName}
+                    onChange={(e) => setClientName(e.target.value)}
                     required
                   />
                 </Col>
                 <Col xs={12} md={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Client Email <span style={{ color: "#ff0000" }}>*</span>
+                    Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
                     type="text"
                     placeholder="Email"
                     className="form-control"
+                    defaultValue={clientEmail}
+                    onChange={(e) => setClientEmail(e.target.value)}
                     required
                   />
                 </Col>
@@ -167,7 +198,7 @@ function BuyerRegistStart({ setStep, step, setMessage }) {
               <Row className="mt-3">
                 <Col xs={12} md={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Client Phone <span style={{ color: "#ff0000" }}>*</span>
+                    Phone <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <PhoneInput
                     disableCountryCode={false}
@@ -208,9 +239,9 @@ function BuyerRegistStart({ setStep, step, setMessage }) {
                       </label>
                     </div>
                     <div className="d-grid">
-                      {attorney.map((doc, index) => (
+                      {attorney?.map((doc, index) => (
                         <span key={index}>
-                          {doc.name}
+                          {doc?.name}
                           <Button
                             className="bg-transparent border-0"
                             onClick={handleDeleteAttorney(doc.url)}

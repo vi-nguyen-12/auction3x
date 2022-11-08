@@ -91,6 +91,18 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
     property.details.broker_name ? property.details.email : ""
   );
   const [brokerId] = useState(property.details.broker_id || "");
+  const [location, setLocation] = useState(
+    property.details?.description.location || ""
+  );
+  const [market, setMarket] = useState(
+    property.details?.description.market || ""
+  );
+  const [summary, setSummary] = useState(
+    property.details?.description.summary || ""
+  );
+  const [investment, setInvestment] = useState(
+    property.details?.description.investment || ""
+  );
 
   const handleChange = (address) => {
     setAddress(address);
@@ -329,10 +341,12 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           running_cost: parseInt(prop.details.running_cost),
           no_of_crew_required: parseInt(prop.details.no_of_crew_required),
           description: {
-            summary: prop.details.description.summary,
-            investment: prop.details.description.investment,
-            location: prop.details.description.location,
-            market: prop.details.description.market,
+            summary: summary ? summary : prop.details.description.summary,
+            investment: investment
+              ? investment
+              : prop.details.description.investment,
+            location: location ? location : prop.details.description.location,
+            market: market ? market : prop.details.description.market,
           },
           property_address: {
             formatted_street_address: address,
@@ -373,6 +387,8 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       }
     }
   };
+
+  console.log(parse(summary));
 
   return (
     <Container className="mb-4">
@@ -809,64 +825,92 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col xs={12}>
+        <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Location Highlight
           </span>
-          <textarea
-            type="text"
-            className="form-control"
-            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details?.description.location}
-            onChange={(e) =>
-              (property.details.description.location = e.target.value)
-            }
-            disabled={!edit.step2_2}
-          />
+          {edit.step2_2 ? (
+            <ReactQuill
+              theme="snow"
+              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+              modules={modules}
+              formats={formats}
+              value={location}
+              onChange={(e) => setLocation(e)}
+            ></ReactQuill>
+          ) : (
+            <textarea
+              type="text"
+              className="form-control"
+              value={parse(location)?.props?.children || ""}
+              disabled
+            />
+          )}
         </Col>
-        <Col xs={12}>
+        <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Market Overview
           </span>
-          <textarea
-            type="text"
-            className="form-control"
-            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details?.description.market}
-            onChange={(e) =>
-              (property.details.description.market = e.target.value)
-            }
-            disabled={!edit.step2_2}
-          />
+          {edit.step2_2 ? (
+            <ReactQuill
+              theme="snow"
+              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+              modules={modules}
+              formats={formats}
+              value={market}
+              onChange={(e) => setMarket(e)}
+            ></ReactQuill>
+          ) : (
+            <textarea
+              type="text"
+              className="form-control"
+              value={parse(market)?.props?.children || ""}
+              disabled
+            />
+          )}
         </Col>
-        <Col xs={12}>
+        <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Executive Summary
           </span>
-          <textarea
-            className="form-control"
-            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details?.description.summary}
-            onChange={(e) =>
-              (property.details.description.summary = e.target.value)
-            }
-            disabled={!edit.step2_2}
-          />
+          {edit.step2_2 ? (
+            <ReactQuill
+              theme="snow"
+              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+              modules={modules}
+              formats={formats}
+              value={summary}
+              onChange={(e) => setSummary(e)}
+            ></ReactQuill>
+          ) : (
+            <textarea
+              className="form-control"
+              value={parse(summary)?.props?.children || ""}
+              disabled
+            />
+          )}
         </Col>
-        <Col xs={12}>
+        <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Investment Opportunity
           </span>
-          <textarea
-            type="text"
-            className="form-control"
-            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details?.description.investment}
-            onChange={(e) =>
-              (property.details.description.investment = e.target.value)
-            }
-            disabled={!edit.step2_2}
-          />
+          {edit.step2_2 ? (
+            <ReactQuill
+              theme="snow"
+              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+              modules={modules}
+              formats={formats}
+              value={investment}
+              onChange={(e) => setInvestment(e)}
+            ></ReactQuill>
+          ) : (
+            <textarea
+              type="text"
+              className="form-control"
+              value={parse(investment)?.props?.children || ""}
+              disabled
+            />
+          )}
         </Col>
       </Row>
       <Row className="mt-3">

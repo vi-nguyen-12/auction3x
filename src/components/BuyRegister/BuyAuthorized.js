@@ -22,6 +22,7 @@ const BuyAuthorized = ({
   auctionId,
   toggleDocu,
   setDocuUrl,
+  client,
 }) => {
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
@@ -79,9 +80,21 @@ const BuyAuthorized = ({
     setAgree(dateTime);
   };
 
-  // const sendDocusign = async () => {
-  //   setLoader(true);
-  //   await authService.send
+  const sendDocusign = async () => {
+    setLoader(true);
+    await authService.sendSellDocuSign().then((res) => {
+      if (res.data.error) {
+        setMessage("");
+        setMessage(res.data.error);
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage(`DocuSign successfully sent to ${client?.email}!`);
+        }, 100);
+      }
+    });
+    setLoader(false);
+  };
 
   const handleSignDocusign = async () => {
     setLoader(true);
@@ -140,12 +153,7 @@ const BuyAuthorized = ({
               answers: answers,
               docusignId: res.data._id,
               documents,
-              // client: {
-              //   clientName: name,
-              //   clientEmail: email,
-              //   clientPhone: phone,
-              //   powerOfAttorney: powerOfAttorney,
-              // },
+              client,
             })
             .then((res) => {
               if (res.data.error) {
@@ -186,16 +194,34 @@ const BuyAuthorized = ({
               <div className="d-flex justify-content-center align-items-center docusign-logo">
                 <IoDocumentTextOutline size={35} color="#ffffff" />
               </div>
-              <span className="text-white docusign-text">
-                Please review and sign the Seller Agreement below
-              </span>
-              <button
-                type="button"
-                onClick={handleSignDocusign}
-                className="docusign-btn"
-              >
-                REVIEW DOCUMENT
-              </button>
+              {client?.documents?.length > 0 ? (
+                <>
+                  <span className="text-white docusign-text">
+                    Please review and sign the Seller Agreement below
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleSignDocusign}
+                    className="docusign-btn"
+                  >
+                    REVIEW DOCUMENT
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="text-white docusign-text">
+                    You are not authorized to sign this document. Please send
+                    the document to the owner for signing.
+                  </span>
+                  <button
+                    type="button"
+                    onClick={sendDocusign}
+                    className="docusign-btn"
+                  >
+                    SEND DOCUSIGN TO OWNER
+                  </button>
+                </>
+              )}
             </Col>
           </Row>
 

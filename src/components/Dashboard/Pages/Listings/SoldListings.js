@@ -115,7 +115,7 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
                   </td>
                   <td>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-primary rounded-0"
                       onClick={() => {
                         window.open(`/DisplayAuctions/${auction._id}`);
                       }}

@@ -71,7 +71,7 @@ const Login = ({
             type="text"
             style={{ height: "50px", fontSize: "20px" }}
             className="form-control login-input px-1"
-            placeholder="Email"
+            placeholder="Email or Username"
             {...register("userName", {
               required: true,
             })}

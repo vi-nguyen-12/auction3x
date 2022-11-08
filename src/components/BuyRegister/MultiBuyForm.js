@@ -13,8 +13,9 @@ const MultiBuyForm = ({
   setDocuUrl,
 }) => {
   const [step, setStep] = useState(1);
-
+  const [client, setClient] = useState();
   const [document, setDocument] = useState();
+  const [answers, setAnswers] = useState();
   const toggleDocument = (document) => {
     setDocument(document);
   };
@@ -23,7 +24,7 @@ const MultiBuyForm = ({
     toggleDocument(document);
   }, [document]);
 
-  const [answers, setAnswers] = useState();
+  console.log(client);
 
   if (step === 1) {
     return (
@@ -32,6 +33,8 @@ const MultiBuyForm = ({
           setStep={setStep}
           step={step}
           setMessage={setMessage}
+          setClient={setClient}
+          client={client}
         />
       </div>
     );
@@ -72,6 +75,7 @@ const MultiBuyForm = ({
           auctionId={auctionId}
           toggleDocu={toggleDocu}
           setDocuUrl={setDocuUrl}
+          client={client}
         />
       </div>
     );

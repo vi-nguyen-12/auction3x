@@ -172,6 +172,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
                   <td>
                     <Button
                       variant="primary"
+                      className="rounded-0"
                       onClick={() => {
                         window.open(`/multiSellForm/${listing._id}`);
                       }}
@@ -180,6 +181,7 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
                     </Button>{" "}
                     <Button
                       variant="danger"
+                      className="rounded-0"
                       onClick={() => handleDelete(listing._id)}
                     >
                       Delete

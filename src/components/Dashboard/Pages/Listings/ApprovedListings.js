@@ -124,6 +124,7 @@ function ApprovedListings({
                 <td>
                   <Button
                     variant="primary"
+                    className="rounded-0"
                     onClick={() => {
                       setProperty(listing);
                       toggleShowProperty();
@@ -134,6 +135,8 @@ function ApprovedListings({
                 </td>
                 <td>
                   <Button
+                    variant="primary"
+                    className="rounded-0"
                     onClick={() => {
                       setDocuments(listing.documents);
                       setImages(listing.images);
@@ -141,7 +144,6 @@ function ApprovedListings({
                       setProperty(listing);
                       toggleShowDocu();
                     }}
-                    variant="primary"
                   >
                     View
                   </Button>
@@ -156,7 +158,7 @@ function ApprovedListings({
                         background: "green",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -171,7 +173,7 @@ function ApprovedListings({
                         background: "red",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -185,7 +187,7 @@ function ApprovedListings({
                         background: "orange",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -200,7 +202,7 @@ function ApprovedListings({
                         background: "green",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -214,7 +216,7 @@ function ApprovedListings({
                         background: "orange",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -228,7 +230,7 @@ function ApprovedListings({
                         background: "red",
                         color: "white",
                         padding: "10px",
-                        borderRadius: "5px",
+                        borderRadius: "0",
                         fontWeight: "bold",
                       }}
                     >
@@ -263,6 +265,7 @@ function ApprovedListings({
                       )
                     }
                     variant="primary"
+                    className="rounded-0"
                   >
                     View
                   </Button>

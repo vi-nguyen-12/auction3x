@@ -130,6 +130,7 @@ function LiveListings({
                     <td>
                       <Button
                         variant="primary"
+                        className="rounded-0"
                         onClick={() => {
                           setProperty(listing);
                           toggleShowProperty();
@@ -141,6 +142,7 @@ function LiveListings({
                     <td colSpan={2}>
                       <Button
                         variant="primary"
+                        className="rounded-0"
                         onClick={() => {
                           setDocuments(listing.documents);
                           setImages(listing.images);
@@ -159,7 +161,7 @@ function LiveListings({
                             background: "green",
                             color: "white",
                             padding: "10px",
-                            borderRadius: "5px",
+                            borderRadius: "0",
                             fontWeight: "bold",
                           }}
                         >
@@ -173,7 +175,7 @@ function LiveListings({
                             background: "orange",
                             color: "white",
                             padding: "10px",
-                            borderRadius: "5px",
+                            borderRadius: "0",
                             fontWeight: "bold",
                           }}
                         >
@@ -187,7 +189,7 @@ function LiveListings({
                             background: "red",
                             color: "white",
                             padding: "10px",
-                            borderRadius: "5px",
+                            borderRadius: "0",
                             fontWeight: "bold",
                           }}
                         >
@@ -210,6 +212,7 @@ function LiveListings({
                       <Button
                         onClick={() => history.push("/Dashboard/Messaging")}
                         variant="primary"
+                        className="rounded-0"
                       >
                         Email
                       </Button>

@@ -1357,6 +1357,7 @@ function Dashboard({
             property={property}
             setRefresh={setRefresh}
             refresh={refresh}
+            setMessage={setMessage}
           />
         </Modal.Body>
       </Modal>

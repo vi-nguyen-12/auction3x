@@ -1207,6 +1207,7 @@ function DisplayJet({
             className="mt-1"
             style={{
               padding: windowSize < 600 ? "15px" : "35px",
+              scrollMarginTop: "10rem",
             }}
           >
             {/* ref={myRef}

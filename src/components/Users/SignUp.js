@@ -85,7 +85,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
       setTimeout(() => {
         setMessage("Passwords do not match");
       }, 100);
-    } else {
+    } else if (data.email?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       if (data.agentNumber !== "") {
         const datas = {
           firstName: data.firstName,
@@ -138,6 +138,11 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           }
         });
       }
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter a valid email address");
+      }, 100);
     }
   };
 
