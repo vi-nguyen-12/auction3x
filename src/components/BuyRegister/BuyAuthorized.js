@@ -167,11 +167,16 @@ const BuyAuthorized = ({
               } else {
                 setMessage("");
                 setMessage(
-                  "You have successfully registered to buy this auction"
+                  "You have successfully registered to bid this auction"
                 );
                 setLoader(false);
                 window.location.reload();
               }
+            })
+            .catch((error) => {
+              setMessage("");
+              setMessage(error.message);
+              setLoader(false);
             });
         }
       });
@@ -194,7 +199,7 @@ const BuyAuthorized = ({
               <div className="d-flex justify-content-center align-items-center docusign-logo">
                 <IoDocumentTextOutline size={35} color="#ffffff" />
               </div>
-              {client?.documents?.length > 0 ? (
+              {client?.documents?.length > 0 || !client ? (
                 <>
                   <span className="text-white docusign-text">
                     Please review and sign the Seller Agreement below

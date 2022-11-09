@@ -842,7 +842,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             <textarea
               type="text"
               className="form-control"
-              value={parse(location)?.props?.children || ""}
+              value={parse(location)?.props?.children || location}
               disabled
             />
           )}
@@ -864,7 +864,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             <textarea
               type="text"
               className="form-control"
-              value={parse(market)?.props?.children || ""}
+              value={parse(market)?.props?.children || market}
               disabled
             />
           )}
@@ -885,7 +885,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           ) : (
             <textarea
               className="form-control"
-              value={parse(summary)?.props?.children || ""}
+              value={parse(summary)?.props?.children || summary}
               disabled
             />
           )}
@@ -907,7 +907,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             <textarea
               type="text"
               className="form-control"
-              value={parse(investment)?.props?.children || ""}
+              value={parse(investment)?.props?.children || investment}
               disabled
             />
           )}
