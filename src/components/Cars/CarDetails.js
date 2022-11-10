@@ -149,7 +149,11 @@ function CarDetails({
         setTimeout(() => {
           setMessage("Built year must be less than or equal to current year.");
         }, 100);
-      } else {
+      } else if (
+        summary !== "<p><br></p>" &&
+        locationInfo !== "<p><br></p>" &&
+        marketInfo !== "<p><br></p>"
+      ) {
         const descriptions = {
           summary: summary ? summary : "",
           investment: invest ? invest : "",
@@ -157,7 +161,7 @@ function CarDetails({
           market: marketInfo ? marketInfo : "",
         };
 
-        !invest && delete descriptions.investment;
+        (!invest || invest === "<p><br></p>") && delete descriptions.investment;
 
         const submitedData = {
           make,
@@ -209,6 +213,19 @@ function CarDetails({
             setMessage("");
             setMessage(error.message);
           });
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage(
+            `Please fill out ${
+              summary === "<p><br></p>"
+                ? "Property Summary"
+                : locationInfo === "<p><br></p>"
+                ? "Location Information"
+                : "Market Information"
+            }`
+          );
+        }, 100);
       }
     }
   };
@@ -273,6 +290,7 @@ function CarDetails({
               </>
             ) : (
               <Form.Select
+                className="form-control"
                 value={make}
                 {...register("make", { maxLength: 100 })}
                 onChange={(e) => {
@@ -394,6 +412,7 @@ function CarDetails({
               </>
             ) : (
               <Form.Select
+                className="form-control"
                 value={carType}
                 onChange={(e) => {
                   if (e.target.value === "Other") {
@@ -503,6 +522,7 @@ function CarDetails({
             </span>
 
             <Form.Select
+              className="form-control"
               value={condition}
               {...register("condition", { maxLength: 100 })}
               onChange={(e) => setCondition(e.target.value)}

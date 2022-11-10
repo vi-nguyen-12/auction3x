@@ -162,7 +162,11 @@ function RealEstateDetails({
         setTimeout(() => {
           setMessage("Built year must be less than or equal to current year.");
         }, 100);
-      } else {
+      } else if (
+        summary !== "<p><br></p>" &&
+        locationInfo !== "<p><br></p>" &&
+        marketInfo !== "<p><br></p>"
+      ) {
         const descriptions = {
           summary: summary ? summary : "",
           investment: invest ? invest : "",
@@ -170,7 +174,7 @@ function RealEstateDetails({
           market: marketInfo ? marketInfo : "",
         };
 
-        !invest && delete descriptions.investment;
+        (!invest || invest === "<p><br></p>") && delete descriptions.investment;
 
         const submitedData = {
           street_address: address,
@@ -216,6 +220,19 @@ function RealEstateDetails({
             setMessage("");
             setMessage(error.message);
           });
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage(
+            `Please fill out ${
+              summary === "<p><br></p>"
+                ? "Property Summary"
+                : locationInfo === "<p><br></p>"
+                ? "Location Information"
+                : "Market Information"
+            }`
+          );
+        }, 100);
       }
     }
   };
@@ -407,6 +424,7 @@ function RealEstateDetails({
               Property Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
+              className="form-control"
               value={propType}
               onChange={(e) => setPropType(e.target.value)}
               required

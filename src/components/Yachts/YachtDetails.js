@@ -26,6 +26,7 @@ function YachtDetails({
   setMessage,
 }) {
   const { register, handleSubmit } = useForm();
+  const [changeDate, setChangeDate] = useState(false);
   const [vessel_registration_number, setVessel_registration_number] = useState(
     propertyTest.details?.vessel_registration_number || ""
   );
@@ -150,11 +151,15 @@ function YachtDetails({
   };
 
   const fixDate = (date) => {
-    const newDate = new Date(date);
-    const day = newDate.getDate() + 1;
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
-    setVessel_manufacturing_date(`${month}/${day}/${year}`);
+    const newDate = new Date(date).setDate(
+      new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
+    );
+    const dates = new Date(newDate).setMonth(
+      new Date(newDate).getDate() === 1
+        ? new Date(newDate).getMonth() + 1
+        : new Date(newDate).getMonth()
+    );
+    setVessel_manufacturing_date(new Date(dates).toISOString());
   };
 
   const onSubmit = (data) => {
@@ -165,74 +170,82 @@ function YachtDetails({
           "Reserved amount should be greater than or equal to discussed amount"
         );
       }, 100);
-    } else {
-      if (!summary && !invest && !locationInfo && !marketInfo) {
-        setMessage("");
-        setTimeout(() => {
-          setMessage(
-            "Please enter summary, investment, location, and market information"
-          );
-        }, 100);
-      } else {
-        const descriptions = {
-          summary: summary ? summary : "",
-          investment: invest ? invest : "",
-          location: locationInfo ? locationInfo : "",
-          market: marketInfo ? marketInfo : "",
-        };
+    } else if (
+      summary !== "<p><br></p>" &&
+      locationInfo !== "<p><br></p>" &&
+      marketInfo !== "<p><br></p>"
+    ) {
+      const descriptions = {
+        summary: summary ? summary : "",
+        investment: invest ? invest : "",
+        location: locationInfo ? locationInfo : "",
+        market: marketInfo ? marketInfo : "",
+      };
 
-        !invest && delete descriptions.investment;
+      (!invest || invest === "<p><br></p>") && delete descriptions.investment;
 
-        const submitedData = {
-          reservedAmount: parseInt(reservedAmount),
-          discussedAmount: parseInt(discussedAmount),
-          vessel_registration_number,
-          vessel_manufacturing_date,
-          manufacture_mark,
-          manufacturer_name,
-          engine_type,
-          length: parseInt(length),
-          engine_manufacture_name,
-          engine_deck_type,
-          running_cost: parseInt(running_cost),
-          no_of_crew_required: parseInt(no_of_crew_required),
-          description: descriptions,
-          property_address: {
-            formatted_street_address: address,
-            country,
-            state,
-            city,
-            zip_code: zip,
-            lat,
-            lng,
-          },
-          step: 2,
-        };
-        if (otherDetails?.length > 0) {
-          submitedData.others = otherDetails;
-        }
-        authService
-          .editProperty(propertyTest._id, submitedData)
-          .then((res) => {
-            if (res.data.error) {
-              if (res.data.error === "Invalid Token") {
-                setMessage("");
-                setMessage("Your session ended. Please log in! ");
-                toggleSignIn(true);
-              } else {
-                setMessage("");
-                setMessage(res.data.error);
-              }
-            } else {
-              setPropertyTest(res.data);
-              setStep(step + 1);
-            }
-          })
-          .catch((error) => {
-            setMessage("");
-            setMessage(error.message);
-          });
+      const submitedData = {
+        reservedAmount: parseInt(reservedAmount),
+        discussedAmount: parseInt(discussedAmount),
+        vessel_registration_number,
+        vessel_manufacturing_date,
+        manufacture_mark,
+        manufacturer_name,
+        engine_type,
+        length: parseInt(length),
+        engine_manufacture_name,
+        engine_deck_type,
+        running_cost: parseInt(running_cost),
+        no_of_crew_required: parseInt(no_of_crew_required),
+        description: descriptions,
+        property_address: {
+          formatted_street_address: address,
+          country,
+          state,
+          city,
+          zip_code: zip,
+          lat,
+          lng,
+        },
+        step: 2,
+      };
+      if (otherDetails?.length > 0) {
+        submitedData.others = otherDetails;
       }
+      authService
+        .editProperty(propertyTest._id, submitedData)
+        .then((res) => {
+          if (res.data.error) {
+            if (res.data.error === "Invalid Token") {
+              setMessage("");
+              setMessage("Your session ended. Please log in! ");
+              toggleSignIn(true);
+            } else {
+              setMessage("");
+              setMessage(res.data.error);
+            }
+          } else {
+            setPropertyTest(res.data);
+            setStep(step + 1);
+          }
+        })
+        .catch((error) => {
+          setMessage("");
+          setMessage(error.message);
+        });
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage(
+          `Please fill out ${
+            summary === "<p><br></p>"
+              ? "Property Summary"
+              : locationInfo === "<p><br></p>"
+              ? "Location Information"
+              : "Market Information"
+          }`
+        );
+      }, 100);
     }
   };
 
@@ -293,19 +306,55 @@ function YachtDetails({
               Vessel Manufacturing Date{" "}
               <span style={{ color: "#ff0000" }}>*</span>
             </span>
-            <input
-              type="date"
-              className="form-control"
-              defaultValue={vessel_manufacturing_date}
-              {...register("vessel_manufacturing_date")}
-              onChange={(e) => fixDate(e.target.value)}
-              required
-            />
+            {!changeDate ? (
+              <div className="d-flex">
+                <input
+                  type="text"
+                  defaultValue={new Date(
+                    vessel_manufacturing_date
+                  ).toLocaleDateString()}
+                  className="form-control"
+                  disabled
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setVessel_manufacturing_date();
+                    setChangeDate(true);
+                  }}
+                  className="general_btn py-2 px-3"
+                >
+                  Change
+                </button>
+              </div>
+            ) : (
+              <div className="d-flex">
+                <input
+                  type="date"
+                  className="form-control"
+                  defaultValue={new Date(
+                    vessel_manufacturing_date
+                  ).toLocaleDateString()}
+                  {...register("vessel_manufacturing_date")}
+                  onChange={(e) => fixDate(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setChangeDate(false);
+                  }}
+                  className="general_btn py-2 px-3"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
           </Col>
         </Row>
 
         <Row className="mt-3">
-          <Col>
+          <Col md={6} xs={12} sm={12}>
             <PlacesAutocomplete
               value={address}
               onChange={handleChange}
@@ -365,7 +414,7 @@ function YachtDetails({
               )}
             </PlacesAutocomplete>
           </Col>
-          <Col>
+          <Col md={6} xs={12} sm={12}>
             <span
               style={{
                 fontWeight: "600",
@@ -387,7 +436,7 @@ function YachtDetails({
         </Row>
 
         <Row className="mt-3">
-          <Col>
+          <Col md={4} xs={12} sm={12}>
             <span
               style={{
                 fontWeight: "600",
@@ -406,7 +455,7 @@ function YachtDetails({
               readOnly
             />
           </Col>
-          <Col>
+          <Col md={4} xs={12} sm={12}>
             <span
               style={{
                 fontWeight: "600",
@@ -425,7 +474,7 @@ function YachtDetails({
               readOnly
             />
           </Col>
-          <Col>
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -487,6 +536,7 @@ function YachtDetails({
               </>
             ) : (
               <Form.Select
+                className="form-control"
                 value={manufacturer_name}
                 {...register("manufacturer_name", { maxLength: 100 })}
                 onChange={(e) => {

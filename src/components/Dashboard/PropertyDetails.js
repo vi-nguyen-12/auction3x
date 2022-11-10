@@ -163,6 +163,8 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
     });
   };
 
+  console.log(summary);
+
   const handleDelete = (url) => () => {
     setListingAgreement(
       listingAgreement.filter((document) => document.url !== url)
@@ -229,7 +231,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
         }
       });
     }
-    if (step === 2) {
+    if (step === 2 && summary !== "" && market !== "" && location !== "") {
       let submitedData;
       if (prop.type === "real-estate") {
         submitedData = {
@@ -251,10 +253,12 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           type_of_garage: prop.details.type_of_garage,
           number_of_stories: parseInt(prop.details.number_of_stories),
           description: {
-            summary: prop.details.description.summary,
-            investment: prop.details.description.investment,
-            location: prop.details.description.location,
-            market: prop.details.description.market,
+            summary: summary ? summary : prop.details.description.summary,
+            investment: investment
+              ? investment
+              : prop.details.description.investment,
+            location: location ? location : prop.details.description.location,
+            market: market ? market : prop.details.description.market,
           },
           reservedAmount: parseInt(prop.reservedAmount),
           discussedAmount: parseInt(prop.discussedAmount),
@@ -276,10 +280,12 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           condition: prop.details.condition,
           market_price: parseInt(prop.details.market_price),
           description: {
-            summary: prop.details.description.summary,
-            investment: prop.details.description.investment,
-            location: prop.details.description.location,
-            market: prop.details.description.market,
+            summary: summary ? summary : prop.details.description.summary,
+            investment: investment
+              ? investment
+              : prop.details.description.investment,
+            location: location ? location : prop.details.description.location,
+            market: market ? market : prop.details.description.market,
           },
           property_address: {
             formatted_street_address: address,
@@ -308,10 +314,12 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           propeller_model_designation: prop.details.propeller_model_designation,
           imported_aircraft: prop.details.imported_aircraft,
           description: {
-            summary: prop.details.description.summary,
-            investment: prop.details.description.investment,
-            location: prop.details.description.location,
-            market: prop.details.description.market,
+            summary: summary ? summary : prop.details.description.summary,
+            investment: investment
+              ? investment
+              : prop.details.description.investment,
+            location: location ? location : prop.details.description.location,
+            market: market ? market : prop.details.description.market,
           },
           property_address: {
             formatted_street_address: address,
@@ -385,10 +393,13 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           }
         });
       }
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please fill all required fields");
+      }, 100);
     }
   };
-
-  console.log(parse(summary));
 
   return (
     <Container className="mb-4">

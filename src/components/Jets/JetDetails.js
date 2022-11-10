@@ -168,7 +168,11 @@ function JetDetails({
               "Built year must be less than or equal to current year."
             );
           }, 100);
-        } else {
+        } else if (
+          summary !== "<p><br></p>" &&
+          locationInfo !== "<p><br></p>" &&
+          marketInfo !== "<p><br></p>"
+        ) {
           const descriptions = {
             summary: summary ? summary : "",
             investment: invest ? invest : "",
@@ -176,7 +180,8 @@ function JetDetails({
             market: marketInfo ? marketInfo : "",
           };
 
-          !invest && delete descriptions.investment;
+          (!invest || invest === "<p><br></p>") &&
+            delete descriptions.investment;
 
           const submitedData = {
             registration_mark,
@@ -226,6 +231,19 @@ function JetDetails({
               setMessage("");
               setMessage(error.message);
             });
+        } else {
+          setMessage("");
+          setTimeout(() => {
+            setMessage(
+              `Please fill out ${
+                summary === "<p><br></p>"
+                  ? "Property Summary"
+                  : locationInfo === "<p><br></p>"
+                  ? "Location Information"
+                  : "Market Information"
+              }`
+            );
+          }, 100);
         }
       }
     } else {
@@ -415,6 +433,7 @@ function JetDetails({
               </>
             ) : (
               <Form.Select
+                className="form-control"
                 value={aircraft_builder_name}
                 {...register("aircraft_builder_name", { maxLength: 100 })}
                 onChange={(e) => {

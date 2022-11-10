@@ -54,7 +54,15 @@ function AddFund({ setMessage }) {
   };
 
   const fixDate = (date) => {
-    setValidityDate(new Date(date).toISOString());
+    const newDate = new Date(date).setDate(
+      new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
+    );
+    const dates = new Date(newDate).setMonth(
+      new Date(newDate).getDate() === 1
+        ? new Date(newDate).getMonth() + 1
+        : new Date(newDate).getMonth()
+    );
+    setValidityDate(new Date(dates).toISOString());
   };
 
   const onSubmit = async (data) => {
