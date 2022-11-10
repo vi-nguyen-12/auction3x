@@ -19,7 +19,6 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
           setMessage("");
           setMessage(res.data.error);
         } else {
-          console.log(res.data);
           setWinAuctions(res.data);
           setNewWinAuctions(res.data);
         }

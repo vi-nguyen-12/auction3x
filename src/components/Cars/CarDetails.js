@@ -536,7 +536,7 @@ function CarDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col>
+          <Col md={6} xs={12} sm={12}>
             <PlacesAutocomplete
               value={address}
               onChange={handleChange}
@@ -597,7 +597,7 @@ function CarDetails({
               )}
             </PlacesAutocomplete>
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={6} xs={12} sm={12}>
             <span style={{ fontWeight: "600" }}>
               Country<span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -613,7 +613,7 @@ function CarDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600" }}>
               State<span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -627,7 +627,7 @@ function CarDetails({
               readOnly
             />
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600" }}>
               City<span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -641,7 +641,7 @@ function CarDetails({
               readOnly
             />
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600" }}>
               Zip Code<span style={{ color: "#ff0000" }}>*</span>
             </span>

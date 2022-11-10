@@ -151,7 +151,7 @@ const MultiSellForm = ({
     <>
       <div
         className="vh-100 sell-container"
-        style={{ padding: windowSize < 1000 && "0" }}
+        style={{ padding: windowSize < 1400 && "0" }}
       >
         <h1 className="fw-bold text-black">Sell On Auction3</h1>
         <p

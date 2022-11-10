@@ -276,7 +276,7 @@ function JetDetails({
           </p>
         </div>
         <Row className="mt-3">
-          <Col>
+          <Col md={6} xs={12} sm={12}>
             <PlacesAutocomplete
               value={address}
               onChange={handleChange}
@@ -337,7 +337,7 @@ function JetDetails({
               )}
             </PlacesAutocomplete>
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={6} xs={12} sm={12}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Country <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -353,7 +353,7 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600", color: "black" }}>
               State <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -367,7 +367,7 @@ function JetDetails({
               readOnly
             />
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600", color: "black" }}>
               City <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -381,7 +381,7 @@ function JetDetails({
               readOnly
             />
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col md={4} xs={12} sm={12}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Zip Code <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -459,8 +459,7 @@ function JetDetails({
           </Col>
           <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              Aircraft Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Aircraft Model <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
               type="text"
@@ -510,7 +509,7 @@ function JetDetails({
         <Row className="mt-3">
           <Col xs={12} md={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
-              Engine Builder's Name <span style={{ color: "#ff0000" }}>*</span>
+              Engine Manufacturer <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
               type="text"
@@ -523,8 +522,7 @@ function JetDetails({
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
-              Engine Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Engine Model <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
               type="text"
@@ -537,7 +535,7 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col>
+          <Col lg={4} md={6} xs={12} sm={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Number of Engines <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -564,10 +562,9 @@ function JetDetails({
               required
             /> */}
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col lg={4} md={6} xs={12} sm={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
-              Propeller Builder's Name{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Propeller Manufacturer <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
               type="text"
@@ -578,10 +575,9 @@ function JetDetails({
               required
             />
           </Col>
-          <Col className="mt-sm-3 mt-md-0">
+          <Col lg={4} md={6} xs={12} sm={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
-              Propeller Model Designation{" "}
-              <span style={{ color: "#ff0000" }}>*</span>
+              Propeller Model <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <input
               type="text"

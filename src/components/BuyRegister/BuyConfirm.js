@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import AuctionBidTimer from "../Auctions/AuctionBidTimer";
 
 const BuyConfirm = ({ property, setMessage, windowSize }) => {
-  console.log(property);
   const user = useSelector((state) => state.user);
   const { handleSubmit } = useForm();
   const [bid, setBid] = useState(

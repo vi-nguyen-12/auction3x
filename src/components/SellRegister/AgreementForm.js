@@ -24,7 +24,6 @@ const Agree = ({
   setDocuUrl,
 }) => {
   window.scrollTo(0, 0);
-  console.log("propertyTest", propertyTest);
   const [agree, setAgree] = useState(false);
   const [docuId, setDocuId] = useState();
   const [loader, setLoader] = useState(false);

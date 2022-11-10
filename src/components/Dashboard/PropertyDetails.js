@@ -16,7 +16,6 @@ import { MdClose } from "react-icons/md";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import parse from "html-react-parser";
 
 const modules = {
   toolbar: [
@@ -162,8 +161,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
       });
     });
   };
-
-  console.log(summary);
 
   const handleDelete = (url) => () => {
     setListingAgreement(
@@ -840,88 +837,57 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>
             Location Highlight
           </span>
-          {edit.step2_2 ? (
-            <ReactQuill
-              theme="snow"
-              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-              modules={modules}
-              formats={formats}
-              value={location}
-              onChange={(e) => setLocation(e)}
-            ></ReactQuill>
-          ) : (
-            <textarea
-              type="text"
-              className="form-control"
-              value={parse(location)?.props?.children || location}
-              disabled
-            />
-          )}
+          <ReactQuill
+            theme="snow"
+            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+            modules={modules}
+            formats={formats}
+            value={location}
+            onChange={(e) => setLocation(e)}
+            readOnly={!edit.step2_2}
+          ></ReactQuill>
         </Col>
         <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Market Overview
           </span>
-          {edit.step2_2 ? (
-            <ReactQuill
-              theme="snow"
-              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-              modules={modules}
-              formats={formats}
-              value={market}
-              onChange={(e) => setMarket(e)}
-            ></ReactQuill>
-          ) : (
-            <textarea
-              type="text"
-              className="form-control"
-              value={parse(market)?.props?.children || market}
-              disabled
-            />
-          )}
+          <ReactQuill
+            theme="snow"
+            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+            modules={modules}
+            formats={formats}
+            value={market}
+            onChange={(e) => setMarket(e)}
+            readOnly={!edit.step2_2}
+          ></ReactQuill>
         </Col>
         <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Executive Summary
           </span>
-          {edit.step2_2 ? (
-            <ReactQuill
-              theme="snow"
-              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-              modules={modules}
-              formats={formats}
-              value={summary}
-              onChange={(e) => setSummary(e)}
-            ></ReactQuill>
-          ) : (
-            <textarea
-              className="form-control"
-              value={parse(summary)?.props?.children || summary}
-              disabled
-            />
-          )}
+          <ReactQuill
+            theme="snow"
+            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+            modules={modules}
+            formats={formats}
+            value={summary}
+            onChange={(e) => setSummary(e)}
+            readOnly={!edit.step2_2}
+          ></ReactQuill>
         </Col>
         <Col xs={12} className="mt-2">
           <span style={{ fontWeight: "600", color: "black" }}>
             Investment Opportunity
           </span>
-          {edit.step2_2 ? (
-            <ReactQuill
-              theme="snow"
-              style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
-              modules={modules}
-              formats={formats}
-              value={investment}
-              onChange={(e) => setInvestment(e)}
-            ></ReactQuill>
-          ) : (
-            <textarea
-              type="text"
-              className="form-control"
-              value={parse(investment)?.props?.children || investment}
-              disabled
-            />
-          )}
+          <ReactQuill
+            theme="snow"
+            style={{ border: edit.step2_2 ? "1px solid #2ecc71" : "" }}
+            modules={modules}
+            formats={formats}
+            value={investment}
+            onChange={(e) => setInvestment(e)}
+            readOnly={!edit.step2_2}
+          ></ReactQuill>
         </Col>
       </Row>
       <Row className="mt-3">

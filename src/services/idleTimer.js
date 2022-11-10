@@ -16,7 +16,6 @@ class IdleTimer {
     this.internal = setInterval(() => {
       const expiredTime = parseInt(localStorage.getItem("expiredTime")) || 0;
       if (Date.now() > expiredTime) {
-        console.log("Timeout");
         this.handleLogout();
         clearInterval(this.internal);
       }

@@ -1353,7 +1353,6 @@ function PropertyPageHeader({
                 <Form.Select
                   value={make}
                   onChange={(e) => {
-                    console.log(e.target.value);
                     if (e.target.value === "") {
                       setMake("");
                     } else if (e.target.value === "Other") {

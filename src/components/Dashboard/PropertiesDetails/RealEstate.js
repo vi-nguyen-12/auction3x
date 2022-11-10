@@ -11,8 +11,6 @@ function RealEstate({
   refresh,
   setMessage,
 }) {
-  console.log(property);
-
   const onSubmit = async (prop, step) => {
     if (step === 2) {
       let submitedData = {

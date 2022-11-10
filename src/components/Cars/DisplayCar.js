@@ -22,6 +22,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
 import "../../styles/property-display.css";
 import authService from "../../services/authServices";
+import parse from "html-react-parser";
 
 const mapStyles = {
   height: "60vh",
@@ -113,7 +114,6 @@ function DisplayCar({
   refresh,
   setMessage,
 }) {
-  console.log("property", property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -1059,7 +1059,7 @@ function DisplayCar({
                 className="summary-container d-grid"
               >
                 <span>Executive Summary</span>
-                {property.property.details.description?.summary}
+                {parse(property.property.details.description?.summary)}
               </div>
             </Col>
 
@@ -1150,14 +1150,14 @@ function DisplayCar({
                       Location Highlight
                     </span>
                   </div>
-                  <p
+                  <span
                     style={{
                       fontSize: windowSize < 600 ? "18px" : "20px",
                       textAlign: "left",
                     }}
                   >
-                    {property.property.details.description?.location}
-                  </p>
+                    {parse(property.property.details.description?.location)}
+                  </span>
                 </div>
               </Tab>
               <Tab
@@ -1200,14 +1200,14 @@ function DisplayCar({
                       Merket Overview
                     </span>
                   </div>
-                  <p
+                  <span
                     style={{
                       fontSize: windowSize < 600 ? "18px" : "20px",
                       textAlign: "left",
                     }}
                   >
-                    {property.property.details.description?.market}
-                  </p>
+                    {parse(property.property.details.description?.market)}
+                  </span>
                 </div>
               </Tab>
               <Tab
@@ -1251,14 +1251,16 @@ function DisplayCar({
                       Investment Opportunity
                     </span>
                   </div>
-                  <p
+                  <span
                     style={{
                       fontSize: windowSize < 600 ? "18px" : "20px",
                       textAlign: "left",
                     }}
                   >
-                    {property.property.details.description?.investment}
-                  </p>
+                    {parse(
+                      property.property.details?.description?.investment || ""
+                    )}
+                  </span>
                 </div>
               </Tab>
               <Tab

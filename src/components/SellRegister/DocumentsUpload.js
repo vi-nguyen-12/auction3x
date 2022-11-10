@@ -27,7 +27,7 @@ const DocumentsUpload = ({
   setMessage,
 }) => {
   return (
-    <Container className="wrapper">
+    <div className="wrapper">
       <SellHeader step={step} />
       {propertyTest.type === "real-estate" ? (
         <RealEstateDocus
@@ -110,7 +110,7 @@ const DocumentsUpload = ({
           setMessage={setMessage}
         />
       ) : null}
-    </Container>
+    </div>
   );
 };
 

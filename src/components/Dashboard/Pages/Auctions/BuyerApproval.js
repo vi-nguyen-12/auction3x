@@ -536,7 +536,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                             <label
                               htmlFor="fileEdit"
                               className="btn btn-primary rounded-0"
-                              onClick={(e) => console.log(question.files)}
+                              // onClick={(e) => console.log(question.files)}
                             >
                               Upload
                             </label>

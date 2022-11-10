@@ -24,8 +24,6 @@ const MultiBuyForm = ({
     toggleDocument(document);
   }, [document]);
 
-  console.log(client);
-
   if (step === 1) {
     return (
       <div className="buy-register-container">

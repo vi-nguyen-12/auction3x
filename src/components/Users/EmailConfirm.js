@@ -7,7 +7,6 @@ function Confirm({ setMessage }) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("test");
     authServices
       .confirmEmail(token)
       .then((res) => {

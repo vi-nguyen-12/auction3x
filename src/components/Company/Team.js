@@ -103,8 +103,6 @@ function Team({ windowSize, setMessage }) {
     }
   };
 
-  console.log(id);
-
   return (
     <>
       <CompanyHeader location={"Team"} />
