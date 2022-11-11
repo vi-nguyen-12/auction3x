@@ -71,7 +71,7 @@ function Footer({ windowSize, setMessage }) {
                 >
                   Subscribe
                 </Button>
-                <label className="mt-1 subscript-text">
+                {/* <label className="mt-1 subscript-text">
                   BY SHARING YOUR EMAIL, YOU AGREE TO OUR{" "}
                   <a
                     href="/TermsOfUse"
@@ -89,7 +89,7 @@ function Footer({ windowSize, setMessage }) {
                     PRIVACY POLICY
                   </a>
                   .
-                </label>
+                </label> */}
               </Col>
             </Row>
           </Col>
@@ -171,12 +171,12 @@ function Footer({ windowSize, setMessage }) {
               <Col>
                 <ul className="footer-list mt-4">
                   <li className="footer-list-item-title">Others</li>
-                  <li className="footer-list-item mt-5">
+                  {/* <li className="footer-list-item mt-5">
                     <a className="footer-list-item" href="/Partner">
                       Partner
                     </a>
-                  </li>
-                  <li className="footer-list-item mt-3">
+                  </li> */}
+                  <li className="footer-list-item mt-5">
                     <a className="footer-list-item" href="/PrivacyPolicy">
                       Privacy Policy
                     </a>

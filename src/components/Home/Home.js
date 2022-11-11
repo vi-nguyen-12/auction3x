@@ -53,6 +53,11 @@ const Home = ({ toggleSignIn, windowSize, setMessage }) => {
       });
     }
     getAuctions();
+    return () => {
+      setFeatureAuctions([]);
+      setUpcomingAuctions([]);
+      setOnGoingAuctions([]);
+    };
   }, [setMessage]);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Container, Button } from "react-bootstrap";
+import { Row, Col, Container, Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import PhoneInput from "react-phone-input-2";
@@ -12,6 +12,7 @@ import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { BsQuestionCircleFill } from "react-icons/bs";
 
 function Ownership({
   toggleStep,
@@ -22,8 +23,15 @@ function Ownership({
   setPropertyTest,
   toggleSignIn,
   setMessage,
+  windowSize,
 }) {
   const user = useSelector((state) => state.user);
+  const [ownershipType, setOwnershipType] = useState();
+  const [addedNewOwner, setAddedNewOwner] = useState([]);
+  const [addNewRow, setAddNewRow] = useState(false);
+  const [newOwner, setNewOwner] = useState({ name: "", email: "", phone: "" });
+  const [addOwner, setAddOwner] = useState(false);
+  const toggleAddOwner = () => setAddOwner(!addOwner);
   const { register, handleSubmit } = useForm();
   const [isOwner, setIsOwner] = useState(
     propertyTest.details?.broker_name ? false : true
@@ -58,6 +66,19 @@ function Ownership({
       (item) => item.officialName === "power_of_attorney"
     ) || []
   );
+
+  const addOwnerHandler = () => {
+    setAddedNewOwner([
+      ...addedNewOwner,
+      { id: addedNewOwner.length + 1, ...newOwner },
+    ]);
+    setNewOwner({ name: "", email: "", phone: "" });
+    setAddNewRow(false);
+  };
+
+  const handleOnChange = (e) => {
+    setNewOwner({ ...newOwner, [e.target.name]: e.target.value });
+  };
 
   const getFile = async (e) => {
     const formData = new FormData();
@@ -245,23 +266,34 @@ function Ownership({
           {isOwner ? (
             <form onSubmit={handleSubmit(onSubmit)}>
               <Row>
-                <Row className="mt-5">
-                  <h5
-                    style={{
-                      borderBottom: "2px solid gray",
-                      fontWeight: "bold",
-                      fontSize: "18px",
-                      color: "black",
-                      textAlign: "center",
-                    }}
-                  >
-                    Owner Information
-                  </h5>
+                <Row
+                  className="mt-5"
+                  style={{
+                    borderBottom: "2px solid gray",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                    color: "black",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  Owner Information
+                </Row>
+                <Row>
+                  <Col className="d-flex justify-content-end align-items-center mt-1">
+                    <button
+                      type="button"
+                      onClick={toggleAddOwner}
+                      className="general_btn py-2 px-3"
+                    >
+                      + Add Owner
+                    </button>
+                  </Col>
                 </Row>
                 <Row className="mt-3 d-flex justify-content-center">
                   <Col>
                     <span style={{ fontWeight: "600" }}>
-                      Owner/Entity Name{" "}
+                      Primary Owner/Entity Name{" "}
                       <span style={{ color: "#ff0000" }}>*</span>
                     </span>
                     <input
@@ -418,10 +450,36 @@ function Ownership({
                   Broker Information
                 </Col>
               </Row>
+              <Row>
+                <Col className="d-flex justify-content-end align-items-center mt-1">
+                  <button
+                    type="button"
+                    onClick={toggleAddOwner}
+                    className="general_btn py-2 px-3"
+                  >
+                    + Add Owner
+                  </button>
+                </Col>
+              </Row>
               <Row className="mt-3">
-                <Col xs={12} md={5} lg={4}>
+                <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Owner/Entity Name{" "}
+                    Ownership Type <span style={{ color: "#ff0000" }}>*</span>
+                  </span>
+                  <Form.Select
+                    className="form-control"
+                    onChange={(e) => setOwnershipType(e.target.value)}
+                    required
+                  >
+                    <option value="">Select Ownership Type</option>
+                    <option value="Individual">Individual</option>
+                    <option value="Joint">Joint</option>
+                    <option value="Company">Company</option>
+                  </Form.Select>
+                </Col>
+                <Col xs={12} md={6} lg={6}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Primary Owner/Entity Name{" "}
                     <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
@@ -438,7 +496,9 @@ function Ownership({
                     required
                   />
                 </Col>
-                <Col xs={12} md={5} lg={4}>
+              </Row>
+              <Row className="mt-3">
+                <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Owner Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
@@ -456,7 +516,7 @@ function Ownership({
                     required
                   />
                 </Col>
-                <Col xs={12} md={5} lg={4}>
+                <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Owner Phone <span style={{ color: "#ff0000" }}>*</span>
                   </span>
@@ -528,9 +588,24 @@ function Ownership({
               </Row>
               <Row className="mt-3">
                 <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
-                  <span style={{ fontWeight: "600", color: "black" }}>
+                  <span
+                    style={{ fontWeight: "600", color: "black" }}
+                    className="d-flex"
+                  >
                     Listing Agreement(.pdf){" "}
                     <span style={{ color: "#ff0000" }}>*</span>
+                    <p className="m-0 mx-2 mb-1">
+                      <span
+                        className="tooltip-bottom"
+                        data-tooltip="Employment agreement between owner and broker authorizing the broker to act as listing agent and to find a buyer on seller’s terms."
+                      >
+                        <BsQuestionCircleFill
+                          style={{ cursor: "pointer" }}
+                          color="#bf9767"
+                          size={23}
+                        />
+                      </span>{" "}
+                    </p>
                   </span>
                   <input
                     type="file"
@@ -718,6 +793,120 @@ function Ownership({
           )}
         </Container>
       </div>
+      <Modal size="lg" show={addOwner} onHide={toggleAddOwner} centered>
+        <Modal.Header className="login-modal-header" closeButton>
+          <Modal.Title
+            className="auction-modal-title px-3"
+            style={{ fontSize: windowSize < 800 && "1.5rem" }}
+          >
+            Add Secondary Owner
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="pb-5">
+          <>
+            {addedNewOwner?.map((owner, index) => (
+              <Row key={index}>
+                <Col xs={12} md={4}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Name
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    defaultValue={owner.name}
+                    readOnly
+                  />
+                </Col>
+                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Email
+                  </span>
+                  <input
+                    type="email"
+                    className="form-control"
+                    defaultValue={owner.email}
+                    readOnly
+                  />
+                </Col>
+                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Phone
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    defaultValue={owner.phone}
+                    readOnly
+                  />
+                </Col>
+              </Row>
+            ))}
+            {addNewRow ? (
+              <Row className="mt-3">
+                <Col xs={12} md={4}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Name
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    onChange={handleOnChange}
+                    required
+                  />
+                </Col>
+                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Email
+                  </span>
+                  <input
+                    type="email"
+                    className="form-control"
+                    name="email"
+                    onChange={handleOnChange}
+                    required
+                  />
+                </Col>
+                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Phone
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    maxLength={10}
+                    name="phone"
+                    onChange={handleOnChange}
+                    required
+                  />
+                </Col>
+                <Col
+                  md={12}
+                  className="d-flex justify-content-end align-items-end mt-1"
+                >
+                  <button
+                    className="btn bg-success text-white rounded-0"
+                    onClick={addOwnerHandler}
+                  >
+                    Submit
+                  </button>
+                </Col>
+              </Row>
+            ) : (
+              <Row className="mt-3">
+                <Col className="d-flex justify-content-end align-items-center">
+                  <button
+                    className="btn btn-primary rounded-0"
+                    onClick={() => setAddNewRow(true)}
+                  >
+                    + Add New Owner
+                  </button>
+                </Col>
+              </Row>
+            )}
+          </>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

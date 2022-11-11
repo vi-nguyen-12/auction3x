@@ -657,7 +657,7 @@ h1 {
     0 8px 16px -8px hsla(0, 0%, 0%, 0.3), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
   padding: 10px;
   border: 1px solid #dbdbdb;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0;
   z-index: 989;
   background-color: white;
   /* margin-top: -15px; */
@@ -1005,6 +1005,10 @@ h1 {
 
 .accordion {
   --bs-accordion-border-radius: 0 !important;
+}
+
+.modal-header{
+  border-radius: 0!important;
 }
 
 @media screen and (max-width: 800px) {

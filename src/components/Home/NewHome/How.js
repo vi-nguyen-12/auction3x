@@ -12,8 +12,16 @@ function How({ windowSize }) {
       <Row className="px-2">
         <Col className="how-container p-5">
           <Row className="d-flex justify-content-center align-items-center">
-            <Col className="d-flex justify-content-center align-items-center mt-5 p-0">
+            <Col className="d-grid justify-content-center align-items-center mt-5 p-0">
               <span className="how-title">How it works?</span>
+              <p className="text-white text-center px-5">
+                Our active, affluent community represents a selective
+                marketplace creating the perfect place to acquire or liquidate
+                luxury vehicles, planes, and yachts through an auction format.
+                Auction3 offers a tremendous opportunity to find the perfect
+                luxury asset in a timely fashion and to liquidate assets you no
+                longer require.{" "}
+              </p>
             </Col>
           </Row>
           <Row

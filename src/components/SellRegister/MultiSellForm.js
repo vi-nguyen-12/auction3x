@@ -195,6 +195,7 @@ const MultiSellForm = ({
             setPropertyTest={setPropertyTest}
             toggleSignIn={toggleSignIn}
             setMessage={setMessage}
+            windowSize={windowSize}
           />
         ) : step === 2 ? (
           <PropertyDetails

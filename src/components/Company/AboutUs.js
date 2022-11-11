@@ -15,40 +15,32 @@ function AboutUs({ toggleSignIn, windowSize, setMessage }) {
         <Col md={12}>
           <h1 className="section-title m-0">Who are we?</h1>
         </Col>
-        <Col md={12} className="px-4">
+        <Col md={12} className="px-3">
           <p className="p-0 m-0 aboutus-p">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.
+            Auction3 is the premier global exchange for luxury assets including
+            real estate, yachts, airplanes, and cars. Join us in the thrill of
+            the auction setting, stay for the community and the amazing
+            opportunity to acquire unique, prestigious assets.
           </p>
         </Col>
       </Row>
       <Row style={{ padding: windowSize < 800 ? "2rem 1rem" : "3rem" }}>
         <Col>
-          <Row className="aboutus-our-section">
+          <Row className="aboutus-our-section" style={{padding: windowSize < 800 && "1rem 2rem"}}>
             <Col md={6} xs={12} className="my-5">
               <span>Our Mission</span>
               <p className="p-0 m-0 aboutus-p-our">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Auction3 unites accredited buyers and sellers to exchange truly
+                prestigious assets including real estate, yachts, aircraft, and
+                vehicles.
               </p>
             </Col>
             <Col md={6} xs={12} className="my-5">
               <span>Our Vision</span>
               <p className="p-0 m-0 aboutus-p-our">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                We will create a tremendous community of high-net-worth
+                individuals to generate the most active marketplace for
+                incredibly unique, valuable assets throughout the world.
               </p>
             </Col>
           </Row>

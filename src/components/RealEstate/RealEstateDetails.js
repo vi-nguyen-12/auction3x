@@ -429,7 +429,7 @@ function RealEstateDetails({
               onChange={(e) => setPropType(e.target.value)}
               required
             >
-              <option value="">Property Type</option>
+              <option value="">Select</option>
               {realEstateType.map((item, index) => (
                 <option value={item.value} key={index}>
                   {item.name}
@@ -684,8 +684,7 @@ function RealEstateDetails({
               <p className="m-0 mx-2 mb-1">
                 <span
                   className="tooltip-bottom"
-                  data-tooltip="We will be using these details to match you with the right
-              buyer."
+                  data-tooltip="The minimum amount the seller will accept as the winning bid."
                 >
                   <BsQuestionCircleFill
                     style={{ cursor: "pointer" }}
@@ -717,8 +716,7 @@ function RealEstateDetails({
               <p className="m-0 mx-2 mb-1">
                 <span
                   className="tooltip-bottom"
-                  data-tooltip="We will be using these details to match you with the right
-              buyer."
+                  data-tooltip="An amount less than the reserve price that the seller would be willing to engage in further discussion with the potential buyer."
                 >
                   <BsQuestionCircleFill
                     style={{ cursor: "pointer" }}

@@ -229,25 +229,35 @@ function App() {
           }
         });
         authService.getWallet(user._id).then((res) => {
-          const newWallet = { RealEstate: 0, Car: 0, Jet: 0, Yacht: 0 };
-          const newSubWallet = { RealEstate: [], Car: [], Jet: [], Yacht: [] };
-          res?.data?.map((w) => {
-            if (w.property.type === "real-estate") {
-              newWallet.RealEstate = newWallet.RealEstate + w.availableFund;
-              newSubWallet.RealEstate = [...newSubWallet.RealEstate, w];
-            } else if (w.property.type === "car") {
-              newWallet.Car = newWallet.Car + w.availableFund;
-              newSubWallet.Car = [...newSubWallet.Car, w];
-            } else if (w.property.type === "jet") {
-              newWallet.Jet = newWallet.Jet + w.availableFund;
-              newSubWallet.Jet = [...newSubWallet.Jet, w];
-            } else if (w.property.type === "yacht") {
-              newWallet.Yacht = newWallet.Yacht + w.availableFund;
-              newSubWallet.Yacht = [...newSubWallet.Yacht, w];
-            }
-          });
-          setWallet(newWallet);
-          setSubWallet(newSubWallet);
+          if (res.data.error) {
+            setMessage("");
+            setMessage(res.data.error);
+          } else {
+            const newWallet = { RealEstate: 0, Car: 0, Jet: 0, Yacht: 0 };
+            const newSubWallet = {
+              RealEstate: [],
+              Car: [],
+              Jet: [],
+              Yacht: [],
+            };
+            res?.data?.map((w) => {
+              if (w.property.type === "real-estate") {
+                newWallet.RealEstate = newWallet.RealEstate + w.availableFund;
+                newSubWallet.RealEstate = [...newSubWallet.RealEstate, w];
+              } else if (w.property.type === "car") {
+                newWallet.Car = newWallet.Car + w.availableFund;
+                newSubWallet.Car = [...newSubWallet.Car, w];
+              } else if (w.property.type === "jet") {
+                newWallet.Jet = newWallet.Jet + w.availableFund;
+                newSubWallet.Jet = [...newSubWallet.Jet, w];
+              } else if (w.property.type === "yacht") {
+                newWallet.Yacht = newWallet.Yacht + w.availableFund;
+                newSubWallet.Yacht = [...newSubWallet.Yacht, w];
+              }
+            });
+            setWallet(newWallet);
+            setSubWallet(newSubWallet);
+          }
         });
       }
     }

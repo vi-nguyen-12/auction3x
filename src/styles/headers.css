@@ -1,4 +1,4 @@
-.row{
+.row {
   margin: 0;
   padding: 0;
 }
@@ -185,7 +185,7 @@
   background-color: white;
   display: flex;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 0;
   height: 50px;
   margin: 10px 0;
   border: none;
@@ -211,7 +211,7 @@
   /* space around */
   margin: 0;
 }
-/* .searchBar {
+.searchBar {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -223,7 +223,7 @@
 }
 .searchBar:focus {
   outline: none;
-} */
+}
 .filterResult {
   background-color: #b77b50;
   color: #ffffff;
@@ -238,7 +238,7 @@
 
 .mapButton {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 0;
   border: white solid 1px;
   padding: 0 20px;
   margin: 10px 0;
@@ -248,7 +248,7 @@
 
 .galleryButton {
   background-color: black;
-  border-radius: 5px;
+  border-radius: 0;
   border: black solid 1px;
   padding: 0 20px;
   margin: 10px 0;
@@ -314,4 +314,9 @@
   cursor: pointer;
   padding: 0;
   color: #6d6d6d;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  border-radius: 0;
 }

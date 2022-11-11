@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import contact from "../../../src/images/contactImg.png";
 import CompanyHeader from "./CompanyHeader";
 import { useLocation } from "react-router-dom";
@@ -35,26 +35,33 @@ function ContactUs({ windowSize, setMessage }) {
   }, [setMessage]);
 
   const onSubmit = async (data) => {
-    const datas = {
-      type: "from_user",
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      phone: phone,
-      subject: data.subject,
-      content: data.message,
-      autoReply: "contact_us_reply",
-    };
-    await authService.sendEmails(datas).then((res) => {
-      if (res.data.error) {
-        setMessage("");
-        setMessage(res.data.error);
-      } else {
-        setMessage("");
-        setMessage(res.data.message);
-        window.location.reload();
-      }
-    });
+    if (data.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      const datas = {
+        type: "from_user",
+        name: data.name,
+        email: data.email,
+        phone: phone,
+        title: data.who,
+        subject: data.subject,
+        content: data.message,
+        autoReply: "contact_us_reply",
+      };
+      await authService.sendEmails(datas).then((res) => {
+        if (res.data.error) {
+          setMessage("");
+          setMessage(res.data.error);
+        } else {
+          setMessage("");
+          setMessage(res.data.message);
+          window.location.reload();
+        }
+      });
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter a valid email address");
+      }, 100);
+    }
   };
 
   return (
@@ -95,31 +102,20 @@ function ContactUs({ windowSize, setMessage }) {
             </Row>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Row>
-                <Col className="mb-2" md={6} xs={12}>
-                  <span>First Name</span>
+                <Col className="mb-2" md={12}>
+                  <span>Name</span>
                   <input
-                    placeholder="Enter First Name"
+                    placeholder="Enter Name"
                     type="text"
                     className="form-control"
                     name="firstName"
-                    {...register("firstName", { required: true })}
-                    required
-                  />
-                </Col>
-                <Col className="mb-2" md={6} xs={12}>
-                  <span>Last Name</span>
-                  <input
-                    placeholder="Enter Last Name"
-                    type="text"
-                    className="form-control"
-                    name="lastName"
-                    {...register("lastName", { required: true })}
+                    {...register("name", { required: true })}
                     required
                   />
                 </Col>
               </Row>
               <Row>
-                <Col className="mb-2" md={6} xs={12}>
+                <Col className="mb-2" md={12}>
                   <span>Email</span>
                   <input
                     placeholder="Enter Email"
@@ -130,7 +126,7 @@ function ContactUs({ windowSize, setMessage }) {
                     required
                   />
                 </Col>
-                <Col className="mb-2" md={6} xs={12}>
+                <Col className="mb-2" md={12}>
                   <span>Phone</span>
                   <PhoneInput
                     disableCountryCode={false}
@@ -146,6 +142,24 @@ function ContactUs({ windowSize, setMessage }) {
                     onChange={setPhone}
                     required
                   />
+                </Col>
+              </Row>
+              <Row>
+                <Col className="mb-2" md={12}>
+                  <span>Which Best Describes You?</span>
+                  <Form.Select
+                    name="subject"
+                    {...register("who")}
+                    className="form-control"
+                  >
+                    <option value="buyer">Buyer</option>
+                    <option value="seller">Seller</option>
+                    <option value="broker">Broker/Agent</option>
+                    <option value="intermediary">
+                      Intermediary(Other, Etc)
+                    </option>
+                    <option value="other">Other</option>
+                  </Form.Select>
                 </Col>
               </Row>
               <Row>
