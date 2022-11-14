@@ -279,7 +279,7 @@ function Ownership({
                 >
                   Owner Information
                 </Row>
-                <Row>
+                {/* <Row>
                   <Col className="d-flex justify-content-end align-items-center mt-1">
                     <button
                       type="button"
@@ -289,7 +289,7 @@ function Ownership({
                       + Add Owner
                     </button>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row className="mt-3 d-flex justify-content-center">
                   <Col>
                     <span style={{ fontWeight: "600" }}>
@@ -450,7 +450,7 @@ function Ownership({
                   Broker Information
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col className="d-flex justify-content-end align-items-center mt-1">
                   <button
                     type="button"
@@ -460,7 +460,7 @@ function Ownership({
                     + Add Owner
                   </button>
                 </Col>
-              </Row>
+              </Row> */}
               <Row className="mt-3">
                 <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>

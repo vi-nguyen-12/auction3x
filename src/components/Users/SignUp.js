@@ -327,7 +327,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           </Col>
         </Row>
         <Row style={{ margin: "20px 0" }}>
-          <Col md={4} xs={12}>
+          <Col md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="country">
                 Country <span style={{ color: "red" }}> *</span>
@@ -344,7 +344,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               />
             </div>
           </Col>
-          <Col md={4} xs={12}>
+          {/* <Col md={4} xs={12}>
             <div className="form-group">
               <label htmlFor="state">
                 State <span style={{ color: "red" }}> *</span>
@@ -360,8 +360,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
                 required
               />
             </div>
-          </Col>
-          <Col md={4} xs={12}>
+          </Col> */}
+          <Col md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="city">
                 City <span style={{ color: "red" }}> *</span>

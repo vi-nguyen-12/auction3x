@@ -202,7 +202,7 @@ const BuyAuthorized = ({
               {client?.documents?.length > 0 || !client ? (
                 <>
                   <span className="text-white docusign-text">
-                    Please review and sign the Seller Agreement below
+                    Please review and sign the Buyer Agreement below
                   </span>
                   <button
                     type="button"
@@ -216,14 +216,14 @@ const BuyAuthorized = ({
                 <>
                   <span className="text-white docusign-text">
                     You are not authorized to sign this document. Please send
-                    the document to the owner for signing.
+                    the document to the buyer for signing.
                   </span>
                   <button
                     type="button"
                     onClick={sendDocusign}
                     className="docusign-btn"
                   >
-                    SEND DOCUSIGN TO OWNER
+                    SEND DOCUSIGN TO BUYER
                   </button>
                 </>
               )}

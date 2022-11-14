@@ -29,21 +29,21 @@ function Info({ windowSize, toggleSignIn }) {
       logo: investor,
       title: "Buyers",
       description:
-        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
+        "Buyers can rest assured that the purchase process will be smooth and timely. Avoid the back and forth of never-ending negotiations with our fixed closing auction date and published reserve price. All properties are sold as-is and will be supported through closing by us and our team of partners.",
       buttonText: "Start Now",
     },
     {
       logo: brokers,
       title: "Brokers",
       description:
-        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
+        "Auction3 is a great partner to brokers and we are happy to work with you whether you are representing a buyer or seller. We always value the local insight and expertise provided by seasoned brokers.",
       buttonText: "Earn Now",
     },
     {
       logo: sellers,
       title: "sellers",
       description:
-        "AUCTION3 positioned itself as the leading marketplace for professional real estate investors to auction platform for buying and selling their properties. It brings an opportunity for an investor to execute the transaction with greater eciency and higher prots.",
+        "Sellers on Auction3 enjoy the benefits of a reduced timeline with the peace of mind that they will sell their assets on a set date and price floor.  We will support our sellers by bringing the market to them and our superior service extends throughout the closing process in coordination with our outstanding partners.",
       buttonText: "Sell Now",
     },
   ];
@@ -75,9 +75,11 @@ function Info({ windowSize, toggleSignIn }) {
                     <div className="info-logo">
                       <img src={item.logo} alt="" loading="lazy" />
                     </div>
-                    <div className="info-texts mt-5">
+                    <div className="info-texts mt-4">
                       <span className="info-subtitle mt-3">{item.title}</span>
-                      <p className="info-descript mt-3">{item.description}</p>
+                      <div style={{ height: "230px" }}>
+                        <p className="info-descript mt-3 mb-0">{item.description}</p>
+                      </div>
                       <Button
                         onClick={handleOnClick(item)}
                         className="info-button mt-3"

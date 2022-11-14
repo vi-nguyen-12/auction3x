@@ -113,7 +113,7 @@ const Login = ({
             }}
             className="nav-link-signup px-0"
           >
-            Reset Password
+            Forgot password?
           </Button>
         </div>
         <Modal.Footer>

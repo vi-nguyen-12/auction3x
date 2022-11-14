@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
+import { IoMdMail } from "react-icons/io";
 
 function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
   const {
@@ -24,14 +25,15 @@ function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
   };
   return (
     // reset password
-    <form style={{ padding: "50px 20px" }} onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-group">
-        <label style={{ fontSize: "25px", color: "black" }}>
-          Please enter the account email
-        </label>
+    <form className="px-2 py-3" onSubmit={handleSubmit(onSubmit)}>
+      <p className="text-center px-3">
+        Please enter your email associated with your account to reset your
+        password.
+      </p>
+      <div className="form-group mt-4 d-flex justify-content-between align-items-center">
         <input
           type="email"
-          className="form-control"
+          className="form-control login-input px-2"
           placeholder="Email"
           style={{ height: "50px", fontSize: "20px" }}
           {...register("email", {
@@ -39,10 +41,13 @@ function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
             pattern: /^\S+@\S+$/i,
           })}
         />
+        <div className="eyes_container" style={{ right: "7%" }}>
+          <IoMdMail className="eye-icon" size={23} color="#7e7e7e" />
+        </div>
       </div>
       <div className="form-group" style={{ display: "flex" }}>
         <button type="submit" className="login-modal-btn mt-3 fw-bold w-100">
-          CONTINUE
+          SEND
         </button>
       </div>
     </form>
