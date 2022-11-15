@@ -129,7 +129,6 @@ function App() {
   const [showConfirm, popupConfirm] = useState(false);
   const [showButton, popButton] = useState(false);
   const [forgotPass, popForgotPass] = useState(false);
-  const [changePass, popChangePass] = useState(false);
   const [showSessionTimedOut, setShowSessionTimedOut] = useState(false);
   const [bodyPadding, setBodyPadding] = useState("");
   const [refresh, setRefresh] = useState(false);
@@ -148,7 +147,6 @@ function App() {
   });
 
   const toggleDocu = () => setShowDocu(!showDocu);
-  const toggleChangePass = () => popChangePass(!changePass);
   const toggleForgotPass = () => popForgotPass(!forgotPass);
   const toggleButton = () => popButton(!showButton);
   const toggleSignIn = () => popSignIn(!showSignIn);
@@ -555,77 +553,7 @@ function App() {
                 </button>
               </Modal.Footer>
             </Modal>
-            {/* <Modal
-          size="md"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={forgotPass}
-          onHide={toggleForgotPass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Body
-            contentclassname="forgotPass"
-            className="forgot-modal"
-          ></Modal.Body>
-        </Modal> */}
-            {/* <Modal
-          size="md"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={forgotPass}
-          onHide={toggleForgotPass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title
-              id="contained-modal-title-vcenter"
-              style={{
-                color: "#D58F5C",
-                fontSize: "30px",
-                fontWeight: "bold",
-              }}
-            >
-              Forgot Password
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <ForgotPass
-              toggleForgotPass={toggleForgotPass}
-              toggleChangePass={toggleChangePass}
-            />
-          </Modal.Body>
-        </Modal> */}
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={changePass}
-              onHide={toggleChangePass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Body>
-                <ChangePass
-                  toggleChangePass={toggleChangePass}
-                  setMessage={setMessage}
-                />
-              </Modal.Body>
-            </Modal>
-            {/* <Modal
-          backdrop="static"
-          keyboard={false}
-          // aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignIn}
-          onHide={toggleSignIn}
-          // contentclassname="custom-modal-title"
-        >
-          <div className="sign-In"></div>
-        </Modal> */}
+
             <Modal
               size="md"
               backdrop="static"
@@ -704,23 +632,7 @@ function App() {
                 />
               </Modal.Body>
             </Modal>
-            {/* <Modal
-          size="md"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={forgotPass}
-          onHide={toggleForgotPass}
-          contentclassname="forgotPass"
-        >
-          <Modal.Body contentclassname="forgotPass" className="forgot-modal">
-            <ForgotPass
-              toggleForgotPass={toggleForgotPass}
-              toggleChangePass={toggleChangePass}
-            />
-          </Modal.Body>
-        </Modal> */}
+
             <Modal
               size="md"
               backdrop="static"
@@ -758,7 +670,6 @@ function App() {
               <Modal.Body>
                 <ForgotPass
                   toggleForgotPass={toggleForgotPass}
-                  toggleChangePass={toggleChangePass}
                   setMessage={setMessage}
                 />
               </Modal.Body>
@@ -774,33 +685,7 @@ function App() {
                 </button>
               </Modal.Footer>
             </Modal>
-            <Modal
-              backdrop="static"
-              keyboard={false}
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={changePass}
-              onHide={toggleChangePass}
-              contentclassname="forgotPass"
-            >
-              <Modal.Body>
-                <ChangePass
-                  toggleChangePass={toggleChangePass}
-                  setMessage={setMessage}
-                />
-              </Modal.Body>
-            </Modal>
-            {/* <Modal
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignUp}
-          onHide={toggleSignUp}
-          contentclassname="custom-modal-style"
-        >
-          <div className="sign-Up"></div>
-        </Modal> */}
+
             <Modal
               size="lg"
               backdrop="static"
@@ -1273,6 +1158,7 @@ function App() {
                     toggleShow={toggleShow}
                     setHeaderWidth={setHeaderWidth}
                     setMessage={setMessage}
+                    windowSize={windowSize}
                   />
                 </Route>
                 <Route exact path="/confirm_email">

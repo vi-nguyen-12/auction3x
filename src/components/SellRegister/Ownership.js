@@ -117,10 +117,22 @@ function Ownership({
   useEffect(() => {
     if (!propertyTest.details && isOwner === true) {
       setBrokerName("");
-      setOwnerName(user.firstName + " " + user.lastName);
+      setOwnerName(
+        user.firstName[0].toUpperCase() +
+          user.firstName.slice(1) +
+          " " +
+          user.lastName[0].toUpperCase() +
+          user.lastName.slice(1)
+      );
     } else if (!propertyTest.details && isOwner === false) {
       setOwnerName("");
-      setBrokerName(user.firstName + " " + user.lastName);
+      setBrokerName(
+        user.firstName[0].toUpperCase() +
+          user.firstName.slice(1) +
+          " " +
+          user.lastName[0].toUpperCase() +
+          user.lastName.slice(1)
+      );
     }
   }, [isOwner]);
 

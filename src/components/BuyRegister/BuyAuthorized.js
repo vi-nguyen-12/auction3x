@@ -113,9 +113,9 @@ const BuyAuthorized = ({
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
-          window.open(res.data.redirectUrl);
-          // setDocuUrl(res.data.redirectUrl);
-          // toggleDocu();
+          // window.open(res.data.redirectUrl);
+          setDocuUrl(res.data.redirectUrl);
+          toggleDocu();
         }
       })
       .catch((error) => {

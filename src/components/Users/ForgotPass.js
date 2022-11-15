@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import authServices from "../../services/authServices";
 import { IoMdMail } from "react-icons/io";
 
-function ForgotPass({ toggleForgotPass, toggleChangePass, setMessage }) {
+function ForgotPass({ toggleForgotPass, setMessage }) {
   const {
     register,
     handleSubmit,

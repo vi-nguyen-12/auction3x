@@ -1,0 +1,66 @@
+.resetPass_Container {
+  width: 100%;
+  height: 550px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 3px 3px 32px 7.5px #c1d8e5;
+  -moz-box-shadow: 3px 3px 32px 7.5px #c1d8e5;
+  box-shadow: 3px 3px 32px 7.5px #c1d8e5;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.inputs_container {
+  --bs-gutter-x: 0;
+}
+
+.resetPass_Title {
+  font-family: "Inter", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: #454242;
+}
+
+.resetPass_Subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #cfcfcf;
+}
+
+.resetPass_List {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resetPass_ListItem {
+  color: #cfcfcf;
+}
+
+.resetPass_Input {
+  width: 100%;
+  height: 55px;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 0 15px;
+}
+
+.resetPass_Input:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #ec0d0d;
+}
+
+.new_pass_container {
+  width: 100%;
+  height: 55px;
+  border: 1px solid #cfcfcf;
+  border-radius: 0;
+}
+
+.new_pass_container:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #ec0d0d;
+}

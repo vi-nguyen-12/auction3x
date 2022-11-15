@@ -26,7 +26,8 @@ const Docusign = ({ toggleDocu }) => {
             response.data === "signing_complete" ||
             response.data === "viewing_complete"
           ) {
-            window.close();
+            // window.close();
+            toggleDocu();
           }
         });
     };
