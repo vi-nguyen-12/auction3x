@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Table, Row, Container } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
+import Paginations from "../../../Paginations";
 
 function SoldListings({ windowSize, setMessage, searchBy, search }) {
   const user = useSelector((state) => state.user);
   const [soldListings, setSoldListings] = useState([]);
   const [newSoldListings, setNewSoldListings] = useState([]);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
     authService.getSellerSoldListings(user._id).then((res) => {
@@ -74,8 +77,8 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
               <th>View</th>
             </tr>
           </thead>
-          {newSoldListings.length > 0 ? (
-            newSoldListings.map((auction, index) => (
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
@@ -134,6 +137,13 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
             </tbody>
           )}
         </Table>
+      </Row>
+      <Row className="d-flex justify-content-end align-items-center">
+        <Paginations
+          data={newSoldListings}
+          setCurrentPageContents={setCurrentPageContents}
+          setPageContents={setPageContents}
+        />
       </Row>
     </Container>
   );

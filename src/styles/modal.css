@@ -272,13 +272,7 @@
 }
 
 .loginBtn {
-  background: linear-gradient(
-    90deg,
-    #d58f5c 0%,
-    #ffc195 31.25%,
-    #dd9c6d 62.5%,
-    #edb48b 100%
-  );
+  background-image: linear-gradient(60deg, #f38f43, #c7723a, #a23830);
   width: 100%;
   color: white;
   font-weight: bold;
@@ -309,7 +303,7 @@
   box-shadow: none;
 }
 
-.eyes_container{
+.eyes_container {
   position: absolute;
   right: 10%;
   cursor: pointer;

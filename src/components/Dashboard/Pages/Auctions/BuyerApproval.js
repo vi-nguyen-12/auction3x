@@ -13,6 +13,7 @@ import authService from "../../../../services/authServices";
 import NumberFormat from "react-number-format";
 import CloseButton from "react-bootstrap/CloseButton";
 import Loading from "../../../Loading";
+import Paginations from "../../../Paginations";
 
 function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
@@ -29,6 +30,8 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const [oldFund, setOldFund] = useState([]);
   const [showQuestionair, setShowQuestionair] = useState(false);
   const [showDocuments, setShowDocuments] = useState(false);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
 
@@ -232,8 +235,8 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
               <th>View Auction</th>
             </tr>
           </thead>
-          {newPendingAuctions.length > 0 ? (
-            newPendingAuctions.map((auction, index) => (
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
@@ -874,6 +877,13 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
             </>
           </Modal.Body>
         </Modal>
+      </Row>
+      <Row className="d-flex justify-content-end align-items-center">
+        <Paginations
+          data={newPendingAuctions}
+          setPageContents={setPageContents}
+          setCurrentPageContents={setCurrentPageContents}
+        />
       </Row>
     </Container>
   );

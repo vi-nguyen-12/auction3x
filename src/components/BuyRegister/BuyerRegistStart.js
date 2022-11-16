@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Modal, Form } from "react-bootstrap";
 import { MdClose } from "react-icons/md";
 import authService from "../../services/authServices";
+import Loading from "../Loading";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "react-phone-input-2/lib/bootstrap.css";
 
 function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
+  const [loader, setLoader] = useState(false);
   const [buyerControl, setBuyerControl] = useState();
   const [clientName, setClientName] = useState(client?.name);
   const [clientEmail, setClientEmail] = useState(client?.email);
@@ -18,6 +20,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
   };
 
   const getAttorneyFile = async (e) => {
+    setLoader(true);
     const formData = new FormData();
     for (let i = 0; i < e.target.files.length; i++) {
       formData.append("documents", e.target.files[i]);
@@ -26,10 +29,12 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
       if (res.data.error) {
         setMessage("");
         setMessage(res.data.error);
+        setLoader(false);
       } else {
         setAttorney((prev) =>
           res.data.map((doc) => ({ ...doc, officialName: "power_of_attorney" }))
         );
+        setLoader(false);
       }
     });
   };
@@ -81,6 +86,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
   };
   return (
     <>
+      {loader && <Loading />}
       <Row className="mb-5">
         <Col>
           <Row>
