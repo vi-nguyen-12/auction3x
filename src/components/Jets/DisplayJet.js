@@ -398,12 +398,11 @@ function DisplayJet({
                       >
                         {property.property.videos.map((item, index) => (
                           <Wrap key={index}>
-                            {item.name === "videos" ? (
+                            {item.name === "youtube" ? (
                               <iframe
-                                src={`https://www.youtube.com/embed/${item.url.slice(
-                                  32,
-                                  item.url.indexOf("&")
-                                )}`}
+                                src={`https://www.youtube.com/embed/${
+                                  item.url.split("v=")[1].split("&")[0]
+                                }`}
                                 height="500px"
                                 width="100%"
                                 allowFullScreen
