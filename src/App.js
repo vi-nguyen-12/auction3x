@@ -104,6 +104,7 @@ const MultiSellForm = React.lazy(() =>
 );
 
 const NavBar = React.lazy(() => import("./components/Home/NewHome/NavBar"));
+const DocusignModal = React.lazy(() => import("./DocusignModal"));
 
 function App() {
   const history = useHistory();
@@ -439,13 +440,14 @@ function App() {
             }}
           >
             {/* All Modals */}
-            <Modal
+            {/* <Modal
               size="xl"
               backdrop="static"
               keyboard={false}
               show={showDocu}
               onHide={toggleDocu}
               centered
+              style={{ border: "1px solid red" }}
             >
               <Modal.Body className="vh-100">
                 <div
@@ -464,9 +466,15 @@ function App() {
                     }}
                   />
                 </div>
-                <embed src={docuUrl} width="100%" height="100%" />
+                <iframe src={docuUrl} width="100%" height="100%" />
               </Modal.Body>
-            </Modal>
+            </Modal> */}
+            <DocusignModal
+              docuUrl={docuUrl}
+              toggleDocu={toggleDocu}
+              showDocu={showDocu}
+              windowSize={windowSize}
+            />
 
             <Modal
               size="xl"
@@ -1018,6 +1026,7 @@ function App() {
                     refresh={refresh}
                     toggleDocu={toggleDocu}
                     setDocuUrl={setDocuUrl}
+                    showDocu={showDocu}
                   />
                 </Route>
 
@@ -1174,6 +1183,7 @@ function App() {
                     setHeaderWidth={setHeaderWidth}
                     setMessage={setMessage}
                     toggleDocu={toggleDocu}
+                    showDocu={showDocu}
                   />
                 </Route>
 

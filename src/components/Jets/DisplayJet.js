@@ -118,7 +118,9 @@ function DisplayJet({
   setMessage,
   toggleDocu,
   setDocuUrl,
+  showDocu,
 }) {
+  console.log(showDocu);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -1600,6 +1602,7 @@ function DisplayJet({
                 auctionId={property._id}
                 toggleDocu={toggleDocu}
                 setDocuUrl={setDocuUrl}
+                showDocu={showDocu}
               />
             </Modal.Body>
           </Modal>

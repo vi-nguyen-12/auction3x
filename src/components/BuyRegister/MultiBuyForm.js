@@ -11,7 +11,9 @@ const MultiBuyForm = ({
   auctionId,
   toggleDocu,
   setDocuUrl,
+  showDocu,
 }) => {
+  console.log(showDocu);
   const [step, setStep] = useState(1);
   const [client, setClient] = useState();
   const [document, setDocument] = useState();
@@ -74,6 +76,7 @@ const MultiBuyForm = ({
           toggleDocu={toggleDocu}
           setDocuUrl={setDocuUrl}
           client={client}
+          showDocu={showDocu}
         />
       </div>
     );

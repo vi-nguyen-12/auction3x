@@ -23,7 +23,9 @@ const BuyAuthorized = ({
   toggleDocu,
   setDocuUrl,
   client,
+  showDocu,
 }) => {
+  console.log(showDocu);
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [docuId, setDocuId] = useState();
@@ -109,14 +111,17 @@ const BuyAuthorized = ({
         }
         setLoader(false);
         setDocuId(res.data.docusignId);
-        if (
-          res.data.status !== "signing_complete" &&
-          res.data.status !== "viewing_complete"
-        ) {
-          // window.open(res.data.redirectUrl);
-          setDocuUrl(res.data.redirectUrl);
-          toggleDocu();
-        }
+        setDocuUrl(res.data.redirectUrl);
+        console.log(showDocu);
+        toggleDocu();
+        // if (
+        //   res.data.status !== "signing_complete" &&
+        //   res.data.status !== "viewing_complete"
+        // ) {
+        //   // window.open(res.data.redirectUrl);
+        //   setDocuUrl(res.data.redirectUrl);
+        //   toggleDocu();
+        // }
       })
       .catch((error) => {
         setMessage("");

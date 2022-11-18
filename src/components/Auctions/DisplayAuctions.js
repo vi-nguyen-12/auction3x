@@ -27,11 +27,13 @@ function DisplayAuctions({
   setMessage,
   toggleDocu,
   setDocuUrl,
+  showDocu,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
   const [loader, setLoader] = useState(false);
+  console.log(showDocu);
 
   useEffect(() => {
     toggleShow(true);
@@ -168,6 +170,7 @@ function DisplayAuctions({
             setMessage={setMessage}
             toggleDocu={toggleDocu}
             setDocuUrl={setDocuUrl}
+            showDocu={showDocu}
           />
         ) : auction.property.type === "yacht" ? (
           <DisplayYacht
@@ -180,6 +183,7 @@ function DisplayAuctions({
             setMessage={setMessage}
             toggleDocu={toggleDocu}
             setDocuUrl={setDocuUrl}
+            showDocu={showDocu}
           />
         ) : null
       ) : (
