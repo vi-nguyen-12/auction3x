@@ -176,7 +176,10 @@ function AddFund({ setMessage }) {
         <>
           <Row className="mb-3">
             <Col>
-              <label style={{ color: "black" }}>Proof of Fund for</label>
+              <label style={{ color: "black" }}>
+                Proof of Fund for
+                <span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <Form.Select
                 onChange={(e) => setBuyerId(e.target.value)}
                 className="form-control"
@@ -210,7 +213,10 @@ function AddFund({ setMessage }) {
           </Row>
           <Row className="mb-3">
             <Col>
-              <label style={{ color: "black" }}>Type of Proof of Fund</label>
+              <label style={{ color: "black" }}>
+                Type of Proof of Fund
+                <span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <Form.Select
                 onChange={(e) => setName(e.target.value)}
                 className="form-control"
@@ -232,7 +238,9 @@ function AddFund({ setMessage }) {
           </Row>
           <Row className="mb-3">
             <Col md={6} xs={12}>
-              <label style={{ color: "black" }}>Provider Name</label>
+              <label style={{ color: "black" }}>
+                Provider Name<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <input
                 type="text"
                 name="provider"
@@ -243,7 +251,9 @@ function AddFund({ setMessage }) {
               />
             </Col>
             <Col md={6} xs={12}>
-              <label style={{ color: "black" }}>Validity Date</label>
+              <label style={{ color: "black" }}>
+                Validity Date<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <input
                 type="date"
                 name="validity"
@@ -255,9 +265,11 @@ function AddFund({ setMessage }) {
             </Col>
           </Row>
           <Row className="mb-3">
-            <Col>
+            <Col md={7} xs={12}>
               <div>
-                <label style={{ color: "black" }}>Proof Of Fund</label>
+                <label style={{ color: "black" }}>
+                  Proof Of Fund<span style={{ color: "#ff0000" }}>*</span>
+                </label>
                 <input
                   type="file"
                   name="form"
@@ -293,9 +305,11 @@ function AddFund({ setMessage }) {
                 </div>
               </div>
             </Col>
-          </Row>
-          <Row style={{ marginTop: "40px" }}>
-            <Col style={{ display: "flex", justifyContent: "center" }}>
+            <Col
+              md={5}
+              xs={12}
+              className="d-flex justify-content-end align-items-end"
+            >
               <Button
                 onClick={onSubmit}
                 variant="primary"
@@ -312,7 +326,9 @@ function AddFund({ setMessage }) {
         <Row>
           <Row className="mb-3">
             <Col>
-              <label style={{ color: "black" }}>Proof of Fund for</label>
+              <label style={{ color: "black" }}>
+                Proof of Fund for<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <Form.Select
                 onChange={(e) => setBuyerId(e.target.value)}
                 className="form-control"
@@ -346,7 +362,9 @@ function AddFund({ setMessage }) {
           </Row>
           <Row className="mb-3">
             <Col>
-              <label style={{ color: "black" }}>Type of Proof of Fund</label>
+              <label style={{ color: "black" }}>
+                Type of Proof of Fund<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <Form.Select
                 onChange={(e) => setName(e.target.value)}
                 className="form-control"
@@ -368,7 +386,9 @@ function AddFund({ setMessage }) {
           </Row>
           <Row>
             <Col md={6} xs={12} className="mt-3">
-              <label style={{ color: "black" }}>Proof Of Fund</label>
+              <label style={{ color: "black" }}>
+                Proof Of Fund<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <input
                 type="file"
                 name="form"
@@ -404,7 +424,9 @@ function AddFund({ setMessage }) {
               </div>
             </Col>
             <Col md={6} xs={12} className="mt-3">
-              <label style={{ color: "black" }}>Validity Date</label>
+              <label style={{ color: "black" }}>
+                Validity Date<span style={{ color: "#ff0000" }}>*</span>
+              </label>
               <input
                 type="date"
                 name="validity"
@@ -415,8 +437,8 @@ function AddFund({ setMessage }) {
               />
             </Col>
           </Row>
-          <Row style={{ marginTop: "40px" }}>
-            <Col style={{ display: "flex", justifyContent: "center" }}>
+          <Row className="mt-5 d-flex justify-content-end">
+            <Col className="d-flex justify-content-end">
               <Button
                 onClick={onSubmit}
                 variant="primary"

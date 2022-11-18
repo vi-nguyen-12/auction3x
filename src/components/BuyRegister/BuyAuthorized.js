@@ -3,14 +3,11 @@ import "../../styles/sell-register.css";
 import { Modal, Button, Container, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import authService from "../../services/authServices";
-import { useParams } from "react-router-dom";
 import axious from "axios";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import Loading from "../../components/Loading";
 import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
-import { MdClose } from "react-icons/md";
-import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const BuyAuthorized = ({
   setStep,
@@ -25,9 +22,13 @@ const BuyAuthorized = ({
   client,
   showDocu,
 }) => {
+<<<<<<< HEAD
   console.log(showDocu);
   const { id } = useParams();
+=======
+>>>>>>> 3e29591d2c20780863683aa55964fcdd9ad2db2c
   const [loader, setLoader] = useState(false);
+  const [sentEmail, setSentEmail] = useState(false);
   const [docuId, setDocuId] = useState();
   const [terms, setTerms] = useState("");
   const [show, setShow] = useState(false);
@@ -83,8 +84,13 @@ const BuyAuthorized = ({
   };
 
   const sendDocusign = async () => {
+    const datas = {
+      id: auctionId,
+      clientName: client.name,
+      clientEmail: client.email,
+    };
     setLoader(true);
-    await authService.sendSellDocuSign().then((res) => {
+    await authService.sendBuyerDocuSign(datas).then((res) => {
       if (res.data.error) {
         setMessage("");
         setMessage(res.data.error);
@@ -93,6 +99,8 @@ const BuyAuthorized = ({
         setTimeout(() => {
           setMessage(`DocuSign successfully sent to ${client?.email}!`);
         }, 100);
+        setDocuId(res.data.docusignId);
+        setSentEmail(true);
       }
     });
     setLoader(false);
@@ -100,9 +108,34 @@ const BuyAuthorized = ({
 
   const handleSignDocusign = async () => {
     setLoader(true);
-    await authService
-      .getBuyingDocuSign(auctionId)
-      .then((res) => {
+    if (!docuId) {
+      await authService
+        .getBuyingDocuSign(auctionId)
+        .then((res) => {
+          if (res.data.error === "Invalid Token") {
+            setMessage("");
+            setMessage("Your session ended. Please log in! ");
+            setLoader(false);
+            window.location.reload();
+          }
+          setLoader(false);
+          setDocuId(res.data.docusignId);
+          if (
+            res.data.status !== "signing_complete" &&
+            res.data.status !== "viewing_complete"
+          ) {
+            // window.open(res.data.redirectUrl);
+            setDocuUrl(res.data.redirectUrl);
+            toggleDocu();
+          }
+        })
+        .catch((error) => {
+          setMessage("");
+          setMessage(error.message);
+          setLoader(false);
+        });
+    } else {
+      await authService.getOldDocusign(docuId).then((res) => {
         if (res.data.error === "Invalid Token") {
           setMessage("");
           setMessage("Your session ended. Please log in! ");
@@ -128,63 +161,113 @@ const BuyAuthorized = ({
         setMessage(error.message);
         setLoader(false);
       });
+    }
   };
+
   const handleSubmit = async () => {
     if (agree) {
-      setLoader(true);
-      await authService.getDocuSignStatus(docuId).then((res) => {
-        if (
-          res.data.status !== "signing_complete" &&
-          res.data.status !== "viewing_complete"
-        ) {
-          setLoader(false);
-          setMessage("");
-          setTimeout(() => {
-            setMessage("Please sign the docusign before proceeding");
-          }, 100);
-        } else {
-          answers = answers.map((item) => {
-            return {
-              questionId: item._id,
-              answer: item.answer,
-              explanation: item.explanation,
-              files: item.files,
-            };
-          });
-          authService
-            .buyerRegister({
-              auctionId: id,
-              TC: { time: agree, IPAddress: ip },
-              answers: answers,
-              docusignId: res.data._id,
-              documents,
-              client,
-            })
-            .then((res) => {
-              if (res.data.error) {
-                if (res.data.error === "Invalid Token") {
-                  window.location.reload();
+      if ((!client.documents || !client) && docuId) {
+        setLoader(true);
+        await authService.getDocuSignStatus(docuId).then((res) => {
+          if (
+            res.data.status !== "signing_complete" &&
+            res.data.status !== "viewing_complete"
+          ) {
+            setLoader(false);
+            setMessage("");
+            setTimeout(() => {
+              setMessage("Please sign the docusign before proceeding");
+            }, 100);
+          } else {
+            answers = answers.map((item) => {
+              return {
+                questionId: item._id,
+                answer: item.answer,
+                explanation: item.explanation,
+                files: item.files,
+              };
+            });
+            authService
+              .buyerRegister({
+                auctionId: auctionId,
+                TC: { time: agree, IPAddress: ip },
+                answers: answers,
+                docusignId: res.data._id,
+                documents,
+                client,
+              })
+              .then((res) => {
+                if (res.data.error) {
+                  if (res.data.error === "Invalid Token") {
+                    window.location.reload();
+                  } else {
+                    setMessage("");
+                    setMessage(res.data.error);
+                    setLoader(false);
+                  }
                 } else {
                   setMessage("");
-                  setMessage(res.data.error);
+                  setMessage(
+                    "You have successfully registered to bid this auction"
+                  );
                   setLoader(false);
+                  window.location.reload();
                 }
+              })
+              .catch((error) => {
+                setMessage("");
+                setMessage(error.message);
+                setLoader(false);
+              });
+          }
+        });
+      } else if (sentEmail && docuId) {
+        answers = answers.map((item) => {
+          return {
+            questionId: item._id,
+            answer: item.answer,
+            explanation: item.explanation,
+            files: item.files,
+          };
+        });
+        authService
+          .buyerRegister({
+            auctionId: auctionId,
+            TC: { time: agree, IPAddress: ip },
+            answers: answers,
+            docusignId: docuId,
+            documents,
+            client,
+          })
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                window.location.reload();
               } else {
                 setMessage("");
-                setMessage(
-                  "You have successfully registered to bid this auction"
-                );
+                setMessage(res.data.error);
                 setLoader(false);
-                window.location.reload();
               }
-            })
-            .catch((error) => {
+            } else {
               setMessage("");
-              setMessage(error.message);
+              setMessage(
+                "You have successfully registered to bid this auction"
+              );
               setLoader(false);
-            });
-        }
-      });
+              window.location.reload();
+            }
+          })
+          .catch((error) => {
+            setMessage("");
+            setMessage(error.message);
+            setLoader(false);
+          });
+      } else {
+        setMessage("");
+        setTimeout(() => {
+          setMessage("Please send the docusign before proceeding");
+        }, 100);
+      }
     } else {
       setMessage("");
       setTimeout(() => {

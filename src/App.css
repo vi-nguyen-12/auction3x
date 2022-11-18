@@ -306,7 +306,7 @@
 h1 {
   font-family: "Tzimmers ";
   width: fit-content;
-  font-size: 4rem;
+  /* font-size: 4rem; */
   color: #d58f5c;
   font-weight: 700;
   color: linear-gradient(
@@ -1007,8 +1007,8 @@ h1 {
   --bs-accordion-border-radius: 0 !important;
 }
 
-.modal-header{
-  border-radius: 0!important;
+.modal-header {
+  border-radius: 0 !important;
 }
 
 @media screen and (max-width: 800px) {
@@ -1027,4 +1027,20 @@ h1 {
   .maintenance-form button {
     width: 100%;
   }
+}
+
+.orLine {
+  display: flex;
+  flex-direction: row;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.orLine::before,
+.orLine::after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid #2f3033;
+  margin: 0.5em;
 }

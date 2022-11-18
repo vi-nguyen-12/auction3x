@@ -146,7 +146,22 @@ const FundUpload = ({ setStep, step, toggleDocument, docu, setMessage }) => {
     <>
       {loader ? <Loading /> : null}
       <Modal.Body>
-        <Row style={{ borderBottom: "#333 solid 1px" }}>
+        <Row>
+          <Col
+            md={12}
+            style={{
+              borderBottom: "2px solid gray",
+              fontWeight: "bold",
+              fontSize: "18px",
+              color: "black",
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            Proof Of Funds
+          </Col>
+        </Row>
+        <Row style={{ borderBottom: "#333 solid 1px" }} className="mt-4">
           <Col md={6} xs={12} className="input-form-3">
             Bank Statement (.pdf) <span style={{ color: "#ff0000" }}>*</span>
             <input

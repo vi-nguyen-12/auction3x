@@ -165,7 +165,7 @@ function Messaging({ windowSize, setMessage }) {
             xs={12}
             className="d-flex justify-content-start align-items-start"
           >
-            <Button className="btn btn-primary" onClick={() => send()}>
+            <Button className="btn btn-primary rounded-0" onClick={() => send()}>
               Send
             </Button>
           </Col>

@@ -3,11 +3,14 @@ import { Table, Button, Modal, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
+import Paginations from "../../../Paginations";
 
 function WinAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [winAuctions, setWinAuctions] = useState([]);
   const [newWinAuctions, setNewWinAuctions] = useState([]);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
   const [images, setImages] = useState([]);
   const [showPic, setShowPic] = useState(false);
   const toggleShowPic = () => setShowPic(!showPic);
@@ -81,8 +84,8 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
               <th>View</th>
             </tr>
           </thead>
-          {newWinAuctions.length > 0 ? (
-            newWinAuctions.map((auction, index) => (
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
@@ -219,6 +222,13 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
             </Table>
           </Modal.Body>
         </Modal>
+      </Row>
+      <Row className="d-flex justify-content-end align-items-center">
+        <Paginations
+          data={newWinAuctions}
+          setCurrentPageContents={setCurrentPageContents}
+          setPageContents={setPageContents}
+        />
       </Row>
     </Container>
   );

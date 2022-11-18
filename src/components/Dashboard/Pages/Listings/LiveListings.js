@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
 import ApprovedListings from "./ApprovedListings";
 import { useHistory } from "react-router-dom";
+import Paginations from "../../../Paginations";
 
 function LiveListings({
   windowSize,
@@ -21,6 +22,8 @@ function LiveListings({
   const history = useHistory();
   const [upcomingListings, setUpcomingListings] = useState([]);
   const [newUpcomingListings, setNewUpcomingListings] = useState([]);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
     const fetchApprovedProperty = async () => {
@@ -99,8 +102,8 @@ function LiveListings({
                 <th>Email</th>
               </tr>
             </thead>
-            {newUpcomingListings.length > 0 ? (
-              newUpcomingListings.map((listing, index) => (
+            {pageContent.length > 0 ? (
+              pageContent[currentPageContent].map((listing, index) => (
                 <tbody key={index}>
                   <tr>
                     <td>{index + 1}</td>
@@ -228,6 +231,13 @@ function LiveListings({
               </tbody>
             )}
           </Table>
+        </Row>
+        <Row className="d-flex justify-content-end align-items-center">
+          <Paginations
+            data={newUpcomingListings}
+            setCurrentPageContents={setCurrentPageContents}
+            setPageContents={setPageContents}
+          />
         </Row>
         <Row style={{ marginTop: "50px" }}>
           <ApprovedListings

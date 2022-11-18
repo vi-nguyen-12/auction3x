@@ -3,11 +3,14 @@ import { Table, Button, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
+import Paginations from "../../../Paginations";
 
 function BidAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [newBidAuctions, setNewBidAuctions] = useState([]);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
     const fetchBidAuctions = async () => {
@@ -80,8 +83,8 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
               <th>Bid</th>
             </tr>
           </thead>
-          {newBidAuctions.length > 0 ? (
-            newBidAuctions.map((auction, index) => (
+          {pageContent.length > 0 ? (
+            pageContent[currentPageContent].map((auction, index) => (
               <tbody key={index}>
                 <tr>
                   <td>{index + 1}</td>
@@ -182,6 +185,13 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
             </tbody>
           )}
         </Table>
+      </Row>
+      <Row className="d-flex justify-content-end align-items-center">
+        <Paginations
+          data={newBidAuctions}
+          setCurrentPageContents={setCurrentPageContents}
+          setPageContents={setPageContents}
+        />
       </Row>
     </Container>
   );

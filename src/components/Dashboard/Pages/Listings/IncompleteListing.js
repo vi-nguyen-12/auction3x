@@ -1,29 +1,19 @@
 import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Row,
-  Col,
-  Container,
-  Pagination,
-  Button,
-} from "react-bootstrap";
+import { Table, Row, Col, Container, Button } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 import "../../../../styles/dashboard.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import Paginations from "../../../Paginations";
 
 function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const incompProperty = useSelector((state) => state.incompProperty);
   const [IncompleteListings, setIncompleteListings] = useState([]);
   const [newIncompleteListings, setNewIncompleteListings] = useState([]);
-  const [pageContent, setPageContent] = useState([]);
-  const [currentPageContent, setCurrentPageContent] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  let items = [];
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
     const fetchIncompleteListings = async () => {
@@ -72,20 +62,6 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
     }
   }, [search, searchBy, IncompleteListings]);
 
-  // seperate incomplete listings into pages
-  useEffect(() => {
-    if (newIncompleteListings) {
-      const pages = [];
-      const reversed = newIncompleteListings.slice().reverse();
-      const totalPages = Math.ceil(reversed.length / 5);
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(reversed.slice((i - 1) * 5, i * 5));
-      }
-      setPageContent(pages);
-      setTotalPages(totalPages);
-    }
-  }, [newIncompleteListings, currentPage]);
-
   const handleDelete = async (id) => {
     await authService.deleteProperty(id).then((res) => {
       if (res.data.error) {
@@ -101,23 +77,6 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
         window.location.reload();
       }
     });
-  };
-
-  for (let number = 1; number <= totalPages; number++) {
-    items.push(
-      <Pagination.Item
-        style={{ borderRadius: "0" }}
-        active={number === currentPage}
-        key={number}
-      >
-        {number}
-      </Pagination.Item>
-    );
-  }
-
-  const handlePageChange = (key) => {
-    setCurrentPage(key);
-    setCurrentPageContent(key - 1);
   };
 
   return (
@@ -198,27 +157,11 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
         </Table>
       </Row>
       <Row className="d-flex justify-content-end">
-        {items.map((item, index) => (
-          <Col
-            style={{
-              display: "flex",
-              flex: "0",
-              padding: "0",
-            }}
-            key={index}
-          >
-            <Pagination
-              style={{
-                background: "transparent",
-                margin: "0 2px",
-                borderRadius: "0",
-              }}
-              onClick={() => handlePageChange(parseInt(item.key))}
-            >
-              {item}
-            </Pagination>
-          </Col>
-        ))}
+        <Paginations
+          data={newIncompleteListings}
+          setPageContents={setPageContents}
+          setCurrentPageContents={setCurrentPageContents}
+        />
       </Row>
     </Container>
   );

@@ -7,7 +7,6 @@ import { MdClose } from "react-icons/md";
 import { Button, Row, Col } from "react-bootstrap";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BsQuestionCircleFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
 import SellHeader from "./SellHeader";
 import Loading from "../../components/Loading";
 
@@ -28,8 +27,6 @@ const UploadForm = ({
   const [videoLoader, setVideoLoader] = useState(false);
   const [extra, setExtra] = useState(false);
   const toggleExtra = () => setExtra(!extra);
-
-  const params = useParams();
 
   const onChange = async (e) => {
     setLoader(true);
@@ -86,7 +83,9 @@ const UploadForm = ({
   };
 
   const getLink = () => {
-    if (link) {
+    if (link.includes("youtube.com")) {
+      setVideos([...videos, { name: "youtube", url: link }]);
+    } else {
       setVideos([...videos, { name: "videos", url: link }]);
     }
   };
@@ -238,7 +237,8 @@ const UploadForm = ({
             </Col>
 
             <Col xs={12} md={6} className="px-sm-3">
-              Upload Videos {/* <span style={{ color: "#ff0000" }}>*</span> */}
+              Upload Video(s){" "}
+              {/* <span style={{ color: "#ff0000" }}>*</span> */}
               <input
                 id="videos-btn"
                 accept="video/*"
@@ -262,6 +262,7 @@ const UploadForm = ({
                     </Button>
                   </span>
                 </div>
+                <div className="orLine mb-4">Or</div>
                 <label
                   onClick={toggleExtra}
                   htmlFor="videos-btn"

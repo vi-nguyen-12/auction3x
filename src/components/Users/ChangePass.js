@@ -155,7 +155,7 @@ const ChangePass = ({ colorChange, toggleShow, setMessage, windowSize }) => {
                   style={{
                     cursor: "pointer",
                   }}
-                  className="px-2"
+                  className="px-3"
                 >
                   {hidden ? (
                     <RiEyeCloseLine

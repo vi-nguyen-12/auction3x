@@ -191,14 +191,23 @@ const authService = {
     );
   },
   getBuyingDocuSign(id) {
-    return axios.get(
+    return axios.post(
       apiUrl + `/api/docusign/signature/buying_agreement/${id}/uiviews`,
+      {},
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       }
     );
+  },
+
+  getOldDocusign(id) {
+    return axios.get(apiUrl + `/api/docusign/${id}/uiviews`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 
   getDocuSignStatus(id) {
@@ -210,6 +219,18 @@ const authService = {
   sendSellDocuSign(id) {
     return axios.get(
       apiUrl + `/api/docusign/signature/selling_agreement/${id}/email`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+  },
+
+  sendBuyerDocuSign(data) {
+    return axios.post(
+      apiUrl + `/api/docusign/signature/buying_agreement/${data.id}/email`,
+      { clientName: data.clientName, clientEmail: data.clientEmail },
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

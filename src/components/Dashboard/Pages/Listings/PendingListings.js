@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  Row,
-  Col,
-  Container,
-  Pagination,
-} from "react-bootstrap";
+import { Table, Button, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import authService from "../../../../services/authServices";
+import Paginations from "../../../Paginations";
 
 function PendingListings({
   windowSize,
@@ -27,26 +21,8 @@ function PendingListings({
   const user = useSelector((state) => state.user);
   const [pendingListings, setPendingListings] = useState([]);
   const [newPendingListings, setNewPendingListings] = useState([]);
-  const [pageContent, setPageContent] = useState([]);
-  const [currentPageContent, setCurrentPageContent] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-
-  let items = [];
-
-  // seperate incomplete listings into pages
-  useEffect(() => {
-    if (newPendingListings) {
-      const pages = [];
-      const reversed = newPendingListings.slice().reverse();
-      const totalPages = Math.ceil(reversed.length / 5);
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(reversed.slice((i - 1) * 5, i * 5));
-      }
-      setPageContent(pages);
-      setTotalPages(totalPages);
-    }
-  }, [newPendingListings, refresh]);
+  const [pageContent, setPageContents] = useState([]);
+  const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
     const fetchPendingListings = async () => {
@@ -95,19 +71,6 @@ function PendingListings({
       setNewPendingListings(pendingListings);
     }
   }, [search, searchBy, pendingListings]);
-
-  for (let number = 1; number <= totalPages; number++) {
-    items.push(
-      <Pagination.Item active={number === currentPage} key={number}>
-        {number}
-      </Pagination.Item>
-    );
-  }
-
-  const handlePageChange = (key) => {
-    setCurrentPage(key);
-    setCurrentPageContent(key - 1);
-  };
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
@@ -217,29 +180,12 @@ function PendingListings({
           )}
         </Table>
       </Row>
-
-      <Row>
-        {items.map((item, index) => (
-          <Col
-            style={{
-              display: "flex",
-              flex: "0",
-              padding: "0",
-            }}
-            key={index}
-          >
-            <Pagination
-              style={{
-                background: "transparent",
-                margin: "0 2px",
-                borderRadius: "5px",
-              }}
-              onClick={() => handlePageChange(parseInt(item.key))}
-            >
-              {item}
-            </Pagination>
-          </Col>
-        ))}
+      <Row className="d-flex justify-content-end align-items-center">
+        <Paginations
+          data={newPendingListings}
+          setCurrentPageContents={setCurrentPageContents}
+          setPageContents={setPageContents}
+        />
       </Row>
     </Container>
   );
