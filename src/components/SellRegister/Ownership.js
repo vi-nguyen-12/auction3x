@@ -13,6 +13,8 @@ import "react-phone-input-2/lib/bootstrap.css";
 import { MdClose } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { BsQuestionCircleFill } from "react-icons/bs";
+import ToastMessage from "../Toast";
+// const ToastMessage = React.lazy(() => import("../Toast"));
 
 function Ownership({
   toggleStep,
@@ -25,6 +27,7 @@ function Ownership({
   setMessage,
   windowSize,
 }) {
+  
   const user = useSelector((state) => state.user);
   const [ownershipType, setOwnershipType] = useState();
   const [addedNewOwner, setAddedNewOwner] = useState([]);
@@ -244,6 +247,10 @@ function Ownership({
     });
   };
 
+  const handleToastMessage = () => {
+    alert("If you want to register to sell as broker, pls update profile as broker")
+  }
+
   return (
     <div className="wrapper">
       <SellHeader step={step} />
@@ -263,17 +270,31 @@ function Ownership({
             >
               Owner
             </Button>
-            <Button
-              className="submitBtn border-0 mx-2"
-              style={{
-                background: !isOwner ? "#d68e5a" : "#edb48b",
-              }}
-              onClick={() => {
-                setIsOwner(false);
-              }}
-            >
-              Broker
-            </Button>
+            {user.agent.licenseNumber === undefined ? 
+              <Button
+                className="submitBtn border-0 mx-2"
+                style={{
+                  background: !isOwner ? "#d68e5a" : "#edb48b",
+                }}
+                onClick={
+                  handleToastMessage
+                }
+              >
+                Broker !!
+              </Button> :
+              <Button
+                className="submitBtn border-0 mx-2"
+                style={{
+                  background: !isOwner ? "#d68e5a" : "#edb48b",
+                }}
+                onClick={() => {
+                  setIsOwner(false);
+                }}
+              >
+                Broker
+              </Button>  
+          }
+            
           </div>
           {isOwner ? (
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -311,6 +332,7 @@ function Ownership({
                     <input
                       type="text"
                       className="form-control"
+                      disabled={true}
                       value={
                         ownerName
                           ? ownerName
@@ -418,6 +440,7 @@ function Ownership({
                     <input
                       type="email"
                       className="form-control"
+                      disabled={true}
                       defaultValue={
                         email ? email : ownership ? ownership.details.email : ""
                       }
@@ -560,6 +583,7 @@ function Ownership({
                     Broker Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
+                  disabled={true}
                     type="text"
                     className="form-control"
                     value={
@@ -772,6 +796,7 @@ function Ownership({
                     Broker Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
+                  disabled={true}
                     type="email"
                     className="form-control"
                     defaultValue={
