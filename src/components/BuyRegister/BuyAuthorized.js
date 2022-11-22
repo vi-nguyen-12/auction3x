@@ -8,6 +8,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import Loading from "../../components/Loading";
 import parse from "html-react-parser";
 import CloseButton from "react-bootstrap/CloseButton";
+import { useParams } from "react-router-dom";
 
 const BuyAuthorized = ({
   setStep,
@@ -22,11 +23,7 @@ const BuyAuthorized = ({
   client,
   showDocu,
 }) => {
-<<<<<<< HEAD
-  console.log(showDocu);
   const { id } = useParams();
-=======
->>>>>>> 3e29591d2c20780863683aa55964fcdd9ad2db2c
   const [loader, setLoader] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
   const [docuId, setDocuId] = useState();
@@ -108,6 +105,7 @@ const BuyAuthorized = ({
 
   const handleSignDocusign = async () => {
     setLoader(true);
+
     if (!docuId) {
       await authService
         .getBuyingDocuSign(auctionId)
@@ -120,13 +118,25 @@ const BuyAuthorized = ({
           }
           setLoader(false);
           setDocuId(res.data.docusignId);
+
           if (
             res.data.status !== "signing_complete" &&
             res.data.status !== "viewing_complete"
           ) {
-            // window.open(res.data.redirectUrl);
-            setDocuUrl(res.data.redirectUrl);
-            toggleDocu();
+            // const stuff = window.open(res.data.redirectUrl, "_blank");
+            // stuff.location.href = res.data.redirectUrl;
+            const newWin = window.open(res.data.redirectUrl);
+            if (!newWin || typeof newWin == "undefined") {
+              setMessage("");
+              setMessage(
+                `The document is blocked by your browser. Please disable your pop-up blocker and try again.`
+              );
+            } else {
+              newWin.focus();
+            }
+
+            // setDocuUrl(res.data.redirectUrl);
+            // toggleDocu();
           }
         })
         .catch((error) => {
@@ -135,38 +145,40 @@ const BuyAuthorized = ({
           setLoader(false);
         });
     } else {
-      await authService.getOldDocusign(docuId).then((res) => {
-        if (res.data.error === "Invalid Token") {
-          setMessage("");
-          setMessage("Your session ended. Please log in! ");
+      await authService
+        .getOldDocusign(docuId)
+        .then((res) => {
+          if (res.data.error === "Invalid Token") {
+            setMessage("");
+            setMessage("Your session ended. Please log in! ");
+            setLoader(false);
+            window.location.reload();
+          }
           setLoader(false);
-          window.location.reload();
-        }
-        setLoader(false);
-        setDocuId(res.data.docusignId);
-        setDocuUrl(res.data.redirectUrl);
-        console.log(showDocu);
-        toggleDocu();
-        // if (
-        //   res.data.status !== "signing_complete" &&
-        //   res.data.status !== "viewing_complete"
-        // ) {
-        //   // window.open(res.data.redirectUrl);
-        //   setDocuUrl(res.data.redirectUrl);
-        //   toggleDocu();
-        // }
-      })
-      .catch((error) => {
-        setMessage("");
-        setMessage(error.message);
-        setLoader(false);
-      });
+          // setDocuId(res.data.docusignId);
+          // setDocuUrl(res.data.redirectUrl);
+          // toggleDocu();
+          window.open(res.data.url);
+          // if (
+          //   res.data.status !== "signing_complete" &&
+          //   res.data.status !== "viewing_complete"
+          // ) {
+
+          //   setDocuUrl(res.data.redirectUrl);
+          //   toggleDocu();
+          // }
+        })
+        .catch((error) => {
+          setMessage("");
+          setMessage(error.message);
+          setLoader(false);
+        });
     }
   };
 
   const handleSubmit = async () => {
     if (agree) {
-      if ((!client.documents || !client) && docuId) {
+      if ((!client?.documents || !client) && docuId) {
         setLoader(true);
         await authService.getDocuSignStatus(docuId).then((res) => {
           if (

@@ -12,13 +12,10 @@ const DocusignModal = ({ docuUrl, toggleDocu, showDocu, windowSize }) => {
     new URLSearchParams(search).get("state")
   );
   const [title, setTitle] = useState();
-  console.log(title);
-  console.log(title?.includes("Auction3"));
 
   const { envelopeId } = useParams();
   useEffect(() => {
     if (title?.includes("Auction3")) {
-      console.log("voday");
       window.close();
     }
   }, [title]);

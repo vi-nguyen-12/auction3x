@@ -1183,7 +1183,6 @@ function App() {
                     setHeaderWidth={setHeaderWidth}
                     setMessage={setMessage}
                     toggleDocu={toggleDocu}
-                    showDocu={showDocu}
                   />
                 </Route>
 

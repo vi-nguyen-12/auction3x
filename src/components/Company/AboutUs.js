@@ -13,7 +13,7 @@ function AboutUs({ toggleSignIn, windowSize, setMessage }) {
       <CompanyHeader location={location.pathname.split("/")[1]} />
       <Row style={{ padding: windowSize < 800 ? "2rem 1rem" : "3rem" }}>
         <Col md={12}>
-          <h1 className="section-title m-0">Who are we?</h1>
+          <h1 className="section-title m-0">Who we are?</h1>
         </Col>
         <Col md={12} className="px-3">
           <p className="p-0 m-0 aboutus-p">
@@ -26,7 +26,10 @@ function AboutUs({ toggleSignIn, windowSize, setMessage }) {
       </Row>
       <Row style={{ padding: windowSize < 800 ? "2rem 1rem" : "3rem" }}>
         <Col>
-          <Row className="aboutus-our-section" style={{padding: windowSize < 800 && "1rem 2rem"}}>
+          <Row
+            className="aboutus-our-section"
+            style={{ padding: windowSize < 800 && "1rem 2rem" }}
+          >
             <Col md={6} xs={12} className="my-5">
               <span>Our Mission</span>
               <p className="p-0 m-0 aboutus-p-our">
