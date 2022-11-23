@@ -4,10 +4,7 @@ import { createPortal } from "react-dom";
 const IFrame = ({ children, src, setTitle }) => {
   const [contentRef, setContentRef] = useState(null);
   const container = contentRef?.contentWindow?.document?.body;
-  console.log(contentRef?.contentWindow?.document?.title);
   useEffect(() => {
-    // console.log(contentRef?.contentWindow?.document?.title);
-    // setTitle(contentRef?.contentWindow?.document?.title);
     window.open(src, "theFrame");
   }, [contentRef?.contentWindow?.document?.title]);
   return (

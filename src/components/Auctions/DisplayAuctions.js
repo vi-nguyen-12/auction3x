@@ -33,7 +33,6 @@ function DisplayAuctions({
   const { id } = useParams();
   const [auction, setAuction] = useState();
   const [loader, setLoader] = useState(false);
-  console.log(showDocu);
 
   useEffect(() => {
     toggleShow(true);

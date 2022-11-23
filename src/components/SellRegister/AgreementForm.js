@@ -96,13 +96,13 @@ const Agree = ({
         }
         setLoader(false);
         setDocuId(res.data.docusignId);
+        window.open(res.data.redirectUrl);
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
-          // window.open(res.data.redirectUrl);
-          setDocuUrl(res.data.redirectUrl);
-          toggleDocu();
+          // setDocuUrl(res.data.redirectUrl);
+          // toggleDocu();
         }
       })
       .catch((error) => {

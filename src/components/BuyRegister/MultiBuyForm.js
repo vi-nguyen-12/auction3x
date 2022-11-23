@@ -13,7 +13,6 @@ const MultiBuyForm = ({
   setDocuUrl,
   showDocu,
 }) => {
-  console.log(showDocu);
   const [step, setStep] = useState(1);
   const [client, setClient] = useState();
   const [document, setDocument] = useState();
