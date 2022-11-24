@@ -120,7 +120,6 @@ function DisplayJet({
   setDocuUrl,
   showDocu,
 }) {
-  console.log(showDocu);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);

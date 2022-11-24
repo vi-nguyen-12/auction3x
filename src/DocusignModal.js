@@ -5,8 +5,6 @@ import { Modal, CloseButton } from "react-bootstrap";
 import IFrame from "./IFrame";
 
 const DocusignModal = ({ docuUrl, toggleDocu, showDocu, windowSize }) => {
-  console.log(showDocu);
-  console.log("hello from docusign modal");
   const search = useLocation().search;
   const [dcsState, setDcsState] = useState(
     new URLSearchParams(search).get("state")

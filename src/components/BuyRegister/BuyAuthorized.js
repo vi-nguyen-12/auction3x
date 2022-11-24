@@ -23,6 +23,7 @@ const BuyAuthorized = ({
   client,
   showDocu,
 }) => {
+  console.log(showDocu);
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
@@ -145,34 +146,32 @@ const BuyAuthorized = ({
           setLoader(false);
         });
     } else {
-      await authService
-        .getOldDocusign(docuId)
-        .then((res) => {
-          if (res.data.error === "Invalid Token") {
-            setMessage("");
-            setMessage("Your session ended. Please log in! ");
-            setLoader(false);
-            window.location.reload();
-          }
-          setLoader(false);
-          // setDocuId(res.data.docusignId);
-          // setDocuUrl(res.data.redirectUrl);
-          // toggleDocu();
-          window.open(res.data.url);
-          // if (
-          //   res.data.status !== "signing_complete" &&
-          //   res.data.status !== "viewing_complete"
-          // ) {
-
-          //   setDocuUrl(res.data.redirectUrl);
-          //   toggleDocu();
-          // }
-        })
-        .catch((error) => {
+      await authService.getOldDocusign(docuId).then((res) => {
+        if (res.data.error === "Invalid Token") {
           setMessage("");
-          setMessage(error.message);
+          setMessage("Your session ended. Please log in! ");
           setLoader(false);
-        });
+          window.location.reload();
+        }
+        setLoader(false);
+        setDocuId(res.data.docusignId);
+        setDocuUrl(res.data.redirectUrl);
+        console.log(showDocu);
+        toggleDocu();
+        // if (
+        //   res.data.status !== "signing_complete" &&
+        //   res.data.status !== "viewing_complete"
+        // ) {
+        //   // window.open(res.data.redirectUrl);
+        //   setDocuUrl(res.data.redirectUrl);
+        //   toggleDocu();
+        // }
+      })
+      .catch((error) => {
+        setMessage("");
+        setMessage(error.message);
+        setLoader(false);
+      });
     }
   };
 
