@@ -26,32 +26,34 @@ const BuyAgreement = ({ setStep, step, setMessage }) => {
         <Container className="fs-5">
           <Row className="mb-2">
             1.1. The following terms and conditions apply to the use of the
-            Auction3 platform and the services provided by the Auction3 team.
+            Auction Tree platform and the services provided by the Auction Tree
+            team.
           </Row>
           <Row className=" mb-2">
-            1.2. The Auction3 platform is a platform for the sale of properties.
+            1.2. The Auction Tree platform is a platform for the sale of
+            properties.
           </Row>
           <Row className=" mb-2">
-            1.3. The Auction3 team is a team of professional real estate
+            1.3. The Auction Tree team is a team of professional real estate
             investors and brokers.
           </Row>
           <Row className="mb-2">
-            1.4. The Auction3 team is not a real estate broker.
+            1.4. The Auction Tree team is not a real estate broker.
           </Row>
           <Row className=" mb-2">
-            1.5. The Auction3 team is not a real estate investor.
+            1.5. The Auction Tree team is not a real estate investor.
           </Row>
           <Row className="mb-2">
-            1.6. The Auction3 team is not a real estate agent.
+            1.6. The Auction Tree team is not a real estate agent.
           </Row>
           <Row className=" mb-2">
-            1.7. The Auction3 team is not a real estate developer.
+            1.7. The Auction Tree team is not a real estate developer.
           </Row>
           <Row className="mb-2">
-            1.8. The Auction3 team is not a real estate developer.
+            1.8. The Auction Tree team is not a real estate developer.
           </Row>
           <Row className="mb-2">
-            1.9. The Auction3 team is not a real estate developer.
+            1.9. The Auction Tree team is not a real estate developer.
           </Row>
           <Form.Check className="mt-4 d-flex justify-content-center">
             <Form.Check.Input

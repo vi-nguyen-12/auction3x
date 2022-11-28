@@ -153,7 +153,7 @@ const MultiSellForm = ({
         className="vh-100 sell-container"
         style={{ padding: windowSize < 1400 && "0" }}
       >
-        <h1 className="fw-bold text-black">Sell On Auction3</h1>
+        <h1 className="fw-bold text-black">Sell On Auction Tree</h1>
         <p
           style={{ fontSize: "1.2em", fontWeight: "bold" }}
           className="d-flex justify-content-center"

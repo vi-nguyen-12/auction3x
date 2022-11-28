@@ -273,12 +273,12 @@ function Ownership({
                   setMessage("");
                   setTimeout(() => {
                     setMessage(
-                      "If you want to register to sell as broker, pls update profile as broker"
+                      "If you want to register to sell as broker, please update profile as broker"
                     );
                   }, 100);
                 }}
               >
-                Broker !!
+                Broker
               </Button>
             ) : (
               <Button

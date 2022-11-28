@@ -118,30 +118,35 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                   <ul className="fs-5">
                     <li>
                       1.1. The following terms and conditions apply to the use
-                      of the Auction3 platform and the services provided by the
-                      Auction3 team.
+                      of the Auction Tree platform and the services provided by
+                      the Auction Tree team.
                     </li>
                     <li>
-                      1.2. The Auction3 platform is a platform for the sale of
-                      properties.
+                      1.2. The Auction Tree platform is a platform for the sale
+                      of properties.
                     </li>
                     <li>
-                      1.3. The Auction3 team is a team of professional real
+                      1.3. The Auction Tree team is a team of professional real
                       estate investors and brokers.
                     </li>
-                    <li>1.4. The Auction3 team is not a real estate broker.</li>
                     <li>
-                      1.5. The Auction3 team is not a real estate investor.
-                    </li>
-                    <li>1.6. The Auction3 team is not a real estate agent.</li>
-                    <li>
-                      1.7. The Auction3 team is not a real estate attorney.
+                      1.4. The Auction Tree team is not a real estate broker.
                     </li>
                     <li>
-                      1.8. The Auction3 team is not a real estate title company.
+                      1.5. The Auction Tree team is not a real estate investor.
                     </li>
                     <li>
-                      1.9. The Auction3 team is not a real estate escrow
+                      1.6. The Auction Tree team is not a real estate agent.
+                    </li>
+                    <li>
+                      1.7. The Auction Tree team is not a real estate attorney.
+                    </li>
+                    <li>
+                      1.8. The Auction Tree team is not a real estate title
+                      company.
+                    </li>
+                    <li>
+                      1.9. The Auction Tree team is not a real estate escrow
                       company.
                     </li>
                   </ul>

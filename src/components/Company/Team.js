@@ -110,7 +110,7 @@ function Team({ windowSize, setMessage }) {
         <Row style={{ padding: windowSize > 800 ? "50px 180px" : "50px 10px" }}>
           <Col>
             <p>
-              Auction3™ is the vision of a motivated team with a wealth of
+              Auction Tree™ is the vision of a motivated team with a wealth of
               experience across diverse sectors and geographies. The team is
               currently spread across USA, Canada, UK, Germany, Singapore and
               India with the vision to spread across 196 countries globally.

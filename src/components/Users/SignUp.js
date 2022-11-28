@@ -149,37 +149,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   return (
     <>
       {loader ? <Loading /> : null}
-      {/* <Modal.Header
-        style={{ paddingTop: "20px" }}
-        contentclassname="modal-head-signup"
-        closeButton
-      >
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{
-            color: "#D58F5C",
-            fontSize: windowSize > 800 ? "35px" : "23px",
-            fontWeight: "bold",
-            padding: "0",
-            lineHeight: "1",
-          }}
-          contentclassname="custom-modal-title"
-        >
-          REGISTER ON AUCTION3
-          <div>
-            <Button
-              className="signup-link"
-              onClick={() => {
-                toggleSignIn();
-                toggleSignUp();
-              }}
-            >
-              Already Registered? Sign In
-            </Button>
-          </div>
-        </Modal.Title>
-      </Modal.Header> */}
-      <div>
+      {/* <div>
         <Button
           className="signup-link"
           onClick={() => {
@@ -189,9 +159,9 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
         >
           Already Registered? Sign In
         </Button>
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit(onSubmit)} className="pb-3">
-        <Row style={{ margin: "20px 0" }}>
+        <Row>
           <Col className="mb-2" md={6} xs={12}>
             <div className="form-group">
               <label htmlFor="firstName">
@@ -464,6 +434,19 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
         >
           REGISTER
         </button>
+        <div className="d-flex justify-content-center align-items-center mt-3">
+          <span style={{ fontSize: "1rem" }}>Already have an account?</span>
+          <button
+            type="button"
+            onClick={() => {
+              toggleSignUp();
+              toggleSignIn();
+            }}
+            className="back-login-btn"
+          >
+            Log in
+          </button>
+        </div>
       </form>
       <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
         <Modal.Header className="login-modal-header">

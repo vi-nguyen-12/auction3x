@@ -17,10 +17,10 @@ function AboutUs({ toggleSignIn, windowSize, setMessage }) {
         </Col>
         <Col md={12} className="px-3">
           <p className="p-0 m-0 aboutus-p">
-            Auction3 is the premier global exchange for luxury assets including
-            real estate, yachts, airplanes, and cars. Join us in the thrill of
-            the auction setting, stay for the community and the amazing
-            opportunity to acquire unique, prestigious assets.
+            Auction Tree is the premier global exchange for luxury assets
+            including real estate, yachts, airplanes, and cars. Join us in the
+            thrill of the auction setting, stay for the community and the
+            amazing opportunity to acquire unique, prestigious assets.
           </p>
         </Col>
       </Row>
@@ -33,9 +33,9 @@ function AboutUs({ toggleSignIn, windowSize, setMessage }) {
             <Col md={6} xs={12} className="my-5">
               <span>Our Mission</span>
               <p className="p-0 m-0 aboutus-p-our">
-                Auction3 unites accredited buyers and sellers to exchange truly
-                prestigious assets including real estate, yachts, aircraft, and
-                vehicles.
+                Auction Tree unites accredited buyers and sellers to exchange
+                truly prestigious assets including real estate, yachts,
+                aircraft, and vehicles.
               </p>
             </Col>
             <Col md={6} xs={12} className="my-5">

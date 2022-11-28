@@ -271,7 +271,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                           background: "green",
                           color: "white",
                           padding: "10px",
-                          borderRadius: "5px",
+                          borderRadius: "0",
                           fontWeight: "bold",
                         }}
                       >
@@ -299,7 +299,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                           background: "orange",
                           color: "white",
                           padding: "10px",
-                          borderRadius: "5px",
+                          borderRadius: "0",
                           fontWeight: "bold",
                         }}
                       >

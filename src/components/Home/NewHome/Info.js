@@ -36,14 +36,14 @@ function Info({ windowSize, toggleSignIn }) {
       logo: brokers,
       title: "Brokers",
       description:
-        "Auction3 is a great partner to brokers and we are happy to work with you whether you are representing a buyer or seller. We always value the local insight and expertise provided by seasoned brokers.",
+        "Auction Tree is a great partner to brokers and we are happy to work with you whether you are representing a buyer or seller. We always value the local insight and expertise provided by seasoned brokers.",
       buttonText: "Earn Now",
     },
     {
       logo: sellers,
       title: "sellers",
       description:
-        "Sellers on Auction3 enjoy the benefits of a reduced timeline with the peace of mind that they will sell their assets on a set date and price floor.  We will support our sellers by bringing the market to them and our superior service extends throughout the closing process in coordination with our outstanding partners.",
+        "Sellers on Auction Tree enjoy the benefits of a reduced timeline with the peace of mind that they will sell their assets on a set date and price floor.  We will support our sellers by bringing the market to them and our superior service extends throughout the closing process in coordination with our outstanding partners.",
       buttonText: "Sell Now",
     },
   ];
@@ -78,7 +78,9 @@ function Info({ windowSize, toggleSignIn }) {
                     <div className="info-texts mt-4">
                       <span className="info-subtitle mt-3">{item.title}</span>
                       <div style={{ height: "230px" }}>
-                        <p className="info-descript mt-3 mb-0">{item.description}</p>
+                        <p className="info-descript mt-3 mb-0">
+                          {item.description}
+                        </p>
                       </div>
                       <Button
                         onClick={handleOnClick(item)}

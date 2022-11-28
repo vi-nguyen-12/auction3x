@@ -121,21 +121,18 @@ const Login = ({
             <button type="submit" className="loginBtn mb-3">
               Log In
             </button>
-            <div
-              className="pb-2"
-              style={{ position: "relative", fontSize: "15px", color: "black" }}
-            >
-              Not registered?
-              <Button
+            <div className="d-flex justify-content-center align-items-center mt-3">
+              <span style={{ fontSize: "1rem" }}>Don't have account yet?</span>
+              <button
+                type="button"
                 onClick={() => {
-                  toggleSignUp();
                   toggleSignIn();
+                  toggleSignUp();
                 }}
-                className="nav-link-signup"
-                style={{ fontSize: "15px" }}
+                className="back-login-btn"
               >
-                Click Here to Sign Up!
-              </Button>
+                Sign Up
+              </button>
             </div>
           </div>
         </Modal.Footer>

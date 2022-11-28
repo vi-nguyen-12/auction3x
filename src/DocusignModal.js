@@ -13,7 +13,7 @@ const DocusignModal = ({ docuUrl, toggleDocu, showDocu, windowSize }) => {
 
   const { envelopeId } = useParams();
   useEffect(() => {
-    if (title?.includes("Auction3")) {
+    if (title?.includes("Auction Tree")) {
       window.close();
     }
   }, [title]);

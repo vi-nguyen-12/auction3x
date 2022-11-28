@@ -186,7 +186,7 @@ const BuyQuestionair = ({ setStep, step, answers, setAnswers, setMessage }) => {
                           style={{
                             width: "130px",
                             padding: "0.5rem",
-                            borderRadius: "0.3rem",
+                            borderRadius: "0",
                             cursor: "pointer",
                             textAlign: "center",
                           }}

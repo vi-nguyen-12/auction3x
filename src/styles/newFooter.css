@@ -1,3 +1,8 @@
+
+.row{
+  --bs-gutter-x: 0;
+}
+
 .top-row {
   background: linear-gradient(180deg, #f5f9ff 50%, #08080a 50%);
   /* padding: 0 2vw; */

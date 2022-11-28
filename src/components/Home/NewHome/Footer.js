@@ -44,7 +44,7 @@ function Footer({ windowSize, setMessage }) {
                 className="d-grid justify-content-center align-items-center"
               >
                 <span className="subscript-title">
-                  Stay updated with Auction3
+                  Stay updated with Auction Tree
                 </span>
                 <p className="subscript-descript mt-3">
                   Receive the beautifully curated selection of what's trending
@@ -106,10 +106,10 @@ function Footer({ windowSize, setMessage }) {
               height="auto"
             />
             <p className="footer-texts mt-3 px-4">
-              AUCTION3 is an innovative online bidding platform that specialized
-              in the expediting sale of real estate through auction and brings
-              the exciting real estate opportunities to both buyers and sellers
-              with true value for money.
+              Auction Tree is an innovative online bidding platform that
+              specialized in the expediting sale of real estate through auction
+              and brings the exciting real estate opportunities to both buyers
+              and sellers with true value for money.
             </p>
           </Col>
           <Col
@@ -193,7 +193,7 @@ function Footer({ windowSize, setMessage }) {
         </Row>
         <Row className="d-flex justify-content-center align-items-center footer-copyRight-container">
           <Col className="d-grid justify-content-center mt-2 p-0 footer-copyRight">
-            © 2022 AUCTION3. All Rights Reserved
+            © 2022 Auction Tree. All Rights Reserved
           </Col>
         </Row>
       </Col>
