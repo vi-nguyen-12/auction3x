@@ -295,7 +295,7 @@ function JetDetails({
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
-                      className: "form-control",
+                      className: "form-control custom-input",
                     })}
                     required
                   />
@@ -343,7 +343,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={country}
               // {...register("country")}
               // onChange={(e) => setCountry(e.target.value)}
@@ -359,7 +359,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={state}
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
@@ -373,7 +373,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={city}
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
@@ -387,7 +387,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={zip}
               {...register("zipCode")}
               onChange={(e) => setZip(e.target.value)}
@@ -403,7 +403,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={registration_mark}
               {...register("registration_mark")}
               onChange={(e) => setRegistration_mark(e.target.value)}
@@ -421,7 +421,7 @@ function JetDetails({
                 <input
                   type="text"
                   placeholder="Enter Aircraft Manufacturer"
-                  className="form-control"
+                  className="form-control custom-input"
                   defaultValue={aircraft_builder_name}
                   {...register("aircraft_builder_name")}
                   onChange={(e) => setAircraft_builder_name(e.target.value)}
@@ -433,7 +433,7 @@ function JetDetails({
               </>
             ) : (
               <Form.Select
-                className="form-control"
+                className="form-control custom-input"
                 value={aircraft_builder_name}
                 {...register("aircraft_builder_name", { maxLength: 100 })}
                 onChange={(e) => {
@@ -463,7 +463,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={aircraft_model_designation}
               {...register("aircraft_model_designation")}
               onChange={(e) => setAircraft_model_designation(e.target.value)}
@@ -476,7 +476,7 @@ function JetDetails({
             </span>
             <NumberFormat
               format="####"
-              className="form-control"
+              className="form-control custom-input"
               placeholder="YYYY"
               value={year_built}
               onValueChange={(values) => {
@@ -495,7 +495,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={aircraft_serial_no}
               onInput={(e) => {
                 e.target.value = e.target.value.toUpperCase();
@@ -513,7 +513,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine_builder_name}
               {...register("engine_builder_name")}
               onChange={(e) => setEngine_builder_name(e.target.value)}
@@ -526,7 +526,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine_model_designation}
               {...register("engine_model_designation")}
               onChange={(e) => setEngine_model_designation(e.target.value)}
@@ -542,7 +542,7 @@ function JetDetails({
             <NumberFormat
               format="#"
               thousandSeparator={true}
-              className="form-control"
+              className="form-control custom-input"
               allowNegative={false}
               value={number_of_engines}
               onValueChange={(values) => {
@@ -555,7 +555,7 @@ function JetDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={number_of_engines}
               {...register("number_of_engines")}
               onChange={(e) => setNumber_of_engines(e.target.value)}
@@ -568,7 +568,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={propeller_builder_name}
               {...register("propeller_builder_name")}
               onChange={(e) => setPropeller_builder_name(e.target.value)}
@@ -581,7 +581,7 @@ function JetDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={propeller_model_designation}
               {...register("propeller_model_designation")}
               onChange={(e) => setPropeller_model_designation(e.target.value)}
@@ -689,7 +689,7 @@ function JetDetails({
               prefix="$"
               value={reservedAmount}
               allowNegative={false}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setReservedAmount(value);
@@ -721,7 +721,7 @@ function JetDetails({
               prefix="$"
               value={discussedAmount}
               allowNegative={false}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setDiscussedAmount(value);

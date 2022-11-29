@@ -257,24 +257,6 @@ function RealEstateDetails({
               />
             </span>{" "}
           </p>
-          {/* <div
-            className="dropdown-icon"
-            style={{
-              width: "fit-content",
-            }}
-          >
-            <IoInformationCircleSharp
-              style={{ cursor: "pointer" }}
-              color="blue"
-              size={30}
-            />
-            <div className="dropdown-info">
-              <p>
-                We will be using these details to match you with the right
-                buyer.
-              </p>
-            </div>
-          </div> */}
         </div>
         <Row className="mt-3">
           <Col>
@@ -296,7 +278,7 @@ function RealEstateDetails({
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
-                      className: "form-control",
+                      className: "form-control custom-input",
                     })}
                     required
                   />
@@ -345,7 +327,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               name="city"
               value={city}
               // {...register("city")}
@@ -360,7 +342,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               name="state"
               value={state}
               // {...register("state")}
@@ -377,7 +359,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               name="country"
               value={country}
               // {...register("country")}
@@ -392,7 +374,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               name="zipCode"
               value={zip}
               // {...register("zipCode")}
@@ -409,7 +391,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={ownerName}
               {...register("ownerName")}
               name="ownerName"
@@ -424,7 +406,7 @@ function RealEstateDetails({
               Property Type <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
-              className="form-control"
+              className="form-control custom-input"
               value={propType}
               onChange={(e) => setPropType(e.target.value)}
               required
@@ -438,7 +420,7 @@ function RealEstateDetails({
             </Form.Select>
             {/* <select
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={propType}
               {...register("propertyType")}
               onChange={(e) => setPropType(e.target.value)}
@@ -470,7 +452,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               format="####"
-              className="form-control"
+              className="form-control custom-input"
               placeholder="YYYY"
               defaultValue={year}
               onValueChange={(values) => {
@@ -487,7 +469,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               thousandSeparator={true}
-              className="form-control"
+              className="form-control custom-input"
               value={lotSize}
               allowNegative={false}
               onValueChange={(values) => {
@@ -499,7 +481,7 @@ function RealEstateDetails({
             />
             {/* <input
               type="number"
-              className="form-control"
+              className="form-control custom-input"
               min="0"
               step="any"
               defaultValue={lotSize}
@@ -517,7 +499,7 @@ function RealEstateDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={garage}
               {...register("garage")}
               onChange={(e) => setGarage(e.target.value)}
@@ -530,7 +512,7 @@ function RealEstateDetails({
               Story(s) <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
-              className="form-control"
+              className="form-control custom-input"
               thousandSeparator={true}
               value={story}
               allowNegative={false}
@@ -544,7 +526,7 @@ function RealEstateDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={story}
               {...register("story")}
               onChange={(e) => setStory(e.target.value)}
@@ -560,7 +542,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               format="###"
-              className="form-control"
+              className="form-control custom-input"
               thousandSeparator={true}
               value={bedrooms}
               allowNegative={false}
@@ -574,7 +556,7 @@ function RealEstateDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={bedrooms}
               {...register("bedrooms")}
               onChange={(e) => setBedrooms(e.target.value)}
@@ -588,7 +570,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               format="###"
-              className="form-control"
+              className="form-control custom-input"
               thousandSeparator={true}
               value={bathrooms}
               allowNegative={false}
@@ -609,7 +591,7 @@ function RealEstateDetails({
               prefix="$"
               value={totalValue}
               allowNegative={false}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setTotalValue(value);
@@ -624,7 +606,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               thousandSeparator={true}
-              className="form-control"
+              className="form-control custom-input"
               value={sqft}
               allowNegative={false}
               onValueChange={(values) => {
@@ -699,7 +681,7 @@ function RealEstateDetails({
               prefix="$"
               value={reservedAmount}
               allowNegative={false}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setReservedAmount(value);
@@ -731,7 +713,7 @@ function RealEstateDetails({
               prefix="$"
               value={discussedAmount}
               allowNegative={false}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setDiscussedAmount(value);

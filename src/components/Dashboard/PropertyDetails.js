@@ -417,7 +417,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>Owner Name</span>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
             defaultValue={ownerName}
             onChange={(e) => (property.details.owner_name = e.target.value)}
@@ -439,9 +439,15 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                 country={"us"}
                 dropdownStyle={{ paddingLeft: "0!important" }}
                 value={property.details.broker_name ? "" : phone}
-                inputStyle={{ width: "100%" }}
+                inputStyle={{
+                  width: "100%",
+                  border: "0",
+                  borderBottom: "1px solid #ececec",
+                  borderRadius: "0",
+                }}
                 buttonStyle={{
-                  borderRight: "none",
+                  border: "none",
+                  borderRadius: "0",
                 }}
                 onChange={setPhone}
                 disabled={!edit.step1}
@@ -453,7 +459,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
                 defaultValue={ownerEmail}
                 onChange={(e) => (property.details.email = e.target.value)}
@@ -472,7 +478,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
                 defaultValue={brokerName}
                 onChange={(e) =>
@@ -496,9 +502,14 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                 value={
                   property.details.broker_name ? property.details.phone : ""
                 }
-                inputStyle={{ width: "100%" }}
+                inputStyle={{
+                  width: "100%",
+                  border: "0",
+                  borderBottom: "1px solid #ececec",
+                  borderRadius: "0",
+                }}
                 buttonStyle={{
-                  borderRight: "none",
+                  borderRadius: "none",
                 }}
                 onChange={setPhone}
                 disabled={!edit.step1}
@@ -510,7 +521,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
                 defaultValue={brokerEmail}
                 onChange={(e) => (property.details.email = e.target.value)}
@@ -525,7 +536,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
                 defaultValue={brokerId}
                 onChange={(e) => (property.details.broker_id = e.target.value)}
@@ -541,7 +552,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                   <input
                     type="file"
                     id="docu"
-                    className="form-control"
+                    className="form-control custom-input"
                     style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
                     onChange={onChange}
                     hidden
@@ -734,7 +745,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>Country</span>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             value={country}
             style={{ border: edit.step2 ? "1px solid #2ecc71" : "" }}
             onChange={(e) => setCountry(e.target.value)}
@@ -747,7 +758,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>State</span>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             value={state}
             style={{ border: edit.step2 ? "1px solid #2ecc71" : "" }}
             onChange={(e) => setState(e.target.value)}
@@ -758,7 +769,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>City</span>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             value={city}
             style={{ border: edit.step2 ? "1px solid #2ecc71" : "" }}
             onChange={(e) => setCity(e.target.value)}
@@ -769,7 +780,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
           <span style={{ fontWeight: "600", color: "black" }}>Zip</span>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             value={zip}
             style={{ border: edit.step2 ? "1px solid #2ecc71" : "" }}
             onChange={(e) => setZip(e.target.value)}

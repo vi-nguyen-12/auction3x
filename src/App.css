@@ -973,6 +973,57 @@ h1 {
   color: #b77b50;
 }
 
+.custom-input {
+  border: none !important;
+  border-bottom: 1px solid #ececec !important;
+  transition: all 0.2s ease-in-out !important;
+  padding-left: 5px!important;
+}
+
+.custom-input::before {
+  content: "";
+  color: #d58f5c;
+  position: relative;
+}
+
+.custom-input:focus {
+  border: none !important;
+  border-bottom: 1px solid #d58f5c !important;
+  box-shadow: none !important;
+}
+
+.input_label {
+  position: absolute;
+  left: 5px;
+  top: 0;
+  font-weight: 400;
+  opacity: 0.7;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus + .input_label {
+  transform: translateY(-8px);
+  font-size: 14px;
+  color: #d58f5c;
+  opacity: 1;
+}
+
+.custom-input:valid + .input_label {
+  transform: translateY(-8px);
+  font-size: 14px;
+  color: #d58f5c;
+  opacity: 1;
+}
+
+.react-tel-input .form-control:focus {
+  outline: none !important;
+  border: none !important;
+  border-bottom: 1px solid #d58f5c !important;
+  box-shadow: none !important;
+}
+
 .searchBar {
   display: flex;
   align-items: center;
@@ -1045,6 +1096,6 @@ h1 {
   margin: 0.5em;
 }
 
-.row{
+/* .row{
   --bs-gutter-x: 0!;
-}
+} */

@@ -30,7 +30,7 @@ function Footer({ windowSize, setMessage }) {
   };
 
   return (
-    <Row>
+    <Row className="coll">
       <Col className="footer-container p-0">
         <Row className="d-flex justify-content-center align-items-center top-row">
           <Col
@@ -116,7 +116,7 @@ function Footer({ windowSize, setMessage }) {
             md={6}
             className="d-flex justify-content-end align-items-center mt-2 p-0"
           >
-            <Row>
+            <Row className="coll">
               <Col>
                 <ul className="footer-list mt-4">
                   <li className="footer-list-item-title">Quick Links</li>

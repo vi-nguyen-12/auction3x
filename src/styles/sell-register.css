@@ -260,7 +260,7 @@ ul.dashed > li:before {
 .circle {
   display: flex;
   aspect-ratio: 1/1;
-  width: 60%;
+  width: 50%;
   border-radius: 50%;
   border: 2px solid rgba(109, 109, 109, 0.1);
   background: #ffffff;
@@ -278,7 +278,7 @@ ul.dashed > li:before {
 .circle-active {
   background-color: #b77b50; /* different */
   aspect-ratio: 1/1;
-  width: 60%;
+  width: 50%;
   border-radius: 50%;
   /* margin: auto; */
   display: flex;

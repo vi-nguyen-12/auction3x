@@ -186,7 +186,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                   <input
                     type="text"
                     placeholder="Name"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     required
@@ -199,7 +199,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                   <input
                     type="text"
                     placeholder="Email"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={clientEmail}
                     onChange={(e) => setClientEmail(e.target.value)}
                     required
@@ -218,9 +218,15 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                     country={"us"}
                     dropdownStyle={{ paddingLeft: "0!important" }}
                     value={clientPhone}
-                    inputStyle={{ width: "100%" }}
+                    inputStyle={{
+                      width: "100%",
+                      border: "0",
+                      borderBottom: "1px solid #ececec",
+                      borderRadius: "0",
+                    }}
                     buttonStyle={{
-                      borderRight: "none",
+                      border: "none",
+                      borderRadius: "0",
                     }}
                     onChange={setClientPhone}
                     required
@@ -235,7 +241,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                       type="file"
                       id="docus"
                       accept=".pdf"
-                      className="form-control"
+                      className="form-control custom-input"
                       onChange={getAttorneyFile}
                       hidden
                       multiple

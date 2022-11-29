@@ -258,7 +258,7 @@ function CarDetails({
             </span>
             <NumberFormat
               format="####"
-              className="form-control"
+              className="form-control custom-input"
               placeholder="YYYY"
               value={year}
               onValueChange={(values) => {
@@ -277,7 +277,7 @@ function CarDetails({
               <>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control custom-input"
                   placeholder="Enter Make"
                   defaultValue={make}
                   {...register("make", { maxLength: 100 })}
@@ -290,7 +290,7 @@ function CarDetails({
               </>
             ) : (
               <Form.Select
-                className="form-control"
+                className="form-control custom-input"
                 value={make}
                 {...register("make", { maxLength: 100 })}
                 onChange={(e) => {
@@ -314,7 +314,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={model}
               {...register("model", { maxLength: 100 })}
               onChange={(e) => setModel(e.target.value)}
@@ -328,7 +328,7 @@ function CarDetails({
               Gearbox<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
-              className="form-control"
+              className="form-control custom-input"
               name="gearbox"
               defaultValue={gearbox}
               {...register("gearbox", { maxLength: 100 })}
@@ -345,7 +345,7 @@ function CarDetails({
               Mileage<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
-              className="form-control"
+              className="form-control custom-input"
               thousandSeparator={true}
               value={mileage}
               allowNegative={false}
@@ -359,7 +359,7 @@ function CarDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={mileage}
               {...register("mileage")}
               onChange={(e) => setMileage(e.target.value)}
@@ -374,7 +374,7 @@ function CarDetails({
             </span>
             <NumberFormat
               thousandSeparator={true}
-              className="form-control"
+              className="form-control custom-input"
               allowNegative={false}
               value={power}
               onValueChange={(values) => {
@@ -386,7 +386,7 @@ function CarDetails({
             />
             {/* <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={power}
               {...register("power")}
               onChange={(e) => setPower(e.target.value)}
@@ -399,7 +399,7 @@ function CarDetails({
               <>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control custom-input"
                   placeholder="Enter Body Type"
                   defaultValue={carType}
                   {...register("carType", { maxLength: 100 })}
@@ -412,7 +412,7 @@ function CarDetails({
               </>
             ) : (
               <Form.Select
-                className="form-control"
+                className="form-control custom-input"
                 value={carType}
                 onChange={(e) => {
                   if (e.target.value === "Other") {
@@ -443,7 +443,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={vin}
               onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
               {...register("vin")}
@@ -457,7 +457,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={color}
               {...register("color", { maxLength: 100 })}
               onChange={(e) => setColor(e.target.value)}
@@ -471,7 +471,7 @@ function CarDetails({
               Fuel Type<span style={{ color: "#ff0000" }}>*</span>
             </span>
             <Form.Select
-              className="form-control"
+              className="form-control custom-input"
               name="fuel"
               value={fuelType}
               {...register("fuelType", { maxLength: 100 })}
@@ -490,7 +490,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine}
               {...register("engine", { maxLength: 100 })}
               onChange={(e) => setEngine(e.target.value)}
@@ -508,7 +508,7 @@ function CarDetails({
               thousandSeparator={true}
               prefix="$"
               value={price}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setPrice(value);
@@ -522,7 +522,7 @@ function CarDetails({
             </span>
 
             <Form.Select
-              className="form-control"
+              className="form-control custom-input"
               value={condition}
               {...register("condition", { maxLength: 100 })}
               onChange={(e) => setCondition(e.target.value)}
@@ -555,7 +555,7 @@ function CarDetails({
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
-                      className: "form-control",
+                      className: "form-control custom-input",
                     })}
                     required
                   />
@@ -603,7 +603,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={country}
               {...register("country", { maxLength: 100 })}
               // onChange={(e) => setCountry(e.target.value)}
@@ -619,7 +619,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={state}
               {...register("state", { maxLength: 100 })}
               // onChange={(e) => setState(e.target.value)}
@@ -633,7 +633,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={city}
               {...register("city", { maxLength: 100 })}
               // onChange={(e) => setCity(e.target.value)}
@@ -647,7 +647,7 @@ function CarDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               value={zip}
               {...register("zipCode")}
               // onChange={(e) => setZip(e.target.value)}
@@ -715,7 +715,7 @@ function CarDetails({
               thousandSeparator={true}
               prefix="$"
               value={reservedAmount}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setReservedAmount(value);
@@ -743,7 +743,7 @@ function CarDetails({
               thousandSeparator={true}
               prefix="$"
               value={discussedAmount}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setDiscussedAmount(value);

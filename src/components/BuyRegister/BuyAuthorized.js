@@ -146,32 +146,33 @@ const BuyAuthorized = ({
           setLoader(false);
         });
     } else {
-      await authService.getOldDocusign(docuId).then((res) => {
-        if (res.data.error === "Invalid Token") {
-          setMessage("");
-          setMessage("Your session ended. Please log in! ");
+      await authService
+        .getOldDocusign(docuId)
+        .then((res) => {
+          if (res.data.error === "Invalid Token") {
+            setMessage("");
+            setMessage("Your session ended. Please log in! ");
+            setLoader(false);
+            window.location.reload();
+          }
           setLoader(false);
-          window.location.reload();
-        }
-        setLoader(false);
-        setDocuId(res.data.docusignId);
-        setDocuUrl(res.data.redirectUrl);
-        console.log(showDocu);
-        toggleDocu();
-        // if (
-        //   res.data.status !== "signing_complete" &&
-        //   res.data.status !== "viewing_complete"
-        // ) {
-        //   // window.open(res.data.redirectUrl);
-        //   setDocuUrl(res.data.redirectUrl);
-        //   toggleDocu();
-        // }
-      })
-      .catch((error) => {
-        setMessage("");
-        setMessage(error.message);
-        setLoader(false);
-      });
+          setDocuId(res.data.docusignId);
+          setDocuUrl(res.data.redirectUrl);
+          toggleDocu();
+          // if (
+          //   res.data.status !== "signing_complete" &&
+          //   res.data.status !== "viewing_complete"
+          // ) {
+          //   // window.open(res.data.redirectUrl);
+          //   setDocuUrl(res.data.redirectUrl);
+          //   toggleDocu();
+          // }
+        })
+        .catch((error) => {
+          setMessage("");
+          setMessage(error.message);
+          setLoader(false);
+        });
     }
   };
 
@@ -337,10 +338,13 @@ const BuyAuthorized = ({
               onChange={hangleTerms}
             />
 
-            <label onClick={() => toggleTerms()} className="ms-2">
+            <label className="ms-2">
               {" "}
               Agree to{" "}
-              <span style={{ color: "#00a8ff", cursor: "pointer" }}>
+              <span
+                onClick={() => toggleTerms()}
+                style={{ color: "#00a8ff", cursor: "pointer" }}
+              >
                 Terms & Conditions
               </span>
             </label>

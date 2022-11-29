@@ -199,7 +199,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>First Name</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={firstName}
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
@@ -208,7 +208,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Last Name</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={lastName}
             type="text"
             onChange={(e) => setLastName(e.target.value)}
@@ -217,7 +217,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Username</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={username}
             type="text"
             onChange={(e) => setUsername(e.target.value)}
@@ -228,7 +228,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>Email</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={email}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -242,9 +242,15 @@ function EditProfile({ setMessage }) {
             disableDropdown={false}
             country={"us"}
             dropdownStyle={{ paddingLeft: "0!important" }}
-            inputStyle={{ width: "100%" }}
+            inputStyle={{
+              width: "100%",
+              border: "0",
+              borderBottom: "1px solid #ececec",
+              borderRadius: "0",
+            }}
             buttonStyle={{
-              borderRight: "none",
+              border: "none",
+              borderRadius: "0",
             }}
             value={phone}
             onChange={setPhone}
@@ -255,7 +261,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>Country</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="text"
             defaultValue={country}
             onChange={(e) => setCountry(e.target.value)}
@@ -264,7 +270,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>City</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="text"
             defaultValue={city}
             onChange={(e) => setCity(e.target.value)}
@@ -288,7 +294,7 @@ function EditProfile({ setMessage }) {
         <Col md={12} xs={12} className="mt-3">
           <span>Broker License Number</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="text"
             onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
             defaultValue={licenseNum}
@@ -298,7 +304,7 @@ function EditProfile({ setMessage }) {
         <Col md={12} xs={12} className="mt-3">
           <span>Broker License/Certificate</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="file"
             id="agentFile"
             {...register("agentFile", { onChange: onChange })}
@@ -346,7 +352,7 @@ function EditProfile({ setMessage }) {
         </Col>
         <Col md={12} xs={12} className="mt-3">
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="file"
             accept="image/*"
             {...register("images", { onChange: changeProfilePic })}
@@ -370,7 +376,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Instagram</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={instagram}
             type="text"
             onChange={(e) => setInstagram(e.target.value)}
@@ -379,7 +385,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Facebook</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={facebook}
             type="text"
             onChange={(e) => setFacebook(e.target.value)}
@@ -388,7 +394,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Twitter</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={twitter}
             type="text"
             onChange={(e) => setTwitter(e.target.value)}
@@ -413,7 +419,7 @@ function EditProfile({ setMessage }) {
           <Col md={12} xs={12}>
             <span>Current Password</span>
             <input
-              className="form-control"
+              className="form-control custom-input"
               type="password"
               onChange={(e) => setOldPass(e.target.value)}
             />
@@ -421,7 +427,7 @@ function EditProfile({ setMessage }) {
           <Col md={12} xs={12} className="mt-2">
             <span>New Password</span>
             <input
-              className="form-control"
+              className="form-control custom-input"
               type="password"
               onChange={handleCheckStrength}
             />
@@ -453,7 +459,7 @@ function EditProfile({ setMessage }) {
           <Col md={12} xs={12} className="mt-2">
             <span>Confirm Password</span>
             <input
-              className="form-control"
+              className="form-control custom-input"
               onChange={handleCheckMatch}
               type="password"
               style={{

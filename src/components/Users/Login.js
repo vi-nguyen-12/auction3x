@@ -66,30 +66,38 @@ const Login = ({
     <>
       {showLoading && <Loading />}
       <form onSubmit={handleSubmit(onSubmit)} className="px-3">
-        <div className="form-group mb-4 mt-3">
+        <div className="form-group mb-4 mt-3 position-relative w-100">
           <input
             type="text"
             style={{ height: "50px", fontSize: "20px" }}
-            className="form-control login-input px-1"
-            placeholder="Email or Username"
+            id="username"
+            className="form-control custom-input px-1"
+            // placeholder="Email or Username"
             {...register("userName", {
               required: true,
             })}
             required
           />
+          <label htmlFor="username" className="input_label">
+            Email/Username <span style={{ color: "red" }}> *</span>
+          </label>
         </div>
-        <div className="form-group mt-3 d-flex justify-content-between align-items-center">
+        <div className="form-group mt-3 d-flex justify-content-between align-items-center position-relative">
           <input
             type={hidden ? "password" : "text"}
             style={{ height: "50px", fontSize: "20px" }}
-            className="form-control login-input px-1"
-            placeholder="Password"
+            id="password"
+            className="form-control custom-input px-1"
+            // placeholder="Password"
             {...register("password", {
               required: true,
             })}
             required
           />
-          <div className="eyes_container">
+          <label htmlFor="password" className="input_label">
+            Password <span style={{ color: "red" }}> *</span>
+          </label>
+          <div className="eyes_container" style={{right:"3%"}}>
             {hidden ? (
               <RiEyeCloseLine
                 className="eye-icon"
