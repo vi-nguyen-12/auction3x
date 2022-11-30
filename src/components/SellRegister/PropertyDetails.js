@@ -33,6 +33,7 @@ const PropertyDetails = ({
   return (
     <div className="wrapper">
       <SellHeader step={step} />
+      <div className="sell_top_line" />
       <div className="sell-bottom">
         {propertyTest.type === "car" ? (
           <CarDetails

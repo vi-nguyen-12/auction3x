@@ -4,44 +4,68 @@ import "../../styles/sell-register.css";
 
 function SellHeader({ step }) {
   return (
-    <Row className="sell-top">
-      <Col xs={1} className="sell-top-col">
-        <div className={step >= 1 ? "circle-active" : "circle"}>01</div>
-        <div className="step-title">Ownership</div>
-      </Col>
-      <Col xs={1} className="sell-top-col-line">
-        <div className={step >= 2 ? "line-1" : "line"}></div>
-      </Col>
-      <Col xs={1} className="sell-top-col">
-        {" "}
-        <div className={step >= 2 ? "circle-active" : "circle"}>02</div>
-        <div className="step-title">Details</div>
-      </Col>
-      <Col xs={1} className="sell-top-col-line">
-        <div className={step >= 3 ? "line-1" : "line"}></div>
-      </Col>
-      <Col xs={1} className="sell-top-col">
-        {" "}
-        <div className={step >= 3 ? "circle-active" : "circle"}>03</div>
-        <div className="step-title">Multimedia</div>
-      </Col>
-      <Col xs={1} className="sell-top-col-line">
-        <div className={step >= 4 ? "line-1" : "line"}></div>
-      </Col>
-      <Col xs={1} className="sell-top-col">
-        {" "}
-        <div className={step >= 4 ? "circle-active" : "circle"}>04</div>
-        <div className="step-title">Documents</div>
-      </Col>
-      <Col xs={1} className="sell-top-col-line">
-        <div className={step >= 5 ? "line-1" : "line"}></div>
-      </Col>
-      <Col xs={1} className="sell-top-col">
-        {" "}
-        <div className={step >= 5 ? "circle-active" : "circle"}>05</div>
-        <div className="step-title">Agreement</div>
-      </Col>
-    </Row>
+    <div className="stepper-wrapper">
+      <div
+        className={
+          step > 1
+            ? "stepper-item completed"
+            : step === 1
+            ? "stepper-item active"
+            : "stepper-item"
+        }
+      >
+        <div className="step-counter">1</div>
+        <div className="step-name">Ownership</div>
+      </div>
+      <div
+        className={
+          step > 2
+            ? "stepper-item completed"
+            : step === 2
+            ? "stepper-item active"
+            : "stepper-item"
+        }
+      >
+        <div className="step-counter">2</div>
+        <div className="step-name">Details</div>
+      </div>
+      <div
+        className={
+          step > 3
+            ? "stepper-item completed"
+            : step === 3
+            ? "stepper-item active"
+            : "stepper-item"
+        }
+      >
+        <div className="step-counter">3</div>
+        <div className="step-name">Multimedia</div>
+      </div>
+      <div
+        className={
+          step > 4
+            ? "stepper-item completed"
+            : step === 4
+            ? "stepper-item active"
+            : "stepper-item"
+        }
+      >
+        <div className="step-counter">4</div>
+        <div className="step-name">Documents</div>
+      </div>
+      <div
+        className={
+          step > 5
+            ? "stepper-item completed"
+            : step === 5
+            ? "stepper-item active"
+            : "stepper-item"
+        }
+      >
+        <div className="step-counter">5</div>
+        <div className="step-name">Agreement</div>
+      </div>
+    </div>
   );
 }
 export default SellHeader;

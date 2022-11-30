@@ -183,6 +183,7 @@ const Agree = ({
       {loader ? <Loading /> : null}
       <div className="wrapper">
         <SellHeader step={step} />
+        <div className="sell_top_line" />
         <div className="sell-bottom">
           <h3>SELLER AGREEMENT</h3>
           <form

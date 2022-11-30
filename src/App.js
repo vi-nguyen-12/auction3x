@@ -378,29 +378,29 @@ function App() {
       {!maintenance ? (
         <>
           <div
-            className="expendMenu-container"
+            className="expandMenu-container"
             id={expendedMenuId}
             onClick={() => setExpendedMenuId()}
           ></div>
           <div id={expendedMenuId}>
-            <div className="expendMenu">
-              <div className="expendMenu-items d-flex justify-content-between">
+            <div className="expandMenu">
+              <div className="expandMenu-items d-flex justify-content-between">
                 <span>Welcome!</span>
                 <button onClick={() => setExpendedMenuId()}>X</button>
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/realEstates">Real Estate</a>
                 <a href="/cars">Car</a>
                 <a href="/jets">Jet</a>
                 <a href="/yachts">Yacht</a>
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/multiSellForm">Sell</a>
                 <a href="/Auctions">Buy</a>
                 <a href="/Partner">Broker</a>
                 {/* <a href="/Partner">Invest</a> */}
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/team">Team</a>
                 <a href="/AboutUs">About Us</a>
                 <a href="/FAQ">Help & FAQ</a>

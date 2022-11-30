@@ -247,6 +247,7 @@ function Ownership({
   return (
     <div className="wrapper">
       <SellHeader step={step} />
+      <div className="sell_top_line" />
       <div className="sell-bottom">
         <Container>
           <div
@@ -540,16 +541,36 @@ function Ownership({
                   <span style={{ fontWeight: "600", color: "black" }}>
                     Ownership Type <span style={{ color: "#ff0000" }}>*</span>
                   </span>
-                  <Form.Select
-                    className="form-control"
-                    onChange={(e) => setOwnershipType(e.target.value)}
-                    required
-                  >
-                    <option value="">Select Ownership Type</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Joint">Joint</option>
-                    <option value="Company">Company</option>
-                  </Form.Select>
+                  {ownershipType === "Other" ? (
+                    <div className="d-flex justify-content-between align-items-end">
+                      <input
+                        type="text"
+                        name="ownershipType"
+                        className="form-control custom-input px-1"
+                        onChange={(e) => setOwnershipType(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="general_btn py-2 px-3"
+                        onClick={() => setOwnershipType("")}
+                      >
+                        Back
+                      </button>
+                    </div>
+                  ) : (
+                    <Form.Select
+                      className="form-control custom-input"
+                      onChange={(e) => setOwnershipType(e.target.value)}
+                      // required
+                    >
+                      <option value="">Select Ownership Type</option>
+                      <option value="Individual">Individual</option>
+                      <option value="Joint">Joint</option>
+                      <option value="Corporate">Corporate</option>
+                      <option value="Trust">Trust</option>
+                      <option value="Other">Other</option>
+                    </Form.Select>
+                  )}
                 </Col>
                 <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -558,7 +579,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     value={
                       ownerName
                         ? ownerName
@@ -578,7 +599,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={
                       ownerEmail
                         ? ownerEmail
@@ -630,7 +651,7 @@ function Ownership({
                   <input
                     disabled={true}
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     value={
                       brokerName
                         ? brokerName
@@ -650,7 +671,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={
                       brokerId
                         ? brokerId
@@ -692,7 +713,7 @@ function Ownership({
                     type="file"
                     id="docu"
                     accept=".pdf"
-                    className="form-control"
+                    className="form-control custom-input"
                     onChange={getFile}
                     hidden
                     multiple
@@ -724,7 +745,7 @@ function Ownership({
                     type="file"
                     id="docus"
                     accept=".pdf"
-                    className="form-control"
+                    className="form-control custom-input"
                     onChange={getAttorneyFile}
                     hidden
                     multiple
@@ -772,7 +793,7 @@ function Ownership({
                         <input
                           {...getInputProps({
                             placeholder: "Search address",
-                            className: "form-control",
+                            className: "form-control custom-input",
                           })}
                           required
                         />
@@ -849,7 +870,7 @@ function Ownership({
                   <input
                     disabled={true}
                     type="email"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={
                       email ? email : ownership ? ownership.details.email : ""
                     }
@@ -900,7 +921,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={owner.name}
                     readOnly
                   />
@@ -911,7 +932,7 @@ function Ownership({
                   </span>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={owner.email}
                     readOnly
                   />
@@ -922,7 +943,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     defaultValue={owner.phone}
                     readOnly
                   />
@@ -937,7 +958,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="name"
                     onChange={handleOnChange}
                     required
@@ -949,7 +970,7 @@ function Ownership({
                   </span>
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="email"
                     onChange={handleOnChange}
                     required
@@ -961,7 +982,7 @@ function Ownership({
                   </span>
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     maxLength={10}
                     name="phone"
                     onChange={handleOnChange}

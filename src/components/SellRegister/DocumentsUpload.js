@@ -29,6 +29,7 @@ const DocumentsUpload = ({
   return (
     <div className="wrapper">
       <SellHeader step={step} />
+      <div className="sell_top_line" />
       {propertyTest.type === "real-estate" ? (
         <RealEstateDocus
           toggleStep={toggleStep}
