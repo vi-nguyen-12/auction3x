@@ -76,7 +76,7 @@
 
 .signup-link {
   color: #d58f5c !important;
-  font-size: 13px !important;
+  font-size: 15px !important;
   border: none;
   background-color: transparent !important;
   border: none !important;
@@ -283,24 +283,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.login-input {
-  border: none;
-  border-bottom: 1px solid #ececec;
-  transition: all 0.2s ease-in-out;
-}
-
-.login-input::before {
-  content: "Username";
-  color: #d58f5c;
-  position: relative;
-}
-
-.login-input:focus {
-  border: none;
-  border-bottom: 2px solid #d58f5c;
-  box-shadow: none;
 }
 
 .eyes_container {

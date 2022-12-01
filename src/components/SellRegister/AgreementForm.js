@@ -96,13 +96,13 @@ const Agree = ({
         }
         setLoader(false);
         setDocuId(res.data.docusignId);
+        window.open(res.data.redirectUrl);
         if (
           res.data.status !== "signing_complete" &&
           res.data.status !== "viewing_complete"
         ) {
-          // window.open(res.data.redirectUrl);
-          setDocuUrl(res.data.redirectUrl);
-          toggleDocu();
+          // setDocuUrl(res.data.redirectUrl);
+          // toggleDocu();
         }
       })
       .catch((error) => {
@@ -183,6 +183,7 @@ const Agree = ({
       {loader ? <Loading /> : null}
       <div className="wrapper">
         <SellHeader step={step} />
+        <div className="sell_top_line" />
         <div className="sell-bottom">
           <h3>SELLER AGREEMENT</h3>
           <form

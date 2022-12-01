@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { ProgressBar } from "react-bootstrap";
 import authServices from "../../services/authServices";
 import { Modal, Row, Col, Button } from "react-bootstrap";
+import { IoIosCloseCircle } from "react-icons/io";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import "../../styles/modal.css";
 import Loading from "../../components/Loading";
 import PhoneInput from "react-phone-input-2";
@@ -14,6 +17,10 @@ require("react-bootstrap/ModalHeader");
 const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   const [showTerms, setShowTerms] = useState(false);
   const [terms, setTerms] = useState("");
+  const [pass, setPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [passMatch, setPassMatch] = useState(false);
+  const [passStrong, setPassStrong] = useState("");
   const [files, setFiles] = useState([]);
   const [privacy, setPrivacy] = useState("");
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -21,6 +28,34 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   const [phone, setPhone] = useState();
   const toggleTerms = () => setShowTerms(!showTerms);
   const togglePrivacy = () => setShowPrivacy(!showPrivacy);
+
+  var strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+  var mediumRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+
+  const handleCheckStrength = (e) => {
+    const password = e.target.value;
+    setPass(password);
+
+    if (password.match(strongRegex)) {
+      setPassStrong("strong");
+    } else if (password.match(mediumRegex)) {
+      setPassStrong("medium");
+    } else {
+      setPassStrong("weak");
+    }
+  };
+
+  const handleCheckMatch = (e) => {
+    const password = e.target.value;
+    setConfirmPass(password);
+    if (password === pass) {
+      setPassMatch(true);
+    } else {
+      setPassMatch(false);
+    }
+  };
 
   const {
     register,
@@ -80,10 +115,15 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   };
 
   const onSubmit = (data) => {
-    if (data.password !== data.confirmPassword) {
+    if (!passMatch) {
       setMessage("");
       setTimeout(() => {
         setMessage("Passwords do not match");
+      }, 100);
+    } else if (passStrong === "weak") {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Password is too weak");
       }, 100);
     } else if (data.email?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       if (data.agentNumber !== "") {
@@ -149,161 +189,191 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   return (
     <>
       {loader ? <Loading /> : null}
-      {/* <Modal.Header
-        style={{ paddingTop: "20px" }}
-        contentclassname="modal-head-signup"
-        closeButton
-      >
-        <Modal.Title
-          id="contained-modal-title-vcenter"
-          style={{
-            color: "#D58F5C",
-            fontSize: windowSize > 800 ? "35px" : "23px",
-            fontWeight: "bold",
-            padding: "0",
-            lineHeight: "1",
-          }}
-          contentclassname="custom-modal-title"
-        >
-          REGISTER ON AUCTION3
-          <div>
-            <Button
-              className="signup-link"
-              onClick={() => {
-                toggleSignIn();
-                toggleSignUp();
-              }}
-            >
-              Already Registered? Sign In
-            </Button>
-          </div>
-        </Modal.Title>
-      </Modal.Header> */}
-      <div>
-        <Button
-          className="signup-link"
-          onClick={() => {
-            toggleSignIn();
-            toggleSignUp();
-          }}
-        >
-          Already Registered? Sign In
-        </Button>
-      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="pb-3">
-        <Row style={{ margin: "20px 0" }}>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="firstName">
-                First Name <span style={{ color: "red" }}> *</span>
-              </label>
+        <Row className="mt-3">
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="firstName"
-                placeholder="Enter First Name"
                 name="firstName"
                 {...register("firstName")}
                 required
               />
+              <label htmlFor="firstName" className="input_label">
+                First Name <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="lastName">
-                Last Name
-                <span style={{ color: "red" }}> *</span>
-              </label>
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="lastName"
-                placeholder="Enter Last Name"
                 name="lastName"
                 {...register("lastName")}
                 required
               />
+              <label htmlFor="lastName" className="input_label">
+                Last Name
+                <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "20px 0" }}>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="userName">
-                User Name <span style={{ color: "red" }}> *</span>
-              </label>
+        <Row className="mt-3">
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="userName"
-                placeholder="Enter User Name"
                 name="userName"
                 {...register("userName")}
                 required
               />
+              <label htmlFor="userName" className="input_label">
+                Username <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="email">
-                Email <span style={{ color: "red" }}> *</span>
-              </label>
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="email"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="email"
-                placeholder="Enter Email"
                 name="email"
                 {...register("email")}
                 required
               />
+              <label htmlFor="email" className="input_label">
+                Email <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "20px 0" }}>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="password">
-                Password <span style={{ color: "red" }}> *</span>
-              </label>
+        <Row className="mt-3">
+          <Col md={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="password"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="password"
-                placeholder="Enter Password"
                 name="password"
                 {...register("password")}
+                onChange={handleCheckStrength}
                 required
               />
+              <label htmlFor="password" className="input_label">
+                Password <span style={{ color: "red" }}> *</span>
+              </label>
+              {/* <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <p className="m-0">
+                  <span
+                    className="tooltip-left"
+                    data-tooltip="
+                    * Password must be at least 8 characters long
+                    * Password must contain at least one uppercase letter
+                    * Password must contain at least one lowercase letter
+                    * Password must contain at least one number
+                    * Password must contain at least one special character
+                    "
+                  >
+                    <BsQuestionCircleFill
+                      style={{ cursor: "pointer" }}
+                      color="#bf9767"
+                      size={30}
+                    />
+                  </span>{" "}
+                </p>
+              </div> */}
             </div>
           </Col>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">
-                Confirm Password <span style={{ color: "red" }}> *</span>
-              </label>
+          <Col md={12} className="d-grid align-items-center">
+            <div style={{ width: "150px" }} className="mt-2">
+              <ProgressBar className="rounded-0" style={{ height: "0.3rem" }}>
+                <ProgressBar
+                  animated
+                  now={
+                    passStrong === "strong"
+                      ? 100
+                      : passStrong === "medium"
+                      ? 50
+                      : 30
+                  }
+                  variant={
+                    passStrong === "strong"
+                      ? "success"
+                      : passStrong === "medium"
+                      ? "warning"
+                      : "danger"
+                  }
+                />
+              </ProgressBar>
+            </div>
+            <div
+              style={{ width: "150px" }}
+              className="d-flex justify-content-end"
+            >
+              <small className="text-muted">
+                {passStrong === "strong"
+                  ? "Strong"
+                  : passStrong === "medium"
+                  ? "Medium"
+                  : "Weak"}
+              </small>
+            </div>
+          </Col>
+          <Col md={12} className="d-flex align-items-center mt-3">
+            <div className="form-group position-relative w-100">
               <input
                 type="password"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{
+                  height: "47px",
+                }}
+                className="form-control custom-input"
                 id="confirmPassword"
-                placeholder="Confirm Password"
                 name="confirmPassword"
                 {...register("confirmPassword")}
+                onChange={handleCheckMatch}
                 required
               />
+              <label htmlFor="confirmPassword" className="input_label">
+                Confirm Password <span style={{ color: "red" }}> *</span>
+              </label>
+              {confirmPass && (
+                <div
+                  className="position-absolute"
+                  style={{ right: "5px", top: "10px" }}
+                >
+                  {passMatch ? (
+                    <IoCheckmarkCircleSharp color="#6ac259" size={20} />
+                  ) : (
+                    <IoIosCloseCircle color="red" size={20} />
+                  )}
+                </div>
+              )}
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "20px 0" }}>
+        <Row className="mt-4">
           <Col>
-            <div className="form-group">
-              <label htmlFor="phone">
+            <div className="form-group position-relative w-100">
+              <label htmlFor="phone" className="px-1 mb-2">
                 Phone <span style={{ color: "red" }}> *</span>
               </label>
               <PhoneInput
@@ -313,9 +383,16 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
                 country={"us"}
                 dropdownStyle={{ paddingLeft: "0!important" }}
                 value={phone ? phone : null}
-                inputStyle={{ width: "100%" }}
+                inputStyle={{
+                  width: "100%",
+                  border: "0",
+                  borderBottom: "1px solid #ececec",
+                  borderRadius: "0",
+                  height: "40px",
+                }}
                 buttonStyle={{
-                  borderRight: "none",
+                  border: "0",
+                  borderRadius: "0",
                 }}
                 inputProps={{
                   name: "phone",
@@ -326,85 +403,72 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "20px 0" }}>
-          <Col md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="country">
-                Country <span style={{ color: "red" }}> *</span>
-              </label>
+        <Row className="mt-4">
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="country"
-                placeholder="Enter Country"
                 name="country"
                 {...register("country")}
                 required
               />
+              <label htmlFor="country" className="input_label">
+                Country <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
-          {/* <Col md={4} xs={12}>
-            <div className="form-group">
-              <label htmlFor="state">
-                State <span style={{ color: "red" }}> *</span>
-              </label>
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
-                id="state"
-                placeholder="Enter State"
-                name="state"
-                {...register("state")}
-                required
-              />
-            </div>
-          </Col> */}
-          <Col md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="city">
-                City <span style={{ color: "red" }}> *</span>
-              </label>
-              <input
-                type="text"
-                style={{ height: "47px", borderRadius: "8px" }}
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="city"
-                placeholder="Enter City"
                 name="city"
                 {...register("city")}
                 required
               />
+              <label htmlFor="city" className="input_label">
+                City <span style={{ color: "red" }}> *</span>
+              </label>
             </div>
           </Col>
         </Row>
-        <Row style={{ margin: "50px 0" }}>
-          <h1 style={{ fontSize: "1.3rem", paddingTop: "0" }}>
-            Are you a Broker? (Optional){" "}
-          </h1>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
-              <label htmlFor="agentNumber">Broker License Number</label>
+        <Row className="mt-5">
+          <Col>
+            <h1 style={{ fontSize: "1.3rem", paddingTop: "0" }}>
+              Are you a Broker? (Optional){" "}
+            </h1>
+          </Col>
+        </Row>
+        <Row className="mt-2 mb-5">
+          <Col md={6} xs={12} className="d-flex align-items-end">
+            <div className="form-group position-relative w-100">
               <input
                 type="text"
-                className="form-control"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
                 id="agentNumber"
-                placeholder="Enter Agent License Number"
                 name="agentNumber"
                 onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
                 {...register("agentNumber")}
+                required
               />
+              <label htmlFor="agentNumber" className="input_label">
+                Broker License Number
+              </label>
             </div>
           </Col>
-          <Col className="mb-2" md={6} xs={12}>
-            <div className="form-group">
+          <Col md={6} xs={12} className="d-flex align-items-center">
+            <div className="form-group position-relative w-100">
               <label htmlFor="agentFile">Broker License/Certificate</label>
               <input
                 type="file"
-                className="form-control"
+                className="form-control custom-input"
                 id="agentFile"
-                placeholder="Enter Agent License Files"
                 name="agentFile"
                 {...register("agentFile", { onChange: onChange })}
                 multiple
@@ -464,6 +528,19 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
         >
           REGISTER
         </button>
+        <div className="d-flex justify-content-center align-items-center mt-3">
+          <span style={{ fontSize: "1rem" }}>Already have an account?</span>
+          <button
+            type="button"
+            onClick={() => {
+              toggleSignUp();
+              toggleSignIn();
+            }}
+            className="back-login-btn"
+          >
+            Log in
+          </button>
+        </div>
       </form>
       <Modal size="xl" show={showTerms} onHide={toggleTerms} centered>
         <Modal.Header className="login-modal-header">

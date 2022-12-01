@@ -100,6 +100,7 @@ function RealEstateForm({
     return (
       <div className="wrapper">
         <SellHeader step={step} />
+        <div className="sell_top_line" />
         <div className="sell-bottom">
           <h3>Search Property</h3>
           <form

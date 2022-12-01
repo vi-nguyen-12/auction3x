@@ -33,7 +33,7 @@ function ForgotPass({ toggleForgotPass, setMessage }) {
       <div className="form-group mt-4 d-flex justify-content-between align-items-center">
         <input
           type="email"
-          className="form-control login-input px-2"
+          className="form-control custom-input px-2"
           placeholder="Email"
           style={{ height: "50px", fontSize: "20px" }}
           {...register("email", {

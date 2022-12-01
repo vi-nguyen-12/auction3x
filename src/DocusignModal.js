@@ -5,8 +5,6 @@ import { Modal, CloseButton } from "react-bootstrap";
 import IFrame from "./IFrame";
 
 const DocusignModal = ({ docuUrl, toggleDocu, showDocu, windowSize }) => {
-  console.log(showDocu);
-  console.log("hello from docusign modal");
   const search = useLocation().search;
   const [dcsState, setDcsState] = useState(
     new URLSearchParams(search).get("state")
@@ -15,7 +13,7 @@ const DocusignModal = ({ docuUrl, toggleDocu, showDocu, windowSize }) => {
 
   const { envelopeId } = useParams();
   useEffect(() => {
-    if (title?.includes("Auction3")) {
+    if (title?.includes("Auction Tree")) {
       window.close();
     }
   }, [title]);

@@ -193,6 +193,18 @@ const ChangePass = ({ colorChange, toggleShow, setMessage, windowSize }) => {
                   />
                 </ProgressBar>
               </div>
+              <div
+                style={{ width: "150px" }}
+                className="d-flex justify-content-end"
+              >
+                <small className="text-muted">
+                  {passStrong === "strong"
+                    ? "Strong"
+                    : passStrong === "medium"
+                    ? "Medium"
+                    : "Weak"}
+                </small>
+              </div>
               <input
                 type="password"
                 className="form-control my-3 mb-4 resetPass_Input"

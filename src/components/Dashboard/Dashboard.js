@@ -597,8 +597,14 @@ function Dashboard({
     <div style={{ display: "flex" }}>
       {loader ? <Loading /> : null}
       <Router>
-        {windowSize > 1300 ? (
-          <Sidebar path={path} setLocation={setLocation} />
+        {windowSize > 1050 ? (
+          <div>
+            <Sidebar
+              path={path}
+              setLocation={setLocation}
+              windowSize={windowSize}
+            />
+          </div>
         ) : (
           <div
             style={{
@@ -790,12 +796,12 @@ function Dashboard({
                   <Accordion.Body>
                     <p
                       onClick={() => {
-                        history.push("/Dashboard/Auctions/BidAuctions");
+                        history.push("/Dashboard/Auctions/SavedAuctions");
                         window.location.reload();
                       }}
                       style={{ cursor: "pointer" }}
                     >
-                      Bid Auctions
+                      Saved Auctions
                     </p>
                     <p
                       onClick={() => {
@@ -804,16 +810,16 @@ function Dashboard({
                       }}
                       style={{ cursor: "pointer" }}
                     >
-                      Pending Auctions
+                      Buyer Approval
                     </p>
                     <p
                       onClick={() => {
-                        history.push("/Dashboard/Auctions/SavedAuctions");
+                        history.push("/Dashboard/Auctions/BidAuctions");
                         window.location.reload();
                       }}
                       style={{ cursor: "pointer" }}
                     >
-                      Saved Auctions
+                      Bid Auctions
                     </p>
                     <p
                       onClick={() => {
@@ -834,7 +840,7 @@ function Dashboard({
               <Accordion className="dashAccor">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header style={{ cursor: "pointer" }}>
-                    Your Listings
+                    Listings
                   </Accordion.Header>
                   <Accordion.Body>
                     <p

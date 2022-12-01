@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 
-const ToastMessage = ({ type, message, duration = 5000 }) => {
+const ToastMessage = ({ type, message, duration = 5000, windowSize }) => {
   const [showToast, setShowToast] = useState(false);
   useEffect(() => {
     setShowToast(true);
@@ -16,7 +16,7 @@ const ToastMessage = ({ type, message, duration = 5000 }) => {
           // id={showToast ? "toast-container" : "toast-container-hide"}
           style={{
             zIndex: "10000",
-            right: "20px",
+            right: windowSize > 600 ? "20px" : "0",
             top: "60px",
             boxShadow: "0px 15px 55px rgba(0, 0, 0, 0.1)",
           }}

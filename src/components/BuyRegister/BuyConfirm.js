@@ -139,7 +139,7 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
                   padding: "10px",
                   width: "100%",
                   marginTop: "10px",
-                  borderRadius: "8px",
+                  borderRadius: "0",
                 }}
                 className="nxt-btn"
                 type="submit"

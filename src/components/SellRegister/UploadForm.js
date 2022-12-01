@@ -134,6 +134,7 @@ const UploadForm = ({
   return (
     <div className="wrapper">
       <SellHeader step={step} />
+      <div className="sell_top_line" />
       <div className="sell-bottom">
         <h3>UPLOAD PICTURES AND VIDEOS</h3>
         <div
@@ -252,7 +253,7 @@ const UploadForm = ({
                   <input
                     style={{ width: "80%" }}
                     placeholder="Video Link Here"
-                    className="form-control mb-3 bg-white"
+                    className="form-control custom-input px-2 mb-3"
                     type="text"
                     onChange={(e) => setLink(e.target.value)}
                   />

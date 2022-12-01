@@ -96,7 +96,7 @@ function Messaging({ windowSize, setMessage }) {
       <Container
         className="chatContainer"
         style={{
-          width: windowSize < 600 ? "100%" : "50%",
+          width: windowSize < 1100 ? "100%" : "50%",
           marginTop: "8%",
           padding: windowSize < 800 ? "1rem" : "3rem",
         }}

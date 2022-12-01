@@ -23,6 +23,7 @@ const BuyAuthorized = ({
   client,
   showDocu,
 }) => {
+  console.log(showDocu);
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
@@ -155,15 +156,14 @@ const BuyAuthorized = ({
             window.location.reload();
           }
           setLoader(false);
-          // setDocuId(res.data.docusignId);
-          // setDocuUrl(res.data.redirectUrl);
-          // toggleDocu();
-          window.open(res.data.url);
+          setDocuId(res.data.docusignId);
+          setDocuUrl(res.data.redirectUrl);
+          toggleDocu();
           // if (
           //   res.data.status !== "signing_complete" &&
           //   res.data.status !== "viewing_complete"
           // ) {
-
+          //   // window.open(res.data.redirectUrl);
           //   setDocuUrl(res.data.redirectUrl);
           //   toggleDocu();
           // }
@@ -338,10 +338,13 @@ const BuyAuthorized = ({
               onChange={hangleTerms}
             />
 
-            <label onClick={() => toggleTerms()} className="ms-2">
+            <label className="ms-2">
               {" "}
               Agree to{" "}
-              <span style={{ color: "#00a8ff", cursor: "pointer" }}>
+              <span
+                onClick={() => toggleTerms()}
+                style={{ color: "#00a8ff", cursor: "pointer" }}
+              >
                 Terms & Conditions
               </span>
             </label>

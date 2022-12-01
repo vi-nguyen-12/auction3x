@@ -107,7 +107,7 @@ function ContactUs({ windowSize, setMessage }) {
                   <input
                     placeholder="Enter Name"
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="firstName"
                     {...register("name", { required: true })}
                     required
@@ -120,13 +120,13 @@ function ContactUs({ windowSize, setMessage }) {
                   <input
                     placeholder="Enter Email"
                     type="email"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="email"
                     {...register("email", { required: true })}
                     required
                   />
                 </Col>
-                <Col className="mb-2" md={12}>
+                <Col className="my-2" md={12}>
                   <span>Phone</span>
                   <PhoneInput
                     disableCountryCode={false}
@@ -135,9 +135,15 @@ function ContactUs({ windowSize, setMessage }) {
                     country={"us"}
                     value={phone ? phone : null}
                     dropdownStyle={{ paddingLeft: "0!important" }}
-                    inputStyle={{ width: "100%" }}
+                    inputStyle={{
+                      width: "100%",
+                      border: "0",
+                      borderBottom: "1px solid #ececec",
+                      borderRadius: "0",
+                    }}
                     buttonStyle={{
-                      borderRight: "none",
+                      border: "none",
+                      borderRadius: "0",
                     }}
                     onChange={setPhone}
                     required
@@ -150,7 +156,7 @@ function ContactUs({ windowSize, setMessage }) {
                   <Form.Select
                     name="subject"
                     {...register("who")}
-                    className="form-control"
+                    className="form-control custom-input"
                   >
                     <option value="buyer">Buyer</option>
                     <option value="seller">Seller</option>
@@ -168,7 +174,7 @@ function ContactUs({ windowSize, setMessage }) {
                   <input
                     placeholder="Subject"
                     type="text"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="subject"
                     {...register("subject", { required: true })}
                     required
@@ -180,7 +186,7 @@ function ContactUs({ windowSize, setMessage }) {
                   <span>Message</span>
                   <textarea
                     placeholder="Enter Message"
-                    className="form-control"
+                    className="form-control custom-input"
                     name="message"
                     {...register("message", { required: true })}
                     required

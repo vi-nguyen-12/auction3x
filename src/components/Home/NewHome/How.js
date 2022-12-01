@@ -18,7 +18,7 @@ function How({ windowSize }) {
                 Our active, affluent community represents a selective
                 marketplace creating the perfect place to acquire or liquidate
                 luxury vehicles, planes, and yachts through an auction format.
-                Auction3 offers a tremendous opportunity to find the perfect
+                Auction Tree offers a tremendous opportunity to find the perfect
                 luxury asset in a timely fashion and to liquidate assets you no
                 longer require.{" "}
               </p>

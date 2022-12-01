@@ -57,6 +57,7 @@ const Sell = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="wrapper">
       <SellHeader />
+      <div className="sell_top_line" />
       <div className="sell-bottom" style={{ paddingBottom: "100px" }}>
         <h3>PLEASE SELECT PROPERTY TO SELL</h3>
         <Row className="justify-content-center">

@@ -3,9 +3,9 @@ import "../../styles/sidebar.css";
 import SidebarMenu from "../Dashboard/SidebarMenu";
 import SubMenu from "./SubMenu";
 
-const Sidebar = ({ path, setLocation }) => {
+const Sidebar = ({ path, setLocation, windowSize }) => {
   return (
-    <div className="sideBar">
+    <div className={windowSize < 1630 ? "sideBar small" : "sideBar"}>
       <ul className="sideBarList">
         {SidebarMenu.map((item, index) => {
           return (
@@ -14,6 +14,7 @@ const Sidebar = ({ path, setLocation }) => {
               item={item}
               path={path}
               setLocation={setLocation}
+              windowSize={windowSize}
             />
           );
         })}

@@ -283,7 +283,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={vessel_registration_number}
               onInput={(e) => {
                 e.target.value = e.target.value.toUpperCase();
@@ -313,7 +313,7 @@ function YachtDetails({
                   defaultValue={new Date(
                     vessel_manufacturing_date
                   ).toLocaleDateString()}
-                  className="form-control"
+                  className="form-control custom-input"
                   disabled
                 />
                 <button
@@ -331,7 +331,7 @@ function YachtDetails({
               <div className="d-flex">
                 <input
                   type="date"
-                  className="form-control"
+                  className="form-control custom-input"
                   defaultValue={new Date(
                     vessel_manufacturing_date
                   ).toLocaleDateString()}
@@ -373,7 +373,7 @@ function YachtDetails({
                   <input
                     {...getInputProps({
                       placeholder: "Search address",
-                      className: "form-control",
+                      className: "form-control custom-input",
                     })}
                     required
                   />
@@ -425,7 +425,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={country}
               {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
@@ -447,7 +447,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={state}
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
@@ -466,7 +466,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={city}
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
@@ -480,7 +480,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={zip}
               {...register("zipCode")}
               maxLength="5"
@@ -503,7 +503,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={manufacture_mark}
               {...register("manufacture_mark")}
               onChange={(e) => setManufacture_mark(e.target.value)}
@@ -523,7 +523,7 @@ function YachtDetails({
               <>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control custom-input"
                   placeholder="Enter Manufacturer Name"
                   defaultValue={manufacturer_name}
                   {...register("manufacturer_name")}
@@ -536,7 +536,7 @@ function YachtDetails({
               </>
             ) : (
               <Form.Select
-                className="form-control"
+                className="form-control custom-input"
                 value={manufacturer_name}
                 {...register("manufacturer_name", { maxLength: 100 })}
                 onChange={(e) => {
@@ -566,7 +566,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine_manufacture_name}
               {...register("engine_manufacture_name")}
               onChange={(e) => setEngine_manufacture_name(e.target.value)}
@@ -587,7 +587,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine_type}
               {...register("engine_type")}
               onChange={(e) => setEngine_type(e.target.value)}
@@ -604,7 +604,7 @@ function YachtDetails({
               Vessel Length(ft) <span style={{ color: "#ff0000" }}>*</span>
             </span>
             <NumberFormat
-              className="form-control"
+              className="form-control custom-input"
               thousandSeparator={true}
               allowNegative={false}
               value={length}
@@ -617,7 +617,7 @@ function YachtDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={length}
               {...register("length")}
               onChange={(e) => setLength(e.target.value)}
@@ -637,7 +637,7 @@ function YachtDetails({
             </span>
             <input
               type="text"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={engine_deck_type}
               {...register("engine_deck_type")}
               onChange={(e) => setEngine_deck_type(e.target.value)}
@@ -658,7 +658,7 @@ function YachtDetails({
               allowNegative={false}
               prefix="$"
               value={running_cost}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setRunning_cost(value);
@@ -678,7 +678,7 @@ function YachtDetails({
               thousandSeparator={true}
               allowNegative={false}
               value={no_of_crew_required}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setNo_of_crew_required(value);
@@ -688,7 +688,7 @@ function YachtDetails({
             {/* <input
               type="number"
               min="0"
-              className="form-control"
+              className="form-control custom-input"
               defaultValue={no_of_crew_required}
               {...register("no_of_crew_required")}
               onChange={(e) => setNo_of_crew_required(e.target.value)}
@@ -737,7 +737,7 @@ function YachtDetails({
         {/* <Row style={{ marginTop: "30px", height: "100px" }}>
           <Col>
             <textarea
-              className="form-control"
+              className="form-control custom-input"
               style={{ height: "100%" }}
               defaultValue={otherDetails}
               placeholder="Other information about the property"
@@ -773,7 +773,7 @@ function YachtDetails({
               thousandSeparator={true}
               prefix="$"
               value={reservedAmount}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setReservedAmount(value);
@@ -806,7 +806,7 @@ function YachtDetails({
               thousandSeparator={true}
               prefix="$"
               value={discussedAmount}
-              className="form-control"
+              className="form-control custom-input"
               onValueChange={(values) => {
                 const { value } = values;
                 setDiscussedAmount(value);

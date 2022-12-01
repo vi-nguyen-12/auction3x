@@ -509,7 +509,11 @@ function DisplayYacht({
                     Register to Bid
                   </button>
                   <div className="d-flex justify-content-center mt-2">
-                    <button className="view-docs-btn" onClick={executeScroll}>
+                    <button
+                      disabled={!user._id}
+                      className="view-docs-btn"
+                      onClick={executeScroll}
+                    >
                       View Documents
                     </button>
                   </div>
@@ -1126,7 +1130,13 @@ function DisplayYacht({
             <Tabs
               defaultActiveKey="Location Information"
               activeKey={viewDocs}
-              onSelect={(k) => setViewDocs(k)}
+              onSelect={(k) => {
+                if (k === "Document Vault" && !user._id) {
+                  toggleSignIn();
+                } else {
+                  setViewDocs(k);
+                }
+              }}
               className="RealEstate-Tab"
             >
               <Tab

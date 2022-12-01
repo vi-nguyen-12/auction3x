@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { ProgressBar } from "react-bootstrap";
 import authService from "../../services/authServices";
 import Loading from "../../components/Loading";
 import PhoneInput from "react-phone-input-2";
@@ -55,6 +56,62 @@ function EditProfile({ setMessage }) {
   const [city, setCity] = useState(user.city);
   const [profilePic, setProfilePic] = useState();
   const [loader, setLoader] = useState(false);
+  const [licenseNum, setLicenseNum] = useState(user.agent.licenseNumber);
+  const [files, setFiles] = useState(user.agent.licenseDocument);
+  const [passStrong, setPassStrong] = useState("");
+  const [passMatch, setPassMatch] = useState(false);
+
+  var strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+  var mediumRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+
+  const handleCheckStrength = (e) => {
+    const password = e.target.value;
+    setNewPass(password);
+
+    if (password.match(strongRegex)) {
+      setPassStrong("strong");
+    } else if (password.match(mediumRegex)) {
+      setPassStrong("medium");
+    } else {
+      setPassStrong("weak");
+    }
+  };
+
+  const handleCheckMatch = (e) => {
+    setConfirmPass(e.target.value);
+    const password = e.target.value;
+    if (password === newPass) {
+      setPassMatch(true);
+    } else {
+      setPassMatch(false);
+    }
+  };
+
+  const onChange = async (e) => {
+    setLoader(true);
+    const formData = new FormData();
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append("documents", e.target.files[i]);
+    }
+    await authService.saveDocuments(formData).then((response) => {
+      if (response.data.error) {
+        setMessage("");
+        setMessage(response.data.error);
+        setLoader(false);
+      } else {
+        setFiles([...files, ...response.data]);
+        setLoader(false);
+      }
+    });
+    e.target.value = null;
+  };
+
+  const handleDelete = (url) => () => {
+    setFiles(files.filter((document) => document.url !== url));
+  };
 
   const changeProfilePic = async (e) => {
     setLoader(true);
@@ -74,10 +131,15 @@ function EditProfile({ setMessage }) {
   };
 
   const onSubmit = async (data) => {
-    if (newPass !== confirmPass) {
+    if (newPass && !passMatch) {
       setMessage("");
       setTimeout(() => {
-        setMessage("Please make sure your new password matches");
+        setMessage("Passwords do not match");
+      }, 100);
+    } else if (newPass && passStrong === "weak") {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Password is too weak");
       }, 100);
     } else {
       const datas = {
@@ -94,6 +156,10 @@ function EditProfile({ setMessage }) {
             twitter: twitter ? twitter : "https://www.twitter.com/",
             instagram: instagram ? instagram : "https://www.instagram.com/",
           },
+          agent: {
+            licenseNumber: licenseNum,
+            licenseDocument: files,
+          },
           country: country,
           city: city,
           old_password: oldPass,
@@ -101,13 +167,14 @@ function EditProfile({ setMessage }) {
           description: description,
         },
       };
+      (!licenseNum || files.length === 0) && delete datas.details.agent;
       await authService.editUserInfo(datas).then((res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
           setMessage("");
-          setMessage("Profile changed successfully");
+          setMessage("Profile updated successfully");
           window.location.reload();
         }
       });
@@ -122,6 +189,7 @@ function EditProfile({ setMessage }) {
             fontWeight: "700",
             display: "flex",
             justifyContent: "flex-start",
+            borderBottom: "2px solid black",
           }}
         >
           User Info
@@ -131,7 +199,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>First Name</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={firstName}
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
@@ -140,7 +208,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Last Name</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={lastName}
             type="text"
             onChange={(e) => setLastName(e.target.value)}
@@ -149,7 +217,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Username</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={username}
             type="text"
             onChange={(e) => setUsername(e.target.value)}
@@ -160,7 +228,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>Email</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={email}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
@@ -174,9 +242,15 @@ function EditProfile({ setMessage }) {
             disableDropdown={false}
             country={"us"}
             dropdownStyle={{ paddingLeft: "0!important" }}
-            inputStyle={{ width: "100%" }}
+            inputStyle={{
+              width: "100%",
+              border: "0",
+              borderBottom: "1px solid #ececec",
+              borderRadius: "0",
+            }}
             buttonStyle={{
-              borderRight: "none",
+              border: "none",
+              borderRadius: "0",
             }}
             value={phone}
             onChange={setPhone}
@@ -187,7 +261,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>Country</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="text"
             defaultValue={country}
             onChange={(e) => setCountry(e.target.value)}
@@ -196,7 +270,7 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12}>
           <span>City</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             type="text"
             defaultValue={city}
             onChange={(e) => setCity(e.target.value)}
@@ -204,13 +278,81 @@ function EditProfile({ setMessage }) {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col>
-          {loader ? <Loading /> : null}
-          <span style={{ fontSize: "20px", fontWeight: "700" }}>
-            Profile Picture
-          </span>
+        <Col
+          md={12}
+          xs={12}
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "flex-start",
+            borderBottom: "2px solid black",
+          }}
+        >
+          Broker Info
+        </Col>
+        <Col md={12} xs={12} className="mt-3">
+          <span>Broker License Number</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
+            type="text"
+            onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
+            defaultValue={licenseNum}
+            onChange={(e) => setLicenseNum(e.target.value)}
+          />
+        </Col>
+        <Col md={12} xs={12} className="mt-3">
+          <span>Broker License/Certificate</span>
+          <input
+            className="form-control custom-input"
+            type="file"
+            id="agentFile"
+            {...register("agentFile", { onChange: onChange })}
+          />
+          {files.length > 0 && (
+            <div>
+              {files.map((file, index) => (
+                <ul style={{ paddingLeft: "0.5rem" }} key={index}>
+                  <li style={{ fontSize: "18px", listStyle: "none" }}>
+                    {file.name}{" "}
+                    <span>
+                      <Button
+                        onClick={handleDelete(file.url)}
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "red",
+                          margin: "0",
+                        }}
+                      >
+                        X
+                      </Button>
+                    </span>
+                  </li>
+                </ul>
+              ))}
+            </div>
+          )}
+        </Col>
+      </Row>
+      <Row className="mt-3">
+        <Col
+          md={12}
+          xs={12}
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "flex-start",
+            borderBottom: "2px solid black",
+          }}
+        >
+          {loader ? <Loading /> : null}
+          Profile Picture
+        </Col>
+        <Col md={12} xs={12} className="mt-3">
+          <input
+            className="form-control custom-input"
             type="file"
             accept="image/*"
             {...register("images", { onChange: changeProfilePic })}
@@ -218,13 +360,23 @@ function EditProfile({ setMessage }) {
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col style={{ fontSize: "20px", fontWeight: "700" }}>Social Media</Col>
+        <Col
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "flex-start",
+            borderBottom: "2px solid black",
+          }}
+        >
+          Social Media
+        </Col>
       </Row>
-      <Row>
+      <Row className="mt-2">
         <Col md={4} xs={12}>
           <span>Instagram</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={instagram}
             type="text"
             onChange={(e) => setInstagram(e.target.value)}
@@ -233,7 +385,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Facebook</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={facebook}
             type="text"
             onChange={(e) => setFacebook(e.target.value)}
@@ -242,7 +394,7 @@ function EditProfile({ setMessage }) {
         <Col md={4} xs={12}>
           <span>Twitter</span>
           <input
-            className="form-control"
+            className="form-control custom-input"
             defaultValue={twitter}
             type="text"
             onChange={(e) => setTwitter(e.target.value)}
@@ -257,47 +409,85 @@ function EditProfile({ setMessage }) {
               fontWeight: "700",
               display: "flex",
               justifyContent: "flex-start",
+              borderBottom: "2px solid black",
             }}
           >
             Change Password
           </Col>
         </Row>
         <Row className="mt-2">
-          <Col md={4} xs={12}>
+          <Col md={12} xs={12}>
             <span>Current Password</span>
             <input
-              className="form-control"
+              className="form-control custom-input"
               type="password"
               onChange={(e) => setOldPass(e.target.value)}
             />
           </Col>
-          <Col md={4} xs={12}>
+          <Col md={12} xs={12} className="mt-2">
             <span>New Password</span>
             <input
-              className="form-control"
+              className="form-control custom-input"
               type="password"
-              onChange={(e) => setNewPass(e.target.value)}
+              onChange={handleCheckStrength}
             />
+            <div style={{ width: "150px" }} className="mt-2">
+              <ProgressBar
+                className="rounded-0"
+                style={{ height: "0.3rem", width: "100%" }}
+              >
+                <ProgressBar
+                  animated
+                  now={
+                    passStrong === "strong"
+                      ? 100
+                      : passStrong === "medium"
+                      ? 50
+                      : 30
+                  }
+                  variant={
+                    passStrong === "strong"
+                      ? "success"
+                      : passStrong === "medium"
+                      ? "warning"
+                      : "danger"
+                  }
+                />
+              </ProgressBar>
+            </div>
           </Col>
-          <Col md={4} xs={12}>
+          <Col md={12} xs={12} className="mt-2">
             <span>Confirm Password</span>
             <input
-              className="form-control"
-              onChange={(e) => setConfirmPass(e.target.value)}
+              className="form-control custom-input"
+              onChange={handleCheckMatch}
               type="password"
+              style={{
+                border: passMatch
+                  ? "1px solid green"
+                  : confirmPass
+                  ? "1px solid red"
+                  : "1px solid #ced4da",
+              }}
             />
           </Col>
         </Row>
       </Row>
 
       <Row className="mt-3">
-        <Col>
-          <span style={{ fontSize: "20px", fontWeight: "700" }}>
-            Description
-          </span>
+        <Col
+          style={{
+            fontSize: "20px",
+            fontWeight: "700",
+            display: "flex",
+            justifyContent: "flex-start",
+            borderBottom: "2px solid black",
+          }}
+        >
+          Description
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-3">
         <Col>
           <ReactQuill
             theme="snow"

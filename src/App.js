@@ -374,33 +374,33 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      {message && <ToastMessage message={message} />}
+      {message && <ToastMessage message={message} windowSize={windowSize} />}
       {!maintenance ? (
         <>
           <div
-            className="expendMenu-container"
+            className="expandMenu-container"
             id={expendedMenuId}
             onClick={() => setExpendedMenuId()}
           ></div>
           <div id={expendedMenuId}>
-            <div className="expendMenu">
-              <div className="expendMenu-items d-flex justify-content-between">
+            <div className="expandMenu">
+              <div className="expandMenu-items d-flex justify-content-between">
                 <span>Welcome!</span>
                 <button onClick={() => setExpendedMenuId()}>X</button>
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/realEstates">Real Estate</a>
                 <a href="/cars">Car</a>
                 <a href="/jets">Jet</a>
                 <a href="/yachts">Yacht</a>
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/multiSellForm">Sell</a>
                 <a href="/Auctions">Buy</a>
                 <a href="/Partner">Broker</a>
                 {/* <a href="/Partner">Invest</a> */}
               </div>
-              <div className="expendMenu-items">
+              <div className="expandMenu-items">
                 <a href="/team">Team</a>
                 <a href="/AboutUs">About Us</a>
                 <a href="/FAQ">Help & FAQ</a>
@@ -440,35 +440,6 @@ function App() {
             }}
           >
             {/* All Modals */}
-            {/* <Modal
-              size="xl"
-              backdrop="static"
-              keyboard={false}
-              show={showDocu}
-              onHide={toggleDocu}
-              centered
-              style={{ border: "1px solid red" }}
-            >
-              <Modal.Body className="vh-100">
-                <div
-                  style={{
-                    position: "absolute",
-                    top: windowSize < 600 ? "0" : "25px",
-                    right: windowSize < 600 ? "0" : "25px",
-                    zIndex: "999",
-                  }}
-                >
-                  <CloseButton
-                    className="modal-close"
-                    style={{ backgroundColor: "white" }}
-                    onClick={() => {
-                      toggleDocu();
-                    }}
-                  />
-                </div>
-                <iframe src={docuUrl} width="100%" height="100%" />
-              </Modal.Body>
-            </Modal> */}
             <DocusignModal
               docuUrl={docuUrl}
               toggleDocu={toggleDocu}
@@ -628,7 +599,6 @@ function App() {
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showSessionTimedOut}
-              style={{ borderRadius: "30px" }}
               onHide={toggleSessionTimedOut}
               contentclassname="custom-modal-style"
             >
@@ -701,7 +671,6 @@ function App() {
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showSignUp}
-              style={{ borderRadius: "30px" }}
               onHide={toggleSignUp}
               contentclassname="custom-modal-style"
             >
@@ -746,7 +715,6 @@ function App() {
               aria-labelledby="contained-modal-title-vcenter"
               centered
               show={showSessionTimedOut}
-              style={{ borderRadius: "30px" }}
               onHide={toggleSessionTimedOut}
               contentclassname="custom-modal-style"
             >
@@ -1175,6 +1143,7 @@ function App() {
                     colorChange={colorChange}
                     setHeaderWidth={setHeaderWidth}
                     setMessage={setMessage}
+                    toggleShow={toggleShow}
                   />
                 </Route>
                 <Route path="/docusign/callback/:envelopeId">
@@ -1297,7 +1266,7 @@ function App() {
                   className="maintenance-copyright"
                   style={{ marginTop: windowSize < 800 && "8%" }}
                 >
-                  © Copyrights Auction3 | All Rights Reserved
+                  © Copyrights Auction Tree | All Rights Reserved
                 </span>
               </Col>
               <Col
