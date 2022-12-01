@@ -87,7 +87,7 @@ const DropdownLink = styled(Link)`
   font-weight: 400;
 `;
 
-const SubMenu = ({ item, path, setLocation }) => {
+const SubMenu = ({ item, path, setLocation, windowSize }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
   const [color] = useState("#b77b50");
@@ -95,6 +95,7 @@ const SubMenu = ({ item, path, setLocation }) => {
     setLocation(path);
     item.subNav && showSubnav();
   };
+
   return (
     <>
       <SidebarLink
@@ -104,17 +105,19 @@ const SubMenu = ({ item, path, setLocation }) => {
       >
         <div className="d-flex">
           <div>{item.icon}</div>
-          <div className="mx-3">{item.name}</div>
+          {windowSize > 1630 && <div className="mx-3">{item.name}</div>}
         </div>
-        <div>
-          {item.subNav && subnav
-            ? item.iconOpened
-            : item.subNav
-            ? item.iconClosed
-            : null}
-        </div>
+        {windowSize > 1630 && (
+          <div>
+            {item.subNav && subnav
+              ? item.iconOpened
+              : item.subNav
+              ? item.iconClosed
+              : null}
+          </div>
+        )}
       </SidebarLink>
-      {subnav &&
+      {subnav && windowSize > 1630 ? (
         item.subNav.map((item, index) => {
           return (
             <DropdownLink
@@ -133,7 +136,35 @@ const SubMenu = ({ item, path, setLocation }) => {
               </SidebarLabel>
             </DropdownLink>
           );
-        })}
+        })
+      ) : (
+        <div className={subnav ? "subnav show shadow-lg" : "subnav shadow-lg"}>
+          {subnav &&
+            item.subNav &&
+            item.subNav.map((item, index) => {
+              return (
+                <DropdownLink
+                  to={item.path}
+                  key={index}
+                  onClick={() => {
+                    setLocation(item.path);
+                    setSubnav(false);
+                  }}
+                >
+                  <SidebarLabel
+                    style={{
+                      border: "none",
+                      fontSize: "16px",
+                      color: item.path === path ? color : "",
+                    }}
+                  >
+                    {item.name}
+                  </SidebarLabel>
+                </DropdownLink>
+              );
+            })}
+        </div>
+      )}
     </>
   );
 };

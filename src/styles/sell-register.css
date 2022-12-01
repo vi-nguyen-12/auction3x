@@ -434,10 +434,6 @@ details[open] summary::after {
   flex: 1;
   font-weight: 600;
   color: #6d6d6d;
-
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
 }
 
 .step-counter {
@@ -454,7 +450,6 @@ details[open] summary::after {
   top: 28px;
   left: -50%;
   z-index: 2;
-  transition: width 0.5s;
 }
 
 .stepper-item::after {
@@ -467,8 +462,6 @@ details[open] summary::after {
   left: 50%;
   z-index: 2;
   color: white;
-  transition: width 0.5s;
-  animation: progressWidthReverse 1s forwards;
 }
 
 .stepper-item .step-counter {
@@ -483,6 +476,7 @@ details[open] summary::after {
   border: 2px solid rgba(109, 109, 109, 0.1);
   background: #ffffff;
   margin-bottom: 6px;
+  transition: 5s;
 }
 
 .stepper-item.active {
@@ -491,7 +485,8 @@ details[open] summary::after {
 }
 
 .stepper-item.active .step-counter {
-  border: 2px solid #b77b50;
+  border-color: #b77b50;
+  transition-delay: 1s;
 }
 
 .stepper-item.completed .step-counter {
@@ -500,15 +495,50 @@ details[open] summary::after {
   font-weight: 500;
 }
 
+.stepper-item.done .step-counter {
+  background-color: #b77b50;
+  color: white;
+  font-weight: 500;
+}
+
 .stepper-item.completed::after {
   position: absolute;
   content: "";
-  border-bottom: 3px solid #b77b50;
+  border-color: #b77b50;
   opacity: 1;
   width: 100%;
   top: 28px;
   left: 50%;
   z-index: 3;
+  /* animation: progressWidth 1s ease forwards; */
+}
+
+.stepper-item.done::after {
+  position: absolute;
+  content: "";
+  border-color: #b77b50;
+  opacity: 1;
+  width: 100%;
+  top: 28px;
+  left: 50%;
+  z-index: 3;
+  /* animation: progressWidth 1s ease forwards; */
+}
+
+.stepper-item.incomplete::after {
+  position: absolute;
+  content: "";
+  border-bottom: 3px solid #b77b50;
+  opacity: 0.1;
+  width: 100%;
+  top: 28px;
+  left: 50%;
+  z-index: 3;
+  animation: progressWidthReverse 1s ease forwards;
+}
+
+#completed > .stepper-item.stepper-item.completed::after {
+  width: 100%;
   animation: progressWidth 1s ease forwards;
 }
 
@@ -568,6 +598,10 @@ details[open] summary::after {
   .nxt-btn {
     width: 100px;
     height: 30px;
+  }
+
+  .step-name{
+    font-size: 0.7rem;
   }
 }
 
