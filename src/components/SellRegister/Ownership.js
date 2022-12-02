@@ -27,6 +27,7 @@ function Ownership({
 }) {
   const user = useSelector((state) => state.user);
   const [ownershipType, setOwnershipType] = useState();
+  const [otherOwnershipName, setOtherOwnershipName] = useState();
   const [addedNewOwner, setAddedNewOwner] = useState([]);
   const [addNewRow, setAddNewRow] = useState(false);
   const [newOwner, setNewOwner] = useState({ name: "", email: "", phone: "" });
@@ -244,6 +245,8 @@ function Ownership({
     });
   };
 
+  console.log(ownershipType);
+
   return (
     <div className="wrapper">
       <SellHeader step={step} />
@@ -379,6 +382,33 @@ function Ownership({
                     />
                   </Col>
                 </Row>
+                {(ownershipType !== "Individual" ||
+                  ownershipType !== "Other") &&
+                  ownershipType !== "" && (
+                    <Row className="mt-3 d-flex justify-content-start">
+                      <Col xs={12} md={6} lg={6}>
+                        <span style={{ fontWeight: "600" }}>
+                          {ownershipType === "Joint"
+                            ? "Secondary Owner/Entity"
+                            : ownershipType === "Corporate"
+                            ? "Corporate Name"
+                            : ownershipType === "Trust"
+                            ? "Trust Name"
+                            : ""}{" "}
+                          <span style={{ color: "#ff0000" }}>*</span>
+                        </span>
+                        <input
+                          type="text"
+                          className="form-control custom-input"
+                          value={otherOwnershipName}
+                          onChange={(e) =>
+                            setOtherOwnershipName(e.target.value)
+                          }
+                          required
+                        />
+                      </Col>
+                    </Row>
+                  )}
                 <Row className="mt-3">
                   <Col>
                     <PlacesAutocomplete

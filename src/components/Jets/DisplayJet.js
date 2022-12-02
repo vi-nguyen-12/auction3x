@@ -537,9 +537,15 @@ function DisplayJet({
                   </button>
                   <div className="d-flex justify-content-center mt-2">
                     <button
-                      disabled={!user._id}
+                      // disabled={!user._id}
                       className="view-docs-btn"
-                      onClick={executeScroll}
+                      onClick={() => {
+                        if (!user._id) {
+                          toggleSignIn();
+                        } else {
+                          executeScroll();
+                        }
+                      }}
                     >
                       View Documents
                     </button>

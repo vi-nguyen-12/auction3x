@@ -187,20 +187,21 @@ function DisplayAuctions({
         ) : null
       ) : (
         <div
-          className="real-estate-wrap m-5"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            textAlign: "center",
-          }}
+          className="vh-100"
+          // className="real-estate-wrap m-5"
+          // style={{
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   textAlign: "center",
+          // }}
         >
-          <h1>
+          {/* <h1>
             Auction not found! Auction has either ended or has not started yet,
             please try again later.
             <br />
             <br />
             Thank you for your patience.
-          </h1>
+          </h1> */}
         </div>
       )}
     </>
