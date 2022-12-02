@@ -15,6 +15,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
   const [clientPhone, setClientPhone] = useState(client?.phone);
   const [agreement, setAgreement] = useState(false);
   const [attorney, setAttorney] = useState(client?.documents);
+  console.log(agreement);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
@@ -84,6 +85,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
       setStep(step + 1);
     }
   };
+
   return (
     <>
       {loader && <Loading />}

@@ -15,8 +15,8 @@ text-decoration: none;
 font-size: 18px;
 font-weight: 700;
 &:hover {
-  background-color: gray;
-  color: #ffffff;
+  background-color: rgba(241, 243, 244, 1);;
+  color:  #a5a5a5;
   cursor: pointer;
 }
 &:focus  {
@@ -43,12 +43,12 @@ const SidebarLabel = styled.button`
   justify-content: space-between;
   &:hover {
     // border-left: 3px solid #b77b50;
-    color: #b77b50;
+    // color: #b77b50;
     cursor: pointer;
   }
   &:focus {
     border-left: 4px solid #b77b50;
-    color: #b77b50;
+    // color: #b77b50;
     cursor: pointer;
     font-weight: 900;
   }

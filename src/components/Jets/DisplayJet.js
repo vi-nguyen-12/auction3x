@@ -631,7 +631,7 @@ function DisplayJet({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: "right",
+                    justifyContent: windowSize < 800 ? "center" : "flex-end",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
@@ -1049,9 +1049,9 @@ function DisplayJet({
                       striped
                       style={{
                         padding: "0",
-                        // position: windowSize < 600 && "absolute",
+                        position: windowSize < 600 && "relative",
                         width: windowSize < 600 && "92vw",
-                        // height: windowSize < 600 && "300px",
+                        height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1116,38 +1116,12 @@ function DisplayJet({
           </Row>
 
           <Row
-            className="mt-4"
             style={{
               margin: "0",
               padding: "0",
               padding: windowSize < 500 ? "25px 15px" : "35px",
             }}
           >
-            {/* <div
-              style={{
-                marginTop:
-                  windowSize < 600 && property.highestBidders?.length > 0
-                    ? "300px"
-                    : windowSize < 600
-                    ? "150px"
-                    : "0",
-                alignItems: "center",
-                marginBottom: "20px",
-                padding: "0",
-              }}
-            >
-              <span style={{ color: "#b77b50", fontSize: "40px" }}>|</span>
-              <span
-                style={{
-                  fontWeight: "600",
-                  fontSize: "30px",
-                  color: "black",
-                  fontFamily: "Josefin Slab",
-                }}
-              >
-                Executive Summary
-              </span>
-            </div> */}
             <Col
               style={{
                 color: "black",
@@ -1412,6 +1386,7 @@ function DisplayJet({
                           onChange={download(
                             ownershipDoc.map((item) => item.url)
                           )}
+                          disabled={ownershipDoc.length === 0}
                         />{" "}
                         Ownership Documents ({ownershipDoc.length})
                       </div>
@@ -1421,6 +1396,7 @@ function DisplayJet({
                           onChange={download(
                             registrationDoc.map((item) => item.url)
                           )}
+                          disabled={registrationDoc.length === 0}
                         />{" "}
                         Registration Documents ({registrationDoc.length})
                       </div>
@@ -1430,6 +1406,7 @@ function DisplayJet({
                           onChange={download(
                             valuationDoc.map((item) => item.url)
                           )}
+                          disabled={valuationDoc.length === 0}
                         />{" "}
                         Valuation Report ({valuationDoc.length})
                       </div>
@@ -1440,6 +1417,7 @@ function DisplayJet({
                           onChange={download(
                             detailHistory.map((item) => item.url)
                           )}
+                          disabled={detailHistory.length === 0}
                         />{" "}
                         Jet Detail History ({detailHistory.length})
                       </div>
@@ -1447,6 +1425,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(fitness.map((item) => item.url))}
+                          disabled={fitness.length === 0}
                         />{" "}
                         Fitness Report ({fitness.length})
                       </div>
@@ -1454,6 +1433,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(electric.map((item) => item.url))}
+                          disabled={electric.length === 0}
                         />{" "}
                         Electric Work Details ({electric.length})
                       </div>
@@ -1472,6 +1452,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(loanDoc.map((item) => item.url))}
+                          disabled={loanDoc.length === 0}
                         />{" "}
                         Loan Documents ({loanDoc.length})
                       </div>
@@ -1481,6 +1462,7 @@ function DisplayJet({
                           onChange={download(
                             inspectionDoc.map((item) => item.url)
                           )}
+                          disabled={inspectionDoc.length === 0}
                         />{" "}
                         Inspection Report ({inspectionDoc.length})
                       </div>
@@ -1488,6 +1470,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(engineDoc.map((item) => item.url))}
+                          disabled={engineDoc.length === 0}
                         />{" "}
                         Engine Details ({engineDoc.length})
                       </div>
@@ -1496,6 +1479,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(title.map((item) => item.url))}
+                          disabled={title.length === 0}
                         />{" "}
                         Title Documents ({title.length})
                       </div>
@@ -1503,6 +1487,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(details.map((item) => item.url))}
+                          disabled={details.length === 0}
                         />{" "}
                         Details Specification ({details.length})
                       </div>
@@ -1510,6 +1495,7 @@ function DisplayJet({
                         <input
                           type="checkbox"
                           onChange={download(insurance.map((item) => item.url))}
+                          disabled={insurance.length === 0}
                         />{" "}
                         Insurance Documents ({insurance.length})
                       </div>
@@ -1559,6 +1545,7 @@ function DisplayJet({
                         onClick={() => {
                           viewAll();
                         }}
+                        disabled={property?.property?.documents?.length === 0}
                         className="mt-2 docs-view-btn"
                       >
                         View All
@@ -1578,31 +1565,14 @@ function DisplayJet({
             onHide={toggleRegister}
             centered
           >
-            <Modal.Header className="auction-modal-header p-4">
+            <Modal.Header className="auction-modal-header px-4" closeButton>
               <Modal.Title
                 className="auction-modal-title"
-                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
               >
                 Buyer Registration
               </Modal.Title>
             </Modal.Header>
-            <div
-              style={{
-                position: "absolute",
-                top: windowSize < 600 ? "0" : "25px",
-                right: windowSize < 600 ? "0" : "25px",
-                zIndex: "999",
-              }}
-            >
-              <CloseButton
-                className="modal-close"
-                style={{ backgroundColor: "white" }}
-                onClick={() => {
-                  toggleRegister();
-                  setRefresh(!refresh);
-                }}
-              />
-            </div>
             <Modal.Body>
               <MultiBuyForm
                 setMessage={setMessage}

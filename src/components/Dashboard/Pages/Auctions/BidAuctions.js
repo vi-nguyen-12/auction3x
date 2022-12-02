@@ -154,6 +154,7 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                     <td>
                       <Button
                         variant="primary"
+                        className="rounded-0"
                         onClick={() => {
                           window.open(`/DisplayAuctions/${auction._id}`);
                         }}

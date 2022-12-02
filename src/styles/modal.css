@@ -14,9 +14,9 @@
   padding-top: 10px !important;
 }
 
-.modal-title {
+/* .modal-title {
   padding-top: 20px;
-}
+} */
 
 .input,
 .input-group {
@@ -52,7 +52,7 @@
 .modal-header {
   height: 90px;
   display: flex;
-  padding-bottom: 40px;
+  /* padding-bottom: 40px; */
   border-radius: 0;
 }
 

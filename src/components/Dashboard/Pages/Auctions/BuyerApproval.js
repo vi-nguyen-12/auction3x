@@ -407,27 +407,14 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           onHide={toggleQuestionair}
           centered
         >
-          <Modal.Header className="auction-modal-header">
-            <Modal.Title className="auction-modal-title px-3">
+          <Modal.Header className="auction-modal-header px-4" closeButton>
+            <Modal.Title
+              className="auction-modal-title"
+              style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
+            >
               Questionair
             </Modal.Title>
           </Modal.Header>
-          <div
-            style={{
-              position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton
-              className="modal-close"
-              style={{ backgroundColor: "white" }}
-              onClick={() => {
-                toggleQuestionair();
-              }}
-            />
-          </div>
           <Modal.Body>
             <>
               <Table
@@ -662,30 +649,14 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           onHide={toggleDocuments}
           centered
         >
-          <Modal.Header className="auction-modal-header">
+          <Modal.Header className="auction-modal-header px-4" closeButton>
             <Modal.Title
-              className="auction-modal-title px-3"
-              style={{ fontSize: "2rem" }}
+              className="auction-modal-title"
+              style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
             >
               Proof of Funds
             </Modal.Title>
           </Modal.Header>
-          <div
-            style={{
-              position: "absolute",
-              top: windowSize < 600 ? "0" : "25px",
-              right: windowSize < 600 ? "0" : "25px",
-              zIndex: "999",
-            }}
-          >
-            <CloseButton
-              className="modal-close"
-              style={{ backgroundColor: "white" }}
-              onClick={() => {
-                toggleDocuments();
-              }}
-            />
-          </div>
           <Modal.Body>
             <>
               <Table

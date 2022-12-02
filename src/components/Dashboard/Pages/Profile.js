@@ -276,27 +276,14 @@ function Profile({ id, windowSize, setMessage }) {
         keyboard={false}
         className="edit-modal"
       >
-        <Modal.Header className="auction-modal-header">
-          <Modal.Title className="auction-modal-title px-3">
+        <Modal.Header className="auction-modal-header px-4" closeButton>
+          <Modal.Title
+            className="auction-modal-title"
+            style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
+          >
             Edit Profile
           </Modal.Title>
         </Modal.Header>
-        <div
-          style={{
-            position: "absolute",
-            top: windowSize < 600 ? "0" : "25px",
-            right: windowSize < 600 ? "0" : "25px",
-            zIndex: "999",
-          }}
-        >
-          <CloseButton
-            className="modal-close"
-            style={{ backgroundColor: "white" }}
-            onClick={() => {
-              toggleEdit();
-            }}
-          />
-        </div>
         <Modal.Body>
           <EditProfile setMessage={setMessage} windowSize={windowSize} />
         </Modal.Body>

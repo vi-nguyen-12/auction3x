@@ -601,7 +601,7 @@ function DisplayCar({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: "right",
+                    justifyContent: windowSize < 800 ? "center" : "flex-end",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
@@ -967,9 +967,9 @@ function DisplayCar({
                       striped
                       style={{
                         padding: "0",
-                        // position: windowSize < 600 && "absolute",
+                        position: windowSize < 600 && "relative",
                         width: windowSize < 600 && "92vw",
-                        // height: windowSize < 600 && "300px",
+                        height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1034,7 +1034,6 @@ function DisplayCar({
           </Row>
 
           <Row
-            className="mt-4"
             style={{
               margin: "0",
               padding: windowSize < 500 ? "25px 15px" : "35px",
@@ -1300,6 +1299,7 @@ function DisplayCar({
                         <input
                           type="checkbox"
                           onChange={download(title.map((item) => item.url))}
+                          disabled={title.length === 0}
                         />{" "}
                         Title Document ({title.length})
                       </div>
@@ -1310,6 +1310,7 @@ function DisplayCar({
                           onChange={download(
                             ownershipDoc.map((item) => item.url)
                           )}
+                          disabled={ownershipDoc.length === 0}
                         />{" "}
                         Ownership Documents ({ownershipDoc.length})
                       </div>
@@ -1320,6 +1321,7 @@ function DisplayCar({
                           onChange={download(
                             registrationDoc.map((item) => item.url)
                           )}
+                          disabled={registrationDoc.length === 0}
                         />{" "}
                         Registration Documents ({registrationDoc.length})
                       </div>
@@ -1330,6 +1332,7 @@ function DisplayCar({
                           onChange={download(
                             valuationDoc.map((item) => item.url)
                           )}
+                          disabled={valuationDoc.length === 0}
                         />{" "}
                         Valuation Report ({valuationDoc.length})
                       </div>
@@ -1347,6 +1350,7 @@ function DisplayCar({
                         <input
                           type="checkbox"
                           onChange={download(loanDoc.map((item) => item.url))}
+                          disabled={loanDoc.length === 0}
                         />{" "}
                         Loan Documents ({loanDoc.length})
                       </div>
@@ -1357,6 +1361,7 @@ function DisplayCar({
                           onChange={download(
                             inspectionDoc.map((item) => item.url)
                           )}
+                          disabled={inspectionDoc.length === 0}
                         />{" "}
                         Inspection Report ({inspectionDoc.length})
                       </div>
@@ -1365,6 +1370,7 @@ function DisplayCar({
                         <input
                           type="checkbox"
                           onChange={download(engineDoc.map((item) => item.url))}
+                          disabled={engineDoc.length === 0}
                         />{" "}
                         Engine Details ({engineDoc.length})
                       </div>
@@ -1373,6 +1379,7 @@ function DisplayCar({
                         <input
                           type="checkbox"
                           onChange={download(insurance.map((item) => item.url))}
+                          disabled={insurance.length === 0}
                         />{" "}
                         Insurance Document ({insurance.length})
                       </div>
@@ -1419,6 +1426,7 @@ function DisplayCar({
                         onClick={() => {
                           viewAll();
                         }}
+                        disabled={property.property.documents.length === 0}
                         className="mt-2 docs-view-btn"
                       >
                         View All
@@ -1438,31 +1446,14 @@ function DisplayCar({
             onHide={toggleRegister}
             centered
           >
-            <Modal.Header className="auction-modal-header p-4">
+            <Modal.Header className="auction-modal-header px-4" closeButton>
               <Modal.Title
                 className="auction-modal-title"
-                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
               >
                 Buyer Registration
               </Modal.Title>
             </Modal.Header>
-            <div
-              style={{
-                position: "absolute",
-                top: windowSize < 600 ? "0" : "25px",
-                right: windowSize < 600 ? "0" : "25px",
-                zIndex: "999",
-              }}
-            >
-              <CloseButton
-                className="modal-close"
-                style={{ backgroundColor: "white" }}
-                onClick={() => {
-                  toggleRegister();
-                  setRefresh(!refresh);
-                }}
-              />
-            </div>
             <Modal.Body>
               <MultiBuyForm
                 windowSize={windowSize}

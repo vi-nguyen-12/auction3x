@@ -103,10 +103,10 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
                       <img
                         width="100px"
                         height="50px"
-                        onClick={() => {
-                          setImages(auction.property[0].images);
-                          toggleShowPic();
-                        }}
+                        // onClick={() => {
+                        //   setImages(auction.property[0].images);
+                        //   toggleShowPic();
+                        // }}
                         src={
                           auction.property[0].images.length > 0
                             ? auction.property[0].images[0].url

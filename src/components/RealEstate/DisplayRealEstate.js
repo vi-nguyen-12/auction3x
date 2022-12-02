@@ -456,7 +456,7 @@ function DisplayRealEstate({
             <Col xs={12} md={6} style={{ padding: "0" }}>
               <Row
                 style={{
-                  textAlign: windowSize < 500 && "center",
+                  textAlign: windowSize < 800 && "center",
                 }}
               >
                 <Col className="p-0" md={windowSize > 900 ? 7 : 12} xs={12}>
@@ -606,7 +606,7 @@ function DisplayRealEstate({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: windowSize < 500 ? "center" : "flex-end",
+                    justifyContent: windowSize < 800 ? "center" : "flex-end",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
@@ -670,7 +670,7 @@ function DisplayRealEstate({
                   padding: "0",
                   margin: " 0",
                   display: "flex",
-                  justifyContent: windowSize < 500 ? "center" : "flex-start",
+                  justifyContent: windowSize < 800 ? "center" : "flex-start",
                 }}
               >
                 {registEnded === false ? (
@@ -942,9 +942,9 @@ function DisplayRealEstate({
                       hover
                       style={{
                         padding: "0",
-                        // position: windowSize < 600 && "absolute",
+                        position: windowSize < 600 && "relative",
                         width: windowSize < 600 && "92vw",
-                        // height: windowSize < 600 && "300px",
+                        height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
                         display: windowSize < 800 && "block",
                         tableLayout: windowSize < 800 && "auto",
@@ -1013,7 +1013,6 @@ function DisplayRealEstate({
           </Row>
 
           <Row
-            className="mt-4"
             style={{
               margin: "0",
               padding: "0",
@@ -1276,6 +1275,7 @@ function DisplayRealEstate({
                           onChange={download(
                             demographics.map((item) => item.url)
                           )}
+                          disabled={demographics.length === 0}
                         />{" "}
                         Demographics ({demographics.length})
                       </div>
@@ -1285,6 +1285,7 @@ function DisplayRealEstate({
                           onChange={download(
                             purchaseAgreement.map((item) => item.url)
                           )}
+                          disabled={purchaseAgreement.length === 0}
                         />{" "}
                         Purchase Agreement ({purchaseAgreement.length})
                       </div>
@@ -1292,6 +1293,7 @@ function DisplayRealEstate({
                         <input
                           type="checkbox"
                           onChange={download(market.map((item) => item.url))}
+                          disabled={market.length === 0}
                         />{" "}
                         Market and Valuations ({market.length})
                       </div>
@@ -1311,6 +1313,7 @@ function DisplayRealEstate({
                           onChange={download(
                             thirdParty.map((item) => item.url)
                           )}
+                          disabled={thirdParty.length === 0}
                         />
                         Third Party Reports ({thirdParty.length})
                       </div>
@@ -1318,6 +1321,7 @@ function DisplayRealEstate({
                         <input
                           type="checkbox"
                           onChange={download(financial.map((item) => item.url))}
+                          disabled={financial.length === 0}
                         />{" "}
                         Financial Documents ({financial.length})
                       </div>
@@ -1325,6 +1329,7 @@ function DisplayRealEstate({
                         <input
                           type="checkbox"
                           onChange={download(titles.map((item) => item.url))}
+                          disabled={titles.length === 0}
                         />{" "}
                         Title and Insurance ({titles.length})
                       </div>
@@ -1373,6 +1378,7 @@ function DisplayRealEstate({
                         onClick={() => {
                           viewAll();
                         }}
+                        disabled={property.property.documents.length === 0}
                         className="mt-2 docs-view-btn"
                       >
                         View All
@@ -1392,10 +1398,10 @@ function DisplayRealEstate({
             onHide={toggleRegister}
             centered
           >
-            <Modal.Header className="auction-modal-header p-4">
+            <Modal.Header className="auction-modal-header px-4" closeButton>
               <Modal.Title
                 className="auction-modal-title"
-                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
               >
                 Buyer Registration
               </Modal.Title>
@@ -1439,7 +1445,7 @@ function DisplayRealEstate({
             }}
             centered
           >
-            <Modal.Header className="auction-modal-header p-3">
+            <Modal.Header className="auction-modal-header px-4">
               <Modal.Title className="auction-modal-title">
                 Enter Bid
               </Modal.Title>

@@ -110,7 +110,7 @@ const Carousel = styled(Slider)`
   // }
 `;
 
-function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
+function Dash({ windowSize, loader, setMessage }) {
   const [savedProp, setSavedProp] = useState([]);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [approvedAuctions, setApprovedAuctions] = useState([]);
@@ -776,27 +776,14 @@ function Dash({ windowSize, featureLength, loader, toggleToast, setMessage }) {
         centered
         className="fund-modal"
       >
-        <Modal.Header className="auction-modal-header">
-          <Modal.Title className="auction-modal-title px-3">
+        <Modal.Header className="auction-modal-header px-4" closeButton>
+          <Modal.Title
+            className="auction-modal-title"
+            style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
+          >
             Add Funds
           </Modal.Title>
         </Modal.Header>
-        <div
-          style={{
-            position: "absolute",
-            top: windowSize < 600 ? "0" : "25px",
-            right: windowSize < 600 ? "0" : "25px",
-            zIndex: "999",
-          }}
-        >
-          <CloseButton
-            className="modal-close"
-            style={{ backgroundColor: "white" }}
-            onClick={() => {
-              toggleFundReq();
-            }}
-          />
-        </div>
         <Modal.Body>
           <AddFund setMessage={setMessage} />
         </Modal.Body>

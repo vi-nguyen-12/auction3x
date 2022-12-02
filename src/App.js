@@ -453,27 +453,11 @@ function App() {
               onHide={() => setShowCookiesPolicy(!showCookiesPolicy)}
               centered
             >
-              <Modal.Header className="auction-modal-header">
-                <Modal.Title className="auction-modal-title px-3">
+              <Modal.Header className="auction-modal-header px-4" closeButton>
+                <Modal.Title className="auction-modal-title">
                   Cookies Policy
                 </Modal.Title>
               </Modal.Header>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-                <CloseButton
-                  className="modal-close"
-                  style={{ backgroundColor: "white" }}
-                  onClick={() => {
-                    setShowCookiesPolicy(!showCookiesPolicy);
-                  }}
-                />
-              </div>
               <Modal.Body unselectable="on" className="unselectable">
                 {parse(cookiesPolicy)}
               </Modal.Body>
@@ -489,30 +473,14 @@ function App() {
               onHide={toggleConfirmModal}
               contentclassname="confirm"
             >
-              <Modal.Header className="login-modal-header">
+              <Modal.Header className="login-modal-header px-4" closeButton>
                 <Modal.Title
-                  className="auction-modal-title px-3"
+                  className="auction-modal-title"
                   style={{ fontSize: windowSize < 800 && "1.5rem" }}
                 >
                   Re-Send Confirmation
                 </Modal.Title>
               </Modal.Header>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-                <CloseButton
-                  className="modal-close"
-                  style={{ backgroundColor: "white" }}
-                  onClick={() => {
-                    toggleConfirmModal();
-                  }}
-                />
-              </div>
               <Modal.Body>
                 <ReconfirmEmail
                   toggleConfirmModal={toggleConfirmModal}
@@ -544,30 +512,14 @@ function App() {
               contentclassname="login"
               className="form-group mb-4 mt-3"
             >
-              <Modal.Header className="login-modal-header">
+              <Modal.Header className="login-modal-header px-4" closeButton>
                 <Modal.Title
-                  className="auction-modal-title px-3"
+                  className="auction-modal-title"
                   style={{ fontSize: "2rem" }}
                 >
-                  Log In
+                  Login
                 </Modal.Title>
               </Modal.Header>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-                <CloseButton
-                  className="modal-close"
-                  style={{ backgroundColor: "white" }}
-                  onClick={() => {
-                    toggleSignIn();
-                  }}
-                />
-              </div>
               <Modal.Body>
                 <Login
                   toggleSignUp={toggleSignUp}
@@ -621,30 +573,14 @@ function App() {
               onHide={toggleForgotPass}
               contentclassname="forgotPass"
             >
-              <Modal.Header className="login-modal-header">
+              <Modal.Header className="login-modal-header PX-4" closeButton>
                 <Modal.Title
-                  className="auction-modal-title px-3"
-                  style={{ fontSize: windowSize < 600 && "30px" }}
+                  className="auction-modal-title"
+                  style={{ fontSize: windowSize < 600 && "1.6rem" }}
                 >
                   Forgot Password
                 </Modal.Title>
               </Modal.Header>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-                <CloseButton
-                  className="modal-close"
-                  style={{ backgroundColor: "white" }}
-                  onClick={() => {
-                    toggleForgotPass();
-                  }}
-                />
-              </div>
               <Modal.Body>
                 <ForgotPass
                   toggleForgotPass={toggleForgotPass}
@@ -674,30 +610,14 @@ function App() {
               onHide={toggleSignUp}
               contentclassname="custom-modal-style"
             >
-              <Modal.Header className="login-modal-header">
+              <Modal.Header className="login-modal-header px-4" closeButton>
                 <Modal.Title
-                  className="auction-modal-title px-3"
+                  className="auction-modal-title"
                   style={{ fontSize: "2rem" }}
                 >
                   Sign Up
                 </Modal.Title>
               </Modal.Header>
-              <div
-                style={{
-                  position: "absolute",
-                  top: windowSize < 600 ? "0" : "25px",
-                  right: windowSize < 600 ? "0" : "25px",
-                  zIndex: "999",
-                }}
-              >
-                <CloseButton
-                  className="modal-close"
-                  style={{ backgroundColor: "white" }}
-                  onClick={() => {
-                    toggleSignUp();
-                  }}
-                />
-              </div>
               <Modal.Body>
                 <SignUp
                   toggleSignUp={toggleSignUp}

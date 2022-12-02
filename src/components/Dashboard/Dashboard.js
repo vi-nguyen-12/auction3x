@@ -899,31 +899,14 @@ function Dashboard({
       </Modal>
 
       <Modal size="xl" show={showDocu} onHide={toggleShowDocu} centered>
-        <Modal.Header className="auction-modal-header">
-          <Modal.Title className="auction-modal-title px-3">
+        <Modal.Header className="auction-modal-header px-4" closeButton>
+          <Modal.Title
+            className="auction-modal-title"
+            style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
+          >
             Documents
           </Modal.Title>
         </Modal.Header>
-        <div
-          style={{
-            position: "absolute",
-            top: windowSize < 600 ? "0" : "25px",
-            right: windowSize < 600 ? "0" : "25px",
-            zIndex: "999",
-          }}
-        >
-          <CloseButton
-            className="modal-close"
-            style={{ backgroundColor: "white" }}
-            onClick={() => {
-              toggleShowDocu();
-              // setEdit({ ...edit.image, image: !edit.image });
-              // setEdit({ ...edit.docu, docu: !edit.docu });
-              const edits = { image: false, docu: false, video: false };
-              setEdit({ ...edit, ...edits });
-            }}
-          />
-        </div>
         <Modal.Body style={{ paddingBottom: "8rem" }}>
           <>
             <Row className="mt-3">
@@ -1112,6 +1095,7 @@ function Dashboard({
                               onClick={() => {
                                 window.open(document.url, "_blank");
                               }}
+                              className="rounded-0"
                             >
                               View
                             </Button>
@@ -1233,6 +1217,7 @@ function Dashboard({
                               onClick={() => {
                                 window.open(document.url, "_blank");
                               }}
+                              className="rounded-0"
                             >
                               View
                             </Button>
@@ -1334,30 +1319,14 @@ function Dashboard({
       </Modal>
 
       <Modal size="xl" show={showProperty} onHide={toggleShowProperty} centered>
-        <Modal.Header className="auction-modal-header">
+        <Modal.Header className="auction-modal-header px-4" closeButton>
           <Modal.Title
-            className="auction-modal-title px-3"
-            style={{ fontSize: windowSize < 800 && "1.5rem" }}
+            className="auction-modal-title"
+            style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
           >
             Property Details
           </Modal.Title>
         </Modal.Header>
-        <div
-          style={{
-            position: "absolute",
-            top: windowSize < 600 ? "0" : "25px",
-            right: windowSize < 600 ? "0" : "25px",
-            zIndex: "999",
-          }}
-        >
-          <CloseButton
-            className="modal-close"
-            style={{ backgroundColor: "white" }}
-            onClick={() => {
-              toggleShowProperty();
-            }}
-          />
-        </div>
         <Modal.Body>
           <PropertyDetails
             property={property}

@@ -129,44 +129,19 @@ const BuyAuthorized = ({
             const newWin = window.open(res.data.redirectUrl);
             if (!newWin || typeof newWin == "undefined") {
               setMessage("");
-              setMessage(
-                `The document is blocked by your browser. Please disable your pop-up blocker and try again.`
-              );
+              setTimeout(() => {
+                setMessage(
+                  `The document is blocked by your browser. Please disable your pop-up blocker and try again.`
+                );
+              }, 100);
             } else {
               newWin.focus();
+              window.open(res.data.redirectUrl, "_blank");
             }
 
             // setDocuUrl(res.data.redirectUrl);
             // toggleDocu();
           }
-        })
-        .catch((error) => {
-          setMessage("");
-          setMessage(error.message);
-          setLoader(false);
-        });
-    } else {
-      await authService
-        .getOldDocusign(docuId)
-        .then((res) => {
-          if (res.data.error === "Invalid Token") {
-            setMessage("");
-            setMessage("Your session ended. Please log in! ");
-            setLoader(false);
-            window.location.reload();
-          }
-          setLoader(false);
-          setDocuId(res.data.docusignId);
-          setDocuUrl(res.data.redirectUrl);
-          toggleDocu();
-          // if (
-          //   res.data.status !== "signing_complete" &&
-          //   res.data.status !== "viewing_complete"
-          // ) {
-          //   // window.open(res.data.redirectUrl);
-          //   setDocuUrl(res.data.redirectUrl);
-          //   toggleDocu();
-          // }
         })
         .catch((error) => {
           setMessage("");

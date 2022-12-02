@@ -604,7 +604,7 @@ function DisplayYacht({
                 <div
                   style={{
                     display: "grid",
-                    justifyContent: "right",
+                    justifyContent: windowSize < 800 ? "center" : "flex-end",
                     width: "100%",
                     margin: windowSize < 500 && "30px 0",
                   }}
@@ -668,7 +668,7 @@ function DisplayYacht({
                 style={{
                   width: "100%",
                   display: "flex",
-                  justifyContent: windowSize < 500 ? "center" : "flex-start",
+                  justifyContent: windowSize < 720 ? "center" : "flex-start",
                 }}
               >
                 {registEnded === false ? (
@@ -982,7 +982,7 @@ function DisplayYacht({
                       striped
                       style={{
                         padding: "0",
-                        position: windowSize < 600 && "absolute",
+                        position: windowSize < 600 && "relative",
                         width: windowSize < 600 && "92vw",
                         height: windowSize < 600 && "300px",
                         overflow: windowSize < 800 ? "auto" : "hidden",
@@ -1049,11 +1049,11 @@ function DisplayYacht({
           </Row>
 
           <Row
-            className="mt-4"
             style={{
               margin: "0",
               padding: "0",
               padding: windowSize < 500 ? "25px 15px" : "35px",
+              position: "relative",
             }}
           >
             <Col
@@ -1320,6 +1320,7 @@ function DisplayYacht({
                           onChange={download(
                             vesselRegist.map((item) => item.url)
                           )}
+                          disabled={vesselRegist.length === 0}
                         />{" "}
                         Vessel Registration Document ({vesselRegist.length})
                       </div>
@@ -1329,6 +1330,7 @@ function DisplayYacht({
                           onChange={download(
                             vesselMaintenance.map((item) => item.url)
                           )}
+                          disabled={vesselMaintenance.length === 0}
                         />{" "}
                         Vessel Maintenance Report ({vesselMaintenance.length})
                       </div>
@@ -1338,6 +1340,7 @@ function DisplayYacht({
                           onChange={download(
                             valuationDoc.map((item) => item.url)
                           )}
+                          disabled={valuationDoc.length === 0}
                         />{" "}
                         Vessel Valuation Report ({valuationDoc.length})
                       </div>
@@ -1346,6 +1349,7 @@ function DisplayYacht({
                         <input
                           type="checkbox"
                           onChange={download(engine.map((item) => item.url))}
+                          disabled={engine.length === 0}
                         />{" "}
                         Vessel Engine Details ({engine.length})
                       </div>
@@ -1365,6 +1369,7 @@ function DisplayYacht({
                           onChange={download(
                             deckDetails.map((item) => item.url)
                           )}
+                          disabled={deckDetails.length === 0}
                         />{" "}
                         Vessel Deck Details ({deckDetails.length})
                       </div>
@@ -1374,6 +1379,7 @@ function DisplayYacht({
                           onChange={download(
                             marineReport.map((item) => item.url)
                           )}
+                          disabled={marineReport.length === 0}
                         />{" "}
                         Marine Surveyor Report ({marineReport.length})
                       </div>
@@ -1383,6 +1389,7 @@ function DisplayYacht({
                           onChange={download(
                             vesselPerformance.map((item) => item.url)
                           )}
+                          disabled={vesselPerformance.length === 0}
                         />{" "}
                         Vessel Performance Report ({vesselPerformance.length})
                       </div>
@@ -1391,6 +1398,7 @@ function DisplayYacht({
                         <input
                           type="checkbox"
                           onChange={download(insurance.map((item) => item.url))}
+                          disabled={insurance.length === 0}
                         />{" "}
                         Vessel Insurance Document ({insurance.length})
                       </div>
@@ -1437,6 +1445,7 @@ function DisplayYacht({
                         onClick={() => {
                           viewAll();
                         }}
+                        disabled={property.property.documents.length === 0}
                         className="mt-2 docs-view-btn"
                       >
                         View All
@@ -1456,10 +1465,10 @@ function DisplayYacht({
             onHide={toggleRegister}
             centered
           >
-            <Modal.Header className="auction-modal-header p-4">
+            <Modal.Header className="auction-modal-header px-4" closeButton>
               <Modal.Title
                 className="auction-modal-title"
-                style={{ fontSize: windowSize < 600 ? "1.6rem" : "" }}
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
               >
                 Buyer Registration
               </Modal.Title>
