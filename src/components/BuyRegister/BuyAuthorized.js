@@ -134,9 +134,6 @@ const BuyAuthorized = ({
             } else {
               newWin.focus();
             }
-
-            // setDocuUrl(res.data.redirectUrl);
-            // toggleDocu();
           }
         })
         .catch((error) => {
