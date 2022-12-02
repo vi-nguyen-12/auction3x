@@ -23,7 +23,6 @@ const BuyAuthorized = ({
   client,
   showDocu,
 }) => {
-  console.log(showDocu);
   const { id } = useParams();
   const [loader, setLoader] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
@@ -124,8 +123,6 @@ const BuyAuthorized = ({
             res.data.status !== "signing_complete" &&
             res.data.status !== "viewing_complete"
           ) {
-            // const stuff = window.open(res.data.redirectUrl, "_blank");
-            // stuff.location.href = res.data.redirectUrl;
             const newWin = window.open(res.data.redirectUrl);
             if (!newWin || typeof newWin == "undefined") {
               setMessage("");
@@ -136,7 +133,6 @@ const BuyAuthorized = ({
               }, 100);
             } else {
               newWin.focus();
-              window.open(res.data.redirectUrl, "_blank");
             }
 
             // setDocuUrl(res.data.redirectUrl);
@@ -148,6 +144,21 @@ const BuyAuthorized = ({
           setMessage(error.message);
           setLoader(false);
         });
+    } else {
+      await authService.getOldDocusign(docuId).then((res) => {
+        const newWin = window.open(res.data.url);
+        if (!newWin || typeof newWin == "undefined") {
+          setMessage("");
+          setTimeout(() => {
+            setMessage(
+              `The document is blocked by your browser. Please disable your pop-up blocker and try again.`
+            );
+          }, 100);
+        } else {
+          newWin.focus();
+        }
+      });
+      setLoader(false);
     }
   };
 
