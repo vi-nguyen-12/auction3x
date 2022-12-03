@@ -685,7 +685,7 @@ h1 {
 
 .login-modal-header {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   background-image: linear-gradient(60deg, #f38f43, #c7723a, #a23830);
   color: white;
 }
