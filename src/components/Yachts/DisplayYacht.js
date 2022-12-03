@@ -1085,7 +1085,7 @@ function DisplayYacht({
                 }}
                 className="summary-container d-grid"
               >
-                <span>Executive Summary</span>
+                <span className="exe-title">Executive Summary</span>
                 {parse(property.property.details.description?.summary)}
               </div>
             </Col>
