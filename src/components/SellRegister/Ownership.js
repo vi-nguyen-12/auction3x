@@ -382,33 +382,31 @@ function Ownership({
                     />
                   </Col>
                 </Row>
-                {(ownershipType !== "Individual" ||
-                  ownershipType !== "Other") &&
-                  ownershipType !== "" && (
-                    <Row className="mt-3 d-flex justify-content-start">
-                      <Col xs={12} md={6} lg={6}>
-                        <span style={{ fontWeight: "600" }}>
-                          {ownershipType === "Joint"
-                            ? "Secondary Owner/Entity"
-                            : ownershipType === "Corporate"
-                            ? "Corporate Name"
-                            : ownershipType === "Trust"
-                            ? "Trust Name"
-                            : ""}{" "}
-                          <span style={{ color: "#ff0000" }}>*</span>
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control custom-input"
-                          value={otherOwnershipName}
-                          onChange={(e) =>
-                            setOtherOwnershipName(e.target.value)
-                          }
-                          required
-                        />
-                      </Col>
-                    </Row>
-                  )}
+                {(ownershipType === "Joint" ||
+                  ownershipType === "Corporate" ||
+                  ownershipType === "Trust") && (
+                  <Row className="mt-3 d-flex justify-content-start">
+                    <Col xs={12} md={6} lg={6}>
+                      <span style={{ fontWeight: "600" }}>
+                        {ownershipType === "Joint"
+                          ? "Secondary Owner/Entity"
+                          : ownershipType === "Corporate"
+                          ? "Corporate Name"
+                          : ownershipType === "Trust"
+                          ? "Trust Name"
+                          : ""}{" "}
+                        <span style={{ color: "#ff0000" }}>*</span>
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control custom-input"
+                        value={otherOwnershipName}
+                        onChange={(e) => setOtherOwnershipName(e.target.value)}
+                        required
+                      />
+                    </Col>
+                  </Row>
+                )}
                 <Row className="mt-3">
                   <Col>
                     <PlacesAutocomplete

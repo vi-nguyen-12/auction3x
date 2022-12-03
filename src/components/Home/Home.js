@@ -27,7 +27,7 @@ const Home = ({ toggleSignIn, windowSize, setMessage }) => {
         } else {
           setFeatureAuctions(
             res.data.filter(
-              (auction) => auction.auctionEndDate > new Date().toISOString()
+              (auction) => new Date().toISOString() < auction.auctionEndDate
             )
           );
           setLoader(false);

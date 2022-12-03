@@ -151,7 +151,7 @@ const Agree = ({
                 setMessage(res.data.error);
               } else {
                 setMessage("");
-                setMessage("Property Successfully Created!");
+                setMessage("Property successfully registered");
                 history.push("/");
                 // window.location.reload();
                 window.scrollTo(0, 0);

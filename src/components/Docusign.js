@@ -26,9 +26,12 @@ const Docusign = ({ toggleDocu, showDocu, setMessage }) => {
             response.data === "signing_complete" ||
             response.data === "viewing_complete"
           ) {
-            setMessage(
-              "Thanks for signing selling agreement with us. This tab will close in 10 seconds and back to main page to continue process!"
-            );
+            setMessage("");
+            setTimeout(() => {
+              setMessage(
+                "Thanks for signing selling agreement with us. This tab will close in 10 seconds and back to main page to continue process!"
+              );
+            }, 100);
             window.close();
           }
         });
