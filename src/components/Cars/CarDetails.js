@@ -30,7 +30,7 @@ function CarDetails({
   const [year, setYear] = useState(propertyTest.details?.year || "");
   const [color, setColor] = useState(propertyTest.details?.color || "");
   const [vin, setVin] = useState(propertyTest.details?.VIN || "");
-  const [mileage, setMileage] = useState(propertyTest.details?.mileage || "");
+  const [mileage, setMileage] = useState(propertyTest.details?.mileage);
   const [engine, setEngine] = useState(propertyTest.details?.engine || "");
   const [gearbox, setGearbox] = useState(propertyTest.details?.gearbox || "");
   const [power, setPower] = useState(propertyTest.details?.power || "");
