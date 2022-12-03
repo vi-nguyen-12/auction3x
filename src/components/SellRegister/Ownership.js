@@ -245,8 +245,6 @@ function Ownership({
     });
   };
 
-  console.log(ownershipType);
-
   return (
     <div className="wrapper">
       <SellHeader step={step} />

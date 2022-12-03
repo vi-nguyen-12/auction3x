@@ -176,7 +176,7 @@
   font-weight: 300;
 }
 
-.summary-container span {
+.exe-title {
   font-family: "Tzimmes";
   font-style: normal;
   font-weight: 600;
@@ -289,6 +289,10 @@
   padding: 100px 50px;
   height: 100vh;
 }
+
+.tab-content p > span{
+  color: #f3f3f3!important;
+}
 /* responsive width and height */
 
 @media (max-height: 830px) {
@@ -322,7 +326,7 @@
     padding: 0.5rem 1rem;
   }
 
-  .summary-container span {
+  .exe-title {
     font-size: 1.4rem;
   }
 

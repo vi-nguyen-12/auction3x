@@ -138,7 +138,7 @@ function RealEstateDetails({
     { value: "townhouse", name: "Townhouse" },
     { value: "bungalow", name: "Bungalow" },
     { value: "apartment", name: "Apartment" },
-    { value: "penhouse", name: "Penhouse" },
+    { value: "penthouse", name: "Penthouse" },
     { value: "condo", name: "Condo" },
     { value: "co_op", name: "Co-Op" },
     // { value: "land", name: "Land" },
@@ -331,9 +331,9 @@ function RealEstateDetails({
               name="city"
               value={city}
               // {...register("city")}
-              // onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => setCity(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">

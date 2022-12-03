@@ -1042,7 +1042,7 @@ function DisplayRealEstate({
                 }}
                 className="summary-container d-grid"
               >
-                <span>Executive Summary</span>
+                <span className="exe-title">Executive Summary</span>
                 {parse(property.property.details.description?.summary)}
               </div>
             </Col>
@@ -1145,6 +1145,7 @@ function DisplayRealEstate({
                       fontSize: windowSize < 600 ? "18px" : "20px",
                       textAlign: "left",
                     }}
+                    className="tab-content"
                   >
                     {parse(property.property.details.description?.location)}
                   </span>

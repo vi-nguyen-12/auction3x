@@ -285,7 +285,9 @@ function CarDetails({
                   required
                 />
                 <span className="d-flex justify-content-end mt-1">
-                  <Button onClick={() => setOther(false)}>Back</Button>
+                  <Button className="rounded-0" onClick={() => setOther(false)}>
+                    Back
+                  </Button>
                 </span>
               </>
             ) : (

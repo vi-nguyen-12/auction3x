@@ -153,7 +153,7 @@ const Agree = ({
                 setMessage("");
                 setMessage("Property successfully registered");
                 history.push("/");
-                // window.location.reload();
+                window.location.reload();
                 window.scrollTo(0, 0);
               }
             });
