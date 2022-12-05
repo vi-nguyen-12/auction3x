@@ -1394,7 +1394,8 @@ function DisplayJet({
                           )}
                           disabled={ownershipDoc.length === 0}
                         />{" "}
-                        Ownership Documents ({ownershipDoc.length})
+                        Ownership Documents{" "}
+                        {ownershipDoc.length > 0 && `(${ownershipDoc.length})`}
                       </div>
                       <div>
                         <input
@@ -1404,7 +1405,9 @@ function DisplayJet({
                           )}
                           disabled={registrationDoc.length === 0}
                         />{" "}
-                        Registration Documents ({registrationDoc.length})
+                        Registration Documents{" "}
+                        {registrationDoc.length > 0 &&
+                          `(${registrationDoc.length})`}
                       </div>
                       <div>
                         <input
@@ -1414,7 +1417,8 @@ function DisplayJet({
                           )}
                           disabled={valuationDoc.length === 0}
                         />{" "}
-                        Valuation Report ({valuationDoc.length})
+                        Valuation Report{" "}
+                        {valuationDoc.length > 0 && `(${valuationDoc.length})`}
                       </div>
 
                       <div>
@@ -1425,7 +1429,9 @@ function DisplayJet({
                           )}
                           disabled={detailHistory.length === 0}
                         />{" "}
-                        Jet Detail History ({detailHistory.length})
+                        Jet Detail History{" "}
+                        {detailHistory.length > 0 &&
+                          `(${detailHistory.length})`}
                       </div>
                       <div>
                         <input
@@ -1433,7 +1439,8 @@ function DisplayJet({
                           onChange={download(fitness.map((item) => item.url))}
                           disabled={fitness.length === 0}
                         />{" "}
-                        Fitness Report ({fitness.length})
+                        Fitness Report{" "}
+                        {fitness.length > 0 && `(${fitness.length})`}
                       </div>
                       <div>
                         <input
@@ -1441,7 +1448,8 @@ function DisplayJet({
                           onChange={download(electric.map((item) => item.url))}
                           disabled={electric.length === 0}
                         />{" "}
-                        Electric Work Details ({electric.length})
+                        Electric Work Details{" "}
+                        {electric.length > 0 && `(${electric.length})`}
                       </div>
                     </Col>
 
@@ -1460,7 +1468,8 @@ function DisplayJet({
                           onChange={download(loanDoc.map((item) => item.url))}
                           disabled={loanDoc.length === 0}
                         />{" "}
-                        Loan Documents ({loanDoc.length})
+                        Loan Documents{" "}
+                        {loanDoc.length > 0 && `(${loanDoc.length})`}
                       </div>
                       <div>
                         <input
@@ -1470,7 +1479,9 @@ function DisplayJet({
                           )}
                           disabled={inspectionDoc.length === 0}
                         />{" "}
-                        Inspection Report ({inspectionDoc.length})
+                        Inspection Report{" "}
+                        {inspectionDoc.length > 0 &&
+                          `(${inspectionDoc.length})`}
                       </div>
                       <div>
                         <input
@@ -1478,7 +1489,8 @@ function DisplayJet({
                           onChange={download(engineDoc.map((item) => item.url))}
                           disabled={engineDoc.length === 0}
                         />{" "}
-                        Engine Details ({engineDoc.length})
+                        Engine Details{" "}
+                        {engineDoc.length > 0 && `(${engineDoc.length})`}
                       </div>
 
                       <div>
@@ -1487,7 +1499,8 @@ function DisplayJet({
                           onChange={download(title.map((item) => item.url))}
                           disabled={title.length === 0}
                         />{" "}
-                        Title Documents ({title.length})
+                        Title Documents{" "}
+                        {title.length > 0 && `(${title.length})`}
                       </div>
                       <div>
                         <input
@@ -1495,7 +1508,8 @@ function DisplayJet({
                           onChange={download(details.map((item) => item.url))}
                           disabled={details.length === 0}
                         />{" "}
-                        Details Specification ({details.length})
+                        Details Specification{" "}
+                        {details.length > 0 && `(${details.length})`}
                       </div>
                       <div>
                         <input
@@ -1503,7 +1517,8 @@ function DisplayJet({
                           onChange={download(insurance.map((item) => item.url))}
                           disabled={insurance.length === 0}
                         />{" "}
-                        Insurance Documents ({insurance.length})
+                        Insurance Documents{" "}
+                        {insurance.length > 0 && `(${insurance.length})`}
                       </div>
                     </Col>
                   </Row>

@@ -124,6 +124,10 @@
   align-items: center;
 }
 
+.footer-icon-box img {
+  margin-left: 1.5rem;
+}
+
 .footer-copyRight-container {
   --bs-gutter-x: 0;
   background: #08080a;

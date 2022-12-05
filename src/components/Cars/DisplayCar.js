@@ -1307,7 +1307,7 @@ function DisplayCar({
                           onChange={download(title.map((item) => item.url))}
                           disabled={title.length === 0}
                         />{" "}
-                        Title Document ({title.length})
+                        Title Document {title.length > 0 && `(${title.length})`}
                       </div>
 
                       <div>
@@ -1318,7 +1318,8 @@ function DisplayCar({
                           )}
                           disabled={ownershipDoc.length === 0}
                         />{" "}
-                        Ownership Documents ({ownershipDoc.length})
+                        Ownership Documents{" "}
+                        {ownershipDoc.length > 0 && `(${ownershipDoc.length})`}
                       </div>
 
                       <div>
@@ -1329,7 +1330,9 @@ function DisplayCar({
                           )}
                           disabled={registrationDoc.length === 0}
                         />{" "}
-                        Registration Documents ({registrationDoc.length})
+                        Registration Documents{" "}
+                        {registrationDoc.length > 0 &&
+                          `(${registrationDoc.length})`}
                       </div>
 
                       <div>
@@ -1340,7 +1343,8 @@ function DisplayCar({
                           )}
                           disabled={valuationDoc.length === 0}
                         />{" "}
-                        Valuation Report ({valuationDoc.length})
+                        Valuation Report{" "}
+                        {valuationDoc.length > 0 && `(${valuationDoc.length})`}
                       </div>
                     </Col>
                     <Col
@@ -1358,7 +1362,8 @@ function DisplayCar({
                           onChange={download(loanDoc.map((item) => item.url))}
                           disabled={loanDoc.length === 0}
                         />{" "}
-                        Loan Documents ({loanDoc.length})
+                        Loan Documents{" "}
+                        {loanDoc.length > 0 && `(${loanDoc.length})`}
                       </div>
 
                       <div>
@@ -1369,7 +1374,9 @@ function DisplayCar({
                           )}
                           disabled={inspectionDoc.length === 0}
                         />{" "}
-                        Inspection Report ({inspectionDoc.length})
+                        Inspection Report{" "}
+                        {inspectionDoc.length > 0 &&
+                          `(${inspectionDoc.length})`}
                       </div>
 
                       <div>
@@ -1378,7 +1385,8 @@ function DisplayCar({
                           onChange={download(engineDoc.map((item) => item.url))}
                           disabled={engineDoc.length === 0}
                         />{" "}
-                        Engine Details ({engineDoc.length})
+                        Engine Details{" "}
+                        {engineDoc.length > 0 && `(${engineDoc.length})`}
                       </div>
 
                       <div>
@@ -1387,7 +1395,8 @@ function DisplayCar({
                           onChange={download(insurance.map((item) => item.url))}
                           disabled={insurance.length === 0}
                         />{" "}
-                        Insurance Document ({insurance.length})
+                        Insurance Document{" "}
+                        {insurance.length > 0 && `(${insurance.length})`}
                       </div>
                     </Col>
                   </Row>

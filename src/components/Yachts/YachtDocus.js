@@ -149,7 +149,6 @@ function YachtDocus({
     });
     e.target.value = null;
   };
-  const incompProperty = useSelector((state) => state.incompProperty);
 
   useEffect(() => {
     if (propertyTest.documents.length > 0) {

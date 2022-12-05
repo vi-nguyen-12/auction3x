@@ -1284,7 +1284,8 @@ function DisplayRealEstate({
                           )}
                           disabled={demographics.length === 0}
                         />{" "}
-                        Demographics ({demographics.length})
+                        Demographics{" "}
+                        {demographics.length > 0 && `(${demographics.length})`}
                       </div>
                       <div>
                         <input
@@ -1294,7 +1295,9 @@ function DisplayRealEstate({
                           )}
                           disabled={purchaseAgreement.length === 0}
                         />{" "}
-                        Purchase Agreement ({purchaseAgreement.length})
+                        Purchase Agreement{" "}
+                        {purchaseAgreement.length > 0 &&
+                          `(${purchaseAgreement.length})`}
                       </div>
                       <div>
                         <input
@@ -1302,7 +1305,8 @@ function DisplayRealEstate({
                           onChange={download(market.map((item) => item.url))}
                           disabled={market.length === 0}
                         />{" "}
-                        Market and Valuations ({market.length})
+                        Market and Valuations{" "}
+                        {market.length > 0 && `(${market.length})`}
                       </div>
                     </Col>
                     <Col
@@ -1322,7 +1326,8 @@ function DisplayRealEstate({
                           )}
                           disabled={thirdParty.length === 0}
                         />
-                        Third Party Reports ({thirdParty.length})
+                        Third Party Reports{" "}
+                        {thirdParty.length > 0 && `(${thirdParty.length})`}
                       </div>
                       <div>
                         <input
@@ -1330,7 +1335,8 @@ function DisplayRealEstate({
                           onChange={download(financial.map((item) => item.url))}
                           disabled={financial.length === 0}
                         />{" "}
-                        Financial Documents ({financial.length})
+                        Financial Documents{" "}
+                        {financial.length > 0 && `(${financial.length})`}
                       </div>
                       <div>
                         <input
@@ -1338,7 +1344,8 @@ function DisplayRealEstate({
                           onChange={download(titles.map((item) => item.url))}
                           disabled={titles.length === 0}
                         />{" "}
-                        Title and Insurance ({titles.length})
+                        Title and Insurance{" "}
+                        {titles.length > 0 && `(${titles.length})`}
                       </div>
                     </Col>
                   </Row>

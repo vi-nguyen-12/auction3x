@@ -100,7 +100,7 @@ function Footer({ windowSize, setMessage }) {
         >
           <Col md={6} className="mt-2 p-0 footer-icon-box">
             <img
-              src="/images/newName.Webp"
+              src="/images/Logo_Dark.png"
               alt=""
               width={windowSize < 768 ? "250px" : "300px"}
               height="auto"

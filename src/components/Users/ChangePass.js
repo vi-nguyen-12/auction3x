@@ -45,7 +45,7 @@ const ChangePass = ({ colorChange, toggleShow, setMessage, windowSize }) => {
 
   const onSubmit = (data) => {
     const datas = {
-      password: data.newPassword,
+      password: data?.newPassword || newPass,
       token: token,
     };
     if (!passMatch) {

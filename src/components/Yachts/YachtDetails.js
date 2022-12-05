@@ -172,8 +172,14 @@ function YachtDetails({
       }, 100);
     } else if (
       summary !== "<p><br></p>" &&
+      summary !== "" &&
+      summary !== undefined &&
       locationInfo !== "<p><br></p>" &&
-      marketInfo !== "<p><br></p>"
+      locationInfo !== "" &&
+      locationInfo !== undefined &&
+      marketInfo !== "<p><br></p>" &&
+      marketInfo !== "" &&
+      marketInfo !== undefined
     ) {
       const descriptions = {
         summary: summary ? summary : "",
@@ -238,9 +244,11 @@ function YachtDetails({
       setTimeout(() => {
         setMessage(
           `Please fill out ${
-            summary === "<p><br></p>"
+            summary === "<p><br></p>" || summary === "" || summary === undefined
               ? "Property Summary"
-              : locationInfo === "<p><br></p>"
+              : locationInfo === "<p><br></p>" ||
+                locationInfo === "" ||
+                locationInfo === undefined
               ? "Location Information"
               : "Market Information"
           }`
@@ -430,7 +438,7 @@ function YachtDetails({
               {...register("country")}
               onChange={(e) => setCountry(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>
@@ -452,7 +460,7 @@ function YachtDetails({
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -471,7 +479,7 @@ function YachtDetails({
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -486,7 +494,7 @@ function YachtDetails({
               maxLength="5"
               onChange={(e) => setZip(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>
@@ -531,7 +539,9 @@ function YachtDetails({
                   required
                 />
                 <span className="d-flex justify-content-end mt-1">
-                  <Button onClick={() => setOther(false)}>Back</Button>
+                  <Button className="rounded-0" onClick={() => setOther(false)}>
+                    Back
+                  </Button>
                 </span>
               </>
             ) : (

@@ -151,8 +151,14 @@ function CarDetails({
         }, 100);
       } else if (
         summary !== "<p><br></p>" &&
+        summary !== "" &&
+        summary !== undefined &&
         locationInfo !== "<p><br></p>" &&
-        marketInfo !== "<p><br></p>"
+        locationInfo !== "" &&
+        locationInfo !== undefined &&
+        marketInfo !== "<p><br></p>" &&
+        marketInfo !== "" &&
+        marketInfo !== undefined
       ) {
         const descriptions = {
           summary: summary ? summary : "",
@@ -218,9 +224,13 @@ function CarDetails({
         setTimeout(() => {
           setMessage(
             `Please fill out ${
-              summary === "<p><br></p>"
+              summary === "<p><br></p>" ||
+              summary === "" ||
+              summary === undefined
                 ? "Property Summary"
-                : locationInfo === "<p><br></p>"
+                : locationInfo === "<p><br></p>" ||
+                  locationInfo === "" ||
+                  locationInfo === undefined
                 ? "Location Information"
                 : "Market Information"
             }`
@@ -608,9 +618,9 @@ function CarDetails({
               className="form-control custom-input"
               value={country}
               {...register("country", { maxLength: 100 })}
-              // onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => setCountry(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>
@@ -624,9 +634,9 @@ function CarDetails({
               className="form-control custom-input"
               value={state}
               {...register("state", { maxLength: 100 })}
-              // onChange={(e) => setState(e.target.value)}
+              onChange={(e) => setState(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -638,9 +648,9 @@ function CarDetails({
               className="form-control custom-input"
               value={city}
               {...register("city", { maxLength: 100 })}
-              // onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => setCity(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -652,9 +662,9 @@ function CarDetails({
               className="form-control custom-input"
               value={zip}
               {...register("zipCode")}
-              // onChange={(e) => setZip(e.target.value)}
+              onChange={(e) => setZip(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>

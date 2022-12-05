@@ -170,8 +170,14 @@ function JetDetails({
           }, 100);
         } else if (
           summary !== "<p><br></p>" &&
+          summary !== "" &&
+          summary !== undefined &&
           locationInfo !== "<p><br></p>" &&
-          marketInfo !== "<p><br></p>"
+          locationInfo !== "" &&
+          locationInfo !== undefined &&
+          marketInfo !== "<p><br></p>" &&
+          marketInfo !== "" &&
+          marketInfo !== undefined
         ) {
           const descriptions = {
             summary: summary ? summary : "",
@@ -236,9 +242,13 @@ function JetDetails({
           setTimeout(() => {
             setMessage(
               `Please fill out ${
-                summary === "<p><br></p>"
+                summary === "<p><br></p>" ||
+                summary === "" ||
+                summary === undefined
                   ? "Property Summary"
-                  : locationInfo === "<p><br></p>"
+                  : locationInfo === "<p><br></p>" ||
+                    locationInfo === "" ||
+                    locationInfo === undefined
                   ? "Location Information"
                   : "Market Information"
               }`
@@ -345,10 +355,10 @@ function JetDetails({
               type="text"
               className="form-control custom-input"
               value={country}
-              // {...register("country")}
-              // onChange={(e) => setCountry(e.target.value)}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>
@@ -364,7 +374,7 @@ function JetDetails({
               {...register("state")}
               onChange={(e) => setState(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -378,7 +388,7 @@ function JetDetails({
               {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col md={4} xs={12} sm={12}>
@@ -392,7 +402,7 @@ function JetDetails({
               {...register("zipCode")}
               onChange={(e) => setZip(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>

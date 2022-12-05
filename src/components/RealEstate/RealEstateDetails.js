@@ -148,6 +148,8 @@ function RealEstateDetails({
     { value: "private_island", name: "Private Island" },
   ];
 
+  console.log(summary);
+
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
       setMessage("");
@@ -164,8 +166,14 @@ function RealEstateDetails({
         }, 100);
       } else if (
         summary !== "<p><br></p>" &&
+        summary !== "" &&
+        summary !== undefined &&
         locationInfo !== "<p><br></p>" &&
-        marketInfo !== "<p><br></p>"
+        locationInfo !== "" &&
+        locationInfo !== undefined &&
+        marketInfo !== "<p><br></p>" &&
+        marketInfo !== "" &&
+        marketInfo !== undefined
       ) {
         const descriptions = {
           summary: summary ? summary : "",
@@ -225,9 +233,13 @@ function RealEstateDetails({
         setTimeout(() => {
           setMessage(
             `Please fill out ${
-              summary === "<p><br></p>"
+              summary === "<p><br></p>" ||
+              summary === "" ||
+              summary === undefined
                 ? "Property Summary"
-                : locationInfo === "<p><br></p>"
+                : locationInfo === "<p><br></p>" ||
+                  locationInfo === "" ||
+                  locationInfo === undefined
                 ? "Location Information"
                 : "Market Information"
             }`
@@ -330,7 +342,7 @@ function RealEstateDetails({
               className="form-control custom-input"
               name="city"
               value={city}
-              // {...register("city")}
+              {...register("city")}
               onChange={(e) => setCity(e.target.value)}
               required
               // readOnly
@@ -345,10 +357,10 @@ function RealEstateDetails({
               className="form-control custom-input"
               name="state"
               value={state}
-              // {...register("state")}
-              // onChange={(e) => setState(e.target.value)}
+              {...register("state")}
+              onChange={(e) => setState(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>
@@ -362,10 +374,10 @@ function RealEstateDetails({
               className="form-control custom-input"
               name="country"
               value={country}
-              // {...register("country")}
-              // onChange={(e) => setCountry(e.target.value)}
+              {...register("country")}
+              onChange={(e) => setCountry(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
           <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
@@ -377,10 +389,10 @@ function RealEstateDetails({
               className="form-control custom-input"
               name="zipCode"
               value={zip}
-              // {...register("zipCode")}
-              // onChange={(e) => setZip(e.target.value)}
+              {...register("zipCode")}
+              onChange={(e) => setZip(e.target.value)}
               required
-              readOnly
+              // readOnly
             />
           </Col>
         </Row>

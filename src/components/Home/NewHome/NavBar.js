@@ -98,7 +98,7 @@ function NavBar({
       >
         <img
           onClick={handleLogoClick}
-          src="/images/newName.Webp"
+          src="/images/Logo_Dark.png"
           width={windowSize < 768 ? "150px" : "180px"}
           height="auto"
           alt="logo"

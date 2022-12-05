@@ -1328,7 +1328,8 @@ function DisplayYacht({
                           )}
                           disabled={vesselRegist.length === 0}
                         />{" "}
-                        Vessel Registration Document ({vesselRegist.length})
+                        Vessel Registration Document{" "}
+                        {vesselRegist.length > 0 && `(${vesselRegist.length})`}
                       </div>
                       <div>
                         <input
@@ -1338,7 +1339,9 @@ function DisplayYacht({
                           )}
                           disabled={vesselMaintenance.length === 0}
                         />{" "}
-                        Vessel Maintenance Report ({vesselMaintenance.length})
+                        Vessel Maintenance Report{" "}
+                        {vesselMaintenance.length > 0 &&
+                          `(${vesselMaintenance.length})`}
                       </div>
                       <div>
                         <input
@@ -1348,7 +1351,8 @@ function DisplayYacht({
                           )}
                           disabled={valuationDoc.length === 0}
                         />{" "}
-                        Vessel Valuation Report ({valuationDoc.length})
+                        Vessel Valuation Report{" "}
+                        {valuationDoc.length > 0 && `(${valuationDoc.length})`}
                       </div>
 
                       <div>
@@ -1357,7 +1361,8 @@ function DisplayYacht({
                           onChange={download(engine.map((item) => item.url))}
                           disabled={engine.length === 0}
                         />{" "}
-                        Vessel Engine Details ({engine.length})
+                        Vessel Engine Details{" "}
+                        {engine.length > 0 && `(${engine.length})`}
                       </div>
                     </Col>
                     <Col
@@ -1377,7 +1382,8 @@ function DisplayYacht({
                           )}
                           disabled={deckDetails.length === 0}
                         />{" "}
-                        Vessel Deck Details ({deckDetails.length})
+                        Vessel Deck Details{" "}
+                        {deckDetails.length > 0 && `(${deckDetails.length})`}
                       </div>
                       <div>
                         <input
@@ -1387,7 +1393,8 @@ function DisplayYacht({
                           )}
                           disabled={marineReport.length === 0}
                         />{" "}
-                        Marine Surveyor Report ({marineReport.length})
+                        Marine Surveyor Report{" "}
+                        {marineReport.length > 0 && `(${marineReport.length})`}
                       </div>
                       <div>
                         <input
@@ -1397,7 +1404,9 @@ function DisplayYacht({
                           )}
                           disabled={vesselPerformance.length === 0}
                         />{" "}
-                        Vessel Performance Report ({vesselPerformance.length})
+                        Vessel Performance Report{" "}
+                        {vesselPerformance.length > 0 &&
+                          `(${vesselPerformance.length})`}
                       </div>
 
                       <div>
@@ -1406,7 +1415,8 @@ function DisplayYacht({
                           onChange={download(insurance.map((item) => item.url))}
                           disabled={insurance.length === 0}
                         />{" "}
-                        Vessel Insurance Document ({insurance.length})
+                        Vessel Insurance Document{" "}
+                        {insurance.length > 0 && `(${insurance.length})`}
                       </div>
                     </Col>
                   </Row>
