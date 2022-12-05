@@ -124,7 +124,9 @@ const authService = {
   // },
 
   getFeaturedAuctions() {
-    return axios.get(apiUrl + "/api/auctions?isFeatured=true");
+    return axios.get(
+      apiUrl + "/api/auctions?isFeatured=true&time=upcoming&time=ongoing"
+    );
   },
 
   getUpcomingAuctions() {
