@@ -13,7 +13,7 @@ pipelines:
           caches:
             - node
           script:
-            - npm i npm-update-all -g
+            - npm i react-scripts npm-update-all -g
             - npm run build
       - step:
           name: 'Lint'
