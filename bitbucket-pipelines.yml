@@ -3,17 +3,18 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 
-image: node:16
+image: node
 
 pipelines:
   default:
     - parallel:
       - step:
           name: 'Build and Test'
+          caches:
+            - node
           script:
-            - rm -rf package-lock.json
             - npm install
-            - CI npm run build
+            - npm run build
       - step:
           name: 'Lint'
           script:
