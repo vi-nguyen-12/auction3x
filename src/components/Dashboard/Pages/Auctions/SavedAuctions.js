@@ -45,6 +45,7 @@ const Carousel3 = styled(Slider)`
 
   .slick-prev {
     height: 150px;
+    width: 50px;
     z-index: 1;
     background: url("./images/back-icon.png") center center no-repeat;
     margin: -50px;
@@ -56,6 +57,7 @@ const Carousel3 = styled(Slider)`
 
   .slick-next {
     height: 150px;
+    width: 50px;
     z-index: 1;
     background: url("./images/next-icon.png") center center no-repeat;
     margin: -50px;
@@ -107,13 +109,14 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
           )
         );
       } else if (searchBy === "address") {
-        setNewSavedAuctions(
-          SavedAuctions.filter((listing) =>
-            listing.property.details?.property_address?.formatted_street_address
-              ?.toLowerCase()
-              .includes(search?.toLowerCase())
-          )
+        const results = SavedAuctions.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewSavedAuctions(results);
       }
     } else {
       setNewSavedAuctions(SavedAuctions);

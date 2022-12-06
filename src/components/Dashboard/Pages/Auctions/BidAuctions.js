@@ -32,29 +32,30 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
     if (search) {
       if (searchBy === "id") {
         setNewBidAuctions(
-          bidAuctions.filter((listing) =>
-            listing._id?.includes(search.toLowerCase())
-          )
+          bidAuctions.filter((listing) => listing._id?.includes(search))
         );
       } else if (searchBy === "propType") {
         setNewBidAuctions(
           bidAuctions.filter((listing) =>
-            listing.property.type?.includes(search.toLowerCase())
+            listing.property.type?.includes(search)
           )
         );
       } else if (searchBy === "address") {
-        setNewBidAuctions(
-          bidAuctions.filter((listing) =>
-            listing.property.details.property_address.formatted_street_address
-              ?.toLowerCase()
-              .includes(search.toLowerCase())
-          )
+        const results = bidAuctions.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewBidAuctions(results);
       }
     } else {
       setNewBidAuctions(bidAuctions);
     }
   }, [search, searchBy, bidAuctions]);
+
+  // console.log(newBidAuctions);
 
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>

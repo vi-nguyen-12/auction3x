@@ -48,7 +48,7 @@ const Login = ({
           localStorage.setItem("token", response.data.data.token);
           toggleButton();
           toggleSignIn();
-          // history.push(location.pathname);
+          history.push("/");
           window.location.reload();
           window.setTimeout(() => {
             window.scrollTo(0, 0);
@@ -97,7 +97,7 @@ const Login = ({
           <label htmlFor="password" className="input_label">
             Password <span style={{ color: "red" }}> *</span>
           </label>
-          <div className="eyes_container" style={{right:"3%"}}>
+          <div className="eyes_container" style={{ right: "3%" }}>
             {hidden ? (
               <RiEyeCloseLine
                 className="eye-icon"

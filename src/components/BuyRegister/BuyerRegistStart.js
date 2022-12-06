@@ -65,13 +65,21 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
       }, 100);
     } else if (
       buyerControl === "broker" &&
-      !clientName &&
-      !clientEmail &&
-      !clientPhone
+      (clientName === "" ||
+        clientEmail === "" ||
+        clientPhone === "" ||
+        clientName === undefined ||
+        clientEmail === undefined ||
+        clientPhone === undefined)
     ) {
       setMessage("");
       setTimeout(() => {
         setMessage("Please fill in the client information");
+      }, 100);
+    } else if (!clientEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter a valid email address");
       }, 100);
     } else {
       if (buyerControl === "broker") {
@@ -199,7 +207,7 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
                     Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     className="form-control custom-input"
                     defaultValue={clientEmail}

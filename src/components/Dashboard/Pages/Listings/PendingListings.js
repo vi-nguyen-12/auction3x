@@ -59,13 +59,14 @@ function PendingListings({
           )
         );
       } else if (searchBy === "address") {
-        setNewPendingListings(
-          pendingListings.filter((listing) =>
-            listing.details.property_address.formatted_street_address
-              .toLowerCase()
-              .includes(search?.toLowerCase())
-          )
+        const results = pendingListings.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewPendingListings(results);
       }
     } else {
       setNewPendingListings(pendingListings);
