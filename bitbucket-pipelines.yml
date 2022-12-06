@@ -3,15 +3,14 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 
-image: node:16.13.0
+image: atlassian/default-image:2
 
 pipelines:
   default:
     - parallel:
       - step:
           name: 'Build and Test'
-          caches:
-            - node
+          image: node:16.13.0
           script:
             - npm i react-scripts react@17.0.2 react-dom@17.0.2 npm-update-all -g
             - npm run build
