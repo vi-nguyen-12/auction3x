@@ -13,5 +13,5 @@ pipelines:
           image: node:16.13.0
           script:
             - npm i
-            - npm run build
+            - CI=false npm run build
     
