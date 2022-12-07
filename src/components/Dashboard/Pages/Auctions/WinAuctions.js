@@ -45,13 +45,14 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
           )
         );
       } else if (searchBy === "address") {
-        setNewWinAuctions(
-          winAuctions.filter((listing) =>
-            listing.property.details.property_address.formatted_street_address
-              ?.toLowerCase()
-              .includes(search.toLowerCase())
-          )
+        const results = winAuctions.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewWinAuctions(results);
       }
     } else {
       setNewWinAuctions(winAuctions);

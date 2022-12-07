@@ -56,13 +56,14 @@ function LiveListings({
           )
         );
       } else if (searchBy === "address") {
-        setNewUpcomingListings(
-          upcomingListings.filter((listing) =>
-            listing.details.property_address.formatted_street_address
-              ?.toLowerCase()
-              .includes(search.toLowerCase())
-          )
+        const results = upcomingListings.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewUpcomingListings(results);
       }
     } else {
       setNewUpcomingListings((pre) => [...upcomingListings]);

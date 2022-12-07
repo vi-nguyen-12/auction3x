@@ -49,13 +49,14 @@ function IncompleteListing({ windowSize, searchBy, search, setMessage }) {
           )
         );
       } else if (searchBy === "address") {
-        setNewIncompleteListings(
-          IncompleteListings.filter((listing) =>
-            listing.details?.property_address?.formatted_street_address
-              ?.toLowerCase()
-              .includes(search.toLowerCase())
-          )
+        const results = IncompleteListings.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewIncompleteListings(results);
       }
     } else {
       setNewIncompleteListings(IncompleteListings);

@@ -65,13 +65,14 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           )
         );
       } else if (searchBy === "address") {
-        setNewPendingAuctions(
-          pendingAuctions.filter((listing) =>
-            listing.property.details.property_address.formatted_street_address
-              ?.toLowerCase()
-              .includes(search.toLowerCase())
-          )
+        const results = pendingAuctions.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewPendingAuctions(results);
       }
     } else {
       setNewPendingAuctions(pendingAuctions);

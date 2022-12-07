@@ -38,13 +38,14 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
           )
         );
       } else if (searchBy === "address") {
-        setNewSoldListings(
-          soldListings.filter((listing) =>
-            listing.details.property_address.formatted_street_address
-              .toLowerCase()
-              .includes(search?.toLowerCase())
-          )
+        const results = soldListings.filter((listing) =>
+          Object.values(listing.property?.details?.property_address)
+            .join(" ")
+            .toLowerCase()
+            .includes(search.toLowerCase())
         );
+
+        setNewSoldListings(results);
       }
     } else {
       setNewSoldListings(soldListings);

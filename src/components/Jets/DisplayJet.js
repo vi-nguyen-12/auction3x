@@ -563,7 +563,10 @@ function DisplayJet({
                 >
                   <button
                     className="registsBtn"
-                    disabled={registEnded}
+                    disabled={
+                      registEnded ||
+                      property.registerStartDate > new Date().toISOString()
+                    }
                     onClick={toggleRegister}
                   >
                     Register to Bid

@@ -538,7 +538,10 @@ function DisplayRealEstate({
                 >
                   <button
                     className="registsBtn"
-                    disabled={registEnded}
+                    disabled={
+                      registEnded ||
+                      property.registerStartDate > new Date().toISOString()
+                    }
                     onClick={toggleRegister}
                   >
                     Register to Bid
@@ -1420,23 +1423,6 @@ function DisplayRealEstate({
                 Buyer Registration
               </Modal.Title>
             </Modal.Header>
-            <div
-              style={{
-                position: "absolute",
-                top: windowSize < 600 ? "0" : "25px",
-                right: windowSize < 600 ? "0" : "25px",
-                zIndex: "999",
-              }}
-            >
-              <CloseButton
-                className="modal-close"
-                style={{ backgroundColor: "white" }}
-                onClick={() => {
-                  toggleRegister();
-                  setRefresh(!refresh);
-                }}
-              />
-            </div>
             <Modal.Body>
               <MultiBuyForm
                 windowSize={windowSize}

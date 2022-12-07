@@ -14,6 +14,7 @@ function DashHeader({
   windowSize,
   setSearchBy,
   setSearch,
+  search,
   suggest,
   setSuggest,
   setMessage,
@@ -56,7 +57,8 @@ function DashHeader({
       {windowSize > 768 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
-            {location === "/Dashboard/Listings/YourListings" ? (
+            {history.location.pathname ===
+            "/Dashboard/Listings/YourListings" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -66,7 +68,7 @@ function DashHeader({
               >
                 Your Listings
               </h1>
-            ) : location === "/Dashboard/Messaging" ? (
+            ) : history.location.pathname === "/Dashboard/Messaging" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -76,7 +78,7 @@ function DashHeader({
               >
                 Messaging
               </h1>
-            ) : location === "/Dashboard/Profile" ? (
+            ) : history.location.pathname === "/Dashboard/Profile" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -86,7 +88,7 @@ function DashHeader({
               >
                 Profile
               </h1>
-            ) : location === "/Dashboard" ? (
+            ) : history.location.pathname === "/Dashboard" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -96,7 +98,8 @@ function DashHeader({
               >
                 Dashboard
               </h1>
-            ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Auctions/SavedAuctions" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -106,7 +109,8 @@ function DashHeader({
               >
                 Saved Auctions
               </h1>
-            ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Auctions/BuyerApproval" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -116,7 +120,8 @@ function DashHeader({
               >
                 Buyer Approval
               </h1>
-            ) : location === "/Dashboard/Auctions/BidAuctions" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Auctions/BidAuctions" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -126,7 +131,8 @@ function DashHeader({
               >
                 Bid Auctions
               </h1>
-            ) : location === "/Dashboard/Auctions/WinAuctions" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Auctions/WinAuctions" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -136,7 +142,8 @@ function DashHeader({
               >
                 Won Auctions
               </h1>
-            ) : location === "/Dashboard/Listings/PendingApproval" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Listings/PendingApproval" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -146,7 +153,8 @@ function DashHeader({
               >
                 Pending Approval
               </h1>
-            ) : location === "/Dashboard/Listings/SoldListings" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Listings/SoldListings" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -156,7 +164,8 @@ function DashHeader({
               >
                 Sold Listings
               </h1>
-            ) : location === "/Dashboard/Listings/IncompleteListing" ? (
+            ) : history.location.pathname ===
+              "/Dashboard/Listings/IncompleteListing" ? (
               <h1
                 style={{
                   fontFamily: "Interstate",
@@ -170,9 +179,9 @@ function DashHeader({
           </Col>
           <Col>
             <div className="search">
-              {location === "/Dashboard/Messaging" ? (
+              {history.location.pathname === "/Dashboard/Messaging" ? (
                 <></>
-              ) : location === "/Dashboard/Profile" ? (
+              ) : history.location.pathname === "/Dashboard/Profile" ? (
                 <></>
               ) : (
                 <div className="d-flex">
@@ -198,43 +207,49 @@ function DashHeader({
                       onInput={(e) =>
                         (e.target.value = e.target.value.toLowerCase())
                       }
+                      value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      placeholder="Search Here"
+                      placeholder={
+                        history.location.pathname === "/Dashboard"
+                          ? "Directory Search"
+                          : "Search Here"
+                      }
                     />
                     <FiSearch color="black" size={25} />
                   </div>
 
-                  {location === "/Dashboard" && suggest?.length > 0 && (
-                    <div
-                      className="position-absolute bg-white shadow"
-                      style={{
-                        width: "25rem",
-                        height: "8rem",
-                        marginTop: "50px",
-                        borderRadius: "0 0 5px 5px",
-                        overflow: "auto",
-                      }}
-                    >
-                      {suggest.map((suggestion, index) => (
-                        <div
-                          className="suggest w-100 p-2 px-3"
-                          style={{
-                            cursor: "pointer",
-                            borderBottom: "1px solid #e9ecef",
-                          }}
-                          onClick={() => {
-                            setLoader(true);
-                            history.push(suggestion.value);
-                            // setSuggest([]);
-                            window.location.reload();
-                            setLoader(false);
-                          }}
-                        >
-                          {suggestion.name}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {history.location.pathname === "/Dashboard" &&
+                    suggest?.length > 0 && (
+                      <div
+                        className="position-absolute bg-white shadow"
+                        style={{
+                          width: "25rem",
+                          height: "8rem",
+                          marginTop: "50px",
+                          borderRadius: "0 0 5px 5px",
+                          overflow: "auto",
+                        }}
+                      >
+                        {suggest.map((suggestion, index) => (
+                          <div
+                            className="suggest w-100 p-2 px-3"
+                            style={{
+                              cursor: "pointer",
+                              borderBottom: "1px solid #e9ecef",
+                            }}
+                            onClick={() => {
+                              setLoader(true);
+                              history.push(suggestion.value);
+                              // setSuggest([]);
+                              window.location.reload();
+                              setLoader(false);
+                            }}
+                          >
+                            {suggestion.name}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                 </div>
               )}
               <Button
@@ -406,7 +421,7 @@ function DashHeader({
           </Row>
           <Row style={{ marginBottom: "30px" }}>
             <Col style={{ display: "flex", justifyContent: "center" }}>
-              {location === "/Dashboard/Messaging" ? (
+              {history.location.pathname === "/Dashboard/Messaging" ? (
                 <h1
                   style={{
                     fontFamily: "Interstate",
@@ -416,7 +431,7 @@ function DashHeader({
                 >
                   Messaging
                 </h1>
-              ) : location === "/Dashboard/Profile" ? (
+              ) : history.location.pathname === "/Dashboard/Profile" ? (
                 <h1
                   style={{
                     fontFamily: "Interstate",
@@ -447,13 +462,15 @@ function DashHeader({
                         onInput={(e) =>
                           (e.target.value = e.target.value.toLowerCase())
                         }
+                        value={search}
                         onChange={(e) => setSearch(e.target.value)}
                       />
                       <FiSearch color="black" size={25} />
                     </div>
                   </div>
                   <div className="d-flex justify-content-center mt-4">
-                    {location === "/Dashboard/Listings/AuctionListings" ? (
+                    {history.location.pathname ===
+                    "/Dashboard/Listings/AuctionListings" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -463,7 +480,7 @@ function DashHeader({
                       >
                         Your Listings
                       </h1>
-                    ) : location === "/Dashboard" ? (
+                    ) : history.location.pathname === "/Dashboard" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -473,7 +490,8 @@ function DashHeader({
                       >
                         Dashboard
                       </h1>
-                    ) : location === "/Dashboard/Auctions/SavedAuctions" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Auctions/SavedAuctions" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -483,7 +501,8 @@ function DashHeader({
                       >
                         Saved Auctions
                       </h1>
-                    ) : location === "/Dashboard/Auctions/BuyerApproval" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Auctions/BuyerApproval" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -493,7 +512,8 @@ function DashHeader({
                       >
                         Buyer Approval
                       </h1>
-                    ) : location === "/Dashboard/Auctions/BidAuctions" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Auctions/BidAuctions" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -503,7 +523,8 @@ function DashHeader({
                       >
                         Bid Auctions
                       </h1>
-                    ) : location === "/Dashboard/Auctions/WinAuctions" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Auctions/WinAuctions" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -513,7 +534,8 @@ function DashHeader({
                       >
                         Won Auctions
                       </h1>
-                    ) : location === "/Dashboard/Listings/PendingApproval" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Listings/PendingApproval" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -523,7 +545,8 @@ function DashHeader({
                       >
                         Pending Approval
                       </h1>
-                    ) : location === "/Dashboard/Listings/SoldListings" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Listings/SoldListings" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",
@@ -533,7 +556,8 @@ function DashHeader({
                       >
                         Sold Listings
                       </h1>
-                    ) : location === "/Dashboard/Listings/IncompleteListing" ? (
+                    ) : history.location.pathname ===
+                      "/Dashboard/Listings/IncompleteListing" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",

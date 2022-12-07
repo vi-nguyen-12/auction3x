@@ -194,7 +194,7 @@ function Dashboard({
   }, [location, loca, setMessage]);
 
   const [searchBy, setSearchBy] = useState("id");
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   const [property, setProperty] = useState();
   const [documents, setDocuments] = useState([]);
@@ -634,6 +634,7 @@ function Dashboard({
             windowSize={windowSize}
             location={location ? location : loca.pathname}
             setSearch={setSearch}
+            search={search}
             setSearchBy={setSearchBy}
             suggest={suggest}
             setSuggest={setSuggest}
