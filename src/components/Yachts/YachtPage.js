@@ -63,7 +63,6 @@ function YachtPage({
   setImgYacht,
   toggleSignIn,
   windowSize,
-  filter,
   setResultLength,
   setCenters,
   setMessage,
@@ -74,12 +73,11 @@ function YachtPage({
   const history = useHistory();
   const slider = useRef();
 
-  const urlSearchParams = new URLSearchParams(history.location.search);
-  const filters = Object.fromEntries(urlSearchParams.entries());
-
   useEffect(() => {
     toggleChange();
     async function fetchData() {
+      const urlSearchParams = new URLSearchParams(history.location.search);
+      const filters = Object.fromEntries(urlSearchParams.entries());
       if (!history.location.search) {
         let auctions = [];
         setLoader(true);
@@ -127,7 +125,7 @@ function YachtPage({
       }
     }
     fetchData();
-  }, [history.location.search, setResultLength, setMessage]);
+  }, [history.location.search, setResultLength, setMessage, toggleChange]);
 
   useEffect(() => {
     if (auctions) {
@@ -147,7 +145,7 @@ function YachtPage({
       console.log(imageUrl);
       setImgYacht(imageUrl);
     }
-  }, [auctions]);
+  }, [auctions, setCenters, setImgYacht]);
 
   let settings = {
     dots: false,
