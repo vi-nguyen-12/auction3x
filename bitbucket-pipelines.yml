@@ -27,6 +27,5 @@ pipelines:
       step: 
           name: Deploy to S3
           deployment: staging
-          script:
-            - pipe: atlassian/aws-
+          
           
