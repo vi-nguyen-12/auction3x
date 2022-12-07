@@ -195,7 +195,7 @@ function YachtDocus({
         );
       });
     }
-  }, []);
+  }, [propertyTest.documents]);
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));
