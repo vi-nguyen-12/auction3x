@@ -127,13 +127,7 @@ function YachtPage({
       }
     }
     fetchData();
-  }, [
-    history.location.search,
-    setResultLength,
-    setMessage,
-    filters,
-    toggleChange,
-  ]);
+  }, [history.location.search, setResultLength, setMessage]);
 
   useEffect(() => {
     if (auctions) {
@@ -147,14 +141,13 @@ function YachtPage({
           };
         })
       );
-      const imageUrl = auctions.map((image) => {
-        for (let i = 0; i < image.property.images.length; i++) {
-          return { url: image.property.images[i].url, id: image._id };
-        }
+      const imageUrl = auctions.map((auction) => {
+        return { url: auction.property.images[0].url, id: auction._id };
       });
+      console.log(imageUrl);
       setImgYacht(imageUrl);
     }
-  }, [auctions, setCenters, setImgYacht]);
+  }, [auctions]);
 
   let settings = {
     dots: false,

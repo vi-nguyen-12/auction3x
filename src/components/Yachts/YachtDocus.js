@@ -195,7 +195,7 @@ function YachtDocus({
         );
       });
     }
-  }, [propertyTest.documents]);
+  }, []);
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));
@@ -248,79 +248,6 @@ function YachtDocus({
     ...others,
     ...(listing_agreement ? [...listing_agreement] : []),
   ];
-
-  // const saveInfo = async (data) => {
-  //   if (propId || params.id) {
-  //     if (parseInt(steps) === 1) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         details: {
-  //           ...propertyData,
-  //           images,
-  //           videos,
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.saveInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(4);
-  //         }
-  //       });
-  //     } else if (parseInt(steps) === 2) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         details: {
-  //           images,
-  //           videos,
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.saveInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(4);
-  //         }
-  //       });
-  //     } else if (parseInt(steps) === 3) {
-  //       const datas = {
-  //         id: propId ? propId : params.id,
-  //         details: {
-  //           documents,
-  //           step: 4,
-  //         },
-  //       };
-  //       await authService.saveInfo(datas).then((response) => {
-  //         if (response.data.error) {
-  //           alert(response.data.error);
-  //         } else {
-  //           toggleSellStep(4);
-  //         }
-  //       });
-  //     }
-  //   } else {
-  //     const datas = {
-  //       ...ownership,
-  //       ...propertyData,
-  //       images,
-  //       videos,
-  //       documents,
-  //       step: 4,
-  //     };
-  //     await authService.postPropInfo(datas).then((response) => {
-  //       if (response.data.error) {
-  //         alert(response.data.error);
-  //       } else {
-  //         toggleSellStep(4);
-  //         getPropId(response.data._id);
-  //       }
-  //     });
-  //   }
-  // };
 
   const onSubmit = async (data) => {
     if (doc1.length !== 0 && doc2.length !== 0) {
