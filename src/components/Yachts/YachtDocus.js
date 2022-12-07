@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
 import { Row, Col, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Loading from "../../components/Loading";
 
 function YachtDocus({
@@ -13,7 +12,6 @@ function YachtDocus({
   step,
   setStep,
   ownership,
-  sellStep,
   propertyTest,
   setPropertyTest,
   toggleSignIn,
@@ -104,7 +102,6 @@ function YachtDocus({
     : [];
 
   const params = useParams();
-  const steps = sellStep ? sellStep : params.step ? params.step : 0;
   const onChange = (number) => async (e) => {
     setLoader(true);
 
@@ -198,7 +195,7 @@ function YachtDocus({
         );
       });
     }
-  }, []);
+  }, [propertyTest.documents]);
   const handleDelete = (url) => () => {
     setDocument1(doc1.filter((document) => document.url !== url));
     setDocument2(doc2.filter((document) => document.url !== url));

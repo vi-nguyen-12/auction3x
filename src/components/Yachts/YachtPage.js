@@ -127,7 +127,13 @@ function YachtPage({
       }
     }
     fetchData();
-  }, [history.location.search, setResultLength, setMessage]);
+  }, [
+    history.location.search,
+    setResultLength,
+    setMessage,
+    filters,
+    toggleChange,
+  ]);
 
   useEffect(() => {
     if (auctions) {
