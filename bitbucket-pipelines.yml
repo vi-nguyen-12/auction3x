@@ -14,4 +14,19 @@ pipelines:
           script:
             - npm i
             - CI=false npm run build
-    
+  custom:
+    production:
+      - step:
+          name: Building
+          image: node:16.13.0
+          script: 
+            - npm i
+            - CI=false npm run build
+          artifacts:
+            - build/**
+      step: 
+          name: Deploy to S3
+          deployment: staging
+          script:
+            - pipe: atlassian/aws-
+          
