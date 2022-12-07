@@ -1,0 +1,17 @@
+# This is an example Starter pipeline configuration
+# Use a skeleton to build, test and deploy using manual and parallel steps
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+image: atlassian/default-image:2
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Build and test the app
+          image: node:16.13.0
+          script:
+            - npm i
+            - npm run build
+    
