@@ -154,7 +154,7 @@ function YachtPage({
       });
       setImgYacht(imageUrl);
     }
-  }, [auctions]);
+  }, [auctions, setCenters, setImgYacht]);
 
   let settings = {
     dots: false,
