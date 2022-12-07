@@ -6,32 +6,13 @@
 image: atlassian/default-image:2
 
 pipelines:
-  default:
-    - parallel:
+  branches:
+    master:
       - step:
-          name: 'Build and Test'
+          name: Build and test the app
           image: node:16.13.0
           script:
-            - npm i react-scripts react@17.0.2 react-dom@17.0.2 npm-update-all -g
+            - npm i
+            - npm run test
             - npm run build
-      - step:
-          name: 'Lint'
-          script:
-            - echo "Your linting goes here..."
-      - step:
-          name: 'Security scan'
-          script:
-            - echo "Your security scan goes here..."
-
-    # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: 'Deployment to Staging'
-        deployment: staging
-        script:
-          - echo "Your deployment to staging script goes here..."
-    - step:
-        name: 'Deployment to Production'
-        deployment: production
-        trigger: 'manual'
-        script:
-          - echo "Your deployment to production script goes here..."
+    
