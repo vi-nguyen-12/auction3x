@@ -53,7 +53,9 @@ function ContactUs({ windowSize, setMessage }) {
         } else {
           setMessage("");
           setMessage(res.data.message);
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 200);
         }
       });
     } else {

@@ -161,7 +161,7 @@ const BuyAuthorized = ({
 
   const handleSubmit = async () => {
     if (agree) {
-      if ((!client?.documents || !client) && docuId) {
+      if ((client?.documents || !client) && docuId) {
         setLoader(true);
         await authService.getDocuSignStatus(docuId).then((res) => {
           if (

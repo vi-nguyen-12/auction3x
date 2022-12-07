@@ -15,7 +15,6 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
   const [clientPhone, setClientPhone] = useState(client?.phone);
   const [agreement, setAgreement] = useState(false);
   const [attorney, setAttorney] = useState(client?.documents);
-  console.log(agreement);
   const toggleAgree = () => {
     setAgreement(!agreement);
   };
@@ -76,7 +75,10 @@ function BuyerRegistStart({ setStep, step, setMessage, setClient, client }) {
       setTimeout(() => {
         setMessage("Please fill in the client information");
       }, 100);
-    } else if (!clientEmail.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+    } else if (
+      clientEmail &&
+      !clientEmail?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+    ) {
       setMessage("");
       setTimeout(() => {
         setMessage("Please enter a valid email address");
