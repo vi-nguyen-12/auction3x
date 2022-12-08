@@ -10,7 +10,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 function PropertyPageHeader({
   path,
-  windowSize,
   setFilter,
   toggleImage,
   toggleImgCar,
@@ -18,7 +17,6 @@ function PropertyPageHeader({
   toggleImgYacht,
   toggleMap,
   resultLength,
-  setLocation,
 }) {
   const history = useHistory();
   const urlSearchParams = new URLSearchParams(history.location.search);
