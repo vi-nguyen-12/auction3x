@@ -418,6 +418,25 @@ function PropertyPageHeader({
         setAuctionType(filters?.auctionType);
         setPropertyType(filters?.type);
       }
+    } else {
+      setAuctionType("");
+      setPropertyType("");
+      setRealType("");
+      setCondition("");
+      setMake("");
+      setMinPrice("");
+      setMaxPrice("");
+      setMinMileage("");
+      setMaxMileage("");
+      setMinYear("");
+      setMaxYear("");
+      setMinLength("");
+      setMaxLength("");
+      setSelectedPrice("");
+      setSelectedMileage("");
+      setSelectedYear("");
+      setSelectedLength("");
+      setAddress("");
     }
   }, [
     history.location.search,

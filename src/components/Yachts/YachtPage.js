@@ -142,7 +142,6 @@ function YachtPage({
       const imageUrl = auctions.map((auction) => {
         return { url: auction.property.images[0].url, id: auction._id };
       });
-      console.log(imageUrl);
       setImgYacht(imageUrl);
     }
   }, [auctions, setCenters, setImgYacht]);
