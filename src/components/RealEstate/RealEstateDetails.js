@@ -148,8 +148,6 @@ function RealEstateDetails({
     { value: "private_island", name: "Private Island" },
   ];
 
-  console.log(summary);
-
   const onSubmit = (data) => {
     if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
       setMessage("");

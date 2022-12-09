@@ -26,8 +26,18 @@ function Ownership({
   windowSize,
 }) {
   const user = useSelector((state) => state.user);
-  const [ownershipType, setOwnershipType] = useState();
-  const [otherOwnershipName, setOtherOwnershipName] = useState();
+  const [ownershipType, setOwnershipType] = useState(
+    propertyTest.details?.ownership_type?.name || ""
+  );
+  const [otherOwnershipType, setOtherOwnershipType] = useState(
+    propertyTest.details?.ownership_type?.name || ""
+  );
+  const [otherOwnershipName, setOtherOwnershipName] = useState(
+    propertyTest.details?.ownership_type?.secondary_owner ||
+      propertyTest.details?.ownership_type?.corporate_name ||
+      propertyTest.details?.ownership_type?.trust_name ||
+      ""
+  );
   const [addedNewOwner, setAddedNewOwner] = useState([]);
   const [addNewRow, setAddNewRow] = useState(false);
   const [newOwner, setNewOwner] = useState({ name: "", email: "", phone: "" });
@@ -158,6 +168,14 @@ function Ownership({
             email: email,
             address: address,
             broker_documents: [...listingAgreements, ...attorney],
+            ownership_type: {
+              name: otherOwnershipType ? otherOwnershipType : ownershipType,
+              secondary_owner:
+                ownershipType === "joint" ? otherOwnershipName : null,
+              corporate_name:
+                ownershipType === "corporate" ? otherOwnershipName : null,
+              trust_name: ownershipType === "trust" ? otherOwnershipName : null,
+            },
           },
           step: 1,
         };
@@ -169,6 +187,14 @@ function Ownership({
             phone: phone,
             email: email,
             address: address,
+            ownership_type: {
+              name: otherOwnershipType ? otherOwnershipType : ownershipType,
+              secondary_owner:
+                ownershipType === "joint" ? otherOwnershipName : null,
+              corporate_name:
+                ownershipType === "corporate" ? otherOwnershipName : null,
+              trust_name: ownershipType === "trust" ? otherOwnershipName : null,
+            },
           },
           step: 1,
         };
@@ -183,6 +209,14 @@ function Ownership({
         delete submitedData.details.broker_id;
       submitedData?.details?.broker_documents?.length === 0 &&
         delete submitedData.details.broker_documents;
+      submitedData.details.ownership_type.secondary_owner === null &&
+        delete submitedData.details.ownership_type.secondary_owner;
+      submitedData.details.ownership_type.corporate_name === null &&
+        delete submitedData.details.ownership_type.corporate_name;
+      submitedData.details.ownership_type.trust_name === null &&
+        delete submitedData.details.ownership_type.trust_name;
+
+      console.log(submitedData);
       if (propertyTest._id) {
         if (propertyTest.type === "real-estate") {
           authService
@@ -234,6 +268,8 @@ function Ownership({
       }
     }
   };
+
+  console.log(ownershipType);
 
   const handleChange = (address) => {
     setAddress(address);
@@ -328,18 +364,25 @@ function Ownership({
                     <span style={{ fontWeight: "600", color: "black" }}>
                       Ownership Type <span style={{ color: "#ff0000" }}>*</span>
                     </span>
-                    {ownershipType === "Other" ? (
+                    {ownershipType === "Other" || otherOwnershipType !== "" ? (
                       <div className="d-flex justify-content-between align-items-end">
                         <input
                           type="text"
                           name="ownershipType"
                           className="form-control custom-input px-1"
-                          onChange={(e) => setOwnershipType(e.target.value)}
+                          value={otherOwnershipType}
+                          onChange={(e) =>
+                            setOtherOwnershipType(e.target.value)
+                          }
+                          required
                         />
                         <button
                           type="button"
                           className="general_btn py-2 px-3"
-                          onClick={() => setOwnershipType("")}
+                          onClick={() => {
+                            setOwnershipType("");
+                            setOtherOwnershipType("");
+                          }}
                         >
                           Back
                         </button>
@@ -347,14 +390,15 @@ function Ownership({
                     ) : (
                       <Form.Select
                         className="form-control custom-input"
+                        value={ownershipType}
                         onChange={(e) => setOwnershipType(e.target.value)}
-                        // required
+                        required
                       >
                         <option value="">Select Ownership Type</option>
-                        <option value="Individual">Individual</option>
-                        <option value="Joint">Joint</option>
-                        <option value="Corporate">Corporate</option>
-                        <option value="Trust">Trust</option>
+                        <option value="individual">Individual</option>
+                        <option value="joint">Joint</option>
+                        <option value="corporate">Corporate</option>
+                        <option value="trust">Trust</option>
                         <option value="Other">Other</option>
                       </Form.Select>
                     )}
@@ -380,17 +424,17 @@ function Ownership({
                     />
                   </Col>
                 </Row>
-                {(ownershipType === "Joint" ||
-                  ownershipType === "Corporate" ||
-                  ownershipType === "Trust") && (
+                {(ownershipType === "joint" ||
+                  ownershipType === "corporate" ||
+                  ownershipType === "trust") && (
                   <Row className="mt-3 d-flex justify-content-start">
                     <Col xs={12} md={6} lg={6}>
                       <span style={{ fontWeight: "600" }}>
-                        {ownershipType === "Joint"
+                        {ownershipType === "joint"
                           ? "Secondary Owner/Entity"
-                          : ownershipType === "Corporate"
+                          : ownershipType === "corporate"
                           ? "Corporate Name"
-                          : ownershipType === "Trust"
+                          : ownershipType === "trust"
                           ? "Trust Name"
                           : ""}{" "}
                         <span style={{ color: "#ff0000" }}>*</span>
