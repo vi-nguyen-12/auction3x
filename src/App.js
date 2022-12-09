@@ -334,6 +334,7 @@ function App() {
 
   const acceptCookies = () => {
     localStorage.setItem("acceptCookies", true);
+    localStorage.setItem("acceptCookiesTime", new Date().toISOString());
     window.location.reload();
   };
 

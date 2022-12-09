@@ -328,7 +328,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .cookies-info .cookies {
@@ -339,7 +339,7 @@ h1 {
   font-family: "Interstate";
   font-style: normal;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   color: #08080a;
 }
 
@@ -359,9 +359,9 @@ h1 {
   font-family: "Interstate";
   font-style: normal;
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #ffffff;
-  padding: 0.7rem 2.5rem;
+  padding: 0.5rem 1.5rem;
 }
 
 @media screen and (max-width: 480px) {
@@ -810,6 +810,18 @@ h1 {
 
   .cookies-info {
     display: grid;
+  }
+
+  .cookies-info span {
+    font-size: 0.8rem;
+  }
+
+  .cookies-info p {
+    font-size: 0.8rem;
+  }
+
+  .cookies-info button {
+    font-size: 0.8rem;
   }
 }
 

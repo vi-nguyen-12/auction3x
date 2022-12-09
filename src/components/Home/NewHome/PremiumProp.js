@@ -62,7 +62,7 @@ const Wrap = styled.div`
 const HomeBottom = styled.div`
   position: absolute;
   bottom: 0;
-  height: 27vh;
+  height: 30vh;
   width: 100%;
   background: linear-gradient(
     180deg,
@@ -125,6 +125,7 @@ const BarGroup = styled.div`
     align-items: center;
     align-content: center;
     width: 100%;
+    bottom: 0;
   }
 `;
 
@@ -165,7 +166,7 @@ function PremiumProp({
           <BarGroup
             className="Bar-group"
             style={{
-              bottom: windowSize < 1270 && "5px",
+              bottom: windowSize < 1270 && "0",
               right: windowSize < 1270 && "0",
             }}
           >
