@@ -168,6 +168,7 @@ function PremiumProp({
             style={{
               bottom: windowSize < 1270 && "0",
               right: windowSize < 1270 && "0",
+              display: windowSize < 800 && "none",
             }}
           >
             {featureAuctions.length > 0 &&

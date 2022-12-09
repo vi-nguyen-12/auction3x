@@ -67,6 +67,7 @@ const ChangePass = ({ colorChange, toggleShow, setMessage, windowSize }) => {
           setMessage("");
           setMessage("Successfully Change Password!");
           history.push("/");
+          window.location.reload();
         }
       });
     }

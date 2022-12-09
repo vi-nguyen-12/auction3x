@@ -318,7 +318,7 @@ h1 {
   z-index: 100;
   bottom: 1rem;
   width: 100%;
-  padding: 0 5vw;
+  padding: 0 8vw;
 }
 
 .cookies-info {
@@ -326,7 +326,7 @@ h1 {
   border: 1px solid #d1dcee;
   box-shadow: -15px 25px 60px rgba(25, 90, 255, 0.05);
   display: flex;
-  justify-content: space-between;
+  justify-content:space-evenly;
   align-items: center;
   padding: 1rem 3rem;
 }
