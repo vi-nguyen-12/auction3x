@@ -197,7 +197,11 @@ function PremiumProp({
               <Wrap key={index} setIndex={setIndex}>
                 <a href={`/DisplayAuctions/${auction._id}`}>
                   <img
-                    src={auction.property.images[0].url}
+                    src={
+                      auction.property.images.filter(
+                        (img) => img.isMain === true
+                      )[0]?.url || auction.property.images[0]?.url
+                    }
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                     loading="lazy"
@@ -291,21 +295,15 @@ function PremiumProp({
               <Wrap key={index} setIndex={setIndex}>
                 <a href={`/DisplayAuctions/${auction._id}`}>
                   <img
-                    src={auction.property.images[0].url}
+                    src={
+                      auction.property.images.filter(
+                        (img) => img.isMain === true
+                      )[0]?.url || auction.property.images[0]?.url
+                    }
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                     loading="lazy"
                   />
-                  {/* <div
-                    style={{
-                      width: "100vw",
-                      height: "100vh",
-                      background: `url(${auction.property.images[0].url})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  ></div> */}
                 </a>
                 <HomeBottom>
                   <h2
@@ -386,7 +384,11 @@ function PremiumProp({
               <Wrap key={index} setIndex={setIndex}>
                 <a href={`/DisplayAuctions/${auction._id}`}>
                   <img
-                    src={auction.property.images[0].url}
+                    src={
+                      auction.property.images.filter(
+                        (img) => img.isMain === true
+                      )[0]?.url || auction.property.images[0]?.url
+                    }
                     alt="auction"
                     style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
                     loading="lazy"

@@ -276,7 +276,10 @@ function DisplayCar({
               <span className="badge">Reserved Met!</span>
             )} */}
             <img
-              src={property.property.images[0].url}
+              src={
+                property.property.images.filter((img) => img.isMain === true)[0]
+                  ?.url || property.property.images[0]?.url
+              }
               style={{ padding: windowSize < 500 && "0 15px" }}
               alt="Snow"
               className="display-property"

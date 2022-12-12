@@ -103,7 +103,10 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
         }}
         variant="top"
         onClick={handleDisplay}
-        src={data.property.images[0].url}
+        src={
+          data.property.images.filter((img) => img.isMain === true)[0]?.url ||
+          data.property.images[0]?.url
+        }
         alt="property"
       />
       <button
