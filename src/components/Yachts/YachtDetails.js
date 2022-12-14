@@ -83,10 +83,10 @@ function YachtDetails({
     propertyTest.details?.others || ""
   );
   const [reservedAmount, setReservedAmount] = useState(
-    propertyTest.reservedAmount || ""
+    propertyTest?.reservedAmount || 0
   );
   const [discussedAmount, setDiscussedAmount] = useState(
-    propertyTest.discussedAmount || ""
+    propertyTest?.discussedAmount || 0
   );
 
   const manufacturer = [
@@ -163,7 +163,12 @@ function YachtDetails({
   };
 
   const onSubmit = (data) => {
-    if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
+    if (parseInt(reservedAmount) === 0 && parseInt(discussedAmount) === 0) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter discussed amount or reserved amount");
+      }, 100);
+    } else if (parseInt(data.reservedAmount) < parseInt(data.discussedAmount)) {
       setMessage("");
       setTimeout(() => {
         setMessage(

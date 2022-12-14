@@ -269,8 +269,6 @@ function Ownership({
     }
   };
 
-  console.log(ownershipType);
-
   const handleChange = (address) => {
     setAddress(address);
   };
@@ -668,7 +666,7 @@ function Ownership({
                     Owner Email <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control custom-input"
                     defaultValue={
                       ownerEmail
@@ -719,7 +717,7 @@ function Ownership({
                     Broker Name <span style={{ color: "#ff0000" }}>*</span>
                   </span>
                   <input
-                    disabled={true}
+                    // disabled={true}
                     type="text"
                     className="form-control custom-input"
                     value={

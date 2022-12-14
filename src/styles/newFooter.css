@@ -32,7 +32,7 @@
   font-family: "Interstate", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 50px;
+  font-size: 45px;
   line-height: 60px;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
   display: flex;
   align-items: center;
   color: #6d6d6d;
-  padding: 1rem 0;
+  /* padding: 1rem 0; */
 }
 
 .small-box {

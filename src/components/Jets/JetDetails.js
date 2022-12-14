@@ -82,10 +82,10 @@ function JetDetails({
   );
 
   const [reservedAmount, setReservedAmount] = useState(
-    propertyTest.reservedAmount || ""
+    propertyTest?.reservedAmount || 0
   );
   const [discussedAmount, setDiscussedAmount] = useState(
-    propertyTest.discussedAmount || ""
+    propertyTest?.discussedAmount || 0
   );
 
   const [other, setOther] = useState(false);
@@ -152,115 +152,110 @@ function JetDetails({
   };
 
   const onSubmit = (data) => {
-    if (reservedAmount > 0 && discussedAmount > 0) {
-      if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
+    if (parseInt(reservedAmount) === 0 && parseInt(discussedAmount) === 0) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter discussed amount or reserved amount");
+      }, 100);
+    } else if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage(
+          "Reserved amount should be greater than or equal to discussed amount"
+        );
+      }, 100);
+    } else {
+      if (year_built > new Date().getFullYear()) {
+        setMessage("");
+        setTimeout(() => {
+          setMessage("Built year must be less than or equal to current year.");
+        }, 100);
+      } else if (
+        summary !== "<p><br></p>" &&
+        summary !== "" &&
+        summary !== undefined &&
+        locationInfo !== "<p><br></p>" &&
+        locationInfo !== "" &&
+        locationInfo !== undefined &&
+        marketInfo !== "<p><br></p>" &&
+        marketInfo !== "" &&
+        marketInfo !== undefined
+      ) {
+        const descriptions = {
+          summary: summary ? summary : "",
+          investment: invest ? invest : "",
+          location: locationInfo ? locationInfo : "",
+          market: marketInfo ? marketInfo : "",
+        };
+
+        (!invest || invest === "<p><br></p>") && delete descriptions.investment;
+
+        const submitedData = {
+          registration_mark,
+          aircraft_builder_name,
+          aircraft_model_designation,
+          aircraft_serial_no,
+          engine_builder_name,
+          engine_model_designation,
+          number_of_engines,
+          propeller_builder_name,
+          year_built,
+          propeller_model_designation,
+          imported_aircraft: isImport,
+          description: descriptions,
+          property_address: {
+            formatted_street_address: address,
+            country,
+            state,
+            city,
+            zip_code: zip,
+            lat,
+            lng,
+          },
+          reservedAmount: parseInt(reservedAmount),
+          discussedAmount: parseInt(discussedAmount),
+          step: 2,
+        };
+
+        authService
+          .editProperty(propertyTest._id, submitedData)
+          .then((res) => {
+            if (res.data.error) {
+              if (res.data.error === "Invalid Token") {
+                setMessage("");
+                setMessage("Your session ended. Please log in! ");
+                toggleSignIn(true);
+              } else {
+                setMessage("");
+                setMessage(res.data.error);
+              }
+            } else {
+              setPropertyTest(res.data);
+              setStep(step + 1);
+            }
+          })
+          .catch((error) => {
+            setMessage("");
+            setMessage(error.message);
+          });
+      } else {
         setMessage("");
         setTimeout(() => {
           setMessage(
-            "Reserved amount should be greater than or equal to discussed amount"
+            `Please fill out ${
+              summary === "<p><br></p>" ||
+              summary === "" ||
+              summary === undefined
+                ? "Property Summary"
+                : locationInfo === "<p><br></p>" ||
+                  locationInfo === "" ||
+                  locationInfo === undefined
+                ? "Location Information"
+                : "Market Information"
+            }`
           );
         }, 100);
-      } else {
-        if (year_built > new Date().getFullYear()) {
-          setMessage("");
-          setTimeout(() => {
-            setMessage(
-              "Built year must be less than or equal to current year."
-            );
-          }, 100);
-        } else if (
-          summary !== "<p><br></p>" &&
-          summary !== "" &&
-          summary !== undefined &&
-          locationInfo !== "<p><br></p>" &&
-          locationInfo !== "" &&
-          locationInfo !== undefined &&
-          marketInfo !== "<p><br></p>" &&
-          marketInfo !== "" &&
-          marketInfo !== undefined
-        ) {
-          const descriptions = {
-            summary: summary ? summary : "",
-            investment: invest ? invest : "",
-            location: locationInfo ? locationInfo : "",
-            market: marketInfo ? marketInfo : "",
-          };
-
-          (!invest || invest === "<p><br></p>") &&
-            delete descriptions.investment;
-
-          const submitedData = {
-            registration_mark,
-            aircraft_builder_name,
-            aircraft_model_designation,
-            aircraft_serial_no,
-            engine_builder_name,
-            engine_model_designation,
-            number_of_engines,
-            propeller_builder_name,
-            year_built,
-            propeller_model_designation,
-            imported_aircraft: isImport,
-            description: descriptions,
-            property_address: {
-              formatted_street_address: address,
-              country,
-              state,
-              city,
-              zip_code: zip,
-              lat,
-              lng,
-            },
-            reservedAmount: parseInt(reservedAmount),
-            discussedAmount: parseInt(discussedAmount),
-            step: 2,
-          };
-
-          authService
-            .editProperty(propertyTest._id, submitedData)
-            .then((res) => {
-              if (res.data.error) {
-                if (res.data.error === "Invalid Token") {
-                  setMessage("");
-                  setMessage("Your session ended. Please log in! ");
-                  toggleSignIn(true);
-                } else {
-                  setMessage("");
-                  setMessage(res.data.error);
-                }
-              } else {
-                setPropertyTest(res.data);
-                setStep(step + 1);
-              }
-            })
-            .catch((error) => {
-              setMessage("");
-              setMessage(error.message);
-            });
-        } else {
-          setMessage("");
-          setTimeout(() => {
-            setMessage(
-              `Please fill out ${
-                summary === "<p><br></p>" ||
-                summary === "" ||
-                summary === undefined
-                  ? "Property Summary"
-                  : locationInfo === "<p><br></p>" ||
-                    locationInfo === "" ||
-                    locationInfo === undefined
-                  ? "Location Information"
-                  : "Market Information"
-              }`
-            );
-          }, 100);
-        }
       }
-    } else {
-      setMessage("");
-      setTimeout(() => {
-        setMessage("Please fill out discussed amount and reserved amount");
-      }, 100);
     }
   };
 

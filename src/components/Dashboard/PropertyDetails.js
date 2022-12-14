@@ -80,9 +80,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
   const [ownerAddress, setOwnerAddress] = useState(
     property.details.address || ""
   );
-  const [ownerEmail] = useState(
-    property.details?.broker_name ? "" : property.details?.email
-  );
+  const [ownerEmail] = useState(property.details?.owner_email || "");
   const [brokerName] = useState(
     property.details?.broker_name ? property.details?.broker_name : ""
   );
@@ -398,6 +396,8 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
     }
   };
 
+  console.log(property);
+
   return (
     <Container className="mb-4">
       {loader && <Loading />}
@@ -413,7 +413,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
         </Col>
       </Row>
       <Row className="mt-2">
-        <Col xs={12} md={property.details.broker_name ? 12 : 4}>
+        <Col xs={12} md={property.details.broker_name ? 6 : 4}>
           <span style={{ fontWeight: "600", color: "black" }}>Owner Name</span>
           <input
             type="text"
@@ -421,6 +421,17 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
             style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
             defaultValue={ownerName}
             onChange={(e) => (property.details.owner_name = e.target.value)}
+            disabled={!edit.step1}
+          />
+        </Col>
+        <Col xs={12} md={property.details.broker_name ? 6 : 4}>
+          <span style={{ fontWeight: "600", color: "black" }}>Owner Email</span>
+          <input
+            type="text"
+            className="form-control custom-input"
+            style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
+            defaultValue={ownerEmail}
+            onChange={(e) => (property.details.owner_email = e.target.value)}
             disabled={!edit.step1}
           />
         </Col>
@@ -453,7 +464,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                 disabled={!edit.step1}
               />
             </Col>
-            <Col xs={12} md={4}>
+            {/* <Col xs={12} md={4}>
               <span style={{ fontWeight: "600", color: "black" }}>
                 Owner Email
               </span>
@@ -465,7 +476,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
                 onChange={(e) => (property.details.email = e.target.value)}
                 disabled={!edit.step1}
               />
-            </Col>
+            </Col> */}
           </>
         )}
       </Row>

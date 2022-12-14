@@ -67,10 +67,10 @@ function CarDetails({
   const [otherType, setOtherType] = useState(false);
 
   const [reservedAmount, setReservedAmount] = useState(
-    propertyTest.reservedAmount || ""
+    propertyTest?.reservedAmount || 0
   );
   const [discussedAmount, setDiscussedAmount] = useState(
-    propertyTest.discussedAmount || ""
+    propertyTest?.discussedAmount || 0
   );
 
   const carMake = [
@@ -136,7 +136,12 @@ function CarDetails({
   };
 
   const onSubmit = (data) => {
-    if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
+    if (parseInt(reservedAmount) === 0 && parseInt(discussedAmount) === 0) {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please enter discussed amount or reserved amount");
+      }, 100);
+    } else if (parseInt(reservedAmount) < parseInt(discussedAmount)) {
       setMessage("");
       setTimeout(() => {
         setMessage(

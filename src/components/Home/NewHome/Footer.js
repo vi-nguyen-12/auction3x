@@ -35,9 +35,9 @@ function Footer({ windowSize, setMessage }) {
         <Row className="d-flex justify-content-center align-items-center top-row">
           <Col
             className="d-flex align-items-center"
-            style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem 4rem" }}
+            style={{ padding: windowSize < 800 ? "3rem 0.6rem" : "3rem 3rem" }}
           >
-            <Row className="subscript-container py-5 px-4">
+            <Row className="subscript-container py-4 px-4">
               <Col
                 md={windowSize < 1455 ? 12 : 6}
                 xs={12}
