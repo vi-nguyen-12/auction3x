@@ -729,6 +729,7 @@ const authService = {
   disclaimerAgreement(data) {
     return axios.put(
       apiUrl + `/api/users/${data.userId}/due_diligence/${data.propertyId}`,
+      {},
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),

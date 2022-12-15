@@ -16,7 +16,7 @@ import RegistrationTimer from "../Auctions/RegistrationTimer";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IoImageOutline } from "react-icons/io5";
 import { RiVideoLine } from "react-icons/ri";
-import { Md360 } from "react-icons/md";
+import PropDocDisclaimer from "../Company/PropDocDisclaimer";
 import ReservedMet from "../../images/ReservedMet.png";
 import { IoLocationOutline } from "react-icons/io5";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -116,6 +116,7 @@ function DisplayCar({
   toggleDocu,
   setDocuUrl,
 }) {
+  console.log(property);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
@@ -135,6 +136,8 @@ function DisplayCar({
   const [showRegister, setShowRegister] = useState(false);
   const toggleRegister = () => setShowRegister(!showRegister);
   const togglePlaceBid = () => setPlaceBid(!placeBid);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const toggleDisclaimer = () => setShowDisclaimer(!showDisclaimer);
   const [downloadFiles, setDownloadFiles] = useState([]);
 
   let disabled = new Date().toISOString() >= property.auctionEndDate;
@@ -1126,6 +1129,12 @@ function DisplayCar({
               onSelect={(k) => {
                 if (k === "Document Vault" && !user._id) {
                   toggleSignIn();
+                } else if (
+                  k === "Document Vault" &&
+                  user._id &&
+                  !user.dueDiligence.includes(property.property._id)
+                ) {
+                  toggleDisclaimer();
                 } else {
                   setViewDocs(k);
                 }
@@ -1482,6 +1491,31 @@ function DisplayCar({
                 auctionId={property._id}
                 toggleDocu={toggleDocu}
                 setDocuUrl={setDocuUrl}
+              />
+            </Modal.Body>
+          </Modal>
+
+          <Modal
+            size="lg"
+            backdrop="static"
+            keyboard={false}
+            show={showDisclaimer}
+            onHide={toggleDisclaimer}
+            centered
+          >
+            <Modal.Header className="auction-modal-header px-4" closeButton>
+              <Modal.Title
+                className="auction-modal-title"
+                style={{ fontSize: windowSize < 600 ? "1.6rem" : "2.3rem" }}
+              >
+                Disclaimer
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <PropDocDisclaimer
+                propertyId={property.property._id}
+                userId={user._id}
+                setMessage={setMessage}
               />
             </Modal.Body>
           </Modal>
