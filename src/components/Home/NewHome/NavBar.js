@@ -43,7 +43,7 @@ function NavBar({
   const handleOnClick = (page) => () => {
     bodyColorChange("#F5F9FF");
     history.push(`/${page}`);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleLogout = async () => {

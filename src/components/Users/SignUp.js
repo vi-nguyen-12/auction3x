@@ -190,8 +190,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
     <>
       {loader ? <Loading /> : null}
       <form onSubmit={handleSubmit(onSubmit)} className="pb-3">
-        <Row className="mt-3">
-          <Col md={6} xs={12} className="d-flex align-items-center">
+        <Row>
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="text"
@@ -207,7 +207,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               </label>
             </div>
           </Col>
-          <Col md={6} xs={12} className="d-flex align-items-center">
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="text"
@@ -225,8 +225,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
             </div>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col md={6} xs={12} className="d-flex align-items-center">
+        <Row>
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="text"
@@ -242,7 +242,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               </label>
             </div>
           </Col>
-          <Col md={6} xs={12} className="d-flex align-items-center">
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="email"
@@ -260,7 +260,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col md={12} className="d-flex align-items-center">
+          <Col md={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="password"
@@ -404,7 +404,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           </Col>
         </Row>
         <Row className="mt-4">
-          <Col md={6} xs={12} className="d-flex align-items-center">
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="text"
@@ -420,7 +420,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               </label>
             </div>
           </Col>
-          <Col md={6} xs={12} className="d-flex align-items-center">
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <input
                 type="text"
@@ -462,7 +462,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               </label>
             </div>
           </Col>
-          <Col md={6} xs={12} className="d-flex align-items-center">
+          <Col md={6} xs={12} className="d-flex align-items-center mt-3">
             <div className="form-group position-relative w-100">
               <label htmlFor="agentFile">Broker License/Certificate</label>
               <input

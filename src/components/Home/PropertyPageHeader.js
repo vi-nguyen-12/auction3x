@@ -10,7 +10,6 @@ import { useHistory, useParams } from "react-router-dom";
 
 function PropertyPageHeader({
   path,
-  windowSize,
   setFilter,
   toggleImage,
   toggleImgCar,
@@ -18,7 +17,6 @@ function PropertyPageHeader({
   toggleImgYacht,
   toggleMap,
   resultLength,
-  setLocation,
 }) {
   const history = useHistory();
   const urlSearchParams = new URLSearchParams(history.location.search);
@@ -420,6 +418,25 @@ function PropertyPageHeader({
         setAuctionType(filters?.auctionType);
         setPropertyType(filters?.type);
       }
+    } else {
+      setAuctionType("");
+      setPropertyType("");
+      setRealType("");
+      setCondition("");
+      setMake("");
+      setMinPrice("");
+      setMaxPrice("");
+      setMinMileage("");
+      setMaxMileage("");
+      setMinYear("");
+      setMaxYear("");
+      setMinLength("");
+      setMaxLength("");
+      setSelectedPrice("");
+      setSelectedMileage("");
+      setSelectedYear("");
+      setSelectedLength("");
+      setAddress("");
     }
   }, [
     history.location.search,
