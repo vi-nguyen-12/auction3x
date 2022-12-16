@@ -55,8 +55,6 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
     }
   }, [search, searchBy, bidAuctions]);
 
-  // console.log(newBidAuctions);
-
   return (
     <Container style={{ width: "100vw", height: "100vh", marginTop: "50px" }}>
       <Row>

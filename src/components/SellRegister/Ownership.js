@@ -216,7 +216,6 @@ function Ownership({
       submitedData.details.ownership_type.trust_name === null &&
         delete submitedData.details.ownership_type.trust_name;
 
-      console.log(submitedData);
       if (propertyTest._id) {
         if (propertyTest.type === "real-estate") {
           authService

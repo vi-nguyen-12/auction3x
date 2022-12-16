@@ -396,8 +396,6 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
     }
   };
 
-  console.log(property);
-
   return (
     <Container className="mb-4">
       {loader && <Loading />}
