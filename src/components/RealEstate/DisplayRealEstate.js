@@ -247,7 +247,7 @@ function DisplayRealEstate({
     <>
       {property && (
         <>
-          <div style={{ position: "relative", width: "100%" }}>
+          <div className="position-relative w-100 mt-5 pt-5">
             <div
               className="mini-header"
               style={{ padding: windowSize < 500 && "20px 15px 0 15px" }}
@@ -300,13 +300,7 @@ function DisplayRealEstate({
                 <button className="img-btn" onClick={togglePics}>
                   <IoImageOutline className="info_logo" />
                 </button>
-                <Modal
-                  size="xl"
-                  style={{ height: "100%" }}
-                  show={showPics}
-                  onHide={togglePics}
-                  centered
-                >
+                <Modal fullscreen show={showPics} onHide={togglePics} centered>
                   <Modal.Body>
                     <div
                       style={{
@@ -329,8 +323,7 @@ function DisplayRealEstate({
                       {property.property.images.map((item, index) => (
                         <Wrap key={index}>
                           <img
-                            width="100%"
-                            height="100%"
+                            style={{ aspectRatio: "16/9", borderRadius: "0" }}
                             src={item.url}
                             alt=""
                           />

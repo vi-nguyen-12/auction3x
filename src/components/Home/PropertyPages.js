@@ -32,8 +32,10 @@ const PropertyPages = ({
   toggleSignIn,
   windowSize,
   setMessage,
+  colorChange,
 }) => {
   useEffect(() => {
+    colorChange("");
     toggleShow(true);
     setHeaderWidth("100vw");
     setPositionLeft("20%");

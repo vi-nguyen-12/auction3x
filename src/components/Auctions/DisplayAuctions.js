@@ -16,9 +16,6 @@ import YachtPageBg from "../../images/YachtPageBg.png";
 
 function DisplayAuctions({
   toggleChange,
-  setHeaderWidth,
-  setPositionLeft,
-  setPadRight,
   toggleShow,
   toggleSignIn,
   windowSize,
@@ -28,6 +25,7 @@ function DisplayAuctions({
   toggleDocu,
   setDocuUrl,
   showDocu,
+  colorChange,
 }) {
   const [socket, setSocket] = useState();
   const { id } = useParams();
@@ -35,10 +33,8 @@ function DisplayAuctions({
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    colorChange("black");
     toggleShow(true);
-    setHeaderWidth("100vw");
-    setPositionLeft("20%");
-    setPadRight("3rem");
     setLoader(true);
     authService.getAuction(id).then((res) => {
       if (res.data.error) {
@@ -68,7 +64,7 @@ function DisplayAuctions({
         // console.log("disconnected socket with back-end");
       });
     };
-  }, [setHeaderWidth, setPositionLeft, setPadRight, id, setMessage]);
+  }, [id, setMessage]);
 
   useEffect(() => {
     if (socket) {
@@ -102,7 +98,7 @@ function DisplayAuctions({
   return (
     <>
       {loader ? <Loading /> : null}
-      {auction &&
+      {/* {auction &&
         (auction.property.type === "car" ? (
           <Row
             className="realHeader"
@@ -131,7 +127,7 @@ function DisplayAuctions({
           >
             <title>REAL ESTATE</title>
           </Row>
-        ))}
+        ))} */}
       {auction ? (
         auction.property.type === "real-estate" ? (
           <DisplayRealEstate
