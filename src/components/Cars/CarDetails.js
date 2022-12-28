@@ -65,7 +65,7 @@ function CarDetails({
   );
   const [other, setOther] = useState(false);
   const [otherType, setOtherType] = useState(false);
-
+  const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest?.reservedAmount || 0
   );
@@ -96,9 +96,19 @@ function CarDetails({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(() => {
-        return results[0]?.formatted_address.split(",")[0] || "";
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
       });
+
+      if (countries[0]?.long_name === "India") {
+        setAddress(() => {
+          return results[0]?.formatted_address.split(",", 3).toString() || "";
+        });
+      } else {
+        setAddress(() => {
+          return results[0]?.formatted_address.split(",")[0] || "";
+        });
+      }
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
@@ -114,9 +124,6 @@ function CarDetails({
       });
       setState(states[0]?.long_name || "");
 
-      let countries = results[0].address_components.filter((item) => {
-        return item.types[0] === "country";
-      });
       setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
@@ -200,6 +207,7 @@ function CarDetails({
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
+          currency,
           step: 2,
         };
 
@@ -516,7 +524,7 @@ function CarDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={4}>
             <span style={{ fontWeight: "600" }}>
               Approximate Market Price
               <span style={{ color: "#ff0000" }}>*</span>
@@ -533,7 +541,7 @@ function CarDetails({
               required
             />
           </Col>
-          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
+          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600" }}>
               Condition<span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -550,6 +558,21 @@ function CarDetails({
               <option value="used">Used</option>
               <option value="new">New</option>
             </Form.Select>
+          </Col>
+          <Col xs={12} md={4}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Currency <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <select
+              className="form-control custom-input"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              name="currency"
+              required
+            >
+              <option value="USD">USD</option>
+              <option value="INR">INR</option>
+            </select>
           </Col>
         </Row>
         <Row className="mt-3">

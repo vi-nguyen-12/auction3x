@@ -26,7 +26,6 @@ function RealEstateDetails({
   setMessage,
 }) {
   const { register, handleSubmit } = useForm();
-
   const [address, setAddress] = useState(
     propertyTest.details?.property_address?.formatted_street_address || ""
   );
@@ -77,6 +76,7 @@ function RealEstateDetails({
   const [sqft, setSqft] = useState(
     propertyTest.details?.parcel?.area_sq_ft || ""
   );
+  const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest?.reservedAmount || 0
   );
@@ -89,9 +89,19 @@ function RealEstateDetails({
 
   const handleSelect = (address) => {
     geocodeByAddress(address).then((results) => {
-      setAddress(() => {
-        return results[0]?.formatted_address.split(",")[0] || "";
+      let countries = results[0].address_components.filter((item) => {
+        return item.types[0] === "country";
       });
+
+      if (countries[0]?.long_name === "India") {
+        setAddress(() => {
+          return results[0]?.formatted_address.split(",", 3).toString() || "";
+        });
+      } else {
+        setAddress(() => {
+          return results[0]?.formatted_address.split(",")[0] || "";
+        });
+      }
 
       let cities = results[0].address_components.filter((item) => {
         return item.types.includes(
@@ -106,10 +116,6 @@ function RealEstateDetails({
         return item.types[0] === "administrative_area_level_1";
       });
       setState(states[0]?.long_name || "");
-
-      let countries = results[0].address_components.filter((item) => {
-        return item.types[0] === "country";
-      });
       setCountry(countries[0]?.long_name || "");
 
       let zipcodes = results[0].address_components.filter((item) => {
@@ -208,6 +214,7 @@ function RealEstateDetails({
           description: descriptions,
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
+          currency,
           step: 2,
         };
         authService
@@ -615,7 +622,7 @@ function RealEstateDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col>
+          <Col xs={12} md={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Sqft <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -631,6 +638,21 @@ function RealEstateDetails({
               name="sqft"
               required
             />
+          </Col>
+          <Col xs={12} md={6}>
+            <span style={{ fontWeight: "600", color: "black" }}>
+              Currency <span style={{ color: "#ff0000" }}>*</span>
+            </span>
+            <select
+              className="form-control custom-input"
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+              name="currency"
+              required
+            >
+              <option value="USD">USD</option>
+              <option value="INR">INR</option>
+            </select>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -693,7 +715,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               thousandSeparator={true}
-              prefix="$"
+              prefix={currency === "USD" ? "$" : currency === "INR" ? "₹" : ""}
               value={reservedAmount}
               allowNegative={false}
               className="form-control custom-input"
@@ -725,7 +747,7 @@ function RealEstateDetails({
             </span>
             <NumberFormat
               thousandSeparator={true}
-              prefix="$"
+              prefix={currency === "USD" ? "$" : currency === "INR" ? "₹" : ""}
               value={discussedAmount}
               allowNegative={false}
               className="form-control custom-input"

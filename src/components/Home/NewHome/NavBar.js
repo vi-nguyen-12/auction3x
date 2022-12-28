@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RiMenu2Line } from "react-icons/ri";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../slice/userSlice";
@@ -11,9 +11,6 @@ import { BsFillHouseFill } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
-import { HiUser } from "react-icons/hi";
-import { RiDashboardFill } from "react-icons/ri";
-import { RiLogoutBoxRFill } from "react-icons/ri";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -31,6 +28,7 @@ function NavBar({
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [currency, setCurrency] = useState("USD");
   const [dropdown, setDropdown] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
   const [showSubWallet, setShowSubWallet] = useState({
@@ -239,6 +237,15 @@ function NavBar({
                       padding: "10px",
                     }}
                   >
+                    <Form.Select
+                      className="custom-input w-100"
+                      aria-label="Default select example"
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                    >
+                      <option value="USD">USD</option>
+                      <option value="INR">INR</option>
+                    </Form.Select>
                     <div className="d-flex justify-content-start align-items-center py-2">
                       <div className="wallet-icon">
                         <BsFillHouseFill size={20} color="white" />

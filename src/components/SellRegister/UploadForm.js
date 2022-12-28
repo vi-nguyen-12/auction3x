@@ -102,6 +102,10 @@ const UploadForm = ({
   const onSubmit = () => {
     if (images.length !== 0) {
       const data = { images, videos, step: 3 };
+      //delete isMain from images
+      data.images.forEach((image) => {
+        delete image?.isMain;
+      });
       authService
         .editProperty(propertyTest._id, data)
         .then((res) => {

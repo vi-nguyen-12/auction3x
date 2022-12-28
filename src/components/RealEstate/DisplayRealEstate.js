@@ -325,6 +325,7 @@ function DisplayRealEstate({
                           <img
                             style={{ aspectRatio: "16/9", borderRadius: "0" }}
                             src={item.url}
+                            loading="lazy"
                             alt=""
                           />
                         </Wrap>

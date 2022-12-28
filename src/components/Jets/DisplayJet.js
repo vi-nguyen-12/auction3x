@@ -335,7 +335,7 @@ function DisplayJet({
                 <button className="img-btn" onClick={togglePics}>
                   <IoImageOutline className="info_logo" />
                 </button>
-                <Modal size="xl" show={showPics} onHide={togglePics} centered>
+                <Modal fullscreen show={showPics} onHide={togglePics} centered>
                   <Modal.Body>
                     <div
                       style={{
@@ -353,14 +353,14 @@ function DisplayJet({
                     </div>
                     <Carousel
                       style={{ height: "100%", borderRadius: "0" }}
-                      {...ImgSettings}
+                      // {...ImgSettings}
                     >
                       {property.property.images.map((item, index) => (
                         <Wrap key={index}>
                           <img
-                            width="100%"
-                            height="100%"
+                            style={{ aspectRatio: "16/9", borderRadius: "0" }}
                             src={item.url}
+                            loading="lazy"
                             alt=""
                           />
                         </Wrap>

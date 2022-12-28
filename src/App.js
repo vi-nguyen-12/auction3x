@@ -24,11 +24,11 @@ import { addSavedProperty } from "./slice/savedPropertySlice";
 import { addIncompProperty } from "./slice/incompleteProp";
 import ScrollTop from "./components/ScrollTop";
 import Loading from "./components/Loading";
-import CloseButton from "react-bootstrap/CloseButton";
 import authService from "./services/authServices";
 import Maintenance from "./images/Maintenance.png";
 import BlackLogo from "./images/BlackLogo.png";
 import cookies from "./images/cookies.png";
+import axios from "axios";
 
 // const cookies = React.lazy(() => import("./images/cookies.png"));
 const ToastMessage = React.lazy(() => import("./components/Toast"));
@@ -273,6 +273,12 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
+
+  // var currency = axios
+  //   .get("https://api.exchangerate.host/convert?from=USD&to=INR&amount=1000")
+  //   .then((res) => {
+  //     console.log(res.data);
+  //   });
 
   useEffect(() => {
     if (!maintenance) {
