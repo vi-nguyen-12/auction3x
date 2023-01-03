@@ -16,8 +16,8 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import parse from "html-react-parser";
-// import ToastMessage from "./components/Toast";
 import { useDispatch, useSelector } from "react-redux";
+import { createContext } from "react";
 import { login, logout } from "./slice/userSlice";
 import { IdleTimer } from "./services/idleTimer";
 import { addSavedProperty } from "./slice/savedPropertySlice";
@@ -30,7 +30,8 @@ import BlackLogo from "./images/BlackLogo.png";
 import cookies from "./images/cookies.png";
 import axios from "axios";
 
-// const cookies = React.lazy(() => import("./images/cookies.png"));
+export const currencyText = createContext(null);
+
 const ToastMessage = React.lazy(() => import("./components/Toast"));
 const Footer = React.lazy(() => import("./components/Home/NewHome/Footer"));
 const NotFound = React.lazy(() => import("./components/Error/NotFound"));
@@ -112,6 +113,7 @@ function App() {
   const dispatch = useDispatch();
 
   const [expendedMenuId, setExpendedMenuId] = useState();
+  const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [message, setMessage] = useState("");
   const [maintenance, setMaintenance] = useState(false);
   const [cookiesPolicy, setCookiesPolicy] = useState("");
@@ -273,12 +275,6 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
-
-  // var currency = axios
-  //   .get("https://api.exchangerate.host/convert?from=USD&to=INR&amount=1000")
-  //   .then((res) => {
-  //     console.log(res.data);
-  //   });
 
   useEffect(() => {
     if (!maintenance) {
@@ -539,18 +535,7 @@ function App() {
                 />
               </Modal.Body>
             </Modal>
-            {/* <Modal
-          size="lg"
-          backdrop="static"
-          keyboard={false}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={showSignUp}
-          onHide={toggleSignUp}
-          contentclassname="sign-In"
-        >
-          <Modal.Body className="sign-Up"></Modal.Body>
-        </Modal> */}
+
             <Modal
               size="lg"
               backdrop="static"
@@ -656,452 +641,459 @@ function App() {
             {/* End of Modal */}
             {/* <ButtontoTop />{" "} */}
             <Router>
-              <NavBar
-                color={color}
-                change={change}
-                headerWidth={headerWidth}
-                positionLeft={positionLeft}
-                padRight={padRight}
-                toggleSignIn={toggleSignIn}
-                toggleSignUp={toggleSignUp}
-                windowSize={windowSize}
-                wallet={wallet}
-                subWallet={subWallet}
-                bodyColorChange={bodyColorChange}
-                setExpendedMenuId={setExpendedMenuId}
-                setMessage={setMessage}
-              />
-              <ScrollTop />
+              <currencyText.Provider value={currency}>
+                <NavBar
+                  color={color}
+                  change={change}
+                  headerWidth={headerWidth}
+                  positionLeft={positionLeft}
+                  padRight={padRight}
+                  toggleSignIn={toggleSignIn}
+                  toggleSignUp={toggleSignUp}
+                  windowSize={windowSize}
+                  wallet={wallet}
+                  subWallet={subWallet}
+                  bodyColorChange={bodyColorChange}
+                  setExpendedMenuId={setExpendedMenuId}
+                  setMessage={setMessage}
+                  setCurrency={setCurrency}
+                  currency={currency}
+                />
+                <ScrollTop />
 
-              <Switch>
-                {user._id && (
-                  <Route exact path="/Dashboard">
-                    <Dashboard
-                      toggleShow={toggleShow}
+                <Switch>
+                  {user._id && (
+                    <Route exact path="/Dashboard">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        windowSize={windowSize}
+                        setMessage={setMessage}
+                      />
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Messaging">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <Messaging />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Auctions/BidAuctions">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <BidAuctions />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Auctions/BuyerApproval">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <BuyerApproval />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Auctions/SavedAuctions">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <SavedAuctions windowSize={windowSize} />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Auctions/WinAuctions">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <WinAuctions />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Listings/YourListings">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <LiveListings windowSize={windowSize} />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Listings/PendingApproval">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <PendingListings />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Listings/SoldListings">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <SoldListings />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Listings/IncompleteListing">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <IncompleteListing />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route exact path="/Dashboard/Profile">
+                      <Dashboard
+                        toggleShow={toggleShow}
+                        colorChange={colorChange}
+                        toggleChange={toggleChange}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        setMessage={setMessage}
+                        windowSize={windowSize}
+                      >
+                        <Profile />
+                      </Dashboard>
+                    </Route>
+                  )}
+
+                  {user._id && (
+                    <Route path="/multiSellForm/:id">
+                      <MultiSellForm
+                        colorChange={colorChange}
+                        toggleShow={toggleShow}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        windowSize={windowSize}
+                        toggleSignIn={toggleSignIn}
+                        toggleSignUp={toggleSignUp}
+                        setMessage={setMessage}
+                        toggleDocu={toggleDocu}
+                        setDocuUrl={setDocuUrl}
+                      />
+                    </Route>
+                  )}
+                  {user._id && (
+                    <Route exact path="/multiSellForm">
+                      <MultiSellForm
+                        colorChange={colorChange}
+                        toggleShow={toggleShow}
+                        bodyColorChange={bodyColorChange}
+                        setHeaderWidth={setHeaderWidth}
+                        setPositionLeft={setPositionLeft}
+                        setPadRight={setPadRight}
+                        windowSize={windowSize}
+                        toggleSignIn={toggleSignIn}
+                        setMessage={setMessage}
+                        toggleDocu={toggleDocu}
+                        setDocuUrl={setDocuUrl}
+                      />
+                    </Route>
+                  )}
+
+                  <Route path="/DisplayAuctions/:id">
+                    <DisplayAuctions
                       colorChange={colorChange}
                       toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
                       setHeaderWidth={setHeaderWidth}
                       setPositionLeft={setPositionLeft}
                       setPadRight={setPadRight}
-                      windowSize={windowSize}
-                      setMessage={setMessage}
-                    />
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Messaging">
-                    <Dashboard
                       toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <Messaging />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Auctions/BidAuctions">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <BidAuctions />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Auctions/BuyerApproval">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <BuyerApproval />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Auctions/SavedAuctions">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <SavedAuctions windowSize={windowSize} />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Auctions/WinAuctions">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <WinAuctions />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Listings/YourListings">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <LiveListings windowSize={windowSize} />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Listings/PendingApproval">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <PendingListings />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Listings/SoldListings">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <SoldListings />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Listings/IncompleteListing">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <IncompleteListing />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route exact path="/Dashboard/Profile">
-                    <Dashboard
-                      toggleShow={toggleShow}
-                      colorChange={colorChange}
-                      toggleChange={toggleChange}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      setMessage={setMessage}
-                      windowSize={windowSize}
-                    >
-                      <Profile />
-                    </Dashboard>
-                  </Route>
-                )}
-
-                {user._id && (
-                  <Route path="/multiSellForm/:id">
-                    <MultiSellForm
-                      colorChange={colorChange}
-                      toggleShow={toggleShow}
-                      bodyColorChange={bodyColorChange}
-                      setHeaderWidth={setHeaderWidth}
-                      setPositionLeft={setPositionLeft}
-                      setPadRight={setPadRight}
-                      windowSize={windowSize}
                       toggleSignIn={toggleSignIn}
-                      toggleSignUp={toggleSignUp}
+                      windowSize={windowSize}
+                      setRefresh={setRefresh}
                       setMessage={setMessage}
+                      refresh={refresh}
                       toggleDocu={toggleDocu}
                       setDocuUrl={setDocuUrl}
+                      showDocu={showDocu}
                     />
                   </Route>
-                )}
-                {user._id && (
-                  <Route exact path="/multiSellForm">
-                    <MultiSellForm
-                      colorChange={colorChange}
-                      toggleShow={toggleShow}
+
+                  <Route path="/Profile/:id">
+                    <ViewProfile
+                      windowSize={windowSize}
                       bodyColorChange={bodyColorChange}
+                      setBodyPadding={setBodyPadding}
+                    />
+                  </Route>
+
+                  <Route exact path="/realEstates">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
                       setHeaderWidth={setHeaderWidth}
                       setPositionLeft={setPositionLeft}
                       setPadRight={setPadRight}
-                      windowSize={windowSize}
+                      toggleShow={toggleShow}
                       toggleSignIn={toggleSignIn}
                       setMessage={setMessage}
-                      toggleDocu={toggleDocu}
-                      setDocuUrl={setDocuUrl}
+                      windowSize={windowSize}
                     />
                   </Route>
-                )}
+                  <Route exact path="/cars">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setPositionLeft={setPositionLeft}
+                      setPadRight={setPadRight}
+                      toggleShow={toggleShow}
+                      toggleSignIn={toggleSignIn}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
+                  <Route exact path="/jets">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setPositionLeft={setPositionLeft}
+                      setPadRight={setPadRight}
+                      toggleShow={toggleShow}
+                      toggleSignIn={toggleSignIn}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
+                  <Route exact path="/Yachts">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setPositionLeft={setPositionLeft}
+                      setPadRight={setPadRight}
+                      toggleShow={toggleShow}
+                      toggleSignIn={toggleSignIn}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
 
-                <Route path="/DisplayAuctions/:id">
-                  <DisplayAuctions
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    windowSize={windowSize}
-                    setRefresh={setRefresh}
-                    setMessage={setMessage}
-                    refresh={refresh}
-                    toggleDocu={toggleDocu}
-                    setDocuUrl={setDocuUrl}
-                    showDocu={showDocu}
-                  />
-                </Route>
+                  <Route exact path="/Auctions">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setPositionLeft={setPositionLeft}
+                      setPadRight={setPadRight}
+                      toggleShow={toggleShow}
+                      toggleSignIn={toggleSignIn}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
 
-                <Route path="/Profile/:id">
-                  <ViewProfile
-                    windowSize={windowSize}
-                    bodyColorChange={bodyColorChange}
-                    setBodyPadding={setBodyPadding}
-                  />
-                </Route>
+                  <Route exact path="/Auctions/:parameter">
+                    <PropertyPages
+                      colorChange={colorChange}
+                      toggleChange={toggleChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setPositionLeft={setPositionLeft}
+                      setPadRight={setPadRight}
+                      toggleShow={toggleShow}
+                      toggleSignIn={toggleSignIn}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
 
-                <Route exact path="/realEstates">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
-                <Route exact path="/cars">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
-                <Route exact path="/jets">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
-                <Route exact path="/Yachts">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
+                  <Route path="/contact">
+                    <ContactUs
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                    />
+                  </Route>
 
-                <Route exact path="/Auctions">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
+                  <Route path="/AboutUs">
+                    <AboutUs
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                      toggleSignIn={toggleSignIn}
+                    />
+                  </Route>
 
-                <Route exact path="/Auctions/:parameter">
-                  <PropertyPages
-                    colorChange={colorChange}
-                    toggleChange={toggleChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setPositionLeft={setPositionLeft}
-                    setPadRight={setPadRight}
-                    toggleShow={toggleShow}
-                    toggleSignIn={toggleSignIn}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
+                  <Route path="/FAQ">
+                    <FAQ windowSize={windowSize} setMessage={setMessage} />
+                  </Route>
 
-                <Route path="/contact">
-                  <ContactUs windowSize={windowSize} setMessage={setMessage} />
-                </Route>
+                  <Route path="/Team">
+                    <Team windowSize={windowSize} setMessage={setMessage} />
+                  </Route>
 
-                <Route path="/AboutUs">
-                  <AboutUs
-                    windowSize={windowSize}
-                    setMessage={setMessage}
-                    toggleSignIn={toggleSignIn}
-                  />
-                </Route>
+                  <Route path="/PrivacyPolicy">
+                    <Privacy windowSize={windowSize} setMessage={setMessage} />
+                  </Route>
 
-                <Route path="/FAQ">
-                  <FAQ windowSize={windowSize} setMessage={setMessage} />
-                </Route>
+                  <Route path="/TermsOfUse">
+                    <TermsCondition
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                    />
+                  </Route>
 
-                <Route path="/Team">
-                  <Team windowSize={windowSize} setMessage={setMessage} />
-                </Route>
+                  <Route path="/Partner">
+                    <PartnerWithUs
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                    />
+                  </Route>
 
-                <Route path="/PrivacyPolicy">
-                  <Privacy windowSize={windowSize} setMessage={setMessage} />
-                </Route>
-
-                <Route path="/TermsOfUse">
-                  <TermsCondition
-                    windowSize={windowSize}
-                    setMessage={setMessage}
-                  />
-                </Route>
-
-                <Route path="/Partner">
-                  <PartnerWithUs
-                    windowSize={windowSize}
-                    setMessage={setMessage}
-                  />
-                </Route>
-
-                {/* <Route path="/Broker">
+                  {/* <Route path="/Broker">
                   <Broker windowSize={windowSize} />
                 </Route> */}
 
-                <Route exact path="/reset_password">
-                  <ChangePass
-                    colorChange={colorChange}
-                    toggleShow={toggleShow}
-                    setHeaderWidth={setHeaderWidth}
-                    setMessage={setMessage}
-                    windowSize={windowSize}
-                  />
-                </Route>
-                <Route exact path="/confirm_email">
-                  <EmailConfirm
-                    colorChange={colorChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setMessage={setMessage}
-                    toggleShow={toggleShow}
-                  />
-                </Route>
-                <Route path="/docusign/callback/:envelopeId">
-                  <Docusign
-                    colorChange={colorChange}
-                    setHeaderWidth={setHeaderWidth}
-                    setMessage={setMessage}
-                    toggleDocu={toggleDocu}
-                  />
-                </Route>
+                  <Route exact path="/reset_password">
+                    <ChangePass
+                      colorChange={colorChange}
+                      toggleShow={toggleShow}
+                      setHeaderWidth={setHeaderWidth}
+                      setMessage={setMessage}
+                      windowSize={windowSize}
+                    />
+                  </Route>
+                  <Route exact path="/confirm_email">
+                    <EmailConfirm
+                      colorChange={colorChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setMessage={setMessage}
+                      toggleShow={toggleShow}
+                    />
+                  </Route>
+                  <Route path="/docusign/callback/:envelopeId">
+                    <Docusign
+                      colorChange={colorChange}
+                      setHeaderWidth={setHeaderWidth}
+                      setMessage={setMessage}
+                      toggleDocu={toggleDocu}
+                    />
+                  </Route>
 
-                <Route exact path="/">
-                  <Home
-                    toggleSignIn={toggleSignIn}
-                    windowSize={windowSize}
-                    setMessage={setMessage}
-                  />
-                </Route>
+                  <Route exact path="/">
+                    <Home
+                      toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                    />
+                  </Route>
 
-                <Route exact path="/:sectionId">
-                  <Home
-                    toggleSignIn={toggleSignIn}
-                    windowSize={windowSize}
-                    setMessage={setMessage}
-                  />
-                </Route>
+                  <Route exact path="/:sectionId">
+                    <Home
+                      toggleSignIn={toggleSignIn}
+                      windowSize={windowSize}
+                      setMessage={setMessage}
+                    />
+                  </Route>
 
-                <Route path="">
-                  <NotFound windowSize={windowSize} />
-                </Route>
-              </Switch>
+                  <Route path="">
+                    <NotFound windowSize={windowSize} />
+                  </Route>
+                </Switch>
+              </currencyText.Provider>
             </Router>
             {show ? (
               <Footer

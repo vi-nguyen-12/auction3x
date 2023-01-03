@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Row, Card, Button } from "react-bootstrap";
 import AuctionTimer from "../Auctions/AuctionTimer";
 import NumberFormat from "react-number-format";
@@ -7,11 +7,15 @@ import { useSelector } from "react-redux";
 import authService from "../../services/authServices";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import { currencyText } from "../../App";
 import ReservedMet from "../../images/ReservedMet.png";
+import axios from "axios";
 import "../../styles/card.css";
 
 function NewCards({ data, type, toggleSignIn, windowSize }) {
+  const currency = useContext(currencyText);
   const [favorite, setFavorite] = useState(false);
+  const [convertedCurrency, setConvertedCurrency] = useState(0);
   const user = useSelector((state) => state.user);
   const savedProperty = useSelector((state) => state.savedProperty);
 
@@ -57,6 +61,18 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
     }
     // }
   };
+
+  useEffect(() => {
+    if (currency !== "USD") {
+      axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${data.startingBid}`
+        )
+        .then((res) => {
+          setConvertedCurrency(res.data.result.toFixed(0));
+        });
+    }
+  }, [currency]);
 
   useEffect(() => {
     if (user._id) {
@@ -401,6 +417,17 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                 prefix={"$"}
               />
             </p>
+            {currency !== "USD" && (
+              <p className="m-0">
+                <NumberFormat
+                  value={convertedCurrency}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                />{" "}
+                {currency}
+              </p>
+            )}
           </Col>
           <Col className="d-flex justify-content-end align-items-center py-3 px-0">
             <Button

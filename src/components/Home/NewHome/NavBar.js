@@ -11,6 +11,8 @@ import { BsFillHouseFill } from "react-icons/bs";
 import { IoCarSportSharp } from "react-icons/io5";
 import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
+import { BiDollarCircle } from "react-icons/bi";
+import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -23,20 +25,24 @@ function NavBar({
   bodyColorChange,
   setExpendedMenuId,
   setMessage,
+  setCurrency,
+  currency,
 }) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const [currency, setCurrency] = useState("USD");
   const [dropdown, setDropdown] = useState(false);
-  const [showWallet, setShowWallet] = useState(false);
   const [showSubWallet, setShowSubWallet] = useState({
     RealEstate: false,
     Car: false,
     Jet: false,
     Yacht: false,
   });
+
+  if (!localStorage.getItem("currency")) {
+    localStorage.setItem("currency", "USD");
+  }
 
   const handleOnClick = (page) => () => {
     bodyColorChange("#F5F9FF");
@@ -49,6 +55,11 @@ function NavBar({
     dispatch(logout());
     history.push("/");
     window.location.reload();
+  };
+
+  const changeCurrency = (curr) => {
+    localStorage.setItem("currency", curr);
+    setCurrency(curr);
   };
 
   const handleSell = () => {
@@ -89,10 +100,10 @@ function NavBar({
       }}
     >
       <Col
-        md={windowSize < 800 ? 6 : windowSize < 1300 ? 2 : 3}
+        md={windowSize < 800 ? 6 : windowSize < 1300 ? 2 : user._id ? 2 : 3}
         xs={6}
         className="m-0 d-flex justify-content-start align-items-center"
-        style={{ paddingLeft: windowSize > 1300 && "5rem" }}
+        style={{ paddingLeft: windowSize > 1300 && user._id ? "3rem" : "5rem" }}
       >
         <img
           onClick={handleLogoClick}
@@ -127,7 +138,7 @@ function NavBar({
 
       {user._id ? (
         <Col
-          md={windowSize < 1300 ? 6 : 3}
+          md={windowSize < 1300 ? 6 : user._id ? 4 : 3}
           xs={6}
           className="p-0 m-0 d-flex justify-content-evenly align-items-center"
         >
@@ -214,42 +225,318 @@ function NavBar({
             </div>
 
             <div className="dropdown">
-              <Button
-                className="nav-button"
-                onClick={() => setShowWallet(!showWallet)}
-              >
+              <Button className="nav-button">
                 <img
                   style={{ cursor: "pointer" }}
                   src={wallets}
-                  width={windowSize > 1670 ? "22px" : "20px"}
+                  width="22px"
                   height="auto"
                   alt=""
                   loading="lazy"
                 />
               </Button>
-              {showWallet && (
-                <div className="dropdown-content">
-                  <div
-                    className="dropdown-content-items px-4"
-                    style={{
-                      marginLeft: "-80px",
-                      width: "200px",
-                      padding: "10px",
-                    }}
-                  >
+              <div className="dropdown-content">
+                <div
+                  className="dropdown-content-items px-4"
+                  style={{
+                    marginLeft: "-80px",
+                    width: "200px",
+                    padding: "10px",
+                  }}
+                >
+                  {windowSize < 800 && (
                     <Form.Select
                       className="custom-input w-100"
                       aria-label="Default select example"
                       value={currency}
-                      onChange={(e) => setCurrency(e.target.value)}
+                      onChange={(e) => changeCurrency(e.target.value)}
                     >
-                      <option value="USD">USD</option>
-                      <option value="INR">INR</option>
+                      <option value="USD">US</option>
+                      <option value="INR">INDIA</option>
                     </Form.Select>
-                    <div className="d-flex justify-content-start align-items-center py-2">
-                      <div className="wallet-icon">
-                        <BsFillHouseFill size={20} color="white" />
-                      </div>
+                  )}
+                  <div className="d-flex justify-content-start align-items-center py-2">
+                    <div className="wallet-icon">
+                      <BsFillHouseFill size={20} color="white" />
+                    </div>
+                    <div className="d-grid justify-content-start">
+                      <span
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          color: "#B77B50",
+                        }}
+                      >
+                        Real Estate
+                      </span>
+                      <NumberFormat
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          cursor: "pointer",
+                        }}
+                        value={
+                          subWallet.RealEstate.filter(
+                            (item) =>
+                              item.auctionId ===
+                              history.location.pathname.slice(17)
+                          )[0]?.availableFund || wallet.RealEstate
+                        }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                        onClick={() => {
+                          setShowSubWallet((prev) => ({
+                            ...prev.RealEstate,
+                            RealEstate: !prev.RealEstate,
+                          }));
+                        }}
+                      />
+                      {showSubWallet.RealEstate === true &&
+                        subWallet.RealEstate.map((item, index) => (
+                          <span className="p-0" key={index}>
+                            <NumberFormat
+                              thousandSeparator={true}
+                              value={item.availableFund}
+                              displayType={"text"}
+                              prefix={
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                                  ? "* $"
+                                  : "- $"
+                              }
+                              style={{
+                                padding: "0",
+                                display: "flex",
+                                fontSize: "12px",
+                              }}
+                            />
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+
+                  <div className="d-flex justify-content-start align-items-center py-2">
+                    <div className="wallet-icon">
+                      <IoCarSportSharp size={20} color="white" />
+                    </div>
+                    <div className="d-grid justify-content-start">
+                      <span
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          color: "#B77B50",
+                        }}
+                      >
+                        Car
+                      </span>
+                      <NumberFormat
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          cursor: "pointer",
+                        }}
+                        value={
+                          subWallet.Car.filter(
+                            (item) =>
+                              item.auctionId ===
+                              history.location.pathname.slice(17)
+                          )[0]?.availableFund || wallet.Car
+                        }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                        onClick={() => {
+                          setShowSubWallet((prev) => ({
+                            ...prev.Car,
+                            Car: !prev.Car,
+                          }));
+                        }}
+                      />
+                      {showSubWallet.Car === true &&
+                        subWallet.Car.map((item, index) => (
+                          <span className="p-0" key={index}>
+                            <NumberFormat
+                              thousandSeparator={true}
+                              value={item.availableFund}
+                              displayType={"text"}
+                              prefix={
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                                  ? "* $"
+                                  : "- $"
+                              }
+                              style={{
+                                padding: "0",
+                                display: "flex",
+                                fontSize: "12px",
+                              }}
+                            />
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+
+                  <div className="d-flex justify-content-start align-items-center py-2">
+                    <div className="wallet-icon">
+                      <IoAirplaneSharp size={20} color="white" />
+                    </div>
+                    <div className="d-grid justify-content-start">
+                      <span
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          color: "#B77B50",
+                        }}
+                      >
+                        Jet
+                      </span>
+                      <NumberFormat
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          cursor: "pointer",
+                        }}
+                        value={
+                          subWallet.Jet.filter(
+                            (item) =>
+                              item.auctionId ===
+                              history.location.pathname.slice(17)
+                          )[0]?.availableFund || wallet.Jet
+                        }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                        onClick={() => {
+                          setShowSubWallet((prev) => ({
+                            ...prev.Jet,
+                            Jet: !prev.Jet,
+                          }));
+                        }}
+                      />
+                      {showSubWallet.Jet === true &&
+                        subWallet.Jet.map((item, index) => (
+                          <span className="p-0" key={index}>
+                            <NumberFormat
+                              thousandSeparator={true}
+                              value={item.availableFund}
+                              displayType={"text"}
+                              prefix={
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                                  ? "* $"
+                                  : "- $"
+                              }
+                              style={{
+                                padding: "0",
+                                display: "flex",
+                                fontSize: "12px",
+                              }}
+                            />
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+
+                  <div className="d-flex justify-content-start align-items-center py-2">
+                    <div className="wallet-icon">
+                      <IoIosBoat size={20} color="white" />
+                    </div>
+                    <div className="d-grid justify-content-start">
+                      <span
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          color: "#B77B50",
+                        }}
+                      >
+                        Yacht
+                      </span>
+                      <NumberFormat
+                        style={{
+                          padding: "0",
+                          display: "flex",
+                          cursor: "pointer",
+                        }}
+                        value={
+                          subWallet.Yacht.filter(
+                            (item) =>
+                              item.auctionId ===
+                              history.location.pathname.slice(17)
+                          )[0]?.availableFund || wallet.Yacht
+                        }
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                        onClick={() => {
+                          setShowSubWallet((prev) => ({
+                            ...prev.Yacht,
+                            Yacht: !prev.Yacht,
+                          }));
+                        }}
+                      />
+                      {showSubWallet.Yacht === true &&
+                        subWallet.Yacht.map((item, index) => (
+                          <span className="p-0" key={index}>
+                            <NumberFormat
+                              thousandSeparator={true}
+                              value={item.availableFund}
+                              displayType={"text"}
+                              prefix={
+                                item.auctionId ===
+                                history.location.pathname.slice(17)
+                                  ? "* $"
+                                  : "- $"
+                              }
+                              style={{
+                                padding: "0",
+                                display: "flex",
+                                fontSize: "12px",
+                              }}
+                            />
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {windowSize > 800 && (
+              <div className="dropdown">
+                <Button className="nav-button">
+                  {currency === "USD" ? (
+                    <BiDollarCircle
+                      size={windowSize > 1670 ? 28 : 32}
+                      color="#bf9767"
+                    />
+                  ) : currency === "INR" ? (
+                    <HiOutlineCurrencyRupee
+                      size={windowSize > 1670 ? 28 : 32}
+                      color="#bf9767"
+                    />
+                  ) : (
+                    <BiDollarCircle
+                      size={windowSize > 1670 ? 28 : 32}
+                      color="#bf9767"
+                    />
+                  )}
+                </Button>
+                <div className="dropdown-content">
+                  <div
+                    className="dropdown-content-items px-2"
+                    style={{
+                      marginLeft: "-35px",
+                      width: "130px",
+                      padding: "10px",
+                    }}
+                  >
+                    <div
+                      className="d-flex justify-content-start align-items-center py-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => changeCurrency("USD")}
+                    >
+                      <div className="wallet-icon text-white">$</div>
                       <div className="d-grid justify-content-start">
                         <span
                           style={{
@@ -258,59 +545,16 @@ function NavBar({
                             color: "#B77B50",
                           }}
                         >
-                          Real Estate
+                          US
                         </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.RealEstate.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.RealEstate
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.RealEstate,
-                              RealEstate: !prev.RealEstate,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.RealEstate === true &&
-                          subWallet.RealEstate.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
                       </div>
                     </div>
-
-                    <div className="d-flex justify-content-start align-items-center py-2">
-                      <div className="wallet-icon">
-                        <IoCarSportSharp size={20} color="white" />
-                      </div>
+                    <div
+                      className="d-flex justify-content-start align-items-center py-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => changeCurrency("INR")}
+                    >
+                      <div className="wallet-icon text-white">₹</div>
                       <div className="d-grid justify-content-start">
                         <span
                           style={{
@@ -319,180 +563,15 @@ function NavBar({
                             color: "#B77B50",
                           }}
                         >
-                          Car
+                          INDIA
                         </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Car.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Car
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Car,
-                              Car: !prev.Car,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Car === true &&
-                          subWallet.Car.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-start align-items-center py-2">
-                      <div className="wallet-icon">
-                        <IoAirplaneSharp size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            color: "#B77B50",
-                          }}
-                        >
-                          Jet
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Jet.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Jet
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Jet,
-                              Jet: !prev.Jet,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Jet === true &&
-                          subWallet.Jet.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-start align-items-center py-2">
-                      <div className="wallet-icon">
-                        <IoIosBoat size={20} color="white" />
-                      </div>
-                      <div className="d-grid justify-content-start">
-                        <span
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            color: "#B77B50",
-                          }}
-                        >
-                          Yacht
-                        </span>
-                        <NumberFormat
-                          style={{
-                            padding: "0",
-                            display: "flex",
-                            cursor: "pointer",
-                          }}
-                          value={
-                            subWallet.Yacht.filter(
-                              (item) =>
-                                item.auctionId ===
-                                history.location.pathname.slice(17)
-                            )[0]?.availableFund || wallet.Yacht
-                          }
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          prefix={"$"}
-                          onClick={() => {
-                            setShowSubWallet((prev) => ({
-                              ...prev.Yacht,
-                              Yacht: !prev.Yacht,
-                            }));
-                          }}
-                        />
-                        {showSubWallet.Yacht === true &&
-                          subWallet.Yacht.map((item, index) => (
-                            <span className="p-0" key={index}>
-                              <NumberFormat
-                                thousandSeparator={true}
-                                value={item.availableFund}
-                                displayType={"text"}
-                                prefix={
-                                  item.auctionId ===
-                                  history.location.pathname.slice(17)
-                                    ? "* $"
-                                    : "- $"
-                                }
-                                style={{
-                                  padding: "0",
-                                  display: "flex",
-                                  fontSize: "12px",
-                                }}
-                              />
-                            </span>
-                          ))}
                       </div>
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
             <Button
               onClick={() => {
                 setExpendedMenuId("expended");
@@ -501,12 +580,6 @@ function NavBar({
             >
               <RiMenu2Line size={windowSize > 1670 ? 28 : 32} color="#bf9767" />
             </Button>
-            {/* <Button className="mx-2" onClick={() => history.push("/Dashboard")}>
-            Dashboard
-          </Button>
-          <Button variant="danger" onClick={handleLogout}>
-            Logout
-          </Button> */}
           </div>
         </Col>
       ) : (
