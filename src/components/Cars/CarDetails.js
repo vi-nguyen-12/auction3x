@@ -65,7 +65,7 @@ function CarDetails({
   );
   const [other, setOther] = useState(false);
   const [otherType, setOtherType] = useState(false);
-  const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
+  // const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest?.reservedAmount || 0
   );
@@ -207,7 +207,7 @@ function CarDetails({
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
-          currency,
+          // currency,
           step: 2,
         };
 
@@ -524,7 +524,7 @@ function CarDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col xs={12} md={6}>
             <span style={{ fontWeight: "600" }}>
               Approximate Market Price
               <span style={{ color: "#ff0000" }}>*</span>
@@ -541,7 +541,7 @@ function CarDetails({
               required
             />
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600" }}>
               Condition<span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -559,7 +559,7 @@ function CarDetails({
               <option value="new">New</option>
             </Form.Select>
           </Col>
-          <Col xs={12} md={4}>
+          {/* <Col xs={12} md={4}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Currency <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -573,7 +573,7 @@ function CarDetails({
               <option value="USD">USD</option>
               <option value="INR">INR</option>
             </select>
-          </Col>
+          </Col> */}
         </Row>
         <Row className="mt-3">
           <Col md={6} xs={12} sm={12}>

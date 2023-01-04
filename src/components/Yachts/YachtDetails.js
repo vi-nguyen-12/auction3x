@@ -79,7 +79,7 @@ function YachtDetails({
   const [other, setOther] = useState(
     propertyTest.details?.property_address?.others || ""
   );
-  const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
+  // const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest?.reservedAmount || 0
   );
@@ -223,7 +223,7 @@ function YachtDetails({
           lat,
           lng,
         },
-        currency,
+        // currency,
         step: 2,
       };
       authService
@@ -594,7 +594,7 @@ function YachtDetails({
         </Row>
 
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col xs={12} md={6}>
             <span
               style={{
                 fontWeight: "600",
@@ -612,7 +612,7 @@ function YachtDetails({
               required
             />
           </Col>
-          <Col xs={12} md={4}>
+          <Col xs={12} md={6}>
             <span
               style={{
                 fontWeight: "600",
@@ -632,17 +632,8 @@ function YachtDetails({
               }}
               required
             />
-            {/* <input
-              type="number"
-              min="0"
-              className="form-control custom-input"
-              defaultValue={length}
-              {...register("length")}
-              onChange={(e) => setLength(e.target.value)}
-              required
-            /> */}
           </Col>
-          <Col xs={12} md={4}>
+          {/* <Col xs={12} md={4}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Currency <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -656,7 +647,7 @@ function YachtDetails({
               <option value="USD">USD</option>
               <option value="INR">INR</option>
             </select>
-          </Col>
+          </Col> */}
         </Row>
         <Row className="mt-3">
           <Col xs={12} md={4}>

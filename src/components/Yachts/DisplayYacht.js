@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "../../styles/headers.css";
 import { Modal, Table, Row, Col, Container } from "react-bootstrap";
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -23,6 +23,8 @@ import CloseButton from "react-bootstrap/CloseButton";
 import "../../styles/property-display.css";
 import authService from "../../services/authServices";
 import parse from "html-react-parser";
+import { currencyText } from "../../App";
+import { convertedCurrencyText } from "../Auctions/DisplayAuctions";
 
 const mapStyles = {
   height: "60vh",
@@ -121,6 +123,8 @@ function DisplayYacht({
   setDocuUrl,
 }) {
   const user = useSelector((state) => state.user);
+  const currency = useContext(currencyText);
+  const convertedCurrency = useContext(convertedCurrencyText);
   const savedProperty = useSelector((state) => state.savedProperty);
   const [registEnded, setRegistEnded] = useState(false);
   const toggleRegistEnded = () => setRegistEnded(!registEnded);
@@ -129,8 +133,6 @@ function DisplayYacht({
   const [showPics, setShowPics] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  // const [showLives, setShowLives] = useState(false);
-  // const toggleLive = () => setShowLives(!showLives);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const toggleDisclaimer = () => setShowDisclaimer(!showDisclaimer);
   const [viewDocs, setViewDocs] = useState("Location Information");
@@ -462,7 +464,7 @@ function DisplayYacht({
               padding: windowSize > 500 ? "35px" : "15px",
             }}
           >
-            <Col style={{ padding: "0" }} xs={12} md={6}>
+            <Col style={{ padding: "0" }} xs={12} md={7}>
               <Row style={{ textAlign: windowSize < 500 && "center" }}>
                 <Col className="p-0" md={windowSize > 900 ? 7 : 12} xs={12}>
                   <h2
@@ -762,7 +764,10 @@ function DisplayYacht({
                       <div
                         className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          padding: "1.875rem 40px",
+                          padding:
+                            currency !== "USD"
+                              ? "1.75rem 40px"
+                              : "1.875rem 40px",
                           width: windowSize < 800 && "306px",
                         }}
                       >
@@ -776,16 +781,36 @@ function DisplayYacht({
                             fontSize: "32px",
                             color: "#08080A",
                             fontFamily: "Tzimmes",
-                            paddingBottom: "0.875rem",
+                            paddingBottom:
+                              currency !== "USD" ? "0" : "0.875rem",
                           }}
                         />
+                        {currency !== "USD" && (
+                          <span>
+                            <NumberFormat
+                              value={convertedCurrency}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"Approx. "}
+                              suffix={" " + currency}
+                              style={{
+                                fontSize: "12px",
+                                color: "black",
+                                fontFamily: "Interstate",
+                              }}
+                            />
+                          </span>
+                        )}
                         <span>Current Bid</span>
                       </div>
                     ) : (
                       <div
                         className="d-grid justify-content-center align-items-center auction-boxes"
                         style={{
-                          padding: "1.875rem 40px",
+                          padding:
+                            currency !== "USD"
+                              ? "1.75rem 40px"
+                              : "1.875rem 40px",
                           width: windowSize < 800 && "306px",
                         }}
                       >
@@ -799,10 +824,27 @@ function DisplayYacht({
                             fontSize: "32px",
                             color: "#08080A",
                             fontFamily: "Tzimmes",
-                            paddingBottom: "0.875rem",
+                            paddingBottom:
+                              currency !== "USD" ? "0" : "0.875rem",
                           }}
                         />
-                        <p>Current Bid</p>
+                        {currency !== "USD" && (
+                          <span>
+                            <NumberFormat
+                              value={convertedCurrency}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"Approx. "}
+                              suffix={" " + currency}
+                              style={{
+                                fontSize: "12px",
+                                color: "black",
+                                fontFamily: "Interstate",
+                              }}
+                            />
+                          </span>
+                        )}
+                        <span>Current Bid</span>
                       </div>
                     )}
                   </Col>

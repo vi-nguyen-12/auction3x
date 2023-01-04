@@ -69,7 +69,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
           `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${data.startingBid}`
         )
         .then((res) => {
-          setConvertedCurrency(res.data.result.toFixed(0));
+          setConvertedCurrency(res.data.result?.toFixed(0));
         });
     }
   }, [currency]);
@@ -424,8 +424,8 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
                   displayType={"text"}
                   thousandSeparator={true}
                   prefix={"Approx. "}
-                />{" "}
-                {currency}
+                  suffix={" " + currency}
+                />
               </p>
             )}
           </Col>

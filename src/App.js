@@ -28,7 +28,6 @@ import authService from "./services/authServices";
 import Maintenance from "./images/Maintenance.png";
 import BlackLogo from "./images/BlackLogo.png";
 import cookies from "./images/cookies.png";
-import axios from "axios";
 
 export const currencyText = createContext(null);
 

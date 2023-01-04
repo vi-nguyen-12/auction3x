@@ -1,21 +1,62 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
-import { useState } from "react";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
+import { currencyText } from "../../App";
+import { convertedCurrencyText } from "../Auctions/DisplayAuctions";
 import AuctionBidTimer from "../Auctions/AuctionBidTimer";
+import axios from "axios";
 
 const BuyConfirm = ({ property, setMessage, windowSize }) => {
   const user = useSelector((state) => state.user);
+  const currency = useContext(currencyText);
+  const convertedCurrency = useContext(convertedCurrencyText);
   const { handleSubmit } = useForm();
   const [bid, setBid] = useState(
     property.highestBid + property.incrementAmount
   );
+  const [convertedIncrement, setConvertedIncrement] = useState(0);
+  const [convertedMinimum, setConvertedMinimum] = useState(0);
+  const [convertedBid, setConvertedBid] = useState(0);
 
   const dateTime = new Date().getTime();
   const biddingTimes = new Date(dateTime).toISOString();
+
+  useEffect(() => {
+    if (currency !== "USD") {
+      axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property?.incrementAmount}`
+        )
+        .then((res) => {
+          setConvertedIncrement(res.data.result?.toFixed(0));
+        });
+
+      axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${
+            parseInt(property?.highestBid) + parseInt(property?.incrementAmount)
+          }`
+        )
+        .then((res) => {
+          setConvertedMinimum(res.data.result?.toFixed(0));
+        });
+    }
+  }, [currency, property]);
+
+  useEffect(() => {
+    if (currency !== "USD") {
+      axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${bid}`
+        )
+        .then((res) => {
+          setConvertedBid(res.data.result?.toFixed(0));
+        });
+    }
+  }, [currency, property, bid]);
 
   const onSubmit = async (data) => {
     if (bid === undefined) {
@@ -85,6 +126,22 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
                 />
               )}
             </Col>
+            {currency !== "USD" && (
+              <span className="d-flex justify-content-end">
+                <NumberFormat
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Interstate",
+                    fontWeight: "500",
+                  }}
+                  value={convertedCurrency}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              </span>
+            )}
           </Row>
           <Row style={{ padding: "0 20px" }} className="mt-3">
             <Col className="fw-bold">Increment Amount:</Col>
@@ -97,6 +154,22 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
                 prefix={"$"}
               />
             </Col>
+            {currency !== "USD" && (
+              <span className="d-flex justify-content-end">
+                <NumberFormat
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Interstate",
+                    fontWeight: "500",
+                  }}
+                  value={convertedIncrement}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              </span>
+            )}
           </Row>
           <Row style={{ padding: "0 20px" }} className="mt-3">
             <Col className="fw-bold">Minimum Bid:</Col>
@@ -116,9 +189,41 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
                 }}
               />
             </Col>
+            {currency !== "USD" && (
+              <span className="d-flex justify-content-end">
+                <NumberFormat
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Interstate",
+                    fontWeight: "500",
+                  }}
+                  value={convertedMinimum}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              </span>
+            )}
           </Row>
 
           <Row style={{ padding: "0 20px" }} className="mt-5">
+            {currency !== "USD" && (
+              <span className="d-flex justify-content-start">
+                <NumberFormat
+                  style={{
+                    fontSize: "12px",
+                    fontFamily: "Interstate",
+                    fontWeight: "500",
+                  }}
+                  value={convertedBid}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              </span>
+            )}
             <Col md={12}>
               <NumberFormat
                 thousandSeparator={true}

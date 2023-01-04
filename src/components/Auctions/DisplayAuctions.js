@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import "../../styles/property-display.css";
 import { useParams } from "react-router-dom";
 import authService from "../../services/authServices";
@@ -8,11 +8,15 @@ import DisplayJet from "../Jets/DisplayJet";
 import DisplayYacht from "../Yachts/DisplayYacht";
 import Loading from "../../components/Loading";
 import io from "socket.io-client";
-import { Row } from "react-bootstrap";
-import RealEstatePageBg from "../../images/RealEstatePageBg.png";
-import CarPageBg from "../../images/CarPageBg.png";
-import JetPageBg from "../../images/JetPageBg.png";
-import YachtPageBg from "../../images/YachtPageBg.png";
+import axios from "axios";
+import { currencyText } from "../../App";
+// import { Row } from "react-bootstrap";
+// import RealEstatePageBg from "../../images/RealEstatePageBg.png";
+// import CarPageBg from "../../images/CarPageBg.png";
+// import JetPageBg from "../../images/JetPageBg.png";
+// import YachtPageBg from "../../images/YachtPageBg.png";
+
+export const convertedCurrencyText = createContext();
 
 function DisplayAuctions({
   toggleChange,
@@ -27,9 +31,11 @@ function DisplayAuctions({
   showDocu,
   colorChange,
 }) {
+  const currency = useContext(currencyText);
   const [socket, setSocket] = useState();
   const { id } = useParams();
   const [auction, setAuction] = useState();
+  const [convertedCurrency, setConvertedCurrency] = useState();
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -65,6 +71,22 @@ function DisplayAuctions({
       });
     };
   }, [id, setMessage]);
+
+  console.log(auction);
+
+  useEffect(() => {
+    if (currency !== "USD") {
+      axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${
+            auction?.highestBid ? auction?.highestBid : auction?.startingBid
+          }`
+        )
+        .then((res) => {
+          setConvertedCurrency(res.data.result?.toFixed(0));
+        });
+    }
+  }, [currency, auction]);
 
   useEffect(() => {
     if (socket) {
@@ -128,78 +150,80 @@ function DisplayAuctions({
             <title>REAL ESTATE</title>
           </Row>
         ))} */}
-      {auction ? (
-        auction.property.type === "real-estate" ? (
-          <DisplayRealEstate
-            socket={socket}
-            property={auction}
-            toggleChange={toggleChange}
-            toggleSignIn={toggleSignIn}
-            windowSize={windowSize}
-            setRefresh={setRefresh}
-            refresh={refresh}
-            setMessage={setMessage}
-            toggleDocu={toggleDocu}
-            setDocuUrl={setDocuUrl}
-          />
-        ) : auction.property.type === "car" ? (
-          <DisplayCar
-            property={auction}
-            toggleChange={toggleChange}
-            toggleSignIn={toggleSignIn}
-            windowSize={windowSize}
-            setRefresh={setRefresh}
-            refresh={refresh}
-            setMessage={setMessage}
-            toggleDocu={toggleDocu}
-            setDocuUrl={setDocuUrl}
-          />
-        ) : auction.property.type === "jet" ? (
-          <DisplayJet
-            property={auction}
-            toggleChange={toggleChange}
-            toggleSignIn={toggleSignIn}
-            windowSize={windowSize}
-            setRefresh={setRefresh}
-            refresh={refresh}
-            setMessage={setMessage}
-            toggleDocu={toggleDocu}
-            setDocuUrl={setDocuUrl}
-            showDocu={showDocu}
-          />
-        ) : auction.property.type === "yacht" ? (
-          <DisplayYacht
-            property={auction}
-            toggleChange={toggleChange}
-            toggleSignIn={toggleSignIn}
-            windowSize={windowSize}
-            setRefresh={setRefresh}
-            refresh={refresh}
-            setMessage={setMessage}
-            toggleDocu={toggleDocu}
-            setDocuUrl={setDocuUrl}
-            showDocu={showDocu}
-          />
-        ) : null
-      ) : (
-        <div
-          className="vh-100"
-          // className="real-estate-wrap m-5"
-          // style={{
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   textAlign: "center",
-          // }}
-        >
-          {/* <h1>
+      <convertedCurrencyText.Provider value={convertedCurrency}>
+        {auction ? (
+          auction.property.type === "real-estate" ? (
+            <DisplayRealEstate
+              socket={socket}
+              property={auction}
+              toggleChange={toggleChange}
+              toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
+              setRefresh={setRefresh}
+              refresh={refresh}
+              setMessage={setMessage}
+              toggleDocu={toggleDocu}
+              setDocuUrl={setDocuUrl}
+            />
+          ) : auction.property.type === "car" ? (
+            <DisplayCar
+              property={auction}
+              toggleChange={toggleChange}
+              toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
+              setRefresh={setRefresh}
+              refresh={refresh}
+              setMessage={setMessage}
+              toggleDocu={toggleDocu}
+              setDocuUrl={setDocuUrl}
+            />
+          ) : auction.property.type === "jet" ? (
+            <DisplayJet
+              property={auction}
+              toggleChange={toggleChange}
+              toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
+              setRefresh={setRefresh}
+              refresh={refresh}
+              setMessage={setMessage}
+              toggleDocu={toggleDocu}
+              setDocuUrl={setDocuUrl}
+              showDocu={showDocu}
+            />
+          ) : auction.property.type === "yacht" ? (
+            <DisplayYacht
+              property={auction}
+              toggleChange={toggleChange}
+              toggleSignIn={toggleSignIn}
+              windowSize={windowSize}
+              setRefresh={setRefresh}
+              refresh={refresh}
+              setMessage={setMessage}
+              toggleDocu={toggleDocu}
+              setDocuUrl={setDocuUrl}
+              showDocu={showDocu}
+            />
+          ) : null
+        ) : (
+          <div
+            className="vh-100"
+            // className="real-estate-wrap m-5"
+            // style={{
+            //   display: "flex",
+            //   justifyContent: "center",
+            //   textAlign: "center",
+            // }}
+          >
+            {/* <h1>
             Auction not found! Auction has either ended or has not started yet,
             please try again later.
             <br />
             <br />
             Thank you for your patience.
           </h1> */}
-        </div>
-      )}
+          </div>
+        )}
+      </convertedCurrencyText.Provider>
     </>
   );
 }

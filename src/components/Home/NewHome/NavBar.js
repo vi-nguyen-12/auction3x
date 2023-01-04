@@ -100,10 +100,10 @@ function NavBar({
       }}
     >
       <Col
-        md={windowSize < 800 ? 6 : windowSize < 1300 ? 2 : user._id ? 2 : 3}
+        md={windowSize < 800 ? 6 : 3}
         xs={6}
-        className="m-0 d-flex justify-content-start align-items-center"
-        style={{ paddingLeft: windowSize > 1300 && user._id ? "3rem" : "5rem" }}
+        className="m-0 d-flex justify-content-center align-items-center"
+        // style={{ paddingLeft: windowSize > 1300 && "4rem", paddingRight: windowSize > 1300 && "4rem" }}
       >
         <img
           onClick={handleLogoClick}
@@ -138,9 +138,9 @@ function NavBar({
 
       {user._id ? (
         <Col
-          md={windowSize < 1300 ? 6 : user._id ? 4 : 3}
+          md={windowSize < 1300 ? 6 : 3}
           xs={6}
-          className="p-0 m-0 d-flex justify-content-evenly align-items-center"
+          className="p-0 m-0 d-flex justify-content-center align-items-center"
         >
           {windowSize > 520 && (
             <Button onClick={handleSell} className="nav-button">
@@ -152,13 +152,13 @@ function NavBar({
               {windowSize > 800 ? (
                 <Button
                   onClick={() => setDropdown(!dropdown)}
-                  className="user-name px-2"
+                  className="user-name"
                 >
                   Hello,{" "}
                   {user.firstName[0].toUpperCase() + user.firstName.slice(1)}
                   <div
                     className="d-flex justify-content-center align-items-center"
-                    style={{ marginLeft: "1rem" }}
+                    style={{ marginLeft: "0.5rem" }}
                   >
                     <IoIosArrowDown size={20} />
                   </div>
@@ -584,28 +584,97 @@ function NavBar({
         </Col>
       ) : (
         <Col
-          md={windowSize < 1160 ? 6 : 3}
+          md={windowSize < 1300 ? 6 : 3}
           xs={6}
-          className="p-0 m-0 d-flex justify-content-center align-items-center"
+          className="m-0 p-0 d-flex justify-content-center align-items-center"
         >
-          <Button onClick={handleSell} className="nav-button">
-            Sell
-          </Button>
           {windowSize < 768 ? (
             <Button onClick={toggleSignIn} className="nav-button">
               Login
             </Button>
           ) : (
-            <div className="text-light h-100">
-              <Button onClick={toggleSignIn} className="nav-button">
-                Sign In
+            <>
+              <Button onClick={handleSell} className="nav-button">
+                Sell
               </Button>
-              |
-              <Button onClick={toggleSignUp} className="nav-button">
-                Sign Up
-              </Button>
-            </div>
+              <div className="text-light h-100">
+                <Button onClick={toggleSignIn} className="nav-button">
+                  Sign In
+                </Button>
+                |
+                <Button onClick={toggleSignUp} className="nav-button">
+                  Sign Up
+                </Button>
+              </div>
+            </>
           )}
+          <div className="dropdown">
+            <Button className="nav-button">
+              {currency === "USD" ? (
+                <BiDollarCircle
+                  size={windowSize > 1670 ? 28 : 32}
+                  color="#bf9767"
+                />
+              ) : currency === "INR" ? (
+                <HiOutlineCurrencyRupee
+                  size={windowSize > 1670 ? 28 : 32}
+                  color="#bf9767"
+                />
+              ) : (
+                <BiDollarCircle
+                  size={windowSize > 1670 ? 28 : 32}
+                  color="#bf9767"
+                />
+              )}
+            </Button>
+            <div className="dropdown-content">
+              <div
+                className="dropdown-content-items px-2"
+                style={{
+                  marginLeft: "-35px",
+                  width: "130px",
+                  padding: "10px",
+                }}
+              >
+                <div
+                  className="d-flex justify-content-start align-items-center py-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changeCurrency("USD")}
+                >
+                  <div className="wallet-icon text-white">$</div>
+                  <div className="d-grid justify-content-start">
+                    <span
+                      style={{
+                        padding: "0",
+                        display: "flex",
+                        color: "#B77B50",
+                      }}
+                    >
+                      US
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="d-flex justify-content-start align-items-center py-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changeCurrency("INR")}
+                >
+                  <div className="wallet-icon text-white">₹</div>
+                  <div className="d-grid justify-content-start">
+                    <span
+                      style={{
+                        padding: "0",
+                        display: "flex",
+                        color: "#B77B50",
+                      }}
+                    >
+                      INDIA
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <Button
             onClick={() => {
               setExpendedMenuId("expended");

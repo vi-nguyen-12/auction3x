@@ -80,7 +80,7 @@ function JetDetails({
   const [lng, setLng] = useState(
     propertyTest.details?.property_address?.lng || ""
   );
-  const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
+  // const [currency, setCurrency] = useState(propertyTest?.currency || "USD");
 
   const [reservedAmount, setReservedAmount] = useState(
     propertyTest?.reservedAmount || 0
@@ -222,7 +222,7 @@ function JetDetails({
           },
           reservedAmount: parseInt(reservedAmount),
           discussedAmount: parseInt(discussedAmount),
-          currency,
+          // currency,
           step: 2,
         };
 
@@ -521,7 +521,7 @@ function JetDetails({
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col xs={12} md={4}>
+          <Col xs={12} md={6}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Engine Manufacturer <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -534,7 +534,7 @@ function JetDetails({
               required
             />
           </Col>
-          <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
+          <Col xs={12} md={6} className="mt-sm-3 mt-md-0">
             <span style={{ fontWeight: "600", color: "black" }}>
               Engine Model <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -547,7 +547,7 @@ function JetDetails({
               required
             />
           </Col>
-          <Col xs={12} md={4}>
+          {/* <Col xs={12} md={4}>
             <span style={{ fontWeight: "600", color: "black" }}>
               Currency <span style={{ color: "#ff0000" }}>*</span>
             </span>
@@ -561,7 +561,7 @@ function JetDetails({
               <option value="USD">USD</option>
               <option value="INR">INR</option>
             </select>
-          </Col>
+          </Col> */}
         </Row>
         <Row className="mt-3">
           <Col lg={4} md={6} xs={12} sm={6}>
