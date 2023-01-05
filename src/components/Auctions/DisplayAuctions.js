@@ -72,8 +72,6 @@ function DisplayAuctions({
     };
   }, [id, setMessage]);
 
-  console.log(auction);
-
   useEffect(() => {
     if (currency !== "USD") {
       axios

@@ -128,18 +128,36 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
             </Col>
             {currency !== "USD" && (
               <span className="d-flex justify-content-end">
-                <NumberFormat
-                  style={{
-                    fontSize: "12px",
-                    fontFamily: "Interstate",
-                    fontWeight: "500",
-                  }}
-                  value={convertedCurrency}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"Approx. "}
-                  suffix={" " + currency}
-                />
+                {currency === "INR" ? (
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "black",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Approx.{" "}
+                    {parseInt(convertedCurrency).toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                ) : (
+                  <NumberFormat
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                    value={convertedCurrency}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Approx. "}
+                    suffix={" " + currency}
+                  />
+                )}
               </span>
             )}
           </Row>
@@ -156,18 +174,36 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
             </Col>
             {currency !== "USD" && (
               <span className="d-flex justify-content-end">
-                <NumberFormat
-                  style={{
-                    fontSize: "12px",
-                    fontFamily: "Interstate",
-                    fontWeight: "500",
-                  }}
-                  value={convertedIncrement}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"Approx. "}
-                  suffix={" " + currency}
-                />
+                {currency === "INR" ? (
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "black",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Approx.{" "}
+                    {parseInt(convertedIncrement).toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                ) : (
+                  <NumberFormat
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                    value={convertedIncrement}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Approx. "}
+                    suffix={" " + currency}
+                  />
+                )}
               </span>
             )}
           </Row>
@@ -191,18 +227,36 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
             </Col>
             {currency !== "USD" && (
               <span className="d-flex justify-content-end">
-                <NumberFormat
-                  style={{
-                    fontSize: "12px",
-                    fontFamily: "Interstate",
-                    fontWeight: "500",
-                  }}
-                  value={convertedMinimum}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"Approx. "}
-                  suffix={" " + currency}
-                />
+                {currency === "INR" ? (
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "black",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Approx.{" "}
+                    {parseInt(convertedMinimum).toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                ) : (
+                  <NumberFormat
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                    value={convertedMinimum}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Approx. "}
+                    suffix={" " + currency}
+                  />
+                )}
               </span>
             )}
           </Row>
@@ -210,18 +264,36 @@ const BuyConfirm = ({ property, setMessage, windowSize }) => {
           <Row style={{ padding: "0 20px" }} className="mt-5">
             {currency !== "USD" && (
               <span className="d-flex justify-content-start">
-                <NumberFormat
-                  style={{
-                    fontSize: "12px",
-                    fontFamily: "Interstate",
-                    fontWeight: "500",
-                  }}
-                  value={convertedBid}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"Approx. "}
-                  suffix={" " + currency}
-                />
+                {currency === "INR" ? (
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "black",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Approx.{" "}
+                    {parseInt(convertedBid).toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                ) : (
+                  <NumberFormat
+                    style={{
+                      fontSize: "12px",
+                      fontFamily: "Interstate",
+                      fontWeight: "500",
+                    }}
+                    value={convertedBid}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Approx. "}
+                    suffix={" " + currency}
+                  />
+                )}
               </span>
             )}
             <Col md={12}>

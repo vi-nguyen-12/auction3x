@@ -419,13 +419,24 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
             </p>
             {currency !== "USD" && (
               <p className="m-0">
-                <NumberFormat
-                  value={convertedCurrency}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"Approx. "}
-                  suffix={" " + currency}
-                />
+                {currency === "INR" ? (
+                  <>
+                    Approx.{" "}
+                    {parseInt(convertedCurrency).toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "INR",
+                      maximumFractionDigits: 2,
+                    })}
+                  </>
+                ) : (
+                  <NumberFormat
+                    value={convertedCurrency}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"Approx. "}
+                    suffix={" " + currency}
+                  />
+                )}
               </p>
             )}
           </Col>

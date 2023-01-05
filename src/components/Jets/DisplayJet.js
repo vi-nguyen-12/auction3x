@@ -811,22 +811,42 @@ function DisplayJet({
                               currency !== "USD" ? "0" : "0.875rem",
                           }}
                         />
-                        {currency !== "USD" && (
-                          <span>
-                            <NumberFormat
-                              value={convertedCurrency}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"Approx. "}
-                              suffix={" " + currency}
+                        {currency !== "USD" &&
+                          (currency === "INR" ? (
+                            <span
                               style={{
                                 fontSize: "12px",
                                 color: "black",
                                 fontFamily: "Interstate",
+                                fontWeight: "500",
                               }}
-                            />
-                          </span>
-                        )}
+                            >
+                              Approx.{" "}
+                              {parseInt(convertedCurrency).toLocaleString(
+                                "en-IN",
+                                {
+                                  style: "currency",
+                                  currency: "INR",
+                                  minimumFractionDigits: 2,
+                                }
+                              )}
+                            </span>
+                          ) : (
+                            <span>
+                              <NumberFormat
+                                value={convertedCurrency}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"Approx. "}
+                                suffix={" " + currency}
+                                style={{
+                                  fontSize: "12px",
+                                  color: "black",
+                                  fontFamily: "Interstate",
+                                }}
+                              />
+                            </span>
+                          ))}
                         <span>Current Bid</span>
                       </div>
                     ) : (
@@ -854,22 +874,42 @@ function DisplayJet({
                               currency !== "USD" ? "0" : "0.875rem",
                           }}
                         />
-                        {currency !== "USD" && (
-                          <span>
-                            <NumberFormat
-                              value={convertedCurrency}
-                              displayType={"text"}
-                              thousandSeparator={true}
-                              prefix={"Approx. "}
-                              suffix={" " + currency}
+                        {currency !== "USD" &&
+                          (currency === "INR" ? (
+                            <span
                               style={{
                                 fontSize: "12px",
                                 color: "black",
                                 fontFamily: "Interstate",
+                                fontWeight: "500",
                               }}
-                            />
-                          </span>
-                        )}
+                            >
+                              Approx.{" "}
+                              {parseInt(convertedCurrency).toLocaleString(
+                                "en-IN",
+                                {
+                                  style: "currency",
+                                  currency: "INR",
+                                  minimumFractionDigits: 2,
+                                }
+                              )}
+                            </span>
+                          ) : (
+                            <span>
+                              <NumberFormat
+                                value={convertedCurrency}
+                                displayType={"text"}
+                                thousandSeparator={true}
+                                prefix={"Approx. "}
+                                suffix={" " + currency}
+                                style={{
+                                  fontSize: "12px",
+                                  color: "black",
+                                  fontFamily: "Interstate",
+                                }}
+                              />
+                            </span>
+                          ))}
                         <span>Current Bid</span>
                       </div>
                     )}

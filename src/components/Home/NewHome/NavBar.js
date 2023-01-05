@@ -13,6 +13,7 @@ import { IoAirplaneSharp } from "react-icons/io5";
 import { IoIosBoat } from "react-icons/io";
 import { BiDollarCircle } from "react-icons/bi";
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
+import { AiOutlineEuroCircle } from "react-icons/ai";
 import "../../../styles/nav.css";
 
 function NavBar({
@@ -253,6 +254,7 @@ function NavBar({
                     >
                       <option value="USD">US</option>
                       <option value="INR">INDIA</option>
+                      <option value="EUR">EURO</option>
                     </Form.Select>
                   )}
                   <div className="d-flex justify-content-start align-items-center py-2">
@@ -515,6 +517,11 @@ function NavBar({
                       size={windowSize > 1670 ? 28 : 32}
                       color="#bf9767"
                     />
+                  ) : currency === "EUR" ? (
+                    <AiOutlineEuroCircle
+                      size={windowSize > 1670 ? 28 : 32}
+                      color="#bf9767"
+                    />
                   ) : (
                     <BiDollarCircle
                       size={windowSize > 1670 ? 28 : 32}
@@ -564,6 +571,24 @@ function NavBar({
                           }}
                         >
                           INDIA
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className="d-flex justify-content-start align-items-center py-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => changeCurrency("EUR")}
+                    >
+                      <div className="wallet-icon text-white">€</div>
+                      <div className="d-grid justify-content-start">
+                        <span
+                          style={{
+                            padding: "0",
+                            display: "flex",
+                            color: "#B77B50",
+                          }}
+                        >
+                          EURO
                         </span>
                       </div>
                     </div>
