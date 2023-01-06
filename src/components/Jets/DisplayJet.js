@@ -1187,6 +1187,34 @@ function DisplayJet({
                                     thousandSeparator={true}
                                     prefix={"$"}
                                   />
+                                  {currency !== "USD" && (
+                                    <p
+                                      className="m-0"
+                                      style={{ fontSize: "14px" }}
+                                    >
+                                      {currency === "INR" ? (
+                                        <>
+                                          Approx.{" "}
+                                          {parseInt(bid.amount).toLocaleString(
+                                            "en-IN",
+                                            {
+                                              style: "currency",
+                                              currency: "INR",
+                                              maximumFractionDigits: 2,
+                                            }
+                                          )}
+                                        </>
+                                      ) : (
+                                        <NumberFormat
+                                          value={bid.amount}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix={"Approx. "}
+                                          suffix={" " + currency}
+                                        />
+                                      )}
+                                    </p>
+                                  )}
                                 </td>
                                 <td>{new Date(bid.time).toLocaleString()}</td>
                               </tr>
@@ -1220,17 +1248,10 @@ function DisplayJet({
               }}
               className="p-0"
               xs={12}
-              // md={6}
             >
               <div
                 style={{
                   fontSize: windowSize > 800 ? "20px" : "17px",
-                  // marginTop:
-                  //   windowSize < 600 && property.highestBidders?.length > 0
-                  //     ? "300px"
-                  //     : windowSize < 600
-                  //     ? "150px"
-                  //     : "0",
                 }}
                 className="summary-container d-grid"
               >
@@ -1238,38 +1259,6 @@ function DisplayJet({
                 {parse(property.property.details.description?.summary)}
               </div>
             </Col>
-
-            {/* <Col
-              style={{
-                fontSize: windowSize > 800 ? "20px" : "17px",
-                color: "black",
-                padding: windowSize > 800 && "20px 20px 20px 0",
-                marginTop: windowSize <= 767 && "20px",
-                fontFamily: "Josefin Slab",
-                fontWeight: "600",
-              }}
-              xs={12}
-              md={6}
-            >
-              In recent years, Milwaukee has been undergoing its largest
-              construction boom since the 1960s. Major new additions to the city
-              in the past two decades include the Milwaukee Riverwalk, the
-              Wisconsin Center, American Family Field, The Hop (streetcar
-              system), an expansion to the Milwaukee Art Museum, Milwaukee
-              Repertory Theater, the Bradley Symphony Center, and Discovery
-              World, as well as major renovations to the UW-Milwaukee Panther
-              Arena. Fiserv Forum opened in late 2018 and hosts sporting events
-              and concerts. Since 1968, Milwaukee has been home to Summerfest,
-              one of the largest music festivals in the world. With regard to
-              education, Milwaukee is home to UW-Milwaukee, Marquette
-              University, MSOE, and several other universities and colleges. The
-              city is home to two major professional sports teams, the Bucks and
-              Brewers. It is home to several Fortune 500 companies, including
-              Northwestern Mutual, WE Energy Group, Rockwell Automation, and
-              Harley-Davidson. Property tours are available by appointment only.
-              Please contact Alexander Reid to schedule at 847-791-2420 or
-              alexander@reidgroup.house.
-            </Col> */}
           </Row>
 
           <Row

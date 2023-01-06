@@ -378,7 +378,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
               </label>
               <PhoneInput
                 disableCountryCode={false}
-                onlyCountries={["ca", "us", "gb", "au"]}
+                onlyCountries={["us", "ca", "gb", "au", "in"]}
                 disableDropdown={false}
                 country={"us"}
                 dropdownStyle={{ paddingLeft: "0!important" }}

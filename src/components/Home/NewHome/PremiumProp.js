@@ -67,7 +67,7 @@ const HomeBottom = styled.div`
   background: linear-gradient(
     180deg,
     rgba(8, 8, 10, 0) 0%,
-    rgba(8, 8, 10, 0.74) 41.31%,
+    rgba(8, 8, 10, 0.84) 41.31%,
     #08080a 80%
   );
   opacity: 0.7;

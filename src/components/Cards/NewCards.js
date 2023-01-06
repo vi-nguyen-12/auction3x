@@ -418,7 +418,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
               />
             </p>
             {currency !== "USD" && (
-              <p className="m-0">
+              <p className="m-0" style={{fontSize:"14px"}}>
                 {currency === "INR" ? (
                   <>
                     Approx.{" "}

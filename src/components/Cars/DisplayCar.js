@@ -1106,6 +1106,34 @@ function DisplayCar({
                                     thousandSeparator={true}
                                     prefix={"$"}
                                   />
+                                  {currency !== "USD" && (
+                                    <p
+                                      className="m-0"
+                                      style={{ fontSize: "14px" }}
+                                    >
+                                      {currency === "INR" ? (
+                                        <>
+                                          Approx.{" "}
+                                          {parseInt(bid.amount).toLocaleString(
+                                            "en-IN",
+                                            {
+                                              style: "currency",
+                                              currency: "INR",
+                                              maximumFractionDigits: 2,
+                                            }
+                                          )}
+                                        </>
+                                      ) : (
+                                        <NumberFormat
+                                          value={bid.amount}
+                                          displayType={"text"}
+                                          thousandSeparator={true}
+                                          prefix={"Approx. "}
+                                          suffix={" " + currency}
+                                        />
+                                      )}
+                                    </p>
+                                  )}
                                 </td>
                                 <td>{new Date(bid.time).toLocaleString()}</td>
                               </tr>

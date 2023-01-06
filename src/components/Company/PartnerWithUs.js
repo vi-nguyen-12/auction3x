@@ -152,7 +152,7 @@ function PartnerWithUs({ windowSize, setMessage }) {
                   <span>Phone</span>
                   <PhoneInput
                     disableCountryCode={false}
-                    onlyCountries={["ca", "us", "gb", "au"]}
+                    onlyCountries={["ca", "us", "gb", "au", "in"]}
                     disableDropdown={false}
                     country={"us"}
                     dropdownStyle={{ paddingLeft: "0!important" }}

@@ -441,7 +441,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <PhoneInput
                 disableCountryCode={false}
-                onlyCountries={["ca", "us", "gb", "au"]}
+                onlyCountries={["ca", "us", "gb", "au", "in"]}
                 disableD={!edit.step1}
                 ropdown={false}
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}
@@ -502,7 +502,7 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
               </span>
               <PhoneInput
                 disableCountryCode={false}
-                onlyCountries={["ca", "us", "gb", "au"]}
+                onlyCountries={["ca", "us", "gb", "au", "in"]}
                 disableD={!edit.step1}
                 ropdown={false}
                 style={{ border: edit.step1 ? "1px solid #2ecc71" : "" }}

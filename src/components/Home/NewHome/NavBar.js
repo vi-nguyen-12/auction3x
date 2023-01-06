@@ -96,20 +96,20 @@ function NavBar({
     <Row
       className="p-0 m-0 nav-container"
       style={{
-        justifyContent: windowSize < 1300 && "space-around",
+        justifyContent: windowSize < 1300 && "space-evenly",
         background: color,
       }}
     >
       <Col
-        md={windowSize < 800 ? 6 : 3}
+        md={windowSize < 1300 ? 6 : 2}
         xs={6}
         className="m-0 d-flex justify-content-center align-items-center"
-        // style={{ paddingLeft: windowSize > 1300 && "4rem", paddingRight: windowSize > 1300 && "4rem" }}
+        style={{ paddingLeft: windowSize > 1300 && "4rem" }}
       >
         <img
           onClick={handleLogoClick}
           src="/images/Logo_Dark.png"
-          width={windowSize < 768 ? "150px" : "180px"}
+          width={windowSize < 768 ? "150px" : "200px"}
           height="auto"
           alt="logo"
           className="logo"
@@ -118,7 +118,7 @@ function NavBar({
       </Col>
       <Col
         md={6}
-        className="p-0 m-0"
+        className="p-0 m-0 ms-auto"
         style={{ display: windowSize < 1300 && "none" }}
       >
         <ul className="nav-list">
@@ -694,6 +694,24 @@ function NavBar({
                       }}
                     >
                       INDIA
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="d-flex justify-content-start align-items-center py-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => changeCurrency("EUR")}
+                >
+                  <div className="wallet-icon text-white">€</div>
+                  <div className="d-grid justify-content-start">
+                    <span
+                      style={{
+                        padding: "0",
+                        display: "flex",
+                        color: "#B77B50",
+                      }}
+                    >
+                      EURO
                     </span>
                   </div>
                 </div>
