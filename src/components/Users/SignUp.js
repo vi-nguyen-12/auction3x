@@ -26,6 +26,7 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [loader, setLoader] = useState(false);
   const [phone, setPhone] = useState();
+  const [expireDate, setExpireDate] = useState();
   const toggleTerms = () => setShowTerms(!showTerms);
   const togglePrivacy = () => setShowPrivacy(!showPrivacy);
 
@@ -45,6 +46,18 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
     } else {
       setPassStrong("weak");
     }
+  };
+
+  const fixDate = (date) => {
+    const newDate = new Date(date).setDate(
+      new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
+    );
+    const dates = new Date(newDate).setMonth(
+      new Date(newDate).getDate() === 1
+        ? new Date(newDate).getMonth() + 1
+        : new Date(newDate).getMonth()
+    );
+    setExpireDate(new Date(dates)?.toISOString() || "");
   };
 
   const handleCheckMatch = (e) => {
@@ -139,6 +152,8 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
           agent: {
             licenseNumber: data.agentNumber,
             licenseDocument: files,
+            licenseExpireDate: expireDate,
+            licenseState: data.licenseState,
           },
         };
         authServices.register(datas).then((response) => {
@@ -444,22 +459,21 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
             </h1>
           </Col>
         </Row>
-        <Row className="mt-2 mb-5">
+        <Row className="mt-2">
           <Col md={6} xs={12} className="d-flex align-items-end">
             <div className="form-group position-relative w-100">
+              <label htmlFor="agentNumber">Broker License Number</label>
               <input
                 type="text"
                 style={{ height: "47px" }}
                 className="form-control custom-input"
                 id="agentNumber"
                 name="agentNumber"
+                placeholder=""
                 onInput={(e) => (e.target.value = e.target.value.toUpperCase())}
                 {...register("agentNumber")}
-                required
+                // required
               />
-              <label htmlFor="agentNumber" className="input_label">
-                Broker License Number
-              </label>
             </div>
           </Col>
           <Col md={6} xs={12} className="d-flex align-items-center mt-3">
@@ -474,30 +488,59 @@ const User = ({ toggleSignUp, toggleSignIn, windowSize, setMessage }) => {
                 multiple
               />
             </div>
-            {files.length > 0 && (
-              <div>
-                {files.map((file, index) => (
-                  <ul style={{ paddingLeft: "0.5rem" }} key={index}>
-                    <li style={{ fontSize: "18px", listStyle: "none" }}>
-                      {file.name}{" "}
-                      <span>
-                        <Button
-                          onClick={handleDelete(file.url)}
-                          style={{
-                            background: "transparent",
-                            border: "none",
-                            color: "red",
-                            margin: "0",
-                          }}
-                        >
-                          X
-                        </Button>
-                      </span>
-                    </li>
-                  </ul>
-                ))}
-              </div>
-            )}
+          </Col>
+          {files.length > 0 && (
+            <div className="d-flex justify-content-end">
+              {files.map((file, index) => (
+                <ul style={{ paddingLeft: "0.5rem" }} key={index}>
+                  <li style={{ fontSize: "18px", listStyle: "none" }}>
+                    {file.name}{" "}
+                    <span>
+                      <Button
+                        onClick={handleDelete(file.url)}
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "red",
+                          margin: "0",
+                        }}
+                      >
+                        X
+                      </Button>
+                    </span>
+                  </li>
+                </ul>
+              ))}
+            </div>
+          )}
+        </Row>
+
+        <Row className="mt-2 mb-5">
+          <Col md={6} xs={12} className="d-flex align-items-end mt-3">
+            <div className="form-group position-relative w-100">
+              <label htmlFor="licenseState">Broker License State/Country</label>
+              <input
+                type="text"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
+                id="licenseState"
+                name="licenseState"
+                {...register("licenseState")}
+              />
+            </div>
+          </Col>
+          <Col md={6} xs={12} className="mt-3">
+            <div className="form-group position-relative w-100">
+              <label htmlFor="expireDate">License Expiration Date</label>
+              <input
+                type="date"
+                style={{ height: "47px" }}
+                className="form-control custom-input"
+                id="expireDate"
+                name="expireDate"
+                onChange={(e) => fixDate(e.target.value)}
+              />
+            </div>
           </Col>
         </Row>
 
