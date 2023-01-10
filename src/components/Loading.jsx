@@ -37,7 +37,8 @@ const Loading = () => {
   return (
     <>
       <Loader>
-        <Spinner />
+        {/* <Spinner /> */}
+        <div className="loader"></div>
       </Loader>
     </>
   );
