@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 import Paginations from "../../../Paginations";
+import { currencyText } from "../../../../App";
+import axios from "axios";
 
 function BidAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
+  const currency = useContext(currencyText);
   const [bidAuctions, setBidAuctions] = useState([]);
   const [newBidAuctions, setNewBidAuctions] = useState([]);
   const [pageContent, setPageContents] = useState([]);
@@ -15,18 +18,47 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
   useEffect(() => {
     const fetchBidAuctions = async () => {
       const id = user._id;
-      await authService.getUserBidAuctions(id).then((res) => {
+      await authService.getUserBidAuctions(id).then(async (res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
-          setBidAuctions(res.data);
-          setNewBidAuctions(res.data);
+          let bidAuctions = res.data;
+          if (currency !== "USD") {
+            bidAuctions = await Promise.all(
+              bidAuctions.map(async (auction) => {
+                let convertedHighestBid;
+                let convertedYourHighestBid;
+                await axios
+                  .get(
+                    `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${auction.highestBid?.amount}`
+                  )
+                  .then((res) => {
+                    convertedHighestBid = res.data.result?.toFixed(0) || 0;
+                  });
+
+                await axios
+                  .get(
+                    `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${
+                      auction.bids[auction.bids.length - 1].amount
+                    }`
+                  )
+                  .then((res) => {
+                    convertedYourHighestBid = res.data.result?.toFixed(0) || 0;
+                  });
+                auction.convertedHighestBid = convertedHighestBid;
+                auction.convertedYourHighestBid = convertedYourHighestBid;
+                return auction;
+              })
+            );
+          }
+          setBidAuctions(bidAuctions);
+          setNewBidAuctions(bidAuctions);
         }
       });
     };
     fetchBidAuctions();
-  }, [setMessage, user._id]);
+  }, [setMessage, user._id, currency]);
 
   useEffect(() => {
     if (search) {
@@ -139,6 +171,30 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                       thousandSeparator={true}
                       prefix={"$"}
                     />
+                    {currency !== "USD" && (
+                      <p className="text-muted p-0">
+                        {currency === "INR" ? (
+                          "Approx" +
+                          " " +
+                          parseInt(auction?.convertedHighestBid).toLocaleString(
+                            "en-IN",
+                            {
+                              style: "currency",
+                              currency: "INR",
+                              maximumFractionDigits: 2,
+                            }
+                          )
+                        ) : (
+                          <NumberFormat
+                            value={auction?.convertedHighestBid}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"Approx. "}
+                            suffix={" " + currency}
+                          />
+                        )}
+                      </p>
+                    )}
                   </td>
                   <td colSpan={2}>
                     {" "}
@@ -148,6 +204,29 @@ function BidAuctions({ windowSize, searchBy, search, setMessage }) {
                       thousandSeparator={true}
                       prefix={"$"}
                     />
+                    {currency !== "USD" && (
+                      <p className="text-muted p-0">
+                        {currency === "INR" ? (
+                          "Approx" +
+                          " " +
+                          parseInt(
+                            auction?.convertedYourHighestBid
+                          ).toLocaleString("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                            maximumFractionDigits: 2,
+                          })
+                        ) : (
+                          <NumberFormat
+                            value={auction?.convertedYourHighestBid}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"Approx. "}
+                            suffix={" " + currency}
+                          />
+                        )}
+                      </p>
+                    )}
                   </td>
                   {new Date().toISOString() < auction.auctionEndDate ? (
                     <td>
