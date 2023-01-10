@@ -83,37 +83,39 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
 
   useEffect(() => {
     const getBuyerPendingAuctions = async () => {
-      await authService.getBuyerInfo(user._id).then((res) => {
+      await authService.getBuyerInfo(user._id).then(async (res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
           let pendingAuctions = res.data;
-          console.log(pendingAuctions);
-          if (currency !== "USD") {
-          const pendingAuctionsPromises =  pendingAuctions.map(async (auction) => {
-              auction.buyer.funds = await Promise.all(
-                auction.buyer.funds.map(async (fund) => {
-                  let convertedAmount;
-                  await axios
-                    .get(
-                      `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund.amount}`
-                    )
-                    .then((res) => {
-                      convertedAmount = res.data.result.toFixed(0);
-                      console.log(convertedAmount);
-                    });
-                  console.log(typeof convertedAmount);
-                  fund.convertedAmount = parseInt(convertedAmount);
-                  console.log(fund);
-                  return fund;
-                })
-              );
-              console.log(auction);
-              return auction;
-            }) 
-            pendingAuctions = await Promise.all(pendingAuctionsPromises)
 
+          console.log(pendingAuctions);
+          for (let auction of pendingAuctions) {
+            auction.buyer.totalFund = auction.buyer.funds.reduce(
+              (acc, curr) => acc + curr.amount,
+              0
+            );
+          }
+          console.log(pendingAuctions);
+
+          if (currency !== "USD") {
+            pendingAuctions = await Promise.all(
+              pendingAuctions.map(async (auction) => {
+                let convertedTotalFund;
+                await axios
+                  .get(
+                    `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${auction.buyer.totalFund}`
+                  )
+                  .then((res) => {
+                    console.log(res);
+                    convertedTotalFund = res.data.result?.toFixed(0) || 0;
+                    console.log(convertedTotalFund);
+                  });
+                auction.buyer.convertedTotalFund = convertedTotalFund;
+                return auction;
+              })
+            );
           }
           console.log(pendingAuctions);
 
@@ -441,62 +443,23 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                     </Button>
                   </td>
                   <td colSpan={2}>
-                    {auction.buyer.funds.length > 0 ? (
+                    {auction.buyer.totalFund > 0 ? (
                       <>
                         <NumberFormat
-                          value={auction.buyer.funds.reduce(
-                            (acc, curr) => acc + curr.amount,
-                            0
-                          )}
+                          value={auction.buyer.totalFund}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
                         />
-                        {currency !== "USD" && (
+                        {auction.buyer.convertedTotalFund > 0 && (
                           <p className="text-muted p-0">
-                            {currency === "INR" ? (
-                              <>
-                                <>hello</>
-                                <NumberFormat
-                                  value={auction.buyer.funds.reduce(
-                                    (acc, curr) => acc + curr.convertedAmount,
-                                    0
-                                  )}
-                                  displayType={"text"}
-                                  thousandSeparator={true}
-                                  prefix={"Approx. "}
-                                  suffix={" " + currency}
-                                />
-                              </>
-                            ) : (
-                              // convertedCurrency[index] === null ? (
-                              //   0
-                              // ) : (
-                              //   convertedCurrency[index]?.toLocaleString(
-                              //     "en-IN",
-                              //     {
-                              //       style: "currency",
-                              //       currency: "INR",
-                              //       minimumFractionDigits: 2,
-                              //     }
-                              //   )
-                              // )
-                              // parseInt(convertedCurrency)?.toLocaleString(
-                              //   "en-IN",
-                              //   {
-                              //     style: "currency",
-                              //     currency: "INR",
-                              //     minimumFractionDigits: 2,
-                              //   }
-                              // ) || 0
-                              <NumberFormat
-                                value={convertedCurrency}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"Approx. "}
-                                suffix={" " + currency}
-                              />
-                            )}
+                            <NumberFormat
+                              value={auction.buyer.convertedTotalFund}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                              prefix={"Approx. "}
+                              suffix={" " + currency}
+                            />
                           </p>
                         )}
                       </>
