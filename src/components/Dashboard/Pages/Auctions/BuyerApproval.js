@@ -37,18 +37,29 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const [currentPageContent, setCurrentPageContents] = useState(0);
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
+  console.log(pageContent);
 
-  const convertCurrency = (amount) => {
-    if (currency !== "USD") {
-      axios
-        .get(
-          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${amount}`
-        )
-        .then((res) => {
-          return res.data.result?.toFixed(0);
-        });
-    }
-  };
+  // const convertCurrency = async (amount) => {
+  //   let result;
+  //   if (currency !== "USD") {
+  //     await axios
+  //       .get(
+  //         `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${amount}`
+  //       )
+  //       .then((res) => {
+  //         result = res.data.result.toFixed(0);
+  //       });
+  //   }
+  //   return result;
+  // };
+  // console.log(pendingAuctions[1]);
+  // if (pendingAuctions[1]) {
+  //   console.log(
+  //     pendingAuctions[1].buyer.funds.reduce((acc, curr) => acc + curr.amount, 0)
+  //   );
+
+  //   console.log(convertCurrency(20000000));
+  // }
 
   // useEffect(() => {
   //   const fund = pageContent[currentPageContent]?.map((item) => {
@@ -77,8 +88,37 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           setMessage("");
           setMessage(res.data.error);
         } else {
-          setPendingAuctions(res.data);
-          setNewPendingAuctions(res.data);
+          let pendingAuctions = res.data;
+          console.log(pendingAuctions);
+          if (currency !== "USD") {
+          const pendingAuctionsPromises =  pendingAuctions.map(async (auction) => {
+              auction.buyer.funds = await Promise.all(
+                auction.buyer.funds.map(async (fund) => {
+                  let convertedAmount;
+                  await axios
+                    .get(
+                      `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund.amount}`
+                    )
+                    .then((res) => {
+                      convertedAmount = res.data.result.toFixed(0);
+                      console.log(convertedAmount);
+                    });
+                  console.log(typeof convertedAmount);
+                  fund.convertedAmount = parseInt(convertedAmount);
+                  console.log(fund);
+                  return fund;
+                })
+              );
+              console.log(auction);
+              return auction;
+            }) 
+            pendingAuctions = await Promise.all(pendingAuctionsPromises)
+
+          }
+          console.log(pendingAuctions);
+
+          setPendingAuctions(pendingAuctions);
+          setNewPendingAuctions(pendingAuctions);
         }
       });
     };
@@ -415,12 +455,19 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         {currency !== "USD" && (
                           <p className="text-muted p-0">
                             {currency === "INR" ? (
-                              convertCurrency(
-                                auction.buyer.funds.reduce(
-                                  (acc, curr) => acc + curr.amount,
-                                  0
-                                )
-                              )
+                              <>
+                                <>hello</>
+                                <NumberFormat
+                                  value={auction.buyer.funds.reduce(
+                                    (acc, curr) => acc + curr.convertedAmount,
+                                    0
+                                  )}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"Approx. "}
+                                  suffix={" " + currency}
+                                />
+                              </>
                             ) : (
                               // convertedCurrency[index] === null ? (
                               //   0
