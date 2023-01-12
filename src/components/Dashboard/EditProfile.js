@@ -58,8 +58,13 @@ function EditProfile({ setMessage }) {
   const [loader, setLoader] = useState(false);
   const [licenseNum, setLicenseNum] = useState(user.agent.licenseNumber);
   const [files, setFiles] = useState(user.agent.licenseDocument);
+  const [licenseState, setLicenseState] = useState(user.agent?.licenseState);
+  const [licenseExpireDate, setLicenseExpireDate] = useState(
+    user.agent?.licenseExpireDate
+  );
   const [passStrong, setPassStrong] = useState("");
   const [passMatch, setPassMatch] = useState(false);
+  const [changeDate, setChangeDate] = useState(false);
 
   var strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
@@ -291,7 +296,7 @@ function EditProfile({ setMessage }) {
         >
           Broker Info
         </Col>
-        <Col md={12} xs={12} className="mt-3">
+        <Col md={6} xs={12} className="mt-3">
           <span>Broker License Number</span>
           <input
             className="form-control custom-input"
@@ -301,7 +306,7 @@ function EditProfile({ setMessage }) {
             onChange={(e) => setLicenseNum(e.target.value)}
           />
         </Col>
-        <Col md={12} xs={12} className="mt-3">
+        <Col md={6} xs={12} className="mt-3">
           <span>Broker License/Certificate</span>
           <input
             className="form-control custom-input"
@@ -334,6 +339,39 @@ function EditProfile({ setMessage }) {
             </div>
           )}
         </Col>
+        {/* <Col md={6} xs={12} className="mt-3">
+          <span>Broker License State</span>
+          <input
+            className="form-control custom-input"
+            type="text"
+            defaultValue={licenseState}
+            onChange={(e) => setLicenseState(e.target.value)}
+          />
+        </Col>
+        <Col md={6} xs={12} className="mt-3">
+          <span>Broker License Expiry Date</span>
+          <div className="d-flex justify-content-between">
+            {!changeDate && licenseExpireDate ? (
+              <input
+                className="form-control custom-input"
+                type="text"
+                value={new Date(licenseExpireDate).toLocaleDateString()}
+                disabled
+              />
+            ) : (
+              <input className="form-control custom-input" type="date" />
+            )}
+            <Button
+              variant="primary"
+              onClick={() => setChangeDate(!changeDate)}
+              className={`bg-${
+                changeDate ? "danger" : "success"
+              } border-0 rounded-0 ms-2`}
+            >
+              {changeDate ? "Cancel" : "Change"}
+            </Button>
+          </div>
+        </Col> */}
       </Row>
       <Row className="mt-3">
         <Col

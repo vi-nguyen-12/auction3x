@@ -72,11 +72,31 @@ function Ownership({
     ) || []
   );
 
+  const [licenseExpireDate, setLicenseExpireDate] = useState(
+    user.agent?.licenseExpireDate || ""
+  );
+  const [licenseState, setLicenseState] = useState(
+    user.agent?.licenseState || ""
+  );
+  const [changeDate, setChangeDate] = useState(false);
+
   const [attorney, setAttorney] = useState(
     propertyTest.details?.broker_documents?.filter(
       (item) => item.officialName === "power_of_attorney"
     ) || []
   );
+
+  const fixDate = (date) => {
+    const newDate = new Date(date).setDate(
+      new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
+    );
+    const dates = new Date(newDate).setMonth(
+      new Date(newDate).getDate() === 1
+        ? new Date(newDate).getMonth() + 1
+        : new Date(newDate).getMonth()
+    );
+    setLicenseExpireDate(new Date(dates).toISOString());
+  };
 
   const addOwnerHandler = () => {
     setAddedNewOwner([
@@ -168,6 +188,9 @@ function Ownership({
             email: email,
             address: address,
             broker_documents: [...listingAgreements, ...attorney],
+            broker_license_number: brokerId ? brokerId : data.brokerId,
+            broker_license_expired_date: licenseExpireDate,
+            broker_license_state: licenseState,
             ownership_type: {
               name: otherOwnershipType ? otherOwnershipType : ownershipType,
               secondary_owner:
@@ -837,6 +860,49 @@ function Ownership({
                         </Button>
                       </span>
                     ))}
+                  </div>
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col md={6} xs={12}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker License state
+                  </span>
+                  <input
+                    value={licenseState}
+                    onChange={(e) => setLicenseState(e.target.value)}
+                    type="text"
+                    className="form-control custom-input"
+                  />
+                </Col>
+                <Col md={6} xs={12}>
+                  <span style={{ fontWeight: "600", color: "black" }}>
+                    Broker License Expiration Date
+                  </span>
+                  <div className="d-flex justify-content-between">
+                    {!changeDate && licenseExpireDate ? (
+                      <input
+                        type="text"
+                        className="form-control custom-input"
+                        value={licenseExpireDate}
+                        disabled
+                      />
+                    ) : (
+                      <input
+                        type="date"
+                        className="form-control custom-input"
+                        onChange={(e) => fixDate(e.target.value)}
+                      />
+                    )}
+                    <Button
+                      variant="primary"
+                      onClick={() => setChangeDate(!changeDate)}
+                      className={`bg-${
+                        changeDate ? "danger" : "success"
+                      } border-0 rounded-0 ms-2`}
+                    >
+                      {changeDate ? "Cancel" : "Change"}
+                    </Button>
                   </div>
                 </Col>
               </Row>
