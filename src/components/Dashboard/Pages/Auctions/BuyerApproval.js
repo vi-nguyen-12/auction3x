@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import {
   Table,
   Button,
@@ -37,48 +37,6 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const [currentPageContent, setCurrentPageContents] = useState(0);
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
-
-  // const convertCurrency = async (amount) => {
-  //   let result;
-  //   if (currency !== "USD") {
-  //     await axios
-  //       .get(
-  //         `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${amount}`
-  //       )
-  //       .then((res) => {
-  //         result = res.data.result.toFixed(0);
-  //       });
-  //   }
-  //   return result;
-  // };
-  // console.log(pendingAuctions[1]);
-  // if (pendingAuctions[1]) {
-  //   console.log(
-  //     pendingAuctions[1].buyer.funds.reduce((acc, curr) => acc + curr.amount, 0)
-  //   );
-
-  //   console.log(convertCurrency(20000000));
-  // }
-
-  // useEffect(() => {
-  //   const fund = pageContent[currentPageContent]?.map((item) => {
-  //     return item.buyer.funds.reduce((acc, curr) => {
-  //       return acc + curr.amount;
-  //     }, 0);
-  //   });
-
-  //   for (let i = 0; i < fund?.length; i++) {
-  //     if (currency !== "USD") {
-  //       axios
-  //         .get(
-  //           `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund[i]}`
-  //         )
-  //         .then((res) => {
-  //           setConvertedCurrency([...convertedCurrency, res.data.result]);
-  //         });
-  //     }
-  //   }
-  // }, [currency, pageContent, currentPageContent]);
 
   useEffect(() => {
     var unMounted = false;
@@ -125,6 +83,27 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
       unMounted = true;
     };
   }, [setMessage, user._id, currency]);
+
+  useEffect(async () => {
+    let funds = [...documents];
+    if (documents.length > 0 && currency !== "USD") {
+      funds = await Promise.all(
+        funds.map(async (fund) => {
+          let convertedFund;
+          await axios
+            .get(
+              `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund.amount}`
+            )
+            .then((res) => {
+              convertedFund = res.data.result?.toFixed(0) || 0;
+            });
+          fund.convertedFund = convertedFund;
+          return fund;
+        })
+      );
+      setDocuments(funds);
+    }
+  }, [currency, documents.length > 0]);
 
   useEffect(() => {
     if (search) {
@@ -752,7 +731,10 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           backdrop="static"
           keyboard={false}
           show={showDocuments}
-          onHide={toggleDocuments}
+          onHide={() => {
+            toggleDocuments();
+            setDocuments([]);
+          }}
           centered
         >
           <Modal.Header className="auction-modal-header px-4" closeButton>
@@ -794,7 +776,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         <td>{index + 1}</td>
                         <td>{document?.document?.name || document?.name}</td>
                         <td>
-                          {document?.document?.officialName ||
+                          {document?.document?.officialName.replace("_", " ") ||
                             document?.officialName}
                         </td>
                         <td>
@@ -813,6 +795,29 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                             thousandSeparator={true}
                             prefix={"$"}
                           />
+                          {currency !== "USD" && (
+                            <p className="text-muted p-0">
+                              {currency === "INR" ? (
+                                "Approx" +
+                                " " +
+                                parseInt(
+                                  document?.convertedFund
+                                ).toLocaleString("en-IN", {
+                                  style: "currency",
+                                  currency: "INR",
+                                  maximumFractionDigits: 2,
+                                })
+                              ) : (
+                                <NumberFormat
+                                  value={document?.convertedFund}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"Approx. "}
+                                  suffix={" " + currency}
+                                />
+                              )}
+                            </p>
+                          )}
                         </td>
                         <td>
                           <Button

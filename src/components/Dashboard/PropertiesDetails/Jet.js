@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
+import { currencyText } from "../../../App";
+import axios from "axios";
 
 function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
+  const currency = useContext(currencyText);
   const [other, setOther] = useState(false);
   const [isImported, setIsImported] = useState(
     property.details.imported_aircraft
   );
+  const [convertedCurrency, setConvertedCurrency] = useState();
 
   const builder = [
     "AIRBUS",
@@ -23,6 +27,41 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
     "PIAGGIO",
     "PILATUS",
   ];
+
+  useEffect(() => {
+    const convert = async () => {
+      let convertCurrency = {
+        reservedAmount: 0,
+        discussedAmount: 0,
+      };
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.reservedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            reservedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.discussedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            discussedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+      setConvertedCurrency(convertCurrency);
+    };
+
+    if (property && currency !== "USD") {
+      convert();
+    }
+  }, [property]);
 
   const onSubmit = async (prop, step) => {
     if (step === 2) {
@@ -335,6 +374,30 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.reservedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.reservedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
         <Col xs={12} md={6}>
           <span
@@ -358,6 +421,30 @@ function Jet({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.discussedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.discussedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
       </Row>
       <Row className="mt-3">
