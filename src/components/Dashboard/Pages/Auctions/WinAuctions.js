@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Modal, Row, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NumberFormat from "react-number-format";
 import authService from "../../../../services/authServices";
 import Paginations from "../../../Paginations";
+import { currencyText } from "../../../../App";
+import axios from "axios";
 
 function WinAuctions({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
+  const currency = useContext(currencyText);
   const [winAuctions, setWinAuctions] = useState([]);
   const [newWinAuctions, setNewWinAuctions] = useState([]);
   const [pageContent, setPageContents] = useState([]);
@@ -16,19 +19,43 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
   const toggleShowPic = () => setShowPic(!showPic);
 
   useEffect(() => {
+    let unMounted = false;
     const fetchWinAuctions = async () => {
-      await authService.buyerWonAuctions(user._id).then((res) => {
+      await authService.buyerWonAuctions(user._id).then(async (res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
-          setWinAuctions(res.data);
-          setNewWinAuctions(res.data);
+          let wonAuctions = res.data;
+          if (currency !== "USD") {
+            wonAuctions = await Promise.all(
+              wonAuctions.map(async (auction) => {
+                let convertedBidAmount;
+                await axios
+                  .get(
+                    `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${auction.amount}`
+                  )
+                  .then((res) => {
+                    convertedBidAmount = res.data.result?.toFixed(0) || 0;
+                  });
+                auction.convertedBidAmount = convertedBidAmount;
+                return auction;
+              })
+            );
+          }
+          setWinAuctions(wonAuctions);
+          setNewWinAuctions(wonAuctions);
         }
       });
     };
-    fetchWinAuctions();
-  }, [setMessage, user._id]);
+    if (!unMounted) {
+      fetchWinAuctions();
+    }
+
+    return () => {
+      unMounted = true;
+    };
+  }, [setMessage, user._id, currency]);
 
   useEffect(() => {
     if (search) {
@@ -159,6 +186,30 @@ function WinAuctions({ windowSize, searchBy, search, setMessage }) {
                       thousandSeparator={true}
                       prefix={"$"}
                     />
+                    {currency !== "USD" && (
+                      <p className="text-muted p-0">
+                        {currency === "INR" ? (
+                          "Approx" +
+                          " " +
+                          parseInt(auction.convertedBidAmount).toLocaleString(
+                            "en-IN",
+                            {
+                              style: "currency",
+                              currency: "INR",
+                              maximumFractionDigits: 2,
+                            }
+                          )
+                        ) : (
+                          <NumberFormat
+                            value={auction.convertedBidAmount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"Approx. "}
+                            suffix={" " + currency}
+                          />
+                        )}
+                      </p>
+                    )}
                   </td>
                   <td>
                     <Button

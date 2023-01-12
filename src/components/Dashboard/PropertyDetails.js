@@ -80,7 +80,9 @@ function PropertyDetails({ property, setRefresh, refresh, setMessage }) {
   const [ownerAddress, setOwnerAddress] = useState(
     property.details.address || ""
   );
-  const [ownerEmail] = useState(property.details?.owner_email || "");
+  const [ownerEmail] = useState(
+    property.details?.owner_email || property.details?.email || ""
+  );
   const [brokerName] = useState(
     property.details?.broker_name ? property.details?.broker_name : ""
   );

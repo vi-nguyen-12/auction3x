@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
+import { currencyText } from "../../../App";
+import axios from "axios";
 
 function RealEstate({
   property,
@@ -11,6 +13,57 @@ function RealEstate({
   refresh,
   setMessage,
 }) {
+  console.log(property);
+  const currency = useContext(currencyText);
+  const [convertedCurrency, setConvertedCurrency] = useState();
+
+  useEffect(() => {
+    const convert = async () => {
+      let convertCurrency = {
+        reservedAmount: 0,
+        discussedAmount: 0,
+        market: 0,
+      };
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.reservedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            reservedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.discussedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            discussedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.details?.market_assessments[0]?.total_value}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            market: res.data.result?.toFixed(0) || 0,
+          };
+        });
+      setConvertedCurrency(convertCurrency);
+    };
+
+    if (property && currency !== "USD") {
+      convert();
+    }
+  }, [property]);
+
   const onSubmit = async (prop, step) => {
     if (step === 2) {
       let submitedData = {
@@ -196,6 +249,27 @@ function RealEstate({
               property.details.market_assessments[0].total_value = value;
             }}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.market).toLocaleString("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                  maximumFractionDigits: 2,
+                })
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.market}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
       </Row>
       <Row className="mt-2">
@@ -216,6 +290,30 @@ function RealEstate({
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.reservedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.reservedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
         <Col>
           <span style={{ fontWeight: "600", color: "black" }}>
@@ -234,6 +332,30 @@ function RealEstate({
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.discussedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.discussedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
       </Row>
       <Row className="mt-3">

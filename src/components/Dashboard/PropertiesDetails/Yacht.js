@@ -1,13 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import authService from "../../../services/authServices";
+import { currencyText } from "../../../App";
+import axios from "axios";
 
 function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
+  const currency = useContext(currencyText);
   const [other, setOther] = useState(false);
+  const [changeDate, setChangeDate] = useState(false);
   const [vessel_manufacturing_date, setVessel_manufacturing_date] = useState(
     property.details.vessel_manufacturing_date
   );
+  const [convertedCurrency, setConvertedCurrency] = useState();
+
+  useEffect(() => {
+    const convert = async () => {
+      let convertCurrency = {
+        reservedAmount: 0,
+        discussedAmount: 0,
+        runningCost: 0,
+      };
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.reservedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            reservedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.discussedAmount}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            discussedAmount: res.data.result?.toFixed(0) || 0,
+          };
+        });
+
+      await axios
+        .get(
+          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${property.details.running_cost}`
+        )
+        .then((res) => {
+          convertCurrency = {
+            ...convertCurrency,
+            runningCost: res.data.result?.toFixed(0) || 0,
+          };
+        });
+      setConvertedCurrency(convertCurrency);
+    };
+
+    if (property && currency !== "USD") {
+      convert();
+    }
+  }, [property]);
 
   const manufacturer = [
     "AMELS",
@@ -117,14 +169,35 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
           >
             Vessel Manufacturing Date{" "}
           </span>
-          <input
-            type="date"
-            className="form-control"
-            style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
-            defaultValue={vessel_manufacturing_date}
-            onChange={(e) => fixDate(e.target.value)}
-            disabled={!edit.step2_1}
-          />
+          <div className="d-flex">
+            {changeDate ? (
+              <input
+                type="date"
+                className="form-control"
+                style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
+                value={vessel_manufacturing_date}
+                onChange={(e) => fixDate(e.target.value)}
+                disabled={!edit.step2_1}
+              />
+            ) : (
+              <input
+                type="text"
+                className="form-control"
+                value={new Date(vessel_manufacturing_date).toLocaleDateString()}
+                disabled={!edit.step2_1}
+              />
+            )}
+            <Button
+              variant="primary"
+              onClick={() => setChangeDate(!changeDate)}
+              className={`bg-${
+                changeDate ? "danger" : "success"
+              } border-0 rounded-0 ms-2`}
+              disabled={!edit.step2_1}
+            >
+              {changeDate ? "Cancel" : "Change"}
+            </Button>
+          </div>
         </Col>
       </Row>
 
@@ -214,9 +287,9 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             type="text"
             className="form-control"
             style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
-            defaultValue={property.details.engine_manufacturer_name}
+            defaultValue={property.details.engine_manufacture_name}
             onChange={(e) =>
-              (property.details.engine_manufacturer_name = e.target.value)
+              (property.details.engine_manufacture_name = e.target.value)
             }
             disabled={!edit.step2_1}
           />
@@ -308,6 +381,30 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.runningCost).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.runningCost}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
         <Col xs={12} md={4}>
           <span
@@ -321,12 +418,12 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
           <NumberFormat
             thousandSeparator={true}
             allowNegative={false}
-            value={property.details.no_crew_required}
+            value={property.details.no_of_crew_required}
             className="form-control"
             style={{ border: edit.step2_1 ? "1px solid #2ecc71" : "" }}
             onValueChange={(values) => {
               const { value } = values;
-              property.details.no_crew_required = value;
+              property.details.no_of_crew_required = value;
             }}
             disabled={!edit.step2_1}
           />
@@ -367,6 +464,30 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.reservedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.reservedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
         <Col xs={12} md={6}>
           <span
@@ -390,6 +511,30 @@ function Yacht({ property, setEdit, edit, setRefresh, refresh, setMessage }) {
             }}
             disabled={!edit.step2_1}
           />
+          {currency !== "USD" && (
+            <p className="text-muted p-0">
+              {currency === "INR" ? (
+                "Approx" +
+                " " +
+                parseInt(convertedCurrency?.discussedAmount).toLocaleString(
+                  "en-IN",
+                  {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 2,
+                  }
+                )
+              ) : (
+                <NumberFormat
+                  value={convertedCurrency?.discussedAmount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"Approx. "}
+                  suffix={" " + currency}
+                />
+              )}
+            </p>
+          )}
         </Col>
       </Row>
       <Row className="mt-3">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import {
   Table,
   Button,
@@ -19,8 +19,8 @@ import axios from "axios";
 function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const user = useSelector((state) => state.user);
   const currency = useContext(currencyText);
-  const [convertedCurrency, setConvertedCurrency] = useState([]);
   const [pendingAuctions, setPendingAuctions] = useState([]);
+  const [convertedCurrency, setConvertedCurrency] = useState(0);
   const [newPendingAuctions, setNewPendingAuctions] = useState([]);
   const [edit, setEdit] = useState();
   const [editFund, setEditFund] = useState(false);
@@ -38,52 +38,72 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
   const toggleQuestionair = () => setShowQuestionair(!showQuestionair);
   const toggleDocuments = () => setShowDocuments(!showDocuments);
 
-  const convertCurrency = (amount) => {
-    if (currency !== "USD") {
-      axios
-        .get(
-          `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${amount}`
-        )
-        .then((res) => {
-          return res.data.result?.toFixed(0);
-        });
-    }
-  };
-
-  // useEffect(() => {
-  //   const fund = pageContent[currentPageContent]?.map((item) => {
-  //     return item.buyer.funds.reduce((acc, curr) => {
-  //       return acc + curr.amount;
-  //     }, 0);
-  //   });
-
-  //   for (let i = 0; i < fund?.length; i++) {
-  //     if (currency !== "USD") {
-  //       axios
-  //         .get(
-  //           `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund[i]}`
-  //         )
-  //         .then((res) => {
-  //           setConvertedCurrency([...convertedCurrency, res.data.result]);
-  //         });
-  //     }
-  //   }
-  // }, [currency, pageContent, currentPageContent]);
-
   useEffect(() => {
+    var unMounted = false;
     const getBuyerPendingAuctions = async () => {
-      await authService.getBuyerInfo(user._id).then((res) => {
+      await authService.getBuyerInfo(user._id).then(async (res) => {
         if (res.data.error) {
           setMessage("");
           setMessage(res.data.error);
         } else {
-          setPendingAuctions(res.data);
-          setNewPendingAuctions(res.data);
+          let pendingAuctions = res.data;
+          for (let auction of pendingAuctions) {
+            auction.buyer.totalFund = auction.buyer.funds.reduce(
+              (acc, curr) => acc + curr.amount,
+              0
+            );
+          }
+
+          if (currency !== "USD") {
+            pendingAuctions = await Promise.all(
+              pendingAuctions.map(async (auction) => {
+                let convertedTotalFund;
+                await axios
+                  .get(
+                    `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${auction.buyer.totalFund}`
+                  )
+                  .then((res) => {
+                    convertedTotalFund = res.data.result?.toFixed(0) || 0;
+                  });
+                auction.buyer.convertedTotalFund = convertedTotalFund;
+                return auction;
+              })
+            );
+          }
+          setPendingAuctions(pendingAuctions);
+          setNewPendingAuctions(pendingAuctions);
         }
       });
     };
-    getBuyerPendingAuctions();
-  }, [setMessage, user._id]);
+    if (!unMounted) {
+      getBuyerPendingAuctions();
+    }
+
+    return () => {
+      unMounted = true;
+    };
+  }, [setMessage, user._id, currency]);
+
+  useEffect(async () => {
+    let funds = [...documents];
+    if (documents.length > 0 && currency !== "USD") {
+      funds = await Promise.all(
+        funds.map(async (fund) => {
+          let convertedFund;
+          await axios
+            .get(
+              `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${fund.amount}`
+            )
+            .then((res) => {
+              convertedFund = res.data.result?.toFixed(0) || 0;
+            });
+          fund.convertedFund = convertedFund;
+          return fund;
+        })
+      );
+      setDocuments(funds);
+    }
+  }, [currency, documents.length > 0]);
 
   useEffect(() => {
     if (search) {
@@ -112,6 +132,10 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
     } else {
       setNewPendingAuctions(pendingAuctions);
     }
+
+    return () => {
+      setNewPendingAuctions([]);
+    };
   }, [search, searchBy, pendingAuctions]);
 
   // Questionair files handler
@@ -401,57 +425,38 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                     </Button>
                   </td>
                   <td colSpan={2}>
-                    {auction.buyer.funds.length > 0 ? (
+                    {auction.buyer.totalFund > 0 ? (
                       <>
                         <NumberFormat
-                          value={auction.buyer.funds.reduce(
-                            (acc, curr) => acc + curr.amount,
-                            0
-                          )}
+                          value={auction.buyer.totalFund}
                           displayType={"text"}
                           thousandSeparator={true}
                           prefix={"$"}
                         />
-                        {currency !== "USD" && (
-                          <p className="text-muted p-0">
-                            {currency === "INR" ? (
-                              convertCurrency(
-                                auction.buyer.funds.reduce(
-                                  (acc, curr) => acc + curr.amount,
-                                  0
-                                )
-                              )
-                            ) : (
-                              // convertedCurrency[index] === null ? (
-                              //   0
-                              // ) : (
-                              //   convertedCurrency[index]?.toLocaleString(
-                              //     "en-IN",
-                              //     {
-                              //       style: "currency",
-                              //       currency: "INR",
-                              //       minimumFractionDigits: 2,
-                              //     }
-                              //   )
-                              // )
-                              // parseInt(convertedCurrency)?.toLocaleString(
-                              //   "en-IN",
-                              //   {
-                              //     style: "currency",
-                              //     currency: "INR",
-                              //     minimumFractionDigits: 2,
-                              //   }
-                              // ) || 0
-                              <NumberFormat
-                                value={convertedCurrency}
-                                displayType={"text"}
-                                thousandSeparator={true}
-                                prefix={"Approx. "}
-                                suffix={" " + currency}
-                              />
-                            )}
-                          </p>
-                        )}
+                        {auction.buyer.convertedTotalFund > 0 &&
+                          currency !== "USD" && (
+                            <p className="text-muted p-0">
+                              {currency === "INR" ? (
+                                "Approx" +
+                                " " +
+                                parseInt(
+                                  auction.buyer.convertedTotalFund
+                                ).toLocaleString("en-IN", {
+                                  style: "currency",
+                                  currency: "INR",
+                                  maximumFractionDigits: 2,
+                                })
+                              ) : (
+                                <NumberFormat
+                                  value={auction.buyer.convertedTotalFund}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"Approx. "}
+                                  suffix={" " + currency}
+                                />
+                              )}
+                            </p>
+                          )}
                       </>
                     ) : (
                       "No Funds"
@@ -726,7 +731,10 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
           backdrop="static"
           keyboard={false}
           show={showDocuments}
-          onHide={toggleDocuments}
+          onHide={() => {
+            toggleDocuments();
+            setDocuments([]);
+          }}
           centered
         >
           <Modal.Header className="auction-modal-header px-4" closeButton>
@@ -768,7 +776,7 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                         <td>{index + 1}</td>
                         <td>{document?.document?.name || document?.name}</td>
                         <td>
-                          {document?.document?.officialName ||
+                          {document?.document?.officialName.replace("_", " ") ||
                             document?.officialName}
                         </td>
                         <td>
@@ -787,6 +795,29 @@ function BuyerApproval({ windowSize, searchBy, search, setMessage }) {
                             thousandSeparator={true}
                             prefix={"$"}
                           />
+                          {currency !== "USD" && (
+                            <p className="text-muted p-0">
+                              {currency === "INR" ? (
+                                "Approx" +
+                                " " +
+                                parseInt(
+                                  document?.convertedFund
+                                ).toLocaleString("en-IN", {
+                                  style: "currency",
+                                  currency: "INR",
+                                  maximumFractionDigits: 2,
+                                })
+                              ) : (
+                                <NumberFormat
+                                  value={document?.convertedFund}
+                                  displayType={"text"}
+                                  thousandSeparator={true}
+                                  prefix={"Approx. "}
+                                  suffix={" " + currency}
+                                />
+                              )}
+                            </p>
+                          )}
                         </td>
                         <td>
                           <Button

@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Row, Container } from "react-bootstrap";
 import authService from "../../../../services/authServices";
 import { useSelector } from "react-redux";
 import Paginations from "../../../Paginations";
+import { currencyText } from "../../../../App";
+import NumberFormat from "react-number-format";
+import axios from "axios";
 
 function SoldListings({ windowSize, setMessage, searchBy, search }) {
+  const currency = useContext(currencyText);
   const user = useSelector((state) => state.user);
   const [soldListings, setSoldListings] = useState([]);
   const [newSoldListings, setNewSoldListings] = useState([]);
@@ -12,11 +16,28 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
   const [currentPageContent, setCurrentPageContents] = useState(0);
 
   useEffect(() => {
-    authService.getSellerSoldListings(user._id).then((res) => {
+    authService.getSellerSoldListings(user._id).then(async (res) => {
       if (res.data.error) {
         setMessage("");
         setMessage(res.data.error);
       } else {
+        let soldProperties = res.data;
+        if (currency !== "USD") {
+          soldProperties = await Promise.all(
+            soldProperties.map(async (auction) => {
+              let convertedWinAmount;
+              await axios
+                .get(
+                  `https://api.exchangerate.host/convert?from=USD&to=${currency}&amount=${auction.winner?.amount}`
+                )
+                .then((res) => {
+                  convertedWinAmount = res.data.result?.toFixed(0) || 0;
+                });
+              auction.winner.convertedWinAmount = convertedWinAmount;
+              return auction;
+            })
+          );
+        }
         setSoldListings(res.data);
         setNewSoldListings(res.data);
       }
@@ -116,6 +137,29 @@ function SoldListings({ windowSize, setMessage, searchBy, search }) {
                     <br />
                     <span className="fw-bold">Amount: </span> $
                     {auction.winner.amount.toLocaleString()}
+                    {currency !== "USD" && (
+                      <p className="text-muted p-0">
+                        {currency === "INR" ? (
+                          "Approx" +
+                          " " +
+                          parseInt(
+                            auction.winner?.convertedWinAmount
+                          ).toLocaleString("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                            maximumFractionDigits: 2,
+                          })
+                        ) : (
+                          <NumberFormat
+                            value={auction.winner?.convertedWinAmount}
+                            displayType={"text"}
+                            thousandSeparator={true}
+                            prefix={"Approx. "}
+                            suffix={" " + currency}
+                          />
+                        )}
+                      </p>
+                    )}
                   </td>
                   <td>
                     <button
