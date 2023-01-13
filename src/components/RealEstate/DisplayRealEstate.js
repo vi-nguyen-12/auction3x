@@ -919,6 +919,11 @@ function DisplayRealEstate({
                 </Col>
               </Row>
 
+              {/* <Row className="p-0 m-0 mt-5">
+                <Col style={{ padding: "0" }}>
+                  <div className="auction-boxes">
+                     */}
+
               <Row className="p-0 m-0 mt-5">
                 <Col style={{ padding: "0" }}>
                   <div className="prop-info-table">

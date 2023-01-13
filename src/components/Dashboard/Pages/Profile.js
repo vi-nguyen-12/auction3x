@@ -194,9 +194,7 @@ function Profile({ id, windowSize, setMessage }) {
             <Button
               onClick={() => {
                 window.open(
-                  user.social_links.instagram
-                    ? user.social_links.instagram
-                    : "https://www.instagram.com/"
+                  user.social_links?.instagram || "https://www.instagram.com/"
                 );
               }}
             >
@@ -205,9 +203,7 @@ function Profile({ id, windowSize, setMessage }) {
             <Button
               onClick={() => {
                 window.open(
-                  user.social_links
-                    ? user.social_links.facebook
-                    : "https://www.facebook.com/"
+                  user.social_links?.facebook || "https://www.facebook.com/"
                 );
               }}
             >
@@ -216,9 +212,7 @@ function Profile({ id, windowSize, setMessage }) {
             <Button
               onClick={() => {
                 window.open(
-                  user.social_links
-                    ? user.social_links.twitter
-                    : "https://www.twitter.com/"
+                  user.social_links.twitter || "https://www.twitter.com/"
                 );
               }}
             >

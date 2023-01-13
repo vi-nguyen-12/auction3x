@@ -145,11 +145,12 @@ const Agree = ({
           } else {
             const data = { docusignId: res.data._id, step: 5 };
             authService.editProperty(propertyTest._id, data).then((res) => {
-              setLoader(false);
               if (res.data.error) {
+                setLoader(false);
                 setMessage("");
                 setMessage(res.data.error);
               } else {
+                setLoader(false);
                 setMessage("");
                 setMessage("Property successfully registered");
                 history.push("/");
@@ -162,11 +163,12 @@ const Agree = ({
       } else {
         const data = { step: 5 };
         authService.editProperty(propertyTest._id, data).then((res) => {
-          setLoader(false);
           if (res.data.error) {
+            setLoader(false);
             setMessage("");
             setMessage(res.data.error);
           } else {
+            setLoader(false);
             setMessage("");
             setMessage("Property Successfully Created!");
             history.push("/");

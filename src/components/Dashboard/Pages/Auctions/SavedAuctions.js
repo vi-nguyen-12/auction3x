@@ -129,10 +129,10 @@ function SavedAuctions({ windowSize, searchBy, search, setMessage }) {
     speed: 500,
     autoplay: false,
     slidesToShow:
-      windowSize > 800
-        ? newSavedAuctions.length >= 3
-          ? 3
-          : newSavedAuctions.length
+      newSavedAuctions.length >= 3 && windowSize > 1300
+        ? 3
+        : windowSize < 1300 && windowSize > 920
+        ? 2
         : 1,
     beforeChange: (current, next) => {
       setSlideIndex(next);

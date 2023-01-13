@@ -193,26 +193,26 @@ const BuyAuthorized = ({
               })
               .then((res) => {
                 if (res.data.error) {
+                  setLoader(false);
                   if (res.data.error === "Invalid Token") {
                     window.location.reload();
                   } else {
                     setMessage("");
                     setMessage(res.data.error);
-                    setLoader(false);
                   }
                 } else {
+                  setLoader(false);
                   setMessage("");
                   setMessage(
                     "You have successfully registered to bid this auction"
                   );
-                  setLoader(false);
                   window.location.reload();
                 }
               })
               .catch((error) => {
+                setLoader(false);
                 setMessage("");
                 setMessage(error.message);
-                setLoader(false);
               });
           }
         });

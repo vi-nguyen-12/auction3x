@@ -102,9 +102,10 @@ const Home = React.lazy(() => import("./components/Home/Home"));
 const MultiSellForm = React.lazy(() =>
   import("./components/SellRegister/MultiSellForm")
 );
-
 const NavBar = React.lazy(() => import("./components/Home/NewHome/NavBar"));
 const DocusignModal = React.lazy(() => import("./DocusignModal"));
+const BrokerPage = React.lazy(() => import("./components/Broker/BrokerPage"));
+const Broker = React.lazy(() => import("./components/Broker/Broker"));
 
 function App() {
   const history = useHistory();
@@ -399,7 +400,7 @@ function App() {
               <div className="expandMenu-items">
                 <a href="/multiSellForm">Sell</a>
                 <a href="/Auctions">Buy</a>
-                {/* <a href="/Partner">Broker</a> */}
+                {/* <a href="/Brokers">Brokers</a> */}
                 {/* <a href="/Partner">Invest</a> */}
               </div>
               <div className="expandMenu-items">
@@ -1042,9 +1043,13 @@ function App() {
                     />
                   </Route>
 
-                  {/* <Route path="/Broker">
-                  <Broker windowSize={windowSize} />
-                </Route> */}
+                  <Route path="/Brokers">
+                    <BrokerPage windowSize={windowSize} />
+                  </Route>
+
+                  <Route path="/Broker/:id">
+                    <Broker windowSize={windowSize} />
+                  </Route>
 
                   <Route exact path="/reset_password">
                     <ChangePass

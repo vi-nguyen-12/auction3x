@@ -94,6 +94,18 @@ function EditProfile({ setMessage }) {
     }
   };
 
+  const fixDate = (date) => {
+    const newDate = new Date(date).setDate(
+      new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
+    );
+    const dates = new Date(newDate).setMonth(
+      new Date(newDate).getDate() === 1
+        ? new Date(newDate).getMonth() + 1
+        : new Date(newDate).getMonth()
+    );
+    setLicenseExpireDate(new Date(dates).toISOString());
+  };
+
   const onChange = async (e) => {
     setLoader(true);
     const formData = new FormData();
@@ -147,6 +159,10 @@ function EditProfile({ setMessage }) {
         setMessage("Password is too weak");
       }, 100);
     } else {
+      // const newFile = files.map((file) => {
+      //   delete file._id;
+      // });
+      // console.log(newFile);
       const datas = {
         id: user._id,
         details: {
@@ -164,6 +180,8 @@ function EditProfile({ setMessage }) {
           agent: {
             licenseNumber: licenseNum,
             licenseDocument: files,
+            licenseState: licenseState,
+            licenseExpireDate: licenseExpireDate,
           },
           country: country,
           city: city,
@@ -339,7 +357,7 @@ function EditProfile({ setMessage }) {
             </div>
           )}
         </Col>
-        {/* <Col md={6} xs={12} className="mt-3">
+        <Col md={6} xs={12} className="mt-3">
           <span>Broker License State</span>
           <input
             className="form-control custom-input"
@@ -351,15 +369,19 @@ function EditProfile({ setMessage }) {
         <Col md={6} xs={12} className="mt-3">
           <span>Broker License Expiry Date</span>
           <div className="d-flex justify-content-between">
-            {!changeDate && licenseExpireDate ? (
+            {!changeDate ? (
               <input
                 className="form-control custom-input"
                 type="text"
-                value={new Date(licenseExpireDate).toLocaleDateString()}
+                value={new Date(licenseExpireDate)?.toLocaleDateString() || ""}
                 disabled
               />
             ) : (
-              <input className="form-control custom-input" type="date" />
+              <input
+                className="form-control custom-input"
+                type="date"
+                onChange={(e) => fixDate(e.target.value)}
+              />
             )}
             <Button
               variant="primary"
@@ -371,7 +393,7 @@ function EditProfile({ setMessage }) {
               {changeDate ? "Cancel" : "Change"}
             </Button>
           </div>
-        </Col> */}
+        </Col>
       </Row>
       <Row className="mt-3">
         <Col

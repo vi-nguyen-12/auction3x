@@ -49,12 +49,11 @@
   border-radius: 20px;
 }
 
-.modal-header {
+/* .modal-header {
   height: 90px;
   display: flex;
-  /* padding-bottom: 40px; */
   border-radius: 0;
-}
+} */
 
 .nav-link-signup {
   color: #d58f5c !important;

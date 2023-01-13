@@ -11,11 +11,8 @@ function AddFund({ setMessage }) {
   const { register } = useForm();
   const user = useSelector((state) => state.user);
   const [loader, setLoader] = useState(false);
-  const [other, setOther] = useState(false);
   const [self, setSelf] = useState(true);
   const [registeredAuctions, setRegisteredAuctions] = useState([]);
-  const toggleSelf = () => setSelf(!self);
-  const toggleOther = () => setOther(!other);
   const [buyerId, setBuyerId] = useState();
   const [validityDate, setValidityDate] = useState();
   const [name, setName] = useState();
@@ -66,7 +63,7 @@ function AddFund({ setMessage }) {
   };
 
   const onSubmit = async (data) => {
-    if (other === true) {
+    if (!self) {
       if (validityDate && name && provider && document.length > 0) {
         setLoader(true);
         const datas = {
@@ -139,12 +136,11 @@ function AddFund({ setMessage }) {
               background: self ? "rgb(21 45 131)" : "",
             }}
             onClick={() => {
-              setOther(false);
+              setSelf(true);
               setBuyerId();
               setValidityDate();
               setName();
               setProvider();
-              toggleSelf();
             }}
             variant="primary"
           >
@@ -155,7 +151,7 @@ function AddFund({ setMessage }) {
           <Button
             className="rounded-0 border-0 w-100"
             style={{
-              background: other ? "rgb(21 45 131)" : "",
+              background: !self ? "rgb(21 45 131)" : "",
             }}
             onClick={() => {
               setSelf(false);
@@ -163,7 +159,6 @@ function AddFund({ setMessage }) {
               setValidityDate();
               setName();
               setProvider();
-              toggleOther();
             }}
             variant="primary"
           >
@@ -172,7 +167,7 @@ function AddFund({ setMessage }) {
         </Col>
       </Row>
 
-      {other === true ? (
+      {self === false ? (
         <>
           <Row className="mb-3">
             <Col>
@@ -320,9 +315,7 @@ function AddFund({ setMessage }) {
             </Col>
           </Row>
         </>
-      ) : null}
-
-      {self === true ? (
+      ) : (
         <Row>
           <Row className="mb-3">
             <Col>
@@ -449,7 +442,7 @@ function AddFund({ setMessage }) {
             </Col>
           </Row>
         </Row>
-      ) : null}
+      )}
     </Container>
   );
 }

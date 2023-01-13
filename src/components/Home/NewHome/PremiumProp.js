@@ -205,7 +205,7 @@ function PremiumProp({
                       )[0]?.url || auction.property.images[0]?.url
                     }
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    style={{ objectFit: "cover" }}
                     loading="lazy"
                   />
                 </a>
@@ -303,7 +303,7 @@ function PremiumProp({
                       )[0]?.url || auction.property.images[0]?.url
                     }
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    style={{ objectFit: "cover" }}
                     loading="lazy"
                   />
                 </a>
@@ -392,7 +392,7 @@ function PremiumProp({
                       )[0]?.url || auction.property.images[0]?.url
                     }
                     alt="auction"
-                    style={{ objectFit: windowSize < 768 ? "cover" : "fill" }}
+                    style={{ objectFit: "cover" }}
                     loading="lazy"
                   />
                 </a>
