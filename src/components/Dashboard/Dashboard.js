@@ -855,12 +855,12 @@ function Dashboard({
                     </p>
                     <p
                       onClick={() => {
-                        history.push("/Dashboard/Listings/AuctionListings");
+                        history.push("/Dashboard/Listings/YourListings");
                         window.location.reload();
                       }}
                       style={{ cursor: "pointer" }}
                     >
-                      Auction Listings
+                      Your Listings
                     </p>
                     <p
                       onClick={() => {

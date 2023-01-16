@@ -24,7 +24,10 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
     if (!user._id) {
       return toggleSignIn();
     } else {
-      history.push(`/DisplayAuctions/${data._id}`);
+      history.location.pathname === "/Dashboard" ||
+      "/Dashboard/Auctions/SavedAuctions"
+        ? window.open(`/DisplayAuctions/${data._id}`)
+        : history.push(`/DisplayAuctions/${data._id}`);
     }
   };
 
@@ -418,7 +421,7 @@ function NewCards({ data, type, toggleSignIn, windowSize }) {
               />
             </p>
             {currency !== "USD" && (
-              <p className="m-0" style={{fontSize:"14px"}}>
+              <p className="m-0" style={{ fontSize: "14px" }}>
                 {currency === "INR" ? (
                   <>
                     Approx.{" "}

@@ -159,10 +159,9 @@ function EditProfile({ setMessage }) {
         setMessage("Password is too weak");
       }, 100);
     } else {
-      // const newFile = files.map((file) => {
-      //   delete file._id;
-      // });
-      // console.log(newFile);
+      files.map((file) => {
+        console.log(file._id);
+      });
       const datas = {
         id: user._id,
         details: {

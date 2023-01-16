@@ -470,7 +470,7 @@ function DashHeader({
                   </div>
                   <div className="d-flex justify-content-center mt-4">
                     {history.location.pathname ===
-                    "/Dashboard/Listings/AuctionListings" ? (
+                    "/Dashboard/Listings/YourListings" ? (
                       <h1
                         style={{
                           fontFamily: "Interstate",

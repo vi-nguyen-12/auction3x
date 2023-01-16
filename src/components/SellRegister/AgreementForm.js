@@ -4,8 +4,6 @@ import { Modal } from "react-bootstrap";
 import "../../styles/sell-register.css";
 import authService from "../../services/authServices";
 import { useHistory } from "react-router-dom";
-import { SiDocusign } from "react-icons/si";
-import { useParams } from "react-router-dom";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import SellHeader from "./SellHeader";
 import CloseButton from "react-bootstrap/CloseButton";
@@ -62,15 +60,21 @@ const Agree = ({
         setMessage("");
         setMessage(error.message);
       });
+
+    return () => {
+      setTerms("");
+    };
   }, []);
 
   const sendDocusign = async () => {
     setLoader(true);
     await authService.sendSellDocuSign(propertyTest._id).then((res) => {
       if (res.data.error) {
+        setLoader(false);
         setMessage("");
         setMessage(res.data.error);
       } else {
+        setLoader(false);
         setMessage("");
         setTimeout(() => {
           setMessage(
@@ -80,7 +84,6 @@ const Agree = ({
         setSent(true);
       }
     });
-    setLoader(false);
   };
 
   const handleSignDocusign = async () => {
@@ -110,6 +113,11 @@ const Agree = ({
         setMessage(error.message);
         setLoader(false);
       });
+
+    return () => {
+      setMessage("");
+      setDocuId("");
+    };
   };
 
   const onSubmit = async (data) => {
@@ -123,7 +131,7 @@ const Agree = ({
       setTimeout(() => {
         setMessage("Please send the DocuSign to the owner to continue.");
       }, 100);
-    } else {
+    } else if (docuId) {
       setLoader(true);
       if (
         (propertyTest.details?.broker_id &&
@@ -177,7 +185,16 @@ const Agree = ({
           }
         });
       }
+    } else {
+      setMessage("");
+      setTimeout(() => {
+        setMessage("Please sign/send the docusign before proceeding.");
+      }, 100);
     }
+
+    return () => {
+      setMessage("");
+    };
   };
 
   return (

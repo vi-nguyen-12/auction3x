@@ -122,9 +122,6 @@ const MultiSellForm = ({
   const toggleSellStep = (sellStep) => setSellStep(sellStep);
 
   useEffect(() => {
-    setHeaderWidth("100vw");
-    setPositionLeft("20%");
-    setPadRight("3rem");
     colorChange("black");
     bodyColorChange("#ffefe3");
     toggleShow();
@@ -145,6 +142,12 @@ const MultiSellForm = ({
           }
         });
     }
+
+    return () => {
+      toggleShow();
+      colorChange("");
+      bodyColorChange("");
+    };
   }, []);
 
   return (

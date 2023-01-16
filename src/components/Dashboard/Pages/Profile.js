@@ -226,37 +226,49 @@ function Profile({ id, windowSize, setMessage }) {
           md={12}
           xs={12}
         >
-          <h3 style={{ textAlign: windowSize < 800 && "center" }}>
+          <h3
+            style={{
+              textAlign: windowSize < 800 && "center",
+              marginTop: windowSize < 800 && "2rem",
+            }}
+          >
             Listed Property
           </h3>
-          <Row>
-            <Carousel {...settings}>
-              {listedProp.length > 0
-                ? listedProp.map((property, index) => (
-                    <div className="listItem px-1" key={index}>
-                      <img
-                        src={property.images[0].url}
-                        alt="property"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          width: "100%",
-                          height: "100%",
-                          borderRadius: "0",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          window.open(
-                            `/DisplayAuctions/${property.auctionDetails._id}`,
-                            "_blank"
-                          );
-                        }}
-                      />
-                    </div>
-                  ))
-                : null}
-            </Carousel>
-          </Row>
+          {listedProp.length > 0 ? (
+            <Row>
+              <Carousel {...settings}>
+                {listedProp.map((property, index) => (
+                  <div className="listItem px-1" key={index}>
+                    <img
+                      src={property.images[0].url}
+                      alt="property"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "0",
+                        cursor: "pointer",
+                        objectFit: "cover",
+                      }}
+                      onClick={() => {
+                        window.open(
+                          `/DisplayAuctions/${property.auctionDetails._id}`,
+                          "_blank"
+                        );
+                      }}
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </Row>
+          ) : (
+            <Row>
+              <Col className="d-flex justify-content-center align-items-center py-3">
+                <h3>No Property Listed</h3>
+              </Col>
+            </Row>
+          )}
         </Col>
       </Row>
 
