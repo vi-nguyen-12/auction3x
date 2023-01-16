@@ -377,6 +377,7 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
+      <ScrollTop />
       {message && <ToastMessage message={message} windowSize={windowSize} />}
       {!maintenance ? (
         <>
@@ -659,7 +660,6 @@ function App() {
                   setCurrency={setCurrency}
                   currency={currency}
                 />
-                <ScrollTop />
 
                 <Switch>
                   {user._id && (

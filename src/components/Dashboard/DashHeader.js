@@ -54,7 +54,7 @@ function DashHeader({
       }}
     >
       {loader && <Loading />}
-      {windowSize > 820 ? (
+      {windowSize > 1000 ? (
         <Row style={{ marginBottom: "30px" }}>
           <Col>
             {history.location.pathname ===

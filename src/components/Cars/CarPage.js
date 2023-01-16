@@ -155,7 +155,11 @@ function CarPage({
     speed: 500,
     autoplay: false,
     slidesToShow:
-      windowSize > 800 ? (auctions.length > 3 ? 3 : auctions.length) : 1,
+      auctions.length >= 3 && windowSize > 1300
+        ? 3
+        : windowSize < 1300 && windowSize > 920
+        ? 2
+        : 1,
     beforeChange: (current, next) => {
       setSlideIndex(next);
     },
@@ -176,29 +180,33 @@ function CarPage({
       {loader && <Loading />}
       {auctions.length > 0 ? (
         <>
-          <Row
-            className="mt-4"
-            style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
-          >
-            {windowSize > 800 ? (
-              auctions.map((auction, index) => {
+          {windowSize > 950 ? (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(24.8rem, 2fr))",
+                gridGap: "3.5rem",
+                placeItems: "center",
+                margin: "2rem",
+              }}
+            >
+              {auctions.map((auction, index) => {
                 return (
-                  <Col
-                    lg={windowSize < 1650 ? 4 : 3}
-                    md={windowSize > 1400 ? 4 : 6}
-                    className="mb-5 py-2 d-flex justify-content-center"
+                  <NewCards
+                    data={auction}
+                    toggleSignIn={toggleSignIn}
+                    type={auction.property.type}
+                    windowSize={windowSize}
                     key={index}
-                  >
-                    <NewCards
-                      data={auction}
-                      toggleSignIn={toggleSignIn}
-                      type={auction.property.type}
-                      windowSize={windowSize}
-                    />
-                  </Col>
+                  />
                 );
-              })
-            ) : (
+              })}
+            </div>
+          ) : (
+            <Row
+              className="mt-4"
+              style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
+            >
               <Carousel {...settings} ref={slider}>
                 {auctions.map((item, index) => (
                   <Col
@@ -214,8 +222,8 @@ function CarPage({
                   </Col>
                 ))}
               </Carousel>
-            )}
-          </Row>
+            </Row>
+          )}
           <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
             {auctions.length > 0 && windowSize < 800
               ? auctions.map((property, index) => (

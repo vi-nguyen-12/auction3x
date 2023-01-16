@@ -25,6 +25,7 @@ import authService from "../../services/authServices";
 import parse from "html-react-parser";
 import { currencyText } from "../../App";
 import { convertedCurrencyText } from "../Auctions/DisplayAuctions";
+import avatar from "../../images/User-avatar.png";
 
 const mapStyles = {
   height: "60vh",
@@ -919,10 +920,65 @@ function DisplayRealEstate({
                 </Col>
               </Row>
 
-              {/* <Row className="p-0 m-0 mt-5">
-                <Col style={{ padding: "0" }}>
-                  <div className="auction-boxes">
-                     */}
+              {/* Broker info row */}
+              {/* <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(25rem, 1fr))",
+                  gridGap: "1rem",
+                  placeItems: "center",
+                  margin: "1rem 0",
+                }}
+              >
+                <div className="auction-boxes p-3 d-flex justify-content-around">
+                  <div
+                    className="rounded-0"
+                    style={{
+                      background: `url(${avatar})`,
+                      backgroundSize: "auto",
+                      backgroundPosition: "center",
+                      backgroundColor: "#A5A5A5",
+                      backgroundRepeat: "no-repeat",
+                      width: "150px",
+                      height: "189px",
+                    }}
+                  />
+                  <div className="d-flex flex-column justify-content-center">
+                    <span
+                      className="auction-boxes-title"
+                      style={{
+                        fontSize: "1.88rem",
+                        color: "#08080A",
+                        fontFamily: "Inter",
+                      }}
+                    >
+                      Tim D. Thomas
+                    </span>
+                    <span
+                      className="auction-boxes-subtitle ps-1"
+                      style={{
+                        fontSize: "1rem",
+                        fontFamily: "Inter",
+                      }}
+                    >
+                      exp Commercial
+                    </span>
+                    <p
+                      className="text-muted ps-1"
+                      style={{
+                        fontSize: "1rem",
+                        fontFamily: "Inter",
+                      }}
+                    >
+                      CA Lic # 01953604
+                      <br />
+                      949-525-1000
+                      <br />
+                    </p>
+                    <button className="general_btn ms-1">Send Email</button>
+                  </div>
+                </div>
+              </div> */}
 
               <Row className="p-0 m-0 mt-5">
                 <Col style={{ padding: "0" }}>

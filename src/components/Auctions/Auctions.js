@@ -185,7 +185,11 @@ function Auctions({
     speed: 500,
     autoplay: false,
     slidesToShow:
-      windowSize > 800 ? (allAuctions.length > 3 ? 3 : allAuctions.length) : 1,
+      allAuctions.length >= 3 && windowSize > 1300
+        ? 3
+        : windowSize < 1300 && windowSize > 920
+        ? 2
+        : 1,
     beforeChange: (current, next) => {
       setSlideIndex(next);
     },
@@ -206,29 +210,33 @@ function Auctions({
       {loader && <Loading />}
       {allAuctions.length > 0 ? (
         <>
-          <Row
-            className="mt-4"
-            style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
-          >
-            {windowSize > 800 ? (
-              allAuctions.map((item, index) => {
+          {windowSize > 950 ? (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(24.8rem, 2fr))",
+                gridGap: "3.5rem",
+                placeItems: "center",
+                margin: "2rem",
+              }}
+            >
+              {allAuctions.map((item, index) => {
                 return (
-                  <Col
-                    lg={windowSize < 1650 ? 4 : 3}
-                    md={windowSize > 1400 ? 4 : 6}
-                    className="mb-5 py-2 d-flex justify-content-center"
+                  <NewCards
+                    toggleSignIn={toggleSignIn}
+                    windowSize={windowSize}
+                    data={item}
+                    type={item.property.type}
                     key={index}
-                  >
-                    <NewCards
-                      toggleSignIn={toggleSignIn}
-                      windowSize={windowSize}
-                      data={item}
-                      type={item.property.type}
-                    />
-                  </Col>
+                  />
                 );
-              })
-            ) : (
+              })}
+            </div>
+          ) : (
+            <Row
+              className="mt-4"
+              style={{ padding: windowSize > 800 ? "1.5rem" : "0" }}
+            >
               <Carousel {...settings} ref={slider}>
                 {allAuctions.map((item, index) => (
                   <Col
@@ -244,10 +252,10 @@ function Auctions({
                   </Col>
                 ))}
               </Carousel>
-            )}
-          </Row>
+            </Row>
+          )}
           <Row className="d-flex justify-content-center align-items-center mt-2 mx-5">
-            {allAuctions.length > 0 && windowSize < 800
+            {allAuctions.length > 0 && windowSize < 950
               ? allAuctions.map((property, index) => (
                   <div
                     onClick={handleClick(index)}
