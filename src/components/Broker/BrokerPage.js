@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import bgImg from "../../images/allProperty.png";
 import avatar from "../../images/User-avatar.png";
+import authService from "../../services/authServices";
+import { useHistory } from "react-router-dom";
 
 function BrokerPage() {
+  const history = useHistory();
+  const [brokers, setBrokers] = useState([]);
+  const urlSearchParams = new URLSearchParams(history.location.search);
+  const url = Object.fromEntries(urlSearchParams.entries());
+
+  useEffect(() => {
+    if (!history.location.search && !url.isBroker) {
+      history.push({
+        pathname: "/Brokers",
+        search: `?isBroker=true`,
+      });
+    }
+    authService.getBrokers(history.location.search).then((res) => {
+      if (res.data.error) {
+        console.log(res.data.error);
+        alert(res.data.error);
+      } else {
+        setBrokers(res.data);
+        console.log(res.data);
+        // setSearchParams(searchParams);
+      }
+    });
+  }, [history.location.search]);
+
   return (
     <>
       <Row

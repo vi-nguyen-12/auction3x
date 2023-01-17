@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Row, Col, Container, Button, Modal, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import authService from "../../services/authServices";
@@ -25,6 +25,7 @@ function Ownership({
   setMessage,
   windowSize,
 }) {
+  // console.log(propertyTest);
   const user = useSelector((state) => state.user);
   const [ownershipType, setOwnershipType] = useState(
     propertyTest.details?.ownership_type?.name || ""
@@ -38,11 +39,14 @@ function Ownership({
       propertyTest.details?.ownership_type?.trust_name ||
       ""
   );
-  const [addedNewOwner, setAddedNewOwner] = useState([]);
   const [addNewRow, setAddNewRow] = useState(false);
-  const [newOwner, setNewOwner] = useState({ name: "", email: "", phone: "" });
-  const [addOwner, setAddOwner] = useState(false);
-  const toggleAddOwner = () => setAddOwner(!addOwner);
+  const [newBroker, setNewBroker] = useState({
+    number: "",
+    state: "",
+    expired_date: "",
+  });
+  const [addBroker, setAddBroker] = useState(false);
+  const toggleAddBroker = () => setAddBroker(!addBroker);
   const { register, handleSubmit } = useForm();
   const [isOwner, setIsOwner] = useState(
     propertyTest.details?.broker_name ? false : true
@@ -60,7 +64,9 @@ function Ownership({
     propertyTest.details?.broker_name || ""
   );
   const [brokerId, setBrokerId] = useState(
-    propertyTest.details?.broker_id || ""
+    propertyTest.details?.broker_licenses
+      ? propertyTest.details?.broker_licenses[0]?.number
+      : ""
   );
   const [phone, setPhone] = useState(propertyTest.details?.phone || user.phone);
   const [email, setEmail] = useState(propertyTest.details?.email || user.email);
@@ -73,12 +79,38 @@ function Ownership({
   );
 
   const [licenseExpireDate, setLicenseExpireDate] = useState(
-    user.agent?.licenseExpireDate || ""
+    propertyTest.details?.broker_licenses
+      ? propertyTest.details?.broker_licenses[0]?.expired_date
+      : user.agent?.licenseExpireDate
   );
   const [licenseState, setLicenseState] = useState(
-    user.agent?.licenseState || ""
+    propertyTest.details?.broker_licenses
+      ? propertyTest.details?.broker_licenses[0]?.state
+      : user.agent?.licenseState
   );
   const [changeDate, setChangeDate] = useState(false);
+  const [changeLicense, setChangeLicense] = useState(false);
+  const [brokerLicenses, setBrokerLicenses] = useState(
+    propertyTest.details?.broker_licenses || [
+      {
+        number: brokerId
+          ? brokerId
+          : propertyTest.details?.broker_licenses
+          ? propertyTest.details?.broker_licenses[0]?.number
+          : user.agent?.licenseNumber,
+        state: licenseState
+          ? licenseState
+          : propertyTest.details?.broker_licenses
+          ? propertyTest.details?.broker_licenses[0]?.state
+          : user.agent?.licenseState,
+        expired_date: licenseExpireDate
+          ? licenseExpireDate
+          : propertyTest.details?.broker_licenses
+          ? propertyTest.details?.broker_licenses[0]?.expired_date
+          : user.agent?.licenseExpireDate,
+      },
+    ]
+  );
 
   const [attorney, setAttorney] = useState(
     propertyTest.details?.broker_documents?.filter(
@@ -86,7 +118,7 @@ function Ownership({
     ) || []
   );
 
-  const fixDate = (date) => {
+  const fixDate = (date, param) => {
     const newDate = new Date(date).setDate(
       new Date(date).getDate() + 1 <= 31 ? new Date(date).getDate() + 1 : 1
     );
@@ -95,20 +127,28 @@ function Ownership({
         ? new Date(newDate).getMonth() + 1
         : new Date(newDate).getMonth()
     );
-    setLicenseExpireDate(new Date(dates).toISOString());
+    if (param !== "return") {
+      setLicenseExpireDate(new Date(dates).toISOString());
+    } else {
+      return new Date(dates).toISOString();
+    }
   };
 
-  const addOwnerHandler = () => {
-    setAddedNewOwner([
-      ...addedNewOwner,
-      { id: addedNewOwner.length + 1, ...newOwner },
+  const addBrokerHandler = () => {
+    setBrokerLicenses([
+      ...brokerLicenses,
+      {
+        number: newBroker.number,
+        state: newBroker.state,
+        expired_date: fixDate(newBroker.expired_date, "return"),
+      },
     ]);
-    setNewOwner({ name: "", email: "", phone: "" });
+    setNewBroker({ number: "", state: "", expired_date: "" });
     setAddNewRow(false);
   };
 
   const handleOnChange = (e) => {
-    setNewOwner({ ...newOwner, [e.target.name]: e.target.value });
+    setNewBroker({ ...newBroker, [e.target.name]: e.target.value });
   };
 
   const getFile = async (e) => {
@@ -167,6 +207,32 @@ function Ownership({
     }
   }, [isOwner]);
 
+  // useMemo(() => {
+  //   if (brokerId && brokerLicenses) {
+  //     setLicenseState(
+  //       brokerLicenses.filter((item) => item.number === brokerId)[0]?.state
+  //     );
+  //     setLicenseExpireDate(
+  //       brokerLicenses.filter((item) => item.number === brokerId)[0]
+  //         ?.expired_date
+  //     );
+  //   }
+  // }, [brokerId]);
+
+  useMemo(() => {
+    if (brokerId && licenseExpireDate && licenseState) {
+      setBrokerLicenses([
+        {
+          number: brokerId,
+          state: licenseState,
+          expired_date: licenseExpireDate,
+        },
+      ]);
+    }
+  }, [brokerId, licenseExpireDate, licenseState]);
+
+  // console.log(brokerLicenses);
+
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
       setMessage("");
@@ -181,16 +247,17 @@ function Ownership({
           details: {
             owner_name: ownerName,
             broker_name: brokerName ? brokerName : null,
-            broker_id: brokerId ? brokerId : null,
+            // broker_id: brokerId ? brokerId : null,
             owner_email: ownerEmail ? ownerEmail : null,
             owner_phone: ownerPhone ? ownerPhone : null,
             phone: phone,
             email: email,
             address: address,
             broker_documents: [...listingAgreements, ...attorney],
-            broker_license_number: brokerId ? brokerId : data.brokerId,
-            broker_license_expired_date: licenseExpireDate,
-            broker_license_state: licenseState,
+            broker_licenses: brokerLicenses,
+            // broker_license_number: brokerId ? brokerId : data.brokerId,
+            // broker_license_expired_date: licenseExpireDate,
+            // broker_license_state: licenseState,
             ownership_type: {
               name: otherOwnershipType ? otherOwnershipType : ownershipType,
               secondary_owner:
@@ -321,7 +388,7 @@ function Ownership({
             >
               Owner
             </Button>
-            {user.agent.licenseNumber === undefined ? (
+            {user.agent?.licenseNumber === undefined ? (
               <Button
                 className="submitBtn border-0 mx-2"
                 style={{
@@ -368,17 +435,6 @@ function Ownership({
                 >
                   Owner Information
                 </Row>
-                {/* <Row>
-                  <Col className="d-flex justify-content-end align-items-center mt-1">
-                    <button
-                      type="button"
-                      onClick={toggleAddOwner}
-                      className="general_btn py-2 px-3"
-                    >
-                      + Add Owner
-                    </button>
-                  </Col>
-                </Row> */}
                 <Row className="mt-3 d-flex justify-content-center">
                   <Col xs={12} md={6} lg={6}>
                     <span style={{ fontWeight: "600", color: "black" }}>
@@ -615,17 +671,17 @@ function Ownership({
                   Broker Information
                 </Col>
               </Row>
-              {/* <Row>
+              <Row>
                 <Col className="d-flex justify-content-end align-items-center mt-1">
                   <button
                     type="button"
-                    onClick={toggleAddOwner}
+                    onClick={toggleAddBroker}
                     className="general_btn py-2 px-3"
                   >
-                    + Add Owner
+                    + Add Broker
                   </button>
                 </Col>
-              </Row> */}
+              </Row>
               <Row className="mt-3">
                 <Col xs={12} md={6} lg={6}>
                   <span style={{ fontWeight: "600", color: "black" }}>
@@ -759,7 +815,44 @@ function Ownership({
                     Broker License Number{" "}
                     <span style={{ color: "#ff0000" }}>*</span>
                   </span>
-                  <input
+                  <div className="d-flex justify-content-between">
+                    {changeLicense ? (
+                      <input
+                        type="text"
+                        className="form-control custom-input"
+                        onInput={(e) => {
+                          e.target.value = e.target.value.toUpperCase();
+                        }}
+                        defaultValue={""}
+                        onChange={(e) => setBrokerId(e.target.value)}
+                        required
+                      />
+                    ) : (
+                      <select
+                        value={brokerId}
+                        onChange={(e) => setBrokerId(e.target.value)}
+                        className="form-control custom-input"
+                        required
+                        disabled
+                      >
+                        {brokerLicenses.map((license, i) => (
+                          <option key={i} value={license.number}>
+                            {license.number}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    <Button
+                      variant="primary"
+                      onClick={() => setChangeLicense(!changeLicense)}
+                      className={`bg-${
+                        changeLicense ? "danger" : "success"
+                      } border-0 rounded-0 ms-2`}
+                    >
+                      {changeLicense ? "Cancel" : "New"}
+                    </Button>
+                  </div>
+                  {/* <input
                     type="text"
                     className="form-control custom-input"
                     defaultValue={
@@ -775,7 +868,7 @@ function Ownership({
                     {...register("brokerId", { required: false })}
                     onChange={(e) => setBrokerId(e.target.value)}
                     required
-                  />
+                  /> */}
                 </Col>
               </Row>
               <Row className="mt-3">
@@ -880,11 +973,11 @@ function Ownership({
                     Broker License Expiration Date
                   </span>
                   <div className="d-flex justify-content-between">
-                    {!changeDate && licenseExpireDate ? (
+                    {!changeDate ? (
                       <input
                         type="text"
                         className="form-control custom-input"
-                        value={licenseExpireDate}
+                        value={new Date(licenseExpireDate).toLocaleDateString()}
                         disabled
                       />
                     ) : (
@@ -1035,49 +1128,51 @@ function Ownership({
           )}
         </Container>
       </div>
-      <Modal size="lg" show={addOwner} onHide={toggleAddOwner} centered>
+      <Modal size="lg" show={addBroker} onHide={toggleAddBroker} centered>
         <Modal.Header className="login-modal-header" closeButton>
           <Modal.Title
             className="auction-modal-title px-3"
             style={{ fontSize: windowSize < 800 && "1.5rem" }}
           >
-            Add Secondary Owner
+            Add Secondary Broker
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body className="pb-5">
+        <Modal.Body className="pb-4">
           <>
-            {addedNewOwner?.map((owner, index) => (
+            {brokerLicenses?.map((broker, index) => (
               <Row key={index}>
                 <Col xs={12} md={4}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Name
+                    License Number
                   </span>
                   <input
                     type="text"
                     className="form-control custom-input"
-                    defaultValue={owner.name}
+                    defaultValue={broker.number}
                     readOnly
                   />
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Email
+                    License State
                   </span>
                   <input
                     type="email"
                     className="form-control custom-input"
-                    defaultValue={owner.email}
+                    defaultValue={broker.state}
                     readOnly
                   />
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone
+                    License Expiration Date
                   </span>
                   <input
                     type="text"
                     className="form-control custom-input"
-                    defaultValue={owner.phone}
+                    defaultValue={new Date(
+                      broker.expired_date
+                    ).toLocaleDateString()}
                     readOnly
                   />
                 </Col>
@@ -1087,37 +1182,39 @@ function Ownership({
               <Row className="mt-3">
                 <Col xs={12} md={4}>
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Name
+                    License Number
                   </span>
                   <input
                     type="text"
                     className="form-control custom-input"
-                    name="name"
+                    name="number"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.toUpperCase();
+                    }}
                     onChange={handleOnChange}
                     required
                   />
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Email
+                    License State
                   </span>
                   <input
                     type="email"
                     className="form-control custom-input"
-                    name="email"
+                    name="state"
                     onChange={handleOnChange}
                     required
                   />
                 </Col>
                 <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
                   <span style={{ fontWeight: "600", color: "black" }}>
-                    Phone
+                    License Expiration Date
                   </span>
                   <input
-                    type="text"
+                    type="date"
                     className="form-control custom-input"
-                    maxLength={10}
-                    name="phone"
+                    name="expired_date"
                     onChange={handleOnChange}
                     required
                   />
@@ -1128,7 +1225,7 @@ function Ownership({
                 >
                   <button
                     className="btn bg-success text-white rounded-0"
-                    onClick={addOwnerHandler}
+                    onClick={addBrokerHandler}
                   >
                     Submit
                   </button>
@@ -1141,7 +1238,7 @@ function Ownership({
                     className="btn btn-primary rounded-0"
                     onClick={() => setAddNewRow(true)}
                   >
-                    + Add New Owner
+                    + Add New Broker
                   </button>
                 </Col>
               </Row>

@@ -314,6 +314,10 @@ const authService = {
     );
   },
 
+  getBrokers(searchParams) {
+    return axios.get(apiUrl + `/api/users${searchParams}`);
+  },
+
   buyerApprovedAuctions(id) {
     return axios.get(
       apiUrl + `/api/users/${id}/buyer/auctions?status=success`,
