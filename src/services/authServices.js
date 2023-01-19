@@ -315,7 +315,11 @@ const authService = {
   },
 
   getBrokers(searchParams) {
-    return axios.get(apiUrl + `/api/users${searchParams}`);
+    return axios.get(apiUrl + `/api/users${searchParams}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
   },
 
   buyerApprovedAuctions(id) {

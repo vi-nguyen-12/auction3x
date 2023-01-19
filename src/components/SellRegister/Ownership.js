@@ -207,31 +207,19 @@ function Ownership({
     }
   }, [isOwner]);
 
-  // useMemo(() => {
-  //   if (brokerId && brokerLicenses) {
-  //     setLicenseState(
-  //       brokerLicenses.filter((item) => item.number === brokerId)[0]?.state
-  //     );
-  //     setLicenseExpireDate(
-  //       brokerLicenses.filter((item) => item.number === brokerId)[0]
-  //         ?.expired_date
-  //     );
-  //   }
-  // }, [brokerId]);
-
-  useMemo(() => {
-    if (brokerId && licenseExpireDate && licenseState) {
+  // if brokerId, licenseState and licenseExpireDate are change, then replace index 0 in brokerLicenses
+  useEffect(() => {
+    if (changeLicense) {
       setBrokerLicenses([
         {
           number: brokerId,
           state: licenseState,
           expired_date: licenseExpireDate,
         },
+        ...brokerLicenses.slice(1),
       ]);
     }
-  }, [brokerId, licenseExpireDate, licenseState]);
-
-  // console.log(brokerLicenses);
+  }, [brokerId, licenseState, licenseExpireDate, changeLicense]);
 
   const onSubmit = (data) => {
     if (ownerName === "" || phone === "" || email === "" || address === "") {
@@ -1138,112 +1126,130 @@ function Ownership({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="pb-4">
-          <>
-            {brokerLicenses?.map((broker, index) => (
-              <Row key={index}>
-                <Col xs={12} md={4}>
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License Number
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    defaultValue={broker.number}
-                    readOnly
-                  />
-                </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License State
-                  </span>
-                  <input
-                    type="email"
-                    className="form-control custom-input"
-                    defaultValue={broker.state}
-                    readOnly
-                  />
-                </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License Expiration Date
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    defaultValue={new Date(
-                      broker.expired_date
-                    ).toLocaleDateString()}
-                    readOnly
-                  />
-                </Col>
-              </Row>
-            ))}
-            {addNewRow ? (
-              <Row className="mt-3">
-                <Col xs={12} md={4}>
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License Number
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control custom-input"
-                    name="number"
-                    onInput={(e) => {
-                      e.target.value = e.target.value.toUpperCase();
-                    }}
-                    onChange={handleOnChange}
-                    required
-                  />
-                </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License State
-                  </span>
-                  <input
-                    type="email"
-                    className="form-control custom-input"
-                    name="state"
-                    onChange={handleOnChange}
-                    required
-                  />
-                </Col>
-                <Col xs={12} md={4} className="mt-sm-3 mt-md-0">
-                  <span style={{ fontWeight: "600", color: "black" }}>
-                    License Expiration Date
-                  </span>
-                  <input
-                    type="date"
-                    className="form-control custom-input"
-                    name="expired_date"
-                    onChange={handleOnChange}
-                    required
-                  />
-                </Col>
-                <Col
-                  md={12}
-                  className="d-flex justify-content-end align-items-end mt-1"
-                >
-                  <button
-                    className="btn bg-success text-white rounded-0"
-                    onClick={addBrokerHandler}
+          <Row className="ps-3">
+            <Col xs={12} md={8}>
+              {brokerLicenses?.map((broker, index) => (
+                <Row key={index}>
+                  <Col>
+                    <Row>
+                      <Col>
+                        <ul className="list-unstyled">
+                          <li>
+                            <strong>License:</strong> {broker.number}
+                          </li>
+                          <li>
+                            <strong>State:</strong> {broker.state}
+                          </li>
+                          <li>
+                            <strong>Exp. Date:</strong>{" "}
+                            {new Date(broker.expired_date).toLocaleDateString()}
+                          </li>
+                          <li>
+                            {index === 0 ? (
+                              <div className="d-flex justify-content-start">
+                                <strong>Primary Broker:</strong>
+                                <input
+                                  type="checkbox"
+                                  className="ms-4"
+                                  checked
+                                  readOnly
+                                />
+                              </div>
+                            ) : (
+                              <div className="d-flex justify-content-start">
+                                <strong>Secondary Broker:</strong>
+                                <input
+                                  type="checkbox"
+                                  className="ms-4"
+                                  checked={broker.secondaryBroker}
+                                  onChange={(e) => {
+                                    let temp = [...brokerLicenses];
+                                    temp.map(
+                                      (item) => (item.secondaryBroker = false)
+                                    );
+                                    temp[index].secondaryBroker =
+                                      e.target.checked;
+                                    setBrokerLicenses(temp);
+                                  }}
+                                />
+                              </div>
+                            )}
+                          </li>
+                        </ul>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
+              ))}
+            </Col>
+            <Col xs={12} md={4}>
+              {addNewRow ? (
+                <Row>
+                  <Col xs={12}>
+                    <span style={{ fontWeight: "600", color: "black" }}>
+                      License Number
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control custom-input"
+                      name="number"
+                      onInput={(e) => {
+                        e.target.value = e.target.value.toUpperCase();
+                      }}
+                      onChange={handleOnChange}
+                      required
+                    />
+                  </Col>
+                  <Col xs={12} className="mt-sm-3 mt-md-0">
+                    <span style={{ fontWeight: "600", color: "black" }}>
+                      License State
+                    </span>
+                    <input
+                      type="email"
+                      className="form-control custom-input"
+                      name="state"
+                      onChange={handleOnChange}
+                      required
+                    />
+                  </Col>
+                  <Col xs={12} className="mt-sm-3 mt-md-0">
+                    <span style={{ fontWeight: "600", color: "black" }}>
+                      License Expiration Date
+                    </span>
+                    <input
+                      type="date"
+                      className="form-control custom-input"
+                      name="expired_date"
+                      onChange={handleOnChange}
+                      required
+                    />
+                  </Col>
+                  <Col
+                    md={12}
+                    className="d-flex justify-content-end align-items-end mt-3"
                   >
-                    Submit
-                  </button>
-                </Col>
-              </Row>
-            ) : (
-              <Row className="mt-3">
-                <Col className="d-flex justify-content-end align-items-center">
-                  <button
-                    className="btn btn-primary rounded-0"
-                    onClick={() => setAddNewRow(true)}
-                  >
-                    + Add New Broker
-                  </button>
-                </Col>
-              </Row>
-            )}
-          </>
+                    <button
+                      className="btn bg-success text-white rounded-0"
+                      onClick={addBrokerHandler}
+                    >
+                      Submit
+                    </button>
+                  </Col>
+                </Row>
+              ) : (
+                <Row className="mt-3">
+                  <Col className="d-flex justify-content-end align-items-center">
+                    <button
+                      className="btn btn-primary rounded-0"
+                      onClick={() => setAddNewRow(true)}
+                    >
+                      + Add New Broker
+                    </button>
+                  </Col>
+                </Row>
+              )}
+            </Col>
+          </Row>
         </Modal.Body>
       </Modal>
     </div>

@@ -52,16 +52,19 @@ function BrokerPage() {
           margin: "1rem",
         }}
       >
-        {[...Array(10)].map((e, i) => (
-          <Card className="m-0 p-0 rounded-0" style={{ width: "300px" }}>
+        {brokers.map((item, i) => (
+          <Card
+            className="m-0 p-0 rounded-0"
+            style={{ width: "300px", cursor: "pointer" }}
+          >
             <Card.Img
               variant="top"
               className="rounded-0"
               width={300}
               height={250}
               style={{
-                background: `url(${avatar})`,
-                backgroundSize: "auto",
+                background: `url(${item?.profileImage || avatar})`,
+                backgroundSize: item?.profileImage ? "cover" : "auto",
                 backgroundPosition: "center",
                 backgroundColor: "#A5A5A5",
                 backgroundRepeat: "no-repeat",
@@ -72,7 +75,8 @@ function BrokerPage() {
                 className="fw-bold"
                 style={{ fontFamily: "Interstate", color: "#08080A" }}
               >
-                Josh Mehlberger
+                {item?.firstName[0].toUpperCase() + item?.firstName.slice(1)}{" "}
+                {item?.lastName[0].toUpperCase() + item?.lastName.slice(1)}
               </Card.Title>
               <Card.Text>
                 <h1 style={{ fontSize: "14px" }}>
@@ -81,7 +85,7 @@ function BrokerPage() {
               </Card.Text>
               <Card.Text>
                 <p className="text-muted p-0 m-0" style={{ fontSize: "14px" }}>
-                  josh@auctiontree.com
+                  {item?.email}
                 </p>
               </Card.Text>
             </Card.Body>
