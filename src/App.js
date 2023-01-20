@@ -401,7 +401,7 @@ function App() {
               <div className="expandMenu-items">
                 <a href="/multiSellForm">Sell</a>
                 <a href="/Auctions">Buy</a>
-                {/* <a href="/Brokers">Brokers</a> */}
+                <a href="/Brokers">Brokers</a>
                 {/* <a href="/Partner">Invest</a> */}
               </div>
               <div className="expandMenu-items">

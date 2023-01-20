@@ -54,6 +54,7 @@ function BrokerPage() {
       >
         {brokers.map((item, i) => (
           <Card
+            key={i}
             className="m-0 p-0 rounded-0"
             style={{ width: "300px", cursor: "pointer" }}
           >
@@ -72,21 +73,27 @@ function BrokerPage() {
             />
             <Card.Body>
               <Card.Title
-                className="fw-bold"
+                className="fw-bold m-0"
                 style={{ fontFamily: "Interstate", color: "#08080A" }}
               >
                 {item?.firstName[0].toUpperCase() + item?.firstName.slice(1)}{" "}
                 {item?.lastName[0].toUpperCase() + item?.lastName.slice(1)}
               </Card.Title>
               <Card.Text>
-                <h1 style={{ fontSize: "14px" }}>
+                <span
+                  style={{ fontSize: "14px", color: "#B77B50" }}
+                  className="p-0 m-0"
+                >
                   Auction Tree - Asset Manager
-                </h1>
+                </span>
               </Card.Text>
               <Card.Text>
-                <p className="text-muted p-0 m-0" style={{ fontSize: "14px" }}>
+                <span
+                  className="text-muted p-0 m-0"
+                  style={{ fontSize: "14px" }}
+                >
                   {item?.email}
-                </p>
+                </span>
               </Card.Text>
             </Card.Body>
           </Card>

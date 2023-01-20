@@ -138,12 +138,12 @@ function Ownership({
     setBrokerLicenses([
       ...brokerLicenses,
       {
-        number: newBroker.number,
-        state: newBroker.state,
-        expired_date: fixDate(newBroker.expired_date, "return"),
+        name: newBroker.name,
+        email: newBroker.email,
+        phone: newBroker.phone,
       },
     ]);
-    setNewBroker({ number: "", state: "", expired_date: "" });
+    setNewBroker({ name: "", email: "", phone: "" });
     setAddNewRow(false);
   };
 
@@ -235,7 +235,6 @@ function Ownership({
           details: {
             owner_name: ownerName,
             broker_name: brokerName ? brokerName : null,
-            // broker_id: brokerId ? brokerId : null,
             owner_email: ownerEmail ? ownerEmail : null,
             owner_phone: ownerPhone ? ownerPhone : null,
             phone: phone,
@@ -243,9 +242,6 @@ function Ownership({
             address: address,
             broker_documents: [...listingAgreements, ...attorney],
             broker_licenses: brokerLicenses,
-            // broker_license_number: brokerId ? brokerId : data.brokerId,
-            // broker_license_expired_date: licenseExpireDate,
-            // broker_license_state: licenseState,
             ownership_type: {
               name: otherOwnershipType ? otherOwnershipType : ownershipType,
               secondary_owner:
@@ -355,6 +351,8 @@ function Ownership({
       setAddress(results[0].formatted_address);
     });
   };
+
+  console.log(brokerLicenses);
 
   return (
     <div className="wrapper">
@@ -1127,23 +1125,41 @@ function Ownership({
         </Modal.Header>
         <Modal.Body className="pb-4">
           <Row className="ps-3">
-            <Col xs={12} md={8}>
+            <Col xs={12} md={6}>
               {brokerLicenses?.map((broker, index) => (
                 <Row key={index}>
                   <Col>
                     <Row>
                       <Col>
                         <ul className="list-unstyled">
-                          <li>
-                            <strong>License:</strong> {broker.number}
-                          </li>
-                          <li>
-                            <strong>State:</strong> {broker.state}
-                          </li>
-                          <li>
-                            <strong>Exp. Date:</strong>{" "}
-                            {new Date(broker.expired_date).toLocaleDateString()}
-                          </li>
+                          {index === 0 ? (
+                            <>
+                              <li>
+                                <strong>License:</strong> {broker.number}
+                              </li>
+                              <li>
+                                <strong>State:</strong> {broker.state}
+                              </li>
+                              <li>
+                                <strong>Exp. Date:</strong>{" "}
+                                {new Date(
+                                  broker.expired_date
+                                ).toLocaleDateString()}
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li>
+                                <strong>Name:</strong> {broker.name}
+                              </li>
+                              <li>
+                                <strong>Email:</strong> {broker.email}
+                              </li>
+                              <li>
+                                <strong>Phone:</strong> {broker.phone}
+                              </li>
+                            </>
+                          )}
                           <li>
                             {index === 0 ? (
                               <div className="d-flex justify-content-start">
@@ -1175,6 +1191,22 @@ function Ownership({
                               </div>
                             )}
                           </li>
+                          {index > 0 && (
+                            <li>
+                              <Button
+                                variant="danger"
+                                size="sm"
+                                className="rounded-0"
+                                onClick={() => {
+                                  let temp = [...brokerLicenses];
+                                  temp.splice(index, 1);
+                                  setBrokerLicenses(temp);
+                                }}
+                              >
+                                Delete
+                              </Button>
+                            </li>
+                          )}
                         </ul>
                       </Col>
                     </Row>
@@ -1182,47 +1214,61 @@ function Ownership({
                 </Row>
               ))}
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12} md={6}>
               {addNewRow ? (
                 <Row>
                   <Col xs={12}>
                     <span style={{ fontWeight: "600", color: "black" }}>
-                      License Number
+                      Name
                     </span>
                     <input
                       type="text"
                       className="form-control custom-input"
-                      name="number"
-                      onInput={(e) => {
-                        e.target.value = e.target.value.toUpperCase();
-                      }}
+                      name="name"
                       onChange={handleOnChange}
                       required
                     />
                   </Col>
                   <Col xs={12} className="mt-sm-3 mt-md-0">
                     <span style={{ fontWeight: "600", color: "black" }}>
-                      License State
+                      Email
                     </span>
                     <input
                       type="email"
                       className="form-control custom-input"
-                      name="state"
+                      name="email"
                       onChange={handleOnChange}
                       required
                     />
                   </Col>
                   <Col xs={12} className="mt-sm-3 mt-md-0">
                     <span style={{ fontWeight: "600", color: "black" }}>
-                      License Expiration Date
+                      Phone
                     </span>
                     <input
-                      type="date"
+                      type="text"
                       className="form-control custom-input"
-                      name="expired_date"
+                      name="phone"
                       onChange={handleOnChange}
                       required
                     />
+                    {/* <PhoneInput
+                      onlyCountries={["us", "ca", "gb", "au", "in"]}
+                      country={"us"}
+                      name="phone"
+                      inputStyle={{
+                        width: "100%",
+                        border: "0",
+                        borderBottom: "1px solid #ececec",
+                        borderRadius: "0",
+                      }}
+                      buttonStyle={{
+                        border: "none",
+                        borderRadius: "0",
+                      }}
+                      onChange={handleOnChange}
+                      required
+                    /> */}
                   </Col>
                   <Col
                     md={12}
