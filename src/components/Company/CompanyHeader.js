@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/headers.css";
 import partner from "../../images/partner.png";
 import contact from "../../images/contact.png";
+import contactUs from "../../images/contactUs.png";
 import about2 from "../../images/about2.png";
 import privacy from "../../images/privacy.png";
 import terms from "../../images/terms.png";
@@ -38,7 +39,7 @@ function CompanyHeader({ location, setQuery, faqs }) {
         <div
           className="companyHeader"
           style={{
-            backgroundImage: `url(${contact})`,
+            backgroundImage: `url(${contactUs})`,
           }}
         >
           <span>

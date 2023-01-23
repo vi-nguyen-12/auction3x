@@ -1048,7 +1048,7 @@ function App() {
                   </Route>
 
                   <Route path="/Broker/:id">
-                    <Broker windowSize={windowSize} />
+                    <Broker windowSize={windowSize} colorChange={colorChange} />
                   </Route>
 
                   <Route exact path="/reset_password">

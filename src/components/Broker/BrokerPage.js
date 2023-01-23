@@ -57,6 +57,7 @@ function BrokerPage() {
             key={i}
             className="m-0 p-0 rounded-0"
             style={{ width: "300px", cursor: "pointer" }}
+            onClick={() => history.push(`/Broker/${item._id}`)}
           >
             <Card.Img
               variant="top"
