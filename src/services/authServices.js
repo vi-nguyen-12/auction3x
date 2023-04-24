@@ -76,12 +76,12 @@ const authService = {
   },
 
   saveDocuments(data) {
-    return axios.post(apiUrl + "/api/aws/documents/upload", data, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-        "content-type": "multipart/form-data",
-      },
-    });
+      return axios.post(apiUrl + "/api/aws/documents/upload", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "content-type": "multipart/form-data",
+        },
+      });
   },
 
   sendProperty(id) {
